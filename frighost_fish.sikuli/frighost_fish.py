@@ -1,0 +1,16 @@
+from sikuli.Sikuli import *
+
+PATTERNS = {
+    "kralamoure": [
+            Pattern("kralamoure001.png").similar(0.41), 
+            Pattern("kralamoure002.png").similar(0.52), 
+            Pattern("kralamoure003.png").similar(0.61)
+            ],
+    "poissonPane": [Pattern("poissonPane001.png").similar(0.57)],
+    "poisskaille": [Pattern("poisskaille001.png").similar(0.51)],
+    "sardineBrillante": [
+            Pattern("sardineBrillante001.png").similar(0.45),
+            Pattern("sardineBrillante002.png").similar(0.56)
+            ]
+}
+
