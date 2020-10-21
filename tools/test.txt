@@ -1,0 +1,1 @@
+poissonPane,807,417,129,125poisskaille,1568,532,222,132poissonPane,496,350,42,43kralamoure,845,484,44,36poissonPane,503,652,65,44sardineBrillante,324,254,55,63

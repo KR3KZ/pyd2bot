@@ -7,8 +7,9 @@ import tkinter as tk
 class QSnip(QMainWindow):
 
     snippetTaken = pyqtSignal(list)
+    captureModeExited = pyqtSignal()
 
-    def __init__(self, parent):
+    def __init__(self, parent, snip_types):
         super(QSnip, self).__init__()
         root = tk.Tk()
         screen_width = root.winfo_screenwidth()
@@ -22,25 +23,28 @@ class QSnip(QMainWindow):
             QtGui.QCursor(QtCore.Qt.CrossCursor)
         )
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
-        self.parent.hide()
         self.show()
         self.capturing = False
+        self.snip_types = snip_types
 
     def paintEvent(self, event):
-        brush_color = (128, 128, 255, 128)
-        thickness = 0
+        brush_color = (255, 128, 255, 128)
+        thickness = 1
         opacity = 0.3
-        color = 'black'
+        color = 'red'
         self.setWindowOpacity(opacity)
         qp = QtGui.QPainter(self)
-        qp.setPen(QtGui.QPen(QtGui.QColor(color), thickness))
+        qp.setPen(QtGui.QPen(QtGui.QColor(color), thickness, QtCore.Qt.DotLine))
         qp.setBrush(QtGui.QColor(*brush_color))
+        for t, x, y, w, h in self.parent.getPathAsList():
+            qp.drawRect(QtCore.QRect(int(x), int(y), int(w), int(h)))
         qp.drawRect(QtCore.QRect(self.begin, self.end))
 
     def keyPressEvent(self, event):
         if event.key() == QtCore.Qt.Key_Escape:
             QtWidgets.QApplication.restoreOverrideCursor()
             self.close()
+            self.captureModeExited.emit()
         event.accept()
 
     def mousePressEvent(self, event):
@@ -54,27 +58,16 @@ class QSnip(QMainWindow):
             self.end = event.pos()
             self.update()
 
-    def madeChoice(self, value):
-        QtWidgets.QApplication.restoreOverrideCursor()
-        self.parent.show()
-        self.close()
-        h = abs(self.end.y() - self.begin.y())
-        w = abs(self.end.x() - self.begin.x())
-        capture = [value, self.begin.x(), self.begin.y(), w, h]
+    def madeChoice(self, capture_type):
+        rec = QtCore.QRect(self.begin, self.end)
+        capture = [capture_type, rec.x(), rec.y(), rec.width(), rec.height()]
         self.snippetTaken.emit(capture)
 
     def mouseReleaseEvent(self, event):
         self.capturing = False
-        self.repaint()
-        QtWidgets.QApplication.processEvents()
-        self.repaint()
-        QtWidgets.QApplication.processEvents()
         combo_box = QComboBox(self)
-        combo_box.addItem("mapChange")
-        combo_box.addItem("kralamoure")
-        combo_box.addItem("poisskaille")
-        combo_box.addItem("poissonPane")
-        combo_box.addItem("sardineBrillante")
+        for st in self.snip_types:
+            combo_box.addItem(st)
         combo_box.move(self.end.x(), self.end.y())
         combo_box.activated[str].connect(self.madeChoice)
         combo_box.showPopup()
