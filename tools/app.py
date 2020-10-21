@@ -5,6 +5,7 @@ from snippetWidget import QSnip
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import *
 from MyQtTree import MyQtTree
+from ChangeMapBox import ChangeMapBox
 import re
 
 
@@ -76,10 +77,15 @@ class MyWindow(QMainWindow):
         # set current map button
         set_current_map_button = QPushButton("set current map")
         set_current_map_button.clicked.connect(self.askForCurrentMap)
+        # next map button
+        next_map_button = QPushButton("next map")
+        next_map_button.clicked.connect(self.askForDirection)
+
         self.button_group_layout.addWidget(save_button)
         self.button_group_layout.addWidget(capture_button)
         self.button_map_layout.addWidget(create_map_button)
         self.button_map_layout.addWidget(set_current_map_button)
+        self.button_map_layout.addWidget(next_map_button)
         # init path list
         self.initPath()
         # populate infos box with labels stacked vertically
@@ -87,7 +93,26 @@ class MyWindow(QMainWindow):
         self.infos_box_layout.addWidget(self.current_map_info)
         self.current_path_file_info = QLabel()
         self.infos_box_layout.addWidget(self.current_path_file_info)
-        # path_list.itemClicked.connect(path_list.Clicked)
+
+    def askForDirection(self):
+        if not self.current_map:
+            QMessageBox.critical(self, "ERROR", "You didn't specify a current map.")
+            return
+        self.ch_map_box = ChangeMapBox(self)
+        self.ch_map_box.directionClicked.connect(self.createNextMap)
+        self.ch_map_box.show()
+
+    def getCurrMapCoords(self):
+        sx, sy = re.findall(MAP_REG, self.current_map)[0]
+        return int(sx), int(sy)
+
+    def createNextMap(self, direction):
+        x, y = self.getCurrMapCoords()
+        nx = x + direction[0]
+        ny = y + direction[1]
+        next_map_id = f"map[{nx},{ny}]"
+        QTreeWidgetItem(self.path_list, [next_map_id])
+        self.setCurrentMap(next_map_id)
 
     def savePath(self):
         if not self.path_file:
@@ -144,7 +169,9 @@ class MyWindow(QMainWindow):
             "kralamoure",
             "poisskaille",
             "poissonPane",
-            "sardineBrillante"
+            "sardineBrillante",
+            "greuvette",
+            "crabe"
         ]
         self.hide()
         self.snip_win = QSnip(self, stypes)
@@ -162,9 +189,10 @@ class MyWindow(QMainWindow):
         event.accept()
 
     def appendMapRegions(self, snippet):
+        curr_map = self.path_list[self.current_map]
         print(snippet)
         snippet = map(str, snippet)
-        QTreeWidgetItem(self.path_list[self.current_map], snippet)
+        QTreeWidgetItem(curr_map, snippet)
 
     def getFilePathFromCache(self):
         with open("cache", "r") as f:

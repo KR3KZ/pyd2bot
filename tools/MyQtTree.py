@@ -60,6 +60,9 @@ class MyQtTree(QTreeWidget):
         for idx, name in enumerate(self.maps()):
             if map_id == name:
                 self.takeTopLevelItem(idx)
+                if map_id == self.parent.current_map:
+                    self.parent.current_map = None
+                    self.parent.updateCurrentMapInfo()
 
     def onChoice(self, choice):
         p = self.selected.parent()
@@ -85,11 +88,14 @@ class MyQtTree(QTreeWidget):
         combo_box.showPopup()
 
     def __getitem__(self, map_id):
+        res = None
         if re.findall(MAP_REG, map_id):
             for map in self:
                 if map.text(0) == map_id:
-                    return map
-        raise KeyError('Map ID not found.')
+                    res = map
+        if not res:
+            raise KeyError('Map ID not found.')
+        return res
 
     def getMapList(self, map_id):
         return _mapList(self[map_id])
