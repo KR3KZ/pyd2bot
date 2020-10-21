@@ -6,6 +6,8 @@ import tkinter as tk
 
 class QSnip(QMainWindow):
 
+    snippetTaken = pyqtSignal(list)
+
     def __init__(self, parent):
         super(QSnip, self).__init__()
         root = tk.Tk()
@@ -20,12 +22,11 @@ class QSnip(QMainWindow):
             QtGui.QCursor(QtCore.Qt.CrossCursor)
         )
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
-        self.takeSnipEnded = pyqtSignal()
         self.parent.hide()
         self.show()
+        self.capturing = False
 
     def paintEvent(self, event):
-        # capture rectangle style
         brush_color = (128, 128, 255, 128)
         thickness = 0
         opacity = 0.3
@@ -43,25 +44,27 @@ class QSnip(QMainWindow):
         event.accept()
 
     def mousePressEvent(self, event):
+        self.capturing = True
         self.begin = event.pos()
         self.end = self.begin
         self.update()
 
     def mouseMoveEvent(self, event):
-        self.end = event.pos()
-        self.update()
+        if self.capturing:
+            self.end = event.pos()
+            self.update()
 
     def madeChoice(self, value):
         QtWidgets.QApplication.restoreOverrideCursor()
-        self.takeSnipEnded.emit()
         self.parent.show()
         self.close()
+        h = abs(self.end.y() - self.begin.y())
+        w = abs(self.end.x() - self.begin.x())
+        capture = [value, self.begin.x(), self.begin.y(), w, h]
+        self.snippetTaken.emit(capture)
 
     def mouseReleaseEvent(self, event):
-        x1 = min(self.begin.x(), self.end.x())
-        y1 = min(self.begin.y(), self.end.y())
-        x2 = max(self.begin.x(), self.end.x())
-        y2 = max(self.begin.y(), self.end.y())
+        self.capturing = False
         self.repaint()
         QtWidgets.QApplication.processEvents()
         self.repaint()
