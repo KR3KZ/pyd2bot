@@ -1,4 +1,6 @@
 from PyQt5.QtWidgets import *
+import re
+from constants import *
 
 
 def _mapList(map):
@@ -29,57 +31,45 @@ class MyQtTree(QTreeWidget):
     def loadFromFile(self, file_path):
         with open(file_path, "r") as f:
             for line in f.readlines():
-                if line and not line.startswith('#'):
-                    step = line.split(',')
-                    QTreeWidgetItem(current, step)
-                else:
-                    current = QTreeWidgetItem(self, [line[1:]])
+                if line:
+                    line = line.rstrip('\n')
+                    if line and not line.startswith('#'):
+                        step = line.split(',')
+                        QTreeWidgetItem(current, step)
+                    else:
+                        current = QTreeWidgetItem(self, [line[1:]])
 
     def saveToFile(self, file_path):
         with open(file_path, 'w') as f:
             lines = []
             for mapId, entries in self.items():
-                print(mapId, entries)
-                lines.append('#' + mapId)
-                lines += [','.join(entry) for entry in entries]
+                if mapId:
+                    lines.append('#' + mapId + '\n')
+                    lines += [','.join(entry) + '\n' for entry in entries]
             f.writelines(lines)
-
-    def __getitem__(self, mapId):
-        if mapId.startsWith("map["):
-            for id, item in self.items():
-                if id == mapId:
-                    return item
-        else:
-            raise KeyError('Map Id not found.')
-
-    def __iter__(self):
-        n = self.topLevelItemCount()
-        for i in range(n):
-            yield self.topLevelItem(i)
 
     def items(self):
         for item in self:
-            yield item.text(0), _mapList(item)
+            yield item.text(0).strip(), _mapList(item)
 
     def maps(self):
         for item in self:
             yield item.text(0)
 
-    def delMap(self, mapId):
+    def delMap(self, map_id):
         for idx, name in enumerate(self.maps()):
-            if mapId == name:
+            if map_id == name:
                 self.takeTopLevelItem(idx)
 
     def onChoice(self, choice):
+        p = self.selected.parent()
+        map_id = self.selected.text(0)
         if choice == 'delete map':
-            self.delMap(self.selected.text(0))
-
+            self.delMap(map_id)
         elif choice == 'delete entry':
-            p = self.selected.parent()
             p.removeChild(self.selected)
-
         elif choice == 'set current':
-            self.parent.current_map = self.selected
+            self.parent.setCurrentMap(map_id)
 
     def onClick(self):
         index = self.selectedIndexes()[0]
@@ -91,10 +81,23 @@ class MyQtTree(QTreeWidget):
         else:
             combo_box.addItem("delete entry")
             combo_box.addItem("highlight")
-
-        combo_box.addItem("highlight")
         combo_box.activated[str].connect(self.onChoice)
         combo_box.showPopup()
 
+    def __getitem__(self, map_id):
+        if re.findall(MAP_REG, map_id):
+            for map in self:
+                if map.text(0) == map_id:
+                    return map
+        raise KeyError('Map ID not found.')
 
+    def getMapList(self, map_id):
+        return _mapList(self[map_id])
 
+    def __iter__(self):
+        n = self.topLevelItemCount()
+        for i in range(n):
+            yield self.topLevelItem(i)
+
+    def __contains__(self, map_id):
+        return map_id in self.maps()

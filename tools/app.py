@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 from PyQt5.QtCore import QObject, pyqtSignal
-
+from constants import *
 from snippetWidget import QSnip
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import *
 from MyQtTree import MyQtTree
+import re
 
 
 class Communicate(QObject):
@@ -20,22 +21,39 @@ class MyWindow(QMainWindow):
         self.setWindowIcon(QtGui.QIcon('icon.jpg'))
         widget = QWidget()
         self.setCentralWidget(widget)
+
         self.main_layout = QVBoxLayout()
         widget.setLayout(self.main_layout)
         self.vLayout = QVBoxLayout()
         self.main_layout.insertLayout(0, self.vLayout)
+
+        self.infos_box = QGroupBox("Infos:")
+        self.infos_box_layout = QVBoxLayout()
+        self.infos_box.setLayout(self.infos_box_layout)
+        self.main_layout.addWidget(self.infos_box)
+
         self.button_group_box = QGroupBox()
-        self.button_layout = QHBoxLayout()
-        self.button_group_box.setLayout(self.button_layout)
+        self.button_map_box = QGroupBox()
+        self.button_group_layout = QHBoxLayout()
+        self.button_map_layout = QHBoxLayout()
+
+        self.button_group_box.setLayout(self.button_group_layout)
+        self.button_map_box.setLayout(self.button_map_layout)
+
         self.main_layout.addWidget(self.button_group_box)
+        self.main_layout.addWidget(self.button_map_box)
+
+        self.current_map = None
         self.path_file = None
         self.path_list = MyQtTree(self)
         self.initGui()
         if self.getFilePathFromCache():
             self.path_list.loadFromFile(self.path_file)
-        self.current_map = None
-        self.c = Communicate()
-        self.c.path_loaded.connect(self.getCurrentMap)
+            maps = list(self.path_list.maps())
+            if maps:
+                self.setCurrentMap(maps[-1])
+        self.updatePathFileInfo()
+        self.updateCurrentMapInfo()
 
     def initGui(self):
         # menu
@@ -43,23 +61,32 @@ class MyWindow(QMainWindow):
 
         # message label
         self.notification_text = QLabel()
-        self.setMessage("Press F5 to capture region.")
-
+        self.updateTopMessage("Press F5 to capture region.")
         self.vLayout.addWidget(self.notification_text)
 
-        # save button
+        # save button button
         save_button = QPushButton("save path")
         save_button.clicked.connect(self.savePath)
-
-        # capture region
+        # capture region button
         capture_button = QPushButton("capture mode")
         capture_button.clicked.connect(self.startCaptureMode)
-
-        self.button_layout.addWidget(save_button)
-        self.button_layout.addWidget(capture_button)
-
-        # path show in a list
+        # new map button
+        create_map_button = QPushButton("new map")
+        create_map_button.clicked.connect(self.createNewMap)
+        # set current map button
+        set_current_map_button = QPushButton("set current map")
+        set_current_map_button.clicked.connect(self.askForCurrentMap)
+        self.button_group_layout.addWidget(save_button)
+        self.button_group_layout.addWidget(capture_button)
+        self.button_map_layout.addWidget(create_map_button)
+        self.button_map_layout.addWidget(set_current_map_button)
+        # init path list
         self.initPath()
+        # populate infos box with labels stacked vertically
+        self.current_map_info = QLabel()
+        self.infos_box_layout.addWidget(self.current_map_info)
+        self.current_path_file_info = QLabel()
+        self.infos_box_layout.addWidget(self.current_path_file_info)
         # path_list.itemClicked.connect(path_list.Clicked)
 
     def savePath(self):
@@ -92,8 +119,7 @@ class MyWindow(QMainWindow):
         if self.path_file:
             with open("cache", "w") as f:
                 f.write(self.path_file)
-            self.setMessage(f"Press F5 to capture region.\n"
-                            f"You are working on file : {self.path_file}")
+            self.updatePathFileInfo()
 
     def initPath(self):
         self.path_list.deleteLater()
@@ -107,22 +133,26 @@ class MyWindow(QMainWindow):
             with open("cache", "w") as f:
                 f.write(self.path_file)
             self.path_list.loadFromFile(self.path_file)
-            self.setMessage(f"Press F5 to capture region.\n"
-                            f"You are working on file : {self.path_file}")
+            self.updatePathFileInfo()
 
     def startCaptureMode(self):
-        stypes = ["mapChange",
-                  "kralamoure",
-                  "poisskaille",
-                  "poissonPane",
-                  "sardineBrillante"]
+        if not self.current_map:
+            QMessageBox.critical(self, "ERROR", "You didn't specify a current map.")
+            return
+        stypes = [
+            "mapChange",
+            "kralamoure",
+            "poisskaille",
+            "poissonPane",
+            "sardineBrillante"
+        ]
         self.hide()
         self.snip_win = QSnip(self, stypes)
-        self.snip_win.snippetTaken.connect(self.appendPath)
+        self.snip_win.snippetTaken.connect(self.appendMapRegions)
         self.snip_win.captureModeExited.connect(self.show)
         self.snip_win.show()
 
-    def setMessage(self, text):
+    def updateTopMessage(self, text):
         self.notification_text.setText(text)
         self.notification_text.adjustSize()
 
@@ -131,14 +161,10 @@ class MyWindow(QMainWindow):
             self.startCaptureMode()
         event.accept()
 
-    def appendPath(self, snippet):
+    def appendMapRegions(self, snippet):
         print(snippet)
         snippet = map(str, snippet)
-        if self.path_file:
-            self.current_map =
-            QTreeWidgetItem(self.path_list, snippet)
-        else:
-            QMessageBox.critical(self, "ERROR", "You didn't load any path file.")
+        QTreeWidgetItem(self.path_list[self.current_map], snippet)
 
     def getFilePathFromCache(self):
         with open("cache", "r") as f:
@@ -146,7 +172,40 @@ class MyWindow(QMainWindow):
             if self.path_file:
                 return True
 
-    def
+    def createNewMap(self, map_id):
+        map_id, ok_pressed = QInputDialog.getText(self, "Get map coordinates", "map coordinates :", QLineEdit.Normal, "")
+        if re.match(COORD_REG, map_id):
+            map_id.replace(" ", "")
+            map_id = f"map[{map_id}]"
+            QTreeWidgetItem(self.path_list, [map_id])
+            self.setCurrentMap(map_id)
+        else:
+            QMessageBox.critical(self, "ERROR", "valid map ID.")
+
+    def askForCurrentMap(self):
+        map_coord, ok_pressed = QInputDialog.getText(self, "Get map coordinates", "map coordinates :", QLineEdit.Normal, "")
+        if re.match(COORD_REG, map_coord):
+            map_coord.replace(" ", "").strip('\n')
+            map_id = f"map[{map_coord}]"
+            if map_id in self.path_list.maps():
+                self.setCurrentMap(map_id)
+            else:
+                QMessageBox.critical(self, "ERROR", "Map ID you gave doesn't exist in path.")
+        else:
+            QMessageBox.critical(self, "ERROR", "You didn't give any valid map ID.")
+
+    def updateCurrentMapInfo(self):
+        self.current_map_info.setText(f"Current map is: {self.current_map}")
+        self.current_map_info.adjustSize()
+
+    def updatePathFileInfo(self):
+        self.current_path_file_info.setText(f"Current path file is: {self.path_file}")
+        self.current_map_info.adjustSize()
+
+    def setCurrentMap(self, map_id):
+        self.current_map = map_id
+        self.updateCurrentMapInfo()
+
 
 def window():
     app = QApplication(sys.argv)
@@ -161,6 +220,5 @@ def except_hook(cls, exception, traceback):
 
 if __name__ == "__main__":
     import sys
-
     sys.excepthook = except_hook
     window()
