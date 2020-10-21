@@ -1,7 +1,14 @@
 # -*- coding: utf-8 -*-
+from PyQt5.QtCore import QObject, pyqtSignal
+
 from snippetWidget import QSnip
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import *
+from MyQtTree import MyQtTree
+
+
+class Communicate(QObject):
+    path_loaded = pyqtSignal()
 
 
 class MyWindow(QMainWindow):
@@ -11,7 +18,6 @@ class MyWindow(QMainWindow):
         self.setGeometry(584, 171, 744, 671)
         self.setWindowTitle("Dofus Bot Path generator")
         self.setWindowIcon(QtGui.QIcon('icon.jpg'))
-
         widget = QWidget()
         self.setCentralWidget(widget)
         self.main_layout = QVBoxLayout()
@@ -22,9 +28,14 @@ class MyWindow(QMainWindow):
         self.button_layout = QHBoxLayout()
         self.button_group_box.setLayout(self.button_layout)
         self.main_layout.addWidget(self.button_group_box)
-
         self.path_file = None
+        self.path_list = MyQtTree(self)
         self.initGui()
+        if self.getFilePathFromCache():
+            self.path_list.loadFromFile(self.path_file)
+        self.current_map = None
+        self.c = Communicate()
+        self.c.path_loaded.connect(self.getCurrentMap)
 
     def initGui(self):
         # menu
@@ -40,45 +51,24 @@ class MyWindow(QMainWindow):
         save_button = QPushButton("save path")
         save_button.clicked.connect(self.savePath)
 
-        # delete last
-        delete_last_button = QPushButton("delete last")
-        delete_last_button.clicked.connect(self.deleteLast)
-
         # capture region
         capture_button = QPushButton("capture mode")
         capture_button.clicked.connect(self.startCaptureMode)
-        capture_button.clicked.connect(self.startCaptureMode)
 
         self.button_layout.addWidget(save_button)
-        self.button_layout.addWidget(delete_last_button)
         self.button_layout.addWidget(capture_button)
 
         # path show in a list
-        self.path_list = None
         self.initPath()
         # path_list.itemClicked.connect(path_list.Clicked)
 
     def savePath(self):
         if not self.path_file:
             self.path_file = QFileDialog.getSaveFileName()[0]
-        with open(self.path_file, 'w') as f:
-            path_list = self.getPathAsList()
-            lines = [', '.join(r) for r in path_list]
-            f.writelines(lines)
-
-    def getPathAsList(self):
-        result = []
-        n = self.path_list.topLevelItemCount()
-        for i in range(n):
-            step = self.path_list.topLevelItem(i)
-            m = step.columnCount()
-            row = [step.text(k) for k in range(m)]
-            result.append(row)
-        return result
-
-    def deleteLast(self):
-        n = self.path_list.topLevelItemCount()
-        self.path_list.takeTopLevelItem(n - 1)
+        if self.path_file:
+            self.path_list.saveToFile(self.path_file)
+        else:
+            QMessageBox.critical(self, "ERROR", "You didn't chose any file.")
 
     def initMenu(self):
         # Create new action
@@ -99,26 +89,24 @@ class MyWindow(QMainWindow):
 
     def newPath(self):
         self.path_file = QFileDialog.getSaveFileName()[0]
-        self.setMessage(f"Press F5 to capture region.\n"
-                        f"You are working on file : {self.path_file}")
+        if self.path_file:
+            with open("cache", "w") as f:
+                f.write(self.path_file)
+            self.setMessage(f"Press F5 to capture region.\n"
+                            f"You are working on file : {self.path_file}")
 
     def initPath(self):
-        if self.path_list:
-            self.path_list.deleteLater()
-        self.path_list = QTreeWidget(self)
-        self.path_list.setColumnCount(5)
-        self.path_list.setHeaderLabels(["Type", "PosX", "posY", "Height", "Width"])
+        self.path_list.deleteLater()
+        self.path_list = MyQtTree(self)
         self.vLayout.addWidget(self.path_list)
 
     def openPath(self, event):
         self.path_file = QFileDialog.getOpenFileName()[0]
         self.initPath()
         if self.path_file:
-            with open(self.path_file, "r") as f:
-                for l in f.readlines():
-                    if l and not l.startswith('#'):
-                        step = l.split(',')
-                        QTreeWidgetItem(self.path_list, step)
+            with open("cache", "w") as f:
+                f.write(self.path_file)
+            self.path_list.loadFromFile(self.path_file)
             self.setMessage(f"Press F5 to capture region.\n"
                             f"You are working on file : {self.path_file}")
 
@@ -147,11 +135,18 @@ class MyWindow(QMainWindow):
         print(snippet)
         snippet = map(str, snippet)
         if self.path_file:
+            self.current_map =
             QTreeWidgetItem(self.path_list, snippet)
         else:
             QMessageBox.critical(self, "ERROR", "You didn't load any path file.")
 
+    def getFilePathFromCache(self):
+        with open("cache", "r") as f:
+            self.path_file = f.read()
+            if self.path_file:
+                return True
 
+    def
 
 def window():
     app = QApplication(sys.argv)
@@ -166,5 +161,6 @@ def except_hook(cls, exception, traceback):
 
 if __name__ == "__main__":
     import sys
+
     sys.excepthook = except_hook
     window()

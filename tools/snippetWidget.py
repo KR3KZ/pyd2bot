@@ -36,8 +36,8 @@ class QSnip(QMainWindow):
         qp = QtGui.QPainter(self)
         qp.setPen(QtGui.QPen(QtGui.QColor(color), thickness, QtCore.Qt.DotLine))
         qp.setBrush(QtGui.QColor(*brush_color))
-        for t, x, y, w, h in self.parent.getPathAsList():
-            qp.drawRect(QtCore.QRect(int(x), int(y), int(w), int(h)))
+        # for t, x, y, w, h in self.parent.getPathAsList():
+        #     qp.drawRect(QtCore.QRect(int(x), int(y), int(w), int(h)))
         qp.drawRect(QtCore.QRect(self.begin, self.end))
 
     def keyPressEvent(self, event):
