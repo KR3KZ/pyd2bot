@@ -2,46 +2,15 @@ from sikuli.Sikuli import *
 import constants as cnst
 
 
-def loadFarmingPath(src_path):
-    with open(src_path) as file:
-        farmSteps = []
-        for line in file:
-            pixelType, x, y = line.split(',')
-            trgt = Location(int(x), int(y))
-            farmSteps.append([trgt, pixelType])
-    return farmSteps
-
-
 def dist(pos1, pos2):
     return ((pos1.getX() - pos2.getX()) ** 2 + (pos1.getY() - pos2.getY()) ** 2) ** 0.5
 
 
 def selectTarget(mobs_pos, me_pos):
     if mobs_pos:
-        DistsFromTargets = map(lambda l: dist(l, me_pos), mobs_pos)
-        targetIndex = DistsFromTargets.index(min(DistsFromTargets))
-        return targetIndex
-    return None
-
-
-def getMobsLocs():
-    for p in cst.MOB_Ps:
-        try:
-            mobsPatterns = cst.MAP_R.findAll(p)
-            mobsPositions = map(lambda m: m.getTarget(), mobsPatterns)
-            return mobsPositions
-        except FindFailed:
-            pass
-    return None
-
-
-def getMeLoc():
-    for p in cnst.ME_Ps:
-        try:
-            me = cst.MAP_R.find(p)
-            return me.getTarget()
-        except:
-            pass
+        dists_from_targets = map(lambda l: dist(l, me_pos), mobs_pos)
+        target_index = dists_from_targets.index(min(dists_from_targets))
+        return target_index
     return None
 
 
@@ -69,7 +38,7 @@ def moveTowardsTarget(me_pos, tgt_pos, pm_nbr):
     while tgts_dist:
         nearest_square_index = dists_from_targets.index(tgts_dist.pop(0))
         square = move_squares[nearest_square_index]
-        if square.getColor() == EMPTY_SQUARE_COLOR:
+        if square.getColor() == cnst.EMPTY_SQUARE_COLOR:
             square.click()
             return square
     return None
@@ -85,21 +54,8 @@ def useSpell(shortcut, target):
     target.click()
 
 
-def usePotion():
-    cnst.FIRST_ITEM_R.click()
-    cnst.USE_ITEM_R.click()
-
-
-def eatBred():
-    cnst.BRED_R.click()
-    cnst.USE_MULT_R.click()
-    cnst.USE_MULTI_MAX_R.click()
-    cnst.USE_MULT_CONFIRM_R.click()
-
-
-def resign():
-    cnst.RESIGN_R.click()
-    cnst.RESIGN_CONFIRM_R.click()
+def useRappelPotion():
+    type(cnst.RAPPEL_POTION_SHORTCUT)
 
 
 def waitForChange(region):
@@ -110,10 +66,13 @@ def waitForChange(region):
 
 
 def changeMap(tgt):
-    snippet = capture(MAP_INFO_R)
-    tgt.click()
-    while MAP_INFO_R.exists(Pattern(snippet).similar(0.85)):
-        wait(0.5)
+    time = 0
+    snippet = capture(cnst.MAP_INFO_R)
+    while time < cnst.CHANGE_MAP_TIMEOUT:
+        tgt.click()
+        if waitVanish(Pattern(snippet).exact(), 10):
+            break
+        time += 10
 
 
 def loadFarmPath(file_path):
@@ -129,3 +88,17 @@ def loadFarmPath(file_path):
                 resource_region = Region(*rec)
                 result.append((resource_region, rtype))
     return result
+
+
+def collectResource(rpattern, rregion):
+    match = rregion.findBest(rpattern)
+    if match:
+        rregion.hover()
+        sleep(0.3)
+        current = Pattern(capture(rregion))
+        rregion.click()
+        with rregion:
+            waitForChange(rregion)
+            waitVanish(current.similar(0.6))
+        return True
+    return False
