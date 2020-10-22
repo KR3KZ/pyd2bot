@@ -28,8 +28,6 @@ class QSnip(QMainWindow):
         self.snip_types = snip_types
 
     def paintEvent(self, event):
-        p = self.parent
-        map_id = p.current_map
         brush_color = (255, 128, 255, 128)
         thickness = 1
         opacity = 0.3
@@ -38,7 +36,7 @@ class QSnip(QMainWindow):
         qp = QtGui.QPainter(self)
         qp.setPen(QtGui.QPen(QtGui.QColor(color), thickness, QtCore.Qt.DotLine))
         qp.setBrush(QtGui.QColor(*brush_color))
-        for entry in p.path_list.getMapList(map_id):
+        for entry in self.parent.path_list.getMapList(self.parent.curr_map_idx):
             rec = map(int, entry[1:])
             qp.drawRect(QtCore.QRect(*rec))
         qp.drawRect(QtCore.QRect(self.begin, self.end))

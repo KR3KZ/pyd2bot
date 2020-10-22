@@ -44,15 +44,13 @@ class MyWindow(QMainWindow):
         self.main_layout.addWidget(self.button_group_box)
         self.main_layout.addWidget(self.button_map_box)
 
-        self.current_map = None
+        self.curr_map_idx = None
         self.path_file = None
         self.path_list = MyQtTree(self)
         self.initGui()
         if self.getFilePathFromCache():
             self.path_list.loadFromFile(self.path_file)
-            maps = list(self.path_list.maps())
-            if maps:
-                self.setCurrentMap(maps[-1])
+            self.curr_map_idx = len(self.path_list) - 1
         self.updatePathFileInfo()
         self.updateCurrentMapInfo()
 
@@ -68,26 +66,26 @@ class MyWindow(QMainWindow):
         # save button button
         save_button = QPushButton("save path")
         save_button.clicked.connect(self.savePath)
+
         # capture region button
         capture_button = QPushButton("capture mode")
         capture_button.clicked.connect(self.startCaptureMode)
+
         # new map button
         create_map_button = QPushButton("new map")
         create_map_button.clicked.connect(self.createNewMap)
-        # set current map button
-        set_current_map_button = QPushButton("set current map")
-        set_current_map_button.clicked.connect(self.askForCurrentMap)
+
         # next map button
         next_map_button = QPushButton("next map")
         next_map_button.clicked.connect(self.askForDirection)
-
         self.button_group_layout.addWidget(save_button)
         self.button_group_layout.addWidget(capture_button)
         self.button_map_layout.addWidget(create_map_button)
-        self.button_map_layout.addWidget(set_current_map_button)
         self.button_map_layout.addWidget(next_map_button)
+
         # init path list
         self.initPath()
+
         # populate infos box with labels stacked vertically
         self.current_map_info = QLabel()
         self.infos_box_layout.addWidget(self.current_map_info)
@@ -95,7 +93,7 @@ class MyWindow(QMainWindow):
         self.infos_box_layout.addWidget(self.current_path_file_info)
 
     def askForDirection(self):
-        if not self.current_map:
+        if self.curr_map_idx is None:
             QMessageBox.critical(self, "ERROR", "You didn't specify a current map.")
             return
         self.ch_map_box = ChangeMapBox(self)
@@ -103,7 +101,7 @@ class MyWindow(QMainWindow):
         self.ch_map_box.show()
 
     def getCurrMapCoords(self):
-        sx, sy = re.findall(MAP_REG, self.current_map)[0]
+        sx, sy = re.findall(MAP_REG, self.path_list[self.curr_map_idx].text(0))[0]
         return int(sx), int(sy)
 
     def createNextMap(self, direction):
@@ -112,7 +110,7 @@ class MyWindow(QMainWindow):
         ny = y + direction[1]
         next_map_id = f"map[{nx},{ny}]"
         QTreeWidgetItem(self.path_list, [next_map_id])
-        self.setCurrentMap(next_map_id)
+        self.setCurrentMap(self.curr_map_idx + 1)
 
     def savePath(self):
         if not self.path_file:
@@ -161,7 +159,7 @@ class MyWindow(QMainWindow):
             self.updatePathFileInfo()
 
     def startCaptureMode(self):
-        if not self.current_map:
+        if self.curr_map_idx is None:
             QMessageBox.critical(self, "ERROR", "You didn't specify a current map.")
             return
         stypes = [
@@ -171,7 +169,8 @@ class MyWindow(QMainWindow):
             "poissonPane",
             "sardineBrillante",
             "greuvette",
-            "crabe"
+            "crabe",
+            "espadon"
         ]
         self.hide()
         self.snip_win = QSnip(self, stypes)
@@ -189,7 +188,7 @@ class MyWindow(QMainWindow):
         event.accept()
 
     def appendMapRegions(self, snippet):
-        curr_map = self.path_list[self.current_map]
+        curr_map = self.path_list[self.curr_map_idx]
         print(snippet)
         snippet = map(str, snippet)
         QTreeWidgetItem(curr_map, snippet)
@@ -200,13 +199,13 @@ class MyWindow(QMainWindow):
             if self.path_file:
                 return True
 
-    def createNewMap(self, map_id):
+    def createNewMap(self):
         map_id, ok_pressed = QInputDialog.getText(self, "Get map coordinates", "map coordinates :", QLineEdit.Normal, "")
         if re.match(COORD_REG, map_id):
             map_id.replace(" ", "")
             map_id = f"map[{map_id}]"
             QTreeWidgetItem(self.path_list, [map_id])
-            self.setCurrentMap(map_id)
+            self.setCurrentMap(self.curr_map_idx + 1)
         else:
             QMessageBox.critical(self, "ERROR", "valid map ID.")
 
@@ -223,16 +222,19 @@ class MyWindow(QMainWindow):
             QMessageBox.critical(self, "ERROR", "You didn't give any valid map ID.")
 
     def updateCurrentMapInfo(self):
-        self.current_map_info.setText(f"Current map is: {self.current_map}")
+        self.current_map_info.setText(f"Current map is: {self.currentMap().text(0)}")
         self.current_map_info.adjustSize()
 
     def updatePathFileInfo(self):
         self.current_path_file_info.setText(f"Current path file is: {self.path_file}")
         self.current_map_info.adjustSize()
 
-    def setCurrentMap(self, map_id):
-        self.current_map = map_id
+    def setCurrentMap(self, map_idx):
+        self.curr_map_idx = map_idx
         self.updateCurrentMapInfo()
+
+    def currentMap(self):
+        return self.path_list[self.curr_map_idx]
 
 
 def window():

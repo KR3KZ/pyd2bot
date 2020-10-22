@@ -13,6 +13,7 @@ PATTERNS = {
             Pattern("sardineBrillante002.png").similar(0.56)
             ],
     "greuvette": Pattern("greuvette.png").similar(0.50),
-        "crabe": "crabe.png"
+    "crabe": "crabe.png",
+    "espadon": "1603321953298.png"
+    
 }
-

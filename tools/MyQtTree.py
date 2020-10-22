@@ -56,54 +56,65 @@ class MyQtTree(QTreeWidget):
         for item in self:
             yield item.text(0)
 
-    def delMap(self, map_id):
-        for idx, name in enumerate(self.maps()):
-            if map_id == name:
-                self.takeTopLevelItem(idx)
-                if map_id == self.parent.current_map:
-                    self.parent.current_map = None
-                    self.parent.updateCurrentMapInfo()
+    def delMap(self, map_idx):
+        self.takeTopLevelItem(map_idx)
+        if map_idx == self.parent.curr_map_idx:
+            if self.parent.curr_map_idx > 0:
+                self.parent.curr_map_idx -= 1
+                self.parent.updateCurrentMapInfo()
+            else:
+                self.parent.curr_map_idx = None
 
     def onChoice(self, choice):
         p = self.selected.parent()
         map_id = self.selected.text(0)
+
         if choice == 'delete map':
-            self.delMap(map_id)
+            for idx, map in enumerate(self):
+                if map == self.selected:
+                    self.delMap(idx)
+
         elif choice == 'delete entry':
             p.removeChild(self.selected)
+
         elif choice == 'set current':
-            self.parent.setCurrentMap(map_id)
+            for idx, map in enumerate(self):
+                if map == self.selected:
+                    self.parent.setCurrentMap(idx)
+
+        elif choice == "change":
+            map_id, ok_pressed = QInputDialog.getText(self, "Get map coordinates", "map coordinates :",
+                                                      QLineEdit.Normal, "")
+            if ok_pressed and re.match(COORD_REG, map_id):
+                map_id.replace(" ", "")
+                map_id = f"map[{map_id}]"
+                self.selected.setText(0, map_id)
 
     def onClick(self):
         index = self.selectedIndexes()[0]
         self.selected = self.itemFromIndex(index)
+        self.selected_idx = index
         combo_box = QComboBox(self)
         if self.selected.text(1) == '':
             combo_box.addItem("delete map")
             combo_box.addItem("set current")
+            combo_box.addItem("change")
         else:
             combo_box.addItem("delete entry")
             combo_box.addItem("highlight")
         combo_box.activated[str].connect(self.onChoice)
         combo_box.showPopup()
 
-    def __getitem__(self, map_id):
-        res = None
-        if re.findall(MAP_REG, map_id):
-            for map in self:
-                if map.text(0) == map_id:
-                    res = map
-        if not res:
-            raise KeyError('Map ID not found.')
-        return res
+    def __len__(self):
+        return self.topLevelItemCount()
 
-    def getMapList(self, map_id):
-        return _mapList(self[map_id])
+    def __getitem__(self, map_idx):
+        return self.topLevelItem(map_idx)
+
+    def getMapList(self, map_idx):
+        return _mapList(self[map_idx])
 
     def __iter__(self):
         n = self.topLevelItemCount()
         for i in range(n):
             yield self.topLevelItem(i)
-
-    def __contains__(self, map_id):
-        return map_id in self.maps()
