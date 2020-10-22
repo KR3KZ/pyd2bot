@@ -3,15 +3,10 @@ if not SRC_DIR in sys.path: sys.path.append(SRC_DIR)
 import frighost_fish as frifri
 
 
+READY_B = "1603333068288.png"
+READY_R = Region(1314,930,139,59)
 MAP_R = Region(0,28,1920,1002)
 MAP_INFO_R = tr = Region(13,865,307,169)
-
-
-def waitForChange(region):
-    with region:
-        onChange(100)
-        observe(10)
-        stopObserver()
 
 
 def loadFarmingPath(src_path):

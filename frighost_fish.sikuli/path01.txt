@@ -42,6 +42,8 @@ kralamoure,1035,805,71,42
 sardineBrillante,644,826,78,45
 sardineBrillante,426,718,81,43
 mapChange,1128,32,114,11
+poissonPane,433,503,57,38
+crabe,647,743,63,38
 #map[-76,-36]
 mapChange,53,406,37,33
 #map[-77,-36]
@@ -59,6 +61,22 @@ kralamoure,427,677,78,44
 mapChange,1182,29,65,13
 #map[-77,-38]
 mapChange,79,411,52,45
+#map[-78,-38]
+mapChange,1450,959,31,42
+#map[-78,-37]
+kralamoure,994,226,62,34
+kralamoure,818,566,79,50
+mapChange,44,340,72,44
+#map[-79,-37]
+kralamoure,819,609,73,52
+kralamoure,725,594,82,62
+greuvette,644,701,65,39
+poissonPane,434,503,58,43
+mapChange,1002,29,69,11
+#map[-79,-38]
+sardineBrillante,727,780,83,54
+poissonPane,387,834,64,33
+mapChange,87,446,51,39
 #map[-80,-38]
 sardineBrillante,1033,759,77,48
 kralamoure,905,821,77,50
@@ -90,3 +108,4 @@ mapChange,132,244,43,39
 #map[-84,-41]
 espadon,1500,597,47,70
 kralamoure,1465,627,72,52
+
