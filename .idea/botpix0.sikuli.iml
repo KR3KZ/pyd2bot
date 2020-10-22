@@ -5,7 +5,6 @@
       <sourceFolder url="file://$MODULE_DIR$/tools" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/combatAlgo.sikuli" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/constants.sikuli" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/farmapi.sikuli" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/frighost_fish.sikuli" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/functions.sikuli" isTestSource="false" />
     </content>

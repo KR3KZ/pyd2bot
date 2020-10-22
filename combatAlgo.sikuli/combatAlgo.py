@@ -12,7 +12,7 @@ def combatAlgo():
         spellNbr = 2
         pmNbr = 4
         spellRange = 13
-        YOUR_TURN_R.wait(YOUR_TURN_P, FOREVER)
+        cnst.YOUR_TURN_R.wait(cnst.YOUR_TURN_P, FOREVER)
         # when the bot turn starts, get his location and mobs location.
         meLoc = getMeLoc()
         mobsLocs = getMobsLocs()
@@ -41,7 +41,7 @@ def combatAlgo():
                 # if the target is in range.
                 if sD < spellRange:
                     # try to hit the target with a spell.
-                    pa = Pattern(capture(PA_R))
+                    pa = Pattern(capture(cnst.PA_R))
                     useSpell("e", tgtLoc)
                     wait(0.5)
                     tgtNewColor = tgtLoc.getColor()
