@@ -8,24 +8,27 @@ def dist(pos1, pos2):
 
 def selectTarget(mobs_pos, me_pos):
     if mobs_pos:
-        dists_from_targets = map(lambda l: dist(l, me_pos), mobs_pos)
-        target_index = dists_from_targets.index(min(dists_from_targets))
-        return target_index
+        tI = min(range(len(mobs_pos)), key=lambda x: squareDist(mobs_pos[x], me_pos))
+        tgt_loc = mobs_pos.pop(tI)
+        return tgt_loc
     return None
 
 
-def squareDistance(pos1, pos2):
+def squareDist(pos1, pos2):
     i = round(abs(pos1.x - pos2.x) / cnst.CELL_W)
     j = round(abs(pos1.y - pos2.y) / cnst.CELL_H)
     return int(max(i, j))
 
 
-def getMoveSquares(meLoc, pms):
+def getMoveSquares(loc, pm):
     V = []
-    for i in range(-pms, pms + 1):
-        for j in range(-pms, pms + 1):
-            if max(abs(i), abs(j)) <= pms and (i + j) % 2 == 0:
-                V.append(Location(meLoc.x + i * cnst.CELL_W, meLoc.y + j * cnst.CELL_H))
+    if pm != 0:
+        from itertools import product
+        for i, j in product(range(-pm, pm + 1), range(-pm, pm + 1)):
+            if i * j != 0 and (i + j) % 2 == 0 and max(abs(i), abs(j)) <= pm:
+                square_pos = Location(loc.x + i * cnst.CELL_W, loc.y + j * cnst.CELL_H)
+                if square_pos.getColor() == cnst.EMPTY_SQUARE_COLOR:
+                    V.append(square_pos)
     return V
 
 
@@ -50,7 +53,7 @@ def getNearBy(loc, w, h):
 
 def useSpell(shortcut, target):
     type(shortcut)
-    wait(0.1)
+    wait(0.3)
     target.click()
 
 
@@ -67,7 +70,7 @@ def waitForChange(region):
 
 def changeMap(tgt):
     time = 0
-    snippet = capture(cnst.MAP_INFO_R)
+    snippet = capture(cnst.MINIMAP_R)
     while time < cnst.CHANGE_MAP_TIMEOUT:
         tgt.click()
         if waitVanish(Pattern(snippet).exact(), 10):
