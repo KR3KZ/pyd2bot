@@ -1,7 +1,5 @@
 from java.awt import Robot
-from java.awt import Color
-from java.awt import Rectangle
-import java.awt.Color as Color
+from java.awt import Color, Rectangle, AlphaComposite, RenderingHints, BasicStroke
 import java.awt.Toolkit
 import java.awt.image.BufferedImage
 import java.io.File
@@ -10,11 +8,74 @@ import javax.imageio.ImageIO as ImageIO
 import time
 import logging
 import json
+from javax.swing import JFrame, JPanel, ImageIcon, JLabel
+from java.awt.event import MouseListener
+import traceback
+
 
 SRC_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
 COMBAT_R = Region(335, 29, 1253, 885)
 NBR_H_CELL = 14.5
 NBR_V_CELL = 20.5
+
+
+class ScreenHighlighter(JFrame):
+    opened = set()
+
+    def __init__(self):
+        super(ScreenHighlighter, self).__init__()
+        self.target_color = Color(1, 0, 0, 0.7)
+        self.setAlwaysOnTop(True)
+        self.setUndecorated(True)
+        self.setBackground(Color(0, 0, 0, 0.0))
+        self.roi = set()
+        self.opened.add(self)
+        self.setVisible(False)
+        self.getRootPane().putClientProperty("Window.shadow", False)
+            
+    def closeAfter(self, secs):
+        try:
+            sleep(secs)
+        except InterruptedError as e:
+            self.close()
+            traceback.print_stack()
+        self.close()
+
+    def drawBorder(self, g):
+        stroke = BasicStroke(3)
+        g.setColor(self.target_color)
+        g.setStroke(stroke)
+        w = stroke.getLineWidth()
+        g.drawRect(int(w / 2), int(w / 2), int(self.getWidth() - w), int(self.getHeight() - w))
+
+    def drawRoi(self, g):
+        print('yep')
+        g.setColor(self.target_color)
+        for loc in self.roi:
+            g.drawLine(loc.x, loc.y, loc.x, loc.y)
+
+    def paint(self, g):
+        super(ScreenHighlighter, self).paint(g)
+        if not self.roi:
+            self.drawBorder(g)
+        else:
+            self.drawRoi(g)
+
+    def close(self):
+        self.setVisible(False)
+        self.opened.remove(self)
+        self.dispose()
+
+    def highlight(self, r, secs=None, roi=None, color=None):
+        self.setLocation(r.x, r.y)
+        self.setSize(r.w, r.h)
+        if roi:
+            self.roi = roi
+        if color:
+            self.targetColor = color
+        self.setVisible(True)
+        if secs:
+            self.closeAfter(secs)
 
 
 class CellType:
@@ -23,7 +84,6 @@ class CellType:
     BOT = 2
     FREE = 3
     REACHABLE = 4
-
 
 class Cell(Location):
 
@@ -56,6 +116,7 @@ class Cell(Location):
 
 
 class Grid(list):
+    
     def __init__(self, region, nbr_vcell, nbr_hcell):
         list.__init__(self)
         self.nbr_vcell = nbr_vcell
