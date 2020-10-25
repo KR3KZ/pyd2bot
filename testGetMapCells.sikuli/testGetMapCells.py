@@ -86,6 +86,7 @@ class ObjType:
 
 
 class CellOverlay(Overlay):
+    
     class VizMode:
         BORDER = 1
         ELLIPSE = 2
@@ -136,6 +137,7 @@ class CellOverlay(Overlay):
 class GridOverlay(Overlay):
 
     def __init__(self, grid):
+        super(Overlay, self).__init__()
         self.grid = grid
         self.r = self.grid.r
         self.setLocation(self.r.x, self.r.y)
@@ -147,7 +149,7 @@ class GridOverlay(Overlay):
         for row in self.grid:
             for cell in row:
                 g.setStroke(BasicStroke(2))
-                parallelogram = Path2D.Double
+                parallelogram = Path2D.Double()
                 g.setColor(cell.type)
                 parallelogram.moveTo(cell.x - self.r.x, cell.y - self.r.y + cell.h / 2)
                 parallelogram.lineTo(cell.x - self.r.x + cell.w / 2, cell.y - self.r.y)
@@ -206,15 +208,15 @@ class Cell(Location):
         for loc in self.iterEllipse():
             color = Color(self.getRGB(loc))
             if color in ObjColor.OBSTACLE:
-                self.type = self.OBSTACLE
+                self.type = ObjType.OBSTACLE
             elif color in ObjColor.FREE:
-                self.type = self.FREE
+                self.type = ObjType.FREE
             elif color in ObjColor.REACHABLE:
-                self.type = self.REACHABLE
+                self.type = ObjType.REACHABLE
             elif color in ObjColor.MOB:
-                self.type = self.MOB
+                self.type = ObjType.MOB
             elif color in ObjColor.BOT:
-                self.type = self.BOT
+                self.type = ObjType.BOT
             if self.type != ObjType.UNKNOWN:
                 break
         return self.type
