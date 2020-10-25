@@ -1,23 +1,32 @@
-from java.awt import Robot
-from java.awt import Color, Rectangle, AlphaComposite, RenderingHints, BasicStroke
-import java.awt.Toolkit
-import java.awt.image.BufferedImage
+from java.awt import Color, Rectangle, AlphaComposite, RenderingHints, BasicStroke, Toolkit, Robot
+from java.awt.image import BufferedImage
 import java.io.File
 import java.io.IOException
-import javax.imageio.ImageIO as ImageIO
+from javax.imageio import ImageIO
 import time
 import logging
 import json
-from javax.swing import JFrame, JPanel, ImageIcon, JLabel
-from java.awt.event import MouseListener
+from javax.swing import JFrame, ImageIcon
 import traceback
-
+import logging
 
 SRC_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
 COMBAT_R = Region(335, 29, 1253, 885)
 NBR_H_CELL = 14.5
 NBR_V_CELL = 20.5
 
+    
+class Log:
+    def __init__(self):
+        format = "<%(asctime)-15s %(levelname)s line %(lineno)d %(threadName)s> %(funcName)s: - %(message)s"
+        logging.basicConfig(level=logging.INFO, format=format)
+        self.log = logging.getLogger("bot logger")
+
+    def info(self, *args):
+        res = ', '.join(map(str, args))
+        self.log.info(res)
+        
+log = Log()
 
 class ScreenHighlighter(JFrame):
     opened = set()
@@ -49,7 +58,6 @@ class ScreenHighlighter(JFrame):
         g.drawRect(int(w / 2), int(w / 2), int(self.getWidth() - w), int(self.getHeight() - w))
 
     def drawRoi(self, g):
-        print('yep')
         g.setColor(self.target_color)
         for loc in self.roi:
             g.drawLine(loc.x, loc.y, loc.x, loc.y)
@@ -72,7 +80,7 @@ class ScreenHighlighter(JFrame):
         if roi:
             self.roi = roi
         if color:
-            self.targetColor = color
+            self.target_color = color
         self.setVisible(True)
         if secs:
             self.closeAfter(secs)
@@ -85,6 +93,11 @@ class CellType:
     FREE = 3
     REACHABLE = 4
 
+class ObjColor:
+    FREE = [-7436706, -6910361] 
+    OBSTACLE = [-16777216, -10988742]
+    FREE_REACHABLE = [-10846914, -11175624]
+    
 class Cell(Location):
 
     def __init__(self, grid, x, y):
@@ -93,33 +106,43 @@ class Cell(Location):
         self.h = grid.cell_h
         self.w = grid.cell_w
         self.ellipse = self.getEllipse()
-        print(self.h, self.w)
-
-    def highlight(self, *args):
-        Region(self.x - self.w / 2, self.y - self.h / 2, self.w, self.h).highlight(*args)
-
-    def getRgb(self, dx, dy):
-        self.grid.bi.getRGB(self.x + dx, self.y + dy)
-
-    def parse(self):
-        pass
-
+        
     def getEllipse(self):
-        res = []
-        for i in range(-int(self.h / 2), int(self.h / 2) + 1):
-            for j in range(-int(self.w / 2), int(self.w / 2) + 1):
-                if i >= self.h / 4 and j >= self.w / 4 and Location(i, j) in self:
-                    res.append(Location(i, j))
+        res = set()
+        for dy in range(-int(self.h / 2), int(self.h / 2) + 1):
+            for dx in range(-int(self.w / 2), int(self.w / 2) + 1):
+                loc = Location(dx, dy) 
+                if self.insideEllipse(self._exteriorEllipse[0], self._exteriorEllipse[1], loc) and not \
+                        self.insideEllipse(self._interiorEllipse[0], self._interiorEllipse[1], loc):
+                    res.add(Location(self.x + dx, self.y + dy))
         return res
 
+    def highlight(self, *args):
+        Region(int(self.x - self.w / 2), int(self.y - self.h / 2), int(self.w), int(self.h)).highlight(*args)
+
+    def getRgb(self, loc):
+        self.grid.bi.getRGB(loc.x, loc.y)
+
+    def parse(self):
+        for loc in self.ellipse:
+            if self.getRGB(loc) in O 
+
+    def insideEllipse(self, a, b, loc):
+        w = a * self.w / 2
+        h = b * self.h / 2
+        return (loc.x / w)**2 + (loc.y / h)**2 <= 1
+    
+
+    
     def __iter__(self):
-        for i in range(-int(self.h / 2), int(self.h / 2) + 1):
-            for j in range(-int(self.w / 2), int(self.w / 2) + 1):
-                if Location(i, j) in self:
-                    yield Location(i, j)
+        for dy in range(-int(self.h / 2), int(self.h / 2) + 1):
+            for dx in range(-int(self.w / 2), int(self.w / 2) + 1):
+                if Location(dx, dy) in self:
+                    yield Location(self.x + dx, self.y + dy)
                     
     def __contains__(self, loc):
-        return self.w * abs(loc.y) + self.h * (abs(loc.x) - self.w / 2)
+        res = self.w * abs(loc.y) + self.h * (abs(loc.x) - self.w / 2) <= 0
+        return res
 
 
 class Grid(list):
@@ -142,7 +165,9 @@ class Grid(list):
             self.append(row)
         self.rows = len(self)
         self.cols = len(self[0])
-
+        self._exteriorEllipse = (0.55, 0.6)
+        self._interiorEllipse = (0.47, 0.45)
+    
     def parse(self):
         pass
 
@@ -153,9 +178,12 @@ class Grid(list):
     def getRGB(self, x, y):
         return self.bi.getRGB(x - self.region.x, y - self.region.y)
 
-r = Region(527,593,422,168)
-map = Grid(r, 3, 4) 
-map[0][0].highlight(2)
-roi = list(map[0][0])
-overlay = ScreenHighlighter()
-overlay.highlight(r, secs=3, roi=roi)
+if __name__ == "__main__":
+    r = Region(516,228,497,208)
+    _grid = Grid(r, 2.5, 3) 
+    _roi = _grid[2][1].getEllipse(0.6, 0.6)
+    relative_roi = [Location(l.x - r.x, l.y - r.y) for l in _roi]
+    log.info(len(_roi))
+    overlay = ScreenHighlighter()
+    overlay.highlight(r, secs=3, roi=relative_roi, color=Color.BLUE)
+

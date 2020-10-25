@@ -4,7 +4,6 @@ from java.awt.event import MouseListener
 import traceback
 
 
-
 class ScreenHighlighter(JFrame):
     opened = set()
 
@@ -35,7 +34,6 @@ class ScreenHighlighter(JFrame):
         g.drawRect(int(w / 2), int(w / 2), int(self.getWidth() - w), int(self.getHeight() - w))
 
     def drawRoi(self, g):
-        print('yep')
         g.setColor(self.target_color)
         for loc in self.roi:
             g.drawLine(loc.x, loc.y, loc.x, loc.y)
@@ -64,14 +62,15 @@ class ScreenHighlighter(JFrame):
             self.closeAfter(secs)
 
 
-r = Region(696, 395, 460, 255)
+r = Region(1270,653,273,131)
 overlay = ScreenHighlighter()
 overlay.setSize(r.w, r.h)
 overlay.setLocation(r.x, r.y)
 overlay.setVisible(True)
 for x in range(100):
     overlay.roi.add(Location(x, x))
-    overlay.repaint() 
+    overlay.repaint()
+    wait(0.05)
 overlay.close()
 sleep(2)
 
