@@ -88,11 +88,12 @@ class CellType:
 class Cell(Location):
 
     def __init__(self, grid, x, y):
-        super().__init__(self, x, y)
+        super(Cell, self).__init__(x, y)
         self.grid = grid
         self.h = grid.cell_h
         self.w = grid.cell_w
         self.ellipse = self.getEllipse()
+        print(self.h, self.w)
 
     def highlight(self, *args):
         Region(self.x - self.w / 2, self.y - self.h / 2, self.w, self.h).highlight(*args)
@@ -108,9 +109,15 @@ class Cell(Location):
         for i in range(-int(self.h / 2), int(self.h / 2) + 1):
             for j in range(-int(self.w / 2), int(self.w / 2) + 1):
                 if i >= self.h / 4 and j >= self.w / 4 and Location(i, j) in self:
-                    res.appen((i, j))
+                    res.append(Location(i, j))
         return res
 
+    def __iter__(self):
+        for i in range(-int(self.h / 2), int(self.h / 2) + 1):
+            for j in range(-int(self.w / 2), int(self.w / 2) + 1):
+                if Location(i, j) in self:
+                    yield Location(i, j)
+                    
     def __contains__(self, loc):
         return self.w * abs(loc.y) + self.h * (abs(loc.x) - self.w / 2)
 
@@ -145,3 +152,10 @@ class Grid(list):
 
     def getRGB(self, x, y):
         return self.bi.getRGB(x - self.region.x, y - self.region.y)
+
+r = Region(527,593,422,168)
+map = Grid(r, 3, 4) 
+map[0][0].highlight(2)
+roi = list(map[0][0])
+overlay = ScreenHighlighter()
+overlay.highlight(r, secs=3, roi=roi)

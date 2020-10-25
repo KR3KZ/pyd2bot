@@ -2,7 +2,7 @@ from java.awt import Color, Rectangle, AlphaComposite, RenderingHints, BasicStro
 from javax.swing import JFrame, JPanel, ImageIcon, JLabel
 from java.awt.event import MouseListener
 import traceback
-from time import sleep
+
 
 
 class ScreenHighlighter(JFrame):
