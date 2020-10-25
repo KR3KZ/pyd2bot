@@ -54,8 +54,8 @@ FARM_SPELL = {
 }
 
 def highlightPath(start_loc, path):
-    x = start_loc.absx
-    y = start_loc.absy
+    x = start_loc.x
+    y = start_loc.y
     for dx, dy in path:
         x = x + dx * CELL_W
         y = y + dy * CELL_H
@@ -64,11 +64,11 @@ def highlightPath(start_loc, path):
 
 
 def getNearByRegion(loc, w, h):
-    return Region(loc.absx - w / 2, loc.absy - h / 2, w, h)
+    return Region(loc.x - w/2, loc.y - h/2, w, h)  
 
 
 def dist(pos1, pos2):
-    return ((pos1.absx - pos2.absx) ** 2 + (pos1.absy - pos2.absy) ** 2) ** 0.5
+    return ((pos1.x - pos2.x) ** 2 + (pos1.y - pos2.y) ** 2) ** 0.5
 
 
 def selectTarget(mobs_pos, me_pos):
@@ -78,8 +78,8 @@ def selectTarget(mobs_pos, me_pos):
 
 
 def squareDist(pos1, pos2):
-    i = round(abs(pos1.absx - pos2.absx) / CELL_W)
-    j = round(abs(pos1.absy - pos2.absy) / CELL_H)
+    i = round(abs(pos1.x - pos2.x) / CELL_W)
+    j = round(abs(pos1.y - pos2.y) / CELL_H)
     return max(int(i), int(j))
 
 def similarColor(c1, c2, th=0.7):
@@ -96,7 +96,7 @@ def getMoveSquares(loc, pm):
         from itertools import product
         for i, j in product(range(-pm, pm + 1), range(-pm, pm + 1)):
             if (i != 0 or j != 0) and (i + j) % 2 == 0 and max(abs(i), abs(j)) <= pm:
-                square_pos = Location(loc.absx + i * CELL_W, loc.absy + j * CELL_H)
+                square_pos = Location(loc.x + i * CELL_W, loc.y + j * CELL_H)
                 if similarColor(square_pos.getColor(), EMPTY_SQUARE_COLOR) < 100:
                     # print(similarColor(square_pos.getColor(), EMPTY_SQUARE_COLOR))
                     V.append(square_pos)
@@ -245,7 +245,7 @@ while True:
     mobs_pos = removeDuplicates([e.getTarget() for e in mobs_match])
 
     for m in mobs_pos:
-        Region(m.absx, m.absy, 1, 1).highlight(0.5)
+        Region(m.x, m.y, 1, 1).highlight(0.5)
     
     # Get next target infos
     tgt_pos = selectTarget(mobs_pos, me_pos)
