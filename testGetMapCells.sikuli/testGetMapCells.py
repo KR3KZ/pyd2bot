@@ -30,20 +30,21 @@ class Log:
 log = Log()
 
 
-class ScreenHighlighter(JFrame):
+class GridOverlay(JFrame):
     opened = set()
 
-    def __init__(self):
-        super(ScreenHighlighter, self).__init__()
+    def __init__(self, grid):
+        super(GridOverlay, self).__init__()
         self.target_color = Color(1, 0, 0, 0.7)
         self.setAlwaysOnTop(True)
         self.setUndecorated(True)
         self.setBackground(Color(0, 0, 0, 0.0))
-        self.roi = set()
+        self.grid = grid
         self.opened.add(self)
         self.setVisible(False)
         self.getRootPane().putClientProperty("Window.shadow", False)
-
+        self.r = self.grid.region
+        
     def closeAfter(self, secs):
         try:
             sleep(secs)
@@ -59,93 +60,106 @@ class ScreenHighlighter(JFrame):
         w = stroke.getLineWidth()
         g.drawRect(int(w / 2), int(w / 2), int(self.getWidth() - w), int(self.getHeight() - w))
 
-    def drawRoi(self, g):
-        for points, color in self.roi:
-            g.setColor(color)
-            for loc in points:
-                g.drawLine(loc.x, loc.y, loc.x, loc.y)
-
     def paint(self, g):
-        super(ScreenHighlighter, self).paint(g)
-        if not self.roi:
-            self.drawBorder(g)
-        else:
-            self.drawRoi(g)
+        super(GridOverlay, self).paint(g)
+        g.setStroke(BasicStroke(2))
+        for row in grid:
+            for cell in row:
+                edge1 = Location(cell.x - self.r.x, cell.y - self.r.y + cell.h / 2)
+                edge2 = Location(cell.x - self.r.x, cell.y - self.r.y - cell.h / 2)
+                edge3 = Location(cell.x - self.r.x + cell.w / 2, cell.y - self.r.y)
+                edge4 = Location(cell.x - self.r.x - cell.w / 2, cell.y - self.r.y)
+                g.setColor(cell.type)
+                g.drawLine(edge1.x, edge1.y, edge3.x, edge3.y)
+                g.drawLine(edge1.x, edge1.y, edge4.x, edge4.y)
+                g.drawLine(edge2.x, edge2.y, edge3.x, edge3.y)
+                g.drawLine(edge2.x, edge2.y, edge4.x, edge4.y)
 
     def close(self):
         self.setVisible(False)
         self.opened.remove(self)
         self.dispose()
 
-    def highlight(self, r, secs=None, roi=None, color=None):
-        self.setLocation(r.x, r.y)
-        self.setSize(r.w, r.h)
-        if roi:
-            self.roi = roi
-        if color:
-            self.target_color = color
+    def showWindow(self, secs):
+        self.setLocation(self.grid.region.x, self.grid.region.y)
+        self.setSize(self.grid.region.w, self.grid.region.h)
         self.setVisible(True)
         if secs:
             self.closeAfter(secs)
 
 
-class CellType:
-    FREE_REACHABLE = 5
-    OBSTACLE = 0
-    MOB = 1
-    BOT = 2
-    FREE = 3
-    REACHABLE = 4
-
-
-class ObjColor:
-    BOT = [-65536]
-    MOB = [-16776961]
-    FREE = [-7436706, -6910361]
-    OBSTACLE = [-16777216, -10988742]
-    FREE_REACHABLE = [-10846914, -11175624]
-
-
 class Cell(Location):
+
+    BOT_COLOR = [Color(-65536)]
+    MOB_COLOR = [Color(-16776961)]
+    FREE_COLOR = [Color(-7436706), Color(-6910361)]
+    OBSTACLE_COLOR = [Color(-16777216), Color(-10988742)]
+    REACHABLE_COLOR = [Color(-10846914), Color(-11175624)]
+
+    REACHABLE = Color.GREEN
+    OBSTACLE = Color.RED
+    MOB = Color.BLUE
+    BOT = Color.MAGENTA
+    FREE = Color.ORANGE
 
     def __init__(self, grid, x, y):
         super(Cell, self).__init__(x, y)
         self.grid = grid
         self.h = grid.cell_h
         self.w = grid.cell_w
-        self.ellipse = self.getEllipse()
+        self._exteriorEllipse = (0.55, 0.6)
+        self._interiorEllipse = (0.47, 0.45)
+        self.ellipse = None
         self.type = None
 
     def getEllipse(self):
-        res = set()
-        for dy in range(-int(self.h / 2), int(self.h / 2) + 1):
-            for dx in range(-int(self.w / 2), int(self.w / 2) + 1):
-                loc = Location(dx, dy)
-                if self.insideEllipse(self._exteriorEllipse[0], self._exteriorEllipse[1], loc) and not \
-                        self.insideEllipse(self._interiorEllipse[0], self._interiorEllipse[1], loc):
-                    res.add(Location(self.x + dx, self.y + dy))
-        return res
+        if not self.ellipse:
+            self.ellipse = set()
+            for dy in range(-int(self.h / 2), int(self.h / 2) + 1):
+                for dx in range(-int(self.w / 2), int(self.w / 2) + 1):
+                    loc = Location(dx, dy)
+                    if self.insideEllipse(self._exteriorEllipse[0], self._exteriorEllipse[1], loc) and not \
+                            self.insideEllipse(self._interiorEllipse[0], self._interiorEllipse[1], loc):
+                        self.ellipse.add(Location(self.x + dx, self.y + dy))
+        return self.ellipse
 
     def highlight(self, *args):
         Region(int(self.x - self.w / 2), int(self.y - self.h / 2), int(self.w), int(self.h)).highlight(*args)
 
     def getRGB(self, loc):
-        self.grid.bi.getRGB(loc.x, loc.y)
+        return self.grid.getRGB(loc.x, loc.y)
+
+    def getBorder(self):
+        res = []
+        for dx in range(-int(self.w / 2), int(self.w / 2) + 1):
+            dy1 = (self.h / 2) * (self.w / 2 - dx)
+            dy2 = (self.h / 2) * (self.w / 2 + dx)
+            res.append(Location(self.x + dx, self.y + dy1))
+            res.append(Location(self.x - dx, self.y + dy2))
+            res.append(Location(self.x + dx, self.y - dy1))
+            res.append(Location(self.x - dx, self.y - dy2))
+        return res
+
+    def getTopCorner(self):
+        # TODO
+        pass
 
     def parse(self):
         for loc in self.ellipse:
-            if self.getRGB(loc) in ObjColor.OBSTACLE:
-                self.type = CellType.OBSTACLE
-            elif self.getRGB(loc) in ObjColor.FREE:
-                self.type = CellType.FREE
-            elif self.getRGB(loc) in ObjColor.FREE_REACHABLE:
-                self.type = CellType.FREE_REACHABLE
-            elif self.getRGB(loc) in ObjColor.MOB:
-                self.type = CellType.MOB
-            elif self.getRGB(loc) in ObjColor.BOT:
-                self.type = CellType.BOT
+            color = Color(self.getRGB(loc))
+            if color in self.OBSTACLE_COLOR:
+                self.type = self.OBSTACLE
+            elif color in self.FREE_COLOR:
+                self.type = self.FREE
+            elif color in self.REACHABLE_COLOR:
+                self.type = self.FREE_REACHABLE
+            elif color in self.MOB_COLOR:
+                self.type = self.MOB
+            elif color in self.BOT_COLOR:
+                self.type = self.BOT
             if self.type is not None:
                 break
+            # log.info(Color(rgb))
         return self.type
 
     def insideEllipse(self, a, b, loc):
@@ -184,14 +198,13 @@ class Grid(list):
             self.append(row)
         self.rows = len(self)
         self.cols = len(self[0])
-        self._exteriorEllipse = (0.55, 0.6)
-        self._interiorEllipse = (0.47, 0.45)
 
     def parse(self):
         for i in range(self.rows):
             for j in range(self.cols):
                 cell_type = self[i][j].parse()
-                if not cell_type:
+                if cell_type is None:
+                    self[i][j].highlight(2)
                     raise Exception("Enable to parse cell({}, {})!".format(i, j))
 
     def update(self):
@@ -201,24 +214,12 @@ class Grid(list):
     def getRGB(self, x, y):
         return self.bi.getRGB(x - self.region.x, y - self.region.y)
 
+    def highlight(self, secs):
+        overlay = GridOverlay(self)
+        overlay.showWindow(15)
+
 
 if __name__ == "__main__":
-    overlay = ScreenHighlighter()
     grid = Grid(COMBAT_R, NBR_V_CELL, NBR_H_CELL)
     grid.parse()
-    overlay = ScreenHighlighter()
-    for i in grid.rows:
-        for j in grid.cols:
-            color = None
-            if grid[i][j].type == CellType.OBSTACLE:
-                color = Color.RED
-            elif grid[i][j].type == CellType.FREE:
-                color = Color.ORANGE
-            elif grid[i][j].type == CellType.FREE_REACHABLE:
-                color = Color.GREEN
-            elif grid[i][j].type == CellType.MOB:
-                color = Color.BLUE
-            elif grid[i][j].type == CellType.BOT:
-                color = Color.MAGENTA
-            overlay.roi += (grid[i][j], color)
-    overlay.highlight(COMBAT_R, 15)
+    grid.highlight(10)
