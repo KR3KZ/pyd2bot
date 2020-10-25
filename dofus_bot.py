@@ -305,7 +305,7 @@ class Fighter(threading.Thread):
                'pos': pos,
                'color': pos.getColor(),
                'dist': squareDist(pos, bot.getTarget()),
-               'region': Region(match),
+               'r': Region(match),
                'snippet': Pattern(capture(Region(match))),
                'nbr-casted-on': 0,
                'in-range': False
@@ -368,7 +368,7 @@ class Fighter(threading.Thread):
                         spell_nbr -= 1
                         target['nbr-casted-on'] += 1
                         # if target dies after spell cast
-                        if not target['region'].wait(target['snippet'], 3):
+                        if not target['r'].wait(target['snippet'], 3):
                             log.info("target died")
                             if len(mobs) == 1:
                                 self.combatEnded.wait(5)
