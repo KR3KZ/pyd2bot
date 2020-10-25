@@ -60,14 +60,14 @@ class MyWindow(QMainWindow):
 
         # message label
         self.notification_text = QLabel()
-        self.updateTopMessage("Press F5 to capture r.")
+        self.updateTopMessage("Press F5 to capture region.")
         self.vLayout.addWidget(self.notification_text)
 
         # save button button
         save_button = QPushButton("save path")
         save_button.clicked.connect(self.savePath)
 
-        # capture r button
+        # capture region button
         capture_button = QPushButton("capture mode")
         capture_button.clicked.connect(self.startCaptureMode)
 
