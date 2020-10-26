@@ -95,6 +95,7 @@ class CellOverlay(Overlay):
         super(CellOverlay, self).__init__()
         self.cell = cell
         self._mode = mode
+        self._zone = None
         self.setLocation(int(self.cell.x - self.cell.w / 2), int(self.cell.y - self.cell.h / 2))
         self.setSize(int(self.cell.w), int(self.cell.h))
 
@@ -103,11 +104,11 @@ class CellOverlay(Overlay):
         h = self.cell.extEllipse[1] * self.cell.h / 2
         g.setColor(self.cell.type)
         g.setStroke(BasicStroke(2))
-        g.drawOval(0, 0, w, h)
+        g.drawOval(int((self.cell.w - w) / 2), int((self.cell.h - h) / 2), int(w), int(h))
 
     def drawBorder(self, g):
         log.info("called")
-        g.setStroke(BasicStroke(2))
+        g.setStroke(BasicStroke(6))
         parallelogram = Path2D.Double()
         log.info(self.cell.type)
         g.setColor(self.cell.type)
@@ -116,16 +117,16 @@ class CellOverlay(Overlay):
         parallelogram.lineTo(self.cell.w / 2, self.cell.h)
         parallelogram.lineTo(0, self.cell.h / 2)
         parallelogram.closePath()
-        g.fill(parallelogram)
+        g.draw(parallelogram)
 
     def drawPoints(self, g):
-        log.info("Viz _mode draw ppoints called")
-        stroke = BasicStroke(3)
+        stroke = BasicStroke(4)
         g.setStroke(stroke)
-        log.info(len(self._zone))
         for c, l in self._zone:
             g.setColor(c)
-            g.drawLine(l.x - self.cell.grid.x, l.y - self.cell.grid.y, l.x - self.cell.grid.x, l.y - self.cell.grid.y)
+            x = int(l.x - self.cell.x + self.cell.w / 2)
+            y = int(l.y - self.cell.y + self.cell.h / 2)
+            g.drawLine(x, y, x, y)
 
     def paint(self, g):
         super(Overlay, self).paint(g)
@@ -135,10 +136,16 @@ class CellOverlay(Overlay):
             self.drawEllipse(g)
         elif self._mode == CellOverlay.VizMode.FILL:
             self.fill(g)
+        elif self._mode == CellOverlay.VizMode.ZONE:
+            self.drawPoints(g)
 
-    def highlight(self, secs, mode=VizMode.BORDER):
+    def highlight(self, secs, mode=VizMode.BORDER, zone=None):
+        if mode == CellOverlay.VizMode.ZONE and not zone:
+            raise Exception("A zone of points must be specified in ZONE mode!")
         if mode:
             self._mode = mode
+        if zone:
+            self._zone = zone
         self.setVisible(True)
         if secs:
             self.closeAfter(secs)
@@ -176,7 +183,7 @@ class GridOverlay(Overlay):
 
 def _iterParallelogram(o, w, h):
     for dx in range(-int(w / 2), int(w / 2) + 1):
-        max_dy = int((h / w) * abs(dx - w / 2))
+        max_dy = int((h / w) * (w / 2 - abs(dx)))
         for dy in range(-max_dy, max_dy + 1):
             yield Location(o.x + dx, o.y + dy)
 
@@ -246,20 +253,19 @@ class Cell(Location):
         return self.type
 
     def iterTopCorner(self):
-        o = Location(self.x, self.y + self.h / 4)
+        o = Location(self.x, self.y - self.h / 4)
         w = self.w / 2
         h = self.h / 2
         return _iterParallelogram(o, w, h)
 
-    def highlight(self, secs):
+    def highlight(self, secs, mode):
         overlay = CellOverlay(self)
-        overlay.highlight(secs)
+        overlay.highlight(secs, mode)
 
     def highlightTopCorner(self, secs):
-        zone_iterator = map(lambda l: (Color.GREEN, l), self.iterTopCorner())
-        log.info(len(zone_iterator))
-        overlay = CellOverlay(self, CellOverlay.VizMode.ZONE)
-        overlay.highlight(secs, mode=CellOverlay.VizMode.ZONE, zone=zone_iterator)
+        top_corner_it = map(lambda l: (Color.GREEN, l), self.iterTopCorner())
+        overlay = CellOverlay(self)
+        overlay.highlight(secs, mode=CellOverlay.VizMode.ZONE, zone=top_corner_it)
 
 
 class Grid(list):
@@ -304,6 +310,8 @@ class Grid(list):
 
 
 if __name__ == "__main__":
-    grid = Grid(DofusGUI.COMBAT_R, DofusGUI.VCELLS, DofusGUI.HCELLS)
+    tr = Region(552,174,865,347)
+    grid = Grid(tr, 2, 2.5)
+    # grid = Grid(DofusGUI.COMBAT_R, DofusGUI.VCELLS, DofusGUI.HCELLS)
     # grid.parse()
-    grid[2][2].highlight(1)
+    grid[1][0].highlightTopCorner(10)
