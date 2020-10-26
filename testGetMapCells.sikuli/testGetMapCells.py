@@ -28,7 +28,6 @@ log = Log()
 
 
 class Overlay(JFrame):
-    opened = set()
 
     def __init__(self):
         super(Overlay, self).__init__()
@@ -36,7 +35,6 @@ class Overlay(JFrame):
         self.setAlwaysOnTop(True)
         self.setUndecorated(True)
         self.setBackground(Color(0, 0, 0, 0.0))
-        self.opened.add(self)
         self.setVisible(False)
         self.getRootPane().putClientProperty("Window.shadow", False)
 
@@ -49,6 +47,7 @@ class Overlay(JFrame):
         self.close()
 
     def paint(self, g):
+        super(Overlay, self).paint(g)
         stroke = BasicStroke(3)
         g.setColor(self.target_color)
         g.setStroke(stroke)
@@ -57,7 +56,6 @@ class Overlay(JFrame):
 
     def close(self):
         self.setVisible(False)
-        self.opened.remove(self)
         self.dispose()
 
     def highlight(self, r, secs):
@@ -86,17 +84,19 @@ class ObjType:
 
 
 class CellOverlay(Overlay):
-    
+
     class VizMode:
         BORDER = 1
         ELLIPSE = 2
         FILL = 3
+        ZONE = 4
 
     def __init__(self, cell, mode=VizMode.BORDER):
+        super(CellOverlay, self).__init__()
         self.cell = cell
-        self.mode = mode
+        self._mode = mode
         self.setLocation(int(self.cell.x - self.cell.w / 2), int(self.cell.y - self.cell.h / 2))
-        self.cell.setSize(self.cell.w, self.h)
+        self.setSize(int(self.cell.w), int(self.cell.h))
 
     def drawEllipse(self, g):
         w = self.cell.extEllipse[0] * self.cell.w / 2
@@ -106,29 +106,39 @@ class CellOverlay(Overlay):
         g.drawOval(0, 0, w, h)
 
     def drawBorder(self, g):
+        log.info("called")
         g.setStroke(BasicStroke(2))
-        parallelogram = Path2D.Double
+        parallelogram = Path2D.Double()
+        log.info(self.cell.type)
         g.setColor(self.cell.type)
-        parallelogram.moveTo(self.cell.rx + self.cell.w / 2, self.cell.y + self.cell.h)
-        parallelogram.lineTo(self.cell.rx + self.cell.w, self.cell.y + self.cell.h / 2)
-        parallelogram.lineTo(self.cell.rx + self.cell.w / 2, self.cell.y)
-        parallelogram.lineTo(self.cell.rx, self.cell.y + self.cell.h / 2)
+        parallelogram.moveTo(self.cell.w / 2, self.cell.h)
+        parallelogram.lineTo(self.cell.w, self.cell.h / 2)
+        parallelogram.lineTo(self.cell.w / 2, 0)
+        parallelogram.lineTo(0, self.cell.h / 2)
         parallelogram.closePath()
         g.fill(parallelogram)
 
-    def fill(self, g):
-        pass
+    def drawPoints(self, g):
+        log.info("Viz _mode draw ppoints called")
+        stroke = BasicStroke(3)
+        g.setStroke(stroke)
+        log.info(len(self._zone))
+        for c, l in self._zone:
+            g.setColor(c)
+            g.drawLine(l.x - self.cell.grid.x, l.y - self.cell.grid.y, l.x - self.cell.grid.x, l.y - self.cell.grid.y)
 
     def paint(self, g):
         super(Overlay, self).paint(g)
-        if self.mode == Cell.VizMode.BORDER:
+        if self._mode == CellOverlay.VizMode.BORDER:
             self.drawBorder(g)
-        elif self.mode == Cell.VizMode.ELLIPSE:
+        elif self._mode == CellOverlay.VizMode.ELLIPSE:
             self.drawEllipse(g)
-        elif self.mode == Cell.VizMode.FILL:
+        elif self._mode == CellOverlay.VizMode.FILL:
             self.fill(g)
 
-    def highlight(self, secs):
+    def highlight(self, secs, mode=VizMode.BORDER):
+        if mode:
+            self._mode = mode
         self.setVisible(True)
         if secs:
             self.closeAfter(secs)
@@ -164,6 +174,13 @@ class GridOverlay(Overlay):
             self.closeAfter(secs)
 
 
+def _iterParallelogram(o, w, h):
+    for dx in range(-int(w / 2), int(w / 2) + 1):
+        max_dy = int((h / w) * abs(dx - w / 2))
+        for dy in range(-max_dy, max_dy + 1):
+            yield Location(o.x + dx, o.y + dy)
+
+
 class Cell(Location):
 
     def __init__(self, pgrid, x, y):
@@ -176,10 +193,7 @@ class Cell(Location):
         self.rx, self.ry = self.x - self.grid.r.x, self.y - self.grid.r.y
 
     def __iter__(self):
-        for dx in range(-int(self.w / 2), int(self.w / 2) + 1):
-            max_dy = int((self.h / self.w) * abs(dx - self.w / 2))
-            for dy in range(-max_dy, max_dy + 1):
-                yield Location(self.x + dx, self.y + dy)
+        return _iterParallelogram(self, self.w, self.h)
 
     def __contains__(self, loc):
         res = self.w * abs(loc.y) + self.h * (abs(loc.x) - self.w / 2) <= 0
@@ -200,12 +214,8 @@ class Cell(Location):
         return self.grid.getRGB(loc.x, loc.y)
 
     def parseFromTopCorner(self):
-        # TODO
-        pass
-
-    def parseFromEllipse(self):
         self.type = ObjType.UNKNOWN
-        for loc in self.iterEllipse():
+        for loc in self.iterTopCorner():
             color = Color(self.getRGB(loc))
             if color in ObjColor.OBSTACLE:
                 self.type = ObjType.OBSTACLE
@@ -213,7 +223,15 @@ class Cell(Location):
                 self.type = ObjType.FREE
             elif color in ObjColor.REACHABLE:
                 self.type = ObjType.REACHABLE
-            elif color in ObjColor.MOB:
+            if self.type != ObjType.UNKNOWN:
+                break
+        return self.type
+
+    def parseFromEllipse(self):
+        self.type = ObjType.UNKNOWN
+        for loc in self.iterEllipse():
+            color = Color(self.getRGB(loc))
+            if color in ObjColor.MOB:
                 self.type = ObjType.MOB
             elif color in ObjColor.BOT:
                 self.type = ObjType.BOT
@@ -221,9 +239,27 @@ class Cell(Location):
                 break
         return self.type
 
-    def highlight(self, secs, mode):
-        overlay = CellOverlay(self, mode)
+    def parse(self):
+        self.parseFromTopCorner()
+        if self.type == ObjType.UNKNOWN:
+            self.parseFromEllipse()
+        return self.type
+
+    def iterTopCorner(self):
+        o = Location(self.x, self.y + self.h / 4)
+        w = self.w / 2
+        h = self.h / 2
+        return _iterParallelogram(o, w, h)
+
+    def highlight(self, secs):
+        overlay = CellOverlay(self)
         overlay.highlight(secs)
+
+    def highlightTopCorner(self, secs):
+        zone_iterator = map(lambda l: (Color.GREEN, l), self.iterTopCorner())
+        log.info(len(zone_iterator))
+        overlay = CellOverlay(self, CellOverlay.VizMode.ZONE)
+        overlay.highlight(secs, mode=CellOverlay.VizMode.ZONE, zone=zone_iterator)
 
 
 class Grid(list):
@@ -236,7 +272,6 @@ class Grid(list):
         self.cell_w = region.w / nbr_hcell
         self.cell_h = region.h / nbr_vcell
         self.bi = Robot().createScreenCapture(region.getRect())
-
         for i in range(1, int(2 * self.nbr_vcell)):
             row = []
             for j in range(1, int(2 * self.nbr_hcell)):
@@ -270,5 +305,5 @@ class Grid(list):
 
 if __name__ == "__main__":
     grid = Grid(DofusGUI.COMBAT_R, DofusGUI.VCELLS, DofusGUI.HCELLS)
-    grid.parse()
-    grid.highlight(10)
+    # grid.parse()
+    grid[2][2].highlight(1)
