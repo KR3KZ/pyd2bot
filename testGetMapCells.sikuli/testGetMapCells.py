@@ -112,7 +112,7 @@ class CellOverlay(Overlay):
 
     def drawBorder(self, g):
         log.info("called")
-        g.setStroke(BasicStroke(6))
+        g.setStroke(BasicStroke(4))
         parallelogram = Path2D.Double()
         log.info(self.cell.type)
         g.setColor(self.cell.type)
@@ -226,28 +226,48 @@ class Cell(Location):
 
     def parse(self):
         hist = {}
+        max_key = None
+        max_val = 0
+
+        unknown = set()
+
         for loc in self.iterTopCorner():
-            color = Color(self.getRGB(loc))
+            color = self.getRGB(loc)
             if color not in hist:
                 hist[color] = 0
             hist[color] += 1
-            max_key = max(hist, key=hist.get)
-            if hist[max_key] > 9:
+            if hist[color] > max_val:
+                max_val = hist[color]
+                max_key = color
+            if max_val > 9:
                 break
-        self.type = ObjType.UNKNOWN
-        color = hist[max_key]
-        if color in ObjColor.MOB:
-            self.type = ObjType.MOB
-        elif color in ObjColor.BOT:
-            self.type = ObjType.BOT
-        if color in ObjColor.OBSTACLE:
+
+        max_key = Color(max_key)
+
+        if max_key in ObjColor.OBSTACLE:
             self.type = ObjType.OBSTACLE
-        elif color in ObjColor.FREE:
+
+        elif max_key in ObjColor.FREE:
             self.type = ObjType.FREE
-        elif color in ObjColor.REACHABLE:
+
+        elif max_key in ObjColor.REACHABLE:
             self.type = ObjType.REACHABLE
-        elif color in ObjColor.INVOKE:
+
+        elif max_key in ObjColor.INVOKE:
             self.type = ObjType.INVOKE
+
+        elif max_key in ObjColor.MOB:
+            self.type = ObjType.MOB
+
+        elif max_key in ObjColor.BOT:
+            self.type = ObjType.BOT
+
+        else:
+            if max_key not in unknown:
+                log.info(max_key)
+                unknown.add(max_key)
+            self.type = max_key
+
         return self.type
 
     def iterTopCorner(self):
@@ -291,17 +311,9 @@ class Grid(list):
         self.cols = len(self[0])
 
     def parse(self):
-        for i in range(self.rows):
-            for j in range(self.cols):
-                cell_type = self[i][j].parse()
-                if cell_type is None:
-                    self[i][j].highlight(2)
-                    raise Exception("Enable to parse cell({}, {})!".format(i, j))
-
-    def parse2(self):
         for i in range(1, self.rows):
             for j in range(self.cols):
-                self[i][j].parse2()
+                self[i][j].parse()
 
     def update(self):
         self.bi = Robot().createScreenCapture(self.r.getRect())
@@ -313,24 +325,6 @@ class Grid(list):
     def highlight(self, secs):
         overlay = GridOverlay(self)
         overlay.highlight(secs)
-
-    def getCellIdx(self, loc):
-        x = 2 * (loc.x - self.r.x) / self.cell_w
-        y = 2 * (loc.y - self.r.y) / self.cell_h
-        return int(y), int(x)
-
-
-def test():
-    grid = Grid(DofusGUI.COMBAT_R, DofusGUI.VCELLS, DofusGUI.HCELLS)
-    mob = grid[14][8]
-    it_top_corner = mob.iterTopCorner()
-    stats = {}
-    for l in it_top_corner:
-        col = Color(mob.getRGB(l))
-        if col not in stats:
-            stats[col] = 0
-        stats[col] += 1
-    log.info(stats)
 
 
 if __name__ == "__main__":
