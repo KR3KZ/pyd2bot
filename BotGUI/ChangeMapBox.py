@@ -1,10 +1,6 @@
 from PyQt5.QtCore import QObject, pyqtSignal
 from constants import *
-from snippetWidget import QSnip
-from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import *
-from MyQtTree import MyQtTree
-import re
 
 
 class ChangeMapBox(QMainWindow):

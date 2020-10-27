@@ -1,17 +1,15 @@
-from java.awt import Color, Rectangle, AlphaComposite, RenderingHints, BasicStroke, Toolkit, Robot
-from javax.swing import JFrame
-from java.awt.geom import Path2D
+from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt5.QtGui import QColor
+from PyQt5.QtCore import pyqtSignal, QObject, QPoint, QRect
+from PyQt5.QtWidgets import QMainWindow, QComboBox, QLabel, QPushButton, QAction
 import traceback
 import logging
 from math import sqrt
-from sikuli.Sikuli import *
-from guide import *
-
-SRC_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
+from time import sleep
 
 
 class DofusGUI:
-    COMBAT_R = Region(335, 29, 1253, 885)
+    COMBAT_R = QRect(335, 29, 1253, 885)
     HCELLS = 14.5
     VCELLS = 20.5
 
@@ -30,62 +28,25 @@ class Log:
 log = Log()
 
 
-class Overlay(JFrame):
-
-    def __init__(self):
-        super(Overlay, self).__init__()
-        self.target_color = Color(1, 0, 0, 0.7)
-        self.setAlwaysOnTop(True)
-        self.setUndecorated(True)
-        self.setBackground(Color(0, 0, 0, 0.0))
-        self.setVisible(False)
-        self.getRootPane().putClientProperty("Window.shadow", False)
-
-    def closeAfter(self, secs):
-        try:
-            sleep(secs)
-        except InterruptedError as e:
-            self.close()
-            traceback.print_stack()
-        self.close()
-
-    def paint(self, g):
-        super(Overlay, self).paint(g)
-        stroke = BasicStroke(3)
-        g.setColor(self.target_color)
-        g.setStroke(stroke)
-        w = stroke.getLineWidth()
-        g.drawRect(int(w / 2), int(w / 2), int(self.getWidth() - w), int(self.getHeight() - w))
-
-    def close(self):
-        self.setVisible(False)
-        self.dispose()
-
-    def highlight(self, r, secs):
-        self.setLocation(r.x, r.y)
-        self.setSize(r.w, r.h)
-        self.setVisible(True)
-        if secs:
-            self.closeAfter(secs)
 
 
 class ObjColor:
-    BOT = [Color(61, 56, 150), Color(251, 241, 191)]
-    MOB = [Color(46, 54, 61)]
-    FREE = [Color(150, 142, 103), Color(142, 134, 94)]
-    OBSTACLE = [Color(255, 255, 255), Color(0, 0, 0), Color(88, 83, 58)]
-    REACHABLE = [Color(90, 125, 62), Color(85, 121, 56)]
-    INVOKE = [Color(218, 57, 45)]
+    BOT = [QColor(61, 56, 150), QColor(251, 241, 191)]
+    MOB = [QColor(46, 54, 61)]
+    FREE = [QColor(150, 142, 103), QColor(142, 134, 94)]
+    OBSTACLE = [QColor(255, 255, 255), QColor(0, 0, 0), QColor(88, 83, 58)]
+    REACHABLE = [QColor(90, 125, 62), QColor(85, 121, 56)]
+    INVOKE = [QColor(218, 57, 45)]
 
 
 class ObjType:
-    REACHABLE = Color.GREEN
-    OBSTACLE = Color.BLACK
-    MOB = Color.BLUE
-    BOT = Color.MAGENTA
-    FREE = Color.ORANGE
-    INVOKE = Color.YELLOW
-    UNKNOWN = Color.WHITE
+    REACHABLE = QColor.GREEN
+    OBSTACLE = QColor.BLACK
+    MOB = QColor.BLUE
+    BOT = QColor.MAGENTA
+    FREE = QColor.ORANGE
+    INVOKE = QColor.YELLOW
+    UNKNOWN = QColor.WHITE
 
 
 class CellOverlay(Overlay):
@@ -242,7 +203,7 @@ class Cell(Location):
             if max_val > 9:
                 break
 
-        max_key = Color(max_key)
+        max_key = QColor(max_key)
 
         if max_key in ObjColor.OBSTACLE:
             self.type = ObjType.OBSTACLE
@@ -284,7 +245,7 @@ class Cell(Location):
         overlay.highlight(secs, mode)
 
     def highlightTopCorner(self, secs):
-        top_corner_it = map(lambda l: (Color.GREEN, l), self.iterTopCorner())
+        top_corner_it = map(lambda l: (QColor.GREEN, l), self.iterTopCorner())
         overlay = CellOverlay(self)
         overlay.highlight(secs, mode=CellOverlay.VizMode.ZONE, zone=top_corner_it)
 

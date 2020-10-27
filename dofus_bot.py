@@ -1,25 +1,33 @@
 # from sikuli.Sikuli import Region, Location, Pattern, capture, wait, FindFailed, Key, Settings
 from sikuli.Sikuli import *
-import java.awt.Color as Color
 import threading
 import atexit
-from math import sqrt
-import traceback
 import frighost_fish as frifri
-import logging
+from core import Grid
 import os
 from time import sleep
+from java.awt import Color, Rectangle, AlphaComposite, RenderingHints, BasicStroke, Toolkit, Robot
+from javax.swing import JFrame
+from java.awt.geom import Path2D
+import traceback
+import logging
+from math import sqrt
 
 lock = threading.Lock()
 
-SRC_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
-def get_log():
-    format = "<%(asctime)-15s %(levelname)s line %(lineno)d %(threadName)s> %(funcName)s: - %(message)s"
-    log_path = os.path.join(SRC_DIR, "bot.log")
-    logging.basicConfig(filename=log_path, level=logging.INFO, format=format)
-    return logging.getLogger("bot logger")
-# bot log 
-log = get_log()
+
+class Log:
+    def __init__(self):
+        format = "<%(asctime)-15s %(levelname)s line %(lineno)d %(threadName)s> %(funcName)s: - %(message)s"
+        logging.basicConfig(level=logging.INFO, format=format)
+        self.log = logging.getLogger("bot logger")
+
+    def info(self, *args):
+        res = ', '.join(map(str, args))
+        self.log.info(res)
+
+
+log = Log()
 
 # Regions
 MAP_R = Region(2, 29, 1918, 1002)
@@ -35,27 +43,13 @@ MY_TURN_CHECK_R = Region(841, 1009, 17, 8)
 OUT_OF_COMBAT_R = Region(104, 749, 37, 37)
 
 # Patterns
-READY_BUTTON_P = Pattern("1603357824947.png")
+READY_BUTTON_P = Pattern("READY_BUTTON_P.png")
 COMBAT_ENDED_POPUP_P = "END_COMBAT_P.png"
 SKIP_TURN_BUTTON_P = "YOUR_TURN_P.png"
-BOT_P = [Pattern("ME_P1.png").targetOffset(3, 3), Pattern("ME_P2.png").similar(0.65).targetOffset(-3, 8),
-         Pattern("1603394186463.png").similar(0.68).targetOffset(2, 2),
-         Pattern("1603394202485.png").targetOffset(-2, -8),
-         Pattern("1603403880774.png").similar(0.61).targetOffset(1, 13), Pattern("1603408051708.png").targetOffset(5, 7),
-         Pattern("1603408090329.png").targetOffset(0, -6),
-         Pattern("1603424428505.png").similar(0.67).targetOffset(2, 15),
-         Pattern("1603429082703.png").targetOffset(-2, -1), Pattern("rl.png").similar(0.67).targetOffset(-3, 16)]
-MOB_P = [Pattern("1603396008837.png").targetOffset(-1, 9),
-         Pattern("1603396021085.png").similar(0.50).targetOffset(-1, 8), Pattern("mobDown001.png").targetOffset(7, 1),
-         Pattern("1603396075836.png").targetOffset(-2, 6), Pattern("mobDown002.png").targetOffset(3, 3),
-         Pattern("mobleft001.png").targetOffset(0, -2), Pattern("mobleft002.png").similar(0.65).targetOffset(-11, 6),
-         Pattern("mobLeft003.png").targetOffset(1, -4), Pattern("mobRight001.png").targetOffset(-3, 3),
-         Pattern("1603457672046.png").targetOffset(9, 12)]
 
 # Env Vars
-NBR_H_CELL = 14.5
-NBR_V_CELL = 20.5
-EMPTY_SQUARE_COLOR = Color(90, 125, 62)
+HCELLS = 14.5
+VCELLS = 20.5
 MY_TURN_COLOR = Color(252, 200, 0)
 DU = (-1, -1)
 DL = (-1, 1)
@@ -63,7 +57,7 @@ DD = (1, 1)
 DR = (1, -1)
 
 # Locations
-MY_TURN_CHECK_LOC = Location(1431, 965)
+MY_TURN_CHECK_L = Location(1431, 965)
 END_COMBAT_CLOSE_L = Location(1240, 728)
 
 # Timers
@@ -79,16 +73,6 @@ SOURNOISERIE = {
     "nbr": 3,
     "nbr-on-same": 2
 }
-
-
-def highlightPath(start_loc, path):
-    x = start_loc.x
-    y = start_loc.y
-    for dx, dy in path:
-        x = x + dx * CELL_W
-        y = y + dy * CELL_H
-        Region(x, y, 1, 1).highlight(0.2)
-    return Location(x, y)
 
 
 def getNearByRegion(loc, w, h):
@@ -111,34 +95,6 @@ def similarColor(c1, c2, th=0.7):
     g = c1.green - c2.green
     b = c1.blue - c2.blue
     return sqrt((((512 + rmean) * r * r) >> 8) + 4 * g * g + (((767 - rmean) * b * b) >> 8))
-
-
-def getMoveSquares(loc, pm):
-    V = []
-    if pm != 0:
-        from itertools import product
-        for i, j in product(range(-pm, pm + 1), range(-pm, pm + 1)):
-            if (i != 0 or j != 0) and (i + j) % 2 == 0 and max(abs(i), abs(j)) <= pm:
-                square_pos = Location(loc.x + i * CELL_W, loc.y + j * CELL_H)
-                if similarColor(square_pos.getColor(), EMPTY_SQUARE_COLOR) < 100:
-                    # log.info(similarColor(square_pos.getColor(), EMPTY_SQUARE_COLOR))
-                    V.append(square_pos)
-    return V
-
-
-def mobExists(mobs, mob):
-    for m in mobs:
-        if squareDist(m.getTarget(), mob.getTarget()) == 0:
-            return True
-    return False
-
-
-def removeDuplicates(mobs):
-    res = []
-    for mob in mobs:
-        if not mobExists(res, mob):
-            res.append(mob)
-    return res
 
 
 def getNearestCell(me_pos, tgt_pos, pm_nbr):
@@ -280,22 +236,6 @@ class Fighter(threading.Thread):
         self.combatEnded.set()
 
     @staticmethod
-    def findMapPatterns():
-        bot = COMBAT_R.findBest(BOT_P)
-        if not bot:
-            raise Exception("Enable to find bot position")
-        mobs = []
-        for patt in MOB_P:
-            try:
-                mobs += COMBAT_R.findAll(patt)
-            except FindFailed as e:
-                pass
-        mobs = removeDuplicates(mobs)
-        if not mobs:
-            raise Exception("Couldn't detect mobs positions")
-        return bot, mobs
-
-    @staticmethod
     def selectTarget(mobs, bot):
         idx = min(range(len(mobs)), key=lambda it: squareDist(mobs[it].getTarget(), bot.getTarget()))
         match = mobs[idx]
@@ -330,13 +270,8 @@ class Fighter(threading.Thread):
         while not self.combatEnded.wait(1):
             self.waitTurn()
 
-            # Detect mobs and bot positions and highlight them
-            bot, mobs = self.findMapPatterns()
-            bot_pos = bot.getTarget()
-            log.info("detected :{}, mobs".format(len(mobs)))
-            for m in mobs:
-                Region(m).highlight(0.1)
-            Region(bot).highlight(0.1)
+            # Parse combat grid
+            grid = Grid(MAP_R, VCELLS, HCELLS)
 
             # select nearest target to hit
             target = self.selectTarget(mobs, bot)
