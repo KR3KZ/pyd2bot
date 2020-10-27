@@ -1,7 +1,6 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
-from PyQt5.QtCore import pyqtSignal, QObject
-from PyQt5.QtWidgets import QApplication, QMainWindow, QComboBox, QLabel, QPushButton, QAction
-import tkinter as tk
+from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtWidgets import QMainWindow, QComboBox
 
 
 class QSnip(QMainWindow):
@@ -11,17 +10,14 @@ class QSnip(QMainWindow):
 
     def __init__(self, parent, snip_types):
         super(QSnip, self).__init__()
-        root = tk.Tk()
-        screen_width = root.winfo_screenwidth()
-        screen_height = root.winfo_screenheight()
         self.parent = parent
-        self.setGeometry(0, 0, screen_width, screen_height)
         self.begin = QtCore.QPoint()
         self.end = QtCore.QPoint()
         self.setWindowOpacity(0.3)
         QtWidgets.QApplication.setOverrideCursor(
             QtGui.QCursor(QtCore.Qt.CrossCursor)
         )
+        self.showMaximized()
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         self.show()
         self.capturing = False

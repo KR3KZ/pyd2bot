@@ -1,11 +1,8 @@
-from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtGui import QColor
-from PyQt5.QtCore import pyqtSignal, QObject, QPoint, QRect
-from PyQt5.QtWidgets import QMainWindow, QComboBox, QLabel, QPushButton, QAction
-import traceback
+from PyQt5.QtCore import QPoint, QRect, Qt
 import logging
 from math import sqrt
-from time import sleep
+from Overlay import GridOverlay
 
 
 class DofusGUI:
@@ -28,8 +25,6 @@ class Log:
 log = Log()
 
 
-
-
 class ObjColor:
     BOT = [QColor(61, 56, 150), QColor(251, 241, 191)]
     MOB = [QColor(46, 54, 61)]
@@ -40,123 +35,27 @@ class ObjColor:
 
 
 class ObjType:
-    REACHABLE = QColor.GREEN
-    OBSTACLE = QColor.BLACK
-    MOB = QColor.BLUE
-    BOT = QColor.MAGENTA
-    FREE = QColor.ORANGE
-    INVOKE = QColor.YELLOW
-    UNKNOWN = QColor.WHITE
-
-
-class CellOverlay(Overlay):
-    class VizMode:
-        BORDER = 1
-        ELLIPSE = 2
-        FILL = 3
-        ZONE = 4
-
-    def __init__(self, cell, mode=VizMode.BORDER):
-        super(CellOverlay, self).__init__()
-        self.cell = cell
-        self._mode = mode
-        self._zone = None
-        self.setLocation(int(self.cell.x - self.cell.w / 2), int(self.cell.y - self.cell.h / 2))
-        self.setSize(int(self.cell.w), int(self.cell.h))
-
-    def drawEllipse(self, g):
-        w = self.cell.extEllipse[0] * self.cell.w / 2
-        h = self.cell.extEllipse[1] * self.cell.h / 2
-        g.setColor(self.cell.type)
-        g.setStroke(BasicStroke(2))
-        g.drawOval(int((self.cell.w - w) / 2), int((self.cell.h - h) / 2), int(w), int(h))
-
-    def drawBorder(self, g):
-        log.info("called")
-        g.setStroke(BasicStroke(4))
-        parallelogram = Path2D.Double()
-        log.info(self.cell.type)
-        g.setColor(self.cell.type)
-        parallelogram.moveTo(self.cell.w / 2, 0)
-        parallelogram.lineTo(self.cell.w, self.cell.h / 2)
-        parallelogram.lineTo(self.cell.w / 2, self.cell.h)
-        parallelogram.lineTo(0, self.cell.h / 2)
-        parallelogram.closePath()
-        g.draw(parallelogram)
-
-    def drawPoints(self, g):
-        stroke = BasicStroke(4)
-        g.setStroke(stroke)
-        for c, l in self._zone:
-            g.setColor(c)
-            x = int(l.x - self.cell.x + self.cell.w / 2)
-            y = int(l.y - self.cell.y + self.cell.h / 2)
-            g.drawLine(x, y, x, y)
-
-    def paint(self, g):
-        super(Overlay, self).paint(g)
-        if self._mode == CellOverlay.VizMode.BORDER:
-            self.drawBorder(g)
-        elif self._mode == CellOverlay.VizMode.ELLIPSE:
-            self.drawEllipse(g)
-        elif self._mode == CellOverlay.VizMode.FILL:
-            self.fill(g)
-        elif self._mode == CellOverlay.VizMode.ZONE:
-            self.drawPoints(g)
-
-    def highlight(self, secs, mode=VizMode.BORDER, zone=None):
-        if mode == CellOverlay.VizMode.ZONE and not zone:
-            raise Exception("A zone of points must be specified in ZONE mode!")
-        if mode:
-            self._mode = mode
-        if zone:
-            self._zone = zone
-        self.setVisible(True)
-        if secs:
-            self.closeAfter(secs)
-
-
-class GridOverlay(Overlay):
-
-    def __init__(self, grid):
-        super(Overlay, self).__init__()
-        self.grid = grid
-        self.r = self.grid.r
-        self.setLocation(self.r.x, self.r.y)
-        self.setSize(self.r.w, self.r.h)
-
-    def paint(self, g):
-        super(Overlay, self).paint(g)
-        g.setStroke(BasicStroke(2))
-        for row in self.grid:
-            for cell in row:
-                g.setStroke(BasicStroke(2))
-                parallelogram = Path2D.Double()
-                g.setColor(cell.type)
-                parallelogram.moveTo(cell.x - self.r.x, cell.y - self.r.y + cell.h / 2)
-                parallelogram.lineTo(cell.x - self.r.x + cell.w / 2, cell.y - self.r.y)
-                parallelogram.lineTo(cell.x - self.r.x, cell.y - self.r.y - cell.h / 2)
-                parallelogram.lineTo(cell.x - self.r.x - cell.w / 2, cell.y - self.r.y)
-                parallelogram.closePath()
-                g.fill(parallelogram)
-
-    def highlight(self, secs):
-        self.setVisible(True)
-        if secs:
-            self.closeAfter(secs)
+    REACHABLE = Qt.green
+    OBSTACLE = Qt.BLACK
+    MOB = Qt.blue
+    BOT = Qt.magenta
+    FREE = Qt.orange
+    INVOKE = Qt.yellow
+    UNKNOWN = Qt.white
 
 
 def _iterParallelogram(o, w, h):
     for dx in range(-int(w / 2), int(w / 2) + 1):
         max_dy = int((h / w) * (w / 2 - abs(dx)))
         for dy in range(-max_dy, max_dy + 1):
-            yield Location(o.x + dx, o.y + dy)
+            yield QPoint(o.x + dx, o.y + dy)
 
 
-class Cell(Location):
+class Cell:
 
     def __init__(self, pgrid, x, y):
-        super(Location, self).__init__(x, y)
+        self.x = x
+        self.y = y
         self.grid = pgrid
         self.h = pgrid.cell_h
         self.w = pgrid.cell_w
@@ -177,10 +76,10 @@ class Cell(Location):
         for dx in range(int(a) + 1):
             dy = int(b * sqrt(1 - (dx / a) ** 2))
             for eps in range(thickness):
-                yield Location(self.x + dx, self.y + dy - eps)
-                yield Location(self.x + dx, self.y - dy - eps)
-                yield Location(self.x - dx, self.y + dy - eps)
-                yield Location(self.x - dx, self.y - dy - eps)
+                yield QPoint(self.x + dx, self.y + dy - eps)
+                yield QPoint(self.x + dx, self.y - dy - eps)
+                yield QPoint(self.x - dx, self.y + dy - eps)
+                yield QPoint(self.x - dx, self.y - dy - eps)
 
     def getRGB(self, loc):
         return self.grid.getRGB(loc.x, loc.y)
@@ -235,19 +134,19 @@ class Cell(Location):
         a = 0.4
         b = 0.5
         c = 0.7
-        o = Location(self.x, self.y - (self.h / 4) * (b + c))
+        o = QPoint(self.x, self.y - (self.h / 4) * (b + c))
         w = a * self.w / 2
         h = b * self.h / 2
         return _iterParallelogram(o, w, h)
 
-    def highlight(self, secs, mode=CellOverlay.VizMode.BORDER):
+    def highlight(self, secs, mode=CellOverlay.VizMode.Border):
         overlay = CellOverlay(self)
         overlay.highlight(secs, mode)
 
     def highlightTopCorner(self, secs):
         top_corner_it = map(lambda l: (QColor.GREEN, l), self.iterTopCorner())
         overlay = CellOverlay(self)
-        overlay.highlight(secs, mode=CellOverlay.VizMode.ZONE, zone=top_corner_it)
+        overlay.highlight(secs, mode=CellOverlay.VizMode.Shape, shape=top_corner_it)
 
 
 class Grid(list):

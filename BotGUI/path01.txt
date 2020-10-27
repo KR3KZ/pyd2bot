@@ -1,5 +1,0 @@
-#map[-75,-34]
-kralamoure,770,413,79,55
-poisskaille,1164,342,86,66
-poissonPane,991,175,70,56
-mapChange,94,526,52,70
