@@ -8,6 +8,8 @@ from math import sqrt
 from src.core.log import Log
 
 
+
+
 def getNearByRegion(loc, w, h):
     return QRect(loc.x - w / 2, loc.y - h / 2, w, h)
 
