@@ -1,6 +1,8 @@
 from PyQt5.QtWidgets import *
 import re
-from constants import *
+from .constants import *
+
+from gui.constants import COORD_REG
 
 
 def _mapList(map):

@@ -1,7 +1,12 @@
 import threading
-from core.log import Log
+import traceback
+from core.grid import Grid
+from time import sleep
+from .taf import *
+import core.env as env
 
 log = Log()
+lock = threading.Lock()
 
 
 class Fighter(threading.Thread):
@@ -14,7 +19,8 @@ class Fighter(threading.Thread):
         self.stopSignal = threading.Event()
         self.combatDetected = threading.Event()
         self.combatEnded = threading.Event()
-        self.combat_ended_observer = AppearObserver(COMBAT_ENDED_POPUP_R, COMBAT_ENDED_POPUP_P, self.onCombatEnded)
+        self.combat_ended_observer = AppearObserver(env.Region.COMBAT_ENDED_POPUP_R, env.Pattern.COMBAT_ENDED_POPUP_P,
+                                                    self.onCombatEnded)
 
     def run(self):
         log.info('fighter running')
@@ -23,8 +29,8 @@ class Fighter(threading.Thread):
             if self.stopSignal.is_set():
                 break
             with lock:
-                wait(0.5)
-                READY_R.click()
+                sleep(0.5)
+                env.Region.READY_R.click()
                 try:
                     self.combatAlgo()
                 except Exception as e:
@@ -37,7 +43,7 @@ class Fighter(threading.Thread):
     def waitCombatStarted(self):
         while not self.stopSignal.is_set():
             try:
-                READY_R.wait(READY_BUTTON_P, 1. / self.scan_rate)
+                env.Region.READY_R.wait(env.Pattern.READY_BUTTON_P, 1. / self.scan_rate)
                 self.combatDetected.set()
                 log.info('Combat started')
                 break
@@ -52,14 +58,14 @@ class Fighter(threading.Thread):
 
     def waitTurn(self):
         while not self.stopSignal.is_set() and not self.combatEnded.is_set():
-            if MY_TURN_CHECK_R.getTarget().getColor() == MY_TURN_COLOR:
+            if env.Region.MY_TURN_CHECK_R.getTarget().getColor() == env.Color.MY_TURN_COLOR:
                 log.info('Bot turn started')
                 break
             wait(0.33)
 
     def onCombatEnded(self):
         log.info("combat ended detected")
-        END_COMBAT_CLOSE_L.click()
+        env.Location.END_COMBAT_CLOSE_L.click()
         wait(0.2)
         self.combat_ended_observer.stop()
         self.combat_ended_observer.join()
@@ -83,7 +89,7 @@ class Fighter(threading.Thread):
         return tgt
 
     def useSpell(self, target):
-        pa_observer = ChangeObserver(PA_R)
+        pa_observer = ChangeObserver(env.Region.PA_R)
         pa_observer.start()
         type(self.spell['shortcut'])
         target.click()
@@ -101,7 +107,7 @@ class Fighter(threading.Thread):
             self.waitTurn()
 
             # Parse combat grid
-            grid = Grid(MAP_R, VCELLS, HCELLS)
+            grid = Grid(env.Region.MAP_R, VCELLS, HCELLS)
 
             # select nearest target to hit
             target = self.selectTarget(mobs, bot)
@@ -148,7 +154,8 @@ class Fighter(threading.Thread):
                 if pm == 0:
                     break
 
-                if self.stopSignal.is_set(): return
+                if self.stopSignal.is_set():
+                    return
                 if target['in-range']:
                     search_range = pm
                 else:

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from PyQt5.QtCore import QObject, pyqtSignal
-from constants import *
-from snippetWidget import QSnip
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import *
-from MyQtTree import MyQtTree
-from ChangeMapBox import ChangeMapBox
+from src.gui.constants import MAP_REG, COORD_REG
+from src.gui.ChangeMapBox import ChangeMapBox
+from src.gui.MyQtTree import MyQtTree
+from src.gui.SnippetWidget import QSnip
 import re
 
 
@@ -13,25 +13,61 @@ class Communicate(QObject):
     path_loaded = pyqtSignal()
 
 
-class MyWindow(QMainWindow):
+class MainWindow(QMainWindow):
 
     def __init__(self, parent=None):
-        super(MyWindow, self).__init__()
+        super(MainWindow, self).__init__()
         self.setGeometry(584, 171, 744, 671)
-        self.setWindowTitle("Dofus Bot Path generator")
+        self.setWindowTitle("Dofus Bot")
         self.setWindowIcon(QtGui.QIcon('icon.jpg'))
-        widget = QWidget()
-        self.setCentralWidget(widget)
+        self.tabs = QTabWidget()
+        self.setCentralWidget(self.tabs)
 
-        self.main_layout = QVBoxLayout()
-        widget.setLayout(self.main_layout)
+        # Initialize tab screen
+        self.path_tab = QWidget()
+        self.fighter_tab = QWidget()
+        self.farmer_tab = QWidget()
+
+        # Add tabs
+        self.tabs.addTab(self.path_tab, "path")
+        self.tabs.addTab(self.fighter_tab, "combat")
+        self.tabs.addTab(self.farmer_tab, "farm")
+
+        # Init path tab
+        self.initPathTabLayout()
+
+        # Init combat tab
+
+        # menu
+        self.initMenu()
+
+        self.curr_map_idx = None
+        self.path_file = None
+
+        self.initPathTabWidgets()
+        if self.getFilePathFromCache():
+            self.path_list.loadFromFile(self.path_file)
+            self.curr_map_idx = len(self.path_list) - 1
+        self.updatePathFileInfo()
+        self.updateCurrentMapInfo()
+
+    def InitCombatTabLayout(self):
+        pass
+
+    def initCombatTabWidgets(self):
+        pass
+
+    def initPathTabLayout(self):
+        self.path_tab_layout = QVBoxLayout()
+        self.path_tab.setLayout(self.path_tab_layout)
+
         self.vLayout = QVBoxLayout()
-        self.main_layout.insertLayout(0, self.vLayout)
+        self.path_tab_layout.insertLayout(0, self.vLayout)
 
         self.infos_box = QGroupBox("Infos:")
         self.infos_box_layout = QVBoxLayout()
         self.infos_box.setLayout(self.infos_box_layout)
-        self.main_layout.addWidget(self.infos_box)
+        self.path_tab_layout.addWidget(self.infos_box)
 
         self.button_group_box = QGroupBox()
         self.button_map_box = QGroupBox()
@@ -41,22 +77,9 @@ class MyWindow(QMainWindow):
         self.button_group_box.setLayout(self.button_group_layout)
         self.button_map_box.setLayout(self.button_map_layout)
 
-        self.main_layout.addWidget(self.button_group_box)
-        self.main_layout.addWidget(self.button_map_box)
-
-        self.curr_map_idx = None
-        self.path_file = None
-        self.path_list = MyQtTree(self)
-        self.initGui()
-        if self.getFilePathFromCache():
-            self.path_list.loadFromFile(self.path_file)
-            self.curr_map_idx = len(self.path_list) - 1
-        self.updatePathFileInfo()
-        self.updateCurrentMapInfo()
-
-    def initGui(self):
-        # menu
-        self.initMenu()
+    def initPathTabWidgets(self):
+        self.path_tab_layout.addWidget(self.button_group_box)
+        self.path_tab_layout.addWidget(self.button_map_box)
 
         # message label
         self.notification_text = QLabel()
@@ -64,26 +87,29 @@ class MyWindow(QMainWindow):
         self.vLayout.addWidget(self.notification_text)
 
         # save button button
-        save_button = QPushButton("save path")
-        save_button.clicked.connect(self.savePath)
+        self.save_button = QPushButton("save path")
+        self.save_button.clicked.connect(self.savePath)
 
         # capture region button
-        capture_button = QPushButton("capture mode")
-        capture_button.clicked.connect(self.startCaptureMode)
+        self.capture_button = QPushButton("capture mode")
+        self.capture_button.clicked.connect(self.startCaptureMode)
 
         # new map button
-        create_map_button = QPushButton("new map")
-        create_map_button.clicked.connect(self.createNewMap)
+        self.create_map_button = QPushButton("new map")
+        self.create_map_button.clicked.connect(self.createNewMap)
 
         # next map button
-        next_map_button = QPushButton("next map")
-        next_map_button.clicked.connect(self.askForDirection)
-        self.button_group_layout.addWidget(save_button)
-        self.button_group_layout.addWidget(capture_button)
-        self.button_map_layout.addWidget(create_map_button)
-        self.button_map_layout.addWidget(next_map_button)
+        self.next_map_button = QPushButton("next map")
+        self.next_map_button.clicked.connect(self.askForDirection)
+
+        # Populate path tab layout with widgets
+        self.button_group_layout.addWidget(self.save_button)
+        self.button_group_layout.addWidget(self.capture_button)
+        self.button_map_layout.addWidget(self.create_map_button)
+        self.button_map_layout.addWidget(self.next_map_button)
 
         # init path list
+        self.path_list = MyQtTree(self)
         self.initPath()
 
         # populate infos box with labels stacked vertically
@@ -112,6 +138,11 @@ class MyWindow(QMainWindow):
         QTreeWidgetItem(self.path_list, [next_map_id])
         self.setCurrentMap(self.curr_map_idx + 1)
 
+    def savePathAs(self):
+        self.path_file = QFileDialog.getSaveFileName()[0]
+        self.savePath()
+        self.updatePathFileInfo()
+
     def savePath(self):
         if not self.path_file:
             self.path_file = QFileDialog.getSaveFileName()[0]
@@ -131,11 +162,23 @@ class MyWindow(QMainWindow):
         openAction.setStatusTip('Open path')
         openAction.triggered.connect(self.openPath)
 
+        # save action
+        saveAction = QAction(text='&Save', parent=self)
+        saveAction.setStatusTip('Save path')
+        saveAction.triggered.connect(self.savePath)
+
+        # save as action
+        saveAsAction = QAction(text='&Save as', parent=self)
+        saveAsAction.setStatusTip('Open path')
+        saveAsAction.triggered.connect(self.savePathAs)
+
         # Create menu bar and add action
         menuBar = self.menuBar()
         fileMenu = menuBar.addMenu('&File')
         fileMenu.addAction(newAction)
         fileMenu.addAction(openAction)
+        fileMenu.addAction(saveAction)
+        fileMenu.addAction(saveAsAction)
 
     def newPath(self):
         self.path_file = QFileDialog.getSaveFileName()[0]
@@ -200,7 +243,8 @@ class MyWindow(QMainWindow):
                 return True
 
     def createNewMap(self):
-        map_id, ok_pressed = QInputDialog.getText(self, "Get map coordinates", "map coordinates :", QLineEdit.Normal, "")
+        map_id, ok_pressed = QInputDialog.getText(self, "Get map coordinates", "map coordinates :", QLineEdit.Normal,
+                                                  "")
         if re.match(COORD_REG, map_id):
             map_id.replace(" ", "")
             map_id = f"map[{map_id}]"
@@ -210,7 +254,8 @@ class MyWindow(QMainWindow):
             QMessageBox.critical(self, "ERROR", "valid map ID.")
 
     def askForCurrentMap(self):
-        map_coord, ok_pressed = QInputDialog.getText(self, "Get map coordinates", "map coordinates :", QLineEdit.Normal, "")
+        map_coord, ok_pressed = QInputDialog.getText(self, "Get map coordinates", "map coordinates :", QLineEdit.Normal,
+                                                     "")
         if re.match(COORD_REG, map_coord):
             map_coord.replace(" ", "").strip('\n')
             map_id = f"map[{map_coord}]"
@@ -239,7 +284,7 @@ class MyWindow(QMainWindow):
 
 def window():
     app = QApplication(sys.argv)
-    win = MyWindow()
+    win = MainWindow()
     win.show()
     sys.exit(app.exec_())
 
@@ -250,5 +295,6 @@ def except_hook(cls, exception, traceback):
 
 if __name__ == "__main__":
     import sys
+
     sys.excepthook = except_hook
     window()
