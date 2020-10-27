@@ -13,13 +13,13 @@ class ObjColor:
 
 
 class ObjType:
-    REACHABLE = Qt.darkGreen
-    OBSTACLE = Qt.black
-    MOB = Qt.darkBlue
-    BOT = Qt.darkRed
-    FREE = Qt.green
-    INVOKE = Qt.yellow
-    UNKNOWN = Qt.white
+    REACHABLE = QColor(Qt.darkGreen)
+    OBSTACLE = QColor(Qt.black)
+    MOB = QColor(Qt.darkBlue)
+    BOT = QColor(Qt.darkRed)
+    FREE = QColor(Qt.green)
+    INVOKE = QColor(Qt.yellow)
+    UNKNOWN = QColor(Qt.white)
 
 
 class Region:

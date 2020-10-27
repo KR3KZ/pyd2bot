@@ -1,14 +1,14 @@
 from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QGroupBox, QHBoxLayout
-
 from core.grid import Grid
 from gui.Overlay import GridOverlay
 import core.env as env
 
 
 class FighterView(QWidget):
-    def __init__(self):
-        super(FighterView, self).__init__()
 
+    def __init__(self, main_window):
+        super(FighterView, self).__init__()
+        self.main_window = main_window
         self.initButton()
         self.initLayout()
 
@@ -31,8 +31,8 @@ class FighterView(QWidget):
         self.layout.insertLayout(0, self.button_combat_layout)
 
     def highlightGrid(self, event):
-        self.hide()
-        self.combat_grid = Grid(env.Region.COMBAT_R, env.VCELLS, env.HCELLS)
-        self.combat_grid.parse()
-        self.combat_grid.highlight(3)
-        self.show()
+        self.main_window.hide()
+        combat_grid = Grid(env.Region.COMBAT_R, env.VCELLS, env.HCELLS)
+        combat_grid.parse()
+        combat_grid.highlight(10)
+        self.main_window.show()

@@ -1,7 +1,10 @@
+from time import sleep, perf_counter
+
 from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import QColor, QPainter, QPolygon, QPen
+from PyQt5.QtGui import QColor, QPainter, QPolygon, QPen, QBrush, QPolygonF
 from PyQt5.QtCore import QRect, QPointF
 from PyQt5.QtWidgets import QMainWindow, QApplication
+from core import env
 
 
 class Overlay(QMainWindow):
@@ -9,7 +12,7 @@ class Overlay(QMainWindow):
     def __init__(self):
         super(Overlay, self).__init__()
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground, True)
-        self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint | QtCore.Qt.WindowStaysOnTopHint)
         self.target_color = QColor(1, 0, 0, 0.7)
 
     def closeAfter(self, secs):
@@ -97,35 +100,48 @@ class CellOverlay(Overlay):
 class GridOverlay(Overlay):
 
     def __init__(self, grid):
-        super(Overlay, self).__init__()
+        super(GridOverlay, self).__init__()
         self.grid = grid
-        self.r = self.grid.r
-        self.setLocation(self.r.x, self.r.y)
-        self.setSize(self.r.w, self.r.h)
+        self.setGeometry(self.grid.x(), self.grid.y(), self.grid.width(), self.grid.height())
 
     def paintEvent(self, event):
         qp = QPainter(self)
-        pen = QPen(QColor(self.cell.type), 3, QtCore.Qt.SolidLine)
+        pen = QPen(QColor(255, 0, 0), 1, QtCore.Qt.SolidLine)
+        brush = QBrush(QColor(255, 0, 0))
         qp.setPen(pen)
         for row in self.grid:
             for cell in row:
                 pen.setColor(cell.type)
-                edges = QPolygon(QPointF(cell.x - self.r.x, cell.y - self.r.y + cell.h / 2),
-                                 QPointF(cell.x - self.r.x + cell.w / 2, cell.y - self.r.y),
-                                 QPointF(cell.x - self.r.x, cell.y - self.r.y - cell.h / 2),
-                                 QPointF(cell.x - self.r.x - cell.w / 2, cell.y - self.r.y))
+                brush_color = QColor(cell.type)
+                # brush_color.setAlpha(100)
+                brush.setColor(brush_color)
+                qp.setPen(pen)
+                qp.setBrush(brush)
+                edges = [QPointF(cell.x - self.grid.x(), cell.y - self.grid.y() + cell.h / 2),
+                         QPointF(cell.x - self.grid.x() + cell.w / 2, cell.y - self.grid.y()),
+                         QPointF(cell.x - self.grid.x(), cell.y - self.grid.y() - cell.h / 2),
+                         QPointF(cell.x - self.grid.x() - cell.w / 2, cell.y - self.grid.y())]
+                edges = QPolygonF(edges)
                 qp.drawPolygon(edges)
 
     def highlight(self, secs):
-        self.setVisible(True)
+        self.show()
         if secs:
             self.closeAfter(secs)
 
 
 def window():
+    from core.grid import Grid as G
+    import json
     app = QApplication(sys.argv)
-    win = Overlay()
-    win.highlight(QRect(846, 74, 147, 30), 2)
+    sleep(2)
+    grid = G(env.Region.COMBAT_R, env.VCELLS, env.HCELLS)
+    start = perf_counter()
+    grid.parse()
+    print("it took: ", perf_counter() - start)
+    # grid.fromJson("map.json")
+    win = GridOverlay(grid)
+    win.highlight(20)
     sys.exit(app.exec_())
 
 

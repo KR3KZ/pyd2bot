@@ -1,36 +1,31 @@
 from math import sqrt
-
 from PyQt5.QtCore import QPoint
 from PyQt5.QtGui import QColor
-
 from core.env import ObjColor, ObjType
+from core.utils import iterParallelogram
 from gui.Overlay import CellOverlay
+from core.log import Log
 
-
-def _iterParallelogram(o, w, h):
-    for dx in range(-int(w / 2), int(w / 2) + 1):
-        max_dy = int((h / w) * (w / 2 - abs(dx)))
-        for dy in range(-max_dy, max_dy + 1):
-            yield QPoint(o.x + dx, o.y + dy)
+log = Log()
 
 
 class Cell:
 
-    def __init__(self, pgrid, x, y):
+    def __init__(self, pgrid, x, y, ctype=ObjType.UNKNOWN):
         self.x = x
         self.y = y
         self.grid = pgrid
         self.h = pgrid.cell_h
         self.w = pgrid.cell_w
         self.extEllipse = (0.55, 0.6)
-        self.type = ObjType.UNKNOWN
-        self.rx, self.ry = self.x - self.grid.r.x, self.y - self.grid.r.y
+        self.type = ctype
+        self.rx, self.ry = self.x - self.grid.x(), self.y - self.grid.y()
 
     def __iter__(self):
-        return _iterParallelogram(self, self.w, self.h)
+        return iterParallelogram(self, self.w, self.h)
 
     def __contains__(self, loc):
-        res = self.w * abs(loc.y) + self.h * (abs(loc.x) - self.w / 2) <= 0
+        res = self.w * abs(loc.y()) + self.h * (abs(loc.x()) - self.w / 2) <= 0
         return res
 
     def iterEllipse(self, thickness=2):
@@ -44,8 +39,8 @@ class Cell:
                 yield QPoint(self.x - dx, self.y + dy - eps)
                 yield QPoint(self.x - dx, self.y - dy - eps)
 
-    def getRGB(self, loc):
-        return self.grid.getRGB(loc.x, loc.y)
+    def getpixel(self, p):
+        return self.grid.getpixel(p)
 
     def parse(self):
         hist = {}
@@ -55,17 +50,17 @@ class Cell:
         unknown = set()
 
         for loc in self.iterTopCorner():
-            color = self.getRGB(loc)
-            if color not in hist:
-                hist[color] = 0
-            hist[color] += 1
-            if hist[color] > max_val:
-                max_val = hist[color]
-                max_key = color
+            rgb = self.getpixel(loc).getRgb()
+            if rgb not in hist:
+                hist[rgb] = 0
+            hist[rgb] += 1
+            if hist[rgb] > max_val:
+                max_val = hist[rgb]
+                max_key = rgb
             if max_val > 9:
                 break
 
-        max_key = QColor(max_key)
+        max_key = QColor(*max_key)
 
         if max_key in ObjColor.OBSTACLE:
             self.type = ObjType.OBSTACLE
@@ -86,9 +81,9 @@ class Cell:
             self.type = ObjType.BOT
 
         else:
-            if max_key not in unknown:
-                log.info(max_key)
-                unknown.add(max_key)
+            if max_key.getRgb() not in unknown:
+                log.info("Unknown color: ", max_key.getRgb())
+                unknown.add(max_key.getRgb())
             self.type = max_key
 
         return self.type
@@ -100,7 +95,7 @@ class Cell:
         o = QPoint(self.x, self.y - (self.h / 4) * (b + c))
         w = a * self.w / 2
         h = b * self.h / 2
-        return _iterParallelogram(o, w, h)
+        return iterParallelogram(o, w, h)
 
     def highlight(self, secs, mode=CellOverlay.VizMode.Border):
         overlay = CellOverlay(self)
@@ -110,3 +105,5 @@ class Cell:
         top_corner_it = map(lambda l: (QColor.green, l), self.iterTopCorner())
         overlay = CellOverlay(self)
         overlay.highlight(secs, mode=CellOverlay.VizMode.Shape, shape=top_corner_it)
+
+
