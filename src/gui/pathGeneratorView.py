@@ -183,7 +183,7 @@ class PathGeneratorView(QWidget):
 
     def getFilePathFromCache(self):
         try:
-            with open("cache", "r") as f:
+            with open("cache", "rect") as f:
                 self.path_file = f.read()
                 if os.path.exists(self.path_file):
                     return True

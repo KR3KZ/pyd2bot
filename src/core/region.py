@@ -44,12 +44,18 @@ class Region(QRect):
     def exists(self, img, secs=3):
         pass
 
-    def wait(self, secs):
-        pass
+    def wait(self, template, secs, threshold=0.7):
+        elapsed = 0
+        result = None
+        while elapsed < secs * 1000:
+            start = perf_counter()
+            result = self.findBest(template, threshold)
+            elapsed += perf_counter() - start
+        return result
 
     def waitVanish(self, secs):
         pass
-    
+
     def click(self):
         pyautogui.click(self.center().x(), self.center().y())
         pass
@@ -89,11 +95,11 @@ class Region(QRect):
 
 
 if __name__ == "__main__":
-    r = Region(305, 32, 1387, 870)
-    button_r = Region(1552, 1034, 47, 41)
+    r = Region(1280,38,120,33)
+    button_r = Region(1280,38,120,33)
     template = capture(button_r)
     start = perf_counter()
-    res = r.findAll(template, threshold=0.99)
+    res = r.findAll(template, threshold=0.9)
     print("it took: ", perf_counter() - start)
     for r in res:
         r.highlight(2)

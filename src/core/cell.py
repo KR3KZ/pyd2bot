@@ -1,6 +1,11 @@
+import sys
 from math import sqrt
+
+import pyautogui
 from PyQt5.QtCore import QPoint
 from PyQt5.QtGui import QColor
+from PyQt5.QtWidgets import QApplication
+
 from core.env import ObjColor, ObjType
 from core.utils import iterParallelogram
 from gui.Overlay import CellOverlay
@@ -57,7 +62,7 @@ class Cell:
             if hist[rgb] > max_val:
                 max_val = hist[rgb]
                 max_key = rgb
-            if max_val > 9:
+            if max_val > 5:
                 break
 
         max_key = QColor(*max_key)
@@ -102,8 +107,16 @@ class Cell:
         overlay.highlight(secs, mode)
 
     def highlightTopCorner(self, secs):
-        top_corner_it = map(lambda l: (QColor.green, l), self.iterTopCorner())
+        sys.excepthook = except_hook
+        app = QApplication(sys.argv)
+        top_corner_it = self.iterTopCorner()
         overlay = CellOverlay(self)
         overlay.highlight(secs, mode=CellOverlay.VizMode.Shape, shape=top_corner_it)
+        sys.exit(app.exec_())
+
+    def click(self):
+        pyautogui.click(self.x, self.y)
 
 
+def except_hook(cls, exception, traceback):
+    sys.__excepthook__(cls, exception, traceback)

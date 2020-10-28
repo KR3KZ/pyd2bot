@@ -31,7 +31,7 @@ class MyQtTree(QTreeWidget):
         self.clicked.connect(self.onClick)
 
     def loadFromFile(self, file_path):
-        with open(file_path, "r") as f:
+        with open(file_path, "rect") as f:
             for line in f.readlines():
                 if line:
                     line = line.rstrip('\n')

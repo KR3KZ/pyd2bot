@@ -1,5 +1,5 @@
 from time import sleep, perf_counter
-
+from PyQt5.QtCore import Qt
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtGui import QColor, QPainter, QPolygon, QPen, QBrush, QPolygonF
 from PyQt5.QtCore import QRect, QPointF, pyqtSignal
@@ -32,7 +32,7 @@ class Overlay(QMainWindow):
         qp.drawRect(QRect(0, 0, self.width(), self.height()))
 
     def highlight(self, r, secs):
-        self.setGeometry(r)
+        self.setGeometry(*r.getRect())
         self.show()
         if secs:
             self.closeAfter(secs)
@@ -45,8 +45,8 @@ class CellOverlay(Overlay):
         Fill = 3
         Shape = 4
 
-    def __init__(self, cell, mode=VizMode.Border):
-        super(CellOverlay, self).__init__()
+    def __init__(self, cell, mode=VizMode.Border, parent=None):
+        super(CellOverlay, self).__init__(parent)
         self.cell = cell
         self.mode = mode
         self.shape = None
@@ -74,12 +74,12 @@ class CellOverlay(Overlay):
         qp.drawPolygon(edges)
 
     def drawShape(self):
-        pen = QtGui.QPen(QColor(self.cell.type), 3, QtCore.Qt.SolidLine)
+        pen = QtGui.QPen(Qt.green, 3, QtCore.Qt.SolidLine)
         qp = QPainter(self)
         qp.setPen(pen)
         for point in self.shape:
-            x = int(point.x - self.cell.x + self.cell.w / 2)
-            y = int(point.y - self.cell.y + self.cell.h / 2)
+            x = int(point.x() - self.cell.x + self.cell.w / 2)
+            y = int(point.y() - self.cell.y + self.cell.h / 2)
             qp.drawPoint(x, y)
 
     def paintEvent(self, event):
@@ -114,20 +114,18 @@ class GridOverlay(Overlay):
         pen = QPen(QColor(255, 0, 0), 1, QtCore.Qt.SolidLine)
         brush = QBrush(QColor(255, 0, 0))
         qp.setPen(pen)
-        for row in self.grid:
-            for cell in row:
-                pen.setColor(cell.type)
-                brush_color = QColor(cell.type)
-                # brush_color.setAlpha(100)
-                brush.setColor(brush_color)
-                qp.setPen(pen)
-                qp.setBrush(brush)
-                edges = [QPointF(cell.x - self.grid.x(), cell.y - self.grid.y() + cell.h / 2),
-                         QPointF(cell.x - self.grid.x() + cell.w / 2, cell.y - self.grid.y()),
-                         QPointF(cell.x - self.grid.x(), cell.y - self.grid.y() - cell.h / 2),
-                         QPointF(cell.x - self.grid.x() - cell.w / 2, cell.y - self.grid.y())]
-                edges = QPolygonF(edges)
-                qp.drawPolygon(edges)
+        for cell in self.grid:
+            pen.setColor(cell.type)
+            brush_color = QColor(cell.type)
+            brush.setColor(brush_color)
+            qp.setPen(pen)
+            qp.setBrush(brush)
+            edges = [QPointF(cell.x - self.grid.x(), cell.y - self.grid.y() + cell.h / 2),
+                     QPointF(cell.x - self.grid.x() + cell.w / 2, cell.y - self.grid.y()),
+                     QPointF(cell.x - self.grid.x(), cell.y - self.grid.y() - cell.h / 2),
+                     QPointF(cell.x - self.grid.x() - cell.w / 2, cell.y - self.grid.y())]
+            edges = QPolygonF(edges)
+            qp.drawPolygon(edges)
 
     def highlight(self, secs):
         self.show()

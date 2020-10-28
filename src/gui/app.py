@@ -24,7 +24,7 @@ class MainWindow(QMainWindow):
 
         # Initialize tab screen
         self.pathGenerator = PathGeneratorView()
-        self.fighter = FighterView()
+        self.fighter = FighterView(self)
         self.farmer = FarmerView()
 
         # Add tabs

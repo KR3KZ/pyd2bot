@@ -17,7 +17,7 @@ class ObjType:
     OBSTACLE = QColor(Qt.black)
     MOB = QColor(Qt.darkBlue)
     BOT = QColor(Qt.darkRed)
-    FREE = QColor(Qt.green)
+    FREE = QColor(142, 134, 94)
     INVOKE = QColor(Qt.yellow)
     UNKNOWN = QColor(Qt.white)
 

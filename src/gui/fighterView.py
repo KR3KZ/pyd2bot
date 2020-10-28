@@ -8,10 +8,11 @@ import core.env as env
 
 class FighterView(QWidget):
 
-    def __init__(self):
-        super(FighterView, self).__init__()
+    def __init__(self, parent):
+        super(FighterView, self).__init__(parent)
         self.initButton()
         self.initLayout()
+        self.mainWindow = parent
 
     def initButton(self):
         # next map button
@@ -32,10 +33,10 @@ class FighterView(QWidget):
         self.layout.insertLayout(0, self.button_combat_layout)
 
     def highlightGrid(self, event):
-        self.hide()
+        self.mainWindow.hide()
         combat_grid = Grid(env.Region.COMBAT_R, env.VCELLS, env.HCELLS)
         combat_grid.parse()
         self.overlay = GridOverlay(combat_grid)
-        self.overlay.highlightEnded.connect(self.show)
-        self.overlay.highlight(5)
+        self.overlay.highlightEnded.connect(self.mainWindow.show)
+        self.overlay.highlight(2)
 
