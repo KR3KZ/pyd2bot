@@ -1,7 +1,9 @@
+import sys
 from time import sleep
 
 from PyQt5.QtCore import QRect, QPoint
 from PyQt5.QtGui import QColor
+from PyQt5.QtWidgets import QApplication
 
 from core.cell import Cell
 from core.log import Log
@@ -52,8 +54,10 @@ class Grid(QRect):
         return QColor(*rgb)
 
     def highlight(self, secs):
+        app = QApplication(sys.argv)
         overlay = GridOverlay(self)
         overlay.highlight(secs)
+        sys.exit(app.exec_())
 
     def to_dict(self):
         return {

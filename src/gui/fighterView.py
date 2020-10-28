@@ -1,3 +1,5 @@
+from time import sleep
+
 from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QGroupBox, QHBoxLayout
 from core.grid import Grid
 from gui.Overlay import GridOverlay
@@ -6,9 +8,8 @@ import core.env as env
 
 class FighterView(QWidget):
 
-    def __init__(self, main_window):
+    def __init__(self):
         super(FighterView, self).__init__()
-        self.main_window = main_window
         self.initButton()
         self.initLayout()
 
@@ -31,8 +32,10 @@ class FighterView(QWidget):
         self.layout.insertLayout(0, self.button_combat_layout)
 
     def highlightGrid(self, event):
-        self.main_window.hide()
+        self.hide()
         combat_grid = Grid(env.Region.COMBAT_R, env.VCELLS, env.HCELLS)
         combat_grid.parse()
-        combat_grid.highlight(10)
-        self.main_window.show()
+        self.overlay = GridOverlay(combat_grid)
+        self.overlay.highlightEnded.connect(self.show)
+        self.overlay.highlight(5)
+

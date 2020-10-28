@@ -3,7 +3,7 @@ from PyQt5.QtCore import Qt, QRect, QPoint
 
 
 class ObjColor:
-    BOT = [QColor(61, 56, 150), QColor(251, 241, 191)]
+    BOT = [QColor(61, 56, 150), QColor(251, 241, 191), QColor(33, 34, 88)]
     MOB = [QColor(46, 54, 61)]
     FREE = [QColor(150, 142, 103), QColor(142, 134, 94)]
     OBSTACLE = [QColor(255, 255, 255), QColor(0, 0, 0), QColor(88, 83, 58)]

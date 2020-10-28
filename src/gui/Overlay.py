@@ -2,23 +2,28 @@ from time import sleep, perf_counter
 
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtGui import QColor, QPainter, QPolygon, QPen, QBrush, QPolygonF
-from PyQt5.QtCore import QRect, QPointF
+from PyQt5.QtCore import QRect, QPointF, pyqtSignal
 from PyQt5.QtWidgets import QMainWindow, QApplication
 from core import env
 
 
 class Overlay(QMainWindow):
+    highlightEnded = pyqtSignal()
 
-    def __init__(self):
-        super(Overlay, self).__init__()
+    def __init__(self, parent=None):
+        super(Overlay, self).__init__(parent)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground, True)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint | QtCore.Qt.WindowStaysOnTopHint)
         self.target_color = QColor(1, 0, 0, 0.7)
 
+    def onHighlightEnded(self):
+        self.highlightEnded.emit()
+        self.close()
+
     def closeAfter(self, secs):
         timer = QtCore.QTimer(self)
         timer.setInterval(secs * 1000)
-        timer.timeout.connect(self.close)
+        timer.timeout.connect(self.onHighlightEnded)
         timer.start()
 
     def paintEvent(self, event):
@@ -99,8 +104,8 @@ class CellOverlay(Overlay):
 
 class GridOverlay(Overlay):
 
-    def __init__(self, grid):
-        super(GridOverlay, self).__init__()
+    def __init__(self, grid, parent=None):
+        super(GridOverlay, self).__init__(parent)
         self.grid = grid
         self.setGeometry(self.grid.x(), self.grid.y(), self.grid.width(), self.grid.height())
 
@@ -140,8 +145,9 @@ def window():
     grid.parse()
     print("it took: ", perf_counter() - start)
     # grid.fromJson("map.json")
-    win = GridOverlay(grid)
-    win.highlight(20)
+    # win = GridOverlay(grid)
+    # win.highlight(10)
+    grid.highlight(5)
     sys.exit(app.exec_())
 
 

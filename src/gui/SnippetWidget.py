@@ -13,7 +13,7 @@ class QSnip(QMainWindow):
         self.parent = parent
         self.begin = QtCore.QPoint()
         self.end = QtCore.QPoint()
-        self.setWindowOpacity(0.3)
+        self.setWindowOpacity(0.5)
         QtWidgets.QApplication.setOverrideCursor(
             QtGui.QCursor(QtCore.Qt.CrossCursor)
         )
