@@ -4,7 +4,6 @@ from PyQt5 import QtCore, QtGui
 from PyQt5.QtGui import QColor, QPainter, QPolygon, QPen, QBrush, QPolygonF
 from PyQt5.QtCore import QRect, QPointF, pyqtSignal
 from PyQt5.QtWidgets import QMainWindow, QApplication
-from core import env
 
 
 class Overlay(QMainWindow):
@@ -28,7 +27,7 @@ class Overlay(QMainWindow):
 
     def paintEvent(self, event):
         qp = QtGui.QPainter(self)
-        qp.setPen(QtGui.QPen(QtCore.Qt.red, 3, QtCore.Qt.SolidLine))
+        qp.setPen(QtGui.QPen(QtCore.Qt.red, 5, QtCore.Qt.SolidLine))
         qp.drawRect(QRect(0, 0, self.width(), self.height()))
 
     def highlight(self, r, secs):
@@ -138,7 +137,7 @@ def window():
     import json
     app = QApplication(sys.argv)
     sleep(2)
-    grid = G(env.Region.COMBAT_R, env.VCELLS, env.HCELLS)
+    grid = G(env.COMBAT_R, env.VCELLS, env.HCELLS)
     start = perf_counter()
     grid.parse()
     print("it took: ", perf_counter() - start)
@@ -155,6 +154,7 @@ def except_hook(cls, exception, traceback):
 
 if __name__ == "__main__":
     import sys
+    from core import env
 
     sys.excepthook = except_hook
     window()

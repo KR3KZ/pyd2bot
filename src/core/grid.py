@@ -70,7 +70,6 @@ class Grid(QRect):
 
     def update(self):
         self.bi = pyautogui.screenshot(region=self.getRect())
-        self.parse()
 
     def getpixel(self, p):
         target = (p.x() - self.x(), p.y() - self.y())
@@ -104,6 +103,6 @@ class Grid(QRect):
 
 if __name__ == "__main__":
     sleep(2)
-    grid = Grid(env.Region.COMBAT_R, env.VCELLS, env.HCELLS)
+    grid = Grid(env.COMBAT_R, env.VCELLS, env.HCELLS)
     grid.parse()
     grid[22][5].highlightTopCorner(2)

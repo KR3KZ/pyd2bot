@@ -26,7 +26,7 @@ class Farmer(threading.Thread):
         while not self.stopSignal.is_set():
             with lock:
                 tgt.click()
-            if waitVanish(env.Region.MINIMAP_R):
+            if waitVanish(env.MINIMAP_R):
                 log.info("map changed")
                 break
 

@@ -1,9 +1,52 @@
 import os
+
+import numpy as np
+import pywinauto
+import win32con
+import win32gui
+import win32ui
+from PIL import Image
 from PyQt5.QtGui import QColor
 from PyQt5.QtCore import Qt, QRect, QPoint
 from core.region import Region
+import cv2
 
-patterns_dir = "C:\Users\khalid.majdoub\PycharmProjects\bot2pix\patterns"
+IDE_HWND = pywinauto.findwindows.find_windows(title_re="bot2pix.*")[0]
+patterns_dir = r"C:\Users\khalid.majdoub\PycharmProjects\bot2pix\patterns"
+DOFUS_HWND = pywinauto.findwindows.find_windows(title_re="Dofus.*")[0]
+test_patterns_dir = r"C:\Users\khalid.majdoub\PycharmProjects\bot2pix\tests.sikuli"
+
+
+def focusDofusWindow():
+    win32gui.SetForegroundWindow(DOFUS_HWND)
+    win32gui.SetActiveWindow(DOFUS_HWND)
+    win32gui.ShowWindow(DOFUS_HWND, win32con.SW_RESTORE)
+
+
+def focusIDEWindow():
+    win32gui.SetForegroundWindow(IDE_HWND)
+    win32gui.SetActiveWindow(IDE_HWND)
+    win32gui.ShowWindow(IDE_HWND, win32con.SW_MAXIMIZE)
+
+
+def capture(region):
+    win32gui.SetForegroundWindow(DOFUS_HWND)
+    wDC = win32gui.GetWindowDC(DOFUS_HWND)
+    dcObj = win32ui.CreateDCFromHandle(wDC)
+    cDC = dcObj.CreateCompatibleDC()
+    bmp = win32ui.CreateBitmap()
+    bmp.CreateCompatibleBitmap(dcObj, region.width(), region.height())
+    cDC.SelectObject(bmp)
+    cDC.BitBlt((0, 0), (region.width(), region.height()), dcObj, (region.x(), region.y()), win32con.SRCCOPY)
+    signedIntsArray = bmp.GetBitmapBits(True)
+    img = np.frombuffer(signedIntsArray, dtype='uint8')
+    img.shape = (region.height(), region.width(), 4)
+    # bmp.SaveBitmapFile(cDC, 'screencapture.bmp')
+    dcObj.DeleteDC()
+    cDC.DeleteDC()
+    win32gui.ReleaseDC(DOFUS_HWND, wDC)
+    win32gui.DeleteObject(bmp.GetHandle())
+    return img
 
 
 class ObjColor:
@@ -26,22 +69,20 @@ class ObjType:
     UNKNOWN = QColor(Qt.white)
 
 
-class Region:
-    COMBAT_R = Region(335, 29, 1253, 885)
-    MINIMAP_R = Region(62, 876, 190, 122)
-    PM_R = Region(793, 993, 27, 34)
-    PA_R = Region(729, 983, 55, 42)
-    COMBAT_ENDED_POPUP_R = Region(841, 701, 244, 66)
-    READY_R = Region(1312, 925, 145, 66)
-    SKIP_TURN_R = Region(1312, 925, 145, 66)
-    COMBAT_ENDED_POPUP_CLOSE_R = Region(1231, 721, 22, 18)
-    MY_TURN_CHECK_R = Region(841, 1009, 17, 8)
-    OUT_OF_COMBAT_R = Region(104, 749, 37, 37)
+COMBAT_R = Region(335, 29, 1253, 885)
+MINIMAP_R = Region(62, 876, 190, 122)
+PM_R = Region(793, 993, 27, 34)
+PA_R = Region(729, 983, 55, 42)
+COMBAT_ENDED_POPUP_R = Region(841, 701, 244, 66)
+READY_R = Region(1312, 925, 145, 66)
+COMBAT_ENDED_POPUP_CLOSE_R = Region(1231, 721, 22, 18)
+MY_TURN_CHECK_R = Region(841, 1009, 17, 8)
+OUT_OF_COMBAT_R = Region(104, 749, 37, 37)
 
 
 class Pattern:
-    READY_BUTTON_P = os.path.join(patterns_dir, "READY_BUTTON_P.png")
-    COMBAT_ENDED_POPUP_P = os.path.join(patterns_dir, "END_COMBAT_P.png")
+    READY_BUTTON_P = cv2.imread(os.path.join(patterns_dir, "READY_BUTTON_P.png"))
+    COMBAT_ENDED_POPUP_P = cv2.imread(os.path.join(patterns_dir, "END_COMBAT_P.png"))
 
 
 # Env Vars

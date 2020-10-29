@@ -34,7 +34,7 @@ class FighterView(QWidget):
 
     def highlightGrid(self, event):
         self.mainWindow.hide()
-        combat_grid = Grid(env.Region.COMBAT_R, env.VCELLS, env.HCELLS)
+        combat_grid = Grid(env.COMBAT_R, env.VCELLS, env.HCELLS)
         combat_grid.parse()
         self.overlay = GridOverlay(combat_grid)
         self.overlay.highlightEnded.connect(self.mainWindow.show)

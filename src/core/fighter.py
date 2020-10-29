@@ -19,7 +19,7 @@ class Fighter(threading.Thread):
         self.stopSignal = threading.Event()
         self.combatDetected = threading.Event()
         self.combatEnded = threading.Event()
-        self.combat_ended_observer = AppearObserver(env.Region.COMBAT_ENDED_POPUP_R, env.Pattern.COMBAT_ENDED_POPUP_P,
+        self.combat_ended_observer = AppearObserver(env.COMBAT_ENDED_POPUP_R, env.Pattern.COMBAT_ENDED_POPUP_P,
                                                     self.onCombatEnded)
 
     def run(self):
@@ -30,7 +30,7 @@ class Fighter(threading.Thread):
                 break
             with lock:
                 sleep(0.5)
-                env.Region.READY_R.click()
+                env.READY_R.click()
                 try:
                     self.combatAlgo()
                 except Exception as e:
@@ -42,13 +42,11 @@ class Fighter(threading.Thread):
 
     def waitCombatStarted(self):
         while not self.stopSignal.is_set():
-            try:
-                env.Region.READY_R.wait(env.Pattern.READY_BUTTON_P, 1. / self.scan_rate)
+            res = env.READY_R.wait(env.Pattern.READY_BUTTON_P, 1. / self.scan_rate)
+            if res:
                 self.combatDetected.set()
                 log.info('Combat started')
                 break
-            except FindFailed as e:
-                pass
 
     def interrupt(self):
         self.combat_ended_observer.stop()
@@ -58,7 +56,7 @@ class Fighter(threading.Thread):
 
     def waitTurn(self):
         while not self.stopSignal.is_set() and not self.combatEnded.is_set():
-            if env.Region.MY_TURN_CHECK_R.getTarget().getColor() == env.Color.MY_TURN_COLOR:
+            if env.MY_TURN_CHECK_R.getTarget().getColor() == env.Color.MY_TURN_COLOR:
                 log.info('Bot turn started')
                 break
             wait(0.33)
@@ -79,7 +77,7 @@ class Fighter(threading.Thread):
         return tgt
 
     def useSpell(self, target):
-        pa_observer = ChangeObserver(env.Region.PA_R)
+        pa_observer = ChangeObserver(env.PA_R)
         pa_observer.start()
         type(self.spell['shortcut'])
         target.click()
@@ -97,7 +95,7 @@ class Fighter(threading.Thread):
             self.waitTurn()
 
             # Parse combat grid
-            grid = Grid(env.Region.COMBAT_R, env.VCELLS, env.HCELLS)
+            grid = Grid(env.COMBAT_R, env.VCELLS, env.HCELLS)
 
             # select nearest target to hit
             target = self.selectTarget(mobs, bot)
@@ -162,7 +160,7 @@ class Fighter(threading.Thread):
                     target['dist'] = squareDist(target['pos'], bot_pos)
 
             # skip turn
-            OUT_OF_COMBAT_R.hover()
+            env.OUT_OF_COMBAT_R.hover()
             log.info("bot skipped his turn")
             type(Key.SPACE)
             wait(0.5)
