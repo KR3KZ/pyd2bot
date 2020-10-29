@@ -1,5 +1,9 @@
+import os
 from PyQt5.QtGui import QColor
 from PyQt5.QtCore import Qt, QRect, QPoint
+from core.region import Region
+
+patterns_dir = "C:\Users\khalid.majdoub\PycharmProjects\bot2pix\patterns"
 
 
 class ObjColor:
@@ -23,22 +27,21 @@ class ObjType:
 
 
 class Region:
-    COMBAT_R = QRect(335, 29, 1253, 885)
-    MINIMAP_R = QRect(62, 876, 190, 122)
-    PM_R = QRect(793, 993, 27, 34)
-    PA_R = QRect(729, 983, 55, 42)
-    COMBAT_ENDED_POPUP_R = QRect(841, 701, 244, 66)
-    READY_R = QRect(1312, 925, 145, 66)
-    SKIP_TURN_R = QRect(1312, 925, 145, 66)
-    COMBAT_ENDED_POPUP_CLOSE_R = QRect(1231, 721, 22, 18)
-    MY_TURN_CHECK_R = QRect(841, 1009, 17, 8)
-    OUT_OF_COMBAT_R = QRect(104, 749, 37, 37)
+    COMBAT_R = Region(335, 29, 1253, 885)
+    MINIMAP_R = Region(62, 876, 190, 122)
+    PM_R = Region(793, 993, 27, 34)
+    PA_R = Region(729, 983, 55, 42)
+    COMBAT_ENDED_POPUP_R = Region(841, 701, 244, 66)
+    READY_R = Region(1312, 925, 145, 66)
+    SKIP_TURN_R = Region(1312, 925, 145, 66)
+    COMBAT_ENDED_POPUP_CLOSE_R = Region(1231, 721, 22, 18)
+    MY_TURN_CHECK_R = Region(841, 1009, 17, 8)
+    OUT_OF_COMBAT_R = Region(104, 749, 37, 37)
 
 
 class Pattern:
-    READY_BUTTON_P = "READY_BUTTON_P.png"
-    COMBAT_ENDED_POPUP_P = "END_COMBAT_P.png"
-    SKIP_TURN_BUTTON_P = "YOUR_TURN_P.png"
+    READY_BUTTON_P = os.path.join(patterns_dir, "READY_BUTTON_P.png")
+    COMBAT_ENDED_POPUP_P = os.path.join(patterns_dir, "END_COMBAT_P.png")
 
 
 # Env Vars

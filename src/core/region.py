@@ -5,6 +5,7 @@ import numpy as np
 import pyautogui
 from PyQt5.QtCore import QPoint, QRect
 from PyQt5.QtWidgets import QApplication
+from core.utils import capture, isAdjacent
 from gui.Overlay import Overlay
 
 
@@ -13,13 +14,6 @@ def except_hook(cls, exception, traceback):
 
 
 sys.excepthook = except_hook
-
-
-def isAdjacent(matches, r):
-    for m in matches:
-        if abs(r.x() - m.x()) <= m.width() or abs(r.y() - m.y()) <= m.height():
-            return True
-    return False
 
 
 class Location(QPoint):
@@ -31,30 +25,31 @@ class Location(QPoint):
         pyautogui.click(self.x(), self.y())
 
 
-def capture(rect):
-    img = pyautogui.screenshot(region=rect.getRect())
-    opencvImage = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
-    return opencvImage
-
-
 class Region(QRect):
     def __init__(self, x, y, w, h):
         super(Region, self).__init__(x, y, w, h)
 
-    def exists(self, img, secs=3):
-        pass
-
-    def wait(self, template, secs, threshold=0.7):
+    def wait(self, template, timeout, threshold=0.7):
         elapsed = 0
         result = None
-        while elapsed < secs * 1000:
-            start = perf_counter()
+        start = perf_counter()
+        while elapsed < timeout * 1000:
             result = self.findBest(template, threshold)
-            elapsed += perf_counter() - start
+            if result:
+                break
+            elapsed = perf_counter() - start
         return result
 
-    def waitVanish(self, secs):
-        pass
+    def waitVanish(self, timeout, threshold=0.9):
+        elapsed = 0
+        result = None
+        start = perf_counter()
+        while elapsed < timeout * 1000:
+            result = self.findBest(template, threshold)
+            if not result:
+                break
+            elapsed = perf_counter() - start
+        return result
 
     def click(self):
         pyautogui.click(self.center().x(), self.center().y())
@@ -95,8 +90,8 @@ class Region(QRect):
 
 
 if __name__ == "__main__":
-    r = Region(1280,38,120,33)
-    button_r = Region(1280,38,120,33)
+    r = Region(1280, 38, 120, 33)
+    button_r = Region(1280, 38, 120, 33)
     template = capture(button_r)
     start = perf_counter()
     res = r.findAll(template, threshold=0.9)

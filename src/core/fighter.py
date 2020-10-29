@@ -76,16 +76,6 @@ class Fighter(threading.Thread):
         idx = min(range(len(mobs)), key=lambda it: squareDist(mobs[it].getTarget(), bot.getTarget()))
         match = mobs[idx]
         pos = match.getTarget()
-        tgt = {'idx': idx,
-               'match': match,
-               'pos': pos,
-               'color': pos.getColor(),
-               'dist': squareDist(pos, bot.getTarget()),
-               'region': Region(match),
-               'snippet': Pattern(capture(Region(match))),
-               'nbr-casted-on': 0,
-               'in-range': False
-               }
         return tgt
 
     def useSpell(self, target):
@@ -107,7 +97,7 @@ class Fighter(threading.Thread):
             self.waitTurn()
 
             # Parse combat grid
-            grid = Grid(env.Region.MAP_R, VCELLS, HCELLS)
+            grid = Grid(env.Region.COMBAT_R, env.VCELLS, env.HCELLS)
 
             # select nearest target to hit
             target = self.selectTarget(mobs, bot)

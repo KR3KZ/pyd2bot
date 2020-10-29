@@ -1,4 +1,20 @@
+import cv2
+import numpy as np
+import pyautogui
 from PyQt5.QtCore import QPoint
+
+
+def capture(rect):
+    img = pyautogui.screenshot(region=rect.getRect())
+    opencvImage = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
+    return opencvImage
+
+
+def isAdjacent(matches, r):
+    for m in matches:
+        if abs(r.x() - m.x()) <= m.width() or abs(r.y() - m.y()) <= m.height():
+            return True
+    return False
 
 
 def iterParallelogram(origin, w, h):
