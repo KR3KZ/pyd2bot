@@ -52,9 +52,9 @@ class Farmer(threading.Thread):
 
             while not self.stopSignal.is_set() and self.curr_step < path_length:
 
-                if self.fighter_thread.combatDetected.wait(0.5):
+                if self.fighter_thread.combatDetected.waitAppear(0.5):
                     log.info('waiting for fighter to end...')
-                    self.fighter_thread.combatEnded.wait()
+                    self.fighter_thread.combatEnded.waitAppear()
                     self.curr_step -= 1
 
                 log.info('step number ' + str(self.curr_step) + ' ...')

@@ -5,9 +5,9 @@ import atexit
 from PyQt5.QtCore import QRect
 import os
 from math import sqrt
+
+from core import env
 from src.core.log import Log
-
-
 
 
 def getNearByRegion(loc, w, h):
@@ -62,16 +62,6 @@ def waitForChange(region):
     region.stopObserver()
 
 
-def waitVanish(region, time_out=20, scan_rate=0.8):
-    snippet = Pattern(capture(region)).exact()
-    time_elapsed = 0
-    while time_elapsed < time_out:
-        if not region.wait(snippet, 1 / scan_rate):
-            return True
-        time_elapsed += 1 / scan_rate
-    return False
-
-
 class ChangeObserver(threading.Thread):
     def __init__(self, region, scan_rate=3, sim=0.99):
         threading.Thread.__init__(self)
@@ -86,27 +76,8 @@ class ChangeObserver(threading.Thread):
 
     def run(self):
         while not self.stopSignal.is_set():
-            if not self.region.wait(self.curr, 1 / self.scan_rate):
+            if not self.region.waitAppear(self.curr, 1 / self.scan_rate):
                 self.changed.set()
-
-
-class AppearObserver(threading.Thread):
-    def __init__(self, region, pattern, callback, scan_rate=3, sim=0.99):
-        threading.Thread.__init__(self)
-        self.region = region
-        self.callback = callback
-        self.stopSignal = threading.Event()
-        self.scan_rate = scan_rate
-        self.pattern = pattern
-
-    def stop(self):
-        self.stopSignal.set()
-
-    def run(self):
-        while not self.stopSignal.is_set():
-            if self.region.wait(self.pattern, 1 / self.scan_rate):
-                self.callback()
-                break
 
 
 def cleanUp():

@@ -17,5 +17,5 @@ class Log:
     def debug(self, *args):
         self.log.debug(joinArgs(args))
 
-    def error(self, *args):
-        self.log.error(joinArgs(args))
+    def error(self, *args, **kwargs):
+        self.log.error(joinArgs(args), kwargs)

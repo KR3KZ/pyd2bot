@@ -1,6 +1,8 @@
+from itertools import product
+from math import floor, ceil
 from time import sleep, perf_counter
 from PyQt5.QtCore import Qt
-from PyQt5 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QColor, QPainter, QPolygon, QPen, QBrush, QPolygonF
 from PyQt5.QtCore import QRect, QPointF, pyqtSignal
 from PyQt5.QtWidgets import QMainWindow, QApplication
@@ -108,23 +110,32 @@ class GridOverlay(Overlay):
         self.grid = grid
         self.setGeometry(self.grid.x(), self.grid.y(), self.grid.width(), self.grid.height())
 
+    def keyPressEvent(self, event):
+        if event.key() == QtCore.Qt.Key_Escape:
+            QtWidgets.QApplication.restoreOverrideCursor()
+            self.close()
+        event.accept()
+
+    def drawCell(self, qp, pen, brush, cell):
+        pen.setColor(QColor(0, 0, 0))
+        brush_color = QColor(cell.type)
+        brush.setColor(brush_color)
+        qp.setPen(pen)
+        qp.setBrush(brush)
+        edges = [QPointF(cell.x - self.grid.x(), cell.y - self.grid.y() + cell.h / 2),
+                 QPointF(cell.x - self.grid.x() + cell.w / 2, cell.y - self.grid.y()),
+                 QPointF(cell.x - self.grid.x(), cell.y - self.grid.y() - cell.h / 2),
+                 QPointF(cell.x - self.grid.x() - cell.w / 2, cell.y - self.grid.y())]
+        edges = QPolygonF(edges)
+        qp.drawPolygon(edges)
+
     def paintEvent(self, event):
         qp = QPainter(self)
-        pen = QPen(QColor(255, 0, 0), 1, QtCore.Qt.SolidLine)
+        pen = QPen(QColor(255, 0, 0), 3, QtCore.Qt.SolidLine)
         brush = QBrush(QColor(255, 0, 0))
         qp.setPen(pen)
         for cell in self.grid:
-            pen.setColor(cell.type)
-            brush_color = QColor(cell.type)
-            brush.setColor(brush_color)
-            qp.setPen(pen)
-            qp.setBrush(brush)
-            edges = [QPointF(cell.x - self.grid.x(), cell.y - self.grid.y() + cell.h / 2),
-                     QPointF(cell.x - self.grid.x() + cell.w / 2, cell.y - self.grid.y()),
-                     QPointF(cell.x - self.grid.x(), cell.y - self.grid.y() - cell.h / 2),
-                     QPointF(cell.x - self.grid.x() - cell.w / 2, cell.y - self.grid.y())]
-            edges = QPolygonF(edges)
-            qp.drawPolygon(edges)
+            self.drawCell(qp, pen, brush, cell)
 
     def highlight(self, secs):
         self.show()
@@ -132,19 +143,20 @@ class GridOverlay(Overlay):
             self.closeAfter(secs)
 
 
+
+
+
 def window():
     from core.grid import Grid as G
-    import json
     app = QApplication(sys.argv)
-    sleep(2)
     grid = G(env.COMBAT_R, env.VCELLS, env.HCELLS)
-    start = perf_counter()
-    grid.parse()
-    print("it took: ", perf_counter() - start)
-    # grid.fromJson("map.json")
-    # win = GridOverlay(grid)
-    # win.highlight(10)
-    grid.highlight(5)
+    cell1 = grid[10][0]
+    cell2 = grid[14][8]
+    for i, j in getLdvCells(cell1, cell2):
+        grid[i][j].type = env.ObjType.REACHABLE
+    cell1.type = env.ObjType.MOB
+    cell2.type = env.ObjType.BOT
+    grid.highlight(60)
     sys.exit(app.exec_())
 
 

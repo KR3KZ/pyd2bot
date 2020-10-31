@@ -1,4 +1,6 @@
 import sys
+from itertools import product
+from math import floor
 from time import sleep
 from PyQt5.QtCore import QRect, QPoint
 from PyQt5.QtGui import QColor
@@ -27,14 +29,19 @@ class Grid(QRect):
         self.reachable = set()
         self.free = set()
         self.non_obstacle = set()
+        nrow = 0
+        ncol = 0
         for i in range(1, int(2 * self.nbr_vcell)):
             row = []
+            ncol = 0
             for j in range(1, int(2 * self.nbr_hcell)):
                 if (i + j) % 2 == 0:
                     cell_x = self.x() + int(j * self.cell_w / 2)
                     cell_y = self.y() + int(i * self.cell_h / 2)
-                    row.append(Cell(self, cell_x, cell_y))
+                    row.append(Cell(self, cell_x, cell_y, nrow, ncol))
+                    ncol += 1
             self._matrix.append(row)
+            nrow += 1
         self.rows = len(self._matrix)
         self.cols = len(self._matrix[0])
 
@@ -42,9 +49,37 @@ class Grid(QRect):
         return self._matrix[idx]
 
     def __iter__(self):
-        for i in range(self.rows):
-            for j in range(self.cols):
-                yield self._matrix[i][j]
+        for row in self._matrix:
+            for cell in row:
+                yield cell
+
+    @staticmethod
+    def getLdvCells(c1, c2):
+        w = c1.w
+        h = c1.h
+        yielded = set()
+        if abs(c2.rx - c1.rx) < w / 4:
+            for i in range(c1.i, c2.i + 1):
+                if i % 2 == 0:
+                    yield i, c1.j
+        else:
+            if c1.x > c2.x:
+                c1, c2 = c2, c1
+            alpha = (c2.y - c1.y) / (c2.x - c1.x)
+            for x in range(c1.rx, c2.rx + 1):
+                nx = 2 * x / w
+                if abs(nx - round(nx)) <= 2 / w:
+                    continue
+                y = alpha * (x - c1.rx) + c1.ry
+                ny = 2 * y / h
+                iRange = [floor(ny) + eps for eps in range(2)]
+                jRange = [floor(nx) + eps for eps in range(2)]
+                for i, j in product(iRange, jRange):
+                    if (j + i) % 2 == 0 and abs(ny - i) + abs(nx - j) <= 1:
+                        result = (i - 1, floor((j - 1) / 2))
+                        if result not in yielded:
+                            yielded.add(result)
+                            yield result
 
     def parse(self):
         self.bot = None
@@ -80,6 +115,10 @@ class Grid(QRect):
         i = abs(cell1.x() - cell2.x()) / self.cell_w
         j = abs(cell1.y() - cell2.y()) / self.cell_h
         return max(int(i), int(j))
+
+    def distx(self, cell1, cell2):
+        j = abs(cell1.y() - cell2.y()) / self.cell_h
+        return int(j)
 
     def highlight(self, secs):
         app = QApplication(sys.argv)

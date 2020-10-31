@@ -19,18 +19,14 @@ class Fighter(threading.Thread):
         self.stopSignal = threading.Event()
         self.combatDetected = threading.Event()
         self.combatEnded = threading.Event()
-        self.combat_ended_observer = AppearObserver(env.COMBAT_ENDED_POPUP_R, env.Pattern.COMBAT_ENDED_POPUP_P,
+        self.combat_ended_observer = AppearObserver(env.COMBAT_ENDED_POPUP_R, env.COMBAT_ENDED_POPUP_P,
                                                     self.onCombatEnded)
 
     def run(self):
         log.info('fighter running')
         while not self.stopSignal.is_set():
             self.waitCombatStarted()
-            if self.stopSignal.is_set():
-                break
             with lock:
-                sleep(0.5)
-                env.READY_R.click()
                 try:
                     self.combatAlgo()
                 except Exception as e:
@@ -41,14 +37,15 @@ class Fighter(threading.Thread):
         log.info('fighter stopped')
 
     def waitCombatStarted(self):
-        while not self.stopSignal.is_set():
-            res = env.READY_R.wait(env.Pattern.READY_BUTTON_P, 1. / self.scan_rate)
-            if res:
-                self.combatDetected.set()
-                log.info('Combat started')
-                break
+        r = env.READY_R.waitAppear(env.FOREVER)
+        if r:
+            wait(0.5)
+            env.READY_R.click()
+            self.combatDetected.set()
+            log.info('Combat started')
 
     def interrupt(self):
+        env.READY_R.stopWait.set()
         self.combat_ended_observer.stop()
         self.combat_ended_observer.join()
         self.combatEnded.set()
@@ -61,13 +58,7 @@ class Fighter(threading.Thread):
                 break
             wait(0.33)
 
-    def onCombatEnded(self):
-        log.info("combat ended detected")
-        env.Location.END_COMBAT_CLOSE_L.click()
-        wait(0.2)
-        self.combat_ended_observer.stop()
-        self.combat_ended_observer.join()
-        self.combatEnded.set()
+
 
     @staticmethod
     def selectTarget(mobs, bot):
@@ -81,7 +72,7 @@ class Fighter(threading.Thread):
         pa_observer.start()
         type(self.spell['shortcut'])
         target.click()
-        res = pa_observer.changed.wait(3)
+        res = pa_observer.changed.waitAppear(3)
         pa_observer.join()
         return res
 
@@ -127,7 +118,7 @@ class Fighter(threading.Thread):
                         spell_nbr -= 1
                         target['nbr-casted-on'] += 1
                         # if target dies after spell cast
-                        if not target['region'].wait(target['snippet'], 3):
+                        if not target['region'].waitAppear(target['snippet'], 3):
                             log.info("target died")
                             if len(mobs) == 1:
                                 self.combatEnded.wait(5)

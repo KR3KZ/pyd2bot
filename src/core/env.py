@@ -1,5 +1,4 @@
 import os
-
 import numpy as np
 import pywinauto
 import win32con
@@ -8,16 +7,18 @@ import win32ui
 from PIL import Image
 from PyQt5.QtGui import QColor
 from PyQt5.QtCore import Qt, QRect, QPoint
-from core.region import Region
+from core.region import Region, Location
 import cv2
+
 
 IDE_HWND = pywinauto.findwindows.find_windows(title_re="bot2pix.*")[0]
 patterns_dir = r"C:\Users\khalid.majdoub\PycharmProjects\bot2pix\patterns"
-DOFUS_HWND = pywinauto.findwindows.find_windows(title_re="Dofus.*")[0]
+DOFUS_HWND = None
 test_patterns_dir = r"C:\Users\khalid.majdoub\PycharmProjects\bot2pix\tests.sikuli"
 
 
 def focusDofusWindow():
+    DOFUS_HWND = pywinauto.findwindows.find_windows(title_re=".*Dofus.*")[0]
     win32gui.SetForegroundWindow(DOFUS_HWND)
     win32gui.SetActiveWindow(DOFUS_HWND)
     win32gui.ShowWindow(DOFUS_HWND, win32con.SW_RESTORE)
@@ -30,7 +31,6 @@ def focusIDEWindow():
 
 
 def capture(region):
-    win32gui.SetForegroundWindow(DOFUS_HWND)
     wDC = win32gui.GetWindowDC(DOFUS_HWND)
     dcObj = win32ui.CreateDCFromHandle(wDC)
     cDC = dcObj.CreateCompatibleDC()
@@ -66,7 +66,7 @@ class ObjType:
     BOT = QColor(Qt.darkRed)
     FREE = QColor(142, 134, 94)
     INVOKE = QColor(Qt.yellow)
-    UNKNOWN = QColor(Qt.white)
+    UNKNOWN = QColor(Qt.gray)
 
 
 COMBAT_R = Region(335, 29, 1253, 885)
@@ -79,11 +79,8 @@ COMBAT_ENDED_POPUP_CLOSE_R = Region(1231, 721, 22, 18)
 MY_TURN_CHECK_R = Region(841, 1009, 17, 8)
 OUT_OF_COMBAT_R = Region(104, 749, 37, 37)
 
-
-class Pattern:
-    READY_BUTTON_P = cv2.imread(os.path.join(patterns_dir, "READY_BUTTON_P.png"))
-    COMBAT_ENDED_POPUP_P = cv2.imread(os.path.join(patterns_dir, "END_COMBAT_P.png"))
-
+READY_BUTTON_P = cv2.imread(os.path.join(patterns_dir, "READY_BUTTON_P.png"))
+COMBAT_ENDED_POPUP_P = cv2.imread(os.path.join(patterns_dir, "END_COMBAT_P.png"))
 
 # Env Vars
 HCELLS = 14.5
@@ -93,14 +90,12 @@ DL = (-1, 1)
 DD = (1, 1)
 DR = (1, -1)
 
-
-class Location:
-    MY_TURN_CHECK_L = QPoint(1431, 965)
-    END_COMBAT_CLOSE_L = QPoint(1240, 728)
-
+MY_TURN_CHECK_L = Location(1431, 965)
+END_COMBAT_CLOSE_L = Location(1251, 737)
 
 # Timers
 CHANGE_MAP_TIMEOUT = 3 * 60
+
 
 # Shortcuts
 RAPPEL_POTION_SHORTCUT = "e"

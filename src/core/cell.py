@@ -16,9 +16,11 @@ log = Log()
 
 class Cell:
 
-    def __init__(self, pgrid, x, y, ctype=ObjType.UNKNOWN):
+    def __init__(self, pgrid, x, y, i, j, ctype=ObjType.UNKNOWN):
         self.x = x
         self.y = y
+        self.i = i
+        self.j = j
         self.grid = pgrid
         self.h = pgrid.cell_h
         self.w = pgrid.cell_w
@@ -46,6 +48,15 @@ class Cell:
 
     def getpixel(self, p):
         return self.grid.getpixel(p)
+
+    def dist(self, cell):
+        i = abs(self.x() - cell.x()) / self.w
+        j = abs(self.y() - cell.y()) / self.h
+        return max(int(i), int(j))
+
+    def distx(self, cell):
+        j = (self.x() - cell.x()) / self.w
+        return int(j)
 
     def parse(self):
         hist = {}
