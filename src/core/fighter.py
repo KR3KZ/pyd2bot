@@ -1,157 +1,100 @@
 import threading
 import traceback
-from core.grid import Grid
 from time import sleep
-from .taf import *
-import core.env as env
+from core import env
+from core.grid import Grid
+from core.log import Log
+import atexit
+
+from core.observer import Observer
 
 log = Log()
 lock = threading.Lock()
 
 
 class Fighter(threading.Thread):
-    def __init__(self, nbr_pm, spell, scan_rate=3):
-        threading.Thread.__init__(self, name='Farmer')
-        self.scan_rate = scan_rate
+    def __init__(self, spell):
+        threading.Thread.__init__(self, name='Fighter')
         self.spell = spell
-        self.nbr_pm = nbr_pm
         self.died = threading.Event()
         self.stopSignal = threading.Event()
         self.combatDetected = threading.Event()
         self.combatEnded = threading.Event()
-        self.combat_ended_observer = AppearObserver(env.COMBAT_ENDED_POPUP_R, env.COMBAT_ENDED_POPUP_P,
-                                                    self.onCombatEnded)
+        self.combatEndObs = None
+        self.grid = Grid(env.COMBAT_R, env.VCELLS, env.HCELLS)
+        self.targets = {}
 
     def run(self):
-        log.info('fighter running')
+        log.info('Fighter running')
         while not self.stopSignal.is_set():
             self.waitCombatStarted()
             with lock:
                 try:
+                    self.combatEndObs = Observer(env.COMBAT_ENDED_POPUP_R,
+                                                 env.COMBAT_ENDED_POPUP_P,
+                                                 self.onCombatEnded,
+                                                 Observer.Mode.APPEAR)
+                    self.combatEndObs.start()
                     self.combatAlgo()
                 except Exception as e:
-                    log.info(traceback.print_exc())
+                    log.error("Fatal error in combat loop", exc_info=True)
                     self.interrupt()
+                    break
                 self.combatDetected.clear()
                 log.info('combat ended')
-        log.info('fighter stopped')
+        log.info('Goodbye cruel world.')
 
     def waitCombatStarted(self):
-        r = env.READY_R.waitAppear(env.FOREVER)
-        if r:
-            wait(0.5)
-            env.READY_R.click()
-            self.combatDetected.set()
-            log.info('Combat started')
+        env.READY_R.waitAppear(env.READY_BUTTON_P)
+        env.READY_R.click()
+        self.combatDetected.set()
+        log.info('Fight started')
+
+    def onCombatEnded(self):
+        log.info("Fight ended detected")
+        env.END_COMBAT_CLOSE_L.click()
+        self.combatEnded.set()
+        self.combatEndObs.stop()
+        self.stopSignal.set()
 
     def interrupt(self):
         env.READY_R.stopWait.set()
-        self.combat_ended_observer.stop()
-        self.combat_ended_observer.join()
         self.combatEnded.set()
+        self.combatEndObs.stop()
         self.stopSignal.set()
 
-    def waitTurn(self):
-        while not self.stopSignal.is_set() and not self.combatEnded.is_set():
-            if env.MY_TURN_CHECK_R.getTarget().getColor() == env.Color.MY_TURN_COLOR:
-                log.info('Bot turn started')
-                break
-            wait(0.33)
-
-
-
-    @staticmethod
-    def selectTarget(mobs, bot):
-        idx = min(range(len(mobs)), key=lambda it: squareDist(mobs[it].getTarget(), bot.getTarget()))
-        match = mobs[idx]
-        pos = match.getTarget()
-        return tgt
+    def combatAlgo(self):
+        while not self.combatEnded.wait(0.2):
+            pass
 
     def useSpell(self, target):
-        pa_observer = ChangeObserver(env.PA_R)
+        pa_observer = Observer(env.PA_R, mode=Observer.Mode.CHANGE)
         pa_observer.start()
         type(self.spell['shortcut'])
         target.click()
-        res = pa_observer.changed.waitAppear(3)
+        res = pa_observer.changed.wait(3)
         pa_observer.join()
         return res
 
-    def combatAlgo(self):
-        log.info('combat started')
-        self.combatEnded.clear()
-        self.combat_ended_observer.start()
+    def searchTargets(self, i, j, po, path, seen):
+        if (i, j) not in seen:
+            seen.add((i, j))
+            path.append((i, j))
+            for mob in self.grid.mobs:
+                if Grid.inLDV(self.grid[i][j], mob, po):
+                    if (mob.i, mob.j) not in self.targets or len(self.targets[(mob.i, mob.j)]) > len(path):
+                        self.targets[(mob.i, mob.j)] = path
+            for k, l in self.grid[i][j].neighbors():
+                self.searchTargets(k, l, po, path, seen)
 
-        # main combat loop
-        while not self.combatEnded.wait(1):
-            self.waitTurn()
 
-            # Parse combat grid
-            grid = Grid(env.COMBAT_R, env.VCELLS, env.HCELLS)
+def tearDown(fighter):
+    fighter.interrupt()
+    fighter.join()
 
-            # select nearest target to hit
-            target = self.selectTarget(mobs, bot)
-            spell_nbr = self.spell['nbr']
-            pm = self.nbr_pm
 
-            # in turn loop
-            while not self.stopSignal.is_set() and spell_nbr > 0:
-                log.info('My distance from target = ' + str(target['dist']))
-                log.info("pm: ", pm, ", nbr spell: ", spell_nbr)
-
-                # if target is in spell range
-                if target['dist'] <= self.spell['range']:
-                    log.info("target is in spell range")
-                    target['in-range'] = True
-
-                    # if nbr casts allowed reached try to switch target
-                    if target['nbr-casted-on'] == self.spell['nbr-on-same']:
-                        if len(mobs) > 1:
-                            other_mobs = [m for m in mobs if m != target['match']]
-                            target = self.selectTarget(other_mobs, bot)
-                        else:
-                            # cant recast the spell on target and no other targets
-                            break
-
-                    # if spell hits the target
-                    if self.useSpell(target['pos']):
-                        log.info("I touched the target")
-                        spell_nbr -= 1
-                        target['nbr-casted-on'] += 1
-                        # if target dies after spell cast
-                        if not target['region'].waitAppear(target['snippet'], 3):
-                            log.info("target died")
-                            if len(mobs) == 1:
-                                self.combatEnded.wait(5)
-                                return
-                            else:
-                                mobs.pop(target['idx'])
-                                target = self.selectTarget(mobs, bot)
-                        continue
-
-                log.info("I can't hit the target")
-                # if target not reachable and bot has not pms skip turn
-                if pm == 0:
-                    break
-
-                if self.stopSignal.is_set():
-                    return
-                if target['in-range']:
-                    search_range = pm
-                else:
-                    search_range = min(pm, target['dist'] - self.spell['range'])
-
-                cell_pos = getNearestCell(bot_pos, target['pos'], search_range)
-
-                if cell_pos:
-                    pm_to_cell = squareDist(cell_pos, bot_pos)
-                    log.info("moving {} to new nearest cell".format(pm_to_cell))
-                    cell_pos.click()
-                    pm = pm - pm_to_cell
-                    bot_pos = cell_pos
-                    target['dist'] = squareDist(target['pos'], bot_pos)
-
-            # skip turn
-            env.OUT_OF_COMBAT_R.hover()
-            log.info("bot skipped his turn")
-            type(Key.SPACE)
-            wait(0.5)
+if __name__ == "__main__":
+    env.focusDofusWindow()
+    fighter = Fighter(env.SOURNOISERIE)
+    atexit.register(tearDown, fighter)
+    fighter.start()

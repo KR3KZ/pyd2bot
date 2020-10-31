@@ -1,5 +1,5 @@
 import threading
-from src.core.fighter import Fighter
+from src.core.old_fighter import Fighter
 import src.core.env as env
 from .log import Log
 from .taf import *

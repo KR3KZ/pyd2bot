@@ -1,3 +1,4 @@
+import collections
 from itertools import product
 from math import floor, ceil
 from time import sleep, perf_counter
@@ -122,12 +123,21 @@ class GridOverlay(Overlay):
         brush.setColor(brush_color)
         qp.setPen(pen)
         qp.setBrush(brush)
-        edges = [QPointF(cell.x - self.grid.x(), cell.y - self.grid.y() + cell.h / 2),
-                 QPointF(cell.x - self.grid.x() + cell.w / 2, cell.y - self.grid.y()),
-                 QPointF(cell.x - self.grid.x(), cell.y - self.grid.y() - cell.h / 2),
-                 QPointF(cell.x - self.grid.x() - cell.w / 2, cell.y - self.grid.y())]
+        edges = [QPointF(cell.rx, cell.ry + cell.h / 2),
+                 QPointF(cell.rx + cell.w / 2, cell.ry),
+                 QPointF(cell.rx, cell.ry - cell.h / 2),
+                 QPointF(cell.rx - cell.w / 2, cell.ry)]
         edges = QPolygonF(edges)
         qp.drawPolygon(edges)
+
+    def drawDot(self, qp, cell):
+        color = QColor(157, 22, 102)
+        radiusx = cell.w / 8
+        radiusy = cell.h / 8
+        pen = QPen(QColor(0, 0, 0), 1, QtCore.Qt.SolidLine)
+        qp.setPen(pen)
+        qp.setBrush(color)
+        qp.drawEllipse(cell.rx - radiusx / 2, cell.ry - radiusy / 2, radiusx, radiusy)
 
     def paintEvent(self, event):
         qp = QPainter(self)
@@ -136,6 +146,12 @@ class GridOverlay(Overlay):
         qp.setPen(pen)
         for cell in self.grid:
             self.drawCell(qp, pen, brush, cell)
+            if cell.dotted:
+                self.drawDot(qp, cell)
+
+    def mousePressEvent(self, event):
+        i, j = self.grid.getByCoords(event.x(), event.y())
+        print(i, j)
 
     def highlight(self, secs):
         self.show()
@@ -143,19 +159,53 @@ class GridOverlay(Overlay):
             self.closeAfter(secs)
 
 
+class Test:
+
+    def __init__(self, grid):
+        self.grid = grid
+        self.targets = {}
+
+    def bfs(self, po):
+        queue = collections.deque([[(self.grid.bot.i, self.grid.bot.j)]])
+        seen = {(self.grid.bot.i, self.grid.bot.j)}
+        targets = list(self.grid.mobs.copy())
+        print(targets)
+        while queue:
+            path = queue.popleft()
+            i, j = path[-1]
+
+            for idx, mob in enumerate(targets):
+                if self.grid.inLDV(self.grid[i][j], mob, po):
+                    targets.pop(idx)
+                    self.targets[(mob.i, mob.j)] = path[1:]
+                    if not targets:
+                        return
+
+            for k, l in self.grid[i][j].neighbors():
+                if (k, l) not in seen and \
+                        self.grid[k][l].type == env.ObjType.FREE or \
+                        self.grid[k][l].type == env.ObjType.REACHABLE:
+                    queue.append(path + [(k, l)])
+                    seen.add((k, l))
 
 
-
-def window():
+def test():
     from core.grid import Grid as G
+    import json
     app = QApplication(sys.argv)
     grid = G(env.COMBAT_R, env.VCELLS, env.HCELLS)
-    cell1 = grid[10][0]
-    cell2 = grid[14][8]
-    for i, j in getLdvCells(cell1, cell2):
-        grid[i][j].type = env.ObjType.REACHABLE
-    cell1.type = env.ObjType.MOB
-    cell2.type = env.ObjType.BOT
+    grid.fromJson("map.json")
+
+    grid[16][6].type = env.ObjType.MOB
+    grid.mobs.add(grid[16][6])
+
+    solver = Test(grid)
+    s = perf_counter()
+    solver.bfs(5)
+    print("search took: ", perf_counter() - s)
+    for pos, path in solver.targets.items():
+        for i, j in path:
+            grid[i][j].dotted = True
     grid.highlight(60)
     sys.exit(app.exec_())
 
@@ -169,4 +219,4 @@ if __name__ == "__main__":
     from core import env
 
     sys.excepthook = except_hook
-    window()
+    test()

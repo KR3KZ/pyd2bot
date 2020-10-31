@@ -27,6 +27,7 @@ class Cell:
         self.extEllipse = (0.55, 0.6)
         self.type = ctype
         self.rx, self.ry = self.x - self.grid.x(), self.y - self.grid.y()
+        self.dotted = False
 
     def __iter__(self):
         return iterParallelogram(self, self.w, self.h)
@@ -62,7 +63,6 @@ class Cell:
         hist = {}
         max_key = None
         max_val = 0
-
         unknown = set()
 
         for loc in self.iterTopCorner():
@@ -96,6 +96,9 @@ class Cell:
         elif max_key in ObjColor.BOT:
             self.type = ObjType.BOT
 
+        elif max_key in ObjColor.DARK:
+            self.type = ObjType.DARK
+
         else:
             if max_key.getRgb() not in unknown:
                 log.info("Unknown color: ", max_key.getRgb())
@@ -127,6 +130,16 @@ class Cell:
 
     def click(self):
         pyautogui.click(self.x, self.y)
+
+    def neighbors(self):
+        if self.i % 2 == 0:
+            neighbors = [(-1, 0), (1, -1), (1, 0), (-1, -1)]
+        else:
+            neighbors = [(-1, 1), (-1, 0), (1, 0), (1, 1)]
+        for di, dj in neighbors:
+            if self.grid.inside(self.i + di, self.j + dj):
+                yield self.i + di, self.j + dj
+
 
 
 def except_hook(cls, exception, traceback):

@@ -53,35 +53,40 @@ class Grid(QRect):
             for cell in row:
                 yield cell
 
-    @staticmethod
-    def getLdvCells(c1, c2):
-        w = c1.w
-        h = c1.h
-        yielded = set()
+    def inLDV(self, cell, mob, po):
+        dist = 1
+        for i, j in self.getLdvCells(cell, mob):
+            if dist == po:
+                return False
+            if self[i][j].type == env.ObjType.OBSTACLE or \
+                    self[i][j].type == env.ObjType.MOB or \
+                    self[i][j].type == env.ObjType.INVOKE:
+                return False
+            dist += 1
+        return True
+
+    def getLdvCells(self, c1, c2):
+        w = self.cell_w
+        h = self.cell_h
+        yielded = {(c1.i, c1.j), (c2.i, c2.j)}
         if abs(c2.rx - c1.rx) < w / 4:
             for i in range(c1.i, c2.i + 1):
-                if i % 2 == 0:
+                if i % 2 == c1.i % 2:
                     yield i, c1.j
         else:
             if c1.x > c2.x:
                 c1, c2 = c2, c1
             alpha = (c2.y - c1.y) / (c2.x - c1.x)
             for x in range(c1.rx, c2.rx + 1):
-                nx = 2 * x / w
-                if abs(nx - round(nx)) <= 2 / w:
+                if abs(2 * x / w - round(2 * x / w)) <= 2 / w:
                     continue
                 y = alpha * (x - c1.rx) + c1.ry
-                ny = 2 * y / h
-                iRange = [floor(ny) + eps for eps in range(2)]
-                jRange = [floor(nx) + eps for eps in range(2)]
-                for i, j in product(iRange, jRange):
-                    if (j + i) % 2 == 0 and abs(ny - i) + abs(nx - j) <= 1:
-                        result = (i - 1, floor((j - 1) / 2))
-                        if result not in yielded:
-                            yielded.add(result)
-                            yield result
+                res = self.getByCoords(x, y)
+                if res not in yielded:
+                    yielded.add(res)
+                    yield res
 
-    def parse(self):
+    def parse(self, do_parse=True):
         self.bot = None
         self.mobs = set()
         self.reachable = set()
@@ -91,7 +96,10 @@ class Grid(QRect):
         else:
             to_iter = self.non_obstacle
         for cell in to_iter:
-            ctype = cell.parse()
+            if do_parse:
+                ctype = cell.parse()
+            else:
+                ctype = cell.type
             if ctype == env.ObjType.BOT:
                 self.bot = cell
             elif ctype == env.ObjType.MOB:
@@ -128,16 +136,32 @@ class Grid(QRect):
 
     def to_dict(self):
         return {
-            "map": [[{"i": i, "j": j, "type": self[i][j].type.getRgb()} for i in range(self.rows)] for j in
+            "map": [[{"i": i, "j": j, "type": QColor(self[i][j].type).getRgb()} for i in range(self.rows)] for j in
                     range(self.cols)]}
 
     def fromJson(self, path_to_file):
         import json
-        with open(path_to_file, 'rect') as f:
+        with open(path_to_file, 'r') as f:
             data = json.load(f)
         for row in data["map"]:
             for cell in row:
                 self[cell["i"]][cell["j"]].type = QColor(*cell["type"])
+        self.parse(do_parse=False)
+
+    def inside(self, i, j):
+        return 0 <= i <= self.rows - 1 and 0 <= j <= self.cols - 1
+
+    def getByCoords(self, x, y, relative=True):
+        if not relative:
+            x = x - self.x()
+            y = y - self.y()
+        ny = 2 * y / self.cell_h
+        nx = 2 * x / self.cell_w
+        iRange = [floor(ny) + eps for eps in range(2)]
+        jRange = [floor(nx) + eps for eps in range(2)]
+        for i, j in product(iRange, jRange):
+            if (j + i) % 2 == 0 and abs(ny - i) + abs(nx - j) <= 1:
+                return i - 1, floor((j - 1) / 2)
 
 
 if __name__ == "__main__":
