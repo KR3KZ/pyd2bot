@@ -19,3 +19,6 @@ class Log:
 
     def error(self, *args, **kwargs):
         self.log.error(joinArgs(args), kwargs)
+
+    def exception(self, msg):
+        self.log.exception(msg)

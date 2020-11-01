@@ -69,11 +69,12 @@ class CellOverlay(Overlay):
     def drawBorder(self):
         qp = QPainter(self)
         qp.setPen(QtGui.QPen(QColor(self.cell.type), 3, QtCore.Qt.SolidLine))
-        edges = QPolygon(QPointF(self.cell.w / 2, 0),
-                         QPointF(self.cell.w, self.cell.h / 2),
-                         QPointF(self.cell.w / 2, self.cell.h),
-                         QPointF(0, self.cell.h / 2))
-        qp.drawPolygon(edges)
+        edges = [QPointF(self.cell.w / 2, 0),
+                          QPointF(self.cell.w, self.cell.h / 2),
+                          QPointF(self.cell.w / 2, self.cell.h),
+                          QPointF(0, self.cell.h / 2)]
+        polygon = QPolygonF(edges)
+        qp.drawPolygon(polygon)
 
     def drawShape(self):
         pen = QtGui.QPen(Qt.green, 3, QtCore.Qt.SolidLine)
@@ -159,54 +160,26 @@ class GridOverlay(Overlay):
             self.closeAfter(secs)
 
 
-class Test:
-
-    def __init__(self, grid):
-        self.grid = grid
-        self.targets = {}
-
-    def bfs(self, po):
-        queue = collections.deque([[(self.grid.bot.i, self.grid.bot.j)]])
-        seen = {(self.grid.bot.i, self.grid.bot.j)}
-        targets = list(self.grid.mobs.copy())
-        print(targets)
-        while queue:
-            path = queue.popleft()
-            i, j = path[-1]
-
-            for idx, mob in enumerate(targets):
-                if self.grid.inLDV(self.grid[i][j], mob, po):
-                    targets.pop(idx)
-                    self.targets[(mob.i, mob.j)] = path[1:]
-                    if not targets:
-                        return
-
-            for k, l in self.grid[i][j].neighbors():
-                if (k, l) not in seen and \
-                        self.grid[k][l].type == env.ObjType.FREE or \
-                        self.grid[k][l].type == env.ObjType.REACHABLE:
-                    queue.append(path + [(k, l)])
-                    seen.add((k, l))
-
-
 def test():
     from core.grid import Grid as G
+    from core.fighter import Fighter
     import json
     app = QApplication(sys.argv)
-    grid = G(env.COMBAT_R, env.VCELLS, env.HCELLS)
-    grid.fromJson("map.json")
+    fighter = Fighter(env.SOURNOISERIE)
+    fighter.grid.fromJson("map.json")
 
-    grid[16][6].type = env.ObjType.MOB
-    grid.mobs.add(grid[16][6])
+    fighter.grid[16][6].type = env.ObjType.MOB
+    fighter.grid.mobs.add(fighter.grid[16][6])
 
-    solver = Test(grid)
+    print(fighter.grid.dist(fighter.grid[25][9], fighter.grid[22][9]))
+
     s = perf_counter()
-    solver.bfs(5)
+    mob, path = fighter.findPathToTarget(6)
     print("search took: ", perf_counter() - s)
-    for pos, path in solver.targets.items():
-        for i, j in path:
-            grid[i][j].dotted = True
-    grid.highlight(60)
+    for i, j in path:
+        fighter.grid[i][j].dotted = True
+
+    fighter.grid.highlight(60)
     sys.exit(app.exec_())
 
 

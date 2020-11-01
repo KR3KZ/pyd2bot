@@ -1,15 +1,17 @@
 import sys
-from math import sqrt
-
-import pyautogui
-from PyQt5.QtCore import QPoint
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QApplication
-
-from core.env import ObjColor, ObjType
+from core import dofus, env
+from core.dofus import ObjColor, ObjType
+from core.region import Region
 from core.utils import iterParallelogram
 from gui.Overlay import CellOverlay
 from core.log import Log
+
+
+class ParseFailed(Exception):
+    pass
+
 
 log = Log()
 
@@ -17,56 +19,38 @@ log = Log()
 class Cell:
 
     def __init__(self, pgrid, x, y, i, j, ctype=ObjType.UNKNOWN):
-        self.x = x
-        self.y = y
         self.i = i
         self.j = j
-        self.grid = pgrid
-        self.h = pgrid.cell_h
+        self.x = x
+        self.y = y
         self.w = pgrid.cell_w
+        self.h = pgrid.cell_h
+        self.grid = pgrid
         self.extEllipse = (0.55, 0.6)
         self.type = ctype
         self.rx, self.ry = self.x - self.grid.x(), self.y - self.grid.y()
         self.dotted = False
+        self._r = Region(self.x - self.w / 2, self.y - self.h / 2, self.w, self.h)
 
-    def __iter__(self):
-        return iterParallelogram(self, self.w, self.h)
+    def getpixel(self, x, y, from_grid=True):
+        rx = x - self.grid.x()
+        ry = y - self.grid.y()
+        if from_grid:
+            return self.grid.getpixel(rx, ry)
+        else:
+            return self._r.getpixel(x - self._r.x(), y - self._r.y())
 
-    def __contains__(self, loc):
-        res = self.w * abs(loc.y()) + self.h * (abs(loc.x()) - self.w / 2) <= 0
-        return res
-
-    def iterEllipse(self, thickness=2):
-        a = self.extEllipse[0] * self.w / 2
-        b = self.extEllipse[1] * self.h / 2
-        for dx in range(int(a) + 1):
-            dy = int(b * sqrt(1 - (dx / a) ** 2))
-            for eps in range(thickness):
-                yield QPoint(self.x + dx, self.y + dy - eps)
-                yield QPoint(self.x + dx, self.y - dy - eps)
-                yield QPoint(self.x - dx, self.y + dy - eps)
-                yield QPoint(self.x - dx, self.y - dy - eps)
-
-    def getpixel(self, p):
-        return self.grid.getpixel(p)
-
-    def dist(self, cell):
-        i = abs(self.x() - cell.x()) / self.w
-        j = abs(self.y() - cell.y()) / self.h
-        return max(int(i), int(j))
-
-    def distx(self, cell):
-        j = (self.x() - cell.x()) / self.w
-        return int(j)
-
-    def parse(self):
+    def parse(self, from_grid=True):
         hist = {}
-        max_key = None
+        max_key = (0, 0, 0)
         max_val = 0
         unknown = set()
 
-        for loc in self.iterTopCorner():
-            rgb = self.getpixel(loc).getRgb()
+        if not from_grid:
+            self._r.capture()
+
+        for x, y in self.iterTopCorner():
+            rgb = self.getpixel(x, y, from_grid)
             if rgb not in hist:
                 hist[rgb] = 0
             hist[rgb] += 1
@@ -76,34 +60,12 @@ class Cell:
             if max_val > 5:
                 break
 
-        max_key = QColor(*max_key)
+        color = QColor(*max_key)
+        self.type = dofus.findObject(color)
 
-        if max_key in ObjColor.OBSTACLE:
-            self.type = ObjType.OBSTACLE
-
-        elif max_key in ObjColor.FREE:
-            self.type = ObjType.FREE
-
-        elif max_key in ObjColor.REACHABLE:
-            self.type = ObjType.REACHABLE
-
-        elif max_key in ObjColor.INVOKE:
-            self.type = ObjType.INVOKE
-
-        elif max_key in ObjColor.MOB:
-            self.type = ObjType.MOB
-
-        elif max_key in ObjColor.BOT:
-            self.type = ObjType.BOT
-
-        elif max_key in ObjColor.DARK:
-            self.type = ObjType.DARK
-
-        else:
-            if max_key.getRgb() not in unknown:
-                log.info("Unknown color: ", max_key.getRgb())
-                unknown.add(max_key.getRgb())
-            self.type = max_key
+        if self.type == dofus.ObjType.UNKNOWN:
+            # self.highlight(1)
+            raise ParseFailed(f"Enable parse cell of top corner max color {color.getRgb()}!")
 
         return self.type
 
@@ -111,14 +73,17 @@ class Cell:
         a = 0.4
         b = 0.5
         c = 0.7
-        o = QPoint(self.x, self.y - (self.h / 4) * (b + c))
+        ox = self.x
+        oy = self.y - (self.h / 4) * (b + c)
         w = a * self.w / 2
         h = b * self.h / 2
-        return iterParallelogram(o, w, h)
+        return iterParallelogram(ox, oy, w, h)
 
     def highlight(self, secs, mode=CellOverlay.VizMode.Border):
+        app = QApplication(sys.argv)
         overlay = CellOverlay(self)
         overlay.highlight(secs, mode)
+        sys.exit(app.exec_())
 
     def highlightTopCorner(self, secs):
         sys.excepthook = except_hook
@@ -129,17 +94,28 @@ class Cell:
         sys.exit(app.exec_())
 
     def click(self):
-        pyautogui.click(self.x, self.y)
+        env.click(self.x, self.y)
 
     def neighbors(self):
         if self.i % 2 == 0:
-            neighbors = [(-1, 0), (1, -1), (1, 0), (-1, -1)]
+            vicinity = [(-1, 0), (1, -1), (1, 0), (-1, -1)]
         else:
-            neighbors = [(-1, 1), (-1, 0), (1, 0), (1, 1)]
-        for di, dj in neighbors:
+            vicinity = [(-1, 1), (-1, 0), (1, 0), (1, 1)]
+        for di, dj in vicinity:
             if self.grid.inside(self.i + di, self.j + dj):
-                yield self.i + di, self.j + dj
+                yield self.grid[self.i + di][self.j + dj]
 
+    def inLDV(self, tgt, po):
+        return self.grid.inLDV(self, tgt, po)
+
+    def occupied(self):
+        return self.type != ObjType.FREE and self.type != ObjType.REACHABLE
+
+    def occupiedWithBot(self):
+        return self.type == dofus.ObjType.BOT
+
+    def reachable(self):
+        return self.type == dofus.ObjType.REACHABLE
 
 
 def except_hook(cls, exception, traceback):

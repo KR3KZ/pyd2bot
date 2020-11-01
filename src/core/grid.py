@@ -2,19 +2,20 @@ import sys
 from itertools import product
 from math import floor
 from time import sleep
-from PyQt5.QtCore import QRect, QPoint
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QApplication
+from core import dofus
 from core.cell import Cell
 from core.log import Log
+from core.region import Region
 from gui.Overlay import GridOverlay
 import core.env as env
-import pyautogui
+
 
 log = Log()
 
 
-class Grid(QRect):
+class Grid(Region):
 
     def __init__(self, region, nbr_vcell, nbr_hcell):
         super(Grid, self).__init__(*region.getRect())
@@ -22,13 +23,13 @@ class Grid(QRect):
         self.nbr_hcell = nbr_hcell
         self.cell_w = self.width() / nbr_hcell
         self.cell_h = self.height() / nbr_vcell
-        self.bi = pyautogui.screenshot(region=self.getRect())
         self._matrix = []
         self.bot = None
         self.mobs = set()
         self.reachable = set()
         self.free = set()
         self.non_obstacle = set()
+        self.invoke = set()
         nrow = 0
         ncol = 0
         for i in range(1, int(2 * self.nbr_vcell)):
@@ -54,28 +55,27 @@ class Grid(QRect):
                 yield cell
 
     def inLDV(self, cell, mob, po):
-        dist = 1
+        if self.dist(cell, mob) >= po:
+            return False
+        elif self.dist(cell, mob) < 2:
+            return True
         for i, j in self.getLdvCells(cell, mob):
-            if dist == po:
+            if self[i][j].type == dofus.ObjType.OBSTACLE or \
+                    self[i][j].type == dofus.ObjType.MOB or \
+                    self[i][j].type == dofus.ObjType.INVOKE:
                 return False
-            if self[i][j].type == env.ObjType.OBSTACLE or \
-                    self[i][j].type == env.ObjType.MOB or \
-                    self[i][j].type == env.ObjType.INVOKE:
-                return False
-            dist += 1
         return True
 
     def getLdvCells(self, c1, c2):
         w = self.cell_w
-        h = self.cell_h
         yielded = {(c1.i, c1.j), (c2.i, c2.j)}
+        if c1.x > c2.x:
+            c1, c2 = c2, c1
         if abs(c2.rx - c1.rx) < w / 4:
-            for i in range(c1.i, c2.i + 1):
+            for i in range(c1.i + 1, c2.i):
                 if i % 2 == c1.i % 2:
                     yield i, c1.j
         else:
-            if c1.x > c2.x:
-                c1, c2 = c2, c1
             alpha = (c2.y - c1.y) / (c2.x - c1.x)
             for x in range(c1.rx, c2.rx + 1):
                 if abs(2 * x / w - round(2 * x / w)) <= 2 / w:
@@ -91,6 +91,7 @@ class Grid(QRect):
         self.mobs = set()
         self.reachable = set()
         self.free = set()
+        self.capture()
         if not self.non_obstacle:
             to_iter = self
         else:
@@ -100,33 +101,23 @@ class Grid(QRect):
                 ctype = cell.parse()
             else:
                 ctype = cell.type
-            if ctype == env.ObjType.BOT:
+            if ctype == dofus.ObjType.BOT:
                 self.bot = cell
-            elif ctype == env.ObjType.MOB:
+            elif ctype == dofus.ObjType.MOB:
                 self.mobs.add(cell)
-            elif ctype == env.ObjType.FREE:
+            elif ctype == dofus.ObjType.FREE:
                 self.free.add(cell)
-            elif ctype == env.ObjType.REACHABLE:
+            elif ctype == dofus.ObjType.REACHABLE:
                 self.reachable.add(cell)
-        self.non_obstacle = self.mobs | self.free | self.reachable
+            elif ctype == dofus.ObjType.INVOKE:
+                self.invoke.add(cell)
+        self.non_obstacle = self.mobs | self.free | self.reachable | self.invoke
         self.non_obstacle.add(self.bot)
 
-    def update(self):
-        self.bi = pyautogui.screenshot(region=self.getRect())
-
-    def getpixel(self, p):
-        target = (p.x() - self.x(), p.y() - self.y())
-        rgb = self.bi.getpixel(target)
-        return QColor(*rgb)
-
     def dist(self, cell1, cell2):
-        i = abs(cell1.x() - cell2.x()) / self.cell_w
-        j = abs(cell1.y() - cell2.y()) / self.cell_h
+        i = 2 * abs(cell1.x - cell2.x) / self.cell_w
+        j = 2 * abs(cell1.y - cell2.y) / self.cell_h
         return max(int(i), int(j))
-
-    def distx(self, cell1, cell2):
-        j = abs(cell1.y() - cell2.y()) / self.cell_h
-        return int(j)
 
     def highlight(self, secs):
         app = QApplication(sys.argv)
@@ -165,7 +156,8 @@ class Grid(QRect):
 
 
 if __name__ == "__main__":
-    sleep(2)
-    grid = Grid(env.COMBAT_R, env.VCELLS, env.HCELLS)
+    env.focusDofusWindow()
+    grid = Grid(dofus.COMBAT_R, dofus.VCELLS, dofus.HCELLS)
     grid.parse()
-    grid[22][5].highlightTopCorner(2)
+    grid.highlight(5)
+    grid.overlay.highlightEnded.connect(env.focusIDEWindow)

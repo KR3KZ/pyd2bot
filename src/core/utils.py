@@ -1,12 +1,7 @@
 import cv2
 import numpy as np
 import pyautogui
-import pywinauto
-import win32con
-import win32gui
-import win32ui
-
-from PyQt5.QtCore import QPoint
+from numpy.ma import sqrt
 
 
 def capture(rect):
@@ -22,11 +17,18 @@ def isAdjacent(matches, r):
     return False
 
 
-def iterParallelogram(origin, w, h):
+def iterParallelogram(ox, oy, w, h):
     for dx in range(-int(w / 2), int(w / 2) + 1):
         max_dy = int((h / w) * (w / 2 - abs(dx)))
         for dy in range(-max_dy, max_dy + 1):
-            yield QPoint(origin.x() + dx, origin.y() + dy)
+            yield int(ox) + dx, int(oy) + dy
 
 
-
+def iterEllipse(ox, oy, a, b, thickness=2):
+    for dx in range(int(a) + 1):
+        dy = int(b * sqrt(1 - (dx / a) ** 2))
+        for eps in range(thickness):
+            yield ox + dx, oy + dy - eps
+            yield ox + dx, oy - dy - eps
+            yield ox - dx, oy + dy - eps
+            yield ox - dx, oy - dy - eps

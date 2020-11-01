@@ -7,7 +7,7 @@ class Observer(threading.Thread):
         VANISH = 2
         CHANGE = 3
 
-    def __init__(self, region, pattern, callback=None, mode=Mode.APPEAR):
+    def __init__(self, region, pattern=None, callback=None, mode=Mode.APPEAR):
         threading.Thread.__init__(self)
         self.region = region
         self.callback = callback
@@ -29,3 +29,15 @@ class Observer(threading.Thread):
             self.changed.set()
         if self.callback:
             self.callback()
+
+
+if __name__ == "__main__":
+    import pyautogui
+    "z "
+    pyautogui.press("z")
+    # from core.region import Region as R
+    # r = R(251, 21, 349, 81)
+    # pa_observer = Observer(r, mode=Observer.Mode.CHANGE)
+    # pa_observer.start()
+    # if pa_observer.changed.wait(10):
+    #     print("changed")
