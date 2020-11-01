@@ -32,3 +32,8 @@ def iterEllipse(ox, oy, a, b, thickness=2):
             yield ox + dx, oy - dy - eps
             yield ox - dx, oy + dy - eps
             yield ox - dx, oy - dy - eps
+
+
+def sample(x1, x2, n):
+    for k in range(0, n + 1):
+        yield x1 + (x2 - x1) * k / n

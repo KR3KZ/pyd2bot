@@ -124,6 +124,8 @@ class Fighter(threading.Thread):
             return path[-1]
         for idx, cell in enumerate(path):
             if not cell.reachable():
+                if idx == 0:
+                    return None
                 return path[idx - 1]
         return None
 
@@ -178,7 +180,6 @@ def tearDown(fighter):
 
 if __name__ == "__main__":
     from core import env
-
     env.focusDofusWindow()
     fighter = Fighter(dofus.SOURNOISERIE)
     atexit.register(tearDown, fighter)

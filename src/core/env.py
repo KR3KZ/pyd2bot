@@ -54,7 +54,7 @@ def _capture(region):
     signedIntsArray = bmp.GetBitmapBits(True)
     img = np.frombuffer(signedIntsArray, dtype='uint8')
     img.shape = (region.height(), region.width(), 4)
-    bmp.SaveBitmapFile(cDC, 'save.bmp')
+    # bmp.SaveBitmapFile(cDC, 'save.bmp')
     dcObj.DeleteDC()
     cDC.DeleteDC()
     win32gui.ReleaseDC(DOFUS_HWND, last_dc)

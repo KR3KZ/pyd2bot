@@ -24,6 +24,8 @@ COMBAT_ENDED_POPUP_P = cv2.imread(os.path.join(patterns_dir, "END_COMBAT_P.png")
 CREATURE_MODE_OFF_P = cv2.imread(os.path.join(patterns_dir, "CREATURE_MODE_OFF_P.png"))
 SKIP_TURN_BUTTON_P = cv2.imread(os.path.join(patterns_dir, "SKIP_TURN_BUTTON_P.png"))
 
+SMALL_FISH_P = cv2.imread(os.path.join(patterns_dir, "SMALL_FISH_P.png"))
+
 # Env Vars
 HCELLS = 14.5
 VCELLS = 20.5
@@ -55,7 +57,7 @@ SOURNOISERIE = {
 class ObjColor:
     BOT = [QColor(61, 56, 150), QColor(251, 241, 191), QColor(33, 34, 88)]
     MOB = [QColor(46, 54, 61)]
-    FREE = [QColor(150, 142, 103), QColor(142, 134, 94)]
+    FREE = [QColor(150, 142, 103), QColor(142, 134, 94), QColor(186, 181, 155)]
     OBSTACLE = [QColor(255, 255, 255), QColor(88, 83, 58)]
     DARK = [QColor(0, 0, 0)]
     REACHABLE = [QColor(90, 125, 62), QColor(85, 121, 56), QColor(0, 102, 0)]

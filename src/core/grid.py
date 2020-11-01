@@ -8,6 +8,7 @@ from core import dofus
 from core.cell import Cell
 from core.log import Log
 from core.region import Region
+from core.utils import sample
 from gui.Overlay import GridOverlay
 import core.env as env
 
@@ -77,8 +78,8 @@ class Grid(Region):
                     yield i, c1.j
         else:
             alpha = (c2.y - c1.y) / (c2.x - c1.x)
-            for x in range(c1.rx, c2.rx + 1):
-                if abs(2 * x / w - round(2 * x / w)) <= 2 / w:
+            for x in sample(c1.rx, c2.rx, 50000):
+                if abs(2 * x / w - round(2 * x / w)) <= 1e-20:
                     continue
                 y = alpha * (x - c1.rx) + c1.ry
                 res = self.getByCoords(x, y)
@@ -86,17 +87,25 @@ class Grid(Region):
                     yielded.add(res)
                     yield res
 
+    def getByCoords(self, x, y, relative=True):
+        if not relative:
+            x = x - self.x()
+            y = y - self.y()
+        ny = 2 * y / self.cell_h
+        nx = 2 * x / self.cell_w
+        iRange = [floor(ny) + eps for eps in range(2)]
+        jRange = [floor(nx) + eps for eps in range(2)]
+        for i, j in product(iRange, jRange):
+            if (j + i) % 2 == 0 and abs(ny - i) + abs(nx - j) <= 1:
+                return i - 1, floor((j - 1) / 2)
+
     def parse(self, do_parse=True):
         self.bot = None
         self.mobs = set()
         self.reachable = set()
         self.free = set()
         self.capture()
-        if not self.non_obstacle:
-            to_iter = self
-        else:
-            to_iter = self.non_obstacle
-        for cell in to_iter:
+        for cell in self:
             if do_parse:
                 ctype = cell.parse()
             else:
@@ -111,8 +120,6 @@ class Grid(Region):
                 self.reachable.add(cell)
             elif ctype == dofus.ObjType.INVOKE:
                 self.invoke.add(cell)
-        self.non_obstacle = self.mobs | self.free | self.reachable | self.invoke
-        self.non_obstacle.add(self.bot)
 
     def dist(self, cell1, cell2):
         i = 2 * abs(cell1.x - cell2.x) / self.cell_w
@@ -142,17 +149,7 @@ class Grid(Region):
     def inside(self, i, j):
         return 0 <= i <= self.rows - 1 and 0 <= j <= self.cols - 1
 
-    def getByCoords(self, x, y, relative=True):
-        if not relative:
-            x = x - self.x()
-            y = y - self.y()
-        ny = 2 * y / self.cell_h
-        nx = 2 * x / self.cell_w
-        iRange = [floor(ny) + eps for eps in range(2)]
-        jRange = [floor(nx) + eps for eps in range(2)]
-        for i, j in product(iRange, jRange):
-            if (j + i) % 2 == 0 and abs(ny - i) + abs(nx - j) <= 1:
-                return i - 1, floor((j - 1) / 2)
+
 
 
 if __name__ == "__main__":

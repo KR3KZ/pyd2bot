@@ -161,23 +161,28 @@ class GridOverlay(Overlay):
 
 
 def test():
+    def addMob(grid, i, j):
+        grid[i][j].type = dofus.ObjType.MOB
+        grid.mobs.add(fighter.grid[i][j])
     from core.grid import Grid as G
+    import core.dofus
     from core.fighter import Fighter
     import json
     app = QApplication(sys.argv)
-    fighter = Fighter(env.SOURNOISERIE)
+    fighter = Fighter(dofus.SOURNOISERIE)
     fighter.grid.fromJson("map.json")
 
-    fighter.grid[16][6].type = env.ObjType.MOB
-    fighter.grid.mobs.add(fighter.grid[16][6])
+    addMob(fighter.grid, 16, 6)
+    addMob(fighter.grid, 23, 3)
 
-    print(fighter.grid.dist(fighter.grid[25][9], fighter.grid[22][9]))
-
-    s = perf_counter()
-    mob, path = fighter.findPathToTarget(6)
-    print("search took: ", perf_counter() - s)
-    for i, j in path:
+    for i, j in fighter.grid.getLdvCells(fighter.grid.bot, fighter.grid[22][9]):
         fighter.grid[i][j].dotted = True
+
+    # s = perf_counter()
+    # mob, path = fighter.findPathToTarget(6)
+    # print("search took: ", perf_counter() - s)
+    # for cell in path:
+    #     cell.dotted = True
 
     fighter.grid.highlight(60)
     sys.exit(app.exec_())
@@ -189,7 +194,7 @@ def except_hook(cls, exception, traceback):
 
 if __name__ == "__main__":
     import sys
-    from core import env
+    from core import env, dofus
 
     sys.excepthook = except_hook
     test()

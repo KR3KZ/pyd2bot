@@ -7,6 +7,8 @@ import numpy as np
 import pyautogui
 from PyQt5.QtCore import QPoint, QRect
 from PyQt5.QtGui import QColor
+from PyQt5.QtWidgets import QApplication
+
 from core.utils import isAdjacent
 import gui.Overlay as overlay
 import core.env as env
@@ -141,15 +143,20 @@ class Region(QRect):
 if __name__ == "__main__":
     from core import dofus
 
-    # app = QApplication(sys.argv)
     env.focusDofusWindow()
+    app = QApplication(sys.argv)
+    res = dofus.COMBAT_R.findAll(dofus.SMALL_FISH_P, threshold=0.4)
+    for r in res:
+        r.highlight(1)
+
+
     # button_r = tst.r
     # button_r.capture()
     # pix = button_r.getpixel(0, 0)
-    while True:
-        if dofus.MY_TURN_CHECK_L.getpixel() == dofus.MY_TURN_C:
-            print('Bot turn started')
-            break
+    # while True:
+    #     if dofus.MY_TURN_CHECK_L.getpixel() == dofus.MY_TURN_C:
+    #         print('Bot turn started')
+    #         break
     # not my turn color (0 144 122 255)
     # my turn color (0 242 205 255)
     # s = perf_counter()
@@ -157,7 +164,7 @@ if __name__ == "__main__":
     # print(perf_counter() - s)
     # print(res)
     # sleep(1)
-    env.focusIDEWindow()
+    # env.focusIDEWindow()
     # start = perf_counter()
     # template = cv2.imread(os.path.join(env.test_patterns_dir, tst.p))
     # res = button_r.findAll(template)
@@ -172,4 +179,4 @@ if __name__ == "__main__":
     #         r.overlay.highlightEnded.connect(env.focusIDEWindow)
     # else:
     #     env.focusIDEWindow()
-    # sys.exit(app.exec_())
+    sys.exit(app.exec_())
