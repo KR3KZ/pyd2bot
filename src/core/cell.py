@@ -3,14 +3,14 @@ from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QApplication
 from core import dofus, env
 from core.dofus import ObjColor, ObjType
+from core.exceptions import ParseCellFailed
 from core.region import Region
 from core.utils import iterParallelogram
 from gui.Overlay import CellOverlay
 from core.log import Log
 
 
-class ParseFailed(Exception):
-    pass
+
 
 
 log = Log()
@@ -65,7 +65,7 @@ class Cell:
 
         if self.type == dofus.ObjType.UNKNOWN:
             # self.highlight(1)
-            raise ParseFailed(f"Enable parse cell of top corner max color {color.getRgb()}!")
+            raise ParseCellFailed(f"Enable parse cell of top corner max color {color.getRgb()}!")
 
         return self.type
 
@@ -94,7 +94,13 @@ class Cell:
         sys.exit(app.exec_())
 
     def click(self):
-        env.click(self.x, self.y)
+        self._r.click()
+
+    def hover(self):
+        self._r.hover()
+
+    def nearBy(self, w, h):
+        return self._r.nearBy(w, h)
 
     def neighbors(self):
         if self.i % 2 == 0:
@@ -117,6 +123,13 @@ class Cell:
     def reachable(self):
         return self.type == dofus.ObjType.REACHABLE
 
+    def opaque(self):
+        return self.type == dofus.ObjType.OBSTACLE or \
+               self.type == dofus.ObjType.MOB or \
+               self.type == dofus.ObjType.INVOKE
+
+    def indexes(self):
+        return self.i, self.j
 
 def except_hook(cls, exception, traceback):
     sys.__excepthook__(cls, exception, traceback)

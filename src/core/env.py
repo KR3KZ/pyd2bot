@@ -1,3 +1,5 @@
+from time import sleep
+
 import numpy as np
 import pywinauto
 import win32api
@@ -5,10 +7,14 @@ import win32con
 import win32gui
 import win32ui
 
-IDE_HWND = pywinauto.findwindows.find_windows(title_re="bot2pix.*")[0]
+# IDE_HWND = pywinauto.findwindows.find_windows(title_re="bot2pix.*")[0]
 DOFUS_HWND = None
 last_dc = None
 
+keycodes = {
+    "z": 0x5A,
+    "space": win32con.VK_SPACE
+}
 
 def focusDofusWindow():
     DOFUS_HWND = pywinauto.findwindows.find_windows(title_re=".*Dofus.*")[0]
@@ -43,6 +49,14 @@ def click(x, y):
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN | win32con.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0)
 
 
+def press(key):
+    win32api.keybd_event(keycodes[key], 0, 0, 0)
+
+
+def release(key):
+    win32api.keybd_event(keycodes[key], 0, win32con.KEYEVENTF_KEYUP, 0)  # key up
+
+
 def _capture(region):
     last_dc = win32gui.GetWindowDC(DOFUS_HWND)
     dcObj = win32ui.CreateDCFromHandle(last_dc)
@@ -60,3 +74,8 @@ def _capture(region):
     win32gui.ReleaseDC(DOFUS_HWND, last_dc)
     win32gui.DeleteObject(bmp.GetHandle())
     return img
+
+if __name__ == "__main__":
+    press()
+    sleep(2)
+    release(0x5A)

@@ -23,7 +23,6 @@ READY_BUTTON_P = cv2.imread(os.path.join(patterns_dir, "READY_BUTTON_P.png"))
 COMBAT_ENDED_POPUP_P = cv2.imread(os.path.join(patterns_dir, "END_COMBAT_P.png"))
 CREATURE_MODE_OFF_P = cv2.imread(os.path.join(patterns_dir, "CREATURE_MODE_OFF_P.png"))
 SKIP_TURN_BUTTON_P = cv2.imread(os.path.join(patterns_dir, "SKIP_TURN_BUTTON_P.png"))
-
 SMALL_FISH_P = cv2.imread(os.path.join(patterns_dir, "SMALL_FISH_P.png"))
 
 # Env Vars
@@ -38,7 +37,15 @@ MY_TURN_CHECK_L = Location(1425, 963)
 END_COMBAT_CLOSE_L = Location(1251, 737)
 MY_TURN_C = QColor(0, 240, 206, 255)
 SKIP_TURN_SHORTCUT = 'space'
+RESIGN_BUTTON_LOC = Location(1443, 1006)
 
+RESIGN_POPUP_P = "RESIGN_POPUP_P.png"
+
+RESIGN_CONFIRM_L = Location(879, 567)
+DEFEAT_POPUP_P = "DEFEAT_POPUP_P.png"
+DEFEAT_POPUP_CLOSE_L = Location(1122, 730)
+RESGIN_POPUP_R = Region(698,442,533,173)
+DEFEAT_POPUP_R = Region(762,696,415,141)
 # Timers
 CHANGE_MAP_TIMEOUT = 3 * 60
 
@@ -53,14 +60,15 @@ SOURNOISERIE = {
     "nbr-on-same": 2
 }
 
-# QColor(184, 183, 127)
+
+
 class ObjColor:
-    BOT = [QColor(61, 56, 150), QColor(251, 241, 191), QColor(33, 34, 88)]
-    MOB = [QColor(46, 54, 61)]
-    FREE = [QColor(150, 142, 103), QColor(142, 134, 94), QColor(186, 181, 155)]
-    OBSTACLE = [QColor(255, 255, 255), QColor(88, 83, 58)]
+    BOT = [QColor(61, 56, 150), QColor(251, 241, 191), QColor(33, 34, 88), QColor(227, 218, 173)]
+    MOB = [QColor(46, 54, 61), QColor(41, 48, 55)]
+    FREE = [QColor(150, 142, 103), QColor(142, 134, 94), QColor(186, 181, 155), QColor(128, 121, 85)]
+    OBSTACLE = [QColor(255, 255, 255), QColor(88, 83, 58), QColor(79, 75, 52), QColor(228, 228, 226)]
     DARK = [QColor(0, 0, 0)]
-    REACHABLE = [QColor(90, 125, 62), QColor(85, 121, 56), QColor(0, 102, 0)]
+    REACHABLE = [QColor(90, 125, 62), QColor(85, 121, 56), QColor(0, 102, 0), QColor(77, 109, 50)]
     INVOKE = [QColor(218, 57, 45), QColor(255, 244, 221)]
     MY_TURN_COLOR = QColor(252, 200, 0)
 
@@ -101,3 +109,19 @@ def findObject(color):
         result = ObjType.DARK
 
     return result
+
+
+def loadMobs():
+    res = []
+    directory = os.path.join(patterns_dir, "monsters")
+    for filename in os.listdir(directory):
+        if filename.endswith(".png"):
+            res.append(cv2.imread(os.path.join(directory, filename)))
+    return res
+
+
+mobs = loadMobs()
+MAP_UP_L = Location(876, 36)
+MAP_LEFT_L = Location(358, 477)
+MAP_RIGHT_L = Location(1562, 559)
+MAP_DOWN_L = Location(879, 908)

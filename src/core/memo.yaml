@@ -1,0 +1,122 @@
+exclude: !!set
+  ? !!python/tuple
+  - 9
+  - -18
+  : null
+  ? !!python/tuple
+  - 10
+  - -19
+  : null
+  ? &id004 !!python/tuple
+  - 10
+  - -17
+  : null
+  ? &id005 !!python/tuple
+  - 11
+  - -18
+  : null
+memo:
+  ? !!python/tuple
+  - 8
+  - -18
+  : !!set
+    ? &id001 !!python/tuple
+    - -1
+    - 0
+    : null
+    ? &id002 !!python/tuple
+    - 0
+    - -1
+    : null
+  ? !!python/tuple
+  - 8
+  - -17
+  : !!set
+    *id001: null
+  ? !!python/tuple
+  - 8
+  - -16
+  : !!set
+    *id001: null
+  ? !!python/tuple
+  - 8
+  - -15
+  : !!set
+    ? !!python/tuple
+    - -1
+    - 0
+    : null
+    ? !!python/tuple
+    - 0
+    - 1
+    : null
+  ? !!python/tuple
+  - 9
+  - -18
+  : !!set
+    *id002: null
+  ? !!python/tuple
+  - 9
+  - -17
+  : !!set
+    ? &id003 !!python/tuple
+    - 1
+    - 0
+    : null
+  ? !!python/tuple
+  - 9
+  - -16
+  : !!set {}
+  ? !!python/tuple
+  - 9
+  - -15
+  : !!set {}
+  ? !!python/tuple
+  - 10
+  - -18
+  : !!set
+    ? !!python/tuple
+    - 0
+    - -1
+    : null
+    ? !!python/tuple
+    - 0
+    - 1
+    : null
+    *id003: null
+  *id004: !!set {}
+  ? !!python/tuple
+  - 10
+  - -16
+  : !!set
+    *id002: null
+  ? !!python/tuple
+  - 10
+  - -15
+  : !!set
+    ? !!python/tuple
+    - 0
+    - 1
+    : null
+  *id005: !!set {}
+  ? !!python/tuple
+  - 11
+  - -17
+  : !!set
+    *id001: null
+    *id002: null
+    *id003: null
+  ? !!python/tuple
+  - 11
+  - -16
+  : !!set
+    *id003: null
+  ? !!python/tuple
+  - 11
+  - -15
+  : !!set
+    ? !!python/tuple
+    - 0
+    - 1
+    : null
+    *id003: null

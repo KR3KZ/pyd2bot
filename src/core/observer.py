@@ -13,8 +13,12 @@ class Observer(threading.Thread):
         self.callback = callback
         self.stopSignal = threading.Event()
         self.changed = threading.Event()
-        self.pattern = pattern
+        self.vanished = threading.Event()
         self.mode = mode
+        if self.mode == self.Mode.CHANGE:
+            self.pattern = self.region.capture().copy()
+        else:
+            self.pattern = pattern
 
     def stop(self):
         self.region.stopWait.set()
@@ -24,20 +28,21 @@ class Observer(threading.Thread):
             self.region.waitAppear(self.pattern)
         elif self.mode == self.Mode.VANISH:
             self.region.waitVanish(self.pattern)
+            self.vanished.set()
         elif self.mode == self.Mode.CHANGE:
-            self.region.waitChange()
+            self.region.waitVanish(self.pattern)
             self.changed.set()
         if self.callback:
             self.callback()
 
 
 if __name__ == "__main__":
-    import pyautogui
-    "z "
-    pyautogui.press("z")
-    # from core.region import Region as R
-    # r = R(251, 21, 349, 81)
-    # pa_observer = Observer(r, mode=Observer.Mode.CHANGE)
-    # pa_observer.start()
-    # if pa_observer.changed.wait(10):
-    #     print("changed")
+    from core.region import Region
+    from core import dofus
+    from core import env
+    # env.focusDofusWindow()
+    # dofus.PA_R.highlight(1)
+    pa_observer = Observer(dofus.PA_R, mode=Observer.Mode.CHANGE)
+    pa_observer.start()
+    if pa_observer.changed.wait(10):
+        print("changed")

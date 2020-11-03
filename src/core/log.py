@@ -7,12 +7,12 @@ def joinArgs(args):
 
 class Log:
     def __init__(self):
-        format = "<%(asctime)-15s %(levelname)s line %(lineno)d %(threadName)s> %(funcName)s: %(message)s"
+        format = "<%(asctime)-15s %(levelname)s %(threadName)s> %(funcName)s: %(message)s"
         logging.basicConfig(level=logging.INFO, format=format)
         self.log = logging.getLogger("bot logger")
 
-    def info(self, *args):
-        self.log.info(joinArgs(args))
+    def info(self, *args, **kwargs):
+        self.log.info(joinArgs(args), **kwargs)
 
     def debug(self, *args):
         self.log.debug(joinArgs(args))

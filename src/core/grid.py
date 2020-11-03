@@ -6,12 +6,12 @@ from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QApplication
 from core import dofus
 from core.cell import Cell
+from core.exceptions import ParseGridFailed
 from core.log import Log
 from core.region import Region
 from core.utils import sample
 from gui.Overlay import GridOverlay
 import core.env as env
-
 
 log = Log()
 
@@ -56,14 +56,12 @@ class Grid(Region):
                 yield cell
 
     def inLDV(self, cell, mob, po):
-        if self.dist(cell, mob) >= po:
+        if self.dist(cell, mob) > po:
             return False
-        elif self.dist(cell, mob) < 2:
+        elif self.dist(cell, mob) == 1:
             return True
         for i, j in self.getLdvCells(cell, mob):
-            if self[i][j].type == dofus.ObjType.OBSTACLE or \
-                    self[i][j].type == dofus.ObjType.MOB or \
-                    self[i][j].type == dofus.ObjType.INVOKE:
+            if self[i][j].opaque():
                 return False
         return True
 
@@ -73,7 +71,9 @@ class Grid(Region):
         if c1.x > c2.x:
             c1, c2 = c2, c1
         if abs(c2.rx - c1.rx) < w / 4:
-            for i in range(c1.i + 1, c2.i):
+            start = min(c1.i, c2.i) + 1
+            end = max(c1.i, c2.i)
+            for i in range(start, end):
                 if i % 2 == c1.i % 2:
                     yield i, c1.j
         else:
@@ -120,11 +120,13 @@ class Grid(Region):
                 self.reachable.add(cell)
             elif ctype == dofus.ObjType.INVOKE:
                 self.invoke.add(cell)
+        if not self.bot or not self.mobs:
+            raise ParseGridFailed("Enable to find bot or mobs pos!")
 
     def dist(self, cell1, cell2):
         i = 2 * abs(cell1.x - cell2.x) / self.cell_w
         j = 2 * abs(cell1.y - cell2.y) / self.cell_h
-        return max(int(i), int(j))
+        return max(round(i), round(j))
 
     def highlight(self, secs):
         app = QApplication(sys.argv)
@@ -148,8 +150,6 @@ class Grid(Region):
 
     def inside(self, i, j):
         return 0 <= i <= self.rows - 1 and 0 <= j <= self.cols - 1
-
-
 
 
 if __name__ == "__main__":

@@ -170,12 +170,18 @@ def test():
     import json
     app = QApplication(sys.argv)
     fighter = Fighter(dofus.SOURNOISERIE)
-    fighter.grid.fromJson("map.json")
+    grid = fighter.grid
+    grid.fromJson("map.json")
 
-    addMob(fighter.grid, 16, 6)
-    addMob(fighter.grid, 23, 3)
+    addMob(grid, 16, 6)
+    addMob(grid, 23, 3)
 
-    for i, j in fighter.grid.getLdvCells(fighter.grid.bot, fighter.grid[22][9]):
+    grid[26][3].type = dofus.ObjType.BOT
+    grid.bot = grid[26][3]
+
+    grid[31][5].type = dofus.ObjType.FREE
+
+    for i, j in fighter.grid.getLdvCells(fighter.grid.bot, fighter.grid[23][3]):
         fighter.grid[i][j].dotted = True
 
     # s = perf_counter()

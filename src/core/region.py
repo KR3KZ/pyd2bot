@@ -1,14 +1,13 @@
 import os
 import sys
 import threading
+import random
 from time import perf_counter, sleep
 import cv2
 import numpy as np
-import pyautogui
 from PyQt5.QtCore import QPoint, QRect
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QApplication
-
 from core.utils import isAdjacent
 import gui.Overlay as overlay
 import core.env as env
@@ -28,7 +27,7 @@ class Location(QPoint):
         super(Location, self).__init__(x, y)
 
     def click(self):
-        pyautogui.click(self.x(), self.y())
+        env.click(self.x(), self.y())
 
     def getpixel(self):
         bi = env.capture(Region(self.x(), self.y(), 1, 1))
@@ -47,7 +46,7 @@ class Region(QRect):
         elapsed = 0
         result = None
         start = perf_counter()
-        while not self.stopWait.is_set() and elapsed < timeout * 1000:
+        while not self.stopWait.is_set() and elapsed < timeout:
             result = self.find(pattern, threshold)
             if result:
                 break
@@ -59,7 +58,7 @@ class Region(QRect):
         elapsed = 0
         result = None
         start = perf_counter()
-        while not self.stopWait.is_set() and elapsed < timeout * 1000:
+        while not self.stopWait.is_set() and elapsed < timeout:
             for pattern in patterns:
                 result = self.find(pattern, threshold)
                 if result is not None:
@@ -67,29 +66,59 @@ class Region(QRect):
             elapsed = perf_counter() - start
         return result
 
+    def findAnyAll(self, patterns, threshold=0.7, shuffle=False):
+        ans = []
+        self.capture()
+        if shuffle:
+            random.shuffle(patterns)
+        for pattern in patterns:
+            result = self.find(pattern, threshold, capture=False)
+            if result:
+                ans.append(result)
+        return ans
+
+    def findAny(self, patterns, threshold=0.7, shuffle=False):
+        self.capture()
+        if shuffle:
+            random.shuffle(patterns)
+        for pattern in patterns:
+            result = self.find(pattern, threshold, capture=False)
+            if result is not None:
+                return result
+        return None
+
     def waitVanish(self, pattern, timeout=FOREVER, threshold=0.9):
         self.stopWait.clear()
         elapsed = 0
-        result = None
         start = perf_counter()
-        while not self.stopWait.is_set() and elapsed < timeout * 1000:
+        while not self.stopWait.is_set() and elapsed < timeout:
             result = self.find(pattern, threshold)
             if not result:
-                break
+                return True
             elapsed = perf_counter() - start
-        return result
+        return False
 
-    def waitChange(self, timeout=FOREVER, threshold=0.99):
-        self.bi = env.capture(self)
-        return self.waitVanish(self.bi, timeout, threshold)
+    def waitChange(self, timeout=FOREVER, nbr_pix=50):
+        self.stopWait.clear()
+        elapsed = 0
+        start = perf_counter()
+        initial = env.capture(self)
+        while not self.stopWait.is_set() and elapsed < timeout:
+            pix_diff = (initial != env.capture(self)).any(axis=2).sum()
+            if pix_diff > nbr_pix:
+                return True
+            elapsed = perf_counter() - start
+        return False
 
     def capture(self):
         self.bi = env.capture(self)
         self.bi = cv2.cvtColor(self.bi, cv2.COLOR_RGB2BGR)
+        return self.bi
 
-    def findAll(self, pattern, threshold=0.7, grayscale=True):
+    def findAll(self, pattern, threshold=0.7, grayscale=True, capture=True):
         matches = []
-        self.capture()
+        if capture:
+            self.capture()
         if grayscale:
             cvImage = cv2.cvtColor(self.bi, cv2.COLOR_BGR2GRAY)
             pattern = cv2.cvtColor(pattern, cv2.COLOR_BGR2GRAY)
@@ -109,8 +138,9 @@ class Region(QRect):
                 matches.append(r)
         return matches
 
-    def find(self, pattern, threshold=0.7, grayscale=True):
-        self.capture()
+    def find(self, pattern, threshold=0.7, grayscale=True, capture=True):
+        if capture:
+            self.capture()
         if grayscale:
             cvImage = cv2.cvtColor(self.bi, cv2.COLOR_BGR2GRAY)
             pattern = cv2.cvtColor(pattern, cv2.COLOR_BGR2GRAY)
@@ -127,8 +157,10 @@ class Region(QRect):
             return None
 
     def highlight(self, secs):
+        app = QApplication(sys.argv)
         self.overlay = overlay.Overlay()
         self.overlay.highlight(self, secs)
+        app.exec_()
 
     def click(self):
         env.click(self.center().x(), self.center().y())
@@ -139,17 +171,28 @@ class Region(QRect):
     def hover(self):
         env.move(self.center().x(), self.center().y())
 
+    def nearBy(self, w, h):
+        return Region(self.center().x() - w / 2, self.center().y() - h / 2, w, h)
+
 
 if __name__ == "__main__":
     from core import dofus
+    from core.grid import Grid
 
+    # app = QApplication(sys.argv)
     env.focusDofusWindow()
-    app = QApplication(sys.argv)
-    res = dofus.COMBAT_R.findAll(dofus.SMALL_FISH_P, threshold=0.4)
-    for r in res:
-        r.highlight(1)
+    s = perf_counter()
+    ans, pattern = dofus.COMBAT_R.findAny(dofus.mobs, threshold=0.7)
+    print(f"took {perf_counter() - s}")
+    print(ans)
+    if ans:
+        ans.highlight(1)
 
+    cv2.imshow("pattern", pattern)
+    cv2.waitKey(0)
 
+    # closing all open windows
+    cv2.destroyAllWindows()
     # button_r = tst.r
     # button_r.capture()
     # pix = button_r.getpixel(0, 0)
@@ -178,5 +221,4 @@ if __name__ == "__main__":
     #         r.highlight(2)
     #         r.overlay.highlightEnded.connect(env.focusIDEWindow)
     # else:
-    #     env.focusIDEWindow()
-    sys.exit(app.exec_())
+    # env.focusIDEWindow()

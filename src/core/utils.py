@@ -2,6 +2,10 @@ import cv2
 import numpy as np
 import pyautogui
 from numpy.ma import sqrt
+from core.log import Log
+from core.exceptions import ParseCellFailed, ParseGridFailed
+
+log = Log()
 
 
 def capture(rect):
@@ -37,3 +41,22 @@ def iterEllipse(ox, oy, a, b, thickness=2):
 def sample(x1, x2, n):
     for k in range(0, n + 1):
         yield x1 + (x2 - x1) * k / n
+
+
+def retry(fn):
+    def wrapped(self, *args, nbr_retries=10, reraise=True, **kwargs):
+        result = None
+        for counter in range(nbr_retries):
+            try:
+                if self.stopRetry.is_set():
+                    return
+                result = fn(self, *args, **kwargs)
+                break
+            except (ParseCellFailed, TimeoutError, ParseGridFailed) as e:
+                log.info(str(e))
+                if counter == nbr_retries - 1:
+                    if reraise:
+                        raise
+        return result
+
+    return wrapped
