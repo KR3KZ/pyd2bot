@@ -51,7 +51,7 @@ def retry(fn):
                 result = fn(self, *args, **kwargs)
                 break
             except (ParseCellFailed, TimeoutError, ParseGridFailed) as e:
-                # log.info(str(e))
+                # log.debug(str(e))
                 if counter == nbr_retries - 1:
                     if reraise:
                         raise

@@ -71,7 +71,7 @@ class Zone:
             dx, dy = direction
             if inside_zone and self.inside(x + dx, y + dy):
                 yield x + dx, y + dy
-            else:
+            elif not inside_zone:
                 yield x + dx, y + dy
 
     def loadFromFile(self, file_path):
@@ -90,7 +90,7 @@ class Zone:
 
     def saveTo(self, file_path):
         with open(file_path, 'w') as f:
-            json.dumps(self.to_dict(), indent=4)
+            json.dump(self.to_dict(), f)
 
     def to_dict(self):
         return {"name": self.name,

@@ -8,11 +8,3 @@ from core import dofus
 from core import env
 
 
-class A:
-
-    def __getitem__(self, v):
-        x, y = v
-        print(v)
-        return 1
-
-A()[1, 2]

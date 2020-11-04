@@ -21,12 +21,12 @@ class Farmer(threading.Thread):
         self.curr_pods = min_pods
 
     def changeMap(self, tgt):
-        log.info('changing map...')
+        log.debug('changing map...')
         while not self.stopSignal.is_set():
             with lock:
                 tgt.click()
             if waitVanish(env.MINIMAP_R):
-                log.info("map changed")
+                log.debug("map changed")
                 break
 
     def collectResource(self):
@@ -52,11 +52,11 @@ class Farmer(threading.Thread):
             while not self.stopSignal.is_set() and self.curr_step < path_length:
 
                 if self.fighter_thread.combatDetected.waitAppear(0.5):
-                    log.info('waiting for fighter to end...')
+                    log.debug('waiting for fighter to end...')
                     self.fighter_thread.combatEnded.waitAppear()
                     self.curr_step -= 1
 
-                log.info('step number ' + str(self.curr_step) + ' ...')
+                log.debug('step number ' + str(self.curr_step) + ' ...')
                 rtype, rregion = self.farm_path[self.curr_step]
                 self.curr_step += 1
 
@@ -73,10 +73,10 @@ class Farmer(threading.Thread):
                 with lock:
                     useRappelPotion()
                 sleep(2)
-                log.info('cycle number' + str(cycle) + 'ended')
+                log.debug('cycle number' + str(cycle) + 'ended')
 
         self.fighter_thread.interrupt()
-        log.info('farmer stopped')
+        log.debug('farmer stopped')
 
     def interrupt(self):
         self.fighter_thread.interrupt()

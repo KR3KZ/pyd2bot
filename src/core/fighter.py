@@ -10,6 +10,8 @@ import atexit
 from core.observer import Observer
 from core.utils import retry
 
+pyautogui.FAILSAFE = False
+
 
 class Fighter(threading.Thread):
     def __init__(self, spell, parent=None):
@@ -33,10 +35,10 @@ class Fighter(threading.Thread):
 
     def run(self):
         try:
-            log.info('Fighter running')
+            log.debug('Fighter running')
             while not self.killsig.wait(1):
                 dofus.READY_R.waitAny([dofus.READY_BUTTON_P, dofus.SKIP_TURN_BUTTON_P])
-                log.info("Combat started")
+                log.debug("Combat started")
                 if self.killsig.is_set():
                     return
                 self.combatDetected.set()
@@ -57,23 +59,23 @@ class Fighter(threading.Thread):
                     self.combatEnded.set()
                     self.combatDetected.clear()
                     self.nbr_fights += 1
-                    log.info('Combat ended')
+                    log.debug('Combat ended')
         except Exception as e:
             log.error(e, exc_info=True)
             if self.parent:
                 self.parent.interrupt()
             else:
                 self.interrupt()
-        log.info('Goodbye cruel world.')
+        log.debug('Goodbye cruel world.')
 
     def waitTurn(self):
         while not self.killsig.wait(0.25) and not self.combatEnded.wait(0.25):
             if dofus.MY_TURN_CHECK_L.getpixel() == dofus.MY_TURN_C:
-                log.info('Bot turn started')
+                log.debug('Bot turn started')
                 break
 
     def onCombatEnded(self):
-        log.info("Fight ended detected")
+        log.debug("Fight ended detected")
         dofus.END_COMBAT_CLOSE_L.click()
         dofus.COMBAT_ENDED_POPUP_R.waitVanish(dofus.COMBAT_ENDED_POPUP_P)
         self.combatEndedDetected.set()
@@ -116,7 +118,7 @@ class Fighter(threading.Thread):
             except (ParseCellFailed, TimeoutError, FindPathFailed) as e:
                 if self.combatEndedDetected.is_set():
                     return
-                log.info("fatal error in main loop", exec_info=True)
+                log.debug("fatal error in main loop", exec_info=True)
                 turns_skipped_on_error += 1
                 if turns_skipped_on_error == 10:
                     self.died = True

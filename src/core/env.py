@@ -20,6 +20,7 @@ keycodes = {
 }
 
 
+
 def focusDofusWindow():
     DOFUS_HWND = pywinauto.findwindows.find_windows(title_re=".*Dofus.*")[0]
     win32gui.SetForegroundWindow(DOFUS_HWND)
@@ -39,7 +40,7 @@ def capture(region):
         try:
             return _capture(region)
         except win32ui.error:
-            # log.info("Enable to capture screen!")
+            # log.debug("Enable to capture screen!")
             if k == 19:
                 raise
             win32gui.ReleaseDC(DOFUS_HWND, last_dc)

@@ -1,4 +1,5 @@
 import atexit
+import logging
 import os
 import re
 import threading
@@ -15,6 +16,9 @@ from core import env, dofus
 from core.zone import Zone
 
 work_dir = os.path.dirname(os.path.abspath(__file__))
+save_dir = os.path.join(work_dir, 'save')
+graph_file = os.path.join(save_dir, 'graph.json')
+cache_dir = os.path.join(save_dir, 'cache')
 
 
 class FightsFarmer(threading.Thread):
@@ -28,40 +32,46 @@ class FightsFarmer(threading.Thread):
         self.botRightMap = bot_right
         self.topLeftMap = top_left
         self.harvestZone = Zone(top_left, bot_right)
-        print(self.harvestZone.to_dict())
         self.currMap = None
+        self.cache = {}
 
     def run(self):
         self.fighter_thread.start()
+        if os.path.exists(graph_file):
+            self.harvestZone.loadFromFile(graph_file)
         try:
             while not self.killsig.is_set():
                 currCoords = self.currMapCoords()
-                log.info(f"Current map {currCoords}")
+                log.debug(f"Current map {currCoords}")
                 if not self.harvestZone.inside(*currCoords):
                     self.moveToZone()
                 self.harvestCurrMap()
                 self.randomWalk()
         except Exception as e:
-            log.info("Fatal error in main loop!", exc_info=True)
+            log.debug("Fatal error in main loop!", exc_info=True)
             self.interrupt()
-        log.info("Goodbye cruel world!")
+        log.debug("Goodbye cruel world!")
 
     def randomWalk(self):
         while not self.killsig.is_set():
-            log.info(f"Current map {self.currMapCoords()}")
-            print(self.currMap.neighbors)
+            log.debug(f"Current map {self.currMapCoords()}")
+            if not self.currMap.neighbors:
+                self.currMap.neighbors = set(self.harvestZone.neighbors(*self.currMapCoords()))
+                self.currMap.farmable = True
+
             nx, ny = random.choice(list(self.currMap.neighbors))
+
             try:
                 self.moveTo(nx, ny, nbr_retries=3)
                 break
             except ChangeMapFailed as e:
-                log.info(str(e))
+                log.debug(str(e))
                 self.currMap.neighbors.remove((nx, ny))
 
     @retry
-    def moveTo(self, x, y, timeout=20):
+    def moveTo(self, x, y, timeout=10):
         with self.lock:
-            log.info(f"Changing map to {(x, y)}")
+            log.debug(f"Changing map to {(x, y)}")
             currx, curry = self.currMapCoords()
             direction = x - currx, y - curry
             dofus.mapChangeLoc[direction].click()
@@ -83,34 +93,34 @@ class FightsFarmer(threading.Thread):
     @retry
     def harvestCombats(self):
         while not self.killsig.is_set():
-            log.info("Searching for mobs group...")
+            log.debug("Searching for mobs group...")
             tgt = dofus.COMBAT_R.findAny(dofus.mobs, threshold=0.75, shuffle=True)
             if tgt:
-                log.info("I found a mob group")
+                log.debug("I found a mob group")
                 self.enterCombat(tgt)
                 self.fighter_thread.combatEnded.wait()
                 if self.fighter_thread.died:
-                    log.info("Bot died during combat!")
+                    log.debug("Bot died during combat!")
             else:
-                log.info("Didn't find any mobs here")
-                # cv2.imwrite(os.path.join(work_dir, "mapCapture.png"), dofus.COMBAT_R.bi)
+                log.debug("Didn't find any mobs here")
+                # cv2.imwrite(os.path.join(save_dir, "mapCapture.png"), dofus.COMBAT_R.bi)
                 return True
 
     def enterCombat(self, tgt, timeout=5):
         with self.lock:
             tgt.click()
-            log.info("Clicked on mobs group")
+            log.debug("Clicked on mobs group")
         if self.fighter_thread.combatDetected.wait(timeout):
             return True
-        log.info("Couldn't open combat!")
+        log.debug("Couldn't open combat!")
         raise TimeoutError("Enter combat timed out!")
 
     def interrupt(self):
-        log.info(f"I farmed {self.fighter_thread.nbr_fights} fights")
+        log.debug(f"I farmed {self.fighter_thread.nbr_fights} fights")
         self.fighter_thread.interrupt()
         self.killsig.set()
         self.stopRetry.set()
-        file_path = os.path.join(work_dir, "graph.json")
+        file_path = os.path.join(save_dir, "graph.json")
         self.harvestZone.saveTo(file_path)
 
     def currMapCoords(self):
@@ -150,6 +160,7 @@ def tearDown(thread):
 
 
 if __name__ == "__main__":
+    # log.setLevel(logging.DEBUG)
     env.focusDofusWindow()
     top_left = (8, -21)
     bot_right = (12, -15)
