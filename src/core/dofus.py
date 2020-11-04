@@ -7,6 +7,11 @@ from core.region import Region, Location
 
 patterns_dir = r"C:\Users\khalid.majdoub\PycharmProjects\bot2pix\patterns"
 
+
+def loadPattern(name):
+    return cv2.imread(os.path.join(patterns_dir, name))
+
+
 COMBAT_R = Region(335, 29, 1253, 885)
 MINIMAP_R = Region(62, 876, 190, 122)
 PM_R = Region(793, 993, 27, 34)
@@ -20,11 +25,11 @@ CREATURE_MODE_R = Region(1339, 993, 27, 25)
 MAP_COORDS_R = Region(0, 28, 298, 98)
 
 # Patterns
-READY_BUTTON_P = cv2.imread(os.path.join(patterns_dir, "READY_BUTTON_P.png"))
-COMBAT_ENDED_POPUP_P = cv2.imread(os.path.join(patterns_dir, "END_COMBAT_P.png"))
-CREATURE_MODE_OFF_P = cv2.imread(os.path.join(patterns_dir, "CREATURE_MODE_OFF_P.png"))
-SKIP_TURN_BUTTON_P = cv2.imread(os.path.join(patterns_dir, "SKIP_TURN_BUTTON_P.png"))
-SMALL_FISH_P = cv2.imread(os.path.join(patterns_dir, "SMALL_FISH_P.png"))
+READY_BUTTON_P = loadPattern("READY_BUTTON_P.png")
+COMBAT_ENDED_POPUP_P = loadPattern("END_COMBAT_P.png")
+CREATURE_MODE_OFF_P = loadPattern("CREATURE_MODE_OFF_P.png")
+SKIP_TURN_BUTTON_P = loadPattern("SKIP_TURN_BUTTON_P.png")
+SMALL_FISH_P = loadPattern("SMALL_FISH_P.png")
 
 # Env Vars
 HCELLS = 14.5
@@ -35,19 +40,24 @@ LEFT = (-1, 0)
 RIGHT = (1, 0)
 DOWN = (0, 1)
 
+mapChangeLoc = {
+    UP: Location(876, 36),
+    LEFT: Location(358, 477),
+    RIGHT: Location(1562, 559),
+    DOWN: Location(879, 908)
+}
+
 MY_TURN_CHECK_L = Location(1425, 963)
 END_COMBAT_CLOSE_L = Location(1251, 737)
 MY_TURN_C = QColor(0, 240, 206, 255)
 SKIP_TURN_SHORTCUT = 'space'
 RESIGN_BUTTON_LOC = Location(1443, 1006)
-
 RESIGN_POPUP_P = "RESIGN_POPUP_P.png"
-
 RESIGN_CONFIRM_L = Location(879, 567)
 DEFEAT_POPUP_P = "DEFEAT_POPUP_P.png"
 DEFEAT_POPUP_CLOSE_L = Location(1122, 730)
-RESGIN_POPUP_R = Region(698,442,533,173)
-DEFEAT_POPUP_R = Region(762,696,415,141)
+RESGIN_POPUP_R = Region(698, 442, 533, 173)
+DEFEAT_POPUP_R = Region(762, 696, 415, 141)
 # Timers
 CHANGE_MAP_TIMEOUT = 3 * 60
 
@@ -63,9 +73,8 @@ SOURNOISERIE = {
 }
 
 
-
 class ObjColor:
-    BOT = [QColor(61, 56, 150), QColor(251, 241, 191), QColor(33, 34, 88), QColor(227, 218, 173)]
+    BOT = [QColor(61, 56, 150), QColor(251, 241, 191), QColor(33, 34, 88), QColor(227, 218, 173), QColor(34, 51, 153)]
     MOB = [QColor(46, 54, 61), QColor(41, 48, 55)]
     FREE = [QColor(150, 142, 103), QColor(142, 134, 94), QColor(186, 181, 155), QColor(128, 121, 85)]
     OBSTACLE = [QColor(255, 255, 255), QColor(88, 83, 58), QColor(79, 75, 52), QColor(228, 228, 226)]
@@ -123,7 +132,3 @@ def loadMobs():
 
 
 mobs = loadMobs()
-MAP_UP_L = Location(876, 36)
-MAP_LEFT_L = Location(358, 477)
-MAP_RIGHT_L = Location(1562, 559)
-MAP_DOWN_L = Location(879, 908)

@@ -6,11 +6,11 @@ import win32con
 import win32gui
 import win32ui
 from pytesseract import pytesseract
-from core.log import Log
+from core.log import log
 
 pytesseract.tesseract_cmd = r'C:\Users\khalid.majdoub\AppData\Local\Tesseract-OCR\tesseract.exe'
 
-IDE_HWND = pywinauto.findwindows.find_windows(title_re="bot2pix.*")[0]
+IDE_HWND = None
 DOFUS_HWND = None
 last_dc = None
 
@@ -28,6 +28,7 @@ def focusDofusWindow():
 
 
 def focusIDEWindow():
+    IDE_HWND = pywinauto.findwindows.find_windows(title_re="bot2pix.*")[0]
     win32gui.SetForegroundWindow(IDE_HWND)
     win32gui.SetActiveWindow(IDE_HWND)
     win32gui.ShowWindow(IDE_HWND, win32con.SW_MAXIMIZE)
@@ -38,7 +39,7 @@ def capture(region):
         try:
             return _capture(region)
         except win32ui.error:
-            log.info("Enable to capture screen!")
+            # log.info("Enable to capture screen!")
             if k == 19:
                 raise
             win32gui.ReleaseDC(DOFUS_HWND, last_dc)

@@ -7,17 +7,12 @@ import re
 from core import dofus
 from core import env
 
-pytesseract.pytesseract.tesseract_cmd = (r'C:\Users\khalid.majdoub\AppData\Local\Tesseract-OCR\tesseract.exe')
-curr_dir = os.path.dirname(os.path.abspath(__file__))
 
+class A:
 
+    def __getitem__(self, v):
+        x, y = v
+        print(v)
+        return 1
 
-
-
-
-
-
-env.focusDofusWindow()
-sleep(0.5)
-
-
+A()[1, 2]

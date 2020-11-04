@@ -11,4 +11,14 @@ class FindPathFailed(Exception):
 
 
 class ChangeMapFailed(Exception):
+    def __init__(self, msg, coords):
+        super(ChangeMapFailed, self).__init__(msg)
+        self.coords = coords
+
+
+class BotDied(Exception):
+    pass
+
+
+class ParseMapCoordsFailed(Exception):
     pass

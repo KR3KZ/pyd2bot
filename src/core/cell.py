@@ -7,13 +7,6 @@ from core.exceptions import ParseCellFailed
 from core.region import Region
 from core.utils import iterParallelogram
 from gui.Overlay import CellOverlay
-from core.log import Log
-
-
-
-
-
-log = Log()
 
 
 class Cell:

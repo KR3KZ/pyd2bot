@@ -2,10 +2,8 @@ import cv2
 import numpy as np
 import pyautogui
 from numpy.ma import sqrt
-from core.log import Log
+from core.log import log
 from core.exceptions import ParseCellFailed, ParseGridFailed
-
-log = Log()
 
 
 def capture(rect):
@@ -53,7 +51,7 @@ def retry(fn):
                 result = fn(self, *args, **kwargs)
                 break
             except (ParseCellFailed, TimeoutError, ParseGridFailed) as e:
-                log.info(str(e))
+                # log.info(str(e))
                 if counter == nbr_retries - 1:
                     if reraise:
                         raise

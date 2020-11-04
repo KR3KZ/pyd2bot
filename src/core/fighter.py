@@ -5,12 +5,10 @@ import pyautogui
 from core import dofus
 from core.exceptions import FindPathFailed, ParseCellFailed
 from core.grid import Grid
-from core.log import Log
+from core.log import log
 import atexit
 from core.observer import Observer
 from core.utils import retry
-
-log = Log()
 
 
 class Fighter(threading.Thread):
@@ -118,7 +116,7 @@ class Fighter(threading.Thread):
             except (ParseCellFailed, TimeoutError, FindPathFailed) as e:
                 if self.combatEndedDetected.is_set():
                     return
-                log.info(str(e))
+                log.info("fatal error in main loop", exec_info=True)
                 turns_skipped_on_error += 1
                 if turns_skipped_on_error == 10:
                     self.died = True
@@ -192,6 +190,7 @@ class Fighter(threading.Thread):
         dofus.DEFEAT_POPUP_R.waitAppear(dofus.DEFEAT_POPUP_P)
         dofus.DEFEAT_POPUP_CLOSE_L.click()
         dofus.DEFEAT_POPUP_R.waitVanish(dofus.DEFEAT_POPUP_P)
+
 
 def tearDown(fighter):
     fighter.interrupt()
