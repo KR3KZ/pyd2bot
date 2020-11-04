@@ -17,6 +17,7 @@ COMBAT_ENDED_POPUP_CLOSE_R = Region(1231, 721, 22, 18)
 MY_TURN_CHECK_R = Region(841, 1009, 17, 8)
 OUT_OF_COMBAT_R = Region(104, 749, 37, 37)
 CREATURE_MODE_R = Region(1339, 993, 27, 25)
+MAP_COORDS_R = Region(0, 28, 298, 98)
 
 # Patterns
 READY_BUTTON_P = cv2.imread(os.path.join(patterns_dir, "READY_BUTTON_P.png"))
@@ -28,10 +29,11 @@ SMALL_FISH_P = cv2.imread(os.path.join(patterns_dir, "SMALL_FISH_P.png"))
 # Env Vars
 HCELLS = 14.5
 VCELLS = 20.5
-DU = (-1, -1)
-DL = (-1, 1)
-DD = (1, 1)
-DR = (1, -1)
+
+UP = (0, -1)
+LEFT = (-1, 0)
+RIGHT = (1, 0)
+DOWN = (0, 1)
 
 MY_TURN_CHECK_L = Location(1425, 963)
 END_COMBAT_CLOSE_L = Location(1251, 737)

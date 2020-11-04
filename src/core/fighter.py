@@ -3,11 +3,11 @@ import threading
 from time import sleep, perf_counter
 import pyautogui
 from core import dofus
+from core.exceptions import FindPathFailed, ParseCellFailed
 from core.grid import Grid
 from core.log import Log
 import atexit
 from core.observer import Observer
-from core.cell import ParseCellFailed, FindPathFailed
 from core.utils import retry
 
 log = Log()
@@ -18,7 +18,7 @@ class Fighter(threading.Thread):
         threading.Thread.__init__(self, name='Fighter')
         self.spell = spell
         self.died = threading.Event()
-        self.stopSignal = threading.Event()
+        self.killsig = threading.Event()
         self.combatDetected = threading.Event()
         self.stopRetry = threading.Event()
         self.combatEnded = threading.Event()
@@ -26,6 +26,7 @@ class Fighter(threading.Thread):
         self.combatEndObs = None
         self.grid = Grid(dofus.COMBAT_R, dofus.VCELLS, dofus.HCELLS)
         self.parent = parent
+        self.died = False
         if parent:
             self.lock = self.parent.lock
         else:
@@ -35,16 +36,17 @@ class Fighter(threading.Thread):
     def run(self):
         try:
             log.info('Fighter running')
-            while not self.stopSignal.wait(1):
+            while not self.killsig.wait(1):
                 dofus.READY_R.waitAny([dofus.READY_BUTTON_P, dofus.SKIP_TURN_BUTTON_P])
                 log.info("Combat started")
-                if self.stopSignal.is_set():
+                if self.killsig.is_set():
                     return
                 self.combatDetected.set()
                 self.combatEndedDetected.clear()
                 self.combatEnded.clear()
                 self.stopRetry.clear()
                 with self.lock:
+                    self.died = False
                     pyautogui.press(dofus.SKIP_TURN_SHORTCUT)
                     dofus.OUT_OF_COMBAT_R.hover()
                     self.checkCreatureMode()
@@ -67,7 +69,7 @@ class Fighter(threading.Thread):
         log.info('Goodbye cruel world.')
 
     def waitTurn(self):
-        while not self.stopSignal.wait(0.1) and not self.combatEnded.wait(0.1):
+        while not self.killsig.wait(0.25) and not self.combatEnded.wait(0.25):
             if dofus.MY_TURN_CHECK_L.getpixel() == dofus.MY_TURN_C:
                 log.info('Bot turn started')
                 break
@@ -86,7 +88,7 @@ class Fighter(threading.Thread):
         self.combatEnded.set()
         if self.combatEndObs:
             self.combatEndObs.stop()
-        self.stopSignal.set()
+        self.killsig.set()
 
     def combatAlgo(self):
         turns_skipped_on_error = 0
@@ -119,7 +121,9 @@ class Fighter(threading.Thread):
                 log.info(str(e))
                 turns_skipped_on_error += 1
                 if turns_skipped_on_error == 10:
+                    self.died = True
                     self.resign()
+                    return
             except KeyboardInterrupt:
                 self.interrupt()
                 return
@@ -184,8 +188,10 @@ class Fighter(threading.Thread):
         dofus.RESIGN_BUTTON_LOC.click()
         dofus.RESGIN_POPUP_R.waitAppear(dofus.RESIGN_POPUP_P)
         dofus.RESIGN_CONFIRM_L.click()
+        dofus.RESGIN_POPUP_R.waitVanish(dofus.RESIGN_POPUP_P)
         dofus.DEFEAT_POPUP_R.waitAppear(dofus.DEFEAT_POPUP_P)
         dofus.DEFEAT_POPUP_CLOSE_L.click()
+        dofus.DEFEAT_POPUP_R.waitVanish(dofus.DEFEAT_POPUP_P)
 
 def tearDown(fighter):
     fighter.interrupt()

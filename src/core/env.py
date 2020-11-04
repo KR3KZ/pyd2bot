@@ -1,13 +1,16 @@
 from time import sleep
-
 import numpy as np
 import pywinauto
 import win32api
 import win32con
 import win32gui
 import win32ui
+from pytesseract import pytesseract
+from core.log import Log
 
-# IDE_HWND = pywinauto.findwindows.find_windows(title_re="bot2pix.*")[0]
+pytesseract.tesseract_cmd = r'C:\Users\khalid.majdoub\AppData\Local\Tesseract-OCR\tesseract.exe'
+
+IDE_HWND = pywinauto.findwindows.find_windows(title_re="bot2pix.*")[0]
 DOFUS_HWND = None
 last_dc = None
 
@@ -15,6 +18,7 @@ keycodes = {
     "z": 0x5A,
     "space": win32con.VK_SPACE
 }
+
 
 def focusDofusWindow():
     DOFUS_HWND = pywinauto.findwindows.find_windows(title_re=".*Dofus.*")[0]
@@ -30,10 +34,13 @@ def focusIDEWindow():
 
 
 def capture(region):
-    for k in range(10):
+    for k in range(20):
         try:
             return _capture(region)
         except win32ui.error:
+            log.info("Enable to capture screen!")
+            if k == 19:
+                raise
             win32gui.ReleaseDC(DOFUS_HWND, last_dc)
     return _capture(region)
 

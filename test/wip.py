@@ -1,11 +1,23 @@
-import pywinauto as pywinauto
-import win32con
-import win32gui
-import yaml
-from core.log import Log
+import os
+from time import sleep, perf_counter
+import cv2
+import numpy as np
+import pytesseract
+import re
+from core import dofus
+from core import env
 
-log = Log()
-try:
-    1/0
-except Exception as e:
-    log.info(exc_info=True)
+pytesseract.pytesseract.tesseract_cmd = (r'C:\Users\khalid.majdoub\AppData\Local\Tesseract-OCR\tesseract.exe')
+curr_dir = os.path.dirname(os.path.abspath(__file__))
+
+
+
+
+
+
+
+
+env.focusDofusWindow()
+sleep(0.5)
+
+

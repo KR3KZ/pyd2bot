@@ -8,3 +8,7 @@ class ParseGridFailed(Exception):
 
 class FindPathFailed(Exception):
     pass
+
+
+class ChangeMapFailed(Exception):
+    pass
