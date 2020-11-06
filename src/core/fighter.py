@@ -5,10 +5,11 @@ import pyautogui
 from core import dofus
 from core.exceptions import FindPathFailed, ParseCellFailed
 from core.grid import Grid
-from core.log import log
+import logging
 import atexit
 from core.observer import Observer
 from core.utils import retry
+
 
 pyautogui.FAILSAFE = False
 
@@ -27,6 +28,7 @@ class Fighter(threading.Thread):
         self.grid = Grid(dofus.COMBAT_R, dofus.VCELLS, dofus.HCELLS)
         self.parent = parent
         self.died = False
+        self.mobs_killed = 0
         if parent:
             self.lock = self.parent.lock
         else:
@@ -35,10 +37,10 @@ class Fighter(threading.Thread):
 
     def run(self):
         try:
-            log.debug('Fighter running')
+            logging.debug('Fighter running')
             while not self.killsig.wait(1):
                 dofus.READY_R.waitAny([dofus.READY_BUTTON_P, dofus.SKIP_TURN_BUTTON_P])
-                log.debug("Combat started")
+                logging.debug("Combat started")
                 if self.killsig.is_set():
                     return
                 self.combatDetected.set()
@@ -59,28 +61,30 @@ class Fighter(threading.Thread):
                     self.combatEnded.set()
                     self.combatDetected.clear()
                     self.nbr_fights += 1
-                    log.debug('Combat ended')
+                    logging.debug('Combat ended')
         except Exception as e:
-            log.error(e, exc_info=True)
+            logging.error(e, exc_info=True)
             if self.parent:
                 self.parent.interrupt()
             else:
                 self.interrupt()
-        log.debug('Goodbye cruel world.')
+        logging.debug(f"I farmed {self.nbr_fights} fights")
+        logging.debug('Goodbye cruel world.')
 
     def waitTurn(self):
-        while not self.killsig.wait(0.25) and not self.combatEnded.wait(0.25):
+        while not self.killsig.wait(0.25) and \
+                not self.combatEnded.wait(0.25):
             if dofus.MY_TURN_CHECK_L.getpixel() == dofus.MY_TURN_C:
-                log.debug('Bot turn started')
+                logging.debug('Bot turn started')
                 break
 
     def onCombatEnded(self):
-        log.debug("Fight ended detected")
-        dofus.END_COMBAT_CLOSE_L.click()
-        dofus.COMBAT_ENDED_POPUP_R.waitVanish(dofus.COMBAT_ENDED_POPUP_P)
+        logging.debug("Fight ended detected")
         self.combatEndedDetected.set()
         self.stopRetry.set()
         self.combatEndObs.stop()
+        dofus.END_COMBAT_CLOSE_L.click()
+        dofus.COMBAT_ENDED_POPUP_R.waitVanish(dofus.COMBAT_ENDED_POPUP_P)
 
     def interrupt(self):
         self.stopRetry.set()
@@ -92,33 +96,42 @@ class Fighter(threading.Thread):
 
     def combatAlgo(self):
         turns_skipped_on_error = 0
+        self.mobs_killed = 0
         while not self.combatEndedDetected.wait(1):
             self.waitTurn()
             usedSpells = 0
             try:
-                while not self.combatEndedDetected.is_set() and usedSpells < self.spell['nbr']:
+                while not self.combatEndedDetected.wait(0.2) and usedSpells < self.spell['nbr']:
                     self.parseGrid(nbr_retries=200)
+                    logging.debug("combat grid parsed successfully")
+                    logging.debug(f"fighting {len(self.grid.mobs)} mobs")
+                    if not self.mobs_killed:
+                        self.mobs_killed = len(self.grid.mobs)
                     if self.combatEndedDetected.is_set():
                         return
                     try:
-                        mob, path = self.findPathToTarget(self.spell['range'], self.grid.mobs)
+                        logging.debug("searching path to mobs")
+                        mob, path = self.findPathToTarget(self.grid.bot, self.spell['range'], self.grid.mobs)
                     except FindPathFailed:
-                        mob, path = self.findPathToTarget(self.spell['range'], self.grid.invoke)
+                        mob, path = self.findPathToTarget(self.grid.bot, self.spell['range'], self.grid.invoke)
                     if path:
+                        logging.debug("path found")
                         tgt = self.getTarget(path)
                         if tgt:
+                            logging.debug("moving towards target")
                             self.moveTo(tgt)
                         if tgt == path[-1]:
-                            self.useSpell(mob)
+                            logging.debug("can hit target")
+                            self.useSpell(self.spell, mob)
                         else:
                             break
                     else:
-                        self.useSpell(mob)
+                        self.useSpell(self.spell, mob)
                     usedSpells += 1
             except (ParseCellFailed, TimeoutError, FindPathFailed) as e:
                 if self.combatEndedDetected.is_set():
                     return
-                log.debug("fatal error in main loop", exec_info=True)
+                logging.info(str(e))
                 turns_skipped_on_error += 1
                 if turns_skipped_on_error == 10:
                     self.died = True
@@ -128,7 +141,6 @@ class Fighter(threading.Thread):
                 self.interrupt()
                 return
             pyautogui.press(dofus.SKIP_TURN_SHORTCUT)
-            sleep(1)
 
     @retry
     def parseGrid(self):
@@ -136,7 +148,8 @@ class Fighter(threading.Thread):
         if not self.grid.bot or not self.grid.mobs:
             raise ParseCellFailed("Enable to find bot or mobs pos!")
 
-    def getTarget(self, path):
+    @staticmethod
+    def getTarget(path):
         if path[-1].reachable():
             return path[-1]
         for idx, cell in enumerate(path):
@@ -158,16 +171,16 @@ class Fighter(threading.Thread):
         raise TimeoutError
 
     @retry
-    def useSpell(self, target, timeout=3):
-        pyautogui.press(self.spell['shortcut'])
+    def useSpell(self, spell, target):
+        pyautogui.press(spell['shortcut'])
         target.click()
         dofus.OUT_OF_COMBAT_R.hover()
         sleep(0.7)
 
-    def findPathToTarget(self, po, targets):
-        queue = collections.deque([[self.grid.bot]])
-        seen = {(self.grid.bot.i, self.grid.bot.j)}
-        while queue:
+    def findPathToTarget(self, start_cell, po, targets):
+        queue = collections.deque([[start_cell]])
+        seen = {start_cell.indexes()}
+        while queue and not self.combatEndedDetected.is_set():
             path = queue.popleft()
             curr = path[-1]
             for mob in targets:
@@ -176,19 +189,21 @@ class Fighter(threading.Thread):
             for cell in curr.neighbors():
                 if (cell.i, cell.j) not in seen and not cell.occupied():
                     queue.append(path + [cell])
-                    seen.add((cell.i, cell.j))
+                    seen.add(cell.indexes())
         raise FindPathFailed("Enable to find a valid path!")
 
-    def checkCreatureMode(self):
+    @staticmethod
+    def checkCreatureMode():
         if dofus.CREATURE_MODE_R.find(dofus.CREATURE_MODE_OFF_P, grayscale=False):
             dofus.CREATURE_MODE_R.click()
             dofus.OUT_OF_COMBAT_R.hover()
 
-    def resign(self):
+    @staticmethod
+    def resign():
         dofus.RESIGN_BUTTON_LOC.click()
-        dofus.RESGIN_POPUP_R.waitAppear(dofus.RESIGN_POPUP_P)
+        dofus.RESIGN_POPUP_R.waitAppear(dofus.RESIGN_POPUP_P)
         dofus.RESIGN_CONFIRM_L.click()
-        dofus.RESGIN_POPUP_R.waitVanish(dofus.RESIGN_POPUP_P)
+        dofus.RESIGN_POPUP_R.waitVanish(dofus.RESIGN_POPUP_P)
         dofus.DEFEAT_POPUP_R.waitAppear(dofus.DEFEAT_POPUP_P)
         dofus.DEFEAT_POPUP_CLOSE_L.click()
         dofus.DEFEAT_POPUP_R.waitVanish(dofus.DEFEAT_POPUP_P)

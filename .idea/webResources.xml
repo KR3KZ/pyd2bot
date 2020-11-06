@@ -6,6 +6,7 @@
         <entryData>
           <resourceRoots>
             <path value="file://$PROJECT_DIR$/tests.sikuli" />
+            <path value="file://$PROJECT_DIR$/src/patterns" />
           </resourceRoots>
         </entryData>
       </entry>

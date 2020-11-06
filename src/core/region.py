@@ -1,8 +1,7 @@
-import os
 import sys
 import threading
 import random
-from time import perf_counter, sleep
+from time import perf_counter
 import cv2
 import numpy as np
 from PyQt5.QtCore import QPoint, QRect

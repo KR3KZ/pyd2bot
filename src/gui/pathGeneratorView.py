@@ -111,20 +111,20 @@ class PathGeneratorView(QWidget):
         self.setCurrentMap(self.curr_map_idx + 1)
 
     def savePathAs(self):
-        self.path_file = QFileDialog.getSaveFileName()[0]
+        self.path_file = QFileDialogging.getSaveFileName()[0]
         self.savePath()
         self.updatePathFileInfo()
 
     def savePath(self):
         if not self.path_file:
-            self.path_file = QFileDialog.getSaveFileName()[0]
+            self.path_file = QFileDialogging.getSaveFileName()[0]
         if self.path_file:
             self.path_list.saveToFile(self.path_file)
         else:
             QMessageBox.critical(self, "ERROR", "You didn't chose any file.")
 
     def newPath(self):
-        self.path_file = QFileDialog.getSaveFileName()[0]
+        self.path_file = QFileDialogging.getSaveFileName()[0]
         if self.path_file:
             with open("cache", "w") as f:
                 f.write(self.path_file)
@@ -136,7 +136,7 @@ class PathGeneratorView(QWidget):
         self.vLayout.addWidget(self.path_list)
 
     def openPath(self):
-        self.path_file = QFileDialog.getOpenFileName()[0]
+        self.path_file = QFileDialogging.getOpenFileName()[0]
         self.initPath()
         if os.path.exists(self.path_file):
             with open("cache", "w") as f:
@@ -192,7 +192,7 @@ class PathGeneratorView(QWidget):
         return False
 
     def createNewMap(self):
-        map_id, ok_pressed = QInputDialog.getText(self, "Get map coordinates", "map coordinates :", QLineEdit.Normal,
+        map_id, ok_pressed = QInputDialogging.getText(self, "Get map coordinates", "map coordinates :", QLineEdit.Normal,
                                                   "")
         if re.match(COORD_REG, map_id):
             map_id.replace(" ", "")
@@ -203,7 +203,7 @@ class PathGeneratorView(QWidget):
             QMessageBox.critical(self, "ERROR", "valid map ID.")
 
     def askForCurrentMap(self):
-        map_coord, ok_pressed = QInputDialog.getText(self, "Get map coordinates", "map coordinates :", QLineEdit.Normal,
+        map_coord, ok_pressed = QInputDialogging.getText(self, "Get map coordinates", "map coordinates :", QLineEdit.Normal,
                                                      "")
         if re.match(COORD_REG, map_coord):
             map_coord.replace(" ", "").strip('\n')

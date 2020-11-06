@@ -6,7 +6,7 @@ import win32con
 import win32gui
 import win32ui
 from pytesseract import pytesseract
-from core.log import log
+
 
 pytesseract.tesseract_cmd = r'C:\Users\khalid.majdoub\AppData\Local\Tesseract-OCR\tesseract.exe'
 
@@ -18,7 +18,6 @@ keycodes = {
     "z": 0x5A,
     "space": win32con.VK_SPACE
 }
-
 
 
 def focusDofusWindow():
@@ -40,7 +39,7 @@ def capture(region):
         try:
             return _capture(region)
         except win32ui.error:
-            # log.debug("Enable to capture screen!")
+            # logging.debug("Enable to capture screen!")
             if k == 19:
                 raise
             win32gui.ReleaseDC(DOFUS_HWND, last_dc)
@@ -83,6 +82,7 @@ def _capture(region):
     win32gui.ReleaseDC(DOFUS_HWND, last_dc)
     win32gui.DeleteObject(bmp.GetHandle())
     return img
+
 
 if __name__ == "__main__":
     press()

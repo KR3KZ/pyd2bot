@@ -2,16 +2,17 @@ import os
 import cv2
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor
-
 from core.region import Region, Location
 
-patterns_dir = r"C:\Users\khalid.majdoub\PycharmProjects\bot2pix\patterns"
+patterns_dir = r"C:\Users\khalid.majdoub\PycharmProjects\bot2pix\src\patterns"
 
 
 def loadPattern(name):
     return cv2.imread(os.path.join(patterns_dir, name))
 
 
+RESIGN_POPUP_R = Region(698, 442, 533, 173)
+DEFEAT_POPUP_R = Region(762, 696, 415, 141)
 COMBAT_R = Region(335, 29, 1253, 885)
 MINIMAP_R = Region(62, 876, 190, 122)
 PM_R = Region(793, 993, 27, 34)
@@ -23,6 +24,9 @@ MY_TURN_CHECK_R = Region(841, 1009, 17, 8)
 OUT_OF_COMBAT_R = Region(104, 749, 37, 37)
 CREATURE_MODE_R = Region(1339, 993, 27, 25)
 MAP_COORDS_R = Region(0, 28, 298, 98)
+CONNECT_R = Region(666, 88, 572, 531)
+RECONNECT_BUTTON_R = Region(880, 381, 161, 57)
+PLAY_GAME_BUTTON_R = Region(946, 366, 489, 521)
 
 # Patterns
 READY_BUTTON_P = loadPattern("READY_BUTTON_P.png")
@@ -30,6 +34,11 @@ COMBAT_ENDED_POPUP_P = loadPattern("END_COMBAT_P.png")
 CREATURE_MODE_OFF_P = loadPattern("CREATURE_MODE_OFF_P.png")
 SKIP_TURN_BUTTON_P = loadPattern("SKIP_TURN_BUTTON_P.png")
 SMALL_FISH_P = loadPattern("SMALL_FISH_P.png")
+RESIGN_POPUP_P = loadPattern("RESIGN_POPUP_P.png")
+DEFEAT_POPUP_P = loadPattern("DEFEAT_POPUP_P.png")
+DISCONNECTED_BOX_P = loadPattern("DISCONNECTED_BOX_P.png")
+RECONNECT_BUTTON_P = loadPattern("RECONNECT_BUTTON_P.png")
+PLAY_GAME_BUTTON_P = loadPattern("PLAY_GAME_BUTTON_P.png")
 
 # Env Vars
 HCELLS = 14.5
@@ -50,27 +59,14 @@ mapChangeLoc = {
 MY_TURN_CHECK_L = Location(1425, 963)
 END_COMBAT_CLOSE_L = Location(1251, 737)
 MY_TURN_C = QColor(0, 240, 206, 255)
-SKIP_TURN_SHORTCUT = 'space'
 RESIGN_BUTTON_LOC = Location(1443, 1006)
-RESIGN_POPUP_P = "RESIGN_POPUP_P.png"
 RESIGN_CONFIRM_L = Location(879, 567)
-DEFEAT_POPUP_P = "DEFEAT_POPUP_P.png"
 DEFEAT_POPUP_CLOSE_L = Location(1122, 730)
-RESGIN_POPUP_R = Region(698, 442, 533, 173)
-DEFEAT_POPUP_R = Region(762, 696, 415, 141)
-# Timers
-CHANGE_MAP_TIMEOUT = 3 * 60
+CLOSE_DISCONNECTED_BOX_L = Region(866, 549, 205, 42)
 
 # Shortcuts
 RAPPEL_POTION_SHORTCUT = "e"
-
-# Spells
-SOURNOISERIE = {
-    "shortcut": "z",
-    "range": 6,
-    "nbr": 3,
-    "nbr-on-same": 2
-}
+SKIP_TURN_SHORTCUT = 'space'
 
 
 class ObjColor:
@@ -122,13 +118,4 @@ def findObject(color):
     return result
 
 
-def loadMobs():
-    res = []
-    directory = os.path.join(patterns_dir, "monsters")
-    for filename in os.listdir(directory):
-        if filename.endswith(".png"):
-            res.append(cv2.imread(os.path.join(directory, filename)))
-    return res
 
-
-mobs = loadMobs()

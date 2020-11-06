@@ -1,16 +1,8 @@
+import os
 import cv2
-import numpy as np
-import pyautogui
 from numpy.ma import sqrt
-from core.log import log
 from core.exceptions import ParseCellFailed, ParseGridFailed
-
-
-def capture(rect):
-    img = pyautogui.screenshot(region=rect.getRect())
-    opencvImage = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
-    return opencvImage
-
+import logging
 
 def isAdjacent(matches, r):
     for m in matches:
@@ -51,10 +43,24 @@ def retry(fn):
                 result = fn(self, *args, **kwargs)
                 break
             except (ParseCellFailed, TimeoutError, ParseGridFailed) as e:
-                # log.debug(str(e))
+                # logging.debug(str(e))
                 if counter == nbr_retries - 1:
                     if reraise:
                         raise
         return result
 
     return wrapped
+
+
+def dhash(image, hashSize=8):
+    resized = cv2.resize(image, (hashSize + 1, hashSize))
+    diff = resized[:, 1:] > resized[:, :-1]
+    return sum([2 ** i for (i, v) in enumerate(diff.flatten()) if v])
+
+
+def loadPatternsFromDir(patterns_dir, pattern_ext=".png"):
+    res = []
+    for filename in os.listdir(patterns_dir):
+        if filename.endswith(pattern_ext):
+            res.append(cv2.imread(os.path.join(patterns_dir, filename)))
+    return res
