@@ -1,6 +1,12 @@
+import os
+import uuid
+
+import cv2
 from PyQt5 import QtWidgets, QtCore, QtGui
-from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtCore import pyqtSignal, QRect
 from PyQt5.QtWidgets import QMainWindow, QComboBox
+
+from core.region import Region
 
 
 class QSnip(QMainWindow):
@@ -8,7 +14,7 @@ class QSnip(QMainWindow):
     snippetTaken = pyqtSignal(list)
     captureModeExited = pyqtSignal()
 
-    def __init__(self, parent, snip_types):
+    def __init__(self, parent, patterns_dir):
         super(QSnip, self).__init__()
         self.parent = parent
         self.begin = QtCore.QPoint()
@@ -21,7 +27,7 @@ class QSnip(QMainWindow):
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         self.show()
         self.capturing = False
-        self.snip_types = snip_types
+        self.patterns_dir = patterns_dir
 
     def paintEvent(self, event):
         brush_color = (255, 128, 255, 128)
@@ -32,9 +38,6 @@ class QSnip(QMainWindow):
         qp = QtGui.QPainter(self)
         qp.setPen(QtGui.QPen(QtGui.QColor(color), thickness, QtCore.Qt.DotLine))
         qp.setBrush(QtGui.QColor(*brush_color))
-        for entry in self.parent.path_list.getMapList(self.parent.curr_map_idx):
-            rec = map(int, entry[1:])
-            qp.drawRect(QtCore.QRect(*rec))
         qp.drawRect(QtCore.QRect(self.begin, self.end))
 
     def keyPressEvent(self, event):
@@ -55,16 +58,11 @@ class QSnip(QMainWindow):
             self.end = event.pos()
             self.update()
 
-    def madeChoice(self, capture_type):
-        rec = QtCore.QRect(self.begin, self.end)
-        capture = [capture_type, rec.x(), rec.y(), rec.width(), rec.height()]
-        self.snippetTaken.emit(capture)
-
     def mouseReleaseEvent(self, event):
         self.capturing = False
-        combo_box = QComboBox(self)
-        for st in self.snip_types:
-            combo_box.addItem(st)
-        combo_box.move(self.end.x(), self.end.y())
-        combo_box.activated[str].connect(self.madeChoice)
-        combo_box.showPopup()
+        r = Region(*QRect(self.begin, self.end).getRect())
+        bi = r.capture()
+        image_file = os.path.join(self.patterns_dir, str(uuid.uuid4().hex))
+        cv2.imwrite(image_file, bi)
+
+

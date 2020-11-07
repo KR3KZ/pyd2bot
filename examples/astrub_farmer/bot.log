@@ -18952,3 +18952,481 @@ win32ui.error: BitBlt failed
 2020-11-06:16:53:09,408 DEBUG    [fighter.py:121] moving towards target
 2020-11-06:16:53:09,770 DEBUG    [fighter.py:124] can hit target
 2020-11-06:16:53:12,457 DEBUG    [fighter.py:82] Fight ended detected
+2020-11-06:18:35:03,8 DEBUG    [fighter.py:40] Fighter running
+2020-11-06:18:35:04,525 INFO     [bot.py:99] Current map coords: (5, -18)
+2020-11-06:18:35:04,526 DEBUG    [bot.py:101] Changing map to destination (6, -18)
+2020-11-06:18:35:10,891 INFO     [bot.py:109] Change map took 6.340904399999999
+2020-11-06:18:35:11,577 INFO     [bot.py:99] Current map coords: (6, -18)
+2020-11-06:18:35:11,577 DEBUG    [bot.py:101] Changing map to destination (7, -18)
+2020-11-06:18:35:19,128 INFO     [bot.py:99] Current map coords: (6, -18)
+2020-11-06:18:35:19,128 DEBUG    [bot.py:101] Changing map to destination (7, -18)
+2020-11-06:18:35:19,976 INFO     [bot.py:109] Change map took 0.828634000000001
+2020-11-06:18:35:20,731 INFO     [bot.py:99] Current map coords: (7, -18)
+2020-11-06:18:35:20,731 DEBUG    [bot.py:101] Changing map to destination (8, -18)
+2020-11-06:18:35:26,32 INFO     [bot.py:109] Change map took 5.298971799999997
+2020-11-06:18:35:26,724 DEBUG    [bot.py:36] Searching for mobs group...
+2020-11-06:18:35:26,859 DEBUG    [bot.py:39] I found a mob group
+2020-11-06:18:35:26,860 DEBUG    [bot.py:55] Clicked on mobs group
+2020-11-06:18:35:30,914 DEBUG    [fighter.py:43] Combat started
+2020-11-06:18:35:30,914 INFO     [bot.py:58] Enter combat took: 4.053497
+2020-11-06:18:35:32,583 DEBUG    [fighter.py:78] Bot turn started
+2020-11-06:18:35:33,202 DEBUG    [fighter.py:106] combat grid parsed successfully
+2020-11-06:18:35:33,202 DEBUG    [fighter.py:107] fighting 8 mobs
+2020-11-06:18:35:33,202 DEBUG    [fighter.py:113] searching path to mobs
+2020-11-06:18:35:35,182 DEBUG    [fighter.py:106] combat grid parsed successfully
+2020-11-06:18:35:35,182 DEBUG    [fighter.py:107] fighting 7 mobs
+2020-11-06:18:35:35,183 DEBUG    [fighter.py:113] searching path to mobs
+2020-11-06:18:35:37,591 DEBUG    [fighter.py:106] combat grid parsed successfully
+2020-11-06:18:35:37,592 DEBUG    [fighter.py:107] fighting 6 mobs
+2020-11-06:18:35:37,592 DEBUG    [fighter.py:113] searching path to mobs
+2020-11-06:18:35:49,995 DEBUG    [fighter.py:78] Bot turn started
+2020-11-06:18:35:50,273 DEBUG    [fighter.py:106] combat grid parsed successfully
+2020-11-06:18:35:50,273 DEBUG    [fighter.py:107] fighting 5 mobs
+2020-11-06:18:35:50,273 DEBUG    [fighter.py:113] searching path to mobs
+2020-11-06:18:35:52,223 DEBUG    [fighter.py:106] combat grid parsed successfully
+2020-11-06:18:35:52,223 DEBUG    [fighter.py:107] fighting 4 mobs
+2020-11-06:18:35:52,223 DEBUG    [fighter.py:113] searching path to mobs
+2020-11-06:18:35:52,631 DEBUG    [fighter.py:118] path found
+2020-11-06:18:35:52,631 DEBUG    [fighter.py:121] moving towards target
+2020-11-06:18:35:53,666 DEBUG    [fighter.py:124] can hit target
+2020-11-06:18:35:55,841 DEBUG    [fighter.py:106] combat grid parsed successfully
+2020-11-06:18:35:55,842 DEBUG    [fighter.py:107] fighting 3 mobs
+2020-11-06:18:35:55,842 DEBUG    [fighter.py:113] searching path to mobs
+2020-11-06:18:35:56,243 DEBUG    [fighter.py:118] path found
+2020-11-06:18:35:56,243 DEBUG    [fighter.py:121] moving towards target
+2020-11-06:18:35:56,769 DEBUG    [fighter.py:124] can hit target
+2020-11-06:18:36:03,91 DEBUG    [fighter.py:78] Bot turn started
+2020-11-06:18:36:03,380 DEBUG    [fighter.py:106] combat grid parsed successfully
+2020-11-06:18:36:03,380 DEBUG    [fighter.py:107] fighting 2 mobs
+2020-11-06:18:36:03,380 DEBUG    [fighter.py:113] searching path to mobs
+2020-11-06:18:36:04,917 DEBUG    [fighter.py:106] combat grid parsed successfully
+2020-11-06:18:36:04,918 DEBUG    [fighter.py:107] fighting 1 mobs
+2020-11-06:18:36:04,918 DEBUG    [fighter.py:113] searching path to mobs
+2020-11-06:18:36:05,335 DEBUG    [fighter.py:118] path found
+2020-11-06:18:36:05,335 DEBUG    [fighter.py:121] moving towards target
+2020-11-06:18:36:07,12 DEBUG    [fighter.py:124] can hit target
+2020-11-06:18:36:10,887 DEBUG    [fighter.py:82] Fight ended detected
+2020-11-06:18:36:10,928 DEBUG    [fighter.py:106] combat grid parsed successfully
+2020-11-06:18:36:10,928 DEBUG    [fighter.py:107] fighting 0 mobs
+2020-11-06:18:36:10,929 DEBUG    [fighter.py:64] Combat ended
+2020-11-06:18:36:10,929 DEBUG    [bot.py:36] Searching for mobs group...
+2020-11-06:18:36:13,605 DEBUG    [bot.py:48] No mobs found
+2020-11-06:18:36:13,605 DEBUG    [bot.py:42] Current map (8, -18)
+2020-11-06:18:36:14,279 INFO     [bot.py:99] Current map coords: (8, -18)
+2020-11-06:18:36:14,279 DEBUG    [bot.py:101] Changing map to destination (9, -18)
+2020-11-06:18:36:18,827 INFO     [bot.py:109] Change map took 4.521981499999995
+2020-11-06:18:36:19,495 DEBUG    [bot.py:36] Searching for mobs group...
+2020-11-06:18:36:19,666 DEBUG    [bot.py:39] I found a mob group
+2020-11-06:18:36:19,667 DEBUG    [bot.py:55] Clicked on mobs group
+2020-11-06:18:36:21,728 DEBUG    [fighter.py:43] Combat started
+2020-11-06:18:36:21,728 INFO     [bot.py:58] Enter combat took: 2.0606031000000087
+2020-11-06:18:36:23,878 DEBUG    [fighter.py:78] Bot turn started
+2020-11-06:18:36:24,176 DEBUG    [fighter.py:106] combat grid parsed successfully
+2020-11-06:18:36:24,177 DEBUG    [fighter.py:107] fighting 4 mobs
+2020-11-06:18:36:24,177 DEBUG    [fighter.py:113] searching path to mobs
+2020-11-06:18:36:26,572 DEBUG    [fighter.py:106] combat grid parsed successfully
+2020-11-06:18:36:26,572 DEBUG    [fighter.py:107] fighting 3 mobs
+2020-11-06:18:36:26,573 DEBUG    [fighter.py:113] searching path to mobs
+2020-11-06:18:36:27,987 DEBUG    [fighter.py:106] combat grid parsed successfully
+2020-11-06:18:36:27,987 DEBUG    [fighter.py:107] fighting 2 mobs
+2020-11-06:18:36:27,987 DEBUG    [fighter.py:113] searching path to mobs
+2020-11-06:18:36:33,255 DEBUG    [fighter.py:78] Bot turn started
+2020-11-06:18:36:33,547 DEBUG    [fighter.py:106] combat grid parsed successfully
+2020-11-06:18:36:33,547 DEBUG    [fighter.py:107] fighting 1 mobs
+2020-11-06:18:36:33,547 DEBUG    [fighter.py:113] searching path to mobs
+2020-11-06:18:36:38,117 DEBUG    [fighter.py:82] Fight ended detected
+2020-11-06:18:36:38,118 DEBUG    [fighter.py:106] combat grid parsed successfully
+2020-11-06:18:36:38,118 DEBUG    [fighter.py:107] fighting 0 mobs
+2020-11-06:18:36:38,119 DEBUG    [fighter.py:64] Combat ended
+2020-11-06:18:36:38,119 DEBUG    [bot.py:36] Searching for mobs group...
+2020-11-06:18:36:40,782 DEBUG    [bot.py:48] No mobs found
+2020-11-06:18:36:40,782 DEBUG    [bot.py:42] Current map (9, -18)
+2020-11-06:18:36:41,519 INFO     [bot.py:99] Current map coords: (9, -18)
+2020-11-06:18:36:41,519 DEBUG    [bot.py:101] Changing map to destination (9, -17)
+2020-11-06:18:36:46,952 INFO     [bot.py:109] Change map took 5.432091899999989
+2020-11-06:18:36:47,600 DEBUG    [bot.py:36] Searching for mobs group...
+2020-11-06:18:36:47,810 DEBUG    [bot.py:39] I found a mob group
+2020-11-06:18:36:47,811 DEBUG    [bot.py:55] Clicked on mobs group
+2020-11-06:18:36:52,812 DEBUG    [bot.py:60] Couldn't open combat!
+2020-11-06:18:36:52,812 DEBUG    [bot.py:36] Searching for mobs group...
+2020-11-06:18:36:53,298 DEBUG    [fighter.py:43] Combat started
+2020-11-06:18:36:54,943 DEBUG    [fighter.py:78] Bot turn started
+2020-11-06:18:36:55,780 DEBUG    [fighter.py:106] combat grid parsed successfully
+2020-11-06:18:36:55,781 DEBUG    [fighter.py:107] fighting 5 mobs
+2020-11-06:18:36:55,781 DEBUG    [fighter.py:113] searching path to mobs
+2020-11-06:18:36:56,259 DEBUG    [fighter.py:118] path found
+2020-11-06:18:36:56,315 DEBUG    [bot.py:48] No mobs found
+2020-11-06:18:36:56,316 DEBUG    [bot.py:42] Current map (9, -17)
+2020-11-06:18:37:16,732 DEBUG    [fighter.py:78] Bot turn started
+2020-11-06:18:37:17,27 DEBUG    [fighter.py:106] combat grid parsed successfully
+2020-11-06:18:37:17,28 DEBUG    [fighter.py:107] fighting 5 mobs
+2020-11-06:18:37:17,28 DEBUG    [fighter.py:113] searching path to mobs
+2020-11-06:18:37:17,439 DEBUG    [fighter.py:118] path found
+2020-11-06:18:37:17,439 DEBUG    [fighter.py:121] moving towards target
+2020-11-06:18:37:18,950 DEBUG    [fighter.py:124] can hit target
+2020-11-06:18:37:21,6 DEBUG    [fighter.py:106] combat grid parsed successfully
+2020-11-06:18:37:21,7 DEBUG    [fighter.py:107] fighting 4 mobs
+2020-11-06:18:37:21,7 DEBUG    [fighter.py:113] searching path to mobs
+2020-11-06:18:37:21,394 DEBUG    [fighter.py:118] path found
+2020-11-06:18:37:21,394 DEBUG    [fighter.py:121] moving towards target
+2020-11-06:18:37:21,952 DEBUG    [fighter.py:124] can hit target
+2020-11-06:18:37:23,893 DEBUG    [fighter.py:106] combat grid parsed successfully
+2020-11-06:18:37:23,893 DEBUG    [fighter.py:107] fighting 3 mobs
+2020-11-06:18:37:23,893 DEBUG    [fighter.py:113] searching path to mobs
+2020-11-06:18:37:29,511 DEBUG    [fighter.py:78] Bot turn started
+2020-11-06:18:37:29,790 DEBUG    [fighter.py:106] combat grid parsed successfully
+2020-11-06:18:37:29,790 DEBUG    [fighter.py:107] fighting 2 mobs
+2020-11-06:18:37:29,790 DEBUG    [fighter.py:113] searching path to mobs
+2020-11-06:18:37:32,40 DEBUG    [fighter.py:106] combat grid parsed successfully
+2020-11-06:18:37:32,40 DEBUG    [fighter.py:107] fighting 1 mobs
+2020-11-06:18:37:32,41 DEBUG    [fighter.py:113] searching path to mobs
+2020-11-06:18:37:32,404 DEBUG    [fighter.py:118] path found
+2020-11-06:18:37:32,404 DEBUG    [fighter.py:121] moving towards target
+2020-11-06:18:37:34,167 DEBUG    [fighter.py:124] can hit target
+2020-11-06:18:37:37,826 DEBUG    [fighter.py:82] Fight ended detected
+2020-11-06:18:37:37,827 DEBUG    [fighter.py:106] combat grid parsed successfully
+2020-11-06:18:37:37,827 DEBUG    [fighter.py:107] fighting 0 mobs
+2020-11-06:18:37:37,828 DEBUG    [fighter.py:64] Combat ended
+2020-11-06:18:37:38,663 INFO     [bot.py:99] Current map coords: (9, -17)
+2020-11-06:18:37:38,663 DEBUG    [bot.py:101] Changing map to destination (9, -18)
+2020-11-06:18:37:45,749 INFO     [bot.py:109] Change map took 7.0847756999999945
+2020-11-06:18:37:46,415 DEBUG    [bot.py:36] Searching for mobs group...
+2020-11-06:18:37:47,239 DEBUG    [bot.py:39] I found a mob group
+2020-11-06:18:37:47,240 DEBUG    [bot.py:55] Clicked on mobs group
+2020-11-06:18:37:49,681 DEBUG    [fighter.py:43] Combat started
+2020-11-06:18:37:49,681 INFO     [bot.py:58] Enter combat took: 2.4408018999999967
+2020-11-06:18:37:51,315 DEBUG    [fighter.py:78] Bot turn started
+2020-11-06:18:37:51,593 DEBUG    [fighter.py:106] combat grid parsed successfully
+2020-11-06:18:37:51,593 DEBUG    [fighter.py:107] fighting 2 mobs
+2020-11-06:18:37:51,593 DEBUG    [fighter.py:113] searching path to mobs
+2020-11-06:18:37:53,493 DEBUG    [fighter.py:106] combat grid parsed successfully
+2020-11-06:18:37:53,494 DEBUG    [fighter.py:107] fighting 1 mobs
+2020-11-06:18:37:53,494 DEBUG    [fighter.py:113] searching path to mobs
+2020-11-06:18:37:57,43 DEBUG    [fighter.py:82] Fight ended detected
+2020-11-06:18:37:57,45 DEBUG    [fighter.py:106] combat grid parsed successfully
+2020-11-06:18:37:57,45 DEBUG    [fighter.py:107] fighting 0 mobs
+2020-11-06:18:37:57,45 DEBUG    [fighter.py:64] Combat ended
+2020-11-06:18:37:57,45 DEBUG    [bot.py:36] Searching for mobs group...
+2020-11-06:18:37:59,682 DEBUG    [bot.py:48] No mobs found
+2020-11-06:18:37:59,682 DEBUG    [bot.py:42] Current map (9, -18)
+2020-11-06:18:38:00,359 INFO     [bot.py:99] Current map coords: (9, -18)
+2020-11-06:18:38:00,359 DEBUG    [bot.py:101] Changing map to destination (8, -18)
+2020-11-06:18:38:06,540 INFO     [bot.py:109] Change map took 6.179883600000011
+2020-11-06:18:38:07,193 DEBUG    [bot.py:36] Searching for mobs group...
+2020-11-06:18:38:09,712 DEBUG    [bot.py:48] No mobs found
+2020-11-06:18:38:09,712 DEBUG    [bot.py:42] Current map (8, -18)
+2020-11-06:18:38:10,492 INFO     [bot.py:99] Current map coords: (8, -18)
+2020-11-06:18:38:10,493 DEBUG    [bot.py:101] Changing map to destination (8, -19)
+2020-11-06:18:38:16,876 INFO     [bot.py:109] Change map took 6.3810979000000145
+2020-11-06:18:38:17,565 DEBUG    [bot.py:36] Searching for mobs group...
+2020-11-06:18:38:18,62 DEBUG    [bot.py:39] I found a mob group
+2020-11-06:18:38:18,92 DEBUG    [bot.py:55] Clicked on mobs group
+2020-11-06:18:38:20,997 DEBUG    [fighter.py:43] Combat started
+2020-11-06:18:38:20,997 INFO     [bot.py:58] Enter combat took: 2.904671800000017
+2020-11-06:18:38:23,165 DEBUG    [fighter.py:78] Bot turn started
+2020-11-06:18:38:23,442 DEBUG    [fighter.py:106] combat grid parsed successfully
+2020-11-06:18:38:23,442 DEBUG    [fighter.py:107] fighting 1 mobs
+2020-11-06:18:38:23,442 DEBUG    [fighter.py:113] searching path to mobs
+2020-11-06:18:38:27,590 DEBUG    [fighter.py:82] Fight ended detected
+2020-11-06:18:38:27,625 DEBUG    [fighter.py:106] combat grid parsed successfully
+2020-11-06:18:38:27,625 DEBUG    [fighter.py:107] fighting 0 mobs
+2020-11-06:18:38:27,625 DEBUG    [fighter.py:64] Combat ended
+2020-11-06:18:38:27,625 DEBUG    [bot.py:36] Searching for mobs group...
+2020-11-06:18:38:30,578 DEBUG    [bot.py:48] No mobs found
+2020-11-06:18:38:30,579 DEBUG    [bot.py:42] Current map (8, -19)
+2020-11-06:18:38:31,499 INFO     [bot.py:99] Current map coords: (8, -19)
+2020-11-06:18:38:31,499 DEBUG    [bot.py:101] Changing map to destination (8, -18)
+2020-11-06:18:38:36,297 INFO     [bot.py:109] Change map took 4.796339099999983
+2020-11-06:18:38:36,962 DEBUG    [bot.py:36] Searching for mobs group...
+2020-11-06:18:38:39,500 DEBUG    [bot.py:48] No mobs found
+2020-11-06:18:38:39,500 DEBUG    [bot.py:42] Current map (8, -18)
+2020-11-06:18:38:40,155 INFO     [bot.py:99] Current map coords: (8, -18)
+2020-11-06:18:38:40,155 DEBUG    [bot.py:101] Changing map to destination (8, -17)
+2020-11-06:18:38:47,528 INFO     [bot.py:99] Current map coords: (8, -17)
+2020-11-06:18:38:47,528 DEBUG    [bot.py:101] Changing map to destination (8, -16)
+2020-11-06:18:38:53,987 DEBUG    [bot.py:42] Current map (8, -17)
+2020-11-06:18:38:54,902 INFO     [bot.py:99] Current map coords: (8, -16)
+2020-11-06:18:38:54,903 DEBUG    [bot.py:101] Changing map to destination (8, -17)
+2020-11-06:18:38:54,909 ERROR    [fighter.py:66] BitBlt failed
+Traceback (most recent call last):
+  File "C:\Users\khalid.majdoub\PycharmProjects\bot2pix\src\core\fighter.py", line 42, in run
+    dofus.READY_R.waitAny([dofus.READY_BUTTON_P, dofus.SKIP_TURN_BUTTON_P])
+  File "C:\Users\khalid.majdoub\PycharmProjects\bot2pix\src\core\region.py", line 62, in waitAny
+    result = self.find(pattern, threshold)
+  File "C:\Users\khalid.majdoub\PycharmProjects\bot2pix\src\core\region.py", line 142, in find
+    self.capture()
+  File "C:\Users\khalid.majdoub\PycharmProjects\bot2pix\src\core\region.py", line 113, in capture
+    self.bi = env.capture(self)
+  File "C:\Users\khalid.majdoub\PycharmProjects\bot2pix\src\core\env.py", line 40, in capture
+    return _capture(region)
+  File "C:\Users\khalid.majdoub\PycharmProjects\bot2pix\src\core\env.py", line 75, in _capture
+    cDC.BitBlt((0, 0), (region.width(), region.height()), dcObj, (region.x(), region.y()), win32con.SRCCOPY)
+win32ui.error: BitBlt failed
+2020-11-06:18:38:54,922 INFO     [bot.py:35] farmed 15mobs in 231.9147022seconds
+2020-11-06:18:38:54,922 DEBUG    [bot.py:36] Goodbye cruel world!
+2020-11-06:18:38:54,976 DEBUG    [fighter.py:71] I farmed 5 fights
+2020-11-06:18:38:54,977 DEBUG    [fighter.py:72] Goodbye cruel world.
+2020-11-06:18:40:40,823 INFO     [bot.py:58] Enter combat took: 1.5229036000000002
+2020-11-06:18:41:38,967 INFO     [bot.py:99] Current map coords: (8, -16)
+2020-11-06:18:41:42,448 INFO     [bot.py:109] Change map took 3.4783740000000094
+2020-11-06:18:41:47,124 INFO     [bot.py:58] Enter combat took: 3.834567199999995
+2020-11-06:18:42:09,435 INFO     [bot.py:99] Current map coords: (9, -16)
+2020-11-06:18:42:14,370 INFO     [bot.py:109] Change map took 4.9341115
+2020-11-06:18:42:19,400 INFO     [bot.py:58] Enter combat took: 4.1734565
+2020-11-06:18:42:28,129 INFO     [bot.py:99] Current map coords: (8, -16)
+2020-11-06:18:42:33,541 INFO     [bot.py:109] Change map took 5.411511200000007
+2020-11-06:18:42:36,934 INFO     [bot.py:58] Enter combat took: 2.508851700000008
+2020-11-06:18:42:52,682 INFO     [bot.py:99] Current map coords: (9, -16)
+2020-11-06:18:42:56,730 INFO     [bot.py:109] Change map took 4.0466763000000014
+2020-11-06:18:43:04,82 INFO     [bot.py:58] Enter combat took: 1.3458238000000051
+2020-11-06:18:43:14,693 INFO     [bot.py:58] Enter combat took: 1.0012627000000123
+2020-11-06:18:43:28,314 INFO     [bot.py:99] Current map coords: (9, -17)
+2020-11-06:18:43:34,533 INFO     [bot.py:109] Change map took 6.217294900000013
+2020-11-06:18:43:47,71 INFO     [bot.py:99] Current map coords: (10, -17)
+2020-11-06:18:43:53,206 INFO     [bot.py:109] Change map took 6.135011600000013
+2020-11-06:18:43:56,815 INFO     [bot.py:99] Current map coords: (9, -17)
+2020-11-06:18:44:01,570 INFO     [bot.py:109] Change map took 4.7534400999999775
+2020-11-06:18:44:04,26 INFO     [bot.py:58] Enter combat took: 1.6098791999999946
+2020-11-06:18:44:20,514 INFO     [bot.py:99] Current map coords: (9, -18)
+2020-11-06:18:44:23,878 INFO     [bot.py:109] Change map took 3.3626271999999915
+2020-11-06:18:44:27,650 INFO     [bot.py:58] Enter combat took: 3.0225499000000013
+2020-11-06:18:59:13,102 INFO     [bot.py:58] Enter combat took: 2.2529164999999995
+2020-11-06:18:59:52,376 INFO     [bot.py:99] Current map coords: (8, -18)
+2020-11-06:18:59:55,163 INFO     [bot.py:109] Change map took 2.7858421999999976
+2020-11-06:18:59:56,928 INFO     [bot.py:58] Enter combat took: 1.0568308000000002
+2020-11-06:19:00:33,544 INFO     [bot.py:99] Current map coords: (9, -18)
+2020-11-06:19:00:41,163 INFO     [bot.py:99] Current map coords: (9, -18)
+2020-11-06:19:00:48,598 INFO     [bot.py:99] Current map coords: (9, -18)
+2020-11-06:19:00:54,809 INFO     [bot.py:109] Change map took 6.2108755
+2020-11-06:19:00:56,261 INFO     [bot.py:58] Enter combat took: 0.572148900000002
+2020-11-06:19:01:32,134 INFO     [bot.py:99] Current map coords: (10, -18)
+2020-11-06:19:01:35,461 INFO     [bot.py:109] Change map took 3.325724999999977
+2020-11-06:19:01:40,481 INFO     [bot.py:58] Enter combat took: 4.203703300000001
+2020-11-06:19:01:55,757 INFO     [bot.py:99] Current map coords: (10, -17)
+2020-11-06:19:02:01,167 INFO     [bot.py:109] Change map took 5.410388299999994
+2020-11-06:19:02:02,359 INFO     [bot.py:58] Enter combat took: 0.4948961000000054
+2020-11-06:19:02:09,143 INFO     [bot.py:58] Enter combat took: 1.4032312999999874
+2020-11-06:19:02:29,162 INFO     [bot.py:99] Current map coords: (10, -18)
+2020-11-06:19:02:31,844 INFO     [bot.py:109] Change map took 2.6801102000000014
+2020-11-06:19:02:34,525 INFO     [bot.py:58] Enter combat took: 1.593238499999984
+2020-11-06:19:02:46,273 INFO     [bot.py:99] Current map coords: (9, -18)
+2020-11-06:19:02:49,591 INFO     [bot.py:109] Change map took 3.317703899999998
+2020-11-06:19:02:55,373 INFO     [bot.py:58] Enter combat took: 4.807933100000014
+2020-11-06:19:03:34,2 INFO     [bot.py:99] Current map coords: (9, -17)
+2020-11-06:19:03:36,843 INFO     [bot.py:109] Change map took 2.840662399999985
+2020-11-06:19:03:46,223 INFO     [bot.py:58] Enter combat took: 1.5889042000000018
+2020-11-06:19:04:02,918 INFO     [bot.py:99] Current map coords: (10, -17)
+2020-11-06:19:04:06,973 INFO     [bot.py:109] Change map took 4.052927099999977
+2020-11-06:19:04:10,710 INFO     [bot.py:99] Current map coords: (10, -18)
+2020-11-06:19:04:15,387 INFO     [bot.py:109] Change map took 4.655286900000021
+2020-11-06:19:04:20,914 INFO     [bot.py:58] Enter combat took: 4.531005499999992
+2020-11-06:19:04:40,427 INFO     [bot.py:99] Current map coords: (11, -18)
+2020-11-06:19:04:47,175 INFO     [bot.py:109] Change map took 6.747607300000027
+2020-11-06:19:04:50,443 INFO     [bot.py:58] Enter combat took: 2.261627400000009
+2020-11-06:19:05:15,955 INFO     [bot.py:99] Current map coords: (11, -19)
+2020-11-06:19:05:20,753 INFO     [bot.py:109] Change map took 4.796791299999995
+2020-11-06:19:05:26,74 INFO     [bot.py:58] Enter combat took: 4.468287799999985
+2020-11-06:19:05:40,488 INFO     [bot.py:99] Current map coords: (11, -20)
+2020-11-06:19:05:43,914 INFO     [bot.py:109] Change map took 3.424196400000028
+2020-11-06:19:05:47,962 INFO     [bot.py:58] Enter combat took: 3.332044499999995
+2020-11-06:19:06:01,681 INFO     [bot.py:99] Current map coords: (11, -21)
+2020-11-06:19:06:04,408 INFO     [bot.py:109] Change map took 2.726259700000014
+2020-11-06:19:06:07,949 INFO     [bot.py:99] Current map coords: (10, -21)
+2020-11-06:19:06:13,331 INFO     [bot.py:109] Change map took 5.3801807000000395
+2020-11-06:19:06:22,152 INFO     [bot.py:58] Enter combat took: 2.339610499999992
+2020-11-06:19:06:30,60 INFO     [bot.py:58] Enter combat took: 1.9993665999999735
+2020-11-06:19:06:54,113 INFO     [bot.py:99] Current map coords: (9, -21)
+2020-11-06:19:06:58,176 INFO     [bot.py:109] Change map took 4.061367100000041
+2020-11-06:19:07:01,326 INFO     [bot.py:58] Enter combat took: 2.3227016000000162
+2020-11-06:19:07:35,315 INFO     [bot.py:99] Current map coords: (9, -20)
+2020-11-06:19:07:41,446 INFO     [bot.py:109] Change map took 6.130222899999978
+2020-11-06:19:07:51,141 INFO     [bot.py:58] Enter combat took: 3.363222500000006
+2020-11-06:19:08:22,383 INFO     [bot.py:99] Current map coords: (8, -20)
+2020-11-06:19:08:27,500 INFO     [bot.py:109] Change map took 5.114812299999926
+2020-11-06:19:08:32,676 INFO     [bot.py:58] Enter combat took: 4.406138100000021
+2020-11-06:19:09:32,382 INFO     [bot.py:99] Current map coords: (9, -20)
+2020-11-06:19:09:38,513 INFO     [bot.py:109] Change map took 6.129233799999952
+2020-11-06:19:09:41,284 INFO     [bot.py:58] Enter combat took: 2.0658356999999796
+2020-11-06:19:09:54,766 INFO     [bot.py:99] Current map coords: (9, -19)
+2020-11-06:19:09:58,369 INFO     [bot.py:109] Change map took 3.60039919999997
+2020-11-06:19:10:01,981 INFO     [bot.py:99] Current map coords: (9, -20)
+2020-11-06:19:10:06,49 INFO     [bot.py:109] Change map took 4.066739299999995
+2020-11-06:19:10:09,28 INFO     [bot.py:58] Enter combat took: 2.1916192999999566
+2020-11-06:19:10:46,726 INFO     [bot.py:99] Current map coords: (10, -20)
+2020-11-06:19:10:51,348 INFO     [bot.py:109] Change map took 4.6201348000000735
+2020-11-06:19:10:57,343 INFO     [bot.py:58] Enter combat took: 4.740841599999953
+2020-11-06:19:11:21,486 INFO     [bot.py:99] Current map coords: (11, -20)
+2020-11-06:19:11:24,911 INFO     [bot.py:109] Change map took 3.4239446999999927
+2020-11-06:19:11:29,187 INFO     [bot.py:58] Enter combat took: 3.367328499999985
+2020-11-06:19:11:35,535 INFO     [bot.py:99] Current map coords: (11, -21)
+2020-11-06:19:11:40,228 INFO     [bot.py:109] Change map took 4.691661900000099
+2020-11-06:19:11:44,25 INFO     [bot.py:99] Current map coords: (11, -20)
+2020-11-06:19:11:46,13 INFO     [bot.py:109] Change map took 1.9871372999999721
+2020-11-06:19:11:49,650 INFO     [bot.py:99] Current map coords: (11, -21)
+2020-11-06:19:11:51,702 INFO     [bot.py:109] Change map took 2.051880600000004
+2020-11-06:19:11:54,644 INFO     [bot.py:58] Enter combat took: 1.9065037999999959
+2020-11-06:19:12:00,924 INFO     [bot.py:99] Current map coords: (11, -20)
+2020-11-06:19:12:04,310 INFO     [bot.py:109] Change map took 3.3852421999999933
+2020-11-06:19:12:07,414 INFO     [bot.py:58] Enter combat took: 1.7952460999999857
+2020-11-06:19:12:25,838 INFO     [bot.py:99] Current map coords: (12, -20)
+2020-11-06:19:12:29,226 INFO     [bot.py:109] Change map took 3.3867292999999563
+2020-11-06:19:12:33,290 INFO     [bot.py:58] Enter combat took: 3.2275584999999865
+2020-11-06:19:12:42,195 INFO     [bot.py:99] Current map coords: (12, -19)
+2020-11-06:19:12:46,965 INFO     [bot.py:109] Change map took 4.768604100000061
+2020-11-06:19:12:51,785 INFO     [bot.py:58] Enter combat took: 4.0999524000000065
+2020-11-06:19:13:19,47 INFO     [bot.py:58] Enter combat took: 3.787209800000028
+2020-11-06:19:13:25,558 INFO     [bot.py:99] Current map coords: (12, -20)
+2020-11-06:19:13:28,376 INFO     [bot.py:109] Change map took 2.8169861000000083
+2020-11-06:19:13:31,592 INFO     [bot.py:58] Enter combat took: 2.2307831000000533
+2020-11-06:19:13:48,492 INFO     [bot.py:99] Current map coords: (11, -20)
+2020-11-06:19:13:54,0 INFO     [bot.py:109] Change map took 5.506284600000072
+2020-11-06:19:13:56,540 INFO     [bot.py:58] Enter combat took: 1.6380940000000237
+2020-11-06:19:14:06,816 INFO     [bot.py:99] Current map coords: (10, -20)
+2020-11-06:19:14:11,565 INFO     [bot.py:109] Change map took 4.720156599999996
+2020-11-06:19:14:15,253 INFO     [bot.py:99] Current map coords: (9, -20)
+2020-11-06:19:14:20,79 INFO     [bot.py:109] Change map took 4.824849299999983
+2020-11-06:19:14:23,661 INFO     [bot.py:58] Enter combat took: 1.9856846999999789
+2020-11-06:19:14:32,156 INFO     [bot.py:99] Current map coords: (9, -19)
+2020-11-06:19:14:35,548 INFO     [bot.py:109] Change map took 3.3907877999999982
+2020-11-06:19:14:40,366 INFO     [bot.py:58] Enter combat took: 3.8535150999999814
+2020-11-06:19:14:47,733 INFO     [bot.py:99] Current map coords: (9, -20)
+2020-11-06:19:14:51,150 INFO     [bot.py:109] Change map took 3.4171323000000484
+2020-11-06:19:14:54,308 INFO     [bot.py:58] Enter combat took: 2.3854213000000755
+2020-11-06:19:15:16,468 INFO     [bot.py:99] Current map coords: (9, -21)
+2020-11-06:19:15:20,661 INFO     [bot.py:109] Change map took 4.191935299999955
+2020-11-06:19:15:23,588 INFO     [bot.py:58] Enter combat took: 1.789900800000055
+2020-11-06:19:16:08,826 INFO     [bot.py:99] Current map coords: (9, -20)
+2020-11-06:19:16:12,674 INFO     [bot.py:109] Change map took 3.847819500000128
+2020-11-06:19:16:20,299 INFO     [bot.py:58] Enter combat took: 1.0873520000000099
+2020-11-06:19:16:26,943 INFO     [bot.py:99] Current map coords: (10, -20)
+2020-11-06:19:16:32,113 INFO     [bot.py:109] Change map took 5.1691194
+2020-11-06:19:16:37,711 INFO     [bot.py:58] Enter combat took: 4.709207000000106
+2020-11-06:19:17:02,577 INFO     [bot.py:99] Current map coords: (11, -20)
+2020-11-06:19:17:05,828 INFO     [bot.py:109] Change map took 3.250309199999947
+2020-11-06:19:17:09,345 INFO     [bot.py:99] Current map coords: (12, -20)
+2020-11-06:19:17:13,316 INFO     [bot.py:109] Change map took 3.969910099999879
+2020-11-06:19:17:17,401 INFO     [bot.py:58] Enter combat took: 2.3156324999999924
+2020-11-06:19:17:45,85 INFO     [bot.py:99] Current map coords: (12, -19)
+2020-11-06:19:17:48,407 INFO     [bot.py:109] Change map took 3.3204774999999245
+2020-11-06:19:17:50,918 INFO     [bot.py:58] Enter combat took: 1.5528847000000496
+2020-11-06:19:18:15,739 INFO     [bot.py:99] Current map coords: (11, -19)
+2020-11-06:19:18:19,803 INFO     [bot.py:109] Change map took 4.062609099999918
+2020-11-06:19:18:23,322 INFO     [bot.py:99] Current map coords: (11, -20)
+2020-11-06:19:18:29,184 INFO     [bot.py:109] Change map took 5.8620008000000325
+2020-11-06:19:18:33,493 INFO     [bot.py:58] Enter combat took: 3.6295678999999836
+2020-11-06:19:18:50,116 INFO     [bot.py:99] Current map coords: (11, -21)
+2020-11-06:19:18:54,387 INFO     [bot.py:109] Change map took 4.2699164000000565
+2020-11-06:19:18:59,469 INFO     [bot.py:58] Enter combat took: 4.154661000000033
+2020-11-06:19:19:29,833 INFO     [bot.py:58] Enter combat took: 1.2133100000000923
+2020-11-06:19:19:35,968 INFO     [bot.py:99] Current map coords: (10, -21)
+2020-11-06:19:19:40,536 INFO     [bot.py:109] Change map took 4.5660513000000265
+2020-11-06:19:19:43,347 INFO     [bot.py:58] Enter combat took: 1.125463800000034
+2020-11-06:19:19:50,528 INFO     [bot.py:99] Current map coords: (11, -21)
+2020-11-06:19:19:55,68 INFO     [bot.py:109] Change map took 4.538145500000155
+2020-11-06:19:19:58,724 INFO     [bot.py:99] Current map coords: (11, -20)
+2020-11-06:19:20:00,659 INFO     [bot.py:109] Change map took 1.9132885999999871
+2020-11-06:19:20:04,108 INFO     [bot.py:99] Current map coords: (11, -21)
+2020-11-06:19:20:08,634 INFO     [bot.py:109] Change map took 4.524975099999892
+2020-11-06:19:20:12,130 INFO     [bot.py:99] Current map coords: (10, -21)
+2020-11-06:19:20:17,243 INFO     [bot.py:109] Change map took 5.112133700000186
+2020-11-06:19:20:24,9 INFO     [bot.py:58] Enter combat took: 0.44389860000001136
+2020-11-06:19:20:46,516 INFO     [bot.py:99] Current map coords: (10, -20)
+2020-11-06:19:20:51,759 INFO     [bot.py:109] Change map took 5.242531699999972
+2020-11-06:19:20:56,675 INFO     [bot.py:58] Enter combat took: 3.904662600000165
+2020-11-06:19:21:03,718 INFO     [bot.py:99] Current map coords: (11, -20)
+2020-11-06:19:21:06,964 INFO     [bot.py:109] Change map took 3.2457554000000073
+2020-11-06:19:21:09,99 INFO     [bot.py:58] Enter combat took: 1.4434135999999853
+2020-11-06:19:21:22,287 INFO     [bot.py:99] Current map coords: (12, -20)
+2020-11-06:19:21:26,360 INFO     [bot.py:109] Change map took 4.071920400000181
+2020-11-06:19:21:30,443 INFO     [bot.py:58] Enter combat took: 2.832284800000025
+2020-11-06:19:21:51,883 INFO     [bot.py:99] Current map coords: (12, -19)
+2020-11-06:19:21:55,300 INFO     [bot.py:109] Change map took 3.415903999999955
+2020-11-06:19:21:59,917 INFO     [bot.py:58] Enter combat took: 3.447682900000018
+2020-11-06:19:22:23,244 INFO     [bot.py:99] Current map coords: (12, -18)
+2020-11-06:19:22:27,889 INFO     [bot.py:109] Change map took 4.64362959999994
+2020-11-06:19:22:31,416 INFO     [bot.py:99] Current map coords: (12, -19)
+2020-11-06:19:22:32,776 INFO     [bot.py:109] Change map took 1.357671900000014
+2020-11-06:19:22:35,285 INFO     [bot.py:58] Enter combat took: 1.701171400000021
+2020-11-06:19:22:49,931 INFO     [bot.py:99] Current map coords: (12, -18)
+2020-11-06:19:22:53,231 INFO     [bot.py:109] Change map took 3.2979181999999128
+2020-11-06:19:22:56,757 INFO     [bot.py:99] Current map coords: (12, -19)
+2020-11-06:19:23:01,358 INFO     [bot.py:109] Change map took 4.599792799999932
+2020-11-06:19:23:05,956 INFO     [bot.py:58] Enter combat took: 3.919068599999946
+2020-11-06:19:23:48,526 INFO     [bot.py:99] Current map coords: (12, -20)
+2020-11-06:19:23:51,369 INFO     [bot.py:109] Change map took 2.8413671000000704
+2020-11-06:19:23:53,903 INFO     [bot.py:58] Enter combat took: 1.1276405999999497
+2020-11-06:19:24:02,368 INFO     [bot.py:99] Current map coords: (12, -21)
+2020-11-06:19:24:06,275 INFO     [bot.py:109] Change map took 3.90530119999994
+2020-11-06:19:24:10,553 INFO     [bot.py:58] Enter combat took: 3.170146100000011
+2020-11-06:19:24:42,986 INFO     [bot.py:99] Current map coords: (11, -21)
+2020-11-06:19:24:46,256 INFO     [bot.py:109] Change map took 3.2432333000001563
+2020-11-06:19:24:48,825 INFO     [bot.py:58] Enter combat took: 1.6610734000000775
+2020-11-06:19:25:24,642 INFO     [bot.py:99] Current map coords: (11, -20)
+2020-11-06:19:25:28,737 INFO     [bot.py:109] Change map took 4.09349700000007
+2020-11-06:19:25:38,118 INFO     [bot.py:58] Enter combat took: 1.1710137000000032
+2020-11-06:19:25:53,14 INFO     [bot.py:99] Current map coords: (12, -20)
+2020-11-06:19:25:57,567 INFO     [bot.py:109] Change map took 4.5517959999999675
+2020-11-06:19:26:00,645 INFO     [bot.py:58] Enter combat took: 1.0835586000000603
+2020-11-06:19:26:40,25 INFO     [bot.py:99] Current map coords: (12, -19)
+2020-11-06:19:26:44,122 INFO     [bot.py:109] Change map took 4.0961666999999125
+2020-11-06:19:26:47,710 INFO     [bot.py:99] Current map coords: (12, -18)
+2020-11-06:19:26:52,436 INFO     [bot.py:109] Change map took 4.725961999999981
+2020-11-06:19:26:55,984 INFO     [bot.py:58] Enter combat took: 2.81540340000015
+2020-11-06:19:27:04,138 INFO     [bot.py:99] Current map coords: (11, -18)
+2020-11-06:19:27:10,65 INFO     [bot.py:109] Change map took 5.925542299999961
+2020-11-06:19:27:15,288 INFO     [bot.py:58] Enter combat took: 4.288785299999972
+2020-11-06:19:27:25,468 INFO     [bot.py:99] Current map coords: (11, -17)
+2020-11-06:19:27:30,76 INFO     [bot.py:109] Change map took 4.607468300000164
+2020-11-06:19:27:34,272 INFO     [bot.py:58] Enter combat took: 3.3140264999999545
+2020-11-06:19:27:42,426 INFO     [bot.py:58] Enter combat took: 2.7681299000000763
+2020-11-06:19:28:25,124 INFO     [bot.py:58] Enter combat took: 3.6618544000000384
+2020-11-06:19:28:33,198 INFO     [bot.py:99] Current map coords: (10, -17)
+2020-11-06:19:28:37,163 INFO     [bot.py:109] Change map took 3.964296000000104
+2020-11-06:19:28:39,505 INFO     [bot.py:58] Enter combat took: 1.5747263999999177
+2020-11-06:19:29:18,98 INFO     [bot.py:99] Current map coords: (10, -18)
+2020-11-06:19:29:20,794 INFO     [bot.py:109] Change map took 2.6952713999999105
+2020-11-06:19:29:23,115 INFO     [bot.py:58] Enter combat took: 1.5117250000000695
+2020-11-06:19:29:31,144 INFO     [bot.py:99] Current map coords: (9, -18)
+2020-11-06:19:29:38,364 INFO     [bot.py:99] Current map coords: (9, -18)
+2020-11-06:19:29:45,360 INFO     [bot.py:99] Current map coords: (9, -18)
+2020-11-06:19:29:50,50 INFO     [bot.py:109] Change map took 4.688253300000042
+2020-11-06:19:29:52,372 INFO     [bot.py:58] Enter combat took: 1.5129382999998597
+2020-11-06:19:30:00,648 INFO     [bot.py:99] Current map coords: (9, -17)
+2020-11-06:19:30:07,718 INFO     [bot.py:99] Current map coords: (9, -16)
+2020-11-06:19:30:13,536 INFO     [bot.py:109] Change map took 5.816577400000142
+2020-11-06:19:30:17,481 INFO     [bot.py:58] Enter combat took: 3.1915145999998913
+2020-11-06:19:30:42,176 INFO     [bot.py:99] Current map coords: (9, -15)
+2020-11-06:19:30:45,463 INFO     [bot.py:109] Change map took 3.2862003999998706
+2020-11-06:19:30:49,578 INFO     [bot.py:58] Enter combat took: 3.4277584000001298
+2020-11-06:19:31:07,943 INFO     [bot.py:99] Current map coords: (8, -15)
+2020-11-06:19:31:12,724 INFO     [bot.py:109] Change map took 4.781277799999998
+2020-11-06:19:31:16,473 INFO     [bot.py:58] Enter combat took: 2.9898466000001918
+2020-11-06:19:31:28,557 INFO     [bot.py:58] Enter combat took: 1.6641643000000386
+2020-11-06:19:31:35,562 INFO     [bot.py:99] Current map coords: (9, -15)
+2020-11-06:19:31:39,467 INFO     [bot.py:109] Change map took 3.9042497000000367
+2020-11-06:19:31:41,514 INFO     [bot.py:58] Enter combat took: 1.2417821999999887
+2020-11-06:19:32:16,443 INFO     [bot.py:99] Current map coords: (8, -15)
+2020-11-06:19:32:19,97 INFO     [bot.py:109] Change map took 2.65245630000004
+2020-11-06:19:32:22,608 INFO     [bot.py:99] Current map coords: (9, -15)
+2020-11-06:19:32:27,215 INFO     [bot.py:109] Change map took 4.6066233000001375
+2020-11-06:19:32:30,719 INFO     [bot.py:58] Enter combat took: 2.7589590000000044
+2020-11-06:19:32:46,185 INFO     [bot.py:99] Current map coords: (9, -16)
+2020-11-06:19:32:50,36 INFO     [bot.py:109] Change map took 3.8491116999998667
+2020-11-06:19:32:57,279 INFO     [bot.py:58] Enter combat took: 0.7263247000000774
+2020-11-06:19:33:10,895 INFO     [bot.py:99] Current map coords: (9, -17)
+2020-11-06:19:33:15,113 ERROR    [fighter.py:66] BitBlt failed
+Traceback (most recent call last):
+  File "C:\Users\khalid.majdoub\PycharmProjects\bot2pix\src\core\fighter.py", line 42, in run
+    dofus.READY_R.waitAny([dofus.READY_BUTTON_P, dofus.SKIP_TURN_BUTTON_P])
+  File "C:\Users\khalid.majdoub\PycharmProjects\bot2pix\src\core\region.py", line 62, in waitAny
+    result = self.find(pattern, threshold)
+  File "C:\Users\khalid.majdoub\PycharmProjects\bot2pix\src\core\region.py", line 142, in find
+    self.capture()
+  File "C:\Users\khalid.majdoub\PycharmProjects\bot2pix\src\core\region.py", line 113, in capture
+    self.bi = env.capture(self)
+  File "C:\Users\khalid.majdoub\PycharmProjects\bot2pix\src\core\env.py", line 40, in capture
+    return _capture(region)
+  File "C:\Users\khalid.majdoub\PycharmProjects\bot2pix\src\core\env.py", line 75, in _capture
+    cDC.BitBlt((0, 0), (region.width(), region.height()), dcObj, (region.x(), region.y()), win32con.SRCCOPY)
+win32ui.error: BitBlt failed
+2020-11-06:19:33:15,915 INFO     [bot.py:35] farmed 236mobs in 2046.6930172000002seconds

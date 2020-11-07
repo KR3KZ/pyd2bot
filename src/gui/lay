@@ -1,0 +1,11 @@
+path:
+- up
+- right
+- down
+- left
+- up
+- left
+- down
+start-map: !!python/tuple
+- '0'
+- '0'

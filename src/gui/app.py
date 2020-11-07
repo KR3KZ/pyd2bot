@@ -23,7 +23,7 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.tabs)
 
         # Initialize tab screen
-        self.pathGenerator = PathGeneratorView()
+        self.pathGenerator = PathGeneratorView(self)
         self.fighter = FighterView(self)
         self.farmer = FarmerView()
 
@@ -37,7 +37,7 @@ class MainWindow(QMainWindow):
 
     def initMenu(self):
         # Create new action
-        newAction = QAction(text='&New', parent=self)
+        newAction = QAction(text='&New path', parent=self)
         newAction.setStatusTip('New path')
         newAction.triggered.connect(self.pathGenerator.newPath)
 

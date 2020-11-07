@@ -44,7 +44,6 @@ class FightsFarmer(bot.Bot):
                 choices = self.harvestZone.neighbors(x, y) - self.harvestZone.cache[key]
             else:
                 choices = self.harvestZone.neighbors(x, y)
-            
             nx, ny = random.choice(list(choices))
             rand_direction = nx - x, ny -y
             if self.moveTo(rand_direction, nbr_retries=2):
@@ -70,7 +69,7 @@ if __name__ == "__main__":
     log_file = os.path.join(work_dir, 'bot.log')
     patterns_dir = os.path.join(work_dir, "mobs_patterns")
     logging.basicConfig(filename=log_file,
-                        level=logging.DEBUG,
+                        level=logging.INFO,
                         format='%(asctime)s,%(msecs)d %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s',
                         datefmt='%Y-%m-%d:%H:%M:%S')
 

@@ -1,27 +1,21 @@
 from PyQt5.QtCore import QObject, pyqtSignal
-from constants import *
 from PyQt5.QtWidgets import *
 
 
-class ChangeMapBox(QMainWindow):
-    directionClicked = pyqtSignal(tuple)
+class ChooseDirectionBox(QWidget):
+    directionClicked = pyqtSignal(str)
 
     def __init__(self, parent=None):
-        super(ChangeMapBox, self).__init__()
+        super(ChooseDirectionBox, self).__init__()
         self.horizontal_group_box = QGroupBox()
-        self.setGeometry(756, 305, 374, 258)
-        self.setWindowTitle("Chose next map direction")
-        widget = QWidget()
-        self.setCentralWidget(widget)
         self.createGridLayout()
         window_layout = QVBoxLayout()
         window_layout.addWidget(self.horizontal_group_box)
-        widget.setLayout(window_layout)
+        self.setLayout(window_layout)
 
     def createGridLayout(self):
         layout = QGridLayout()
-        layout.setColumnStretch(1, 4)
-        layout.setColumnStretch(2, 4)
+        # layout.setColumnStretch(4, 0)
 
         up_button = QPushButton('Up')
         left_button = QPushButton('Left')
@@ -41,25 +35,21 @@ class ChangeMapBox(QMainWindow):
         self.horizontal_group_box.setLayout(layout)
 
     def upClicked(self):
-        self.directionClicked.emit((0, -1))
-        self.close()
+        self.directionClicked.emit('up')
 
     def leftClicked(self):
-        self.directionClicked.emit((-1, 0))
-        self.close()
+        self.directionClicked.emit('left')
 
     def rightClicked(self):
-        self.close()
-        self.directionClicked.emit((1, 0))
+        self.directionClicked.emit('right')
 
     def downClicked(self):
-        self.directionClicked.emit((0, 1))
-        self.close()
+        self.directionClicked.emit('down')
 
 
 def window():
     app = QApplication(sys.argv)
-    win = ChangeMapBox()
+    win = ChooseDirectionBox()
     win.show()
     sys.exit(app.exec_())
 
