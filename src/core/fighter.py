@@ -170,7 +170,6 @@ class Fighter(threading.Thread):
                 return True
         raise TimeoutError
 
-    @retry
     def useSpell(self, spell, target):
         pyautogui.press(spell['shortcut'])
         target.click()

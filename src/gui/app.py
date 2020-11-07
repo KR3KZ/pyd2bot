@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import *
 from gui.farmerView import FarmerView
 from gui.fighterView import FighterView
 from gui.pathGeneratorView import PathGeneratorView
+from gui.patternView import PatternView
 
 
 class Communicate(QObject):
@@ -25,12 +26,14 @@ class MainWindow(QMainWindow):
         # Initialize tab screen
         self.pathGenerator = PathGeneratorView(self)
         self.fighter = FighterView(self)
-        self.farmer = FarmerView()
+        self.farmer = FarmerView(self)
+        self.patternCreator = PatternView(self)
 
         # Add tabs
         self.tabs.addTab(self.pathGenerator, "path")
         self.tabs.addTab(self.fighter, "combat")
         self.tabs.addTab(self.farmer, "farm")
+        self.tabs.addTab(self.patternCreator, "pattern")
 
         # menu
         self.initMenu()

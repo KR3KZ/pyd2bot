@@ -1,11 +1,10 @@
 import os
 import re
-
 from PyQt5 import QtCore
 from PyQt5.QtCore import QRegExp
-from PyQt5.QtGui import QRegExpValidator
+from PyQt5.QtGui import QRegExpValidator, QCursor
 from PyQt5.QtWidgets import QVBoxLayout, QGroupBox, QHBoxLayout, QLabel, QPushButton, QTreeWidgetItem, \
-    QFileDialog, QMessageBox, QAction, QInputDialog, QLineEdit, QListWidget, QWidget
+    QFileDialog, QMessageBox, QAction, QInputDialog, QLineEdit, QListWidget, QWidget, QComboBox, QMenu
 from .constants import *
 from gui.ChooseDirectionBox import ChooseDirectionBox
 from gui.SnippetWidget import QSnip
@@ -21,8 +20,24 @@ class MapCoordField(QLineEdit):
 
 
 class PathList(QListWidget):
-    def __init__(self):
-        super(PathList, self).__init__()
+    def __init__(self, parent=None):
+        super(PathList, self).__init__(parent)
+        self.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
+        self.customContextMenuRequested[QtCore.QPoint].connect(self.rightMenuShow)
+
+    def rightMenuShow(self):
+        self.rightMenu = QMenu(self)
+        removeAction = QAction(text="Delete", parent=self)
+        removeAction.triggered.connect(self.removeSelected)
+        self.rightMenu.addAction(removeAction)
+        self.rightMenu.exec_(QCursor.pos())
+
+    def removeSelected(self):
+        listItems = self.selectedItems()
+        if not listItems:
+            return
+        for item in listItems:
+            self.takeItem(self.row(item))
 
 
 class PathGeneratorView(QWidget):
@@ -48,16 +63,17 @@ class PathGeneratorView(QWidget):
         self.layout = QVBoxLayout()
         self.setLayout(self.layout)
 
+        # top box (list + choose start map)
         self.topBox = QGroupBox()
         self.topBoxLyt = QVBoxLayout()
         self.topBox.setLayout(self.topBoxLyt)
         self.layout.addWidget(self.topBox)
 
         # init path list
-        self.pathList = QListWidget(self)
+        self.pathList = PathList()
         self.topBoxLyt.addWidget(self.pathList)
 
-        # message label
+        # Set start map
         self.chooseStartMapLyt = QHBoxLayout()
         self.startMapLbl = QLabel("Start Map: ")
         self.xcoords = MapCoordField("x coord")
@@ -76,7 +92,7 @@ class PathGeneratorView(QWidget):
         self.buttonsGrpBx = QGroupBox()
         self.buttonsLyt = QHBoxLayout()
         self.buttonsGrpBx.setLayout(self.buttonsLyt)
-        self.saveButton = QPushButton("save path")
+        self.saveButton = QPushButton("Save")
         self.saveButton.clicked.connect(self.savePath)
         self.buttonsLyt.addWidget(self.saveButton)
         self.layout.addWidget(self.buttonsGrpBx)

@@ -25,7 +25,7 @@ class MyQtTree(QTreeWidget):
     def __init__(self, parent):
         super(MyQtTree, self).__init__()
         self.setColumnCount(5)
-        self.setHeaderLabels(["Type", "PosX", "posY", "Height", "Width"])
+        self.setHeaderLabels(["Name", "PosX", "posY", "Height", "Width"])
         self.parent = parent
         self.selected = None
         self.clicked.connect(self.onClick)
