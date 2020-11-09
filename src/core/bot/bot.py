@@ -9,7 +9,6 @@ class Bot(Walker):
     def __init__(self, spell, name="Bot"):
         super(Bot, self).__init__(name)
         self.spell = spell
-        self.dead = threading.Event()
         self.killsig = threading.Event()
         self.combatStarted = threading.Event()
         self.combatEnded = threading.Event()

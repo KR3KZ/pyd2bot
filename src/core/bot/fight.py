@@ -69,7 +69,6 @@ class Fighter(Bot):
                 pyautogui.press(dofus.SKIP_TURN_SHORTCUT)
             dofus.OUT_OF_COMBAT_R.hover()
             self.combatAlgo()
-            sleep(1)
             self.combatEnded.set()
             self.nbr_fights += 1
             logging.debug('Combat ended')
