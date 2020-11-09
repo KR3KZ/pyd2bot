@@ -7,7 +7,6 @@ import win32gui
 import win32ui
 from pytesseract import pytesseract
 
-
 pytesseract.tesseract_cmd = r'C:\Users\khalid.majdoub\AppData\Local\Tesseract-OCR\tesseract.exe'
 
 IDE_HWND = None
@@ -38,12 +37,11 @@ def capture(region):
     for k in range(20):
         try:
             return _capture(region)
-        except win32ui.error:
+        except win32ui.error as e:
             # logging.debug("Enable to capture screen!")
             if k == 19:
                 raise
             win32gui.ReleaseDC(DOFUS_HWND, last_dc)
-    return _capture(region)
 
 
 def move(x, y):

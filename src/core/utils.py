@@ -1,8 +1,8 @@
 import os
 import cv2
+import numpy as np
 from numpy.ma import sqrt
-from core.exceptions import ParseCellFailed, ParseGridFailed
-import logging
+
 
 def isAdjacent(matches, r):
     for m in matches:
@@ -33,25 +33,6 @@ def sample(x1, x2, n):
         yield x1 + (x2 - x1) * k / n
 
 
-def retry(fn):
-    def wrapped(self, *args, nbr_retries=10, reraise=True, **kwargs):
-        result = None
-        for counter in range(nbr_retries):
-            try:
-                if self.stopRetry.is_set():
-                    return
-                result = fn(self, *args, **kwargs)
-                break
-            except (ParseCellFailed, TimeoutError, ParseGridFailed) as e:
-                # logging.debug(str(e))
-                if counter == nbr_retries - 1:
-                    if reraise:
-                        raise
-        return result
-
-    return wrapped
-
-
 def dhash(image, hashSize=8):
     resized = cv2.resize(image, (hashSize + 1, hashSize))
     diff = resized[:, 1:] > resized[:, :-1]
@@ -64,3 +45,15 @@ def loadPatternsFromDir(patterns_dir, pattern_ext=".png"):
         if filename.endswith(pattern_ext):
             res.append(cv2.imread(os.path.join(patterns_dir, filename)))
     return res
+
+
+def areSame(img1, img2):
+    difference = cv2.subtract(img1, img2)
+    return not np.any(difference)
+
+
+def inMotion(clip):
+    for i in range(len(clip) - 1):
+        if not areSame(clip[i], clip[i + 1]):
+            return True
+    return False

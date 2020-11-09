@@ -26,7 +26,7 @@ CREATURE_MODE_R = Region(1339, 993, 27, 25)
 MAP_COORDS_R = Region(0, 28, 298, 98)
 CONNECT_R = Region(666, 88, 572, 531)
 RECONNECT_BUTTON_R = Region(880, 381, 161, 57)
-PLAY_GAME_BUTTON_R = Region(946, 366, 489, 521)
+PLAY_GAME_BUTTON_R = Region(993, 652, 452, 260)
 
 # Patterns
 READY_BUTTON_P = loadPattern("READY_BUTTON_P.png")
@@ -68,9 +68,13 @@ CLOSE_DISCONNECTED_BOX_L = Region(866, 549, 205, 42)
 RAPPEL_POTION_SHORTCUT = "e"
 SKIP_TURN_SHORTCUT = 'space'
 
+ENU_COLOR = [QColor(253, 242, 206), QColor(253, 190, 45), QColor(254, 249, 226), QColor(216, 138, 22)]
+SRAM_COLOR = [QColor(61, 56, 150), QColor(251, 241, 191), QColor(33, 34, 88), QColor(227, 218, 173),
+              QColor(34, 51, 153)]
+
 
 class ObjColor:
-    BOT = [QColor(61, 56, 150), QColor(251, 241, 191), QColor(33, 34, 88), QColor(227, 218, 173), QColor(34, 51, 153)]
+    BOT = ENU_COLOR + SRAM_COLOR
     MOB = [QColor(46, 54, 61), QColor(41, 48, 55)]
     FREE = [QColor(150, 142, 103), QColor(142, 134, 94), QColor(186, 181, 155), QColor(128, 121, 85)]
     OBSTACLE = [QColor(255, 255, 255), QColor(88, 83, 58), QColor(79, 75, 52), QColor(228, 228, 226)]
@@ -116,6 +120,3 @@ def findObject(color):
         result = ObjType.DARK
 
     return result
-
-
-

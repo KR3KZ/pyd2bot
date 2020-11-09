@@ -1,17 +1,18 @@
+import collections
 import sys
 import threading
 import random
-from time import perf_counter
+from time import perf_counter, sleep
 import cv2
 import numpy as np
 from PyQt5.QtCore import QPoint, QRect
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QApplication
-from core.utils import isAdjacent
+from core import utils
 import gui.Overlay as overlay
 import core.env as env
 
-FOREVER = 60 * 60 * 24
+FOREVER = 60 * 60 * 24 * 1.
 
 
 def except_hook(cls, exception, traceback):
@@ -40,7 +41,7 @@ class Region(QRect):
         self.bi = None
         self.stopWait = threading.Event()
 
-    def waitAppear(self, pattern, timeout=FOREVER, threshold=0.7):
+    def waitAppear(self, pattern, timeout=FOREVER, threshold=0.7, rest_time=0):
         self.stopWait.clear()
         elapsed = 0
         result = None
@@ -49,6 +50,7 @@ class Region(QRect):
             result = self.find(pattern, threshold)
             if result:
                 break
+            sleep(rest_time)
             elapsed = perf_counter() - start
         return result
 
@@ -80,11 +82,11 @@ class Region(QRect):
         self.capture()
         if shuffle:
             random.shuffle(patterns)
-        for pattern in patterns:
-            result = self.find(pattern, threshold, capture=False)
-            if result is not None:
-                return result
-        return None
+        for idx, pattern in enumerate(patterns):
+            target = self.find(pattern, threshold, capture=False)
+            if target is not None:
+                return target, idx
+        return None, None
 
     def waitVanish(self, pattern, timeout=FOREVER, threshold=0.9):
         self.stopWait.clear()
@@ -109,10 +111,28 @@ class Region(QRect):
             elapsed = perf_counter() - start
         return False
 
+    def waitAnimationEnd(self, timeout=FOREVER):
+        self.stopWait.clear()
+        lookup_int = 5
+        clip = collections.deque()
+        for frame in self.stream(timeout):
+            if len(clip) > lookup_int:
+                if utils.inMotion(clip):
+                    return True
+                clip.popleft()
+            clip.append(frame)
+            sleep(0.2)
+        return False
+
     def capture(self):
         self.bi = env.capture(self)
         self.bi = cv2.cvtColor(self.bi, cv2.COLOR_RGB2BGR)
         return self.bi
+
+    def stream(self, interval=FOREVER):
+        s = perf_counter()
+        while perf_counter() - s < interval:
+            yield cv2.cvtColor(env.capture(self), cv2.COLOR_RGB2GRAY)
 
     def findAll(self, pattern, threshold=0.7, grayscale=True, capture=True):
         matches = []
@@ -133,7 +153,7 @@ class Region(QRect):
             matches.append(Region(self.x() + bestx, self.y() + besty, w, h))
         for dx, dy in zip(*loc[::-1]):
             r = Region(self.x() + dx, self.y() + dy, w, h)
-            if not isAdjacent(matches, r):
+            if not utils.isAdjacent(matches, r):
                 matches.append(r)
         return matches
 
@@ -174,50 +194,4 @@ class Region(QRect):
         return Region(self.center().x() - w / 2, self.center().y() - h / 2, w, h)
 
 
-if __name__ == "__main__":
-    from core import dofus
-    from core.grid import Grid
 
-    # app = QApplication(sys.argv)
-    env.focusDofusWindow()
-    s = perf_counter()
-    ans, pattern = dofus.COMBAT_R.findAny(dofus.mobs, threshold=0.7)
-    print(f"took {perf_counter() - s}")
-    print(ans)
-    if ans:
-        ans.highlight(1)
-
-    cv2.imshow("pattern", pattern)
-    cv2.waitKey(0)
-
-    # closing all open windows
-    cv2.destroyAllWindows()
-    # button_r = tst.r
-    # button_r.capture()
-    # pix = button_r.getpixel(0, 0)
-    # while True:
-    #     if dofus.MY_TURN_CHECK_L.getpixel() == dofus.MY_TURN_C:
-    #         print('Bot turn started')
-    #         break
-    # not my turn color (0 144 122 255)
-    # my turn color (0 242 205 255)
-    # s = perf_counter()
-    # res = myTurnCheckL.getpixel()
-    # print(perf_counter() - s)
-    # print(res)
-    # sleep(1)
-    # env.focusIDEWindow()
-    # start = perf_counter()
-    # template = cv2.imread(os.path.join(env.test_patterns_dir, tst.p))
-    # res = button_r.findAll(template)
-    # elapsed = perf_counter() - start
-    # print("detection took: ", elapsed)
-    #
-    # print("r: ", res)
-    # if res:
-    #     env.focusDofusWindow()
-    #     for r in res:
-    #         r.highlight(2)
-    #         r.overlay.highlightEnded.connect(env.focusIDEWindow)
-    # else:
-    # env.focusIDEWindow()

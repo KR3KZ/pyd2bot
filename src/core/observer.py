@@ -7,7 +7,7 @@ class Observer(threading.Thread):
         VANISH = 2
         CHANGE = 3
 
-    def __init__(self, region, pattern=None, callback=None, mode=Mode.APPEAR):
+    def __init__(self, region, pattern=None, callback=None, mode=Mode.APPEAR, rest_time=0):
         threading.Thread.__init__(self)
         self.region = region
         self.callback = callback
@@ -15,24 +15,26 @@ class Observer(threading.Thread):
         self.changed = threading.Event()
         self.vanished = threading.Event()
         self.mode = mode
+        self.rest_time = rest_time
         if self.mode == self.Mode.CHANGE:
             self.pattern = self.region.capture().copy()
         else:
             self.pattern = pattern
 
     def stop(self):
+        self.stopSignal.set()
         self.region.stopWait.set()
 
     def run(self):
         if self.mode == self.Mode.APPEAR:
-            self.region.waitAppear(self.pattern)
+            self.region.waitAppear(self.pattern, rest_time=self.rest_time)
         elif self.mode == self.Mode.VANISH:
             self.region.waitVanish(self.pattern)
             self.vanished.set()
         elif self.mode == self.Mode.CHANGE:
             self.region.waitVanish(self.pattern)
             self.changed.set()
-        if self.callback:
+        if not self.stopSignal.is_set() and self.callback:
             self.callback()
 
 

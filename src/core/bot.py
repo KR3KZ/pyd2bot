@@ -18,36 +18,45 @@ class Bot(threading.Thread):
         self.killsig = threading.Event()
         self.stopRetry = threading.Event()
         self.disconnected = threading.Event()
+        self.connected = threading.Event()
         self.lock = threading.Lock()
         self.fighter_thread = Fighter(spell, parent=self)
         self.harvestZone = zone
         self.currMapCoords = None
-        self.disconnectedObs = Observer(dofus.RECONNECT_BUTTON_R,
+        self.disconnectedObs = Observer(dofus.CONNECT_R,
                                         dofus.DISCONNECTED_BOX_P,
                                         self.reconnect,
-                                        Observer.Mode.APPEAR)
+                                        Observer.Mode.APPEAR,
+                                        rest_time=5)
         self.save_path = save_path
         self.last_map = None
 
-    def harvestCombats(self, mobs_patterns):
-        farmed = 0
+    def harvestCombats(self, mobs_patterns, shuffle=False):
         nbr_fails = 0
-        while not self.killsig.is_set() and nbr_fails < 3:
+        result = {
+            "farmed": 0,
+            "matched": {}
+        }
+        while not self.killsig.is_set() and nbr_fails < 5:
             logging.debug("Searching for mobs group...")
-            tgt = dofus.COMBAT_R.findAny(mobs_patterns, threshold=0.75, shuffle=True)
+            tgt, idx = dofus.COMBAT_R.findAny(mobs_patterns, threshold=0.8, shuffle=shuffle)
             if tgt:
                 logging.debug("I found a mob group")
                 if self.enterCombat(tgt):
+                    if idx not in result['matched']:
+                        result['matched'][idx] = 0
+                    result['matched'][idx] += 1
                     self.fighter_thread.combatEnded.wait()
-                    farmed += self.fighter_thread.mobs_killed
+                    result["farmed"] += self.fighter_thread.mobs_killed
                     if self.fighter_thread.died:
                         logging.debug("Bot died during combat!")
+                        break
                 else:
                     nbr_fails += 1
             else:
                 logging.debug("No mobs found")
                 break
-        return farmed
+        return result
 
     def enterCombat(self, tgt, timeout=5):
         with self.lock:
@@ -55,7 +64,7 @@ class Bot(threading.Thread):
             logging.debug("Clicked on mobs group")
         s = perf_counter()
         if self.fighter_thread.combatDetected.wait(timeout):
-            logging.info(f"Enter combat took: {perf_counter() - s}")
+            logging.debug(f"Enter combat took: {perf_counter() - s}")
             return True
         logging.debug("Couldn't open combat!")
         return False
@@ -91,12 +100,12 @@ class Bot(threading.Thread):
         else:
             raise ParseMapCoordsFailed(f"Enable to parse map coords")
 
-    def moveTo(self, direction, timeout=6.4, nbr_retries=3):
+    def moveTo(self, direction, timeout=8, nbr_retries=3):
         nbr_fails = 0
         while not self.killsig.is_set() and nbr_fails < nbr_retries:
             with self.lock:
                 currx, curry = self.updateMapCoords()
-                logging.info(f"Current map coords: {self.currMapCoords}")
+                logging.debug(f"Current map coords: {self.currMapCoords}")
                 dstx, dsty = currx + direction[0], curry + direction[1]
                 logging.debug(f"Changing map to destination {(dstx, dsty)}")
                 dofus.mapChangeLoc[direction].click()
@@ -106,15 +115,15 @@ class Bot(threading.Thread):
                 with self.lock:
                     if self.updateMapCoords() == (dstx, dsty):
                         self.last_map = currx, curry
-                        logging.info(f"Change map took {perf_counter() - s}")
+                        logging.debug(f"Change map took {perf_counter() - s}")
                         return True
             nbr_fails += 1
         return False
 
-    def moveToZone(self):
+    def moveToZone(self, zone):
         exclude = set()
         while not self.killsig.is_set():
-            path = self.harvestZone.pathToEntry(self.currMapCoords, exclude)
+            path = zone.pathToEntry(self.currMapCoords, exclude)
             for x, y in path:
                 currx, curry = self.currMapCoords
                 direction = x - currx, y - curry
@@ -127,14 +136,16 @@ class Bot(threading.Thread):
     def reconnect(self):
         logging.info("Disconnected popup appeared!")
         self.disconnected.set()
+        self.connected.clear()
         dofus.CLOSE_DISCONNECTED_BOX_L.click()
-        dofus.RECONNECT_BUTTON_R.waitVanish(dofus.DISCONNECTED_BOX_P)
+        dofus.CONNECT_R.waitVanish(dofus.DISCONNECTED_BOX_P)
         dofus.RECONNECT_BUTTON_R.click()
         dofus.PLAY_GAME_BUTTON_R.waitAppear(dofus.PLAY_GAME_BUTTON_P)
         dofus.PLAY_GAME_BUTTON_R.click()
         while not self.parseMapCoords():
-            sleep(1)
+            pass
         self.disconnected.clear()
+        self.connected.set()
 
     def insideZone(self):
         return self.harvestZone.inside(*self.currMapCoords)

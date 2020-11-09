@@ -1,9 +1,8 @@
 import sys
+from time import perf_counter
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QApplication
 from core import dofus, env
-from core.dofus import ObjColor, ObjType
-from core.exceptions import ParseCellFailed
 from core.region import Region
 from core.utils import iterParallelogram
 from gui.Overlay import CellOverlay
@@ -11,7 +10,7 @@ from gui.Overlay import CellOverlay
 
 class Cell:
 
-    def __init__(self, pgrid, x, y, i, j, ctype=ObjType.UNKNOWN):
+    def __init__(self, pgrid, x, y, i, j, ctype=dofus.ObjType.UNKNOWN):
         self.i = i
         self.j = j
         self.x = x
@@ -21,6 +20,7 @@ class Cell:
         self.grid = pgrid
         self.extEllipse = (0.55, 0.6)
         self.type = ctype
+        self.color = None
         self.rx, self.ry = self.x - self.grid.x(), self.y - self.grid.y()
         self.dotted = False
         self._r = Region(self.x - self.w / 2, self.y - self.h / 2, self.w, self.h)
@@ -36,8 +36,7 @@ class Cell:
     def parse(self, from_grid=True):
         hist = {}
         max_key = (0, 0, 0)
-        max_val = 0
-        unknown = set()
+        max_val = 0.
 
         if not from_grid:
             self._r.capture()
@@ -54,11 +53,8 @@ class Cell:
                 break
 
         color = QColor(*max_key)
+        self.color = color
         self.type = dofus.findObject(color)
-
-        if self.type == dofus.ObjType.UNKNOWN:
-            # self.highlight(1)
-            raise ParseCellFailed(f"Enable parse cell of top corner max color {color.getRgb()}!")
 
         return self.type
 
@@ -79,7 +75,7 @@ class Cell:
         sys.exit(app.exec_())
 
     def highlightTopCorner(self, secs):
-        sys.excepthook = except_hook
+        # sys.excepthook = except_hook
         app = QApplication(sys.argv)
         top_corner_it = self.iterTopCorner()
         overlay = CellOverlay(self)
@@ -108,10 +104,18 @@ class Cell:
         return self.grid.inLDV(self, tgt, po)
 
     def occupied(self):
-        return self.type != ObjType.FREE and self.type != ObjType.REACHABLE
+        return self.type != dofus.ObjType.FREE and self.type != dofus.ObjType.REACHABLE
 
-    def occupiedWithBot(self):
-        return self.type == dofus.ObjType.BOT
+    def waitAppear(self, kind, timeout=3):
+        start = perf_counter()
+        while perf_counter() - start < timeout:
+            self.parse(from_grid=False)
+            if self.type == kind:
+                return True
+        return False
+
+    def waitAnimation(self, timeout=3):
+        return self._r.waitAnimationEnd(timeout)
 
     def reachable(self):
         return self.type == dofus.ObjType.REACHABLE
@@ -123,6 +127,3 @@ class Cell:
 
     def indexes(self):
         return self.i, self.j
-
-def except_hook(cls, exception, traceback):
-    sys.__excepthook__(cls, exception, traceback)

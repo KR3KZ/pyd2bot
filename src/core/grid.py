@@ -5,7 +5,6 @@ from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QApplication
 from core import dofus
 from core.cell import Cell
-from core.exceptions import ParseGridFailed
 from core.region import Region
 from core.utils import sample
 from gui.Overlay import GridOverlay
@@ -16,6 +15,7 @@ class Grid(Region):
 
     def __init__(self, region, nbr_vcell, nbr_hcell):
         super(Grid, self).__init__(*region.getRect())
+        self.unknown = []
         self.nbr_vcell = nbr_vcell
         self.nbr_hcell = nbr_hcell
         self.cell_w = self.width() / nbr_hcell
@@ -101,11 +101,14 @@ class Grid(Region):
         self.reachable = set()
         self.free = set()
         self.capture()
+        self.unknown = []
         for cell in self:
+
             if do_parse:
                 ctype = cell.parse()
             else:
                 ctype = cell.type
+
             if ctype == dofus.ObjType.BOT:
                 self.bot = cell
             elif ctype == dofus.ObjType.MOB:
@@ -116,8 +119,27 @@ class Grid(Region):
                 self.reachable.add(cell)
             elif ctype == dofus.ObjType.INVOKE:
                 self.invoke.add(cell)
+            elif ctype == dofus.ObjType.UNKNOWN:
+                self.unknown.append(cell)
+
+        if len(self.unknown) == 1:
+            if not self.mobs:
+                self.unknown[0].type = dofus.ObjType.MOB
+                self.mobs.add(self.unknown[0])
+            elif not self.bot:
+                self.unknown[0].type = dofus.ObjType.BOT
+                self.bot = self.unknown[0]
+            else:
+                # assume its an obstacle (to test)
+                self.unknown[0].type = dofus.ObjType.OBSTACLE
+
+        elif len(self.unknown) > 1:
+            return False
+
         if not self.bot or not self.mobs:
-            raise ParseGridFailed("Enable to find bot or mobs pos!")
+            return False
+
+        return True
 
     def dist(self, cell1, cell2):
         i = 2 * abs(cell1.x - cell2.x) / self.cell_w
