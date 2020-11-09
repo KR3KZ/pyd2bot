@@ -3,67 +3,79 @@ import threading
 from time import sleep, perf_counter
 import pyautogui
 from core import dofus
+from core.bot import Bot
 from core.exceptions import *
 from core.grid import Grid
 import logging
-from core.observer import Observer
-
 pyautogui.FAILSAFE = False
 
 
-class Fighter(threading.Thread):
-    def __init__(self, spell, parent=None):
-        threading.Thread.__init__(self, name='Fighter')
-        self.spell = spell
-        self.dead = threading.Event()
-        self.killsig = threading.Event()
-        self.combatStarted = threading.Event()
-        self.combatEnded = threading.Event()
-        self.combatEndReached = threading.Event()
-        self.combatEndObs = None
+class CombatStartObs(threading.Thread):
+    def __init__(self, bot, rate=3):
+        super(CombatStartObs, self).__init__()
+        self.bot = bot
+        self.rate = rate
+
+    def run(self):
+        while not self.bot.killsig.wait(1):
+            patterns = [dofus.READY_BUTTON_P, dofus.SKIP_TURN_BUTTON_P]
+            match, idx = dofus.READY_R.waitAny(patterns)
+            self.bot.onCombatStarted('combat' if idx == 0 else 'turn')
+            self.bot.combatEnded.wait()
+
+
+class CombatEndObs(threading.Thread):
+    def __init__(self, bot, rate=3):
+        super(CombatEndObs, self).__init__()
+        self.bot = bot
+        self.rate = rate
+
+    def run(self):
+        while not self.bot.killsig.is_set():
+            if self.bot.combatStarted.wait(1 / self.rate) and \
+                    dofus.COMBAT_ENDED_POPUP_R.waitAppear(dofus.COMBAT_ENDED_POPUP_P, rate=self.rate):
+                self.bot.onCombatEnded()
+
+
+class Fighter(Bot):
+
+    def __init__(self, spell, name="Fighter"):
+        super(Fighter, self).__init__(spell, name)
+        self.fightEndObs = CombatEndObs(self)
+        self.fightStartObs = CombatStartObs(self)
         self.grid = Grid(dofus.COMBAT_R, dofus.VCELLS, dofus.HCELLS)
-        self.parent = parent
-        self.dead = False
         self.mobs_killed = 0
-        if parent:
-            self.lock = self.parent.lock
-        else:
-            self.lock = threading.Lock()
         self.nbr_fights = 0
 
     def run(self):
+        super(Fighter, self).run()
+        self.fightStartObs.start()
+        self.fightEndObs.start()
+
+    def onCombatEnded(self):
+        self.combatEndReached.set()
+        self.combatStarted.clear()
+        dofus.COMBAT_ENDED_POPUP_CLOSE_R.click()
+        dofus.COMBAT_ENDED_POPUP_R.waitVanish(dofus.COMBAT_ENDED_POPUP_P)
+
+    def onCombatStarted(self, event):
         try:
-            logging.info('Fighter running')
-            while not self.killsig.wait(1):
-                match, matched = dofus.READY_R.waitAny([dofus.READY_BUTTON_P, dofus.SKIP_TURN_BUTTON_P])
-                logging.info("Combat started")
-                if self.killsig.is_set():
-                    break
-                self.combatStarted.set()
-                self.combatEndReached.clear()
-                self.combatEnded.clear()
-                self.dead = False
-                with self.lock:
-                    if matched == dofus.READY_BUTTON_P:
-                        pyautogui.press(dofus.SKIP_TURN_SHORTCUT)
-                    dofus.OUT_OF_COMBAT_R.hover()
-                    self.combatEndObs = Observer(dofus.COMBAT_ENDED_POPUP_R,
-                                                 dofus.COMBAT_ENDED_POPUP_P,
-                                                 self.onCombatEnded,
-                                                 Observer.Mode.APPEAR,
-                                                 rest_time=0.3)
-                    self.combatEndObs.start()
-                    self.combatAlgo()
-                    sleep(1)
-                    self.combatEnded.set()
-                    self.nbr_fights += 1
-                    logging.debug('Combat ended')
+            logging.info("Combat started")
+            self.combatStarted.set()
+            self.combatEndReached.clear()
+            self.combatEnded.clear()
+            self.dead = False
+            if event == 'combat':
+                pyautogui.press(dofus.SKIP_TURN_SHORTCUT)
+            dofus.OUT_OF_COMBAT_R.hover()
+            self.combatAlgo()
+            sleep(1)
+            self.combatEnded.set()
+            self.nbr_fights += 1
+            logging.debug('Combat ended')
         except Exception:
             logging.error("Fatal error in main run!", exc_info=True)
-            if self.parent:
-                self.parent.interrupt()
-            else:
-                self.interrupt()
+            self.interrupt()
         logging.info(f"I farmed {self.nbr_fights} fights")
         logging.info('Goodbye cruel world.')
 
@@ -79,25 +91,19 @@ class Fighter(threading.Thread):
                 perf_counter() - s < timeout:
             s = perf_counter()
             if self.myTurn():
-                logging.debug('Walk turn started')
-                break
+                logging.debug('Bot turn started')
+                return True
             elapsed = perf_counter() - s
             sleep((1 / rate) - elapsed)
         raise WaitTurnTimedOut
 
-    def onCombatEnded(self):
-        logging.debug("Fight ended detected")
-        self.combatEndReached.set()
-        self.combatEndObs.stop()
-        dofus.END_COMBAT_CLOSE_L.click()
-        dofus.COMBAT_ENDED_POPUP_R.waitVanish(dofus.COMBAT_ENDED_POPUP_P)
-
     def interrupt(self):
+        """
+        interrupt thread.
+        """
         dofus.READY_R.stopWait.set()
         self.combatEnded.set()
-        if self.combatEndObs:
-            self.combatEndObs.stop()
-        self.killsig.set()
+        super(Fighter, self).interrupt()
 
     def combatAlgo(self):
         nbr_errors = 0
@@ -112,10 +118,10 @@ class Fighter(threading.Thread):
             except (FindPathFailed, ParseGridFailed, MoveToCellFailed, UseSpellFailed, WaitTurnTimedOut) as e:
                 if self.combatEndReached.is_set():
                     return True
-                if self.parent.disconnected.is_set():
-                    self.parent.connected.wait()
+                if self.disconnected.is_set():
+                    self.connected.wait()
                 else:
-                    logging.debug(str(e))
+                    logging.error(str(e), exc_info=True)
                     nbr_errors += 1
                     logging.debug(f"Will skip bots turn for the '{nbr_errors}'th time!")
                     if nbr_errors == 10:
@@ -282,7 +288,7 @@ class Fighter(threading.Thread):
                     self.combatEnded.wait()
                     result["farmed"] += self.mobs_killed
                     if self.dead:
-                        logging.debug("Walk dead during combat!")
+                        logging.debug("Walker dead during combat!")
                         break
                 else:
                     nbr_fails += 1

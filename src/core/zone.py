@@ -1,15 +1,47 @@
 import collections
+import random
 from core import dofus
 from core.exceptions import FindPathFailed
 
 
-class Map:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-        self.hasResource = None
-        self.hasMobs = None
-        self.discovered = False
+class Map(dict):
+    def __init__(self, zone, x, y):
+        super(Map, self).__init__({
+            'x': x,
+            'y': y,
+            'hasResource': None,
+            'hasMobs': None,
+            'discovered': None,
+            'excluded': {},
+            "farmed": 0
+        })
+        self.zone = zone
+
+    def __getattr__(self, item):
+        if item not in self:
+            raise AttributeError(f"Class 'Map' has no attribute '{item}'.")
+        return self[item]
+
+    def exclude(self, src, dst):
+        if src not in self.excluded:
+            self.excluded[src] = set()
+        self.excluded[src].add(dst)
+
+    def neighbors(self, src, hasMobs=False, hasResource=False):
+        result = []
+        for n in self.zone.neighbors(self.x, self.y):
+            if not src or src not in self.excluded or n not in self.excluded[src]:
+                result.append(n)
+        if hasMobs:
+            result = [_ for _ in result if not _.discovered or _.hasMobs]
+        if hasResource:
+            result = [_ for _ in result if not _.discovered or _.hasResource]
+        return result
+
+    def randDirection(self, src):
+        choices = self.neighbors(src)
+        dst = random.choice(choices)
+        return dst, (dst.x - self.x, dst.y - self.y)
 
 
 class Zone:
@@ -25,20 +57,29 @@ class Zone:
         self.y = top_left[1]
         self.w = bot_right[0] - top_left[0]
         self.h = bot_right[1] - top_left[1]
+        self._matrix = []
         self.name = name
+        for x in range(self.x, self.x + self.w + 1):
+            row = [Map(self, x, y) for y in range(self.y, self.y + self.h + 1)]
+            self._matrix.append(row)
 
-    def inside(self, x, y):
+    def __getitem__(self, coords):
+        x, y = coords
+        return self._matrix[x - self.x][y - self.y]
+
+    def __contains__(self, coords):
+        x, y = coords
         return self.x <= x <= self.x + self.w and self.y <= y <= self.y + self.h
 
-    def neighbors(self, x, y, inside_zone=True):
-        ans = set()
+    def neighbors(self, x, y, inside=True):
+        ans = []
         for direction in self.directions:
             dx, dy = direction
             dst = x + dx, y + dy
-            if inside_zone and self.inside(*dst):
-                ans.add(dst)
-            elif not inside_zone:
-                ans.add(dst)
+            if inside and dst in self:
+                ans.append(self[dst])
+            elif not inside:
+                ans.append(dst)
         return ans
 
     def pathToEntry(self, start_coords, exclude):
@@ -46,10 +87,9 @@ class Zone:
         seen = {start_coords}
         while queue:
             path = queue.popleft()
-            x, y = path[-1]
-            if self.inside(x, y):
+            if path[-1] in self:
                 return path[1:]
-            for coords in self.neighbors(x, y, inside_zone=False):
+            for coords in self.neighbors(*path[-1], inside=False):
                 if coords not in exclude | seen:
                     queue.append(path + [coords])
                     seen.add(coords)
@@ -60,4 +100,4 @@ if __name__ == "__main__":
     top_left = (0, 0)
     bot_right = (2, 2)
     z = Zone(top_left, bot_right)
-    print(z.x, z.y)
+    print(z)

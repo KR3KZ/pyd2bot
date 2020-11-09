@@ -7,7 +7,7 @@ class Observer(threading.Thread):
         VANISH = 2
         CHANGE = 3
 
-    def __init__(self, region, pattern=None, callback=None, mode=Mode.APPEAR, rest_time=0):
+    def __init__(self, region, pattern=None, callback=None, mode=Mode.APPEAR, rate=0):
         threading.Thread.__init__(self)
         self.region = region
         self.callback = callback
@@ -15,7 +15,7 @@ class Observer(threading.Thread):
         self.changed = threading.Event()
         self.vanished = threading.Event()
         self.mode = mode
-        self.rest_time = rest_time
+        self.rate = rate
         if self.mode == self.Mode.CHANGE:
             self.pattern = self.region.capture().copy()
         else:
@@ -27,7 +27,7 @@ class Observer(threading.Thread):
 
     def run(self):
         if self.mode == self.Mode.APPEAR:
-            self.region.waitAppear(self.pattern, rest_time=self.rest_time)
+            self.region.waitAppear(self.pattern, rate=self.rate)
         elif self.mode == self.Mode.VANISH:
             self.region.waitVanish(self.pattern)
             self.vanished.set()
@@ -42,6 +42,7 @@ if __name__ == "__main__":
     from core.region import Region
     from core import dofus
     from core import env
+
     # env.focusDofusWindow()
     # dofus.PA_R.highlight(1)
     pa_observer = Observer(dofus.PA_R, mode=Observer.Mode.CHANGE)

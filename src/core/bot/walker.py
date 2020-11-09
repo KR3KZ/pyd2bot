@@ -9,18 +9,14 @@ from core.exceptions import *
 from core import env, dofus
 
 
-class Walk:
+class Walker(threading.Thread):
 
-    def __init__(self, parent=None):
+    def __init__(self, name="Walked"):
+        super(Walker, self).__init__(name=name)
         self.killsig = threading.Event()
         self.lock = threading.Lock()
-        self.coordinates = None
-        self.lastMap = None
-        self.parent = parent
-        if self.parent:
-            self.killsig = parent.killsig
-        else:
-            self.killsig = threading.Event()
+        self.currPos = None
+        self.lastPos = None
 
     @staticmethod
     def parseMapCoords():
@@ -39,10 +35,10 @@ class Walk:
         else:
             return None
 
-    def updateCoords(self):
-        self.coordinates = self.parseMapCoords()
-        if self.coordinates:
-            return self.coordinates
+    def updatePos(self):
+        self.currPos = self.parseMapCoords()
+        if self.currPos:
+            return self.currPos
         else:
             raise ParseMapCoordsFailed(f"Enable to parse map coords")
 
@@ -50,23 +46,23 @@ class Walk:
         nbr_fails = 0
         while not self.killsig.is_set() and nbr_fails < max_tries:
             with self.lock:
-                currx, curry = self.updateCoords()
+                currx, curry = self.updatePos()
                 dstx, dsty = currx + direction[0], curry + direction[1]
                 dofus.mapChangeLoc[direction].click()
                 dofus.COMBAT_R.hover()
             if self.waitMapChange(dstx, dsty):
-                self.lastMap = (currx, curry)
+                self.lastPos = (currx, curry)
                 return True
             nbr_fails += 1
         return False
 
     def waitMapChange(self, x, y, timeout=8):
-        logging.debug(f"Current map coords: {self.coordinates}")
+        logging.debug(f"Current map coords: {self.currPos}")
         logging.debug(f"Changing map to destination ({x}, {y})")
         s = perf_counter()
         while not self.killsig.is_set() and perf_counter() - s < timeout:
             with self.lock:
-                if self.updateCoords() == (x, y):
+                if self.updatePos() == (x, y):
                     logging.debug(f"Change map took {perf_counter() - s}")
                     return True
         return False
@@ -74,9 +70,9 @@ class Walk:
     def moveToZone(self, zone):
         exclude = set()
         while not self.killsig.is_set():
-            path = zone.pathToEntry(self.coordinates, exclude)
+            path = zone.pathToEntry(self.currPos, exclude)
             for x, y in path:
-                currx, curry = self.coordinates
+                currx, curry = self.currPos
                 direction = x - currx, y - curry
                 if not self.changeMap(direction):
                     exclude.add((x, y))
@@ -85,4 +81,10 @@ class Walk:
             return True
         return False
 
-
+    def randomWalk(self, zone):
+        while not self.killsig.is_set():
+            dst, direction = zone[self.currPos].randDirection(self.lastPos)
+            if self.changeMap(direction, max_tries=2):
+                return True
+            else:
+                zone[self.currPos].exclude(self.lastPos, dst)

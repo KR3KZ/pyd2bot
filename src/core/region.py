@@ -22,6 +22,21 @@ def except_hook(cls, exception, traceback):
 sys.excepthook = except_hook
 
 
+def withTimeOut(fn):
+    def wrapped(self, *args, timeout=FOREVER, rate=3):
+        self.stopWait.clear()
+        start = perf_counter()
+        while not self.stopWait.is_set() and perf_counter() - start < timeout:
+            s = perf_counter()
+            r = fn(self, *args)
+            if r:
+                return r
+            rest = (1 / rate) - perf_counter() + s
+            sleep(rest if rest > 0 else 0)
+        return None, None
+    return wrapped
+
+
 class Location(QPoint):
     def __init__(self, x, y):
         super(Location, self).__init__(x, y)
@@ -41,30 +56,33 @@ class Region(QRect):
         self.bi = None
         self.stopWait = threading.Event()
 
-    def waitAppear(self, pattern, timeout=FOREVER, threshold=0.7, rest_time=0):
-        self.stopWait.clear()
-        elapsed = 0
-        result = None
-        start = perf_counter()
-        while not self.stopWait.is_set() and elapsed < timeout:
-            result = self.find(pattern, threshold)
-            if result:
-                break
-            sleep(rest_time)
-            elapsed = perf_counter() - start
-        return result
+    @withTimeOut
+    def waitAppear(self, pattern, threshold=0.7):
+        match = self.find(pattern, threshold)
+        if match:
+            return match
 
-    def waitAny(self, patterns, timeout=FOREVER, threshold=0.7):
+    @withTimeOut
+    def waitAny(self, patterns, threshold=0.7):
+        match, idx = self.findAny(patterns, threshold)
+        if match:
+            return match, idx
+
+    @withTimeOut
+    def waitVanish(self, pattern, threshold=0.9):
+        match = self.find(pattern, threshold)
+        if not match:
+            return pattern, match
+
+    def waitChange(self, timeout=FOREVER, nbr_pix=50):
         self.stopWait.clear()
-        elapsed = 0
         start = perf_counter()
-        while not self.stopWait.is_set() and elapsed < timeout:
-            for pattern in patterns:
-                match = self.find(pattern, threshold)
-                if match:
-                    return pattern, match
-            elapsed = perf_counter() - start
-        return None, None
+        initial = env.capture(self)
+        while not self.stopWait.is_set() and perf_counter() - start < timeout:
+            pix_diff = (initial != env.capture(self)).any(axis=2).sum()
+            if pix_diff > nbr_pix:
+                return True
+        return False
 
     def findAnyAll(self, patterns, threshold=0.7, shuffle=False):
         ans = []
@@ -82,33 +100,10 @@ class Region(QRect):
         if shuffle:
             random.shuffle(patterns)
         for idx, pattern in enumerate(patterns):
-            target = self.find(pattern, threshold, capture=False)
-            if target is not None:
-                return target, idx
+            match = self.find(pattern, threshold, capture=False)
+            if match:
+                return match, idx
         return None, None
-
-    def waitVanish(self, pattern, timeout=FOREVER, threshold=0.9):
-        self.stopWait.clear()
-        elapsed = 0
-        start = perf_counter()
-        while not self.stopWait.is_set() and elapsed < timeout:
-            result = self.find(pattern, threshold)
-            if not result:
-                return True
-            elapsed = perf_counter() - start
-        return False
-
-    def waitChange(self, timeout=FOREVER, nbr_pix=50):
-        self.stopWait.clear()
-        elapsed = 0
-        start = perf_counter()
-        initial = env.capture(self)
-        while not self.stopWait.is_set() and elapsed < timeout:
-            pix_diff = (initial != env.capture(self)).any(axis=2).sum()
-            if pix_diff > nbr_pix:
-                return True
-            elapsed = perf_counter() - start
-        return False
 
     def waitAnimationEnd(self, timeout=FOREVER):
         self.stopWait.clear()

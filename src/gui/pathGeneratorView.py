@@ -112,7 +112,7 @@ class PathGeneratorView(QWidget):
 
         if not self.pathFile:
             self.pathFile = QFileDialog.getSaveFileName(self.mw, 'Save Path', '',
-                                                        "Walk Path File (*.path);;All Files (*)",
+                                                        "Walker Path File (*.path);;All Files (*)",
                                                         options=QFileDialog.DontUseNativeDialog)[0]
         if self.pathFile:
             with open(self.pathFile, 'w') as f:
@@ -127,7 +127,7 @@ class PathGeneratorView(QWidget):
 
     def newPath(self):
         self.pathFile = QFileDialog.getSaveFileName(self.mw, 'Select file to save path', '',
-                                                    "Walk Path File (*.path);;All Files (*)",
+                                                    "Walker Path File (*.path);;All Files (*)",
                                                     options=QFileDialog.DontUseNativeDialog)[0]
         if self.pathFile:
             with open("cache", "w") as f:
@@ -173,11 +173,11 @@ class PathGeneratorView(QWidget):
         return False
 
     def askFirstMap(self):
-        map_coord, ok_pressed = QInputDialog.getText(self, "Get map coordinates", "map coordinates :", QLineEdit.Normal,
+        map_coord, ok_pressed = QInputDialog.getText(self, "Get map currPos", "map currPos :", QLineEdit.Normal,
                                                      "")
         if re.match(COORD_REG, map_coord):
             map_coord.replace(" ", "").strip('\n')
             x, y = map(int, map_coord.split(","))
             self.path = [(x, y)] + self.path
         else:
-            QMessageBox.critical(self, "ERROR", "You didn't enter valid coordinates!")
+            QMessageBox.critical(self, "ERROR", "You didn't enter valid currPos!")

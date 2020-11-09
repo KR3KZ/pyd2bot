@@ -85,7 +85,7 @@ class MyQtTree(QTreeWidget):
                     self.parent.setCurrentMap(idx)
 
         elif choice == "change":
-            map_id, ok_pressed = QInputDialogging.getText(self, "Get map coordinates", "map coordinates :",
+            map_id, ok_pressed = QInputDialogging.getText(self, "Get map currPos", "map currPos :",
                                                       QLineEdit.Normal, "")
             if ok_pressed and re.match(COORD_REG, map_id):
                 map_id.replace(" ", "")
