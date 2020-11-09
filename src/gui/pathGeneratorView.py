@@ -112,7 +112,7 @@ class PathGeneratorView(QWidget):
 
         if not self.pathFile:
             self.pathFile = QFileDialog.getSaveFileName(self.mw, 'Save Path', '',
-                                                        "Bot Path File (*.path);;All Files (*)",
+                                                        "Walk Path File (*.path);;All Files (*)",
                                                         options=QFileDialog.DontUseNativeDialog)[0]
         if self.pathFile:
             with open(self.pathFile, 'w') as f:
@@ -127,7 +127,7 @@ class PathGeneratorView(QWidget):
 
     def newPath(self):
         self.pathFile = QFileDialog.getSaveFileName(self.mw, 'Select file to save path', '',
-                                                    "Bot Path File (*.path);;All Files (*)",
+                                                    "Walk Path File (*.path);;All Files (*)",
                                                     options=QFileDialog.DontUseNativeDialog)[0]
         if self.pathFile:
             with open("cache", "w") as f:

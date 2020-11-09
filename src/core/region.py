@@ -57,15 +57,14 @@ class Region(QRect):
     def waitAny(self, patterns, timeout=FOREVER, threshold=0.7):
         self.stopWait.clear()
         elapsed = 0
-        result = None
         start = perf_counter()
         while not self.stopWait.is_set() and elapsed < timeout:
             for pattern in patterns:
-                result = self.find(pattern, threshold)
-                if result is not None:
-                    return pattern
+                match = self.find(pattern, threshold)
+                if match:
+                    return pattern, match
             elapsed = perf_counter() - start
-        return result
+        return None, None
 
     def findAnyAll(self, patterns, threshold=0.7, shuffle=False):
         ans = []

@@ -1,7 +1,15 @@
 import collections
-import yaml
 from core import dofus
 from core.exceptions import FindPathFailed
+
+
+class Map:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.hasResource = None
+        self.hasMobs = None
+        self.discovered = False
 
 
 class Zone:
@@ -18,7 +26,6 @@ class Zone:
         self.w = bot_right[0] - top_left[0]
         self.h = bot_right[1] - top_left[1]
         self.name = name
-        self.cache = {}
 
     def inside(self, x, y):
         return self.x <= x <= self.x + self.w and self.y <= y <= self.y + self.h
@@ -33,14 +40,6 @@ class Zone:
             elif not inside_zone:
                 ans.add(dst)
         return ans
-
-    def loadCache(self, file_path):
-        with open(file_path, 'r') as f:
-            self.cache = yaml.load(f, Loader=yaml.FullLoader)
-
-    def saveTo(self, file_path):
-        with open(file_path, 'w') as f:
-            yaml.dump(self.cache, f)
 
     def pathToEntry(self, start_coords, exclude):
         queue = collections.deque([[start_coords]])

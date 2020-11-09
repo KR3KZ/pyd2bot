@@ -39,6 +39,10 @@ class UseSpellFailed(TimeoutError):
         self.tgt = tgtCell
 
 
+class WaitTurnTimedOut(Exception):
+    pass
+
+
 class BotDied(Exception):
     pass
 

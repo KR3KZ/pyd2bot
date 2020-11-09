@@ -15,15 +15,15 @@ class Fighter(threading.Thread):
     def __init__(self, spell, parent=None):
         threading.Thread.__init__(self, name='Fighter')
         self.spell = spell
-        self.died = threading.Event()
+        self.dead = threading.Event()
         self.killsig = threading.Event()
-        self.combatDetected = threading.Event()
+        self.combatStarted = threading.Event()
         self.combatEnded = threading.Event()
-        self.combatEndedDetected = threading.Event()
+        self.combatEndReached = threading.Event()
         self.combatEndObs = None
         self.grid = Grid(dofus.COMBAT_R, dofus.VCELLS, dofus.HCELLS)
         self.parent = parent
-        self.died = False
+        self.dead = False
         self.mobs_killed = 0
         if parent:
             self.lock = self.parent.lock
@@ -35,18 +35,18 @@ class Fighter(threading.Thread):
         try:
             logging.info('Fighter running')
             while not self.killsig.wait(1):
-                dofus.READY_R.waitAny([dofus.READY_BUTTON_P, dofus.SKIP_TURN_BUTTON_P])
+                match, matched = dofus.READY_R.waitAny([dofus.READY_BUTTON_P, dofus.SKIP_TURN_BUTTON_P])
                 logging.info("Combat started")
                 if self.killsig.is_set():
                     break
-                self.combatDetected.set()
-                self.combatEndedDetected.clear()
+                self.combatStarted.set()
+                self.combatEndReached.clear()
                 self.combatEnded.clear()
+                self.dead = False
                 with self.lock:
-                    self.died = False
-                    pyautogui.press(dofus.SKIP_TURN_SHORTCUT)
+                    if matched == dofus.READY_BUTTON_P:
+                        pyautogui.press(dofus.SKIP_TURN_SHORTCUT)
                     dofus.OUT_OF_COMBAT_R.hover()
-                    self.checkCreatureMode()
                     self.combatEndObs = Observer(dofus.COMBAT_ENDED_POPUP_R,
                                                  dofus.COMBAT_ENDED_POPUP_P,
                                                  self.onCombatEnded,
@@ -56,11 +56,10 @@ class Fighter(threading.Thread):
                     self.combatAlgo()
                     sleep(1)
                     self.combatEnded.set()
-                    self.combatDetected.clear()
                     self.nbr_fights += 1
                     logging.debug('Combat ended')
-        except Exception as e:
-            logging.error("fatal error", exc_info=True)
+        except Exception:
+            logging.error("Fatal error in main run!", exc_info=True)
             if self.parent:
                 self.parent.interrupt()
             else:
@@ -68,16 +67,27 @@ class Fighter(threading.Thread):
         logging.info(f"I farmed {self.nbr_fights} fights")
         logging.info('Goodbye cruel world.')
 
-    def waitTurn(self, rate=3):
-        while not self.killsig.is_set() and not self.combatEndedDetected.is_set():
-            if dofus.MY_TURN_CHECK_L.getpixel() == dofus.MY_TURN_C:
-                logging.debug('Bot turn started')
+    def waitTurn(self, rate=3, timeout=60 * 2):
+        """
+        Waits for bot turn.
+        :param timeout: timeout in seconds
+        :param rate: scan rate
+        """
+        s = perf_counter()
+        while not self.killsig.is_set() and\
+                not self.combatEndReached.is_set() and\
+                perf_counter() - s < timeout:
+            s = perf_counter()
+            if self.myTurn():
+                logging.debug('Walk turn started')
                 break
-            sleep(1 / rate)
+            elapsed = perf_counter() - s
+            sleep((1 / rate) - elapsed)
+        raise WaitTurnTimedOut
 
     def onCombatEnded(self):
         logging.debug("Fight ended detected")
-        self.combatEndedDetected.set()
+        self.combatEndReached.set()
         self.combatEndObs.stop()
         dofus.END_COMBAT_CLOSE_L.click()
         dofus.COMBAT_ENDED_POPUP_R.waitVanish(dofus.COMBAT_ENDED_POPUP_P)
@@ -90,38 +100,49 @@ class Fighter(threading.Thread):
         self.killsig.set()
 
     def combatAlgo(self):
-        turns_skipped_on_error = 0
+        nbr_errors = 0
         self.mobs_killed = 0
-        while not self.combatEndedDetected.wait(1):
-            self.waitTurn()
+        while not self.combatEndReached.wait(1):
+            self.checkCreatureMode()
             try:
+                if not self.myTurn():
+                    self.waitTurn()
                 self.playTurn()
-            except (FindPathFailed, ParseGridFailed, MoveToCellFailed, UseSpellFailed) as e:
-                if self.combatEndedDetected.is_set():
-                    return
+                nbr_errors = 0
+            except (FindPathFailed, ParseGridFailed, MoveToCellFailed, UseSpellFailed, WaitTurnTimedOut) as e:
+                if self.combatEndReached.is_set():
+                    return True
                 if self.parent.disconnected.is_set():
                     self.parent.connected.wait()
-                logging.debug(str(e))
-                turns_skipped_on_error += 1
-                logging.debug(f"Will skip bots turn for the '{turns_skipped_on_error}'th time!")
-                if turns_skipped_on_error == 10:
-                    logging.debug("Reached maximum of turns skip on error. Will resign combat.")
-                    self.died = True
-                    self.resign()
-                    return
-            pyautogui.press(dofus.SKIP_TURN_SHORTCUT)
+                else:
+                    logging.debug(str(e))
+                    nbr_errors += 1
+                    logging.debug(f"Will skip bots turn for the '{nbr_errors}'th time!")
+                    if nbr_errors == 10:
+                        logging.debug("Reached maximum of turns skip on error. Will resign combat.")
+                        self.dead = True
+                        self.resign()
+                        return False
+            self.skipTurn()
+
+    @staticmethod
+    def skipTurn():
+        pyautogui.press(dofus.SKIP_TURN_SHORTCUT)
+
+    @staticmethod
+    def myTurn():
+        return dofus.MY_TURN_CHECK_L.getpixel() == dofus.MY_TURN_C
 
     def playTurn(self):
         """
-        Play turn
-        :return:
+        Play turn loop
         """
         usedSpells = 0
-        while not self.combatEndedDetected.wait(0.2) and usedSpells < self.spell['nbr']:
-            self.parseGrid()
+        while not self.combatEndReached.wait(0.2) and usedSpells < self.spell['nbr']:
+            self.parseCombatGrid()
             if not self.mobs_killed:
                 self.mobs_killed = len(self.grid.mobs)
-            if self.combatEndedDetected.is_set():
+            if self.combatEndReached.is_set():
                 return
             mob, path = self.findPathToTarget(self.grid.bot, self.spell['range'], self.grid.mobs)
             if not mob:
@@ -140,7 +161,7 @@ class Fighter(threading.Thread):
                 self.useSpell(self.spell, mob)
             usedSpells += 1
 
-    def parseGrid(self, timeout=5):
+    def parseCombatGrid(self, timeout=5):
         """
         Parse combat grid.
         :param timeout:  time out in seconds
@@ -148,7 +169,7 @@ class Fighter(threading.Thread):
         """
         s = perf_counter()
         while not self.killsig.is_set() and\
-                not self.combatEndedDetected.is_set() and\
+                not self.combatEndReached.is_set() and\
                 perf_counter() - s < timeout:
             if self.grid.parse():
                 return True
@@ -179,7 +200,7 @@ class Fighter(threading.Thread):
         """
         s = perf_counter()
         while not self.killsig.is_set() and \
-                not self.combatEndedDetected.is_set() and \
+                not self.combatEndReached.is_set() and \
                 perf_counter() - s < timeout:
             cell.click()
             dofus.OUT_OF_COMBAT_R.hover()
@@ -199,7 +220,7 @@ class Fighter(threading.Thread):
         pyautogui.press(spell['shortcut'])
         target.click()
         dofus.OUT_OF_COMBAT_R.hover()
-        if target.waitAnimation(10):
+        if target.waitAnimation(timeout):
             return True
         raise UseSpellFailed(target)
 
@@ -214,7 +235,7 @@ class Fighter(threading.Thread):
         logging.debug("searching path to mobs")
         queue = collections.deque([[start_cell]])
         seen = {start_cell.indexes()}
-        while not self.killsig.is_set() and not self.combatEndedDetected.is_set() and queue:
+        while not self.killsig.is_set() and not self.combatEndReached.is_set() and queue:
             path = queue.popleft()
             curr = path[-1]
             for mob in targets:
@@ -234,6 +255,57 @@ class Fighter(threading.Thread):
         if dofus.CREATURE_MODE_R.find(dofus.CREATURE_MODE_OFF_P, grayscale=False):
             dofus.CREATURE_MODE_R.click()
             dofus.OUT_OF_COMBAT_R.hover()
+
+    def harvestCombats(self, mobs_patterns, max_tries=4, shuffle=False):
+        """
+        Look for mobs patterns and try to enter combats.
+        :param mobs_patterns: list of images
+        :param max_tries: max number of clicks on mobs group
+        :param shuffle: if you want to shuffle mobs patterns before matching
+        :return: nbr of mobs farmed and the matched patterns with nbr of times matched
+        """
+        nbr_fails = 0
+        result = {
+            "farmed": 0,
+            "matched": {}
+        }
+        while not self.killsig.is_set() and nbr_fails < max_tries:
+            logging.debug("Searching for mobs group...")
+            tgt, idx = dofus.COMBAT_R.findAny(mobs_patterns, threshold=0.8, shuffle=shuffle)
+            if tgt:
+                logging.debug("I found a mob group")
+                if self.enterCombat(tgt):
+                    nbr_fails = 0
+                    if idx not in result['matched']:
+                        result['matched'][idx] = 0
+                    result['matched'][idx] += 1
+                    self.combatEnded.wait()
+                    result["farmed"] += self.mobs_killed
+                    if self.dead:
+                        logging.debug("Walk dead during combat!")
+                        break
+                else:
+                    nbr_fails += 1
+            else:
+                logging.debug("No mobs found")
+                break
+        return result
+
+    def enterCombat(self, tgt, timeout=5):
+        """
+        Click on a mob group and wait for the combat to start.
+        :param tgt: pos of mobs group in the screen
+        :param timeout: timeout in seconds
+        :return: True if all good else False
+        """
+        tgt.click()
+        logging.debug("Clicked on mobs group")
+        s = perf_counter()
+        if self.combatStarted.wait(timeout):
+            logging.debug(f"Enter combat took: {perf_counter() - s}")
+            return True
+        logging.debug("Couldn't open combat!")
+        return False
 
     @staticmethod
     def resign():

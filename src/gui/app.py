@@ -18,7 +18,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
         self.setGeometry(584, 171, 744, 671)
-        self.setWindowTitle("Dofus Bot")
+        self.setWindowTitle("Dofus Walk")
         self.setWindowIcon(QtGui.QIcon('icon.jpg'))
         self.tabs = QTabWidget()
         self.setCentralWidget(self.tabs)
