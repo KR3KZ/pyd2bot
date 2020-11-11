@@ -3,9 +3,7 @@ from itertools import product
 from math import floor
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QApplication
-from core import dofus
-from core.cell import Cell
-from core.region import Region
+from core import dofus, Cell, Region
 from core.utils import sample
 from gui.Overlay import GridOverlay
 import core.env as env

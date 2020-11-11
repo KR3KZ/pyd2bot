@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
+import os
+
 from PyQt5.QtCore import QObject, pyqtSignal
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
-
-from gui.farmerView import FarmerView
-from gui.fighterView import FighterView
-from gui.pathGeneratorView import PathGeneratorView
-from gui.patternView import PatternView
+from gui import FarmerView, FighterView, PathGeneratorView, PatternView
 
 
 class Communicate(QObject):
@@ -22,6 +20,8 @@ class MainWindow(QMainWindow):
         self.setWindowIcon(QtGui.QIcon('icon.jpg'))
         self.tabs = QTabWidget()
         self.setCentralWidget(self.tabs)
+        self.currProjectDir = None
+        self.patternsDir = None
 
         # Initialize tab screen
         self.pathGenerator = PathGeneratorView(self)
@@ -40,14 +40,14 @@ class MainWindow(QMainWindow):
 
     def initMenu(self):
         # Create new action
-        newAction = QAction(text='&New path', parent=self)
+        newAction = QAction(text='&New project', parent=self)
         newAction.setStatusTip('New path')
-        newAction.triggered.connect(self.pathGenerator.newPath)
+        newAction.triggered.connect(self.newProject)
 
         # Create new action
         openAction = QAction(text='&Open', parent=self)
         openAction.setStatusTip('Open path')
-        openAction.triggered.connect(self.pathGenerator.openPath)
+        openAction.triggered.connect(self.openProject)
 
         # save action
         saveAction = QAction(text='&Save', parent=self)
@@ -66,6 +66,23 @@ class MainWindow(QMainWindow):
         fileMenu.addAction(openAction)
         fileMenu.addAction(saveAction)
         fileMenu.addAction(saveAsAction)
+
+    def newProject(self):
+        self.currProjectDir = str(
+            QFileDialog.getExistingDirectory(self, "Select Directory", options=QFileDialog.DontUseNativeDialog))
+        if self.currProjectDir:
+            self.patternsDir = os.path.join(self.currProjectDir, 'patterns')
+            self.pathsDir = os.path.join(self.currProjectDir, 'paths')
+            self.logsDir = os.path.join(self.currProjectDir, 'logs')
+            os.mkdir(self.patternsDir)
+            os.mkdir(self.pathsDir)
+            os.mkdir(self.logsDir)
+
+    def openProject(self):
+        self.currProjectDir = str(
+            QFileDialog.getExistingDirectory(self, "Select Directory", options=QFileDialog.DontUseNativeDialog))
+        self.patternsDir = os.path.join(self.currProjectDir, 'patterns')
+
 
 
 def window():

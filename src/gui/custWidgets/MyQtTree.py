@@ -1,9 +1,6 @@
 from PyQt5.QtWidgets import *
 import re
-from .constants import *
-
-from gui.constants import COORD_REG
-
+from gui.constants import *
 
 def _mapList(map):
     m = map.childCount()

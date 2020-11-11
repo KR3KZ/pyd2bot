@@ -3,7 +3,7 @@ import threading
 from time import sleep, perf_counter
 import pyautogui
 from core import dofus
-from core.bot import Bot
+from core.bot import Walker
 from core.exceptions import *
 from core.grid import Grid
 import logging
@@ -37,10 +37,11 @@ class CombatEndObs(threading.Thread):
                 self.bot.onCombatEnded()
 
 
-class Fighter(Bot):
+class Fighter(Walker):
 
     def __init__(self, spell, name="Fighter"):
-        super(Fighter, self).__init__(spell, name)
+        super(Fighter, self).__init__(name)
+        self.spell = spell
         self.fightEndObs = CombatEndObs(self)
         self.fightStartObs = CombatStartObs(self)
         self.grid = Grid(dofus.COMBAT_R, dofus.VCELLS, dofus.HCELLS)
@@ -56,7 +57,7 @@ class Fighter(Bot):
         self.combatEndReached.set()
         self.combatStarted.clear()
         dofus.COMBAT_ENDED_POPUP_CLOSE_R.click()
-        dofus.COMBAT_ENDED_POPUP_R.waitVanish(dofus.COMBAT_ENDED_POPUP_P)
+        dofus.COMBAT_ENDED_POPUP_R.waitAnimationEnd()
 
     def onCombatStarted(self, event):
         try:
@@ -115,7 +116,7 @@ class Fighter(Bot):
                 self.playTurn()
                 nbr_errors = 0
             except (FindPathFailed, ParseGridFailed, MoveToCellFailed, UseSpellFailed, WaitTurnTimedOut) as e:
-                if self.combatEndReached.is_set():
+                if self.combatEndReached.is_set() or self.killsig.is_set():
                     return True
                 if self.disconnected.is_set():
                     self.connected.wait()
@@ -226,7 +227,9 @@ class Fighter(Bot):
         target.click()
         dofus.OUT_OF_COMBAT_R.hover()
         if target.waitAnimation(timeout):
+            sleep(0.2)
             return True
+
         raise UseSpellFailed(target)
 
     def findPathToTarget(self, start_cell, po, targets):

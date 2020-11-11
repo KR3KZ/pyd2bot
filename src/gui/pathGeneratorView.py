@@ -1,20 +1,18 @@
 import os
 import re
 from PyQt5 import QtCore
-from PyQt5.QtCore import QRegExp
 from PyQt5.QtGui import QRegExpValidator, QCursor
 from PyQt5.QtWidgets import QVBoxLayout, QGroupBox, QHBoxLayout, QLabel, QPushButton, QTreeWidgetItem, \
     QFileDialog, QMessageBox, QAction, QInputDialog, QLineEdit, QListWidget, QWidget, QComboBox, QMenu
 from .constants import *
-from gui.ChooseDirectionBox import ChooseDirectionBox
-from gui.SnippetWidget import QSnip
+from gui.custWidgets import ChooseDirectionBox, QSnip
 import yaml
 
 
 class MapCoordField(QLineEdit):
     def __init__(self, place_holder):
         super(MapCoordField, self).__init__()
-        validator = QRegExpValidator(QRegExp("-?\d{2}"))
+        validator = QRegExpValidator(QtCore.QRegExp("-?\d{2}"))
         self.setPlaceholderText(place_holder)
         self.setValidator(validator)
 
@@ -111,7 +109,9 @@ class PathGeneratorView(QWidget):
             return
 
         if not self.pathFile:
-            self.pathFile = QFileDialog.getSaveFileName(self.mw, 'Save Path', '',
+            self.pathFile = QFileDialog.getSaveFileName(self.mw,
+                                                        'Save Path',
+                                                        self.mw.pathsDir,
                                                         "Walker Path File (*.path);;All Files (*)",
                                                         options=QFileDialog.DontUseNativeDialog)[0]
         if self.pathFile:
@@ -144,23 +144,6 @@ class PathGeneratorView(QWidget):
             x, y = data['start-map']
             self.xcoords.setText(x)
             self.Ycoords.setText(y)
-
-    def openPatternsDir(self):
-        self.patterns_dir = QFileDialog.getExistingDirectory(None, 'Select a folder:', 'C:\\', QFileDialog.ShowDirsOnly)
-
-    def startCaptureMode(self):
-        if self.curr_map_idx is None:
-            QMessageBox.critical(self, "ERROR", "You didn't specify a current map.")
-            return
-        self.mw.hide()
-        self.snip_win = QSnip(self, self.patterns_dir)
-        self.snip_win.captureModeExited.connect(self.mw.show)
-        self.snip_win.show()
-
-    def keyPressEvent(self, event):
-        if event.key() == QtCore.Qt.Key_F5:
-            self.startCaptureMode()
-        event.accept()
 
     def getFilePathFromCache(self):
         try:

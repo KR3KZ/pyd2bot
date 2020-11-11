@@ -9,7 +9,7 @@ from PyQt5.QtCore import QPoint, QRect
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QApplication
 from core import utils
-import gui.Overlay as overlay
+from gui import Overlay
 import core.env as env
 
 FOREVER = 60 * 60 * 24 * 1.
@@ -82,6 +82,7 @@ class Region(QRect):
             pix_diff = (initial != env.capture(self)).any(axis=2).sum()
             if pix_diff > nbr_pix:
                 return True
+            sleep(0.01)
         return False
 
     def findAnyAll(self, patterns, threshold=0.7, shuffle=False):
@@ -107,7 +108,7 @@ class Region(QRect):
 
     def waitAnimationEnd(self, timeout=FOREVER):
         self.stopWait.clear()
-        lookup_int = 5
+        lookup_int = 4
         clip = collections.deque()
         for frame in self.stream(timeout):
             if len(clip) > lookup_int:
@@ -115,12 +116,15 @@ class Region(QRect):
                     return True
                 clip.popleft()
             clip.append(frame)
-            sleep(0.2)
+            sleep(0.17)
         return False
 
-    def capture(self):
+    def capture(self, gray=False):
         self.bi = env.capture(self)
-        self.bi = cv2.cvtColor(self.bi, cv2.COLOR_RGB2BGR)
+        if gray:
+            self.bi = cv2.cvtColor(self.bi, cv2.COLOR_RGB2GRAY)
+        else:
+            self.bi = cv2.cvtColor(self.bi, cv2.COLOR_RGB2BGR)
         return self.bi
 
     def stream(self, interval=FOREVER):
@@ -171,7 +175,7 @@ class Region(QRect):
 
     def highlight(self, secs):
         app = QApplication(sys.argv)
-        self.overlay = overlay.Overlay()
+        self.overlay = Overlay()
         self.overlay.highlight(self, secs)
         app.exec_()
 

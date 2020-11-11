@@ -1,6 +1,5 @@
 import collections
 import random
-from core import dofus
 from core.exceptions import FindPathFailed
 
 
@@ -24,8 +23,8 @@ class Map(dict):
 
     def exclude(self, src, dst):
         if src not in self.excluded:
-            self.excluded[src] = set()
-        self.excluded[src].add(dst)
+            self.excluded[src] = []
+        self.excluded[src].append(dst)
 
     def neighbors(self, src, hasMobs=False, hasResource=False):
         result = []
@@ -45,7 +44,7 @@ class Map(dict):
 
 
 class Zone:
-    directions = {dofus.UP, dofus.DOWN, dofus.LEFT, dofus.RIGHT}
+    directions = {(0, -1), (0, 1), (-1, 0), (1, 0)}
 
     def __init__(self, top_left, bot_right, name="Zone"):
         self.init(top_left, bot_right, name)

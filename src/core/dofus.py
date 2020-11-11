@@ -2,7 +2,7 @@ import os
 import cv2
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor
-from core.region import Region, Location
+from core import Region, Location
 
 patterns_dir = r"C:\Users\khalid.majdoub\PycharmProjects\bot2pix\src\patterns"
 
