@@ -1,2 +1,2 @@
-COORD_REG = "^\s*-?(\d+)\s*,\s*-?(\d+)\s*$"
+COORD_REG = "^\s*-*(\d+)\s*,\s*-*(\d+)\s*$"
 MAP_REG = f"^map\s*\[\s*(-*\d+)\s*,\s*(-*\d+)\s*\]$"

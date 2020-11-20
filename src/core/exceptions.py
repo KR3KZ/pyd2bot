@@ -5,13 +5,13 @@ class ParseGridFailed(TimeoutError):
             msg = "While parsing combat grid encountered more thant one unknown cell.\n"
             msg += "List of unknown cells and their colors: \n"
             for cell in grid.unknown:
-                msg += f"({cell.i}, {cell.j}), {str(cell.color)}\n"
+                msg += f"({cell.i}, {cell.j}), {str(cell.color)}.\n"
         if not grid.bot:
             msg += "Failed to parse bot position in the grid.\n"
         if not grid.mobs:
             msg += "Failed to parse any mob positions in the grid."
         if not msg:
-            msg = "Parse grid failed for unknown reason!!!"
+            msg = "Parse grid failed for unknown reason!"
         super(ParseGridFailed, self).__init__(msg)
 
 

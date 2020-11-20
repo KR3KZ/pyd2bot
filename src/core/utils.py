@@ -6,7 +6,7 @@ from numpy.ma import sqrt
 
 def isAdjacent(matches, r):
     for m in matches:
-        if abs(r.x() - m.x()) <= m.width() or abs(r.y() - m.y()) <= m.height():
+        if abs(r.x() - m.x()) <= 50 and abs(r.y() - m.y()) <= 50:
             return True
     return False
 

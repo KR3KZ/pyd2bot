@@ -37,8 +37,16 @@ class Map(dict):
             result = [_ for _ in result if not _.discovered or _.hasResource]
         return result
 
-    def randDirection(self, src):
-        choices = self.neighbors(src)
+    def randDirection(self, src, ignore=None):
+        if not ignore:
+            ignore = []
+        neighbors = self.neighbors(src)
+        if not neighbors:
+            self.excluded[src] = []
+            neighbors = self.neighbors(src)
+        choices = [_ for _ in neighbors if (_['x'], _['y']) not in ignore]
+        if not choices:
+            choices = neighbors
         dst = random.choice(choices)
         return dst, (dst.x - self.x, dst.y - self.y)
 

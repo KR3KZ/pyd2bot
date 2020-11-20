@@ -27,18 +27,30 @@ MAP_COORDS_R = Region(0, 28, 298, 98)
 CONNECT_R = Region(666, 88, 572, 531)
 RECONNECT_BUTTON_R = Region(880, 381, 161, 57)
 PLAY_GAME_BUTTON_R = Region(993, 652, 452, 260)
-
+BANK_MAN_R = Region(935, 465, 121, 126)
+BANK_MAN_TALK_R = Region(465, 601, 999, 236)
+INV_OPEN_R = Region(1213, 76, 413, 138)
+INV_FIRST_SLOT_R = Region(1249, 202, 67, 67)
+LVL_UP_INFO_R = Region(0,438,486,388)
+SLOTS_R = Region(835,920,418,86)
 # Patterns
 READY_BUTTON_P = loadPattern("READY_BUTTON_P.png")
 COMBAT_ENDED_POPUP_P = loadPattern("END_COMBAT_P.png")
 CREATURE_MODE_OFF_P = loadPattern("CREATURE_MODE_OFF_P.png")
 SKIP_TURN_BUTTON_P = loadPattern("SKIP_TURN_BUTTON_P.png")
-SMALL_FISH_P = loadPattern("SMALL_FISH_P.png")
 RESIGN_POPUP_P = loadPattern("RESIGN_POPUP_P.png")
 DEFEAT_POPUP_P = loadPattern("DEFEAT_POPUP_P.png")
 DISCONNECTED_BOX_P = loadPattern("DISCONNECTED_BOX_P.png")
 RECONNECT_BUTTON_P = loadPattern("RECONNECT_BUTTON_P.png")
 PLAY_GAME_BUTTON_P = loadPattern("PLAY_GAME_BUTTON_P.png")
+ASTRUB_ZAAP_P = loadPattern("ASTRUB_ZAAP_P.png")
+BANK_MAN_P = loadPattern("BANK_MAN_P.png")
+BANK_MAN_TALK_P = loadPattern("BANK_MAN_TALK_P.png")
+COIN_BOUF_ZAAP_P = loadPattern("COIN_BOUF_ZAAP_P.png")
+EMPTY_SLOT_INV_P = loadPattern("EMPTY_SLOT_INV_P.png")
+ZAAP_OPEN_P = loadPattern("ZAAP_OPEN_P.png")
+INVENTAIRE_P = loadPattern("INVENTAIRE.png")
+CLOSE_POPUP_P = loadPattern("CLOSE_POPUP_P.png")
 
 # Env Vars
 HCELLS = 14.5
@@ -63,6 +75,8 @@ RESIGN_BUTTON_LOC = Location(1443, 1006)
 RESIGN_CONFIRM_L = Location(879, 567)
 DEFEAT_POPUP_CLOSE_L = Location(1122, 730)
 CLOSE_DISCONNECTED_BOX_L = Region(866, 549, 205, 42)
+CLOSE_LVL_UP_POPUP_L = Region(336,573,46,32)
+
 
 # Shortcuts
 RAPPEL_POTION_SHORTCUT = "e"
@@ -71,6 +85,9 @@ SKIP_TURN_SHORTCUT = 'space'
 ENU_COLOR = [QColor(253, 242, 206), QColor(253, 190, 45), QColor(254, 249, 226), QColor(216, 138, 22)]
 SRAM_COLOR = [QColor(61, 56, 150), QColor(251, 241, 191), QColor(33, 34, 88), QColor(227, 218, 173),
               QColor(34, 51, 153)]
+
+FULL_POD_CHECK_L = Location(1266, 1019)
+FULL_POD_COLOR = QColor(53, 190, 96)
 
 
 class ObjColor:

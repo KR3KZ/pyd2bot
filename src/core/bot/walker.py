@@ -1,6 +1,9 @@
 import collections
 import logging
-from time import perf_counter
+from time import perf_counter, sleep
+
+import pyautogui
+
 from core.exceptions import *
 from core import env, dofus
 from core.bot import Bot
@@ -8,7 +11,7 @@ from core.bot import Bot
 
 class Walker(Bot):
 
-    def __init__(self, name="Walker"):
+    def __init__(self, name="Dofus"):
         super(Walker, self).__init__(name=name)
         self.currPos = None
         self.lastPos = None
@@ -28,7 +31,11 @@ class Walker(Bot):
             currx, curry = self.updatePos()
             dstx, dsty = currx + direction[0], curry + direction[1]
             with self.lock:
+                pyautogui.keyDown('shift')
+                sleep(0.2)
                 dofus.mapChangeLoc[direction].click()
+                sleep(0.2)
+                pyautogui.keyUp('shift')
                 dofus.COMBAT_R.hover()
             if self.waitMapChange(dstx, dsty):
                 self.lastPos = (currx, curry)
@@ -36,7 +43,7 @@ class Walker(Bot):
             nbr_fails += 1
         return False
 
-    def waitMapChange(self, x, y, timeout=7.5):
+    def waitMapChange(self, x, y, timeout=12):
         logging.debug(f"Current map coords: {self.currPos}")
         logging.debug(f"Changing map to destination ({x}, {y})")
         s = perf_counter()
@@ -55,7 +62,7 @@ class Walker(Bot):
             for idx, (x, y) in enumerate(path):
                 currx, curry = self.currPos
                 direction = x - currx, y - curry
-                if not self.changeMap(direction, max_tries=1):
+                if not self.changeMap(direction, max_tries=2):
                     exclude.append([self.currPos, (x, y)])
                     res = False
                     break

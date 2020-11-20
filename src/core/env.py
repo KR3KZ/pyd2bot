@@ -1,10 +1,13 @@
 from time import sleep
+
+import cv2
 import numpy as np
 import pywinauto
 import win32api
 import win32con
 import win32gui
 import win32ui
+from PyQt5.QtCore import QRect
 from pytesseract import pytesseract
 
 pytesseract.tesseract_cmd = r'C:\Users\khalid.majdoub\AppData\Local\Tesseract-OCR\tesseract.exe'
@@ -19,8 +22,11 @@ keycodes = {
 }
 
 
-def focusDofusWindow():
-    DOFUS_HWND = pywinauto.findwindows.find_windows(title_re=".*Dofus.*")[0]
+def focusDofusWindow(account_name=None):
+    if not account_name:
+        DOFUS_HWND = pywinauto.findwindows.find_windows(title_re=".*Dofus.*")[0]
+    else:
+        DOFUS_HWND = pywinauto.findwindows.find_windows(title_re=f".*{account_name}.*")[0]
     win32gui.SetForegroundWindow(DOFUS_HWND)
     win32gui.SetActiveWindow(DOFUS_HWND)
     win32gui.ShowWindow(DOFUS_HWND, win32con.SW_MAXIMIZE)
@@ -64,25 +70,31 @@ def release(key):
 
 
 def _capture(region):
-    last_dc = win32gui.GetWindowDC(DOFUS_HWND)
-    dcObj = win32ui.CreateDCFromHandle(last_dc)
+    x, y, w, h = region.getRect()
+    # hwnd = pywinauto.findwindows.find_windows(title_re=".*Dofus.*")[0]
+    hdcwin = win32gui.GetWindowDC(DOFUS_HWND)
+
+    dcObj = win32ui.CreateDCFromHandle(hdcwin)
     cDC = dcObj.CreateCompatibleDC()
     bmp = win32ui.CreateBitmap()
-    bmp.CreateCompatibleBitmap(dcObj, region.width(), region.height())
+    bmp.CreateCompatibleBitmap(dcObj, w, h)
     cDC.SelectObject(bmp)
-    cDC.BitBlt((0, 0), (region.width(), region.height()), dcObj, (region.x(), region.y()), win32con.SRCCOPY)
+    cDC.BitBlt((0, 0), (w, h), dcObj, (x, y), win32con.SRCCOPY)
+
     signedIntsArray = bmp.GetBitmapBits(True)
     img = np.frombuffer(signedIntsArray, dtype='uint8')
-    img.shape = (region.height(), region.width(), 4)
+    img.shape = (h, w, 4)
+    #img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
     # bmp.SaveBitmapFile(cDC, 'save.bmp')
-    dcObj.DeleteDC()
-    cDC.DeleteDC()
-    win32gui.ReleaseDC(DOFUS_HWND, last_dc)
+
     win32gui.DeleteObject(bmp.GetHandle())
+    cDC.DeleteDC()
+    dcObj.DeleteDC()
+    win32gui.ReleaseDC(DOFUS_HWND, hdcwin)
     return img
 
 
 if __name__ == "__main__":
-    press()
-    sleep(2)
-    release(0x5A)
+    for k in range(81):
+        r = QRect(100, 100, 100, 100)
+        _capture(r)

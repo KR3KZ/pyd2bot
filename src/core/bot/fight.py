@@ -57,9 +57,13 @@ class Fighter(Walker):
         self.combatEndReached.set()
         self.combatStarted.clear()
         dofus.COMBAT_ENDED_POPUP_CLOSE_R.click()
-        dofus.COMBAT_ENDED_POPUP_R.waitAnimationEnd()
+        dofus.COMBAT_ENDED_POPUP_R.waitVanish(dofus.COMBAT_ENDED_POPUP_P)
+        sleep(0.7)
 
     def onCombatStarted(self, event):
+        match = dofus.LVL_UP_INFO_R.find(dofus.CLOSE_POPUP_P)
+        if match:
+            match.click()
         try:
             logging.info("Combat started")
             self.combatStarted.set()
@@ -264,7 +268,7 @@ class Fighter(Walker):
             dofus.CREATURE_MODE_R.click()
             dofus.OUT_OF_COMBAT_R.hover()
 
-    def harvestCombats(self, mobs_patterns, max_tries=4, shuffle=False):
+    def harvestCombats(self, mobs_patterns, max_tries=10, shuffle=False):
         """
         Look for mobs patterns and try to enter combats.
         :param mobs_patterns: list of images
@@ -299,7 +303,7 @@ class Fighter(Walker):
                 break
         return result
 
-    def enterCombat(self, tgt, timeout=5):
+    def enterCombat(self, tgt, timeout=3.5):
         """
         Click on a mob group and wait for the combat to start.
         :param tgt: pos of mobs group in the screen

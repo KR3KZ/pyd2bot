@@ -58,6 +58,7 @@ class Region(QRect):
 
     @withTimeOut
     def waitAppear(self, pattern, threshold=0.7):
+        self.stopWait.clear()
         match = self.find(pattern, threshold)
         if match:
             return match
@@ -74,7 +75,7 @@ class Region(QRect):
         if not match:
             return pattern, match
 
-    def waitChange(self, timeout=FOREVER, nbr_pix=50):
+    def waitChange(self, timeout=FOREVER, nbr_pix=1):
         self.stopWait.clear()
         start = perf_counter()
         initial = env.capture(self)
@@ -91,9 +92,10 @@ class Region(QRect):
         if shuffle:
             random.shuffle(patterns)
         for pattern in patterns:
-            result = self.find(pattern, threshold, capture=False)
-            if result:
-                ans.append(result)
+            result = self.findAll(pattern, threshold, capture=False)
+            for r in result:
+                if not utils.isAdjacent(ans, r):
+                    ans.append(r)
         return ans
 
     def findAny(self, patterns, threshold=0.7, shuffle=False):
@@ -108,15 +110,15 @@ class Region(QRect):
 
     def waitAnimationEnd(self, timeout=FOREVER):
         self.stopWait.clear()
-        lookup_int = 4
+        lookup_int = 12
         clip = collections.deque()
         for frame in self.stream(timeout):
             if len(clip) > lookup_int:
-                if utils.inMotion(clip):
+                if not utils.inMotion(clip):
                     return True
                 clip.popleft()
             clip.append(frame)
-            sleep(0.17)
+            sleep(0.2)
         return False
 
     def capture(self, gray=False):
@@ -131,6 +133,7 @@ class Region(QRect):
         s = perf_counter()
         while perf_counter() - s < interval:
             yield cv2.cvtColor(env.capture(self), cv2.COLOR_RGB2GRAY)
+
 
     def findAll(self, pattern, threshold=0.7, grayscale=True, capture=True):
         matches = []

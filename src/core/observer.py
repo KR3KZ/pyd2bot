@@ -26,16 +26,18 @@ class Observer(threading.Thread):
         self.region.stopWait.set()
 
     def run(self):
-        if self.mode == self.Mode.APPEAR:
-            self.region.waitAppear(self.pattern, rate=self.rate)
-        elif self.mode == self.Mode.VANISH:
-            self.region.waitVanish(self.pattern)
-            self.vanished.set()
-        elif self.mode == self.Mode.CHANGE:
-            self.region.waitVanish(self.pattern)
-            self.changed.set()
-        if not self.stopSignal.is_set() and self.callback:
-            self.callback()
+        self.stopSignal.clear()
+        while not self.stopSignal.is_set():
+            if self.mode == self.Mode.APPEAR:
+                self.region.waitAppear(self.pattern, rate=self.rate)
+            elif self.mode == self.Mode.VANISH:
+                self.region.waitVanish(self.pattern)
+                self.vanished.set()
+            elif self.mode == self.Mode.CHANGE:
+                self.region.waitVanish(self.pattern)
+                self.changed.set()
+            if not self.stopSignal.is_set() and self.callback:
+                self.callback()
 
 
 if __name__ == "__main__":

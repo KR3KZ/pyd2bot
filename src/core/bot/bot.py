@@ -19,6 +19,7 @@ class Bot(threading.Thread):
         self.lock = threading.Lock()
         self.disconnected = threading.Event()
         self.connected = threading.Event()
+        self.name = name
         self.dead = False
         self.disconnectedObs = Observer(dofus.CONNECT_R,
                                         dofus.DISCONNECTED_BOX_P,
@@ -28,6 +29,7 @@ class Bot(threading.Thread):
 
     def run(self):
         self.disconnectedObs.start()
+        env.focusDofusWindow(self.name)
 
     def interrupt(self):
         self.killsig.set()
@@ -37,12 +39,14 @@ class Bot(threading.Thread):
         logging.info("Disconnected popup appeared!")
         self.disconnected.set()
         self.connected.clear()
+        sleep(4)
         dofus.CLOSE_DISCONNECTED_BOX_L.click()
         dofus.CONNECT_R.waitVanish(dofus.DISCONNECTED_BOX_P)
         dofus.RECONNECT_BUTTON_R.click()
-        dofus.PLAY_GAME_BUTTON_R.waitAppear(dofus.PLAY_GAME_BUTTON_P)
-        dofus.PLAY_GAME_BUTTON_R.click()
-        if self.waitMapCoords(8):
+        sleep(4)
+        # dofus.PLAY_GAME_BUTTON_R.waitAppear(dofus.PLAY_GAME_BUTTON_P)
+        # dofus.PLAY_GAME_BUTTON_R.click()
+        if self.waitMapCoords(10):
             self.disconnected.clear()
             self.connected.set()
 
@@ -70,3 +74,4 @@ class Bot(threading.Thread):
                 return True
             sleep(0.2)
         return False
+

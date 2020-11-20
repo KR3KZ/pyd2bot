@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import *
 
 
 class ChooseDirectionBox(QWidget):
-    directionClicked = pyqtSignal(str)
+    directionClicked = pyqtSignal(tuple)
 
     def __init__(self, parent=None):
         super(ChooseDirectionBox, self).__init__()
@@ -35,16 +35,16 @@ class ChooseDirectionBox(QWidget):
         self.horizontal_group_box.setLayout(layout)
 
     def upClicked(self):
-        self.directionClicked.emit('up')
+        self.directionClicked.emit((0, -1))
 
     def leftClicked(self):
-        self.directionClicked.emit('left')
+        self.directionClicked.emit((-1, 0))
 
     def rightClicked(self):
-        self.directionClicked.emit('right')
+        self.directionClicked.emit((1, 0))
 
     def downClicked(self):
-        self.directionClicked.emit('down')
+        self.directionClicked.emit((0, 1))
 
 
 def window():

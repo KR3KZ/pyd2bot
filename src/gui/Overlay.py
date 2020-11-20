@@ -1,3 +1,7 @@
+import collections
+from itertools import product
+from math import floor, ceil
+from time import sleep, perf_counter
 from PyQt5.QtCore import Qt
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QColor, QPainter, QPolygon, QPen, QBrush, QPolygonF
@@ -196,7 +200,7 @@ def except_hook(cls, exception, traceback):
 
 if __name__ == "__main__":
     import sys
-
+    from core import env, dofus
 
     sys.excepthook = except_hook
     test()
