@@ -1,0 +1,3394 @@
+name: subzone
+maps:
+- x: -7
+  y: 24
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 2
+- x: -7
+  y: 25
+  excludedMaps:
+    ? !!python/tuple
+    - -6
+    - 25
+    : - !!python/tuple
+        - -7
+        - 24
+      - !!python/tuple
+        - -8
+        - 25
+    ? &id001 !!python/tuple
+    - -7
+    - 27
+    : - !!python/tuple
+        - -6
+        - 26
+      - !!python/tuple
+        - -8
+        - 25
+      - !!python/tuple
+        - -7
+        - 24
+    ? !!python/tuple
+    - -7
+    - 26
+    : - !!python/tuple
+        - -8
+        - 25
+      - !!python/tuple
+        - -7
+        - 24
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1117
+    - 655
+    - 25
+    - 25
+    kind: sauge
+    patternId: 1605708362139.png
+  nbrseen: 2
+- x: -7
+  y: 26
+  excludedMaps:
+    ? !!python/tuple
+    - -7
+    - 26
+    : - !!python/tuple
+        - -8
+        - 27
+    *id001:
+    - !!python/tuple
+      - -7
+      - 25
+  excludedSpots: {}
+  spots: []
+  nbrseen: 2
+- x: -7
+  y: 27
+  excludedMaps:
+    ? &id002 !!python/tuple
+    - -7
+    - 28
+    : - !!python/tuple
+        - -7
+        - 26
+    ? &id003 !!python/tuple
+    - -7
+    - 26
+    : - !!python/tuple
+        - -6
+        - 27
+      - !!python/tuple
+        - -8
+        - 27
+      - !!python/tuple
+        - -7
+        - 28
+    ? &id004 !!python/tuple
+    - -6
+    - 27
+    : - !!python/tuple
+        - -8
+        - 27
+      - !!python/tuple
+        - -6
+        - 27
+      - !!python/tuple
+        - -7
+        - 26
+  excludedSpots:
+    *id002:
+    - !!python/tuple
+      - 743
+      - 618
+      - 38
+      - 19
+    *id003:
+    - !!python/tuple
+      - 743
+      - 618
+      - 38
+      - 19
+    - !!python/tuple
+      - 1237
+      - 593
+      - 25
+      - 25
+    - !!python/tuple
+      - 916
+      - 790
+      - 38
+      - 19
+    - !!python/tuple
+      - 656
+      - 402
+      - 38
+      - 19
+    - !!python/tuple
+      - 875
+      - 770
+      - 41
+      - 21
+    - !!python/tuple
+      - 795
+      - 685
+      - 33
+      - 21
+    *id004:
+    - !!python/tuple
+      - 875
+      - 770
+      - 41
+      - 21
+    - !!python/tuple
+      - 795
+      - 685
+      - 33
+      - 21
+  spots:
+  - region: !!python/tuple
+    - 789
+    - 682
+    - 42
+    - 28
+    kind: poisson
+    patternId: 1605708169078.png
+  - region: !!python/tuple
+    - 743
+    - 618
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 1237
+    - 593
+    - 25
+    - 25
+    kind: sauge
+    patternId: 1605708362139.png
+  - region: !!python/tuple
+    - 1443
+    - 275
+    - 33
+    - 21
+    kind: poisson
+    patternId: 1605709453333.png
+  - region: !!python/tuple
+    - 916
+    - 790
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 656
+    - 402
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 875
+    - 770
+    - 41
+    - 21
+    kind: poissonMoyen
+    patternId: 89dfg74654ghj46gh54j.png
+  - region: !!python/tuple
+    - 795
+    - 685
+    - 33
+    - 21
+    kind: poisson
+    patternId: 1605709453333.png
+  nbrseen: 2
+- x: -7
+  y: 28
+  excludedMaps:
+    ? !!python/tuple
+    - -6
+    - 28
+    : - !!python/tuple
+        - -8
+        - 28
+    ? !!python/tuple
+    - -7
+    - 27
+    : - !!python/tuple
+        - -8
+        - 28
+  excludedSpots:
+    ? !!python/tuple
+    - -6
+    - 28
+    : - !!python/tuple
+        - 1218
+        - 423
+        - 38
+        - 19
+      - !!python/tuple
+        - 919
+        - 620
+        - 41
+        - 21
+    ? !!python/tuple
+    - -7
+    - 27
+    : - !!python/tuple
+        - 919
+        - 620
+        - 41
+        - 21
+      - !!python/tuple
+        - 1218
+        - 423
+        - 38
+        - 19
+    ? !!python/tuple
+    - -7
+    - 29
+    : - !!python/tuple
+        - 919
+        - 620
+        - 41
+        - 21
+      - !!python/tuple
+        - 1178
+        - 404
+        - 41
+        - 21
+      - !!python/tuple
+        - 1131
+        - 336
+        - 38
+        - 19
+      - !!python/tuple
+        - 1218
+        - 423
+        - 38
+        - 19
+  spots:
+  - region: !!python/tuple
+    - 919
+    - 661
+    - 42
+    - 28
+    kind: poisson
+    patternId: 1605708169078.png
+  - region: !!python/tuple
+    - 919
+    - 620
+    - 41
+    - 21
+    kind: poissonMoyen
+    patternId: 89dfg74654ghj46gh54j.png
+  - region: !!python/tuple
+    - 1134
+    - 468
+    - 41
+    - 21
+    kind: poissonMoyen
+    patternId: 89dfg74654ghj46gh54j.png
+  - region: !!python/tuple
+    - 1178
+    - 404
+    - 41
+    - 21
+    kind: poissonMoyen
+    patternId: 89dfg74654ghj46gh54j.png
+  - region: !!python/tuple
+    - 1131
+    - 336
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 1218
+    - 423
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  nbrseen: 2
+- x: -7
+  y: 29
+  excludedMaps:
+    ? !!python/tuple
+    - -6
+    - 29
+    : - !!python/tuple
+        - -8
+        - 29
+    ? !!python/tuple
+    - -7
+    - 30
+    : - !!python/tuple
+        - -8
+        - 29
+  excludedSpots:
+    ? !!python/tuple
+    - -7
+    - 30
+    : - !!python/tuple
+        - 832
+        - 231
+        - 41
+        - 21
+      - !!python/tuple
+        - 829
+        - 229
+        - 38
+        - 19
+    ? !!python/tuple
+    - -6
+    - 29
+    : - !!python/tuple
+        - 832
+        - 188
+        - 41
+        - 21
+      - !!python/tuple
+        - 1003
+        - 316
+        - 47
+        - 23
+      - !!python/tuple
+        - 832
+        - 231
+        - 41
+        - 21
+  spots:
+  - region: !!python/tuple
+    - 1448
+    - 232
+    - 20
+    - 64
+    kind: noyer
+    patternId: 9df8g432e6g151g9rt9h56841rthrth8rt4.png
+  - region: !!python/tuple
+    - 832
+    - 231
+    - 41
+    - 21
+    kind: poissonMoyen
+    patternId: 89dfg74654ghj46gh54j.png
+  - region: !!python/tuple
+    - 832
+    - 188
+    - 41
+    - 21
+    kind: poissonMoyen
+    patternId: 89dfg74654ghj46gh54j.png
+  - region: !!python/tuple
+    - 1003
+    - 316
+    - 47
+    - 23
+    kind: poissonMoyen
+    patternId: gdf65g435468zerze65r4354.png
+  - region: !!python/tuple
+    - 1100
+    - 107
+    - 22
+    - 46
+    kind: menthe
+    patternId: 5r465hg32j1h3k54hj65k4.png
+  - region: !!python/tuple
+    - 788
+    - 636
+    - 45
+    - 58
+    kind: chataigner
+    patternId: g89df7g32r3e21tfg58dh4gf65h4rt5u4.png
+  - region: !!python/tuple
+    - 829
+    - 186
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 829
+    - 229
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  nbrseen: 2
+- x: -7
+  y: 30
+  excludedMaps:
+    ? !!python/tuple
+    - -7
+    - 29
+    : - !!python/tuple
+        - -8
+        - 30
+    ? !!python/tuple
+    - -6
+    - 30
+    : - !!python/tuple
+        - -8
+        - 30
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 449
+    - 642
+    - 33
+    - 21
+    kind: poisson
+    patternId: 1605709453333.png
+  - region: !!python/tuple
+    - 1323
+    - 247
+    - 25
+    - 25
+    kind: sauge
+    patternId: 1605708362139.png
+  - region: !!python/tuple
+    - 448
+    - 644
+    - 28
+    - 17
+    kind: poisson
+    patternId: 1605713212941.png
+  nbrseen: 2
+- x: -7
+  y: 31
+  excludedMaps:
+    ? !!python/tuple
+    - -6
+    - 31
+    : - !!python/tuple
+        - -8
+        - 31
+    ? !!python/tuple
+    - -7
+    - 30
+    : - !!python/tuple
+        - -8
+        - 31
+    ? !!python/tuple
+    - -7
+    - 32
+    : - !!python/tuple
+        - -8
+        - 31
+  excludedSpots:
+    ? !!python/tuple
+    - -7
+    - 32
+    : - !!python/tuple
+        - 746
+        - 663
+        - 41
+        - 21
+      - !!python/tuple
+        - 829
+        - 618
+        - 38
+        - 19
+    ? !!python/tuple
+    - -6
+    - 31
+    : - !!python/tuple
+        - 789
+        - 511
+        - 41
+        - 21
+      - !!python/tuple
+        - 829
+        - 618
+        - 38
+        - 19
+      - !!python/tuple
+        - 786
+        - 509
+        - 38
+        - 19
+    ? !!python/tuple
+    - -7
+    - 30
+    : - !!python/tuple
+        - 829
+        - 618
+        - 38
+        - 19
+  spots:
+  - region: !!python/tuple
+    - 746
+    - 663
+    - 41
+    - 21
+    kind: poissonMoyen
+    patternId: 89dfg74654ghj46gh54j.png
+  - region: !!python/tuple
+    - 789
+    - 511
+    - 41
+    - 21
+    kind: poissonMoyen
+    patternId: 89dfg74654ghj46gh54j.png
+  - region: !!python/tuple
+    - 829
+    - 618
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 786
+    - 509
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 743
+    - 661
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  nbrseen: 2
+- x: -7
+  y: 32
+  excludedMaps:
+    ? !!python/tuple
+    - -7
+    - 31
+    : - !!python/tuple
+        - -8
+        - 32
+      - !!python/tuple
+        - -7
+        - 33
+    ? &id005 !!python/tuple
+    - -6
+    - 32
+    : - !!python/tuple
+        - -8
+        - 32
+  excludedSpots:
+    *id005:
+    - !!python/tuple
+      - 1045
+      - 552
+      - 38
+      - 19
+  spots:
+  - region: !!python/tuple
+    - 1227
+    - 814
+    - 33
+    - 21
+    kind: poisson
+    patternId: 1605709453333.png
+  - region: !!python/tuple
+    - 1307
+    - 770
+    - 41
+    - 21
+    kind: poissonMoyen
+    patternId: 89dfg74654ghj46gh54j.png
+  - region: !!python/tuple
+    - 573
+    - 101
+    - 41
+    - 21
+    kind: poissonMoyen
+    patternId: 89dfg74654ghj46gh54j.png
+  - region: !!python/tuple
+    - 1045
+    - 552
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 570
+    - 99
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  nbrseen: 2
+- x: -6
+  y: 24
+  excludedMaps:
+    ? !!python/tuple
+    - -6
+    - 25
+    : - !!python/tuple
+        - -6
+        - 23
+    ? !!python/tuple
+    - -5
+    - 24
+    : - !!python/tuple
+        - -7
+        - 24
+      - !!python/tuple
+        - -6
+        - 23
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 882
+    - 790
+    - 28
+    - 29
+    kind: edelwise
+    patternId: 654f6ds54fds651gds36g21df9g684.png
+  - region: !!python/tuple
+    - 1229
+    - 534
+    - 26
+    - 23
+    kind: edelwise
+    patternId: ezrez9fg986543213fgh1gf.png
+  nbrseen: 2
+- x: -6
+  y: 25
+  excludedMaps:
+    ? !!python/tuple
+    - -6
+    - 26
+    : - !!python/tuple
+        - -5
+        - 25
+    ? &id006 !!python/tuple
+    - -5
+    - 25
+    : - !!python/tuple
+        - -6
+        - 24
+      - !!python/tuple
+        - -7
+        - 25
+      - !!python/tuple
+        - -6
+        - 26
+  excludedSpots:
+    *id006:
+    - !!python/tuple
+      - 1142
+      - 318
+      - 26
+      - 23
+  spots:
+  - region: !!python/tuple
+    - 1142
+    - 318
+    - 26
+    - 23
+    kind: edelwise
+    patternId: ezrez9fg986543213fgh1gf.png
+  nbrseen: 2
+- x: -6
+  y: 26
+  excludedMaps: {}
+  excludedSpots:
+    ? !!python/tuple
+    - -7
+    - 26
+    : - !!python/tuple
+        - 491
+        - 154
+        - 34
+        - 29
+    ? !!python/tuple
+    - -6
+    - 25
+    : - !!python/tuple
+        - 1012
+        - 553
+        - 28
+        - 29
+    ? !!python/tuple
+    - -6
+    - 27
+    : - !!python/tuple
+        - 1012
+        - 553
+        - 28
+        - 29
+  spots:
+  - region: !!python/tuple
+    - 1012
+    - 553
+    - 28
+    - 29
+    kind: edelwise
+    patternId: 654f6ds54fds651gds36g21df9g684.png
+  - region: !!python/tuple
+    - 491
+    - 154
+    - 34
+    - 29
+    kind: orchide
+    patternId: 5483654354cgfhjfgh789678574.png
+  nbrseen: 2
+- x: -6
+  y: 27
+  excludedMaps:
+    ? !!python/tuple
+    - -7
+    - 27
+    : - !!python/tuple
+        - -6
+        - 26
+    ? !!python/tuple
+    - -5
+    - 27
+    : - !!python/tuple
+        - -6
+        - 26
+    null:
+    - !!python/tuple
+      - -6
+      - 26
+    ? !!python/tuple
+    - -6
+    - 26
+    : - !!python/tuple
+        - -7
+        - 27
+      - !!python/tuple
+        - -5
+        - 27
+      - !!python/tuple
+        - -6
+        - 28
+  excludedSpots:
+    ? !!python/tuple
+    - -6
+    - 26
+    : - !!python/tuple
+        - 793
+        - 531
+        - 36
+        - 96
+  spots:
+  - region: !!python/tuple
+    - 793
+    - 531
+    - 36
+    - 96
+    kind: chataigner
+    patternId: 1605783480770.png
+  - region: !!python/tuple
+    - 1185
+    - 154
+    - 26
+    - 30
+    kind: orchide
+    patternId: dfs654987654362163514.png
+  - region: !!python/tuple
+    - 613
+    - 250
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  nbrseen: 2
+- x: -6
+  y: 28
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 965
+    - 240
+    - 32
+    - 68
+    kind: noyer
+    patternId: 9f8dg6e1tg65zt196z4gfh1rtg9hj1rty1j4.png
+  - region: !!python/tuple
+    - 978
+    - 808
+    - 25
+    - 25
+    kind: sauge
+    patternId: 1605708362139.png
+  nbrseen: 2
+- x: -6
+  y: 29
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1137
+    - 112
+    - 26
+    - 115
+    kind: chataigner
+    patternId: 1605783459530.png
+  - region: !!python/tuple
+    - 584
+    - 664
+    - 20
+    - 64
+    kind: noyer
+    patternId: 9df8g432e6g151g9rt9h56841rthrth8rt4.png
+  - region: !!python/tuple
+    - 749
+    - 177
+    - 26
+    - 115
+    kind: chataigner
+    patternId: 1605783459530.png
+  - region: !!python/tuple
+    - 1059
+    - 771
+    - 20
+    - 64
+    kind: noyer
+    patternId: 9df8g432e6g151g9rt9h56841rthrth8rt4.png
+  - region: !!python/tuple
+    - 835
+    - 523
+    - 26
+    - 115
+    kind: chataigner
+    patternId: 1605783459530.png
+  - region: !!python/tuple
+    - 1353
+    - 131
+    - 32
+    - 68
+    kind: noyer
+    patternId: 9f8dg6e1tg65zt196z4gfh1rtg9hj1rty1j4.png
+  - region: !!python/tuple
+    - 1347
+    - 666
+    - 45
+    - 70
+    kind: chataigner
+    patternId: 1605783474490.png
+  - region: !!python/tuple
+    - 502
+    - 508
+    - 74
+    - 45
+    kind: chataigner
+    patternId: g81re6g5reg858d9f6bh8dsf9h4.png
+  - region: !!python/tuple
+    - 1309
+    - 594
+    - 45
+    - 58
+    kind: chataigner
+    patternId: g89df7g32r3e21tfg58dh4gf65h4rt5u4.png
+  nbrseen: 2
+- x: -6
+  y: 30
+  excludedMaps: {}
+  excludedSpots:
+    ? !!python/tuple
+    - -5
+    - 30
+    : - !!python/tuple
+        - 1135
+        - 428
+        - 41
+        - 21
+    ? !!python/tuple
+    - -6
+    - 29
+    : - !!python/tuple
+        - 1397
+        - 716
+        - 26
+        - 115
+      - !!python/tuple
+        - 1135
+        - 428
+        - 41
+        - 21
+    ? !!python/tuple
+    - -7
+    - 30
+    : - !!python/tuple
+        - 1397
+        - 716
+        - 26
+        - 115
+  spots:
+  - region: !!python/tuple
+    - 1397
+    - 716
+    - 26
+    - 115
+    kind: chataigner
+    patternId: 1605783459530.png
+  - region: !!python/tuple
+    - 1268
+    - 111
+    - 32
+    - 166
+    kind: frene
+    patternId: 1605708205361.png
+  - region: !!python/tuple
+    - 878
+    - 153
+    - 32
+    - 68
+    kind: noyer
+    patternId: 9f8dg6e1tg65zt196z4gfh1rtg9hj1rty1j4.png
+  - region: !!python/tuple
+    - 1135
+    - 428
+    - 41
+    - 21
+    kind: poisson
+    patternId: 1605713182793.png
+  - region: !!python/tuple
+    - 1051
+    - 155
+    - 26
+    - 115
+    kind: chataigner
+    patternId: 1605783459530.png
+  - region: !!python/tuple
+    - 1347
+    - 277
+    - 45
+    - 70
+    kind: chataigner
+    patternId: 1605783474490.png
+  - region: !!python/tuple
+    - 491
+    - 164
+    - 36
+    - 96
+    kind: chataigner
+    patternId: 1605783480770.png
+  - region: !!python/tuple
+    - 875
+    - 464
+    - 45
+    - 58
+    kind: chataigner
+    patternId: g89df7g32r3e21tfg58dh4gf65h4rt5u4.png
+  - region: !!python/tuple
+    - 916
+    - 537
+    - 45
+    - 70
+    kind: chataigner
+    patternId: 1605783474490.png
+  nbrseen: 2
+- x: -6
+  y: 31
+  excludedMaps:
+    ? !!python/tuple
+    - -7
+    - 31
+    : - !!python/tuple
+        - -7
+        - 31
+  excludedSpots:
+    ? !!python/tuple
+    - -6
+    - 32
+    : - !!python/tuple
+        - 882
+        - 471
+        - 28
+        - 18
+    ? !!python/tuple
+    - -7
+    - 31
+    : - !!python/tuple
+        - 1218
+        - 293
+        - 38
+        - 19
+      - !!python/tuple
+        - 1365
+        - 551
+        - 74
+        - 45
+    ? !!python/tuple
+    - -6
+    - 30
+    : - !!python/tuple
+        - 882
+        - 471
+        - 28
+        - 18
+  spots:
+  - region: !!python/tuple
+    - 662
+    - 263
+    - 26
+    - 115
+    kind: chataigner
+    patternId: 1605783459530.png
+  - region: !!python/tuple
+    - 663
+    - 673
+    - 32
+    - 166
+    kind: frene
+    patternId: 1605708205361.png
+  - region: !!python/tuple
+    - 749
+    - 174
+    - 32
+    - 68
+    kind: noyer
+    patternId: 9f8dg6e1tg65zt196z4gfh1rtg9hj1rty1j4.png
+  - region: !!python/tuple
+    - 882
+    - 471
+    - 28
+    - 18
+    kind: poisson
+    patternId: 1605766090455.png
+  - region: !!python/tuple
+    - 1218
+    - 293
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 1365
+    - 551
+    - 74
+    - 45
+    kind: chataigner
+    patternId: g81re6g5reg858d9f6bh8dsf9h4.png
+  - region: !!python/tuple
+    - 1263
+    - 485
+    - 45
+    - 58
+    kind: chataigner
+    patternId: g89df7g32r3e21tfg58dh4gf65h4rt5u4.png
+  - region: !!python/tuple
+    - 1263
+    - 486
+    - 45
+    - 58
+    kind: chataigner
+    patternId: g89df7g32r3e21tfg58dh4gf65h4rt5u4.png
+  - region: !!python/tuple
+    - 1436
+    - 96
+    - 45
+    - 58
+    kind: chataigner
+    patternId: g89df7g32r3e21tfg58dh4gf65h4rt5u4.png
+  - region: !!python/tuple
+    - 1396
+    - 548
+    - 42
+    - 76
+    kind: chataigner
+    patternId: df4g6h2143gf2j1gf65j146h5j4.png
+  nbrseen: 2
+- x: -6
+  y: 32
+  excludedMaps:
+    ? !!python/tuple
+    - -7
+    - 32
+    : - !!python/tuple
+        - -6
+        - 33
+    ? !!python/tuple
+    - -5
+    - 32
+    : - !!python/tuple
+        - -6
+        - 33
+  excludedSpots:
+    ? !!python/tuple
+    - -6
+    - 31
+    : - !!python/tuple
+        - 829
+        - 704
+        - 38
+        - 19
+  spots:
+  - region: !!python/tuple
+    - 829
+    - 704
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  nbrseen: 2
+- x: -5
+  y: 24
+  excludedMaps:
+    ? !!python/tuple
+    - -6
+    - 24
+    : - !!python/tuple
+        - -5
+        - 23
+    ? &id007 !!python/tuple
+    - -4
+    - 24
+    : - !!python/tuple
+        - -5
+        - 23
+    ? !!python/tuple
+    - -5
+    - 25
+    : - !!python/tuple
+        - -5
+        - 23
+  excludedSpots:
+    *id007:
+    - !!python/tuple
+      - 1141
+      - 601
+      - 28
+      - 18
+  spots:
+  - region: !!python/tuple
+    - 666
+    - 381
+    - 28
+    - 29
+    kind: edelwise
+    patternId: 654f6ds54fds651gds36g21df9g684.png
+  - region: !!python/tuple
+    - 1141
+    - 601
+    - 28
+    - 18
+    kind: poisson
+    patternId: 1605766090455.png
+  - region: !!python/tuple
+    - 503
+    - 615
+    - 25
+    - 25
+    kind: sauge
+    patternId: 1605708362139.png
+  - region: !!python/tuple
+    - 1098
+    - 165
+    - 28
+    - 29
+    kind: edelwise
+    patternId: 654f6ds54fds651gds36g21df9g684.png
+  - region: !!python/tuple
+    - 538
+    - 448
+    - 26
+    - 23
+    kind: edelwise
+    patternId: ezrez9fg986543213fgh1gf.png
+  nbrseen: 2
+- x: -5
+  y: 25
+  excludedMaps: {}
+  excludedSpots:
+    ? !!python/tuple
+    - -5
+    - 26
+    : - !!python/tuple
+        - 449
+        - 426
+        - 33
+        - 21
+      - !!python/tuple
+        - 700
+        - 552
+        - 38
+        - 19
+    ? !!python/tuple
+    - -4
+    - 25
+    : - !!python/tuple
+        - 700
+        - 552
+        - 38
+        - 19
+  spots:
+  - region: !!python/tuple
+    - 449
+    - 426
+    - 33
+    - 21
+    kind: poisson
+    patternId: 1605709453333.png
+  - region: !!python/tuple
+    - 743
+    - 488
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 700
+    - 552
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  nbrseen: 2
+- x: -5
+  y: 26
+  excludedMaps: {}
+  excludedSpots:
+    ? !!python/tuple
+    - -5
+    - 27
+    : - !!python/tuple
+        - 494
+        - 251
+        - 28
+        - 29
+  spots:
+  - region: !!python/tuple
+    - 494
+    - 251
+    - 28
+    - 29
+    kind: edelwise
+    patternId: 654f6ds54fds651gds36g21df9g684.png
+  - region: !!python/tuple
+    - 1182
+    - 67
+    - 34
+    - 29
+    kind: orchide
+    patternId: 5483654354cgfhjfgh789678574.png
+  - region: !!python/tuple
+    - 1358
+    - 513
+    - 26
+    - 23
+    kind: edelwise
+    patternId: ezrez9fg986543213fgh1gf.png
+  nbrseen: 2
+- x: -5
+  y: 27
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 968
+    - 256
+    - 29
+    - 18
+    kind: poisson
+    patternId: 1605712921885.png
+  - region: !!python/tuple
+    - 1175
+    - 315
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 1106
+    - 525
+    - 29
+    - 27
+    kind: sauge
+    patternId: 1605709564190.png
+  - region: !!python/tuple
+    - 743
+    - 488
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  nbrseen: 2
+- x: -5
+  y: 28
+  excludedMaps: {}
+  excludedSpots:
+    ? !!python/tuple
+    - -5
+    - 29
+    : - !!python/tuple
+        - 1308
+        - 336
+        - 40
+        - 22
+    ? !!python/tuple
+    - -4
+    - 28
+    : - !!python/tuple
+        - 1308
+        - 336
+        - 40
+        - 22
+  spots:
+  - region: !!python/tuple
+    - 926
+    - 623
+    - 28
+    - 18
+    kind: poisson
+    patternId: 1605766090455.png
+  - region: !!python/tuple
+    - 1304
+    - 380
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 1308
+    - 336
+    - 40
+    - 22
+    kind: poissonMoyen
+    patternId: rez8736fg32654qs8f65fsdg2s3g54.png
+  nbrseen: 2
+- x: -5
+  y: 29
+  excludedMaps: {}
+  excludedSpots:
+    ? !!python/tuple
+    - -6
+    - 29
+    : - !!python/tuple
+        - 394
+        - 83
+        - 44
+        - 83
+      - !!python/tuple
+        - 1347
+        - 234
+        - 45
+        - 70
+    ? !!python/tuple
+    - -5
+    - 28
+    : - !!python/tuple
+        - 394
+        - 83
+        - 44
+        - 83
+    ? !!python/tuple
+    - -5
+    - 30
+    : - !!python/tuple
+        - 394
+        - 83
+        - 44
+        - 83
+  spots:
+  - region: !!python/tuple
+    - 843
+    - 232
+    - 20
+    - 64
+    kind: noyer
+    patternId: 9df8g432e6g151g9rt9h56841rthrth8rt4.png
+  - region: !!python/tuple
+    - 749
+    - 652
+    - 26
+    - 115
+    kind: chataigner
+    patternId: 1605783459530.png
+  - region: !!python/tuple
+    - 1396
+    - 585
+    - 32
+    - 68
+    kind: noyer
+    patternId: 9f8dg6e1tg65zt196z4gfh1rtg9hj1rty1j4.png
+  - region: !!python/tuple
+    - 1347
+    - 234
+    - 45
+    - 70
+    kind: chataigner
+    patternId: 1605783474490.png
+  - region: !!python/tuple
+    - 1207
+    - 523
+    - 67
+    - 70
+    kind: chataigner
+    patternId: fq68gq6rg48qg79fds6g463g54dsg87.png
+  - region: !!python/tuple
+    - 878
+    - 110
+    - 32
+    - 68
+    kind: noyer
+    patternId: 9f8dg6e1tg65zt196z4gfh1rtg9hj1rty1j4.png
+  - region: !!python/tuple
+    - 743
+    - 666
+    - 45
+    - 70
+    kind: chataigner
+    patternId: 1605783474490.png
+  - region: !!python/tuple
+    - 1177
+    - 485
+    - 45
+    - 58
+    kind: chataigner
+    patternId: g89df7g32r3e21tfg58dh4gf65h4rt5u4.png
+  - region: !!python/tuple
+    - 394
+    - 83
+    - 44
+    - 83
+    kind: chataigner
+    patternId: 1605783448765.png
+  nbrseen: 2
+- x: -5
+  y: 30
+  excludedMaps: {}
+  excludedSpots:
+    null:
+    - !!python/tuple
+      - 451
+      - 793
+      - 26
+      - 23
+    ? !!python/tuple
+    - -5
+    - 29
+    : - !!python/tuple
+        - 451
+        - 793
+        - 26
+        - 23
+      - !!python/tuple
+        - 796
+        - 298
+        - 28
+        - 18
+    ? !!python/tuple
+    - -6
+    - 30
+    : - !!python/tuple
+        - 451
+        - 793
+        - 26
+        - 23
+    ? !!python/tuple
+    - -4
+    - 30
+    : - !!python/tuple
+        - 451
+        - 793
+        - 26
+        - 23
+  spots:
+  - region: !!python/tuple
+    - 1440
+    - 91
+    - 26
+    - 115
+    kind: chataigner
+    patternId: 1605783459530.png
+  - region: !!python/tuple
+    - 796
+    - 298
+    - 28
+    - 18
+    kind: poisson
+    patternId: 1605766090455.png
+  - region: !!python/tuple
+    - 451
+    - 793
+    - 26
+    - 23
+    kind: edelwise
+    patternId: ezrez9fg986543213fgh1gf.png
+  - region: !!python/tuple
+    - 446
+    - 112
+    - 26
+    - 115
+    kind: chataigner
+    patternId: 1605783459530.png
+  nbrseen: 2
+- x: -5
+  y: 31
+  excludedMaps: {}
+  excludedSpots:
+    ? !!python/tuple
+    - -4
+    - 31
+    : - !!python/tuple
+        - 1509
+        - 372
+        - 67
+        - 70
+    ? !!python/tuple
+    - -6
+    - 31
+    : - !!python/tuple
+        - 1509
+        - 372
+        - 67
+        - 70
+  spots:
+  - region: !!python/tuple
+    - 1094
+    - 350
+    - 26
+    - 115
+    kind: chataigner
+    patternId: 1605783459530.png
+  - region: !!python/tuple
+    - 662
+    - 520
+    - 32
+    - 68
+    kind: noyer
+    patternId: 9f8dg6e1tg65zt196z4gfh1rtg9hj1rty1j4.png
+  - region: !!python/tuple
+    - 1401
+    - 644
+    - 28
+    - 18
+    kind: poisson
+    patternId: 1605766090455.png
+  - region: !!python/tuple
+    - 1191
+    - 745
+    - 28
+    - 25
+    kind: sauge
+    patternId: 1605824252540.png
+  - region: !!python/tuple
+    - 792
+    - 544
+    - 26
+    - 115
+    kind: chataigner
+    patternId: 1605783459530.png
+  - region: !!python/tuple
+    - 404
+    - 250
+    - 36
+    - 96
+    kind: chataigner
+    patternId: 1605783480770.png
+  - region: !!python/tuple
+    - 786
+    - 558
+    - 45
+    - 70
+    kind: chataigner
+    patternId: 1605783474490.png
+  - region: !!python/tuple
+    - 1509
+    - 372
+    - 67
+    - 70
+    kind: chataigner
+    patternId: fq68gq6rg48qg79fds6g463g54dsg87.png
+  nbrseen: 2
+- x: -5
+  y: 32
+  excludedMaps:
+    ? !!python/tuple
+    - -5
+    - 31
+    : - !!python/tuple
+        - -5
+        - 33
+    ? !!python/tuple
+    - -4
+    - 32
+    : - !!python/tuple
+        - -5
+        - 33
+  excludedSpots:
+    ? !!python/tuple
+    - -6
+    - 32
+    : - !!python/tuple
+        - 401
+        - 790
+        - 40
+        - 22
+  spots:
+  - region: !!python/tuple
+    - 1350
+    - 834
+    - 42
+    - 28
+    kind: poisson
+    patternId: 1605708169078.png
+  - region: !!python/tuple
+    - 397
+    - 790
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 1356
+    - 837
+    - 33
+    - 21
+    kind: poisson
+    patternId: 1605709453333.png
+  - region: !!python/tuple
+    - 401
+    - 790
+    - 40
+    - 22
+    kind: poissonMoyen
+    patternId: rez8736fg32654qs8f65fsdg2s3g54.png
+  nbrseen: 2
+- x: -4
+  y: 24
+  excludedMaps:
+    ? !!python/tuple
+    - -3
+    - 24
+    : - !!python/tuple
+        - -4
+        - 23
+    ? &id008 !!python/tuple
+    - -5
+    - 24
+    : - !!python/tuple
+        - -4
+        - 23
+      - !!python/tuple
+        - -3
+        - 24
+    ? !!python/tuple
+    - -4
+    - 25
+    : - !!python/tuple
+        - -4
+        - 23
+  excludedSpots:
+    *id008:
+    - !!python/tuple
+      - 707
+      - 434
+      - 34
+      - 29
+    - !!python/tuple
+      - 1347
+      - 445
+      - 38
+      - 19
+    - !!python/tuple
+      - 1265
+      - 488
+      - 40
+      - 22
+    - !!python/tuple
+      - 1434
+      - 358
+      - 38
+      - 19
+    - !!python/tuple
+      - 613
+      - 639
+      - 38
+      - 19
+    ? !!python/tuple
+    - -3
+    - 24
+    : - !!python/tuple
+        - 627
+        - 713
+        - 17
+        - 17
+      - !!python/tuple
+        - 1434
+        - 315
+        - 38
+        - 19
+  spots:
+  - region: !!python/tuple
+    - 1056
+    - 621
+    - 26
+    - 23
+    kind: edelwise
+    patternId: ezrez9fg986543213fgh1gf.png
+  - region: !!python/tuple
+    - 707
+    - 434
+    - 34
+    - 29
+    kind: orchide
+    patternId: 5483654354cgfhjfgh789678574.png
+  - region: !!python/tuple
+    - 1347
+    - 445
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 627
+    - 713
+    - 17
+    - 17
+    kind: trefle
+    patternId: 1605781115353.png
+  - region: !!python/tuple
+    - 613
+    - 639
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 1434
+    - 315
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 1265
+    - 488
+    - 40
+    - 22
+    kind: poissonMoyen
+    patternId: rez8736fg32654qs8f65fsdg2s3g54.png
+  - region: !!python/tuple
+    - 1434
+    - 358
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  nbrseen: 2
+- x: -4
+  y: 25
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 2
+- x: -4
+  y: 26
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 406
+    - 469
+    - 29
+    - 26
+    kind: edelwise
+    patternId: 987tg6df5g4d3f65g14.png
+  nbrseen: 2
+- x: -4
+  y: 27
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 843
+    - 649
+    - 17
+    - 17
+    kind: trefle
+    patternId: 1605781115353.png
+  nbrseen: 2
+- x: -4
+  y: 28
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 760
+    - 476
+    - 25
+    - 25
+    kind: sauge
+    patternId: 1605708362139.png
+  nbrseen: 2
+- x: -4
+  y: 29
+  excludedMaps:
+    ? !!python/tuple
+    - -4
+    - 30
+    : - !!python/tuple
+        - -4
+        - 28
+      - !!python/tuple
+        - -5
+        - 29
+      - !!python/tuple
+        - -3
+        - 29
+    ? &id009 !!python/tuple
+    - -3
+    - 29
+    : - !!python/tuple
+        - -4
+        - 30
+    ? &id010 !!python/tuple
+    - -5
+    - 29
+    : - !!python/tuple
+        - -3
+        - 29
+      - !!python/tuple
+        - -4
+        - 30
+  excludedSpots:
+    ? !!python/tuple
+    - -4
+    - 30
+    : - !!python/tuple
+        - 796
+        - 644
+        - 28
+        - 18
+      - !!python/tuple
+        - 700
+        - 639
+        - 38
+        - 19
+      - !!python/tuple
+        - 786
+        - 509
+        - 38
+        - 19
+      - !!python/tuple
+        - 872
+        - 768
+        - 38
+        - 19
+    *id009:
+    - !!python/tuple
+      - 796
+      - 644
+      - 28
+      - 18
+    - !!python/tuple
+      - 700
+      - 639
+      - 38
+      - 19
+    - !!python/tuple
+      - 1018
+      - 501
+      - 34
+      - 29
+    ? !!python/tuple
+    - -4
+    - 28
+    : - !!python/tuple
+        - 1141
+        - 298
+        - 28
+        - 18
+      - !!python/tuple
+        - 796
+        - 644
+        - 28
+        - 18
+      - !!python/tuple
+        - 700
+        - 639
+        - 38
+        - 19
+      - !!python/tuple
+        - 1018
+        - 501
+        - 34
+        - 29
+    *id010:
+    - !!python/tuple
+      - 700
+      - 639
+      - 38
+      - 19
+    - !!python/tuple
+      - 796
+      - 644
+      - 28
+      - 18
+    - !!python/tuple
+      - 1018
+      - 501
+      - 34
+      - 29
+  spots:
+  - region: !!python/tuple
+    - 1141
+    - 298
+    - 28
+    - 18
+    kind: poisson
+    patternId: 1605766090455.png
+  - region: !!python/tuple
+    - 786
+    - 509
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 796
+    - 644
+    - 28
+    - 18
+    kind: poisson
+    patternId: 1605766090455.png
+  - region: !!python/tuple
+    - 700
+    - 639
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 872
+    - 768
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 1018
+    - 501
+    - 34
+    - 29
+    kind: orchide
+    patternId: 5483654354cgfhjfgh789678574.png
+  nbrseen: 2
+- x: -4
+  y: 30
+  excludedMaps: {}
+  excludedSpots:
+    ? !!python/tuple
+    - -5
+    - 30
+    : - !!python/tuple
+        - 1175
+        - 191
+        - 45
+        - 70
+      - !!python/tuple
+        - 743
+        - 531
+        - 38
+        - 19
+    ? !!python/tuple
+    - -3
+    - 30
+    : - !!python/tuple
+        - 1218
+        - 509
+        - 38
+        - 19
+    ? !!python/tuple
+    - -4
+    - 29
+    : - !!python/tuple
+        - 882
+        - 601
+        - 28
+        - 18
+  spots:
+  - region: !!python/tuple
+    - 1175
+    - 191
+    - 45
+    - 70
+    kind: chataigner
+    patternId: 1605783474490.png
+  - region: !!python/tuple
+    - 743
+    - 531
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 882
+    - 601
+    - 28
+    - 18
+    kind: poisson
+    patternId: 1605766090455.png
+  - region: !!python/tuple
+    - 1218
+    - 509
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  nbrseen: 2
+- x: -4
+  y: 31
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1370
+    - 630
+    - 22
+    - 28
+    kind: orchide
+    patternId: 7f6ds8f3f43d4f3ef543df54q3sfd54.png
+  nbrseen: 2
+- x: -4
+  y: 32
+  excludedMaps:
+    ? !!python/tuple
+    - -3
+    - 32
+    : - !!python/tuple
+        - -4
+        - 33
+  excludedSpots:
+    ? !!python/tuple
+    - -3
+    - 32
+    : - !!python/tuple
+        - 1437
+        - 620
+        - 41
+        - 21
+  spots:
+  - region: !!python/tuple
+    - 1437
+    - 620
+    - 41
+    - 21
+    kind: poissonMoyen
+    patternId: 89dfg74654ghj46gh54j.png
+  - region: !!python/tuple
+    - 659
+    - 620
+    - 41
+    - 21
+    kind: poissonMoyen
+    patternId: 89dfg74654ghj46gh54j.png
+  - region: !!python/tuple
+    - 1218
+    - 596
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 484
+    - 834
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 1434
+    - 618
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 656
+    - 618
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 1222
+    - 596
+    - 40
+    - 22
+    kind: poissonMoyen
+    patternId: rez8736fg32654qs8f65fsdg2s3g54.png
+  nbrseen: 2
+- x: -3
+  y: 24
+  excludedMaps:
+    ? !!python/tuple
+    - -4
+    - 24
+    : - !!python/tuple
+        - -3
+        - 23
+    null:
+    - !!python/tuple
+      - -3
+      - 23
+    ? !!python/tuple
+    - -3
+    - 25
+    : - !!python/tuple
+        - -3
+        - 23
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 539
+    - 435
+    - 22
+    - 28
+    kind: orchide
+    patternId: 7f6ds8f3f43d4f3ef543df54q3sfd54.png
+  - region: !!python/tuple
+    - 1005
+    - 576
+    - 41
+    - 21
+    kind: poissonMoyen
+    patternId: 89dfg74654ghj46gh54j.png
+  - region: !!python/tuple
+    - 1045
+    - 596
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 1304
+    - 509
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 1010
+    - 666
+    - 28
+    - 17
+    kind: poisson
+    patternId: 1605713212941.png
+  nbrseen: 2
+- x: -3
+  y: 25
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 827
+    - 755
+    - 48
+    - 54
+    kind: eau
+    patternId: f37qs6d8f3qs6fg4q6g87d3fs6g87.png
+  nbrseen: 2
+- x: -3
+  y: 26
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 2
+- x: -3
+  y: 27
+  excludedMaps:
+    ? !!python/tuple
+    - -4
+    - 27
+    : - !!python/tuple
+        - -3
+        - 28
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 709
+    - 280
+    - 25
+    - 30
+    kind: trefle
+    patternId: 1605781121883.png
+  nbrseen: 2
+- x: -3
+  y: 28
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1102
+    - 519
+    - 17
+    - 17
+    kind: trefle
+    patternId: 1605781115353.png
+  nbrseen: 2
+- x: -3
+  y: 29
+  excludedMaps:
+    ? &id011 !!python/tuple
+    - -3
+    - 30
+    : - !!python/tuple
+        - -4
+        - 29
+      - !!python/tuple
+        - -2
+        - 29
+      - !!python/tuple
+        - -3
+        - 28
+    ? &id012 !!python/tuple
+    - -4
+    - 29
+    : - !!python/tuple
+        - -3
+        - 28
+      - !!python/tuple
+        - -2
+        - 29
+    ? !!python/tuple
+    - -3
+    - 28
+    : - !!python/tuple
+        - -3
+        - 30
+  excludedSpots:
+    ? !!python/tuple
+    - -3
+    - 28
+    : - !!python/tuple
+        - 656
+        - 402
+        - 38
+        - 19
+      - !!python/tuple
+        - 1088
+        - 790
+        - 38
+        - 19
+      - !!python/tuple
+        - 1131
+        - 725
+        - 38
+        - 19
+    *id011:
+    - !!python/tuple
+      - 710
+      - 471
+      - 28
+      - 18
+    - !!python/tuple
+      - 656
+      - 402
+      - 38
+      - 19
+    - !!python/tuple
+      - 1131
+      - 855
+      - 38
+      - 19
+    - !!python/tuple
+      - 1088
+      - 790
+      - 38
+      - 19
+    - !!python/tuple
+      - 1131
+      - 725
+      - 38
+      - 19
+    *id012:
+    - !!python/tuple
+      - 710
+      - 471
+      - 28
+      - 18
+    - !!python/tuple
+      - 656
+      - 402
+      - 38
+      - 19
+    ? !!python/tuple
+    - -2
+    - 29
+    : - !!python/tuple
+        - 710
+        - 471
+        - 28
+        - 18
+      - !!python/tuple
+        - 656
+        - 402
+        - 38
+        - 19
+  spots:
+  - region: !!python/tuple
+    - 710
+    - 471
+    - 28
+    - 18
+    kind: poisson
+    patternId: 1605766090455.png
+  - region: !!python/tuple
+    - 656
+    - 402
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 1131
+    - 855
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 1088
+    - 790
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 1131
+    - 725
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  nbrseen: 2
+- x: -3
+  y: 30
+  excludedMaps: {}
+  excludedSpots:
+    ? !!python/tuple
+    - -4
+    - 30
+    : - !!python/tuple
+        - 1350
+        - 706
+        - 41
+        - 21
+  spots:
+  - region: !!python/tuple
+    - 1350
+    - 706
+    - 41
+    - 21
+    kind: poissonMoyen
+    patternId: 89dfg74654ghj46gh54j.png
+  - region: !!python/tuple
+    - 1175
+    - 661
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 1443
+    - 750
+    - 33
+    - 21
+    kind: poisson
+    patternId: 1605709453333.png
+  nbrseen: 2
+- x: -3
+  y: 31
+  excludedMaps:
+    ? !!python/tuple
+    - -3
+    - 32
+    : - !!python/tuple
+        - -2
+        - 31
+    ? !!python/tuple
+    - -3
+    - 30
+    : - !!python/tuple
+        - -2
+        - 31
+    ? !!python/tuple
+    - -4
+    - 31
+    : - !!python/tuple
+        - -2
+        - 31
+  excludedSpots:
+    ? !!python/tuple
+    - -3
+    - 30
+    : - !!python/tuple
+        - 925
+        - 192
+        - 29
+        - 18
+      - !!python/tuple
+        - 1264
+        - 533
+        - 41
+        - 21
+    ? !!python/tuple
+    - -4
+    - 31
+    : - !!python/tuple
+        - 1261
+        - 531
+        - 38
+        - 19
+    ? !!python/tuple
+    - -3
+    - 32
+    : - !!python/tuple
+        - 1264
+        - 533
+        - 41
+        - 21
+  spots:
+  - region: !!python/tuple
+    - 925
+    - 192
+    - 29
+    - 18
+    kind: poisson
+    patternId: 1605712921885.png
+  - region: !!python/tuple
+    - 1264
+    - 576
+    - 41
+    - 21
+    kind: poissonMoyen
+    patternId: 89dfg74654ghj46gh54j.png
+  - region: !!python/tuple
+    - 1264
+    - 533
+    - 41
+    - 21
+    kind: poissonMoyen
+    patternId: 89dfg74654ghj46gh54j.png
+  - region: !!python/tuple
+    - 929
+    - 488
+    - 33
+    - 25
+    kind: sauge
+    patternId: 1605709569016.png
+  - region: !!python/tuple
+    - 1261
+    - 531
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  nbrseen: 2
+- x: -3
+  y: 32
+  excludedMaps:
+    ? !!python/tuple
+    - -4
+    - 32
+    : - !!python/tuple
+        - -2
+        - 32
+      - !!python/tuple
+        - -3
+        - 33
+    ? !!python/tuple
+    - -3
+    - 31
+    : - !!python/tuple
+        - -3
+        - 33
+      - !!python/tuple
+        - -2
+        - 32
+  excludedSpots:
+    ? !!python/tuple
+    - -3
+    - 31
+    : - !!python/tuple
+        - 1394
+        - 295
+        - 41
+        - 21
+    ? !!python/tuple
+    - -4
+    - 32
+    : - !!python/tuple
+        - 1394
+        - 295
+        - 41
+        - 21
+  spots:
+  - region: !!python/tuple
+    - 1307
+    - 380
+    - 42
+    - 28
+    kind: poisson
+    patternId: 1605708169078.png
+  - region: !!python/tuple
+    - 1394
+    - 295
+    - 41
+    - 21
+    kind: poissonMoyen
+    patternId: 89dfg74654ghj46gh54j.png
+  - region: !!python/tuple
+    - 1048
+    - 770
+    - 41
+    - 21
+    kind: poissonMoyen
+    patternId: 89dfg74654ghj46gh54j.png
+  - region: !!python/tuple
+    - 1313
+    - 383
+    - 33
+    - 21
+    kind: poisson
+    patternId: 1605709453333.png
+  - region: !!python/tuple
+    - 1045
+    - 768
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  nbrseen: 2
+- x: -2
+  y: 24
+  excludedMaps:
+    ? !!python/tuple
+    - -3
+    - 24
+    : - !!python/tuple
+        - -2
+        - 23
+  excludedSpots:
+    null:
+    - !!python/tuple
+      - 800
+      - 306
+      - 19
+      - 40
+    ? !!python/tuple
+    - -3
+    - 24
+    : - !!python/tuple
+        - 1442
+        - 623
+        - 28
+        - 17
+      - !!python/tuple
+        - 800
+        - 306
+        - 19
+        - 40
+    ? !!python/tuple
+    - -2
+    - 25
+    : - !!python/tuple
+        - 1442
+        - 623
+        - 28
+        - 17
+      - !!python/tuple
+        - 484
+        - 531
+        - 38
+        - 19
+  spots:
+  - region: !!python/tuple
+    - 1442
+    - 623
+    - 28
+    - 17
+    kind: poisson
+    patternId: 1605713212941.png
+  - region: !!python/tuple
+    - 484
+    - 531
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 1268
+    - 499
+    - 34
+    - 29
+    kind: orchide
+    patternId: 5483654354cgfhjfgh789678574.png
+  - region: !!python/tuple
+    - 756
+    - 713
+    - 22
+    - 50
+    kind: menthe
+    patternId: 8fdf463retkjp98r569836.png
+  - region: !!python/tuple
+    - 800
+    - 306
+    - 19
+    - 40
+    kind: menthe
+    patternId: f8ds365h7978p65631R5.png
+  - region: !!python/tuple
+    - 667
+    - 340
+    - 26
+    - 23
+    kind: edelwise
+    patternId: ezrez9fg986543213fgh1gf.png
+  - region: !!python/tuple
+    - 484
+    - 488
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  nbrseen: 2
+- x: -2
+  y: 25
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1486
+    - 555
+    - 34
+    - 29
+    kind: orchide
+    patternId: 5483654354cgfhjfgh789678574.png
+  nbrseen: 2
+- x: -2
+  y: 26
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 2
+- x: -2
+  y: 27
+  excludedMaps:
+    null:
+    - !!python/tuple
+      - -1
+      - 27
+    ? !!python/tuple
+    - -2
+    - 28
+    : - !!python/tuple
+        - -1
+        - 27
+    ? !!python/tuple
+    - -3
+    - 27
+    : - !!python/tuple
+        - -1
+        - 27
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1054
+    - 296
+    - 33
+    - 21
+    kind: poisson
+    patternId: 1605709453333.png
+  - region: !!python/tuple
+    - 1062
+    - 374
+    - 32
+    - 32
+    kind: poissonMoyen
+    patternId: ds8d3652g1ra4z6d3a213qsd1gfg32fd1g56.png
+  nbrseen: 2
+- x: -2
+  y: 28
+  excludedMaps: {}
+  excludedSpots:
+    ? !!python/tuple
+    - -3
+    - 28
+    : - !!python/tuple
+        - 1045
+        - 336
+        - 38
+        - 19
+    ? !!python/tuple
+    - -2
+    - 27
+    : - !!python/tuple
+        - 1045
+        - 336
+        - 38
+        - 19
+    ? !!python/tuple
+    - -2
+    - 29
+    : - !!python/tuple
+        - 1045
+        - 336
+        - 38
+        - 19
+  spots:
+  - region: !!python/tuple
+    - 1011
+    - 318
+    - 33
+    - 21
+    kind: poisson
+    patternId: 1605709453333.png
+  - region: !!python/tuple
+    - 1045
+    - 336
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 495
+    - 686
+    - 26
+    - 23
+    kind: edelwise
+    patternId: ezrez9fg986543213fgh1gf.png
+  nbrseen: 2
+- x: -2
+  y: 29
+  excludedMaps: {}
+  excludedSpots:
+    ? !!python/tuple
+    - -3
+    - 29
+    : - !!python/tuple
+        - 959
+        - 380
+        - 38
+        - 19
+    ? !!python/tuple
+    - -2
+    - 30
+    : - !!python/tuple
+        - 959
+        - 380
+        - 38
+        - 19
+    ? !!python/tuple
+    - -1
+    - 29
+    : - !!python/tuple
+        - 959
+        - 380
+        - 38
+        - 19
+  spots:
+  - region: !!python/tuple
+    - 959
+    - 423
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 959
+    - 380
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 1175
+    - 445
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  nbrseen: 2
+- x: -2
+  y: 30
+  excludedMaps:
+    ? &id013 !!python/tuple
+    - -3
+    - 30
+    : - !!python/tuple
+        - -2
+        - 31
+  excludedSpots:
+    ? !!python/tuple
+    - -2
+    - 29
+    : - !!python/tuple
+        - 916
+        - 704
+        - 38
+        - 19
+      - !!python/tuple
+        - 1045
+        - 725
+        - 38
+        - 19
+    *id013:
+    - !!python/tuple
+      - 1097
+      - 837
+      - 33
+      - 21
+  spots:
+  - region: !!python/tuple
+    - 1097
+    - 837
+    - 33
+    - 21
+    kind: poisson
+    patternId: 1605709453333.png
+  - region: !!python/tuple
+    - 1477
+    - 77
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 916
+    - 704
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 570
+    - 834
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 1045
+    - 725
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  nbrseen: 2
+- x: -2
+  y: 31
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 2
+- x: -2
+  y: 32
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 2
+- x: -1
+  y: 24
+  excludedMaps:
+    ? &id014 !!python/tuple
+    - -2
+    - 24
+    : - !!python/tuple
+        - -1
+        - 25
+  excludedSpots:
+    *id014:
+    - !!python/tuple
+      - 1271
+      - 795
+      - 28
+      - 18
+    - !!python/tuple
+      - 1005
+      - 704
+      - 42
+      - 28
+    - !!python/tuple
+      - 1005
+      - 661
+      - 42
+      - 28
+    - !!python/tuple
+      - 450
+      - 773
+      - 28
+      - 18
+    - !!python/tuple
+      - 1005
+      - 834
+      - 42
+      - 28
+    null:
+    - !!python/tuple
+      - 1271
+      - 795
+      - 28
+      - 18
+    ? !!python/tuple
+    - -1
+    - 23
+    : - !!python/tuple
+        - 1005
+        - 661
+        - 42
+        - 28
+      - !!python/tuple
+        - 450
+        - 773
+        - 28
+        - 18
+  spots:
+  - region: !!python/tuple
+    - 885
+    - 654
+    - 19
+    - 43
+    kind: ortie
+    patternId: 1605708225624.png
+  - region: !!python/tuple
+    - 1005
+    - 834
+    - 42
+    - 28
+    kind: poisson
+    patternId: 1605708169078.png
+  - region: !!python/tuple
+    - 1005
+    - 704
+    - 42
+    - 28
+    kind: poisson
+    patternId: 1605708169078.png
+  - region: !!python/tuple
+    - 1005
+    - 661
+    - 42
+    - 28
+    kind: poisson
+    patternId: 1605708169078.png
+  - region: !!python/tuple
+    - 1271
+    - 795
+    - 28
+    - 18
+    kind: poisson
+    patternId: 1605766090455.png
+  - region: !!python/tuple
+    - 450
+    - 773
+    - 28
+    - 18
+    kind: poisson
+    patternId: 1605766090455.png
+  nbrseen: 2
+- x: -1
+  y: 25
+  excludedMaps:
+    null:
+    - !!python/tuple
+      - -1
+      - 24
+    - !!python/tuple
+      - 0
+      - 25
+    ? !!python/tuple
+    - -1
+    - 26
+    : - !!python/tuple
+        - 0
+        - 25
+    ? !!python/tuple
+    - -2
+    - 25
+    : - !!python/tuple
+        - -1
+        - 24
+      - !!python/tuple
+        - 0
+        - 25
+  excludedSpots:
+    ? !!python/tuple
+    - -2
+    - 25
+    : - !!python/tuple
+        - 1307
+        - 336
+        - 42
+        - 28
+      - !!python/tuple
+        - 703
+        - 209
+        - 41
+        - 21
+      - !!python/tuple
+        - 1134
+        - 641
+        - 41
+        - 21
+      - !!python/tuple
+        - 573
+        - 188
+        - 41
+        - 21
+      - !!python/tuple
+        - 1218
+        - 423
+        - 38
+        - 19
+  spots:
+  - region: !!python/tuple
+    - 798
+    - 349
+    - 22
+    - 28
+    kind: orchide
+    patternId: 7f6ds8f3f43d4f3ef543df54q3sfd54.png
+  - region: !!python/tuple
+    - 495
+    - 643
+    - 26
+    - 23
+    kind: edelwise
+    patternId: ezrez9fg986543213fgh1gf.png
+  - region: !!python/tuple
+    - 1175
+    - 358
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 1307
+    - 336
+    - 42
+    - 28
+    kind: poisson
+    patternId: 1605708169078.png
+  - region: !!python/tuple
+    - 703
+    - 209
+    - 41
+    - 21
+    kind: poissonMoyen
+    patternId: 89dfg74654ghj46gh54j.png
+  - region: !!python/tuple
+    - 1134
+    - 641
+    - 41
+    - 21
+    kind: poissonMoyen
+    patternId: 89dfg74654ghj46gh54j.png
+  - region: !!python/tuple
+    - 573
+    - 188
+    - 41
+    - 21
+    kind: poissonMoyen
+    patternId: 89dfg74654ghj46gh54j.png
+  - region: !!python/tuple
+    - 1218
+    - 423
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 440
+    - 207
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 1002
+    - 790
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  nbrseen: 2
+- x: -1
+  y: 26
+  excludedMaps:
+    ? !!python/tuple
+    - -2
+    - 26
+    : - !!python/tuple
+        - 0
+        - 26
+    ? !!python/tuple
+    - -1
+    - 25
+    : - !!python/tuple
+        - 0
+        - 26
+      - !!python/tuple
+        - -1
+        - 27
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 703
+    - 554
+    - 41
+    - 21
+    kind: poissonMoyen
+    patternId: 89dfg74654ghj46gh54j.png
+  - region: !!python/tuple
+    - 1134
+    - 554
+    - 41
+    - 21
+    kind: poissonMoyen
+    patternId: 89dfg74654ghj46gh54j.png
+  - region: !!python/tuple
+    - 746
+    - 576
+    - 41
+    - 21
+    kind: poissonMoyen
+    patternId: 89dfg74654ghj46gh54j.png
+  - region: !!python/tuple
+    - 789
+    - 122
+    - 41
+    - 21
+    kind: poissonMoyen
+    patternId: 89dfg74654ghj46gh54j.png
+  - region: !!python/tuple
+    - 1131
+    - 552
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 790
+    - 120
+    - 40
+    - 22
+    kind: poissonMoyen
+    patternId: rez8736fg32654qs8f65fsdg2s3g54.png
+  nbrseen: 2
+- x: -1
+  y: 27
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 2
+- x: -1
+  y: 28
+  excludedMaps:
+    ? !!python/tuple
+    - -2
+    - 28
+    : - !!python/tuple
+        - 0
+        - 28
+      - !!python/tuple
+        - -1
+        - 27
+    ? !!python/tuple
+    - -1
+    - 29
+    : - !!python/tuple
+        - 0
+        - 28
+      - !!python/tuple
+        - -1
+        - 27
+  excludedSpots:
+    ? !!python/tuple
+    - -2
+    - 28
+    : - !!python/tuple
+        - 1391
+        - 77
+        - 38
+        - 19
+      - !!python/tuple
+        - 1408
+        - 71
+        - 32
+        - 32
+  spots:
+  - region: !!python/tuple
+    - 1408
+    - 71
+    - 32
+    - 32
+    kind: poissonMoyen
+    patternId: ds8d3652g1ra4z6d3a213qsd1gfg32fd1g56.png
+  - region: !!python/tuple
+    - 1494
+    - 374
+    - 32
+    - 32
+    kind: poissonMoyen
+    patternId: ds8d3652g1ra4z6d3a213qsd1gfg32fd1g56.png
+  - region: !!python/tuple
+    - 1434
+    - 445
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 1391
+    - 768
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 1391
+    - 77
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  nbrseen: 2
+- x: -1
+  y: 29
+  excludedMaps:
+    ? !!python/tuple
+    - -1
+    - 30
+    : - !!python/tuple
+        - 0
+        - 29
+  excludedSpots:
+    ? !!python/tuple
+    - -1
+    - 28
+    : - !!python/tuple
+        - 1261
+        - 99
+        - 38
+        - 19
+      - !!python/tuple
+        - 1304
+        - 596
+        - 38
+        - 19
+  spots:
+  - region: !!python/tuple
+    - 1183
+    - 363
+    - 28
+    - 17
+    kind: poisson
+    patternId: 1605713212941.png
+  - region: !!python/tuple
+    - 1261
+    - 99
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 484
+    - 747
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 1304
+    - 596
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  nbrseen: 2
+- x: -1
+  y: 30
+  excludedMaps:
+    ? !!python/tuple
+    - -2
+    - 30
+    : - !!python/tuple
+        - -1
+        - 31
+      - !!python/tuple
+        - 0
+        - 30
+    ? !!python/tuple
+    - -1
+    - 29
+    : - !!python/tuple
+        - -1
+        - 31
+      - !!python/tuple
+        - 0
+        - 30
+  excludedSpots:
+    ? !!python/tuple
+    - -1
+    - 29
+    : - !!python/tuple
+        - 1175
+        - 661
+        - 38
+        - 19
+  spots:
+  - region: !!python/tuple
+    - 630
+    - 114
+    - 32
+    - 32
+    kind: poissonMoyen
+    patternId: ds8d3652g1ra4z6d3a213qsd1gfg32fd1g56.png
+  - region: !!python/tuple
+    - 1218
+    - 811
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 1347
+    - 186
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 1313
+    - 80
+    - 33
+    - 21
+    kind: poisson
+    patternId: 1605709453333.png
+  - region: !!python/tuple
+    - 1175
+    - 661
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  - region: !!python/tuple
+    - 613
+    - 120
+    - 38
+    - 19
+    kind: poissonMoyen
+    patternId: ezr835t3254yt85rez32y8ryr3564.png
+  nbrseen: 2
+- x: -1
+  y: 31
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 2
+- x: -1
+  y: 32
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 2
