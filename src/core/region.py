@@ -46,6 +46,7 @@ class Location(QPoint):
 
     def getpixel(self):
         bi = env.capture(Region(self.x(), self.y(), 1, 1))
+        ni = cv2.cvtColor(bi, cv2.COLOR_RGB2BGR)
         return QColor(*bi[0, 0])
 
 
@@ -110,7 +111,7 @@ class Region(QRect):
 
     def waitAnimationEnd(self, timeout=FOREVER):
         self.stopWait.clear()
-        lookup_int = 12
+        lookup_int = 5
         clip = collections.deque()
         for frame in self.stream(timeout):
             if len(clip) > lookup_int:
@@ -118,7 +119,6 @@ class Region(QRect):
                     return True
                 clip.popleft()
             clip.append(frame)
-            sleep(0.2)
         return False
 
     def capture(self, gray=False):
@@ -194,5 +194,8 @@ class Region(QRect):
     def nearBy(self, w, h):
         return Region(self.center().x() - w / 2, self.center().y() - h / 2, w, h)
 
+    def scroll(self, clicks=0, delta_x=0, delta_y=0, delay_between_ticks=0):
+        self.hover()
+        env.scroll(clicks, delta_x, delta_y, delay_between_ticks)
 
 

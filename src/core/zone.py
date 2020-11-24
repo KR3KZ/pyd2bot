@@ -1,6 +1,13 @@
 import collections
+import os
 import random
+from datetime import datetime
+import yaml
+from core import Region
+from core.bot.bot import Pattern
 from core.exceptions import FindPathFailed
+
+random.seed(datetime.now())
 
 
 class Map(dict):
@@ -8,33 +15,51 @@ class Map(dict):
         super(Map, self).__init__({
             'x': x,
             'y': y,
-            'hasResource': None,
-            'hasMobs': None,
-            'discovered': None,
-            'excluded': {},
-            "farmed": 0
+            'excludedMaps': {},
+            'excludedSpots': {},
+            "spots": [],
+            "nbrseen": 0
         })
         self.zone = zone
+
+    def toDict(self):
+        data = self.copy()
+        data['spots'] = []
+        for spot in self['spots']:
+            data['spots'].append({'region': spot['region'].getRect(),
+                                  'kind': spot['pattern']['kind'],
+                                  'patternId': spot['pattern']['id']})
+        return data
+
+    def hasSpot(self, spot):
+        for _spot in self['spots']:
+            if _spot['region'].getRect() == spot['region'].getRect() \
+                    and _spot['pattern']['id'] == spot['pattern']['id']:
+                return True
+        return False
 
     def __getattr__(self, item):
         if item not in self:
             raise AttributeError(f"Class 'Map' has no attribute '{item}'.")
         return self[item]
 
-    def exclude(self, src, dst):
-        if src not in self.excluded:
-            self.excluded[src] = []
-        self.excluded[src].append(dst)
+    def excludeSpot(self, src, spot):
+        if src not in self.excludedSpots:
+            self.excludedSpots[src] = []
+        if spot['region'].getRect() not in self.excludedSpots[src]:
+            self.excludedSpots[src].append(spot['region'].getRect())
 
-    def neighbors(self, src, hasMobs=False, hasResource=False):
+    def excludeMap(self, src, dst):
+        if src not in self.excludedMaps:
+            self.excludedMaps[src] = []
+        if dst not in self.excludedMaps[src]:
+            self.excludedMaps[src].append(dst)
+
+    def neighbors(self, src):
         result = []
         for n in self.zone.neighbors(self.x, self.y):
-            if not src or src not in self.excluded or n not in self.excluded[src]:
+            if src not in self.excludedMaps or (n['x'], n['y']) not in self.excludedMaps[src]:
                 result.append(n)
-        if hasMobs:
-            result = [_ for _ in result if not _.discovered or _.hasMobs]
-        if hasResource:
-            result = [_ for _ in result if not _.discovered or _.hasResource]
         return result
 
     def randDirection(self, src, ignore=None):
@@ -42,41 +67,37 @@ class Map(dict):
             ignore = []
         neighbors = self.neighbors(src)
         if not neighbors:
-            self.excluded[src] = []
+            self.excludedMaps = {}
             neighbors = self.neighbors(src)
         choices = [_ for _ in neighbors if (_['x'], _['y']) not in ignore]
         if not choices:
             choices = neighbors
         dst = random.choice(choices)
-        return dst, (dst.x - self.x, dst.y - self.y)
+        return (dst.x, dst.y), (dst.x - self.x, dst.y - self.y)
 
+    def isValidSpot(self, src, spot):
+        if src not in self.excludedSpots:
+            return True
+        return spot['region'].getRect() not in self.excludedSpots[src]
 
-class Zone:
+class Zone(dict):
     directions = {(0, -1), (0, 1), (-1, 0), (1, 0)}
 
-    def __init__(self, top_left, bot_right, name="Zone"):
-        self.init(top_left, bot_right, name)
-
-    def init(self, top_left, bot_right, name):
-        self.top_left = top_left
-        self.bot_right = bot_right
-        self.x = top_left[0]
-        self.y = top_left[1]
-        self.w = bot_right[0] - top_left[0]
-        self.h = bot_right[1] - top_left[1]
-        self._matrix = []
+    def __init__(self, name="Zone"):
+        super(Zone, self).__init__()
         self.name = name
-        for x in range(self.x, self.x + self.w + 1):
-            row = [Map(self, x, y) for y in range(self.y, self.y + self.h + 1)]
-            self._matrix.append(row)
 
-    def __getitem__(self, coords):
-        x, y = coords
-        return self._matrix[x - self.x][y - self.y]
-
-    def __contains__(self, coords):
-        x, y = coords
-        return self.x <= x <= self.x + self.w and self.y <= y <= self.y + self.h
+    def addSquare(self, top_left, bot_right):
+        top_left = top_left
+        bot_right = bot_right
+        x = top_left[0]
+        y = top_left[1]
+        w = bot_right[0] - top_left[0]
+        h = bot_right[1] - top_left[1]
+        for dx in range(x, x + w + 1):
+            for dy in range(y, y + h + 1):
+                if (dx, dy) not in self:
+                    self[(dx, dy)] = Map(self, dx, dy)
 
     def neighbors(self, x, y, inside=True):
         ans = []
@@ -102,6 +123,45 @@ class Zone:
                     seen.add(coords)
         raise FindPathFailed("Enable to find a valid path!")
 
+    def toDict(self):
+        return {
+            'name': self.name,
+            'maps': [m.toDict() for c, m in self.items()]
+        }
+
+    def loadFromFile(self, filepath, patternsDir):
+        with open(filepath, 'r') as f:
+            data = yaml.load(f, Loader=yaml.FullLoader)
+            self.name = data['name']
+            for dmap in data['maps']:
+                nmap = Map(self, dmap['x'], dmap['y'])
+                nmap['nbrseen'] = dmap['nbrseen']
+                nmap['excludedMaps'] = dmap['excludedMaps']
+                nmap['excludedSpots'] = dmap['excludedSpots']
+                for spot in dmap['spots']:
+                    pattern_path = os.path.join(patternsDir, spot['kind'], spot['patternId'])
+                    if os.path.exists(pattern_path):
+                        nmap['spots'].append({
+                            'region': Region(*spot['region']),
+                            'pattern': Pattern(spot['kind'], pattern_path, spot['patternId'])
+                        })
+                self[(dmap['x'], dmap['y'])] = nmap
+
+    def subZone(self, tl, br, name="subzone"):
+        subZone = Zone(name)
+        x = tl[0]
+        y = tl[1]
+        w = br[0] - tl[0]
+        h = br[1] - tl[1]
+        for dx in range(x, x + w + 1):
+            for dy in range(y, y + h + 1):
+                if (dx, dy) in self:
+                    subZone[(dx, dy)] = self[(dx, dy)]
+        return subZone
+
+    def resetExcludedSpots(self):
+        for coord, item in self.items():
+            item['excludedSpots'] = {}
 
 if __name__ == "__main__":
     top_left = (0, 0)

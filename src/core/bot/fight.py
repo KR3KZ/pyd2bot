@@ -39,8 +39,8 @@ class CombatEndObs(threading.Thread):
 
 class Fighter(Walker):
 
-    def __init__(self, spell, name="Fighter"):
-        super(Fighter, self).__init__(name)
+    def __init__(self, spell, workdir, name="Fighter"):
+        super(Fighter, self).__init__(workdir, name)
         self.spell = spell
         self.fightEndObs = CombatEndObs(self)
         self.fightStartObs = CombatStartObs(self)
@@ -49,9 +49,9 @@ class Fighter(Walker):
         self.nbr_fights = 0
 
     def run(self):
-        super(Fighter, self).run()
         self.fightStartObs.start()
         self.fightEndObs.start()
+        super(Fighter, self).run()
 
     def onCombatEnded(self):
         self.combatEndReached.set()
@@ -74,6 +74,7 @@ class Fighter(Walker):
                 pyautogui.press(dofus.SKIP_TURN_SHORTCUT)
             dofus.OUT_OF_COMBAT_R.hover()
             self.combatAlgo()
+            sleep(10)
             self.combatEnded.set()
             self.nbr_fights += 1
             logging.debug('Combat ended')
@@ -124,6 +125,8 @@ class Fighter(Walker):
                     return True
                 if self.disconnected.is_set():
                     self.connected.wait()
+                elif dofus.COMBAT_R.find(dofus.REDUCE_BOX_P):
+                    dofus.COMBAT_R.find(dofus.REDUCE_BOX_P).click()
                 else:
                     logging.error(str(e), exc_info=True)
                     nbr_errors += 1
@@ -219,7 +222,7 @@ class Fighter(Walker):
         raise MoveToCellFailed(cell)
 
     @staticmethod
-    def useSpell(spell, target, timeout=10):
+    def useSpell(spell, target, timeout=2):
         """
         Cast given spell on the target
         :param spell: spell dictionary

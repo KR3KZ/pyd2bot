@@ -84,7 +84,7 @@ def _capture(region):
     signedIntsArray = bmp.GetBitmapBits(True)
     img = np.frombuffer(signedIntsArray, dtype='uint8')
     img.shape = (h, w, 4)
-    #img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+    # img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
     # bmp.SaveBitmapFile(cDC, 'save.bmp')
 
     win32gui.DeleteObject(bmp.GetHandle())
@@ -92,6 +92,18 @@ def _capture(region):
     dcObj.DeleteDC()
     win32gui.ReleaseDC(DOFUS_HWND, hdcwin)
     return img
+
+
+def scroll(clicks=0, delta_x=0, delta_y=0, delay_between_ticks=0):
+
+    if clicks > 0:
+        increment = win32con.WHEEL_DELTA
+    else:
+        increment = win32con.WHEEL_DELTA * -1
+
+    for _ in range(abs(clicks)):
+        win32api.mouse_event(win32con.MOUSEEVENTF_WHEEL, delta_x, delta_y, increment, 0)
+        sleep(delay_between_ticks)
 
 
 if __name__ == "__main__":

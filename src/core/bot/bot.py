@@ -1,16 +1,27 @@
 import logging
+import os
 import re
 import threading
 from time import perf_counter, sleep
 import cv2
 import numpy as np
+import pyautogui
 import pytesseract
-from core import Observer, dofus, env
+from core import Observer, dofus, env, utils, Region
+
+
+class Pattern(dict):
+    def __init__(self, kind, path_to_pattern, id):
+        super(Pattern, self).__init__({
+            'kind': kind,
+            'id': id,
+            'bi': cv2.imread(path_to_pattern)
+        })
 
 
 class Bot(threading.Thread):
 
-    def __init__(self, name="Bot"):
+    def __init__(self, workdir, name="Bot"):
         super(Bot, self).__init__(name=name)
         self.killsig = threading.Event()
         self.combatStarted = threading.Event()
@@ -21,15 +32,22 @@ class Bot(threading.Thread):
         self.connected = threading.Event()
         self.name = name
         self.dead = False
+        self.workdir = workdir
         self.disconnectedObs = Observer(dofus.CONNECT_R,
                                         dofus.DISCONNECTED_BOX_P,
                                         self.reconnect,
                                         Observer.Mode.APPEAR,
                                         rate=1 / 5)
+        self.patternsDir = os.path.join(self.workdir, 'patterns')
+        self.patterns = {}
+        self.loadPatterns()
 
-    def run(self):
-        self.disconnectedObs.start()
-        env.focusDofusWindow(self.name)
+    def loadPatterns(self):
+        for patternDir in os.listdir(self.patternsDir):
+            self.patterns[patternDir] = []
+            fpath = os.path.join(self.patternsDir, patternDir)
+            for path_to_img, fn in utils.iterPatternsImg(fpath):
+                self.patterns[patternDir].append(Pattern(patternDir, path_to_img, fn))
 
     def interrupt(self):
         self.killsig.set()
@@ -44,9 +62,7 @@ class Bot(threading.Thread):
         dofus.CONNECT_R.waitVanish(dofus.DISCONNECTED_BOX_P)
         dofus.RECONNECT_BUTTON_R.click()
         sleep(4)
-        # dofus.PLAY_GAME_BUTTON_R.waitAppear(dofus.PLAY_GAME_BUTTON_P)
-        # dofus.PLAY_GAME_BUTTON_R.click()
-        if self.waitMapCoords(10):
+        if self.waitMapCoords(99999):
             self.disconnected.clear()
             self.connected.set()
 
@@ -74,4 +90,52 @@ class Bot(threading.Thread):
                 return True
             sleep(0.2)
         return False
+
+    @staticmethod
+    def fullPods():
+        return dofus.FULL_POD_CHECK_L.getpixel() == dofus.FULL_POD_COLOR
+
+    @staticmethod
+    def shiftClick(tgt):
+        pyautogui.keyDown('shift')
+        sleep(0.1)
+        tgt.click()
+        sleep(0.1)
+        pyautogui.keyUp('shift')
+        sleep(0.1)
+        dofus.OUT_OF_COMBAT_R.hover()
+
+    def collect(self, spot, timeout=7):
+        tgt = spot['region']
+
+        with self.lock:
+            self.shiftClick(tgt)
+
+        if spot['pattern']['kind'] == 'poisson' or spot['pattern']['kind'] == 'poissonMoyen':
+            sleep(1)
+            if not tgt.waitChange(5):
+                return False
+            sleep(1)
+            res = tgt.waitChange(2.5)
+        else:
+            res = dofus.SLOTS_R.waitChange(timeout)
+
+        if self.combatStarted.is_set():
+            self.combatEnded.wait()
+
+        if self.disconnected.is_set():
+            self.connected.wait()
+
+        self.checkPopup()
+
+        return res
+
+    def harvest(self):
+        pass
+
+    @staticmethod
+    def checkPopup():
+        m = dofus.LVL_UP_INFO_R.find(dofus.CLOSE_POPUP_P)
+        if m:
+            m.click()
 

@@ -39,11 +39,16 @@ def dhash(image, hashSize=8):
     return sum([2 ** i for (i, v) in enumerate(diff.flatten()) if v])
 
 
-def loadPatternsFromDir(patterns_dir, pattern_ext=".png"):
-    res = []
+def iterPatternsImg(patterns_dir, pattern_ext=".png"):
     for filename in os.listdir(patterns_dir):
         if filename.endswith(pattern_ext):
-            res.append(cv2.imread(os.path.join(patterns_dir, filename)))
+           yield os.path.join(patterns_dir, filename), filename
+
+
+def loadPatternsFromDir(patterns_dir, pattern_ext=".png"):
+    res = []
+    for file_path in iterPatternsImg(patterns_dir, pattern_ext):
+        res.append(cv2.imread(file_path))
     return res
 
 

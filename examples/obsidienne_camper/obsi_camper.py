@@ -1,12 +1,9 @@
 import random
 import threading
 from time import sleep
-from uuid import uuid4
 import cv2
-import collections
 from core import utils
-
-from core.bot import Walker, Fighter
+from core.bot import Fighter
 from core import env, Region
 
 env.focusDofusWindow()
