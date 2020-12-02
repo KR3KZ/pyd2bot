@@ -37,8 +37,8 @@ if __name__ == "__main__":
         "shortcut": "z"
     }
 
-    # top_left = (8, -21)
-    # bot_right = (12, -15)
+    # tl = (8, -21)
+    # br = (12, -15)
 
     top_left = (3, -14)
     bot_right = (11, -9)

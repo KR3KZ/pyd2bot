@@ -151,11 +151,11 @@ class Fighter(Walker):
         Play turn loop
         """
         usedSpells = 0
-        while not self.combatEndReached.wait(0.2) and usedSpells < self.spell['nbr']:
+        while not self.combatEndReached.wait(3) and usedSpells < self.spell['nbr']:
             self.parseCombatGrid()
             if not self.mobs_killed:
                 self.mobs_killed = len(self.grid.mobs)
-            if self.combatEndReached.is_set():
+            if self.combatEndReached.wait(0.5):
                 return
             mob, path = self.findPathToTarget(self.grid.bot, self.spell['range'], self.grid.mobs)
             if not mob:
@@ -167,6 +167,8 @@ class Fighter(Walker):
                 if cell:
                     self.moveToCell(cell)
                     if cell == path[-1]:
+                        if self.combatEndReached.wait(0.5):
+                            return
                         self.useSpell(self.spell, mob)
                     else:
                         break
@@ -186,7 +188,7 @@ class Fighter(Walker):
                 perf_counter() - s < timeout:
             if self.grid.parse():
                 return True
-        raise ParseGridFailed(self.grid)
+
 
     @staticmethod
     def cellToTarget(path):
@@ -222,7 +224,7 @@ class Fighter(Walker):
         raise MoveToCellFailed(cell)
 
     @staticmethod
-    def useSpell(spell, target, timeout=2):
+    def useSpell(spell, target, timeout=5):
         """
         Cast given spell on the target
         :param spell: spell dictionary
@@ -234,7 +236,6 @@ class Fighter(Walker):
         target.click()
         dofus.OUT_OF_COMBAT_R.hover()
         if target.waitAnimation(timeout):
-            sleep(0.2)
             return True
 
         raise UseSpellFailed(target)

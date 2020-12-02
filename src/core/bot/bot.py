@@ -41,6 +41,8 @@ class Bot(threading.Thread):
         self.patternsDir = os.path.join(self.workdir, 'patterns')
         self.patterns = {}
         self.loadPatterns()
+        self.resourcesToFarm = []
+        self.mapChangeTimeOut = 7.6
 
     def loadPatterns(self):
         for patternDir in os.listdir(self.patternsDir):
@@ -70,16 +72,22 @@ class Bot(threading.Thread):
     def parseMapCoords():
         image = env.capture(dofus.MAP_COORDS_R)
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        low_bound = np.array([228, 220, 220])
-        upper_bound = np.array([255, 230, 255])
+        low_bound = np.array([160, 60, 0])
+        upper_bound = np.array([255, 255, 255])
+
         bgr_img = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         mask = cv2.inRange(bgr_img, low_bound, upper_bound)
         result = cv2.bitwise_and(gray, gray, mask=mask)
         result = cv2.threshold(result, 0, 255, cv2.THRESH_BINARY_INV)[1]
+        newShape = (int(dofus.MAP_COORDS_R.width() * 10), int(dofus.MAP_COORDS_R.height() * 10))
+        result = cv2.resize(result, newShape)
+        result = cv2.blur(result, (7, 7))
         text = pytesseract.image_to_string(result, config='--psm 6')
-        res = re.findall("(-?\d+),?(-?\d+)", text)
+
+        print(text)
+        res = re.findall("(-?\d+)", text)
         if res:
-            return int(res[0][0]), int(res[0][1])
+            return int(res[0]), int(res[1])
         else:
             return None
 

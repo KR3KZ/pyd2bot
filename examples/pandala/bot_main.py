@@ -27,20 +27,21 @@ if __name__ == "__main__":
     patterns_dir = os.path.join(work_dir, "patterns")
     saves_dir = os.path.join(work_dir, 'saves')
     now = datetime.datetime.now()
-    today_save_file = os.path.join(saves_dir, "23_11_2020.yaml")
+    today_save_file = os.path.join(saves_dir, "pandala_30_11_2020.yaml")
 
     lancer_de_piece = {
-        "range": 12,
+        "range": 13,
         "nbr": 4,
         "shortcut": "z"
     }
 
-    pandala = Zone("lac_de_cania")
-    # lac_de_cania.addSquare((19, -38), (28, -19))
+    pandala = Zone("pandala")
+    zone_zaap_coords = (20, -29)
     pandala.loadFromFile(today_save_file, patterns_dir)
-    # lac_de_cania.resetExcludedSpots()
-    bot = ResourceFarmer(pandala, 'pandala', lancer_de_piece, work_dir, "John-shooter")
-
+    bot = ResourceFarmer(pandala, zone_zaap_coords, lancer_de_piece, work_dir, "John-shooter")
+    bot.mapChangeTimeOut = 12
+    bot.memoTime = 60 * 5
+    bot.famPatternThreshold = 0.8
     atexit.register(tearDown, bot)
     bot.start()
     bot.join()

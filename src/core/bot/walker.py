@@ -1,6 +1,7 @@
 import collections
 import datetime
 import logging
+import random
 import re
 from threading import Timer
 from time import perf_counter, sleep
@@ -24,7 +25,7 @@ class Walker(Bot):
         self.tmpIgnore = []
         self.zone = None
         self.startZaap = None
-        self.memoTime = 60 * 2
+        self.memoTime = 60 * 15
 
     def updatePos(self, nbr_tries=5):
         for i in range(nbr_tries):
@@ -40,7 +41,9 @@ class Walker(Bot):
         while not self.killsig.is_set() and nbr_fails < max_tries:
             currx, curry = self.updatePos()
             dstx, dsty = currx + direction[0], curry + direction[1]
-            for tgt in dofus.mapChangeLoc[direction]:
+            directionLocs = dofus.mapChangeLoc[direction]
+            random.shuffle(directionLocs)
+            for tgt in directionLocs:
                 with self.lock:
                     pyautogui.keyDown('shift')
                     sleep(0.1)
@@ -48,7 +51,7 @@ class Walker(Bot):
                     sleep(0.1)
                     pyautogui.keyUp('shift')
                     dofus.OUT_OF_COMBAT_R.hover()
-                if self.waitMapChange(dstx, dsty):
+                if self.waitMapChange(dstx, dsty, self.mapChangeTimeOut):
                     self.lastPos = (currx, curry)
                     return True
                 else:
@@ -57,7 +60,7 @@ class Walker(Bot):
             nbr_fails += 1
         return False
 
-    def waitMapChange(self, x, y, timeout=12):
+    def waitMapChange(self, x, y, timeout=20):
         logging.debug(f"Current map coords: {self.currPos}")
         logging.debug(f"Changing map to destination ({x}, {y})")
         s = perf_counter()
@@ -140,23 +143,35 @@ class Walker(Bot):
         Region(771, 737, 272, 40).click()  # click first choice
         dofus.INV_OPEN_R.waitAppear(dofus.INVENTAIRE_P)
         Region(1469, 142, 29, 26).click()  # choose resources tab
-        sleep(1)
-        Region(1248, 138, 34, 33).click()  # click transfer
-        sleep(1)
-        Region(1276, 178, 222, 23).click()  # click transfer visible
-        dofus.INV_FIRST_SLOT_R.waitAppear(dofus.EMPTY_SLOT_INV_P)
+        sleep(2)
+        self.transferAllObjects()
+        Region(1418, 146, 28, 15).click()  # choose consumable tab
+        sleep(2)
+        Region(1354, 810, 44, 5).click()  # click on search region
+        sleep(2)
+        pyautogui.write("sac")
+        self.transferAllObjects()
         Region(1526, 109, 52, 22).click()  # close
         sleep(1)
+
+    def transferAllObjects(self):
+        Region(1248, 138, 34, 33).click()  # click transfer
+        sleep(2)
+        Region(1276, 178, 222, 23).click()  # click transfer visible
+        dofus.INV_FIRST_SLOT_R.waitAppear(dofus.EMPTY_SLOT_INV_P)
 
     def onTimer(self):
         if self.tmpIgnore:
             self.tmpIgnore.pop(0)
 
     def run(self):
+        if not self.resourcesToFarm:
+            self.resourcesToFarm = self.patterns.keys()
         self.disconnectedObs.start()
         env.focusDofusWindow(self.name)
         s = perf_counter()
         self.updatePos()
+        print(self.currPos)
         while not self.killsig.is_set():
             try:
                 if self.fullPods():
@@ -217,6 +232,8 @@ class Walker(Bot):
                         sleep(0.2)
                         box_r.click()
                         self.waitMapChange(*zapCoords, 60 * 15)
+                        if zapCoords == (20, -29):
+                            Region(618, 729, 36, 24).click()
                         return True
             dofus.ZAAP_COORD_R.scroll(clicks=-3, delay_between_ticks=0.1)
             dofus.OUT_OF_COMBAT_R.hover()

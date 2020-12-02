@@ -1,0 +1,4749 @@
+name: cania
+maps:
+- x: -15
+  y: -59
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 2
+- x: -15
+  y: -58
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1306
+    - 543
+    - 19
+    - 40
+    kind: erable
+    patternId: 654651gf36251.png
+  nbrseen: 2
+- x: -15
+  y: -57
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1354
+    - 180
+    - 24
+    - 63
+    kind: erable
+    patternId: 9ghf7hj9gh58j46.png
+  nbrseen: 2
+- x: -15
+  y: -56
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 573
+    - 616
+    - 33
+    - 22
+    kind: ortie
+    patternId: 6546f5h465321321zrez54.png
+  - region: !!python/tuple
+    - 1052
+    - 648
+    - 37
+    - 58
+    kind: chene
+    patternId: 4re6321f3g21fd3g2d1fg321f.png
+  - region: !!python/tuple
+    - 1440
+    - 229
+    - 33
+    - 60
+    kind: chene
+    patternId: 7tre465433r6sd4f6ds4f.png
+  nbrseen: 4
+- x: -15
+  y: -55
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 560
+    - 504
+    - 41
+    - 107
+    kind: noyer
+    patternId: 3d2f1g36j5415k54jh6k54hj654.png
+  nbrseen: 4
+- x: -15
+  y: -54
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1349
+    - 695
+    - 19
+    - 40
+    kind: erable
+    patternId: 654651gf36251.png
+  - region: !!python/tuple
+    - 1269
+    - 400
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  - region: !!python/tuple
+    - 1171
+    - 62
+    - 48
+    - 50
+    kind: erable
+    patternId: t9r7e84t6514h6j514gh5.png
+  nbrseen: 3
+- x: -15
+  y: -53
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 664
+    - 745
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  - region: !!python/tuple
+    - 519
+    - 55
+    - 67
+    - 108
+    kind: noyer
+    patternId: 6df4d3s612f5ds32f1.png
+  nbrseen: 4
+- x: -15
+  y: -52
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 393
+    - 127
+    - 76
+    - 38
+    kind: noyer
+    patternId: 56h4gf6h13gf21h.png
+  - region: !!python/tuple
+    - 962
+    - 464
+    - 33
+    - 22
+    kind: ortie
+    patternId: 6546f5h465321321zrez54.png
+  - region: !!python/tuple
+    - 1394
+    - 766
+    - 33
+    - 22
+    kind: ortie
+    patternId: 6546f5h465321321zrez54.png
+  - region: !!python/tuple
+    - 1035
+    - 611
+    - 41
+    - 107
+    kind: noyer
+    patternId: 3d2f1g36j5415k54jh6k54hj654.png
+  nbrseen: 4
+- x: -15
+  y: -51
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 437
+    - 40
+    - 48
+    - 50
+    kind: erable
+    patternId: t9r7e84t6514h6j514gh5.png
+  - region: !!python/tuple
+    - 406
+    - 487
+    - 48
+    - 32
+    kind: chene
+    patternId: 6464e6rt54rt3re12t321.png
+  - region: !!python/tuple
+    - 1090
+    - 565
+    - 19
+    - 40
+    kind: erable
+    patternId: 654651gf36251.png
+  nbrseen: 4
+- x: -15
+  y: -50
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1442
+    - 396
+    - 20
+    - 65
+    kind: erable
+    patternId: d6s5f43612f.png
+  nbrseen: 5
+- x: -15
+  y: -49
+  excludedMaps:
+    ? !!python/tuple
+    - -15
+    - -48
+    : - !!python/tuple
+        - -14
+        - -49
+    ? !!python/tuple
+    - -15
+    - -50
+    : - !!python/tuple
+        - -14
+        - -49
+    null:
+    - !!python/tuple
+      - -14
+      - -49
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1138
+    - 777
+    - 37
+    - 58
+    kind: chene
+    patternId: 4re6321f3g21fd3g2d1fg321f.png
+  - region: !!python/tuple
+    - 714
+    - 364
+    - 31
+    - 69
+    kind: ebene
+    patternId: f6ds4f3d2s1f3213216584654.png
+  - region: !!python/tuple
+    - 535
+    - 507
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  - region: !!python/tuple
+    - 1345
+    - 320
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  nbrseen: 4
+- x: -15
+  y: -48
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 992
+    - 418
+    - 41
+    - 107
+    kind: noyer
+    patternId: 3d2f1g36j5415k54jh6k54hj654.png
+  - region: !!python/tuple
+    - 708
+    - 378
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  - region: !!python/tuple
+    - 1498
+    - 337
+    - 22
+    - 44
+    kind: noyer
+    patternId: 87ds6f54d1s32f1ds321.png
+  - region: !!python/tuple
+    - 1023
+    - 532
+    - 22
+    - 44
+    kind: noyer
+    patternId: 87ds6f54d1s32f1ds321.png
+  nbrseen: 5
+- x: -15
+  y: -47
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 478
+    - 359
+    - 41
+    - 54
+    kind: erable
+    patternId: 54dfg654df6g54.png
+  - region: !!python/tuple
+    - 1220
+    - 586
+    - 19
+    - 40
+    kind: erable
+    patternId: 654651gf36251.png
+  - region: !!python/tuple
+    - 1263
+    - 90
+    - 19
+    - 40
+    kind: erable
+    patternId: 654651gf36251.png
+  - region: !!python/tuple
+    - 788
+    - 154
+    - 19
+    - 40
+    kind: erable
+    patternId: 654651gf36251.png
+  nbrseen: 10
+- x: -15
+  y: -46
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 404
+    - 238
+    - 37
+    - 58
+    kind: chene
+    patternId: 4re6321f3g21fd3g2d1fg321f.png
+  - region: !!python/tuple
+    - 1345
+    - 61
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  nbrseen: 9
+- x: -15
+  y: -45
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 670
+    - 256
+    - 31
+    - 69
+    kind: ebene
+    patternId: f6ds4f3d2s1f3213216584654.png
+  nbrseen: 6
+- x: -15
+  y: -44
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 3
+- x: -14
+  y: -59
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 924
+    - 400
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  - region: !!python/tuple
+    - 1277
+    - 86
+    - 25
+    - 54
+    kind: ebene
+    patternId: f9d684g63d2fg1d32f1.png
+  nbrseen: 2
+- x: -14
+  y: -58
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1534
+    - 299
+    - 31
+    - 69
+    kind: ebene
+    patternId: f6ds4f3d2s1f3213216584654.png
+  - region: !!python/tuple
+    - 832
+    - 184
+    - 33
+    - 22
+    kind: ortie
+    patternId: 6546f5h465321321zrez54.png
+  nbrseen: 2
+- x: -14
+  y: -57
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 2
+- x: -14
+  y: -56
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 567
+    - 104
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  - region: !!python/tuple
+    - 1400
+    - 119
+    - 48
+    - 32
+    kind: chene
+    patternId: 6464e6rt54rt3re12t321.png
+  nbrseen: 4
+- x: -14
+  y: -55
+  excludedMaps:
+    ? !!python/tuple
+    - -14
+    - -54
+    : - !!python/tuple
+        - -13
+        - -55
+    ? !!python/tuple
+    - -14
+    - -56
+    : - !!python/tuple
+        - -13
+        - -55
+    ? !!python/tuple
+    - -15
+    - -55
+    : - !!python/tuple
+        - -13
+        - -55
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1340
+    - 423
+    - 43
+    - 46
+    kind: if
+    patternId: ds4f654dsf654ds6f321321.png
+  - region: !!python/tuple
+    - 995
+    - 682
+    - 43
+    - 46
+    kind: if
+    patternId: ds4f654dsf654ds6f321321.png
+  nbrseen: 4
+- x: -14
+  y: -54
+  excludedMaps:
+    ? !!python/tuple
+    - -15
+    - -54
+    : - !!python/tuple
+        - -14
+        - -53
+    ? !!python/tuple
+    - -13
+    - -54
+    : - !!python/tuple
+        - -14
+        - -53
+    ? !!python/tuple
+    - -14
+    - -55
+    : - !!python/tuple
+        - -14
+        - -53
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1282
+    - 618
+    - 22
+    - 44
+    kind: noyer
+    patternId: 87ds6f54d1s32f1ds321.png
+  - region: !!python/tuple
+    - 1399
+    - 291
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  nbrseen: 5
+- x: -14
+  y: -53
+  excludedMaps:
+    ? !!python/tuple
+    - -14
+    - -52
+    : - !!python/tuple
+        - -14
+        - -54
+    ? !!python/tuple
+    - -13
+    - -53
+    : - !!python/tuple
+        - -14
+        - -54
+    ? !!python/tuple
+    - -15
+    - -53
+    : - !!python/tuple
+        - -14
+        - -54
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 783
+    - 169
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  - region: !!python/tuple
+    - 1233
+    - 645
+    - 43
+    - 58
+    kind: chene
+    patternId: 9g68fd41g321bvn321.png
+  nbrseen: 5
+- x: -14
+  y: -52
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1275
+    - 666
+    - 30
+    - 67
+    kind: if
+    patternId: 4ut6i4kjy6k541hj6541.png
+  - region: !!python/tuple
+    - 1458
+    - 304
+    - 39
+    - 32
+    kind: if
+    patternId: ds698t496h854g65.png
+  nbrseen: 4
+- x: -14
+  y: -51
+  excludedMaps:
+    ? !!python/tuple
+    - -14
+    - -50
+    : - !!python/tuple
+        - -13
+        - -51
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 533
+    - 172
+    - 83
+    - 58
+    kind: if
+    patternId: d9qs8d43qs6d13qs21.png
+  - region: !!python/tuple
+    - 923
+    - 238
+    - 37
+    - 58
+    kind: chene
+    patternId: 4re6321f3g21fd3g2d1fg321f.png
+  - region: !!python/tuple
+    - 1467
+    - 568
+    - 41
+    - 107
+    kind: noyer
+    patternId: 3d2f1g36j5415k54jh6k54hj654.png
+  nbrseen: 5
+- x: -14
+  y: -50
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 746
+    - 788
+    - 33
+    - 22
+    kind: ortie
+    patternId: 6546f5h465321321zrez54.png
+  - region: !!python/tuple
+    - 1012
+    - 426
+    - 24
+    - 39
+    kind: ortie
+    patternId: 6tre41t321rey3rt1y3rt254.png
+  - region: !!python/tuple
+    - 490
+    - 738
+    - 26
+    - 45
+    kind: if
+    patternId: 4df6g54d3f1gd3f21321.png
+  - region: !!python/tuple
+    - 1427
+    - 769
+    - 43
+    - 46
+    kind: if
+    patternId: ds4f654dsf654ds6f321321.png
+  nbrseen: 6
+- x: -14
+  y: -49
+  excludedMaps:
+    ? !!python/tuple
+    - -14
+    - -48
+    : - !!python/tuple
+        - -15
+        - -49
+    ? !!python/tuple
+    - -13
+    - -49
+    : - !!python/tuple
+        - -15
+        - -49
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1467
+    - 611
+    - 41
+    - 107
+    kind: noyer
+    patternId: 3d2f1g36j5415k54jh6k54hj654.png
+  - region: !!python/tuple
+    - 1294
+    - 50
+    - 41
+    - 107
+    kind: noyer
+    patternId: 3d2f1g36j5415k54jh6k54hj654.png
+  - region: !!python/tuple
+    - 573
+    - 197
+    - 40
+    - 31
+    kind: noyer
+    patternId: h9gf74h65gf41j6.png
+  nbrseen: 5
+- x: -14
+  y: -48
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 788
+    - 197
+    - 19
+    - 40
+    kind: erable
+    patternId: 654651gf36251.png
+  - region: !!python/tuple
+    - 1440
+    - 320
+    - 32
+    - 111
+    kind: erable
+    patternId: dstfd3s21f3d2s1fds321.png
+  nbrseen: 10
+- x: -14
+  y: -47
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1325
+    - 553
+    - 22
+    - 44
+    kind: noyer
+    patternId: 87ds6f54d1s32f1ds321.png
+  nbrseen: 9
+- x: -14
+  y: -46
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1381
+    - 525
+    - 41
+    - 107
+    kind: noyer
+    patternId: 3d2f1g36j5415k54jh6k54hj654.png
+  - region: !!python/tuple
+    - 788
+    - 241
+    - 19
+    - 40
+    kind: erable
+    patternId: 654651gf36251.png
+  - region: !!python/tuple
+    - 399
+    - 608
+    - 19
+    - 40
+    kind: erable
+    patternId: 654651gf36251.png
+  - region: !!python/tuple
+    - 469
+    - 332
+    - 34
+    - 73
+    kind: noyer
+    patternId: 9684365ds3g2d1fg321.png
+  - region: !!python/tuple
+    - 1004
+    - 651
+    - 19
+    - 40
+    kind: erable
+    patternId: 654651gf36251.png
+  nbrseen: 6
+- x: -14
+  y: -45
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1467
+    - 692
+    - 54
+    - 42
+    kind: ebene
+    patternId: fds94f3ds21f3ds216546251.png
+  nbrseen: 4
+- x: -14
+  y: -44
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 3
+- x: -13
+  y: -59
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 3
+- x: -13
+  y: -58
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1340
+    - 293
+    - 43
+    - 46
+    kind: if
+    patternId: ds4f654dsf654ds6f321321.png
+  - region: !!python/tuple
+    - 464
+    - 196
+    - 39
+    - 32
+    kind: if
+    patternId: ds698t496h854g65.png
+  nbrseen: 3
+- x: -13
+  y: -57
+  excludedMaps:
+    ? !!python/tuple
+    - -13
+    - -56
+    : - !!python/tuple
+        - -12
+        - -57
+    ? !!python/tuple
+    - -14
+    - -57
+    : - !!python/tuple
+        - -12
+        - -57
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 836
+    - 825
+    - 41
+    - 38
+    kind: chene
+    patternId: 465fg4321qsd.png
+  - region: !!python/tuple
+    - 1220
+    - 111
+    - 19
+    - 40
+    kind: erable
+    patternId: 654651gf36251.png
+  nbrseen: 2
+- x: -13
+  y: -56
+  excludedMaps:
+    null:
+    - !!python/tuple
+      - -12
+      - -56
+    ? !!python/tuple
+    - -13
+    - -57
+    : - !!python/tuple
+        - -12
+        - -56
+    ? !!python/tuple
+    - -13
+    - -55
+    : - !!python/tuple
+        - -12
+        - -56
+    ? !!python/tuple
+    - -14
+    - -56
+    : - !!python/tuple
+        - -12
+        - -56
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1232
+    - 105
+    - 31
+    - 69
+    kind: ebene
+    patternId: f6ds4f3d2s1f3213216584654.png
+  - region: !!python/tuple
+    - 442
+    - 543
+    - 19
+    - 40
+    kind: erable
+    patternId: 654651gf36251.png
+  - region: !!python/tuple
+    - 1267
+    - 608
+    - 26
+    - 45
+    kind: if
+    patternId: 4df6g54d3f1gd3f21321.png
+  - region: !!python/tuple
+    - 1375
+    - 569
+    - 70
+    - 47
+    kind: noyer
+    patternId: 98ds4f3sd21fd3s2f1f48ds9f874.png
+  nbrseen: 3
+- x: -13
+  y: -55
+  excludedMaps:
+    ? !!python/tuple
+    - -12
+    - -55
+    : - !!python/tuple
+        - -14
+        - -55
+    ? !!python/tuple
+    - -13
+    - -54
+    : - !!python/tuple
+        - -14
+        - -55
+    ? !!python/tuple
+    - -13
+    - -56
+    : - !!python/tuple
+        - -14
+        - -55
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1312
+    - 637
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  - region: !!python/tuple
+    - 794
+    - 291
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  - region: !!python/tuple
+    - 1312
+    - 635
+    - 33
+    - 24
+    kind: sauge
+    patternId: 98rt7y6y1u3ty21jhgh.png
+  - region: !!python/tuple
+    - 1085
+    - 536
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  - region: !!python/tuple
+    - 1306
+    - 413
+    - 19
+    - 40
+    kind: erable
+    patternId: 654651gf36251.png
+  - region: !!python/tuple
+    - 1393
+    - 68
+    - 19
+    - 40
+    kind: erable
+    patternId: 654651gf36251.png
+  - region: !!python/tuple
+    - 702
+    - 154
+    - 19
+    - 40
+    kind: erable
+    patternId: 654651gf36251.png
+  - region: !!python/tuple
+    - 659
+    - 460
+    - 55
+    - 40
+    kind: erable
+    patternId: 87654321324976531654.png
+  nbrseen: 4
+- x: -13
+  y: -54
+  excludedMaps:
+    ? !!python/tuple
+    - -13
+    - -55
+    : - !!python/tuple
+        - -12
+        - -54
+    ? !!python/tuple
+    - -13
+    - -53
+    : - !!python/tuple
+        - -12
+        - -54
+    ? !!python/tuple
+    - -14
+    - -54
+    : - !!python/tuple
+        - -12
+        - -54
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 393
+    - 559
+    - 76
+    - 38
+    kind: noyer
+    patternId: 56h4gf6h13gf21h.png
+  - region: !!python/tuple
+    - 1301
+    - 601
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  - region: !!python/tuple
+    - 430
+    - 482
+    - 41
+    - 107
+    kind: noyer
+    patternId: 3d2f1g36j5415k54jh6k54hj654.png
+  - region: !!python/tuple
+    - 1116
+    - 162
+    - 48
+    - 66
+    kind: chene
+    patternId: 96ds4f6ds1f3ds21f.png
+  - region: !!python/tuple
+    - 1005
+    - 700
+    - 63
+    - 36
+    kind: merisier
+    patternId: 9f8ds4f32ds1f3s21.png
+  nbrseen: 6
+- x: -13
+  y: -53
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1047
+    - 68
+    - 19
+    - 40
+    kind: erable
+    patternId: 654651gf36251.png
+  - region: !!python/tuple
+    - 1436
+    - 695
+    - 19
+    - 40
+    kind: erable
+    patternId: 654651gf36251.png
+  - region: !!python/tuple
+    - 524
+    - 515
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  nbrseen: 7
+- x: -13
+  y: -52
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1214
+    - 63
+    - 76
+    - 38
+    kind: noyer
+    patternId: 56h4gf6h13gf21h.png
+  nbrseen: 4
+- x: -13
+  y: -51
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 946
+    - 90
+    - 67
+    - 97
+    kind: ebene
+    patternId: sdq98765413612.png
+  - region: !!python/tuple
+    - 1256
+    - 489
+    - 41
+    - 54
+    kind: erable
+    patternId: 54dfg654df6g54.png
+  - region: !!python/tuple
+    - 1294
+    - 611
+    - 41
+    - 107
+    kind: noyer
+    patternId: 3d2f1g36j5415k54jh6k54hj654.png
+  - region: !!python/tuple
+    - 616
+    - 651
+    - 40
+    - 31
+    kind: noyer
+    patternId: h9gf74h65gf41j6.png
+  nbrseen: 4
+- x: -13
+  y: -50
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 783
+    - 558
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  - region: !!python/tuple
+    - 918
+    - 47
+    - 19
+    - 40
+    kind: erable
+    patternId: 654651gf36251.png
+  - region: !!python/tuple
+    - 751
+    - 313
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  - region: !!python/tuple
+    - 1129
+    - 126
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  nbrseen: 4
+- x: -13
+  y: -49
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1307
+    - 386
+    - 32
+    - 29
+    kind: merisier
+    patternId: f3d2s1fd3s21.png
+  - region: !!python/tuple
+    - 1273
+    - 802
+    - 24
+    - 62
+    kind: noyer
+    patternId: 98dfg76df54g3d2f1g.png
+  nbrseen: 4
+- x: -13
+  y: -48
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 733
+    - 461
+    - 41
+    - 107
+    kind: noyer
+    patternId: 3d2f1g36j5415k54jh6k54hj654.png
+  - region: !!python/tuple
+    - 443
+    - 564
+    - 40
+    - 31
+    kind: noyer
+    patternId: h9gf74h65gf41j6.png
+  nbrseen: 7
+- x: -13
+  y: -47
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 961
+    - 284
+    - 19
+    - 40
+    kind: erable
+    patternId: 654651gf36251.png
+  nbrseen: 7
+- x: -13
+  y: -46
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1490
+    - 174
+    - 21
+    - 62
+    kind: merisier
+    patternId: f9ds84f36d2s1f321.png
+  - region: !!python/tuple
+    - 917
+    - 342
+    - 46
+    - 48
+    kind: noisetier
+    patternId: 89f4sd62f1ds32f1321.png
+  - region: !!python/tuple
+    - 1233
+    - 91
+    - 16
+    - 95
+    kind: bombu
+    patternId: 8rey461ue32yt1ui4y65i4o5.png
+  - region: !!python/tuple
+    - 480
+    - 169
+    - 49
+    - 52
+    kind: bombu
+    patternId: 98ghf6j46k54hj65l4kj5.png
+  - region: !!python/tuple
+    - 652
+    - 569
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 4
+- x: -13
+  y: -45
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1257
+    - 51
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 744
+    - 645
+    - 46
+    - 48
+    kind: noisetier
+    patternId: 89f4sd62f1ds32f1321.png
+  - region: !!python/tuple
+    - 523
+    - 418
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 5
+- x: -13
+  y: -44
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1516
+    - 224
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 761
+    - 622
+    - 59
+    - 64
+    kind: noisetier
+    patternId: ds4f61ds32f1ds321.png
+  - region: !!python/tuple
+    - 1069
+    - 110
+    - 56
+    - 150
+    kind: noisetier
+    patternId: 98f4ds63f1ds321.png
+  nbrseen: 4
+- x: -12
+  y: -59
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1183
+    - 270
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  - region: !!python/tuple
+    - 1328
+    - 110
+    - 39
+    - 32
+    kind: if
+    patternId: ds698t496h854g65.png
+  - region: !!python/tuple
+    - 607
+    - 837
+    - 33
+    - 35
+    kind: if
+    patternId: f9d8h46g5j4gh321321gfh.png
+  - region: !!python/tuple
+    - 477
+    - 296
+    - 33
+    - 35
+    kind: if
+    patternId: f9d8h46g5j4gh321321gfh.png
+  nbrseen: 4
+- x: -12
+  y: -58
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1137
+    - 327
+    - 26
+    - 45
+    kind: if
+    patternId: 4df6g54d3f1gd3f21321.png
+  - region: !!python/tuple
+    - 517
+    - 482
+    - 41
+    - 107
+    kind: noyer
+    patternId: 3d2f1g36j5415k54jh6k54hj654.png
+  - region: !!python/tuple
+    - 1359
+    - 696
+    - 42
+    - 43
+    kind: merisier
+    patternId: 9g84df6g51df321.png
+  - region: !!python/tuple
+    - 1223
+    - 52
+    - 33
+    - 92
+    kind: noyer
+    patternId: 54vxcb21xc3v21xc321.png
+  - region: !!python/tuple
+    - 650
+    - 167
+    - 33
+    - 35
+    kind: if
+    patternId: f9d8h46g5j4gh321321gfh.png
+  nbrseen: 4
+- x: -12
+  y: -57
+  excludedMaps:
+    ? !!python/tuple
+    - -12
+    - -58
+    : - !!python/tuple
+        - -13
+        - -57
+      - !!python/tuple
+        - -12
+        - -56
+    ? !!python/tuple
+    - -11
+    - -57
+    : - !!python/tuple
+        - -12
+        - -56
+      - !!python/tuple
+        - -13
+        - -57
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 474
+    - 239
+    - 54
+    - 42
+    kind: ebene
+    patternId: fds94f3ds21f3ds216546251.png
+  - region: !!python/tuple
+    - 1253
+    - 131
+    - 29
+    - 33
+    kind: noyer
+    patternId: 3f14g6df54g31.png
+  - region: !!python/tuple
+    - 792
+    - 115
+    - 38
+    - 77
+    kind: merisier
+    patternId: dfsfd+sf4ds65f1d3s62f1.png
+  - region: !!python/tuple
+    - 1257
+    - 386
+    - 76
+    - 38
+    kind: noyer
+    patternId: 56h4gf6h13gf21h.png
+  - region: !!python/tuple
+    - 1073
+    - 648
+    - 73
+    - 165
+    kind: merisier
+    patternId: f56ds41f6d2s1fd3s21f.png
+  - region: !!python/tuple
+    - 1235
+    - 660
+    - 27
+    - 64
+    kind: if
+    patternId: 49gh84jgf61j45.png
+  - region: !!python/tuple
+    - 414
+    - 432
+    - 47
+    - 37
+    kind: if
+    patternId: tyu654132154967856.png
+  nbrseen: 3
+- x: -12
+  y: -56
+  excludedMaps:
+    ? !!python/tuple
+    - -11
+    - -56
+    : - !!python/tuple
+        - -12
+        - -57
+      - !!python/tuple
+        - -13
+        - -56
+    ? !!python/tuple
+    - -12
+    - -55
+    : - !!python/tuple
+        - -12
+        - -57
+      - !!python/tuple
+        - -13
+        - -56
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 669
+    - 269
+    - 25
+    - 73
+    kind: merisier
+    patternId: 32f1d3s6f16dsf54ds6f548.png
+  - region: !!python/tuple
+    - 1325
+    - 337
+    - 22
+    - 44
+    kind: noyer
+    patternId: 87ds6f54d1s32f1ds321.png
+  - region: !!python/tuple
+    - 882
+    - 171
+    - 26
+    - 59
+    kind: noyer
+    patternId: ds6f54ds32f1sd321.png
+  nbrseen: 2
+- x: -12
+  y: -55
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 760
+    - 423
+    - 27
+    - 64
+    kind: if
+    patternId: 49gh84jgf61j45.png
+  - region: !!python/tuple
+    - 1035
+    - 655
+    - 41
+    - 107
+    kind: noyer
+    patternId: 3d2f1g36j5415k54jh6k54hj654.png
+  - region: !!python/tuple
+    - 807
+    - 78
+    - 22
+    - 44
+    kind: noyer
+    patternId: 87ds6f54d1s32f1ds321.png
+  nbrseen: 5
+- x: -12
+  y: -54
+  excludedMaps:
+    ? !!python/tuple
+    - -11
+    - -54
+    : - !!python/tuple
+        - -13
+        - -54
+    null:
+    - !!python/tuple
+      - -13
+      - -54
+    ? !!python/tuple
+    - -12
+    - -53
+    : - !!python/tuple
+        - -13
+        - -54
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1016
+    - 386
+    - 31
+    - 69
+    kind: ebene
+    patternId: f6ds4f3d2s1f3213216584654.png
+  - region: !!python/tuple
+    - 1234
+    - 33
+    - 107
+    - 133
+    kind: merisier
+    patternId: 98ds4f6ds1fd3s21f.png
+  - region: !!python/tuple
+    - 884
+    - 459
+    - 42
+    - 43
+    kind: merisier
+    patternId: 9g84df6g51df321.png
+  - region: !!python/tuple
+    - 1393
+    - 68
+    - 19
+    - 40
+    kind: erable
+    patternId: 654651gf36251.png
+  nbrseen: 3
+- x: -12
+  y: -53
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 794
+    - 464
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  - region: !!python/tuple
+    - 1537
+    - 77
+    - 27
+    - 64
+    kind: if
+    patternId: 49gh84jgf61j45.png
+  - region: !!python/tuple
+    - 1048
+    - 159
+    - 63
+    - 36
+    kind: merisier
+    patternId: 9f8ds4f32ds1f3s21.png
+  - region: !!python/tuple
+    - 875
+    - 694
+    - 40
+    - 31
+    kind: noyer
+    patternId: h9gf74h65gf41j6.png
+  nbrseen: 5
+- x: -12
+  y: -52
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 378
+    - 282
+    - 39
+    - 32
+    kind: if
+    patternId: ds698t496h854g65.png
+  - region: !!python/tuple
+    - 783
+    - 40
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  - region: !!python/tuple
+    - 404
+    - 680
+    - 26
+    - 126
+    kind: chene
+    patternId: 79re8t6531qs4984k6jyu4o3321hj321.png
+  nbrseen: 4
+- x: -12
+  y: -51
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1273
+    - 711
+    - 40
+    - 56
+    kind: chene
+    patternId: 987f65d4s3f21321.png
+  - region: !!python/tuple
+    - 1355
+    - 400
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  - region: !!python/tuple
+    - 530
+    - 289
+    - 63
+    - 36
+    kind: merisier
+    patternId: 9f8ds4f32ds1f3s21.png
+  - region: !!python/tuple
+    - 1270
+    - 746
+    - 48
+    - 32
+    kind: chene
+    patternId: 6464e6rt54rt3re12t321.png
+  - region: !!python/tuple
+    - 846
+    - 34
+    - 27
+    - 64
+    kind: if
+    patternId: 49gh84jgf61j45.png
+  nbrseen: 4
+- x: -12
+  y: -50
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1451
+    - 121
+    - 27
+    - 64
+    kind: if
+    patternId: 49gh84jgf61j45.png
+  - region: !!python/tuple
+    - 1412
+    - 596
+    - 22
+    - 44
+    kind: noyer
+    patternId: 87ds6f54d1s32f1ds321.png
+  - region: !!python/tuple
+    - 835
+    - 88
+    - 32
+    - 68
+    kind: noyer
+    patternId: 9f8dg6e1tg65zt196z4gfh1rtg9hj1rty1j4.png
+  - region: !!python/tuple
+    - 803
+    - 574
+    - 27
+    - 64
+    kind: if
+    patternId: 49gh84jgf61j45.png
+  nbrseen: 5
+- x: -12
+  y: -49
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1437
+    - 52
+    - 63
+    - 36
+    kind: merisier
+    patternId: 9f8ds4f32ds1f3s21.png
+  - region: !!python/tuple
+    - 477
+    - 210
+    - 33
+    - 35
+    kind: if
+    patternId: f9d8h46g5j4gh321321gfh.png
+  - region: !!python/tuple
+    - 962
+    - 677
+    - 63
+    - 36
+    kind: merisier
+    patternId: 9f8ds4f32ds1f3s21.png
+  - region: !!python/tuple
+    - 414
+    - 725
+    - 27
+    - 64
+    kind: if
+    patternId: 49gh84jgf61j45.png
+  nbrseen: 8
+- x: -12
+  y: -48
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1405
+    - 321
+    - 31
+    - 69
+    kind: ebene
+    patternId: f6ds4f3d2s1f3213216584654.png
+  - region: !!python/tuple
+    - 630
+    - 358
+    - 27
+    - 64
+    kind: if
+    patternId: 49gh84jgf61j45.png
+  - region: !!python/tuple
+    - 980
+    - 203
+    - 30
+    - 33
+    kind: merisier
+    patternId: 98df4g651hj36g2f51h651.png
+  - region: !!python/tuple
+    - 864
+    - 714
+    - 29
+    - 33
+    kind: noyer
+    patternId: 3f14g6df54g31.png
+  nbrseen: 9
+- x: -12
+  y: -47
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1125
+    - 318
+    - 33
+    - 35
+    kind: if
+    patternId: f9d8h46g5j4gh321321gfh.png
+  - region: !!python/tuple
+    - 1320
+    - 755
+    - 25
+    - 54
+    kind: ebene
+    patternId: f9d684g63d2fg1d32f1.png
+  - region: !!python/tuple
+    - 875
+    - 202
+    - 63
+    - 36
+    kind: merisier
+    patternId: 9f8ds4f32ds1f3s21.png
+  nbrseen: 5
+- x: -12
+  y: -46
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 573
+    - 484
+    - 63
+    - 36
+    kind: merisier
+    patternId: 9f8ds4f32ds1f3s21.png
+  - region: !!python/tuple
+    - 825
+    - 483
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 865
+    - 760
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  nbrseen: 6
+- x: -12
+  y: -45
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1257
+    - 94
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 1480
+    - 116
+    - 63
+    - 36
+    kind: merisier
+    patternId: 9f8ds4f32ds1f3s21.png
+  nbrseen: 6
+- x: -12
+  y: -44
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1300
+    - 504
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 5
+- x: -11
+  y: -59
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 517
+    - 131
+    - 54
+    - 42
+    kind: ebene
+    patternId: fds94f3ds21f3ds216546251.png
+  - region: !!python/tuple
+    - 961
+    - 68
+    - 19
+    - 40
+    kind: erable
+    patternId: 654651gf36251.png
+  - region: !!python/tuple
+    - 1523
+    - 192
+    - 32
+    - 29
+    kind: merisier
+    patternId: f3d2s1fd3s21.png
+  - region: !!python/tuple
+    - 509
+    - 565
+    - 44
+    - 44
+    kind: erable
+    patternId: 6f4d3s62f1ds32f1.png
+  - region: !!python/tuple
+    - 627
+    - 341
+    - 30
+    - 67
+    kind: if
+    patternId: 4ut6i4kjy6k541hj6541.png
+  nbrseen: 4
+- x: -11
+  y: -58
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1235
+    - 444
+    - 27
+    - 64
+    kind: if
+    patternId: 49gh84jgf61j45.png
+  - region: !!python/tuple
+    - 949
+    - 180
+    - 41
+    - 107
+    kind: noyer
+    patternId: 3d2f1g36j5415k54jh6k54hj654.png
+  - region: !!python/tuple
+    - 780
+    - 794
+    - 33
+    - 35
+    kind: if
+    patternId: f9d8h46g5j4gh321321gfh.png
+  - region: !!python/tuple
+    - 751
+    - 106
+    - 55
+    - 40
+    kind: noyer
+    patternId: 98ezr743621g3d2fg1df.png
+  - region: !!python/tuple
+    - 1224
+    - 413
+    - 26
+    - 45
+    kind: if
+    patternId: 4df6g54d3f1gd3f21321.png
+  nbrseen: 5
+- x: -11
+  y: -57
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1269
+    - 138
+    - 33
+    - 24
+    kind: sauge
+    patternId: 98rt7y6y1u3ty21jhgh.png
+  - region: !!python/tuple
+    - 1480
+    - 41
+    - 32
+    - 29
+    kind: merisier
+    patternId: f3d2s1fd3s21.png
+  - region: !!python/tuple
+    - 980
+    - 164
+    - 22
+    - 44
+    kind: noyer
+    patternId: 87ds6f54d1s32f1ds321.png
+  nbrseen: 4
+- x: -11
+  y: -56
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 481
+    - 147
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  - region: !!python/tuple
+    - 1375
+    - 464
+    - 48
+    - 66
+    kind: chene
+    patternId: 96ds4f6ds1f3ds21f.png
+  - region: !!python/tuple
+    - 1307
+    - 73
+    - 63
+    - 36
+    kind: merisier
+    patternId: 9f8ds4f32ds1f3s21.png
+  - region: !!python/tuple
+    - 487
+    - 408
+    - 32
+    - 29
+    kind: merisier
+    patternId: f3d2s1fd3s21.png
+  nbrseen: 3
+- x: -11
+  y: -55
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 782
+    - 547
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 481
+    - 61
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  nbrseen: 2
+- x: -11
+  y: -54
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1182
+    - 152
+    - 37
+    - 58
+    kind: chene
+    patternId: 4re6321f3g21fd3g2d1fg321f.png
+  - region: !!python/tuple
+    - 1345
+    - 665
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  nbrseen: 2
+- x: -11
+  y: -53
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 480
+    - 51
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 3
+- x: -11
+  y: -52
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 740
+    - 601
+    - 49
+    - 52
+    kind: bombu
+    patternId: 98ghf6j46k54hj65l4kj5.png
+  - region: !!python/tuple
+    - 1095
+    - 627
+    - 37
+    - 58
+    kind: chene
+    patternId: 4re6321f3g21fd3g2d1fg321f.png
+  - region: !!python/tuple
+    - 666
+    - 123
+    - 24
+    - 39
+    kind: ortie
+    patternId: 6tre41t321rey3rt1y3rt254.png
+  nbrseen: 3
+- x: -11
+  y: -51
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1376
+    - 190
+    - 52
+    - 35
+    kind: bombu
+    patternId: 9gh87j65k416l545.png
+  nbrseen: 2
+- x: -11
+  y: -50
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 782
+    - 331
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 3
+- x: -11
+  y: -49
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 966
+    - 260
+    - 31
+    - 43
+    kind: menthe
+    patternId: 98gj73621321k.png
+  - region: !!python/tuple
+    - 919
+    - 788
+    - 33
+    - 22
+    kind: ortie
+    patternId: 6546f5h465321321zrez54.png
+  - region: !!python/tuple
+    - 1268
+    - 195
+    - 37
+    - 58
+    kind: chene
+    patternId: 4re6321f3g21fd3g2d1fg321f.png
+  nbrseen: 3
+- x: -11
+  y: -48
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1103
+    - 545
+    - 16
+    - 95
+    kind: bombu
+    patternId: 8rey461ue32yt1ui4y65i4o5.png
+  - region: !!python/tuple
+    - 452
+    - 107
+    - 31
+    - 41
+    kind: bombu
+    patternId: g79fd84h32j136hj54.png
+  nbrseen: 5
+- x: -11
+  y: -47
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 6
+- x: -11
+  y: -46
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1348
+    - 213
+    - 46
+    - 48
+    kind: noisetier
+    patternId: 89f4sd62f1ds32f1321.png
+  - region: !!python/tuple
+    - 1521
+    - 558
+    - 46
+    - 48
+    kind: noisetier
+    patternId: 89f4sd62f1ds32f1321.png
+  - region: !!python/tuple
+    - 951
+    - 223
+    - 57
+    - 51
+    kind: noisetier
+    patternId: dggfgdfgdf8978654354.png
+  nbrseen: 8
+- x: -11
+  y: -45
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 523
+    - 331
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 1430
+    - 137
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 4
+- x: -11
+  y: -44
+  excludedMaps:
+    ? !!python/tuple
+    - -11
+    - -45
+    : - !!python/tuple
+        - -10
+        - -44
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1215
+    - 278
+    - 49
+    - 52
+    kind: bombu
+    patternId: 98ghf6j46k54hj65l4kj5.png
+  - region: !!python/tuple
+    - 761
+    - 104
+    - 59
+    - 64
+    kind: noisetier
+    patternId: ds4f61ds32f1ds321.png
+  - region: !!python/tuple
+    - 701
+    - 234
+    - 46
+    - 48
+    kind: noisetier
+    patternId: 89f4sd62f1ds32f1321.png
+  nbrseen: 3
+- x: -10
+  y: -59
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1041
+    - 288
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 4
+- x: -10
+  y: -58
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1311
+    - 605
+    - 37
+    - 58
+    kind: chene
+    patternId: 4re6321f3g21fd3g2d1fg321f.png
+  - region: !!python/tuple
+    - 1097
+    - 760
+    - 30
+    - 50
+    kind: ginseng
+    patternId: fd9s8f436ds21f3ds21.png
+  - region: !!python/tuple
+    - 567
+    - 104
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  - region: !!python/tuple
+    - 789
+    - 723
+    - 33
+    - 22
+    kind: ortie
+    patternId: 6546f5h465321321zrez54.png
+  - region: !!python/tuple
+    - 1101
+    - 760
+    - 21
+    - 44
+    kind: ginseng
+    patternId: 968dfs4d3s21fds321.png
+  nbrseen: 5
+- x: -10
+  y: -57
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 822
+    - 497
+    - 79
+    - 42
+    kind: chene
+    patternId: 98ez65azr3df3g3h1tty48y48.png
+  - region: !!python/tuple
+    - 666
+    - 675
+    - 25
+    - 26
+    kind: orchide
+    patternId: g9re84gh32gf1h3gf21.png
+  nbrseen: 5
+- x: -10
+  y: -56
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 7
+- x: -10
+  y: -55
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1300
+    - 547
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 3
+- x: -10
+  y: -54
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1127
+    - 375
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 3
+- x: -10
+  y: -53
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 609
+    - 202
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 913
+    - 536
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  nbrseen: 3
+- x: -10
+  y: -52
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 2
+- x: -10
+  y: -51
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 1
+- x: -10
+  y: -50
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 2
+- x: -10
+  y: -49
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 838
+    - 458
+    - 30
+    - 50
+    kind: ginseng
+    patternId: fd9s8f436ds21f3ds21.png
+  nbrseen: 2
+- x: -10
+  y: -48
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 5
+- x: -10
+  y: -47
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 998
+    - 397
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 5
+- x: -10
+  y: -46
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 4
+- x: -10
+  y: -45
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 4
+- x: -10
+  y: -44
+  excludedMaps:
+    ? !!python/tuple
+    - -10
+    - -45
+    : - !!python/tuple
+        - -11
+        - -44
+    ? !!python/tuple
+    - -9
+    - -44
+    : - !!python/tuple
+        - -11
+        - -44
+  excludedSpots: {}
+  spots: []
+  nbrseen: 5
+- x: -9
+  y: -59
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 523
+    - 245
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 956
+    - 169
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  nbrseen: 5
+- x: -9
+  y: -58
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 739
+    - 483
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 4
+- x: -9
+  y: -57
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 998
+    - 310
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 1098
+    - 685
+    - 24
+    - 39
+    kind: ortie
+    patternId: 6tre41t321rey3rt1y3rt254.png
+  nbrseen: 5
+- x: -9
+  y: -56
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 728
+    - 298
+    - 52
+    - 35
+    kind: bombu
+    patternId: 9gh87j65k416l545.png
+  - region: !!python/tuple
+    - 1484
+    - 130
+    - 37
+    - 58
+    kind: chene
+    patternId: 4re6321f3g21fd3g2d1fg321f.png
+  - region: !!python/tuple
+    - 666
+    - 685
+    - 24
+    - 39
+    kind: ortie
+    patternId: 6tre41t321rey3rt1y3rt254.png
+  - region: !!python/tuple
+    - 659
+    - 702
+    - 33
+    - 22
+    kind: ortie
+    patternId: 6546f5h465321321zrez54.png
+  nbrseen: 6
+- x: -9
+  y: -55
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1129
+    - 428
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  - region: !!python/tuple
+    - 881
+    - 263
+    - 30
+    - 50
+    kind: ginseng
+    patternId: fd9s8f436ds21f3ds21.png
+  - region: !!python/tuple
+    - 885
+    - 263
+    - 21
+    - 44
+    kind: ginseng
+    patternId: 968dfs4d3s21fds321.png
+  nbrseen: 4
+- x: -9
+  y: -54
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 3
+- x: -9
+  y: -53
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1230
+    - 151
+    - 31
+    - 41
+    kind: bombu
+    patternId: g79fd84h32j136hj54.png
+  - region: !!python/tuple
+    - 709
+    - 436
+    - 30
+    - 50
+    kind: ginseng
+    patternId: fd9s8f436ds21f3ds21.png
+  nbrseen: 3
+- x: -9
+  y: -52
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1473
+    - 29
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 2
+- x: -9
+  y: -51
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 2
+- x: -9
+  y: -50
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 783
+    - 428
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  nbrseen: 3
+- x: -9
+  y: -49
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 868
+    - 115
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 3
+- x: -9
+  y: -48
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1258
+    - 104
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  nbrseen: 3
+- x: -9
+  y: -47
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 879
+    - 518
+    - 37
+    - 58
+    kind: chene
+    patternId: 4re6321f3g21fd3g2d1fg321f.png
+  - region: !!python/tuple
+    - 875
+    - 766
+    - 33
+    - 22
+    kind: ortie
+    patternId: 6546f5h465321321zrez54.png
+  - region: !!python/tuple
+    - 998
+    - 613
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 826
+    - 406
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  nbrseen: 5
+- x: -9
+  y: -46
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 540
+    - 290
+    - 25
+    - 73
+    kind: merisier
+    patternId: 32f1d3s6f16dsf54ds6f548.png
+  - region: !!python/tuple
+    - 674
+    - 760
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  - region: !!python/tuple
+    - 1452
+    - 622
+    - 59
+    - 64
+    kind: noisetier
+    patternId: ds4f61ds32f1ds321.png
+  - region: !!python/tuple
+    - 1163
+    - 373
+    - 67
+    - 109
+    kind: noisetier
+    patternId: 6f54ds6f4ds6f4.png
+  nbrseen: 7
+- x: -9
+  y: -45
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1214
+    - 331
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 1447
+    - 312
+    - 25
+    - 73
+    kind: merisier
+    patternId: 32f1d3s6f16dsf54ds6f548.png
+  nbrseen: 4
+- x: -9
+  y: -44
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1089
+    - 405
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  - region: !!python/tuple
+    - 1274
+    - 140
+    - 25
+    - 73
+    kind: merisier
+    patternId: 32f1d3s6f16dsf54ds6f548.png
+  - region: !!python/tuple
+    - 497
+    - 442
+    - 25
+    - 73
+    kind: merisier
+    patternId: 32f1d3s6f16dsf54ds6f548.png
+  - region: !!python/tuple
+    - 945
+    - 659
+    - 28
+    - 96
+    kind: noisetier
+    patternId: 5646g514df63251.png
+  - region: !!python/tuple
+    - 1521
+    - 256
+    - 46
+    - 48
+    kind: noisetier
+    patternId: 89f4sd62f1ds32f1321.png
+  - region: !!python/tuple
+    - 717
+    - 212
+    - 59
+    - 64
+    kind: noisetier
+    patternId: ds4f61ds32f1ds321.png
+  nbrseen: 7
+- x: -8
+  y: -59
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 652
+    - 440
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 4
+- x: -8
+  y: -58
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 912
+    - 483
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 1085
+    - 450
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  nbrseen: 3
+- x: -8
+  y: -57
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 750
+    - 627
+    - 37
+    - 58
+    kind: chene
+    patternId: 4re6321f3g21fd3g2d1fg321f.png
+  - region: !!python/tuple
+    - 875
+    - 421
+    - 33
+    - 22
+    kind: ortie
+    patternId: 6546f5h465321321zrez54.png
+  - region: !!python/tuple
+    - 666
+    - 728
+    - 24
+    - 39
+    kind: ortie
+    patternId: 6tre41t321rey3rt1y3rt254.png
+  nbrseen: 4
+- x: -8
+  y: -56
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1214
+    - 590
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 530
+    - 809
+    - 33
+    - 22
+    kind: ortie
+    patternId: 6546f5h465321321zrez54.png
+  - region: !!python/tuple
+    - 696
+    - 159
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 6
+- x: -8
+  y: -55
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 7
+- x: -8
+  y: -54
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 5
+- x: -8
+  y: -53
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 757
+    - 406
+    - 30
+    - 67
+    kind: if
+    patternId: 4ut6i4kjy6k541hj6541.png
+  - region: !!python/tuple
+    - 1369
+    - 371
+    - 25
+    - 26
+    kind: orchide
+    patternId: g9re84gh32gf1h3gf21.png
+  nbrseen: 7
+- x: -8
+  y: -52
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 3
+- x: -8
+  y: -51
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 2
+- x: -8
+  y: -50
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 760
+    - 121
+    - 27
+    - 64
+    kind: if
+    patternId: 49gh84jgf61j45.png
+  - region: !!python/tuple
+    - 1384
+    - 491
+    - 33
+    - 35
+    kind: if
+    patternId: f9d8h46g5j4gh321321gfh.png
+  nbrseen: 3
+- x: -8
+  y: -49
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 480
+    - 440
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 1364
+    - 596
+    - 27
+    - 64
+    kind: if
+    patternId: 49gh84jgf61j45.png
+  - region: !!python/tuple
+    - 616
+    - 90
+    - 50
+    - 69
+    kind: bombu
+    patternId: 8fd7gh56gf4h3j41kghk5jh654.png
+  nbrseen: 3
+- x: -8
+  y: -48
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 536
+    - 609
+    - 30
+    - 50
+    kind: ginseng
+    patternId: fd9s8f436ds21f3ds21.png
+  - region: !!python/tuple
+    - 1301
+    - 40
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  nbrseen: 3
+- x: -8
+  y: -47
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1300
+    - 115
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 1437
+    - 356
+    - 33
+    - 22
+    kind: ortie
+    patternId: 6546f5h465321321zrez54.png
+  - region: !!python/tuple
+    - 750
+    - 238
+    - 37
+    - 58
+    kind: chene
+    patternId: 4re6321f3g21fd3g2d1fg321f.png
+  nbrseen: 4
+- x: -8
+  y: -46
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1084
+    - 137
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 5
+- x: -8
+  y: -45
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 912
+    - 397
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 3
+- x: -8
+  y: -44
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1437
+    - 443
+    - 33
+    - 22
+    kind: ortie
+    patternId: 6546f5h465321321zrez54.png
+  nbrseen: 5
+- x: -7
+  y: -59
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 923
+    - 497
+    - 37
+    - 58
+    kind: chene
+    patternId: 4re6321f3g21fd3g2d1fg321f.png
+  - region: !!python/tuple
+    - 1138
+    - 130
+    - 37
+    - 58
+    kind: chene
+    patternId: 4re6321f3g21fd3g2d1fg321f.png
+  nbrseen: 2
+- x: -7
+  y: -58
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 740
+    - 277
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  nbrseen: 3
+- x: -7
+  y: -57
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1127
+    - 547
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 5
+- x: -7
+  y: -56
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1225
+    - 389
+    - 37
+    - 58
+    kind: chene
+    patternId: 4re6321f3g21fd3g2d1fg321f.png
+  - region: !!python/tuple
+    - 1172
+    - 277
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  nbrseen: 6
+- x: -7
+  y: -55
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 6
+- x: -7
+  y: -54
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1058
+    - 420
+    - 25
+    - 73
+    kind: merisier
+    patternId: 32f1d3s6f16dsf54ds6f548.png
+  - region: !!python/tuple
+    - 1437
+    - 181
+    - 63
+    - 36
+    kind: merisier
+    patternId: 9f8ds4f32ds1f3s21.png
+  nbrseen: 8
+- x: -7
+  y: -53
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1181
+    - 522
+    - 26
+    - 45
+    kind: if
+    patternId: 4df6g54d3f1gd3f21321.png
+  - region: !!python/tuple
+    - 1470
+    - 660
+    - 43
+    - 46
+    kind: if
+    patternId: ds4f654dsf654ds6f321321.png
+  nbrseen: 7
+- x: -7
+  y: -52
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1181
+    - 392
+    - 26
+    - 45
+    kind: if
+    patternId: 4df6g54d3f1gd3f21321.png
+  nbrseen: 3
+- x: -7
+  y: -51
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1300
+    - 115
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 1494
+    - 358
+    - 27
+    - 64
+    kind: if
+    patternId: 49gh84jgf61j45.png
+  nbrseen: 2
+- x: -7
+  y: -50
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 2
+- x: -7
+  y: -49
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1516
+    - 526
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 1474
+    - 62
+    - 49
+    - 52
+    kind: bombu
+    patternId: 98ghf6j46k54hj65l4kj5.png
+  nbrseen: 2
+- x: -7
+  y: -48
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1042
+    - 256
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  - region: !!python/tuple
+    - 924
+    - 486
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  nbrseen: 1
+- x: -7
+  y: -47
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 879
+    - 432
+    - 37
+    - 58
+    kind: chene
+    patternId: 4re6321f3g21fd3g2d1fg321f.png
+  nbrseen: 2
+- x: -7
+  y: -46
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1215
+    - 472
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  nbrseen: 3
+- x: -7
+  y: -45
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 697
+    - 515
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  nbrseen: 5
+- x: -7
+  y: -44
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 862
+    - 439
+    - 41
+    - 107
+    kind: noyer
+    patternId: 3d2f1g36j5415k54jh6k54hj654.png
+  - region: !!python/tuple
+    - 825
+    - 84
+    - 76
+    - 38
+    kind: noyer
+    patternId: 56h4gf6h13gf21h.png
+  nbrseen: 4
+- x: -6
+  y: -59
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 454
+    - 105
+    - 31
+    - 69
+    kind: ebene
+    patternId: f6ds4f3d2s1f3213216584654.png
+  nbrseen: 1
+- x: -6
+  y: -58
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1430
+    - 656
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 1018
+    - 432
+    - 25
+    - 54
+    kind: ebene
+    patternId: f9d684g63d2fg1d32f1.png
+  - region: !!python/tuple
+    - 436
+    - 375
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 2
+- x: -6
+  y: -57
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1405
+    - 277
+    - 31
+    - 69
+    kind: ebene
+    patternId: f6ds4f3d2s1f3213216584654.png
+  - region: !!python/tuple
+    - 410
+    - 701
+    - 25
+    - 73
+    kind: merisier
+    patternId: 32f1d3s6f16dsf54ds6f548.png
+  nbrseen: 5
+- x: -6
+  y: -56
+  excludedMaps:
+    ? !!python/tuple
+    - -3
+    - -55
+    : - !!python/tuple
+        - -4
+        - -56
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1232
+    - 364
+    - 31
+    - 69
+    kind: ebene
+    patternId: f6ds4f3d2s1f3213216584654.png
+  - region: !!python/tuple
+    - 616
+    - 505
+    - 63
+    - 36
+    kind: merisier
+    patternId: 9f8ds4f32ds1f3s21.png
+  nbrseen: 2
+- x: -6
+  y: -55
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 540
+    - 290
+    - 25
+    - 73
+    kind: merisier
+    patternId: 32f1d3s6f16dsf54ds6f548.png
+  - region: !!python/tuple
+    - 1490
+    - 74
+    - 25
+    - 73
+    kind: merisier
+    patternId: 32f1d3s6f16dsf54ds6f548.png
+  - region: !!python/tuple
+    - 1350
+    - 527
+    - 63
+    - 36
+    kind: merisier
+    patternId: 9f8ds4f32ds1f3s21.png
+  nbrseen: 8
+- x: -6
+  y: -54
+  excludedMaps:
+    ? !!python/tuple
+    - -7
+    - -54
+    : - !!python/tuple
+        - -5
+        - -54
+    ? !!python/tuple
+    - -6
+    - -55
+    : - !!python/tuple
+        - -5
+        - -54
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1397
+    - 629
+    - 26
+    - 45
+    kind: if
+    patternId: 4df6g54d3f1gd3f21321.png
+  - region: !!python/tuple
+    - 487
+    - 570
+    - 63
+    - 36
+    kind: merisier
+    patternId: 9f8ds4f32ds1f3s21.png
+  - region: !!python/tuple
+    - 757
+    - 61
+    - 30
+    - 67
+    kind: if
+    patternId: 4ut6i4kjy6k541hj6541.png
+  nbrseen: 6
+- x: -6
+  y: -53
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 7
+- x: -6
+  y: -52
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 5
+- x: -6
+  y: -51
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1297
+    - 99
+    - 43
+    - 46
+    kind: if
+    patternId: ds4f654dsf654ds6f321321.png
+  nbrseen: 3
+- x: -6
+  y: -50
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 868
+    - 375
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 1487
+    - 513
+    - 30
+    - 50
+    kind: ginseng
+    patternId: fd9s8f436ds21f3ds21.png
+  nbrseen: 2
+- x: -6
+  y: -49
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1343
+    - 310
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 3
+- x: -6
+  y: -48
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1398
+    - 734
+    - 37
+    - 58
+    kind: chene
+    patternId: 4re6321f3g21fd3g2d1fg321f.png
+  - region: !!python/tuple
+    - 1011
+    - 415
+    - 30
+    - 50
+    kind: ginseng
+    patternId: fd9s8f436ds21f3ds21.png
+  - region: !!python/tuple
+    - 868
+    - 159
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 3
+- x: -6
+  y: -47
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 5
+- x: -6
+  y: -46
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 4
+- x: -6
+  y: -45
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 868
+    - 461
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 5
+- x: -6
+  y: -44
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1350
+    - 616
+    - 33
+    - 22
+    kind: ortie
+    patternId: 6546f5h465321321zrez54.png
+  nbrseen: 5
+- x: -5
+  y: -59
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 0
+- x: -5
+  y: -58
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 0
+- x: -5
+  y: -57
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1490
+    - 161
+    - 25
+    - 73
+    kind: merisier
+    patternId: 32f1d3s6f16dsf54ds6f548.png
+  - region: !!python/tuple
+    - 1015
+    - 485
+    - 25
+    - 73
+    kind: merisier
+    patternId: 32f1d3s6f16dsf54ds6f548.png
+  nbrseen: 3
+- x: -5
+  y: -56
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 443
+    - 159
+    - 63
+    - 36
+    kind: merisier
+    patternId: 9f8ds4f32ds1f3s21.png
+  nbrseen: 3
+- x: -5
+  y: -55
+  excludedMaps:
+    ? !!python/tuple
+    - -6
+    - -55
+    : - !!python/tuple
+        - -5
+        - -54
+  excludedSpots: {}
+  spots: []
+  nbrseen: 3
+- x: -5
+  y: -54
+  excludedMaps:
+    ? !!python/tuple
+    - -5
+    - -53
+    : - !!python/tuple
+        - -4
+        - -54
+      - !!python/tuple
+        - -6
+        - -54
+      - !!python/tuple
+        - -5
+        - -55
+  excludedSpots: {}
+  spots: []
+  nbrseen: 3
+- x: -5
+  y: -53
+  excludedMaps:
+    null:
+    - !!python/tuple
+      - -5
+      - -52
+    ? !!python/tuple
+    - -6
+    - -53
+    : - !!python/tuple
+        - -5
+        - -52
+    ? !!python/tuple
+    - -5
+    - -54
+    : - !!python/tuple
+        - -5
+        - -52
+  excludedSpots: {}
+  spots: []
+  nbrseen: 7
+- x: -5
+  y: -51
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1321
+    - 99
+    - 27
+    - 64
+    kind: if
+    patternId: 49gh84jgf61j45.png
+  - region: !!python/tuple
+    - 1444
+    - 632
+    - 25
+    - 26
+    kind: orchide
+    patternId: g9re84gh32gf1h3gf21.png
+  - region: !!python/tuple
+    - 792
+    - 327
+    - 26
+    - 45
+    kind: if
+    patternId: 4df6g54d3f1gd3f21321.png
+  nbrseen: 3
+- x: -5
+  y: -50
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1039
+    - 102
+    - 33
+    - 35
+    kind: if
+    patternId: f9d8h46g5j4gh321321gfh.png
+  nbrseen: 1
+- x: -5
+  y: -49
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1343
+    - 94
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 739
+    - 483
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 897
+    - 239
+    - 56
+    - 150
+    kind: noisetier
+    patternId: 98f4ds63f1ds321.png
+  nbrseen: 3
+- x: -5
+  y: -48
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1226
+    - 464
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  nbrseen: 3
+- x: -5
+  y: -47
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1171
+    - 137
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 5
+- x: -5
+  y: -46
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 868
+    - 159
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 4
+- x: -5
+  y: -45
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 782
+    - 72
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 5
+- x: -5
+  y: -44
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 438
+    - 212
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  nbrseen: 7
+- x: -4
+  y: -59
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 0
+- x: -4
+  y: -58
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 0
+- x: -4
+  y: -57
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 2
+- x: -4
+  y: -52
+  excludedMaps:
+    ? !!python/tuple
+    - -3
+    - -52
+    : - !!python/tuple
+        - -5
+        - -52
+  excludedSpots: {}
+  spots: []
+  nbrseen: 2
+- x: -4
+  y: -51
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 2
+- x: -4
+  y: -50
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 1
+- x: -4
+  y: -49
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1343
+    - 397
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 1402
+    - 89
+    - 28
+    - 48
+    kind: ginseng
+    patternId: 495132196598795351615.png
+  nbrseen: 4
+- x: -4
+  y: -48
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 912
+    - 353
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 4
+- x: -4
+  y: -47
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 5
+- x: -4
+  y: -46
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1268
+    - 540
+    - 37
+    - 58
+    kind: chene
+    patternId: 4re6321f3g21fd3g2d1fg321f.png
+  - region: !!python/tuple
+    - 1442
+    - 745
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  nbrseen: 4
+- x: -4
+  y: -45
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 966
+    - 605
+    - 37
+    - 58
+    kind: chene
+    patternId: 4re6321f3g21fd3g2d1fg321f.png
+  - region: !!python/tuple
+    - 913
+    - 493
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  nbrseen: 5
+- x: -4
+  y: -44
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 794
+    - 766
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  nbrseen: 4
+- x: -3
+  y: -59
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 627
+    - 321
+    - 31
+    - 69
+    kind: ebene
+    patternId: f6ds4f3d2s1f3213216584654.png
+  nbrseen: 1
+- x: -3
+  y: -58
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1387
+    - 29
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 1275
+    - 515
+    - 31
+    - 69
+    kind: ebene
+    patternId: f6ds4f3d2s1f3213216584654.png
+  - region: !!python/tuple
+    - 530
+    - 375
+    - 63
+    - 36
+    kind: merisier
+    patternId: 9f8ds4f32ds1f3s21.png
+  nbrseen: 1
+- x: -3
+  y: -57
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 557
+    - 458
+    - 67
+    - 97
+    kind: ebene
+    patternId: sdq98765413612.png
+  - region: !!python/tuple
+    - 1069
+    - 239
+    - 56
+    - 150
+    kind: noisetier
+    patternId: 98f4ds63f1ds321.png
+  nbrseen: 2
+- x: -3
+  y: -56
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 2
+- x: -3
+  y: -55
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 1
+- x: -3
+  y: -54
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 0
+- x: -3
+  y: -53
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 0
+- x: -3
+  y: -52
+  excludedMaps:
+    ? !!python/tuple
+    - -3
+    - -51
+    : - !!python/tuple
+        - -2
+        - -52
+  excludedSpots: {}
+  spots: []
+  nbrseen: 1
+- x: -3
+  y: -51
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 2
+- x: -3
+  y: -50
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 544
+    - 444
+    - 27
+    - 64
+    kind: if
+    patternId: 49gh84jgf61j45.png
+  - region: !!python/tuple
+    - 1279
+    - 234
+    - 59
+    - 64
+    kind: noisetier
+    patternId: ds4f61ds32f1ds321.png
+  - region: !!python/tuple
+    - 1526
+    - 262
+    - 26
+    - 45
+    kind: if
+    patternId: 4df6g54d3f1gd3f21321.png
+  nbrseen: 1
+- x: -3
+  y: -49
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1473
+    - 288
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 564
+    - 80
+    - 33
+    - 35
+    kind: if
+    patternId: f9d8h46g5j4gh321321gfh.png
+  - region: !!python/tuple
+    - 789
+    - 565
+    - 50
+    - 69
+    kind: bombu
+    patternId: 8fd7gh56gf4h3j41kghk5jh654.png
+  - region: !!python/tuple
+    - 469
+    - 687
+    - 52
+    - 35
+    kind: bombu
+    patternId: 9gh87j65k416l545.png
+  - region: !!python/tuple
+    - 825
+    - 483
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 869
+    - 580
+    - 49
+    - 52
+    kind: bombu
+    patternId: 98ghf6j46k54hj65l4kj5.png
+  nbrseen: 5
+- x: -3
+  y: -48
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 449
+    - 306
+    - 30
+    - 50
+    kind: ginseng
+    patternId: fd9s8f436ds21f3ds21.png
+  - region: !!python/tuple
+    - 825
+    - 51
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 1054
+    - 465
+    - 48
+    - 32
+    kind: chene
+    patternId: 6464e6rt54rt3re12t321.png
+  nbrseen: 4
+- x: -3
+  y: -47
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 5
+- x: -3
+  y: -46
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 4
+- x: -3
+  y: -45
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 969
+    - 523
+    - 25
+    - 26
+    kind: orchide
+    patternId: g9re84gh32gf1h3gf21.png
+  nbrseen: 3
+- x: -3
+  y: -44
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1178
+    - 270
+    - 33
+    - 22
+    kind: ortie
+    patternId: 6546f5h465321321zrez54.png
+  - region: !!python/tuple
+    - 523
+    - 375
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 2
+- x: -2
+  y: -59
+  excludedMaps:
+    ? !!python/tuple
+    - -2
+    - -58
+    : - !!python/tuple
+        - -1
+        - -59
+  excludedSpots: {}
+  spots: []
+  nbrseen: 1
+- x: -2
+  y: -58
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 1
+- x: -2
+  y: -57
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1322
+    - 566
+    - 21
+    - 44
+    kind: ginseng
+    patternId: 968dfs4d3s21fds321.png
+  nbrseen: 2
+- x: -2
+  y: -56
+  excludedMaps:
+    ? !!python/tuple
+    - -3
+    - -56
+    : - !!python/tuple
+        - -2
+        - -55
+    ? !!python/tuple
+    - -1
+    - -56
+    : - !!python/tuple
+        - -2
+        - -55
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 564
+    - 242
+    - 57
+    - 85
+    kind: noisetier
+    patternId: 98f4sd6f13ds21fds9f6548984.png
+  nbrseen: 2
+- x: -2
+  y: -55
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 0
+- x: -2
+  y: -54
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 0
+- x: -2
+  y: -53
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 0
+- x: -2
+  y: -52
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 0
+- x: -2
+  y: -51
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 2
+- x: -2
+  y: -50
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1227
+    - 695
+    - 30
+    - 50
+    kind: ginseng
+    patternId: fd9s8f436ds21f3ds21.png
+  - region: !!python/tuple
+    - 1229
+    - 694
+    - 28
+    - 48
+    kind: ginseng
+    patternId: 495132196598795351615.png
+  nbrseen: 2
+- x: -2
+  y: -49
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1115
+    - 526
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  - region: !!python/tuple
+    - 434
+    - 306
+    - 57
+    - 85
+    kind: noisetier
+    patternId: 98f4sd6f13ds21fds9f6548984.png
+  nbrseen: 4
+- x: -2
+  y: -48
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1182
+    - 454
+    - 37
+    - 58
+    kind: chene
+    patternId: 4re6321f3g21fd3g2d1fg321f.png
+  - region: !!python/tuple
+    - 968
+    - 134
+    - 30
+    - 50
+    kind: ginseng
+    patternId: fd9s8f436ds21f3ds21.png
+  - region: !!python/tuple
+    - 970
+    - 133
+    - 28
+    - 48
+    kind: ginseng
+    patternId: 495132196598795351615.png
+  nbrseen: 3
+- x: -2
+  y: -47
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1355
+    - 745
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  nbrseen: 4
+- x: -2
+  y: -46
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 881
+    - 738
+    - 30
+    - 50
+    kind: ginseng
+    patternId: fd9s8f436ds21f3ds21.png
+  nbrseen: 6
+- x: -2
+  y: -45
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1084
+    - 181
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 913
+    - 579
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  nbrseen: 4
+- x: -2
+  y: -44
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 430
+    - 439
+    - 41
+    - 107
+    kind: noyer
+    patternId: 3d2f1g36j5415k54jh6k54hj654.png
+  - region: !!python/tuple
+    - 919
+    - 486
+    - 33
+    - 22
+    kind: ortie
+    patternId: 6546f5h465321321zrez54.png
+  - region: !!python/tuple
+    - 1294
+    - 93
+    - 41
+    - 107
+    kind: noyer
+    patternId: 3d2f1g36j5415k54jh6k54hj654.png
+  nbrseen: 4
+- x: -1
+  y: -59
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 0
+- x: -1
+  y: -58
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 0
+- x: -1
+  y: -57
+  excludedMaps:
+    ? !!python/tuple
+    - -2
+    - -57
+    : - !!python/tuple
+        - 0
+        - -57
+    ? !!python/tuple
+    - -1
+    - -56
+    : - !!python/tuple
+        - 0
+        - -57
+      - !!python/tuple
+        - -1
+        - -58
+  excludedSpots: {}
+  spots: []
+  nbrseen: 2
+- x: -1
+  y: -56
+  excludedMaps:
+    ? !!python/tuple
+    - -1
+    - -57
+    : - !!python/tuple
+        - -1
+        - -55
+      - !!python/tuple
+        - 0
+        - -56
+    ? !!python/tuple
+    - -2
+    - -56
+    : - !!python/tuple
+        - -1
+        - -55
+      - !!python/tuple
+        - 0
+        - -56
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 767
+    - 217
+    - 56
+    - 150
+    kind: noisetier
+    patternId: 98f4ds63f1ds321.png
+  nbrseen: 2
+- x: -1
+  y: -55
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 0
+- x: -1
+  y: -54
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 0
+- x: -1
+  y: -53
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 0
+- x: -1
+  y: -52
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 1
+- x: -1
+  y: -51
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 2
+- x: -1
+  y: -50
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 1
+- x: -1
+  y: -49
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 1
+- x: -1
+  y: -48
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1041
+    - 288
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 3
+- x: -1
+  y: -47
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1214
+    - 245
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 1298
+    - 195
+    - 33
+    - 22
+    kind: ortie
+    patternId: 6546f5h465321321zrez54.png
+  - region: !!python/tuple
+    - 1327
+    - 629
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  nbrseen: 3
+- x: -1
+  y: -46
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 652
+    - 397
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 6
+- x: -1
+  y: -45
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 4
+- x: -1
+  y: -44
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1264
+    - 97
+    - 33
+    - 22
+    kind: ortie
+    patternId: 6546f5h465321321zrez54.png
+  nbrseen: 5
+- x: 0
+  y: -59
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 0
+- x: 0
+  y: -58
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 0
+- x: 0
+  y: -57
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 0
+- x: 0
+  y: -56
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 0
+- x: 0
+  y: -55
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 0
+- x: 0
+  y: -54
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 0
+- x: 0
+  y: -53
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 0
+- x: 0
+  y: -52
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 847
+    - 363
+    - 59
+    - 64
+    kind: noisetier
+    patternId: ds4f61ds32f1ds321.png
+  nbrseen: 1
+- x: 0
+  y: -51
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 1
+- x: 0
+  y: -50
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1247
+    - 638
+    - 28
+    - 96
+    kind: noisetier
+    patternId: 5646g514df63251.png
+  nbrseen: 1
+- x: 0
+  y: -49
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1065
+    - 588
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  nbrseen: 2
+- x: 0
+  y: -48
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 739
+    - 397
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 1005
+    - 58
+    - 33
+    - 22
+    kind: ortie
+    patternId: 6546f5h465321321zrez54.png
+  - region: !!python/tuple
+    - 937
+    - 479
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  nbrseen: 3
+- x: 0
+  y: -47
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1313
+    - 566
+    - 30
+    - 50
+    kind: ginseng
+    patternId: fd9s8f436ds21f3ds21.png
+  - region: !!python/tuple
+    - 1022
+    - 655
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  - region: !!python/tuple
+    - 924
+    - 356
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  - region: !!python/tuple
+    - 1315
+    - 565
+    - 28
+    - 48
+    kind: ginseng
+    patternId: 495132196598795351615.png
+  nbrseen: 2
+- x: 0
+  y: -46
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 3
+- x: 0
+  y: -45
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 523
+    - 590
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 912
+    - 94
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 4
+- x: 0
+  y: -44
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 620
+    - 347
+    - 31
+    - 43
+    kind: menthe
+    patternId: 98gj73621321k.png
+  - region: !!python/tuple
+    - 1057
+    - 607
+    - 24
+    - 62
+    kind: noyer
+    patternId: 98dfg76df54g3d2f1g.png
+  - region: !!python/tuple
+    - 492
+    - 97
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  nbrseen: 4

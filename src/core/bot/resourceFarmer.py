@@ -2,6 +2,8 @@ import datetime
 import logging
 import os
 from time import sleep
+
+import pyautogui
 import yaml
 from core.bot import Fighter
 from core import dofus
@@ -17,39 +19,42 @@ class ResourceFarmer(Fighter):
         self.save_dir = os.path.join(self.workdir, 'saves')
         save_file_name = self.zone.name.replace(' ', '_') + '_' + now.strftime("%d_%m_%Y") + ".yaml"
         self.today_save_file = os.path.join(self.save_dir, save_file_name)
+        self.famPatternThreshold = 0.7
 
     def harvest(self):
         logging.debug("Searching for resources...")
         currMap = self.zone[self.currPos]
-        currMap['nbrseen'] += 1
-        if currMap['nbrseen'] > 25:
-            currMap['nbrseen'] = 0
-            currMap['excludedMaps'] = {}
-            currMap['excludedSpots'] = {}
-        self.collectLearnedSpots()
+
+        if currMap['nbrseen'] > 30:
+            currMap['nbrseen'] = 9
+
         if currMap['nbrseen'] < 10:
             self.discoverSpots()
+
+        else:
+            self.collectLearnedSpots()
+
+        currMap['nbrseen'] += 1
+        self.checkPopup()
 
     def collectLearnedSpots(self):
         currMap = self.zone[self.currPos]
         for spot in currMap['spots']:
-            if spot['region'].find(spot['pattern']['bi'], threshold=0.7):
+            if spot['pattern']['kind'] in self.resourcesToFarm and \
+                    spot['region'].find(spot['pattern']['bi'], threshold=self.famPatternThreshold):
                 if currMap.isValidSpot(self.lastPos, spot):
-                    if not self.collect(spot):
-                        currMap.excludeSpot(self.lastPos, spot)
-        if self.combatStarted.is_set():
-            self.combatEnded.wait()
-        if self.disconnected.is_set():
-            self.connected.wait()
+                    self.collect(spot)
 
     def discoverSpots(self):
         seen = []
         currMap = self.zone[self.currPos]
+
         while not self.killsig.is_set():
             matched = False
-            for kind, patterns in self.patterns.items():
+            for kind in self.resourcesToFarm:
+                patterns = self.patterns[kind]
                 pattern_imgs = [p['bi'] for p in patterns]
-                tgt, idx = dofus.COMBAT_R.findAny(pattern_imgs, threshold=0.7)
+                tgt, idx = dofus.COMBAT_R.findAny(pattern_imgs, threshold=self.famPatternThreshold)
                 if tgt and tgt not in seen:
                     spot = {
                         'region': tgt,

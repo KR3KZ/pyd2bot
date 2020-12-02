@@ -1,0 +1,2273 @@
+name: sidimote
+maps:
+- x: -27
+  y: 15
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 27
+- x: -26
+  y: 15
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 15
+- x: -25
+  y: 15
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 24
+- x: -24
+  y: 15
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 557
+    - 615
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  - region: !!python/tuple
+    - 1442
+    - 442
+    - 58
+    - 24
+    kind: oliviolet
+    patternId: 5q4sdqs65d6546D54D654.png
+  - region: !!python/tuple
+    - 1398
+    - 399
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  - region: !!python/tuple
+    - 448
+    - 615
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  nbrseen: 10
+- x: -23
+  y: 15
+  excludedMaps:
+    ? !!python/tuple
+    - -23
+    - 14
+    : - !!python/tuple
+        - -22
+        - 15
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 600
+    - 420
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  nbrseen: 15
+- x: -22
+  y: 15
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 11
+- x: -21
+  y: 15
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 15
+- x: -20
+  y: 15
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 10
+- x: -20
+  y: 16
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 26
+- x: -20
+  y: 17
+  excludedMaps:
+    ? !!python/tuple
+    - -20
+    - 16
+    : - !!python/tuple
+        - -20
+        - 18
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 437
+    - 705
+    - 38
+    - 39
+    kind: oliviolet
+    patternId: 9fd7s84f6d5s4f6132d1qs3d21.png
+  - region: !!python/tuple
+    - 989
+    - 356
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  - region: !!python/tuple
+    - 401
+    - 800
+    - 31
+    - 51
+    kind: oliviolet
+    patternId: 6546f51d3s2f1o987ui46513jh12.png
+  - region: !!python/tuple
+    - 921
+    - 336
+    - 27
+    - 89
+    kind: oliviolet
+    patternId: 1606843601437.png
+  nbrseen: 11
+- x: -20
+  y: 18
+  excludedMaps:
+    ? !!python/tuple
+    - -21
+    - 18
+    : - !!python/tuple
+        - -20
+        - 17
+  excludedSpots: {}
+  spots: []
+  nbrseen: 1
+- x: -20
+  y: 19
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 1
+- x: -29
+  y: -1
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 429
+    - 456
+    - 74
+    - 42
+    kind: poisson
+    patternId: 98g7d3f5621gd32fg1df3g2d1fs321.png
+  - region: !!python/tuple
+    - 440
+    - 465
+    - 48
+    - 27
+    kind: poisson
+    patternId: 9qs87d6qs5d13qs2d1qs32d1qs321.png
+  nbrseen: 3
+- x: -29
+  y: 0
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 475
+    - 571
+    - 73
+    - 34
+    kind: poisson
+    patternId: 98798g7df3g21df32.g10df321.png
+  - region: !!python/tuple
+    - 606
+    - 851
+    - 69
+    - 36
+    kind: poisson
+    patternId: 9846fd3521sg32s1gf3sd21.png
+  - region: !!python/tuple
+    - 510
+    - 714
+    - 86
+    - 46
+    kind: poisson
+    patternId: fqsfdsf9ds8f43ds21f.png
+  nbrseen: 7
+- x: -29
+  y: 1
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 561
+    - 226
+    - 73
+    - 34
+    kind: poisson
+    patternId: 98798g7df3g21df32.g10df321.png
+  - region: !!python/tuple
+    - 431
+    - 420
+    - 73
+    - 34
+    kind: poisson
+    patternId: 98798g7df3g21df32.g10df321.png
+  - region: !!python/tuple
+    - 423
+    - 412
+    - 86
+    - 46
+    kind: poisson
+    patternId: fqsfdsf9ds8f43ds21f.png
+  nbrseen: 7
+- x: -29
+  y: 2
+  excludedMaps:
+    ? !!python/tuple
+    - -28
+    - 2
+    : - !!python/tuple
+        - -29
+        - 3
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 863
+    - 204
+    - 73
+    - 34
+    kind: poisson
+    patternId: 98798g7df3g21df32.g10df321.png
+  - region: !!python/tuple
+    - 1207
+    - 586
+    - 74
+    - 42
+    kind: poisson
+    patternId: 98g7d3f5621gd32fg1df3g2d1fs321.png
+  - region: !!python/tuple
+    - 1218
+    - 595
+    - 48
+    - 27
+    kind: poisson
+    patternId: 9qs87d6qs5d13qs2d1qs32d1qs321.png
+  nbrseen: 6
+- x: -29
+  y: 3
+  excludedMaps:
+    ? !!python/tuple
+    - -28
+    - 3
+    : - !!python/tuple
+        - -29
+        - 2
+      - !!python/tuple
+        - -29
+        - 4
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1079
+    - 831
+    - 73
+    - 34
+    kind: poisson
+    patternId: 98798g7df3g21df32.g10df321.png
+  - region: !!python/tuple
+    - 1088
+    - 833
+    - 48
+    - 27
+    kind: poisson
+    patternId: 9qs87d6qs5d13qs2d1qs32d1qs321.png
+  nbrseen: 4
+- x: -29
+  y: 4
+  excludedMaps:
+    ? !!python/tuple
+    - -29
+    - 5
+    : - !!python/tuple
+        - -29
+        - 3
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 354
+    - 508
+    - 48
+    - 27
+    kind: poisson
+    patternId: 9qs87d6qs5d13qs2d1qs32d1qs321.png
+  nbrseen: 5
+- x: -29
+  y: 5
+  excludedMaps:
+    ? !!python/tuple
+    - -29
+    - 6
+    : - !!python/tuple
+        - -28
+        - 5
+  excludedSpots: {}
+  spots: []
+  nbrseen: 5
+- x: -29
+  y: 6
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 388
+    - 615
+    - 73
+    - 34
+    kind: poisson
+    patternId: 98798g7df3g21df32.g10df321.png
+  nbrseen: 7
+- x: -29
+  y: 7
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 440
+    - 206
+    - 48
+    - 27
+    kind: poisson
+    patternId: 9qs87d6qs5d13qs2d1qs32d1qs321.png
+  - region: !!python/tuple
+    - 1218
+    - 810
+    - 48
+    - 27
+    kind: poisson
+    patternId: 9qs87d6qs5d13qs2d1qs32d1qs321.png
+  nbrseen: 8
+- x: -28
+  y: -2
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 4
+- x: -28
+  y: -1
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1334
+    - 226
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  - region: !!python/tuple
+    - 1161
+    - 486
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  - region: !!python/tuple
+    - 495
+    - 371
+    - 57
+    - 52
+    kind: oliviolet
+    patternId: 765cxv37ter9t874e61aze321.png
+  - region: !!python/tuple
+    - 1052
+    - 486
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  - region: !!python/tuple
+    - 1225
+    - 226
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  nbrseen: 6
+- x: -28
+  y: 0
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 902
+    - 745
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  - region: !!python/tuple
+    - 1377
+    - 334
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  - region: !!python/tuple
+    - 533
+    - 63
+    - 32
+    - 83
+    kind: oliviolet
+    patternId: 8o7ui6514f3sd21f.png
+  - region: !!python/tuple
+    - 1268
+    - 334
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  - region: !!python/tuple
+    - 793
+    - 745
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  - region: !!python/tuple
+    - 533
+    - 61
+    - 32
+    - 83
+    kind: oliviolet
+    patternId: 8o7ui6514f3sd21f.png
+  nbrseen: 5
+- x: -28
+  y: 1
+  excludedMaps:
+    ? !!python/tuple
+    - -27
+    - 1
+    : - !!python/tuple
+        - -29
+        - 1
+  excludedSpots: {}
+  spots: []
+  nbrseen: 4
+- x: -28
+  y: 2
+  excludedMaps:
+    ? !!python/tuple
+    - -27
+    - 2
+    : - !!python/tuple
+        - -28
+        - 1
+    ? !!python/tuple
+    - -29
+    - 2
+    : - !!python/tuple
+        - -28
+        - 1
+  excludedSpots: {}
+  spots: []
+  nbrseen: 6
+- x: -28
+  y: 3
+  excludedMaps:
+    ? !!python/tuple
+    - -29
+    - 3
+    : - !!python/tuple
+        - -28
+        - 2
+      - !!python/tuple
+        - -27
+        - 3
+    ? !!python/tuple
+    - -28
+    - 4
+    : - !!python/tuple
+        - -27
+        - 3
+      - !!python/tuple
+        - -28
+        - 2
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1334
+    - 702
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  - region: !!python/tuple
+    - 1053
+    - 75
+    - 58
+    - 24
+    kind: oliviolet
+    patternId: 5q4sdqs65d6546D54D654.png
+  - region: !!python/tuple
+    - 1226
+    - 322
+    - 50
+    - 47
+    kind: oliviolet
+    patternId: ds9f87ds6f514ds32f1qf4q654.png
+  nbrseen: 11
+- x: -28
+  y: 4
+  excludedMaps:
+    ? !!python/tuple
+    - -28
+    - 3
+    : - !!python/tuple
+        - -27
+        - 4
+    ? !!python/tuple
+    - -29
+    - 4
+    : - !!python/tuple
+        - -27
+        - 4
+  excludedSpots: {}
+  spots: []
+  nbrseen: 7
+- x: -28
+  y: 6
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 5
+- x: -28
+  y: 7
+  excludedMaps:
+    ? !!python/tuple
+    - -28
+    - 6
+    : - !!python/tuple
+        - -27
+        - 7
+    ? !!python/tuple
+    - -29
+    - 7
+    : - !!python/tuple
+        - -27
+        - 7
+  excludedSpots: {}
+  spots: []
+  nbrseen: 7
+- x: -27
+  y: -3
+  excludedMaps:
+    ? !!python/tuple
+    - -27
+    - -2
+    : - !!python/tuple
+        - -27
+        - -4
+      - !!python/tuple
+        - -28
+        - -3
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1311
+    - 702
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  - region: !!python/tuple
+    - 448
+    - 356
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  nbrseen: 2
+- x: -27
+  y: -2
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1248
+    - 442
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  - region: !!python/tuple
+    - 840
+    - 415
+    - 57
+    - 52
+    kind: oliviolet
+    patternId: 765cxv37ter9t874e61aze321.png
+  - region: !!python/tuple
+    - 836
+    - 464
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  - region: !!python/tuple
+    - 384
+    - 128
+    - 75
+    - 78
+    kind: oliviolet
+    patternId: 1606866577497.png
+  nbrseen: 6
+- x: -27
+  y: -1
+  excludedMaps:
+    ? !!python/tuple
+    - -28
+    - -1
+    : - !!python/tuple
+        - -27
+        - 0
+  excludedSpots: {}
+  spots: []
+  nbrseen: 2
+- x: -27
+  y: 0
+  excludedMaps:
+    ? !!python/tuple
+    - -26
+    - 0
+    : - !!python/tuple
+        - -27
+        - -1
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1507
+    - 702
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  - region: !!python/tuple
+    - 535
+    - 463
+    - 58
+    - 24
+    kind: oliviolet
+    patternId: 5q4sdqs65d6546D54D654.png
+  - region: !!python/tuple
+    - 1487
+    - 121
+    - 48
+    - 48
+    kind: oliviolet
+    patternId: 8f74ds65f4ds365f14.png
+  - region: !!python/tuple
+    - 1398
+    - 702
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  - region: !!python/tuple
+    - 1484
+    - 140
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  nbrseen: 4
+- x: -27
+  y: 1
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 8
+- x: -27
+  y: 2
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 8
+- x: -27
+  y: 3
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 10
+- x: -27
+  y: 4
+  excludedMaps:
+    null:
+    - !!python/tuple
+      - -28
+      - 4
+    ? !!python/tuple
+    - -27
+    - 3
+    : - !!python/tuple
+        - -28
+        - 4
+    ? !!python/tuple
+    - -27
+    - 5
+    : - !!python/tuple
+        - -28
+        - 4
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1377
+    - 248
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  - region: !!python/tuple
+    - 513
+    - 723
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  - region: !!python/tuple
+    - 1268
+    - 248
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  nbrseen: 7
+- x: -27
+  y: 5
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 8
+- x: -27
+  y: 6
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 12
+- x: -27
+  y: 7
+  excludedMaps:
+    ? !!python/tuple
+    - -27
+    - 6
+    : - !!python/tuple
+        - -28
+        - 7
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 859
+    - 75
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  - region: !!python/tuple
+    - 750
+    - 75
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  nbrseen: 6
+- x: -26
+  y: -4
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 2
+- x: -26
+  y: -3
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 3
+- x: -26
+  y: -2
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1032
+    - 161
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  - region: !!python/tuple
+    - 1052
+    - 486
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  - region: !!python/tuple
+    - 923
+    - 161
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  nbrseen: 4
+- x: -26
+  y: -1
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 3
+- x: -26
+  y: 0
+  excludedMaps:
+    ? !!python/tuple
+    - -29
+    - 0
+    : - !!python/tuple
+        - -28
+        - 1
+  excludedSpots: {}
+  spots: []
+  nbrseen: 6
+- x: -26
+  y: 1
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 9
+- x: -26
+  y: 2
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 470
+    - 745
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  - region: !!python/tuple
+    - 1183
+    - 183
+    - 58
+    - 24
+    kind: oliviolet
+    patternId: 5q4sdqs65d6546D54D654.png
+  - region: !!python/tuple
+    - 361
+    - 745
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  nbrseen: 6
+- x: -26
+  y: 3
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 538
+    - 566
+    - 57
+    - 52
+    kind: oliviolet
+    patternId: 765cxv37ter9t874e61aze321.png
+  - region: !!python/tuple
+    - 534
+    - 615
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  nbrseen: 10
+- x: -26
+  y: 4
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1315
+    - 221
+    - 57
+    - 52
+    kind: oliviolet
+    patternId: 765cxv37ter9t874e61aze321.png
+  - region: !!python/tuple
+    - 1311
+    - 270
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  nbrseen: 13
+- x: -26
+  y: 5
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 12
+- x: -26
+  y: 6
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 9
+- x: -25
+  y: -4
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 600
+    - 75
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  - region: !!python/tuple
+    - 880
+    - 270
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  - region: !!python/tuple
+    - 491
+    - 75
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  nbrseen: 2
+- x: -25
+  y: -3
+  excludedMaps:
+    ? !!python/tuple
+    - -26
+    - -3
+    : - !!python/tuple
+        - -25
+        - -4
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 495
+    - 199
+    - 57
+    - 52
+    kind: oliviolet
+    patternId: 765cxv37ter9t874e61aze321.png
+  - region: !!python/tuple
+    - 1013
+    - 630
+    - 57
+    - 52
+    kind: oliviolet
+    patternId: 765cxv37ter9t874e61aze321.png
+  nbrseen: 3
+- x: -25
+  y: -2
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 581
+    - 155
+    - 57
+    - 52
+    kind: oliviolet
+    patternId: 765cxv37ter9t874e61aze321.png
+  - region: !!python/tuple
+    - 1464
+    - 464
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  - region: !!python/tuple
+    - 1355
+    - 464
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  - region: !!python/tuple
+    - 577
+    - 204
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  nbrseen: 6
+- x: -25
+  y: -1
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 470
+    - 313
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  - region: !!python/tuple
+    - 1484
+    - 652
+    - 31
+    - 90
+    kind: oliviolet
+    patternId: 65436132146549876321.png
+  - region: !!python/tuple
+    - 754
+    - 112
+    - 57
+    - 52
+    kind: oliviolet
+    patternId: 765cxv37ter9t874e61aze321.png
+  nbrseen: 4
+- x: -25
+  y: 0
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1464
+    - 334
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  - region: !!python/tuple
+    - 686
+    - 161
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  - region: !!python/tuple
+    - 1355
+    - 334
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  nbrseen: 5
+- x: -25
+  y: 1
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 600
+    - 334
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  - region: !!python/tuple
+    - 1377
+    - 248
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  nbrseen: 6
+- x: -25
+  y: 2
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1118
+    - 291
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  - region: !!python/tuple
+    - 686
+    - 204
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  nbrseen: 5
+- x: -25
+  y: 3
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 8
+- x: -25
+  y: 4
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 14
+- x: -25
+  y: 5
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1312
+    - 507
+    - 58
+    - 24
+    kind: oliviolet
+    patternId: 5q4sdqs65d6546D54D654.png
+  - region: !!python/tuple
+    - 624
+    - 264
+    - 57
+    - 52
+    kind: oliviolet
+    patternId: 765cxv37ter9t874e61aze321.png
+  - region: !!python/tuple
+    - 729
+    - 313
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  - region: !!python/tuple
+    - 620
+    - 313
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  - region: !!python/tuple
+    - 1308
+    - 519
+    - 31
+    - 51
+    kind: oliviolet
+    patternId: 6546f51d3s2f1o987ui46513jh12.png
+  nbrseen: 17
+- x: -25
+  y: 6
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 708
+    - 334
+    - 58
+    - 24
+    kind: oliviolet
+    patternId: 5q4sdqs65d6546D54D654.png
+  - region: !!python/tuple
+    - 1445
+    - 630
+    - 57
+    - 52
+    kind: oliviolet
+    patternId: 765cxv37ter9t874e61aze321.png
+  - region: !!python/tuple
+    - 664
+    - 291
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  nbrseen: 19
+- x: -25
+  y: 7
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 16
+- x: -24
+  y: -4
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 2
+- x: -24
+  y: -3
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 4
+- x: -24
+  y: -2
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1395
+    - 691
+    - 31
+    - 51
+    kind: oliviolet
+    patternId: 6546f51d3s2f1o987ui46513jh12.png
+  - region: !!python/tuple
+    - 902
+    - 442
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  - region: !!python/tuple
+    - 1355
+    - 636
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  - region: !!python/tuple
+    - 793
+    - 442
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  nbrseen: 5
+- x: -24
+  y: -1
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 3
+- x: -24
+  y: 0
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1395
+    - 432
+    - 31
+    - 51
+    kind: oliviolet
+    patternId: 6546f51d3s2f1o987ui46513jh12.png
+  - region: !!python/tuple
+    - 1355
+    - 377
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  - region: !!python/tuple
+    - 773
+    - 32
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  nbrseen: 2
+- x: -24
+  y: 1
+  excludedMaps:
+    ? !!python/tuple
+    - -24
+    - 2
+    : - !!python/tuple
+        - -23
+        - 1
+  excludedSpots: {}
+  spots: []
+  nbrseen: 4
+- x: -24
+  y: 2
+  excludedMaps:
+    ? !!python/tuple
+    - -25
+    - 2
+    : - !!python/tuple
+        - -23
+        - 2
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 945
+    - 464
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  - region: !!python/tuple
+    - 1229
+    - 696
+    - 57
+    - 52
+    kind: oliviolet
+    patternId: 765cxv37ter9t874e61aze321.png
+  - region: !!python/tuple
+    - 1225
+    - 745
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  - region: !!python/tuple
+    - 836
+    - 464
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  nbrseen: 6
+- x: -24
+  y: 3
+  excludedMaps:
+    ? !!python/tuple
+    - -25
+    - 3
+    : - !!python/tuple
+        - -23
+        - 3
+      - !!python/tuple
+        - -24
+        - 4
+    ? !!python/tuple
+    - -24
+    - 2
+    : - !!python/tuple
+        - -24
+        - 4
+      - !!python/tuple
+        - -23
+        - 3
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 927
+    - 69
+    - 57
+    - 52
+    kind: oliviolet
+    patternId: 765cxv37ter9t874e61aze321.png
+  - region: !!python/tuple
+    - 754
+    - 112
+    - 57
+    - 52
+    kind: oliviolet
+    patternId: 765cxv37ter9t874e61aze321.png
+  - region: !!python/tuple
+    - 1420
+    - 658
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  nbrseen: 5
+- x: -24
+  y: 4
+  excludedMaps:
+    ? !!python/tuple
+    - -24
+    - 5
+    : - !!python/tuple
+        - -24
+        - 3
+    ? !!python/tuple
+    - -23
+    - 4
+    : - !!python/tuple
+        - -24
+        - 3
+  excludedSpots: {}
+  spots: []
+  nbrseen: 13
+- x: -24
+  y: 5
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 16
+- x: -24
+  y: 6
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1099
+    - 501
+    - 57
+    - 52
+    kind: oliviolet
+    patternId: 765cxv37ter9t874e61aze321.png
+  - region: !!python/tuple
+    - 664
+    - 291
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  - region: !!python/tuple
+    - 1550
+    - 679
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  nbrseen: 11
+- x: -24
+  y: 7
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 18
+- x: -23
+  y: -4
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1032
+    - 593
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  - region: !!python/tuple
+    - 1267
+    - 83
+    - 32
+    - 83
+    kind: oliviolet
+    patternId: 8o7ui6514f3sd21f.png
+  - region: !!python/tuple
+    - 403
+    - 83
+    - 32
+    - 83
+    kind: oliviolet
+    patternId: 8o7ui6514f3sd21f.png
+  - region: !!python/tuple
+    - 923
+    - 593
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  nbrseen: 2
+- x: -23
+  y: -3
+  excludedMaps:
+    ? !!python/tuple
+    - -23
+    - -4
+    : - !!python/tuple
+        - -23
+        - -2
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 600
+    - 679
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  nbrseen: 3
+- x: -23
+  y: -2
+  excludedMaps:
+    ? !!python/tuple
+    - -23
+    - -1
+    : - !!python/tuple
+        - -23
+        - -3
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1229
+    - 437
+    - 57
+    - 52
+    kind: oliviolet
+    patternId: 765cxv37ter9t874e61aze321.png
+  - region: !!python/tuple
+    - 662
+    - 386
+    - 32
+    - 83
+    kind: oliviolet
+    patternId: 8o7ui6514f3sd21f.png
+  - region: !!python/tuple
+    - 1225
+    - 486
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  nbrseen: 3
+- x: -23
+  y: -1
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 3
+- x: -23
+  y: 4
+  excludedMaps:
+    ? !!python/tuple
+    - -24
+    - 4
+    : - !!python/tuple
+        - -23
+        - 3
+  excludedSpots: {}
+  spots: []
+  nbrseen: 10
+- x: -23
+  y: 5
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 17
+- x: -23
+  y: 6
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1487
+    - 683
+    - 48
+    - 48
+    kind: oliviolet
+    patternId: 8f74ds65f4ds365f14.png
+  - region: !!python/tuple
+    - 1484
+    - 702
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  nbrseen: 17
+- x: -23
+  y: 7
+  excludedMaps:
+    ? !!python/tuple
+    - -23
+    - 6
+    : - !!python/tuple
+        - -23
+        - 8
+  excludedSpots: {}
+  spots: []
+  nbrseen: 12
+- x: -27
+  y: 8
+  excludedMaps:
+    ? !!python/tuple
+    - -27
+    - 7
+    : - !!python/tuple
+        - -27
+        - 9
+    ? !!python/tuple
+    - -26
+    - 8
+    : - !!python/tuple
+        - -27
+        - 9
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 473
+    - 564
+    - 74
+    - 42
+    kind: poisson
+    patternId: 98g7d3f5621gd32fg1df3g2d1fs321.png
+  - region: !!python/tuple
+    - 484
+    - 573
+    - 48
+    - 27
+    kind: poisson
+    patternId: 9qs87d6qs5d13qs2d1qs32d1qs321.png
+  nbrseen: 6
+- x: -27
+  y: 9
+  excludedMaps:
+    ? !!python/tuple
+    - -26
+    - 9
+    : - !!python/tuple
+        - -27
+        - 8
+    ? !!python/tuple
+    - -27
+    - 10
+    : - !!python/tuple
+        - -27
+        - 8
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 431
+    - 636
+    - 73
+    - 34
+    kind: poisson
+    patternId: 98798g7df3g21df32.g10df321.png
+  - region: !!python/tuple
+    - 698
+    - 726
+    - 51
+    - 26
+    kind: poisson
+    patternId: 9879re8t54r3e62t1321321321.png
+  - region: !!python/tuple
+    - 1392
+    - 511
+    - 44
+    - 22
+    kind: poisson
+    patternId: 98qs7d9qs854d35g4df965g748fd9654.png
+  - region: !!python/tuple
+    - 1477
+    - 163
+    - 48
+    - 27
+    kind: poisson
+    patternId: 9qs87d6qs5d13qs2d1qs32d1qs321.png
+  - region: !!python/tuple
+    - 702
+    - 727
+    - 44
+    - 22
+    kind: poisson
+    patternId: 98qs7d9qs854d35g4df965g748fd9654.png
+  - region: !!python/tuple
+    - 440
+    - 638
+    - 48
+    - 27
+    kind: poisson
+    patternId: 9qs87d6qs5d13qs2d1qs32d1qs321.png
+  - region: !!python/tuple
+    - 1473
+    - 165
+    - 62
+    - 24
+    kind: poisson
+    patternId: 9s8d798f7df9sg87df4g65df143g21.png
+  nbrseen: 10
+- x: -27
+  y: 10
+  excludedMaps:
+    ? !!python/tuple
+    - -27
+    - 9
+    : - !!python/tuple
+        - -27
+        - 11
+      - !!python/tuple
+        - -26
+        - 10
+    ? !!python/tuple
+    - -26
+    - 10
+    : - !!python/tuple
+        - -27
+        - 11
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1389
+    - 510
+    - 51
+    - 26
+    kind: poisson
+    patternId: 9879re8t54r3e62t1321321321.png
+  - region: !!python/tuple
+    - 950
+    - 161
+    - 73
+    - 34
+    kind: poisson
+    patternId: 98798g7df3g21df32.g10df321.png
+  - region: !!python/tuple
+    - 861
+    - 499
+    - 74
+    - 42
+    kind: poisson
+    patternId: 98g7d3f5621gd32fg1df3g2d1fs321.png
+  nbrseen: 29
+- x: -27
+  y: 11
+  excludedMaps:
+    ? !!python/tuple
+    - -27
+    - 12
+    : - !!python/tuple
+        - -27
+        - 10
+    ? !!python/tuple
+    - -26
+    - 11
+    : - !!python/tuple
+        - -27
+        - 10
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1308
+    - 87
+    - 31
+    - 51
+    kind: oliviolet
+    patternId: 6546f51d3s2f1o987ui46513jh12.png
+  - region: !!python/tuple
+    - 1186
+    - 371
+    - 57
+    - 52
+    kind: oliviolet
+    patternId: 765cxv37ter9t874e61aze321.png
+  - region: !!python/tuple
+    - 1226
+    - 463
+    - 58
+    - 24
+    kind: oliviolet
+    patternId: 5q4sdqs65d6546D54D654.png
+  - region: !!python/tuple
+    - 1312
+    - 75
+    - 58
+    - 24
+    kind: oliviolet
+    patternId: 5q4sdqs65d6546D54D654.png
+  - region: !!python/tuple
+    - 1182
+    - 420
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  - region: !!python/tuple
+    - 1268
+    - 32
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  nbrseen: 26
+- x: -27
+  y: 12
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 729
+    - 97
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  nbrseen: 28
+- x: -26
+  y: 8
+  excludedMaps:
+    ? !!python/tuple
+    - -27
+    - 8
+    : - !!python/tuple
+        - -25
+        - 8
+    ? !!python/tuple
+    - -26
+    - 9
+    : - !!python/tuple
+        - -25
+        - 8
+      - !!python/tuple
+        - -27
+        - 8
+    ? !!python/tuple
+    - -25
+    - 8
+    : - !!python/tuple
+        - -27
+        - 8
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 707
+    - 356
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  - region: !!python/tuple
+    - 610
+    - 57
+    - 38
+    - 39
+    kind: oliviolet
+    patternId: 9fd7s84f6d5s4f6132d1qs3d21.png
+  nbrseen: 23
+- x: -26
+  y: 9
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 23
+- x: -26
+  y: 10
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 14
+- x: -26
+  y: 11
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 16
+- x: -26
+  y: 12
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 495
+    - 328
+    - 57
+    - 52
+    kind: oliviolet
+    patternId: 765cxv37ter9t874e61aze321.png
+  - region: !!python/tuple
+    - 491
+    - 377
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  nbrseen: 30
+- x: -26
+  y: 13
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 26
+- x: -26
+  y: 14
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 20
+- x: -25
+  y: 8
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 27
+- x: -25
+  y: 9
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 30
+- x: -25
+  y: 10
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1118
+    - 161
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  - region: !!python/tuple
+    - 1464
+    - 550
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  - region: !!python/tuple
+    - 470
+    - 529
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  - region: !!python/tuple
+    - 1009
+    - 161
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  - region: !!python/tuple
+    - 437
+    - 489
+    - 38
+    - 39
+    kind: oliviolet
+    patternId: 9fd7s84f6d5s4f6132d1qs3d21.png
+  nbrseen: 11
+- x: -25
+  y: 11
+  excludedMaps:
+    ? !!python/tuple
+    - -24
+    - 11
+    : - !!python/tuple
+        - -25
+        - 10
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1441
+    - 118
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  - region: !!python/tuple
+    - 923
+    - 507
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  - region: !!python/tuple
+    - 513
+    - 75
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  nbrseen: 19
+- x: -25
+  y: 14
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 495
+    - 415
+    - 57
+    - 52
+    kind: oliviolet
+    patternId: 765cxv37ter9t874e61aze321.png
+  - region: !!python/tuple
+    - 1399
+    - 236
+    - 50
+    - 47
+    kind: oliviolet
+    patternId: ds9f87ds6f514ds32f1qf4q654.png
+  - region: !!python/tuple
+    - 491
+    - 464
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  nbrseen: 9
+- x: -24
+  y: 8
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 884
+    - 134
+    - 57
+    - 52
+    kind: oliviolet
+    patternId: 765cxv37ter9t874e61aze321.png
+  - region: !!python/tuple
+    - 392
+    - 719
+    - 48
+    - 57
+    kind: oliviolet
+    patternId: 98f7ds65f43sd2f13qsd2f13dsf2qsd4f.png
+  - region: !!python/tuple
+    - 880
+    - 183
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  nbrseen: 29
+- x: -24
+  y: 9
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1204
+    - 161
+    - 27
+    - 32
+    kind: oliviolet
+    patternId: 4ds65f4ds632f1ds3201.png
+  nbrseen: 30
+- x: -24
+  y: 10
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 13
+- x: -24
+  y: 11
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1441
+    - 118
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  nbrseen: 17
+- x: -24
+  y: 13
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 408
+    - 579
+    - 81
+    - 39
+    kind: oliviolet
+    patternId: 987qsd652qs1d32qs1d32sq1.png
+  nbrseen: 2
+- x: -23
+  y: 8
+  excludedMaps:
+    ? !!python/tuple
+    - -23
+    - 9
+    : - !!python/tuple
+        - -23
+        - 7
+    ? !!python/tuple
+    - -24
+    - 8
+    : - !!python/tuple
+        - -23
+        - 7
+    ? !!python/tuple
+    - -22
+    - 8
+    : - !!python/tuple
+        - -23
+        - 7
+  excludedSpots: {}
+  spots: []
+  nbrseen: 23
+- x: -23
+  y: 9
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 30
+- x: -23
+  y: 10
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 16
+- x: -23
+  y: 11
+  excludedMaps: {}
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 487
+    - 559
+    - 50
+    - 47
+    kind: oliviolet
+    patternId: ds9f87ds6f514ds32f1qf4q654.png
+  nbrseen: 24
+- x: -23
+  y: 12
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 16
+- x: -23
+  y: 13
+  excludedMaps:
+    ? !!python/tuple
+    - -23
+    - 12
+    : - !!python/tuple
+        - -24
+        - 13
+    ? !!python/tuple
+    - -22
+    - 13
+    : - !!python/tuple
+        - -24
+        - 13
+    ? !!python/tuple
+    - -23
+    - 14
+    : - !!python/tuple
+        - -24
+        - 13
+  excludedSpots: {}
+  spots: []
+  nbrseen: 14
+- x: -23
+  y: 14
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 10
+- x: -22
+  y: 8
+  excludedMaps:
+    ? !!python/tuple
+    - -22
+    - 9
+    : - !!python/tuple
+        - -21
+        - 8
+  excludedSpots: {}
+  spots: []
+  nbrseen: 21
+- x: -22
+  y: 9
+  excludedMaps:
+    ? !!python/tuple
+    - -23
+    - 9
+    : - !!python/tuple
+        - -21
+        - 9
+  excludedSpots: {}
+  spots: []
+  nbrseen: 30
+- x: -22
+  y: 10
+  excludedMaps:
+    ? !!python/tuple
+    - -23
+    - 10
+    : - !!python/tuple
+        - -21
+        - 10
+  excludedSpots: {}
+  spots:
+  - region: !!python/tuple
+    - 1445
+    - 675
+    - 57
+    - 52
+    kind: oliviolet
+    patternId: 765cxv37ter9t874e61aze321.png
+  - region: !!python/tuple
+    - 1444
+    - 675
+    - 57
+    - 52
+    kind: oliviolet
+    patternId: 765cxv37ter9t874e61aze321.png
+  - region: !!python/tuple
+    - 1441
+    - 723
+    - 39
+    - 36
+    kind: oliviolet
+    patternId: 1606843049917.png
+  nbrseen: 11
+- x: -22
+  y: 11
+  excludedMaps:
+    ? !!python/tuple
+    - -22
+    - 10
+    : - !!python/tuple
+        - -21
+        - 11
+  excludedSpots: {}
+  spots: []
+  nbrseen: 12
+- x: -22
+  y: 12
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 21
+- x: -22
+  y: 13
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 17
+- x: -22
+  y: 14
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 16
+- x: -21
+  y: 12
+  excludedMaps:
+    ? !!python/tuple
+    - -22
+    - 12
+    : - !!python/tuple
+        - -21
+        - 13
+      - !!python/tuple
+        - -21
+        - 11
+  excludedSpots: {}
+  spots: []
+  nbrseen: 13
+- x: -21
+  y: 13
+  excludedMaps:
+    ? !!python/tuple
+    - -22
+    - 13
+    : - !!python/tuple
+        - -21
+        - 12
+    ? !!python/tuple
+    - -21
+    - 14
+    : - !!python/tuple
+        - -21
+        - 12
+  excludedSpots: {}
+  spots: []
+  nbrseen: 27
+- x: -21
+  y: 14
+  excludedMaps: {}
+  excludedSpots: {}
+  spots: []
+  nbrseen: 30

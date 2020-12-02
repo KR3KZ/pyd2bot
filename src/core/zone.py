@@ -55,11 +55,13 @@ class Map(dict):
         if dst not in self.excludedMaps[src]:
             self.excludedMaps[src].append(dst)
 
-    def neighbors(self, src):
+    def neighbors(self, src=None):
         result = []
-        for n in self.zone.neighbors(self.x, self.y):
-            if src not in self.excludedMaps or (n['x'], n['y']) not in self.excludedMaps[src]:
-                result.append(n)
+        mapNeighbors = self.zone.neighbors(self.x, self.y)
+        for n in mapNeighbors:
+            if src and src in self.excludedMaps and n.coord() in self.excludedMaps[src]:
+                continue
+            result.append(n)
         return result
 
     def randDirection(self, src, ignore=None):
@@ -69,7 +71,7 @@ class Map(dict):
         if not neighbors:
             self.excludedMaps = {}
             neighbors = self.neighbors(src)
-        choices = [_ for _ in neighbors if (_['x'], _['y']) not in ignore]
+        choices = [_ for _ in neighbors if _.coord() not in ignore]
         if not choices:
             choices = neighbors
         dst = random.choice(choices)
@@ -80,6 +82,10 @@ class Map(dict):
             return True
         return spot['region'].getRect() not in self.excludedSpots[src]
 
+    def coord(self):
+        return self['x'], self['y']
+
+
 class Zone(dict):
     directions = {(0, -1), (0, 1), (-1, 0), (1, 0)}
 
@@ -87,13 +93,11 @@ class Zone(dict):
         super(Zone, self).__init__()
         self.name = name
 
-    def addSquare(self, top_left, bot_right):
-        top_left = top_left
-        bot_right = bot_right
-        x = top_left[0]
-        y = top_left[1]
-        w = bot_right[0] - top_left[0]
-        h = bot_right[1] - top_left[1]
+    def addSquare(self, tl, br):
+        x = tl[0]
+        y = tl[1]
+        w = br[0] - tl[0]
+        h = br[1] - tl[1]
         for dx in range(x, x + w + 1):
             for dy in range(y, y + h + 1):
                 if (dx, dy) not in self:
@@ -159,9 +163,64 @@ class Zone(dict):
                     subZone[(dx, dy)] = self[(dx, dy)]
         return subZone
 
+    def delSquare(self, tl, br):
+        x = tl[0]
+        y = tl[1]
+        w = br[0] - tl[0]
+        h = br[1] - tl[1]
+        for dx in range(x, x + w + 1):
+            for dy in range(y, y + h + 1):
+                if (dx, dy) in self:
+                    del self[(dx, dy)]
+
     def resetExcludedSpots(self):
         for coord, item in self.items():
             item['excludedSpots'] = {}
+
+    def farmable(self):
+        farmable = []
+        for map_coord, dmap in self.items():
+            if dmap['spots']:
+                farmable.append(dmap)
+        return farmable
+
+    def bfs(self, startMap):
+        queue = collections.deque([startMap])
+        seen = {startMap.coord()}
+        while queue:
+            dmap = queue.popleft()
+            for dmap in dmap.neighbors():
+                if dmap.coord() not in seen:
+                    queue.append(dmap)
+                    seen.add(dmap.coord())
+        return seen
+
+    def cleanEmptyMaps(self):
+        madeProgress = True
+        while madeProgress:
+            print(len(self.items()))
+            madeProgress = False
+            for coord, dmap in self.items():
+                del self[coord]
+                if not self.canFarmAll():
+                    self[coord] = dmap
+                else:
+                    madeProgress = True
+                break
+
+    def canFarmAll(self):
+        farmableMaps = self.farmable()
+        seen = self.bfs(farmableMaps[0])
+        return all([dmap.coord() in seen for dmap in farmableMaps])
+
+    def save(self, filepath):
+        with open(filepath, 'w') as f:
+            yaml.dump(self.toDict(), f, sort_keys=False)
+
+
+
+
+
 
 if __name__ == "__main__":
     top_left = (0, 0)

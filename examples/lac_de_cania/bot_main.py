@@ -26,22 +26,23 @@ if __name__ == "__main__":
     now = datetime.datetime.now()
 
     spell = {
-        "range": 12,
+        "range": 13,
         "nbr": 4,
         "shortcut": "z"
     }
 
     character_name = "John-shooter"
 
-    # lac_de_cania = Zone("lac de cania")
-    # zone_zaap_coord = (-3, -42)
-    # zone_file_path = os.path.join(saves_dir, "lac_cania_24_11_2020.yaml")
-    # lac_de_cania.loadFromFile(zone_file_path, patterns_dir)
-
-    bois_de_litneg = Zone("bois de litneg")
+    zone_file_path = os.path.join(saves_dir, "cania_02_12_2020.yaml")
+    plaines_de_cania = Zone("cania")
     zone_zaap_coords = (-17, -47)
-    bois_de_litneg.addSquare((-15, -59), (-11, -45))
-    bot = ResourceFarmer(bois_de_litneg, zone_zaap_coords, spell, work_dir, character_name)
+
+    plaines_de_cania.loadFromFile(zone_file_path, patterns_dir)
+    bot = ResourceFarmer(plaines_de_cania, zone_zaap_coords, spell, work_dir, character_name)
+
+    bot.mapChangeTimeOut = 12
+    bot.memoTime = 60 * 15
+    bot.famPatternThreshold = 0.85
 
     atexit.register(tearDown, bot)
     bot.start()
