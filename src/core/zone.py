@@ -198,20 +198,21 @@ class Zone(dict):
     def cleanEmptyMaps(self):
         madeProgress = True
         while madeProgress:
-            print(len(self.items()))
             madeProgress = False
             for coord, dmap in self.items():
-                del self[coord]
-                if not self.canFarmAll():
-                    self[coord] = dmap
-                else:
-                    madeProgress = True
-                break
+                if not dmap['spots']:
+                    del self[coord]
+                    if not self.canFarmAll():
+                        self[coord] = dmap
+                    else:
+                        madeProgress = True
+                        break
 
     def canFarmAll(self):
         farmableMaps = self.farmable()
         seen = self.bfs(farmableMaps[0])
-        return all([dmap.coord() in seen for dmap in farmableMaps])
+        res = all([dmap.coord() in seen for dmap in farmableMaps])
+        return res
 
     def save(self, filepath):
         with open(filepath, 'w') as f:

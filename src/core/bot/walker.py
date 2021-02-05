@@ -65,6 +65,8 @@ class Walker(Bot):
         logging.debug(f"Changing map to destination ({x}, {y})")
         s = perf_counter()
         while not self.killsig.is_set() and perf_counter() - s < timeout:
+            if self.combatStarted.wait(0.3):
+                self.combatEnded.wait()
             if self.updatePos() == (x, y):
                 logging.debug(f"Change map took {perf_counter() - s}")
                 return True
@@ -130,31 +132,39 @@ class Walker(Bot):
                         self.moveToZone(self.zone)
                     zone[self.currPos].excludeMap(self.lastPos, dst)
 
-    def discharge(self):
+    @staticmethod
+    def openBank():
+        dofus.BANK_MAN_R.waitAppear(dofus.BANK_MAN_P)
+        dofus.BANK_MAN_R.click()  # click on bank man
+        dofus.BANK_MAN_TALK_R.waitAppear(dofus.BANK_MAN_TALK_P)
+        Region(771, 737, 272, 40).click()  # click first choice
+        dofus.INV_OPEN_R.waitAppear(dofus.INVENTAIRE_P)
+
+    def goToBank(self):
         pyautogui.press(dofus.RAPPEL_POTION_SHORTCUT)
         sleep(2)
         self.updatePos()
         self.changeMap(dofus.RIGHT)
         sleep(2)
         Region(1067, 440, 25, 43).click()  # enter bank click
-        dofus.BANK_MAN_R.waitAppear(dofus.BANK_MAN_P)
-        dofus.BANK_MAN_R.click()  # click on bank man
-        dofus.BANK_MAN_TALK_R.waitAppear(dofus.BANK_MAN_TALK_P)
-        Region(771, 737, 272, 40).click()  # click first choice
-        dofus.INV_OPEN_R.waitAppear(dofus.INVENTAIRE_P)
+
+    def discharge(self):
+        self.goToBank()
+        self.openBank()
         Region(1469, 142, 29, 26).click()  # choose resources tab
         sleep(2)
         self.transferAllObjects()
         Region(1418, 146, 28, 15).click()  # choose consumable tab
         sleep(2)
-        Region(1354, 810, 44, 5).click()  # click on search region
-        sleep(2)
-        pyautogui.write("sac")
-        self.transferAllObjects()
+        self.transferAllObjects("sac")
         Region(1526, 109, 52, 22).click()  # close
         sleep(1)
 
-    def transferAllObjects(self):
+    def transferAllObjects(self, filter=None):
+        if filter:
+            Region(1354, 810, 44, 5).click()  # click on search region
+            sleep(2)
+            pyautogui.write(filter)
         Region(1248, 138, 34, 33).click()  # click transfer
         sleep(2)
         Region(1276, 178, 222, 23).click()  # click transfer visible
@@ -168,11 +178,15 @@ class Walker(Bot):
         if not self.resourcesToFarm:
             self.resourcesToFarm = self.patterns.keys()
         self.disconnectedObs.start()
-        env.focusDofusWindow(self.name)
+        env.focusDofusWindow()
         s = perf_counter()
         self.updatePos()
-        print(self.currPos)
+
         while not self.killsig.is_set():
+            try:
+                env.focusDofusWindow()
+            except:
+                pass
             try:
                 if self.fullPods():
                     self.discharge()
@@ -188,7 +202,7 @@ class Walker(Bot):
                 self.randomWalk(self.zone)
             except Exception as e:
                 if self.disconnected.is_set():
-                    self.connected.wait()
+                    self.connected.wait(60 * 5)
                 else:
                     logging.error("Fatal error!", exc_info=True)
                     self.interrupt()
@@ -197,45 +211,17 @@ class Walker(Bot):
         logging.info(f"farmed for total time: {total_time}.")
         logging.info("Goodbye cruel world!")
 
-    def goToZaap(self, zapCoords):
-        print("moving to zaap: ", zapCoords)
+    def goToZaap(self, zaap):
+        print("moving to zaap: ", zaap['coords'])
         pyautogui.press(dofus.HAVRE_SAC_SHORTCUT)
-        sleep(2)
+        sleep(4)
         dofus.HAVRE_SAC_ZAAP_R.click()
         sleep(2)
-        while dofus.ZAAP_SCROLL_BAR_END_L.getpixel() != dofus.ZAAP_END_SCROLL_C:
-            print(dofus.ZAAP_SCROLL_BAR_END_L.getpixel())
-            for k in range(9):
-                box_h = dofus.ZAAP_COORD_R.height() / 9
-                box_y = dofus.ZAAP_COORD_R.y() + k * box_h
-                box_x = dofus.ZAAP_COORD_R.x()
-                box_w = dofus.ZAAP_COORD_R.width()
-                box_r = Region(box_x, box_y, box_w, box_h)
-                image = env.capture(box_r)
-                gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-                low_bound = np.array([145, 0, 0])
-                upper_bound = np.array([255, 255, 14])
-                bgr_img = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
-                mask = cv2.inRange(bgr_img, low_bound, upper_bound)
-                result = cv2.bitwise_and(gray, gray, mask=mask)
-                result = cv2.threshold(result, 0, 255, cv2.THRESH_BINARY_INV)[1]
-                newShape = (int(box_w * 15), int(box_h * 15))
-                result = cv2.resize(result, newShape)
-                result = cv2.blur(result, (5, 5))
-                text = pytesseract.image_to_string(result, config='--psm 6')
-                res = re.findall("(-?\s*\d+),?(-?\s*\d+)", text)
-                if res:
-                    coord = tuple(map(lambda x: int(x.replace(' ', '')), res[0]))
-                    print(coord)
-                    if coord == zapCoords:
-                        box_r.click()
-                        sleep(0.2)
-                        box_r.click()
-                        self.waitMapChange(*zapCoords, 60 * 15)
-                        if zapCoords == (20, -29):
-                            Region(618, 729, 36, 24).click()
-                        return True
-            dofus.ZAAP_COORD_R.scroll(clicks=-3, delay_between_ticks=0.1)
-            dofus.OUT_OF_COMBAT_R.hover()
-            sleep(0.5)
-        raise Exception("Zaap coords not found!")
+        Region(1116, 230, 21, 14).click()
+        pyautogui.write(zaap['name'])
+        Region(910, 757, 105, 16).click()
+        self.waitMapChange(*zaap['coords'], 60 * 15)
+        if zaap['coords'] == (20, -29):
+            Region(618, 729, 36, 24).click()
+            sleep(4)
+        return True

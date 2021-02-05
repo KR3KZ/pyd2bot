@@ -119,6 +119,7 @@ class Region(QRect):
                     return True
                 clip.popleft()
             clip.append(frame)
+            sleep(0.2)
         return False
 
     def capture(self, gray=False):

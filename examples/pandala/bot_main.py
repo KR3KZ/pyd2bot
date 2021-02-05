@@ -27,7 +27,7 @@ if __name__ == "__main__":
     patterns_dir = os.path.join(work_dir, "patterns")
     saves_dir = os.path.join(work_dir, 'saves')
     now = datetime.datetime.now()
-    today_save_file = os.path.join(saves_dir, "pandala_30_11_2020.yaml")
+    today_save_file = os.path.join(saves_dir, "pandala_13_12_2020.yaml")
 
     lancer_de_piece = {
         "range": 13,
@@ -40,7 +40,7 @@ if __name__ == "__main__":
     pandala.loadFromFile(today_save_file, patterns_dir)
     bot = ResourceFarmer(pandala, zone_zaap_coords, lancer_de_piece, work_dir, "John-shooter")
     bot.mapChangeTimeOut = 12
-    bot.memoTime = 60 * 5
+    bot.memoTime = 60
     bot.famPatternThreshold = 0.8
     atexit.register(tearDown, bot)
     bot.start()

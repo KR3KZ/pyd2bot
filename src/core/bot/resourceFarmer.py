@@ -41,14 +41,13 @@ class ResourceFarmer(Fighter):
         currMap = self.zone[self.currPos]
         for spot in currMap['spots']:
             if spot['pattern']['kind'] in self.resourcesToFarm and \
-                    spot['region'].find(spot['pattern']['bi'], threshold=self.famPatternThreshold):
+                    spot['region'].find(spot['pattern']['bi'], threshold=0.8):
                 if currMap.isValidSpot(self.lastPos, spot):
                     self.collect(spot)
 
     def discoverSpots(self):
         seen = []
         currMap = self.zone[self.currPos]
-
         while not self.killsig.is_set():
             matched = False
             for kind in self.resourcesToFarm:

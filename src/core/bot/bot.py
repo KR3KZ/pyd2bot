@@ -59,12 +59,12 @@ class Bot(threading.Thread):
         logging.info("Disconnected popup appeared!")
         self.disconnected.set()
         self.connected.clear()
-        sleep(4)
+        sleep(5)
         dofus.CLOSE_DISCONNECTED_BOX_L.click()
         dofus.CONNECT_R.waitVanish(dofus.DISCONNECTED_BOX_P)
         dofus.RECONNECT_BUTTON_R.click()
-        sleep(4)
-        if self.waitMapCoords(99999):
+        sleep(20)
+        if self.waitMapCoords(99999999):
             self.disconnected.clear()
             self.connected.set()
 
@@ -79,12 +79,12 @@ class Bot(threading.Thread):
         mask = cv2.inRange(bgr_img, low_bound, upper_bound)
         result = cv2.bitwise_and(gray, gray, mask=mask)
         result = cv2.threshold(result, 0, 255, cv2.THRESH_BINARY_INV)[1]
-        newShape = (int(dofus.MAP_COORDS_R.width() * 10), int(dofus.MAP_COORDS_R.height() * 10))
-        result = cv2.resize(result, newShape)
-        result = cv2.blur(result, (7, 7))
-        text = pytesseract.image_to_string(result, config='--psm 6')
 
-        print(text)
+        # newShape = (int(dofus.MAP_COORDS_R.width() * 5), int(dofus.MAP_COORDS_R.height() * 5))
+        # result = cv2.resize(result, newShape)
+        # result = cv2.blur(result, (5, 5))
+
+        text = pytesseract.image_to_string(result, config='--psm 6')
         res = re.findall("(-?\d+)", text)
         if res:
             return int(res[0]), int(res[1])
@@ -130,10 +130,8 @@ class Bot(threading.Thread):
 
         if self.combatStarted.is_set():
             self.combatEnded.wait()
-
         if self.disconnected.is_set():
             self.connected.wait()
-
         self.checkPopup()
 
         return res

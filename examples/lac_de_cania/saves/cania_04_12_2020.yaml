@@ -15,6 +15,12 @@ maps:
     : - !!python/tuple
         - -15
         - -60
+    ? !!python/tuple
+    - -14
+    - -59
+    : - !!python/tuple
+        - -15
+        - -60
   excludedSpots: {}
   spots:
   - region: !!python/tuple
@@ -24,7 +30,7 @@ maps:
     - 50
     kind: chene
     patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
-  nbrseen: 16
+  nbrseen: 27
 - x: -15
   y: -58
   excludedMaps: {}
@@ -44,10 +50,16 @@ maps:
     - 44
     kind: erable
     patternId: 6f4d3s62f1ds32f1.png
-  nbrseen: 21
+  nbrseen: 10
 - x: -15
   y: -57
-  excludedMaps: {}
+  excludedMaps:
+    ? !!python/tuple
+    - -14
+    - -57
+    : - !!python/tuple
+        - -16
+        - -57
   excludedSpots: {}
   spots:
   - region: !!python/tuple
@@ -78,10 +90,16 @@ maps:
     - 37
     kind: if
     patternId: tyu654132154967856.png
-  nbrseen: 26
+  nbrseen: 16
 - x: -15
   y: -56
-  excludedMaps: {}
+  excludedMaps:
+    ? !!python/tuple
+    - -15
+    - -55
+    : - !!python/tuple
+        - -15
+        - -57
   excludedSpots: {}
   spots:
   - region: !!python/tuple
@@ -105,7 +123,21 @@ maps:
     - 60
     kind: chene
     patternId: 7tre465433r6sd4f6ds4f.png
-  nbrseen: 30
+  - region: !!python/tuple
+    - 999
+    - 536
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  - region: !!python/tuple
+    - 572
+    - 617
+    - 34
+    - 18
+    kind: ortie
+    patternId: 1606914010626.png
+  nbrseen: 23
 - x: -15
   y: -55
   excludedMaps: {}
@@ -125,7 +157,7 @@ maps:
     - 37
     kind: if
     patternId: tyu654132154967856.png
-  nbrseen: 30
+  nbrseen: 26
 - x: -15
   y: -54
   excludedMaps: {}
@@ -173,7 +205,7 @@ maps:
     - 60
     kind: chene
     patternId: 7tre465433r6sd4f6ds4f.png
-  nbrseen: 12
+  nbrseen: 30
 - x: -15
   y: -53
   excludedMaps: {}
@@ -210,7 +242,13 @@ maps:
   nbrseen: 21
 - x: -15
   y: -52
-  excludedMaps: {}
+  excludedMaps:
+    ? !!python/tuple
+    - -14
+    - -52
+    : - !!python/tuple
+        - -16
+        - -52
   excludedSpots: {}
   spots:
   - region: !!python/tuple
@@ -255,7 +293,7 @@ maps:
     - 37
     kind: if
     patternId: tyu654132154967856.png
-  nbrseen: 22
+  nbrseen: 25
 - x: -15
   y: -51
   excludedMaps: {}
@@ -296,7 +334,7 @@ maps:
     - 37
     kind: if
     patternId: tyu654132154967856.png
-  nbrseen: 10
+  nbrseen: 30
 - x: -15
   y: -50
   excludedMaps: {}
@@ -309,7 +347,7 @@ maps:
     - 65
     kind: erable
     patternId: d6s5f43612f.png
-  nbrseen: 17
+  nbrseen: 20
 - x: -15
   y: -49
   excludedMaps:
@@ -386,7 +424,21 @@ maps:
     - 37
     kind: if
     patternId: tyu654132154967856.png
-  nbrseen: 31
+  - region: !!python/tuple
+    - 1085
+    - 665
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  - region: !!python/tuple
+    - 1367
+    - 333
+    - 47
+    - 79
+    kind: chene
+    patternId: 987h9gf46h54gf65h4654j6k54jh654.png
+  nbrseen: 10
 - x: -15
   y: -48
   excludedMaps: {}
@@ -427,7 +479,7 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 26
+  nbrseen: 30
 - x: -15
   y: -47
   excludedMaps: {}
@@ -488,7 +540,14 @@ maps:
     - 38
     kind: chene
     patternId: 465fg4321qsd.png
-  nbrseen: 12
+  - region: !!python/tuple
+    - 403
+    - 229
+    - 33
+    - 60
+    kind: chene
+    patternId: 7tre465433r6sd4f6ds4f.png
+  nbrseen: 11
 - x: -15
   y: -45
   excludedMaps: {}
@@ -508,7 +567,7 @@ maps:
     - 63
     kind: erable
     patternId: 1606745693394.png
-  nbrseen: 13
+  nbrseen: 30
 - x: -15
   y: -44
   excludedMaps:
@@ -523,13 +582,19 @@ maps:
         - -44
   excludedSpots: {}
   spots: []
-  nbrseen: 22
+  nbrseen: 17
 - x: -14
   y: -59
   excludedMaps:
     ? !!python/tuple
     - -15
     - -59
+    : - !!python/tuple
+        - -14
+        - -60
+    ? !!python/tuple
+    - -14
+    - -58
     : - !!python/tuple
         - -14
         - -60
@@ -577,7 +642,7 @@ maps:
     - 50
     kind: chene
     patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
-  nbrseen: 17
+  nbrseen: 27
 - x: -14
   y: -58
   excludedMaps: {}
@@ -611,7 +676,21 @@ maps:
     - 126
     kind: chene
     patternId: 79re8t6531qs4984k6jyu4o3321hj321.png
-  nbrseen: 23
+  - region: !!python/tuple
+    - 1288
+    - 724
+    - 48
+    - 66
+    kind: chene
+    patternId: 96ds4f6ds1f3ds21f.png
+  - region: !!python/tuple
+    - 831
+    - 185
+    - 34
+    - 18
+    kind: ortie
+    patternId: 1606914010626.png
+  nbrseen: 12
 - x: -14
   y: -57
   excludedMaps: {}
@@ -645,7 +724,7 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 25
+  nbrseen: 14
 - x: -14
   y: -56
   excludedMaps:
@@ -685,7 +764,7 @@ maps:
     - 68
     kind: erable
     patternId: 9tre48t6r54yh6j54gh.png
-  nbrseen: 31
+  nbrseen: 22
 - x: -14
   y: -55
   excludedMaps:
@@ -723,7 +802,7 @@ maps:
     - 46
     kind: if
     patternId: ds4f654dsf654ds6f321321.png
-  nbrseen: 26
+  nbrseen: 17
 - x: -14
   y: -54
   excludedMaps:
@@ -775,7 +854,7 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 31
+  nbrseen: 20
 - x: -14
   y: -53
   excludedMaps:
@@ -830,10 +909,22 @@ maps:
     - 66
     kind: erable
     patternId: 9s8f79ds8f79ds87fd5s6f4d3s6f14ds6f87.png
-  nbrseen: 13
+  nbrseen: 25
 - x: -14
   y: -52
-  excludedMaps: {}
+  excludedMaps:
+    ? !!python/tuple
+    - -14
+    - -53
+    : - !!python/tuple
+        - -13
+        - -52
+    ? !!python/tuple
+    - -15
+    - -52
+    : - !!python/tuple
+        - -14
+        - -51
   excludedSpots: {}
   spots:
   - region: !!python/tuple
@@ -871,7 +962,7 @@ maps:
     - 45
     kind: if
     patternId: 4df6g54d3f1gd3f21321.png
-  nbrseen: 24
+  nbrseen: 27
 - x: -14
   y: -51
   excludedMaps:
@@ -886,6 +977,12 @@ maps:
     - -51
     : - !!python/tuple
         - -13
+        - -51
+    ? !!python/tuple
+    - -13
+    - -51
+    : - !!python/tuple
+        - -15
         - -51
   excludedSpots: {}
   spots:
@@ -917,7 +1014,7 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 30
+  nbrseen: 26
 - x: -14
   y: -50
   excludedMaps:
@@ -1037,7 +1134,7 @@ maps:
     - 38
     kind: noyer
     patternId: 56h4gf6h13gf21h.png
-  nbrseen: 12
+  nbrseen: 28
 - x: -14
   y: -48
   excludedMaps: {}
@@ -1064,7 +1161,7 @@ maps:
     - 37
     kind: erable
     patternId: 9tre684t362df1h3d2f1.png
-  nbrseen: 29
+  nbrseen: 24
 - x: -14
   y: -47
   excludedMaps: {}
@@ -1091,10 +1188,16 @@ maps:
     - 107
     kind: noyer
     patternId: 3d2f1g36j5415k54jh6k54hj654.png
-  nbrseen: 10
+  nbrseen: 26
 - x: -14
   y: -46
-  excludedMaps: {}
+  excludedMaps:
+    ? !!python/tuple
+    - -14
+    - -47
+    : - !!python/tuple
+        - -15
+        - -46
   excludedSpots: {}
   spots:
   - region: !!python/tuple
@@ -1139,7 +1242,7 @@ maps:
     - 44
     kind: noyer
     patternId: 87ds6f54d1s32f1ds321.png
-  nbrseen: 29
+  nbrseen: 26
 - x: -14
   y: -45
   excludedMaps: {}
@@ -1166,13 +1269,13 @@ maps:
     - 37
     kind: erable
     patternId: 9tre684t362df1h3d2f1.png
-  nbrseen: 14
+  nbrseen: 30
 - x: -14
   y: -44
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 27
+  nbrseen: 21
 - x: -13
   y: -59
   excludedMaps: {}
@@ -1206,7 +1309,7 @@ maps:
     - 44
     kind: noyer
     patternId: 87ds6f54d1s32f1ds321.png
-  nbrseen: 20
+  nbrseen: 30
 - x: -13
   y: -58
   excludedMaps: {}
@@ -1268,7 +1371,14 @@ maps:
     - 37
     kind: if
     patternId: tyu654132154967856.png
-  nbrseen: 25
+  - region: !!python/tuple
+    - 1344
+    - 709
+    - 48
+    - 50
+    kind: erable
+    patternId: t9r7e84t6514h6j514gh5.png
+  nbrseen: 12
 - x: -13
   y: -57
   excludedMaps:
@@ -1306,7 +1416,7 @@ maps:
     - 54
     kind: erable
     patternId: 54dfg654df6g54.png
-  nbrseen: 23
+  nbrseen: 31
 - x: -13
   y: -56
   excludedMaps:
@@ -1404,7 +1514,14 @@ maps:
     - 44
     kind: erable
     patternId: 6f4d3s62f1ds32f1.png
-  nbrseen: 28
+  - region: !!python/tuple
+    - 1261
+    - 582
+    - 45
+    - 65
+    kind: if
+    patternId: 1606913523846.png
+  nbrseen: 16
 - x: -13
   y: -55
   excludedMaps:
@@ -1531,7 +1648,7 @@ maps:
     - 58
     kind: chene
     patternId: 4re6321f3g21fd3g2d1fg321f.png
-  nbrseen: 12
+  nbrseen: 22
 - x: -13
   y: -54
   excludedMaps:
@@ -1590,7 +1707,7 @@ maps:
     - 36
     kind: merisier
     patternId: 9f8ds4f32ds1f3s21.png
-  nbrseen: 17
+  nbrseen: 29
 - x: -13
   y: -53
   excludedMaps: {}
@@ -1617,7 +1734,7 @@ maps:
     - 68
     kind: erable
     patternId: 9tre48t6r54yh6j54gh.png
-  nbrseen: 24
+  nbrseen: 15
 - x: -13
   y: -52
   excludedMaps: {}
@@ -1630,7 +1747,7 @@ maps:
     - 38
     kind: noyer
     patternId: 56h4gf6h13gf21h.png
-  nbrseen: 28
+  nbrseen: 21
 - x: -13
   y: -51
   excludedMaps: {}
@@ -1671,7 +1788,7 @@ maps:
     - 98
     kind: erable
     patternId: 98ds7f43d2s1f3dsf49ds8f74ds98f7987.png
-  nbrseen: 21
+  nbrseen: 14
 - x: -13
   y: -50
   excludedMaps: {}
@@ -1733,7 +1850,7 @@ maps:
     - 58
     kind: chene
     patternId: 4re6321f3g21fd3g2d1fg321f.png
-  nbrseen: 29
+  nbrseen: 20
 - x: -13
   y: -49
   excludedMaps: {}
@@ -1774,7 +1891,7 @@ maps:
     - 42
     kind: chene
     patternId: 98ez65azr3df3g3h1tty48y48.png
-  nbrseen: 16
+  nbrseen: 30
 - x: -13
   y: -48
   excludedMaps: {}
@@ -1787,7 +1904,7 @@ maps:
     - 62
     kind: charme
     patternId: 1606915106267.png
-  nbrseen: 19
+  nbrseen: 12
 - x: -13
   y: -47
   excludedMaps: {}
@@ -1821,7 +1938,7 @@ maps:
     - 29
     kind: erable
     patternId: d6s5f4d3s612f.png
-  nbrseen: 15
+  nbrseen: 10
 - x: -13
   y: -46
   excludedMaps:
@@ -1882,7 +1999,7 @@ maps:
     - 23
     kind: charme
     patternId: 1606815779274.png
-  nbrseen: 30
+  nbrseen: 20
 - x: -13
   y: -45
   excludedMaps:
@@ -1915,10 +2032,16 @@ maps:
     - 73
     kind: bombu
     patternId: 665g4rtyh84t6j54ghj64yu96k87.png
-  nbrseen: 17
+  nbrseen: 29
 - x: -13
   y: -44
-  excludedMaps: {}
+  excludedMaps:
+    ? !!python/tuple
+    - -13
+    - -43
+    : - !!python/tuple
+        - -12
+        - -44
   excludedSpots: {}
   spots:
   - region: !!python/tuple
@@ -1956,13 +2079,25 @@ maps:
     - 37
     kind: if
     patternId: tyu654132154967856.png
-  nbrseen: 28
+  nbrseen: 15
 - x: -12
   y: -59
   excludedMaps:
     ? !!python/tuple
     - -13
     - -59
+    : - !!python/tuple
+        - -12
+        - -60
+    ? !!python/tuple
+    - -11
+    - -59
+    : - !!python/tuple
+        - -12
+        - -60
+    ? !!python/tuple
+    - -12
+    - -58
     : - !!python/tuple
         - -12
         - -60
@@ -2024,7 +2159,7 @@ maps:
     - 48
     kind: if
     patternId: 9fds4f6ds21fd3s21.png
-  nbrseen: 19
+  nbrseen: 25
 - x: -12
   y: -58
   excludedMaps: {}
@@ -2072,7 +2207,7 @@ maps:
     - 60
     kind: chene
     patternId: 7tre465433r6sd4f6ds4f.png
-  nbrseen: 25
+  nbrseen: 15
 - x: -12
   y: -57
   excludedMaps:
@@ -2180,7 +2315,7 @@ maps:
     - 60
     kind: chene
     patternId: 7tre465433r6sd4f6ds4f.png
-  nbrseen: 15
+  nbrseen: 24
 - x: -12
   y: -56
   excludedMaps:
@@ -2274,7 +2409,7 @@ maps:
     - 36
     kind: merisier
     patternId: 9f8ds4f32ds1f3s21.png
-  nbrseen: 20
+  nbrseen: 25
 - x: -12
   y: -55
   excludedMaps: {}
@@ -2364,7 +2499,7 @@ maps:
     - 60
     kind: chene
     patternId: 7tre465433r6sd4f6ds4f.png
-  nbrseen: 23
+  nbrseen: 12
 - x: -12
   y: -54
   excludedMaps:
@@ -2476,7 +2611,7 @@ maps:
     - 36
     kind: merisier
     patternId: 9f8ds4f32ds1f3s21.png
-  nbrseen: 12
+  nbrseen: 21
 - x: -12
   y: -53
   excludedMaps: {}
@@ -2496,7 +2631,7 @@ maps:
     - 36
     kind: merisier
     patternId: 9f8ds4f32ds1f3s21.png
-  nbrseen: 18
+  nbrseen: 27
 - x: -12
   y: -52
   excludedMaps:
@@ -2549,7 +2684,7 @@ maps:
     - 64
     kind: if
     patternId: 49gh84jgf61j45.png
-  nbrseen: 21
+  nbrseen: 28
 - x: -12
   y: -51
   excludedMaps: {}
@@ -2625,7 +2760,7 @@ maps:
     - 50
     kind: chene
     patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
-  nbrseen: 20
+  nbrseen: 29
 - x: -12
   y: -50
   excludedMaps: {}
@@ -2673,7 +2808,7 @@ maps:
     - 71
     kind: charme
     patternId: 2fdsfd2sf4ds65f4ds654.png
-  nbrseen: 30
+  nbrseen: 18
 - x: -12
   y: -49
   excludedMaps: {}
@@ -2728,7 +2863,7 @@ maps:
     - 73
     kind: merisier
     patternId: 32f1d3s6f16dsf54ds6f548.png
-  nbrseen: 13
+  nbrseen: 26
 - x: -12
   y: -48
   excludedMaps: {}
@@ -2762,7 +2897,7 @@ maps:
     - 33
     kind: noyer
     patternId: 3f14g6df54g31.png
-  nbrseen: 11
+  nbrseen: 25
 - x: -12
   y: -47
   excludedMaps: {}
@@ -2803,7 +2938,7 @@ maps:
     - 97
     kind: ebene
     patternId: d46sq54d65qs4d65qs4.png
-  nbrseen: 12
+  nbrseen: 26
 - x: -12
   y: -46
   excludedMaps: {}
@@ -2830,7 +2965,7 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 14
+  nbrseen: 24
 - x: -12
   y: -45
   excludedMaps: {}
@@ -2864,7 +2999,7 @@ maps:
     - 35
     kind: bombu
     patternId: 9gh87j65k416l545.png
-  nbrseen: 27
+  nbrseen: 17
 - x: -12
   y: -44
   excludedMaps: {}
@@ -2877,7 +3012,7 @@ maps:
     - 73
     kind: bombu
     patternId: 665g4rtyh84t6j54ghj64yu96k87.png
-  nbrseen: 26
+  nbrseen: 15
 - x: -11
   y: -59
   excludedMaps:
@@ -2889,6 +3024,12 @@ maps:
         - -60
     ? !!python/tuple
     - -12
+    - -59
+    : - !!python/tuple
+        - -11
+        - -60
+    ? !!python/tuple
+    - -10
     - -59
     : - !!python/tuple
         - -11
@@ -2951,7 +3092,7 @@ maps:
     - 67
     kind: if
     patternId: 4ut6i4kjy6k541hj6541.png
-  nbrseen: 22
+  nbrseen: 29
 - x: -11
   y: -58
   excludedMaps:
@@ -3005,7 +3146,7 @@ maps:
     - 44
     kind: noyer
     patternId: 87ds6f54d1s32f1ds321.png
-  nbrseen: 28
+  nbrseen: 15
 - x: -11
   y: -57
   excludedMaps: {}
@@ -3060,7 +3201,7 @@ maps:
     - 107
     kind: noyer
     patternId: 3d2f1g36j5415k54jh6k54hj654.png
-  nbrseen: 28
+  nbrseen: 17
 - x: -11
   y: -56
   excludedMaps: {}
@@ -3115,10 +3256,16 @@ maps:
     - 53
     kind: merisier
     patternId: rfdsfdsfds3f5d4sf65ds1f36514.png
-  nbrseen: 30
+  nbrseen: 19
 - x: -11
   y: -55
-  excludedMaps: {}
+  excludedMaps:
+    ? !!python/tuple
+    - -11
+    - -56
+    : - !!python/tuple
+        - -10
+        - -55
   excludedSpots: {}
   spots:
   - region: !!python/tuple
@@ -3135,7 +3282,7 @@ maps:
     - 50
     kind: chene
     patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
-  nbrseen: 14
+  nbrseen: 28
 - x: -11
   y: -54
   excludedMaps: {}
@@ -3155,7 +3302,7 @@ maps:
     - 50
     kind: chene
     patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
-  nbrseen: 31
+  nbrseen: 19
 - x: -11
   y: -53
   excludedMaps: {}
@@ -3168,7 +3315,7 @@ maps:
     - 73
     kind: bombu
     patternId: 665g4rtyh84t6j54ghj64yu96k87.png
-  nbrseen: 16
+  nbrseen: 21
 - x: -11
   y: -52
   excludedMaps: {}
@@ -3209,7 +3356,7 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 13
+  nbrseen: 19
 - x: -11
   y: -51
   excludedMaps: {}
@@ -3229,7 +3376,7 @@ maps:
     - 73
     kind: bombu
     patternId: 665g4rtyh84t6j54ghj64yu96k87.png
-  nbrseen: 15
+  nbrseen: 22
 - x: -11
   y: -50
   excludedMaps: {}
@@ -3242,7 +3389,7 @@ maps:
     - 73
     kind: bombu
     patternId: 665g4rtyh84t6j54ghj64yu96k87.png
-  nbrseen: 19
+  nbrseen: 27
 - x: -11
   y: -49
   excludedMaps: {}
@@ -3269,10 +3416,16 @@ maps:
     - 58
     kind: chene
     patternId: 4re6321f3g21fd3g2d1fg321f.png
-  nbrseen: 21
+  nbrseen: 29
 - x: -11
   y: -48
-  excludedMaps: {}
+  excludedMaps:
+    ? !!python/tuple
+    - -11
+    - -47
+    : - !!python/tuple
+        - -11
+        - -49
   excludedSpots: {}
   spots:
   - region: !!python/tuple
@@ -3289,13 +3442,13 @@ maps:
     - 41
     kind: bombu
     patternId: g79fd84h32j136hj54.png
-  nbrseen: 20
+  nbrseen: 28
 - x: -11
   y: -47
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 30
+  nbrseen: 17
 - x: -11
   y: -46
   excludedMaps: {}
@@ -3336,7 +3489,7 @@ maps:
     - 73
     kind: merisier
     patternId: 32f1d3s6f16dsf54ds6f548.png
-  nbrseen: 17
+  nbrseen: 26
 - x: -11
   y: -45
   excludedMaps: {}
@@ -3356,7 +3509,7 @@ maps:
     - 73
     kind: bombu
     patternId: 665g4rtyh84t6j54ghj64yu96k87.png
-  nbrseen: 18
+  nbrseen: 26
 - x: -11
   y: -44
   excludedMaps:
@@ -3369,6 +3522,12 @@ maps:
     ? !!python/tuple
     - -12
     - -44
+    : - !!python/tuple
+        - -10
+        - -44
+    ? !!python/tuple
+    - -11
+    - -43
     : - !!python/tuple
         - -10
         - -44
@@ -3402,7 +3561,7 @@ maps:
     - 73
     kind: bombu
     patternId: 665g4rtyh84t6j54ghj64yu96k87.png
-  nbrseen: 14
+  nbrseen: 20
 - x: -10
   y: -59
   excludedMaps: {}
@@ -3422,7 +3581,7 @@ maps:
     - 60
     kind: chene
     patternId: 7tre465433r6sd4f6ds4f.png
-  nbrseen: 24
+  nbrseen: 29
 - x: -10
   y: -58
   excludedMaps: {}
@@ -3484,7 +3643,7 @@ maps:
     - 73
     kind: bombu
     patternId: 665g4rtyh84t6j54ghj64yu96k87.png
-  nbrseen: 29
+  nbrseen: 12
 - x: -10
   y: -57
   excludedMaps: {}
@@ -3511,10 +3670,16 @@ maps:
     - 60
     kind: chene
     patternId: 7tre465433r6sd4f6ds4f.png
-  nbrseen: 10
+  nbrseen: 15
 - x: -10
   y: -56
-  excludedMaps: {}
+  excludedMaps:
+    ? !!python/tuple
+    - -10
+    - -57
+    : - !!python/tuple
+        - -9
+        - -56
   excludedSpots: {}
   spots:
   - region: !!python/tuple
@@ -3531,7 +3696,7 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 15
+  nbrseen: 22
 - x: -10
   y: -55
   excludedMaps: {}
@@ -3544,7 +3709,7 @@ maps:
     - 73
     kind: bombu
     patternId: 665g4rtyh84t6j54ghj64yu96k87.png
-  nbrseen: 10
+  nbrseen: 17
 - x: -10
   y: -54
   excludedMaps: {}
@@ -3578,7 +3743,7 @@ maps:
     - 37
     kind: if
     patternId: tyu654132154967856.png
-  nbrseen: 10
+  nbrseen: 23
 - x: -10
   y: -53
   excludedMaps:
@@ -3604,25 +3769,25 @@ maps:
     - 50
     kind: chene
     patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
-  nbrseen: 29
+  nbrseen: 14
 - x: -10
   y: -52
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 13
+  nbrseen: 21
 - x: -10
   y: -51
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 14
+  nbrseen: 21
 - x: -10
   y: -50
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 19
+  nbrseen: 28
 - x: -10
   y: -49
   excludedMaps: {}
@@ -3649,13 +3814,13 @@ maps:
     - 48
     kind: ginseng
     patternId: 495132196598795351615.png
-  nbrseen: 15
+  nbrseen: 24
 - x: -10
   y: -48
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 14
+  nbrseen: 22
 - x: -10
   y: -47
   excludedMaps: {}
@@ -3675,7 +3840,7 @@ maps:
     - 22
     kind: ortie
     patternId: 6546f5h465321321zrez54.png
-  nbrseen: 22
+  nbrseen: 29
 - x: -10
   y: -46
   excludedMaps: {}
@@ -3688,7 +3853,7 @@ maps:
     - 73
     kind: merisier
     patternId: 32f1d3s6f16dsf54ds6f548.png
-  nbrseen: 30
+  nbrseen: 14
 - x: -10
   y: -45
   excludedMaps: {}
@@ -3715,7 +3880,7 @@ maps:
     - 48
     kind: noisetier
     patternId: 89f4sd62f1ds32f1321.png
-  nbrseen: 30
+  nbrseen: 15
 - x: -10
   y: -44
   excludedMaps:
@@ -3725,6 +3890,9 @@ maps:
     : - !!python/tuple
         - -11
         - -44
+      - !!python/tuple
+        - -10
+        - -43
     ? !!python/tuple
     - -9
     - -44
@@ -3733,7 +3901,7 @@ maps:
         - -44
   excludedSpots: {}
   spots: []
-  nbrseen: 14
+  nbrseen: 18
 - x: -9
   y: -59
   excludedMaps: {}
@@ -3753,7 +3921,7 @@ maps:
     - 50
     kind: chene
     patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
-  nbrseen: 24
+  nbrseen: 28
 - x: -9
   y: -58
   excludedMaps: {}
@@ -3766,7 +3934,7 @@ maps:
     - 73
     kind: bombu
     patternId: 665g4rtyh84t6j54ghj64yu96k87.png
-  nbrseen: 13
+  nbrseen: 17
 - x: -9
   y: -57
   excludedMaps: {}
@@ -3793,7 +3961,7 @@ maps:
     - 22
     kind: ortie
     patternId: 6546f5h465321321zrez54.png
-  nbrseen: 12
+  nbrseen: 18
 - x: -9
   y: -56
   excludedMaps: {}
@@ -3855,7 +4023,7 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 13
+  nbrseen: 17
 - x: -9
   y: -55
   excludedMaps: {}
@@ -3889,13 +4057,13 @@ maps:
     - 48
     kind: ginseng
     patternId: 495132196598795351615.png
-  nbrseen: 12
+  nbrseen: 19
 - x: -9
   y: -54
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 26
+  nbrseen: 13
 - x: -9
   y: -53
   excludedMaps: {}
@@ -3929,7 +4097,7 @@ maps:
     - 52
     kind: bombu
     patternId: 98ghf6j46k54hj65l4kj5.png
-  nbrseen: 29
+  nbrseen: 14
 - x: -9
   y: -52
   excludedMaps: {}
@@ -3942,13 +4110,13 @@ maps:
     - 73
     kind: bombu
     patternId: 665g4rtyh84t6j54ghj64yu96k87.png
-  nbrseen: 11
+  nbrseen: 19
 - x: -9
   y: -51
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 11
+  nbrseen: 17
 - x: -9
   y: -50
   excludedMaps: {}
@@ -3961,7 +4129,7 @@ maps:
     - 50
     kind: chene
     patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
-  nbrseen: 15
+  nbrseen: 21
 - x: -9
   y: -49
   excludedMaps: {}
@@ -3974,7 +4142,7 @@ maps:
     - 73
     kind: bombu
     patternId: 665g4rtyh84t6j54ghj64yu96k87.png
-  nbrseen: 31
+  nbrseen: 16
 - x: -9
   y: -48
   excludedMaps: {}
@@ -3994,7 +4162,7 @@ maps:
     - 58
     kind: chene
     patternId: 4re6321f3g21fd3g2d1fg321f.png
-  nbrseen: 30
+  nbrseen: 14
 - x: -9
   y: -47
   excludedMaps: {}
@@ -4035,7 +4203,7 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 12
+  nbrseen: 17
 - x: -9
   y: -46
   excludedMaps: {}
@@ -4076,7 +4244,7 @@ maps:
     - 150
     kind: noisetier
     patternId: 98f4ds63f1ds321.png
-  nbrseen: 18
+  nbrseen: 23
 - x: -9
   y: -45
   excludedMaps: {}
@@ -4138,7 +4306,7 @@ maps:
     - 96
     kind: noisetier
     patternId: 5646g514df63251.png
-  nbrseen: 17
+  nbrseen: 21
 - x: -9
   y: -44
   excludedMaps: {}
@@ -4200,13 +4368,19 @@ maps:
     - 96
     kind: noisetier
     patternId: 5646g514df63251.png
-  nbrseen: 19
+  nbrseen: 23
 - x: -8
   y: -59
   excludedMaps:
     ? !!python/tuple
     - -8
     - -58
+    : - !!python/tuple
+        - -8
+        - -60
+    ? !!python/tuple
+    - -7
+    - -59
     : - !!python/tuple
         - -8
         - -60
@@ -4226,7 +4400,7 @@ maps:
     - 52
     kind: ginseng
     patternId: v365xc1v32xc1v321.png
-  nbrseen: 16
+  nbrseen: 20
 - x: -8
   y: -58
   excludedMaps:
@@ -4265,7 +4439,7 @@ maps:
     - 69
     kind: bombu
     patternId: 8fd7gh56gf4h3j41kghk5jh654.png
-  nbrseen: 16
+  nbrseen: 20
 - x: -8
   y: -57
   excludedMaps:
@@ -4311,7 +4485,14 @@ maps:
     - 22
     kind: ortie
     patternId: 6546f5h465321321zrez54.png
-  nbrseen: 24
+  - region: !!python/tuple
+    - 874
+    - 422
+    - 34
+    - 18
+    kind: ortie
+    patternId: 1606914010626.png
+  nbrseen: 10
 - x: -8
   y: -56
   excludedMaps: {}
@@ -4345,19 +4526,19 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 10
+  nbrseen: 18
 - x: -8
   y: -55
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 30
+  nbrseen: 15
 - x: -8
   y: -54
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 29
+  nbrseen: 14
 - x: -8
   y: -53
   excludedMaps: {}
@@ -4377,19 +4558,26 @@ maps:
     - 26
     kind: orchide
     patternId: g9re84gh32gf1h3gf21.png
-  nbrseen: 31
+  nbrseen: 16
 - x: -8
   y: -52
   excludedMaps: {}
   excludedSpots: {}
-  spots: []
-  nbrseen: 27
+  spots:
+  - region: !!python/tuple
+    - 1454
+    - 707
+    - 28
+    - 48
+    kind: ginseng
+    patternId: 495132196598795351615.png
+  nbrseen: 11
 - x: -8
   y: -51
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 23
+  nbrseen: 28
 - x: -8
   y: -50
   excludedMaps: {}
@@ -4416,7 +4604,7 @@ maps:
     - 60
     kind: chene
     patternId: 7tre465433r6sd4f6ds4f.png
-  nbrseen: 25
+  nbrseen: 31
 - x: -8
   y: -49
   excludedMaps: {}
@@ -4450,7 +4638,7 @@ maps:
     - 35
     kind: bombu
     patternId: 9gh87j65k416l545.png
-  nbrseen: 17
+  nbrseen: 20
 - x: -17
   y: -63
   excludedMaps: {}
@@ -4474,7 +4662,7 @@ maps:
         - -63
   excludedSpots: {}
   spots: []
-  nbrseen: 18
+  nbrseen: 24
 - x: -17
   y: -61
   excludedMaps: {}
@@ -4487,25 +4675,25 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 14
+  nbrseen: 23
 - x: -17
   y: -60
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 10
+  nbrseen: 22
 - x: -17
   y: -59
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 9
+  nbrseen: 10
 - x: -17
   y: -58
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 7
+  nbrseen: 21
 - x: -17
   y: -57
   excludedMaps: {}
@@ -4525,49 +4713,49 @@ maps:
     - 55
     kind: charme
     patternId: 9d7s8f97f6a4f65f4.png
-  nbrseen: 7
+  nbrseen: 20
 - x: -17
   y: -56
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 11
+  nbrseen: 23
 - x: -17
   y: -55
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 16
+  nbrseen: 28
 - x: -17
   y: -54
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 11
+  nbrseen: 28
 - x: -17
   y: -53
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 10
+  nbrseen: 31
 - x: -17
   y: -52
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 12
+  nbrseen: 11
 - x: -17
   y: -51
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 9
+  nbrseen: 28
 - x: -17
   y: -50
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 12
+  nbrseen: 10
 - x: -17
   y: -49
   excludedMaps: {}
@@ -4592,7 +4780,7 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 14
+  nbrseen: 28
 - x: -17
   y: -46
   excludedMaps: {}
@@ -4605,13 +4793,13 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 8
+  nbrseen: 25
 - x: -17
   y: -45
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 7
+  nbrseen: 24
 - x: -17
   y: -44
   excludedMaps: {}
@@ -4624,7 +4812,7 @@ maps:
     - 24
     kind: sauge
     patternId: 98rt7y6y1u3ty21jhgh.png
-  nbrseen: 5
+  nbrseen: 18
 - x: -17
   y: -43
   excludedMaps: {}
@@ -4637,13 +4825,26 @@ maps:
     - 35
     kind: bombu
     patternId: 9gh87j65k416l545.png
-  nbrseen: 5
+  - region: !!python/tuple
+    - 430
+    - 525
+    - 41
+    - 107
+    kind: noyer
+    patternId: 3d2f1g36j5415k54jh6k54hj654.png
+  nbrseen: 17
 - x: -17
   y: -42
   excludedMaps:
     ? !!python/tuple
     - -16
     - -42
+    : - !!python/tuple
+        - -17
+        - -41
+    ? !!python/tuple
+    - -17
+    - -43
     : - !!python/tuple
         - -17
         - -41
@@ -4663,13 +4864,19 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 4
+  nbrseen: 12
 - x: -17
   y: -41
   excludedMaps:
     ? !!python/tuple
     - -17
     - -40
+    : - !!python/tuple
+        - -17
+        - -42
+    ? !!python/tuple
+    - -16
+    - -41
     : - !!python/tuple
         - -17
         - -42
@@ -4682,13 +4889,20 @@ maps:
     - 67
     kind: if
     patternId: 4ut6i4kjy6k541hj6541.png
-  nbrseen: 3
+  nbrseen: 8
 - x: -17
   y: -40
   excludedMaps: {}
   excludedSpots: {}
-  spots: []
-  nbrseen: 3
+  spots:
+  - region: !!python/tuple
+    - 921
+    - 174
+    - 32
+    - 68
+    kind: noyer
+    patternId: 9f8dg6e1tg65zt196z4gfh1rtg9hj1rty1j4.png
+  nbrseen: 12
 - x: -17
   y: -39
   excludedMaps: {}
@@ -4701,31 +4915,50 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 1
+  nbrseen: 8
 - x: -17
   y: -38
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 0
+  nbrseen: 4
 - x: -17
   y: -37
-  excludedMaps: {}
+  excludedMaps:
+    ? !!python/tuple
+    - -17
+    - -38
+    : - !!python/tuple
+        - -17
+        - -36
   excludedSpots: {}
   spots: []
-  nbrseen: 0
+  nbrseen: 5
 - x: -17
   y: -36
-  excludedMaps: {}
+  excludedMaps:
+    ? !!python/tuple
+    - -16
+    - -36
+    : - !!python/tuple
+        - -17
+        - -37
   excludedSpots: {}
-  spots: []
-  nbrseen: 0
+  spots:
+  - region: !!python/tuple
+    - 1182
+    - 368
+    - 37
+    - 58
+    kind: chene
+    patternId: 4re6321f3g21fd3g2d1fg321f.png
+  nbrseen: 3
 - x: -17
   y: -35
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 0
+  nbrseen: 2
 - x: -16
   y: -63
   excludedMaps: {}
@@ -4761,7 +4994,7 @@ maps:
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 17
+  nbrseen: 23
 - x: -16
   y: -60
   excludedMaps:
@@ -4785,97 +5018,104 @@ maps:
         - -59
   excludedSpots: {}
   spots: []
-  nbrseen: 13
+  nbrseen: 21
 - x: -16
   y: -59
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 11
+  nbrseen: 10
 - x: -16
   y: -58
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 8
+  nbrseen: 23
 - x: -16
   y: -57
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 11
+  nbrseen: 25
 - x: -16
   y: -56
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 16
+  nbrseen: 29
 - x: -16
   y: -55
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 18
+  nbrseen: 10
 - x: -16
   y: -54
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 14
+  nbrseen: 10
 - x: -16
   y: -53
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 12
+  nbrseen: 14
 - x: -16
   y: -52
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 11
+  nbrseen: 16
 - x: -16
   y: -51
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 13
+  nbrseen: 17
 - x: -16
   y: -50
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 11
+  nbrseen: 15
 - x: -16
   y: -49
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 12
+  nbrseen: 16
 - x: -16
   y: -48
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 13
+  nbrseen: 17
 - x: -16
   y: -47
   excludedMaps: {}
   excludedSpots: {}
-  spots: []
-  nbrseen: 8
+  spots:
+  - region: !!python/tuple
+    - 858
+    - 81
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  nbrseen: 15
 - x: -16
   y: -46
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 7
+  nbrseen: 27
 - x: -16
   y: -45
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 7
+  nbrseen: 28
 - x: -16
   y: -44
   excludedMaps: {}
@@ -4888,13 +5128,13 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 4
+  nbrseen: 23
 - x: -16
   y: -43
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 6
+  nbrseen: 18
 - x: -16
   y: -42
   excludedMaps: {}
@@ -4928,7 +5168,7 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 4
+  nbrseen: 18
 - x: -16
   y: -41
   excludedMaps: {}
@@ -4941,13 +5181,13 @@ maps:
     - 52
     kind: bombu
     patternId: 98ghf6j46k54hj65l4kj5.png
-  nbrseen: 3
+  nbrseen: 16
 - x: -16
   y: -40
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 1
+  nbrseen: 12
 - x: -16
   y: -39
   excludedMaps: {}
@@ -4960,31 +5200,45 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 1
+  nbrseen: 9
 - x: -16
   y: -38
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 1
+  nbrseen: 6
 - x: -16
   y: -37
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 0
+  nbrseen: 6
 - x: -16
   y: -36
   excludedMaps: {}
   excludedSpots: {}
-  spots: []
-  nbrseen: 0
+  spots:
+  - region: !!python/tuple
+    - 447
+    - 173
+    - 37
+    - 58
+    kind: chene
+    patternId: 4re6321f3g21fd3g2d1fg321f.png
+  nbrseen: 6
 - x: -16
   y: -35
   excludedMaps: {}
   excludedSpots: {}
-  spots: []
-  nbrseen: 0
+  spots:
+  - region: !!python/tuple
+    - 696
+    - 202
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 4
 - x: -15
   y: -63
   excludedMaps: {}
@@ -5003,9 +5257,18 @@ maps:
       - !!python/tuple
         - -16
         - -62
+    ? !!python/tuple
+    - -15
+    - -61
+    : - !!python/tuple
+        - -15
+        - -63
+      - !!python/tuple
+        - -16
+        - -62
   excludedSpots: {}
   spots: []
-  nbrseen: 5
+  nbrseen: 17
 - x: -15
   y: -61
   excludedMaps: {}
@@ -5018,13 +5281,25 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 7
+  nbrseen: 11
 - x: -15
   y: -60
   excludedMaps:
     ? !!python/tuple
     - -14
     - -60
+    : - !!python/tuple
+        - -15
+        - -59
+    ? !!python/tuple
+    - -16
+    - -60
+    : - !!python/tuple
+        - -15
+        - -59
+    ? !!python/tuple
+    - -15
+    - -61
     : - !!python/tuple
         - -15
         - -59
@@ -5037,13 +5312,19 @@ maps:
     - 73
     kind: bombu
     patternId: 665g4rtyh84t6j54ghj64yu96k87.png
-  nbrseen: 4
+  nbrseen: 21
 - x: -15
   y: -43
   excludedMaps:
     ? !!python/tuple
     - -16
     - -43
+    : - !!python/tuple
+        - -14
+        - -43
+    ? !!python/tuple
+    - -15
+    - -44
     : - !!python/tuple
         - -14
         - -43
@@ -5070,7 +5351,7 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 6
+  nbrseen: 18
 - x: -15
   y: -42
   excludedMaps: {}
@@ -5083,7 +5364,7 @@ maps:
     - 41
     kind: bombu
     patternId: g79fd84h32j136hj54.png
-  nbrseen: 4
+  nbrseen: 20
 - x: -15
   y: -41
   excludedMaps: {}
@@ -5103,7 +5384,7 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 3
+  nbrseen: 17
 - x: -15
   y: -40
   excludedMaps: {}
@@ -5116,7 +5397,7 @@ maps:
     - 73
     kind: bombu
     patternId: 665g4rtyh84t6j54ghj64yu96k87.png
-  nbrseen: 1
+  nbrseen: 13
 - x: -15
   y: -39
   excludedMaps: {}
@@ -5129,7 +5410,14 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 1
+  - region: !!python/tuple
+    - 1406
+    - 350
+    - 16
+    - 95
+    kind: bombu
+    patternId: 8rey461ue32yt1ui4y65i4o5.png
+  nbrseen: 7
 - x: -15
   y: -38
   excludedMaps: {}
@@ -5149,25 +5437,39 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 1
+  nbrseen: 6
 - x: -15
   y: -37
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 0
+  nbrseen: 4
 - x: -15
   y: -36
   excludedMaps: {}
   excludedSpots: {}
-  spots: []
-  nbrseen: 0
+  spots:
+  - region: !!python/tuple
+    - 1214
+    - 375
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 4
 - x: -15
   y: -35
   excludedMaps: {}
   excludedSpots: {}
-  spots: []
-  nbrseen: 0
+  spots:
+  - region: !!python/tuple
+    - 1041
+    - 547
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 4
 - x: -14
   y: -63
   excludedMaps: {}
@@ -5211,7 +5513,7 @@ maps:
     - 69
     kind: bombu
     patternId: 8fd7gh56gf4h3j41kghk5jh654.png
-  nbrseen: 9
+  nbrseen: 20
 - x: -14
   y: -61
   excludedMaps: {}
@@ -5224,10 +5526,28 @@ maps:
     - 73
     kind: bombu
     patternId: 665g4rtyh84t6j54ghj64yu96k87.png
-  nbrseen: 5
+  nbrseen: 19
 - x: -14
   y: -60
-  excludedMaps: {}
+  excludedMaps:
+    ? !!python/tuple
+    - -14
+    - -61
+    : - !!python/tuple
+        - -14
+        - -59
+    ? !!python/tuple
+    - -15
+    - -60
+    : - !!python/tuple
+        - -14
+        - -59
+    ? !!python/tuple
+    - -13
+    - -60
+    : - !!python/tuple
+        - -14
+        - -59
   excludedSpots: {}
   spots:
   - region: !!python/tuple
@@ -5251,7 +5571,7 @@ maps:
     - 69
     kind: bombu
     patternId: 8fd7gh56gf4h3j41kghk5jh654.png
-  nbrseen: 2
+  nbrseen: 17
 - x: -14
   y: -43
   excludedMaps:
@@ -5261,9 +5581,21 @@ maps:
     : - !!python/tuple
         - -15
         - -43
+    ? !!python/tuple
+    - -14
+    - -44
+    : - !!python/tuple
+        - -15
+        - -43
+    ? !!python/tuple
+    - -14
+    - -42
+    : - !!python/tuple
+        - -15
+        - -43
   excludedSpots: {}
   spots: []
-  nbrseen: 2
+  nbrseen: 17
 - x: -14
   y: -42
   excludedMaps: {}
@@ -5276,7 +5608,7 @@ maps:
     - 58
     kind: chene
     patternId: 4re6321f3g21fd3g2d1fg321f.png
-  nbrseen: 3
+  nbrseen: 17
 - x: -14
   y: -41
   excludedMaps:
@@ -5292,6 +5624,12 @@ maps:
     : - !!python/tuple
         - -13
         - -41
+    ? !!python/tuple
+    - -14
+    - -40
+    : - !!python/tuple
+        - -13
+        - -41
   excludedSpots: {}
   spots:
   - region: !!python/tuple
@@ -5301,10 +5639,16 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 2
+  nbrseen: 12
 - x: -14
   y: -40
-  excludedMaps: {}
+  excludedMaps:
+    ? !!python/tuple
+    - -14
+    - -39
+    : - !!python/tuple
+        - -13
+        - -40
   excludedSpots: {}
   spots:
   - region: !!python/tuple
@@ -5314,37 +5658,96 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 1
+  nbrseen: 10
 - x: -14
   y: -39
-  excludedMaps: {}
+  excludedMaps:
+    ? !!python/tuple
+    - -14
+    - -38
+    : - !!python/tuple
+        - -13
+        - -39
+    ? !!python/tuple
+    - -15
+    - -39
+    : - !!python/tuple
+        - -13
+        - -39
   excludedSpots: {}
-  spots: []
-  nbrseen: 0
+  spots:
+  - region: !!python/tuple
+    - 819
+    - 308
+    - 33
+    - 24
+    kind: sauge
+    patternId: 98rt7y6y1u3ty21jhgh.png
+  nbrseen: 5
 - x: -14
   y: -38
-  excludedMaps: {}
+  excludedMaps:
+    ? !!python/tuple
+    - -15
+    - -38
+    : - !!python/tuple
+        - -13
+        - -38
+    ? !!python/tuple
+    - -14
+    - -37
+    : - !!python/tuple
+        - -13
+        - -38
   excludedSpots: {}
-  spots: []
-  nbrseen: 0
+  spots:
+  - region: !!python/tuple
+    - 1257
+    - 483
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 609
+    - 72
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 5
 - x: -14
   y: -37
   excludedMaps: {}
   excludedSpots: {}
-  spots: []
-  nbrseen: 0
+  spots:
+  - region: !!python/tuple
+    - 955
+    - 331
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 4
 - x: -14
   y: -36
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 0
+  nbrseen: 3
 - x: -14
   y: -35
   excludedMaps: {}
   excludedSpots: {}
-  spots: []
-  nbrseen: 0
+  spots:
+  - region: !!python/tuple
+    - 825
+    - 94
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 3
 - x: -13
   y: -63
   excludedMaps: {}
@@ -5366,6 +5769,12 @@ maps:
     : - !!python/tuple
         - -13
         - -63
+    ? !!python/tuple
+    - -12
+    - -62
+    : - !!python/tuple
+        - -13
+        - -63
   excludedSpots: {}
   spots:
   - region: !!python/tuple
@@ -5375,19 +5784,19 @@ maps:
     - 69
     kind: bombu
     patternId: 8fd7gh56gf4h3j41kghk5jh654.png
-  nbrseen: 7
+  nbrseen: 20
 - x: -13
   y: -61
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 6
+  nbrseen: 18
 - x: -13
   y: -60
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 5
+  nbrseen: 17
 - x: -13
   y: -43
   excludedMaps: {}
@@ -5414,7 +5823,7 @@ maps:
     - 96
     kind: noisetier
     patternId: 5646g514df63251.png
-  nbrseen: 3
+  nbrseen: 17
 - x: -13
   y: -42
   excludedMaps:
@@ -5427,6 +5836,12 @@ maps:
     ? !!python/tuple
     - -12
     - -42
+    : - !!python/tuple
+        - -13
+        - -41
+    ? !!python/tuple
+    - -13
+    - -43
     : - !!python/tuple
         - -13
         - -41
@@ -5474,7 +5889,7 @@ maps:
     - 48
     kind: noisetier
     patternId: 89f4sd62f1ds32f1321.png
-  nbrseen: 2
+  nbrseen: 13
 - x: -13
   y: -41
   excludedMaps:
@@ -5484,9 +5899,12 @@ maps:
     : - !!python/tuple
         - -14
         - -41
+      - !!python/tuple
+        - -13
+        - -42
   excludedSpots: {}
   spots: []
-  nbrseen: 1
+  nbrseen: 2
 - x: -13
   y: -40
   excludedMaps:
@@ -5496,9 +5914,12 @@ maps:
     : - !!python/tuple
         - -14
         - -40
+      - !!python/tuple
+        - -12
+        - -40
   excludedSpots: {}
   spots: []
-  nbrseen: 1
+  nbrseen: 2
 - x: -13
   y: -39
   excludedMaps:
@@ -5513,7 +5934,7 @@ maps:
         - -39
   excludedSpots: {}
   spots: []
-  nbrseen: 1
+  nbrseen: 2
 - x: -13
   y: -38
   excludedMaps:
@@ -5525,25 +5946,66 @@ maps:
         - -37
   excludedSpots: {}
   spots: []
-  nbrseen: 1
+  nbrseen: 2
 - x: -13
   y: -37
-  excludedMaps: {}
+  excludedMaps:
+    ? !!python/tuple
+    - -12
+    - -37
+    : - !!python/tuple
+        - -13
+        - -38
   excludedSpots: {}
-  spots: []
-  nbrseen: 0
+  spots:
+  - region: !!python/tuple
+    - 798
+    - 218
+    - 24
+    - 62
+    kind: noyer
+    patternId: 98dfg76df54g3d2f1g.png
+  - region: !!python/tuple
+    - 1291
+    - 290
+    - 34
+    - 18
+    kind: ortie
+    patternId: 1606914010626.png
+  nbrseen: 3
 - x: -13
   y: -36
   excludedMaps: {}
   excludedSpots: {}
-  spots: []
-  nbrseen: 0
+  spots:
+  - region: !!python/tuple
+    - 1079
+    - 405
+    - 34
+    - 18
+    kind: ortie
+    patternId: 1606914010626.png
+  - region: !!python/tuple
+    - 1233
+    - 91
+    - 16
+    - 95
+    kind: bombu
+    patternId: 8rey461ue32yt1ui4y65i4o5.png
+  nbrseen: 2
 - x: -13
   y: -35
   excludedMaps: {}
   excludedSpots: {}
-  spots: []
-  nbrseen: 0
+  spots:
+  - region: !!python/tuple
+    - 798
+    - 151
+    - 31
+    - 41
+    kind: bombu
+    patternId: g79fd84h32j136hj54.png
+  nbrseen: 2
 - x: -12
   y: -63
   excludedMaps: {}
@@ -5559,6 +6021,18 @@ maps:
     : - !!python/tuple
         - -12
         - -63
+    ? !!python/tuple
+    - -11
+    - -62
+    : - !!python/tuple
+        - -12
+        - -63
+    ? !!python/tuple
+    - -12
+    - -61
+    : - !!python/tuple
+        - -12
+        - -63
   excludedSpots: {}
   spots:
   - region: !!python/tuple
@@ -5568,7 +6042,7 @@ maps:
     - 73
     kind: bombu
     patternId: 665g4rtyh84t6j54ghj64yu96k87.png
-  nbrseen: 4
+  nbrseen: 17
 - x: -12
   y: -61
   excludedMaps: {}
@@ -5616,7 +6090,7 @@ maps:
     - 52
     kind: bombu
     patternId: 98ghf6j46k54hj65l4kj5.png
-  nbrseen: 5
+  nbrseen: 19
 - x: -12
   y: -60
   excludedMaps:
@@ -5626,9 +6100,21 @@ maps:
     : - !!python/tuple
         - -12
         - -59
+    ? !!python/tuple
+    - -12
+    - -61
+    : - !!python/tuple
+        - -12
+        - -59
+    ? !!python/tuple
+    - -13
+    - -60
+    : - !!python/tuple
+        - -12
+        - -59
   excludedSpots: {}
   spots: []
-  nbrseen: 3
+  nbrseen: 11
 - x: -12
   y: -43
   excludedMaps: {}
@@ -5655,7 +6141,7 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 4
+  nbrseen: 12
 - x: -12
   y: -42
   excludedMaps:
@@ -5708,13 +6194,20 @@ maps:
     - 97
     kind: ebene
     patternId: d46sq54d65qs4d65qs4.png
-  nbrseen: 2
+  - region: !!python/tuple
+    - 1473
+    - 478
+    - 49
+    - 97
+    kind: ebene
+    patternId: d46sq54d65qs4d65qs4.png
+  nbrseen: 10
 - x: -12
   y: -41
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 2
+  nbrseen: 3
 - x: -12
   y: -40
   excludedMaps:
@@ -5732,34 +6225,116 @@ maps:
   nbrseen: 1
 - x: -12
   y: -39
-  excludedMaps: {}
+  excludedMaps:
+    ? !!python/tuple
+    - -12
+    - -38
+    : - !!python/tuple
+        - -12
+        - -40
   excludedSpots: {}
   spots: []
-  nbrseen: 2
+  nbrseen: 3
 - x: -12
   y: -38
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 2
+  nbrseen: 3
 - x: -12
   y: -37
-  excludedMaps: {}
+  excludedMaps:
+    ? !!python/tuple
+    - -12
+    - -36
+    : - !!python/tuple
+        - -11
+        - -37
   excludedSpots: {}
-  spots: []
-  nbrseen: 0
+  spots:
+  - region: !!python/tuple
+    - 1201
+    - 783
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  nbrseen: 3
 - x: -12
   y: -36
   excludedMaps: {}
   excludedSpots: {}
-  spots: []
-  nbrseen: 0
+  spots:
+  - region: !!python/tuple
+    - 1257
+    - 526
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 1165
+    - 72
+    - 41
+    - 107
+    kind: noyer
+    patternId: 3d2f1g36j5415k54jh6k54hj654.png
+  - region: !!python/tuple
+    - 1387
+    - 209
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  - region: !!python/tuple
+    - 598
+    - 146
+    - 52
+    - 35
+    kind: bombu
+    patternId: 9gh87j65k416l545.png
+  nbrseen: 4
 - x: -12
   y: -35
   excludedMaps: {}
   excludedSpots: {}
-  spots: []
-  nbrseen: 0
+  spots:
+  - region: !!python/tuple
+    - 696
+    - 504
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 864
+    - 772
+    - 34
+    - 18
+    kind: ortie
+    patternId: 1606914010626.png
+  - region: !!python/tuple
+    - 805
+    - 244
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  - region: !!python/tuple
+    - 662
+    - 174
+    - 32
+    - 68
+    kind: noyer
+    patternId: 9f8dg6e1tg65zt196z4gfh1rtg9hj1rty1j4.png
+  - region: !!python/tuple
+    - 1257
+    - 137
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 3
 - x: -11
   y: -63
   excludedMaps: {}
@@ -5789,7 +6364,7 @@ maps:
         - -62
   excludedSpots: {}
   spots: []
-  nbrseen: 3
+  nbrseen: 11
 - x: -11
   y: -61
   excludedMaps:
@@ -5805,6 +6380,12 @@ maps:
     : - !!python/tuple
         - -10
         - -61
+    ? !!python/tuple
+    - -11
+    - -60
+    : - !!python/tuple
+        - -10
+        - -61
   excludedSpots: {}
   spots:
   - region: !!python/tuple
@@ -5814,7 +6395,7 @@ maps:
     - 35
     kind: bombu
     patternId: 9gh87j65k416l545.png
-  nbrseen: 5
+  nbrseen: 12
 - x: -11
   y: -60
   excludedMaps:
@@ -5827,6 +6408,15 @@ maps:
       - !!python/tuple
         - -10
         - -60
+    ? !!python/tuple
+    - -12
+    - -60
+    : - !!python/tuple
+        - -10
+        - -60
+      - !!python/tuple
+        - -11
+        - -59
   excludedSpots: {}
   spots:
   - region: !!python/tuple
@@ -5843,7 +6433,7 @@ maps:
     - 73
     kind: bombu
     patternId: 665g4rtyh84t6j54ghj64yu96k87.png
-  nbrseen: 2
+  nbrseen: 6
 - x: -11
   y: -43
   excludedMaps: {}
@@ -5863,13 +6453,33 @@ maps:
     - 69
     kind: ebene
     patternId: f6ds4f3d2s1f3213216584654.png
-  nbrseen: 4
+  - region: !!python/tuple
+    - 1214
+    - 478
+    - 49
+    - 97
+    kind: ebene
+    patternId: d46sq54d65qs4d65qs4.png
+  - region: !!python/tuple
+    - 413
+    - 130
+    - 25
+    - 54
+    kind: ebene
+    patternId: f9d684g63d2fg1d32f1.png
+  nbrseen: 8
 - x: -11
   y: -42
   excludedMaps:
     ? !!python/tuple
     - -11
     - -43
+    : - !!python/tuple
+        - -11
+        - -41
+    ? !!python/tuple
+    - -12
+    - -42
     : - !!python/tuple
         - -11
         - -41
@@ -5889,7 +6499,21 @@ maps:
     - 48
     kind: noisetier
     patternId: 89f4sd62f1ds32f1321.png
-  nbrseen: 2
+  - region: !!python/tuple
+    - 843
+    - 83
+    - 31
+    - 69
+    kind: ebene
+    patternId: f6ds4f3d2s1f3213216584654.png
+  - region: !!python/tuple
+    - 454
+    - 61
+    - 31
+    - 69
+    kind: ebene
+    patternId: f6ds4f3d2s1f3213216584654.png
+  nbrseen: 8
 - x: -11
   y: -41
   excludedMaps:
@@ -5907,7 +6531,7 @@ maps:
         - -42
   excludedSpots: {}
   spots: []
-  nbrseen: 3
+  nbrseen: 4
 - x: -11
   y: -40
   excludedMaps:
@@ -5925,19 +6549,19 @@ maps:
         - -40
   excludedSpots: {}
   spots: []
-  nbrseen: 4
+  nbrseen: 5
 - x: -11
   y: -39
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 2
+  nbrseen: 4
 - x: -11
   y: -38
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 2
+  nbrseen: 3
 - x: -11
   y: -37
   excludedMaps:
@@ -5947,12 +6571,24 @@ maps:
     : - !!python/tuple
         - -12
         - -37
+    ? !!python/tuple
+    - -10
+    - -37
+    : - !!python/tuple
+        - -12
+        - -37
   excludedSpots: {}
   spots: []
-  nbrseen: 2
+  nbrseen: 4
 - x: -11
   y: -36
-  excludedMaps: {}
+  excludedMaps:
+    ? !!python/tuple
+    - -12
+    - -36
+    : - !!python/tuple
+        - -11
+        - -35
   excludedSpots: {}
   spots:
   - region: !!python/tuple
@@ -5962,13 +6598,20 @@ maps:
     - 73
     kind: bombu
     patternId: 665g4rtyh84t6j54ghj64yu96k87.png
-  nbrseen: 2
+  nbrseen: 4
 - x: -11
   y: -35
   excludedMaps: {}
   excludedSpots: {}
-  spots: []
-  nbrseen: 0
+  spots:
+  - region: !!python/tuple
+    - 625
+    - 84
+    - 34
+    - 18
+    kind: ortie
+    patternId: 1606914010626.png
+  nbrseen: 1
 - x: -10
   y: -63
   excludedMaps: {}
@@ -5996,6 +6639,9 @@ maps:
     : - !!python/tuple
         - -11
         - -60
+      - !!python/tuple
+        - -10
+        - -61
   excludedSpots: {}
   spots:
   - region: !!python/tuple
@@ -6019,13 +6665,19 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 3
+  nbrseen: 6
 - x: -10
   y: -43
   excludedMaps:
     ? !!python/tuple
     - -9
     - -43
+    : - !!python/tuple
+        - -10
+        - -44
+    ? !!python/tuple
+    - -10
+    - -42
     : - !!python/tuple
         - -10
         - -44
@@ -6045,13 +6697,19 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 2
+  nbrseen: 6
 - x: -10
   y: -42
   excludedMaps:
     ? !!python/tuple
     - -11
     - -42
+    : - !!python/tuple
+        - -10
+        - -41
+    ? !!python/tuple
+    - -10
+    - -43
     : - !!python/tuple
         - -10
         - -41
@@ -6092,7 +6750,7 @@ maps:
     - 51
     kind: noisetier
     patternId: dggfgdfgdf8978654354.png
-  nbrseen: 2
+  nbrseen: 8
 - x: -10
   y: -41
   excludedMaps:
@@ -6110,25 +6768,31 @@ maps:
         - -42
   excludedSpots: {}
   spots: []
-  nbrseen: 4
+  nbrseen: 6
 - x: -10
   y: -40
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 7
+  nbrseen: 11
 - x: -10
   y: -39
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 4
+  nbrseen: 6
 - x: -10
   y: -38
-  excludedMaps: {}
+  excludedMaps:
+    ? &id001 !!python/tuple
+    - -10
+    - -38
+    : - !!python/tuple
+        - -8
+        - -38
   excludedSpots: {}
   spots: []
-  nbrseen: 2
+  nbrseen: 3
 - x: -10
   y: -37
   excludedMaps:
@@ -6138,9 +6802,15 @@ maps:
     : - !!python/tuple
         - -10
         - -36
+    ? !!python/tuple
+    - -9
+    - -37
+    : - !!python/tuple
+        - -10
+        - -36
   excludedSpots: {}
   spots: []
-  nbrseen: 1
+  nbrseen: 3
 - x: -10
   y: -36
   excludedMaps:
@@ -6166,13 +6836,13 @@ maps:
     - 35
     kind: bombu
     patternId: 9gh87j65k416l545.png
-  nbrseen: 2
+  nbrseen: 3
 - x: -10
   y: -35
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 1
+  nbrseen: 2
 - x: -9
   y: -63
   excludedMaps: {}
@@ -6219,7 +6889,7 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 3
+  nbrseen: 5
 - x: -9
   y: -43
   excludedMaps: {}
@@ -6239,12 +6909,18 @@ maps:
     - 35
     kind: bombu
     patternId: 9gh87j65k416l545.png
-  nbrseen: 2
+  nbrseen: 8
 - x: -9
   y: -42
   excludedMaps:
     ? !!python/tuple
     - -10
+    - -42
+    : - !!python/tuple
+        - -9
+        - -41
+    ? !!python/tuple
+    - -8
     - -42
     : - !!python/tuple
         - -9
@@ -6272,7 +6948,7 @@ maps:
     - 36
     kind: merisier
     patternId: 9f8ds4f32ds1f3s21.png
-  nbrseen: 1
+  nbrseen: 6
 - x: -9
   y: -41
   excludedMaps:
@@ -6296,7 +6972,7 @@ maps:
         - -42
   excludedSpots: {}
   spots: []
-  nbrseen: 4
+  nbrseen: 6
 - x: -9
   y: -40
   excludedMaps:
@@ -6320,7 +6996,7 @@ maps:
         - -40
   excludedSpots: {}
   spots: []
-  nbrseen: 7
+  nbrseen: 11
 - x: -9
   y: -39
   excludedMaps:
@@ -6344,7 +7020,7 @@ maps:
         - -39
   excludedSpots: {}
   spots: []
-  nbrseen: 5
+  nbrseen: 6
 - x: -9
   y: -38
   excludedMaps:
@@ -6369,9 +7045,22 @@ maps:
       - !!python/tuple
         - -9
         - -37
+    *id001:
+    - !!python/tuple
+      - -9
+      - -37
+    - !!python/tuple
+      - -8
+      - -38
+    - !!python/tuple
+      - -10
+      - -38
+    - !!python/tuple
+      - -9
+      - -39
   excludedSpots: {}
   spots: []
-  nbrseen: 2
+  nbrseen: 3
 - x: -9
   y: -37
   excludedMaps:
@@ -6386,7 +7075,7 @@ maps:
         - -36
   excludedSpots: {}
   spots: []
-  nbrseen: 1
+  nbrseen: 2
 - x: -9
   y: -36
   excludedMaps: {}
@@ -6399,7 +7088,7 @@ maps:
     - 41
     kind: bombu
     patternId: g79fd84h32j136hj54.png
-  nbrseen: 2
+  nbrseen: 4
 - x: -9
   y: -35
   excludedMaps: {}
@@ -6412,7 +7101,7 @@ maps:
     - 39
     kind: ortie
     patternId: 6tre41t321rey3rt1y3rt254.png
-  nbrseen: 1
+  nbrseen: 3
 - x: -8
   y: -63
   excludedMaps: {}
@@ -6449,7 +7138,7 @@ maps:
     - 44
     kind: ginseng
     patternId: 968dfs4d3s21fds321.png
-  nbrseen: 1
+  nbrseen: 4
 - x: -8
   y: -47
   excludedMaps: {}
@@ -6462,19 +7151,33 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 2
+  - region: !!python/tuple
+    - 1300
+    - 115
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 7
 - x: -8
   y: -46
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 3
+  nbrseen: 7
 - x: -8
   y: -45
   excludedMaps: {}
   excludedSpots: {}
-  spots: []
-  nbrseen: 1
+  spots:
+  - region: !!python/tuple
+    - 876
+    - 479
+    - 50
+    - 69
+    kind: bombu
+    patternId: 8fd7gh56gf4h3j41kghk5jh654.png
+  nbrseen: 6
 - x: -8
   y: -44
   excludedMaps: {}
@@ -6487,7 +7190,7 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 1
+  nbrseen: 10
 - x: -8
   y: -43
   excludedMaps: {}
@@ -6500,7 +7203,7 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 2
+  nbrseen: 11
 - x: -8
   y: -42
   excludedMaps: {}
@@ -6513,10 +7216,16 @@ maps:
     - 50
     kind: chene
     patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
-  nbrseen: 2
+  nbrseen: 7
 - x: -8
   y: -41
-  excludedMaps: {}
+  excludedMaps:
+    ? !!python/tuple
+    - -8
+    - -40
+    : - !!python/tuple
+        - -9
+        - -41
   excludedSpots: {}
   spots:
   - region: !!python/tuple
@@ -6526,7 +7235,7 @@ maps:
     - 52
     kind: bombu
     patternId: 98ghf6j46k54hj65l4kj5.png
-  nbrseen: 2
+  nbrseen: 6
 - x: -8
   y: -40
   excludedMaps:
@@ -6551,7 +7260,7 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 4
+  nbrseen: 9
 - x: -8
   y: -39
   excludedMaps:
@@ -6584,13 +7293,19 @@ maps:
     - 69
     kind: bombu
     patternId: 8fd7gh56gf4h3j41kghk5jh654.png
-  nbrseen: 4
+  nbrseen: 8
 - x: -8
   y: -38
   excludedMaps:
     ? !!python/tuple
     - -8
     - -39
+    : - !!python/tuple
+        - -9
+        - -38
+    ? !!python/tuple
+    - -7
+    - -38
     : - !!python/tuple
         - -9
         - -38
@@ -6610,7 +7325,7 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 2
+  nbrseen: 5
 - x: -8
   y: -37
   excludedMaps: {}
@@ -6623,7 +7338,7 @@ maps:
     - 64
     kind: noyer
     patternId: 9df8g432e6g151g9rt9h56841rthrth8rt4.png
-  nbrseen: 2
+  nbrseen: 3
 - x: -8
   y: -36
   excludedMaps: {}
@@ -6636,13 +7351,27 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 2
+  nbrseen: 4
 - x: -8
   y: -35
   excludedMaps: {}
   excludedSpots: {}
-  spots: []
-  nbrseen: 0
+  spots:
+  - region: !!python/tuple
+    - 702
+    - 508
+    - 34
+    - 18
+    kind: ortie
+    patternId: 1606914010626.png
+  - region: !!python/tuple
+    - 1096
+    - 745
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  nbrseen: 1
 - x: -7
   y: -63
   excludedMaps: {}
@@ -6680,6 +7409,12 @@ maps:
     : - !!python/tuple
         - -7
         - -60
+    ? !!python/tuple
+    - -8
+    - -59
+    : - !!python/tuple
+        - -7
+        - -60
   excludedSpots: {}
   spots:
   - region: !!python/tuple
@@ -6703,7 +7438,7 @@ maps:
     - 57
     kind: ortie
     patternId: jaenGi.png
-  nbrseen: 12
+  nbrseen: 16
 - x: -7
   y: -58
   excludedMaps: {}
@@ -6716,7 +7451,7 @@ maps:
     - 50
     kind: chene
     patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
-  nbrseen: 17
+  nbrseen: 23
 - x: -7
   y: -57
   excludedMaps: {}
@@ -6736,7 +7471,7 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 14
+  nbrseen: 21
 - x: -7
   y: -56
   excludedMaps: {}
@@ -6756,13 +7491,13 @@ maps:
     - 58
     kind: chene
     patternId: 4re6321f3g21fd3g2d1fg321f.png
-  nbrseen: 4
+  nbrseen: 10
 - x: -7
   y: -55
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 3
+  nbrseen: 9
 - x: -7
   y: -54
   excludedMaps: {}
@@ -6782,7 +7517,14 @@ maps:
     - 36
     kind: merisier
     patternId: 9f8ds4f32ds1f3s21.png
-  nbrseen: 4
+  - region: !!python/tuple
+    - 1402
+    - 200
+    - 42
+    - 43
+    kind: merisier
+    patternId: 9g84df6g51df321.png
+  nbrseen: 8
 - x: -7
   y: -53
   excludedMaps: {}
@@ -6802,7 +7544,7 @@ maps:
     - 46
     kind: if
     patternId: ds4f654dsf654ds6f321321.png
-  nbrseen: 3
+  nbrseen: 6
 - x: -7
   y: -52
   excludedMaps: {}
@@ -6815,7 +7557,7 @@ maps:
     - 67
     kind: if
     patternId: 4ut6i4kjy6k541hj6541.png
-  nbrseen: 4
+  nbrseen: 7
 - x: -7
   y: -51
   excludedMaps: {}
@@ -6835,13 +7577,20 @@ maps:
     - 64
     kind: if
     patternId: 49gh84jgf61j45.png
-  nbrseen: 1
+  - region: !!python/tuple
+    - 1264
+    - 197
+    - 50
+    - 69
+    kind: bombu
+    patternId: 8fd7gh56gf4h3j41kghk5jh654.png
+  nbrseen: 5
 - x: -7
   y: -50
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 2
+  nbrseen: 7
 - x: -7
   y: -49
   excludedMaps: {}
@@ -6854,7 +7603,14 @@ maps:
     - 52
     kind: bombu
     patternId: 98ghf6j46k54hj65l4kj5.png
-  nbrseen: 1
+  - region: !!python/tuple
+    - 1516
+    - 526
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 2
 - x: -7
   y: -48
   excludedMaps: {}
@@ -6874,7 +7630,14 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 2
+  - region: !!python/tuple
+    - 1097
+    - 271
+    - 48
+    - 32
+    kind: chene
+    patternId: 6464e6rt54rt3re12t321.png
+  nbrseen: 3
 - x: -7
   y: -47
   excludedMaps: {}
@@ -6887,19 +7650,40 @@ maps:
     - 58
     kind: chene
     patternId: 4re6321f3g21fd3g2d1fg321f.png
-  nbrseen: 2
+  nbrseen: 4
 - x: -7
   y: -46
   excludedMaps: {}
   excludedSpots: {}
-  spots: []
-  nbrseen: 2
+  spots:
+  - region: !!python/tuple
+    - 1215
+    - 472
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  nbrseen: 4
 - x: -7
   y: -45
   excludedMaps: {}
   excludedSpots: {}
-  spots: []
-  nbrseen: 2
+  spots:
+  - region: !!python/tuple
+    - 697
+    - 515
+    - 77
+    - 50
+    kind: chene
+    patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
+  - region: !!python/tuple
+    - 715
+    - 516
+    - 43
+    - 58
+    kind: chene
+    patternId: 9g68fd41g321bvn321.png
+  nbrseen: 6
 - x: -7
   y: -44
   excludedMaps: {}
@@ -6919,7 +7703,14 @@ maps:
     - 38
     kind: noyer
     patternId: 56h4gf6h13gf21h.png
-  nbrseen: 2
+  - region: !!python/tuple
+    - 857
+    - 94
+    - 34
+    - 73
+    kind: noyer
+    patternId: 9684365ds3g2d1fg321.png
+  nbrseen: 8
 - x: -7
   y: -43
   excludedMaps: {}
@@ -6939,7 +7730,7 @@ maps:
     - 64
     kind: noyer
     patternId: 9df8g432e6g151g9rt9h56841rthrth8rt4.png
-  nbrseen: 2
+  nbrseen: 6
 - x: -7
   y: -42
   excludedMaps: {}
@@ -6952,7 +7743,7 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 2
+  nbrseen: 5
 - x: -7
   y: -41
   excludedMaps: {}
@@ -6972,13 +7763,13 @@ maps:
     - 47
     kind: noyer
     patternId: df56g2df32h1gf32j1gf.png
-  nbrseen: 4
+  nbrseen: 9
 - x: -7
   y: -40
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 5
+  nbrseen: 11
 - x: -7
   y: -39
   excludedMaps: {}
@@ -6991,7 +7782,7 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 3
+  nbrseen: 7
 - x: -7
   y: -38
   excludedMaps: {}
@@ -7004,7 +7795,7 @@ maps:
     - 107
     kind: noyer
     patternId: 3d2f1g36j5415k54jh6k54hj654.png
-  nbrseen: 1
+  nbrseen: 5
 - x: -7
   y: -37
   excludedMaps:
@@ -7091,9 +7882,21 @@ maps:
     : - !!python/tuple
         - -7
         - -60
+      - !!python/tuple
+        - -6
+        - -61
+    ? !!python/tuple
+    - -5
+    - -60
+    : - !!python/tuple
+        - -6
+        - -61
+      - !!python/tuple
+        - -7
+        - -60
   excludedSpots: {}
   spots: []
-  nbrseen: 2
+  nbrseen: 7
 - x: -6
   y: -59
   excludedMaps: {}
@@ -7120,7 +7923,7 @@ maps:
     - 54
     kind: ebene
     patternId: f9d684g63d2fg1d32f1.png
-  nbrseen: 4
+  nbrseen: 10
 - x: -6
   y: -58
   excludedMaps: {}
@@ -7154,7 +7957,7 @@ maps:
     - 91
     kind: merisier
     patternId: 1606913679656.png
-  nbrseen: 14
+  nbrseen: 20
 - x: -6
   y: -57
   excludedMaps: {}
@@ -7174,7 +7977,7 @@ maps:
     - 73
     kind: merisier
     patternId: 32f1d3s6f16dsf54ds6f548.png
-  nbrseen: 7
+  nbrseen: 13
 - x: -6
   y: -56
   excludedMaps: {}
@@ -7194,7 +7997,7 @@ maps:
     - 70
     kind: merisier
     patternId: wi.png
-  nbrseen: 15
+  nbrseen: 22
 - x: -6
   y: -55
   excludedMaps: {}
@@ -7221,10 +8024,16 @@ maps:
     - 62
     kind: merisier
     patternId: f9ds84f36d2s1f321.png
-  nbrseen: 6
+  nbrseen: 11
 - x: -6
   y: -54
-  excludedMaps: {}
+  excludedMaps:
+    ? !!python/tuple
+    - -6
+    - -53
+    : - !!python/tuple
+        - -5
+        - -54
   excludedSpots: {}
   spots:
   - region: !!python/tuple
@@ -7248,19 +8057,19 @@ maps:
     - 65
     kind: if
     patternId: 1606913523846.png
-  nbrseen: 13
+  nbrseen: 16
 - x: -6
   y: -53
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 3
+  nbrseen: 6
 - x: -6
   y: -52
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 5
+  nbrseen: 7
 - x: -6
   y: -51
   excludedMaps: {}
@@ -7273,7 +8082,7 @@ maps:
     - 32
     kind: if
     patternId: ds698t496h854g65.png
-  nbrseen: 3
+  nbrseen: 6
 - x: -6
   y: -50
   excludedMaps: {}
@@ -7286,13 +8095,13 @@ maps:
     - 73
     kind: bombu
     patternId: 665g4rtyh84t6j54ghj64yu96k87.png
-  nbrseen: 2
+  nbrseen: 7
 - x: -6
   y: -49
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 1
+  nbrseen: 3
 - x: -6
   y: -48
   excludedMaps: {}
@@ -7305,25 +8114,46 @@ maps:
     - 50
     kind: ginseng
     patternId: fd9s8f436ds21f3ds21.png
-  nbrseen: 1
+  - region: !!python/tuple
+    - 868
+    - 159
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 1398
+    - 734
+    - 37
+    - 58
+    kind: chene
+    patternId: 4re6321f3g21fd3g2d1fg321f.png
+  nbrseen: 4
 - x: -6
   y: -47
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 2
+  nbrseen: 4
 - x: -6
   y: -46
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 3
+  nbrseen: 6
 - x: -6
   y: -45
   excludedMaps: {}
   excludedSpots: {}
-  spots: []
-  nbrseen: 4
+  spots:
+  - region: !!python/tuple
+    - 868
+    - 461
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 8
 - x: -6
   y: -44
   excludedMaps: {}
@@ -7336,19 +8166,19 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 4
+  nbrseen: 10
 - x: -6
   y: -43
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 4
+  nbrseen: 8
 - x: -6
   y: -42
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 4
+  nbrseen: 8
 - x: -6
   y: -41
   excludedMaps: {}
@@ -7361,7 +8191,7 @@ maps:
     - 33
     kind: noyer
     patternId: 3f14g6df54g31.png
-  nbrseen: 4
+  nbrseen: 10
 - x: -6
   y: -40
   excludedMaps: {}
@@ -7381,19 +8211,34 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 4
+  nbrseen: 10
 - x: -6
   y: -39
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 3
+  nbrseen: 7
 - x: -6
   y: -38
-  excludedMaps: {}
+  excludedMaps:
+    ? !!python/tuple
+    - -6
+    - -39
+    : - !!python/tuple
+        - -5
+        - -38
+      - !!python/tuple
+        - -6
+        - -37
+    ? !!python/tuple
+    - -7
+    - -38
+    : - !!python/tuple
+        - -5
+        - -38
   excludedSpots: {}
   spots: []
-  nbrseen: 0
+  nbrseen: 3
 - x: -6
   y: -37
   excludedMaps:
@@ -7458,9 +8303,21 @@ maps:
     : - !!python/tuple
         - -5
         - -61
+    ? !!python/tuple
+    - -4
+    - -60
+    : - !!python/tuple
+        - -5
+        - -61
+    ? !!python/tuple
+    - -5
+    - -59
+    : - !!python/tuple
+        - -5
+        - -61
   excludedSpots: {}
   spots: []
-  nbrseen: 2
+  nbrseen: 7
 - x: -5
   y: -59
   excludedMaps: {}
@@ -7508,7 +8365,7 @@ maps:
     - 69
     kind: bombu
     patternId: 8fd7gh56gf4h3j41kghk5jh654.png
-  nbrseen: 5
+  nbrseen: 10
 - x: -5
   y: -58
   excludedMaps: {}
@@ -7521,7 +8378,7 @@ maps:
     - 73
     kind: bombu
     patternId: 665g4rtyh84t6j54ghj64yu96k87.png
-  nbrseen: 5
+  nbrseen: 12
 - x: -5
   y: -57
   excludedMaps: {}
@@ -7541,7 +8398,7 @@ maps:
     - 43
     kind: merisier
     patternId: 9g84df6g51df321.png
-  nbrseen: 4
+  nbrseen: 9
 - x: -5
   y: -56
   excludedMaps: {}
@@ -7554,13 +8411,19 @@ maps:
     - 36
     kind: merisier
     patternId: 9f8ds4f32ds1f3s21.png
-  nbrseen: 7
+  nbrseen: 13
 - x: -5
   y: -55
   excludedMaps:
     ? !!python/tuple
     - -5
     - -56
+    : - !!python/tuple
+        - -5
+        - -54
+    ? !!python/tuple
+    - -6
+    - -55
     : - !!python/tuple
         - -5
         - -54
@@ -7573,58 +8436,7 @@ maps:
     - 36
     kind: merisier
     patternId: 9f8ds4f32ds1f3s21.png
-  nbrseen: 5
-- x: -5
-  y: -54
-  excludedMaps:
-    ? !!python/tuple
-    - -5
-    - -53
-    : - !!python/tuple
-        - -5
-        - -55
-      - !!python/tuple
-        - -4
-        - -54
-      - !!python/tuple
-        - -6
-        - -54
-  excludedSpots: {}
-  spots: []
-  nbrseen: 2
-- x: -5
-  y: -53
-  excludedMaps:
-    ? !!python/tuple
-    - -6
-    - -53
-    : - !!python/tuple
-        - -5
-        - -52
-    ? !!python/tuple
-    - -5
-    - -54
-    : - !!python/tuple
-        - -5
-        - -52
-  excludedSpots: {}
-  spots: []
-  nbrseen: 4
-- x: -5
-  y: -52
-  excludedMaps:
-    ? !!python/tuple
-    - -6
-    - -52
-    : - !!python/tuple
-        - -5
-        - -53
-      - !!python/tuple
-        - -4
-        - -52
-  excludedSpots: {}
-  spots: []
-  nbrseen: 1
+  nbrseen: 12
 - x: -5
   y: -51
   excludedMaps: {}
@@ -7644,7 +8456,7 @@ maps:
     - 67
     kind: if
     patternId: 4ut6i4kjy6k541hj6541.png
-  nbrseen: 3
+  nbrseen: 4
 - x: -5
   y: -50
   excludedMaps: {}
@@ -7657,7 +8469,7 @@ maps:
     - 35
     kind: if
     patternId: f9d8h46g5j4gh321321gfh.png
-  nbrseen: 3
+  nbrseen: 6
 - x: -5
   y: -49
   excludedMaps: {}
@@ -7684,7 +8496,7 @@ maps:
     - 73
     kind: bombu
     patternId: 665g4rtyh84t6j54ghj64yu96k87.png
-  nbrseen: 2
+  nbrseen: 5
 - x: -5
   y: -48
   excludedMaps: {}
@@ -7697,7 +8509,7 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 3
+  nbrseen: 6
 - x: -5
   y: -47
   excludedMaps: {}
@@ -7710,7 +8522,7 @@ maps:
     - 73
     kind: bombu
     patternId: 665g4rtyh84t6j54ghj64yu96k87.png
-  nbrseen: 3
+  nbrseen: 6
 - x: -5
   y: -46
   excludedMaps: {}
@@ -7723,13 +8535,20 @@ maps:
     - 73
     kind: bombu
     patternId: 665g4rtyh84t6j54ghj64yu96k87.png
-  nbrseen: 3
+  nbrseen: 6
 - x: -5
   y: -45
   excludedMaps: {}
   excludedSpots: {}
-  spots: []
-  nbrseen: 3
+  spots:
+  - region: !!python/tuple
+    - 782
+    - 72
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 6
 - x: -5
   y: -44
   excludedMaps: {}
@@ -7742,7 +8561,7 @@ maps:
     - 32
     kind: chene
     patternId: 6464e6rt54rt3re12t321.png
-  nbrseen: 4
+  nbrseen: 9
 - x: -5
   y: -43
   excludedMaps: {}
@@ -7755,7 +8574,7 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 4
+  nbrseen: 9
 - x: -5
   y: -42
   excludedMaps: {}
@@ -7768,7 +8587,7 @@ maps:
     - 48
     kind: noisetier
     patternId: 89f4sd62f1ds32f1321.png
-  nbrseen: 4
+  nbrseen: 10
 - x: -5
   y: -41
   excludedMaps: {}
@@ -7781,7 +8600,7 @@ maps:
     - 50
     kind: chene
     patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
-  nbrseen: 4
+  nbrseen: 8
 - x: -5
   y: -40
   excludedMaps: {}
@@ -7794,13 +8613,13 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 6
+  nbrseen: 10
 - x: -5
   y: -39
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 6
+  nbrseen: 9
 - x: -5
   y: -38
   excludedMaps:
@@ -7878,9 +8697,15 @@ maps:
     : - !!python/tuple
         - -4
         - -61
+    ? !!python/tuple
+    - -5
+    - -60
+    : - !!python/tuple
+        - -4
+        - -61
   excludedSpots: {}
   spots: []
-  nbrseen: 5
+  nbrseen: 8
 - x: -4
   y: -59
   excludedMaps: {}
@@ -7900,7 +8725,7 @@ maps:
     - 73
     kind: bombu
     patternId: 665g4rtyh84t6j54ghj64yu96k87.png
-  nbrseen: 2
+  nbrseen: 5
 - x: -4
   y: -58
   excludedMaps: {}
@@ -7920,25 +8745,25 @@ maps:
     - 23
     kind: merisier
     patternId: fds98f4ds612fds6125.png
-  nbrseen: 3
+  nbrseen: 8
 - x: -4
   y: -57
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 4
+  nbrseen: 7
 - x: -4
   y: -56
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 6
+  nbrseen: 9
 - x: -4
   y: -55
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 6
+  nbrseen: 13
 - x: -4
   y: -54
   excludedMaps:
@@ -7956,7 +8781,7 @@ maps:
         - -54
   excludedSpots: {}
   spots: []
-  nbrseen: 3
+  nbrseen: 8
 - x: -4
   y: -52
   excludedMaps:
@@ -7968,19 +8793,19 @@ maps:
         - -52
   excludedSpots: {}
   spots: []
-  nbrseen: 2
+  nbrseen: 4
 - x: -4
   y: -51
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 5
+  nbrseen: 8
 - x: -4
   y: -50
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 5
+  nbrseen: 7
 - x: -4
   y: -49
   excludedMaps: {}
@@ -8000,7 +8825,7 @@ maps:
     - 48
     kind: ginseng
     patternId: 495132196598795351615.png
-  nbrseen: 3
+  nbrseen: 8
 - x: -4
   y: -48
   excludedMaps: {}
@@ -8013,13 +8838,13 @@ maps:
     - 73
     kind: bombu
     patternId: 665g4rtyh84t6j54ghj64yu96k87.png
-  nbrseen: 4
+  nbrseen: 8
 - x: -4
   y: -47
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 4
+  nbrseen: 7
 - x: -4
   y: -46
   excludedMaps: {}
@@ -8039,7 +8864,7 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 3
+  nbrseen: 7
 - x: -4
   y: -45
   excludedMaps: {}
@@ -8052,7 +8877,7 @@ maps:
     - 58
     kind: chene
     patternId: 4re6321f3g21fd3g2d1fg321f.png
-  nbrseen: 3
+  nbrseen: 9
 - x: -4
   y: -44
   excludedMaps: {}
@@ -8065,7 +8890,7 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 4
+  nbrseen: 8
 - x: -4
   y: -43
   excludedMaps: {}
@@ -8078,7 +8903,7 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 4
+  nbrseen: 7
 - x: -4
   y: -42
   excludedMaps: {}
@@ -8091,25 +8916,25 @@ maps:
     - 107
     kind: noyer
     patternId: 3d2f1g36j5415k54jh6k54hj654.png
-  nbrseen: 4
+  nbrseen: 9
 - x: -4
   y: -41
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 5
+  nbrseen: 8
 - x: -4
   y: -40
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 5
+  nbrseen: 8
 - x: -4
   y: -39
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 3
+  nbrseen: 6
 - x: -4
   y: -38
   excludedMaps: {}
@@ -8121,13 +8946,13 @@ maps:
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 3
+  nbrseen: 4
 - x: -4
   y: -36
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 2
+  nbrseen: 3
 - x: -4
   y: -35
   excludedMaps: {}
@@ -8172,7 +8997,7 @@ maps:
         - -61
   excludedSpots: {}
   spots: []
-  nbrseen: 5
+  nbrseen: 7
 - x: -3
   y: -59
   excludedMaps: {}
@@ -8199,7 +9024,7 @@ maps:
     - 97
     kind: ebene
     patternId: d46sq54d65qs4d65qs4.png
-  nbrseen: 4
+  nbrseen: 8
 - x: -3
   y: -58
   excludedMaps: {}
@@ -8226,7 +9051,7 @@ maps:
     - 97
     kind: ebene
     patternId: d46sq54d65qs4d65qs4.png
-  nbrseen: 2
+  nbrseen: 8
 - x: -3
   y: -57
   excludedMaps: {}
@@ -8253,13 +9078,13 @@ maps:
     - 54
     kind: ebene
     patternId: f9d684g63d2fg1d32f1.png
-  nbrseen: 4
+  nbrseen: 8
 - x: -3
   y: -56
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 6
+  nbrseen: 10
 - x: -3
   y: -55
   excludedMaps:
@@ -8269,9 +9094,15 @@ maps:
     : - !!python/tuple
         - -2
         - -55
+    ? !!python/tuple
+    - -3
+    - -56
+    : - !!python/tuple
+        - -2
+        - -55
   excludedSpots: {}
   spots: []
-  nbrseen: 5
+  nbrseen: 8
 - x: -3
   y: -54
   excludedMaps:
@@ -8281,21 +9112,33 @@ maps:
     : - !!python/tuple
         - -2
         - -54
+    ? !!python/tuple
+    - -4
+    - -54
+    : - !!python/tuple
+        - -2
+        - -54
   excludedSpots: {}
   spots: []
-  nbrseen: 5
+  nbrseen: 11
 - x: -3
   y: -53
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 4
+  nbrseen: 10
 - x: -3
   y: -52
-  excludedMaps: {}
+  excludedMaps:
+    ? !!python/tuple
+    - -3
+    - -53
+    : - !!python/tuple
+        - -2
+        - -52
   excludedSpots: {}
   spots: []
-  nbrseen: 2
+  nbrseen: 6
 - x: -3
   y: -51
   excludedMaps: {}
@@ -8308,7 +9151,7 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 2
+  nbrseen: 7
 - x: -3
   y: -50
   excludedMaps: {}
@@ -8335,13 +9178,13 @@ maps:
     - 64
     kind: if
     patternId: 49gh84jgf61j45.png
-  nbrseen: 2
+  nbrseen: 6
 - x: -3
   y: -49
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 2
+  nbrseen: 5
 - x: -3
   y: -48
   excludedMaps: {}
@@ -8368,25 +9211,25 @@ maps:
     - 44
     kind: ginseng
     patternId: 968dfs4d3s21fds321.png
-  nbrseen: 4
+  nbrseen: 6
 - x: -3
   y: -47
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 4
+  nbrseen: 8
 - x: -3
   y: -46
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 2
+  nbrseen: 5
 - x: -3
   y: -45
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 3
+  nbrseen: 8
 - x: -3
   y: -44
   excludedMaps: {}
@@ -8399,7 +9242,7 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 4
+  nbrseen: 8
 - x: -3
   y: -43
   excludedMaps: {}
@@ -8412,19 +9255,19 @@ maps:
     - 68
     kind: noyer
     patternId: 9f8dg6e1tg65zt196z4gfh1rtg9hj1rty1j4.png
-  nbrseen: 4
+  nbrseen: 7
 - x: -3
   y: -42
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 4
+  nbrseen: 8
 - x: -3
   y: -41
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 4
+  nbrseen: 7
 - x: -3
   y: -40
   excludedMaps: {}
@@ -8437,13 +9280,13 @@ maps:
     - 107
     kind: noyer
     patternId: 3d2f1g36j5415k54jh6k54hj654.png
-  nbrseen: 6
+  nbrseen: 8
 - x: -3
   y: -39
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 4
+  nbrseen: 5
 - x: -3
   y: -38
   excludedMaps: {}
@@ -8462,13 +9305,13 @@ maps:
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 3
+  nbrseen: 4
 - x: -3
   y: -36
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 2
+  nbrseen: 3
 - x: -3
   y: -35
   excludedMaps: {}
@@ -8508,15 +9351,30 @@ maps:
     : - !!python/tuple
         - -2
         - -60
+      - !!python/tuple
+        - -1
+        - -59
   excludedSpots: {}
   spots: []
-  nbrseen: 2
+  nbrseen: 4
 - x: -2
   y: -58
-  excludedMaps: {}
+  excludedMaps:
+    ? !!python/tuple
+    - -3
+    - -58
+    : - !!python/tuple
+        - -1
+        - -58
+    ? !!python/tuple
+    - -2
+    - -59
+    : - !!python/tuple
+        - -1
+        - -58
   excludedSpots: {}
   spots: []
-  nbrseen: 2
+  nbrseen: 5
 - x: -2
   y: -57
   excludedMaps: {}
@@ -8529,7 +9387,7 @@ maps:
     - 44
     kind: ginseng
     patternId: 968dfs4d3s21fds321.png
-  nbrseen: 4
+  nbrseen: 9
 - x: -2
   y: -56
   excludedMaps:
@@ -8554,7 +9412,7 @@ maps:
     - 85
     kind: noisetier
     patternId: 98f4sd6f13ds21fds9f6548984.png
-  nbrseen: 5
+  nbrseen: 9
 - x: -2
   y: -55
   excludedMaps: {}
@@ -8576,9 +9434,21 @@ maps:
     : - !!python/tuple
         - -2
         - -54
+      - !!python/tuple
+        - -1
+        - -53
+    ? !!python/tuple
+    - -2
+    - -52
+    : - !!python/tuple
+        - -1
+        - -53
+      - !!python/tuple
+        - -2
+        - -54
   excludedSpots: {}
   spots: []
-  nbrseen: 3
+  nbrseen: 8
 - x: -2
   y: -52
   excludedMaps:
@@ -8588,21 +9458,34 @@ maps:
     : - !!python/tuple
         - -3
         - -52
+    ? !!python/tuple
+    - -1
+    - -52
+    : - !!python/tuple
+        - -3
+        - -52
   excludedSpots: {}
   spots: []
-  nbrseen: 3
+  nbrseen: 10
 - x: -2
   y: -51
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 3
+  nbrseen: 7
 - x: -2
   y: -50
   excludedMaps: {}
   excludedSpots: {}
-  spots: []
-  nbrseen: 2
+  spots:
+  - region: !!python/tuple
+    - 1231
+    - 695
+    - 21
+    - 44
+    kind: ginseng
+    patternId: 968dfs4d3s21fds321.png
+  nbrseen: 6
 - x: -2
   y: -49
   excludedMaps: {}
@@ -8622,7 +9505,7 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 1
+  nbrseen: 4
 - x: -2
   y: -48
   excludedMaps: {}
@@ -8635,19 +9518,33 @@ maps:
     - 44
     kind: ginseng
     patternId: 968dfs4d3s21fds321.png
-  nbrseen: 2
+  - region: !!python/tuple
+    - 1182
+    - 454
+    - 37
+    - 58
+    kind: chene
+    patternId: 4re6321f3g21fd3g2d1fg321f.png
+  nbrseen: 4
 - x: -2
   y: -47
   excludedMaps: {}
   excludedSpots: {}
-  spots: []
-  nbrseen: 0
+  spots:
+  - region: !!python/tuple
+    - 1355
+    - 745
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  nbrseen: 3
 - x: -2
   y: -46
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 0
+  nbrseen: 3
 - x: -2
   y: -45
   excludedMaps: {}
@@ -8667,7 +9564,7 @@ maps:
     - 50
     kind: chene
     patternId: 546r1313ds5f4f976e3213s1F498RAE4.png
-  nbrseen: 1
+  nbrseen: 5
 - x: -2
   y: -44
   excludedMaps: {}
@@ -8694,7 +9591,7 @@ maps:
     - 107
     kind: noyer
     patternId: 3d2f1g36j5415k54jh6k54hj654.png
-  nbrseen: 2
+  nbrseen: 5
 - x: -2
   y: -43
   excludedMaps: {}
@@ -8707,19 +9604,19 @@ maps:
     - 96
     kind: noisetier
     patternId: 5646g514df63251.png
-  nbrseen: 2
+  nbrseen: 4
 - x: -2
   y: -42
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 3
+  nbrseen: 8
 - x: -2
   y: -41
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 4
+  nbrseen: 9
 - x: -2
   y: -40
   excludedMaps: {}
@@ -8732,7 +9629,7 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 6
+  nbrseen: 9
 - x: -2
   y: -39
   excludedMaps: {}
@@ -8745,7 +9642,7 @@ maps:
     - 32
     kind: chene
     patternId: 6464e6rt54rt3re12t321.png
-  nbrseen: 4
+  nbrseen: 7
 - x: -2
   y: -38
   excludedMaps: {}
@@ -8765,13 +9662,13 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 6
+  nbrseen: 7
 - x: -2
   y: -37
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 6
+  nbrseen: 7
 - x: -2
   y: -36
   excludedMaps: {}
@@ -8784,13 +9681,13 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 6
+  nbrseen: 7
 - x: -2
   y: -35
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 2
+  nbrseen: 3
 - x: -1
   y: -63
   excludedMaps: {}
@@ -8845,9 +9742,12 @@ maps:
     : - !!python/tuple
         - 0
         - -57
+      - !!python/tuple
+        - -1
+        - -58
   excludedSpots: {}
   spots: []
-  nbrseen: 3
+  nbrseen: 7
 - x: -1
   y: -56
   excludedMaps:
@@ -8860,9 +9760,18 @@ maps:
       - !!python/tuple
         - -1
         - -55
+    ? !!python/tuple
+    - -2
+    - -56
+    : - !!python/tuple
+        - 0
+        - -56
+      - !!python/tuple
+        - -1
+        - -55
   excludedSpots: {}
   spots: []
-  nbrseen: 4
+  nbrseen: 8
 - x: -1
   y: -55
   excludedMaps: {}
@@ -8890,6 +9799,12 @@ maps:
     : - !!python/tuple
         - -1
         - -53
+    ? !!python/tuple
+    - 0
+    - -52
+    : - !!python/tuple
+        - -1
+        - -53
   excludedSpots: {}
   spots:
   - region: !!python/tuple
@@ -8899,49 +9814,91 @@ maps:
     - 44
     kind: charme
     patternId: 6gf4df3g21df3g21df.png
-  nbrseen: 1
+  nbrseen: 7
 - x: -1
   y: -51
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 1
+  nbrseen: 6
 - x: -1
   y: -50
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 2
+  nbrseen: 8
 - x: -1
   y: -49
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 2
+  nbrseen: 5
 - x: -1
   y: -48
   excludedMaps: {}
   excludedSpots: {}
-  spots: []
-  nbrseen: 2
+  spots:
+  - region: !!python/tuple
+    - 1041
+    - 288
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  - region: !!python/tuple
+    - 564
+    - 112
+    - 57
+    - 85
+    kind: noisetier
+    patternId: 98f4sd6f13ds21fds9f6548984.png
+  nbrseen: 4
 - x: -1
   y: -47
   excludedMaps: {}
   excludedSpots: {}
-  spots: []
-  nbrseen: 0
+  spots:
+  - region: !!python/tuple
+    - 1297
+    - 196
+    - 34
+    - 18
+    kind: ortie
+    patternId: 1606914010626.png
+  - region: !!python/tuple
+    - 1327
+    - 629
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  - region: !!python/tuple
+    - 1214
+    - 245
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 2
 - x: -1
   y: -46
   excludedMaps: {}
   excludedSpots: {}
-  spots: []
-  nbrseen: 0
+  spots:
+  - region: !!python/tuple
+    - 652
+    - 397
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 4
 - x: -1
   y: -45
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 2
+  nbrseen: 5
 - x: -1
   y: -44
   excludedMaps: {}
@@ -8954,7 +9911,7 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 2
+  nbrseen: 5
 - x: -1
   y: -43
   excludedMaps: {}
@@ -8967,7 +9924,7 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 2
+  nbrseen: 4
 - x: -1
   y: -42
   excludedMaps: {}
@@ -8994,7 +9951,7 @@ maps:
     - 44
     kind: noyer
     patternId: 87ds6f54d1s32f1ds321.png
-  nbrseen: 4
+  nbrseen: 8
 - x: -1
   y: -41
   excludedMaps: {}
@@ -9014,7 +9971,14 @@ maps:
     - 32
     kind: chene
     patternId: 6464e6rt54rt3re12t321.png
-  nbrseen: 4
+  - region: !!python/tuple
+    - 1029
+    - 594
+    - 48
+    - 66
+    kind: chene
+    patternId: 96ds4f6ds1f3ds21f.png
+  nbrseen: 8
 - x: -1
   y: -40
   excludedMaps: {}
@@ -9034,7 +9998,7 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 5
+  nbrseen: 7
 - x: -1
   y: -39
   excludedMaps: {}
@@ -9047,13 +10011,13 @@ maps:
     - 107
     kind: noyer
     patternId: 3d2f1g36j5415k54jh6k54hj654.png
-  nbrseen: 6
+  nbrseen: 9
 - x: -1
   y: -38
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 11
+  nbrseen: 13
 - x: -1
   y: -37
   excludedMaps:
@@ -9090,13 +10054,13 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 6
+  nbrseen: 7
 - x: -1
   y: -35
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 4
+  nbrseen: 5
 - x: 0
   y: -63
   excludedMaps: {}
@@ -9165,7 +10129,19 @@ maps:
   nbrseen: 0
 - x: 0
   y: -52
-  excludedMaps: {}
+  excludedMaps:
+    ? !!python/tuple
+    - 0
+    - -51
+    : - !!python/tuple
+        - 0
+        - -53
+    ? !!python/tuple
+    - -1
+    - -52
+    : - !!python/tuple
+        - 0
+        - -53
   excludedSpots: {}
   spots:
   - region: !!python/tuple
@@ -9175,19 +10151,26 @@ maps:
     - 64
     kind: noisetier
     patternId: ds4f61ds32f1ds321.png
-  nbrseen: 1
+  nbrseen: 5
 - x: 0
   y: -51
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 1
+  nbrseen: 4
 - x: 0
   y: -50
   excludedMaps: {}
   excludedSpots: {}
-  spots: []
-  nbrseen: 1
+  spots:
+  - region: !!python/tuple
+    - 1262
+    - 688
+    - 46
+    - 48
+    kind: noisetier
+    patternId: 89f4sd62f1ds32f1321.png
+  nbrseen: 4
 - x: 0
   y: -49
   excludedMaps: {}
@@ -9200,7 +10183,7 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 1
+  nbrseen: 4
 - x: 0
   y: -48
   excludedMaps: {}
@@ -9220,19 +10203,47 @@ maps:
     - 22
     kind: sauge
     patternId: 89hg74j321k321.png
-  nbrseen: 1
+  - region: !!python/tuple
+    - 739
+    - 397
+    - 41
+    - 73
+    kind: bombu
+    patternId: 665g4rtyh84t6j54ghj64yu96k87.png
+  nbrseen: 4
 - x: 0
   y: -47
   excludedMaps: {}
   excludedSpots: {}
-  spots: []
-  nbrseen: 0
+  spots:
+  - region: !!python/tuple
+    - 1317
+    - 566
+    - 21
+    - 44
+    kind: ginseng
+    patternId: 968dfs4d3s21fds321.png
+  - region: !!python/tuple
+    - 1022
+    - 655
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  - region: !!python/tuple
+    - 924
+    - 356
+    - 34
+    - 22
+    kind: sauge
+    patternId: 89hg74j321k321.png
+  nbrseen: 2
 - x: 0
   y: -46
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 0
+  nbrseen: 3
 - x: 0
   y: -45
   excludedMaps: {}
@@ -9259,7 +10270,7 @@ maps:
     - 73
     kind: bombu
     patternId: 665g4rtyh84t6j54ghj64yu96k87.png
-  nbrseen: 1
+  nbrseen: 3
 - x: 0
   y: -44
   excludedMaps: {}
@@ -9279,7 +10290,7 @@ maps:
     - 24
     kind: sauge
     patternId: 98rt7y6y1u3ty21jhgh.png
-  nbrseen: 1
+  nbrseen: 5
 - x: 0
   y: -43
   excludedMaps: {}
@@ -9299,7 +10310,7 @@ maps:
     - 58
     kind: chene
     patternId: 4re6321f3g21fd3g2d1fg321f.png
-  nbrseen: 2
+  nbrseen: 6
 - x: 0
   y: -42
   excludedMaps: {}
@@ -9319,13 +10330,13 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 3
+  nbrseen: 6
 - x: 0
   y: -41
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 6
+  nbrseen: 9
 - x: 0
   y: -40
   excludedMaps: {}
@@ -9345,7 +10356,7 @@ maps:
     - 73
     kind: bombu
     patternId: 665g4rtyh84t6j54ghj64yu96k87.png
-  nbrseen: 8
+  nbrseen: 11
 - x: 0
   y: -39
   excludedMaps: {}
@@ -9358,7 +10369,7 @@ maps:
     - 107
     kind: noyer
     patternId: 3d2f1g36j5415k54jh6k54hj654.png
-  nbrseen: 10
+  nbrseen: 12
 - x: 0
   y: -38
   excludedMaps: {}
@@ -9378,13 +10389,13 @@ maps:
     - 18
     kind: ortie
     patternId: 1606914010626.png
-  nbrseen: 12
+  nbrseen: 14
 - x: 0
   y: -37
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 6
+  nbrseen: 7
 - x: 0
   y: -36
   excludedMaps: {}
@@ -9397,10 +10408,10 @@ maps:
     - 39
     kind: ortie
     patternId: 6tre41t321rey3rt1y3rt254.png
-  nbrseen: 5
+  nbrseen: 7
 - x: 0
   y: -35
   excludedMaps: {}
   excludedSpots: {}
   spots: []
-  nbrseen: 4
+  nbrseen: 5

@@ -32,14 +32,17 @@ if __name__ == "__main__":
     }
 
     character_name = "John-shooter"
-
-    zone_file_path = os.path.join(saves_dir, "otomai_01_12_2020.yaml")
+    zone_file_path = os.path.join(saves_dir, "otomai_15_12_2020.yaml")
     jungle_obscure = Zone("otomai")
-    zone_zaap_coords = (-46, 18)
+
+    zone_zaap = {
+        "name": "ile d'otomai",
+        "coords": (-46, 18)
+    }
 
     jungle_obscure.loadFromFile(zone_file_path, patterns_dir)
 
-    bot = ResourceFarmer(jungle_obscure, zone_zaap_coords, spell, work_dir, character_name)
+    bot = ResourceFarmer(jungle_obscure, zone_zaap, spell, work_dir, character_name)
     bot.mapChangeTimeOut = 12
     bot.memoTime = 60
     bot.famPatternThreshold = 0.85

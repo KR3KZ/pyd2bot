@@ -74,7 +74,6 @@ class Fighter(Walker):
                 pyautogui.press(dofus.SKIP_TURN_SHORTCUT)
             dofus.OUT_OF_COMBAT_R.hover()
             self.combatAlgo()
-            sleep(10)
             self.combatEnded.set()
             self.nbr_fights += 1
             logging.debug('Combat ended')
@@ -99,7 +98,8 @@ class Fighter(Walker):
                 logging.debug('Bot turn started')
                 return True
             elapsed = perf_counter() - s
-            sleep((1 / rate) - elapsed)
+            if (1 / rate) - elapsed > 0:
+                sleep((1 / rate) - elapsed)
         raise WaitTurnTimedOut
 
     def interrupt(self):
@@ -151,7 +151,7 @@ class Fighter(Walker):
         Play turn loop
         """
         usedSpells = 0
-        while not self.combatEndReached.wait(3) and usedSpells < self.spell['nbr']:
+        while not self.combatEndReached.wait(1) and usedSpells < self.spell['nbr']:
             self.parseCombatGrid()
             if not self.mobs_killed:
                 self.mobs_killed = len(self.grid.mobs)
@@ -224,7 +224,7 @@ class Fighter(Walker):
         raise MoveToCellFailed(cell)
 
     @staticmethod
-    def useSpell(spell, target, timeout=5):
+    def useSpell(spell, target, timeout=2):
         """
         Cast given spell on the target
         :param spell: spell dictionary

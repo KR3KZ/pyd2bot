@@ -27,7 +27,7 @@ if __name__ == "__main__":
     patterns_dir = os.path.join(work_dir, "patterns")
     saves_dir = os.path.join(work_dir, 'saves')
     now = datetime.datetime.now()
-    today_save_file = os.path.join(saves_dir, "sidimote_01_12_2020.yaml")
+    today_save_file = os.path.join(saves_dir, "sidimote_11_12_2020.yaml")
 
     lancer_de_piece = {
         "range": 13,
