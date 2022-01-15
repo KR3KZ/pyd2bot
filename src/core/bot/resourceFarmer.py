@@ -2,12 +2,12 @@ import datetime
 import logging
 import os
 from time import sleep
-
+import math
 import pyautogui
 import yaml
 from core.bot import Fighter
-from core import dofus
-
+from core import dofus, env
+import json
 
 class ResourceFarmer(Fighter):
 
@@ -23,58 +23,27 @@ class ResourceFarmer(Fighter):
 
     def harvest(self):
         logging.debug("Searching for resources...")
-        currMap = self.zone[self.currPos]
-
-        if currMap['nbrseen'] > 30:
-            currMap['nbrseen'] = 9
-
-        if currMap['nbrseen'] < 10:
-            self.discoverSpots()
-
-        else:
-            self.collectLearnedSpots()
-
-        currMap['nbrseen'] += 1
+        self.collect()
         self.checkPopup()
 
-    def collectLearnedSpots(self):
-        currMap = self.zone[self.currPos]
-        for spot in currMap['spots']:
-            if spot['pattern']['kind'] in self.resourcesToFarm and \
-                    spot['region'].find(spot['pattern']['bi'], threshold=0.8):
-                if currMap.isValidSpot(self.lastPos, spot):
-                    self.collect(spot)
-
-    def discoverSpots(self):
-        seen = []
-        currMap = self.zone[self.currPos]
-        while not self.killsig.is_set():
-            matched = False
-            for kind in self.resourcesToFarm:
-                patterns = self.patterns[kind]
-                pattern_imgs = [p['bi'] for p in patterns]
-                tgt, idx = dofus.COMBAT_R.findAny(pattern_imgs, threshold=self.famPatternThreshold)
-                if tgt and tgt not in seen:
-                    spot = {
-                        'region': tgt,
-                        'pattern': patterns[idx]
-                    }
-                    seen.append(tgt)
-                    res = self.collect(spot)
-                    if res:
-                        sleep(0.3)
-                    if res and not currMap.hasSpot(spot):
-                        currMap['spots'].append(spot)
-                    else:
-                        dofus.OUT_OF_COMBAT_R.click()
-                    matched = True
-            if self.combatStarted.is_set():
-                self.combatEnded.wait()
-            if self.disconnected.is_set():
-                self.connected.wait()
-            elif not matched:
-                return
-
+    def collect(self):
+        with open("map.json", 'r') as fp:
+            map_data = json.load(fp)
+            stated_elems = {}
+            for ele in map_data["statedElements"]:
+                stated_elems[ele["elementId"]] = ele
+            for iele in map_data["interactiveElements"]:
+                if iele["onCurrentMap"]:
+                    sele = stated_elems[iele["elementId"]]
+                    if sele["elementState"] == 0:
+                        x, y = self.getCellCoords(sele["elementCellId"])
+                        env.focusDofusWindow()
+                        px, py = self.getCellPixelCenterCoords(x, y)
+                        pyautogui.keyDown('shift')
+                        env.click(px, py)
+                        pyautogui.keyUp('shift')
+                        dofus.OUT_OF_COMBAT_R.hover()
+                
     def interrupt(self):
         data = self.zone.toDict()
         with open(self.today_save_file, 'w') as f:

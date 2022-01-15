@@ -3,17 +3,18 @@ import cv2
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor
 from core import Region, Location
+import math
 
-patterns_dir = r"C:\Users\khalid.majdoub\PycharmProjects\bot2pix\src\patterns"
 
+dir_path = os.path.dirname(os.path.realpath(__file__))
+patterns_dir = os.path.join(dir_path, "..", "patterns")
 
 def loadPattern(name):
     return cv2.imread(os.path.join(patterns_dir, name))
 
-
 RESIGN_POPUP_R = Region(698, 442, 533, 173)
 DEFEAT_POPUP_R = Region(762, 696, 415, 141)
-COMBAT_R = Region(335, 29, 1253, 885)
+COMBAT_R = Region(325,23,1270,903)
 MINIMAP_R = Region(62, 876, 190, 122)
 PM_R = Region(793, 993, 27, 34)
 PA_R = Region(729, 983, 55, 42)
@@ -162,3 +163,19 @@ def findObject(color):
         result = ObjType.DARK
 
     return result
+
+def getCellCoords(cell_id):
+    Y = math.floor(cell_id / 14)
+    if Y < 0:
+        Y = 0
+    if Y&1:
+        X = (cell_id - Y * 14) * 2 + 1
+    else:
+        X = (cell_id - Y * 14) * 2
+    return X, Y
+
+def getCellPixelCenterCoords(x, y):
+    map_px, map_py, map_pw, map_ph = COMBAT_R.getRect()
+    cpx = map_px + int(map_pw / (2 * HCELLS)) * (x + 1) 
+    cpy = map_py + int(map_ph / (2 * VCELLS)) * (y + 1)
+    return cpx, cpy

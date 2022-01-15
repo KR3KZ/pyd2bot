@@ -10,7 +10,7 @@ import win32ui
 from PyQt5.QtCore import QRect
 from pytesseract import pytesseract
 
-pytesseract.tesseract_cmd = r'C:\Users\khalid.majdoub\AppData\Local\Tesseract-OCR\tesseract.exe'
+pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 IDE_HWND = None
 DOFUS_HWND = None
@@ -33,7 +33,7 @@ def focusDofusWindow(account_name=None):
 
 
 def focusIDEWindow():
-    IDE_HWND = pywinauto.findwindows.find_windows(title_re="bot2pix.*")[0]
+    IDE_HWND = pywinauto.findwindows.find_windows(title_re=".*bot2pix.*")[0]
     win32gui.SetForegroundWindow(IDE_HWND)
     win32gui.SetActiveWindow(IDE_HWND)
     win32gui.ShowWindow(IDE_HWND, win32con.SW_MAXIMIZE)
@@ -92,7 +92,6 @@ def _capture(region):
     dcObj.DeleteDC()
     win32gui.ReleaseDC(DOFUS_HWND, hdcwin)
     return img
-
 
 def scroll(clicks=0, delta_x=0, delta_y=0, delay_between_ticks=0):
 

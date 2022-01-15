@@ -183,10 +183,7 @@ class Walker(Bot):
         self.updatePos()
 
         while not self.killsig.is_set():
-            try:
-                env.focusDofusWindow()
-            except:
-                pass
+            env.focusDofusWindow()
             try:
                 if self.fullPods():
                     self.discharge()
@@ -212,7 +209,7 @@ class Walker(Bot):
         logging.info("Goodbye cruel world!")
 
     def goToZaap(self, zaap):
-        print("moving to zaap: ", zaap['coords'])
+        logging.info("moving to zaap: " + str(zaap['coords']))
         pyautogui.press(dofus.HAVRE_SAC_SHORTCUT)
         sleep(4)
         dofus.HAVRE_SAC_ZAAP_R.click()

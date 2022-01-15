@@ -83,7 +83,6 @@ class Bot(threading.Thread):
         # newShape = (int(dofus.MAP_COORDS_R.width() * 5), int(dofus.MAP_COORDS_R.height() * 5))
         # result = cv2.resize(result, newShape)
         # result = cv2.blur(result, (5, 5))
-
         text = pytesseract.image_to_string(result, config='--psm 6')
         res = re.findall("(-?\d+)", text)
         if res:

@@ -1,0 +1,7 @@
+opencv-python
+PyQt5
+pywinauto
+pyyaml
+pyautogui
+scapy
+wdom
