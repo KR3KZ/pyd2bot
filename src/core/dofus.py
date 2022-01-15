@@ -1,3 +1,4 @@
+import json
 import os
 import cv2
 from PyQt5.QtCore import Qt
@@ -179,3 +180,37 @@ def getCellPixelCenterCoords(x, y):
     cpx = map_px + int(map_pw / (2 * HCELLS)) * (x + 1) 
     cpy = map_py + int(map_ph / (2 * VCELLS)) * (y + 1)
     return cpx, cpy
+
+with open(os.path.join(dir_path, "MapCoordinates.json")) as fp:
+    map_coords = json.load(fp)
+
+with open(os.path.join(dir_path, "MapScrollActions.json")) as fp:
+    map_scrolls_json = json.load(fp)
+    map_scrolls = {}
+    for msc in map_scrolls_json:
+        map_scrolls[msc["id"]] = msc
+
+def getMapCoords(map_id):
+    for map_data in map_coords:
+        if map_id in map_data["mapIds"]:
+            compressed_coords = map_data["compressedCoords"]
+            break
+    x = (compressed_coords >> 16)
+    y = -(-compressed_coords & 65535)
+    return x, y
+
+def getMapDirections(mapId=None):
+    if mapId:
+        directions = []
+        mapscrolls = map_scrolls[mapId]
+        if mapscrolls["rightExists"]:
+            directions.append((RIGHT, mapscrolls["rightMapId"]))
+        if mapscrolls["bottomExists"]:
+            directions.append((DOWN, mapscrolls["bottomMapId"]))
+        if mapscrolls["leftExists"]:
+            directions.append((LEFT, mapscrolls["leftMapId"]))
+        if mapscrolls["topExists"]:
+            directions.append((UP, mapscrolls["topMapId"]))
+        return directions
+    else:
+        return [(RIGHT, None), (DOWN, None), (LEFT, None), (UP, None)]

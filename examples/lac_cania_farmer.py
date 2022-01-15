@@ -2,7 +2,7 @@ import atexit
 import datetime
 import os
 from core.bot import ResourceFarmer
-from Labot-1
+
 
 def tearDown(thread):
     thread.interrupt()

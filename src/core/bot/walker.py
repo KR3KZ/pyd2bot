@@ -4,76 +4,114 @@ import logging
 import random
 import re
 from threading import Timer
+import threading
 from time import perf_counter, sleep
-
-import cv2
-import numpy as np
 import pyautogui
-from pytesseract import pytesseract
-
 from core.exceptions import *
 from core import dofus, Region, env
 from core.bot import Bot
+from core.bot.states import *
+from network.message.msg import Msg
 
-
+logger = logging.getLogger("bot")
 class Walker(Bot):
 
     def __init__(self, workdir, name="Dofus"):
         super(Walker, self).__init__(workdir, name=name)
         self.currPos = None
+        self.currMapId = None
         self.lastPos = None
         self.tmpIgnore = []
         self.zone = None
         self.startZaap = None
         self.memoTime = 60 * 15
+        self.mapChangeState = MapChangeState.idle
+        self.posRequestState = PosRequestState.idle
+        self.moving = threading.Event()
+        self.mapChangeTimeOut = 7.6
+        
+    def handleMsg(self, msg: Msg):
+        if msg.msgType["name"] == "MapComplementaryInformationsDataMessage":
+            self.mapChangeState = MapChangeState.done
+            self.currMapData = msg.json()
+            
+        if msg.msgType["name"] == "CurrentMapMessage":
+            map_id = int(msg.json()["mapId"])
+            self.currPos = dofus.getMapCoords(map_id)
+            self.mapChangeState = MapChangeState.done
+        
+        if msg.msgType["name"] == "GameMapMovementRequestMessage":
+            self.moving.set()
+            if self.mapChangeState == MapChangeState.clicked:
+                self.mapChangeState = MapChangeState.moving
+            
+        if msg.msgType["name"] == "GameMapMovementConfirmMessage":
+            self.moving.clear()
+                    
+        if msg.msgType["name"] == "ChatClientMultiMessage":
+            if self.posRequestState == PosRequestState.msgSent:
+                msg_json = msg.json()
+                if msg_json["channel"] == 0:
+                    m = re.match(".*{map,(-?\d+),(-?\d+),1}.*", msg_json["content"])
+                    if m:
+                        x = int(m.group(1))
+                        y = int(m.group(2))
+                        self.currPos = (x, y)
+                        self.posRequestState = PosRequestState.gotResponse
 
-    def updatePos(self, nbr_tries=5):
-        for i in range(nbr_tries):
-            self.currPos = self.parseMapCoords()
-            if self.currPos:
-                return self.currPos
-            if self.disconnected.wait(2):
-                self.connected.wait()
-        raise ParseMapCoordsFailed(f"Enable to parse map coords")
-
+    def getCurrPos(self):
+        pyautogui.press('space')
+        pyautogui.write("%pos%")
+        self.posRequestState = PosRequestState.msgSent
+        pyautogui.press('enter')
+        return self.waitPosMsg(20)
+    
     def changeMap(self, direction, max_tries=3):
         nbr_fails = 0
         while not self.killsig.is_set() and nbr_fails < max_tries:
-            currx, curry = self.updatePos()
+            currx, curry = self.currPos
             dstx, dsty = currx + direction[0], curry + direction[1]
             directionLocs = dofus.mapChangeLoc[direction]
             random.shuffle(directionLocs)
             for tgt in directionLocs:
                 with self.lock:
-                    pyautogui.keyDown('shift')
-                    sleep(0.1)
-                    tgt.click()
-                    sleep(0.1)
-                    pyautogui.keyUp('shift')
-                    dofus.OUT_OF_COMBAT_R.hover()
-                if self.waitMapChange(dstx, dsty, self.mapChangeTimeOut):
-                    self.lastPos = (currx, curry)
-                    return True
-                else:
-                    dofus.OUT_OF_COMBAT_R.click()
-                    sleep(0.1)
+                    self.shiftClick(tgt)
+                self.mapChangeState = MapChangeState.clicked
+                if self.moving.wait(1):
+                    if self.waitMapChange(dstx, dsty, self.mapChangeTimeOut):
+                        self.lastPos = (currx, curry)
+                        return True
+                    else:
+                        dofus.OUT_OF_COMBAT_R.click()
+                        sleep(0.2)
             nbr_fails += 1
         return False
 
+    def waitPosMsg(self, t=20):
+        s = perf_counter()
+        while not self.killsig.is_set() and perf_counter() - s < t:
+            if self.posRequestState == PosRequestState.gotResponse:
+                self.posRequestState = PosRequestState.idle
+                return True
+            sleep(0.2)
+        return False
+                 
     def waitMapChange(self, x, y, timeout=20):
-        logging.debug(f"Current map coords: {self.currPos}")
-        logging.debug(f"Changing map to destination ({x}, {y})")
+        logger.debug(f"Current map coords: {self.currPos}")
+        logger.debug(f"Changing map to destination ({x}, {y})")
         s = perf_counter()
         while not self.killsig.is_set() and perf_counter() - s < timeout:
             if self.combatStarted.wait(0.3):
                 self.combatEnded.wait()
-            if self.updatePos() == (x, y):
-                logging.debug(f"Change map took {perf_counter() - s}")
+            if self.mapChangeState == MapChangeState.done:
+                logger.debug(f"Change map took {perf_counter() - s}")
+                self.mapChangeState = MapChangeState.idle
+                if self.currPos != (x, y):
+                    raise Exception(f"Landed on the wrong map {self.currPos} when requested to go to map {(x, y)}")
                 return True
         return False
 
     def moveToTargets(self, targets):
-        self.updatePos()
         exclude = []
         while not self.killsig.is_set():
             path = self.pathToTargets(targets, exclude)
@@ -104,8 +142,8 @@ class Walker(Bot):
         raise FindPathFailed("Enable to find a valid path!")
 
     @staticmethod
-    def mapNeighbors(pos):
-        directions = {dofus.UP, dofus.DOWN, dofus.LEFT, dofus.RIGHT}
+    def mapNeighbors(pos, mapId=None):
+        directions = dofus.getMapDirections(mapId)
         ans = []
         for direction in directions:
             dx, dy = direction
@@ -118,7 +156,7 @@ class Walker(Bot):
 
     def moveToMap(self, dst):
         return self.moveToTargets([dst])
-
+      
     def randomWalk(self, zone):
         while not self.killsig.is_set():
             dst, direction = zone[self.currPos].randDirection(self.lastPos, ignore=self.tmpIgnore)
@@ -140,46 +178,13 @@ class Walker(Bot):
         Region(771, 737, 272, 40).click()  # click first choice
         dofus.INV_OPEN_R.waitAppear(dofus.INVENTAIRE_P)
 
-    def goToBank(self):
-        pyautogui.press(dofus.RAPPEL_POTION_SHORTCUT)
-        sleep(2)
-        self.updatePos()
-        self.changeMap(dofus.RIGHT)
-        sleep(2)
-        Region(1067, 440, 25, 43).click()  # enter bank click
-
-    def discharge(self):
-        self.goToBank()
-        self.openBank()
-        Region(1469, 142, 29, 26).click()  # choose resources tab
-        sleep(2)
-        self.transferAllObjects()
-        Region(1418, 146, 28, 15).click()  # choose consumable tab
-        sleep(2)
-        self.transferAllObjects("sac")
-        Region(1526, 109, 52, 22).click()  # close
-        sleep(1)
-
-    def transferAllObjects(self, filter=None):
-        if filter:
-            Region(1354, 810, 44, 5).click()  # click on search region
-            sleep(2)
-            pyautogui.write(filter)
-        Region(1248, 138, 34, 33).click()  # click transfer
-        sleep(2)
-        Region(1276, 178, 222, 23).click()  # click transfer visible
-        dofus.INV_FIRST_SLOT_R.waitAppear(dofus.EMPTY_SLOT_INV_P)
-
-    def onTimer(self):
-        if self.tmpIgnore:
-            self.tmpIgnore.pop(0)
-
     def run(self):
         if not self.resourcesToFarm:
             self.resourcesToFarm = self.patterns.keys()
         self.disconnectedObs.start()
         env.focusDofusWindow()
         s = perf_counter()
+        self.sniffUi.start()
         self.updatePos()
 
         while not self.killsig.is_set():
@@ -190,7 +195,6 @@ class Walker(Bot):
                 if self.currPos not in self.zone:
                     self.goToZaap(self.startZaap)
                     self.moveToZone(self.zone)
-                self.updatePos()
                 self.tmpIgnore.append(self.currPos)
                 Timer(self.memoTime, self.onTimer).start()
                 self.harvest()
@@ -201,15 +205,15 @@ class Walker(Bot):
                 if self.disconnected.is_set():
                     self.connected.wait(60 * 5)
                 else:
-                    logging.error("Fatal error!", exc_info=True)
+                    logger.error("Fatal error!", exc_info=True)
                     self.interrupt()
                     break
         total_time = str(datetime.timedelta(seconds=perf_counter() - s))
-        logging.info(f"farmed for total time: {total_time}.")
-        logging.info("Goodbye cruel world!")
+        logger.info(f"farmed for total time: {total_time}.")
+        logger.info("Goodbye cruel world!")
 
     def goToZaap(self, zaap):
-        logging.info("moving to zaap: " + str(zaap['coords']))
+        logger.info("moving to zaap: " + str(zaap['coords']))
         pyautogui.press(dofus.HAVRE_SAC_SHORTCUT)
         sleep(4)
         dofus.HAVRE_SAC_ZAAP_R.click()

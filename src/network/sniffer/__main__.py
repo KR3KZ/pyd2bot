@@ -9,7 +9,6 @@ def main(capture_file=None):
     ui.init(capture_file)
     ui.async_start()
 
-
 if __name__ == "__main__":
 
     logger.debug("Starting sniffer as __main__")

@@ -42,14 +42,14 @@ class SnifferUI(Div):
         self.msgtable = MsgTable(parent=self)
         self.dofusSniffer = DofusSniffer(self.msgtable.appendMsg, self.capture_file)
 
-    def start(self, event):
+    def start(self, event=None):
         if not self.dofusSniffer.running:
             self.dofusSniffer.start()
             self.info.textContent = "Sniffer started"
         else:
             self.info.textContent = "Sniffer already started"
 
-    def stop(self, event):
+    def stop(self, event=None):
         logger.debug("Stop button clicked...")
         if self.dofusSniffer.running:
             self.dofusSniffer.stop()

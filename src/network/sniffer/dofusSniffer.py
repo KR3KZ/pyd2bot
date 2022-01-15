@@ -17,7 +17,7 @@ bot_map_json_path = r"C:\Users\majdoub\OneDrive\Documents\bot2pix\map.json"
 
 class DofusSniffer(AsyncSniffer):
     
-    def __init__(self, action, capture_file):
+    def __init__(self, action, capture_file, bot=None):
         super().__init__(
         filter="tcp port 5555",
         prn=lambda pkt: self.onReceive(pkt, action),
@@ -26,6 +26,7 @@ class DofusSniffer(AsyncSniffer):
         self.SERVER_IP = None
         self.fromClientBuffer = Buffer()
         self.fromServerBuffer = Buffer()
+        self.bot=None
     
     def getLocalIp(self):
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -67,7 +68,7 @@ class DofusSniffer(AsyncSniffer):
                 while msg:
                     if msg.msgType["name"] not in IGNORED_MSGS:
                         action(msg)
-                        if msg.msgType["name"] == "MapComplementaryInformationsDataMessage":
-                            with open(bot_map_json_path, "w") as fp:
-                                json.dump(msg.json(), fp)
+                        if self.bot:
+                            self.bot.handleMsg(msg)
                     msg = Msg.fromRaw(buf, isfromClient)
+        
