@@ -1,13 +1,9 @@
 #!/usr/bin/env python3
 import json
 import socket
-from select import select
-from scapy.all import conf
-from scapy.all import *
-from scapy.data import ETH_P_ALL, MTU
-from pprint import pprint
+from scapy.all import AsyncSniffer, Packet
 import logging
-from ..data import Buffer, Msg
+from ..message import Buffer, Msg
 
 
 IGNORED_MSGS = ["ChatServerMessage", 
@@ -21,7 +17,7 @@ bot_map_json_path = r"C:\Users\majdoub\OneDrive\Documents\bot2pix\map.json"
 
 class DofusSniffer(AsyncSniffer):
     
-    def __init__(self, action, capture_file) -> Any:
+    def __init__(self, action, capture_file):
         super().__init__(
         filter="tcp port 5555",
         prn=lambda pkt: self.onReceive(pkt, action),

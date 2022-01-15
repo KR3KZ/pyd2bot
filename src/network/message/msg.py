@@ -1,12 +1,12 @@
 import logging
-
 from .binrw import Data, Buffer
-from .. import protocol
-
+from ..protocol import DofusProtocol
+from pathlib import Path
 
 logger = logging.getLogger("labot")
 
-
+protocol_json_f = Path(__file__).parent / "../protocol.json"
+dofusProtocol = DofusProtocol(protocol_json_f)
 class Msg:
     def __init__(self, m_id, data, count=None):
         self.id = m_id
@@ -39,6 +39,9 @@ class Msg:
     def fromRaw(buf: Buffer, from_client):
         """Read a message from the buffer and
         empty the beginning of the buffer.
+        msg fields spec: 
+            id     |   len    |   data
+           2 bits  |  2 bits  |  len bits
         """
         if not buf:
             return
@@ -53,20 +56,20 @@ class Msg:
             data = Data(buf.read(lenData))
         except IndexError:
             buf.pos = 0
-            logger.debug("Could not parse message: Not complete")
-            return None
-        else:
-            if id == 2:
-                logger.debug("Message is NetworkDataContainerMessage! Uncompressing...")
-                newbuffer = Buffer(data.readByteArray())
-                newbuffer.uncompress()
-                msg = Msg.fromRaw(newbuffer, from_client)
-                assert msg is not None and not newbuffer.remaining()
-                return msg
-            logger.debug("Parsed %s", protocol.msg_from_id[id]["name"])
-            buf.end()
+            raise Exception("Unable to parse the msg because of missing data")
 
-            return Msg(id, data, count)
+        if id == 2:
+            logger.debug("Message is NetworkDataContainerMessage! Uncompressing...")
+            newbuffer = Buffer(data.readByteArray())
+            newbuffer.uncompress()
+            msg = Msg.fromRaw(newbuffer, from_client)
+            if msg is None or newbuffer.remaining():
+                raise Exception("Unable to parse Message")
+            return msg
+        
+        buf.end()
+
+        return Msg(id, data, count)
 
     def lenlenData(self):
         if len(self.data) > 65535:
@@ -89,17 +92,18 @@ class Msg:
 
     @property
     def msgType(self):
-        return protocol.msg_from_id[self.id]
+        return dofusProtocol.getMsgById(self.id)
 
     def json(self):
         logger.debug("Getting json representation of message %s", self)
         if not hasattr(self, "parsed"):
-            self.parsed = protocol.read(self.msgType, self.data)
+            self.parsed = dofusProtocol.read(self.msgType["name"], self.data)
         return self.parsed
 
     @staticmethod
     def from_json(json, count=None, random_hash=True):
         type_name: str = json["__type__"]
-        type_id: int = protocol.types[type_name]["protocolId"]
-        data = protocol.write(type_name, json, random_hash=random_hash)
+        msg_type: dict = dofusProtocol.getMsgTypeByName(type_name)
+        type_id: int = msg_type["protocolId"]
+        data = dofusProtocol.write(type_name, json, random_hash=random_hash)
         return Msg(type_id, data, count)
