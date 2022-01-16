@@ -142,8 +142,8 @@ class GridOverlay(Overlay):
 
     def paintEvent(self, event):
         qp = QPainter(self)
-        pen = QPen(QColor(255, 0, 0), 3, QtCore.Qt.SolidLine)
-        brush = QBrush(QColor(255, 0, 0))
+        pen = QPen(QColor(255, 0, 0), 1, QtCore.Qt.SolidLine)
+        brush = QBrush(QColor(0xFF, 0, 0, 0x80))
         qp.setPen(pen)
         for cell in self.grid:
             self.drawCell(qp, pen, brush, cell)

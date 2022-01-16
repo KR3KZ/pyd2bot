@@ -1,6 +1,7 @@
 import sys
 from itertools import product
 from math import floor
+from time import perf_counter
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QApplication
 from core import dofus, Cell, Region
@@ -81,62 +82,34 @@ class Grid(Region):
                     yielded.add(res)
                     yield res
 
-    def getByCoords(self, x, y, relative=True):
+    def getByCoords(self, px, py, relative=True):
         if not relative:
-            x = x - self.x()
-            y = y - self.y()
-        ny = 2 * y / self.cell_h
-        nx = 2 * x / self.cell_w
+            px = px - self.x()
+            py = py - self.y()
+        ny = 2 * py / self.cell_h
+        nx = 2 * px / self.cell_w
         iRange = [floor(ny) + eps for eps in range(2)]
         jRange = [floor(nx) + eps for eps in range(2)]
         for i, j in product(iRange, jRange):
             if (j + i) % 2 == 0 and abs(ny - i) + abs(nx - j) <= 1:
                 return i - 1, floor((j - 1) / 2)
 
-    def parse(self, do_parse=True):
+    def parse(self, mapId, do_parse=True):
         self.bot = None
         self.mobs = set()
         self.reachable = set()
         self.free = set()
-        self.capture()
         self.unknown = []
-        for cell in self:
-
+        map_data = dofus.getScrappedMapJson(mapId)
+        for cellId, cell in enumerate(self):
             if do_parse:
-                ctype = cell.parse()
-            else:
-                ctype = cell.type
-
-            if ctype == dofus.ObjType.BOT:
-                self.bot = cell
-            elif ctype == dofus.ObjType.MOB:
-                self.mobs.add(cell)
-            elif ctype == dofus.ObjType.FREE:
-                self.free.add(cell)
-            elif ctype == dofus.ObjType.REACHABLE:
-                self.reachable.add(cell)
-            elif ctype == dofus.ObjType.INVOKE:
-                self.invoke.add(cell)
-            elif ctype == dofus.ObjType.UNKNOWN:
-                self.unknown.append(cell)
-
-        if len(self.unknown) == 1:
-            if not self.mobs:
-                self.unknown[0].type = dofus.ObjType.MOB
-                self.mobs.add(self.unknown[0])
-            elif not self.bot:
-                self.unknown[0].type = dofus.ObjType.BOT
-                self.bot = self.unknown[0]
-            else:
-                # assume its an obstacle (to test)
-                self.unknown[0].type = dofus.ObjType.OBSTACLE
-
-        elif len(self.unknown) > 1:
-            return False
-
-        if not self.bot or not self.mobs:
-            return False
-
+                cell_data = map_data["cells"][cellId]
+                if not cell_data["los"]:
+                    cell.type = dofus.ObjType.OBSTACLE
+                elif not cell_data["mov"] or cell_data["nonWalkableDuringFight"]:
+                    cell.type = dofus.ObjType.DARK
+                else:
+                    cell.type = dofus.ObjType.FREE
         return True
 
     def dist(self, cell1, cell2):
@@ -167,10 +140,10 @@ class Grid(Region):
     def inside(self, i, j):
         return 0 <= i <= self.rows - 1 and 0 <= j <= self.cols - 1
 
-
 if __name__ == "__main__":
     env.focusDofusWindow()
     grid = Grid(dofus.COMBAT_R, dofus.VCELLS, dofus.HCELLS)
-    grid.parse()
+    s = perf_counter()
+    grid.parse(212599298)
     grid.highlight(10)
     grid.overlay.highlightEnded.connect(env.focusIDEWindow)

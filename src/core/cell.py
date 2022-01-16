@@ -9,7 +9,7 @@ from gui.Overlay import CellOverlay
 
 class Cell:
 
-    def __init__(self, pgrid, x, y, i, j, ctype=dofus.ObjType.UNKNOWN):
+    def __init__(self, pgrid, x, y, i, j, ctype=None):
         self.i = i
         self.j = j
         self.x = x

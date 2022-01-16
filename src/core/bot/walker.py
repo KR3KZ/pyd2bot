@@ -174,7 +174,7 @@ class Walker(Bot):
         return self.moveToTargets([dst])
       
     def randomWalk(self, zone):
-        self.getCurrPos()
+        self.refreshMapData()
         if self.currPos not in zone:
             self.moveToZone(zone)
         while not self.killsig.is_set():
@@ -202,8 +202,10 @@ class Walker(Bot):
         Region(771, 737, 272, 40).click()  # click first choice
         dofus.INV_OPEN_R.waitAppear(dofus.INVENTAIRE_P)
 
-    def refreshMapData():
+    def refreshMapData(self):
+        pyautogui.press("escape")
         pyautogui.press(dofus.HAVRE_SAC_SHORTCUT)
+        sleep(0.2)
         pyautogui.press(dofus.HAVRE_SAC_SHORTCUT)
         
     def run(self):
@@ -212,7 +214,7 @@ class Walker(Bot):
         s = perf_counter()
         self.sniffer.start()
         sleep(1)
-        self.getCurrPos()
+        self.refreshMapData()
         while not self.killsig.is_set():
             try:
                 if self.currPos not in self.zone:

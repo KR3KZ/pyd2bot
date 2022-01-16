@@ -56,6 +56,7 @@ class Bot(threading.Thread):
         self.currMapData = None
         self.currMapInteractiveElems = {}
         self.currMapStatedElems = {}
+        self.id = {}
         
     def interrupt(self):
         self.sniffUi.stop()
