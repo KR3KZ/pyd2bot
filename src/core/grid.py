@@ -172,5 +172,5 @@ if __name__ == "__main__":
     env.focusDofusWindow()
     grid = Grid(dofus.COMBAT_R, dofus.VCELLS, dofus.HCELLS)
     grid.parse()
-    grid.highlight(5)
+    grid.highlight(10)
     grid.overlay.highlightEnded.connect(env.focusIDEWindow)

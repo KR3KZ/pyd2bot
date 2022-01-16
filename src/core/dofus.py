@@ -1,19 +1,21 @@
+import json
 import os
 import cv2
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor
 from core import Region, Location
+import math
 
-patterns_dir = r"C:\Users\khalid.majdoub\PycharmProjects\bot2pix\src\patterns"
 
+dir_path = os.path.dirname(os.path.realpath(__file__))
+patterns_dir = os.path.join(dir_path, "..", "patterns")
 
 def loadPattern(name):
     return cv2.imread(os.path.join(patterns_dir, name))
 
-
 RESIGN_POPUP_R = Region(698, 442, 533, 173)
 DEFEAT_POPUP_R = Region(762, 696, 415, 141)
-COMBAT_R = Region(335, 29, 1253, 885)
+COMBAT_R = Region(325,23,1270,903)
 MINIMAP_R = Region(62, 876, 190, 122)
 PM_R = Region(793, 993, 27, 34)
 PA_R = Region(729, 983, 55, 42)
@@ -78,19 +80,23 @@ mapChangeLoc = {
     UP: [
         Region(877, 29, 142, 12),
         Region(492, 29, 141, 11),
-        Region(1318, 30, 165, 11)],
+        Region(1318, 30, 165, 11)
+    ],
     LEFT: [
         Region(335, 349, 14, 126),
         Region(337, 112, 10, 116),
-        Region(338, 719, 11, 116)],
+        Region(338, 719, 11, 116)
+    ],
     RIGHT: [
         Region(1576, 360, 7, 125),
         Region(1572, 53, 11, 98),
-        Region(1572, 752, 12, 100)],
+        Region(1575,707,22,94)
+    ],
     DOWN: [
         Region(898, 901, 137, 12),
         Region(423, 905, 111, 6),
-        Region(1334, 893, 111, 22)]
+        Region(1334, 893, 111, 22)
+    ]
 }
 
 MY_TURN_CHECK_L = Location(1425, 963)
@@ -162,3 +168,41 @@ def findObject(color):
         result = ObjType.DARK
 
     return result
+
+def getCellCoords(cell_id):
+    Y = math.floor(cell_id / 14)
+    if Y < 0:
+        Y = 0
+    if Y&1:
+        X = (cell_id - Y * 14) * 2 + 1
+    else:
+        X = (cell_id - Y * 14) * 2
+    return X, Y
+
+def getCellPixelCenterCoords(x, y):
+    map_px, map_py, map_pw, map_ph = COMBAT_R.getRect()
+    cpx = map_px + int(map_pw / (2 * HCELLS)) * (x + 1) 
+    cpy = map_py + int(map_ph / (2 * VCELLS)) * (y + 1)
+    return cpx, cpy
+
+with open(os.path.join(dir_path, "MapCoordinates.json")) as fp:
+    map_coords = json.load(fp)
+
+with open(os.path.join(dir_path, "MapPositions.json")) as fp:
+    _json = json.load(fp)
+    map_positions = {}
+    for mpos in _json:
+        map_positions[int(mpos["id"])] = mpos
+
+def getMapCoords(map_id):
+    x = map_positions[int(map_id)]["posX"]
+    y = map_positions[int(map_id)]["posY"]
+    return x, y
+    # else:
+    #     for map_data in map_coords:
+    #         if map_id in map_data["mapIds"]:
+    #             compressed_coords = map_data["compressedCoords"]
+    #             break
+    #     x = (compressed_coords >> 16)
+    #     y = -(-compressed_coords & 65535)
+    #     return x, y

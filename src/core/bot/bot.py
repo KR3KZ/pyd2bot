@@ -8,7 +8,10 @@ import numpy as np
 import pyautogui
 import pytesseract
 from core import Observer, dofus, env, utils, Region
+from network.message.msg import Msg
+import network.sniffer.ui as snifferui
 
+logger = logging.getLogger("bot")
 
 class Pattern(dict):
     def __init__(self, kind, path_to_pattern, id):
@@ -23,6 +26,8 @@ class Bot(threading.Thread):
 
     def __init__(self, workdir, name="Bot"):
         super(Bot, self).__init__(name=name)
+        self.inventoryWeight = None
+        self.weightMax = None
         self.killsig = threading.Event()
         self.combatStarted = threading.Event()
         self.combatEnded = threading.Event()
@@ -30,6 +35,10 @@ class Bot(threading.Thread):
         self.lock = threading.Lock()
         self.disconnected = threading.Event()
         self.connected = threading.Event()
+        self.moving = threading.Event()
+        self.idle = threading.Event()
+        self.fullPods = threading.Event()
+        self.fullPodsAAA = threading.Event()
         self.name = name
         self.dead = False
         self.workdir = workdir
@@ -38,20 +47,18 @@ class Bot(threading.Thread):
                                         self.reconnect,
                                         Observer.Mode.APPEAR,
                                         rate=1 / 5)
-        self.patternsDir = os.path.join(self.workdir, 'patterns')
-        self.patterns = {}
-        self.loadPatterns()
         self.resourcesToFarm = []
-        self.mapChangeTimeOut = 7.6
-
-    def loadPatterns(self):
-        for patternDir in os.listdir(self.patternsDir):
-            self.patterns[patternDir] = []
-            fpath = os.path.join(self.patternsDir, patternDir)
-            for path_to_img, fn in utils.iterPatternsImg(fpath):
-                self.patterns[patternDir].append(Pattern(patternDir, path_to_img, fn))
-
+        snifferui.init(None)
+        self.sniffUi = snifferui.ui
+        snifferui.async_start()
+        self.sniffer = self.sniffUi.dofusSniffer
+        self.sniffer.bot = self
+        self.currMapData = None
+        self.currMapInteractiveElems = {}
+        self.currMapStatedElems = {}
+        
     def interrupt(self):
+        self.sniffUi.stop()
         self.killsig.set()
         self.disconnectedObs.stop()
 
@@ -64,45 +71,7 @@ class Bot(threading.Thread):
         dofus.CONNECT_R.waitVanish(dofus.DISCONNECTED_BOX_P)
         dofus.RECONNECT_BUTTON_R.click()
         sleep(20)
-        if self.waitMapCoords(99999999):
-            self.disconnected.clear()
-            self.connected.set()
-
-    @staticmethod
-    def parseMapCoords():
-        image = env.capture(dofus.MAP_COORDS_R)
-        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        low_bound = np.array([160, 60, 0])
-        upper_bound = np.array([255, 255, 255])
-
-        bgr_img = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
-        mask = cv2.inRange(bgr_img, low_bound, upper_bound)
-        result = cv2.bitwise_and(gray, gray, mask=mask)
-        result = cv2.threshold(result, 0, 255, cv2.THRESH_BINARY_INV)[1]
-
-        # newShape = (int(dofus.MAP_COORDS_R.width() * 5), int(dofus.MAP_COORDS_R.height() * 5))
-        # result = cv2.resize(result, newShape)
-        # result = cv2.blur(result, (5, 5))
-
-        text = pytesseract.image_to_string(result, config='--psm 6')
-        res = re.findall("(-?\d+)", text)
-        if res:
-            return int(res[0]), int(res[1])
-        else:
-            return None
-
-    def waitMapCoords(self, timeout=5):
-        s = perf_counter()
-        while not self.killsig.is_set() and perf_counter() - s < timeout:
-            if self.parseMapCoords():
-                return True
-            sleep(0.2)
-        return False
-
-    @staticmethod
-    def fullPods():
-        return dofus.FULL_POD_CHECK_L.getpixel() == dofus.FULL_POD_COLOR
-
+        
     @staticmethod
     def shiftClick(tgt):
         pyautogui.keyDown('shift')
@@ -110,31 +79,7 @@ class Bot(threading.Thread):
         tgt.click()
         sleep(0.1)
         pyautogui.keyUp('shift')
-        sleep(0.1)
         dofus.OUT_OF_COMBAT_R.hover()
-
-    def collect(self, spot, timeout=7):
-        tgt = spot['region']
-
-        with self.lock:
-            self.shiftClick(tgt)
-
-        if spot['pattern']['kind'] == 'poisson' or spot['pattern']['kind'] == 'poissonMoyen':
-            sleep(1)
-            if not tgt.waitChange(5):
-                return False
-            sleep(1)
-            res = tgt.waitChange(2.5)
-        else:
-            res = dofus.SLOTS_R.waitChange(timeout)
-
-        if self.combatStarted.is_set():
-            self.combatEnded.wait()
-        if self.disconnected.is_set():
-            self.connected.wait()
-        self.checkPopup()
-
-        return res
 
     def harvest(self):
         pass
@@ -145,3 +90,20 @@ class Bot(threading.Thread):
         if m:
             m.click()
 
+    def handleMsg(self, msg: Msg):
+        logger.info("received msg: " + msg.msgType["name"])     
+        
+        if msg.msgType["name"] == "InventoryWeightMessage":
+            msg_json = msg.json()
+            self.inventoryWeight = msg_json["inventoryWeight"]
+            self.weightMax = msg_json["weightMax"]
+            prcnt = self.inventoryWeight / self.weightMax
+            if prcnt > 0.9:
+                logger.info(f"Bot reached {100 * prcnt} of pod available")
+                self.fullPodsAAA.set()
+            
+        if msg.msgType["name"] == "NotificationUpdateFlagMessage":
+            msg_json = msg.json()
+            if msg_json["index"] == 37:
+                self.fullPods.set()
+                logger.info("Got bot full pod notif from server")

@@ -10,47 +10,16 @@ import logging
 pyautogui.FAILSAFE = False
 
 
-class CombatStartObs(threading.Thread):
-    def __init__(self, bot, rate=3):
-        super(CombatStartObs, self).__init__()
-        self.bot = bot
-        self.rate = rate
-
-    def run(self):
-        while not self.bot.killsig.wait(1):
-            patterns = [dofus.READY_BUTTON_P, dofus.SKIP_TURN_BUTTON_P]
-            match, idx = dofus.READY_R.waitAny(patterns)
-            self.bot.onCombatStarted('combat' if idx == 0 else 'turn')
-            self.bot.combatEnded.wait()
-
-
-class CombatEndObs(threading.Thread):
-    def __init__(self, bot, rate=3):
-        super(CombatEndObs, self).__init__()
-        self.bot = bot
-        self.rate = rate
-
-    def run(self):
-        while not self.bot.killsig.is_set():
-            if self.bot.combatStarted.wait(1 / self.rate) and \
-                    dofus.COMBAT_ENDED_POPUP_R.waitAppear(dofus.COMBAT_ENDED_POPUP_P, rate=self.rate):
-                self.bot.onCombatEnded()
-
-
 class Fighter(Walker):
 
     def __init__(self, spell, workdir, name="Fighter"):
         super(Fighter, self).__init__(workdir, name)
         self.spell = spell
-        self.fightEndObs = CombatEndObs(self)
-        self.fightStartObs = CombatStartObs(self)
         self.grid = Grid(dofus.COMBAT_R, dofus.VCELLS, dofus.HCELLS)
         self.mobs_killed = 0
         self.nbr_fights = 0
 
     def run(self):
-        self.fightStartObs.start()
-        self.fightEndObs.start()
         super(Fighter, self).run()
 
     def onCombatEnded(self):
@@ -60,7 +29,7 @@ class Fighter(Walker):
         dofus.COMBAT_ENDED_POPUP_R.waitVanish(dofus.COMBAT_ENDED_POPUP_P)
         sleep(0.7)
 
-    def onCombatStarted(self, event):
+    def onCombatStarted(self):
         match = dofus.LVL_UP_INFO_R.find(dofus.CLOSE_POPUP_P)
         if match:
             match.click()
@@ -70,8 +39,7 @@ class Fighter(Walker):
             self.combatEndReached.clear()
             self.combatEnded.clear()
             self.dead = False
-            if event == 'combat':
-                pyautogui.press(dofus.SKIP_TURN_SHORTCUT)
+            pyautogui.press(dofus.SKIP_TURN_SHORTCUT)
             dofus.OUT_OF_COMBAT_R.hover()
             self.combatAlgo()
             self.combatEnded.set()
