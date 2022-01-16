@@ -24,7 +24,7 @@ keycodes = {
 
 def focusDofusWindow(account_name=None):
     if not account_name:
-        DOFUS_HWND = pywinauto.findwindows.find_windows(title_re=".*Dofus.*")[0]
+        DOFUS_HWND = pywinauto.findwindows.find_windows(title_re=".*Dofus 2.*")[0]
     else:
         DOFUS_HWND = pywinauto.findwindows.find_windows(title_re=f".*{account_name}.*")[0]
     win32gui.SetForegroundWindow(DOFUS_HWND)
@@ -94,7 +94,6 @@ def _capture(region):
     return img
 
 def scroll(clicks=0, delta_x=0, delta_y=0, delay_between_ticks=0):
-
     if clicks > 0:
         increment = win32con.WHEEL_DELTA
     else:

@@ -80,19 +80,23 @@ mapChangeLoc = {
     UP: [
         Region(877, 29, 142, 12),
         Region(492, 29, 141, 11),
-        Region(1318, 30, 165, 11)],
+        Region(1318, 30, 165, 11)
+    ],
     LEFT: [
         Region(335, 349, 14, 126),
         Region(337, 112, 10, 116),
-        Region(338, 719, 11, 116)],
+        Region(338, 719, 11, 116)
+    ],
     RIGHT: [
         Region(1576, 360, 7, 125),
         Region(1572, 53, 11, 98),
-        Region(1572, 752, 12, 100)],
+        Region(1575,707,22,94)
+    ],
     DOWN: [
         Region(898, 901, 137, 12),
         Region(423, 905, 111, 6),
-        Region(1334, 893, 111, 22)]
+        Region(1334, 893, 111, 22)
+    ]
 }
 
 MY_TURN_CHECK_L = Location(1425, 963)
@@ -184,33 +188,21 @@ def getCellPixelCenterCoords(x, y):
 with open(os.path.join(dir_path, "MapCoordinates.json")) as fp:
     map_coords = json.load(fp)
 
-with open(os.path.join(dir_path, "MapScrollActions.json")) as fp:
-    map_scrolls_json = json.load(fp)
-    map_scrolls = {}
-    for msc in map_scrolls_json:
-        map_scrolls[msc["id"]] = msc
+with open(os.path.join(dir_path, "MapPositions.json")) as fp:
+    _json = json.load(fp)
+    map_positions = {}
+    for mpos in _json:
+        map_positions[int(mpos["id"])] = mpos
 
 def getMapCoords(map_id):
-    for map_data in map_coords:
-        if map_id in map_data["mapIds"]:
-            compressed_coords = map_data["compressedCoords"]
-            break
-    x = (compressed_coords >> 16)
-    y = -(-compressed_coords & 65535)
+    x = map_positions[int(map_id)]["posX"]
+    y = map_positions[int(map_id)]["posY"]
     return x, y
-
-def getMapDirections(mapId=None):
-    if mapId:
-        directions = []
-        mapscrolls = map_scrolls[mapId]
-        if mapscrolls["rightExists"]:
-            directions.append((RIGHT, mapscrolls["rightMapId"]))
-        if mapscrolls["bottomExists"]:
-            directions.append((DOWN, mapscrolls["bottomMapId"]))
-        if mapscrolls["leftExists"]:
-            directions.append((LEFT, mapscrolls["leftMapId"]))
-        if mapscrolls["topExists"]:
-            directions.append((UP, mapscrolls["topMapId"]))
-        return directions
-    else:
-        return [(RIGHT, None), (DOWN, None), (LEFT, None), (UP, None)]
+    # else:
+    #     for map_data in map_coords:
+    #         if map_id in map_data["mapIds"]:
+    #             compressed_coords = map_data["compressedCoords"]
+    #             break
+    #     x = (compressed_coords >> 16)
+    #     y = -(-compressed_coords & 65535)
+    #     return x, y

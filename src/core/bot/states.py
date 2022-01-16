@@ -11,4 +11,12 @@ class MapChangeState(Enum):
     moving = 4
     requested = 2
     done = 3
+
+class FarmingState(Enum):
+    idle = 0
+    clicked = 1
+    moving = 2
+    requested = 3
+    startedCollect = 4
+    endedCollect = 5
     
