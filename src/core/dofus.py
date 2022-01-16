@@ -9,13 +9,12 @@ import math
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 patterns_dir = os.path.join(dir_path, "..", "patterns")
-
 def loadPattern(name):
     return cv2.imread(os.path.join(patterns_dir, name))
 
 RESIGN_POPUP_R = Region(698, 442, 533, 173)
 DEFEAT_POPUP_R = Region(762, 696, 415, 141)
-COMBAT_R = Region(325,23,1270,903)
+COMBAT_R = Region(325, 23, 1271, 903)
 MINIMAP_R = Region(62, 876, 190, 122)
 PM_R = Region(793, 993, 27, 34)
 PA_R = Region(729, 983, 55, 42)
@@ -112,63 +111,14 @@ CLOSE_LVL_UP_POPUP_L = Region(336, 573, 46, 32)
 RAPPEL_POTION_SHORTCUT = "e"
 SKIP_TURN_SHORTCUT = 'space'
 HAVRE_SAC_SHORTCUT = "h"
-
-ENU_COLOR = [QColor(253, 242, 206), QColor(253, 190, 45), QColor(254, 249, 226), QColor(216, 138, 22)]
-SRAM_COLOR = [QColor(61, 56, 150), QColor(251, 241, 191), QColor(33, 34, 88), QColor(227, 218, 173),
-              QColor(34, 51, 153)]
-
-FULL_POD_CHECK_L = Location(1266, 1019)
-FULL_POD_COLOR = QColor(53, 190, 96)
-
-
-class ObjColor:
-    BOT = ENU_COLOR + SRAM_COLOR
-    MOB = [QColor(46, 54, 61), QColor(41, 48, 55)]
-    FREE = [QColor(150, 142, 103), QColor(142, 134, 94), QColor(186, 181, 155), QColor(128, 121, 85)]
-    OBSTACLE = [QColor(255, 255, 255), QColor(88, 83, 58), QColor(79, 75, 52), QColor(228, 228, 226)]
-    DARK = [QColor(0, 0, 0)]
-    REACHABLE = [QColor(90, 125, 62), QColor(85, 121, 56), QColor(0, 102, 0), QColor(77, 109, 50)]
-    INVOKE = [QColor(218, 57, 45), QColor(255, 244, 221)]
-    MY_TURN_COLOR = QColor(252, 200, 0)
-
-
 class ObjType:
-    REACHABLE = QColor(Qt.darkGreen)
     OBSTACLE = QColor(88, 83, 58)
     DARK = Qt.black
     MOB = QColor(Qt.darkBlue)
     BOT = QColor(Qt.darkRed)
     FREE = QColor(142, 134, 94)
     INVOKE = QColor(Qt.yellow)
-    UNKNOWN = QColor(Qt.gray)
-
-
-def findObject(color):
-    result = ObjType.UNKNOWN
-
-    if color in ObjColor.OBSTACLE:
-        result = ObjType.OBSTACLE
-
-    elif color in ObjColor.FREE:
-        result = ObjType.FREE
-
-    elif color in ObjColor.REACHABLE:
-        result = ObjType.REACHABLE
-
-    elif color in ObjColor.INVOKE:
-        result = ObjType.INVOKE
-
-    elif color in ObjColor.MOB:
-        result = ObjType.MOB
-
-    elif color in ObjColor.BOT:
-        result = ObjType.BOT
-
-    elif color in ObjColor.DARK:
-        result = ObjType.DARK
-
-    return result
-
+    
 def getCellCoords(cell_id):
     Y = math.floor(cell_id / 14)
     if Y < 0:
@@ -181,8 +131,8 @@ def getCellCoords(cell_id):
 
 def getCellPixelCenterCoords(x, y):
     map_px, map_py, map_pw, map_ph = COMBAT_R.getRect()
-    cpx = map_px + int(map_pw / (2 * HCELLS)) * (x + 1) 
-    cpy = map_py + int(map_ph / (2 * VCELLS)) * (y + 1)
+    cpx = map_px + int(map_pw / (2 * HCELLS) * (x + 1))
+    cpy = map_py + int(map_ph / (2 * VCELLS) * (y + 1))
     return cpx, cpy
 
 with open(os.path.join(dir_path, "MapCoordinates.json")) as fp:
@@ -193,16 +143,13 @@ with open(os.path.join(dir_path, "MapPositions.json")) as fp:
     map_positions = {}
     for mpos in _json:
         map_positions[int(mpos["id"])] = mpos
+        
+def getScrappedMapJson(mapId):
+    with open(os.path.join(dir_path, "scraped_maps", f"{mapId}.json"), "r") as fp:
+        map_data = json.load(fp)
+    return map_data
 
 def getMapCoords(map_id):
     x = map_positions[int(map_id)]["posX"]
     y = map_positions[int(map_id)]["posY"]
     return x, y
-    # else:
-    #     for map_data in map_coords:
-    #         if map_id in map_data["mapIds"]:
-    #             compressed_coords = map_data["compressedCoords"]
-    #             break
-    #     x = (compressed_coords >> 16)
-    #     y = -(-compressed_coords & 65535)
-    #     return x, y

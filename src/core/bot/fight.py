@@ -7,9 +7,11 @@ from core.bot import Walker
 from core.exceptions import *
 from core.grid import Grid
 import logging
+
+from network.message.msg import Msg
 pyautogui.FAILSAFE = False
 
-
+logger = logging.getLogger("bot")
 class Fighter(Walker):
 
     def __init__(self, spell, workdir, name="Fighter"):
@@ -25,11 +27,374 @@ class Fighter(Walker):
     def onCombatEnded(self):
         self.combatEndReached.set()
         self.combatStarted.clear()
-        dofus.COMBAT_ENDED_POPUP_CLOSE_R.click()
-        dofus.COMBAT_ENDED_POPUP_R.waitVanish(dofus.COMBAT_ENDED_POPUP_P)
+        pyautogui.press("escape")
         sleep(0.7)
 
+    def handleMsg(self, msg: Msg):
+        super().handleMsg(msg)
+        if msg.msgType["name"] == "GameFightStartingMessage":
+            """	
+            {
+                '__type__': 'GameFightStartingMessage',
+                'attackerId': 290210840786.0,
+                'containsBoss': False,
+                'defenderId': -20008.0,
+                'fightId': 2517,
+                'fightType': 4}
+            """
+            msg_json = msg.json()
+            self.id = msg_json["attackerId"]
+            logger.info(msg_json)
+            self.combatStarted.set()
+        
+        elif msg.msgType["name"] == "GameEntitiesDispositionMessage":
+            """
+            {
+                '__type__': 'GameEntitiesDispositionMessage',
+                'dispositions': [
+                    {'__type__': 'IdentifiedEntityDispositionInformations',
+                'cellId': 483,
+                'direction': 7,
+                'id': 290210840786.0}]
+            }
+            """
+            msg_json = msg.json()
+            cellId = msg_json["cellId"]
+            x, y = dofus.getCellCoords(cellId)
+            if msg_json["id"] == self.id:
+                self.grid[x][y].type = dofus.ObjType.BOT
+                self.grid.bot = self.grid[x][y]
+            else:
+                self.grid[x][y].type = dofus.ObjType.MOB
+                self.grid.mobs.add(self.grid[x][y])
+        
+        elif msg.msgType["name"] == "GameFightShowFighterMessage":
+            """{
+                    '__type__': 'GameFightShowFighterMessage',
+                    'informations': {'__type__': 'GameFightCharacterInformations',
+                    'alignmentInfos': {'__type__': 'ActorAlignmentInformations',
+                                     'alignmentGrade': 0,
+                                     'alignmentSide': 0,
+                                     'alignmentValue': 0,
+                                     'characterPower': 290210840968.0},
+                  'breed': 3,
+                  'contextualId': 290210840786.0,
+                  'disposition': {'__type__': 'FightEntityDispositionInformations',
+                                  'carryingCharacterId': 0.0,
+                                  'cellId': 483,
+                                  'direction': 7},
+                  'hiddenInPrefight': False,
+                  'ladderPosition': 0,
+                  'leagueId': 65535,
+                  'level': 182,
+                  'look': {'__type__': 'EntityLook',
+                           'bonesId': 1,
+                           'indexedColors': [32562098,
+                                             35425736,
+                                             52378184,
+                                             68446613,
+                                             89959123],
+                           'scales': [120],
+                           'skins': [30, 2046, 250, 1176, 75, 499],
+                           'subentities': [{'__type__': 'SubEntity',
+                                            'bindingPointCategory': 1,
+                                            'bindingPointIndex': 0,
+                                            'subEntityLook': {'__type__': 'EntityLook',
+                                                              'bonesId': 264,
+                                                              'indexedColors': [],
+                                                              'scales': [80],
+                                                              'skins': [],
+                                                              'subentities': []}}]},
+                  'name': 'John-shooter',
+                  'previousPositions': [],
+                  'sex': False,
+                  'spawnInfo': {'__type__': 'GameContextBasicSpawnInformation',
+                                'alive': True,
+                                'informations': {'__type__': 'GameContextActorPositionInformations',
+                                                 'contextualId': 290210840786.0,
+                                                 'disposition': {'__type__': 'FightEntityDispositionInformations',
+                                                                 'carryingCharacterId': 0.0,
+                                                                 'cellId': 483,
+                                                                 'direction': 7}},
+                                'teamId': 0},
+                  'stats': {'__type__': 'GameFightCharacteristics',
+                            'characteristics': {'__type__': 'CharacterCharacteristics',
+                                                'characteristics': [{'__type__': 'CharacterUsableCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 7,
+                                                                     'characteristicId': 1,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 2,
+                                                                     'used': 0},
+                                                                    {'__type__': 'CharacterUsableCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 3,
+                                                                     'characteristicId': 23,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 2,
+                                                                     'used': 0},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 0,
+                                                                     'characteristicId': 37,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 3},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 0,
+                                                                     'characteristicId': 33,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 65534},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 0,
+                                                                     'characteristicId': 35,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 9},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 0,
+                                                                     'characteristicId': 36,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 26},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 0,
+                                                                     'characteristicId': 34,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 0},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 13,
+                                                                     'characteristicId': 27,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 0},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 13,
+                                                                     'characteristicId': 28,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 9},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 3,
+                                                                     'characteristicId': 79,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 0},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 3,
+                                                                     'characteristicId': 78,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 0},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 964,
+                                                                     'characteristicId': 44,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 316},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 0,
+                                                                     'characteristicId': 92,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 0},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 0,
+                                                                     'characteristicId': 97,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 0},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 100,
+                                                                     'characteristicId': 123,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 0},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 376,
+                                                                     'characteristicId': 10,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 332},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 100,
+                                                                     'characteristicId': 120,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 10},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 100,
+                                                                     'characteristicId': 122,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 0},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 0,
+                                                                     'characteristicId': 11,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 487},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 0,
+                                                                     'characteristicId': 95,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 0},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 0,
+                                                                     'characteristicId': 90,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 0},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 100,
+                                                                     'characteristicId': 125,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 65524},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 0,
+                                                                     'characteristicId': 14,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 30},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 65,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 0,
+                                                                     'characteristicId': 13,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 60},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 0,
+                                                                     'characteristicId': 88,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 0},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 0,
+                                                                     'characteristicId': 91,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 0},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 960,
+                                                                     'characteristicId': 0,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 0},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 100,
+                                                                     'characteristicId': 107,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 0},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 25,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 0,
+                                                                     'characteristicId': 15,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 76},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 0,
+                                                                     'characteristicId': 25,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 12},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 0,
+                                                                     'characteristicId': 16,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 19},
+                                                                    {'__type__': 'CharacterCharacteristicDetailed',
+                                                                     'additional': 0,
+                                                                     'alignGiftBonus': 0,
+                                                                     'base': 0,
+                                                                     'characteristicId': 89,
+                                                                     'contextModif': 0,
+                                                                     'objectsAndMountBonus': 0}]},
+                            'invisibilityState': 3,
+                            'summoned': False,
+                            'summoner': 0.0},
+                  'status': {'__type__': 'PlayerStatus', 'statusId': 10},
+                  'wave': 0}}"""
+            pass
+        
+        elif msg.msgType["name"] == "GameFightEndMessage":
+            """
+            {'__type__': 'GameFightEndMessage',
+                'duration': 9270,
+                'lootShareLimitMalus': -1,
+                'namedPartyTeamsOutcomes': [],
+                'results': [{'__type__': 'FightResultPlayerListEntry',
+                            'additional': [{'__type__': 'FightResultExperienceData',
+                                            'experience': 1386623564,
+                                            'experienceFightDelta': 37,
+                                            'experienceForGuild': 0,
+                                            'experienceForMount': 0,
+                                            'experienceLevelFloor': 1355584000,
+                                            'experienceNextLevelFloor': 1404179000,
+                                            'isIncarnationExperience': False,
+                                            'rerollExperienceMul': 1,
+                                            'showExperience': True,
+                                            'showExperienceFightDelta': True,
+                                            'showExperienceForGuild': False,
+                                            'showExperienceForMount': False,
+                                            'showExperienceLevelFloor': True,
+                                            'showExperienceNextLevelFloor': True}],
+                            'alive': True,
+                            'id': 290210840786.0,
+                            'level': 182,
+                            'outcome': 2,
+                            'rewards': {'__type__': 'FightLoot',
+                                        'kamas': 5,
+                                        'objects': [287, 1, 6899, 1]},
+                            'wave': 0},
+                            {'__type__': 'FightResultFighterListEntry',
+                            'alive': True,
+                            'id': -1.0,
+                            'outcome': 0,
+                            'rewards': {'__type__': 'FightLoot', 'kamas': 0, 'objects': []},
+                            'wave': 0}],
+                'rewardRate': 0}
+            """
+            self.combatEnded.set()
+            pass
+    
     def onCombatStarted(self):
+        self.grid.parse(self.currMapId)
         match = dofus.LVL_UP_INFO_R.find(dofus.CLOSE_POPUP_P)
         if match:
             match.click()
@@ -42,7 +407,6 @@ class Fighter(Walker):
             pyautogui.press(dofus.SKIP_TURN_SHORTCUT)
             dofus.OUT_OF_COMBAT_R.hover()
             self.combatAlgo()
-            self.combatEnded.set()
             self.nbr_fights += 1
             logging.debug('Combat ended')
         except Exception:
@@ -120,7 +484,6 @@ class Fighter(Walker):
         """
         usedSpells = 0
         while not self.combatEndReached.wait(1) and usedSpells < self.spell['nbr']:
-            self.parseCombatGrid()
             if not self.mobs_killed:
                 self.mobs_killed = len(self.grid.mobs)
             if self.combatEndReached.wait(0.5):
@@ -143,20 +506,6 @@ class Fighter(Walker):
             else:
                 self.useSpell(self.spell, mob)
             usedSpells += 1
-
-    def parseCombatGrid(self, timeout=5):
-        """
-        Parse combat grid.
-        :param timeout:  time out in seconds
-        :return: True if all good else raise ParseGridFailed
-        """
-        s = perf_counter()
-        while not self.killsig.is_set() and\
-                not self.combatEndReached.is_set() and\
-                perf_counter() - s < timeout:
-            if self.grid.parse():
-                return True
-
 
     @staticmethod
     def cellToTarget(path):

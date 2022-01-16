@@ -60,9 +60,6 @@ class ResourceFarmer(Fighter):
                 self.currFarmingElem = None
             self.currMapInteractiveElems[elem_id] = msg_json["interactiveElement"]
         
-        elif msg.msgType["name"] == "GameFightStartingMessage":
-            self.combatStarted.set()
-            
     def harvest(self):
         logger.info("harvest called")
         self.collect()
@@ -95,12 +92,12 @@ class ResourceFarmer(Fighter):
                             px, py = dofus.getCellPixelCenterCoords(x, y)
                             pyautogui.keyDown('shift')
                             sleep(0.1)
-                            map_px, map_py, map_pw, map_ph = dofus.COMBAT_R.getRect()
-                            cell_w = int(map_pw / (2 * dofus.HCELLS)) 
-                            cell_h = int(map_ph / (2 * dofus.VCELLS)) 
-                            rand_px = px + random.randint(-cell_w//3, cell_w//3)
-                            rand_py = py + random.randint(-cell_h//3, cell_h//3)
-                            env.click(rand_px, rand_py)
+                            # map_px, map_py, map_pw, map_ph = dofus.COMBAT_R.getRect()
+                            # cell_w = int(map_pw / (2 * dofus.HCELLS)) 
+                            # cell_h = int(map_ph / (2 * dofus.VCELLS)) 
+                            # rand_px = px + random.randint(-cell_w//3, cell_w//3)
+                            # rand_py = py + random.randint(-cell_h//3, cell_h//3)
+                            env.click(px, py)
                             sleep(0.1)
                             pyautogui.keyUp('shift')
                             dofus.OUT_OF_COMBAT_R.hover()
@@ -126,8 +123,7 @@ class ResourceFarmer(Fighter):
                 return
             except MapChangedWhileFarmingError:
                 logger.info("Bot missclicked and changed map while farming, will repeat harvest on new map")
-            
-            
+                
     def interrupt(self):
         data = self.zone.toDict()
         with open(self.today_save_file, 'w') as f:

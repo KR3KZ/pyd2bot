@@ -1,4 +1,5 @@
 *.log
 /test
 /sources
+scraped_maps/
 map.json

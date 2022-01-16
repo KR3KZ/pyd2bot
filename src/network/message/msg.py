@@ -8,6 +8,7 @@ logger = logging.getLogger("labot")
 protocol_json_f = Path(__file__).parent / "../protocol.json"
 dofusProtocol = DofusProtocol(protocol_json_f)
 class Msg:
+    
     def __init__(self, m_id, data, count=None):
         self.id = m_id
         if isinstance(data, bytearray):
@@ -53,10 +54,11 @@ class Msg:
                 count = None
             lenData = int.from_bytes(buf.read(header & 3), "big")
             id = header >> 2
+            
             data = Data(buf.read(lenData))
         except IndexError:
             buf.pos = 0
-            raise Exception("Unable to parse the msg because of missing data")
+            return None
 
         if id == 2:
             logger.debug("Message is NetworkDataContainerMessage! Uncompressing...")

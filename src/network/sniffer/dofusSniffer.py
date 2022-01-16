@@ -71,4 +71,6 @@ class DofusSniffer(AsyncSniffer):
                         if self.bot:
                             self.bot.handleMsg(msg)
                     msg = Msg.fromRaw(buf, isfromClient)
+
+
         
