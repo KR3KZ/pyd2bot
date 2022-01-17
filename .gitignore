@@ -3,3 +3,5 @@
 /sources
 scraped_maps/
 map.json
+*.pyc
+__pycache__
