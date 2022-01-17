@@ -80,7 +80,7 @@ class Walker(Bot):
                 else:
                     dofus.OUT_OF_COMBAT_R.hover()
                     sleep(0.2)
-        nbr_fails += 1
+            nbr_fails += 1
         return False
 
     def moveToTargets(self, targets):
@@ -145,7 +145,6 @@ class Walker(Bot):
             if self.disconnected.is_set():
                 self.connected.wait()
             else:
-                self.refreshMapData()
                 if self.currPos not in zone:
                     self.moveToZone(zone)
                 zone[self.currPos].excludeMap(self.lastPos, dst)
@@ -159,9 +158,8 @@ class Walker(Bot):
         dofus.INV_OPEN_R.waitAppear(dofus.INVENTAIRE_P)
 
     def refreshMapData(self):
-        pyautogui.press("escape")
         pyautogui.press(dofus.HAVRE_SAC_SHORTCUT)
-        sleep(0.2)
+        sleep(4)
         pyautogui.press(dofus.HAVRE_SAC_SHORTCUT)
         
     def run(self):
@@ -169,7 +167,6 @@ class Walker(Bot):
         s = perf_counter()
         self.sniffer.start()
         sleep(1)
-        self.refreshMapData()
         while not self.killsig.is_set():
             try:
                 if self.currPos not in self.zone:
@@ -178,7 +175,9 @@ class Walker(Bot):
                 self.tmpIgnore.append(self.currPos)
                 Timer(self.memoTime, self.onTimer).start()
                 self.harvest()
-                self.randomMapChange(self.zone)
+                while not self.killsig.is_set():
+                    if self.randomMapChange(self.zone):
+                        break
             except Exception as e:
                 if self.disconnected.is_set():
                     self.connected.wait(60 * 5)
@@ -196,8 +195,6 @@ class Walker(Bot):
             
     def goToZaap(self, zaap):
         logger.info("moving to zaap: " + str(zaap['coords']))
-        pyautogui.press("escape")
-        sleep(1)
         pyautogui.press(dofus.HAVRE_SAC_SHORTCUT)
         sleep(4)
         self.mapChanged.clear()

@@ -30,6 +30,7 @@ class Bot(threading.Thread):
         self.currMapInteractiveElems = {}
         self.currMapStatedElems = {}
         self.id = {}
+        self.context = 1
         
     def interrupt(self):
         self.killsig.set()
@@ -69,7 +70,6 @@ class Bot(threading.Thread):
 
     def handleMsg(self, msg: Msg):
         logger.info("received msg: " + msg.msgType["name"])     
-        
         if msg.msgType["name"] == "InventoryWeightMessage":
             msg_json = msg.json()
             self.inventoryWeight = msg_json["inventoryWeight"]
@@ -84,3 +84,9 @@ class Bot(threading.Thread):
             if msg_json["index"] == 37:
                 self.fullPods.set()
                 logger.info("Got bot full pod notif from server")
+        
+        if msg.msgType["name"] == "GameContextCreateMessage":
+            msg_json = msg.json()
+            self.context = msg_json["context"]
+        
+            

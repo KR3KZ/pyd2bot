@@ -19,16 +19,21 @@ class Fighter(Walker):
         self.spell = spell
         self.grid = Grid(dofus.COMBAT_R, dofus.VCELLS, dofus.HCELLS)
         self.mobs_killed = 0
-        self.combatStarted = threading.Event()
-        self.combatEnded = threading.Event()
-        self.turnStarted = threading.Event()
-
-    def onCombatEnded(self):
-        pyautogui.press("escape")
-        sleep(0.7)
+        self.isInFight = threading.Event()
+        self.inFightTurn = threading.Event()
+        self.canSayReady = threading.Event()
+        self.isReady = threading.Event()
+        self.spellAnimation = threading.Event()
+        self.spellCasted = threading.Event()
+        self.spellCast = None # {"spellId": , "cellID": }
+        self.pa = None
+        self.pm = None
+        self.currCellId = None
+        self.monsters = []
 
     def handleMsg(self, msg: Msg):
         super().handleMsg(msg)
+        msg_json = msg.json()
         try:
             if msg.msgType["name"] == "GameFightStartingMessage":
                 """	
@@ -43,7 +48,7 @@ class Fighter(Walker):
                 """
                 msg_json = msg.json()
                 self.id = msg_json["attackerId"]
-                self.combatStarted.set()
+                self.isInFight.set()
             
             elif msg.msgType["name"] == "GameEntitiesDispositionMessage":
                 """
@@ -59,17 +64,18 @@ class Fighter(Walker):
                     ]
                 }
                 """
-                msg_json = msg.json()
                 for disposition in msg_json["dispositions"]:
                     cellId = disposition["cellId"]
                     x, y = dofus.getCellCoords(cellId)
+                    i, j = y, x//2
+                    cell = self.grid[i][j]
                     logger.info(f"Element disposed in {(x, y)}")
                     if disposition["id"] == self.id:
-                        self.grid[y][x].type = dofus.ObjType.BOT
-                        self.grid.bot = self.grid[x][y]
+                        cell.type = dofus.ObjType.BOT
+                        self.grid.bot = cell
                     else:
-                        self.grid[y][x].type = dofus.ObjType.MOB
-                        self.grid.mobs.add(self.grid[x][y])
+                        cell.type = dofus.ObjType.MOB
+                        self.grid.mobs.add(cell)
             
             elif msg.msgType["name"] == "GameFightShowFighterMessage":
                 """
@@ -159,8 +165,68 @@ class Fighter(Walker):
                                 'wave': 0}],
                     'rewardRate': 0}
                 """
-                self.combatEnded.set()
-                pass
+                self.isInFight.clear()
+            
+            elif msg.msgType["name"] == "GameFightTurnStartPlayingMessage":
+                logger.info("Bot turn started")
+                self.inFightTurn.set()
+            
+            elif msg.msgType["name"] == "GameFightTurnFinishMessage":
+                logger.info("Bot turn ended")
+                self.inFightTurn.clear()
+            
+            elif msg.msgType["name"] == "GameFightJoinMessage":
+                if msg_json["canSayReady"]:
+                    logger.info("can say ready event set")
+                    self.canSayReady.set()
+
+            elif msg.msgType["name"] == "GameFightReadyMessage":
+                if msg_json["isReady"]:
+                    self.isReady.set()
+            
+            elif msg.msgType["name"] == "GameActionFightCastRequestMessage":
+                logger.info("Spell casted")
+                # if msg_json["cellId"] == self.spellCast["cellId"] and  msg_json["spellId"] == self.spellCast["spellId"] :
+                #     self.spellCasted.set()
+                        
+            elif msg.msgType["name"] == "SequenceStartMessage":
+                if msg_json["authorId"] == self.id and msg_json["sequenceType"] == 1:
+                    self.spellAnimation.set()
+                    
+            elif msg.msgType["name"] == "SequenceEndMessage":
+                if msg_json["authorId"] == self.id and msg_json["sequenceType"] == 1:
+                    self.spellAnimation.clear()
+                
+            elif msg.msgType["name"] == "RefreshCharacterStatsMessage":
+                if msg_json["fighterId"] == self.id:
+                    for characteristic in msg_json["stats"]["characteristics"]["characteristics"]:
+                        value = characteristic["additional"] + characteristic["alignGiftBonus"] + characteristic["base"] +\
+                                characteristic["objectsAndMountBonus"]
+                        if characteristic["characteristicId"] == 23:
+                            self.pm = value - characteristic["used"]
+                        elif characteristic["characteristicId"] == 1:
+                            self.pa = value - characteristic["used"]
+                    logger.info(f"Bot pa, pm: {self.pa, self.pm}")
+
+            elif msg.msgType["name"] == "GameFightSynchronizeMessage":
+                self.monsters = []
+                for fighter in msg_json["fighters"]:
+                    if fighter["__type__"] == "GameFightCharacterInformations" and fighter["contextualId"] == self.id:
+                        self.currCellId = fighter["disposition"]["cellId"]
+                        for characteristic in fighter["stats"]["characteristics"]["characteristics"]:
+                            value = characteristic["additional"] + characteristic["alignGiftBonus"] + characteristic["base"] +\
+                                characteristic["objectsAndMountBonus"]
+                            if characteristic["characteristicId"] == 23:
+                                self.pm = value - characteristic["used"]
+                            elif characteristic["characteristicId"] == 1:
+                                self.pa = value - characteristic["used"]
+                    elif fighter["__type__"] == "GameFightMonsterInformations":
+                        self.monsters.append(
+                            {
+                                "cellID": fighter["disposition"]["cellId"],
+                                "summoned": fighter["stats"]["summoned"]
+                            }
+                        )
         except Exception:
             logger.error("Fatal error in msg handler!", exc_info=True)
             self.interrupt()
@@ -168,8 +234,14 @@ class Fighter(Walker):
     def onCombatStarted(self):
         self.grid.parse(self.currMapId)
         try:
-            logger.info("Combat started")
-            self.combatEnded.wait()
+            logger.info(f"Combat started **** {self.canSayReady.is_set()}")
+            if self.canSayReady.wait():
+                for _ in range(6):
+                    pyautogui.press(dofus.SKIP_TURN_SHORTCUT)
+                    logger.info("ready clicked")
+                    if self.isReady.wait(0.2):
+                        break
+            while self.isInFight.is_set():sleep(0.1)
             logger.info("combat ended")
             # pyautogui.press(dofus.SKIP_TURN_SHORTCUT)
             # dofus.OUT_OF_COMBAT_R.hover()
@@ -183,8 +255,7 @@ class Fighter(Walker):
         interrupt thread.
         """
         dofus.READY_R.stopWait.set()
-        self.combatStarted.clear()
-        self.combatEnded.set()
+        self.isInFight.clear()
         super(Fighter, self).interrupt()
 
     def combatAlgo(self):
@@ -366,7 +437,7 @@ class Fighter(Walker):
         tgt.click()
         logging.debug("Clicked on mobs group")
         s = perf_counter()
-        if self.combatStarted.wait(timeout):
+        if self.isInFight.wait(timeout):
             logging.debug(f"Enter combat took: {perf_counter() - s}")
             return True
         logging.debug("Couldn't open combat!")

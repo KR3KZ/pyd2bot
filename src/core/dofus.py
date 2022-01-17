@@ -134,8 +134,10 @@ def getCellCoords(cell_id):
 
 def getCellPixelCenterCoords(x, y):
     map_px, map_py, map_pw, map_ph = COMBAT_R.getRect()
-    cpx = map_px + int(map_pw / (2 * HCELLS) * (x + 1))
-    cpy = map_py + int(map_ph / (2 * VCELLS) * (y + 1))
+    cell_w = map_pw / HCELLS 
+    cell_h = map_ph / VCELLS 
+    cpx = map_px + int((cell_w / 2) * (x + 1))
+    cpy = map_py + int((cell_h / 2) * (y + 1))
     return cpx, cpy
 
 with open(os.path.join(dir_path, "MapCoordinates.json")) as fp:

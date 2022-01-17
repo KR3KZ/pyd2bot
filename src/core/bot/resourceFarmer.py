@@ -111,9 +111,13 @@ class ResourceFarmer(Fighter):
                             logger.info("Unable to collect the resource")
                         if self.fullPodsAAA.is_set():
                             logger.info("Warning pods reached more than 90% of total capacity")
-                        if self.combatStarted.is_set():
+                        if self.isInFight.is_set():
                             logger.info("Combat started")
-                            while self.combatStarted.is_set():sleep(0.1)
+                            self.onCombatStarted()
+                            while self.context != 1:
+                                sleep(0.1)
+                            sleep(3)
+                            pyautogui.press("escape")
                         if self.mapChanged.is_set():
                             self.mapChanged.clear()
                             raise MapChangedWhileFarmingError
