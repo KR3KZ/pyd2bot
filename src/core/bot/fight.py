@@ -63,11 +63,12 @@ class Fighter(Walker):
                 for disposition in msg_json["dispositions"]:
                     cellId = disposition["cellId"]
                     x, y = dofus.getCellCoords(cellId)
+                    logger.info(f"Element disposed in {(x, y)}")
                     if disposition["id"] == self.id:
-                        self.grid[x][y].type = dofus.ObjType.BOT
+                        self.grid[y][x].type = dofus.ObjType.BOT
                         self.grid.bot = self.grid[x][y]
                     else:
-                        self.grid[x][y].type = dofus.ObjType.MOB
+                        self.grid[y][x].type = dofus.ObjType.MOB
                         self.grid.mobs.add(self.grid[x][y])
             
             elif msg.msgType["name"] == "GameFightShowFighterMessage":
