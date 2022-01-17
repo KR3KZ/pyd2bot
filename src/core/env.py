@@ -8,9 +8,7 @@ import win32con
 import win32gui
 import win32ui
 from PyQt5.QtCore import QRect
-from pytesseract import pytesseract
-
-pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+import pyautogui
 
 IDE_HWND = None
 DOFUS_HWND = None
@@ -44,7 +42,6 @@ def capture(region):
         try:
             return _capture(region)
         except win32ui.error as e:
-            # logging.debug("Enable to capture screen!")
             if k == 19:
                 raise
             win32gui.ReleaseDC(DOFUS_HWND, last_dc)
@@ -60,14 +57,19 @@ def click(x, y):
     move(x, y)
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN | win32con.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0)
 
-
+def shiftClick(x, y):
+    pyautogui.keyDown('shift')
+    sleep(0.1)
+    pyautogui.click(x, y)
+    sleep(0.1)
+    pyautogui.keyUp('shift')
+    
 def press(key):
     win32api.keybd_event(keycodes[key], 0, 0, 0)
 
 
 def release(key):
     win32api.keybd_event(keycodes[key], 0, win32con.KEYEVENTF_KEYUP, 0)  # key up
-
 
 def _capture(region):
     x, y, w, h = region.getRect()

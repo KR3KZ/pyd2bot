@@ -4,7 +4,6 @@ import random
 from datetime import datetime
 import yaml
 from core import Region
-from core.bot.bot import Pattern
 from core.exceptions import FindPathFailed
 
 random.seed(datetime.now())
@@ -16,39 +15,19 @@ class Map(dict):
             'x': x,
             'y': y,
             'excludedMaps': {},
-            'excludedSpots': {},
-            "spots": [],
             "nbrseen": 0
         })
         self.zone = zone
 
     def toDict(self):
         data = self.copy()
-        data['spots'] = []
-        for spot in self['spots']:
-            data['spots'].append({'region': spot['region'].getRect(),
-                                  'kind': spot['pattern']['kind'],
-                                  'patternId': spot['pattern']['id']})
         return data
-
-    def hasSpot(self, spot):
-        for _spot in self['spots']:
-            if _spot['region'].getRect() == spot['region'].getRect() \
-                    and _spot['pattern']['id'] == spot['pattern']['id']:
-                return True
-        return False
 
     def __getattr__(self, item):
         if item not in self:
             raise AttributeError(f"Class 'Map' has no attribute '{item}'.")
         return self[item]
-
-    def excludeSpot(self, src, spot):
-        if src not in self.excludedSpots:
-            self.excludedSpots[src] = []
-        if spot['region'].getRect() not in self.excludedSpots[src]:
-            self.excludedSpots[src].append(spot['region'].getRect())
-
+    
     def excludeMap(self, src, dst):
         if src not in self.excludedMaps:
             self.excludedMaps[src] = []
@@ -76,11 +55,6 @@ class Map(dict):
             choices = neighbors
         dst = random.choice(choices)
         return (dst.x, dst.y), (dst.x - self.x, dst.y - self.y)
-
-    def isValidSpot(self, src, spot):
-        if src not in self.excludedSpots:
-            return True
-        return spot['region'].getRect() not in self.excludedSpots[src]
 
     def coord(self):
         return self['x'], self['y']
@@ -133,7 +107,7 @@ class Zone(dict):
             'maps': [m.toDict() for c, m in self.items()]
         }
 
-    def loadFromFile(self, filepath, patternsDir):
+    def loadFromFile(self, filepath):
         with open(filepath, 'r') as f:
             data = yaml.load(f, Loader=yaml.FullLoader)
             self.name = data['name']
@@ -141,14 +115,6 @@ class Zone(dict):
                 nmap = Map(self, dmap['x'], dmap['y'])
                 nmap['nbrseen'] = dmap['nbrseen']
                 nmap['excludedMaps'] = dmap['excludedMaps']
-                nmap['excludedSpots'] = dmap['excludedSpots']
-                for spot in dmap['spots']:
-                    pattern_path = os.path.join(patternsDir, spot['kind'], spot['patternId'])
-                    if os.path.exists(pattern_path):
-                        nmap['spots'].append({
-                            'region': Region(*spot['region']),
-                            'pattern': Pattern(spot['kind'], pattern_path, spot['patternId'])
-                        })
                 self[(dmap['x'], dmap['y'])] = nmap
 
     def subZone(self, tl, br, name="subzone"):
@@ -173,17 +139,6 @@ class Zone(dict):
                 if (dx, dy) in self:
                     del self[(dx, dy)]
 
-    def resetExcludedSpots(self):
-        for coord, item in self.items():
-            item['excludedSpots'] = {}
-
-    def farmable(self):
-        farmable = []
-        for map_coord, dmap in self.items():
-            if dmap['spots']:
-                farmable.append(dmap)
-        return farmable
-
     def bfs(self, startMap):
         queue = collections.deque([startMap])
         seen = {startMap.coord()}
@@ -195,32 +150,9 @@ class Zone(dict):
                     seen.add(dmap.coord())
         return seen
 
-    def cleanEmptyMaps(self):
-        madeProgress = True
-        while madeProgress:
-            madeProgress = False
-            for coord, dmap in self.items():
-                if not dmap['spots']:
-                    del self[coord]
-                    if not self.canFarmAll():
-                        self[coord] = dmap
-                    else:
-                        madeProgress = True
-                        break
-
-    def canFarmAll(self):
-        farmableMaps = self.farmable()
-        seen = self.bfs(farmableMaps[0])
-        res = all([dmap.coord() in seen for dmap in farmableMaps])
-        return res
-
     def save(self, filepath):
         with open(filepath, 'w') as f:
             yaml.dump(self.toDict(), f, sort_keys=False)
-
-
-
-
 
 
 if __name__ == "__main__":

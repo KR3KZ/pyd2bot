@@ -19,441 +19,183 @@ class Fighter(Walker):
         self.spell = spell
         self.grid = Grid(dofus.COMBAT_R, dofus.VCELLS, dofus.HCELLS)
         self.mobs_killed = 0
-        self.nbr_fights = 0
-
-    def run(self):
-        super(Fighter, self).run()
+        self.combatStarted = threading.Event()
+        self.combatEnded = threading.Event()
+        self.turnStarted = threading.Event()
 
     def onCombatEnded(self):
-        self.combatEndReached.set()
-        self.combatStarted.clear()
         pyautogui.press("escape")
         sleep(0.7)
 
     def handleMsg(self, msg: Msg):
         super().handleMsg(msg)
-        if msg.msgType["name"] == "GameFightStartingMessage":
-            """	
-            {
-                '__type__': 'GameFightStartingMessage',
-                'attackerId': 290210840786.0,
-                'containsBoss': False,
-                'defenderId': -20008.0,
-                'fightId': 2517,
-                'fightType': 4}
-            """
-            msg_json = msg.json()
-            self.id = msg_json["attackerId"]
-            logger.info(msg_json)
-            self.combatStarted.set()
-        
-        elif msg.msgType["name"] == "GameEntitiesDispositionMessage":
-            """
-            {
-                '__type__': 'GameEntitiesDispositionMessage',
-                'dispositions': [
-                    {'__type__': 'IdentifiedEntityDispositionInformations',
-                'cellId': 483,
-                'direction': 7,
-                'id': 290210840786.0}]
-            }
-            """
-            msg_json = msg.json()
-            cellId = msg_json["cellId"]
-            x, y = dofus.getCellCoords(cellId)
-            if msg_json["id"] == self.id:
-                self.grid[x][y].type = dofus.ObjType.BOT
-                self.grid.bot = self.grid[x][y]
-            else:
-                self.grid[x][y].type = dofus.ObjType.MOB
-                self.grid.mobs.add(self.grid[x][y])
-        
-        elif msg.msgType["name"] == "GameFightShowFighterMessage":
-            """{
+        try:
+            if msg.msgType["name"] == "GameFightStartingMessage":
+                """	
+                {
+                    '__type__': 'GameFightStartingMessage',
+                    'attackerId': 290210840786.0,
+                    'containsBoss': False,
+                    'defenderId': -20008.0,
+                    'fightId': 2517,
+                    'fightType': 4
+                }
+                """
+                msg_json = msg.json()
+                self.id = msg_json["attackerId"]
+                self.combatStarted.set()
+            
+            elif msg.msgType["name"] == "GameEntitiesDispositionMessage":
+                """
+                {
+                    '__type__': 'GameEntitiesDispositionMessage',
+                    'dispositions': [
+                        {
+                            '__type__': 'IdentifiedEntityDispositionInformations',
+                            'cellId': 483,
+                            'direction': 7,
+                            'id': 290210840786.0
+                        }
+                    ]
+                }
+                """
+                msg_json = msg.json()
+                for disposition in msg_json["dispositions"]:
+                    cellId = disposition["cellId"]
+                    x, y = dofus.getCellCoords(cellId)
+                    if disposition["id"] == self.id:
+                        self.grid[x][y].type = dofus.ObjType.BOT
+                        self.grid.bot = self.grid[x][y]
+                    else:
+                        self.grid[x][y].type = dofus.ObjType.MOB
+                        self.grid.mobs.add(self.grid[x][y])
+            
+            elif msg.msgType["name"] == "GameFightShowFighterMessage":
+                """
+                {
                     '__type__': 'GameFightShowFighterMessage',
-                    'informations': {'__type__': 'GameFightCharacterInformations',
-                    'alignmentInfos': {'__type__': 'ActorAlignmentInformations',
-                                     'alignmentGrade': 0,
-                                     'alignmentSide': 0,
-                                     'alignmentValue': 0,
-                                     'characterPower': 290210840968.0},
-                  'breed': 3,
-                  'contextualId': 290210840786.0,
-                  'disposition': {'__type__': 'FightEntityDispositionInformations',
-                                  'carryingCharacterId': 0.0,
-                                  'cellId': 483,
-                                  'direction': 7},
-                  'hiddenInPrefight': False,
-                  'ladderPosition': 0,
-                  'leagueId': 65535,
-                  'level': 182,
-                  'look': {'__type__': 'EntityLook',
-                           'bonesId': 1,
-                           'indexedColors': [32562098,
-                                             35425736,
-                                             52378184,
-                                             68446613,
-                                             89959123],
-                           'scales': [120],
-                           'skins': [30, 2046, 250, 1176, 75, 499],
-                           'subentities': [{'__type__': 'SubEntity',
-                                            'bindingPointCategory': 1,
-                                            'bindingPointIndex': 0,
-                                            'subEntityLook': {'__type__': 'EntityLook',
-                                                              'bonesId': 264,
-                                                              'indexedColors': [],
-                                                              'scales': [80],
-                                                              'skins': [],
-                                                              'subentities': []}}]},
-                  'name': 'John-shooter',
-                  'previousPositions': [],
-                  'sex': False,
-                  'spawnInfo': {'__type__': 'GameContextBasicSpawnInformation',
+                    'informations': {
+                        '__type__': 'GameFightCharacterInformations',
+                        'breed': 3,
+                        'contextualId': 290210840786.0,
+                        'disposition': {
+                            '__type__': 'FightEntityDispositionInformations',
+                            'carryingCharacterId': 0.0,
+                            'cellId': 483,
+                            'direction': 7
+                        },
+                        'hiddenInPrefight': False,
+                        'level': 182,
+                        'name': 'John-shooter',
+                        'previousPositions': [],
+                        'sex': False,
+                        'spawnInfo': {
+                            '__type__': 'GameContextBasicSpawnInformation',
+                            'alive': True,
+                            'informations': {
+                                '__type__': 'GameContextActorPositionInformations',
+                                'contextualId': 290210840786.0,
+                                'disposition': {
+                                    '__type__': 'FightEntityDispositionInformations',
+                                    'carryingCharacterId': 0.0,
+                                    'cellId': 483,
+                                    'direction': 7
+                                }
+                            }
+                        },
+                        'teamId': 0
+                    },
+                    'stats': {
+                        '__type__': 'GameFightCharacteristics',
+                        'invisibilityState': 3,
+                        'summoned': False,
+                        'summoner': 0.0
+                    },
+                    'status': {
+                        '__type__': 'PlayerStatus', 
+                        'statusId': 10
+                    },
+                    'wave': 0
+                }
+                """
+                pass
+            
+            elif msg.msgType["name"] == "GameFightEndMessage":
+                """
+                {'__type__': 'GameFightEndMessage',
+                    'duration': 9270,
+                    'lootShareLimitMalus': -1,
+                    'namedPartyTeamsOutcomes': [],
+                    'results': [{'__type__': 'FightResultPlayerListEntry',
+                                'additional': [{'__type__': 'FightResultExperienceData',
+                                                'experience': 1386623564,
+                                                'experienceFightDelta': 37,
+                                                'experienceForGuild': 0,
+                                                'experienceForMount': 0,
+                                                'experienceLevelFloor': 1355584000,
+                                                'experienceNextLevelFloor': 1404179000,
+                                                'isIncarnationExperience': False,
+                                                'rerollExperienceMul': 1,
+                                                'showExperience': True,
+                                                'showExperienceFightDelta': True,
+                                                'showExperienceForGuild': False,
+                                                'showExperienceForMount': False,
+                                                'showExperienceLevelFloor': True,
+                                                'showExperienceNextLevelFloor': True}],
                                 'alive': True,
-                                'informations': {'__type__': 'GameContextActorPositionInformations',
-                                                 'contextualId': 290210840786.0,
-                                                 'disposition': {'__type__': 'FightEntityDispositionInformations',
-                                                                 'carryingCharacterId': 0.0,
-                                                                 'cellId': 483,
-                                                                 'direction': 7}},
-                                'teamId': 0},
-                  'stats': {'__type__': 'GameFightCharacteristics',
-                            'characteristics': {'__type__': 'CharacterCharacteristics',
-                                                'characteristics': [{'__type__': 'CharacterUsableCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 7,
-                                                                     'characteristicId': 1,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 2,
-                                                                     'used': 0},
-                                                                    {'__type__': 'CharacterUsableCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 3,
-                                                                     'characteristicId': 23,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 2,
-                                                                     'used': 0},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 0,
-                                                                     'characteristicId': 37,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 3},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 0,
-                                                                     'characteristicId': 33,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 65534},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 0,
-                                                                     'characteristicId': 35,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 9},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 0,
-                                                                     'characteristicId': 36,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 26},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 0,
-                                                                     'characteristicId': 34,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 0},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 13,
-                                                                     'characteristicId': 27,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 0},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 13,
-                                                                     'characteristicId': 28,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 9},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 3,
-                                                                     'characteristicId': 79,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 0},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 3,
-                                                                     'characteristicId': 78,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 0},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 964,
-                                                                     'characteristicId': 44,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 316},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 0,
-                                                                     'characteristicId': 92,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 0},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 0,
-                                                                     'characteristicId': 97,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 0},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 100,
-                                                                     'characteristicId': 123,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 0},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 376,
-                                                                     'characteristicId': 10,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 332},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 100,
-                                                                     'characteristicId': 120,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 10},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 100,
-                                                                     'characteristicId': 122,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 0},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 0,
-                                                                     'characteristicId': 11,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 487},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 0,
-                                                                     'characteristicId': 95,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 0},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 0,
-                                                                     'characteristicId': 90,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 0},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 100,
-                                                                     'characteristicId': 125,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 65524},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 0,
-                                                                     'characteristicId': 14,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 30},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 65,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 0,
-                                                                     'characteristicId': 13,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 60},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 0,
-                                                                     'characteristicId': 88,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 0},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 0,
-                                                                     'characteristicId': 91,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 0},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 960,
-                                                                     'characteristicId': 0,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 0},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 100,
-                                                                     'characteristicId': 107,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 0},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 25,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 0,
-                                                                     'characteristicId': 15,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 76},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 0,
-                                                                     'characteristicId': 25,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 12},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 0,
-                                                                     'characteristicId': 16,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 19},
-                                                                    {'__type__': 'CharacterCharacteristicDetailed',
-                                                                     'additional': 0,
-                                                                     'alignGiftBonus': 0,
-                                                                     'base': 0,
-                                                                     'characteristicId': 89,
-                                                                     'contextModif': 0,
-                                                                     'objectsAndMountBonus': 0}]},
-                            'invisibilityState': 3,
-                            'summoned': False,
-                            'summoner': 0.0},
-                  'status': {'__type__': 'PlayerStatus', 'statusId': 10},
-                  'wave': 0}}"""
-            pass
-        
-        elif msg.msgType["name"] == "GameFightEndMessage":
-            """
-            {'__type__': 'GameFightEndMessage',
-                'duration': 9270,
-                'lootShareLimitMalus': -1,
-                'namedPartyTeamsOutcomes': [],
-                'results': [{'__type__': 'FightResultPlayerListEntry',
-                            'additional': [{'__type__': 'FightResultExperienceData',
-                                            'experience': 1386623564,
-                                            'experienceFightDelta': 37,
-                                            'experienceForGuild': 0,
-                                            'experienceForMount': 0,
-                                            'experienceLevelFloor': 1355584000,
-                                            'experienceNextLevelFloor': 1404179000,
-                                            'isIncarnationExperience': False,
-                                            'rerollExperienceMul': 1,
-                                            'showExperience': True,
-                                            'showExperienceFightDelta': True,
-                                            'showExperienceForGuild': False,
-                                            'showExperienceForMount': False,
-                                            'showExperienceLevelFloor': True,
-                                            'showExperienceNextLevelFloor': True}],
-                            'alive': True,
-                            'id': 290210840786.0,
-                            'level': 182,
-                            'outcome': 2,
-                            'rewards': {'__type__': 'FightLoot',
-                                        'kamas': 5,
-                                        'objects': [287, 1, 6899, 1]},
-                            'wave': 0},
-                            {'__type__': 'FightResultFighterListEntry',
-                            'alive': True,
-                            'id': -1.0,
-                            'outcome': 0,
-                            'rewards': {'__type__': 'FightLoot', 'kamas': 0, 'objects': []},
-                            'wave': 0}],
-                'rewardRate': 0}
-            """
-            self.combatEnded.set()
-            pass
-    
+                                'id': 290210840786.0,
+                                'level': 182,
+                                'outcome': 2,
+                                'rewards': {'__type__': 'FightLoot',
+                                            'kamas': 5,
+                                            'objects': [287, 1, 6899, 1]},
+                                'wave': 0},
+                                {'__type__': 'FightResultFighterListEntry',
+                                'alive': True,
+                                'id': -1.0,
+                                'outcome': 0,
+                                'rewards': {'__type__': 'FightLoot', 'kamas': 0, 'objects': []},
+                                'wave': 0}],
+                    'rewardRate': 0}
+                """
+                self.combatEnded.set()
+                pass
+        except Exception:
+            logger.error("Fatal error in msg handler!", exc_info=True)
+            self.interrupt()
+            
     def onCombatStarted(self):
         self.grid.parse(self.currMapId)
-        match = dofus.LVL_UP_INFO_R.find(dofus.CLOSE_POPUP_P)
-        if match:
-            match.click()
         try:
-            logging.info("Combat started")
-            self.combatStarted.set()
-            self.combatEndReached.clear()
-            self.combatEnded.clear()
-            self.dead = False
-            pyautogui.press(dofus.SKIP_TURN_SHORTCUT)
-            dofus.OUT_OF_COMBAT_R.hover()
-            self.combatAlgo()
-            self.nbr_fights += 1
-            logging.debug('Combat ended')
+            logger.info("Combat started")
+            self.combatEnded.wait()
+            logger.info("combat ended")
+            # pyautogui.press(dofus.SKIP_TURN_SHORTCUT)
+            # dofus.OUT_OF_COMBAT_R.hover()
+            # self.combatAlgo()
         except Exception:
             logging.error("Fatal error in main run!", exc_info=True)
             self.interrupt()
-        logging.info(f"I farmed {self.nbr_fights} fights")
-        logging.info('Goodbye cruel world.')
-
-    def waitTurn(self, rate=3, timeout=60 * 2):
-        """
-        Waits for bot turn.
-        :param timeout: timeout in seconds
-        :param rate: scan rate
-        """
-        s = perf_counter()
-        while not self.killsig.is_set() and\
-                not self.combatEndReached.is_set() and\
-                perf_counter() - s < timeout:
-            s = perf_counter()
-            if self.myTurn():
-                logging.debug('Bot turn started')
-                return True
-            elapsed = perf_counter() - s
-            if (1 / rate) - elapsed > 0:
-                sleep((1 / rate) - elapsed)
-        raise WaitTurnTimedOut
 
     def interrupt(self):
         """
         interrupt thread.
         """
         dofus.READY_R.stopWait.set()
+        self.combatStarted.clear()
         self.combatEnded.set()
         super(Fighter, self).interrupt()
 
     def combatAlgo(self):
-        nbr_errors = 0
         self.mobs_killed = 0
-        while not self.combatEndReached.wait(1):
+        while not self.combatEnded.wait(1):
             self.checkCreatureMode()
             try:
                 if not self.myTurn():
                     self.waitTurn()
                 self.playTurn()
-                nbr_errors = 0
-            except (FindPathFailed, ParseGridFailed, MoveToCellFailed, UseSpellFailed, WaitTurnTimedOut) as e:
-                if self.combatEndReached.is_set() or self.killsig.is_set():
+            except (FindPathFailed, MoveToCellFailed, UseSpellFailed, WaitTurnTimedOut) as e:
+                if self.killsig.is_set():
                     return True
                 if self.disconnected.is_set():
                     self.connected.wait()
@@ -461,13 +203,6 @@ class Fighter(Walker):
                     dofus.COMBAT_R.find(dofus.REDUCE_BOX_P).click()
                 else:
                     logging.error(str(e), exc_info=True)
-                    nbr_errors += 1
-                    logging.debug(f"Will skip bots turn for the '{nbr_errors}'th time!")
-                    if nbr_errors == 10:
-                        logging.debug("Reached maximum of turns skip on error. Will resign combat.")
-                        self.dead = True
-                        self.resign()
-                        return False
             self.skipTurn()
 
     @staticmethod
@@ -483,11 +218,9 @@ class Fighter(Walker):
         Play turn loop
         """
         usedSpells = 0
-        while not self.combatEndReached.wait(1) and usedSpells < self.spell['nbr']:
+        while usedSpells < self.spell['nbr']:
             if not self.mobs_killed:
                 self.mobs_killed = len(self.grid.mobs)
-            if self.combatEndReached.wait(0.5):
-                return
             mob, path = self.findPathToTarget(self.grid.bot, self.spell['range'], self.grid.mobs)
             if not mob:
                 mob, path = self.findPathToTarget(self.grid.bot, self.spell['range'], self.grid.invoke)
@@ -498,8 +231,6 @@ class Fighter(Walker):
                 if cell:
                     self.moveToCell(cell)
                     if cell == path[-1]:
-                        if self.combatEndReached.wait(0.5):
-                            return
                         self.useSpell(self.spell, mob)
                     else:
                         break

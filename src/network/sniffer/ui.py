@@ -40,7 +40,7 @@ class SnifferUI(Div):
         self.info = P("Press start", parent=self.button_wrapper)
 
         self.msgtable = MsgTable(parent=self)
-        self.dofusSniffer = DofusSniffer(self.msgtable.appendMsg, self.capture_file)
+        self.dofusSniffer = DofusSniffer(self.msgtable.appendMsg)
 
     def start(self, event=None):
         if not self.dofusSniffer.running:

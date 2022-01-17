@@ -23,17 +23,15 @@ class Walker(Bot):
         self.currMapId = None
         self.lastPos = None
         self.zone = None
-        self.startZaap = NonCallableMagicMock
-        self.posRequestState = PosRequestState.idle
+        self.startZaap = None
         self.mapChanged = threading.Event()
         self.mapChangeTimeOut = 7.6
         self.tmpIgnore = []
-        self.memoTime = 60 * 15
+        self.memoTime = 60* 3
 
     def handleMsg(self, msg: Msg):
         super().handleMsg(msg)
         if msg.msgType["name"] == "MapComplementaryInformationsDataMessage":
-            logger.info("got new map infos")
             self.currMapInteractiveElems  = {}
             self.currMapStatedElems = {}
             
@@ -51,41 +49,20 @@ class Walker(Bot):
             self.currPos = dofus.getMapCoords(self.currMapId)
             
         elif msg.msgType["name"] == "GameMapMovementRequestMessage":
-            logger.info("got movement started msg")
             self.moving.set()
             self.idle.clear()
             
         elif msg.msgType["name"] == "GameMapMovementConfirmMessage":
-            logger.info("got movement ended msg")
             self.moving.clear()
             self.idle.set()
                     
         elif msg.msgType["name"] == "ChatClientMultiMessage":
-            if self.posRequestState == PosRequestState.msgSent:
-                msg_json = msg.json()
-                if msg_json["channel"] == 0:
-                    m = re.match(".*{map,(-?\d+),(-?\d+),1}.*", msg_json["content"])
-                    if m:
-                        x = int(m.group(1))
-                        y = int(m.group(2))
-                        self.currPos = (x, y)
-                        self.posRequestState = PosRequestState.gotResponse
+            pass
 
-            
-    def getCurrPos(self):
-        pyautogui.press('space')
-        pyautogui.write("%pos%")
-        self.posRequestState = PosRequestState.msgSent
-        pyautogui.press('enter')
-        if self.waitPosMsg(20):
-            return self.currPos
-        return None
-    
     def changeMap(self, direction, max_tries=3):
         nbr_fails = 0
         while not self.killsig.is_set() and nbr_fails < max_tries:
             currx, curry = self.currPos
-            dstx, dsty = currx + direction[0], curry + direction[1]
             directionLocs = dofus.mapChangeLoc[direction]
             random.shuffle(directionLocs)
             for tgt in directionLocs:
@@ -96,6 +73,7 @@ class Walker(Bot):
                 if self.moving.wait(1):
                     self.idle.wait()
                 if self.mapChanged.wait(2):
+                    self.mapChanged.clear()
                     self.lastPos = (currx, curry)
                     sleep(0.3)
                     return True
@@ -103,28 +81,6 @@ class Walker(Bot):
                     dofus.OUT_OF_COMBAT_R.hover()
                     sleep(0.2)
         nbr_fails += 1
-        return False
-
-    def waitPosMsg(self, t=20):
-        s = perf_counter()
-        while not self.killsig.is_set() and perf_counter() - s < t:
-            if self.posRequestState == PosRequestState.gotResponse:
-                self.posRequestState = PosRequestState.idle
-                return True
-            sleep(0.1)
-        return False
-                 
-    def waitMapChange(self, x, y, timeout=20):
-        logger.debug(f"Current map coords: {self.currPos}")
-        logger.debug(f"Changing map to destination ({x}, {y})")
-        s = perf_counter()
-        while not self.killsig.is_set() and perf_counter() - s < timeout:
-            if self.combatStarted.wait(0.3):
-                self.combatEnded.wait()
-            if self.mapChangeState == MapChangeState.done:
-                logger.debug(f"Change map took {perf_counter() - s}")
-                self.mapChangeState = MapChangeState.idle
-                return True
         return False
 
     def moveToTargets(self, targets):
@@ -189,7 +145,7 @@ class Walker(Bot):
             if self.disconnected.is_set():
                 self.connected.wait()
             else:
-                self.getCurrPos()
+                self.refreshMapData()
                 if self.currPos not in zone:
                     self.moveToZone(zone)
                 zone[self.currPos].excludeMap(self.lastPos, dst)
@@ -209,7 +165,6 @@ class Walker(Bot):
         pyautogui.press(dofus.HAVRE_SAC_SHORTCUT)
         
     def run(self):
-        self.disconnectedObs.start()
         env.focusDofusWindow()
         s = perf_counter()
         self.sniffer.start()
@@ -223,8 +178,6 @@ class Walker(Bot):
                 self.tmpIgnore.append(self.currPos)
                 Timer(self.memoTime, self.onTimer).start()
                 self.harvest()
-                if self.combatStarted.is_set():
-                    self.combatEnded.wait()
                 self.randomMapChange(self.zone)
             except Exception as e:
                 if self.disconnected.is_set():

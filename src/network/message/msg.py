@@ -54,18 +54,16 @@ class Msg:
                 count = None
             lenData = int.from_bytes(buf.read(header & 3), "big")
             id = header >> 2
-            
             data = Data(buf.read(lenData))
         except IndexError:
             buf.pos = 0
             return None
 
         if id == 2:
-            logger.debug("Message is NetworkDataContainerMessage! Uncompressing...")
             newbuffer = Buffer(data.readByteArray())
             newbuffer.uncompress()
             msg = Msg.fromRaw(newbuffer, from_client)
-            if msg is None or newbuffer.remaining():
+            if not msg or newbuffer.remaining():
                 raise Exception("Unable to parse Message")
             return msg
         
