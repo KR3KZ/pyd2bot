@@ -27,8 +27,7 @@ class ResourceFarmer(Fighter):
         self.save_dir = os.path.join(self.workdir, 'saves')
         save_file_name = self.zone.name.replace(' ', '_') + '_' + now.strftime("%d_%m_%Y") + ".yaml"
         self.today_save_file = os.path.join(self.save_dir, save_file_name)
-        self.farmingStarted = threading.Event()
-        self.farmingEnded = threading.Event()
+        self.farming = threading.Event()
         self.farmingError = threading.Event()
         self.currFarmingElem = None
 
@@ -39,26 +38,39 @@ class ResourceFarmer(Fighter):
             self.farmingError.set()
         
         if msg.msgType["name"] == "InteractiveUsedMessage":
-            logger.info("Got message telling farm started")
-            self.farmingStarted.set()
+            """
+            {
+                '__type__': 'InteractiveUsedMessage',
+                'canMove': False,
+                'duration': 30,
+                'elemId': 502678,
+                'entityId': 290210840786,
+                'skillId': 69
+            }
+            """
+            msg_json = msg.json()
+            skill = msg_json["skillId"]
+            self.currFarmingElem = msg_json["elemId"]
+            logger.info(f"Farming animation of elem {self.currFarmingElem} with skill {skill} started")
+            self.farming.set()
         
         elif msg.msgType["name"] == "InteractiveUseEndedMessage":
-            logger.info("Got message telling farm ended")
+            logger.info(f"Farming animation of elem {self.currFarmingElem} ended")
     
         elif msg.msgType["name"] == "StatedElementUpdatedMessage":
             msg_json = msg.json()
             elem_id = msg_json["statedElement"]["elementId"]
             self.currMapStatedElems[elem_id] = msg_json["statedElement"]
+            logger.info(f"Element {elem_id} state changed")
         
         elif msg.msgType["name"] == "InteractiveElementUpdatedMessage":
             msg_json = msg.json()
             elem_id = msg_json["interactiveElement"]["elementId"]
-            logger.info("received interaction update for elem: " + str(elem_id))
-            if self.currFarmingElem == elem_id:
-                self.farmingStarted.clear()
-                self.farmingEnded.set()
-                self.currFarmingElem = None
             self.currMapInteractiveElems[elem_id] = msg_json["interactiveElement"]
+            logger.info(f"Element {elem_id} interactiveness changed")
+            if self.currFarmingElem == elem_id:
+                self.currFarmingElem = None
+                self.farming.clear()
         
     def harvest(self):
         logger.info("harvest called")
@@ -73,53 +85,40 @@ class ResourceFarmer(Fighter):
         return False
                 
     def collect(self):
-        logger.info("looking for collectable resources")
         while not self.killsig.is_set():
+            self.currFarmingElem = None
             try:
-                for elem_id in self.currMapInteractiveElems.keys():
-                    for _ in range(6):
-                        if self.canCollect(elem_id):
-                            self.currFarmingElem = None
-                            ielem = self.currMapInteractiveElems[elem_id]
-                            selem = self.currMapStatedElems[elem_id]
-                            logger.info("collecting elem state : " + str(selem))
-                            logger.info("collecting elem interactions : " + str(ielem))
-                            cell_id = selem["elementCellId"]
-                            self.farmingStarted.clear()
-                            self.farmingEnded.clear()
-                            self.moving.clear()
-                            x, y = dofus.getCellCoords(cell_id)
-                            px, py = dofus.getCellPixelCenterCoords(x, y)
-                            pyautogui.keyDown('shift')
-                            sleep(0.1)
-                            # map_px, map_py, map_pw, map_ph = dofus.COMBAT_R.getRect()
-                            # cell_w = int(map_pw / (2 * dofus.HCELLS)) 
-                            # cell_h = int(map_ph / (2 * dofus.VCELLS)) 
-                            # rand_px = px + random.randint(-cell_w//3, cell_w//3)
-                            # rand_py = py + random.randint(-cell_h//3, cell_h//3)
-                            env.click(px, py)
-                            sleep(0.1)
-                            pyautogui.keyUp('shift')
+                logger.info("looking for collectable resources")
+                for elem_id in self.currMapInteractiveElems.keys():         
+                    if self.canCollect(elem_id):
+                        selem = self.currMapStatedElems[elem_id]
+                        logger.info(f"Collecting elem {elem_id}")
+                        cell_id = selem["elementCellId"]
+                        self.farming.clear()
+                        self.moving.clear()
+                        x, y = dofus.getCellCoords(cell_id)
+                        px, py = dofus.getCellPixelCenterCoords(x, y)
+                        for _ in range(3):
+                            env.shiftClick(px, py)
                             dofus.OUT_OF_COMBAT_R.hover()
                             if self.moving.wait(1):
-                                self.idle.wait()
-                            if self.farmingStarted.wait(1):
-                                logger.info("got farming started event")
-                                self.currFarmingElem = elem_id
-                                self.farmingEnded.wait()
-                                logger.info("got farming ended event")
-                                self.farmingEnded.clear()
+                                while self.moving.is_set():sleep(0.1)
+                            if self.farming.wait(1):
+                                while self.farming.is_set():sleep(0.1)
                                 break
-                            if self.farmingError.is_set():
-                                logger.info("Unable to collect the resource")
-                            if self.fullPodsAAA.is_set():
-                                logger.info("Warning pods reached 90% of total capacity")
-                            if self.combatStarted.is_set():
-                                logger.info("Combat started")
-                                self.combatEnded.wait()
-                            if self.mapChanged.is_set():
-                                self.mapChanged.clear()
-                                raise MapChangedWhileFarmingError
+                        if self.farmingError.is_set():
+                            # handle collect errors here
+                            logger.info("Unable to collect the resource")
+                        if self.fullPodsAAA.is_set():
+                            logger.info("Warning pods reached more than 90% of total capacity")
+                        if self.combatStarted.is_set():
+                            logger.info("Combat started")
+                            while self.combatStarted.is_set():sleep(0.1)
+                        if self.mapChanged.is_set():
+                            self.mapChanged.clear()
+                            raise MapChangedWhileFarmingError
+                        if self.killsig.is_set():
+                            return
                 return
             except MapChangedWhileFarmingError:
                 logger.info("Bot missclicked and changed map while farming, will repeat harvest on new map")

@@ -1,26 +1,11 @@
 import logging
-import os
-import re
+logger = logging.getLogger("bot")
 import threading
-from time import perf_counter, sleep
-import cv2
-import numpy as np
+from time import sleep
 import pyautogui
-import pytesseract
 from core import Observer, dofus, env, utils, Region
 from network.message.msg import Msg
-import network.sniffer.ui as snifferui
-
-logger = logging.getLogger("bot")
-
-class Pattern(dict):
-    def __init__(self, kind, path_to_pattern, id):
-        super(Pattern, self).__init__({
-            'kind': kind,
-            'id': id,
-            'bi': cv2.imread(path_to_pattern)
-        })
-
+from network.sniffer.dofusSniffer import DofusSniffer 
 
 class Bot(threading.Thread):
 
@@ -29,9 +14,6 @@ class Bot(threading.Thread):
         self.inventoryWeight = None
         self.weightMax = None
         self.killsig = threading.Event()
-        self.combatStarted = threading.Event()
-        self.combatEnded = threading.Event()
-        self.combatEndReached = threading.Event()
         self.lock = threading.Lock()
         self.disconnected = threading.Event()
         self.connected = threading.Event()
@@ -42,29 +24,23 @@ class Bot(threading.Thread):
         self.name = name
         self.dead = False
         self.workdir = workdir
-        self.disconnectedObs = Observer(dofus.CONNECT_R,
-                                        dofus.DISCONNECTED_BOX_P,
-                                        self.reconnect,
-                                        Observer.Mode.APPEAR,
-                                        rate=1 / 5)
         self.resourcesToFarm = []
-        snifferui.init(None)
-        self.sniffUi = snifferui.ui
-        snifferui.async_start()
-        self.sniffer = self.sniffUi.dofusSniffer
-        self.sniffer.bot = self
+        self.sniffer = DofusSniffer(self.handleMsg)
         self.currMapData = None
         self.currMapInteractiveElems = {}
         self.currMapStatedElems = {}
         self.id = {}
         
     def interrupt(self):
-        self.sniffUi.stop()
         self.killsig.set()
-        self.disconnectedObs.stop()
-
+        try:
+            self.sniffer.stop()
+        except:
+            logger.error("Fatal error in interrupt!", exc_info=True)
+        logger.info('Goodbye cruel world.')
+        
     def reconnect(self):
-        logging.info("Disconnected popup appeared!")
+        logger.info("Disconnected popup appeared!")
         self.disconnected.set()
         self.connected.clear()
         sleep(5)

@@ -109,8 +109,11 @@ CLOSE_LVL_UP_POPUP_L = Region(336, 573, 46, 32)
 
 # Shortcuts
 RAPPEL_POTION_SHORTCUT = "e"
-SKIP_TURN_SHORTCUT = 'space'
+SKIP_TURN_SHORTCUT = 'f1'
 HAVRE_SAC_SHORTCUT = "h"
+FOCUS_CHAT_SHORTCUT = "space"
+CLOSE_ACTIVE_WINDOW_SHORTCUT = "escape"
+
 class ObjType:
     OBSTACLE = QColor(88, 83, 58)
     DARK = Qt.black

@@ -6,27 +6,49 @@ import logging
 from ..message import Buffer, Msg
 
 
-IGNORED_MSGS = ["ChatServerMessage", 
-                "ChatServerWithObjectMessage", 
-                "GameMapMovementMessage", 
-                "BasicLatencyStatsMessage", 
-                "BasicNoOperationMessage", 
-                "BasicLatencyStatsRequestMessage"]
-
-bot_map_json_path = r"C:\Users\majdoub\OneDrive\Documents\bot2pix\map.json"
+IGNORED_MSGS = [
+    # chat msgs to ignore
+    "ChatServerMessage", 
+    "ChatServerWithObjectMessage", 
+    
+    # map msgs to ignore
+    "GameMapMovementMessage", 
+    "BasicLatencyStatsMessage", 
+    "BasicNoOperationMessage", 
+    "BasicLatencyStatsRequestMessage",
+    "ListMapNpcsQuestStatusUpdateMessage",
+    "MapInformationsRequestMessage",
+    "MapRewardRateMessage",
+    "UpdateMapPlayersAgressableStatusMessage",
+    "SetCharacterRestrictionsMessage",
+    "BasicTimeMessage",
+    "PrismsListUpdateMessage",
+    
+    # job msgs to ignore
+    "ObtainedItemWithBonusMessage",
+    "JobExperienceUpdateMessage",
+    "ObjectQuantityMessage",
+    
+    # fight msgs to ignore
+    "CharacterStatsListMessage",
+    "GameFightPlacementPossiblePositionsMessage",
+    "GameFightOptionStateUpdateMessage",
+    "IdolFightPreparationUpdateMessage",
+    "LifePointsRegenEndMessage"
+]
 
 class DofusSniffer(AsyncSniffer):
     
-    def __init__(self, action, capture_file, bot=None):
+    def __init__(self, action, capture_file=None):
         super().__init__(
-        filter="tcp port 5555",
-        prn=lambda pkt: self.onReceive(pkt, action),
-        offline=capture_file)
+            filter="tcp port 5555",
+            prn=lambda pkt: self.onReceive(pkt, action),
+            offline=capture_file
+        )
         self.LOCAL_IP = self.getLocalIp()
         self.SERVER_IP = None
         self.fromClientBuffer = Buffer()
         self.fromServerBuffer = Buffer()
-        self.bot=None
     
     def getLocalIp(self):
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -40,36 +62,28 @@ class DofusSniffer(AsyncSniffer):
         return local_ip
 
     def isFromClient(self, pa: Packet):
-        logging.debug("Determining packet origin...")
         dst = pa.getlayer('IP').dst
         src = pa.getlayer('IP').src
         if src == self.LOCAL_IP:
-            logging.debug("Packet comes from local machine")
             return True
         elif dst == self.LOCAL_IP:
-            logging.debug("Packet comes from server")
             if not self.SERVER_IP:
                 self.SERVER_IP = src
             return False
-        logging.error(
-            "Packet origin unknown\nsrc: %s\ndst: %s\nLOCAL_IP: %s", src, dst, self.LOCAL_IP
-        )
-        raise Exception("Packet origin unknown")
+        raise Exception(f"Packet origin unknown\nsrc: {src}\ndst: {dst}\nLOCAL_IP: {self.LOCAL_IP}")
 
-    def onReceive(self, pa: Packet, action):
+    def onReceive(self, pa: Packet, handle):
         logging.debug("Received packet. ")
         if pa and pa.haslayer('TCP'):
             isfromClient = self.isFromClient(pa)
             buf = self.fromClientBuffer if isfromClient else self.fromServerBuffer
-            raw_pa = pa.getlayer('Raw')
-            if raw_pa:
-                buf += raw_pa.load
+            raw_layer = pa.getlayer('Raw')
+            if raw_layer:
+                buf += raw_layer.load
                 msg = Msg.fromRaw(buf, isfromClient)
                 while msg:
                     if msg.msgType["name"] not in IGNORED_MSGS:
-                        action(msg)
-                        if self.bot:
-                            self.bot.handleMsg(msg)
+                        handle(msg)
                     msg = Msg.fromRaw(buf, isfromClient)
 
 
