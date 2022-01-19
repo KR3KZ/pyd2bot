@@ -1,4 +1,3 @@
-import atexit
 import logging
 import os
 workdir = os.path.dirname(os.path.abspath(__file__))
@@ -7,10 +6,9 @@ logging.basicConfig(filename=log_file,
                     level=logging.INFO,
                     format='%(asctime)s,%(msecs)d %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s',
                     datefmt='%Y-%m-%d:%H:%M:%S')
-from core.bot.resourceFarmer import ResourceFarmer 
-from core.bot import Walker
-from core.zone import Zone
-from core import env
+from pyd2bot.core.bot.resourceFarmer import ResourceFarmer 
+from pyd2bot.core.world.zone import Zone
+from pyd2bot.core.world import env
 spell = {
     "range": 13,
     "nbr": 4,

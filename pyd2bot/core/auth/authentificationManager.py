@@ -8,7 +8,7 @@ from Cryptodome.Util import number
 from Cryptodome.Cipher import AES, PKCS1_OAEP, PKCS1_v1_5
 from typing import Any
 import hashlib
-from . import crypto_utils 
+from ..utils import crypto_utils 
 from network.message.msg import Msg
 
 logger = logging.getLogger("bot")
