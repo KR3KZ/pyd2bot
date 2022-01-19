@@ -1,4 +1,4 @@
-from core.authentificationManager import AuthentificationManager
+from pyd2bot.logic.auth.authentificationManager import AuthentificationManager
 
 key = [
     107,
@@ -310,3 +310,4 @@ key = [
 
 myAuthMgr = AuthentificationManager()
 myAuthMgr.setPublicKey(key)
+print(myAuthMgr._publicKey)
