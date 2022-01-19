@@ -75,5 +75,6 @@ class AuthentificationManager:
         baIn += len(login).to_bytes(1, "big")
         baIn += bytes(login, 'utf')
         baIn += bytes(pwd, 'utf')
-        baOut = PKCS1_OAEP.new(RSA.importKey(bytes(self._publicKey, 'utf'))).encrypt(baIn)
+        rsa_key = RSA.importKey(bytes(self._publicKey, 'utf'))
+        baOut = crypto_utils.encryptWithRSA(rsa_key, baIn)
         return crypto_utils.byteArrtoIntArr(baOut)
