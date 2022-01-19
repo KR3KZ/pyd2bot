@@ -78,7 +78,7 @@ class DofusSniffer(AsyncSniffer):
                 buf += raw_layer.load
                 msg = Msg.fromRaw(buf, isfromClient)
                 while msg:
-                    if msg.msgType["name"] not in IGNORED_MSGS:
+                    if msg.msgName not in IGNORED_MSGS:
                         handle(msg)
                     msg = Msg.fromRaw(buf, isfromClient)
 

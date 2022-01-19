@@ -31,7 +31,7 @@ class Walker(Bot):
 
     def handleMsg(self, msg: Msg):
         super().handleMsg(msg)
-        if msg.msgType["name"] == "MapComplementaryInformationsDataMessage":
+        if msg.msgName == "MapComplementaryInformationsDataMessage":
             self.currMapInteractiveElems  = {}
             self.currMapStatedElems = {}
             
@@ -44,19 +44,19 @@ class Walker(Bot):
                 self.currMapStatedElems[selem["elementId"]] = selem    
             self.mapChanged.set()
                 
-        if msg.msgType["name"] == "CurrentMapMessage":
+        if msg.msgName == "CurrentMapMessage":
             self.currMapId = int(msg.json()["mapId"])
             self.currPos = dofus.getMapCoords(self.currMapId)
             
-        elif msg.msgType["name"] == "GameMapMovementRequestMessage":
+        elif msg.msgName == "GameMapMovementRequestMessage":
             self.moving.set()
             self.idle.clear()
             
-        elif msg.msgType["name"] == "GameMapMovementConfirmMessage":
+        elif msg.msgName == "GameMapMovementConfirmMessage":
             self.moving.clear()
             self.idle.set()
                     
-        elif msg.msgType["name"] == "ChatClientMultiMessage":
+        elif msg.msgName == "ChatClientMultiMessage":
             pass
 
     def changeMap(self, direction, max_tries=3):

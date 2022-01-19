@@ -89,7 +89,7 @@ class MsgTable(Table):
 
 class Msg(Tr):
     def __init__(self, msg, *args, **kwargs):
-        logger.debug("Initializing UI Msg: {}".format(msg.msgType["name"]))
+        logger.debug("Initializing UI Msg: {}".format(msg.msgName))
         self.msg = msg
         if msg.count is not None:
             super().__init__(class_="success", *args, **kwargs)
@@ -100,7 +100,7 @@ class Msg(Tr):
         self.contents = Td("", style="white-space: pre;")
         self.append(
             Td(str(msg.count)),
-            Td(msg.msgType["name"]),
+            Td(msg.msgName),
             Td(str(msg.id)),
             Td(str(len(msg.data))),
             self.contents,

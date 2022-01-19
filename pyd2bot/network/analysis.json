@@ -1,0 +1,232 @@
+{
+    {
+        "__type__": "ServersListMessage",
+        "servers": [
+            {
+                "__type__": "GameServerInformations",
+                "isMonoAccount": False,
+                "isSelectable": True,
+                "id": 50,
+                "type": 4,
+                "status": 3,
+                "completion": 0,
+                "charactersCount": 0,
+                "charactersSlots": 5,
+                "date": 0.0
+            },
+            {
+                "__type__": "GameServerInformations",
+                "isMonoAccount": True,
+                "isSelectable": True,
+                "id": 240,
+                "type": 0,
+                "status": 3,
+                "completion": 0,
+                "charactersCount": 0,
+                "charactersSlots": 4,
+                "date": 0.0
+            },
+            {
+                "__type__": "GameServerInformations",
+                "isMonoAccount": False,
+                "isSelectable": False,
+                "id": 203,
+                "type": 0,
+                "status": 3,
+                "completion": 0,
+                "charactersCount": 0,
+                "charactersSlots": 4,
+                "date": 0.0
+            },
+            {
+                "__type__": "GameServerInformations",
+                "isMonoAccount": False,
+                "isSelectable": True,
+                "id": 206,
+                "type": 0,
+                "status": 3,
+                "completion": 0,
+                "charactersCount": 0,
+                "charactersSlots": 4,
+                "date": 0.0
+            },
+            {
+                "__type__": "GameServerInformations",
+                "isMonoAccount": False,
+                "isSelectable": True,
+                "id": 209,
+                "type": 0,
+                "status": 3,
+                "completion": 0,
+                "charactersCount": 0,
+                "charactersSlots": 4,
+                "date": 0.0
+            },
+            {
+                "__type__": "GameServerInformations",
+                "isMonoAccount": False,
+                "isSelectable": True,
+                "id": 212,
+                "type": 0,
+                "status": 3,
+                "completion": 0,
+                "charactersCount": 0,
+                "charactersSlots": 4,
+                "date": 0.0
+            },
+            {
+                "__type__": "GameServerInformations",
+                "isMonoAccount": False,
+                "isSelectable": True,
+                "id": 36,
+                "type": 0,
+                "status": 3,
+                "completion": 0,
+                "charactersCount": 0,
+                "charactersSlots": 4,
+                "date": 0.0
+            },
+            {
+                "__type__": "GameServerInformations",
+                "isMonoAccount": False,
+                "isSelectable": False,
+                "id": 201,
+                "type": 0,
+                "status": 3,
+                "completion": 0,
+                "charactersCount": 0,
+                "charactersSlots": 4,
+                "date": 0.0
+            },
+            {
+                "__type__": "GameServerInformations",
+                "isMonoAccount": False,
+                "isSelectable": False,
+                "id": 204,
+                "type": 0,
+                "status": 3,
+                "completion": 0,
+                "charactersCount": 0,
+                "charactersSlots": 4,
+                "date": 0.0
+            },
+            {
+                "__type__": "GameServerInformations",
+                "isMonoAccount": False,
+                "isSelectable": True,
+                "id": 207,
+                "type": 0,
+                "status": 3,
+                "completion": 0,
+                "charactersCount": 0,
+                "charactersSlots": 4,
+                "date": 0.0
+            },
+            {
+                "__type__": "GameServerInformations",
+                "isMonoAccount": False,
+                "isSelectable": True,
+                "id": 210,
+                "type": 0,
+                "status": 3,
+                "completion": 0,
+                "charactersCount": 1,
+                "charactersSlots": 5,
+                "date": 1642600223407.0
+            },
+            {
+                "__type__": "GameServerInformations",
+                "isMonoAccount": True,
+                "isSelectable": True,
+                "id": 222,
+                "type": 0,
+                "status": 3,
+                "completion": 0,
+                "charactersCount": 0,
+                "charactersSlots": 4,
+                "date": 0.0
+            },
+            {
+                "__type__": "GameServerInformations",
+                "isMonoAccount": False,
+                "isSelectable": False,
+                "id": 99,
+                "type": 3,
+                "status": 3,
+                "completion": 0,
+                "charactersCount": 0,
+                "charactersSlots": 5,
+                "date": 0.0
+            },
+            {
+                "__type__": "GameServerInformations",
+                "isMonoAccount": False,
+                "isSelectable": False,
+                "id": 202,
+                "type": 0,
+                "status": 3,
+                "completion": 0,
+                "charactersCount": 0,
+                "charactersSlots": 4,
+                "date": 0.0
+            },
+            {
+                "__type__": "GameServerInformations",
+                "isMonoAccount": False,
+                "isSelectable": True,
+                "id": 205,
+                "type": 0,
+                "status": 3,
+                "completion": 0,
+                "charactersCount": 0,
+                "charactersSlots": 4,
+                "date": 0.0
+            },
+            {
+                "__type__": "GameServerInformations",
+                "isMonoAccount": False,
+                "isSelectable": True,
+                "id": 208,
+                "type": 0,
+                "status": 3,
+                "completion": 0,
+                "charactersCount": 0,
+                "charactersSlots": 4,
+                "date": 0.0
+            },
+            {
+                "__type__": "GameServerInformations",
+                "isMonoAccount": False,
+                "isSelectable": True,
+                "id": 211,
+                "type": 0,
+                "status": 3,
+                "completion": 0,
+                "charactersCount": 0,
+                "charactersSlots": 4,
+                "date": 0.0
+            }
+        ],
+        "alreadyConnectedToServerId": 0,
+        "canCreateNewCharacter": True
+    },
+    {
+        "__type__": "IdentificationSuccessMessage",
+        "hasRights": False,
+        "hasConsoleRight": False,
+        "wasAlreadyConnected": False,
+        "login": "kmajdoub",
+        "accountTag": {
+            "__type__": "AccountTagInformation",
+            "nickname": "grinderSama",
+            "tagNumber": "5800"
+        },
+        "accountId": 149512160,
+        "communityId": 0,
+        "secretQuestion": "Quel est mon film d’horreur préféré?",
+        "accountCreation": 1605217572000.0,
+        "subscriptionElapsedDuration": 6245497.0,
+        "subscriptionEndDate": 1644744074000.0,
+        "havenbagAvailableRoom": 1
+    }
+}

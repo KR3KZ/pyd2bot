@@ -1,6 +1,5 @@
 import os
 import logging
-import base64
 from Cryptodome.PublicKey import RSA
 from Cryptodome.Cipher import PKCS1_OAEP
 import pyd2bot.utils.crypto as crypto_utils
@@ -39,8 +38,7 @@ class AuthentificationManager:
     def setPublicKey(self, enc_publicKey:list[int]):
         baSignedKey = crypto_utils.intArrToBytesArr(enc_publicKey)
         ba_pubKey = crypto_utils.verifyRSASign(self.CLIENT_PUB_KEY, baSignedKey)
-        b64_pubkey = base64.b64encode(ba_pubKey)
-        self._publicKey = "-----BEGIN PUBLIC KEY-----\n" + b64_pubkey.decode('utf') + "\n-----END PUBLIC KEY-----"
+        self._publicKey = "-----BEGIN PUBLIC KEY-----\n" + crypto_utils.bytesToStr(ba_pubKey) + "\n-----END PUBLIC KEY-----"
     
     def getCanAutoConnectWithToken(self) -> bool:
         return self.nextToken != None

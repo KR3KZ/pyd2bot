@@ -1,6 +1,7 @@
 import logging
 from .customDataWrapper import Data, Buffer
 from .protocol import DofusProtocol
+from . import msg_name_by_id
 
 logger = logging.getLogger("labot")
 
@@ -8,12 +9,13 @@ logger = logging.getLogger("labot")
 class Msg:
     protocol = DofusProtocol()
     
-    def __init__(self, m_id, data, count=None):
+    def __init__(self, m_id, data, count=None, from_client=None):
         self.id = m_id
         if isinstance(data, bytearray):
             data = Data(data)
         self.data = data
         self.count = count
+        self.from_client = from_client
 
     def __str__(self):
         ans = str.format(
@@ -68,7 +70,7 @@ class Msg:
         
         buf.end()
 
-        return Msg(id, data, count)
+        return Msg(id, data, count, from_client=from_client)
 
     def lenlenData(self):
         if len(self.data) > 65535:
@@ -90,13 +92,16 @@ class Msg:
         return ans.data
 
     @property
-    def msgType(self):
-        return self.protocol.getMsgById(self.id)
+    def msgName(self):
+        if not self.from_client:
+            return msg_name_by_id._messagesTypes[self.id]
+        else:
+            return self.protocol.getMsgById(self.id)["name"]
 
     def json(self):
         logger.debug("Getting json representation of message %s", self)
         if not hasattr(self, "parsed"):
-            self.parsed = self.protocol.read(self.msgType["name"], self.data)
+            self.parsed = self.protocol.read(self.msgName, self.data)
         return self.parsed
 
     @staticmethod

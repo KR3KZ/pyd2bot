@@ -58,8 +58,8 @@ class Bot(threading.Thread):
             m.click()
 
     def handleMsg(self, msg: Msg):
-        logger.info("received msg: " + msg.msgType["name"])     
-        if msg.msgType["name"] == "InventoryWeightMessage":
+        logger.info("received msg: " + msg.msgName["name"])     
+        if msg.msgName["name"] == "InventoryWeightMessage":
             msg_json = msg.json()
             self.inventoryWeight = msg_json["inventoryWeight"]
             self.weightMax = msg_json["weightMax"]
@@ -68,13 +68,13 @@ class Bot(threading.Thread):
                 logger.info(f"Bot reached {100 * prcnt} of pod available")
                 self.fullPodsAAA.set()
             
-        if msg.msgType["name"] == "NotificationUpdateFlagMessage":
+        if msg.msgName["name"] == "NotificationUpdateFlagMessage":
             msg_json = msg.json()
             if msg_json["index"] == 37:
                 self.fullPods.set()
                 logger.info("Got bot full pod notif from server")
         
-        if msg.msgType["name"] == "GameContextCreateMessage":
+        if msg.msgName["name"] == "GameContextCreateMessage":
             msg_json = msg.json()
             self.context = msg_json["context"]
         

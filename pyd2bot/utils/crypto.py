@@ -4,13 +4,13 @@ from Cryptodome.Cipher import AES, PKCS1_OAEP
 import random
 import math
 import hashlib
+import base64
 
+def bytesToStr(ba:bytearray):
+   return base64.b64encode(ba).decode("utf")
 
 def getBlockSize(key:RSA.RsaKey):
    return (key.n.bit_length() + 7) // 8
-
-def cipherMd5str(self, pwd:str) -> str:
-   return  hashlib.md5(pwd + self._salt)
 
 def byteArrtoIntArr(ba:bytearray) -> list[int]:
    ret = []

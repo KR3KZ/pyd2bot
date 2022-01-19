@@ -35,7 +35,7 @@ class Fighter(Walker):
         super().handleMsg(msg)
         msg_json = msg.json()
         try:
-            if msg.msgType["name"] == "GameFightStartingMessage":
+            if msg.msgName == "GameFightStartingMessage":
                 """	
                 {
                     '__type__': 'GameFightStartingMessage',
@@ -50,7 +50,7 @@ class Fighter(Walker):
                 self.id = msg_json["attackerId"]
                 self.isInFight.set()
             
-            elif msg.msgType["name"] == "GameEntitiesDispositionMessage":
+            elif msg.msgName == "GameEntitiesDispositionMessage":
                 """
                 {
                     '__type__': 'GameEntitiesDispositionMessage',
@@ -77,7 +77,7 @@ class Fighter(Walker):
                         cell.type = dofus.ObjType.MOB
                         self.grid.mobs.add(cell)
             
-            elif msg.msgType["name"] == "GameFightShowFighterMessage":
+            elif msg.msgName == "GameFightShowFighterMessage":
                 """
                 {
                     '__type__': 'GameFightShowFighterMessage',
@@ -127,7 +127,7 @@ class Fighter(Walker):
                 """
                 pass
             
-            elif msg.msgType["name"] == "GameFightEndMessage":
+            elif msg.msgName == "GameFightEndMessage":
                 """
                 {'__type__': 'GameFightEndMessage',
                     'duration': 9270,
@@ -167,37 +167,37 @@ class Fighter(Walker):
                 """
                 self.isInFight.clear()
             
-            elif msg.msgType["name"] == "GameFightTurnStartPlayingMessage":
+            elif msg.msgName == "GameFightTurnStartPlayingMessage":
                 logger.info("Bot turn started")
                 self.inFightTurn.set()
             
-            elif msg.msgType["name"] == "GameFightTurnFinishMessage":
+            elif msg.msgName == "GameFightTurnFinishMessage":
                 logger.info("Bot turn ended")
                 self.inFightTurn.clear()
             
-            elif msg.msgType["name"] == "GameFightJoinMessage":
+            elif msg.msgName == "GameFightJoinMessage":
                 if msg_json["canSayReady"]:
                     logger.info("can say ready event set")
                     self.canSayReady.set()
 
-            elif msg.msgType["name"] == "GameFightReadyMessage":
+            elif msg.msgName == "GameFightReadyMessage":
                 if msg_json["isReady"]:
                     self.isReady.set()
             
-            elif msg.msgType["name"] == "GameActionFightCastRequestMessage":
+            elif msg.msgName == "GameActionFightCastRequestMessage":
                 logger.info("Spell casted")
                 # if msg_json["cellId"] == self.spellCast["cellId"] and  msg_json["spellId"] == self.spellCast["spellId"] :
                 #     self.spellCasted.set()
                         
-            elif msg.msgType["name"] == "SequenceStartMessage":
+            elif msg.msgName == "SequenceStartMessage":
                 if msg_json["authorId"] == self.id and msg_json["sequenceType"] == 1:
                     self.spellAnimation.set()
                     
-            elif msg.msgType["name"] == "SequenceEndMessage":
+            elif msg.msgName == "SequenceEndMessage":
                 if msg_json["authorId"] == self.id and msg_json["sequenceType"] == 1:
                     self.spellAnimation.clear()
                 
-            elif msg.msgType["name"] == "RefreshCharacterStatsMessage":
+            elif msg.msgName == "RefreshCharacterStatsMessage":
                 if msg_json["fighterId"] == self.id:
                     for characteristic in msg_json["stats"]["characteristics"]["characteristics"]:
                         value = characteristic["additional"] + characteristic["alignGiftBonus"] + characteristic["base"] +\
@@ -208,7 +208,7 @@ class Fighter(Walker):
                             self.pa = value - characteristic["used"]
                     logger.info(f"Bot pa, pm: {self.pa, self.pm}")
 
-            elif msg.msgType["name"] == "GameFightSynchronizeMessage":
+            elif msg.msgName == "GameFightSynchronizeMessage":
                 self.monsters = []
                 for fighter in msg_json["fighters"]:
                     if fighter["__type__"] == "GameFightCharacterInformations" and fighter["contextualId"] == self.id:
