@@ -2,7 +2,6 @@
 
 ## Intro
 Ce projet a pour objectif de developper un bot fullsocket pour dofus 2 100% en python.
-Le bot pour le moment ne tourne que pour la résolution 1920 x 1080.
 
 ## Setup des sources dans site-packages de python
 Vous devez executer le script shell setup.sh affin que le chemin des sources soit connu par python
@@ -29,6 +28,3 @@ Section pas encore rédigée
 
 # Lancement d'une instance de bot
 Rendez-vous dans le dossier examples pour trouver des examples de lancement de bots.
-Maintenant tout est prêt, vous pouvez alors vous rendre dans le dossier examples et voir comment instancier un python-bot et le lancer.
-
-
