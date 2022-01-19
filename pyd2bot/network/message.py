@@ -57,7 +57,7 @@ class Msg:
             id = header >> 2
             data = Data(buf.read(lenData))
         except IndexError:
-            buf.pos = 0
+            buf.position = 0
             return None
 
         if id == 2:

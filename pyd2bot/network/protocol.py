@@ -83,7 +83,7 @@ class DofusProtocol:
 
         logger.debug("reading boolean variables")
         ans.update(self.readBooleans(msg_type["boolVars"], data))
-        logger.debug("remaining data: %s", data.data[data.pos:])
+        logger.debug("remaining data: %s", data.data[data.position:])
 
         for var in msg_type["vars"]:
             logger.debug("reading %s", var)
@@ -94,7 +94,7 @@ class DofusProtocol:
                 ans[var["name"]] = self.readArray(var, data)
             else:
                 ans[var["name"]] = self.read(var["type"], data)
-            logger.debug("remaining data: %s", data.data[data.pos:])
+            logger.debug("remaining data: %s", data.data[data.position:])
         if msg_type["hash_function"] and data.remaining() == 48:
             ans["hash_function"] = data.read(48)
         return ans

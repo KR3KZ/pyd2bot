@@ -7,7 +7,7 @@ class Data:
         if data is None:
             data = bytearray()
         self.data = data
-        self.pos = 0
+        self.position = 0
 
     def __len__(self):
         return len(self.data)
@@ -31,7 +31,7 @@ class Data:
         return str.format("{}({!r})", self.__class__.__name__, self.data)
 
     def remaining(self):
-        return len(self) - self.pos
+        return len(self) - self.position
 
     def hex(self):
         return self.data.hex()
@@ -41,16 +41,16 @@ class Data:
         return cls(bytearray.fromhex(hex))
 
     def verif(self, l):
-        if len(self) < self.pos + l:
-            raise IndexError(self.pos, l, len(self))
+        if len(self) < self.position + l:
+            raise IndexError(self.position, l, len(self))
 
     def reset_pos(self):
-        self.pos = 0
+        self.position = 0
 
     def read(self, l):
         self.verif(l)
-        pos = self.pos
-        self.pos += l
+        pos = self.position
+        self.position += l
         return self.data[pos : pos + l]
 
     def write(self, l):
@@ -135,6 +135,13 @@ class Data:
     def writeUnsignedShort(self, us):
         self.data += us.to_bytes(2, "big")
 
+    def readBytes(self, start, len=None):
+        self.position = start
+        return self.read(len)
+    
+    def readUTFBytes(self, len):
+        return self.read(len).decode()
+    
     def _writeVar(self, i):
         if not i:
             self.writeUnsignedByte(0)
@@ -207,8 +214,8 @@ class Buffer(Data):
     def end(self):
         """Very efficient
         """
-        del self.data[: self.pos]
-        self.pos = 0
+        del self.data[: self.position]
+        self.position = 0
 
     def reset(self):
         self.__init__()
