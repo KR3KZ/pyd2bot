@@ -1,35 +1,18 @@
-import socket
-from pyd2bot.logic.network.sniffer.dofusSniffer import DofusSniffer
-from pyd2bot.logic.auth.authentificationManager import AuthentificationManager
-from pyd2bot.logic.network.message.msg import Msg
-from time import sleep 
-import json 
+from pyd2bot.logic.auth.authentificationManager import ROOTDIR
+from pyd2bot.network.client import DofusClient
+import json
+from time import sleep
+import os
 
-myAuthMgr = AuthentificationManager()
-myAuthMgr.initAESKey()
-sock = socket.socket()
-auth_host = "54.76.16.121"
-port = 5555
-counter = 0
+ROOTDIR = os.path.dirname(__file__)
 
-with open("account.json") as fp:
+c = DofusClient()
+creds_f = os.path.join(ROOTDIR, "account.json")
+with open(creds_f) as fp:
     auth_json = json.load(fp)
-    login = auth_json["username"]
-    password = auth_json["password"]
-    
-def handle(msg: Msg):
-    print("received: ", msg.msgType["name"])
-    mjson = msg.json()
-    if msg.msgType["name"] == "HelloConnectMessage":
-        myAuthMgr.setSalt(mjson["salt"])
-        imsg: Msg = myAuthMgr.getIdentificationMessage("kmajdoub", "rMrTXHA4*")
-        imsg.count = counter + 1
-        data = imsg.bytes()
-        sock.sendall(data)
-    if msg.msgType["name"] == "IdentificationFailedMessage":
-        print(mjson)
-        
-mdsniffer = DofusSniffer(handle)
-mdsniffer.start()
-sock.connect((auth_host, port))
-sleep(60)
+    c._login = auth_json["username"]
+    c._password = auth_json["password"]
+c.start()
+c.join()
+sleep(10)
+c.interrupt()

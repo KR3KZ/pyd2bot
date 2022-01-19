@@ -1,8 +1,8 @@
 import socket
 from scapy.all import AsyncSniffer, Packet
 import logging
-from .message import Buffer, Msg
-
+from .message import Msg
+from .customDataWrapper import Buffer
 
 # IGNORED_MSGS = [
 #     # chat msgs to ignore

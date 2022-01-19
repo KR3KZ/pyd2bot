@@ -19,6 +19,7 @@ Après installation des dépendences il faudra suivre les étapes suivantes pour
 Commencer par modifier le fichier se trouvant dans "protocol_builder/config.json", vous devez y renseigner deux choses:
 - "dofusInvoker_path" (chemin vers le fichier dofusInvoker): example "C:\\Users\\<ton_user_name>\\AppData\\Local\\Ankama\\Dofus\\DofusInvoker.swf",
 - "ffdec_path" (chemin vers l'executable du decodeur flash): "C:\\Program Files (x86)\\FFDec\\ffdec.bat"
+
 Lancer Après la commande `python -m protocol_builder`.
 ## Extraction des données de jeux (sur les maps, la pub_key du client ...)
 Section pas encore rédigée

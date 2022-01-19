@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 from pathlib import Path
 from .protocol_parser import ProtocolParser
 import json 
@@ -28,7 +27,7 @@ if __name__ == "__main__":
     ]
     pparser = ProtocolParser()
     protocol_json = pparser.run(src_paths)
-    with (work_dir / "../protocol.json").open("w") as fp:
+    with (work_dir / "../pyd2bot/network/protocol_spec.json").open("w") as fp:
         json.dump(protocol_json, fp)
         
     

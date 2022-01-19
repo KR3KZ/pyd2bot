@@ -3,7 +3,6 @@ import logging
 import base64
 from Cryptodome.PublicKey import RSA
 from Cryptodome.Cipher import PKCS1_OAEP
-from typing import Any
 import pyd2bot.utils.crypto as crypto_utils
 from pyd2bot.network.message import Msg
 
@@ -15,10 +14,10 @@ class ClientPubKeyNotFoundError(Exception):
 
 class AuthentificationManager:
     AES_KEY_LENGTH = 32
-    client_public_key_p = os.path.join(ROOTDIR, "public_key.pk")
-    if not os.path.exists(client_public_key_p):
-        raise ClientPubKeyNotFoundError(f"{client_public_key_p} file not found")
-    with open(client_public_key_p, 'r') as fp:
+    CLIENT_PUBLIC_KEY_P = os.path.join(ROOTDIR, "public_key.pk")
+    if not os.path.exists(CLIENT_PUBLIC_KEY_P):
+        raise ClientPubKeyNotFoundError(f"{CLIENT_PUBLIC_KEY_P} file not found")
+    with open(CLIENT_PUBLIC_KEY_P, 'r') as fp:
         CLIENT_PUB_KEY = RSA.importKey(fp.read())
     _publicKey:str
     _salt:str
@@ -69,7 +68,7 @@ class AuthentificationManager:
         imsg["credentials"] = self.getAuthCredentials(login, pwd)
         return Msg.from_json(imsg)
     
-    def getAuthCredentials(self, login:str, pwd:str) -> list:
+    def getAuthCredentials(self, login:str, pwd:str) -> list[int]:
         baIn = bytearray()
         baIn += bytes(self._salt, 'utf')
         baIn += self._AESKey
@@ -77,11 +76,4 @@ class AuthentificationManager:
         baIn += bytes(login, 'utf')
         baIn += bytes(pwd, 'utf')
         baOut = PKCS1_OAEP.new(RSA.importKey(bytes(self._publicKey, 'utf'))).encrypt(baIn)
-        ret:list[int] = []
-        for i in range(len(baOut)):
-            ret.append(int.from_bytes(baOut[i:i+1], "big", signed=True))
-        return ret
-
-
-
-
+        return crypto_utils.byteArrtoIntArr(baOut)

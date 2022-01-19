@@ -11,7 +11,7 @@ from wdom.server import start_server, start
 from wdom.themes import bootstrap3
 
 from wdom.themes.bootstrap3 import *
-from pyd2bot.network.dofusSniffer import DofusSniffer
+from pyd2bot.network.sniffer import DofusSniffer
 
 logger = logging.getLogger("labot")
 

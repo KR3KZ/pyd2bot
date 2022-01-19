@@ -3,9 +3,8 @@ logger = logging.getLogger("bot")
 import threading
 from time import sleep
 import pyautogui
-from core import Observer, dofus, env, utils, Region
-from network.message.msg import Msg
-from network.sniffer.dofusSniffer import DofusSniffer 
+from pyd2bot.network.message import Msg
+from pyd2bot.network.sniffer import DofusSniffer 
 
 class Bot(threading.Thread):
 
@@ -39,16 +38,6 @@ class Bot(threading.Thread):
         except:
             logger.error("Fatal error in interrupt!", exc_info=True)
         logger.info('Goodbye cruel world.')
-        
-    def reconnect(self):
-        logger.info("Disconnected popup appeared!")
-        self.disconnected.set()
-        self.connected.clear()
-        sleep(5)
-        dofus.CLOSE_DISCONNECTED_BOX_L.click()
-        dofus.CONNECT_R.waitVanish(dofus.DISCONNECTED_BOX_P)
-        dofus.RECONNECT_BUTTON_R.click()
-        sleep(20)
         
     @staticmethod
     def shiftClick(tgt):

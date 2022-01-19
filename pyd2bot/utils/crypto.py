@@ -7,7 +7,13 @@ import hashlib
 
 def cipherMd5str(self, pwd:str) -> str:
    return  hashlib.md5(pwd + self._salt)
-    
+
+def byteArrtoIntArr(ba:bytearray) -> list[int]:
+   ret = []
+   for i in range(len(ba)):
+      ret.append(int.from_bytes(ba[i:i+1], "big", signed=True))
+   return ret
+
 def intArrToBytesArr(int_arr:list[int]):
    """Converts an array of signed 8bits integers to an array of bytes
    """
