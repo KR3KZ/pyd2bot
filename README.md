@@ -1,11 +1,12 @@
-# bot2pix
+# pyd2bot
 
 ## Intro
-Ce projet a pour objectif de developper un bot pixel pour dofus 2, qui utilise un sniffer pour compléter certaines infos difficiles à parser visuellement.
-Pour la partie visuelle, il se base sur cv2 de openCV, et pour la partie sniffing il se base sur scapy et wincap.
-Le sniffer decode les messages à partir d'un fichier json ("protocol.json") qui contient les données sur les packets du protocol dofus 2.
-Ce fichier est construit à partir des sources de dofus 2 (DofusInvoker.swf), cette partie a été construite à Partir du fameux LaBot de Louis Abraham.
+Ce projet a pour objectif de developper un bot fullsocket pour dofus 2 100% en python.
 Le bot pour le moment ne tourne que pour la résolution 1920 x 1080.
+
+## Setup des sources dans site-packages de python
+Vous devez executer le script shell setup.sh affin que le chemin des sources soit connu par python
+`./setup.sh`
 
 # Dependences 
 ## dependences python
@@ -16,11 +17,18 @@ Après, il faudra telecharger et installer le decodeur flash ffdec de l'url, qui
 FFDec](https://github.com/jindrapetrik/jpexs-decompiler).
 
 
-# Mode Emploi 
+# Build 
 Après installation des dépendences il faudra suivre les étapes suivantes pour pouvoir lancer une instance le bot correctement et s'amuser avec :).
 ## Build du protocol 
-Lancer la commande `python -m src.network.protocol_builder`.
+Commencer par modifier le fichier se trouvant dans "protocol_builder/config.json", vous devez y renseigner deux choses:
+- "dofusInvoker_path" (chemin vers le fichier dofusInvoker): example "C:\\Users\\<ton_user_name>\\AppData\\Local\\Ankama\\Dofus\\DofusInvoker.swf",
+- "ffdec_path" (chemin vers l'executable du decodeur flash): "C:\\Program Files (x86)\\FFDec\\ffdec.bat"
+Lancer Après la commande `python -m protocol_builder`.
+## Extraction des données de jeux (sur les maps, la pub_key du client ...)
+Section pas encore rédigée
 
+# Lancement d'une instance de bot
+Rendez-vous dans le dossier examples pour trouver des examples de lancement de bots.
 Maintenant tout est prêt, vous pouvez alors vous rendre dans le dossier examples et voir comment instancier un python-bot et le lancer.
 
 

@@ -14,3 +14,4 @@ env.move(px,py)
 # for cid in range(560):
 #     x, y = dofus.getCellCoords(cid)
 #     print(y, x//2)
+
