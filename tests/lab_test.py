@@ -1,7 +1,7 @@
 import socket
-from pyd2bot.core.network.sniffer.dofusSniffer import DofusSniffer
-from pyd2bot.core.auth.authentificationManager import AuthentificationManager
-from pyd2bot.core.network.message.msg import Msg
+from pyd2bot.logic.network.sniffer.dofusSniffer import DofusSniffer
+from pyd2bot.logic.auth.authentificationManager import AuthentificationManager
+from pyd2bot.logic.network.message.msg import Msg
 from time import sleep 
 import json 
 
