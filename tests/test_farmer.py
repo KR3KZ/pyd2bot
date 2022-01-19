@@ -6,9 +6,10 @@ logging.basicConfig(filename=log_file,
                     level=logging.INFO,
                     format='%(asctime)s,%(msecs)d %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s',
                     datefmt='%Y-%m-%d:%H:%M:%S')
+
 from pyd2bot.logic.bot.resourceFarmer import ResourceFarmer 
-from pyd2bot.logic.world.zone import Zone
-from pyd2bot.logic.world import env
+from pyd2bot.world.zone import Zone
+
 spell = {
     "range": 13,
     "nbr": 4,
@@ -25,5 +26,4 @@ myBot.zone = zone
 myBot.startZaap = zone_zaap
 myBot.start()    
 myBot.join()
-env.focusIDEWindow()
 

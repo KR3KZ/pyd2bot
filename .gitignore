@@ -6,3 +6,4 @@ map.json
 *.pyc
 __pycache__
 account.json
+sources
