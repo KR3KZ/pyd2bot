@@ -11,6 +11,7 @@ from wdom.server import start_server, start
 from wdom.themes import bootstrap3
 
 from wdom.themes.bootstrap3 import *
+from pyd2bot.network.message import Msg
 from pyd2bot.network.sniffer import DofusSniffer
 
 logger = logging.getLogger("labot")
@@ -80,16 +81,17 @@ class MsgTable(Table):
 
     def appendMsg(self, msg):
         logger.debug("Adding message to table")
-        Msg(msg, parent=self.tbody)
+        MsgView(msg, parent=self.tbody)
 
     def clear(self, msg):
         self.tbody.remove()
         self.tbody = Tbody(parent=self)
 
 
-class Msg(Tr):
-    def __init__(self, msg, *args, **kwargs):
-        logger.debug("Initializing UI Msg: {}".format(msg.msgName))
+class MsgView(Tr):
+    
+    def __init__(self, msg: Msg, *args, **kwargs):
+        logger.debug("Initializing UI Msg: {}".format(msg.name))
         self.msg = msg
         if msg.count is not None:
             super().__init__(class_="success", *args, **kwargs)
@@ -100,7 +102,7 @@ class Msg(Tr):
         self.contents = Td("", style="white-space: pre;")
         self.append(
             Td(str(msg.count)),
-            Td(msg.msgName),
+            Td(msg.name),
             Td(str(msg.id)),
             Td(str(len(msg.data))),
             self.contents,

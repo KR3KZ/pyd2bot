@@ -1,40 +1,8 @@
 import socket
 from scapy.all import AsyncSniffer, Packet
-import logging
 from .message import Msg
-from .customDataWrapper import Buffer
+from pyd2bot.utils.binaryIO import Buffer
 
-# IGNORED_MSGS = [
-#     # chat msgs to ignore
-#     "ChatServerMessage", 
-#     "ChatServerWithObjectMessage", 
-    
-#     # map msgs to ignore
-#     "GameMapMovementMessage", 
-#     "BasicLatencyStatsMessage", 
-#     "BasicNoOperationMessage", 
-#     "BasicLatencyStatsRequestMessage",
-#     "ListMapNpcsQuestStatusUpdateMessage",
-#     "MapInformationsRequestMessage",
-#     "MapRewardRateMessage",
-#     "UpdateMapPlayersAgressableStatusMessage",
-#     "SetCharacterRestrictionsMessage",
-#     "BasicTimeMessage",
-#     "PrismsListUpdateMessage",
-    
-#     # job msgs to ignore
-#     "ObtainedItemWithBonusMessage",
-#     "JobExperienceUpdateMessage",
-#     "ObjectQuantityMessage",
-    
-#     # fight msgs to ignore
-#     "CharacterStatsListMessage",
-#     "GameFightPlacementPossiblePositionsMessage",
-#     "GameFightOptionStateUpdateMessage",
-#     "IdolFightPreparationUpdateMessage",
-#     "LifePointsRegenEndMessage"
-# ]
-IGNORED_MSGS = []
 class DofusSniffer(AsyncSniffer):
     
     def __init__(self, action, capture_file=None):
@@ -69,18 +37,23 @@ class DofusSniffer(AsyncSniffer):
         raise Exception(f"Packet origin unknown\nsrc: {src}\ndst: {dst}\nLOCAL_IP: {self.LOCAL_IP}")
 
     def onReceive(self, pa: Packet, handle):
-        logging.debug("Received packet. ")
+        dst = pa.getlayer('IP').dst
+        src = pa.getlayer('IP').src
         if pa and pa.haslayer('TCP'):
             isfromClient = self.isFromClient(pa)
             buf = self.fromClientBuffer if isfromClient else self.fromServerBuffer
             raw_layer = pa.getlayer('Raw')
             if raw_layer:
                 buf += raw_layer.load
-                msg = Msg.fromRaw(buf, isfromClient)
-                while msg:
-                    if msg.msgName not in IGNORED_MSGS:
-                        handle(msg)
-                    msg = Msg.fromRaw(buf, isfromClient)
-
+                while True:
+                    msg = Msg.fromRaw(buf, isfromClient, src=src, dst=dst)
+                    if not msg:
+                        break
+                    # print(f"Received msg. {msg.json()}, src {src} -> dst: {dst}")
+                    if msg.name == "RawDataMessage":
+                        with open(r"C:\Users\majdoub\OneDrive\Documents\pyd2bot\tests\rawd.bin", 'wb') as fp:
+                            fp.write(msg.json()["content"])
+                    handle(msg)
+                    
 
         

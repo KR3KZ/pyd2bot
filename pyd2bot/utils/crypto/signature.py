@@ -1,8 +1,10 @@
 
 import hashlib
-from pyd2bot.network.customDataWrapper import Data
-from Cryptodome.PublicKey import RSA
-import pyd2bot.utils.crypto as crypto_utils
+from inspect import trace
+import traceback
+from pyd2bot.utils.binaryIO.customDataWrapper import ByteArray
+from pyd2bot.utils.crypto import RSA, RSACipher, PKCS1
+
 
 class SignatureError(Exception):
     pass
@@ -12,7 +14,7 @@ class SignatureKey:
     PRIVATE_KEY_HEADER:str = "DofusPrivateKey"
     
     @staticmethod
-    def import_key(input:Data): 
+    def import_key(input:ByteArray): 
         header:str = input.readUTF()
         if header != SignatureKey.PUBLIC_KEY_HEADER and header != SignatureKey.PRIVATE_KEY_HEADER:
             raise Exception("Invalid public or private header")
@@ -31,8 +33,8 @@ class Signature:
         self.key1 = key1
         self.key2= key2
 
-    def verify(self, input:bytearray) -> bytearray: 
-        input:Data = Data(input)
+    def verify(self, input:ByteArray) -> ByteArray: 
+        input:ByteArray = ByteArray(input)
         headerSize:int = 0
         header:str = None
         headerPosition = 0
@@ -50,15 +52,18 @@ class Signature:
                 return self.verifyV1Signature(input)
         raise SignatureError("Invalid header")
 
-    def verifyV2Signature(self, input:Data, headerPosition:int) -> bool:
+    def verifyV2Signature(self, input:ByteArray, headerPosition:int) -> bool:
         if not self.key2:
-            raise SignatureError("No key for self signature version")
+            raise SignatureError("No key for self signature version (2)")
         try:
             input.position = headerPosition - 4
             signedDataLenght = input.readShort()
             input.position = headerPosition - 4 - signedDataLenght
             cryptedData = input.readBytes(0, signedDataLenght)
-            sigData = Data(crypto_utils.verifyRSASign(self.key2, cryptedData))
+            rsaceipher = RSACipher(self.key2, PKCS1())
+            sigData = ByteArray()
+            if not rsaceipher.verify(cryptedData, sigData):
+                return False
             sigData.position = 0
             sigHeader = sigData.readUTF()
             if sigHeader != self.SIGNATURE_HEADER:
@@ -82,10 +87,11 @@ class Signature:
             if sigHash != contentHash:
                 return None
         except Exception as e:
+            traceback.print_exc()
             return None
         return output
 
-    def verifyV1Signature(self, input:Data) -> bytearray:
+    def verifyV1Signature(self, input:ByteArray) -> bytearray:
         len:int = 0
         try:
             len = input.readInt()
@@ -93,8 +99,10 @@ class Signature:
         except Exception as e:
             raise SignatureError("Invalid signature format, not enough data.")
         
-        try:   
-            decryptedHash = Data(crypto_utils.verifyRSASign(self.key1, sigData))
+        try:
+            decryptedHash = ByteArray()
+            rsacipher = RSACipher(self.key1, PKCS1())
+            rsacipher.verify(sigData, decryptedHash)
         except Exception as e:
             return None
         
@@ -106,7 +114,7 @@ class Signature:
         contentLen:int = decryptedHash.readUnsignedInt()
         testedContentLen:int = input.remaining()
         signHash:str = decryptedHash.readUTFBytes(decryptedHash.remaining())[1:]
-        output = Data(input.readBytes())
+        output = ByteArray(input.readBytes())
         contentHash:str = hashlib.md5(output.readUTFBytes(output.remaining())).hexdigest()[1:]
         if signHash and signHash == contentHash and contentLen == testedContentLen:
             return output

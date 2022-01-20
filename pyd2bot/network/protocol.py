@@ -1,7 +1,7 @@
 from functools import reduce
 import logging
 import random
-from .customDataWrapper import Data
+from pyd2bot.utils.binaryIO.customDataWrapper import ByteArray
 import json
 import os
 
@@ -19,6 +19,7 @@ ROOTDIR = os.path.dirname(__file__)
 
 class DofusProtocol:
     protocol_spec_p = os.path.join(ROOTDIR, "protocol_spec.json")
+    
     if not os.path.exists(protocol_spec_p):
         raise ProtocolSpecNotFoundError(f"{protocol_spec_p} file not found")
     with open(protocol_spec_p, "r") as fp:
@@ -40,7 +41,7 @@ class DofusProtocol:
     def isPrimitive(self, name):
         return name in self.json["primitives"]
     
-    def readBooleans(self, boolVars, data: Data):
+    def readBooleans(self, boolVars, data: ByteArray):
         ans = {}
         bvars = iter(boolVars)
         for _ in range(0, len(boolVars), 8):
@@ -49,7 +50,7 @@ class DofusProtocol:
                 ans[var["name"]] = val == "1"
         return ans
 
-    def readArray(self, var, data: Data):
+    def readArray(self, var, data: ByteArray):
         assert var["length"] is not None
         if isinstance(var["length"], int):
             n = var["length"]
@@ -60,14 +61,14 @@ class DofusProtocol:
             ans.append(self.read(var["type"], data))
         return ans
 
-    def read(self, type_name, data: Data):
+    def read(self, type_name, data: ByteArray):
         if not type_name:
             msg_type_id = data.readUnsignedShort()
             msg_type = self.getTypeById(msg_type_id)
             
         else:
             if self.isPrimitive(type_name):
-                return getattr(Data, "read" + type_name)(data)
+                return getattr(ByteArray, "read" + type_name)(data)
             msg_type = self.getMsgTypeByName(type_name)
             
         logger.debug("reading data %s", data)
@@ -83,7 +84,7 @@ class DofusProtocol:
 
         logger.debug("reading boolean variables")
         ans.update(self.readBooleans(msg_type["boolVars"], data))
-        logger.debug("remaining data: %s", data.data[data.position:])
+        logger.debug("remaining data: %s", data.remaining())
 
         for var in msg_type["vars"]:
             logger.debug("reading %s", var)
@@ -94,12 +95,12 @@ class DofusProtocol:
                 ans[var["name"]] = self.readArray(var, data)
             else:
                 ans[var["name"]] = self.read(var["type"], data)
-            logger.debug("remaining data: %s", data.data[data.position:])
+            logger.debug("remaining data: %s", data.remaining())
         if msg_type["hash_function"] and data.remaining() == 48:
             ans["hash_function"] = data.read(48)
         return ans
 
-    def writeBooleans(self, boolVars, el, data: Data):
+    def writeBooleans(self, boolVars, el, data: ByteArray):
         bits = []
         for var in boolVars:
             bits.append(el[var["name"]])
@@ -119,9 +120,9 @@ class DofusProtocol:
         for it in el:
             self.write(var["type"], it, data)
 
-    def write(self, msg_type_name, json, data=None, random_hash=True) -> Data:
+    def write(self, msg_type_name, json, data=None, random_hash=True) -> ByteArray:
         if data is None:
-            data = Data()
+            data = ByteArray()
             
         if msg_type_name is False:
             msg_type = self.getMsgTypeByName[json["__type__"]]
@@ -129,7 +130,7 @@ class DofusProtocol:
             
         elif isinstance(msg_type_name, str):
             if self.isPrimitive(msg_type_name):
-                getattr(Data, "write" + msg_type_name)(data, json)
+                getattr(ByteArray, "write" + msg_type_name)(data, json)
                 return data
             msg_type = self.getMsgTypeByName(msg_type_name)
             

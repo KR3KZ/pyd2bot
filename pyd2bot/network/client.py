@@ -1,10 +1,12 @@
 import socket
 import threading
-from pyd2bot.network.customDataWrapper import Buffer
-from pyd2bot.network.message import Msg
-from pyd2bot.logic.auth.authentificationManager import AuthentificationManager
+from pyd2bot.network.message import Msg, ByteArray, Buffer
+from pyd2bot.logic.connection.managers import AuthentificationManager
 from pyd2bot.gameData.enums.IdentificationFailureReasons import IdentificationFailureReason
-import pyd2bot.utils.crypto as crypto_utils
+import math
+import random
+from pyd2bot.utils.crypto import RSA, RSACipher
+
 
 sock = socket.socket()
 counter = 0
@@ -48,14 +50,13 @@ class DofusClient(threading.Thread):
         self.killSig.set()
     
     def sendMsg(self, msg: Msg):
-        msg.count = self.counter + 1
+        self.counter += 1
+        msg.count = self.counter 
         self.sock.sendall(msg.bytes())
-        self.counter = 3
         
     def handle(self, msg: Msg):
         jmsg = msg.json()
-        mtype = msg.msgName["name"]
-        print(jmsg)
+        mtype = msg.name
         
         if mtype == "HelloConnectMessage":
             self.authManager.setSalt(jmsg["salt"])
@@ -79,31 +80,69 @@ class DofusClient(threading.Thread):
         
         elif mtype == "SelectedServerDataMessage":
             self.serverInfos = jmsg
+            ba_ticket = self.authManager.decodeWithAES(self.serverInfos["ticket"])
+            self.serverInfos["ticket"] = ba_ticket.to_string()
             self.sock.close()
+            self.counter = 0
+            self.sock = socket.socket()
             self.sock.connect((self.serverInfos["address"], self.port))
-            bcypher_ticket = crypto_utils.intArrToBytesArr(self.serverInfos["ticket"])
-            bticket = crypto_utils.decodeWithAES(self.authManager._AESKey, bcypher_ticket)
-            ticket = crypto_utils.bytesToStr(bticket)
-            ticketMsg = {
+        
+        elif mtype == "HelloGameMessage":
+            ticketMsg = Msg.from_json({
                 '__type__': 'AuthenticationTicketMessage',
                 'lang': 'fr',
-                'ticket': ticket
-            }
+                'ticket': self.serverInfos["ticket"]
+            })
             self.sendMsg(ticketMsg)
         
         elif mtype == "RawDataMessage":
-            content = bytearray()
-            signature = Signature(SIGNATURE_KEY_V1, SIGNATURE_KEY_V2)
-            _log.info("Bytecode len: " + rdMsg.content.length + ", hash: " + MD5.hashBytes(rdMsg.content))
-            rdMsg.content.position = 0
-            if(signature.verify(rdMsg.content,content)):
-                l = Loader()
-                LogInFile.getInstance().logLine("Kernel l.uncaughtErrorEvents.addEventListener onUncaughtError",FileLoggerEnum.EVENTLISTENERS)
-                l.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR,this.onUncaughtError,false,0,true)
-                lc = LoaderContext(false,ApplicationDomain(ApplicationDomain.currentDomain))
-                AirScanner.allowByteCodeExecution(lc,true)
-                l.loadBytes(content,lc)
+            gameServerTicket = self.serverInfos["ticket"]
+
+            key = b"AKMBJ2YBJUHRsk8yptfOlcVLksJSCCSiWUryWD/vv6euIERWlfrWN0+Csf8UVG4CY"\
+                b"qoz3hDBuaA3oe48W1xFADd5Bm+ks0dW3hemrTSI7HBLSLBWAcKrZ21wPfgWD2QUxVV1infGd"\
+                b"pw+Lt0808UwqdDGUpwV2JGqzIbMZjGCXWdj8Ae2ribiXWU2P255Uv5nhC7O4ZKoTNXDAmjtc"\
+                b"3qYzSXUZTkrhlf3yL8J/XyUvHuvuKetABtoJun2QaaKkuO6258oDtDxnKQKgKhtVrc0Jpa"\
+                b"Qusr7GlWRcg6bK2M8dWjj+TAuwZLMvn7ltKYJjgvYymasrRu+56wbreTHa98ctVE="
+                
+            publicModulo = int.from_bytes(key, "big")
+            rsaKeyNetwork = RSA.RsaKey(n=publicModulo, e=65537) 
+
+            keyLen = 128
+            hashKey = bytearray()
+            i = 0
+            while i < keyLen // 8:
+                rb = math.floor(random.random() * 256) - 128
+                hashKey += rb.to_bytes(1, "big", signed=True)
+                i+=1
+                
+            xorKey2Len = math.floor(random.random() * 128) + 128
+            xorKey2 = bytearray()
+            i = 0
+            while(i < xorKey2Len // 8):
+                rb =  math.floor(random.random() * 256 - 128)
+                xorKey2 += rb.to_bytes(1, "big", signed=True)
+                i+=1 
+            i = 0
+
+            dataToEncrypt = ByteArray()
+            dataToEncrypt.writeUTF(gameServerTicket)
+            dataToEncrypt.writeShort(len(hashKey))
+            dataToEncrypt += hashKey
+            dataToEncrypt.writeShort(len(xorKey2))
+            dataToEncrypt += xorKey2
+            dataToEncrypt.position = 0
+
+            dataIndex = 0
+            while dataIndex < len(dataToEncrypt):
+                dataToEncrypt.data[dataIndex] = 0 ^ 0
+                dataIndex += 1
+
+            rsacipher = RSACipher(rsaKeyNetwork, PKCS1())
+            enc_data = rsaKeyNetwork.encryptWithRSA(dataToEncrypt)
+            ret = byteArrtoIntArr(enc_data)
+            self.sendMsg(Msg.from_json({'__type__': 'CheckIntegrityMessage',
+            'data': ret}))
+                                    
                         
-            
         
         

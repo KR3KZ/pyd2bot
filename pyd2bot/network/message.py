@@ -1,7 +1,7 @@
 import logging
-from .customDataWrapper import Data, Buffer
+from ..utils.binaryIO.customDataWrapper import ByteArray, Buffer
 from .protocol import DofusProtocol
-from . import msg_name_by_id
+from . import msgReceiver
 
 logger = logging.getLogger("labot")
 
@@ -9,20 +9,20 @@ logger = logging.getLogger("labot")
 class Msg:
     protocol = DofusProtocol()
     
-    def __init__(self, m_id, data, count=None, from_client=None):
+    def __init__(self, m_id, data, count=None, from_client=None, src=None, dst=None):
         self.id = m_id
-        if isinstance(data, bytearray):
-            data = Data(data)
         self.data = data
         self.count = count
         self.from_client = from_client
+        self.src_ip = src
+        self.dst_ip = dst
 
     def __str__(self):
         ans = str.format(
             "{}(m_id={}, data={}, count={})",
             self.__class__.__name__,
             self.id,
-            self.data.data,
+            self.data,
             self.count,
         )
         return ans
@@ -32,13 +32,13 @@ class Msg:
             "{}(m_id={}, data={!r}, count={})",
             self.__class__.__name__,
             self.id,
-            self.data.data,
+            self.data,
             self.count,
         )
         return ans
 
     @staticmethod
-    def fromRaw(buf: Buffer, from_client):
+    def fromRaw(buf: Buffer, from_client, src=None, dst=None):
         """Read a message from the buffer and
         empty the beginning of the buffer.
         msg fields spec: 
@@ -55,7 +55,7 @@ class Msg:
                 count = None
             lenData = int.from_bytes(buf.read(header & 3), "big")
             id = header >> 2
-            data = Data(buf.read(lenData))
+            data = ByteArray(buf.read(lenData))
         except IndexError:
             buf.position = 0
             return None
@@ -70,7 +70,12 @@ class Msg:
         
         buf.end()
 
-        return Msg(id, data, count, from_client=from_client)
+        return Msg(m_id=id, 
+                   data=data, 
+                   count=count, 
+                   from_client=from_client,
+                   src=src,
+                   dst=dst)
 
     def lenlenData(self):
         if len(self.data) > 65535:
@@ -83,25 +88,25 @@ class Msg:
 
     def bytes(self):
         header = 4 * self.id + self.lenlenData()
-        ans = Data()
+        ans = ByteArray()
         ans.writeUnsignedShort(header)
         if self.count is not None:
             ans.writeUnsignedInt(self.count)
         ans += len(self.data).to_bytes(self.lenlenData(), "big")
         ans += self.data
-        return ans.data
+        return ans
 
     @property
-    def msgName(self):
+    def name(self):
         if not self.from_client:
-            return msg_name_by_id._messagesTypes[self.id]
+            return msgReceiver._messagesTypes[self.id]
         else:
             return self.protocol.getMsgById(self.id)["name"]
 
     def json(self):
         logger.debug("Getting json representation of message %s", self)
         if not hasattr(self, "parsed"):
-            self.parsed = self.protocol.read(self.msgName, self.data)
+            self.parsed = self.protocol.read(self.name, self.data)
         return self.parsed
 
     @staticmethod
