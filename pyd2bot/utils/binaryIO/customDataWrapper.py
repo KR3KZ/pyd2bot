@@ -2,16 +2,19 @@ import base64
 from zlib import decompress
 import struct
 
-
 class ByteArray(bytearray):
     def __init__(self, *args, **kwrgs):
         super().__init__(*args, **kwrgs)
         self.position = 0
-
+        
     @property
     def length(self):
         return len(self)
     
+    @length.setter
+    def length(self, val):   
+        del self[val:]
+           
     def to_string(self):
         return base64.b64encode(self).decode("utf")
 
@@ -62,9 +65,9 @@ class ByteArray(bytearray):
         lon = self.readVarInt()
         return self.read(lon)
 
-    def writeBytes(self, ba):
-        self.writeVarInt(len(ba))
-        self += ba
+    # def writeBytes(self, ba):
+    #     self.writeVarInt(len(ba))
+    #     self += ba
 
     def readDouble(self):
         return struct.unpack("!d", self.read(8))[0]
@@ -204,16 +207,16 @@ class ByteArray(bytearray):
             res += nbr.to_bytes(1, "big", signed=True)
         return res
     
-    def writeBytes(self, data, offset=0, size=None):
-        self.position += offset
-        if size is None:
-            size = len(data)
-        if len(data) <= size:
-            self += data
+    def writeBytes(self, ba, offset=0, size=None):
+        if not size:
+            size = len(ba)
+        if self.position + size < len(self):
+            self[self.position : self.position + size] = ba[offset : offset + size]
         else:
-            self += data[:size]
-        self.position += len(data)
-        
+            chunck_size = len(self) - self.position
+            self[self.position :] = ba[offset : offset + chunck_size]
+            self += ba[offset + chunck_size : offset + size]
+        self.position += size
         
 class Buffer(ByteArray):
     def end(self):

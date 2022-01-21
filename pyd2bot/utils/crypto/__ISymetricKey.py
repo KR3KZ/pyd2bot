@@ -5,13 +5,13 @@ from pyd2bot.utils.binaryIO.customDataWrapper import ByteArray;
 
 class ISymmetricKey(ABC):
     
-    def getBlockSize() -> int:
+    def getBlockSize(self) -> int:
         pass 
     
-    def encrypt(param1:ByteArray, param2:int = 0) -> None:
+    def encrypt(self, param1:ByteArray, param2:int = 0) -> None:
         pass
     
-    def decrypt(param1:ByteArray, param2:int = 0) -> None: 
+    def decrypt(self, param1:ByteArray, param2:int = 0) -> None: 
         pass
     
     def dispose() -> None:

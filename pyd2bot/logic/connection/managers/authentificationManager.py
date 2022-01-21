@@ -6,7 +6,7 @@ import random
 from pyd2bot.utils.crypto import RSACipher, RSA, PKCS1
 from pyd2bot.network.message import Msg
 from pyd2bot.utils.binaryIO import ByteArray
-from pyd2bot.utils.crypto import CBCMode, NullPad, AESKey
+from pyd2bot.utils.crypto import CBCMode, NullPad, AESKey, SimpleIVMode
 
 logger = logging.getLogger("bot")
 ROOTDIR = os.path.dirname(__file__)
@@ -96,7 +96,7 @@ class AuthentificationManager:
         return ba
 
     def decodeWithAES(self, byteArrayOrVector) -> ByteArray:
-        aescipher = CBCMode(AESKey(self._AESKey), NullPad())
+        aescipher = SimpleIVMode(CBCMode(AESKey(self._AESKey), NullPad()))
         result = ByteArray()
         result.writeBytes(self._AESKey, 0, 16)
         
@@ -108,6 +108,6 @@ class AuthentificationManager:
             if not isinstance(byteArrayOrVector, ByteArray):
                 raise ArgumentError("Argument must be a bytearray or a vector of int/uint")
             result.writeBytes(byteArrayOrVector)
-        
+            
         aescipher.decrypt(result)
         return result

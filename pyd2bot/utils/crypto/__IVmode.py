@@ -12,49 +12,49 @@ class IVMode:
             padding = PKCS5(self.blockSize)
         else:
             padding.setBlockSize(self.blockSize)
-        
         self.padding = padding
         self.prng = Random()
         self.iv = ByteArray()
         self.lastIV = ByteArray()
     
     def getBlockSize(self) : 
-        return self.key.getBlockSize
+        return self.key.getBlockSize()
     
     def dispose(self): 
-        i = 0
-        if self.iv != None:
+        if self.iv is not None:
             for i in range(len(self.iv)):
                 self.iv[i] = self.prng.getrandbits(8)
-            self.iv.__init__()
+            self.iv.length = 0
             self.iv = None
         
-        if self.lastIV != None:
-            for i in range(len(self.iv)):
+        if self.lastIV is not None:
+            for i in range(len(self.lastIV)):
                 self.lastIV[i] = self.prng.getrandbits(8)
-            self.lastIV.__init__()
+            self.lastIV.length = 0
             self.lastIV = None
         
         self.key.dispose()
         self.key = None
         self.padding = None
         self.prng = None
-    
-    def setIV(self, value:ByteArray) : 
-        self.iv = value
-        self.lastIV.__init__()
-        self.lastIV.writeBytes(self.iv)
-    
-    def getIV(self) -> ByteArray: 
+        
+    @property
+    def IV(self) -> ByteArray: 
         return self.lastIV
+        
+    @IV.setter
+    def IV(self, value:ByteArray) : 
+        self.iv = value
+        self.lastIV.length = 0
+        self.lastIV.writeBytes(self.iv)
     
     def getIV4e(self) -> ByteArray: 
         vec:ByteArray = ByteArray()
         if self.iv:
             vec.writeBytes(self.iv)
         else:
-            vec = self.prng.getrandbits(8 * self.blockSize)
-        self.lastIV.__init__()
+            vec = ByteArray(self.prng.getrandbits(8 * self.blockSize).to_bytes(self.blockSize, "big"))
+        self.lastIV.length = 0
         self.lastIV.writeBytes(vec)
         return vec
     

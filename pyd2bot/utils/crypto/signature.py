@@ -2,7 +2,7 @@
 import hashlib
 from inspect import trace
 import traceback
-from pyd2bot.utils.binaryIO.customDataWrapper import ByteArray
+from pyd2bot.utils.binaryIO import ByteArray
 from pyd2bot.utils.crypto import RSA, RSACipher, PKCS1
 
 
@@ -33,11 +33,7 @@ class Signature:
         self.key1 = key1
         self.key2= key2
 
-    def verify(self, input:ByteArray) -> ByteArray: 
-        input:ByteArray = ByteArray(input)
-        headerSize:int = 0
-        header:str = None
-        headerPosition = 0
+    def verify(self, input:ByteArray) -> ByteArray:
         headerSize = input.readUnsignedShort()
         if headerSize != len(self.ANKAMA_SIGNED_FILE_HEADER):
             input.position = 0
@@ -107,7 +103,7 @@ class Signature:
             return None
         
         decryptedHash.position = 0
-        ramdomPart:int = decryptedHash.readByte()
+        ramdomPart = decryptedHash.readByte()
         for i in range(len(decryptedHash)):
             decryptedHash[i] ^= ramdomPart
         

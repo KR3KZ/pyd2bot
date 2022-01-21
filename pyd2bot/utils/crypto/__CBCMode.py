@@ -17,7 +17,7 @@ class CBCMode(IVMode):
             self.key.encrypt(src, i)
             vector.position = 0
             vector.writeBytes(src, i, self.blockSize)
-    
+        
     def decrypt(self, src:ByteArray): 
         j = 0
         vector:ByteArray = self.getIV4d()

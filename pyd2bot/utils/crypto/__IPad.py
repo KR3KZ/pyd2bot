@@ -7,11 +7,11 @@ from pyd2bot.utils.binaryIO.customDataWrapper import ByteArray;
 
 class IPad(ABC):
     
-    def pad(param1:ByteArray) -> None: 
+    def pad(self, param1:ByteArray) -> None: 
         pass
     
-    def unpad(param1:ByteArray) -> None:
+    def unpad(self, param1:ByteArray) -> None:
         pass
 
-    def setBlockSize(param1:int) -> None: 
+    def setBlockSize(self, param1:int) -> None: 
         pass

@@ -36,11 +36,10 @@ class AESKey:
         self.XtimeD = ByteArray(self._XtimeD.copy())
         self.XtimeE = ByteArray(self._XtimeE.copy())
         self.Rcon = ByteArray(self._Rcon.copy())
-        
         self.tmp = ByteArray()
         self.state = ByteArray()
         self.keyLength = key.length
-        self.key = key
+        self.key = ByteArray(key.copy())
         self.expandKey()
     
     def expandKey(self) -> None:
@@ -71,26 +70,27 @@ class AESKey:
                 tmp2 = self.Sbox[tmp2]
                 tmp3 = self.Sbox[tmp3]
                 
-            self.key[4 * idx + 0] = self.key[4 * idx - 4 * Nk + 0] ^ tmp0
-            self.key[4 * idx + 1] = self.key[4 * idx - 4 * Nk + 1] ^ tmp1
-            self.key[4 * idx + 2] = self.key[4 * idx - 4 * Nk + 2] ^ tmp2
-            self.key[4 * idx + 3] = self.key[4 * idx - 4 * Nk + 3] ^ tmp3
+            self.key.writeByte(self.key[4 * idx - 4 * Nk + 0] ^ tmp0, signed=False)
+            self.key.writeByte(self.key[4 * idx - 4 * Nk + 1] ^ tmp1, signed=False)
+            self.key.writeByte(self.key[4 * idx - 4 * Nk + 2] ^ tmp2, signed=False)
+            self.key.writeByte(self.key[4 * idx - 4 * Nk + 3] ^ tmp3, signed=False)
+        self.key.position = 0
     
     
-    def getBlockSize() -> int:
+    def getBlockSize(self) -> int:
         return 16
     
     def encrypt(self, block:ByteArray, index = 0) -> None: 
         round = 0
         self.state.position = 0
-        self.state.writeBytes(block,index, self.Nb * 4)
-        self.addRoundKey(self.key,0)
+        self.state.writeBytes(block, index, self.Nb * 4)
+        self.addRoundKey(self.key, 0)
         for round in range(1, self.Nr + 1):
-            if(round < self.Nr):
+            if round < self.Nr:
                 self.mixSubColumns()
             else:
                 self.shiftRows()
-            self.addRoundKey(self.key,round * self.Nb * 4)
+            self.addRoundKey(self.key, round * self.Nb * 4)
         block.position = index
         block.writeBytes(self.state)
         
@@ -98,12 +98,12 @@ class AESKey:
         round = 0
         self.state.position = 0
         self.state.writeBytes(block,index, self.Nb * 4)
-        self.addRoundKey(self.key,self.Nr * self.Nb * 4)
+        self.addRoundKey(self.key, self.Nr * self.Nb * 4)
         self.invShiftRows()
         round = self.Nr
         while round:
             round -= 1
-            self.addRoundKey(self.key,round * self.Nb * 4)
+            self.addRoundKey(self.key, round * self.Nb * 4)
             if round:
                 self.invMixSubColumns()
         
@@ -111,52 +111,52 @@ class AESKey:
         block.writeBytes(self.state)
 
     def mixSubColumns(self):
-        self.tmp.__init__()
-        self.tmp[0] = self.Xtime2Sbox[self.state[0]] ^ self.Xtime3Sbox[self.state[5]] ^ self.Sbox[self.state[10]] ^ self.Sbox[self.state[15]];
-        self.tmp[1] = self.Sbox[self.state[0]] ^ self.Xtime2Sbox[self.state[5]] ^ self.Xtime3Sbox[self.state[10]] ^ self.Sbox[self.state[15]];
-        self.tmp[2] = self.Sbox[self.state[0]] ^ self.Sbox[self.state[5]] ^ self.Xtime2Sbox[self.state[10]] ^ self.Xtime3Sbox[self.state[15]];
-        self.tmp[3] = self.Xtime3Sbox[self.state[0]] ^ self.Sbox[self.state[5]] ^ self.Sbox[self.state[10]] ^ self.Xtime2Sbox[self.state[15]];
-        self.tmp[4] = self.Xtime2Sbox[self.state[4]] ^ self.Xtime3Sbox[self.state[9]] ^ self.Sbox[self.state[14]] ^ self.Sbox[self.state[3]];
-        self.tmp[5] = self.Sbox[self.state[4]] ^ self.Xtime2Sbox[self.state[9]] ^ self.Xtime3Sbox[self.state[14]] ^ self.Sbox[self.state[3]];
-        self.tmp[6] = self.Sbox[self.state[4]] ^ self.Sbox[self.state[9]] ^ self.Xtime2Sbox[self.state[14]] ^ self.Xtime3Sbox[self.state[3]];
-        self.tmp[7] = self.Xtime3Sbox[self.state[4]] ^ self.Sbox[self.state[9]] ^ self.Sbox[self.state[14]] ^ self.Xtime2Sbox[self.state[3]];
-        self.tmp[8] = self.Xtime2Sbox[self.state[8]] ^ self.Xtime3Sbox[self.state[13]] ^ self.Sbox[self.state[2]] ^ self.Sbox[self.state[7]];
-        self.tmp[9] = self.Sbox[self.state[8]] ^ self.Xtime2Sbox[self.state[13]] ^ self.Xtime3Sbox[self.state[2]] ^ self.Sbox[self.state[7]];
-        self.tmp[10] = self.Sbox[self.state[8]] ^ self.Sbox[self.state[13]] ^ self.Xtime2Sbox[self.state[2]] ^ self.Xtime3Sbox[self.state[7]];
-        self.tmp[11] = self.Xtime3Sbox[self.state[8]] ^ self.Sbox[self.state[13]] ^ self.Sbox[self.state[2]] ^ self.Xtime2Sbox[self.state[7]];
-        self.tmp[12] = self.Xtime2Sbox[self.state[12]] ^ self.Xtime3Sbox[self.state[1]] ^ self.Sbox[self.state[6]] ^ self.Sbox[self.state[11]];
-        self.tmp[13] = self.Sbox[self.state[12]] ^ self.Xtime2Sbox[self.state[1]] ^ self.Xtime3Sbox[self.state[6]] ^ self.Sbox[self.state[11]];
-        self.tmp[14] = self.Sbox[self.state[12]] ^ self.Sbox[self.state[1]] ^ self.Xtime2Sbox[self.state[6]] ^ self.Xtime3Sbox[self.state[11]];
-        self.tmp[15] = self.Xtime3Sbox[self.state[12]] ^ self.Sbox[self.state[1]] ^ self.Sbox[self.state[6]] ^ self.Xtime2Sbox[self.state[11]];
+        self.tmp = ByteArray([0] * 16)
+        self.tmp[0] = self.Xtime2Sbox[self.state[0]] ^ self.Xtime3Sbox[self.state[5]] ^ self.Sbox[self.state[10]] ^ self.Sbox[self.state[15]]
+        self.tmp[1] = self.Sbox[self.state[0]] ^ self.Xtime2Sbox[self.state[5]] ^ self.Xtime3Sbox[self.state[10]] ^ self.Sbox[self.state[15]]
+        self.tmp[2] = self.Sbox[self.state[0]] ^ self.Sbox[self.state[5]] ^ self.Xtime2Sbox[self.state[10]] ^ self.Xtime3Sbox[self.state[15]]
+        self.tmp[3] = self.Xtime3Sbox[self.state[0]] ^ self.Sbox[self.state[5]] ^ self.Sbox[self.state[10]] ^ self.Xtime2Sbox[self.state[15]]
+        self.tmp[4] = self.Xtime2Sbox[self.state[4]] ^ self.Xtime3Sbox[self.state[9]] ^ self.Sbox[self.state[14]] ^ self.Sbox[self.state[3]]
+        self.tmp[5] = self.Sbox[self.state[4]] ^ self.Xtime2Sbox[self.state[9]] ^ self.Xtime3Sbox[self.state[14]] ^ self.Sbox[self.state[3]]
+        self.tmp[6] = self.Sbox[self.state[4]] ^ self.Sbox[self.state[9]] ^ self.Xtime2Sbox[self.state[14]] ^ self.Xtime3Sbox[self.state[3]]
+        self.tmp[7] = self.Xtime3Sbox[self.state[4]] ^ self.Sbox[self.state[9]] ^ self.Sbox[self.state[14]] ^ self.Xtime2Sbox[self.state[3]]
+        self.tmp[8] = self.Xtime2Sbox[self.state[8]] ^ self.Xtime3Sbox[self.state[13]] ^ self.Sbox[self.state[2]] ^ self.Sbox[self.state[7]]
+        self.tmp[9] = self.Sbox[self.state[8]] ^ self.Xtime2Sbox[self.state[13]] ^ self.Xtime3Sbox[self.state[2]] ^ self.Sbox[self.state[7]]
+        self.tmp[10] = self.Sbox[self.state[8]] ^ self.Sbox[self.state[13]] ^ self.Xtime2Sbox[self.state[2]] ^ self.Xtime3Sbox[self.state[7]]
+        self.tmp[11] = self.Xtime3Sbox[self.state[8]] ^ self.Sbox[self.state[13]] ^ self.Sbox[self.state[2]] ^ self.Xtime2Sbox[self.state[7]]
+        self.tmp[12] = self.Xtime2Sbox[self.state[12]] ^ self.Xtime3Sbox[self.state[1]] ^ self.Sbox[self.state[6]] ^ self.Sbox[self.state[11]]
+        self.tmp[13] = self.Sbox[self.state[12]] ^ self.Xtime2Sbox[self.state[1]] ^ self.Xtime3Sbox[self.state[6]] ^ self.Sbox[self.state[11]]
+        self.tmp[14] = self.Sbox[self.state[12]] ^ self.Sbox[self.state[1]] ^ self.Xtime2Sbox[self.state[6]] ^ self.Xtime3Sbox[self.state[11]]
+        self.tmp[15] = self.Xtime3Sbox[self.state[12]] ^ self.Sbox[self.state[1]] ^ self.Sbox[self.state[6]] ^ self.Xtime2Sbox[self.state[11]]
         self.state.position = 0
         self.state.writeBytes(self.tmp, 0, self.Nb * 4)
          
     def shiftRows(self) -> None:
-         tmp = 0
-         self.state[0] = self.Sbox[self.state[0]]
-         self.state[4] = self.Sbox[self.state[4]]
-         self.state[8] = self.Sbox[self.state[8]]
-         self.state[12] = self.Sbox[self.state[12]]
-         tmp = self.Sbox[self.state[1]]
-         self.state[1] = self.Sbox[self.state[5]]
-         self.state[5] = self.Sbox[self.state[9]]
-         self.state[9] = self.Sbox[self.state[13]]
-         self.state[13] = tmp
-         tmp = self.Sbox[self.state[2]]
-         self.state[2] = self.Sbox[self.state[10]]
-         self.state[10] = tmp
-         tmp = self.Sbox[self.state[6]]
-         self.state[6] = self.Sbox[self.state[14]]
-         self.state[14] = tmp
-         tmp = self.Sbox[self.state[15]]
-         self.state[15] = self.Sbox[self.state[11]]
-         self.state[11] = self.Sbox[self.state[7]]
-         self.state[7] = self.Sbox[self.state[3]]
-         self.state[3] = tmp
+        tmp = 0
+        self.state[0] = self.Sbox[self.state[0]]
+        self.state[4] = self.Sbox[self.state[4]]
+        self.state[8] = self.Sbox[self.state[8]]
+        self.state[12] = self.Sbox[self.state[12]]
+        tmp = self.Sbox[self.state[1]]
+        self.state[1] = self.Sbox[self.state[5]]
+        self.state[5] = self.Sbox[self.state[9]]
+        self.state[9] = self.Sbox[self.state[13]]
+        self.state[13] = tmp
+        tmp = self.Sbox[self.state[2]]
+        self.state[2] = self.Sbox[self.state[10]]
+        self.state[10] = tmp
+        tmp = self.Sbox[self.state[6]]
+        self.state[6] = self.Sbox[self.state[14]]
+        self.state[14] = tmp
+        tmp = self.Sbox[self.state[15]]
+        self.state[15] = self.Sbox[self.state[11]]
+        self.state[11] = self.Sbox[self.state[7]]
+        self.state[7] = self.Sbox[self.state[3]]
+        self.state[3] = tmp
     
     def invMixSubColumns(self) :
         i = 0
-        self.tmp.__init__()
+        self.tmp = ByteArray([0] * 16)
         self.tmp[0] = self.XtimeE[self.state[0]] ^ self.XtimeB[self.state[1]] ^ self.XtimeD[self.state[2]] ^ self.Xtime9[self.state[3]]
         self.tmp[5] = self.Xtime9[self.state[0]] ^ self.XtimeE[self.state[1]] ^ self.XtimeB[self.state[2]] ^ self.XtimeD[self.state[3]]
         self.tmp[10] = self.XtimeD[self.state[0]] ^ self.Xtime9[self.state[1]] ^ self.XtimeE[self.state[2]] ^ self.XtimeB[self.state[3]]
@@ -200,7 +200,6 @@ class AESKey:
         self.state[15] = tmp
 
     def addRoundKey(self, key:ByteArray, offset:int):
-        idx = 0
         for idx in range(16):
             self.state[idx] ^= key[idx + offset]
       

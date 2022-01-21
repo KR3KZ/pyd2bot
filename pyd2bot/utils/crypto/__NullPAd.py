@@ -7,11 +7,11 @@ class NullPad(IPad):
     def NullPad(self):
         super().__init__()
     
-    def unpad(a:ByteArray) -> None:
+    def unpad(self, a:ByteArray) -> None:
         pass
     
-    def pad(a:ByteArray) -> None:
+    def pad(self, a:ByteArray) -> None:
         pass
     
-    def setBlockSize(bs:int):
+    def setBlockSize(self, bs:int):
         pass

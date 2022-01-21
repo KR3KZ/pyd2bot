@@ -1,11 +1,13 @@
+from inspect import trace
 import socket
 import threading
+import traceback
 from pyd2bot.network.message import Msg, ByteArray, Buffer
 from pyd2bot.logic.connection.managers import AuthentificationManager
 from pyd2bot.gameData.enums.IdentificationFailureReasons import IdentificationFailureReason
 import math
 import random
-from pyd2bot.utils.crypto import RSA, RSACipher
+from pyd2bot.utils.crypto import RSA, RSACipher, PKCS1
 
 
 sock = socket.socket()
@@ -39,13 +41,17 @@ class DofusClient(threading.Thread):
     def run(self):
         self.sock.connect((self.auth_server_ip, self.port))
         while not self.killSig.is_set():
-            rdata = self.sock.recv(8192)
-            self.buf += rdata
-            msg = Msg.fromRaw(self.buf, False)
-            while msg:
-                self.handle(msg)
+            try:
+                rdata = self.sock.recv(8192)
+                self.buf += rdata
                 msg = Msg.fromRaw(self.buf, False)
-
+                while msg:
+                    self.handle(msg)
+                    msg = Msg.fromRaw(self.buf, False)
+            except Exception as e:
+                traceback.print_exc()
+                self.killSig.set()
+                
     def interrupt(self):
         self.killSig.set()
     
@@ -81,7 +87,7 @@ class DofusClient(threading.Thread):
         elif mtype == "SelectedServerDataMessage":
             self.serverInfos = jmsg
             ba_ticket = self.authManager.decodeWithAES(self.serverInfos["ticket"])
-            self.serverInfos["ticket"] = ba_ticket.to_string()
+            self.serverInfos["ticket"] = ba_ticket.decode()
             self.sock.close()
             self.counter = 0
             self.sock = socket.socket()
@@ -134,12 +140,12 @@ class DofusClient(threading.Thread):
 
             dataIndex = 0
             while dataIndex < len(dataToEncrypt):
-                dataToEncrypt.data[dataIndex] = 0 ^ 0
+                dataToEncrypt[dataIndex] = 0 ^ 0
                 dataIndex += 1
 
             rsacipher = RSACipher(rsaKeyNetwork, PKCS1())
-            enc_data = rsaKeyNetwork.encryptWithRSA(dataToEncrypt)
-            ret = byteArrtoIntArr(enc_data)
+            enc_data = rsacipher.encrypt(dataToEncrypt)
+            ret = enc_data.to_int8Arr()
             self.sendMsg(Msg.from_json({'__type__': 'CheckIntegrityMessage',
             'data': ret}))
                                     
