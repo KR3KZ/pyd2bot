@@ -1,3 +1,4 @@
+from time import sleep
 from inspect import trace
 import socket
 import threading
@@ -55,7 +56,8 @@ class DofusClient(threading.Thread):
     def interrupt(self):
         self.killSig.set()
     
-    def sendMsg(self, msg: Msg):
+    def send(self, msgjson):
+        msg = Msg.from_json(msgjson)
         self.counter += 1
         msg.count = self.counter 
         self.sock.sendall(msg.bytes())
@@ -68,9 +70,9 @@ class DofusClient(threading.Thread):
             self.authManager.setSalt(jmsg["salt"])
             self.authManager.setPublicKey(jmsg["key"])
             imsg: Msg = self.authManager.getIdentificationMessage(self._login, self._password)
-            self.sendMsg(imsg)
-            kmsg = Msg.from_json({'__type__': 'ClientKeyMessage', 'key': 'LQ9r8NAvccW6G5cmD8#01'})
-            self.sendMsg(kmsg)
+            self.send(imsg)
+            kmsg = {'__type__': 'ClientKeyMessage', 'key': 'LQ9r8NAvccW6G5cmD8#01'}
+            self.send(kmsg)
             
         elif mtype == "IdentificationFailedMessage":
             print(jmsg["reason"], IdentificationFailureReason.WRONG_CREDENTIALS)
@@ -81,8 +83,8 @@ class DofusClient(threading.Thread):
             self.playerInfos = jmsg
         
         elif mtype == "ServersListMessage":
-            ssmsg = Msg.from_json({'__type__': 'ServerSelectionMessage', 'serverId': self._serverId})
-            self.sendMsg(ssmsg)
+            ssmsg = {'__type__': 'ServerSelectionMessage', 'serverId': self._serverId}
+            self.send(ssmsg)
         
         elif mtype == "SelectedServerDataMessage":
             self.serverInfos = jmsg
@@ -94,14 +96,15 @@ class DofusClient(threading.Thread):
             self.sock.connect((self.serverInfos["address"], self.port))
         
         elif mtype == "HelloGameMessage":
-            ticketMsg = Msg.from_json({
+            ticketMsg = {
                 '__type__': 'AuthenticationTicketMessage',
                 'lang': 'fr',
                 'ticket': self.serverInfos["ticket"]
-            })
-            self.sendMsg(ticketMsg)
+            }
+            self.send(ticketMsg)
         
         elif mtype == "RawDataMessage":
+            # Bypass humain check here
             gameServerTicket = self.serverInfos["ticket"]
 
             key = b"AKMBJ2YBJUHRsk8yptfOlcVLksJSCCSiWUryWD/vv6euIERWlfrWN0+Csf8UVG4CY"\
@@ -146,9 +149,16 @@ class DofusClient(threading.Thread):
             rsacipher = RSACipher(rsaKeyNetwork, PKCS1())
             enc_data = rsacipher.encrypt(dataToEncrypt)
             ret = enc_data.to_int8Arr()
-            self.sendMsg(Msg.from_json({'__type__': 'CheckIntegrityMessage',
-            'data': ret}))
-                                    
+            self.send({
+                '__type__': 'CheckIntegrityMessage',
+                'data': ret
+            })
+            
+        elif mtype == "TrustStatusMessage":
+            self.connected.set()
+            self.send({'__type__': 'CharactersListRequestMessage'})
+            sleep(0.5)
+            self.send({'__type__': 'CharacterSelectionMessage', 'id': 290210840786})
                         
         
         

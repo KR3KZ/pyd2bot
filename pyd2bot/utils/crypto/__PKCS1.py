@@ -4,7 +4,6 @@ from pyd2bot.utils.crypto import IPad
 
 
 class PKCS1(IPad):
-    
     blockSize:int
     
     def __init__(self, blockSize:int = 0):

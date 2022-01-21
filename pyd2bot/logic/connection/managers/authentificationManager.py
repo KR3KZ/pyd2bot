@@ -55,7 +55,7 @@ class AuthentificationManager:
         imsg = {
             '__type__': 'IdentificationMessage',
             'autoconnect': False,
-            'credentials': [],
+            'credentials': self.getAuthCredentials(login, pwd),
             'failedAttempts': [],
             'lang': 'fr',
             'serverId': 0,
@@ -71,8 +71,7 @@ class AuthentificationManager:
                 'minor': 62
             }
         }
-        imsg["credentials"] = self.getAuthCredentials(login, pwd)
-        return Msg.from_json(imsg)
+        return imsg
     
     def getAuthCredentials(self, login:str, pwd:str) -> list[int]:
         baIn = bytearray()
