@@ -1,4 +1,4 @@
-from pyd2bot.network.client import DofusClient
+from pyd2bot.clientMain import DofusClient
 import json
 from time import sleep
 import os
@@ -6,13 +6,11 @@ import os
 ROOTDIR = os.path.dirname(__file__)
 
 c = DofusClient()
-creds_f = os.path.join(ROOTDIR, "account.json")
-conn = {}
-with open(creds_f) as fp:
-    auth_json = json.load(fp)
-    conn["login"] = auth_json["username"]
-    conn["password"] = auth_json["password"]
-    conn["serverID"] = 210
+conn_f = os.path.join(ROOTDIR, "account.json")
+
+with open(conn_f) as fp:
+    conn = json.load(fp)
+    
 c.start(conn)
 c.join()
 sleep(10)

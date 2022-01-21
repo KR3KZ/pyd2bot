@@ -1,3 +1,5 @@
+import math
+import random
 from pyd2bot.utils.binaryIO.customDataWrapper import ByteArray
 
 
@@ -202,6 +204,15 @@ class AESKey:
     def addRoundKey(self, key:ByteArray, offset:int):
         for idx in range(16):
             self.state[idx] ^= key[idx + offset]
-      
+    
+    @staticmethod
+    def generateRandomAESKey(key_length) -> ByteArray:
+        ba = ByteArray()
+        for _ in range(key_length):
+            rb = math.floor(random.random() * 256)
+            ba.writeByte(rb, signed=False)
+        ba.position = 0
+        return ba
+    
     def toString(self) -> str:
         return "aes" + 8 * self.keyLength

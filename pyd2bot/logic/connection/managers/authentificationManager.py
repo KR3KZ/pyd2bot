@@ -24,38 +24,45 @@ class AuthentificationManager:
     with open(CLIENT_PUBLIC_KEY_P, 'r') as fp:
         CLIENT_PUB_KEY = RSA.import_key(fp.read())
     AES_KEY_LENGTH = 32
+    _publicKey:str = None
+    _salt:str = None
+    gameServerTicket:str = None
+    _AESKey:str = None
+    nextToken:str = None
+    tokenMode:bool = None
+    username = None
     
-    def __init__(self):
-        self._publicKey:str = None
-        self._salt:str = None
-        self.gameServerTicket:str = None
-        self._AESKey:str = self.generateRandomAESKey(self.AES_KEY_LENGTH)
-        self.nextToken:str = None
-        self.tokenMode:bool = None
+    @staticmethod
+    def initAESKey():
+        AuthentificationManager._AESKey = AESKey.generateRandomAESKey(AuthentificationManager.AES_KEY_LENGTH)
     
-    def setSalt(self, salt:str) -> None:
-        self._salt = salt
-        if len(self._salt) < 32:
+    @staticmethod
+    def setSalt(salt:str) -> None:
+        if len(salt) < 32:
             logger.warn("Authentification salt size is lower than 32 ")
-        while len(self._salt) < 32:
-            self._salt += " "
-            
-    def setPublicKey(self, enc_publicKey:list[int]):
+        while len(salt) < 32:
+            salt += " "
+        AuthentificationManager._salt = salt
+    
+    @staticmethod    
+    def setPublicKey(enc_publicKey:list[int]):
         baSignedKey = ByteArray.from_int8Arr(enc_publicKey)
-        rsacipher = RSACipher(self.CLIENT_PUB_KEY, PKCS1())
+        rsacipher = RSACipher(AuthentificationManager.CLIENT_PUB_KEY, PKCS1())
         ba_pubKey = ByteArray()
         if not rsacipher.verify(baSignedKey, ba_pubKey):
             raise Exception("Pubkey Sign validation failed!")
-        self._publicKey = "-----BEGIN PUBLIC KEY-----\n" + ba_pubKey.to_string() + "\n-----END PUBLIC KEY-----"
+        AuthentificationManager._publicKey = "-----BEGIN PUBLIC KEY-----\n" + ba_pubKey.to_string() + "\n-----END PUBLIC KEY-----"
     
-    def getCanAutoConnectWithToken(self) -> bool:
-        return self.nextToken != None
+    @staticmethod
+    def getCanAutoConnectWithToken() -> bool:
+        return AuthentificationManager.nextToken != None
 
-    def getIdentificationMessage(self, login, pwd):
+    @staticmethod
+    def getIdentificationMessage(login, pwd):
         imsg = {
             '__type__': 'IdentificationMessage',
             'autoconnect': False,
-            'credentials': self.getAuthCredentials(login, pwd),
+            'credentials': AuthentificationManager.getAuthCredentials(login, pwd),
             'failedAttempts': [],
             'lang': 'fr',
             'serverId': 0,
@@ -73,31 +80,24 @@ class AuthentificationManager:
         }
         return imsg
     
-    def getAuthCredentials(self, login:str, pwd:str) -> list[int]:
+    @staticmethod
+    def getAuthCredentials(login:str, pwd:str) -> list[int]:
         baIn = bytearray()
-        baIn += bytes(self._salt, 'utf')
-        baIn += self._AESKey
+        baIn += bytes(AuthentificationManager._salt, 'utf')
+        baIn += AuthentificationManager._AESKey
         baIn += len(login).to_bytes(1, "big")
         baIn += bytes(login, 'utf')
         baIn += bytes(pwd, 'utf')
-        rsa_key = RSA.importKey(bytes(self._publicKey, 'utf'))
+        rsa_key = RSA.importKey(bytes(AuthentificationManager._publicKey, 'utf'))
         rsacipher = RSACipher(rsa_key, PKCS1())
         baOut = rsacipher.encrypt(baIn)
         return baOut.to_int8Arr()
-    
-    @staticmethod
-    def generateRandomAESKey(key_length) -> ByteArray:
-        ba = ByteArray()
-        for _ in range(key_length):
-            rb = math.floor(random.random() * 256)
-            ba.writeByte(rb, signed=False)
-        ba.position = 0
-        return ba
 
-    def decodeWithAES(self, byteArrayOrVector) -> ByteArray:
-        aescipher = SimpleIVMode(CBCMode(AESKey(self._AESKey), NullPad()))
+    @staticmethod
+    def decodeWithAES(byteArrayOrVector) -> ByteArray:
+        aescipher = SimpleIVMode(CBCMode(AESKey(AuthentificationManager._AESKey), NullPad()))
         result = ByteArray()
-        result.writeBytes(self._AESKey, 0, 16)
+        result.writeBytes(AuthentificationManager._AESKey, 0, 16)
         
         if type(byteArrayOrVector) == list:
             for i in byteArrayOrVector:

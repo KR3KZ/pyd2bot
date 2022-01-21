@@ -1,5 +1,4 @@
 PyQt5
-pywinauto
 pyyaml
 scapy
 wdom

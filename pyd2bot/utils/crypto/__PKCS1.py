@@ -31,13 +31,11 @@ class PKCS1(IPad):
         """
         max_msglength = self.blockSize - 11
         msglength = len(message)
-
         if msglength > max_msglength:
             raise OverflowError(
                 "%i bytes needed for message, but there is only"
                 " space for %i" % (msglength, max_msglength)
             )
-            
         padding = b""
         padding_length = self.blockSize - msglength - 3
         while len(padding) < padding_length:
@@ -45,9 +43,7 @@ class PKCS1(IPad):
             new_padding = os.urandom(needed_bytes + 5)
             new_padding = new_padding.replace(b"\x00", b"")
             padding = padding + new_padding[:needed_bytes]
-
         assert len(padding) == padding_length
-
         return b"".join([b"\x00\x02", padding, b"\x00", message])
 
     def setBlockSize(self, bs:int) -> None:
