@@ -1,15 +1,14 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+import io
 from struct import *
 
-class _BinaryStream:
+class BinaryStream:
     """Allow some binary operations on a stream opened in binary mode"""
-    def __init__(self, base_stream, big_endian=False):
+    def __init__(self, base_stream:io.BytesIO, big_endian=False):
         self._base_stream = base_stream
         self._big_endian = big_endian
-
-    # Comment functions
 
     def position(self, value=None):
         if value is None:
@@ -23,62 +22,6 @@ class _BinaryStream:
         eof = self._base_stream.tell()
         self._base_stream.seek(position, 0)
         return eof - position
-
-    # Write functions
-
-    def write_bytes(self, value):
-        self._base_stream.write(value)
-
-    def write_bool(self, value):
-        if value:
-            self.write_char(1)
-        else:
-            self.write_char(0)
-
-    def write_char(self, value):
-        self._pack('b', value)
-
-    def write_uchar(self, value):
-        self._pack('B', value)
-
-    def write_bool(self, value):
-        self._pack('?', value)
-
-    def write_int16(self, value):
-        self._pack('h', value)
-
-    def write_uint16(self, value):
-        self._pack('H', value)
-
-    def write_int32(self, value):
-        self._pack('i', value)
-
-    def write_uint32(self, value):
-        self._pack('I', value)
-
-    def write_int64(self, value):
-        self._pack('q', value)
-
-    def write_uint64(self, value):
-        self._pack('Q', value)
-
-    def write_float(self, value):
-        self._pack('f', value)
-
-    def write_double(self, value):
-        self._pack('d', value)
-
-    def write_string(self, value):
-        length = len(value)
-        self.write_uint16(length)
-        self._pack(str(length) + 's', value)
-
-    def _pack(self, fmt, data):
-        if self._big_endian:
-            fmt = ">" + fmt
-        else:
-            fmt = "<" + fmt
-        return self.write_bytes(pack(fmt, data))
 
     # Read functions
 

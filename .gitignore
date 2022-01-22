@@ -7,3 +7,5 @@ map.json
 __pycache__
 account.json
 sources
+*.dlm
+*.d2p

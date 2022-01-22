@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-from ._binarystream import _BinaryStream
+from .__binarystream import BinaryStream
 from collections import OrderedDict
 
 # Exceptions
@@ -17,37 +17,27 @@ class InvalidD2PFile(Exception):
 
 class D2PReader:
     """Read D2P files"""
-    def __init__(self, stream, autoload=True):
+    def __init__(self, stream:BinaryStream, autoload=True):
         """Init the class with the informations about files in the D2P"""
         # Attributes
         self._stream = stream
-
         self._base_offset = None
         self._base_length = None
         self._indexes_offset = None
         self._number_indexes = None
         self._properties_offset = None
         self._number_properties = None
-
         self._properties = None
-
         self._files_position = None
-
         self._files = None
-
         self._loaded = False
-
         # Load the D2P
-        D2P_file_binary = _BinaryStream(self._stream, True)
-
+        D2P_file_binary = BinaryStream(self._stream, True)
         bytes_header = D2P_file_binary.read_bytes(2)
         if bytes_header == b"":
             raise InvalidD2PFile("First bytes not found.")
-
         if bytes_header != b"\x02\x01":
-            raise InvalidD2PFile("The first bytes don't match the"
-                                 " SWL pattern.")
-
+            raise InvalidD2PFile("The first bytes don't match the SWL pattern.")
         self._stream.seek(-24, 2)  # Set position to end - 24 bytes
 
         self._base_offset = D2P_file_binary.read_uint32()
@@ -109,7 +99,7 @@ class D2PReader:
         if self._loaded:
             raise Exception("D2P instance is already populated.")
 
-        D2P_file_binary = _BinaryStream(self._stream, True)
+        D2P_file_binary = BinaryStream(self._stream, True)
 
         self._files = OrderedDict()
 
@@ -155,16 +145,13 @@ class D2PBuilder:
     def __init__(self, template, target):
         self._template = template
         self._stream = target
-
         self._base_offset = None
         self._base_length = None
         self._indexes_offset = None
         self._number_indexes = None
         self._properties_offset = None
         self._number_properties = None
-
         self._files_position = None
-
         self._files = None
         self._set_files(self._template.files)  # To update files and position
 
@@ -173,7 +160,7 @@ class D2PBuilder:
         if self._template is None:
             raise RuntimeError("Template must be defined to build a D2P file")
 
-        D2P_file_build_binary = _BinaryStream(self._stream, True)
+        D2P_file_build_binary = BinaryStream(self._stream, True)
 
         D2P_file_build_binary.write_bytes(b"\x02\x01")
 

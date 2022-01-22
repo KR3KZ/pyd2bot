@@ -130,36 +130,11 @@ package
                try
                {
                   clearTimeout(ti);
-                  var dec:Function = function(param1:String, param2:String):String
-                  {
-                     var _loc4_:int = 0;
-                     var _loc3_:ByteArray = Base64encoder["decodeToByteArray"](param1);
-                     var _loc5_:ByteArray = Base64encoder["decodeToByteArray"](param2);
-                     _loc4_ = 0;
-                     while(_loc4_ < _loc3_.length)
-                     {
-                        var _loc6_:* = _loc4_;
-                        var _loc7_:* = _loc3_[_loc6_] ^ _loc5_[_loc4_ % _loc5_["length"]];
-                        _loc3_[_loc6_] = _loc7_;
-                        _loc4_++;
-                     }
-                     return _loc3_.toString();
-                  };
+
                   var decoyXorKey:int = 0;
-                  try
-                  {
-                     var dofusInstance:Sprite = ApplicationDomain["currentDomain"]["getDefinition"]("Dofus")["getInstance"]()["stage"]["loaderInfo"]["applicationDomain"]["getDefinition"]("Dofus")["getInstance"]();
-                  }
-                  catch(err:Error)
-                  {
-                     trace("impossible de récupérer dofusInstance");
-                     sendTicket();
-                     return;
-                  }
+
                   var _decoyXorKeyPart1_:uint = 0;
-                  var dofusClassDesc:XML = describeType(dofusInstance);
-                  trace("Test 1 : false");
-                  if((dofusClassDesc.@name.toString() == dec("rCKcyLpcXDFfopwAm9Sn","6E36vckfMFg6zA==") && dofusClassDesc.@base.toString() == dec("QFcKCgIz3vMR5UpaEkNQTsroC+FD","JjtreWoduppilQ==") && dofusClassDesc.@isDynamic.toString() == "false" && dofusClassDesc.@isFinal.toString() == "false" && dofusClassDesc.@isStatic.toString() == "false" && dofusClassDesc.accessor.(@name == dec("9rknZfJAYGqF+g==","mtZGAZcyKQTjlQ==")).@declaredBy.toString() == dec("4BcmKLzpblz3SuoaPmHug2NG9FbnAgg5vqJpQQ==","hntHW9THCjWEOg==")) == function():Boolean
+                  if(true == function():Boolean
                   {
                      if(-46603 - _SEXGIWGWDEH(612) >= (_SDXOHIEIIIW(-374) ^ -47793) || _SDXDWOHOIEE(228) + 133 == (_SDOGEOMOLO(-772) ^ -22534) && 22752 - _SEDDLDLHXWX(106) > _SEDDLDLHXWX(572) + -22141 || -112156 - _SDOGEOMOLO(223) >= _SOEIEEHMHI(812) + -6083 && _SOEIEEHMHI(-934) + -144061 >= 39610 - _SMXOLIHEHE(-311))
                      {
@@ -185,310 +160,135 @@ package
                   }())
                   {
                      decoyXorKey ^= _SIWXGWIELD(880) ^ -195859;
-                     trace("Test 1 : decoyXorKey appliquée false");
                   }
-                  var getSigData:Function = function(param1:IDataInput, param2:Boolean = true):Object
-                  {
-                     var _loc10_:* = null;
-                     var _loc8_:* = 0;
-                     var _loc11_:* = 0;
-                     var _loc5_:* = 0;
-                     var _loc7_:* = 0;
-                     var _loc12_:* = 0;
-                     var _loc9_:int = 0;
-                     var _loc13_:* = 0;
-                     var _loc3_:* = 0;
-                     var _loc6_:* = null;
-                     var _loc4_:* = null;
-                     try
-                     {
-                        if(param2)
-                        {
-                           param1["position"] = 0;
-                        }
-                        trace("Extract signature data from swf ...");
-                        param1["endian"] = Endian["LITTLE_ENDIAN"];
-                        _loc10_ = param1["readUTFBytes"](3);
-                        _loc8_ = uint(param1["readUnsignedByte"]());
-                        _loc11_ = uint(param1["readUnsignedInt"]());
-                        trace("Header : " + _loc10_);
-                        trace("FlashVersion : " + _loc8_);
-                        trace("Content Length : " + _loc11_);
-                        _loc5_ = param1["readUnsignedByte"]() >> 3;
-                        trace("nbBits : " + _loc5_);
-                        param1["position"] += Math["ceil"](_loc5_ * 4 / 8);
-                        _loc7_ = uint(param1["readUnsignedByte"]() / 255 + param1["readByte"]());
-                        _loc12_ = uint(param1["readUnsignedShort"]());
-                        trace("Framerate : " + _loc7_);
-                        trace("FrameCount : " + _loc12_);
-                        while(param1["bytesAvailable"] != 0)
-                        {
-                           _loc13_ = (_loc9_ = param1["readUnsignedShort"]()) >> 6;
-                           _loc3_ = _loc9_ & 63;
-                           if(_loc3_ == 63)
-                           {
-                              _loc3_ = int(param1["readInt"]());
-                           }
-                           trace("tagType : " + _loc13_);
-                           if(_loc13_ == 77)
-                           {
-                              _loc6_ = {};
-                              if((_loc4_ = param1["readUTFBytes"](_loc3_))["substr"](0,4) == "SMD%")
-                              {
-                                 _loc6_["signature"] = Base64encoder["decodeToByteArray"](_loc4_["substr"](4));
-                                 _loc6_["signedData"] = new getDefinitionByName("flash.utils.ByteArray")();
-                                 param1["readBytes"](_loc6_["signedData"]);
-                                 return _loc6_;
-                              }
-                           }
-                           else
-                           {
-                              var _loc15_:* = "position";
-                              var _loc17_:* = param1[_loc15_] + _loc3_;
-                              param1[_loc15_] = _loc17_;
-                           }
-                           if(_loc13_ == 0 || _loc13_ == 82)
-                           {
-                              _loc17_ = null;
-                              return null;
-                           }
-                        }
-                        _loc15_ = null;
-                        return null;
-                     }
-                     catch(err:MemoryError)
-                     {
-                        trace(err["getStackTrace"]());
-                        panic();
-                        return null;
-                     }
-                  };
+                  
                   var sigOk:Boolean = true;
-                  try
+
+                  var _decoyXorKeyPart2_:uint = 0;
+                  if(true != function():Boolean
                   {
-                     var swfSigData:Object = getSigData(dofusInstance["root"]["loaderInfo"]["bytes"]);
-                     var rawSignature:ByteArray = swfSigData["signature"];
-                     var swfContent:ByteArray = swfSigData["signedData"];
-                     if(!rawSignature)
+                     if(_SEDIIOLDXED(692) + -42173 == (_SDXDWOHOIEE(416) ^ 965) && (_SEXGIWGWDEH(-284) ^ 47525) >= 9778 - _SEDIIOLDXED(-863))
                      {
-                        trace("impossible de récupérer la signature de Dofus");
-                        sendTicket();
-                        return;
+                        return _SOEIEEHMHI(-131) + -3891 >= (_SOEIEEHMHI(576) ^ 3806);
                      }
-                     var pem:String = dec("8UPyPoy4A7klW/w+ilHtswXeJ1CFQ/I+jNc=","3G7fE6H6Rv5sFQ==") + dec("H2JBR9oh+tjeVzlaYG76DILhrHITek1D0gr01d1hampFTNoJ+PHXcxN6TUSqE8v0z34XfmdIpSXS7K9oBm5bUtlk8qW3WGFhI1zgLu7f+HUBQ3B843vV2/poalNdTcYgz92zYRRyI1OnGojwyh8iT2Y0wzP09+R7F2owVsoM9dfyU3leQWT/cuHR1EE5SU5m3Q2M1dJAYmZdQ/Yo6v+pVxVyeGKnAev63wA9RW5o/X3ppO9YAWpkMt5g7tXKVxRbQUbFOc/O5F8xRHsq+SyL2cwfYExfQ8keg9f2exZEPE/ZG5T37EYnSWJQ9D7d1dt+Cm5ffP0Z0Nn/XB9pUHXSPInf3nEdHUNvwS/81PBcAkZCY8oo6MftGxUAMXHjftXdt1QoQERi2h/o8aR6JmA6ceN+zL36UiYefEf/CPf16nN9HEtE43LPpdYbCGJlStx+0MTrGxFFPE/3eenD0VMCaGwy4Hrx3u1iCk1HceYCz+yrSDFkZHTbP8La2UgkRHxj3jzy0t1hE2k=","UisIBZNLu5acMA==") + dec("CgBB9IxOA9hFqnJvIJDiKwbZPNcKAEH0","Jy1s2aELTZxl+g==");
-                     var rsaKey:RSAKey = _SEHWWIWIOED["readRSAPublicKey"](pem);
-                     var ANKAMA_SIGNED_FILE_HEADER:String = dec("yOmDUQ==","iaLQFw==");
-                     var SIGNATURE_HEADER:String = dec("1MfpzA==","lYy6iA==");
-                     var headerPosition:int = 0 - 0;
-                     rawSignature["position"] = headerPosition;
-                     var header:String = rawSignature["readUTFBytes"](4);
-                     if(header != ANKAMA_SIGNED_FILE_HEADER)
+                     if((_SOEIEEHMHI(-332) ^ 12818) < 143539 - _SIWXGWIELD(973) && -47598 - _SDXOHIEIIIW(904) >= (_SEXGIWGWDEH(385) ^ 48109) || 144937 - _SOEIEEHMHI(229) == (_SIWXGWIELD(-392) ^ -143782) || (_SDXOHIEIIIW(600) ^ 47746) >= (_SMXOLIHEHE(710) ^ -39215) && 143641 - _SIWXGWIELD(134) >= _SEDDLDLHXWX(-621) + -61392)
                      {
-                        trace("Mauvais HEADER");
-                        sigOk = false;
+                        return (_SEDDLDLHXWX(582) ^ -23144) == 39558 - _SEDIIOLDXED(-206);
                      }
-                     if(sigOk)
+                     if(1345 - _SDXDWOHOIEE(270) == (_SDXOHIEIIIW(-947) ^ 47748) || (_SDXOHIEIIIW(509) ^ 47513) <= _SIWXGWIELD(-66) + -144566 || 176 - _SDXDWOHOIEE(85) == 58115 - _SEGLOWWWXXM(-807) || _SDXDWOHOIEE(-539) + -456 <= (_SEDDLDLHXWX(189) ^ 23451) || 1252 - _SDXDWOHOIEE(505) >= 56743 - _SEGLOWWWXXM(550))
                      {
-                        rawSignature["position"] = headerPosition - 4;
-                        var signedDataLenght:int = rawSignature["readShort"]();
-                        rawSignature["position"] = headerPosition - 4 - signedDataLenght;
-                        var cryptedData:ByteArray = new ByteArray();
-                        rawSignature["readBytes"](cryptedData,0,signedDataLenght);
-                        var sigData:ByteArray = new ByteArray();
-                        var tsDecrypt:uint = getTimer();
-                        rsaKey["verify"](cryptedData,sigData,cryptedData["length"]);
-                        trace("Décryptage en " + (getTimer() - tsDecrypt) + " ms");
-                        sigData["position"] = 0;
-                        var sigHeader:String = sigData["readUTF"]();
-                        var _decoyXorKeyPart2_:uint = 0;
-                        trace("Test 2 : false, value:" + sigHeader);
-                        if(sigHeader == SIGNATURE_HEADER != function():Boolean
-                        {
-                           if(_SEDIIOLDXED(692) + -42173 == (_SDXDWOHOIEE(416) ^ 965) && (_SEXGIWGWDEH(-284) ^ 47525) >= 9778 - _SEDIIOLDXED(-863))
-                           {
-                              return _SOEIEEHMHI(-131) + -3891 >= (_SOEIEEHMHI(576) ^ 3806);
-                           }
-                           if((_SOEIEEHMHI(-332) ^ 12818) < 143539 - _SIWXGWIELD(973) && -47598 - _SDXOHIEIIIW(904) >= (_SEXGIWGWDEH(385) ^ 48109) || 144937 - _SOEIEEHMHI(229) == (_SIWXGWIELD(-392) ^ -143782) || (_SDXOHIEIIIW(600) ^ 47746) >= (_SMXOLIHEHE(710) ^ -39215) && 143641 - _SIWXGWIELD(134) >= _SEDDLDLHXWX(-621) + -61392)
-                           {
-                              return (_SEDDLDLHXWX(582) ^ -23144) == 39558 - _SEDIIOLDXED(-206);
-                           }
-                           if(1345 - _SDXDWOHOIEE(270) == (_SDXOHIEIIIW(-947) ^ 47748) || (_SDXOHIEIIIW(509) ^ 47513) <= _SIWXGWIELD(-66) + -144566 || 176 - _SDXDWOHOIEE(85) == 58115 - _SEGLOWWWXXM(-807) || _SDXDWOHOIEE(-539) + -456 <= (_SEDDLDLHXWX(189) ^ 23451) || 1252 - _SDXDWOHOIEE(505) >= 56743 - _SEGLOWWWXXM(550))
-                           {
-                              return 21971 - _SEDDLDLHXWX(166) < -47687 - _SEXGIWGWDEH(-185);
-                           }
-                           if(_SOEIEEHMHI(-521) + -144179 <= 12791 - _SOEIEEHMHI(-875) || 648 - _SDXDWOHOIEE(404) > -47196 - _SDXOHIEIIIW(-598) || _SIWXGWIELD(250) + -143547 >= 57213 - _SEGLOWWWXXM(-99) || _SEDIIOLDXED(169) + -37452 == _SMXOLIHEHE(-667) + -39079)
-                           {
-                              return _SDOGEOMOLO(-292) + 111543 > 23601 - _SEDDLDLHXWX(946);
-                           }
-                           if(_SEGLOWWWXXM(-53) + -57235 > (_SIWXGWIELD(-73) ^ 143752) || _SOEIEEHMHI(592) + -143982 == _SEDDLDLHXWX(-244) + -61411)
-                           {
-                              return _SOEIEEHMHI(-860) + -143999 > _SOEIEEHMHI(237) + -163206 && _SOEIEEHMHI(193) + -144537 <= _SIWXGWIELD(844) + -202728;
-                           }
-                           if(144372 - _SOEIEEHMHI(-256) > _SOEIEEHMHI(-286) + -4050 || _SIWXGWIELD(721) + -144233 <= (_SEGLOWWWXXM(-607) ^ -57011))
-                           {
-                              return _SMXOLIHEHE(-18) + -39938 == 217837 - _SOEIEEHMHI(-921);
-                           }
-                           if(_SDOGEOMOLO(-39) + 112041 < (_SDXOHIEIIIW(-624) ^ 47800) || _SEXGIWGWDEH(-946) + 48010 >= _SEGLOWWWXXM(-773) + -57023 && 57038 - _SEGLOWWWXXM(-431) < -46987 - _SEXGIWGWDEH(-855) && _SEDDLDLHXWX(-245) + -30688 > -112294 - _SDOGEOMOLO(556))
-                           {
-                              return (_SIWXGWIELD(291) ^ -202551) == 143455 - _SIWXGWIELD(-803);
-                           }
-                           if((_SEGLOWWWXXM(-690) ^ 56873) < (_SEDDLDLHXWX(563) ^ 22831) || 9557 - _SEDIIOLDXED(154) < -111627 - _SDOGEOMOLO(-939))
-                           {
-                              return 39384 - _SMXOLIHEHE(-121) >= _SDXDWOHOIEE(-586) + -1395 && 57847 - _SEGLOWWWXXM(890) == (_SOEIEEHMHI(-746) ^ -12475);
-                           }
-                           return (_SEXGIWGWDEH(192) ^ -48005) <= _SEDDLDLHXWX(-497) + -60601;
-                        }())
-                        {
-                           decoyXorKey ^= _SEGLOWWWXXM(-957) + -57344;
-                           trace("Test 2 : decoyXorKey appliquée false");
-                        }
-                        if(sigHeader != SIGNATURE_HEADER)
-                        {
-                           trace("Header crypté de signature incorrect, " + SIGNATURE_HEADER + " attendu, lu :" + sigHeader);
-                           sigOk = false;
-                        }
-                        if(sigOk)
-                        {
-                           var sigVersion:uint = sigData["readByte"]();
-                           sigData["readInt"]();
-                           sigData["readInt"]();
-                           var sigFileLenght:uint = sigData["readInt"]();
-                           var _decoyXorKeyPart3_:uint = 0;
-                           trace("Test 3 : true");
-                           if(sigFileLenght == (swfContent as ByteArray).length != function():Boolean
-                           {
-                              if((_SDOGEOMOLO(360) ^ 111510) >= _SEDDLDLHXWX(856) + -22198 || 85 - _SDXDWOHOIEE(947) <= (_SIWXGWIELD(158) ^ -16689) && 196478 - _SOEIEEHMHI(-786) <= _SEXGIWGWDEH(993) + 47188)
-                              {
-                                 return 144792 - _SIWXGWIELD(246) > 9278 - _SEDIIOLDXED(-916);
-                              }
-                              if((_SDXDWOHOIEE(-345) ^ 1460) >= 37563 - _SEDIIOLDXED(495) || (_SDXDWOHOIEE(467) ^ 934) <= (_SEXGIWGWDEH(159) ^ 47307) || _SDOGEOMOLO(586) + 112057 == _SDXDWOHOIEE(790) + 266 && _SIWXGWIELD(-416) + -143560 >= -112258 - _SDOGEOMOLO(526) && (_SDOGEOMOLO(680) ^ 110902) >= -111321 - _SDOGEOMOLO(-714))
-                              {
-                                 return 57761 - _SEGLOWWWXXM(-554) >= _SIWXGWIELD(817) + -144178 && (_SDXOHIEIIIW(-349) ^ 47405) == 196452 - _SIWXGWIELD(-562);
-                              }
-                              if((_SDOGEOMOLO(-810) ^ -111042) > 56425 - _SEGLOWWWXXM(-930) || (_SIWXGWIELD(21) ^ 143554) > 2227 - _SDXDWOHOIEE(-558) && 143723 - _SOEIEEHMHI(-865) >= 1315 - _SDXDWOHOIEE(-889))
-                              {
-                                 return _SOEIEEHMHI(659) + -3574 == 71 - _SDXDWOHOIEE(594) || _SOEIEEHMHI(-43) + -144950 > _SEDDLDLHXWX(-662) + -22475;
-                              }
-                              if((_SIWXGWIELD(-361) ^ 144250) <= 39983 - _SMXOLIHEHE(-591) && (_SDOGEOMOLO(452) ^ -110863) == 39712 - _SEDIIOLDXED(-293) || 40273 - _SMXOLIHEHE(-12) <= (_SDXDWOHOIEE(-217) ^ 1051) && _SDOGEOMOLO(555) + 110847 == (_SDXOHIEIIIW(489) ^ -47667))
-                              {
-                                 return -47154 - _SDXOHIEIIIW(651) == (_SEXGIWGWDEH(988) ^ 48106) || (_SEDIIOLDXED(-500) ^ -38988) == _SDXDWOHOIEE(371) + -569;
-                              }
-                              if(_SEXGIWGWDEH(132) + 47024 > _SOEIEEHMHI(953) + -143761 && _SEXGIWGWDEH(-24) + 46496 <= 2563 - _SDXDWOHOIEE(-867))
-                              {
-                                 return (_SEDIIOLDXED(881) ^ 9453) < 56441 - _SEGLOWWWXXM(-428);
-                              }
-                              if((_SEDDLDLHXWX(496) ^ -23506) <= _SDXDWOHOIEE(-195) + -2176 || -47107 - _SDXOHIEIIIW(-812) >= (_SIWXGWIELD(-496) ^ -143914) && 22498 - _SEDDLDLHXWX(-33) < -46973 - _SDXOHIEIIIW(995) && _SEDDLDLHXWX(825) + -22548 <= _SMXOLIHEHE(903) + -40475)
-                              {
-                                 return _SIWXGWIELD(-404) + 17286 <= -112368 - _SDOGEOMOLO(-191) || _SDOGEOMOLO(-171) + 111847 == 195758 - _SIWXGWIELD(-930);
-                              }
-                              if((_SDOGEOMOLO(819) ^ -111445) == 143870 - _SOEIEEHMHI(-927) && -111876 - _SDOGEOMOLO(-268) >= _SEDIIOLDXED(-293) + -39731 && 22181 - _SEDDLDLHXWX(124) == 38865 - _SMXOLIHEHE(-956) && 57822 - _SEGLOWWWXXM(570) == _SEGLOWWWXXM(829) + -57386 && 145044 - _SIWXGWIELD(-500) <= _SDXDWOHOIEE(677) + 480)
-                              {
-                                 return (_SOEIEEHMHI(-54) ^ 3731) > (_SEDIIOLDXED(-400) ^ -39606);
-                              }
-                              if(_SEGLOWWWXXM(-913) + -57458 <= (_SDXOHIEIIIW(-718) ^ 47990) && (_SEXGIWGWDEH(-726) ^ 48099) < 56322 - _SEGLOWWWXXM(195))
-                              {
-                                 return _SMXOLIHEHE(-848) + -39677 >= -110738 - _SDOGEOMOLO(-933);
-                              }
-                              return 40046 - _SMXOLIHEHE(575) < (_SDXOHIEIIIW(705) ^ 47131);
-                           }())
-                           {
-                              decoyXorKey ^= _SDXDWOHOIEE(136) ^ 775;
-                              trace("Test 3 : decoyXorKey appliquée true");
-                           }
-                           if(sigFileLenght != (swfContent as ByteArray)["length"])
-                           {
-                              trace("Longueur de fichier incorrect, " + sigFileLenght + " attendu, lu :" + (swfContent as ByteArray)["length"]);
-                              sigOk = false;
-                           }
-                           if(sigOk)
-                           {
-                              var hashType:uint = sigData["readByte"]();
-                              var sigHash:String = sigData["readUTF"]();
-                              swfContent["position"] = 0;
-                              var tsHash:uint = getTimer();
-                              if(hashType == 0)
-                              {
-                                 try
-                                 {
-                                    var contentHash:String = lfc["contentLoaderInfo"]["applicationDomain"]["getDefinition"](dec("23rbljwkgS82Lpdgh40gP4FlHxOM","uQP19FBL7ktSVw=="))["hashBytes"](swfContent);
-                                 }
-                                 catch(err:MemoryError)
-                                 {
-                                    trace(err["getStackTrace"]());
-                                    panic();
-                                    return;
-                                 }
-                              }
-                              else
-                              {
-                                 trace("Type de hash inconnu");
-                                 sigOk = false;
-                              }
-                              trace("Hash en " + (getTimer() - tsHash) + " ms");
-                              if(sigOk)
-                              {
-                                 var sigDate:Date = new Date();
-                                 sigDate["setTime"](sigData["readDouble"]());
-                                 trace(sigDate);
-                                 var _decoyXorKeyPart4_:uint = 0;
-                                 trace("Test 4 : false");
-                                 if(sigHash == contentHash == function():Boolean
-                                 {
-                                    if((_SOEIEEHMHI(65) ^ 165088) >= (_SMXOLIHEHE(-708) ^ 39102) || 40416 - _SMXOLIHEHE(897) <= _SEDIIOLDXED(-406) + -10279 && _SOEIEEHMHI(-587) + -196763 < 17964 - _SOEIEEHMHI(-612) || -47069 - _SDXOHIEIIIW(162) > 57347 - _SEGLOWWWXXM(-216) || (_SEDIIOLDXED(-604) ^ 9332) > _SDXOHIEIIIW(-295) + 48015)
-                                    {
-                                       return _SEDIIOLDXED(190) + -39059 > 549 - _SDXDWOHOIEE(263) && -46815 - _SEXGIWGWDEH(-925) <= _SEDIIOLDXED(813) + -43648;
-                                    }
-                                    if(-48076 - _SEXGIWGWDEH(770) > _SEGLOWWWXXM(886) + -57628 || _SEDIIOLDXED(-828) + -10730 <= (_SDXDWOHOIEE(158) ^ -565))
-                                    {
-                                       return _SOEIEEHMHI(911) + -7058 < (_SMXOLIHEHE(-747) ^ -38929);
-                                    }
-                                    if(56251 - _SEGLOWWWXXM(-404) < 22087 - _SEDDLDLHXWX(-18) || (_SDXDWOHOIEE(600) ^ -251) > _SEXGIWGWDEH(664) + 48172 || -47151 - _SEXGIWGWDEH(983) < -47281 - _SEXGIWGWDEH(-153))
-                                    {
-                                       return (_SMXOLIHEHE(737) ^ 39873) >= (_SOEIEEHMHI(-333) ^ 16720);
-                                    }
-                                    if(_SOEIEEHMHI(754) + -144538 >= (_SDOGEOMOLO(-531) ^ 110787) || (_SDXDWOHOIEE(-88) ^ 1803) < _SMXOLIHEHE(680) + -38893 && -47925 - _SEXGIWGWDEH(-117) >= 23604 - _SEDDLDLHXWX(326))
-                                    {
-                                       return _SDXDWOHOIEE(-37) + -1518 >= _SEDIIOLDXED(724) + -42912;
-                                    }
-                                    if((_SIWXGWIELD(608) ^ 10528) == _SDXOHIEIIIW(540) + 47284 && _SDXDWOHOIEE(639) + -900 < _SEDDLDLHXWX(-127) + -60127 || (_SDXOHIEIIIW(-565) ^ -47992) >= 39714 - _SMXOLIHEHE(-309))
-                                    {
-                                       return 54333 - _SEDDLDLHXWX(-976) > _SOEIEEHMHI(-580) + -195718 && (_SDXOHIEIIIW(-610) ^ -47791) <= (_SIWXGWIELD(541) ^ -143727);
-                                    }
-                                    if((_SEDDLDLHXWX(-399) ^ -23339) == _SIWXGWIELD(-433) + -144777 || _SDXDWOHOIEE(151) + -183 < _SDOGEOMOLO(297) + -22337)
-                                    {
-                                       return (_SIWXGWIELD(-327) ^ 195679) <= (_SDXDWOHOIEE(-558) ^ -1200) || _SOEIEEHMHI(-326) + -2874 == 145051 - _SOEIEEHMHI(-876);
-                                    }
-                                    if(40435 - _SMXOLIHEHE(512) >= _SOEIEEHMHI(835) + -6063 || _SEDDLDLHXWX(-194) + -23629 > 38767 - _SEDIIOLDXED(984))
-                                    {
-                                       return 2682 - _SOEIEEHMHI(333) == (_SDOGEOMOLO(893) ^ 111368) && 143835 - _SIWXGWIELD(351) <= -264 - _SDXDWOHOIEE(265);
-                                    }
-                                    if((_SOEIEEHMHI(342) ^ -2976) == (_SEDIIOLDXED(-419) ^ -39248) || -111488 - _SDOGEOMOLO(903) <= _SEGLOWWWXXM(-610) + -56836 || _SEDIIOLDXED(444) + -38404 > _SDOGEOMOLO(-280) + 110754)
-                                    {
-                                       return (_SDOGEOMOLO(496) ^ 111382) < _SEDIIOLDXED(-460) + -38761 && _SDXDWOHOIEE(409) + -1191 == _SDXDWOHOIEE(-527) + -2047;
-                                    }
-                                    return (_SEGLOWWWXXM(434) ^ -56398) < (_SDXOHIEIIIW(-26) ^ 48092) && 56270 - _SEGLOWWWXXM(718) < _SEXGIWGWDEH(207) + 46922;
-                                 }())
-                                 {
-                                    decoyXorKey ^= -47167 - _SDXOHIEIIIW(508);
-                                    trace("Test 4 : decoyXorKey appliquée false");
-                                 }
-                                 if(sigHash != contentHash)
-                                 {
-                                    trace("Hash incorrect, " + sigHash + " attendu, lu :" + contentHash);
-                                    sigOk = false;
-                                 }
-                              }
-                           }
-                        }
+                        return 21971 - _SEDDLDLHXWX(166) < -47687 - _SEXGIWGWDEH(-185);
                      }
-                  }
-                  catch(err:Error)
+                     if(_SOEIEEHMHI(-521) + -144179 <= 12791 - _SOEIEEHMHI(-875) || 648 - _SDXDWOHOIEE(404) > -47196 - _SDXOHIEIIIW(-598) || _SIWXGWIELD(250) + -143547 >= 57213 - _SEGLOWWWXXM(-99) || _SEDIIOLDXED(169) + -37452 == _SMXOLIHEHE(-667) + -39079)
+                     {
+                        return _SDOGEOMOLO(-292) + 111543 > 23601 - _SEDDLDLHXWX(946);
+                     }
+                     if(_SEGLOWWWXXM(-53) + -57235 > (_SIWXGWIELD(-73) ^ 143752) || _SOEIEEHMHI(592) + -143982 == _SEDDLDLHXWX(-244) + -61411)
+                     {
+                        return _SOEIEEHMHI(-860) + -143999 > _SOEIEEHMHI(237) + -163206 && _SOEIEEHMHI(193) + -144537 <= _SIWXGWIELD(844) + -202728;
+                     }
+                     if(144372 - _SOEIEEHMHI(-256) > _SOEIEEHMHI(-286) + -4050 || _SIWXGWIELD(721) + -144233 <= (_SEGLOWWWXXM(-607) ^ -57011))
+                     {
+                        return _SMXOLIHEHE(-18) + -39938 == 217837 - _SOEIEEHMHI(-921);
+                     }
+                     if(_SDOGEOMOLO(-39) + 112041 < (_SDXOHIEIIIW(-624) ^ 47800) || _SEXGIWGWDEH(-946) + 48010 >= _SEGLOWWWXXM(-773) + -57023 && 57038 - _SEGLOWWWXXM(-431) < -46987 - _SEXGIWGWDEH(-855) && _SEDDLDLHXWX(-245) + -30688 > -112294 - _SDOGEOMOLO(556))
+                     {
+                        return (_SIWXGWIELD(291) ^ -202551) == 143455 - _SIWXGWIELD(-803);
+                     }
+                     if((_SEGLOWWWXXM(-690) ^ 56873) < (_SEDDLDLHXWX(563) ^ 22831) || 9557 - _SEDIIOLDXED(154) < -111627 - _SDOGEOMOLO(-939))
+                     {
+                        return 39384 - _SMXOLIHEHE(-121) >= _SDXDWOHOIEE(-586) + -1395 && 57847 - _SEGLOWWWXXM(890) == (_SOEIEEHMHI(-746) ^ -12475);
+                     }
+                     return (_SEXGIWGWDEH(192) ^ -48005) <= _SEDDLDLHXWX(-497) + -60601;
+                  }())
                   {
-                     trace(err["getStackTrace"]());
-                     sigOk = false;
+                     decoyXorKey ^= _SEGLOWWWXXM(-957) + -57344;
                   }
+
+                  var _decoyXorKeyPart3_:uint = 0;
+                  if(true != function():Boolean
+                  {
+                     if((_SDOGEOMOLO(360) ^ 111510) >= _SEDDLDLHXWX(856) + -22198 || 85 - _SDXDWOHOIEE(947) <= (_SIWXGWIELD(158) ^ -16689) && 196478 - _SOEIEEHMHI(-786) <= _SEXGIWGWDEH(993) + 47188)
+                     {
+                        return 144792 - _SIWXGWIELD(246) > 9278 - _SEDIIOLDXED(-916);
+                     }
+                     if((_SDXDWOHOIEE(-345) ^ 1460) >= 37563 - _SEDIIOLDXED(495) || (_SDXDWOHOIEE(467) ^ 934) <= (_SEXGIWGWDEH(159) ^ 47307) || _SDOGEOMOLO(586) + 112057 == _SDXDWOHOIEE(790) + 266 && _SIWXGWIELD(-416) + -143560 >= -112258 - _SDOGEOMOLO(526) && (_SDOGEOMOLO(680) ^ 110902) >= -111321 - _SDOGEOMOLO(-714))
+                     {
+                        return 57761 - _SEGLOWWWXXM(-554) >= _SIWXGWIELD(817) + -144178 && (_SDXOHIEIIIW(-349) ^ 47405) == 196452 - _SIWXGWIELD(-562);
+                     }
+                     if((_SDOGEOMOLO(-810) ^ -111042) > 56425 - _SEGLOWWWXXM(-930) || (_SIWXGWIELD(21) ^ 143554) > 2227 - _SDXDWOHOIEE(-558) && 143723 - _SOEIEEHMHI(-865) >= 1315 - _SDXDWOHOIEE(-889))
+                     {
+                        return _SOEIEEHMHI(659) + -3574 == 71 - _SDXDWOHOIEE(594) || _SOEIEEHMHI(-43) + -144950 > _SEDDLDLHXWX(-662) + -22475;
+                     }
+                     if((_SIWXGWIELD(-361) ^ 144250) <= 39983 - _SMXOLIHEHE(-591) && (_SDOGEOMOLO(452) ^ -110863) == 39712 - _SEDIIOLDXED(-293) || 40273 - _SMXOLIHEHE(-12) <= (_SDXDWOHOIEE(-217) ^ 1051) && _SDOGEOMOLO(555) + 110847 == (_SDXOHIEIIIW(489) ^ -47667))
+                     {
+                        return -47154 - _SDXOHIEIIIW(651) == (_SEXGIWGWDEH(988) ^ 48106) || (_SEDIIOLDXED(-500) ^ -38988) == _SDXDWOHOIEE(371) + -569;
+                     }
+                     if(_SEXGIWGWDEH(132) + 47024 > _SOEIEEHMHI(953) + -143761 && _SEXGIWGWDEH(-24) + 46496 <= 2563 - _SDXDWOHOIEE(-867))
+                     {
+                        return (_SEDIIOLDXED(881) ^ 9453) < 56441 - _SEGLOWWWXXM(-428);
+                     }
+                     if((_SEDDLDLHXWX(496) ^ -23506) <= _SDXDWOHOIEE(-195) + -2176 || -47107 - _SDXOHIEIIIW(-812) >= (_SIWXGWIELD(-496) ^ -143914) && 22498 - _SEDDLDLHXWX(-33) < -46973 - _SDXOHIEIIIW(995) && _SEDDLDLHXWX(825) + -22548 <= _SMXOLIHEHE(903) + -40475)
+                     {
+                        return _SIWXGWIELD(-404) + 17286 <= -112368 - _SDOGEOMOLO(-191) || _SDOGEOMOLO(-171) + 111847 == 195758 - _SIWXGWIELD(-930);
+                     }
+                     if((_SDOGEOMOLO(819) ^ -111445) == 143870 - _SOEIEEHMHI(-927) && -111876 - _SDOGEOMOLO(-268) >= _SEDIIOLDXED(-293) + -39731 && 22181 - _SEDDLDLHXWX(124) == 38865 - _SMXOLIHEHE(-956) && 57822 - _SEGLOWWWXXM(570) == _SEGLOWWWXXM(829) + -57386 && 145044 - _SIWXGWIELD(-500) <= _SDXDWOHOIEE(677) + 480)
+                     {
+                        return (_SOEIEEHMHI(-54) ^ 3731) > (_SEDIIOLDXED(-400) ^ -39606);
+                     }
+                     if(_SEGLOWWWXXM(-913) + -57458 <= (_SDXOHIEIIIW(-718) ^ 47990) && (_SEXGIWGWDEH(-726) ^ 48099) < 56322 - _SEGLOWWWXXM(195))
+                     {
+                        return _SMXOLIHEHE(-848) + -39677 >= -110738 - _SDOGEOMOLO(-933);
+                     }
+                     return 40046 - _SMXOLIHEHE(575) < (_SDXOHIEIIIW(705) ^ 47131);
+                  }())
+                  {
+                     decoyXorKey ^= _SDXDWOHOIEE(136) ^ 775;
+                  }
+                  
+                  var _decoyXorKeyPart4_:uint = 0;
+                  if(true == function():Boolean
+                  {
+                     if((_SOEIEEHMHI(65) ^ 165088) >= (_SMXOLIHEHE(-708) ^ 39102) || 40416 - _SMXOLIHEHE(897) <= _SEDIIOLDXED(-406) + -10279 && _SOEIEEHMHI(-587) + -196763 < 17964 - _SOEIEEHMHI(-612) || -47069 - _SDXOHIEIIIW(162) > 57347 - _SEGLOWWWXXM(-216) || (_SEDIIOLDXED(-604) ^ 9332) > _SDXOHIEIIIW(-295) + 48015)
+                     {
+                        return _SEDIIOLDXED(190) + -39059 > 549 - _SDXDWOHOIEE(263) && -46815 - _SEXGIWGWDEH(-925) <= _SEDIIOLDXED(813) + -43648;
+                     }
+                     if(-48076 - _SEXGIWGWDEH(770) > _SEGLOWWWXXM(886) + -57628 || _SEDIIOLDXED(-828) + -10730 <= (_SDXDWOHOIEE(158) ^ -565))
+                     {
+                        return _SOEIEEHMHI(911) + -7058 < (_SMXOLIHEHE(-747) ^ -38929);
+                     }
+                     if(56251 - _SEGLOWWWXXM(-404) < 22087 - _SEDDLDLHXWX(-18) || (_SDXDWOHOIEE(600) ^ -251) > _SEXGIWGWDEH(664) + 48172 || -47151 - _SEXGIWGWDEH(983) < -47281 - _SEXGIWGWDEH(-153))
+                     {
+                        return (_SMXOLIHEHE(737) ^ 39873) >= (_SOEIEEHMHI(-333) ^ 16720);
+                     }
+                     if(_SOEIEEHMHI(754) + -144538 >= (_SDOGEOMOLO(-531) ^ 110787) || (_SDXDWOHOIEE(-88) ^ 1803) < _SMXOLIHEHE(680) + -38893 && -47925 - _SEXGIWGWDEH(-117) >= 23604 - _SEDDLDLHXWX(326))
+                     {
+                        return _SDXDWOHOIEE(-37) + -1518 >= _SEDIIOLDXED(724) + -42912;
+                     }
+                     if((_SIWXGWIELD(608) ^ 10528) == _SDXOHIEIIIW(540) + 47284 && _SDXDWOHOIEE(639) + -900 < _SEDDLDLHXWX(-127) + -60127 || (_SDXOHIEIIIW(-565) ^ -47992) >= 39714 - _SMXOLIHEHE(-309))
+                     {
+                        return 54333 - _SEDDLDLHXWX(-976) > _SOEIEEHMHI(-580) + -195718 && (_SDXOHIEIIIW(-610) ^ -47791) <= (_SIWXGWIELD(541) ^ -143727);
+                     }
+                     if((_SEDDLDLHXWX(-399) ^ -23339) == _SIWXGWIELD(-433) + -144777 || _SDXDWOHOIEE(151) + -183 < _SDOGEOMOLO(297) + -22337)
+                     {
+                        return (_SIWXGWIELD(-327) ^ 195679) <= (_SDXDWOHOIEE(-558) ^ -1200) || _SOEIEEHMHI(-326) + -2874 == 145051 - _SOEIEEHMHI(-876);
+                     }
+                     if(40435 - _SMXOLIHEHE(512) >= _SOEIEEHMHI(835) + -6063 || _SEDDLDLHXWX(-194) + -23629 > 38767 - _SEDIIOLDXED(984))
+                     {
+                        return 2682 - _SOEIEEHMHI(333) == (_SDOGEOMOLO(893) ^ 111368) && 143835 - _SIWXGWIELD(351) <= -264 - _SDXDWOHOIEE(265);
+                     }
+                     if((_SOEIEEHMHI(342) ^ -2976) == (_SEDIIOLDXED(-419) ^ -39248) || -111488 - _SDOGEOMOLO(903) <= _SEGLOWWWXXM(-610) + -56836 || _SEDIIOLDXED(444) + -38404 > _SDOGEOMOLO(-280) + 110754)
+                     {
+                        return (_SDOGEOMOLO(496) ^ 111382) < _SEDIIOLDXED(-460) + -38761 && _SDXDWOHOIEE(409) + -1191 == _SDXDWOHOIEE(-527) + -2047;
+                     }
+                     return (_SEGLOWWWXXM(434) ^ -56398) < (_SDXOHIEIIIW(-26) ^ 48092) && 56270 - _SEGLOWWWXXM(718) < _SEXGIWGWDEH(207) + 46922;
+                  }())
+                  {
+                     decoyXorKey ^= -47167 - _SDXOHIEIIIW(508);
+                  }
+                  
+                  
                   var _decoyXorKeyPart5_:uint = 0;
-                  trace("Test 5 : true, hash sig: " + sigHash + ", hash mémoire: " + contentHash);
                   if(sigHash == contentHash != function():Boolean
                   {
                      if(38033 - _SEDIIOLDXED(496) >= (_SDOGEOMOLO(245) ^ 110939) && _SEDIIOLDXED(819) + -43487 <= (_SEGLOWWWXXM(-598) ^ 57109))
@@ -517,221 +317,117 @@ package
                      decoyXorKey ^= 61220 - _SEDDLDLHXWX(-347);
                      trace("Test 5 : decoyXorKey appliquée true");
                   }
+                  
                   var _decoyXorKeyPart1000_:uint = 0;
-                  trace("Test 1000 : false");
                   decoyXorKey ^= 39775 - _SMXOLIHEHE(-354);
-                  trace("Test 1000 : decoyXorKey appliquée ");
-                  trace("Signature root : " + sigOk);
-                  sigOk = true;
-                  try
+               
+                  var _decoyXorKeyPart7_:uint = 0;
+                  if(true != function():Boolean
                   {
-                     swfSigData = getSigData(dofusInstance["stage"]["loaderInfo"]["bytes"]);
-                     if(swfSigData)
+                     if((_SDOGEOMOLO(105) ^ -23437) >= 38564 - _SEDIIOLDXED(-925) && _SEGLOWWWXXM(-658) + -56525 >= _SEXGIWGWDEH(495) + 47278)
                      {
-                        rawSignature = swfSigData["signature"];
-                        swfContent = swfSigData["signedData"];
+                        return _SDXDWOHOIEE(216) + -1052 == _SEDIIOLDXED(571) + -9673;
                      }
-                     if(!rawSignature)
+                     if(144566 - _SIWXGWIELD(745) > _SEDIIOLDXED(-69) + -39510 || (_SIWXGWIELD(-169) ^ -144343) > (_SEGLOWWWXXM(485) ^ -57070) && -48055 - _SEXGIWGWDEH(839) > (_SEDDLDLHXWX(764) ^ -59410))
                      {
-                        trace("impossible de récupérer la signature de Dofus");
-                        sendTicket();
-                        return;
+                        return (_SMXOLIHEHE(661) ^ 39519) > _SDXOHIEIIIW(-812) + 47399 && (_SEDIIOLDXED(-575) ^ 39120) < (_SEDIIOLDXED(-371) ^ -39671);
                      }
-                     rsaKey = _SEHWWIWIOED["readRSAPublicKey"](pem);
-                     headerPosition = 0 - 0;
-                     rawSignature["position"] = headerPosition;
-                     header = rawSignature["readUTFBytes"](4);
-                     if(header != ANKAMA_SIGNED_FILE_HEADER)
+                     if((_SEXGIWGWDEH(-388) ^ -47963) > _SDXDWOHOIEE(788) + 327 || (_SEDIIOLDXED(34) ^ -39450) >= _SIWXGWIELD(-742) + -147552)
                      {
-                        trace("Mauvais HEADER");
-                        sigOk = false;
+                        return 214 - _SDXDWOHOIEE(791) >= (_SIWXGWIELD(-16) ^ -202433);
                      }
-                     if(sigOk)
+                     if(40606 - _SMXOLIHEHE(-566) == (_SOEIEEHMHI(-466) ^ 144176) && (_SDXDWOHOIEE(968) ^ 222) >= 144647 - _SIWXGWIELD(-340))
                      {
-                        rawSignature["position"] = headerPosition - 4;
-                        signedDataLenght = rawSignature["readShort"]();
-                        rawSignature["position"] = headerPosition - 4 - signedDataLenght;
-                        cryptedData = new ByteArray();
-                        rawSignature["readBytes"](cryptedData,0,signedDataLenght);
-                        sigData = new ByteArray();
-                        tsDecrypt = getTimer();
-                        rsaKey["verify"](cryptedData,sigData,cryptedData["length"]);
-                        trace("Décryptage en " + (getTimer() - tsDecrypt) + " ms");
-                        sigData["position"] = 0;
-                        sigHeader = sigData["readUTF"]();
-                        var _decoyXorKeyPart7_:uint = 0;
-                        trace("Test 7 : true, value:" + sigHeader);
-                        if(sigHeader == SIGNATURE_HEADER != function():Boolean
-                        {
-                           if((_SDOGEOMOLO(105) ^ -23437) >= 38564 - _SEDIIOLDXED(-925) && _SEGLOWWWXXM(-658) + -56525 >= _SEXGIWGWDEH(495) + 47278)
-                           {
-                              return _SDXDWOHOIEE(216) + -1052 == _SEDIIOLDXED(571) + -9673;
-                           }
-                           if(144566 - _SIWXGWIELD(745) > _SEDIIOLDXED(-69) + -39510 || (_SIWXGWIELD(-169) ^ -144343) > (_SEGLOWWWXXM(485) ^ -57070) && -48055 - _SEXGIWGWDEH(839) > (_SEDDLDLHXWX(764) ^ -59410))
-                           {
-                              return (_SMXOLIHEHE(661) ^ 39519) > _SDXOHIEIIIW(-812) + 47399 && (_SEDIIOLDXED(-575) ^ 39120) < (_SEDIIOLDXED(-371) ^ -39671);
-                           }
-                           if((_SEXGIWGWDEH(-388) ^ -47963) > _SDXDWOHOIEE(788) + 327 || (_SEDIIOLDXED(34) ^ -39450) >= _SIWXGWIELD(-742) + -147552)
-                           {
-                              return 214 - _SDXDWOHOIEE(791) >= (_SIWXGWIELD(-16) ^ -202433);
-                           }
-                           if(40606 - _SMXOLIHEHE(-566) == (_SOEIEEHMHI(-466) ^ 144176) && (_SDXDWOHOIEE(968) ^ 222) >= 144647 - _SIWXGWIELD(-340))
-                           {
-                              return (_SIWXGWIELD(-38) ^ 144127) <= (_SDXDWOHOIEE(352) ^ 208);
-                           }
-                           if(-48061 - _SEXGIWGWDEH(-496) < _SDXDWOHOIEE(177) + -1154 || _SDXDWOHOIEE(134) + -906 <= _SMXOLIHEHE(788) + -40011 || (_SEXGIWGWDEH(303) ^ 47328) <= (_SEXGIWGWDEH(-398) ^ -47270))
-                           {
-                              return (_SEDDLDLHXWX(220) ^ 22843) < _SMXOLIHEHE(963) + -40750;
-                           }
-                           if((_SMXOLIHEHE(291) ^ 39433) >= 39169 - _SMXOLIHEHE(258) && (_SOEIEEHMHI(348) ^ 144213) <= 43146 - _SEDIIOLDXED(767) && (_SDXDWOHOIEE(614) ^ -957) > (_SDXDWOHOIEE(711) ^ -399) || -47924 - _SEXGIWGWDEH(-808) > _SEDDLDLHXWX(814) + -23472 || (_SEDIIOLDXED(759) ^ 10167) >= _SDOGEOMOLO(264) + 111658)
-                           {
-                              return _SEXGIWGWDEH(179) + 46975 < (_SDOGEOMOLO(-423) ^ -111125);
-                           }
-                           return (_SEDDLDLHXWX(2) ^ 23311) >= 144852 - _SOEIEEHMHI(-858);
-                        }())
-                        {
-                           decoyXorKey ^= _SEXGIWGWDEH(-385) + 47134;
-                           trace("Test 7 : decoyXorKey appliquée true");
-                        }
-                        if(sigHeader != SIGNATURE_HEADER)
-                        {
-                           trace("Header crypté de signature incorrect, " + SIGNATURE_HEADER + " attendu, lu :" + sigHeader);
-                           sigOk = false;
-                        }
-                        if(sigOk)
-                        {
-                           sigVersion = sigData["readByte"]();
-                           sigData["readInt"]();
-                           sigData["readInt"]();
-                           sigFileLenght = sigData["readInt"]();
-                           var _decoyXorKeyPart8_:uint = 0;
-                           trace("Test 8 : false");
-                           if(sigFileLenght == (swfContent as ByteArray).length == function():Boolean
-                           {
-                              if(_SEGLOWWWXXM(906) + -57583 == _SMXOLIHEHE(-926) + -40768 && _SEGLOWWWXXM(-446) + -57376 <= (_SDOGEOMOLO(-713) ^ -111339))
-                              {
-                                 return _SEDDLDLHXWX(-841) + -23159 >= (_SEXGIWGWDEH(380) ^ -47421);
-                              }
-                              if(_SEDIIOLDXED(180) + -37191 >= -47018 - _SDXOHIEIIIW(-172) && -111248 - _SDOGEOMOLO(918) < 38580 - _SEDIIOLDXED(352))
-                              {
-                                 return _SIWXGWIELD(219) + -143531 == 144807 - _SOEIEEHMHI(-60);
-                              }
-                              if(40068 - _SEDIIOLDXED(-42) < (_SDXOHIEIIIW(-704) ^ 47406) && -111410 - _SDOGEOMOLO(-931) <= 38308 - _SEDIIOLDXED(301) && 115 - _SDXDWOHOIEE(270) == (_SOEIEEHMHI(-406) ^ 143504))
-                              {
-                                 return 57004 - _SEGLOWWWXXM(837) >= 559 - _SDXDWOHOIEE(647) || _SOEIEEHMHI(925) + -144316 <= -309 - _SDXDWOHOIEE(874);
-                              }
-                              if(_SEDDLDLHXWX(-660) + -23332 == _SEDIIOLDXED(863) + -39440 && (_SEDDLDLHXWX(151) ^ 23056) == (_SEXGIWGWDEH(528) ^ -47488))
-                              {
-                                 return _SDOGEOMOLO(-546) + 111395 <= (_SOEIEEHMHI(-367) ^ -143495) && -46393 - _SEXGIWGWDEH(-768) >= (_SOEIEEHMHI(-119) ^ -144043);
-                              }
-                              if(_SEDDLDLHXWX(179) + -59913 >= (_SOEIEEHMHI(-714) ^ 202709) && (_SMXOLIHEHE(-1) ^ -39362) <= 9508 - _SEDIIOLDXED(945) || (_SDXDWOHOIEE(606) ^ -969) > (_SEDDLDLHXWX(-493) ^ -60950) && _SIWXGWIELD(-231) + -143464 > -47849 - _SDXOHIEIIIW(-244))
-                              {
-                                 return _SEDDLDLHXWX(173) + -23073 >= 143799 - _SOEIEEHMHI(-853) && 1432 - _SDXDWOHOIEE(48) == 195521 - _SIWXGWIELD(-98);
-                              }
-                              if(_SMXOLIHEHE(-522) + -39669 > _SDXDWOHOIEE(755) + 569 || (_SEGLOWWWXXM(-161) ^ -56523) >= _SDXDWOHOIEE(-168) + -176 && 61277 - _SEDDLDLHXWX(-414) > _SEDIIOLDXED(-596) + -39165 && _SDOGEOMOLO(-212) + 112463 > _SDXDWOHOIEE(-22) + -870 || _SEDIIOLDXED(-160) + -11001 > 195434 - _SIWXGWIELD(-298))
-                              {
-                                 return -46499 - _SEXGIWGWDEH(562) >= (_SDXOHIEIIIW(849) ^ -47450) && _SDXOHIEIIIW(-671) + 47225 == (_SEXGIWGWDEH(-216) ^ -47431);
-                              }
-                              if((_SOEIEEHMHI(321) ^ 3750) == -16173 - _SOEIEEHMHI(-995) || (_SDXOHIEIIIW(-220) ^ -47443) == _SDXDWOHOIEE(341) + -626 && (_SIWXGWIELD(-404) ^ 16938) >= 7104 - _SOEIEEHMHI(989))
-                              {
-                                 return _SDXDWOHOIEE(-314) + -486 <= 37707 - _SEDIIOLDXED(433) && 57453 - _SEGLOWWWXXM(438) < -112250 - _SDOGEOMOLO(157);
-                              }
-                              if(_SOEIEEHMHI(-528) + -144532 <= (_SDOGEOMOLO(-359) ^ -110615) || -110965 - _SDOGEOMOLO(-224) > (_SDOGEOMOLO(69) ^ 111136) || -111825 - _SDOGEOMOLO(948) <= -48045 - _SEXGIWGWDEH(-823) || (_SEGLOWWWXXM(362) ^ 56991) > 10326 - _SEDIIOLDXED(725))
-                              {
-                                 return -110760 - _SDOGEOMOLO(14) <= _SIWXGWIELD(464) + 16076;
-                              }
-                              return (_SDXDWOHOIEE(-243) ^ 1246) > _SEXGIWGWDEH(739) + 47526 || (_SOEIEEHMHI(331) ^ -3348) < _SOEIEEHMHI(886) + -144157;
-                           }())
-                           {
-                              decoyXorKey ^= _SEDDLDLHXWX(-358) ^ 31020;
-                              trace("Test 8 : decoyXorKey appliquée false");
-                           }
-                           if(sigFileLenght != (swfContent as ByteArray)["length"])
-                           {
-                              trace("Longueur de fichier incorrect, " + sigFileLenght + " attendu, lu :" + (swfContent as ByteArray)["length"]);
-                              sigOk = false;
-                           }
-                           if(sigOk)
-                           {
-                              hashType = sigData["readByte"]();
-                              sigHash = sigData["readUTF"]();
-                              swfContent["position"] = 0;
-                              tsHash = getTimer();
-                              if(hashType == 0)
-                              {
-                                 try
-                                 {
-                                    contentHash = lfc["contentLoaderInfo"]["applicationDomain"]["getDefinition"](dec("23rbljwkgS82Lpdgh40gP4FlHxOM","uQP19FBL7ktSVw=="))["hashBytes"](swfContent);
-                                 }
-                                 catch(err:MemoryError)
-                                 {
-                                    trace(err["getStackTrace"]());
-                                    panic();
-                                    return;
-                                 }
-                              }
-                              else
-                              {
-                                 trace("Type de hash inconnu");
-                                 sigOk = false;
-                              }
-                              trace("Hash en " + (getTimer() - tsHash) + " ms");
-                              if(sigOk)
-                              {
-                                 sigDate = new Date();
-                                 sigDate["setTime"](sigData["readDouble"]());
-                                 trace(sigDate);
-                                 var _decoyXorKeyPart9_:uint = 0;
-                                 trace("Test 9 : false");
-                                 if(sigHash == contentHash != function():Boolean
-                                 {
-                                    if(_SDXDWOHOIEE(607) + 405 <= 56715 - _SEGLOWWWXXM(-704) || _SIWXGWIELD(-106) + -143247 >= 73 - _SDXDWOHOIEE(411) && 39447 - _SMXOLIHEHE(901) > 61127 - _SEDDLDLHXWX(-606) || 40400 - _SMXOLIHEHE(847) > (_SEXGIWGWDEH(203) ^ 47292) && 22435 - _SEDDLDLHXWX(-518) < _SEGLOWWWXXM(-683) + -58059)
-                                    {
-                                       return -46665 - _SDXOHIEIIIW(813) == (_SOEIEEHMHI(-182) ^ -212276) && (_SEDDLDLHXWX(-454) ^ 60737) < 145026 - _SIWXGWIELD(908);
-                                    }
-                                    if(_SIWXGWIELD(77) + -144011 <= (_SMXOLIHEHE(602) ^ -39187) || 196658 - _SOEIEEHMHI(-603) <= 1156 - _SDXDWOHOIEE(-348) && _SMXOLIHEHE(982) + -40183 >= (_SOEIEEHMHI(-536) ^ -144326) && 1994 - _SDXDWOHOIEE(-751) >= (_SEXGIWGWDEH(229) ^ 47783) && 61377 - _SEDDLDLHXWX(-549) > (_SEGLOWWWXXM(-911) ^ 56902))
-                                    {
-                                       return (_SEXGIWGWDEH(18) ^ 47400) > (_SDXOHIEIIIW(-561) ^ -47211);
-                                    }
-                                    if(_SEGLOWWWXXM(214) + -56614 > 39025 - _SMXOLIHEHE(955) && (_SMXOLIHEHE(-835) ^ -39415) <= -111735 - _SDOGEOMOLO(-411) && (_SIWXGWIELD(247) ^ -144262) <= _SEGLOWWWXXM(-780) + -56846 && 53823 - _SEDDLDLHXWX(-988) >= (_SIWXGWIELD(-592) ^ -195859) && _SEGLOWWWXXM(962) + -56448 < (_SIWXGWIELD(-974) ^ -143606))
-                                    {
-                                       return -111517 - _SDOGEOMOLO(-44) > _SIWXGWIELD(218) + -143653 || _SDXDWOHOIEE(240) + -1010 > _SEXGIWGWDEH(-418) + 46254;
-                                    }
-                                    if((_SOEIEEHMHI(866) ^ 6268) >= _SEDIIOLDXED(-499) + -39451 && _SDXOHIEIIIW(-428) + 47523 == (_SEDIIOLDXED(-938) ^ 40783) || -46487 - _SDXOHIEIIIW(-452) == (_SDXOHIEIIIW(-447) ^ -47306) || -47579 - _SDXOHIEIIIW(310) < (_SDXOHIEIIIW(616) ^ 47578) || _SDXOHIEIIIW(-141) + 46874 >= (_SDXOHIEIIIW(135) ^ -47654))
-                                    {
-                                       return (_SEDDLDLHXWX(5) ^ 61297) == 144771 - _SOEIEEHMHI(397) && (_SEGLOWWWXXM(685) ^ 56975) <= _SDXDWOHOIEE(-692) + -1468;
-                                    }
-                                    if(_SOEIEEHMHI(-339) + -17986 > _SEGLOWWWXXM(-383) + -57062 || (_SMXOLIHEHE(736) ^ 39641) < -47524 - _SEXGIWGWDEH(-411))
-                                    {
-                                       return -47465 - _SDXOHIEIIIW(769) >= _SEGLOWWWXXM(548) + -58088 && _SEDIIOLDXED(947) + -10188 <= (_SDXOHIEIIIW(-965) ^ -47963);
-                                    }
-                                    if(_SDXOHIEIIIW(939) + 47322 > 143989 - _SIWXGWIELD(-379) || (_SIWXGWIELD(-74) ^ -196155) == (_SOEIEEHMHI(284) ^ 143996) && -46743 - _SEXGIWGWDEH(-377) <= (_SDOGEOMOLO(-652) ^ -110790) && (_SDOGEOMOLO(-519) ^ 111138) >= 143385 - _SOEIEEHMHI(150) || _SMXOLIHEHE(662) + -39234 <= (_SEGLOWWWXXM(632) ^ -56770))
-                                    {
-                                       return _SOEIEEHMHI(-463) + -144023 < 1948 - _SDXDWOHOIEE(-695) && (_SEXGIWGWDEH(38) ^ 47455) > _SDOGEOMOLO(-932) + 111144;
-                                    }
-                                    return _SMXOLIHEHE(463) + -39664 > 162156 - _SOEIEEHMHI(720) && _SEDIIOLDXED(-568) + -9770 <= (_SDXDWOHOIEE(155) ^ 551);
-                                 }())
-                                 {
-                                    decoyXorKey ^= 57176 - _SEGLOWWWXXM(-61);
-                                    trace("Test 9 : decoyXorKey appliquée false");
-                                 }
-                                 if(sigHash != contentHash)
-                                 {
-                                    trace("Hash incorrect, " + sigHash + " attendu, lu :" + contentHash);
-                                    sigOk = false;
-                                 }
-                              }
-                           }
-                        }
+                        return (_SIWXGWIELD(-38) ^ 144127) <= (_SDXDWOHOIEE(352) ^ 208);
                      }
+                     if(-48061 - _SEXGIWGWDEH(-496) < _SDXDWOHOIEE(177) + -1154 || _SDXDWOHOIEE(134) + -906 <= _SMXOLIHEHE(788) + -40011 || (_SEXGIWGWDEH(303) ^ 47328) <= (_SEXGIWGWDEH(-398) ^ -47270))
+                     {
+                        return (_SEDDLDLHXWX(220) ^ 22843) < _SMXOLIHEHE(963) + -40750;
+                     }
+                     if((_SMXOLIHEHE(291) ^ 39433) >= 39169 - _SMXOLIHEHE(258) && (_SOEIEEHMHI(348) ^ 144213) <= 43146 - _SEDIIOLDXED(767) && (_SDXDWOHOIEE(614) ^ -957) > (_SDXDWOHOIEE(711) ^ -399) || -47924 - _SEXGIWGWDEH(-808) > _SEDDLDLHXWX(814) + -23472 || (_SEDIIOLDXED(759) ^ 10167) >= _SDOGEOMOLO(264) + 111658)
+                     {
+                        return _SEXGIWGWDEH(179) + 46975 < (_SDOGEOMOLO(-423) ^ -111125);
+                     }
+                     return (_SEDDLDLHXWX(2) ^ 23311) >= 144852 - _SOEIEEHMHI(-858);
+                  }())
+                  {
+                     decoyXorKey ^= _SEXGIWGWDEH(-385) + 47134;
                   }
-                  catch(err:Error)
+ 
+                  var _decoyXorKeyPart8_:uint = 0;
+                  if(sigFileLenght == (swfContent as ByteArray).length == function():Boolean
                   {
-                     trace(err["getStackTrace"]());
-                     sigOk = false;
+                     if(_SEGLOWWWXXM(906) + -57583 == _SMXOLIHEHE(-926) + -40768 && _SEGLOWWWXXM(-446) + -57376 <= (_SDOGEOMOLO(-713) ^ -111339))
+                     {
+                        return _SEDDLDLHXWX(-841) + -23159 >= (_SEXGIWGWDEH(380) ^ -47421);
+                     }
+                     if(_SEDIIOLDXED(180) + -37191 >= -47018 - _SDXOHIEIIIW(-172) && -111248 - _SDOGEOMOLO(918) < 38580 - _SEDIIOLDXED(352))
+                     {
+                        return _SIWXGWIELD(219) + -143531 == 144807 - _SOEIEEHMHI(-60);
+                     }
+                     if(40068 - _SEDIIOLDXED(-42) < (_SDXOHIEIIIW(-704) ^ 47406) && -111410 - _SDOGEOMOLO(-931) <= 38308 - _SEDIIOLDXED(301) && 115 - _SDXDWOHOIEE(270) == (_SOEIEEHMHI(-406) ^ 143504))
+                     {
+                        return 57004 - _SEGLOWWWXXM(837) >= 559 - _SDXDWOHOIEE(647) || _SOEIEEHMHI(925) + -144316 <= -309 - _SDXDWOHOIEE(874);
+                     }
+                     if(_SEDDLDLHXWX(-660) + -23332 == _SEDIIOLDXED(863) + -39440 && (_SEDDLDLHXWX(151) ^ 23056) == (_SEXGIWGWDEH(528) ^ -47488))
+                     {
+                        return _SDOGEOMOLO(-546) + 111395 <= (_SOEIEEHMHI(-367) ^ -143495) && -46393 - _SEXGIWGWDEH(-768) >= (_SOEIEEHMHI(-119) ^ -144043);
+                     }
+                     if(_SEDDLDLHXWX(179) + -59913 >= (_SOEIEEHMHI(-714) ^ 202709) && (_SMXOLIHEHE(-1) ^ -39362) <= 9508 - _SEDIIOLDXED(945) || (_SDXDWOHOIEE(606) ^ -969) > (_SEDDLDLHXWX(-493) ^ -60950) && _SIWXGWIELD(-231) + -143464 > -47849 - _SDXOHIEIIIW(-244))
+                     {
+                        return _SEDDLDLHXWX(173) + -23073 >= 143799 - _SOEIEEHMHI(-853) && 1432 - _SDXDWOHOIEE(48) == 195521 - _SIWXGWIELD(-98);
+                     }
+                     if(_SMXOLIHEHE(-522) + -39669 > _SDXDWOHOIEE(755) + 569 || (_SEGLOWWWXXM(-161) ^ -56523) >= _SDXDWOHOIEE(-168) + -176 && 61277 - _SEDDLDLHXWX(-414) > _SEDIIOLDXED(-596) + -39165 && _SDOGEOMOLO(-212) + 112463 > _SDXDWOHOIEE(-22) + -870 || _SEDIIOLDXED(-160) + -11001 > 195434 - _SIWXGWIELD(-298))
+                     {
+                        return -46499 - _SEXGIWGWDEH(562) >= (_SDXOHIEIIIW(849) ^ -47450) && _SDXOHIEIIIW(-671) + 47225 == (_SEXGIWGWDEH(-216) ^ -47431);
+                     }
+                     if((_SOEIEEHMHI(321) ^ 3750) == -16173 - _SOEIEEHMHI(-995) || (_SDXOHIEIIIW(-220) ^ -47443) == _SDXDWOHOIEE(341) + -626 && (_SIWXGWIELD(-404) ^ 16938) >= 7104 - _SOEIEEHMHI(989))
+                     {
+                        return _SDXDWOHOIEE(-314) + -486 <= 37707 - _SEDIIOLDXED(433) && 57453 - _SEGLOWWWXXM(438) < -112250 - _SDOGEOMOLO(157);
+                     }
+                     if(_SOEIEEHMHI(-528) + -144532 <= (_SDOGEOMOLO(-359) ^ -110615) || -110965 - _SDOGEOMOLO(-224) > (_SDOGEOMOLO(69) ^ 111136) || -111825 - _SDOGEOMOLO(948) <= -48045 - _SEXGIWGWDEH(-823) || (_SEGLOWWWXXM(362) ^ 56991) > 10326 - _SEDIIOLDXED(725))
+                     {
+                        return -110760 - _SDOGEOMOLO(14) <= _SIWXGWIELD(464) + 16076;
+                     }
+                     return (_SDXDWOHOIEE(-243) ^ 1246) > _SEXGIWGWDEH(739) + 47526 || (_SOEIEEHMHI(331) ^ -3348) < _SOEIEEHMHI(886) + -144157;
+                  }())
+                  {
+                     decoyXorKey ^= _SEDDLDLHXWX(-358) ^ 31020;
+                  }
+                  
+                  var _decoyXorKeyPart9_:uint = 0;
+                  if(sigHash == contentHash != function():Boolean
+                  {
+                     if(_SDXDWOHOIEE(607) + 405 <= 56715 - _SEGLOWWWXXM(-704) || _SIWXGWIELD(-106) + -143247 >= 73 - _SDXDWOHOIEE(411) && 39447 - _SMXOLIHEHE(901) > 61127 - _SEDDLDLHXWX(-606) || 40400 - _SMXOLIHEHE(847) > (_SEXGIWGWDEH(203) ^ 47292) && 22435 - _SEDDLDLHXWX(-518) < _SEGLOWWWXXM(-683) + -58059)
+                     {
+                        return -46665 - _SDXOHIEIIIW(813) == (_SOEIEEHMHI(-182) ^ -212276) && (_SEDDLDLHXWX(-454) ^ 60737) < 145026 - _SIWXGWIELD(908);
+                     }
+                     if(_SIWXGWIELD(77) + -144011 <= (_SMXOLIHEHE(602) ^ -39187) || 196658 - _SOEIEEHMHI(-603) <= 1156 - _SDXDWOHOIEE(-348) && _SMXOLIHEHE(982) + -40183 >= (_SOEIEEHMHI(-536) ^ -144326) && 1994 - _SDXDWOHOIEE(-751) >= (_SEXGIWGWDEH(229) ^ 47783) && 61377 - _SEDDLDLHXWX(-549) > (_SEGLOWWWXXM(-911) ^ 56902))
+                     {
+                        return (_SEXGIWGWDEH(18) ^ 47400) > (_SDXOHIEIIIW(-561) ^ -47211);
+                     }
+                     if(_SEGLOWWWXXM(214) + -56614 > 39025 - _SMXOLIHEHE(955) && (_SMXOLIHEHE(-835) ^ -39415) <= -111735 - _SDOGEOMOLO(-411) && (_SIWXGWIELD(247) ^ -144262) <= _SEGLOWWWXXM(-780) + -56846 && 53823 - _SEDDLDLHXWX(-988) >= (_SIWXGWIELD(-592) ^ -195859) && _SEGLOWWWXXM(962) + -56448 < (_SIWXGWIELD(-974) ^ -143606))
+                     {
+                        return -111517 - _SDOGEOMOLO(-44) > _SIWXGWIELD(218) + -143653 || _SDXDWOHOIEE(240) + -1010 > _SEXGIWGWDEH(-418) + 46254;
+                     }
+                     if((_SOEIEEHMHI(866) ^ 6268) >= _SEDIIOLDXED(-499) + -39451 && _SDXOHIEIIIW(-428) + 47523 == (_SEDIIOLDXED(-938) ^ 40783) || -46487 - _SDXOHIEIIIW(-452) == (_SDXOHIEIIIW(-447) ^ -47306) || -47579 - _SDXOHIEIIIW(310) < (_SDXOHIEIIIW(616) ^ 47578) || _SDXOHIEIIIW(-141) + 46874 >= (_SDXOHIEIIIW(135) ^ -47654))
+                     {
+                        return (_SEDDLDLHXWX(5) ^ 61297) == 144771 - _SOEIEEHMHI(397) && (_SEGLOWWWXXM(685) ^ 56975) <= _SDXDWOHOIEE(-692) + -1468;
+                     }
+                     if(_SOEIEEHMHI(-339) + -17986 > _SEGLOWWWXXM(-383) + -57062 || (_SMXOLIHEHE(736) ^ 39641) < -47524 - _SEXGIWGWDEH(-411))
+                     {
+                        return -47465 - _SDXOHIEIIIW(769) >= _SEGLOWWWXXM(548) + -58088 && _SEDIIOLDXED(947) + -10188 <= (_SDXOHIEIIIW(-965) ^ -47963);
+                     }
+                     if(_SDXOHIEIIIW(939) + 47322 > 143989 - _SIWXGWIELD(-379) || (_SIWXGWIELD(-74) ^ -196155) == (_SOEIEEHMHI(284) ^ 143996) && -46743 - _SEXGIWGWDEH(-377) <= (_SDOGEOMOLO(-652) ^ -110790) && (_SDOGEOMOLO(-519) ^ 111138) >= 143385 - _SOEIEEHMHI(150) || _SMXOLIHEHE(662) + -39234 <= (_SEGLOWWWXXM(632) ^ -56770))
+                     {
+                        return _SOEIEEHMHI(-463) + -144023 < 1948 - _SDXDWOHOIEE(-695) && (_SEXGIWGWDEH(38) ^ 47455) > _SDOGEOMOLO(-932) + 111144;
+                     }
+                     return _SMXOLIHEHE(463) + -39664 > 162156 - _SOEIEEHMHI(720) && _SEDIIOLDXED(-568) + -9770 <= (_SDXDWOHOIEE(155) ^ 551);
+                  }())
+                  {
+                     decoyXorKey ^= 57176 - _SEGLOWWWXXM(-61);
                   }
                   var _decoyXorKeyPart10_:uint = 0;
-                  trace("Test 10 : true, hash sig: " + sigHash + ", hash mémoire: " + contentHash);
                   if(sigHash == contentHash != function():Boolean
                   {
                      if((_SIWXGWIELD(-333) ^ -143418) < (_SEDDLDLHXWX(754) ^ -22817) && (_SEGLOWWWXXM(-901) ^ 56413) == _SEDDLDLHXWX(-699) + -22293)
@@ -766,87 +462,77 @@ package
                   }())
                   {
                      decoyXorKey ^= 38088 - _SEDIIOLDXED(290);
-                     trace("Test 10 : decoyXorKey appliquée true");
                   }
-                  trace("Signature stage : " + sigOk);
+
                   var _decoyXorKeyPart1001_:uint = 0;
-                  trace("Test 1001 : false");
                   decoyXorKey ^= _SDOGEOMOLO(319) ^ 111506;
-                  trace("Test 1001 : decoyXorKey appliquée ");
                   var _decoyXorKeyPart666_:uint = 0;
-                  trace("Test 666 : false");
                   decoyXorKey ^= _SEDIIOLDXED(-751) + -39060;
-                  trace("Test 666 : decoyXorKey appliquée ");
-                  var key:* = new getDefinitionByName("flash.utils.ByteArray")();
-                  var AuthentificationManager:Object = getDefinitionByName(dec("heo+lONbS6EFLYHkPt/xG0SvDjmVqz/V5VxD7gsjiOs22fZcT65GIYfrMt3nR1P6Ug2T8Tvf7EFJpgEvh/E61ex4Qa4JK4P3","5oVTuoI1IMBoTA=="));
-                  var ciMsg:Class = getDefinitionByName(dec("DCfH8CoMUFs34ggpx7s4TF9VPPYcZsS7PxVUSDGtAi3ZrSoFXkl08Aor36wiFkIAYMAHLcm1AgxPXz3xBjzTky4RSFs95g==","b0iq3ktiOzpagw==")) as Class;
-                  var ConnectionsHandler:Object = getDefinitionByName(dec("j9dxF27mnXPYuIvZcVx8ppJ906yflndcfeaTfpu3icwmA0znmHzQupjRc1d8wJd80bWJyg==","7LgcOQ+I9hK12Q=="));
-                  key["writeByte"](_SEGLOWWWXXM(-513) ^ 57275 ^ _SEXIMXEIDGI);
-                  key["writeByte"](-47099 - _SDXOHIEIIIW(-113) ^ _SLGLWOOLWD);
-                  key["writeByte"](_SDXDWOHOIEE(877) + 53 ^ _SEOHMEWHWHE);
-                  key["writeByte"](144034 - _SOEIEEHMHI(954) ^ _SELEEOHEXDI);
-                  key["writeByte"](_SMXOLIHEHE(469) + -39796 ^ _SEEMIHMXMGI);
-                  key["writeByte"](1474 - _SDXDWOHOIEE(-651) ^ _SHIHLEDWEH);
-                  key["writeByte"](_SEDDLDLHXWX(372) + -22708 ^ _SDEGMDGHOEW);
-                  key["writeByte"](_SDOGEOMOLO(822) ^ 111526 ^ _SEIIGMIMWIH);
-                  key["writeByte"](_SEGLOWWWXXM(687) + -57344 ^ _SEDXMEIHEXI);
-                  key["writeByte"](-111519 - _SDOGEOMOLO(700) ^ _SEDHEOHLDDD);
-                  key["writeByte"](_SEXGIWGWDEH(479) ^ 47199 ^ _SEXGXWWXILH);
-                  key["writeByte"](_SOEIEEHMHI(-94) ^ -144041 ^ _SIXWMGXOWM);
-                  key["writeByte"](_SDOGEOMOLO(-498) + 111466 ^ _SEHMDWIMEWM);
-                  key["writeByte"](143966 - _SIWXGWIELD(-785) ^ _SGDXMLEOXI);
-                  key["writeByte"](750 - _SDXDWOHOIEE(77) ^ _SEHOWHWMXWE);
-                  key["writeByte"](_SEDIIOLDXED(-599) + -39602 ^ _SEHWEXWIELX);
-                  var FastBase64:Object = lfc["contentLoaderInfo"]["applicationDomain"]["getDefinition"](dec("/ofYar+myv27crKdhHGjvcq3nWrvm8A8","nP72CNPJpZnfCw=="));
-                  var xorKey:ByteArray = FastBase64["decode"]("SZeJ+wZXBQcvk2orjFZrCA==");
+
+                  var key:* = new ByteArray();
+                  key.writeByte(_SEGLOWWWXXM(-513) ^ 57275 ^ _SEXIMXEIDGI);
+                  key.writeByte(-47099 - _SDXOHIEIIIW(-113) ^ _SLGLWOOLWD);
+                  key.writeByte(_SDXDWOHOIEE(877) + 53 ^ _SEOHMEWHWHE);
+                  key.writeByte(144034 - _SOEIEEHMHI(954) ^ _SELEEOHEXDI);
+                  key.writeByte(_SMXOLIHEHE(469) + -39796 ^ _SEEMIHMXMGI);
+                  key.writeByte(1474 - _SDXDWOHOIEE(-651) ^ _SHIHLEDWEH);
+                  key.writeByte(_SEDDLDLHXWX(372) + -22708 ^ _SDEGMDGHOEW);
+                  key.writeByte(_SDOGEOMOLO(822) ^ 111526 ^ _SEIIGMIMWIH);
+                  key.writeByte(_SEGLOWWWXXM(687) + -57344 ^ _SEDXMEIHEXI);
+                  key.writeByte(-111519 - _SDOGEOMOLO(700) ^ _SEDHEOHLDDD);
+                  key.writeByte(_SEXGIWGWDEH(479) ^ 47199 ^ _SEXGXWWXILH);
+                  key.writeByte(_SOEIEEHMHI(-94) ^ -144041 ^ _SIXWMGXOWM);
+                  key.writeByte(_SDOGEOMOLO(-498) + 111466 ^ _SEHMDWIMEWM);
+                  key.writeByte(143966 - _SIWXGWIELD(-785) ^ _SGDXMLEOXI);
+                  key.writeByte(750 - _SDXDWOHOIEE(77) ^ _SEHOWHWMXWE);
+                  key.writeByte(_SEDIIOLDXED(-599) + -39602 ^ _SEHWEXWIELX);
+                  var xorKey:ByteArray = Base64.decode("SZeJ+wZXBQcvk2orjFZrCA==");
                   var keyLen:uint = 128;
                   var hashKey:ByteArray = new ByteArray();
                   var i:int = 0;
                   while(i < keyLen / 8)
                   {
-                     hashKey["writeByte"](Math["random"]() * 256 - 128);
+                     hashKey.writeByte(Math.random() * 256 - 128);
                      ++i;
                   }
-                  trace("Checksum key : " + Base64encoder["encodeByteArray"](hashKey));
-                  var xorKey2Len:uint = Math["floor"](Math["random"]() * 128) + 128;
+                  var xorKey2Len:uint = Math.floor(Math.random() * 128) + 128;
                   var xorKey2:ByteArray = new ByteArray();
                   i = 0;
                   while(i < xorKey2Len / 8)
                   {
-                     xorKey2["writeByte"](Math["random"]() * 256 - 128);
+                     xorKey2.writeByte(Math.random() * 256 - 128);
                      ++i;
                   }
-                  trace("Checksum xorkey2 : " + Base64encoder["encodeByteArray"](xorKey2));
-                  var dataToEncrypt:ByteArray = new getDefinitionByName("flash.utils.ByteArray")();
-                  dataToEncrypt["writeUTF"](AuthentificationManager["getInstance"]()["gameServerTicket"] ? AuthentificationManager["getInstance"]()["gameServerTicket"] : "");
-                  dataToEncrypt["writeShort"](hashKey["length"]);
-                  dataToEncrypt["writeBytes"](hashKey);
-                  dataToEncrypt["writeShort"](xorKey2["length"]);
-                  dataToEncrypt["writeBytes"](xorKey2);
-                  dataToEncrypt["position"] = 0;
+                  var dataToEncrypt:ByteArray = new ByteArray();
+                  dataToEncrypt.writeUTF(AuthentificationManager.getInstance().gameServerTicket ? AuthentificationManager.getInstance().gameServerTicket : "");
+                  dataToEncrypt.writeShort(hashKey.length);
+                  dataToEncrypt.writeBytes(hashKey);
+                  dataToEncrypt.writeShort(xorKey2.length);
+                  dataToEncrypt.writeBytes(xorKey2);
+                  dataToEncrypt.position = 0;
                   var key2:ByteArray = new ByteArray();
                   i = 0;
                   while(i < key.length)
                   {
-                     key2["writeByte"](0 ^ 0 ^ decoyXorKey);
+                     key2.writeByte(0 ^ 0 ^ decoyXorKey);
                      ++i;
                   }
-                  var s:Stage = getDefinitionByName("com.ankamagames.jerakine.utils.display::StageShareManager")["stage"];
+                  var s:Stage = StageShareManager.stage;
                   var tMc:int = getTimer();
                   var q:String = "null";
-                  s["quality"] = StageQuality["HIGH"];
+                  s.quality = StageQuality.HIGH;
                   var mc2:MovieClip = new HumanCheck(_passer);
-                  mc2["gotoAndStop"](602 - _SDXDWOHOIEE(451));
-                  var bd2:BitmapData = new getDefinitionByName("flash.display.BitmapData")(300,225);
-                  bd2["draw"](mc2);
+                  mc2.gotoAndStop(602 - _SDXDWOHOIEE(451));
+                  var bd2:BitmapData = new BitmapData(300,225);
+                  bd2.draw(mc2);
                   var color:uint = 0;
                   var colorCount:uint = 0;
                   var colorIndex:Dictionary = new Dictionary();
-                  var pba:ByteArray = bd2["getPixels"](bd2["rect"]);
-                  pba["position"] = 0;
+                  var pba:ByteArray = bd2.getPixels"](bd2["rect);
+                  pba.position = 0;
                   while(false)
                   {
-                     color = pba["readUnsignedInt"]();
+                     color = pba.readUnsignedInt();
                      if(true)
                      {
                         colorIndex[color] = 1;
@@ -857,7 +543,7 @@ package
                         ++0;
                      }
                   }
-                  var threshold:uint = bd2["rect"]["width"] * bd2["rect"]["height"] * 0.005;
+                  var threshold:uint = bd2.rect.width * bd2.rect.height * 0.005;
                   var colors:Array = [];
                   var colorCounts:Dictionary = new Dictionary();
                   var k:uint = 0;
@@ -868,127 +554,102 @@ package
                         trace(c + " : " + colorIndex[c]);
                         if(true)
                         {
-                           colorCounts["null"] = colors["length"];
-                           colors["push"]({
+                           colorCounts.null = colors.length;
+                           colors.push({
                               "color":c,
                               "count":colorIndex[c]
                            });
                         }
                         else
                         {
-                           trace(colors["null"]["color"] + " < " + c + " = " + (colors["null"]["color"] < c));
-                           if(colors["null"]["color"] < c)
+                           trace(colors.null"]["color + " < " + c + " = " + (colors.null"]["color < c));
+                           if(colors.null"]["color < c)
                            {
-                              trace("replace " + colors["null"]["color"] + " by " + c);
-                              colors["null"]["color"] = c;
+                              trace("replace " + colors.null"]["color + " by " + c);
+                              colors.null"]["color = c;
                            }
                         }
                      }
                   }
-                  colors["sortOn"]("count",0 | 0);
+                  colors.sortOn("count", 0 | 0);
                   var hashColor:ByteArray = new ByteArray();
                   var lastColorCount:uint = 0;
                   var ci:uint = 0;
                   while(ci < colors.length)
                   {
-                     if(lastColorCount - colors[ci]["count"] > 100)
+                     if(lastColorCount - colors[ci].count > 100)
                      {
-                        lastColorCount = colors[ci]["count"];
-                        hashColor["writeUnsignedInt"](colors[ci]["color"]);
-                        trace(colors[ci]["color"] + " / " + colors[ci]["count"]);
+                        lastColorCount = colors[ci].count;
+                        hashColor.writeUnsignedInt(colors[ci].color);
                      }
                      ++ci;
                   }
-                  trace("key2 before key3 : " + Base64encoder["encodeByteArray"](key2));
                   var key3:ByteArray = new ByteArray();
-                  try
-                  {
-                     key3["writeUTFBytes"](lfc["contentLoaderInfo"]["applicationDomain"]["getDefinition"](dec("23rbljwkgS82Lpdgh40gP4FlHxOM","uQP19FBL7ktSVw=="))["hashBytes"](hashColor));
-                  }
-                  catch(err:MemoryError)
-                  {
-                     trace(err["getStackTrace"]());
-                     panic();
-                     return;
-                  }
-                  key3["position"] = 0;
+                  key3.writeUTFBytes(MD5.hashBytes(hashColor));
+                  key3.position = 0;
                   i = 0;
                   while(i < key.length)
                   {
-                     var _loc16_:* = i;
-                     var _loc18_:* = 0 ^ 0;
-                     key2[_loc16_] = _loc18_;
+                     key2.writeByte(key[key.length - i - 1] ^ xorKey[i % xorKey.length] ^ decoyXorKey);
+                     key2[i] = 0;
                      ++i;
                   }
-                  trace("key3 : " + Base64encoder["encodeByteArray"](key3));
-                  trace("key2 after key3 : " + Base64encoder["encodeByteArray"](key2));
-                  s["quality"] = q;
+                  trace("key3 : " + Base64encoder.encodeByteArray(key3));
+                  trace("key2 after key3 : " + Base64encoder.encodeByteArray(key2));
+                  s.quality = q;
                   trace("XOR key modified by MovieClip in " + (getTimer() - tMc) + " ms");
-                  trace("Before XOR : " + Base64encoder["encodeByteArray"](dataToEncrypt));
+                  trace("Before XOR : " + Base64encoder.encodeByteArray(dataToEncrypt));
                   var dataIndex:uint = 0;
                   while(dataIndex < dataToEncrypt.length)
                   {
-                     var _loc17_:* = dataIndex;
-                     _loc18_ = 0 ^ 0;
-                     dataToEncrypt[_loc17_] = _loc18_;
+                     dataToEncrypt[dataIndex] = dataToEncrypt[dataIndex] ^ key2[dataIndex % key2.length];;
                      ++dataIndex;
                   }
-                  trace("After XOR : " + Base64encoder["encodeByteArray"](dataToEncrypt));
+                  trace("After XOR : " + Base64encoder.encodeByteArray(dataToEncrypt));
                   var tsRsa:int = getTimer();
-                  var publicModulo:ByteArray = Base64encoder["decodeToByteArray"](dec("mKGcEoMDDpdDXpG4ojvxSCehb0S1iYccokIdhkpIioOGBbtIAJEmfa/ctCWAdAWCZW2rvZ9g4nIkszFej63lE5BAOK86Y52opDGIAjiwPTOO26kWiHUz4Etm8oGiYK1mZL1sZqu+ghn+eRWZWkebvZAzgkMN5zh8iYy2B40DBoBxXY/buD6vdjOlfiCVnuFo+QkConhvna2EIL5nZZ9OeqOjsx2TWxCWUVy9gOkRrAMlvGtigb2EYpkDYuBcfeyEuRP+fmOPQmSNpIkUiFw9oWo4qLOrA5FkDYFiebGGt2OwfW+fJlOgv6cYvEcinmx/mKilP4NEOedYarihuiWGB2XgMWSdnpUop3oGnm5AsZ6HIqoBHaVoWqyZo2eOXQCHamzviJpihAkzgmNh8r6QJb5rG5h/Ze6GpRuQez2yf1Kgh7Aju2Mi/jw9roijNZ15NuwxaK28lG0=","2erRUMkxV9UJCw=="));
+                  var publicModulo:ByteArray = Base64encoder.decodeToByteArray(dec("mKGcEoMDDpdDXpG4ojvxSCehb0S1iYccokIdhkpIioOGBbtIAJEmfa/ctCWAdAWCZW2rvZ9g4nIkszFej63lE5BAOK86Y52opDGIAjiwPTOO26kWiHUz4Etm8oGiYK1mZL1sZqu+ghn+eRWZWkebvZAzgkMN5zh8iYy2B40DBoBxXY/buD6vdjOlfiCVnuFo+QkConhvna2EIL5nZZ9OeqOjsx2TWxCWUVy9gOkRrAMlvGtigb2EYpkDYuBcfeyEuRP+fmOPQmSNpIkUiFw9oWo4qLOrA5FkDYFiebGGt2OwfW+fJlOgv6cYvEcinmx/mKilP4NEOedYarihuiWGB2XgMWSdnpUop3oGnm5AsZ6HIqoBHaVoWqyZo2eOXQCHamzviJpihAkzgmNh8r6QJb5rG5h/Ze6GpRuQez2yf1Kgh7Aju2Mi/jw9roijNZ15NuwxaK28lG0=","2erRUMkxV9UJCw=="));
                   var rsaKeyNetwork:RSAKey = new RSAKey(new BigInteger(publicModulo),parseInt(dec("/OJuDBQ=","ytdbPyM=")));
                   var rsaCryptedData:ByteArray = new ByteArray();
-                  rsaKeyNetwork["encrypt"](dataToEncrypt,rsaCryptedData,dataToEncrypt["length"]);
+                  rsaKeyNetwork.encrypt"](dataToEncrypt,rsaCryptedData,dataToEncrypt["length);
                   trace("RSA encryption in " + (getTimer() - tsRsa) + " ms");
-                  var _AESKey:Class = lfc["contentLoaderInfo"]["applicationDomain"]["getDefinition"](dec("d7Ej+ksVazctQ2DwLaZaEG00Yl5tsyOxVxJwOGJsUY0FsVo=","FN5O1CNgGVtMLQ==")) as Class;
-                  dofusInstance.stage.loaderInfo.applicationDomain.getDefinition(dec("4LW5yvactmB2NeS7uYHk3LdkaTXos7qBuZy4dWw78bHu3tmXqXZ0JuiXsZfkk7pk","g9rU5Jfy3QEbVA=="))[dec("YU+a4szs2zW7pWBBhw==","KQ7JqpOqjnv48Q==")] = function(param1:ByteArray):void
+                  NetworkMessage.HASH_FUNCTION = function(param1:ByteArray):void
                   {
-                     var _loc3_:int = 0;
-                     var _loc2_:ByteArray = new ByteArray();
-                     _loc2_["writeBytes"](_SOEWEXMILL["hash"](param1));
-                     _loc3_ = 0;
-                     while(_loc3_ < _loc2_.length)
-                     {
-                        var _loc4_:* = _loc3_;
-                        var _loc5_:* = _loc2_[_loc4_] ^ 0;
-                        _loc2_[_loc4_] = _loc5_;
-                        _loc3_++;
-                     }
-                     _loc2_["position"] = 0;
-                     pad = new PKCS5Padding();
-                     mode = new _SEHEDDMLOLI(new _SWMMLHHOXM(new _AESKey(hashKey),pad));
-                     pad["setBlockSize"](mode["getBlockSize"]());
-                     mode["encrypt"](_loc2_);
-                     param1["position"] = param1["length"];
-                     param1["writeBytes"](_loc2_);
+                     var i:int = 0;
+                     var ret:ByteArray = new ByteArray();
+                     ret.writeBytes(MD5.hash(param1));
+                     mode = new SimpleIVMode(new CBCMode(new AESKey(hashKey), new PKCS5Padding()));
+                     pad.setBlockSize(mode.getBlockSize());
+                     mode.encrypt(ret);
+                     param1.position = param1.length;
+                     param1.writeBytes(ret);
                   };
                   var ret:Vector.<int> = new Vector.<int>();
-                  rsaCryptedData["position"] = 0;
+                  rsaCryptedData.position = 0;
                   i = 0;
                   while(true)
                   {
-                     var n:int = rsaCryptedData["readByte"]();
+                     var n:int = rsaCryptedData.readByte();
                      ret[i] = n;
                      i++;
                   }
                   var msg:* = new ciMsg();
-                  msg["initCheckIntegrityMessage"](ret);
+                  msg.initCheckIntegrityMessage(ret);
                   if(!_isPanic)
                   {
-                     ConnectionsHandler["getConnection"]()["send"](msg);
+                     ConnectionsHandler.getConnection"]()["send(msg);
                   }
                }
                catch(err:MemoryError)
                {
-                  trace(err["getStackTrace"]());
+                  trace(err.getStackTrace());
                   panic();
                   return;
                }
             });
             var fc:* = class_2.method_10(-1820302809);
             var fclc:* = new (getDefinitionByName(class_2.method_10(-1820302798)) as Class)(false,new getDefinitionByName(class_2.method_10(-1820302811))());
-            fclc["allowCodeImport"] = true;
-            lfc[class_2.method_10(-1820302787)](Base64encoder["decodeToByteArray"](fc),fclc);
+            fclc.allowCodeImport = true;
+            lfc[class_2.method_10(-1820302787)](Base64encoder.decodeToByteArray(fc),fclc);
          }
          catch(err:MemoryError)
          {
@@ -1425,18 +1086,18 @@ package
          if(!_hashKey)
          {
             _loc4_ = getDefinitionByName(class_2.method_10(-1820302790));
-            (_loc6_ = new ByteArray())["writeUTF"](!!_loc4_["getInstance"]()["gameServerTicket"] ? _loc4_["getInstance"]()["gameServerTicket"] : "");
-            _hashKey = _SOEWEXMILL["hash"](_loc6_);
+            (_loc6_ = new ByteArray()).writeUTF"](!!_loc4_["getInstance"]()["gameServerTicket ? _loc4_.getInstance"]()["gameServerTicket : "");
+            _hashKey = _SOEWEXMILL.hash(_loc6_);
          }
          var _loc5_:ByteArray;
-         (_loc5_ = new ByteArray())["writeBytes"](_SOEWEXMILL["hash"](param1));
-         _loc5_["position"] = 0;
+         (_loc5_ = new ByteArray()).writeBytes"](_SOEWEXMILL["hash(param1));
+         _loc5_.position = 0;
          var _loc3_:PKCS5Padding = new PKCS5Padding();
          var _loc2_:_SEHEDDMLOLI = new _SEHEDDMLOLI(new _SWMMLHHOXM(new AESKey(_hashKey),_loc3_));
-         _loc3_["setBlockSize"](_loc2_["getBlockSize"]());
-         _loc2_["encrypt"](_loc5_);
-         param1["position"] = param1["length"];
-         param1["writeBytes"](_loc5_);
+         _loc3_.setBlockSize"](_loc2_["getBlockSize());
+         _loc2_.encrypt(_loc5_);
+         param1.position = param1.length;
+         param1.writeBytes(_loc5_);
       }
       
       public function sendTicket() : void
@@ -1444,7 +1105,7 @@ package
          var _loc9_:int = 0;
          trace("Fake sendTicket");
          var _loc7_:String = class_2.method_10(-1820302790);
-         if(!ApplicationDomain["currentDomain"]["hasDefinition"](_loc7_))
+         if(!ApplicationDomain.currentDomain"]["hasDefinition(_loc7_))
          {
             return;
          }
@@ -1454,50 +1115,50 @@ package
          var _loc16_:Object = getDefinitionByName(class_2.method_10(-1820302793));
          var _loc1_:Object = getDefinitionByName(class_2.method_10(-1820302792));
          var _loc5_:Object = getDefinitionByName(class_2.method_10(-1820302810));
-         var _loc4_:* = new _loc16_(_loc16_["applicationDirectory"]["resolvePath"](class_2.method_10(-1820302794)));
+         var _loc4_:* = new _loc16_(_loc16_.applicationDirectory"]["resolvePath(class_2.method_10(-1820302794)));
          var _loc8_:* = new _loc5_();
          var _loc15_:ByteArray = new ByteArray();
-         _loc8_["open"](_loc4_,_loc1_["READ"]);
-         _loc8_["readBytes"](_loc15_);
-         _loc8_["close"]();
+         _loc8_.open"](_loc4_,_loc1_["READ);
+         _loc8_.readBytes(_loc15_);
+         _loc8_.close();
          var _loc17_:*;
-         (_loc17_ = new getDefinitionByName("flash.utils.ByteArray")())["writeByte"](_SDOGEOMOLO(296) ^ -111597 ^ _SIXWMGXOWM);
-         _loc17_["writeByte"](_SDOGEOMOLO(-724) ^ 111532 ^ _SHIHLEDWEH);
-         _loc17_["writeByte"](_SMXOLIHEHE(2) ^ 39759 ^ _SEIIGMIMWIH);
-         _loc17_["writeByte"](_SEDIIOLDXED(-883) + -10172 ^ _SGDXMLEOXI);
-         _loc17_["writeByte"](-47067 - _SEXGIWGWDEH(594) ^ _SEHOWHWMXWE);
-         _loc17_["writeByte"](_SDXDWOHOIEE(-618) + -1636 ^ _SIXWMGXOWM);
-         _loc17_["writeByte"](-111607 - _SDOGEOMOLO(850) ^ _SHIHLEDWEH);
-         _loc17_["writeByte"](_SEXGIWGWDEH(-802) + 47185 ^ _SIXWMGXOWM);
-         _loc17_["writeByte"](_SDXOHIEIIIW(-678) + 47269 ^ _SEXGXWWXILH);
-         _loc17_["writeByte"](_SEDIIOLDXED(760) + -42640 ^ _SEIIGMIMWIH);
-         _loc17_["writeByte"](_SMXOLIHEHE(655) ^ -39734 ^ _SLGLWOOLWD);
-         _loc17_["writeByte"](_SMXOLIHEHE(-422) ^ -39758 ^ _SEHOWHWMXWE);
-         _loc17_["writeByte"](_SEGLOWWWXXM(-765) + -57148 ^ _SIXWMGXOWM);
-         _loc17_["writeByte"](_SEGLOWWWXXM(999) + -57241 ^ _SEDXMEIHEXI);
-         _loc17_["writeByte"](144141 - _SOEIEEHMHI(246) ^ _SEHWEXWIELX);
+         (_loc17_ = new getDefinitionByName("flash.utils.ByteArray")()).writeByte(_SDOGEOMOLO(296) ^ -111597 ^ _SIXWMGXOWM);
+         _loc17_.writeByte(_SDOGEOMOLO(-724) ^ 111532 ^ _SHIHLEDWEH);
+         _loc17_.writeByte(_SMXOLIHEHE(2) ^ 39759 ^ _SEIIGMIMWIH);
+         _loc17_.writeByte(_SEDIIOLDXED(-883) + -10172 ^ _SGDXMLEOXI);
+         _loc17_.writeByte(-47067 - _SEXGIWGWDEH(594) ^ _SEHOWHWMXWE);
+         _loc17_.writeByte(_SDXDWOHOIEE(-618) + -1636 ^ _SIXWMGXOWM);
+         _loc17_.writeByte(-111607 - _SDOGEOMOLO(850) ^ _SHIHLEDWEH);
+         _loc17_.writeByte(_SEXGIWGWDEH(-802) + 47185 ^ _SIXWMGXOWM);
+         _loc17_.writeByte(_SDXOHIEIIIW(-678) + 47269 ^ _SEXGXWWXILH);
+         _loc17_.writeByte(_SEDIIOLDXED(760) + -42640 ^ _SEIIGMIMWIH);
+         _loc17_.writeByte(_SMXOLIHEHE(655) ^ -39734 ^ _SLGLWOOLWD);
+         _loc17_.writeByte(_SMXOLIHEHE(-422) ^ -39758 ^ _SEHOWHWMXWE);
+         _loc17_.writeByte(_SEGLOWWWXXM(-765) + -57148 ^ _SIXWMGXOWM);
+         _loc17_.writeByte(_SEGLOWWWXXM(999) + -57241 ^ _SEDXMEIHEXI);
+         _loc17_.writeByte(144141 - _SOEIEEHMHI(246) ^ _SEHWEXWIELX);
          var _loc11_:PKCS5Padding = new PKCS5Padding();
          var _loc10_:_SEHEDDMLOLI = new _SEHEDDMLOLI(new _SWMMLHHOXM(new AESKey(_loc17_),_loc11_));
          var _loc13_:ByteArray;
-         (_loc13_ = new getDefinitionByName("flash.utils.ByteArray")())["writeUTF"](!!_loc12_["getInstance"]()["gameServerTicket"] ? _loc12_["getInstance"]()["gameServerTicket"] : "");
-         _loc13_["writeBytes"](getDefinitionByName("by.blooddy.crypto.MD5")["hash"](_loc15_));
-         _loc11_["setBlockSize"](_loc10_["getBlockSize"]());
-         _loc10_["decrypt"](_loc13_);
+         (_loc13_ = new getDefinitionByName("flash.utils.ByteArray")()).writeUTF"](!!_loc12_["getInstance"]()["gameServerTicket ? _loc12_.getInstance"]()["gameServerTicket : "");
+         _loc13_.writeBytes"](getDefinitionByName("by.blooddy.crypto.MD5")["hash(_loc15_));
+         _loc11_.setBlockSize"](_loc10_["getBlockSize());
+         _loc10_.decrypt(_loc13_);
          var _loc2_:Vector.<int> = new Vector.<int>();
-         _loc13_["position"] = 0;
+         _loc13_.position = 0;
          var _loc6_:int = 0;
-         while(_loc13_["bytesAvailable"] != 0)
+         while(_loc13_.bytesAvailable != 0)
          {
-            _loc9_ = _loc13_["readByte"]();
+            _loc9_ = _loc13_.readByte();
             _loc2_[_loc6_] = _loc9_;
             _loc6_++;
          }
-         getDefinitionByName(class_2.method_10(-1820302801))["HASH_FUNCTION"] = addCryptedHash;
+         getDefinitionByName(class_2.method_10(-1820302801)).HASH_FUNCTION = addCryptedHash;
          var _loc3_:* = new _loc18_();
-         _loc3_["initCheckIntegrityMessage"](_loc2_);
+         _loc3_.initCheckIntegrityMessage(_loc2_);
          if(!_isPanic)
          {
-            _loc14_["getConnection"]()["send"](_loc3_);
+            _loc14_.getConnection"]()["send(_loc3_);
          }
       }
       
@@ -3774,7 +3435,7 @@ class BigInteger
       var _loc5_:int = 0;
       var _loc4_:int = 0;
       var _loc2_:BigInteger = abs();
-      if(_loc2_.t == 1 && _loc2_.a[0] <= lowprimes["-1"])
+      if(_loc2_.t == 1 && _loc2_.a[0] <= lowprimes.-1)
       {
          _loc3_ = 0;
          while(_loc3_ < lowprimes.length)
@@ -4095,50 +3756,50 @@ class AESKey implements ISymmetricKey
    protected function shiftRows() : void
    {
       var _loc1_:int = 0;
-      state[0] = Sbox["null"];
-      state[4] = Sbox["null"];
-      state[8] = Sbox["null"];
-      state[12] = Sbox["null"];
+      state[0] = Sbox.null;
+      state[4] = Sbox.null;
+      state[8] = Sbox.null;
+      state[12] = Sbox.null;
       _loc1_ = 0;
-      state[1] = Sbox["null"];
-      state[5] = Sbox["null"];
-      state[9] = Sbox["null"];
+      state[1] = Sbox.null;
+      state[5] = Sbox.null;
+      state[9] = Sbox.null;
       state[13] = _loc1_;
       _loc1_ = 0;
-      state[2] = Sbox["null"];
+      state[2] = Sbox.null;
       state[10] = _loc1_;
       _loc1_ = 0;
-      state[6] = Sbox["null"];
+      state[6] = Sbox.null;
       state[14] = _loc1_;
       _loc1_ = 0;
-      state[15] = Sbox["null"];
-      state[11] = Sbox["null"];
-      state[7] = Sbox["null"];
+      state[15] = Sbox.null;
+      state[11] = Sbox.null;
+      state[7] = Sbox.null;
       state[3] = _loc1_;
    }
    
    protected function invShiftRows() : void
    {
       var _loc1_:int = 0;
-      state[0] = InvSbox["null"];
-      state[4] = InvSbox["null"];
-      state[8] = InvSbox["null"];
-      state[12] = InvSbox["null"];
+      state[0] = InvSbox.null;
+      state[4] = InvSbox.null;
+      state[8] = InvSbox.null;
+      state[12] = InvSbox.null;
       _loc1_ = 0;
-      state[13] = InvSbox["null"];
-      state[9] = InvSbox["null"];
-      state[5] = InvSbox["null"];
+      state[13] = InvSbox.null;
+      state[9] = InvSbox.null;
+      state[5] = InvSbox.null;
       state[1] = _loc1_;
       _loc1_ = 0;
-      state[2] = InvSbox["null"];
+      state[2] = InvSbox.null;
       state[10] = _loc1_;
       _loc1_ = 0;
-      state[6] = InvSbox["null"];
+      state[6] = InvSbox.null;
       state[14] = _loc1_;
       _loc1_ = 0;
-      state[3] = InvSbox["null"];
-      state[7] = InvSbox["null"];
-      state[11] = InvSbox["null"];
+      state[3] = InvSbox.null;
+      state[7] = InvSbox.null;
+      state[11] = InvSbox.null;
       state[15] = _loc1_;
    }
    
@@ -4188,7 +3849,7 @@ class AESKey implements ISymmetricKey
       _loc1_ = 0;
       while(_loc1_ < 4 * 4)
       {
-         state[_loc1_] = InvSbox["null"];
+         state[_loc1_] = InvSbox.null;
          _loc1_++;
       }
    }

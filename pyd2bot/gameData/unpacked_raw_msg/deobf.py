@@ -1,8 +1,7 @@
 import math
 import random
-from pyd2bot.utils.binaryIO import bytesToStr, encryptWithRSA, byteArrtoIntArr
 from Cryptodome.PublicKey import RSA
-from pyd2bot.utils.binaryIO.customDataWrapper import ByteArray
+from pyd2bot.utils.binaryIO import ByteArray
 import base64
 
 class HC:
@@ -326,7 +325,7 @@ class HC:
         
         return (HC._SEDDLDLHXWX(906) ^ 60114) >= 144977 - HC._SOEIEEHMHI(-688)
 
-def xorDecrypt(param1:str, param2:str):
+def dec(param1:str, param2:str):
     key:bytearray = bytearray(base64.b64decode(param1))
     src:bytearray = bytearray(base64.b64decode(param2))
     i = 0
@@ -334,47 +333,49 @@ def xorDecrypt(param1:str, param2:str):
         key[i] = key[i] ^ src[i % len(src)]
         i+=1
     return key.decode()
+r = dec("23rbljwkgS82Lpdgh40gP4FlHxOM","uQP19FBL7ktSVw==")
+print(r)
+# print(dec("/ofYar+myv27crKdhHGjvcq3nWrvm8A8","nP72CNPJpZnfCw=="))
+# gameServerTicket = ''
 
-gameServerTicket = ''
-
-key = b"AKMBJ2YBJUHRsk8yptfOlcVLksJSCCSiWUryWD/vv6euIERWlfrWN0+Csf8UVG4CY"\
-    b"qoz3hDBuaA3oe48W1xFADd5Bm+ks0dW3hemrTSI7HBLSLBWAcKrZ21wPfgWD2QUxVV1infGd"\
-    b"pw+Lt0808UwqdDGUpwV2JGqzIbMZjGCXWdj8Ae2ribiXWU2P255Uv5nhC7O4ZKoTNXDAmjtc"\
-    b"3qYzSXUZTkrhlf3yL8J/XyUvHuvuKetABtoJun2QaaKkuO6258oDtDxnKQKgKhtVrc0Jpa"\
-    b"Qusr7GlWRcg6bK2M8dWjj+TAuwZLMvn7ltKYJjgvYymasrRu+56wbreTHa98ctVE="
+# key = b"AKMBJ2YBJUHRsk8yptfOlcVLksJSCCSiWUryWD/vv6euIERWlfrWN0+Csf8UVG4CY"\
+#     b"qoz3hDBuaA3oe48W1xFADd5Bm+ks0dW3hemrTSI7HBLSLBWAcKrZ21wPfgWD2QUxVV1infGd"\
+#     b"pw+Lt0808UwqdDGUpwV2JGqzIbMZjGCXWdj8Ae2ribiXWU2P255Uv5nhC7O4ZKoTNXDAmjtc"\
+#     b"3qYzSXUZTkrhlf3yL8J/XyUvHuvuKetABtoJun2QaaKkuO6258oDtDxnKQKgKhtVrc0Jpa"\
+#     b"Qusr7GlWRcg6bK2M8dWjj+TAuwZLMvn7ltKYJjgvYymasrRu+56wbreTHa98ctVE="
     
-publicModulo = int.from_bytes(key, "big")
-rsaKeyNetwork = RSA.RsaKey(n=publicModulo,  e=65537) 
+# publicModulo = int.from_bytes(key, "big")
+# rsaKeyNetwork = RSA.RsaKey(n=publicModulo,  e=65537) 
 
-keyLen = 128
-hashKey = bytearray()
-i = 0
-while i < keyLen // 8:
-    rb = math.floor(random.random() * 256) - 128
-    hashKey += rb.to_bytes(1, "big", signed=True)
-    i+=1
-xorKey2Len = math.floor(random.random() * 128) + 128
-xorKey2 = bytearray()
-i = 0
-while(i < xorKey2Len // 8):
-    rb =  math.floor(random.random() * 256 - 128)
-    xorKey2 += rb.to_bytes(1, "big", signed=True)
-    i+=1 
-i = 0
+# keyLen = 128
+# hashKey = bytearray()
+# i = 0
+# while i < keyLen // 8:
+#     rb = math.floor(random.random() * 256) - 128
+#     hashKey += rb.to_bytes(1, "big", signed=True)
+#     i+=1
+# xorKey2Len = math.floor(random.random() * 128) + 128
+# xorKey2 = bytearray()
+# i = 0
+# while(i < xorKey2Len // 8):
+#     rb =  math.floor(random.random() * 256 - 128)
+#     xorKey2 += rb.to_bytes(1, "big", signed=True)
+#     i+=1 
+# i = 0
 
-dataToEncrypt = ByteArray()
-dataToEncrypt.writeUTF(gameServerTicket)
-dataToEncrypt.writeShort(len(hashKey))
-dataToEncrypt += hashKey
-dataToEncrypt.writeShort(len(xorKey2))
-dataToEncrypt += xorKey2
-dataToEncrypt.position = 0
+# dataToEncrypt = ByteArray()
+# dataToEncrypt.writeUTF(gameServerTicket)
+# dataToEncrypt.writeShort(len(hashKey))
+# dataToEncrypt += hashKey
+# dataToEncrypt.writeShort(len(xorKey2))
+# dataToEncrypt += xorKey2
+# dataToEncrypt.position = 0
 
-dataIndex = 0
-while dataIndex < len(dataToEncrypt):
-    dataToEncrypt.data[dataIndex] = 0 ^ 0
-    dataIndex += 1
+# dataIndex = 0
+# while dataIndex < len(dataToEncrypt):
+#     dataToEncrypt.data[dataIndex] = 0 ^ 0
+#     dataIndex += 1
 
-enc_data = encryptWithRSA(rsaKeyNetwork, dataToEncrypt.data)
-ret = byteArrtoIntArr(enc_data)
-print(ret)
+# enc_data = encryptWithRSA(rsaKeyNetwork, dataToEncrypt.data)
+# ret = byteArrtoIntArr(enc_data)
+# print(ret)

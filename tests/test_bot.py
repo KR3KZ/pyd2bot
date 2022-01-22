@@ -16,7 +16,6 @@ with open(conn_f) as fp:
     conn = json.load(fp)
     
 bot.start(conn)
-
 bot.connectToLoginServer()
 PlayerManager.inGame.wait()
 bot.gameContextCreate()

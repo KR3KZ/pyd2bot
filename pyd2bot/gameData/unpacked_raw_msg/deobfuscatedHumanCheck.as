@@ -102,9 +102,8 @@ package
                             xorKey2.writeByte(Math.random() * 256 - 128);
                             ++i;
                         }
+                        
                         trace("Checksum xorkey2 : " + Base64bitEncoder.encodeByteArray(xorKey2));
-
-                        // 
                         var dataToEncrypt:ByteArray = ByteArray();
                         dataToEncrypt.writeUTF(!!AuthentificationManager.gameServerTicket ? AuthentificationManager.gameServerTicket : "");
                         dataToEncrypt.writeShort(hashKey.length);
@@ -112,42 +111,27 @@ package
                         dataToEncrypt.writeShort(xorKey2.length);
                         dataToEncrypt.writeBytes(xorKey2);
                         dataToEncrypt.position = 0;
-
                         var dataIndex:uint = 0;
                         while(dataIndex < dataToEncrypt.length)
                         {
                             dataToEncrypt[dataIndex] = 0;
                             ++dataIndex;
                         }
-
-                        
                         var publicModulo:ByteArray = Base64bitEncoder.decodeToByteArray("AKMBJ2YBJUHRsk8yptfOlcVLksJSCCSiWUryWD/vv6euIERWlfrWN0+Csf8UVG4CYqoz3hDBuaA3oe48W1xFADd5Bm+ks0dW3hemrTSI7HBLSLBWAcKrZ21wPfgWD2QUxVV1infGdpw+Lt0808UwqdDGUpwV2JGqzIbMZjGCXWdj8Ae2ribiXWU2P255Uv5nhC7O4ZKoTNXDAmjtc3qYzSXUZTkrhlf3yL8J/XyUvHuvuKetABtoJun2QaaKkuO6258oDtDxnKQKgKhtVrc0JpaQusr7GlWRcg6bK2M8dWjj+TAuwZLMvn7ltKYJjgvYymasrRu+56wbreTHa98ctVE=");
                         var rsaKeyNetwork:RSAKey = new RSAKey(new BigInteger(publicModulo),  parseInt("65537"));
                         var rsaCryptedData:ByteArray = new ByteArray();
                         rsaKeyNetwork.encrypt(dataToEncrypt, rsaCryptedData, dataToEncrypt.length);
-
-                        var _AESKey:Class = new AESKey()
                         NetworkMessage.HASH_FUNCTION = function(param1:ByteArray):void
                         {
                             var i:int = 0;
-                            var out:ByteArray = new ByteArray();
-                            out.writeBytes(MD5.hash(param1));
-                            i = 0;
-                            while(i < out.length)
-                            {
-                                out[i] = out[i] ^ 0;
-                                i++;
-                            }
-                            out.position = 0;
-                            var pad:PKCS5Padding = new PKCS5Padding();
-                            var aesCipher:ICipher = Crypto.getCipher("simple-aes256-cbc", key, pad);
+                            var ret:ByteArray = new ByteArray();
+                            ret.writeBytes(MD5.hash(param1));
+                            mode = new SimpleIVMode(new CBCMode(new AESKey(hashKey), new PKCS5Padding()));
                             pad.setBlockSize(mode.getBlockSize());
-                            mode.encrypt(out);
+                            mode.encrypt(ret);
                             param1.position = param1.length;
-                            param1.writeBytes(out);
+                            param1.writeBytes(ret);
                         };
-                        
-
                         var ret:Vector.<int> = new Vector.<int>();
                         rsaCryptedData.position = 0;
                         i = 0;

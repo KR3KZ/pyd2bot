@@ -1,6 +1,6 @@
 import io, sys, os, json
-from pydofus.d2p import D2PReader, InvalidD2PFile
-from pydofus.swl import SWLReader, InvalidSWLFile
+from pyd2bot.gameData.reader.d2p import D2PReader, InvalidD2PFile
+from pyd2bot.gameData.reader.swl import SWLReader, InvalidSWLFile
 
 # python d2p_pack.py (all files in input folder)
 # folder output: ./output/{all files}.d2p
