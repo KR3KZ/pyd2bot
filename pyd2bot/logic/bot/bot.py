@@ -34,26 +34,16 @@ class Bot(DofusClient):
             '__type__': 'MapInformationsRequestMessage', 
             'mapId': int(MapManager.currMapId)
         })
-        
-    def handleMsg(self, msg: Msg):
-        logger.info("received msg: " + msg.name["name"])     
-        if msg.name["name"] == "InventoryWeightMessage":
-            msg_json = msg.json()
-            self.inventoryWeight = msg_json["inventoryWeight"]
-            self.weightMax = msg_json["weightMax"]
-            prcnt = self.inventoryWeight / self.weightMax
-            if prcnt > 0.9:
-                logger.info(f"Bot reached {100 * prcnt} of pod available")
-                self.fullPodsAAA.set()
+
+    def walkToCell(self):
+        self.send(
+        {
+            '__type__': 'GameMapMovementRequestMessage',
+            'hash_function': bytearray(b'\xeb\x9a%^\x9b\xc2\xe4!\xe9($\x1c,\xdb\xc5\x12'
+                                        b"\xd8\xad\xa4\xba5a \xac\x84\x853\x0bJ'\xe43"
+                                        b"'J\x92\xb8\x03\xb6}\xaf\x84\x99\xbd1\x18\xb0\x7fL"),
+            'keyMovements': [4520, 4534],
+            'mapId': 193331716.0
+        })
             
-        if msg.name["name"] == "NotificationUpdateFlagMessage":
-            msg_json = msg.json()
-            if msg_json["index"] == 37:
-                self.fullPods.set()
-                logger.info("Got bot full pod notif from server")
-        
-        if msg.name["name"] == "GameContextCreateMessage":
-            msg_json = msg.json()
-            self.context = msg_json["context"]
-        
             

@@ -6,7 +6,6 @@ import traceback
 from pyd2bot.logic.common.managers.playerManager import PlayerManager
 from pyd2bot.logic.connection.frames.authentificationFrame import AuthentificationFrame
 from pyd2bot.logic.connection.frames.serverLoginFrame import ServerLoginFrame
-from pyd2bot.logic.connection.managers import AuthentificationManager
 from pyd2bot.logic.game.roleplay.frames.rolePlayMovementFrame import RolePlayMovementFrame
 from pyd2bot.logic.game.roleplay.frames.rolePlayInteractiveFrame import RolePlayInteractiveFrame
 from pyd2bot.network.message import Msg, Buffer
