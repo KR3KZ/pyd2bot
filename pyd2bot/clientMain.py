@@ -7,13 +7,14 @@ from pyd2bot.logic.common.managers.playerManager import PlayerManager
 from pyd2bot.logic.connection.frames.authentificationFrame import AuthentificationFrame
 from pyd2bot.logic.connection.frames.serverLoginFrame import ServerLoginFrame
 from pyd2bot.logic.connection.managers import AuthentificationManager
-from pyd2bot.gameData.enums.IdentificationFailureReasons import IdentificationFailureReason
-from pyd2bot.network.message import Msg, ByteArray, Buffer
+from pyd2bot.logic.game.roleplay.frames.rolePlayMovementFrame import RolePlayMovementFrame
+from pyd2bot.logic.game.roleplay.frames.rolePlayInteractiveFrame import RolePlayInteractiveFrame
+from pyd2bot.network.message import Msg, Buffer
 
 sock = socket.socket()
 counter = 0
 
-frameClasses = [AuthentificationFrame, ServerLoginFrame]
+frameClasses = [AuthentificationFrame, ServerLoginFrame, RolePlayMovementFrame, RolePlayInteractiveFrame]
 
 class DofusClient(threading.Thread):
     
@@ -28,10 +29,7 @@ class DofusClient(threading.Thread):
         self._password = None
         self.serverID = None
         self.buf = Buffer()
-        self.authManager = AuthentificationManager()
         self.killSig = threading.Event()
-        self.inServerSelection = threading.Event()
-        self.connected = threading.Event()
         self.counter = 0
         self.login_attempts = 0
         self.frames = []
@@ -62,7 +60,6 @@ class DofusClient(threading.Thread):
         self.killSig.set()
         
     def run(self):
-        self.connectToLoginServer()
         while not self.killSig.is_set():
             try:
                 rdata = self.sock.recv(8192)
@@ -71,12 +68,14 @@ class DofusClient(threading.Thread):
                 while msg:
                     self.handle(msg)
                     msg = Msg.fromRaw(self.buf, False)
-            except Exception as e:
-                traceback.print_exc()
-                self.killSig.set()
+            except:
+                # print("Error: ", traceback.format_exc())
+                pass
                 
     def interrupt(self):
         self.killSig.set()
+        print("Goodbye cruel world!")
+        self.sock.close()
     
     def send(self, msgjson):
         msg = Msg.from_json(msgjson)
@@ -84,8 +83,11 @@ class DofusClient(threading.Thread):
         msg.count = self.counter 
         self.sock.sendall(msg.bytes())
         
-    def handle(self, msg: Msg): 
+    def handle(self, msg: Msg):
+        jmsg = msg.json()
+        if jmsg["__type__"] == "CharacterLoadingCompleteMessage":
+            PlayerManager.inGame.set()
         for frame in self.frames:
-            if frame.process(msg.json()):
+            if frame.process(jmsg):
                 return
     

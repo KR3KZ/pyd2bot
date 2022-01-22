@@ -36,34 +36,11 @@ class Fighter(Walker):
         msg_json = msg.json()
         try:
             if msg.msgName == "GameFightStartingMessage":
-                """	
-                {
-                    '__type__': 'GameFightStartingMessage',
-                    'attackerId': 290210840786.0,
-                    'containsBoss': False,
-                    'defenderId': -20008.0,
-                    'fightId': 2517,
-                    'fightType': 4
-                }
-                """
                 msg_json = msg.json()
                 self.id = msg_json["attackerId"]
                 self.isInFight.set()
             
             elif msg.msgName == "GameEntitiesDispositionMessage":
-                """
-                {
-                    '__type__': 'GameEntitiesDispositionMessage',
-                    'dispositions': [
-                        {
-                            '__type__': 'IdentifiedEntityDispositionInformations',
-                            'cellId': 483,
-                            'direction': 7,
-                            'id': 290210840786.0
-                        }
-                    ]
-                }
-                """
                 for disposition in msg_json["dispositions"]:
                     cellId = disposition["cellId"]
                     x, y = dofus.getCellCoords(cellId)
@@ -78,93 +55,9 @@ class Fighter(Walker):
                         self.grid.mobs.add(cell)
             
             elif msg.msgName == "GameFightShowFighterMessage":
-                """
-                {
-                    '__type__': 'GameFightShowFighterMessage',
-                    'informations': {
-                        '__type__': 'GameFightCharacterInformations',
-                        'breed': 3,
-                        'contextualId': 290210840786.0,
-                        'disposition': {
-                            '__type__': 'FightEntityDispositionInformations',
-                            'carryingCharacterId': 0.0,
-                            'cellId': 483,
-                            'direction': 7
-                        },
-                        'hiddenInPrefight': False,
-                        'level': 182,
-                        'name': 'John-shooter',
-                        'previousPositions': [],
-                        'sex': False,
-                        'spawnInfo': {
-                            '__type__': 'GameContextBasicSpawnInformation',
-                            'alive': True,
-                            'informations': {
-                                '__type__': 'GameContextActorPositionInformations',
-                                'contextualId': 290210840786.0,
-                                'disposition': {
-                                    '__type__': 'FightEntityDispositionInformations',
-                                    'carryingCharacterId': 0.0,
-                                    'cellId': 483,
-                                    'direction': 7
-                                }
-                            }
-                        },
-                        'teamId': 0
-                    },
-                    'stats': {
-                        '__type__': 'GameFightCharacteristics',
-                        'invisibilityState': 3,
-                        'summoned': False,
-                        'summoner': 0.0
-                    },
-                    'status': {
-                        '__type__': 'PlayerStatus', 
-                        'statusId': 10
-                    },
-                    'wave': 0
-                }
-                """
                 pass
             
             elif msg.msgName == "GameFightEndMessage":
-                """
-                {'__type__': 'GameFightEndMessage',
-                    'duration': 9270,
-                    'lootShareLimitMalus': -1,
-                    'namedPartyTeamsOutcomes': [],
-                    'results': [{'__type__': 'FightResultPlayerListEntry',
-                                'additional': [{'__type__': 'FightResultExperienceData',
-                                                'experience': 1386623564,
-                                                'experienceFightDelta': 37,
-                                                'experienceForGuild': 0,
-                                                'experienceForMount': 0,
-                                                'experienceLevelFloor': 1355584000,
-                                                'experienceNextLevelFloor': 1404179000,
-                                                'isIncarnationExperience': False,
-                                                'rerollExperienceMul': 1,
-                                                'showExperience': True,
-                                                'showExperienceFightDelta': True,
-                                                'showExperienceForGuild': False,
-                                                'showExperienceForMount': False,
-                                                'showExperienceLevelFloor': True,
-                                                'showExperienceNextLevelFloor': True}],
-                                'alive': True,
-                                'id': 290210840786.0,
-                                'level': 182,
-                                'outcome': 2,
-                                'rewards': {'__type__': 'FightLoot',
-                                            'kamas': 5,
-                                            'objects': [287, 1, 6899, 1]},
-                                'wave': 0},
-                                {'__type__': 'FightResultFighterListEntry',
-                                'alive': True,
-                                'id': -1.0,
-                                'outcome': 0,
-                                'rewards': {'__type__': 'FightLoot', 'kamas': 0, 'objects': []},
-                                'wave': 0}],
-                    'rewardRate': 0}
-                """
                 self.isInFight.clear()
             
             elif msg.msgName == "GameFightTurnStartPlayingMessage":
@@ -442,16 +335,3 @@ class Fighter(Walker):
             return True
         logging.debug("Couldn't open combat!")
         return False
-
-    @staticmethod
-    def resign():
-        """
-        Abandon combat.
-        """
-        dofus.RESIGN_BUTTON_LOC.click()
-        dofus.RESIGN_POPUP_R.waitAppear(dofus.RESIGN_POPUP_P)
-        dofus.RESIGN_CONFIRM_L.click()
-        dofus.RESIGN_POPUP_R.waitVanish(dofus.RESIGN_POPUP_P)
-        dofus.DEFEAT_POPUP_R.waitAppear(dofus.DEFEAT_POPUP_P)
-        dofus.DEFEAT_POPUP_CLOSE_L.click()
-        dofus.DEFEAT_POPUP_R.waitVanish(dofus.DEFEAT_POPUP_P)

@@ -31,47 +31,7 @@ class ResourceFarmer(Fighter):
         self.farmingError = threading.Event()
         self.currFarmingElem = None
 
-    def handleMsg(self, msg: Msg):
-        super().handleMsg(msg)
-        
-        if msg.msgName == "InteractiveUseErrorMessage":
-            self.farmingError.set()
-        
-        if msg.msgName == "InteractiveUsedMessage":
-            """
-            {
-                '__type__': 'InteractiveUsedMessage',
-                'canMove': False,
-                'duration': 30,
-                'elemId': 502678,
-                'entityId': 290210840786,
-                'skillId': 69
-            }
-            """
-            msg_json = msg.json()
-            skill = msg_json["skillId"]
-            self.currFarmingElem = msg_json["elemId"]
-            logger.info(f"Farming animation of elem {self.currFarmingElem} with skill {skill} started")
-            self.farming.set()
-        
-        elif msg.msgName == "InteractiveUseEndedMessage":
-            logger.info(f"Farming animation of elem {self.currFarmingElem} ended")
-    
-        elif msg.msgName == "StatedElementUpdatedMessage":
-            msg_json = msg.json()
-            elem_id = msg_json["statedElement"]["elementId"]
-            self.currMapStatedElems[elem_id] = msg_json["statedElement"]
-            logger.info(f"Element {elem_id} state changed")
-        
-        elif msg.msgName == "InteractiveElementUpdatedMessage":
-            msg_json = msg.json()
-            elem_id = msg_json["interactiveElement"]["elementId"]
-            self.currMapInteractiveElems[elem_id] = msg_json["interactiveElement"]
-            logger.info(f"Element {elem_id} interactiveness changed")
-            if self.currFarmingElem == elem_id:
-                self.currFarmingElem = None
-                self.farming.clear()
-        
+
     def harvest(self):
         logger.info("harvest called")
         self.collect()

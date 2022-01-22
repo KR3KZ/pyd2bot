@@ -1,26 +1,19 @@
 import collections
 import datetime
 import logging
-import random
-import re
 from threading import Timer
 import threading
 from time import perf_counter, sleep
-from unittest.mock import NonCallableMagicMock
-import pyautogui
-from core.exceptions import *
-from core import dofus, Region, env
-from core.bot import Bot
-from core.bot.states import *
-from network.message.msg import Msg
+
+from pyd2bot.logic.common.managers.playerManager import PlayerManager
+from .bot import Bot 
+
 
 logger = logging.getLogger("bot")
 class Walker(Bot):
 
     def __init__(self, workdir, name="Dofus"):
         super(Walker, self).__init__(workdir, name=name)
-        self.currPos = None
-        self.currMapId = None
         self.lastPos = None
         self.zone = None
         self.startZaap = None
@@ -28,59 +21,19 @@ class Walker(Bot):
         self.mapChangeTimeOut = 7.6
         self.tmpIgnore = []
         self.memoTime = 60* 3
-
-    def handleMsg(self, msg: Msg):
-        super().handleMsg(msg)
-        if msg.msgName == "MapComplementaryInformationsDataMessage":
-            self.currMapInteractiveElems  = {}
-            self.currMapStatedElems = {}
-            
-            self.currMapData = msg.json()
-            
-            for ielem in self.currMapData["interactiveElements"]:
-                self.currMapInteractiveElems[ielem["elementId"]] = ielem
-            
-            for selem in self.currMapData["statedElements"]:
-                self.currMapStatedElems[selem["elementId"]] = selem    
-            self.mapChanged.set()
-                
-        if msg.msgName == "CurrentMapMessage":
-            self.currMapId = int(msg.json()["mapId"])
-            self.currPos = dofus.getMapCoords(self.currMapId)
-            
-        elif msg.msgName == "GameMapMovementRequestMessage":
-            self.moving.set()
-            self.idle.clear()
-            
-        elif msg.msgName == "GameMapMovementConfirmMessage":
-            self.moving.clear()
-            self.idle.set()
-                    
-        elif msg.msgName == "ChatClientMultiMessage":
-            pass
-
+    
+    def moveToCell(self):
+        pass
+    
     def changeMap(self, direction, max_tries=3):
         nbr_fails = 0
         while not self.killsig.is_set() and nbr_fails < max_tries:
-            currx, curry = self.currPos
-            directionLocs = dofus.mapChangeLoc[direction]
-            random.shuffle(directionLocs)
-            for tgt in directionLocs:
-                with self.lock:
-                    tgt.click()
-                    dofus.OUT_OF_COMBAT_R.hover()
+            self.mapChanged.clear()
+            if self.moving.wait(1):
+                self.idle.wait()
+            if self.mapChanged.wait(2):
                 self.mapChanged.clear()
-                if self.moving.wait(1):
-                    self.idle.wait()
-                if self.mapChanged.wait(2):
-                    self.mapChanged.clear()
-                    self.lastPos = (currx, curry)
-                    sleep(0.3)
-                    return True
-                else:
-                    dofus.OUT_OF_COMBAT_R.hover()
-                    sleep(0.2)
-            nbr_fails += 1
+                sleep(0.3)
         return False
 
     def moveToTargets(self, targets):
@@ -100,8 +53,8 @@ class Walker(Bot):
         return False
 
     def pathToTargets(self, targets, exclude):
-        seen = {self.currPos}
-        queue = collections.deque([[self.currPos]])
+        seen = {PlayerManager.currPos}
+        queue = collections.deque([[PlayerManager.currPos]])
         while queue:
             path = queue.popleft()
             if path not in exclude and path[-1] in targets:
@@ -111,7 +64,7 @@ class Walker(Bot):
                 if coords not in seen and [path[-1], coords] not in exclude:
                     queue.append(next_path)
                     seen.add(coords)
-        raise FindPathFailed("Enable to find a valid path!")
+        return None
 
     @staticmethod
     def mapNeighbors(pos, mapId=None):
@@ -148,24 +101,9 @@ class Walker(Bot):
                 if self.currPos not in zone:
                     self.moveToZone(zone)
                 zone[self.currPos].excludeMap(self.lastPos, dst)
-                
-    @staticmethod
-    def openBank():
-        dofus.BANK_MAN_R.waitAppear(dofus.BANK_MAN_P)
-        dofus.BANK_MAN_R.click()  # click on bank man
-        dofus.BANK_MAN_TALK_R.waitAppear(dofus.BANK_MAN_TALK_P)
-        Region(771, 737, 272, 40).click()  # click first choice
-        dofus.INV_OPEN_R.waitAppear(dofus.INVENTAIRE_P)
 
-    def refreshMapData(self):
-        pyautogui.press(dofus.HAVRE_SAC_SHORTCUT)
-        sleep(4)
-        pyautogui.press(dofus.HAVRE_SAC_SHORTCUT)
-        
     def run(self):
-        env.focusDofusWindow()
         s = perf_counter()
-        self.sniffer.start()
         sleep(1)
         while not self.killsig.is_set():
             try:
@@ -192,19 +130,3 @@ class Walker(Bot):
     def onTimer(self):
         if self.tmpIgnore:
             self.tmpIgnore.pop(0)
-            
-    def goToZaap(self, zaap):
-        logger.info("moving to zaap: " + str(zaap['coords']))
-        pyautogui.press(dofus.HAVRE_SAC_SHORTCUT)
-        sleep(4)
-        self.mapChanged.clear()
-        dofus.HAVRE_SAC_ZAAP_R.click()
-        sleep(2)
-        pyautogui.write(zaap['name'])
-        sleep(0.5)
-        pyautogui.press("enter")
-        self.mapChanged.wait(10)
-        if zaap['coords'] == (20, -29):
-            Region(618, 729, 36, 24).click()
-            sleep(4)
-        return True

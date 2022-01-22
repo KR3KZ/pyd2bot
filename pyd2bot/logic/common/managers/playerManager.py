@@ -1,5 +1,5 @@
 from http import server
-
+import threading
 
 class PlayerManager:
     accountId = None
@@ -16,3 +16,14 @@ class PlayerManager:
     characterID = None
     characterName = None
     serverID = None
+    inventoryWeight = None
+    weightMax = None
+    moving = threading.Event()
+    idle = threading.Event()
+    disconnected = threading.Event()
+    inGame = threading.Event()
+    onMap = threading.Event()
+    inServerSelection = threading.Event()
+    connected = threading.Event()
+    farming = threading.Event()
+    

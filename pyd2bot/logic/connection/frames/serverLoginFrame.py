@@ -100,7 +100,7 @@ class ServerLoginFrame:
             return True
             
         elif mtype == "TrustStatusMessage":
-            self.client.connected.set()
+            PlayerManager.connected.set()
             self.client.send({'__type__': 'CharactersListRequestMessage'})
             return True
 

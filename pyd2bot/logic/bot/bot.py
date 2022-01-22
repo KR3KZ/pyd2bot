@@ -1,62 +1,40 @@
 import logging
-logger = logging.getLogger("bot")
-import threading
 from time import sleep
-import pyautogui
+
+from pyd2bot.logic.common.managers.mapManager import MapManager
+logger = logging.getLogger("bot")
+
+import threading
 from pyd2bot.network.message import Msg
-from pyd2bot.network.sniffer import DofusSniffer 
+from pyd2bot.clientMain import DofusClient
 
-class Bot(threading.Thread):
+class Bot(DofusClient):
 
-    def __init__(self, workdir, name="Bot"):
-        super(Bot, self).__init__(name=name)
-        self.inventoryWeight = None
-        self.weightMax = None
+    def __init__(self):
+        super(Bot, self).__init__()
         self.killsig = threading.Event()
         self.lock = threading.Lock()
-        self.disconnected = threading.Event()
-        self.connected = threading.Event()
-        self.moving = threading.Event()
-        self.idle = threading.Event()
         self.fullPods = threading.Event()
         self.fullPodsAAA = threading.Event()
-        self.name = name
-        self.dead = False
-        self.workdir = workdir
-        self.resourcesToFarm = []
-        self.sniffer = DofusSniffer(self.handleMsg)
-        self.currMapData = None
-        self.currMapInteractiveElems = {}
-        self.currMapStatedElems = {}
-        self.id = {}
         self.context = 1
-        
+            
     def interrupt(self):
         self.killsig.set()
-        try:
-            self.sniffer.stop()
-        except:
-            logger.error("Fatal error in interrupt!", exc_info=True)
+        super().interrupt()
         logger.info('Goodbye cruel world.')
-        
-    @staticmethod
-    def shiftClick(tgt):
-        pyautogui.keyDown('shift')
-        sleep(0.1)
-        tgt.click()
-        sleep(0.1)
-        pyautogui.keyUp('shift')
-        dofus.OUT_OF_COMBAT_R.hover()
 
     def harvest(self):
         pass
-
-    @staticmethod
-    def checkPopup():
-        m = dofus.LVL_UP_INFO_R.find(dofus.CLOSE_POPUP_P)
-        if m:
-            m.click()
-
+    
+    def gameContextCreate(self) :
+        self.send({'__type__': 'GameContextCreateRequestMessage'})
+        
+    def requestMapData(self):
+        self.send({
+            '__type__': 'MapInformationsRequestMessage', 
+            'mapId': int(MapManager.currMapId)
+        })
+        
     def handleMsg(self, msg: Msg):
         logger.info("received msg: " + msg.name["name"])     
         if msg.name["name"] == "InventoryWeightMessage":
