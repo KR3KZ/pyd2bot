@@ -6,27 +6,24 @@ from pyd2bot.utils.pathFinding.path import Path
 
 
 class PathNode:
-    id:int
-    x:float
-    y:float
-    parent:'PathNode'
-    g:float # distance [noeud courant / parent]
-    f:float # distance [noeud courant / parent] + [noeud courant / noeud cible]
-    h:float # distance [noeud courant / cible]
-    cost:int # nombre de noeuds traversés
-    isAccessible:bool
-    lastDirection:int
-    direction:int
-    outgoingCellId:int # uniquement pour les MapNodes
     
-    def __init__(self, id:int, lastDirection:int, parent:'PathNode'):
+    def __init__(self, id:int, incomingDirection:int, parent:'PathNode'):
         self.id = id
         self.parent = parent
-        self.lastDirection = lastDirection
-        self.direction = -1
-    
+        self.incomingDirection = incomingDirection
+        self.outGoingDirection = -1
+        self.isAccessible:bool = None
+        self.x:float = None
+        self.y:float = None
+        self.g:float = None # distance [noeud courant / parent]
+        self.f:float = None # distance [noeud courant / parent] + [noeud courant / noeud cible]
+        self.h:float = None # distance [noeud courant / cible]
+        self.cost:int = None  # nombre de noeuds traversés
+        self.destNode:PathNode = None
+        self.outgoingCellId:int = None # uniquement pour les MapNodes
+        
     def setHeuristic(self, destNode:'PathNode') -> None: 
-        if self.parent is not None: 
+        if self.parent: 
             self.g = self.parent.g + self.distanceTo(self.parent)
             self.cost = self.parent.cost + 1
         
@@ -34,7 +31,7 @@ class PathNode:
             self.g = 0
             self.cost = 0
         
-        if destNode is not None: 
+        if destNode: 
             self.h = self.distanceTo(destNode)
             self.f = self.g + self.h
     
@@ -47,7 +44,7 @@ class PathNode:
     def setNode(self) -> None:
         pass
     
-    def getCrossingDuration(mode:bool) -> int:
+    def getCrossingDuration(self, mode:bool) -> int:
         pass
     
     def __str__(self):
@@ -55,59 +52,58 @@ class PathNode:
 
 
 class Pathfinder:
-    
     currentNode:PathNode
     destNode:PathNode
     path:Path
     openedList:list[PathNode]
     closedList:list[PathNode]
     
-    def getNodeFromId(id:int) -> PathNode:
+    def getNodeFromId(self, id:int) -> PathNode:
         pass
     
-    def nodeIsInList(node:PathNode, list:list[PathNode]) -> PathNode:
+    def nodeIsInList(self, node:PathNode, nlist:list[PathNode]) -> tuple[int, PathNode]:
         pass
     
-    def getNeighbourNodes(node:PathNode) -> list[PathNode]:
+    def getNeighbourNodes(self, node:PathNode) -> list[PathNode]:
         pass
     
-    @staticmethod
-    def compute(srcId:int, destId:int) -> Path: 
-        currentNode = Pathfinder.getNodeFromId(srcId)
-        if currentNode == None:
+    def compute(self, srcId:int, destId:int) -> Path: 
+        currentNode = self.getNodeFromId(srcId)
+        if currentNode is None:
             raise Exception("Invalid current node id.")
-        destNode = Pathfinder.getNodeFromId(destId)
-        if destNode == None:
+        destNode = self.getNodeFromId(destId)
+        if destNode is None:
             raise Exception("Invalid destination node id.")
         openedList = list[PathNode]()
         closedList = list[PathNode]()
         
-        while not currentNode == destNode: 
-            neighbours = Pathfinder.getNeighbourNodes(currentNode)
+        while currentNode != destNode: 
+            neighbours:list[PathNode] = self.getNeighbourNodes(currentNode)
             for neighbourNode in neighbours: 
-                if not neighbourNode.isAccessible: # obstacle
-                    continue
-                if Pathfinder.nodeIsInList(neighbourNode, closedList) is not None: # déjà traitée
-                    continue	
-                inListNode = Pathfinder.nodeIsInList(neighbourNode, openedList)
-                if inListNode is not None:  # déjà une possibilité
-                    if neighbourNode.g < inListNode.g:
-                        inListNode = neighbourNode # modification de la référence dans la liste
-                else:
-                    openedList.append(neighbourNode)	
+                if neighbourNode.isAccessible: # skip obstacles
+                    if self.nodeIsInList(neighbourNode, closedList): # already visited all its neighbours
+                        continue	
+                    
+                    idx, node = self.nodeIsInList(neighbourNode, openedList)
+                    if node:  # already visited
+                        if neighbourNode.g < node.g:
+                            openedList[idx] = neighbourNode # update distance
+                             
+                    else:
+                        openedList.append(neighbourNode)	
             
             closedList.append(currentNode)
-            currentNode = Pathfinder.popBestNodeOfList(openedList)
-            if currentNode == None: # pas de chemin possible
+            currentNode = self.popBestNodeOfList(openedList)
+            if currentNode is None: # no path found
                 return None
         
         path = Path()
         direction = -2
-        while currentNode is not None: 
-            if direction != -2: # -2 correspond au noeud d'arrivée
-                currentNode.direction = direction # on fixe la direction du noeud grâce à la propriété "lastDirection" du noeud fils
-            currentNode.setNode() # on fixe la cellule du sortie du noeud (pour:uniquement les chemins de maps)
-            direction = currentNode.lastDirection
+        while currentNode: 
+            if direction != -2: # -2 corresponds to the destination node
+                currentNode.outGoingDirection = direction
+            currentNode.setNode() # finds the outgoing cell (only for MapNodes)
+            direction = currentNode.incomingDirection
             path.append(currentNode)
             currentNode = currentNode.parent
         
@@ -115,14 +111,18 @@ class Pathfinder:
         return path
     
     @staticmethod
-    def popBestNodeOfList(nlist:list[PathNode]) -> PathNode: 
+    def findBestNode(nlist:list[PathNode]):
         if len(nlist) == 0:
             return None
-        currentNode = nlist[0]
-        for listNode in nlist: 
-            if listNode.f < currentNode.f:
-                currentNode = listNode
-        del currentNode
-        return currentNode
+        currNodeIdx = 0
+        for i, listNode in enumerate(nlist): 
+            if listNode.f < nlist[currNoneIdx].f:
+                currNoneIdx = i
+        return currNodeIdx
+        
+    @staticmethod
+    def popBestNodeOfList(nlist:list[PathNode]) -> PathNode:
+        idx = Pathfinder.findBestNode(nlist)
+        return nlist.pop(idx)
     
     

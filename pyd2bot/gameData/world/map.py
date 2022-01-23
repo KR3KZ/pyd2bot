@@ -28,6 +28,7 @@ class Map:
         self.read(raw)
 
     def read(self, raw:BinaryStream):
+        """read the map from the raw binary stream"""
         self.mapId = raw.read_uint32()
         self.relativeId = raw.read_uint32()
         self.mapType = raw.read_char()
@@ -95,6 +96,7 @@ class Map:
                 self.rightArrowCell.add(cellid)
                 
     def getNeighbourMapFromDirection(self, direction:int) -> int:
+        """return the id of the neighbour map from the given direction"""
         if direction == self.LEFT: 
             return self.leftNeighbourId
         elif direction == self.RIGHT: 
@@ -103,28 +105,34 @@ class Map:
             return self.topNeighbourId
         elif direction == self.DOWN:
             return self.bottomNeighbourId
+        else:
+            raise Exception("invalid direction")
     
-    def directionToString(self, direction:int) -> str:
-        if direction == self.LEFT:
+    @staticmethod
+    def directionToString(direction:int) -> str:
+        if direction == Map.LEFT:
             return "left"
-        elif direction == self.RIGHT:
+        elif direction == Map.RIGHT:
             return "right"
-        elif direction == self.UP:
+        elif direction == Map.UP:
             return "up"
-        elif direction == self.DOWN:
+        elif direction == Map.DOWN:
             return "down"
-        elif direction == self.DOWN_LEFT:
+        elif direction == Map.DOWN_LEFT:
             return "down and left"
-        elif direction == self.DOWN_RIGHT:
+        elif direction == Map.DOWN_RIGHT:
             return "down and right"
-        elif direction == self.UP_LEFT:
+        elif direction == Map.UP_LEFT:
             return "up and left"
-        elif direction == self.UP_RIGHT:
+        elif direction == Map.UP_RIGHT:
             return "up and right"
-    
+        
     def __str__(self):
         mp = MapPosition.getMapPositionById(self.id)
         return self.id + " [" + mp.posX + ", " + mp.posY + "]"
+    
+    def __eq__(self, other:'Map'):
+        return self.id == other.id
     
 class Fixture:
     

@@ -2,48 +2,9 @@ from pyd2bot.gameData.world.map import Map, Cell
 from pyd2bot.gameData.world.mapPoint import MapPoint
 from pyd2bot.gameData.world.mouvementPath import MovementPath
 from pyd2bot.gameData.world.pathElement import PathElement
+from pyd2bot.utils.pathFinding.lightMapNode import LightMapNode
 from .pathFinder import PathNode, Pathfinder
 
-
-class CellsPathfinder(Pathfinder): 
-	
-	def __init__(self, map:Map):
-		self.mapNode = LightMapNode(map)
-	
-	def getNodeFromId(self, cellId:int) -> PathNode: 
-		return CellNode(cellId)
-
-	def nodeIsInList(self, node:PathNode, plist:list[PathNode]) -> PathNode: 
-		cn = CellNode(node)
-		for pn in plist:
-			if pn.id == cn.id:
-				return pn
-		return None
-	
-	def getNeighbourNodes(self, node:PathNode) -> list[PathNode]: 
-		neighbours = list()
-		for direction in range(8) :
-			cell = self.mapNode.getNeighbourCellFromDirection(node.id, direction)
-			if cell != None:
-				neighbours.append(CellNode(cell, direction, self.currentNode))
-		
-		return neighbours		
-
-	def movementPathFromArray(self, iPath:list[int]) -> MovementPath:
-		mpPath = list[MapPoint]()
-		mp = MovementPath()
-		for cellId in iPath:
-			mpPath.append(MapPoint.fromCellId(cellId))
-		for i in range(len(mpPath) - 1): 
-			pe = PathElement(None, 0)
-			pe.step.x = mpPath[i].x
-			pe.step.y = mpPath[i].y
-			pe.orientation = mpPath[i].orientationTo(mpPath[i + 1])
-			mp.append(pe)
-		mp.compress()
-		mp.fill()
-		return mp
-	
 	
 class CellNode(PathNode): 
 	HORIZONTAL_WALK_DURATION = 510
@@ -72,8 +33,8 @@ class CellNode(PathNode):
 	
 	def getCrossingDuration(self, mode:bool) -> int: 
 		if not mode:  # walk
-			if self.lastDirection % 2 == 0:
-				if self.lastDirection % 4 == 0: # left or right
+			if self.incomingDirection % 2 == 0:
+				if self.incomingDirection % 4 == 0: # left or right
 					return self.HORIZONTAL_WALK_DURATION
 				else: # top or down
 					return self.VERTICAL_WALK_DURATION
@@ -82,8 +43,8 @@ class CellNode(PathNode):
 				return self.DIAGONAL_WALK_DURATION
 		
 		else:  # run
-			if self.lastDirection % 2 == 0:
-				if self.lastDirection % 4 == 0: # left or right
+			if self.incomingDirection % 2 == 0:
+				if self.incomingDirection % 4 == 0: # left or right
 					return self.HORIZONTAL_RUN_DURATION
 				else: # top or down
 					return self.VERTICAL_RUN_DURATION
@@ -92,8 +53,47 @@ class CellNode(PathNode):
 				return self.DIAGONAL_RUN_DURATION
 		
 	def toString(self) -> str: 
-		if self.direction != -1:
-			return str(self.id) + " [" + self.x + ", " + self.y + "] " + Map.directionToString(self.direction)
+		if self.outGoingDirection != -1:
+			return str(self.id) + " [" + self.x + ", " + self.y + "] " + Map.directionToString(self.outGoingDirection)
 		return str(self.id) + " [" + self.x + ", " + self.y + "]"
 	
 
+
+class CellsPathfinder(Pathfinder): 
+	
+	def __init__(self, map:Map):
+		super().__init__(map)
+		self.mapNode = LightMapNode(map)
+	
+	def getNodeFromId(self, cellId:int) -> CellNode: 
+		return CellNode(cellId)
+
+	def nodeIsInList(self, cn:CellNode, plist:list[CellNode]) -> PathNode: 
+		for pn in plist:
+			if pn.id == cn.id:
+				return pn
+		return None
+	
+	def getNeighbourNodes(self, node:CellNode) -> list[CellNode]: 
+		neighbours = list[CellNode]()
+		for direction in range(8) :
+			cell = self.mapNode.getNeighbourCellFromDirection(node.id, direction)
+			if cell:
+				neighbours.append(CellNode(cell, direction, self.currentNode))
+		return neighbours		
+
+	def movementPathFromArray(self, iPath:list[int]) -> MovementPath:
+		mpPath = list[MapPoint]()
+		mp = MovementPath()
+		for cellId in iPath:
+			mpPath.append(MapPoint.fromCellId(cellId))
+		for i in range(len(mpPath) - 1): 
+			pe = PathElement(None, 0)
+			pe.step.x = mpPath[i].x
+			pe.step.y = mpPath[i].y
+			pe.orientation = mpPath[i].orientationTo(mpPath[i + 1])
+			mp.append(pe)
+		mp.compress()
+		mp.fill()
+		return mp
+	

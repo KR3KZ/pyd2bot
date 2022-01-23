@@ -57,7 +57,7 @@ class Pathfinding:
         self.currentCellsPath = pathfinder.compute(self.currentCellId, targetId)
         if self.currentCellsPath is None:
             return None
-        mvPath:MovementPath = CellsPathfinder.movementPathFromArray(self.currentCellsPath.toVector())
+        mvPath:MovementPath = CellsPathfinder.movementPathFromArray(self.currentCellsPath.getIdsList())
         mvPath.start = MapPoint.fromCellId(self.currentCellId)
         mvPath.end = MapPoint.fromCellId(targetId)
         return mvPath.getServerMovement()
@@ -127,7 +127,7 @@ class Pathfinding:
         if(path == null)
             throw new FatalError("Impossible to find a path between the map with id = " + sourceMapId + " and the map with id = " + targetMapId + ".");
         path.startCellId = startCellId;
-        return path;
+        return path
     
     
     protected static Path toArea(int areaId, int sourceMapId, int startCellId) {

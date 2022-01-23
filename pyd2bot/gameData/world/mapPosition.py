@@ -1,3 +1,4 @@
+from functools import lru_cache
 import json
 import os
 import os
@@ -23,17 +24,20 @@ class MapPosition:
     tacticalModeTemplateId:int
     hasPublicPaddock:bool
     
+    with open(os.path.join(ROOTDIR, "MapPositions.json")) as fp:
+        _json = json.load(fp)
+        _positions = {}
+        for mpos in _json:
+            _positions[int(mpos["id"])] = mpos
+        del _json
+        
     def __init__(self, dictionary:dict[str, Any]):
         for k, v in dictionary.items():
             setattr(self, k, v)
             
-    with open(os.path.join(ROOTDIR, "MapPositions.json")) as fp:
-        _json = json.load(fp)
-        
-    _positions = {}
-    for mpos in _json:
-        _positions[int(mpos["id"])] = mpos
-    
     @staticmethod
-    def getMapPositionById(map_id) -> 'MapPosition':
-        return MapPosition(MapPosition._positions[map_id])
+    @lru_cache(maxsize = 100)
+    def getMapPositionById(mapId) -> 'MapPosition':
+        if mapId not in MapPosition._positions:
+            return None
+        return MapPosition(MapPosition._positions[mapId])
