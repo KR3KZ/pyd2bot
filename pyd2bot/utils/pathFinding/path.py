@@ -18,10 +18,10 @@ class PathNode:
         self.isAccessible:bool = None
         self.x:float = None
         self.y:float = None
-        self.g:float = None # distance [noeud courant / parent]
-        self.f:float = None # distance [noeud courant / parent] + [noeud courant / noeud cible]
-        self.h:float = None # distance [noeud courant / cible]
-        self.cost:int = None  # nombre de noeuds traversés
+        self.g:float = 0 # distance [noeud courant / parent]
+        self.f:float = 0 # distance [noeud courant / parent] + [noeud courant / noeud cible]
+        self.h:float = 0 # distance [noeud courant / cible]
+        self.cost:int = 0  # nombre de noeuds traversés
         self.destNode:PathNode = None
         self.outgoingCellId:int = None # uniquement pour les MapNodes
         
@@ -92,19 +92,17 @@ class Path(list[PathNode]):
     def getIdsList(self) -> list[int]: 
         return [node.id for node in self]
     
-    def __str__(self, ) -> str: 
-        str = "Path \"" + self.name + "\" : \n"
+    def __str__(self) -> str: 
+        res = "Path \"" + self.name + "\" : \n"
         for node in self:
-            str += node + "\n"
-        return str
+            res += str(node) + "\n"
+        return res
 
     def addNode(self, id:int, direction:int) -> None: 
         if direction != Map.LEFT and direction != Map.RIGHT and direction != Map.UP and direction != Map.DOWN:
             raise Exception("Invalid direction for create a node path.")
         self.append(SimplePathNode(id, direction))
-    
-    def reverse(self) -> None: 
-        self.reverse()
+
 
 class SimplePathNode(PathNode):  # pour les paths enregistrés dans le fichier "paths.txt"
 

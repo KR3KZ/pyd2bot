@@ -23,7 +23,7 @@ class DLM:
         
         header = dlm_raw.read_char()
         map_version = dlm_raw.read_char()
-        mapId = dlm_raw.read_uint32()
+        id = dlm_raw.read_uint32()
         
         if map_version > 6:
             self.encrypted = dlm_raw.read_bool()
@@ -38,7 +38,7 @@ class DLM:
                 cleanData = io.BytesIO(decryptedData)
                 mapRaw = BinaryStream(cleanData, True)
 
-        map = Map(mapRaw, mapId, map_version)
+        map = Map(mapRaw, id, map_version)
         dlm_uncompressed.close()
         del dlm_raw
         return map

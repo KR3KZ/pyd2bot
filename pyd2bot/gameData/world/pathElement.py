@@ -2,28 +2,15 @@ from .mapPoint import MapPoint
 
 
 class PathElement:
-    _oStep:MapPoint
-    _nOrientation:int
 
-    def __init__(self, mp:MapPoint, i:int): 
+    def __init__(self, mp:MapPoint, orientation:int): 
         if mp is None:
-            self._oStep = MapPoint()
+            self.step = MapPoint()
         else:
-            self._oStep = mp
-        self._nOrientation = i
-    
-    @property
-    def orientation(self) -> int: 
-        return self._nOrientation
-    
-    @property
-    def step(self) -> MapPoint: 
-        return self._oStep
-    
-    @property
-    def cellId(self) -> int:
-        return self._oStep.cellId 
-
+            self.step = mp
+        self.orientation = orientation
+        self.cellId = self.step.cellID
+        
     def __str__(self) -> str:
-        return "[PathElement(cellId:" + self.cellId + ", x:" + self._oStep.x + ", y:" + self._oStep.y + ", orientation:" + self._nOrientation + ")]"
+        return "PE(cellId: {}, orientation: {})".format(self.cellId, self.orientation)
     

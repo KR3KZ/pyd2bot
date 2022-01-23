@@ -1,13 +1,15 @@
 
 # représente une direction composée du sens et de la cellule sortante de la map
+from functools import lru_cache
 import logging
 import random
+from pyd2bot.gameData.mapReader import MapLoader
 from pyd2bot.gameData.world.map import Map
 from pyd2bot.gameData.world.mapPoint import MapPoint
 from pyd2bot.gameData.world.mapPosition import MapPosition
 from pyd2bot.gameData.world.mouvementPath import MovementPath
 from pyd2bot.utils.pathFinding.CellsPathFinder import CellsPathfinder
-from pyd2bot.utils.pathFinding.MapsPathFinder import MapsPathfinder
+from pyd2bot.utils.pathFinding.MapsPathFinder import MapNode, MapsPathfinder
 from pyd2bot.utils.pathFinding.lightMapNode import LightMapNode
 from pyd2bot.utils.pathFinding.path import Path, Direction
 
@@ -18,34 +20,36 @@ class Pathfinding:
     currentCellId:int
     currentCellsPath:Path
     currentMapsPath:Path
-    areaId:int
+    _areaId:int
     lastDirection:int
     neighbourMaps:dict[int, int] 
     
     def __init__(self):
         self.currentCellId = -1
         self.lastDirection = -1
-        self.areaId = -1
+        self._areaId = -1
         self.neighbourMaps = dict[int, int]
+        self.mapNode:MapNode = None
     
     def updatePosition(self, map:Map, currentCellId:int) -> None: 
-        """met à jour la position du personnage sur la map"""
+        """Update the position of the character on the map"""
         self.mapNode = LightMapNode(map, currentCellId)
         self.currentCellId = currentCellId
     
-    def updatePosition(self, currentCellId:int) -> None:
-        """"met à jour la position du personnage sur la map"""
-        self.currentCellId = currentCellId
+    @property
+    def areaId(self):
+        return self._areaId
     
-    def setArea(self, areaId:int) -> None:
+    @areaId.setter
+    def areaId(self, areaId:int) -> None:
         """modifie l'aire cible et calcule si nécessaire un chemin vers cette aire"""
-        self.areaId = areaId
+        self._areaId = areaId
         if self.mapNode.map.subareaId != areaId:
-            self.currentMapsPath = PathsCache.toArea(self.areaId, self.mapNode.map.id, self.currentCellId)
+            self.currentMapsPath = self.toArea(self.areaId, self.mapNode.map.id, self.currentCellId)
     
     def setTargetMap(self, mapId:int) -> None: 
         """modifie la map cible et calcule si nécessaire un chemin vers cette map"""
-        self.currentMapsPath = PathsCache.toMap(mapId, self.mapNode.map.id, self.currentCellId)
+        self.currentMapsPath = self.toMap(mapId, self.mapNode.map.id, self.currentCellId)
     
     def getCellsPathTo(self, targetId:int) -> list[int]:
         """retourne un chemin de cellules vers une cellule cible"""
@@ -53,12 +57,13 @@ class Pathfinding:
         self.currentCellsPath = pathfinder.compute(self.currentCellId, targetId)
         if self.currentCellsPath is None:
             return None
-        mvPath:MovementPath = CellsPathfinder.movementPathFromArray(self.currentCellsPath.getIdsList())
-        mvPath.start = MapPoint.fromCellId(self.currentCellId)
-        mvPath.end = MapPoint.fromCellId(targetId)
+        print("currId: " + str(self.currentCellId))
+        print("targetId: " + str(targetId))
+        mvPath = pathfinder.movementPathFromArray(self.currentCellsPath.getIdsList())
+        print("path: " + str(mvPath))
         return mvPath.getServerMovement()
     
-    def getCellsPathDuration(self, ) -> int:
+    def getCellsPathDuration(self) -> int:
         """retourne la durée du chemin de cellules"""
         return self.currentCellsPath.getCrossingDuration()
     
@@ -92,7 +97,7 @@ class Pathfinding:
             direction = random.randint(0, neighboursCount - 1)
             randDirection = list(self.neighbourMaps.keys())[direction]
             mapId = self.neighbourMaps.get(randDirection)
-            map = MapsCache.loadMap(mapId)
+            map = MapLoader.load(mapId)
             
             # si la map existe et qu'elle est dans la même aire
             if map != None and map.mapType == 0 and map.subareaId == self.mapNode.map.subareaId: 
@@ -116,7 +121,7 @@ class Pathfinding:
         else:
             return direction + 4
     
-    
+    @lru_cache(maxsize=128)
     def toMap(self, targetMapId:int, sourceMapId:int, startCellId:int) -> Path:
         pf = MapsPathfinder(startCellId)
         path = pf.compute(sourceMapId, targetMapId)
@@ -125,7 +130,7 @@ class Pathfinding:
         path.startCellId = startCellId
         return path
     
-    
+    @lru_cache(maxsize=128)
     def toArea(self, areaId:int, sourceMapId:int, startCellId:int) -> Path:
         logger.debug("Going to area with id = " + areaId + " from  " + MapPosition.getMapPositionById(sourceMapId) + ".")
         mapPositions = MapPosition.getMapPositions()
@@ -151,3 +156,5 @@ class Pathfinding:
         if bestPath != None:
             bestPath.startCellId = startCellId
         return bestPath
+    
+    

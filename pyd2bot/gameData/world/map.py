@@ -17,7 +17,7 @@ class Map:
     UP = 6
     UP_RIGHT = 7
  
-    def __init__(self, raw:BinaryStream, id:int, version:int):
+    def __init__(self, raw:BinaryStream, id, version:int):
         self.id = id
         self.version = version
         self.topArrowCell = set[int]()
@@ -29,7 +29,6 @@ class Map:
 
     def read(self, raw:BinaryStream):
         """read the map from the raw binary stream"""
-        self.mapId = raw.read_uint32()
         self.relativeId = raw.read_uint32()
         self.mapType = raw.read_char()
         self.subareaId = raw.read_int32()
@@ -70,7 +69,15 @@ class Map:
 
         if self.version > 10:
             self.tacticalModeTemplateId = raw.read_int32()
+            
+        self.useLowPassFilter = raw.read_bool()
+        self.useReverb = raw.read_bool()
 
+        if self.useReverb:
+            self.presetId = self.raw().read_int32()
+        else:
+            self.presetId = -1
+            
         self.backgroundsCount = raw.read_char()
         self.backgroundFixtures = [Fixture(raw) for _ in range(self.backgroundsCount)]
 
@@ -80,7 +87,6 @@ class Map:
         raw.read_int32()
         self.groundCRC = raw.read_int32()
         self.layersCount = raw.read_char()
-
         self.layers = [Layer(raw, self.version) for _ in range(self.layersCount)]
         
         for cellid in range(self.CELLS_COUNT):
@@ -362,8 +368,11 @@ class Cell:
                and not self.havenbagCell
     
     def isAccessibleDuringRP(self):
-        return not self.nonWalkableDuringRP and self.floor == 0 and self.mov
-
+        isAccessible = self.los or self.mov or not self.nonWalkableDuringRP
+        print("isAccessibleDuringRP called for :id = {}, los = {}, nonWalkableDuringRP = {}, floor = {}, mov = {} => accessibleDuringRp = {}"\
+            .format(self.id, self.los, self.nonWalkableDuringRP, self.floor, self.mov, isAccessible))
+        return isAccessible
+    
     def allowsChangementMap(self) -> bool:
         return self.mapChangeData != 0
     
@@ -373,6 +382,8 @@ class Cell:
     def __eq__(self, cell:'Cell'):
         return self.id == cell.id
     
+    def __hash__(self) -> int:
+        return self.id
 class GraphicalElement:
     
     def __init__(self, raw:BinaryStream, mapVersion):
