@@ -1,5 +1,9 @@
 # SIGNATURE_KEY_DATA = Constants_SIGNATURE_KEY_DATA
-        
+
+import os
+from pathlib import Path
+
+
 LOG_UPLOAD_MODE = False
 
 EVENT_MODE = False
@@ -20,5 +24,6 @@ DATASTORE_MODULE_DEBUG = False
 
 MAX_LOGIN_ATTEMPTS = 3
 
-DOFUS_DIR = "C:\\Users\\majdoub\\AppData\\Local\\Ankama\\Dofus"
-D2P_MAPS_PATH = "C:\\Users\\majdoub\\AppData\\Local\\Ankama\\Dofus\\content\\data\\maps\\maps0.d2p"
+ROOTDIR = Path(os.path.dirname(__file__))
+MAPS_PATH = ROOTDIR / "gameData/dlmMaps"
+PROTOCOL_SPEC_PATH = ROOTDIR / "network/protocol_spec.json"

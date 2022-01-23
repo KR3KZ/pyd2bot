@@ -3,11 +3,11 @@ from pathlib import Path
 from tqdm import tqdm
 from .d2p import D2PReader, InvalidD2PFile
 from .swl import SWLReader, InvalidSWLFile
-
+import pyd2bot.Constants as Constants
 
 work_dir = Path(os.path.dirname(__file__))
 D2P_MAPS_PATH = "C:\\Users\\majdoub\\AppData\\Local\\Ankama\\Dofus\\content\\maps\\maps0.d2p"
-out_dir = work_dir / "../pyd2bot/gameData/dlm_maps"
+out_dir = Constants.MAPS_PATH
 
 def unpackD2pFile(file_p, out_dir):
     file_name = os.path.basename(file_p)

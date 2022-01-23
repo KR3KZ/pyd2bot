@@ -190,6 +190,10 @@ class Cell:
         else:
             self.x = (tmp % Map.WIDTH) * 2 + 1; 
         self.y = id / (Map.WIDTH * 2)
+        self.top_arrow = None
+        self.bottom_arrow = None
+        self.left_arrow = None
+        self.right_arrow = None
         self.read(raw)
 
     def read(self, raw:BinaryStream):

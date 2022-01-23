@@ -4,7 +4,7 @@ from .protocol_parser import ProtocolParser
 import json 
 import subprocess
 import os
-
+import pyd2bot.Constants as Constants
 work_dir = Path(os.path.dirname(__file__))
 
 if __name__ == "__main__":
@@ -27,7 +27,7 @@ if __name__ == "__main__":
     ]
     
     protocol_json = ProtocolParser.run(src_paths)
-    with (work_dir / "../pyd2bot/network/protocol_spec.json").open("w") as fp:
+    with Constants.PROTOCOL_SPEC_PATH.open("w") as fp:
         json.dump(protocol_json, fp)
         
     
