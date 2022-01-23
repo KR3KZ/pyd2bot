@@ -1,22 +1,39 @@
+import json
 import os
 import os
+from typing import Any
 
 ROOTDIR = os.path.dirname(__file__)
-WORLD_DATA_DIR = os.path.join(ROOTDIR, "../../../gameData/world")
 
 class MapPosition:
-    with open(os.path.join(WORLD_DATA_DIR, "MapCoordinates.json")) as fp:
-        map_coords = json.load(fp)
-
-    with open(os.path.join(WORLD_DATA_DIR, "MapPositions.json")) as fp:
+    id:int
+    posX:int
+    posY:int
+    outdoor:bool
+    capabilities:int
+    nameId:int  
+    showNameOnFingerpost:bool   
+    playlists:list[list[int]]
+    subAreaId:int
+    worldMap:int
+    hasPriorityOnWorldmap:bool
+    allowPrism:bool
+    isTransition:bool
+    mapHasTemplate:bool
+    tacticalModeTemplateId:int
+    hasPublicPaddock:bool
+    
+    def __init__(self, dictionary:dict[str, Any]):
+        for k, v in dictionary.items():
+            setattr(self, k, v)
+            
+    with open(os.path.join(ROOTDIR, "MapPositions.json")) as fp:
         _json = json.load(fp)
         
-    map_positions = {}
+    _positions = {}
     for mpos in _json:
-        map_positions[int(mpos["id"])] = mpos
+        _positions[int(mpos["id"])] = mpos
     
     @staticmethod
-    def getMapCoords(map_id):
-        x = MapManager.map_positions[int(map_id)]["posX"]
-        y = MapManager.map_positions[int(map_id)]["posY"]
-        return x, y
+    def getMapPositionById(map_id) -> 'MapPosition':
+        return MapPosition(MapPosition._positions[map_id])

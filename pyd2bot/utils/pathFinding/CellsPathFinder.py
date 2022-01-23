@@ -1,8 +1,9 @@
-from pyd2bot.gameData.world.map import Map
-from pyd2bot.gameData.reader.map import Cell
+from pyd2bot.gameData.reader.map import Map, Cell
 from pyd2bot.gameData.world.mapPoint import MapPoint
 from pyd2bot.gameData.world.mouvementPath import MovementPath
+from pyd2bot.gameData.world.pathElement import PathElement
 from .pathFinder import PathNode, Pathfinder
+
 
 class CellsPathfinder(Pathfinder): 
 	
@@ -24,22 +25,21 @@ class CellsPathfinder(Pathfinder):
 		for direction in range(8) :
 			cell = self.mapNode.getNeighbourCellFromDirection(node.id, direction)
 			if cell != None:
-				neighbours.add(CellNode(cell, direction, self.currentNode))
+				neighbours.append(CellNode(cell, direction, self.currentNode))
 		
 		return neighbours		
 
 	def movementPathFromArray(self, iPath:list[int]) -> MovementPath:
-		mpPath = []
+		mpPath = list[MapPoint]()
 		mp = MovementPath()
 		for cellId in iPath:
 			mpPath.append(MapPoint.fromCellId(cellId))
-		vectorSize = len(mpPath)
-		for i in range(vectorSize - 1): 
+		for i in range(len(mpPath) - 1): 
 			pe = PathElement(None, 0)
-			pe.getStep().setX(mpPath.get(i).getX())
-			pe.getStep().setY(mpPath.get(i).getY())
-			pe.setOrientation(mpPath.get(i).orientationTo(mpPath.get(i + 1)))
-			mp.addPoint(pe)
+			pe.step.x = mpPath[i].x
+			pe.step.y = mpPath[i].y
+			pe.orientation = mpPath[i].orientationTo(mpPath[i + 1])
+			mp.append(pe)
 		mp.compress()
 		mp.fill()
 		return mp

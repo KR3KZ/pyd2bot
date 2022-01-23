@@ -1,11 +1,23 @@
+import math
+
+from pyd2bot.gameData.world.mapPosition import MapPosition
 from .__binarystream import BinaryStream
 
 
-class RawMap:
-    
+class Map:
     CELLS_COUNT = 560
-    
-    def __init__(self, raw:BinaryStream, id, version:int):
+    WIDTH = 14
+    HEIGHT = 20 # 40 pour l'ancienne version du pathfinder
+    RIGHT = 0
+    DOWN_RIGHT = 1
+    DOWN = 2
+    DOWN_LEFT = 3
+    LEFT = 4
+    UP_LEFT = 5
+    UP = 6
+    UP_RIGHT = 7
+ 
+    def __init__(self, raw:BinaryStream, id:int, version:int):
         self.id = id
         self.version = version
         self.topArrowCell = set[int]()
@@ -81,7 +93,39 @@ class RawMap:
                 self.leftArrowCell.add(cellid)
             elif cell.right_arrow:
                 self.rightArrowCell.add(cellid)
-
+                
+    def getNeighbourMapFromDirection(self, direction:int) -> int:
+        if direction == self.LEFT: 
+            return self.leftNeighbourId
+        elif direction == self.RIGHT: 
+            return self.rightNeighbourId
+        elif direction == self.UP:
+            return self.topNeighbourId
+        elif direction == self.DOWN:
+            return self.bottomNeighbourId
+    
+    def directionToString(self, direction:int) -> str:
+        if direction == self.LEFT:
+            return "left"
+        elif direction == self.RIGHT:
+            return "right"
+        elif direction == self.UP:
+            return "up"
+        elif direction == self.DOWN:
+            return "down"
+        elif direction == self.DOWN_LEFT:
+            return "down and left"
+        elif direction == self.DOWN_RIGHT:
+            return "down and right"
+        elif direction == self.UP_LEFT:
+            return "up and left"
+        elif direction == self.UP_RIGHT:
+            return "up and right"
+    
+    def __str__(self):
+        mp = MapPosition.getMapPositionById(self.id)
+        return self.id + " [" + mp.posX + ", " + mp.posY + "]"
+    
 class Fixture:
     
     def __init__(self, raw):
@@ -140,6 +184,12 @@ class Cell:
     def __init__(self, raw:BinaryStream, id:int, mapVersion):
         self.id = id
         self.mapVersion = mapVersion
+        tmp = id % (Map.WIDTH * 2)
+        if tmp < Map.WIDTH:
+            self.x = tmp * 2
+        else:
+            self.x = (tmp % Map.WIDTH) * 2 + 1; 
+        self.y = id / (Map.WIDTH * 2)
         self.read(raw)
 
     def read(self, raw:BinaryStream):
@@ -234,6 +284,12 @@ class Cell:
     
     def isAccessibleDuringRP(self):
         return not self.nonWalkableDuringRP and self.floor == 0 and self.mov
+
+    def allowsChangementMap(self) -> bool:
+        return self.mapChangeData != 0
+    
+    def distanceBetween(self, cell1:'Cell', cell2:'Cell') -> float:
+        return math.sqrt((cell1.x - cell2.x)**2 + (cell1.y - cell2.y)**2)
     
     def __eq__(self, cell:'Cell'):
         return self.id == cell.id

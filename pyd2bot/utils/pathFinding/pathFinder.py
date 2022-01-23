@@ -2,6 +2,8 @@
 
 import math
 
+from pyd2bot.utils.pathFinding.path import Path
+
 
 class PathNode:
     id:int
