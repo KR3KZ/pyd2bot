@@ -25,8 +25,8 @@ if __name__ == "__main__":
         work_dir / "sources/scripts/com/ankamagames/dofus/network/types",
         work_dir / "sources/scripts/com/ankamagames/dofus/network/messages",
     ]
-    pparser = ProtocolParser()
-    protocol_json = pparser.run(src_paths)
+    
+    protocol_json = ProtocolParser.run(src_paths)
     with (work_dir / "../pyd2bot/network/protocol_spec.json").open("w") as fp:
         json.dump(protocol_json, fp)
         

@@ -1,4 +1,4 @@
-from pyd2bot.gameData.reader.map import Map
+from pyd2bot.gameData.world.map import Map
 from pyd2bot.utils.pathFinding.pathFinder import PathNode
 from pyd2bot.utils.pathFinding.pathFinding import Direction
 

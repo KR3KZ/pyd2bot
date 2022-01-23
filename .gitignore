@@ -9,3 +9,4 @@ account.json
 sources
 *.dlm
 *.d2p
+unpacked_raw_msg

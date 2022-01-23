@@ -1,7 +1,7 @@
 import math
 
 from pyd2bot.gameData.world.mapPosition import MapPosition
-from .__binarystream import BinaryStream
+from pyd2bot.utils.binaryIO import BinaryStream
 
 
 class Map:

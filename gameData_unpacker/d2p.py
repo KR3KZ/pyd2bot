@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-from .__binarystream import BinaryStream
+from pyd2bot.utils.binaryIO import BinaryStream
 from collections import OrderedDict
 
 # Exceptions
@@ -119,7 +119,8 @@ class D2PReader:
     def _get_properties(self):
         return self._properties
 
-    def _get_files(self):
+    @property
+    def files(self):
         to_return = OrderedDict()
         for file_name, position in self._files_position.items():
             object_ = {"position": position}
@@ -136,7 +137,6 @@ class D2PReader:
 
     stream = property(_get_stream)
     properties = property(_get_properties)
-    files = property(_get_files)
     loaded = property(_get_loaded)
 
 

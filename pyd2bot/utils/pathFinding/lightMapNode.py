@@ -1,7 +1,7 @@
 
 
 # noeud utilisé pour les parcours de zones (besoin:pas de création de chemin)
-from pyd2bot.gameData.reader.map import Map, Cell
+from pyd2bot.gameData.world.map import Map, Cell
 from pyd2bot.utils.pathFinding.pathFinder import PathNode
 DOUBLE_MAX = 1.7976931348623158E+308
 

@@ -24,13 +24,11 @@ class ProtocolParser:
     OPTIONAL_VAR_PATTERN_OF_NAME = r"\s*if\(this\.%s == null\)\n"
     HASH_FUNCTION_PATTERN = r"\s*HASH_FUNCTION\(data\);\n"
     WRAPPED_BOOLEAN_PATTERN = r"\s*this.(?P<name>\w+) = BooleanByteWrapper\.getFlag\(.*;\n"
-    
-    def __init__(self):
-        self.json = {
-            "type": {},
-            "msg_by_id": {},
-            "type_by_id": {}
-        }
+    json = {
+        "type": {},
+        "msg_by_id": {},
+        "type_by_id": {}
+    }
     
     def run(self, src_paths):
         self.getMsgTypesFromSrcs(src_paths)

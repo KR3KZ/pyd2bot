@@ -1,4 +1,4 @@
-from pyd2bot.gameData.reader.map import Map, Cell
+from pyd2bot.gameData.world.map import Map, Cell
 from pyd2bot.gameData.world.mapPoint import MapPoint
 from pyd2bot.gameData.world.mouvementPath import MovementPath
 from pyd2bot.gameData.world.pathElement import PathElement

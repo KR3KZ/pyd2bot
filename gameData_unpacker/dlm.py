@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 import zlib, tempfile, io
-from pyd2bot.world.zone import Map
-from .__binarystream import BinaryStream
+from pyd2bot.utils.binaryIO.binarystream import BinaryStream
 
 
 class InvalidDLMFile(Exception):

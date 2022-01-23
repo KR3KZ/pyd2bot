@@ -1,7 +1,7 @@
 
 # représente une direction composée du sens et de la cellule sortante de la map
 import random
-from pyd2bot.gameData.reader.map import Map
+from pyd2bot.gameData.world.map import Map
 from pyd2bot.gameData.world.mapPoint import MapPoint
 from pyd2bot.gameData.world.mouvementPath import MovementPath
 from pyd2bot.utils.pathFinding.CellsPathFinder import CellsPathfinder

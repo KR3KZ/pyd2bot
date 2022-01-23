@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-from .__binarystream import BinaryStream
+from ..pyd2bot.utils.binaryIO.binarystream import BinaryStream
 from collections import OrderedDict
 
 # Exceptions

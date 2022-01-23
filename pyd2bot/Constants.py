@@ -19,3 +19,6 @@ DETERMINIST_TACKLE = True
 DATASTORE_MODULE_DEBUG = False
 
 MAX_LOGIN_ATTEMPTS = 3
+
+DOFUS_DIR = "C:\\Users\\majdoub\\AppData\\Local\\Ankama\\Dofus"
+D2P_MAPS_PATH = "C:\\Users\\majdoub\\AppData\\Local\\Ankama\\Dofus\\content\\data\\maps\\maps0.d2p"
