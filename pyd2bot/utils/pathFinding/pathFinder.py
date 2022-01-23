@@ -1,54 +1,4 @@
-
-
-import math
-
-from pyd2bot.utils.pathFinding.path import Path
-
-
-class PathNode:
-    
-    def __init__(self, id:int, incomingDirection:int, parent:'PathNode'):
-        self.id = id
-        self.parent = parent
-        self.incomingDirection = incomingDirection
-        self.outGoingDirection = -1
-        self.isAccessible:bool = None
-        self.x:float = None
-        self.y:float = None
-        self.g:float = None # distance [noeud courant / parent]
-        self.f:float = None # distance [noeud courant / parent] + [noeud courant / noeud cible]
-        self.h:float = None # distance [noeud courant / cible]
-        self.cost:int = None  # nombre de noeuds traversés
-        self.destNode:PathNode = None
-        self.outgoingCellId:int = None # uniquement pour les MapNodes
-        
-    def setHeuristic(self, destNode:'PathNode') -> None: 
-        if self.parent: 
-            self.g = self.parent.g + self.distanceTo(self.parent)
-            self.cost = self.parent.cost + 1
-        
-        else:  # noeud initial et noeud final
-            self.g = 0
-            self.cost = 0
-        
-        if destNode: 
-            self.h = self.distanceTo(destNode)
-            self.f = self.g + self.h
-    
-    def distanceTo(self, node:'PathNode') -> float: 
-        return math.sqrt(math.pow(node.x - self.x, 2) + math.pow(node.y - self.y, 2))
-    
-    def __eq__(self, node:'PathNode') -> bool: 
-        return self.id == node.id
-    
-    def setNode(self) -> None:
-        pass
-    
-    def getCrossingDuration(self, mode:bool) -> int:
-        pass
-    
-    def __str__(self):
-        pass
+from pyd2bot.utils.pathFinding.path import Path, PathNode
 
 
 class Pathfinder:
@@ -124,5 +74,3 @@ class Pathfinder:
     def popBestNodeOfList(nlist:list[PathNode]) -> PathNode:
         idx = Pathfinder.findBestNode(nlist)
         return nlist.pop(idx)
-    
-    

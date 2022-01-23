@@ -1,21 +1,17 @@
 
 # représente une direction composée du sens et de la cellule sortante de la map
+import logging
 import random
 from pyd2bot.gameData.world.map import Map
 from pyd2bot.gameData.world.mapPoint import MapPoint
+from pyd2bot.gameData.world.mapPosition import MapPosition
 from pyd2bot.gameData.world.mouvementPath import MovementPath
 from pyd2bot.utils.pathFinding.CellsPathFinder import CellsPathfinder
+from pyd2bot.utils.pathFinding.MapsPathFinder import MapsPathfinder
 from pyd2bot.utils.pathFinding.lightMapNode import LightMapNode
-from pyd2bot.utils.pathFinding.path import Path
+from pyd2bot.utils.pathFinding.path import Path, Direction
 
-
-class Direction:
-    direction:int
-    outgoingCellId:int
-    
-    def __init__(self, direction:int, outgoingCellId:int):
-        self.direction = direction
-        self.outgoingCellId = outgoingCellId
+logger = logging.getLogger("bot")
         
 class Pathfinding:
     mapNode:LightMapNode
@@ -122,44 +118,36 @@ class Pathfinding:
     
     
     def toMap(self, targetMapId:int, sourceMapId:int, startCellId:int) -> Path:
-        pf = MapsPathfinder(startCellId);
-        Path path = pf.compute(sourceMapId, targetMapId);
-        if(path == null)
-            throw new FatalError("Impossible to find a path between the map with id = " + sourceMapId + " and the map with id = " + targetMapId + ".");
-        path.startCellId = startCellId;
+        pf = MapsPathfinder(startCellId)
+        path = pf.compute(sourceMapId, targetMapId)
+        if path is None:
+            raise Exception("Impossible to find a path between the map with id = " + sourceMapId + " and the map with id = " + targetMapId + ".")
+        path.startCellId = startCellId
         return path
     
     
-    protected static Path toArea(int areaId, int sourceMapId, int startCellId) {
-        if(DEBUG)
-            Log.info("Going to area with id = " + areaId + " from  " + MapPosition.getMapPositionById(sourceMapId) + ".");
-        MapPosition[] mapPositions = MapPosition.getMapPositions();
-        Vector<MapPosition> mapPositionsInArea = new Vector<MapPosition>();
-        for(MapPosition mapPosition : mapPositions)
-            if(mapPosition.subAreaId == areaId)
-                mapPositionsInArea.add(mapPosition);
-        if(mapPositionsInArea.size() == 0)
-            throw new FatalError("Invalid area id.");
-        if(DEBUG)
-            Log.info(mapPositionsInArea.size() + " maps in the area with id = " + areaId + ".");
-        Pathfinder pathfinder = new MapsPathfinder(startCellId);
-        Path bestPath = null;
-        Path tmpPath;
-        int shortestDistance = 999999;
-        int tmpDistance;
-        for(MapPosition mapPosition : mapPositionsInArea) {
-            if(mapPosition.worldMap < 1)
-                continue;
-            tmpPath = pathfinder.compute(sourceMapId, mapPosition.id);
-            if(tmpPath == null) // chemin impossible
-                continue;
-            tmpDistance = tmpPath.getCrossingDuration(); // c'est en fait la distance
-            if(tmpDistance < shortestDistance) {
-                shortestDistance = tmpDistance;
-                bestPath = tmpPath;
-            }
-        }
-        if(bestPath != null)
-            bestPath.startCellId = startCellId;
-        return bestPath;
-    }
+    def toArea(self, areaId:int, sourceMapId:int, startCellId:int) -> Path:
+        logger.debug("Going to area with id = " + areaId + " from  " + MapPosition.getMapPositionById(sourceMapId) + ".")
+        mapPositions = MapPosition.getMapPositions()
+        mapPositionsInArea = list[MapPosition]()
+        for mapPosition in mapPositions:
+            if mapPosition.subAreaId == areaId:
+                mapPositionsInArea.append(mapPosition)
+        if len(mapPositionsInArea) == 0:
+            raise Exception("Invalid area id.")
+        logger.debug(mapPositionsInArea.size() + " maps in the area with id = " + areaId + ".")
+        pathfinder = MapsPathfinder(startCellId)
+        shortestDistance = 999999
+        for mapPosition in mapPositionsInArea:
+            if mapPosition.worldMap < 1:
+                continue
+            tmpPath = pathfinder.compute(sourceMapId, mapPosition.id)
+            if tmpPath == None: # chemin impossible
+                continue
+            tmpDistance = tmpPath.getCrossingDuration() # c'est en fait la distance
+            if tmpDistance < shortestDistance:
+                shortestDistance = tmpDistance
+                bestPath = tmpPath
+        if bestPath != None:
+            bestPath.startCellId = startCellId
+        return bestPath

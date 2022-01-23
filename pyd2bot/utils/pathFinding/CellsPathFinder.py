@@ -2,10 +2,11 @@ from pyd2bot.gameData.world.map import Map, Cell
 from pyd2bot.gameData.world.mapPoint import MapPoint
 from pyd2bot.gameData.world.mouvementPath import MovementPath
 from pyd2bot.gameData.world.pathElement import PathElement
-from pyd2bot.utils.pathFinding.lightMapNode import LightMapNode
-from .pathFinder import PathNode, Pathfinder
+import pyd2bot.utils.pathFinding.lightMapNode as lmn
+from pyd2bot.utils.pathFinding.path import PathNode
+from pyd2bot.utils.pathFinding.pathFinder import Pathfinder
 
-	
+
 class CellNode(PathNode): 
 	HORIZONTAL_WALK_DURATION = 510
 	VERTICAL_WALK_DURATION = 425
@@ -56,14 +57,12 @@ class CellNode(PathNode):
 		if self.outGoingDirection != -1:
 			return str(self.id) + " [" + self.x + ", " + self.y + "] " + Map.directionToString(self.outGoingDirection)
 		return str(self.id) + " [" + self.x + ", " + self.y + "]"
-	
-
 
 class CellsPathfinder(Pathfinder): 
 	
 	def __init__(self, map:Map):
 		super().__init__(map)
-		self.mapNode = LightMapNode(map)
+		self.mapNode = lmn.LightMapNode(map)
 	
 	def getNodeFromId(self, cellId:int) -> CellNode: 
 		return CellNode(cellId)
@@ -74,12 +73,12 @@ class CellsPathfinder(Pathfinder):
 				return pn
 		return None
 	
-	def getNeighbourNodes(self, node:CellNode) -> list[CellNode]: 
-		neighbours = list[CellNode]()
+	def getNeighbourNodes(self, node:CellNode) -> dict[int, CellNode]: 
+		neighbours = dict[int, CellNode]()
 		for direction in range(8) :
-			cell = self.mapNode.getNeighbourCellFromDirection(node.id, direction)
+			cell = self.mapNode.getCellNeighbourFromDirection(node.id, direction)
 			if cell:
-				neighbours.append(CellNode(cell, direction, self.currentNode))
+				neighbours[cell.id] = CellNode(cell, direction, self.currentNode)
 		return neighbours		
 
 	def movementPathFromArray(self, iPath:list[int]) -> MovementPath:

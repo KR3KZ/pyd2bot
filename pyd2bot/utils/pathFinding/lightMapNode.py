@@ -1,8 +1,6 @@
-
-
 # noeud utilisé pour les parcours de zones (besoin:pas de création de chemin)
-from functools import lru_cache
 from pyd2bot.gameData.world.map import Map, Cell
+from pyd2bot.utils.pathFinding.mapZones import MapZones
 from pyd2bot.utils.pathFinding.pathFinder import PathNode
 DOUBLE_MAX = 1.7976931348623158E+308
 
@@ -12,75 +10,15 @@ class LightMapNode(PathNode):
     MIDDLE_DOWN_CELL_ID = 552 # (Map.CELLS_COUNT - 1 - Map.WIDTH) + (Map.WIDTH / 2)
     MIDDLE_LEFT_CELL_ID = 280 # Map.CELLS_COUNT * (Map.HEIGHT / 2)
     MIDDLE_UP_CELL_ID = 7 # Map.WIDTH / 2
-    FORBIDDEN_CELL_IDS = set(0, 14, 27, 532, 545, 559)
-    _map:Map
-    zones:MapZones
-    currentZone:list[Cell]
+    FORBIDDEN_CELL_IDS = set([0, 14, 27, 532, 545, 559])
     
-    def __init__(self, map:Map, currentCellId:int, lastDirection:int=-1, parent:PathNode=None):
-        super().__init__(id=map.id, incomingDirection=lastDirection, parent=parent)
+    def __init__(self, map:Map, currentCellId:int=None, incomingDirection:int=-1, parent:PathNode=None):
+        super().__init__(id=map.id, incomingDirection=incomingDirection, parent=parent)
         self.map = map
         self.zones = MapZones(map)
-        self.currentZone = self.zones.getZone(currentCellId)
+        if currentCellId:
+            self.currentZone = self.zones.getZone(currentCellId)
 
-    def getNeighbourCellFromDirection(self, srcId:int, direction:int) -> Cell:
-        """retourne la cellule voisine selon une certaine direction"""
-        if (srcId // Map.WIDTH) % 2 == 0: 
-            offsetId = 0
-            
-        else:
-            offsetId = 1
-
-        if direction == Map.RIGHT:
-            destId = srcId + 1
-            if destId % Map.WIDTH != 0:
-                return self.map.cells[destId]
-            return None
-        
-        elif direction == Map.DOWN_RIGHT:
-            destId = srcId + Map.WIDTH + offsetId
-            if destId < Map.CELLS_COUNT and (srcId + 1) % (Map.WIDTH * 2) != 0:
-                return self.map.cells[destId]
-            return None
-            
-        elif direction == Map.DOWN :
-            destId = srcId + Map.WIDTH * 2
-            if destId < Map.CELLS_COUNT:
-                return self.map.cells[destId]
-            return None
-        
-        elif direction == Map.DOWN_LEFT :
-            destId = srcId + Map.WIDTH - 1 + offsetId
-            if destId < Map.CELLS_COUNT and srcId % (Map.WIDTH * 2) != 0:
-                return self.map.cells[destId]
-            return None
-        
-        elif direction == Map.LEFT :
-            destId = srcId - 1
-            if srcId % Map.WIDTH != 0:
-                return self.map.cells[destId]
-            return None
-        
-        elif direction == Map.UP_LEFT :
-            destId = srcId - Map.WIDTH - 1 + offsetId
-            if destId >= 0 and srcId % (Map.WIDTH * 2) != 0:
-                return self.map.cells[destId]
-            return None
-        
-        elif direction == Map.UP :
-            destId = srcId - Map.WIDTH * 2
-            if destId >= 0:
-                return self.map.cells[destId]
-            return None
-        
-        elif direction == Map.UP_RIGHT :
-            destId = srcId - Map.WIDTH + offsetId
-            if destId > 0 and (srcId + 1) % (Map.WIDTH * 2) != 0:
-                return self.map.cells[destId]
-            return None
-        
-        raise Exception("Invalid direction.")
-    
     def isOutgoingPossibility(self, cellId:int, direction:int) -> bool:
         """Indicate if a cell is a possibility to go out of the current map for a certain direction"""
         if direction == Map.LEFT:
@@ -135,16 +73,7 @@ class LightMapNode(PathNode):
                     shortestDistance = currentDistance
                     nearestCellId = cell.id
         return nearestCellId
-    
-    def getNeighboursCell(self, cellId:int) -> list[Cell]:
-        """Get the neighbours of a cell"""
-        neighbours = list[Cell]()
-        for i in range(8):
-            cell = self.getNeighbourCellFromDirection(cellId, i)
-            if cell is not None:
-                neighbours.append(cell)
-        return neighbours
-    
+
     def setNode(self) -> None: 
         pass
     

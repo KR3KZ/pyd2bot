@@ -108,6 +108,73 @@ class Map:
         else:
             raise Exception("invalid direction")
     
+    def getNeighbourCellFromDirection(self, srcId:int, direction:int) -> 'Cell':
+        """retourne la cellule voisine selon une certaine direction"""
+        if (srcId // self.WIDTH) % 2 == 0: 
+            offsetId = 0
+            
+        else:
+            offsetId = 1
+
+        if direction == self.RIGHT:
+            destId = srcId + 1
+            if destId % self.WIDTH != 0:
+                return self.cells[destId]
+            return None
+        
+        elif direction == self.DOWN_RIGHT:
+            destId = srcId + self.WIDTH + offsetId
+            if destId < self.CELLS_COUNT and (srcId + 1) % (self.WIDTH * 2) != 0:
+                return self.cells[destId]
+            return None
+            
+        elif direction == self.DOWN :
+            destId = srcId + self.WIDTH * 2
+            if destId < self.CELLS_COUNT:
+                return self.cells[destId]
+            return None
+        
+        elif direction == self.DOWN_LEFT :
+            destId = srcId + self.WIDTH - 1 + offsetId
+            if destId < self.CELLS_COUNT and srcId % (self.WIDTH * 2) != 0:
+                return self.cells[destId]
+            return None
+        
+        elif direction == self.LEFT :
+            destId = srcId - 1
+            if srcId % self.WIDTH != 0:
+                return self.cells[destId]
+            return None
+        
+        elif direction == self.UP_LEFT :
+            destId = srcId - self.WIDTH - 1 + offsetId
+            if destId >= 0 and srcId % (self.WIDTH * 2) != 0:
+                return self.cells[destId]
+            return None
+        
+        elif direction == self.UP :
+            destId = srcId - self.WIDTH * 2
+            if destId >= 0:
+                return self.cells[destId]
+            return None
+        
+        elif direction == self.UP_RIGHT :
+            destId = srcId - self.WIDTH + offsetId
+            if destId > 0 and (srcId + 1) % (self.WIDTH * 2) != 0:
+                return self.cells[destId]
+            return None
+        
+        raise Exception("Invalid direction.")
+
+    def getCellNeighbours(self, cellId:int) -> set['Cell']:
+        """Get the neighbours of a cell"""
+        neighbours = set[Cell]()
+        for i in range(8):
+            cell = self.getNeighbourCellFromDirection(cellId, i)
+            if cell:
+                neighbours.add(cell)
+        return neighbours
+    
     @staticmethod
     def directionToString(direction:int) -> str:
         if direction == Map.LEFT:

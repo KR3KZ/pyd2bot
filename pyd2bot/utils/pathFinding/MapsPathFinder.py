@@ -2,15 +2,14 @@ from pyd2bot.gameData.mapReader import MapLoader
 from pyd2bot.gameData.world.map import Cell, Map
 from pyd2bot.gameData.world.mapPosition import MapPosition
 from pyd2bot.utils.pathFinding.lightMapNode import LightMapNode
+from pyd2bot.utils.pathFinding.mapZones import MapZones
 from pyd2bot.utils.pathFinding.pathFinder import PathNode, Pathfinder
 
 class MapNode(LightMapNode):
     """"Wrapper of LightMapNode"""
             
-    def __init__(self, map:Map, lastDirection:int, parent:PathNode, incomingCellId:int): 
-        super().__init__(map.id, lastDirection, parent)
-        self.map = map
-        self.zones = MapZones(map)
+    def __init__(self, map:Map or int, incomingDirection:int, parent:PathNode, incomingCellId:int): 
+        super().__init__(map=map, currentCellId=None, incomingDirection=incomingDirection, parent=parent)
         self.outgoingPossibilities = list[Cell]()
         mp = MapPosition.getMapPositionById(map.id)
         self.x = mp.posX
@@ -25,6 +24,10 @@ class MapNode(LightMapNode):
                 self.currentZone = self.zones.getZone(incomingCellId) # s'applique aussi au noeud de destination, mais cela ne change rien
         self.isAccessible = self.currentZone != None
         self.setHeuristic(self.destNode)
+    
+    @classmethod
+    def fromMapId(cls, mapId:int, incomingDirection:int, parent:PathNode, incomingCellId:int):
+        return cls(MapLoader.load(mapId), incomingDirection, parent, incomingCellId)
     
     def setParentOugoingCell(self) -> None:
         """Add the current cell to parent's outgoing possibilities, detemining its current zone.

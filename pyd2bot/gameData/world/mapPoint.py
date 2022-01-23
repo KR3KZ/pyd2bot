@@ -3,9 +3,9 @@ import math
 
 
 class Point:
-    def __init__(self):    
-        self.x = 0
-        self.y = 0
+    def __init__(self, x, y):    
+        self.x = x
+        self.y = y
         
     def __str__(self):
         return "(" + str(self.x) + ", " + str(self.y) + ")"
@@ -21,7 +21,7 @@ class MapPoint:
     UP_RIGHT = 7
     MAP_WIDTH = 14
     MAP_HEIGHT = 20
-    CELLPOS = dict(int, Point)
+    CELLPOS = dict[int, Point]()
     VECTOR_RIGHT = Point(1, 1)
     VECTOR_DOWN_RIGHT = Point(1, 0)
     VECTOR_DOWN = Point(1, -1)
