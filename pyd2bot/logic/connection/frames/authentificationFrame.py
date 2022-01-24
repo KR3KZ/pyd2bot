@@ -1,67 +1,70 @@
-import pyd2bot.bot as bot
-from pyd2bot import Constants
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from pyd2bot.network.connection import Connection
 from pyd2bot.logic.connection.managers import AuthentificationManager
 from pyd2bot.misc.interClient.interClientManager import InterClientManager
+from pyd2bot.logic import IFrame
+import logging
+logger = logging.getLogger("bot")
 
 
-class AuthentificationFrame:
-
-    def __init__(self, client):
-        self.client = client    
-      
+class AuthentificationFrame(IFrame):
+    MAX_LOGIN_ATTEMPTS = 3
+    
+    
+    def __init__(self, conn:'Connection'):
+        super().__init__(conn)
+        self._login_attempts = 0
+    
     def process(self, msg) -> bool:
         mtype = msg["__type__"]
+
+        if self._done:
+            return False
         
         if mtype == "ServerConnectionFailedMessage":
-            self.client.closeConnection()
-            if self.client.login_attempts < Constants.MAX_LOGIN_ATTEMPTS:
-                self.client.connectToLoginServer()
+            if self._login_attempts < self.MAX_LOGIN_ATTEMPTS:
+                self.conn.connectToLoginServer()
+                self._login_attempts += 1
             else:
-                self.client.killSig.set()
+                self.conn.interrupt()
                 return True
             return True 
        
-        if mtype == "HelloConnectMessage":
+        elif mtype == "HelloConnectMessage":
             AuthentificationManager.setSalt(msg["salt"])
             AuthentificationManager.setPublicKey(msg["key"])
             AuthentificationManager.initAESKey()
-            iMsg = AuthentificationManager.getIdentificationMessage(self.client._login, self.client._password)
-            self.client.send(iMsg)
+            iMsg = AuthentificationManager.getIdentificationMessage(self.bot._login, self.bot._password)
+            self.conn.send(iMsg)
             if InterClientManager.flashKey:
-                flashKeyMsg = {'__type__': 'ClientKeyMessage', 'key': InterClientManager.flashKey}
-                self.client.send(flashKeyMsg)
+                flashKeyMsg = {
+                    '__type__': 'ClientKeyMessage', 
+                    'key': InterClientManager.flashKey
+                }
+                self.conn.send(flashKeyMsg)
             return True
         
-        if mtype == "IdentificationSuccessMessage":
-            if msg["login"]:
-                AuthentificationManager.username = msg["login"]
-            bot.Bot.accountId = msg["accountId"]
-            bot.Bot.communityId = msg["communityId"]
-            bot.Bot.hasRights = msg["hasRights"]
-            bot.Bot.hasConsoleRight = msg["hasConsoleRight"]
-            bot.Bot.nickname = msg["accountTag"]["nickname"]
-            bot.Bot.tag = msg["accountTag"]["tagNumber"]
-            bot.Bot.subscriptionEndDate = msg["subscriptionEndDate"]
-            bot.Bot.subscriptionDurationElapsed = msg["subscriptionElapsedDuration"]
-            bot.Bot.secretQuestion = msg["secretQuestion"]
-            bot.Bot.accountCreation = msg["accountCreation"]
-            bot.Bot.wasAlreadyConnected = msg["wasAlreadyConnected"]
-
+        elif mtype == "IdentificationSuccessMessage":
+            self.bot.accountId = msg["accountId"]
+            self.bot.communityId = msg["communityId"]
+            self.bot.hasRights = msg["hasRights"]
+            self.bot.hasConsoleRight = msg["hasConsoleRight"]
+            self.bot.nickname = msg["accountTag"]["nickname"]
+            self.bot.tag = msg["accountTag"]["tagNumber"]
+            self.bot.subscriptionEndDate = msg["subscriptionEndDate"]
+            self.bot.subscriptionDurationElapsed = msg["subscriptionElapsedDuration"]
+            self.bot.secretQuestion = msg["secretQuestion"]
+            self.bot.accountCreation = msg["accountCreation"]
+            self.bot.wasAlreadyConnected = msg["wasAlreadyConnected"]
+            self._done = True
             return True
         
-        if mtype == "IdentificationFailedForBadVersionMessage":
-            self.client.closeConnection()
+        elif mtype == "IdentificationFailed":
+            logger.error("Identification failed for reason: %s" % msg["reason"])
+            self.conn.interrupt()
             return True
         
-        if mtype == "IdentificationFailedBannedMessage":
-            self.client.closeConnection()
-            return True
-        
-        if mtype == "IdentificationFailedMessage":
-            self.client.closeConnection()
-            return True
-        
-        else:
-            return False
+        return False
 
 

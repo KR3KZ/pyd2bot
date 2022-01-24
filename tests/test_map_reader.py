@@ -25,8 +25,15 @@ def test_load_map():
         for key in cell:
             if cell[key] != grid.cells[i].__dict__[key]:
                 print("key: {0}, value: {1} but old read value {2}".format(key, grid.cells[i].__dict__[key], cell[key]))
-                
-test_load_map()
-test_cach()
+
+def test_cell_load():
+    mapid = 193331717       
+    cellid = 260 
+    grid = MapLoader.load(mapid)
+    print(grid.cells[cellid].isAccessibleDuringRP())
+
+test_cell_load()
+# test_load_map()
+# test_cach()
     
 

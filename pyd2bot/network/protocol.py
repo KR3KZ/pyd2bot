@@ -14,7 +14,6 @@ class UnknownTypeIdError(Exception):
 class ProtocolSpecNotFoundError(Exception):
     pass
 
-logger = logging.getLogger("bot")
 ROOTDIR = os.path.dirname(__file__)
 
 class DofusProtocol:
@@ -36,7 +35,7 @@ class DofusProtocol:
         return self.json["msg_by_id"][str(id)]
     
     def getMsgTypeByName(self, name):
-        return self.json["type"][name]
+        return self.json["type"].get(name)
 
     def isPrimitive(self, name):
         return name in self.json["primitives"]
@@ -70,24 +69,19 @@ class DofusProtocol:
             if self.isPrimitive(type_name):
                 return getattr(ByteArray, "read" + type_name)(data)
             msg_type = self.getMsgTypeByName(type_name)
-            
-        logger.debug("reading data %s", data)
-        logger.debug("with type %s", type_name)
 
         if msg_type["parent"] is not None:
-            logger.debug("calling parent %s", msg_type["parent"])
             ans = self.read(msg_type["parent"], data)
             ans["__type__"] = msg_type["name"]
             
         else:
             ans = {"__type__": msg_type["name"]}
 
-        logger.debug("reading boolean variables")
         ans.update(self.readBooleans(msg_type["boolVars"], data))
-        logger.debug("remaining data: %s", data.remaining())
+        
 
         for var in msg_type["vars"]:
-            logger.debug("reading %s", var)
+            
             if var["optional"]:
                 if not data.readByte():
                     continue
@@ -95,7 +89,7 @@ class DofusProtocol:
                 ans[var["name"]] = self.readArray(var, data)
             else:
                 ans[var["name"]] = self.read(var["type"], data)
-            logger.debug("remaining data: %s", data.remaining())
+            
         if msg_type["hash_function"] and data.remaining() == 48:
             ans["hash_function"] = data.read(48)
         return ans

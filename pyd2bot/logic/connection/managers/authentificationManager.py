@@ -51,7 +51,7 @@ class AuthentificationManager:
         ba_pubKey = ByteArray()
         if not rsacipher.verify(baSignedKey, ba_pubKey):
             raise Exception("Pubkey Sign validation failed!")
-        AuthentificationManager._publicKey = "-----BEGIN PUBLIC KEY-----\n" + ba_pubKey.to_string() + "\n-----END PUBLIC KEY-----"
+        AuthentificationManager._publicKey = "-----BEGIN PUBLIC KEY-----\n" + str(ba_pubKey) + "\n-----END PUBLIC KEY-----"
     
     @staticmethod
     def getCanAutoConnectWithToken() -> bool:

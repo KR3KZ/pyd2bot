@@ -1,54 +1,48 @@
-import pyd2bot.bot as bot
 from pyd2bot.logic.connection.managers import AuthentificationManager
 import math
 import random
 from pyd2bot.utils.crypto import RSA, RSACipher, PKCS1
 from pyd2bot.utils.binaryIO import ByteArray
+from pyd2bot.logic import IFrame
 
 
-class ServerLoginFrame:
+class ServerLoginFrame(IFrame):
 
-    def __init__(self, client):
-        self.client = client    
-        
-    def handleConnectionOpened(self):
-        pass
-    
-    def handleConnectionClosed(self):
-        pass
-      
+
     def process(self, msg) -> bool:
         mtype = msg["__type__"]
-        
+
+        if self._done:
+            return False
+            
         if mtype == "ServersListMessage":
-            self.client.send({
+            self.conn.send({
                 '__type__': 'ServerSelectionMessage',
-                'serverId': bot.Bot.serverID
+                'serverId': self.bot.serverID
             })
             return True
         
         elif mtype == "SelectedServerDataMessage":
-            self.client.serverInfos = msg
+            self.conn.serverInfos = msg
             ba_ticket = AuthentificationManager.decodeWithAES(msg["ticket"])
-            self.client.serverInfos["ticket"] = ba_ticket.decode()
-            self.client.game_server_host = msg["address"]
-            self.client.sock.close()
-            self.counter = 0
-            self.client.connectToGameServer()
+            self.conn.serverInfos["ticket"] = ba_ticket.decode("utf-8")
+            self.conn.gameServer = msg["address"]
+            self.conn.closeConnection()
+            self.conn.connectToGameServer()
             return True
         
         elif mtype == "HelloGameMessage":
             ticketMsg = {
                 '__type__': 'AuthenticationTicketMessage',
                 'lang': 'fr',
-                'ticket': self.client.serverInfos["ticket"]
+                'ticket': self.conn.serverInfos["ticket"]
             }
-            self.client.send(ticketMsg)
+            self.conn.send(ticketMsg)
             return True
         
         elif mtype == "RawDataMessage":
             # Bypass humain check here
-            gameServerTicket = self.client.serverInfos["ticket"]
+            gameServerTicket = self.conn.serverInfos["ticket"]
 
             key = b"AKMBJ2YBJUHRsk8yptfOlcVLksJSCCSiWUryWD/vv6euIERWlfrWN0+Csf8UVG4CY"\
                 b"qoz3hDBuaA3oe48W1xFADd5Bm+ks0dW3hemrTSI7HBLSLBWAcKrZ21wPfgWD2QUxVV1infGd"\
@@ -92,25 +86,28 @@ class ServerLoginFrame:
             rsacipher = RSACipher(rsaKeyNetwork, PKCS1())
             enc_data = rsacipher.encrypt(dataToEncrypt)
             ret = enc_data.to_int8Arr()
-            self.client.send({
+            self.conn.send({
                 '__type__': 'CheckIntegrityMessage',
                 'data': ret
             })
             return True
             
         elif mtype == "TrustStatusMessage":
-            bot.Bot.connected.set()
-            self.client.send({'__type__': 'CharactersListRequestMessage'})
+            self.bot.connected.set()
+            self.conn.send({'__type__': 'CharactersListRequestMessage'})
             return True
 
         elif mtype == "CharactersListMessage":
             for character in msg["characters"]:
-                if character["name"] == bot.Bot.characterName:
-                    bot.Bot.characterID = character["id"]
-            self.client.send({
+                if character["name"] == self.bot.name:
+                    self.bot.characterID = character["id"]
+            self.conn.send({
                 '__type__': 'CharacterSelectionMessage', 
-                'id': bot.Bot.characterID
+                'id': self.bot.characterID
             })
+            self._done = True
             return True
+        
+        return False
 
         

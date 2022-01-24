@@ -1,42 +1,54 @@
 import logging
 import random
-from pyd2bot.gameData.mapReader import MapLoader
-from pyd2bot.logic.common.managers.mapManager import MapManager
-logger = logging.getLogger("bot")
-import pyd2bot.clientMain as conn
-from pyd2bot.utils.pathFinding import Pathfinding
+from sys import exc_info
+from time import sleep
 from . import IBot
 
-class Bot(conn.DofusClient, IBot):
 
-    def __init__(self):
-        super(Bot, self).__init__()
-        self.pf = Pathfinding()
-        self.context = 1
+logger = logging.getLogger("bot")
+class Bot(IBot):
+
+    def __init__(self, name, serverID, login, password) -> None:
+        super().__init__()
+        self.name = name
+        self.serverID = serverID
+        self._login = login
+        self._password = password
+
+    def disconnect(self):
+        self.conn.interrupt()
         
-    def harvest(self):
-        pass
-    
-    def gameContextCreate(self) :
-        self.send({'__type__': 'GameContextCreateRequestMessage'})
-        
-    def requestMapData(self):
-        self.send({
-            '__type__': 'MapInformationsRequestMessage', 
-            'mapId': int(Bot.currMapId)
-        })
+    def login(self):
+        self.conn.start()
+        self.conn.connectToLoginServer()
+        self.mapDataReceived.wait()
 
     def walkToCell(self, cellId):
-        print("current bot cellId: " + str(self.currCellId))
-        print("current bot mapId: " + str(self.currMapId))
-        hash = bytes(random.getrandbits(8) for _ in range(48))
-        self.pf.updatePosition(Bot.currMap, Bot.currCellId)
-        self.send(
-        {
-            '__type__': 'GameMapMovementRequestMessage',
-            'hash_function': hash,
-            'keyMovements': self.pf.getCellsPathTo(cellId),
-            'mapId': Bot.currMapId
-        })
-            
+        try:
+            logger.info("current bot cellId: " + str(self.currCellId))
+            logger.info("current bot mapId: " + str(self.currMapId))
+            hash = bytes(random.getrandbits(8) for _ in range(48))
+            self.pf.updatePosition(self.currMap, self.currCellId)
+            keymoves = self.pf.getCellsPathTo(cellId)
+            if keymoves:
+                self.conn.send(
+                {
+                    '__type__': 'GameMapMovementRequestMessage',
+                    'hash_function': hash,
+                    'keyMovements': keymoves,
+                    'mapId': self.currMapId
+                })
+                if self.conn.waitMsg(msgName="GameMapMovementMessage", filter=lambda m: int(m["actorId"]) == self.characterID, timeout=10):
+                    sleep(self.pf.getCellsPathDuration())
+                    self.conn.send({'__type__': "GameMapMovementConfirmMessage"})
+                    self.currCellId = cellId
+                    logger.info("bot moved to cellId: " + str(self.currCellId))
+                    return True
+                else:
+                    logger.error("Bot failed to walk to cellId: " + str(cellId))
+                    return False
+        except Exception as e:
+            logger.error("fatal error: ", exc_info=True)
+            return False
+                
             

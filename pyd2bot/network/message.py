@@ -104,7 +104,6 @@ class Msg:
             return self.protocol.getMsgById(self.id)["name"]
 
     def json(self):
-        logger.debug("Getting json representation of message %s", self)
         if not hasattr(self, "parsed"):
             self.parsed = self.protocol.read(self.name, self.data)
         return self.parsed

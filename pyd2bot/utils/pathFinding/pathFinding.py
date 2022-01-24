@@ -55,15 +55,15 @@ class Pathfinding:
         """retourne un chemin de cellules vers une cellule cible"""
         pathfinder = CellsPathfinder(self.mapNode.map)
         self.currentCellsPath = pathfinder.compute(self.currentCellId, targetId)
-        if self.currentCellsPath is None:
+        if len(self.currentCellsPath) < 2:
             return None
         mvPath = pathfinder.movementPathFromArray(self.currentCellsPath.getIdsList())
         print("path: " + str(mvPath))
         return mvPath.getServerMovement()
     
-    def getCellsPathDuration(self) -> int:
+    def getCellsPathDuration(self) -> float:
         """retourne la durée du chemin de cellules"""
-        return self.currentCellsPath.getCrossingDuration()
+        return self.currentCellsPath.getCrossingDuration() / 1000
     
     def nextDirectionForReachTarget(self) -> Direction:
         """retourne une direction vers la map cible"""

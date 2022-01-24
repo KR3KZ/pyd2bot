@@ -15,7 +15,7 @@ class ByteArray(bytearray):
     def length(self, val):   
         del self[val:]
            
-    def to_string(self):
+    def __str__(self):
         return base64.b64encode(self).decode("utf")
 
     def remaining(self):
@@ -64,10 +64,6 @@ class ByteArray(bytearray):
     def readByteArray(self):
         lon = self.readVarInt()
         return self.read(lon)
-
-    # def writeBytes(self, ba):
-    #     self.writeVarInt(len(ba))
-    #     self += ba
 
     def readDouble(self):
         return struct.unpack("!d", self.read(8))[0]

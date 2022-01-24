@@ -31,25 +31,22 @@ class CellNode(PathNode):
     def setNode(self): 
         pass
     
-    def getCrossingDuration(self, mode:bool) -> int: 
-        if not mode:  # walk
+    def getCrossingDuration(self, mode:bool) -> int:
+        if not mode:
             if self.incomingDirection % 2 == 0:
-                if self.incomingDirection % 4 == 0: # left or right
+                if self.incomingDirection % 4 == 0:
                     return self.HORIZONTAL_WALK_DURATION
-                else: # top or down
+                else:
                     return self.VERTICAL_WALK_DURATION
-            
-            else: # other directions
+            else:
                 return self.DIAGONAL_WALK_DURATION
-        
-        else:  # run
+        else:
             if self.incomingDirection % 2 == 0:
-                if self.incomingDirection % 4 == 0: # left or right
+                if self.incomingDirection % 4 == 0:
                     return self.HORIZONTAL_RUN_DURATION
-                else: # top or down
+                else:
                     return self.VERTICAL_RUN_DURATION
-            
-            else: # other directions
+            else:
                 return self.DIAGONAL_RUN_DURATION
         
     def __str__(self) -> str: 
@@ -69,19 +66,20 @@ class CellsPathfinder(Pathfinder):
     def nodeIsInList(self, cn:CellNode, plist:list[CellNode]) -> tuple[int, PathNode]: 
         for i, pn in enumerate(plist):
             if pn.id == cn.id:
-                return i, pn
+                return i
         return None, None
     
-    def getNeighbourNodes(self, node:CellNode) -> dict[int, CellNode]: 
+    def getNeighbours(self, node:CellNode) -> dict[int, CellNode]: 
         neighbours = dict[int, CellNode]()
         for direction in range(8) :
             cell = self.map.getNeighbourCellFromDirection(node.id, direction)
             if cell:
                 neighbours[cell.id] = CellNode(cell, direction, node)
-                neighbours[cell.id].setHeuristic(self.destNode)
         return neighbours		
 
     def movementPathFromArray(self, iPath:list[int]) -> MovementPath:
+        if not iPath:
+            return None
         mpPath = [MapPoint.fromCellId(cellId) for cellId in iPath]
         mp = MovementPath([PathElement(mpPath[i], mpPath[i].orientationTo(mpPath[i + 1])) for i in range(len(mpPath) - 1)])
         mp.append(PathElement(mpPath[-1], mp[-1].orientation))

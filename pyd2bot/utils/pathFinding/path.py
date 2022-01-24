@@ -30,7 +30,7 @@ class PathNode:
             self.g = self.parent.g + self.distanceTo(self.parent)
             self.cost = self.parent.cost + 1
         
-        else:  # noeud initial et noeud final
+        else:
             self.g = 0
             self.cost = 0
         
@@ -52,6 +52,9 @@ class PathNode:
     
     def __str__(self):
         pass
+    
+    def __hash__(self) -> int:
+        return self.id
 
 class Path(list[PathNode]):
     

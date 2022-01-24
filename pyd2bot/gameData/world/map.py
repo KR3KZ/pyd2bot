@@ -1,7 +1,9 @@
 import math
 from pyd2bot.gameData.world.mapPosition import MapPosition
 from pyd2bot.utils.binaryIO import BinaryStream
+import logging
 
+logger = logging.getLogger("bot")
 
 class Map:
     CELLS_COUNT = 560
@@ -325,7 +327,7 @@ class Cell:
             self.moveZone = raw.readUnsignedByte()
 
         if self.map.version > 10 and (self.hasLinkedZoneRP() or self.hasLinkedZoneFight()):
-            self.linked_zone = raw.readUnsignedByte()
+            self.linkedZone = raw.readUnsignedByte()
 
         if 7 < self.map.version < 9:
             self.tmpBits = raw.readByte()
@@ -369,11 +371,11 @@ class Cell:
                and not self.havenbagCell
     
     def linkedZoneFight(self) -> int:
-        return self.linked_zone & 15
+        return self.linkedZone & 15
      
     def isAccessibleDuringRP(self):
-        isAccessible = self.mov and not self.nonWalkableDuringRP and self.floor == 0
-        print("isAccessibleDuringRP called for :id = {}, los = {}, nonWalkableDuringRP = {}, floor = {}, mov = {} => accessibleDuringRp = {}"\
+        isAccessible = self.mov and not self.nonWalkableDuringRP #and self.floor == 0
+        logger.debug("isAccessibleDuringRP called for :id = {}, los = {}, nonWalkableDuringRP = {}, floor = {}, mov = {} => accessibleDuringRp = {}"\
             .format(self.id, self.los, self.nonWalkableDuringRP, self.floor, self.mov, isAccessible))
         return isAccessible
     
@@ -390,7 +392,7 @@ class Cell:
         return self.id
 
     def __str__(self) -> str:
-        return "map : " + self.map.ip + " CellId : " + self.id + " mov : " + self.mov + " los : " + self.los + " nonWalkableDuringFight : " + self.nonWalkableDuringFight + " nonWalkableDuringRp : " + self.nonWalkableDuringRP + " farmCell : " + self.farmCell + " havenbagCell: " + self.havenbagCell + " visbile : " + self.visible + " speed: " + self.speed + " moveZone: " + self.moveZone + " linkedZoneId: " + self.linkedZone;
+        return "map : " + self.map.id + " CellId : " + self.id + " mov : " + self.mov + " los : " + self.los + " nonWalkableDuringFight : " + self.nonWalkableDuringFight + " nonWalkableDuringRp : " + self.nonWalkableDuringRP + " farmCell : " + self.farmCell + " havenbagCell: " + self.havenbagCell + " visbile : " + self.visible + " speed: " + self.speed + " moveZone: " + self.moveZone + " linkedZoneId: " + self.linkedZone
 class GraphicalElement:
     
     def __init__(self, raw:BinaryStream, mapVersion):
