@@ -1,6 +1,4 @@
-from collections import deque
 from functools import lru_cache
-from time import perf_counter
 import pyd2bot.Constants as Constants
 from dataUnpacker.dlm import DLM
 
@@ -18,5 +16,5 @@ class MapLoader:
 
     @staticmethod
     def getMapURI(mapId):
-        return f"{mapId % 10}/{mapId}.dlm"
+        return f"{int(mapId) % 10}/{int(mapId)}.dlm"
     

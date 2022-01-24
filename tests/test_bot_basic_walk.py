@@ -1,14 +1,8 @@
 import json
 from time import perf_counter, sleep
-from pyd2bot.logic.bot.bot import Bot
+from pyd2bot.bot import Bot
 import os
-
-from pyd2bot.logic.common.managers.mapManager import MapManager
-from pyd2bot.logic.common.managers.playerManager import PlayerManager
-
-
 ROOTDIR = os.path.dirname(__file__)
-
 bot = Bot()
 conn_f = os.path.join(ROOTDIR, "account.json")
 
@@ -17,12 +11,12 @@ with open(conn_f) as fp:
     
 bot.start(conn)
 bot.connectToLoginServer()
-PlayerManager.inGame.wait()
+bot.inGame.wait()
 bot.gameContextCreate()
-Bot.changeMap(Direction.UP)
-PlayerManager.onMap.wait()
+bot.onMap.wait()
 bot.requestMapData()
-sleep(1)
-bot.walkToCell()
-sleep(3)
+bot.mapDataReceived.wait()
+bot.walkToCell(144)
+bot.idle.wait()
+print("bot stopped moving")
 bot.interrupt()

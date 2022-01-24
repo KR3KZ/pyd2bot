@@ -3,7 +3,7 @@ from inspect import trace
 import socket
 import threading
 import traceback
-from pyd2bot.logic.common.managers.playerManager import PlayerManager
+import pyd2bot.bot as bot
 from pyd2bot.logic.connection.frames.authentificationFrame import AuthentificationFrame
 from pyd2bot.logic.connection.frames.serverLoginFrame import ServerLoginFrame
 from pyd2bot.logic.game.roleplay.frames.rolePlayMovementFrame import RolePlayMovementFrame
@@ -39,8 +39,8 @@ class DofusClient(threading.Thread):
     def start(self, conn):
         self._login = conn["login"]
         self._password = conn["password"]
-        PlayerManager.characterName = conn["characterName"]
-        PlayerManager.serverID = int(conn["serverID"])
+        bot.Bot.characterName = conn["characterName"]
+        bot.Bot.serverID = int(conn["serverID"])
         super().start()
         
     def connectToLoginServer(self):
@@ -68,14 +68,14 @@ class DofusClient(threading.Thread):
                     self.handle(msg)
                     msg = Msg.fromRaw(self.buf, False)
             except:
-                # print("Error: ", traceback.format_exc())
                 pass
+        print("main thread ended")
                 
     def interrupt(self):
         self.killSig.set()
-        print("Goodbye cruel world!")
         self.sock.close()
-    
+        print("Goodbye cruel world!")
+        
     def send(self, msgjson):
         msg = Msg.from_json(msgjson)
         self.counter += 1
@@ -84,9 +84,12 @@ class DofusClient(threading.Thread):
         
     def handle(self, msg: Msg):
         jmsg = msg.json()
-        if jmsg["__type__"] == "CharacterLoadingCompleteMessage":
-            PlayerManager.inGame.set()
-        for frame in self.frames:
-            if frame.process(jmsg):
-                return
-    
+        try:
+            if jmsg["__type__"] == "CharacterLoadingCompleteMessage":
+                bot.Bot.inGame.set()
+            for frame in self.frames:
+                if frame.process(jmsg):
+                    return
+        except:
+            print("Error: ", traceback.format_exc())
+            self.interrupt()

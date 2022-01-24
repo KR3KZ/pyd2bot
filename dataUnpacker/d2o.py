@@ -30,7 +30,7 @@ class D2OReader:
         D2O_file_binary = BinaryStream(self._stream, True)
         self._D2O_file_binary = D2O_file_binary
 
-        string_header = D2O_file_binary.read_bytes(3)
+        string_header = D2O_file_binary.readBytes(3)
         base_offset = 0
         if string_header != b'D2O':
             self._stream.seek(0)
@@ -38,31 +38,31 @@ class D2OReader:
             if string_header != "AKSF":
                 raise InvalidD2OFile("Malformated game data file.")
             D2O_file_binary.read_short()
-            base_offset = D2O_file_binary.read_int32()
+            base_offset = D2O_file_binary.readInt()
             self._stream.seek(base_offset, 1)
             self._stream_start_index = self._stream.position + 7
-            string_header = D2O_file_binary.read_bytes(3)
+            string_header = D2O_file_binary.readBytes(3)
             if string_header != b'D2O':
                 raise InvalidD2OFile("Malformated game data file.")
 
-        offset = D2O_file_binary.read_int32()
+        offset = D2O_file_binary.readInt()
         self._stream.seek(base_offset + offset)
-        index_number = D2O_file_binary.read_int32()
+        index_number = D2O_file_binary.readInt()
         index = 0
         index_dict = OrderedDict()
 
         while index < index_number:
-            index_id = D2O_file_binary.read_int32()
-            offset = D2O_file_binary.read_int32()
+            index_id = D2O_file_binary.readInt()
+            offset = D2O_file_binary.readInt()
             index_dict[index_id] = base_offset + offset
             self._counter += 1
             index = index + 8
 
-        class_number = D2O_file_binary.read_int32()
+        class_number = D2O_file_binary.readInt()
         class_index = 0
 
         while class_index < class_number:
-            class_id = D2O_file_binary.read_int32()
+            class_id = D2O_file_binary.readInt()
             self._read_class_definition(class_id, D2O_file_binary)
             class_index += 1
 
@@ -80,7 +80,7 @@ class D2OReader:
         i = 0
         while i < counter:
             objects.append(
-                classes[D2O_file_binary.read_int32()].read(D2O_file_binary))
+                classes[D2O_file_binary.readInt()].read(D2O_file_binary))
             i += 1
         return objects
 

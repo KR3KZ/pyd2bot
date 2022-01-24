@@ -4,7 +4,6 @@ import logging
 from threading import Timer
 import threading
 from time import perf_counter, sleep
-
 from pyd2bot.logic.common.managers.playerManager import PlayerManager
 from .bot import Bot 
 
@@ -27,7 +26,7 @@ class Walker(Bot):
     
     def changeMap(self, direction, max_tries=3):
         nbr_fails = 0
-        while not self.killsig.is_set() and nbr_fails < max_tries:
+        while not self.killSig.is_set() and nbr_fails < max_tries:
             self.mapChanged.clear()
             if self.moving.wait(1):
                 self.idle.wait()
@@ -38,7 +37,7 @@ class Walker(Bot):
 
     def moveToTargets(self, targets):
         exclude = []
-        while not self.killsig.is_set():
+        while not self.killSig.is_set():
             path = self.pathToTargets(targets, exclude)
             res = True
             for x, y in path:
@@ -86,7 +85,7 @@ class Walker(Bot):
         self.refreshMapData()
         if self.currPos not in zone:
             self.moveToZone(zone)
-        while not self.killsig.is_set():
+        while not self.killSig.is_set():
             self.randomMapChange(zone)
 
     def randomMapChange(self, zone):
@@ -105,7 +104,7 @@ class Walker(Bot):
     def run(self):
         s = perf_counter()
         sleep(1)
-        while not self.killsig.is_set():
+        while not self.killSig.is_set():
             try:
                 if self.currPos not in self.zone:
                     self.goToZaap(self.startZaap)
@@ -113,7 +112,7 @@ class Walker(Bot):
                 self.tmpIgnore.append(self.currPos)
                 Timer(self.memoTime, self.onTimer).start()
                 self.harvest()
-                while not self.killsig.is_set():
+                while not self.killSig.is_set():
                     if self.randomMapChange(self.zone):
                         break
             except Exception as e:

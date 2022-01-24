@@ -24,7 +24,7 @@ def test_load_map():
     for i, cell in enumerate(data["cells"]):
         for key in cell:
             if cell[key] != grid.cells[i].__dict__[key]:
-                raise
+                print("key: {0}, value: {1} but old read value {2}".format(key, grid.cells[i].__dict__[key], cell[key]))
                 
 test_load_map()
 test_cach()

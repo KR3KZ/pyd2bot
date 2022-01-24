@@ -1,28 +1,19 @@
 import logging
-from time import sleep
-
+import random
+from pyd2bot.gameData.mapReader import MapLoader
 from pyd2bot.logic.common.managers.mapManager import MapManager
 logger = logging.getLogger("bot")
+import pyd2bot.clientMain as conn
+from pyd2bot.utils.pathFinding import Pathfinding
+from . import IBot
 
-import threading
-from pyd2bot.network.message import Msg
-from pyd2bot.clientMain import DofusClient
-
-class Bot(DofusClient):
+class Bot(conn.DofusClient, IBot):
 
     def __init__(self):
         super(Bot, self).__init__()
-        self.killsig = threading.Event()
-        self.lock = threading.Lock()
-        self.fullPods = threading.Event()
-        self.fullPodsAAA = threading.Event()
+        self.pf = Pathfinding()
         self.context = 1
-            
-    def interrupt(self):
-        self.killsig.set()
-        super().interrupt()
-        logger.info('Goodbye cruel world.')
-
+        
     def harvest(self):
         pass
     
@@ -32,18 +23,20 @@ class Bot(DofusClient):
     def requestMapData(self):
         self.send({
             '__type__': 'MapInformationsRequestMessage', 
-            'mapId': int(MapManager.currMapId)
+            'mapId': int(Bot.currMapId)
         })
 
-    def walkToCell(self):
+    def walkToCell(self, cellId):
+        print("current bot cellId: " + str(self.currCellId))
+        print("current bot mapId: " + str(self.currMapId))
+        hash = bytes(random.getrandbits(8) for _ in range(48))
+        self.pf.updatePosition(Bot.currMap, Bot.currCellId)
         self.send(
         {
             '__type__': 'GameMapMovementRequestMessage',
-            'hash_function': bytearray(b'\xeb\x9a%^\x9b\xc2\xe4!\xe9($\x1c,\xdb\xc5\x12'
-                                        b"\xd8\xad\xa4\xba5a \xac\x84\x853\x0bJ'\xe43"
-                                        b"'J\x92\xb8\x03\xb6}\xaf\x84\x99\xbd1\x18\xb0\x7fL"),
-            'keyMovements': [4520, 4534],
-            'mapId': 193331716.0
+            'hash_function': hash,
+            'keyMovements': self.pf.getCellsPathTo(cellId),
+            'mapId': Bot.currMapId
         })
             
             

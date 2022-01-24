@@ -1,7 +1,8 @@
-from http import server
 import threading
+from pyd2bot.gameData.world.map import Map
 
-class PlayerManager:
+
+class IBot:
     accountId = None
     communityId = None
     hasRights = None
@@ -18,6 +19,10 @@ class PlayerManager:
     serverID = None
     inventoryWeight = None
     weightMax = None
+    
+    farming = threading.Event()
+    farmingError = threading.Event()
+    mapDataReceived = threading.Event()
     moving = threading.Event()
     idle = threading.Event()
     disconnected = threading.Event()
@@ -25,5 +30,12 @@ class PlayerManager:
     onMap = threading.Event()
     inServerSelection = threading.Event()
     connected = threading.Event()
-    farming = threading.Event()
+    
+    currCellId:int = None
+    direction:int = None
+    currMap:Map = None
+    currMapId:int = None
+    currMapInteractiveElems:dict = {}
+    currMapStatedElems:dict = {}
+    
     

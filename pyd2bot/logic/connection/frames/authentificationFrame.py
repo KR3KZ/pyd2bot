@@ -1,23 +1,13 @@
-from cmath import inf
+import pyd2bot.bot as bot
 from pyd2bot import Constants
-from pyd2bot.logic.common.frames.DisconnectionHandlerFrame import DisconnectionHandlerFrame
-from pyd2bot.logic.common.managers.playerManager import PlayerManager
 from pyd2bot.logic.connection.managers import AuthentificationManager
-from pyd2bot.gameData.enums.IdentificationFailureReasons import IdentificationFailureReason
 from pyd2bot.misc.interClient.interClientManager import InterClientManager
-from pyd2bot.misc.interClient.storeDataManager import StoreDataManager
 
 
 class AuthentificationFrame:
 
     def __init__(self, client):
         self.client = client    
-        
-    def handleConnectionOpened(self):
-        pass
-    
-    def handleConnectionClosed(self):
-        pass
       
     def process(self, msg) -> bool:
         mtype = msg["__type__"]
@@ -36,7 +26,6 @@ class AuthentificationFrame:
             AuthentificationManager.setPublicKey(msg["key"])
             AuthentificationManager.initAESKey()
             iMsg = AuthentificationManager.getIdentificationMessage(self.client._login, self.client._password)
-            #_log.info("Current version : " + iMsg.version.major + "." + iMsg.version.minor + "." + iMsg.version.code + "." + iMsg.version.build)
             self.client.send(iMsg)
             if InterClientManager.flashKey:
                 flashKeyMsg = {'__type__': 'ClientKeyMessage', 'key': InterClientManager.flashKey}
@@ -46,19 +35,18 @@ class AuthentificationFrame:
         if mtype == "IdentificationSuccessMessage":
             if msg["login"]:
                 AuthentificationManager.username = msg["login"]
-            PlayerManager.accountId = msg["accountId"]
-            PlayerManager.communityId = msg["communityId"]
-            PlayerManager.hasRights = msg["hasRights"]
-            PlayerManager.hasConsoleRight = msg["hasConsoleRight"]
-            PlayerManager.nickname = msg["accountTag"]["nickname"]
-            PlayerManager.tag = msg["accountTag"]["tagNumber"]
-            PlayerManager.subscriptionEndDate = msg["subscriptionEndDate"]
-            PlayerManager.subscriptionDurationElapsed = msg["subscriptionElapsedDuration"]
-            PlayerManager.secretQuestion = msg["secretQuestion"]
-            PlayerManager.accountCreation = msg["accountCreation"]
-            PlayerManager.wasAlreadyConnected = msg["wasAlreadyConnected"]
-            # if(msg.wasAlreadyConnected):
-            #     KernelEventsManager.processCallback(HookList.AlreadyConnected)
+            bot.Bot.accountId = msg["accountId"]
+            bot.Bot.communityId = msg["communityId"]
+            bot.Bot.hasRights = msg["hasRights"]
+            bot.Bot.hasConsoleRight = msg["hasConsoleRight"]
+            bot.Bot.nickname = msg["accountTag"]["nickname"]
+            bot.Bot.tag = msg["accountTag"]["tagNumber"]
+            bot.Bot.subscriptionEndDate = msg["subscriptionEndDate"]
+            bot.Bot.subscriptionDurationElapsed = msg["subscriptionElapsedDuration"]
+            bot.Bot.secretQuestion = msg["secretQuestion"]
+            bot.Bot.accountCreation = msg["accountCreation"]
+            bot.Bot.wasAlreadyConnected = msg["wasAlreadyConnected"]
+
             return True
         
         if mtype == "IdentificationFailedForBadVersionMessage":

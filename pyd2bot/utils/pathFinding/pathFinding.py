@@ -57,8 +57,6 @@ class Pathfinding:
         self.currentCellsPath = pathfinder.compute(self.currentCellId, targetId)
         if self.currentCellsPath is None:
             return None
-        print("currId: " + str(self.currentCellId))
-        print("targetId: " + str(targetId))
         mvPath = pathfinder.movementPathFromArray(self.currentCellsPath.getIdsList())
         print("path: " + str(mvPath))
         return mvPath.getServerMovement()

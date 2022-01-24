@@ -40,19 +40,19 @@ class Pathfinder:
                     idx, node = self.nodeIsInList(neighbourNode, closedList)
                     if node: # already visited all its neighbours
                         continue	
-                    print("neighbour node not in closed list")
+                    # print("neighbour node not in closed list")
                     idx, node = self.nodeIsInList(neighbourNode, openedList)
                     if node:  # already visited
-                        print("neighbour node in opened list at index " + str(idx))
+                        # print("neighbour node in opened list at index " + str(idx))
                         if neighbourNode.g < node.g:
                             openedList[idx] = neighbourNode # update distance
                     else:
-                        print("neighbour first visit")
+                        # print("neighbour first visit")
                         openedList.append(neighbourNode)
-            print("opened list size: " + str(len(openedList)))
+            # print("opened list size: " + str(len(openedList)))
             closedList.append(currentNode)
             currentNode = self.popBestNodeOfList(openedList)
-            print("poped node from opened: " + str(currentNode))
+            # print("poped node from opened: " + str(currentNode))
             if currentNode is None: # no path found
                 return None
             
@@ -77,7 +77,7 @@ class Pathfinder:
             return None
         currNodeIdx = 0
         for i, listNode in enumerate(nlist):
-            print("node f = " + str(listNode.f))
+            # print("node f = " + str(listNode.f))
             if listNode.f < nlist[currNodeIdx].f:
                 currNodeIdx = i
         return currNodeIdx

@@ -21,24 +21,28 @@ class DLM:
         dlm_uncompressed.seek(0)
         dlm_raw = BinaryStream(dlm_uncompressed, True)
         
-        header = dlm_raw.read_char()
-        map_version = dlm_raw.read_char()
-        id = dlm_raw.read_uint32()
+        header = dlm_raw.readByte()
+        if header != 77:
+            raise Exception("Unknown file format.")
+        map_version = dlm_raw.readByte()
+        id = dlm_raw.readUnsignedInt()
         
-        if map_version > 6:
-            self.encrypted = dlm_raw.read_bool()
-            self.encryptionVersion = dlm_raw.read_char()
-            self.dataLen = dlm_raw.read_int32()
+        if map_version >= 7:
+            self.encrypted = dlm_raw.readBoolean()
+            self.encryptionVersion = dlm_raw.readByte()
+            self.dataLen = dlm_raw.readInt()
 
             if self.encrypted:
-                self.encryptedData = dlm_raw.read_bytes(self.dataLen)
+                if not self._key:
+                    raise Exception("Map decryption key is empty.")
+                self.encryptedData = dlm_raw.readBytes(self.dataLen)
                 decryptedData = bytearray()
                 for i in range(self.dataLen):
                     decryptedData.append(self.encryptedData[i] ^ ord(self._key[i % len(self._key)]))
                 cleanData = io.BytesIO(decryptedData)
-                mapRaw = BinaryStream(cleanData, True)
+                raw = BinaryStream(cleanData, True)
 
-        map = Map(mapRaw, id, map_version)
+        map = Map(raw, id, map_version)
         dlm_uncompressed.close()
         del dlm_raw
         return map

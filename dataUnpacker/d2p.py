@@ -33,19 +33,19 @@ class D2PReader:
         self._loaded = False
         # Load the D2P
         D2P_file_binary = BinaryStream(self._stream, True)
-        bytes_header = D2P_file_binary.read_bytes(2)
+        bytes_header = D2P_file_binary.readBytes(2)
         if bytes_header == b"":
             raise InvalidD2PFile("First bytes not found.")
         if bytes_header != b"\x02\x01":
             raise InvalidD2PFile("The first bytes don't match the SWL pattern.")
         self._stream.seek(-24, 2)  # Set position to end - 24 bytes
 
-        self._base_offset = D2P_file_binary.read_uint32()
-        self._base_length = D2P_file_binary.read_uint32()
-        self._indexes_offset = D2P_file_binary.read_uint32()
-        self._number_indexes = D2P_file_binary.read_uint32()
-        self._properties_offset = D2P_file_binary.read_uint32()
-        self._number_properties = D2P_file_binary.read_uint32()
+        self._base_offset = D2P_file_binary.readUnsignedInt()
+        self._base_length = D2P_file_binary.readUnsignedInt()
+        self._indexes_offset = D2P_file_binary.readUnsignedInt()
+        self._number_indexes = D2P_file_binary.readUnsignedInt()
+        self._properties_offset = D2P_file_binary.readUnsignedInt()
+        self._number_properties = D2P_file_binary.readUnsignedInt()
 
         if ((self._base_offset == b"" or self._base_length == b"" or
              self._indexes_offset == b"" or self._number_indexes == b"" or
@@ -62,8 +62,8 @@ class D2PReader:
         i = 0
         while i < self._number_indexes:
             file_name = (D2P_file_binary.read_string()).decode()
-            offset = D2P_file_binary.read_int32()
-            length = D2P_file_binary.read_int32()
+            offset = D2P_file_binary.readInt()
+            length = D2P_file_binary.readInt()
             if file_name == b"" or offset == b"" or length == b"":
                 raise InvalidD2PFile("The file appears to be corrupt.")
             self._files_position[file_name] = {
@@ -107,7 +107,7 @@ class D2PReader:
             self._stream.seek(position["offset"], 0)
 
             self._files[file_name] = (D2P_file_binary.
-                                      read_bytes(position["length"]))
+                                      readBytes(position["length"]))
 
         self._loaded = True
 

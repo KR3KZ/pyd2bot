@@ -19,7 +19,6 @@ class CellNode(PathNode):
         self.x = cell.x
         self.y = cell.y
         self.isAccessible = cell.isAccessibleDuringRP()
-        # self.setHeuristic(self.destNode)
         self.checkedCells = []
         
     def checkCell(self, cell:Cell) -> bool: 

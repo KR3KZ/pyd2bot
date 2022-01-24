@@ -1,10 +1,9 @@
-from pyd2bot import Constants
+import pyd2bot.bot as bot
 from pyd2bot.logic.connection.managers import AuthentificationManager
 import math
 import random
 from pyd2bot.utils.crypto import RSA, RSACipher, PKCS1
-from pyd2bot.network.message import Msg, ByteArray, Buffer
-from pyd2bot.logic.common.managers.playerManager import PlayerManager
+from pyd2bot.utils.binaryIO import ByteArray
 
 
 class ServerLoginFrame:
@@ -24,7 +23,7 @@ class ServerLoginFrame:
         if mtype == "ServersListMessage":
             self.client.send({
                 '__type__': 'ServerSelectionMessage',
-                'serverId': PlayerManager.serverID
+                'serverId': bot.Bot.serverID
             })
             return True
         
@@ -100,17 +99,17 @@ class ServerLoginFrame:
             return True
             
         elif mtype == "TrustStatusMessage":
-            PlayerManager.connected.set()
+            bot.Bot.connected.set()
             self.client.send({'__type__': 'CharactersListRequestMessage'})
             return True
 
         elif mtype == "CharactersListMessage":
             for character in msg["characters"]:
-                if character["name"] == PlayerManager.characterName:
-                    PlayerManager.characterID = character["id"]
+                if character["name"] == bot.Bot.characterName:
+                    bot.Bot.characterID = character["id"]
             self.client.send({
                 '__type__': 'CharacterSelectionMessage', 
-                'id': PlayerManager.characterID
+                'id': bot.Bot.characterID
             })
             return True
 

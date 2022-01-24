@@ -25,42 +25,45 @@ class BinaryStream:
 
     # Read functions
 
-    def read_byte(self):
+    def readByte(self):
         return self._base_stream.read(1)
 
-    def read_bytes(self, length=None):
+    def readBytes(self, length=None):
         if length is None:
             bytes = self._base_stream.read()
         else:
             bytes = self._base_stream.read(length)
         return bytes
 
-    def read_bool(self):
+    def readBoolean(self):
         bool = self._base_stream.read(1)[0]
         if bool == 1:
             return True
         else:
             return False
 
-    def read_char(self):
+    def readByte(self):
         return self._unpack('b')
-
+    
+    def readUnsignedByte(self):
+        return int.from_bytes(self.readBytes(1), "big")
+    
     def read_uchar(self):
         return self._unpack('B')
 
-    def read_bool(self):
+    def readBoolean(self):
         return self._unpack('?')
 
-    def read_int16(self):
+    def readShort(self):
         return self._unpack('h', 2)
 
-    def read_uint16(self):
+    def readUnsignedShort(self):
         return self._unpack('H', 2)
 
-    def read_int32(self):
+    def readInt(self):
         return self._unpack('i', 4)
 
-    def read_uint32(self):
+    def readUnsignedInt(self):
         return self._unpack('I', 4)
 
     def read_int64(self):
@@ -76,14 +79,14 @@ class BinaryStream:
         return self._unpack('d', 8)
 
     def read_string(self):
-        length = self.read_uint16()
+        length = self.readUnsignedShort()
         return self._unpack(str(length) + 's', length)
 
     def read_string_bytes(self, length):
         return self._unpack(str(length) + 's', length)
 
     def _unpack(self, fmt, length=1):
-        bytes = self.read_bytes(length)
+        bytes = self.readBytes(length)
         if self._big_endian:
             fmt = ">" + fmt
         else:

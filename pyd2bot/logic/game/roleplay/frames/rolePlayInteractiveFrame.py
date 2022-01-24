@@ -1,16 +1,6 @@
-from cmath import inf
-from pyd2bot import Constants
-from pyd2bot.logic.common.frames.DisconnectionHandlerFrame import DisconnectionHandlerFrame
-from pyd2bot.logic.common.managers.mapManager import MapManager
-from pyd2bot.logic.common.managers.playerManager import PlayerManager
-from pyd2bot.logic.connection.managers import AuthentificationManager
-from pyd2bot.gameData.enums.IdentificationFailureReasons import IdentificationFailureReason
-from pyd2bot.misc.interClient.interClientManager import InterClientManager
-from pyd2bot.misc.interClient.storeDataManager import StoreDataManager
 import logging
-
 logger = logging.getLogger("bot")
-
+import pyd2bot.bot as bot
 
 class RolePlayInteractiveFrame:
 
@@ -27,14 +17,14 @@ class RolePlayInteractiveFrame:
         mtype = msg["__type__"]
         
         if mtype == "InteractiveUseErrorMessage":
-            self.farmingError.set()
+            bot.Bot.farmingError.set()
             return True
         
         elif mtype == "InteractiveUsedMessage":
             skill = msg["skillId"]
             self.currFarmingElem = msg["elemId"]
             logger.info(f"Farming animation of elem {self.currFarmingElem} with skill {skill} started")
-            PlayerManager.farming.set()
+            bot.Bot.farming.set()
             return True
         
         elif mtype == "InteractiveUseEndedMessage":
@@ -43,15 +33,15 @@ class RolePlayInteractiveFrame:
     
         elif mtype == "StatedElementUpdatedMessage":
             elem_id = msg["statedElement"]["elementId"]
-            MapManager.currMapStatedElems[elem_id] = msg["statedElement"]
+            bot.Bot.currMapStatedElems[elem_id] = msg["statedElement"]
             logger.info(f"Element {elem_id} state changed")
             return True
         
         elif mtype == "InteractiveElementUpdatedMessage":
             elem_id = msg["interactiveElement"]["elementId"]
-            MapManager.currMapInteractiveElems[elem_id] = msg["interactiveElement"]
+            bot.Bot.currMapInteractiveElems[elem_id] = msg["interactiveElement"]
             logger.info(f"Element {elem_id} interactiveness changed")
             if self.currFarmingElem == elem_id:
                 self.currFarmingElem = None
-                PlayerManager.farming.clear()
+                bot.Bot.farming.clear()
             return True

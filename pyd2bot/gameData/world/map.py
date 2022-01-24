@@ -1,5 +1,4 @@
 import math
-
 from pyd2bot.gameData.world.mapPosition import MapPosition
 from pyd2bot.utils.binaryIO import BinaryStream
 
@@ -25,26 +24,27 @@ class Map:
         self.leftArrowCell = set[int]()
         self.rightArrowCell = set[int]()
         self.cells = dict[int, Cell]()
+        self.oldMvtSystem = False
         self.read(raw)
 
     def read(self, raw:BinaryStream):
         """read the map from the raw binary stream"""
-        self.relativeId = raw.read_uint32()
-        self.mapType = raw.read_char()
-        self.subareaId = raw.read_int32()
-        self.topNeighbourId = raw.read_int32()
-        self.bottomNeighbourId = raw.read_int32()
-        self.leftNeighbourId = raw.read_int32()
-        self.rightNeighbourId = raw.read_int32()
-        self.shadowBonusOnEntities = raw.read_uint32()
+        self.relativeId = raw.readUnsignedInt()
+        self.mapType = raw.readByte()
+        self.subareaId = raw.readInt()
+        self.topNeighbourId = raw.readInt()
+        self.bottomNeighbourId = raw.readInt()
+        self.leftNeighbourId = raw.readInt()
+        self.rightNeighbourId = raw.readInt()
+        self.shadowBonusOnEntities = raw.readUnsignedInt()
 
         if self.version >= 9:
-            read_color = raw.read_int32()
+            read_color = raw.readInt()
             self.backgroundAlpha = (read_color & 4278190080) >> 32
             self.backgroundRed = (read_color & 16711680) >> 16
             self.backgroundGreen = (read_color & 65280) >> 8
             self.backgroundBlue = read_color & 255
-            read_color = raw.read_uint32()
+            read_color = raw.readUnsignedInt()
             grid_alpha = (read_color & 4278190080) >> 32
             grid_red = (read_color & 16711680) >> 16
             grid_green = (read_color & 65280) >> 8
@@ -52,46 +52,42 @@ class Map:
             self.gridColor = (grid_alpha & 255) << 32 | (grid_red & 255) << 16 | (grid_green & 255) << 8 | grid_blue & 255
             
         elif self.version >= 3:
-            self.backgroundRed = raw.read_char()
-            self.backgroundGreen = raw.read_char()
-            self.backgroundBlue = raw.read_char()
-
-        self.backgroundColor = (self.backgroundRed & 255) << 16 | (self.backgroundGreen & 255) << 8 | self.backgroundBlue & 255
+            self.backgroundRed = raw.readByte()
+            self.backgroundGreen = raw.readByte()
+            self.backgroundBlue = raw.readByte()
+        self.backgroundColor = (self.backgroundAlpha & 255) << 32 | (self.backgroundRed & 255) << 16 | (self.backgroundGreen & 255) << 8 | self.backgroundBlue & 255
 
         if self.version >= 4:
-            self.zoomScale = raw.read_uint16() / 100
-            self.zoomOffsetX = raw.read_int16()
-            self.zoomOffsetY = raw.read_int16()
+            self.zoomScale = raw.readUnsignedShort() // 100
+            self.zoomOffsetX = raw.readShort()
+            self.zoomOffsetY = raw.readShort()
             if self.zoomScale < 1:
                 self.zoomScale = 1
-                self.zoomOffsetX = 0
-                self.zoomOffsetY = 0
-
+                self.zoomOffsetX = self.zoomOffsetY = 0
+                
         if self.version > 10:
-            self.tacticalModeTemplateId = raw.read_int32()
-            
-        self.useLowPassFilter = raw.read_bool()
-        self.useReverb = raw.read_bool()
+            self.tacticalModeTemplateId = raw.readInt()
 
-        if self.useReverb:
-            self.presetId = self.raw().read_int32()
-        else:
-            self.presetId = -1
-            
-        self.backgroundsCount = raw.read_char()
+        self.backgroundsCount = raw.readByte()
         self.backgroundFixtures = [Fixture(raw) for _ in range(self.backgroundsCount)]
 
-        self.foregroundsCount = raw.read_char()
+        self.foregroundsCount = raw.readByte()
         self.foregroundsFixtures = [Fixture(raw) for _  in range(self.foregroundsCount)]
 
-        raw.read_int32()
-        self.groundCRC = raw.read_int32()
-        self.layersCount = raw.read_char()
+        raw.readInt()
+        self.groundCRC = raw.readInt()
+        self.layersCount = raw.readByte()
         self.layers = [Layer(raw, self.version) for _ in range(self.layersCount)]
         
         for cellid in range(self.CELLS_COUNT):
-            cell = Cell(raw, cellid, self.version)
+            cell = Cell(raw, self, cellid)
             self.cells[cellid] = cell
+            
+            if not self.oldMvtSystem:
+                self.oldMvtSystem = cell.moveZone
+            if cell.moveZone != self.oldMvtSystem:
+                self.isUsingNewMovementSystem = True
+                
             if cell.top_arrow:
                 self.topArrowCell.add(cellid)
             elif cell.bottom_arrow:
@@ -213,15 +209,15 @@ class Fixture:
         self.read(raw)
 
     def read(self, raw:BinaryStream):
-        self.fixtureId = raw.read_int32()
-        self.offsetX = raw.read_int16()
-        self.offsetY = raw.read_int16()
-        self.rotation = raw.read_int16()
-        self.xScale = raw.read_int16()
-        self.yScale = raw.read_int16()
-        self.redMultiplier = raw.read_char()
-        self.greenMultiplier = raw.read_char()
-        self.blueMultiplier = raw.read_char()
+        self.fixtureId = raw.readInt()
+        self.offsetX = raw.readShort()
+        self.offsetY = raw.readShort()
+        self.rotation = raw.readShort()
+        self.xScale = raw.readShort()
+        self.yScale = raw.readShort()
+        self.redMultiplier = raw.readByte()
+        self.greenMultiplier = raw.readByte()
+        self.blueMultiplier = raw.readByte()
         self.hue = self.redMultiplier | self.greenMultiplier | self.blueMultiplier
         self.alpha = raw.read_uchar()
 
@@ -233,13 +229,20 @@ class Layer:
 
     def read(self, raw:BinaryStream):
         if self.version >= 9:
-            self.layerId = raw.read_char()
+            self.layerId = raw.readByte()
             
         else:
-            self.layerId = raw.read_int32()
-        self.cellsCount = raw.read_int16()
+            self.layerId = raw.readInt()
+        self.cellsCount = raw.readShort()
         self.cells = [LayerCell(raw, self.version) for _ in range(self.cellsCount)]
-
+        # maxMapCellId = AtouinConstants.MAP_CELLS_COUNT - 1;
+        # if(c.cellId < maxMapCellId)
+        # {
+        #     endCell = Cell.createEmptyCell(self,maxMapCellId);
+        #     self.cells.fixed = false;
+        #     self.cells.push(endCell);
+        #     self.cells.fixed = true;
+        # }
 class LayerCell:
     
     def __init__(self, raw:BinaryStream, mapVersion):
@@ -247,11 +250,11 @@ class LayerCell:
         self.read(raw)
 
     def read(self, raw:BinaryStream):
-        self.cellId = raw.read_int16()
-        self.elementsCount = raw.read_int16()
+        self.cellId = raw.readShort()
+        self.elementsCount = raw.readShort()
         self.elements = []
         for _ in range(self.elementsCount):
-            el_type = raw.read_char()
+            el_type = raw.readByte()
             if el_type == 2: # GRAPHICAL
                 el = GraphicalElement(raw, self.mapVersion)
             elif el_type == 33: # SOUND
@@ -262,9 +265,9 @@ class LayerCell:
 
 class Cell:
     
-    def __init__(self, raw:BinaryStream, id:int, mapVersion):
+    def __init__(self, raw:BinaryStream, map:Map, id:int):
         self.id = id
-        self.mapVersion = mapVersion
+        self.map = map
         tmp = id % (Map.WIDTH * 2)
         if tmp < Map.WIDTH:
             self.x = tmp * 2
@@ -278,14 +281,12 @@ class Cell:
         self.read(raw)
 
     def read(self, raw:BinaryStream):
-        
-        self.floor = raw.read_char() * 10
-        
+        self.floor = raw.readByte() * 10
         if self.floor == -1280:
             return
 
-        if self.mapVersion > 8:
-            tmp_bytes = raw.read_int16()
+        if self.map.version >= 9:
+            tmp_bytes = raw.readShort()
             self.mov = (tmp_bytes & 1) == 0
             self.nonWalkableDuringFight = (tmp_bytes & 2) != 0
             self.nonWalkableDuringRP = (tmp_bytes & 4) != 0
@@ -294,7 +295,7 @@ class Cell:
             self.red = (tmp_bytes & 32) != 0
             self.visible = (tmp_bytes & 64) != 0
             self.farmCell = (tmp_bytes & 128) != 0
-            if self.mapVersion == 9:
+            if self.map.version == 9:
                 self.top_arrow = (tmp_bytes & 256) != 0
                 self.bottom_arrow = (tmp_bytes & 512) != 0
                 self.right_arrow = (tmp_bytes & 1024) != 0
@@ -307,7 +308,7 @@ class Cell:
                 self.left_arrow = (tmp_bytes & 4096) != 0
                 
         else:
-            self.losmov = raw.read_uchar()
+            self.losmov = raw.readUnsignedByte()
             self.los = (self.losmov & 2) >> 1 == 1
             self.mov = (self.losmov & 1) == 1
             self.visible = (self.losmov & 64) >> 6 == 1
@@ -315,60 +316,63 @@ class Cell:
             self.blue = (self.losmov & 16) >> 4 == 1
             self.red = (self.losmov & 8) >> 3 == 1
             self.nonWalkableDuringRP = (self.losmov & 128) >> 7 == 1
-            self.nonWalkableDuringFight = (self.losmov & 4)
+            self.nonWalkableDuringFight = (self.losmov & 4) >> 2 == 1
             
-        self.speed = raw.read_char()
-        self.mapChangeData = raw.read_char()
+        self.speed = raw.readByte()
+        self.mapChangeData = raw.readByte()
 
-        if self.mapVersion > 5:
-            self.moveZone = raw.read_uchar()
+        if self.map.version > 5:
+            self.moveZone = raw.readUnsignedByte()
 
-        if self.mapVersion > 10 and (self.hasLinkedZoneRP() or self.hasLinkedZoneFight()):
-            self._linkedZone = raw.read_uchar()
+        if self.map.version > 10 and (self.hasLinkedZoneRP() or self.hasLinkedZoneFight()):
+            self.linked_zone = raw.readUnsignedByte()
 
-        if 7 < self.mapVersion < 9:
-            self.tmpBits = raw.read_char()
+        if 7 < self.map.version < 9:
+            self.tmpBits = raw.readByte()
             self.arrow = 15 & self.tmpBits
             self.top_arrow = self.useTopArrow()
             self.bottom_arrow = self.useBottomArrow()
             self.left_arrow = self.useLeftArrow()
             self.right_arrow = self.useRightArrow()
 
-    def useTopArrow(self):
+    def useTopArrow(self) -> bool:
         if (self.arrow & 1) == 0:
             return False
         else:
             return True
 
-    def useBottomArrow(self):
+    def useBottomArrow(self) -> bool:
         if (self.arrow & 2) == 0:
             return False
         else:
             return True
 
-    def useLeftArrow(self):
+    def useRightArrow(self) -> bool:
         if (self.arrow & 4) == 0:
             return False
         else:
             return True
 
-    def useRightArrow(self):
+    def useLeftArrow(self) -> bool:
         if (self.arrow & 8) == 0:
             return False
         else:
             return True
 
-    def hasLinkedZoneRP(self):
+    def hasLinkedZoneRP(self) -> bool:
         return self.mov and not self.farmCell
 
-    def hasLinkedZoneFight(self):
+    def hasLinkedZoneFight(self) -> bool:
         return self.mov \
                and not self.nonWalkableDuringFight\
                and not self.farmCell\
                and not self.havenbagCell
     
+    def linkedZoneFight(self) -> int:
+        return self.linked_zone & 15
+     
     def isAccessibleDuringRP(self):
-        isAccessible = self.los or self.mov or not self.nonWalkableDuringRP
+        isAccessible = self.mov and not self.nonWalkableDuringRP and self.floor == 0
         print("isAccessibleDuringRP called for :id = {}, los = {}, nonWalkableDuringRP = {}, floor = {}, mov = {} => accessibleDuringRp = {}"\
             .format(self.id, self.los, self.nonWalkableDuringRP, self.floor, self.mov, isAccessible))
         return isAccessible
@@ -384,6 +388,9 @@ class Cell:
     
     def __hash__(self) -> int:
         return self.id
+
+    def __str__(self) -> str:
+        return "map : " + self.map.ip + " CellId : " + self.id + " mov : " + self.mov + " los : " + self.los + " nonWalkableDuringFight : " + self.nonWalkableDuringFight + " nonWalkableDuringRp : " + self.nonWalkableDuringRP + " farmCell : " + self.farmCell + " havenbagCell: " + self.havenbagCell + " visbile : " + self.visible + " speed: " + self.speed + " moveZone: " + self.moveZone + " linkedZoneId: " + self.linkedZone;
 class GraphicalElement:
     
     def __init__(self, raw:BinaryStream, mapVersion):
@@ -392,28 +399,28 @@ class GraphicalElement:
         self.read(raw)
     
     def read(self, raw:BinaryStream):
-        self.elementId = raw.read_uint32()
+        self.elementId = raw.readUnsignedInt()
 
         # hue
-        self.hue_1 = raw.read_char()
-        self.hue_2 = raw.read_char()
-        self.hue_3 = raw.read_char()
+        self.hue_1 = raw.readByte()
+        self.hue_2 = raw.readByte()
+        self.hue_3 = raw.readByte()
 
         # shadow
-        self.shadow_1 = raw.read_char()
-        self.shadow_2 = raw.read_char()
-        self.shadow_3 = raw.read_char()
+        self.shadow_1 = raw.readByte()
+        self.shadow_2 = raw.readByte()
+        self.shadow_3 = raw.readByte()
 
         if self.mapVersion <= 4:
-            self.offsetX = raw.read_char()
-            self.offsetY = raw.read_char()
+            self.offsetX = raw.readByte()
+            self.offsetY = raw.readByte()
             
         else:
-            self.offsetX = raw.read_int16()
-            self.offsetY = raw.read_int16()
+            self.offsetX = raw.readShort()
+            self.offsetY = raw.readShort()
 
-        self.altitude = raw.read_char()
-        self.identifier = raw.read_uint32()
+        self.altitude = raw.readByte()
+        self.identifier = raw.readUnsignedInt()
 
 class SoundElement:
     
@@ -423,9 +430,9 @@ class SoundElement:
         self.read(raw)
 
     def read(self, raw:BinaryStream):
-        self.soundId = raw.read_int32()
-        self.baseVolume = raw.read_int16()
-        self.fullVolumeDistance = raw.read_int32()
-        self.nullVolumeDistance = raw.read_int32()
-        self.minDelayBetweenLoops = raw.read_int16()
-        self.maxDelayBetweenLoops = raw.read_int16()
+        self.soundId = raw.readInt()
+        self.baseVolume = raw.readShort()
+        self.fullVolumeDistance = raw.readInt()
+        self.nullVolumeDistance = raw.readInt()
+        self.minDelayBetweenLoops = raw.readShort()
+        self.maxDelayBetweenLoops = raw.readShort()

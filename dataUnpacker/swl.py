@@ -30,7 +30,7 @@ class SWLReader:
         # Load the SWL
         SWL_file_binary = BinaryStream(self._stream, True)
 
-        byte_header = SWL_file_binary.read_char()
+        byte_header = SWL_file_binary.readByte()
         if byte_header == b"":
             raise InvalidSWLFile("First byte not found.")
 
@@ -38,9 +38,9 @@ class SWLReader:
             raise InvalidSWLFile("The first byte doesn't match"
                                  " the SWL pattern.")
 
-        self._version = SWL_file_binary.read_char()
-        self._frame_rate = SWL_file_binary.read_uint32()
-        classes_count = SWL_file_binary.read_int32()
+        self._version = SWL_file_binary.readByte()
+        self._frame_rate = SWL_file_binary.readUnsignedInt()
+        classes_count = SWL_file_binary.readInt()
         if ((self._version == b"" or self._frame_rate == b"" or
              classes_count == b"")):
             raise InvalidSWLFile("The file doesn't match the SWL pattern.")
@@ -56,7 +56,7 @@ class SWLReader:
 
             i += 1
 
-        self._SWF = SWL_file_binary.read_bytes()
+        self._SWF = SWL_file_binary.readBytes()
 
     # Accessors
 

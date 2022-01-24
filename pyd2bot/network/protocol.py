@@ -157,4 +157,5 @@ class DofusProtocol:
         elif msg_type["hash_function"] and random_hash:
             hash = bytes(random.getrandbits(8) for _ in range(48))
             data.write(hash)
+            
         return data
