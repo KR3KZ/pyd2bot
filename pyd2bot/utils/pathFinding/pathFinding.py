@@ -55,7 +55,7 @@ class Pathfinding:
         """retourne un chemin de cellules vers une cellule cible"""
         pathfinder = CellsPathfinder(self.mapNode.map)
         self.currentCellsPath = pathfinder.compute(self.currentCellId, targetId)
-        if len(self.currentCellsPath) < 2:
+        if not self.currentCellsPath or len(self.currentCellsPath) < 2:
             return None
         mvPath = pathfinder.movementPathFromArray(self.currentCellsPath.getIdsList())
         print("path: " + str(mvPath))

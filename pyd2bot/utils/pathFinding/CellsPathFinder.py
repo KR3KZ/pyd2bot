@@ -14,13 +14,17 @@ class CellNode(PathNode):
     VERTICAL_RUN_DURATION = 150
     DIAGONAL_RUN_DURATION = 170
     
-    def __init__(self, cell:Cell, lastDirection:int=-1, parent:PathNode=None):
+    def __init__(self, cell:Cell, lastDirection:int=-1, parent:'CellNode'=None):
         super().__init__(cell.id, lastDirection, parent)
         self.x = cell.x
         self.y = cell.y
         self.isAccessible = cell.isAccessibleDuringRP()
+        if parent is not None:
+            self.isAccessible = self.isAccessible and parent.floor == cell.floor
+        self.floor = cell.floor
         self.checkedCells = []
-        
+    
+
     def checkCell(self, cell:Cell) -> bool: 
         for checkedCell in self.checkedCells:
             if checkedCell == cell:

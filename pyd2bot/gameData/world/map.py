@@ -374,9 +374,7 @@ class Cell:
         return self.linkedZone & 15
      
     def isAccessibleDuringRP(self):
-        isAccessible = self.mov and not self.nonWalkableDuringRP #and self.floor == 0
-        logger.debug("isAccessibleDuringRP called for :id = {}, los = {}, nonWalkableDuringRP = {}, floor = {}, mov = {} => accessibleDuringRp = {}"\
-            .format(self.id, self.los, self.nonWalkableDuringRP, self.floor, self.mov, isAccessible))
+        isAccessible = self.mov and not self.nonWalkableDuringRP
         return isAccessible
     
     def allowsChangementMap(self) -> bool:

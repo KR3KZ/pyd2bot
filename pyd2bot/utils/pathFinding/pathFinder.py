@@ -28,7 +28,8 @@ class Pathfinder:
             raise Exception(f"Invalid source node of id {srcId} because accessible={currNode.isAccessible}.")
         destNode = self.getNodeFromId(destId)
         if destNode is None or not destNode.isAccessible:
-            raise Exception("Invalid destination node.")
+            logger.error("Invalid destination node of id " + str(destId) + " because accessible=" + str(destNode.isAccessible))
+            return None
         opened = dict[int, PathNode]()
         closed = dict[int, PathNode]()
         

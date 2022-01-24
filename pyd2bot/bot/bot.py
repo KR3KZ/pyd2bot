@@ -19,9 +19,11 @@ class Bot(IBot):
         self.conn.interrupt()
         
     def login(self):
+        logger.info("Loging in...")
         self.conn.start()
         self.conn.connectToLoginServer()
         self.mapDataReceived.wait()
+        logger.info("Logged in.")
 
     def walkToCell(self, cellId):
         try:
@@ -47,6 +49,8 @@ class Bot(IBot):
                 else:
                     logger.error("Bot failed to walk to cellId: " + str(cellId))
                     return False
+            else:
+                logger.info("Not path to cellId {0} found".format(cellId))
         except Exception as e:
             logger.error("fatal error: ", exc_info=True)
             return False

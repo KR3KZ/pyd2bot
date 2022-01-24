@@ -53,6 +53,7 @@ class Connection(threading.Thread):
         
 
     def run(self):
+        logger.info("Connection thread started.")
         while not self._killSig.is_set():
             try:
                 rdata = self._sock.recv(8192)
