@@ -8,7 +8,7 @@ from pyd2bot.gameData.world.map import Map
 from pyd2bot.gameData.world.mapPoint import MapPoint
 from pyd2bot.gameData.world.mapPosition import MapPosition
 from pyd2bot.gameData.world.mouvementPath import MovementPath
-from pyd2bot.utils.pathFinding.CellsPathFinder import CellsPathfinder
+from pyd2bot.utils.pathFinding.cellsPathFinder import CellsPathfinder
 from pyd2bot.utils.pathFinding.MapsPathFinder import MapNode, MapsPathfinder
 from pyd2bot.utils.pathFinding.lightMapNode import LightMapNode
 from pyd2bot.utils.pathFinding.path import Path, Direction

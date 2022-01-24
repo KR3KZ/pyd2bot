@@ -6,7 +6,7 @@ from .swl import SWLReader, InvalidSWLFile
 import pyd2bot.Constants as Constants
 
 work_dir = Path(os.path.dirname(__file__))
-D2P_MAPS_PATH = "C:\\Users\\majdoub\\AppData\\Local\\Ankama\\Dofus\\content\\maps\\maps0.d2p"
+D2P_MAPS_PATH = "C:\\Users\\majdoub\\AppData\\Local\\Ankama\\Dofus\\content\\maps"
 out_dir = Constants.MAPS_PATH
 
 def unpackD2pFile(file_p, out_dir):
@@ -25,4 +25,5 @@ def unpackD2pFile(file_p, out_dir):
             file_output.write(specs["binary"])
             file_output.close()
 
-unpackD2pFile(D2P_MAPS_PATH, out_dir)
+for d2p_file_path in Path(D2P_MAPS_PATH).glob("**/*.d2p"):
+    unpackD2pFile(d2p_file_path, out_dir)

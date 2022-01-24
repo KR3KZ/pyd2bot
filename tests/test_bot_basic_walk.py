@@ -16,5 +16,5 @@ creds = {
 }
 bot = Bot(**creds)    
 bot.login()
-bot.walkToCell(311)
+bot.collect()
 bot.disconnect()

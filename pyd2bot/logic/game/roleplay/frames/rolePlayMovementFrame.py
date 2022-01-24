@@ -11,6 +11,7 @@ class RolePlayMovementFrame(IFrame):
         mtype = msg["__type__"]
         
         if mtype == "MapComplementaryInformationsDataMessage":
+            logger.info("Map Complementary Informations Data Message received")
             self.bot.currMapInteractiveElems  = {}
             self.bot.currMapStatedElems = {}
             
@@ -30,15 +31,17 @@ class RolePlayMovementFrame(IFrame):
             return True
                 
         elif mtype == "CurrentMapMessage":
-            logger.info('CurrentMapMessage received')
             self.bot.currMapId = int(msg["mapId"])
+            logger.info('CurrentMapMessage received for mapId: {}'.format(self.bot.currMapId))
             self.bot.currMap = MapLoader.load(self.bot.currMapId)
+            logger.info('Map with id {0} loaded successfully'.format(self.bot.currMapId))
             self.bot.onMap.set()
             self.bot.mapDataReceived.clear()
             self.conn.send({
                 '__type__': 'MapInformationsRequestMessage', 
                 'mapId': self.bot.currMapId
             })
+            logger.info('MapInformationsRequestMessage sent')
             return True
             
         elif mtype == "GameMapMovementRequestMessage":

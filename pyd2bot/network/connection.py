@@ -65,7 +65,7 @@ class Connection(threading.Thread):
                     msg = Msg.fromRaw(self._buf, False)
             except OSError:
                 pass
-            except:
+            except Exception as e:
                 logger.error("Error: ", exc_info=True)
                 self.interrupt()
                 break
@@ -73,11 +73,12 @@ class Connection(threading.Thread):
 
           
     def send(self, msgjson):
+        # logger.info("Sending: {0}".format(msgjson))
         msg = Msg.from_json(msgjson)
         self._counter += 1
         msg.count = self._counter 
         self._sock.sendall(msg.bytes())
-    
+        # logger.info("Sent")   
     
     def handle(self, msg: dict):
         for frame in self.frames:
