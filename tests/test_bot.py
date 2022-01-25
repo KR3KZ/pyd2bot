@@ -8,13 +8,16 @@ with open(creds_f) as fp:
     creds = json.load(fp)
 
 from pyd2bot.bot import Bot
+
 creds = {
     "login": "kmajdoub",
     "password": "rMrTXHA4*",
     "name": "John-shooter",
     "serverID": 210
 }
+
 bot = Bot(**creds)    
-bot.login()
-bot.collect()
-bot.disconnect()
+if bot.login():
+    # bot.harvest()
+    bot.walkToMap(189531650)
+    bot.disconnect()

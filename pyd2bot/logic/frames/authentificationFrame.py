@@ -1,9 +1,10 @@
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from pyd2bot.network.connection import Connection
-from pyd2bot.logic.connection.managers import AuthentificationManager
-from pyd2bot.misc.interClient.interClientManager import InterClientManager
-from pyd2bot.logic import IFrame
+from pyd2bot.logic.managers import AuthentificationManager
+from pyd2bot.logic.managers.interClientManager import InterClientManager
+from pyd2bot.gameData.enums.IdentificationFailureReasons import IdentificationFailureReason
+from pyd2bot.logic.frames import IFrame
 import logging
 logger = logging.getLogger("bot")
 
@@ -11,16 +12,11 @@ logger = logging.getLogger("bot")
 class AuthentificationFrame(IFrame):
     MAX_LOGIN_ATTEMPTS = 3
     
-    
     def __init__(self, conn:'Connection'):
         super().__init__(conn)
         self._login_attempts = 0
     
-    def process(self, msg) -> bool:
-        mtype = msg["__type__"]
-
-        if self._done:
-            return False
+    def process(self, mtype, msg) -> bool:
         
         if mtype == "ServerConnectionFailedMessage":
             if self._login_attempts < self.MAX_LOGIN_ATTEMPTS:
@@ -60,8 +56,9 @@ class AuthentificationFrame(IFrame):
             self._done = True
             return True
         
-        elif mtype == "IdentificationFailed":
-            logger.error("Identification failed for reason: %s" % msg["reason"])
+        elif mtype == "IdentificationFailedMessage":
+            reason = IdentificationFailureReason(msg["reason"])
+            logger.error("Identification failed for reason: %s" % reason)
             self.conn.interrupt()
             return True
         

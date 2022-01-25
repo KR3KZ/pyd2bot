@@ -1,15 +1,12 @@
 from argparse import ArgumentError
-import math
 import os
 import logging
-import random
 from pyd2bot.utils.crypto import RSACipher, RSA, PKCS1
-from pyd2bot.network.message import Msg
 from pyd2bot.utils.binaryIO import ByteArray
 from pyd2bot.utils.crypto import CBCMode, NullPad, AESKey, SimpleIVMode
-
 logger = logging.getLogger("bot")
 ROOTDIR = os.path.dirname(__file__)
+
 
 class ClientPubKeyNotFoundError(Exception):
     pass
@@ -36,6 +33,7 @@ class AuthentificationManager:
     def initAESKey():
         AuthentificationManager._AESKey = AESKey.generateRandomAESKey(AuthentificationManager.AES_KEY_LENGTH)
     
+    
     @staticmethod
     def setSalt(salt:str) -> None:
         if len(salt) < 32:
@@ -44,6 +42,7 @@ class AuthentificationManager:
             salt += " "
         AuthentificationManager._salt = salt
     
+
     @staticmethod    
     def setPublicKey(enc_publicKey:list[int]):
         baSignedKey = ByteArray.from_int8Arr(enc_publicKey)
@@ -53,9 +52,11 @@ class AuthentificationManager:
             raise Exception("Pubkey Sign validation failed!")
         AuthentificationManager._publicKey = "-----BEGIN PUBLIC KEY-----\n" + str(ba_pubKey) + "\n-----END PUBLIC KEY-----"
     
+
     @staticmethod
     def getCanAutoConnectWithToken() -> bool:
         return AuthentificationManager.nextToken != None
+
 
     @staticmethod
     def getIdentificationMessage(login, pwd):
@@ -80,6 +81,7 @@ class AuthentificationManager:
         }
         return imsg
     
+
     @staticmethod
     def getAuthCredentials(login:str, pwd:str) -> list[int]:
         baIn = bytearray()
@@ -92,6 +94,7 @@ class AuthentificationManager:
         rsacipher = RSACipher(rsa_key, PKCS1())
         baOut = rsacipher.encrypt(baIn)
         return baOut.to_int8Arr()
+
 
     @staticmethod
     def decodeWithAES(byteArrayOrVector) -> ByteArray:

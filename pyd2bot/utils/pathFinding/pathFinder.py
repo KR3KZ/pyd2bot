@@ -1,8 +1,6 @@
 from pyd2bot.utils.pathFinding.path import Path, PathNode
 import logging
-
 logger = logging.getLogger("bot")
-
 
 
 class Pathfinder:
@@ -25,19 +23,22 @@ class Pathfinder:
         logger.debug("Computing path from " + str(srcId) + " to " + str(destId))
         currNode = self.getNodeFromId(srcId)
         if currNode is None or not currNode.isAccessible:
-            raise Exception(f"Invalid source node of id {srcId} because accessible={currNode.isAccessible}.")
+            logger.error(f"Invalid source node of id {srcId} because accessible={currNode.isAccessible}.")
+            return None
         destNode = self.getNodeFromId(destId)
         if destNode is None or not destNode.isAccessible:
             logger.error("Invalid destination node of id " + str(destId) + " because accessible=" + str(destNode.isAccessible))
             return None
         opened = dict[int, PathNode]()
         closed = dict[int, PathNode]()
-        
         while currNode != destNode:
             neighbours = self.getNeighbours(currNode)
+            logger.debug("Neighbours of " + str(currNode.id) + ": " + str(neighbours.keys()))
             for nid, neighbor in neighbours.items():
                 neighbor.setHeuristic(destNode)
+                logger.debug(f"Neighbour {neighbor.id} of {currNode.id} has heuristic {neighbor.f}")
                 if neighbor.isAccessible:
+                    logger.debug(f"Neighbour {neighbor.id} of {currNode.id} is accessible")
                     if nid in closed:
                         continue	
                     elif nid not in opened or neighbor.g < opened[nid].g:
@@ -46,7 +47,6 @@ class Pathfinder:
             currNode = self.getBestCandidate(opened)
             if currNode is None: 
                 return None
-        
         path = Path()
         direction = -2
         while currNode: 

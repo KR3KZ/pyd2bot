@@ -1,20 +1,18 @@
-from pyd2bot.logic.connection.managers import AuthentificationManager
+from pyd2bot.logic.managers import AuthentificationManager
 import math
 import random
 from pyd2bot.utils.crypto import RSA, RSACipher, PKCS1
 from pyd2bot.utils.binaryIO import ByteArray
-from pyd2bot.logic import IFrame
+from pyd2bot.logic.frames import IFrame
+from pyd2bot.gameData.enums.ServerStatusEnum import ServerStatusEnum
+import logging
+logger = logging.getLogger("bot")
 
 
 class ServerLoginFrame(IFrame):
 
+    def process(self, mtype, msg:dict) -> bool:
 
-    def process(self, msg) -> bool:
-        mtype = msg["__type__"]
-
-        if self._done:
-            return False
-            
         if mtype == "ServersListMessage":
             self.conn.send({
                 '__type__': 'ServerSelectionMessage',
@@ -22,6 +20,13 @@ class ServerLoginFrame(IFrame):
             })
             return True
         
+
+        elif mtype == "SelectedServerRefusedMessage":
+            logger.error(f"Server selection refused because server status is {ServerStatusEnum(msg['serverStatus'])}")
+            self.conn.interrupt()
+            return True
+
+
         elif mtype == "SelectedServerDataMessage":
             self.conn.serverInfos = msg
             ba_ticket = AuthentificationManager.decodeWithAES(msg["ticket"])
@@ -31,6 +36,7 @@ class ServerLoginFrame(IFrame):
             self.conn.connectToGameServer()
             return True
         
+
         elif mtype == "HelloGameMessage":
             ticketMsg = {
                 '__type__': 'AuthenticationTicketMessage',
@@ -40,6 +46,7 @@ class ServerLoginFrame(IFrame):
             self.conn.send(ticketMsg)
             return True
         
+
         elif mtype == "RawDataMessage":
             # Bypass humain check here
             gameServerTicket = self.conn.serverInfos["ticket"]
@@ -92,10 +99,12 @@ class ServerLoginFrame(IFrame):
             })
             return True
             
+
         elif mtype == "TrustStatusMessage":
             self.bot.connected.set()
             self.conn.send({'__type__': 'CharactersListRequestMessage'})
             return True
+
 
         elif mtype == "CharactersListMessage":
             for character in msg["characters"]:

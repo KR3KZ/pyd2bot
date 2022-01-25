@@ -1,12 +1,11 @@
 import logging
 import random
 from time import sleep
-
-from pyd2bot.utils.pathFinding.cellsPathFinder import CellNode, CellsPathfinder
+from pyd2bot.utils.pathFinding.MapsPathFinder import MapNode
+from pyd2bot.utils.pathFinding.path import Path
 from . import IBot
-
-
 logger = logging.getLogger("bot")
+
 class Bot(IBot):
 
     def __init__(self, name, serverID, login, password) -> None:
@@ -16,84 +15,121 @@ class Bot(IBot):
         self._login = login
         self._password = password
 
+
     def disconnect(self):
         self.conn.interrupt()
         
+
     def login(self):
-        logger.info("Loging in...")
         self.conn.start()
         self.conn.connectToLoginServer()
-        self.mapDataReceived.wait()
-        logger.info("Logged in.")
+        if self.conn.waitMsg("IdentificationSuccessMessage"):
+            logger.info("Identified successfully")
+            if self.conn.waitMsg("TrustStatusMessage"):
+                logger.info("Logged to game server successfully.")
+                if self.conn.waitMsg("CharacterLoadingCompleteMessage"):
+                    logger.info("Characted loading completed.")
+                    if self.conn.waitMsg("MapComplementaryInformationsDataMessage"):
+                        logger.info("Map complementary Data Recieved.")
+                        return True
+        return False
+
 
     def walkToCell(self, cellId):
-        try:
-            logger.info("current bot cellId: " + str(self.currCellId))
-            logger.info("current bot mapId: " + str(self.currMapId))
+        logger.debug(f"Current cellId: {self.currCellId}")
+        logger.debug(f"Current mapId: {self.currMapId}")
+        if self.currCellId == cellId:
+            logger.info(f"Already in cell {cellId}")
+            return True
+        self.pf.updatePosition(self.currMap, self.currCellId)
+        keymoves = self.pf.getCellsPathTo(cellId)
+        if keymoves:
             hash = bytes(random.getrandbits(8) for _ in range(48))
-            self.pf.updatePosition(self.currMap, self.currCellId)
-            keymoves = self.pf.getCellsPathTo(cellId)
-            if keymoves:
-                self.conn.send(
-                {
-                    '__type__': 'GameMapMovementRequestMessage',
-                    'hash_function': hash,
-                    'keyMovements': keymoves,
-                    'mapId': self.currMapId
-                })
-                if self.conn.waitMsg(msgName="GameMapMovementMessage", filter=lambda m: int(m["actorId"]) == self.characterID, timeout=10):
-                    sleep(self.pf.getCellsPathDuration())
-                    self.conn.send({'__type__': "GameMapMovementConfirmMessage"})
-                    self.currCellId = cellId
-                    logger.info("bot moved to cellId: " + str(self.currCellId))
-                    return True
-                else:
-                    logger.error("Bot failed to walk to cellId: " + str(cellId))
-                    return False
+            self.conn.send({
+                '__type__': 'GameMapMovementRequestMessage',
+                'hash_function': hash,
+                'keyMovements': keymoves,
+                'mapId': self.currMapId
+            })
+            if self.conn.waitMsg("GameMapMovementMessage", filter=lambda m: int(m["actorId"]) == self.characterID):
+                sleep(self.pf.getCellsPathDuration())
+                self.conn.send({'__type__': "GameMapMovementConfirmMessage"})
+                self.currCellId = cellId
+                logger.info(f"bot moved to cell {self.currCellId}")
+                return True
             else:
-                logger.info("Not path to cellId {0} found".format(cellId))
-        except Exception as e:
-            logger.error("fatal error: ", exc_info=True)
+                logger.error(f"Failed to walk to cell {cellId}")
+                return False
+        else:
+            logger.error(f"No path to cellId {cellId} found")
             return False
 
+
     def canCollect(self, elem_id):
-        ielem = self.currMapInteractiveElems[elem_id]
-        selem = self.currMapStatedElems[elem_id]
-        logger.info(f"checking if elem {ielem} can be collected")
-        if ielem["onCurrentMap"] and selem["elementState"] == 0 and ielem["enabledSkills"]:
-            return ielem["enabledSkills"][0]
+        logger.debug(f"Checking if elem {elem_id} can be collected")
+        if elem_id in self.currMapStatedElems:
+            ielem = self.currMapInteractiveElems[elem_id]
+            selem = self.currMapStatedElems[elem_id]
+            if ielem["onCurrentMap"] and selem["elementState"] == 0 and ielem["enabledSkills"]:
+                return ielem["enabledSkills"][0]
         return None     
 
-    def collect(self):
-        cpf = CellsPathfinder(self.currMap)
-        logger.info("looking for collectable resources")
-        for elId in self.currMapInteractiveElems.keys():
-            enabledSkill = self.canCollect(elId)         
+
+    def collectElement(self, elementId, skill):
+        selem = self.currMapStatedElems[elementId]
+        cellId = selem["elementCellId"]
+        cellNode = self.cpf.getNodeFromId(cellId)
+        neighbors = self.cpf.getAccessibleNeighbours(cellNode)
+        for ncid in neighbors:
+            if self.walkToCell(ncid):
+                hash = bytes(random.getrandbits(8) for _ in range(48))
+                self.conn.send({
+                    '__type__': 'InteractiveUseRequestMessage',
+                    'elemId': elementId,
+                    'hash_function': hash,
+                    'skillInstanceUid': skill["skillInstanceUid"],
+                })
+                if self.conn.waitMsg("InteractiveUsedMessage"):
+                    logger.info(f"Collecting elem {elementId} ...")
+                    if self.conn.waitMsg("InteractiveUseEndedMessage"):
+                        logger.info(f"Element {elementId} collected")
+                        break
+                if self._kill.is_set():
+                    return
+
+
+    def harvest(self):
+        self.cpf.map = self.currMap
+        logger.info("Looking for collectable resources")
+        for id in self.currMapInteractiveElems.keys():
+            enabledSkill = self.canCollect(id)         
             if enabledSkill is not None:
-                selem = self.currMapStatedElems[elId]
-                cell_id = selem["elementCellId"]
-                logger.info(f"Collecting elem {elId} in cell {cell_id}")
-                cellNode = cpf.getNodeFromId(cell_id)
-                neighbors:dict[int, CellNode] = cpf.getNeighbours(cellNode)
-                for neighbor in neighbors.values():
-                    if neighbor.isAccessible:
-                        if self.walkToCell(neighbor.id):
-                            hash = bytes(random.getrandbits(8) for _ in range(48))
-                            self.conn.send({
-                                '__type__': 'InteractiveUseRequestMessage',
-                                'elemId': elId,
-                                'hash_function': hash,
-                                'skillInstanceUid': enabledSkill["skillInstanceUid"],
-                            })
-                            if self.farming.wait(20):
-                                logger.info(f"Collecting elem {elId}")
-                                while self.farming.is_set():
-                                    sleep(0.01)
-                                logger.info(f"Collected elem {elId}")
-                                break
-                            else:
-                                logger.error("farming failed")
-                            
+                self.collectElement(id, enabledSkill)
+                if self._kill.is_set():
+                    return
+    
+    
+    def walkToMap(self, targetMapId):
+        path:list[MapNode] = self.pf.toMap(self.currMapId, targetMapId, self.currCellId)
+        pathLen = len(path)
+        logger.info(f"Path to map {path}")
+        for i in range(pathLen - 1):
+            if self.walkToCell(path[i].outgoingCellId):
+                self.conn.send({
+                    '__type__': 'ChangeMapMessage', 
+                    'autopilot': False, 
+                    'mapId': path[i + 1].id
+                })
+                if self.conn.waitMsg("CurrentMapMessage", filter=lambda m: int(m["mapId"]) == path[i + 1].id):
+                    logger.info(f"Entered to map {path[i + 1].id}")
+                else:
+                    logger.error(f"Failed to walk to map {path[i + 1].id}")
+                    return None
+
+
+
+                
+                        
 
                         
                     

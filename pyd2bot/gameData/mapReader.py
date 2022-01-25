@@ -1,4 +1,3 @@
-from asyncio.log import logger
 from functools import lru_cache
 import pyd2bot.Constants as Constants
 from dataUnpacker.dlm import DLM
@@ -9,11 +8,14 @@ class MapLoader:
     _reader = DLM(_key)
     
     @staticmethod
-    @lru_cache(maxsize = 100)
+    @lru_cache(maxsize = 256)
     def load(mapId):
         map_p = Constants.MAPS_PATH / MapLoader.getMapURI(mapId)
-        compressedMapBinary = open(map_p, "rb").read()
-        return MapLoader._reader.read(compressedMapBinary)
+        if not map_p.exists():
+            return None
+        with open(map_p, "rb") as f:
+            compressedMapBinary = f.read()
+            return MapLoader._reader.read(compressedMapBinary)
 
     @staticmethod
     def getMapURI(mapId):

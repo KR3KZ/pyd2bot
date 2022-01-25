@@ -1,4 +1,4 @@
-from pyd2bot.logic import IFrame
+from pyd2bot.logic.frames import IFrame
 import logging
 logger = logging.getLogger("bot")
 
@@ -6,10 +6,10 @@ logger = logging.getLogger("bot")
 class RolePlayInteractiveFrame(IFrame):
 
 
-    def process(self, msg) -> bool:
-        mtype = msg["__type__"]
+    def process(self, mtype, msg) -> bool:
         
         if mtype == "InteractiveUseErrorMessage":
+            self.bot.farming.clear()
             self.bot.farmingError.set()
             return True
         
@@ -29,13 +29,13 @@ class RolePlayInteractiveFrame(IFrame):
         elif mtype == "StatedElementUpdatedMessage":
             elem_id = msg["statedElement"]["elementId"]
             self.bot.currMapStatedElems[elem_id] = msg["statedElement"]
-            logger.info(f"Element {elem_id} state changed")
+            logger.debug(f"Element {elem_id} state changed")
             return True
         
         elif mtype == "InteractiveElementUpdatedMessage":
             elem_id = msg["interactiveElement"]["elementId"]
             self.bot.currMapInteractiveElems[elem_id] = msg["interactiveElement"]
-            logger.info(f"Element {elem_id} interactiveness changed")
+            logger.debug(f"Element {elem_id} interactiveness changed")
             return True
         
         return False

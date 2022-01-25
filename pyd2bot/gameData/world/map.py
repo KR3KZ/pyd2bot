@@ -99,7 +99,7 @@ class Map:
             elif cell.right_arrow:
                 self.rightArrowCell.add(cellid)
                 
-    def getNeighbourMapFromDirection(self, direction:int) -> int:
+    def getNeighborIdFromDirection(self, direction:int) -> int:
         """return the id of the neighbour map from the given direction"""
         if direction == self.LEFT: 
             return self.leftNeighbourId
@@ -197,14 +197,47 @@ class Map:
             return "up and left"
         elif direction == Map.UP_RIGHT:
             return "up and right"
+    
+
+    def getOutgoingCells(self, direction:int):
+        if direction == self.LEFT:
+            ret = [i * self.WIDTH for i in range(self.HEIGHT)]
         
+        if direction == self.RIGHT:
+            ret = [(i + 1) * self.WIDTH - 1 for i in range(self.HEIGHT)]
+        
+        if direction == self.UP:
+            ret = [i for i in range(self.WIDTH) if self.cells[i].allowsMapChange()]
+        
+        if direction == self.DOWN:
+            ret = [i + self.WIDTH * (self.HEIGHT - 1) for i in range(self.WIDTH) if self.cells[i].allowsMapChange()]
+        
+        else: 
+            raise Exception("Invalid direction for changing map.")
+
+        return set([i for i in ret if self.cells[i].allowsMapChange()])
+
+
     def __str__(self):
         mp = MapPosition.getMapPositionById(self.id)
-        return self.id + " [" + mp.posX + ", " + mp.posY + "]"
+        return f"{self.id}[{mp.posX},{mp.posY}]"
+    
     
     def __eq__(self, other:'Map'):
         return self.id == other.id
     
+
+    def printGrid(self):
+        format_row = "{:>2}" * (Map.WIDTH + 2)
+        print(format_row.format(*["#"] * (Map.WIDTH + 2)))
+        for j in range(2 * Map.HEIGHT):
+            row = []
+            for i in range(Map.WIDTH):
+                row.append(" " if self.cells[i + j * Map.WIDTH].isAccessibleDuringRP() else "X")
+            print(format_row.format("#", *row, "#"))
+        print(format_row.format(*["#"] * (Map.WIDTH + 2)))
+
+
 class Fixture:
     
     def __init__(self, raw):
@@ -237,14 +270,7 @@ class Layer:
             self.layerId = raw.readInt()
         self.cellsCount = raw.readShort()
         self.cells = [LayerCell(raw, self.version) for _ in range(self.cellsCount)]
-        # maxMapCellId = AtouinConstants.MAP_CELLS_COUNT - 1;
-        # if(c.cellId < maxMapCellId)
-        # {
-        #     endCell = Cell.createEmptyCell(self,maxMapCellId);
-        #     self.cells.fixed = false;
-        #     self.cells.push(endCell);
-        #     self.cells.fixed = true;
-        # }
+
 class LayerCell:
     
     def __init__(self, raw:BinaryStream, mapVersion):
@@ -270,17 +296,22 @@ class Cell:
     def __init__(self, raw:BinaryStream, map:Map, id:int):
         self.id = id
         self.map = map
-        tmp = id % (Map.WIDTH * 2)
-        if tmp < Map.WIDTH:
-            self.x = tmp * 2
-        else:
-            self.x = (tmp % Map.WIDTH) * 2 + 1; 
-        self.y = id / (Map.WIDTH * 2)
+        self.x, self.y = self.getCoords(self.id)
         self.top_arrow = None
         self.bottom_arrow = None
         self.left_arrow = None
         self.right_arrow = None
         self.read(raw)
+
+    @staticmethod
+    def getId(x:int, y:int) -> int:
+        return x + y * Map.WIDTH
+
+    @staticmethod
+    def getCoords(cell_id):
+        x = cell_id % Map.WIDTH
+        y = cell_id // Map.WIDTH
+        return x, y
 
     def read(self, raw:BinaryStream):
         self.floor = raw.readByte() * 10
@@ -377,10 +408,11 @@ class Cell:
         isAccessible = self.mov and not self.nonWalkableDuringRP
         return isAccessible
     
-    def allowsChangementMap(self) -> bool:
+    def allowsMapChange(self) -> bool:
         return self.mapChangeData != 0
     
-    def distanceBetween(self, cell1:'Cell', cell2:'Cell') -> float:
+    @staticmethod
+    def distanceBetween(cell1:'Cell', cell2:'Cell') -> float:
         return math.sqrt((cell1.x - cell2.x)**2 + (cell1.y - cell2.y)**2)
     
     def __eq__(self, cell:'Cell'):

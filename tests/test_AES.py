@@ -1,5 +1,5 @@
 from pyd2bot.utils.crypto import AESKey, CBCMode, SimpleIVMode, NullPad, signature
-from pyd2bot.logic.connection.managers import AuthentificationManager
+from pyd2bot.logic.managers import AuthentificationManager
 from pyd2bot.utils.binaryIO import ByteArray
 
 

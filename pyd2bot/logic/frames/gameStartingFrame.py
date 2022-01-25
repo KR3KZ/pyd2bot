@@ -1,13 +1,9 @@
-from pyd2bot.logic import IFrame
+from pyd2bot.logic.frames import IFrame
 
 
 class GameStartingFrame(IFrame):
 
-    def process(self, msg):
-        mtype = msg["__type__"]
-
-        if self._done:
-            return False
+    def process(self, mtype, msg):
 
         if mtype == "CharacterLoadingCompleteMessage":
             self.bot.inGame.set()

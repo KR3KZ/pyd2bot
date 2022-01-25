@@ -52,13 +52,14 @@ class Pathfinding:
         self.currentMapsPath = self.toMap(mapId, self.mapNode.map.id, self.currentCellId)
     
     def getCellsPathTo(self, targetId:int) -> list[int]:
-        """retourne un chemin de cellules vers une cellule cible"""
+        """Returns the cells path to the target cell
+        """
         pathfinder = CellsPathfinder(self.mapNode.map)
         self.currentCellsPath = pathfinder.compute(self.currentCellId, targetId)
         if not self.currentCellsPath or len(self.currentCellsPath) < 2:
             return None
         mvPath = pathfinder.movementPathFromArray(self.currentCellsPath.getIdsList())
-        print("path: " + str(mvPath))
+        logger.debug(f"Found path: {mvPath}")
         return mvPath.getServerMovement()
     
     def getCellsPathDuration(self) -> float:
@@ -82,7 +83,7 @@ class Pathfinding:
         
         # on récupère chaque map voisine
         for direction in range(0, 8, 2):
-            self.neighbourMaps[direction] = self.mapNode.map.getNeighbourMapFromDirection(direction)
+            self.neighbourMaps[direction] = self.mapNode.map.getNeighborIdFromDirection(direction)
 
         # on retire la map voisine correspondant à la map précédente pour éviter les retours en arrière
         incomingDirection = self.getOppositeDirection(self.lastDirection)
@@ -120,12 +121,11 @@ class Pathfinding:
             return direction + 4
     
     @lru_cache(maxsize=128)
-    def toMap(self, targetMapId:int, sourceMapId:int, startCellId:int) -> Path:
+    def toMap(self, sourceMapId:int,targetMapId:int, startCellId:int) -> Path[MapNode]:
         pf = MapsPathfinder(startCellId)
         path = pf.compute(sourceMapId, targetMapId)
         if path is None:
-            raise Exception("Impossible to find a path between the map with id = " + sourceMapId + " and the map with id = " + targetMapId + ".")
-        path.startCellId = startCellId
+            raise Exception(f"Impossible to find a path between the map {sourceMapId} and {targetMapId}.")
         return path
     
     @lru_cache(maxsize=128)

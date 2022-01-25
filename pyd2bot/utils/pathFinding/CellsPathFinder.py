@@ -60,7 +60,7 @@ class CellNode(PathNode):
 
 class CellsPathfinder(Pathfinder): 
     
-    def __init__(self, map:Map):
+    def __init__(self, map:Map=None):
         super().__init__()
         self.map = map
     
@@ -79,7 +79,17 @@ class CellsPathfinder(Pathfinder):
             cell = self.map.getNeighbourCellFromDirection(node.id, direction)
             if cell:
                 neighbours[cell.id] = CellNode(cell, direction, node)
-        return neighbours		
+        return neighbours	
+
+    def getAccessibleNeighbours(self, node:CellNode) -> dict[int, CellNode]: 
+        neighbours = dict[int, CellNode]()
+        for direction in range(8) :
+            cell = self.map.getNeighbourCellFromDirection(node.id, direction)
+            if cell:
+                cn = CellNode(cell, direction, node)
+                if cn.isAccessible:
+                    neighbours[cell.id] = CellNode(cell, direction, node)
+        return neighbours	
 
     def movementPathFromArray(self, iPath:list[int]) -> MovementPath:
         if not iPath:

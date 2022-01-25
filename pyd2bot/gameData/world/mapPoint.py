@@ -42,8 +42,6 @@ class MapPoint:
         if not MapPoint._bInit:
             MapPoint.init()
         p = self.CELLPOS[self._nCellId]
-        if p is None:
-            raise Exception("Cell identifier out of bound.")
         self._nX = p.x
         self._nY = p.y
     

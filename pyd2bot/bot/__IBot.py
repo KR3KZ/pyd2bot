@@ -2,6 +2,7 @@ import threading
 from pyd2bot.gameData.world.map import Map
 from pyd2bot.utils.pathFinding import Pathfinding
 import pyd2bot.network.connection as conn
+from pyd2bot.utils.pathFinding.cellsPathFinder import CellsPathfinder
 
 class IBot:
     
@@ -26,17 +27,13 @@ class IBot:
         self.inventoryWeight = None
         self.weightMax = None
         
-        self.farming = threading.Event()
+
         self.farmingError = threading.Event()
-        self.mapDataReceived = threading.Event()
-        self.moving = threading.Event()
-        self.idle = threading.Event()
-        self.disconnected = threading.Event()
         self.inGame = threading.Event()
-        self.onMap = threading.Event()
-        self.inServerSelection = threading.Event()
-        self.connected = threading.Event()
         
+        self.isInFight = threading.Event()
+        self.inFightTurn = threading.Event()
+        self.fightCurrCellId = None
         self.currCellId:int = None
         self.direction:int = None
         self.currMap:Map = None
@@ -45,4 +42,6 @@ class IBot:
         self.currMapInteractiveElems:dict = {}
         self.currMapStatedElems:dict = {}
         self.pf = Pathfinding()
+        self.cpf = CellsPathfinder()
         self.conn = conn.Connection(self)
+        self._kill = self.conn._kill

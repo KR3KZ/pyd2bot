@@ -49,7 +49,7 @@ class DofusSniffer(AsyncSniffer):
                     msg = Msg.fromRaw(buf, isfromClient, src=src, dst=dst)
                     if not msg:
                         break
-                    # print(f"Received msg. {msg.json()}, src {src} -> dst: {dst}")
+                    print(f"Received msg. {msg.json()['__type__']}, src {src} -> dst: {dst}")
                     if msg.name == "RawDataMessage":
                         with open(r"C:\Users\majdoub\OneDrive\Documents\pyd2bot\tests\rawd.bin", 'wb') as fp:
                             fp.write(msg.json()["content"])
