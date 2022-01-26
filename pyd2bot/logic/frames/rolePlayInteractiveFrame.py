@@ -9,7 +9,6 @@ class RolePlayInteractiveFrame(IFrame):
     def process(self, mtype, msg) -> bool:
         
         if mtype == "InteractiveUseErrorMessage":
-            self.bot.farming.clear()
             self.bot.farmingError.set()
             return True
         
@@ -17,13 +16,11 @@ class RolePlayInteractiveFrame(IFrame):
             skill = msg["skillId"]
             self.bot.currFarmingElem = msg["elemId"]
             logger.info(f"Farming animation of elem {self.bot.currFarmingElem} with skill {skill} started")
-            self.bot.farming.set()
             return True
         
         elif mtype == "InteractiveUseEndedMessage":
             logger.info(f"Farming animation of elem {self.bot.currFarmingElem} ended")            
             self.bot.currFarmingElem = None
-            self.bot.farming.clear()
             return True
     
         elif mtype == "StatedElementUpdatedMessage":

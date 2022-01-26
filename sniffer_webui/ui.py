@@ -4,16 +4,12 @@ from pprint import pformat
 import logging
 import asyncio
 import threading
-
 from wdom.document import get_document, set_app
 from wdom.server import start_server, start
-
 from wdom.themes import bootstrap3
-
 from wdom.themes.bootstrap3 import *
-from pyd2bot.network.message import Msg
+from pyd2bot.network.message import Message
 from pyd2bot.network.sniffer import DofusSniffer
-
 logger = logging.getLogger("labot")
 
 
@@ -90,7 +86,7 @@ class MsgTable(Table):
 
 class MsgView(Tr):
     
-    def __init__(self, msg: Msg, *args, **kwargs):
+    def __init__(self, msg: Message, *args, **kwargs):
         logger.debug("Initializing UI Msg: {}".format(msg.name))
         self.msg = msg
         if msg.count is not None:

@@ -1,17 +1,22 @@
 import threading
 from pyd2bot.gameData.world.map import Map
+from pyd2bot.logic.managers import EventsManager
 from pyd2bot.utils.pathFinding import Pathfinding
-import pyd2bot.network.connection as conn
+from pyd2bot.network import Connection, MsgListner
 from pyd2bot.utils.pathFinding.cellsPathFinder import CellsPathfinder
+import pyd2bot.logic.frames as msgframes
 
 class IBot:
     
-    def __init__(self) -> None:
-        self._login = None
-        self._password = None
-        self.name = None
-        self.serverID = None
+    def __init__(self, name, login, password, serverID):
+
+        # creds data
+        self.name = name
+        self.serverID = serverID
+        self._login = login
+        self._password = password
         
+        # Account data
         self.accountId = None
         self.communityId = None
         self.hasRights = None
@@ -27,12 +32,14 @@ class IBot:
         self.inventoryWeight = None
         self.weightMax = None
         
-
+        # Some game events
         self.farmingError = threading.Event()
         self.inGame = threading.Event()
-        
         self.isInFight = threading.Event()
         self.inFightTurn = threading.Event()
+        self.mapDataLoaded = threading.Event()
+
+        # In game data
         self.fightCurrCellId = None
         self.currCellId:int = None
         self.direction:int = None
@@ -41,7 +48,13 @@ class IBot:
         self.currFarmingElem:int = None
         self.currMapInteractiveElems:dict = {}
         self.currMapStatedElems:dict = {}
+
+        # Modules
         self.pf = Pathfinding()
         self.cpf = CellsPathfinder()
-        self.conn = conn.Connection(self)
-        self._kill = self.conn._kill
+        self.conn = Connection()
+        self.evtMgr = EventsManager()
+        frames = [cls_frame(self) for cls_frame in msgframes._cls_frames]
+        self.msgListner = MsgListner(self.evtMgr, self.conn, frames)
+
+

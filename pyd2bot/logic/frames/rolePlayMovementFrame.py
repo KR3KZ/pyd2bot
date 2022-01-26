@@ -24,7 +24,7 @@ class RolePlayMovementFrame(IFrame):
                     if actor["name"] == self.bot.name and actor["contextualId"] == self.bot.characterID:
                         self.bot.currCellId = actor["disposition"]["cellId"]
                         self.bot.direction = actor["disposition"]["direction"]
-                        
+            self.bot.mapDataLoaded.set()
             return True
                 
         elif mtype == "CurrentMapMessage":

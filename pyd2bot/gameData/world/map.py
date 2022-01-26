@@ -1,5 +1,6 @@
 import math
 from pyd2bot.gameData.world.mapPosition import MapPosition
+from pyd2bot.gameData.world.mapZones import MapZones
 from pyd2bot.utils.binaryIO import BinaryStream
 import logging
 
@@ -28,6 +29,7 @@ class Map:
         self.cells = dict[int, Cell]()
         self.oldMvtSystem = False
         self.read(raw)
+        self.zones = MapZones(self)
 
     def read(self, raw:BinaryStream):
         """read the map from the raw binary stream"""
@@ -112,60 +114,60 @@ class Map:
         else:
             raise Exception("invalid direction")
     
-    def getNeighbourCellFromDirection(self, srcId:int, direction:int) -> 'Cell':
+    def getNeighbourCellFromDirection(cls, srcId:int, direction:int) -> 'Cell':
         """retourne la cellule voisine selon une certaine direction"""
-        if (srcId // self.WIDTH) % 2 == 0: 
+        if (srcId // cls.WIDTH) % 2 == 0: 
             offsetId = 0
             
         else:
             offsetId = 1
 
-        if direction == self.RIGHT:
+        if direction == cls.RIGHT:
             destId = srcId + 1
-            if destId % self.WIDTH != 0:
-                return self.cells[destId]
+            if destId % cls.WIDTH != 0:
+                return cls.cells[destId]
             return None
         
-        elif direction == self.DOWN_RIGHT:
-            destId = srcId + self.WIDTH + offsetId
-            if destId < self.CELLS_COUNT and (srcId + 1) % (self.WIDTH * 2) != 0:
-                return self.cells[destId]
+        elif direction == cls.DOWN_RIGHT:
+            destId = srcId + cls.WIDTH + offsetId
+            if destId < cls.CELLS_COUNT and (srcId + 1) % (cls.WIDTH * 2) != 0:
+                return cls.cells[destId]
             return None
             
-        elif direction == self.DOWN :
-            destId = srcId + self.WIDTH * 2
-            if destId < self.CELLS_COUNT:
-                return self.cells[destId]
+        elif direction == cls.DOWN :
+            destId = srcId + cls.WIDTH * 2
+            if destId < cls.CELLS_COUNT:
+                return cls.cells[destId]
             return None
         
-        elif direction == self.DOWN_LEFT :
-            destId = srcId + self.WIDTH - 1 + offsetId
-            if destId < self.CELLS_COUNT and srcId % (self.WIDTH * 2) != 0:
-                return self.cells[destId]
+        elif direction == cls.DOWN_LEFT :
+            destId = srcId + cls.WIDTH - 1 + offsetId
+            if destId < cls.CELLS_COUNT and srcId % (cls.WIDTH * 2) != 0:
+                return cls.cells[destId]
             return None
         
-        elif direction == self.LEFT :
+        elif direction == cls.LEFT :
             destId = srcId - 1
-            if srcId % self.WIDTH != 0:
-                return self.cells[destId]
+            if srcId % cls.WIDTH != 0:
+                return cls.cells[destId]
             return None
         
-        elif direction == self.UP_LEFT :
-            destId = srcId - self.WIDTH - 1 + offsetId
-            if destId >= 0 and srcId % (self.WIDTH * 2) != 0:
-                return self.cells[destId]
+        elif direction == cls.UP_LEFT :
+            destId = srcId - cls.WIDTH - 1 + offsetId
+            if destId >= 0 and srcId % (cls.WIDTH * 2) != 0:
+                return cls.cells[destId]
             return None
         
-        elif direction == self.UP :
-            destId = srcId - self.WIDTH * 2
+        elif direction == cls.UP :
+            destId = srcId - cls.WIDTH * 2
             if destId >= 0:
-                return self.cells[destId]
+                return cls.cells[destId]
             return None
         
-        elif direction == self.UP_RIGHT :
-            destId = srcId - self.WIDTH + offsetId
-            if destId > 0 and (srcId + 1) % (self.WIDTH * 2) != 0:
-                return self.cells[destId]
+        elif direction == cls.UP_RIGHT :
+            destId = srcId - cls.WIDTH + offsetId
+            if destId > 0 and (srcId + 1) % (cls.WIDTH * 2) != 0:
+                return cls.cells[destId]
             return None
         
         raise Exception("Invalid direction.")
@@ -198,34 +200,30 @@ class Map:
         elif direction == Map.UP_RIGHT:
             return "up and right"
     
-
     def getOutgoingCells(self, direction:int):
         if direction == self.LEFT:
-            ret = [i * self.WIDTH for i in range(self.HEIGHT)]
+            ret = [i * self.WIDTH for i in range(2 * self.HEIGHT)]
         
-        if direction == self.RIGHT:
-            ret = [(i + 1) * self.WIDTH - 1 for i in range(self.HEIGHT)]
+        elif direction == self.RIGHT:
+            ret = [(i + 1) * self.WIDTH - 1 for i in range(2 * self.HEIGHT)]
         
-        if direction == self.UP:
-            ret = [i for i in range(self.WIDTH) if self.cells[i].allowsMapChange()]
+        elif direction == self.UP:
+            ret = [i for i in range(self.WIDTH)]
         
-        if direction == self.DOWN:
-            ret = [i + self.WIDTH * (self.HEIGHT - 1) for i in range(self.WIDTH) if self.cells[i].allowsMapChange()]
+        elif direction == self.DOWN:
+            ret = [i + self.WIDTH * (2 * self.HEIGHT - 1) for i in range(self.WIDTH)]
         
         else: 
-            raise Exception("Invalid direction for changing map.")
+            raise Exception(f"Invalid direction {direction} for changing map.")
 
         return set([i for i in ret if self.cells[i].allowsMapChange()])
-
 
     def __str__(self):
         mp = MapPosition.getMapPositionById(self.id)
         return f"{self.id}[{mp.posX},{mp.posY}]"
     
-    
     def __eq__(self, other:'Map'):
         return self.id == other.id
-    
 
     def printGrid(self):
         format_row = "{:>2}" * (Map.WIDTH + 2)

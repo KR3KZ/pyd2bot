@@ -23,7 +23,7 @@ class ServerLoginFrame(IFrame):
 
         elif mtype == "SelectedServerRefusedMessage":
             logger.error(f"Server selection refused because server status is {ServerStatusEnum(msg['serverStatus'])}")
-            self.conn.interrupt()
+            self.conn.close()
             return True
 
 
@@ -32,7 +32,7 @@ class ServerLoginFrame(IFrame):
             ba_ticket = AuthentificationManager.decodeWithAES(msg["ticket"])
             self.conn.serverInfos["ticket"] = ba_ticket.decode("utf-8")
             self.conn.gameServer = msg["address"]
-            self.conn.closeConnection()
+            self.conn.close()
             self.conn.connectToGameServer()
             return True
         
@@ -101,7 +101,6 @@ class ServerLoginFrame(IFrame):
             
 
         elif mtype == "TrustStatusMessage":
-            self.bot.connected.set()
             self.conn.send({'__type__': 'CharactersListRequestMessage'})
             return True
 

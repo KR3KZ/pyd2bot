@@ -1,4 +1,4 @@
-from .__IFrame import IFrame
+from .iFrame import IFrame
 from .authentificationFrame import AuthentificationFrame
 from .serverLoginFrame import ServerLoginFrame
 from .gameStartingFrame import GameStartingFrame

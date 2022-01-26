@@ -1,1 +1,2 @@
-from . authentificationManager import AuthentificationManager
+from .authentificationManager import AuthentificationManager
+from .eventsmanager import EventsManager

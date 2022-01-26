@@ -5,7 +5,7 @@ from pyd2bot.gameData.world.map import Cell, Map
 from pyd2bot.gameData.world.mapPosition import MapPosition
 from pyd2bot.utils.pathFinding.cellsPathFinder import CellNode
 from pyd2bot.utils.pathFinding.lightMapNode import LightMapNode
-from pyd2bot.utils.pathFinding.mapZones import MapZones
+from pyd2bot.gameData.world.mapZones import MapZones
 from pyd2bot.utils.pathFinding.pathFinder import PathNode, Pathfinder
 
 logger = logging.getLogger("bot")

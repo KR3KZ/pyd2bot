@@ -1,5 +1,6 @@
 import json
-from pyd2bot.bot import Bot
+from pyd2bot.bot import Walker
+from pyd2bot.network import MsgListner
 import os
 
 ROOTDIR = os.path.dirname(__file__)
@@ -16,8 +17,13 @@ creds = {
     "serverID": 210
 }
 
-bot = Bot(**creds)    
-if bot.login():
-    # bot.harvest()
-    bot.walkToMap(189531650)
+try:
+    bot = Walker(**creds)
+    if bot.login():
+        for _ in range(100):
+            bot.randWalk()
+        bot.disconnect()
+except Exception as e:
     bot.disconnect()
+    raise e
+    

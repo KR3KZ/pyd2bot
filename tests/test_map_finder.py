@@ -5,7 +5,7 @@ from pyd2bot.gameData.mapReader import MapLoader
 from pyd2bot.gameData.world.map import Cell, Map
 from pyd2bot.gameData.world.mapPoint import MapPoint
 from pyd2bot.utils.pathFinding import Pathfinding
-from pyd2bot.utils.pathFinding.mapZones import MapZones
+from pyd2bot.gameData.world.mapZones import MapZones
 
 
 with open("pyd2bot.log", "w") as f:
@@ -34,7 +34,7 @@ if __name__ == '__main__':
     startCellId = 132
     targetMapId = 189792257
     srcMap = MapLoader.load(sourceMapId)
-    mz = MapZones(srcMap)
+    mz = MapZones(srcMap).getZone(startCellId)
     srcMap.printGrid()
         # print(srcMap.cells[i].id // 2 * Map.WIDTH, end=", ")
 

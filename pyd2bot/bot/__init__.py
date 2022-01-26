@@ -1,2 +1,3 @@
-from .__IBot import IBot
-from .bot import Bot 
+from .iBot import IBot
+from .bot import Bot
+from .walker import Walker

@@ -1,12 +1,12 @@
 import logging
-from ..utils.binaryIO.customDataWrapper import ByteArray, Buffer
+from ..utils.binaryIO import ByteArray, Buffer
 from .protocol import DofusProtocol
 from . import msgReceiver
 
 logger = logging.getLogger("labot")
 
 
-class Msg:
+class Message:
     protocol = DofusProtocol()
     
     def __init__(self, m_id, data, count=None, from_client=None, src=None, dst=None):
@@ -63,14 +63,14 @@ class Msg:
         if id == 2:
             newbuffer = Buffer(data.readByteArray())
             newbuffer.uncompress()
-            msg = Msg.fromRaw(newbuffer, from_client)
+            msg = Message.fromRaw(newbuffer, from_client)
             if not msg or newbuffer.remaining():
                 raise Exception("Unable to parse Message")
             return msg
         
         buf.end()
 
-        return Msg(m_id=id, 
+        return Message(m_id=id, 
                    data=data, 
                    count=count, 
                    from_client=from_client,
@@ -111,7 +111,7 @@ class Msg:
     @staticmethod
     def from_json(json, count=None, random_hash=True):
         type_name: str = json["__type__"]
-        msg_type: dict = Msg.protocol.getMsgTypeByName(type_name)
+        msg_type: dict = Message.protocol.getMsgTypeByName(type_name)
         type_id: int = msg_type["protocolId"]
-        data = Msg.protocol.write(type_name, json, random_hash=random_hash)
-        return Msg(type_id, data, count)
+        data = Message.protocol.write(type_name, json, random_hash=random_hash)
+        return Message(type_id, data, count)

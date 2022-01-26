@@ -1,6 +1,6 @@
 import socket
 from scapy.all import AsyncSniffer, Packet
-from .message import Msg
+from .message import Message
 from pyd2bot.utils.binaryIO import Buffer
 
 class DofusSniffer(AsyncSniffer):
@@ -46,7 +46,7 @@ class DofusSniffer(AsyncSniffer):
             if raw_layer:
                 buf += raw_layer.load
                 while True:
-                    msg = Msg.fromRaw(buf, isfromClient, src=src, dst=dst)
+                    msg = Message.fromRaw(buf, isfromClient, src=src, dst=dst)
                     if not msg:
                         break
                     print(f"Received msg. {msg.json()['__type__']}, src {src} -> dst: {dst}")
