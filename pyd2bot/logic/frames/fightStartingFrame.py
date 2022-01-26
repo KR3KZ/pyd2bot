@@ -25,16 +25,8 @@ class FightStartingFrame(IFrame):
             return True
 
         elif mtype == "GameFightHumanReadyStateMessage":
-            if int(msg["characterId"]) == self.id:
+            if int(msg["characterId"]) == self.bot.characterId:
                 self.bot.isReady.set()
-
-        elif mtype == "GameEntitiesDispositionMessage":
-            for disposition in msg["dispositions"]:
-                cellId = disposition["cellId"]
-                if int(disposition["id"]) == self.bot.characterId:
-                    self.bot.currCellId = cellId
-                else:
-                    self.bot.mobsDispositions.append(cellId)
             return True
         
         elif mtype == "GameFightShowFighterMessage":

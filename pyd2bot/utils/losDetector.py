@@ -5,9 +5,7 @@ from pyd2bot.utils.mapTools import MapTools
 
 
 class LosDetector:
-    
-    def __init__():
-        pass
+
     
     def getCell(self, mapData:Map, spellrange:list[int], refPosition:MapPoint) -> list[int]: 
         orderedCell:list = list()
@@ -36,18 +34,18 @@ class LosDetector:
                         currentPoint = str(math.floor(line[j].x)) + "_" + str(math.floor(line[j].y))
                         if MapPoint.isInMap(line[j].x, line[j].y):
 
-                            if j > 0 and mapData.hasEntity(math.floor(line[j - 1].x), math.floor(line[j - 1].y), True):
+                            if j > 0 and mapData.hasEntity(math.floor(line[j - 1].x), math.floor(line[j - 1].y)):
                                 los = False
                             
                             elif line[j].x + line[j].y == refPosition.x + refPosition.y or line[j].x - line[j].y == refPosition.x - refPosition.y:
-                                los = los and mapData.pointLos(math.floor(line[j].x), math.floor(line[j].y), True)
+                                los = los and mapData.pointLos(math.floor(line[j].x), math.floor(line[j].y))
                             
                             elif tested.get(currentPoint) is None:
-                                los = los and mapData.pointLos(math.floor(line[j].x), math.floor(line[j].y), True)
+                                los = los and mapData.pointLos(math.floor(line[j].x), math.floor(line[j].y))
                             
                             else:
                                 los = los and tested[currentPoint]
-                        
+    
                     tested[currentPoint] = los
                 
         

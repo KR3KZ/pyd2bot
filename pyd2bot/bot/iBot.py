@@ -32,33 +32,32 @@ class IBot:
         self.inventoryWeight = None
         self.weightMax = None
         
+        # kill sig
+        self._kill = threading.Event()
+
         # Some game events
         self.farming = threading.Event()
         self.moving = threading.Event()
         self.idle = threading.Event()
-
-
         self.moveError = threading.Event()
         self.farmingError = threading.Event()
 
-
+        # contextual data
         self.contextChanged = threading.Event()
         self.inGame = threading.Event()        
         self.mapDataLoaded = threading.Event()
         self.mapComplementaryInfosReceived = threading.Event()
 
-
+        # fight data
         self.isInFight = threading.Event()
-        self.isFightTurn = threading.Event()
         self.canSayReady = threading.Event()
         self.isReady = threading.Event()
+        self.isFightTurn = threading.Event()
+        self.turnStarted = threading.Event()
+        self.turnEnded = threading.Event()
         self.currPA = None
         self.currPM = None
         self.mobsDispositions = []
-
-
-
-        self._kill = threading.Event()
 
         # In game data
         self.fightCurrCellId = None

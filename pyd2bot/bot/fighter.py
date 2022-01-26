@@ -1,8 +1,10 @@
 import collections
 from time import sleep, perf_counter
+
+from pyd2bot.gameData.world.mapPoint import MapPoint
 from .walker import Walker
 import logging
-
+from pyd2bot.utils.losDetector import LosDetector
 logger = logging.getLogger("bot")
 
 class Fighter(Walker):
@@ -22,7 +24,7 @@ class Fighter(Walker):
             logger.info(f"Combat started **** {self.canSayReady.is_set()}")
             if self.canSayReady.wait():
                 self.sayReady()
-                self.isReady.wait()
+                self.turnStarted.wait()
                 self.combatAlgo()
             logger.info("combat ended")
         except Exception:
@@ -34,9 +36,10 @@ class Fighter(Walker):
             try:
                 self.isFightTurn.wait()
                 self.sayReady()
-                self.isReady.wait()
+                self.turnStarted.wait()
                 self.playTurn()
                 self.skipTurn()
+                self.turnEnded.wait()
             except Exception as e:
                 logging.error(str(e), exc_info=True)
 
@@ -44,8 +47,7 @@ class Fighter(Walker):
         self.conn.send({'__type__': 'GameFightReadyMessage', 'isReady': True})
 
     def skipTurn(self):
-        # skip turn msg send here
-        pass
+        self.conn.send({'__type__': 'GameFightTurnFinishMessage', 'isAfk': False})
 
     def playTurn(self):
         usedSpells = 0
@@ -100,7 +102,14 @@ class Fighter(Walker):
         """
         # use spell here
         pass
-
+    
+    def getSpellRange(self):
+        """
+        Get the range of the spell
+        :return: range as list of cellIds
+        """
+        
+        return self.spell['po']
     def findPathToTarget(self, startCellId, po, targets):
         """
         Find path to the closest ldv to hit a mob.
@@ -109,6 +118,7 @@ class Fighter(Walker):
         :param targets: positions of the mobs
         :return: cell of the mob, path to the ldv if any else None
         """
+        LosDetector.getCell(self.currMap, self.getSpellRange(), MapPoint.fromCellId(startCellId))
         logging.debug("searching path to mobs")
         queue = collections.deque([[startCellId]])
         seen = {startCellId}

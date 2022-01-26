@@ -6,6 +6,17 @@ logger = logging.getLogger("bot")
 
 class Farmer(Walker):
 
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
+        self._collected = set[int]()
+
+    def findCollectable(self):
+        for id in self.currMapInteractiveElems.keys():
+            if id not in self._collected:
+                enabledSkill = self.canCollect(id)
+                if enabledSkill:
+                    return id, enabledSkill
+        return None, None
 
     def canCollect(self, elem_id):
         logger.debug(f"Checking if elem {elem_id} can be collected")
@@ -15,7 +26,6 @@ class Farmer(Walker):
             if ielem["onCurrentMap"] and selem["elementState"] == 0 and ielem["enabledSkills"]:
                 return ielem["enabledSkills"][0]
         return None     
-
 
     def collectElement(self, elementId, skill):
         selem = self.currMapStatedElems[elementId]
@@ -49,12 +59,15 @@ class Farmer(Walker):
 
 
     def harvest(self):
+        self._collected = set[int]()
         self.cpf.map = self.currMap
         logger.info("Looking for collectable resources")
-        for id in self.currMapInteractiveElems.keys():
-            enabledSkill = self.canCollect(id)         
-            if enabledSkill is not None:
-                self.collectElement(id, enabledSkill)
-                if self._kill.is_set():
-                    return
-
+        while not self._kill.is_set():
+            self.inGame.wait()
+            elementId, enabledSkill = self.findCollectable()
+            if not elementId:
+                return 
+            if self.collectElement(id, enabledSkill):
+                self._collected.add(elementId)
+            
+            

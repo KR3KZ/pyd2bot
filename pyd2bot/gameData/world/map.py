@@ -7,6 +7,8 @@ from pyd2bot.gameData.world.soundElement import SoundElement
 from pyd2bot.utils.binaryIO import BinaryStream
 import logging
 
+from pyd2bot.utils.mapTools import MapTools
+
 logger = logging.getLogger("bot")
 
 class Map:
@@ -33,9 +35,9 @@ class Map:
         self.oldMvtSystem = False
         self.read(raw)
         self.zones = MapZones(self)
+        self.entities = dict[int, dict]()
 
     def read(self, raw:BinaryStream):
-        """read the map from the raw binary stream"""
         self.relativeId = raw.readUnsignedInt()
         self.mapType = raw.readByte()
         self.subareaId = raw.readInt()
@@ -105,7 +107,6 @@ class Map:
                 self.rightArrowCell.add(cellid)
                 
     def getNeighborIdFromDirection(self, direction:int) -> int:
-        """return the id of the neighbour map from the given direction"""
         if direction == self.LEFT: 
             return self.leftNeighbourId
         elif direction == self.RIGHT: 
@@ -118,7 +119,6 @@ class Map:
             raise Exception("invalid direction")
     
     def getNeighbourCellFromDirection(cls, srcId:int, direction:int) -> 'Cell':
-        """retourne la cellule voisine selon une certaine direction"""
         if (srcId // cls.WIDTH) % 2 == 0: 
             offsetId = 0
             
@@ -176,7 +176,6 @@ class Map:
         raise Exception("Invalid direction.")
 
     def getCellNeighbours(self, cellId:int) -> set['Cell']:
-        """Get the neighbours of a cell"""
         neighbours = set[Cell]()
         for i in range(8):
             cell = self.getNeighbourCellFromDirection(cellId, i)
@@ -221,6 +220,11 @@ class Map:
 
         return set([i for i in ret if self.cells[i].allowsMapChange()])
 
+    def pointLos(self, x:int, y:int) -> True :
+        cellId:int = MapTools.getCellIdByCoord(x,y)
+        los:bool = self.cells[cellId].los
+        return los
+      
     def __str__(self):
         mp = MapPosition.getMapPositionById(self.id)
         return f"{self.id}[{mp.posX},{mp.posY}]"
@@ -238,7 +242,9 @@ class Map:
             print(format_row.format("#", *row, "#"))
         print(format_row.format(*["#"] * (Map.WIDTH + 2)))
 
-
+    def hasEntity(self, x:int, y:int) -> bool:
+        return MapTools.getCellIdByCoord(x,y) in self.entities
+        
 class Fixture:
     
     def __init__(self, raw):
