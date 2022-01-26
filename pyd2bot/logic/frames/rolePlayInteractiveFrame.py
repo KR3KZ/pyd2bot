@@ -10,17 +10,23 @@ class RolePlayInteractiveFrame(IFrame):
         
         if mtype == "InteractiveUseErrorMessage":
             self.bot.farmingError.set()
+            self.bot.farming.set()
+            self.bot.idle.set()
             return True
         
         elif mtype == "InteractiveUsedMessage":
             skill = msg["skillId"]
             self.bot.currFarmingElem = msg["elemId"]
+            self.bot.farming.set()
+            self.bot.idle.clear()
             logger.info(f"Farming animation of elem {self.bot.currFarmingElem} with skill {skill} started")
             return True
         
         elif mtype == "InteractiveUseEndedMessage":
             logger.info(f"Farming animation of elem {self.bot.currFarmingElem} ended")            
             self.bot.currFarmingElem = None
+            self.bot.farming.clear()
+            self.bot.idle.set()
             return True
     
         elif mtype == "StatedElementUpdatedMessage":

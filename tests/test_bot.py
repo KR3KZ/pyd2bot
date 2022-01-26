@@ -1,5 +1,6 @@
 import json
 from pyd2bot.bot import Walker
+from pyd2bot.bot.farmer import Farmer
 from pyd2bot.network import MsgListner
 import os
 
@@ -18,12 +19,13 @@ creds = {
 }
 
 try:
-    bot = Walker(**creds)
+    bot = Farmer(**creds)
     if bot.login():
-        for _ in range(100):
+        for _ in range(200):
             bot.randWalk()
-        bot.disconnect()
+            bot.harvest()
+        bot.stop()
 except Exception as e:
-    bot.disconnect()
+    bot.stop()
     raise e
     

@@ -28,16 +28,37 @@ class IBot:
         self.secretQuestion = None
         self.accountCreation = None
         self.wasAlreadyConnected = None
-        self.characterID = None
+        self.characterId = None
         self.inventoryWeight = None
         self.weightMax = None
         
         # Some game events
+        self.farming = threading.Event()
+        self.moving = threading.Event()
+        self.idle = threading.Event()
+
+
+        self.moveError = threading.Event()
         self.farmingError = threading.Event()
-        self.inGame = threading.Event()
-        self.isInFight = threading.Event()
-        self.inFightTurn = threading.Event()
+
+
+        self.contextChanged = threading.Event()
+        self.inGame = threading.Event()        
         self.mapDataLoaded = threading.Event()
+        self.mapComplementaryInfosReceived = threading.Event()
+
+
+        self.isInFight = threading.Event()
+        self.isFightTurn = threading.Event()
+        self.canSayReady = threading.Event()
+        self.isReady = threading.Event()
+        self.currPA = None
+        self.currPM = None
+        self.mobsDispositions = []
+
+
+
+        self._kill = threading.Event()
 
         # In game data
         self.fightCurrCellId = None

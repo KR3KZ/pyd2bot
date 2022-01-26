@@ -1,7 +1,7 @@
 import logging
 
 logging.root.handlers = []
-logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.DEBUG , filename='pyd2bot.log')
+logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO , filename='pyd2bot.log')
 
 # set up logging to console
 console = logging.StreamHandler()

@@ -12,6 +12,7 @@ class Walker(Bot):
 
 
     def walkToCell(self, cellId):
+        self.inGame.wait()
         logger.info(f"Current cellId: {self.currCellId}")
         logger.debug(f"Current mapId: {self.currMapId}")
         if self.currCellId == cellId:
@@ -21,6 +22,8 @@ class Walker(Bot):
         keymoves = self.pf.getCellsPathTo(cellId)
         if keymoves:
             hash = bytes(random.getrandbits(8) for _ in range(48))
+            self.moving.clear()
+            self.moveError.clear()
             self.conn.send({
                 '__type__': 'GameMapMovementRequestMessage',
                 'hash_function': hash,
@@ -28,13 +31,16 @@ class Walker(Bot):
                 'mapId': self.currMapId
             })
             logger.info(f"Walk request to cell {cellId} sent")
-            events = [("GameMapMovementMessage", lambda m: int(m["actorId"]) == self.characterID), ("GameMapNoMovementMessage", None)]
-            if self.evtMgr.waitMsgs(events):
-                sleep(self.pf.getCellsPathDuration())
-                self.conn.send({'__type__': "GameMapMovementConfirmMessage"})
-                self.currCellId = cellId
-                logger.info(f"Moved to cell {self.currCellId}")
-                return True
+            if self.moving.wait():
+                if self.moveError.is_set():
+                    logger.error("Moving error")
+                    return False
+                else:
+                    sleep(self.pf.getCellsPathDuration())
+                    self.conn.send({'__type__': "GameMapMovementConfirmMessage"})
+                    self.currCellId = cellId
+                    logger.info(f"Moved to cell {self.currCellId}")
+                    return True
             else:
                 logger.error(f"Failed to walk to cell {cellId}")
                 return False
@@ -52,17 +58,17 @@ class Walker(Bot):
         logger.info(f"Going to map {dstMapId}")
         if self.walkToCell(cellId):
             self.mapDataLoaded.clear()
+            self.mapComplementaryInfosReceived.clear()
             self.conn.send({
                 '__type__': 'ChangeMapMessage', 
                 'autopilot': False, 
                 'mapId': dstMapId
             })
-            if self.evtMgr.waitMsg("CurrentMapMessage", condition=lambda m: int(m["mapId"]) == dstMapId):
+            if self.mapDataLoaded.wait(timeout=5):
                 logger.info(f"Entered to map {dstMapId}")
-                if self.mapDataLoaded.wait():
-                    logger.info(f"Map {dstMapId} dlm data loaded successfully")
+                if self.mapComplementaryInfosReceived.wait():
                     self.mapDataLoaded.clear()
-                return dstMapId
-            else:
-                logger.error(f"Failed to walk to map {dstMapId}")
-                return None
+                    self.mapComplementaryInfosReceived.clear()
+                    return dstMapId
+        logger.error(f"Failed to walk to map {dstMapId}")
+        return None

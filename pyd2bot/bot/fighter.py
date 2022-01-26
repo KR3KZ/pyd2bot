@@ -18,37 +18,33 @@ class Fighter(Walker):
         self.monsters = []
             
     def onCombatStarted(self):
-        self.grid.parse(self.currMapId)
         try:
             logger.info(f"Combat started **** {self.canSayReady.is_set()}")
             if self.canSayReady.wait():
-                for _ in range(6):
-                    # skip turn here
-                    logger.info("ready clicked")
-                    if self.isReady.wait(0.2):
-                        break
-            while self.isInFight.is_set():sleep(0.1)
+                self.sayReady()
+                self.isReady.wait()
+                self.combatAlgo()
             logger.info("combat ended")
         except Exception:
             logging.error("Fatal error in main run!", exc_info=True)
             self.interrupt()
 
     def combatAlgo(self):
-        self.mobs_killed = 0
-        while not self.combatEnded.wait(1):
+        while self.isInFight.is_set():
             try:
-                self.waitTurn()
+                self.isFightTurn.wait()
+                self.sayReady()
+                self.isReady.wait()
                 self.playTurn()
                 self.skipTurn()
             except Exception as e:
                 logging.error(str(e), exc_info=True)
 
+    def sayReady(self):
+        self.conn.send({'__type__': 'GameFightReadyMessage', 'isReady': True})
+
     def skipTurn(self):
         # skip turn msg send here
-        pass
-
-    def waitTurn(self):
-        # wait bort turn msg here 
         pass
 
     def playTurn(self):
@@ -105,7 +101,7 @@ class Fighter(Walker):
         # use spell here
         pass
 
-    def findPathToTarget(self, start_cell, po, targets):
+    def findPathToTarget(self, startCellId, po, targets):
         """
         Find path to the closest ldv to hit a mob.
         :param start_cell: position of the character
@@ -114,13 +110,13 @@ class Fighter(Walker):
         :return: cell of the mob, path to the ldv if any else None
         """
         logging.debug("searching path to mobs")
-        queue = collections.deque([[start_cell]])
-        seen = {start_cell.indexes()}
-        while not self.killsig.is_set() and not self.combatEndReached.is_set() and queue:
+        queue = collections.deque([[startCellId]])
+        seen = {startCellId}
+        while not self._kill.is_set() and self.isInFight.is_set() and queue:
             path = queue.popleft()
             curr = path[-1]
-            for mob in targets:
-                if curr.inLDV(mob, po):
+            for mobCellId in self.mobsDispositions:
+                if curr.inLDV(mobCellId, po):
                     return mob, path[1:]
             for cell in curr.neighbors():
                 if (cell.i, cell.j) not in seen and not cell.occupied():

@@ -4,12 +4,17 @@ from .serverLoginFrame import ServerLoginFrame
 from .gameStartingFrame import GameStartingFrame
 from .rolePlayMovementFrame import RolePlayMovementFrame
 from .rolePlayInteractiveFrame import RolePlayInteractiveFrame
-
+from .gameFightFrame import GameFightFrame
+from .serverRandRequestsFrame import ServerRandRequestsFrame
+from .fightStartingFrame import FightStartingFrame
 
 _cls_frames:list[IFrame] = [
     AuthentificationFrame,
     ServerLoginFrame,
     RolePlayMovementFrame,
     RolePlayInteractiveFrame,
-    GameStartingFrame
+    GameStartingFrame,
+    FightStartingFrame,
+    GameFightFrame,
+    ServerRandRequestsFrame
 ]

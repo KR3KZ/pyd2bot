@@ -1,5 +1,6 @@
 import logging
 import threading
+import signal
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from pyd2bot.logic.frames import IFrame
@@ -19,11 +20,11 @@ class MsgListner(threading.Thread):
         self.evtMgr = evtMgr
         self.conn = conn
         self.frames = frames
-
+        signal.signal(signal.SIGINT, self.interrupt)
 
     def interrupt(self):
         self._kill.set()
-
+        self.conn.close()
 
     def run(self):
         logger.info("Connection thread started.")

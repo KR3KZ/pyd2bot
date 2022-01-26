@@ -23,7 +23,7 @@ class ServerLoginFrame(IFrame):
 
         elif mtype == "SelectedServerRefusedMessage":
             logger.error(f"Server selection refused because server status is {ServerStatusEnum(msg['serverStatus'])}")
-            self.conn.close()
+            self.bot.stop()
             return True
 
 
@@ -108,10 +108,10 @@ class ServerLoginFrame(IFrame):
         elif mtype == "CharactersListMessage":
             for character in msg["characters"]:
                 if character["name"] == self.bot.name:
-                    self.bot.characterID = character["id"]
+                    self.bot.characterId = character["id"]
             self.conn.send({
                 '__type__': 'CharacterSelectionMessage', 
-                'id': self.bot.characterID
+                'id': self.bot.characterId
             })
             self._done = True
             return True

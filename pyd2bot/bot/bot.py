@@ -7,7 +7,8 @@ class Bot(IBot):
     def __init__(self, name, serverID, login, password) -> None:
         super().__init__(name, login, password, serverID)
 
-    def disconnect(self):
+    def stop(self):
+        self._kill.set()
         self.conn.close()
         self.evtMgr.interrupt()
         self.msgListner.interrupt()
@@ -26,9 +27,10 @@ class Bot(IBot):
                         logger.info(f"Appeared in map {self.currMapId}.")
                         if self.mapDataLoaded.wait():
                             logger.info("Game Map dlm Ddata loaded.")
-                            logger.info(f"Map Data Recieved. Bot is on cell {self.currCellId}.")
-                            self.mapDataLoaded.clear()
-                            return True
+                            if self.mapComplementaryInfosReceived.wait():
+                                logger.info(f"Map Data Recieved. Bot is on cell {self.currCellId}.")
+                                self.mapDataLoaded.clear()
+                                return True
         return False
 
 
