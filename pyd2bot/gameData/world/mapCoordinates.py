@@ -54,7 +54,7 @@ class MapCoordinates:
             self._y = self.getSignedValue(self.compressedCoords & 0xFFFF)
         return self._y
     
-    def getMaps(self, ) -> list[MapPosition]: 
+    def getMaps(self) -> list[MapPosition]: 
         if self._maps == None: 
             self._maps = list[MapPosition]()
             for mapId in self.mapIds:

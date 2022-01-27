@@ -4,3 +4,4 @@ scapy
 wdom
 tqdm
 pycryptodomex
+mini-amf

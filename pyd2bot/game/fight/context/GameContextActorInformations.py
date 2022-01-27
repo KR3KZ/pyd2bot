@@ -1,6 +1,7 @@
-from pyd2bot.game.context.EntityDispositionInformations import EntityDispositionInformations
+
+from pyd2bot.game.fight.context.EntityDispositionInformations import EntityDispositionInformations
+from pyd2bot.game.fight.context.GameContextActorPositionInformations import GameContextActorPositionInformations
 from pyd2bot.game.stats.EntityLook import EntityLook
-from pyd2bot.game.context.GameContextActorPositionInformations import GameContextActorPositionInformations
 
 
 class GameContextActorInformations(GameContextActorPositionInformations):

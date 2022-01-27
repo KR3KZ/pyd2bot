@@ -1,6 +1,6 @@
 from functools import lru_cache
 import pyd2bot.Constants as Constants
-from dataUnpacker.dlm import DLM
+from dataReader.dlm import DLM
 
 
 class MapLoader:

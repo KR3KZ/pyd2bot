@@ -15,15 +15,13 @@ class BinaryStream:
             return self._base_stream.tell()
         else:
             self._base_stream.seek(value)
-
-    def bytes_available(self):
+        
+    def remaining(self):
         position = self._base_stream.tell()
         self._base_stream.seek(0, 2)
         eof = self._base_stream.tell()
         self._base_stream.seek(position, 0)
         return eof - position
-
-    # Read functions
 
     def readByte(self):
         return self._base_stream.read(1)
@@ -35,7 +33,7 @@ class BinaryStream:
             bytes = self._base_stream.read(length)
         return bytes
 
-    def readBoolean(self):
+    def readbool(self):
         bool = self._base_stream.read(1)[0]
         if bool == 1:
             return True
@@ -51,7 +49,7 @@ class BinaryStream:
     def read_uchar(self):
         return self._unpack('B')
 
-    def readBoolean(self):
+    def readbool(self):
         return self._unpack('?')
 
     def readShort(self):
@@ -75,10 +73,10 @@ class BinaryStream:
     def read_float(self):
         return self._unpack('f', 4)
 
-    def read_double(self):
+    def readDouble(self):
         return self._unpack('d', 8)
 
-    def read_string(self):
+    def readUTF(self):
         length = self.readUnsignedShort()
         return self._unpack(str(length) + 's', length)
 

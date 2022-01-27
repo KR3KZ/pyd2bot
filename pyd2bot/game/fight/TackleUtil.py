@@ -1,27 +1,27 @@
                                                                   
 from pyd2bot import Constants
 from pyd2bot.bot.iBot import IBot
+from pyd2bot.dofus.datacenter.monsters.monster import Monster
 from pyd2bot.game.fight.context.EntityDispositionInformations import EntityDispositionInformations
 from pyd2bot.game.fight.context.FightEntityDispositionInformations import FightEntityDispositionInformations
 from pyd2bot.game.fight.context.GameFightFighterInformations import GameFightFighterInformations
 from pyd2bot.game.fight.context.GameFightMonsterInformations import GameFightMonsterInformations
+from pyd2bot.game.fight.managers import StatsManager, FightersStateManager, EntitiesManager
 from pyd2bot.game.stats.iEntity import IEntity
 from pyd2bot.game.stats.entityStats import EntityStats
 from pyd2bot.game.stats.stat import Stat
 from pyd2bot.gameData.enums.DataEnum import DataEnum
+from pyd2bot.gameData.enums.GameActionFightInvisibilityStateEnum import GameActionFightInvisibilityStateEnum
 from pyd2bot.gameData.enums.statIdsEnum import StatIds
 from pyd2bot.gameData.world.mapPoint import MapPoint
 from pyd2bot.gameData.world.mouvementPath import MovementPath
-from pyd2bot.gameData.world.pathElement import PathElement
 from pyd2bot.logic.frames.fightEntitiesFrame import FightEntitiesFrame
-from pyd2bot.game.fight.managers import StatsManager, FightersStateManager, EntitiesManager
 from pyd2bot.utils import MapTools
 
 
    
    
-def getTackle(player:IBot, playerInfos:GameFightFighterInformations, position:MapPoint) -> float:
-   entitiesFrame:FightEntitiesFrame = player.msgListner.getFrame(FightEntitiesFrame)
+def getTackle(entitiesFrame:FightEntitiesFrame, playerInfos:GameFightFighterInformations, position:MapPoint) -> float:
    stats:EntityStats = StatsManager.getStats(playerInfos.contextualId)
    if Constants.DETERMINIST_TACKLE:
       if not canBeTackled(playerInfos, position):
@@ -59,6 +59,7 @@ def getTackle(player:IBot, playerInfos:GameFightFighterInformations, position:Ma
                if mod < 1:
                   evadePercent *= mod
       return evadePercent
+
    return 1
 
 def getTackleForFighter(tackler:GameFightFighterInformations, tackled:GameFightFighterInformations) -> float:
@@ -78,9 +79,8 @@ def getTackleForFighter(tackler:GameFightFighterInformations, tackled:GameFightF
       tackle = 0
    return (evade + 2) / (tackle + 2) / 2
 
-def getTacklerOnCell(cellId:int) -> IEntity:
+def getTacklerOnCell(entitiesFrame:FightEntitiesFrame, cellId:int) -> IEntity:
    infos:GameFightFighterInformations = None
-   entitiesFrame:FightEntitiesFrame = Kernel.getWorker().getFrame(FightEntitiesFrame)
    entities:list[IEntity] = EntitiesManager.getEntitiesOnCell(cellId, IEntity)
    for entity in entities:
       infos = entitiesFrame.getEntityInfos(entity.id)
@@ -91,7 +91,12 @@ def getTacklerOnCell(cellId:int) -> IEntity:
 
 def canBeTackled(fighter:GameFightFighterInformations, position:MapPoint = None) -> bool:
    fedi:EntityDispositionInformations = None
-   if FightersStateManager.hasState(fighter.contextualId, DataEnum.SPELL_STATE_CANT_BE_LOCKED) or FightersStateManager.hasState(fighter.contextualId,DataEnum.SPELL_STATE_ROOTED) or fighter.stats.invisibilityState == GameActionFightInvisibilityStateEnum.INVISIBLE or fighter.stats.invisibilityState == GameActionFightInvisibilityStateEnum.DETECTED or FightersStateManager.getStatus(fighter.contextualId).cantBeTackled:
+   if FightersStateManager.hasState(
+      fighter.contextualId, DataEnum.SPELL_STATE_CANT_BE_LOCKED) or\
+          FightersStateManager.hasState(fighter.contextualId, DataEnum.SPELL_STATE_ROOTED) or\
+              fighter.stats.invisibilityState == GameActionFightInvisibilityStateEnum.INVISIBLE or\
+                  fighter.stats.invisibilityState == GameActionFightInvisibilityStateEnum.DETECTED or\
+                      FightersStateManager.getStatus(fighter.contextualId).cantBeTackled:
       return False
    if isinstance(fighter.disposition, FightEntityDispositionInformations):
       fedi = fighter.disposition
@@ -99,16 +104,20 @@ def canBeTackled(fighter:GameFightFighterInformations, position:MapPoint = None)
          return False
    return True
 
-def canBeTackler(fighter:GameFightFighterInformations, target:GameFightFighterInformations) -> bool:
+def canBeTackler(entitiesFrame:FightEntitiesFrame, fighter:GameFightFighterInformations, target:GameFightFighterInformations) -> bool:
    monster:Monster = None
-   if FightersStateManager.hasState(fighter.contextualId, DataEnum.SPELL_STATE_CARRIED) or FightersStateManager.hasState(fighter.contextualId,DataEnum.SPELL_STATE_ROOTED) or FightersStateManager.hasState(fighter.contextualId,DataEnum.SPELL_STATE_CANT_LOCK) or fighter.stats.invisibilityState == GameActionFightInvisibilityStateEnum.INVISIBLE or fighter.stats.invisibilityState == GameActionFightInvisibilityStateEnum.DETECTED or FightersStateManager.getStatus(fighter.contextualId).cantTackle:
+   if FightersStateManager.hasState(fighter.contextualId, DataEnum.SPELL_STATE_CARRIED) or\
+       FightersStateManager.hasState(fighter.contextualId,DataEnum.SPELL_STATE_ROOTED) or\
+           FightersStateManager.hasState(fighter.contextualId,DataEnum.SPELL_STATE_CANT_LOCK) or\
+               fighter.stats.invisibilityState == GameActionFightInvisibilityStateEnum.INVISIBLE or\
+                   fighter.stats.invisibilityState == GameActionFightInvisibilityStateEnum.DETECTED or\
+                       FightersStateManager.getStatus(fighter.contextualId).cantTackle:
       return False
-   entitiesFrame:FightEntitiesFrame = Kernel.getWorker().getFrame(FightEntitiesFrame)
    infos:GameFightFighterInformations = entitiesFrame.getEntityInfos(fighter.contextualId)
    if infos and infos.spawnInfo.teamId == target.spawnInfo.teamId:
       return False
    if isinstance(fighter, GameFightMonsterInformations):
-      monster = Monster.getMonsterById(fighter.id)
+      monster = Monster.getMonsterById(fighter.creatureGenericId)
       if not monster.canTackle:
          return False
    return fighter.spawnInfo.alive

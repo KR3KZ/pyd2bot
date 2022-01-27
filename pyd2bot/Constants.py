@@ -25,5 +25,13 @@ DATASTORE_MODULE_DEBUG = False
 MAX_LOGIN_ATTEMPTS = 3
 
 ROOTDIR = Path(os.path.dirname(__file__))
+
 MAPS_PATH = ROOTDIR / "gameData/dlmMaps"
+
+DOFUS_ROOTDIR = Path(r"C:\Users\majdoub\AppData\Local\Ankama\Dofus")
+
+DOFUS_DATA_DIR = DOFUS_ROOTDIR / "data"
+
+DOFUS_COMMON_DIR = DOFUS_DATA_DIR / "common"
+
 PROTOCOL_SPEC_PATH = ROOTDIR / "network/protocol_spec.json"

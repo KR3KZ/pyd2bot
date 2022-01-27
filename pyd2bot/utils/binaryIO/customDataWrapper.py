@@ -44,7 +44,7 @@ class ByteArray(bytearray):
     def uncompress(self):
         self = bytearray(decompress(self))
 
-    def readBoolean(self):
+    def readbool(self):
         ans = self.read(1)
         assert ans[0] in [0, 1]
         return bool(ans[0])
