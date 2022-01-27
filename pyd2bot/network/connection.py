@@ -36,7 +36,7 @@ class Connection:
             self._sock.sendall(msg.bytes())
         except OSError as e:
             pass 
-        # logger.info("Sent message {0}".format(msgjson["__type__"]))
+        logger.debug("Sent message {0}".format(msgjson["__type__"]))
 
 
             

@@ -10,7 +10,6 @@ from pyd2bot.network.message import Message, Buffer
 logger = logging.getLogger("bot")
 
 
-
 class MsgListner(threading.Thread):
     
     def __init__(self, evtMgr:'EventsManager', conn:'Connection', frames:list['IFrame']):
@@ -21,6 +20,12 @@ class MsgListner(threading.Thread):
         self.conn = conn
         self.frames = frames
         signal.signal(signal.SIGINT, self.interrupt)
+
+    def getFrame(self, cls):
+        for frame in self.frames:
+            if isinstance(frame, cls):
+                return frame
+        return None
 
     def interrupt(self):
         self._kill.set()

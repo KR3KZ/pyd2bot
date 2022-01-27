@@ -1,16 +1,16 @@
-from pyd2bot.gameData.world.GraphicalElement import GraphicalElement
+from pyd2bot.gameData.enums.playerTypeEnum import PlayerTypeEnum
 from pyd2bot.gameData.world.cell import Cell
 from pyd2bot.gameData.world.layer import Layer
 from pyd2bot.gameData.world.mapPosition import MapPosition
 from pyd2bot.gameData.world.mapZones import MapZones
-from pyd2bot.gameData.world.soundElement import SoundElement
 from pyd2bot.utils.binaryIO import BinaryStream
 import logging
-
-from pyd2bot.utils.mapTools import MapTools
-
+from pyd2bot.utils.MapTools import MapTools
 logger = logging.getLogger("bot")
 
+
+
+    
 class Map:
     CELLS_COUNT = 560
     WIDTH = 14
@@ -222,8 +222,7 @@ class Map:
 
     def pointLos(self, x:int, y:int) -> True :
         cellId:int = MapTools.getCellIdByCoord(x,y)
-        los:bool = self.cells[cellId].los
-        return los
+        return self.cells[cellId].los
       
     def __str__(self):
         mp = MapPosition.getMapPositionById(self.id)
@@ -244,7 +243,16 @@ class Map:
 
     def hasEntity(self, x:int, y:int) -> bool:
         return MapTools.getCellIdByCoord(x,y) in self.entities
-        
+
+    def getMonsterEntitiesCellIds(self) -> list[int]:
+        return [i for i in self.entities if self.entities[i] == PlayerTypeEnum.MONSTER]
+    
+    def getEntityById(self, eid):
+        for e in self.entities.values():
+            if e["id"] == eid:
+                return e
+        return None
+
 class Fixture:
     
     def __init__(self, raw):
@@ -262,6 +270,7 @@ class Fixture:
         self.blueMultiplier = raw.readByte()
         self.hue = self.redMultiplier | self.greenMultiplier | self.blueMultiplier
         self.alpha = raw.read_uchar()
+
 
 
 

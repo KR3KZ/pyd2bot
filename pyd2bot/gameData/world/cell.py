@@ -19,12 +19,12 @@ class Cell:
 
     @staticmethod
     def getId(x:int, y:int) -> int:
-        return x + y * Map.WIDTH
+        return x + y * 14
 
     @staticmethod
     def getCoords(cell_id):
-        x = cell_id % Map.WIDTH
-        y = cell_id // Map.WIDTH
+        x = cell_id % 14
+        y = cell_id // 14
         return x, y
 
     def read(self, raw:BinaryStream):
@@ -119,9 +119,11 @@ class Cell:
         return self.linkedZone & 15
      
     def isAccessibleDuringRP(self):
-        isAccessible = self.mov and not self.nonWalkableDuringRP
-        return isAccessible
+        return self.mov and not self.nonWalkableDuringRP
     
+    def isAccessibleDuringFight(self):
+        return self.mov and not self.nonWalkableDuringFight
+
     def allowsMapChange(self) -> bool:
         return self.mapChangeData != 0
     

@@ -181,3 +181,6 @@ class MapPoint:
 
     def __str__(self): 
         return f"MapPoint(x: {self.x}, y: {self.y}, id: {self.cellID})"
+
+    def __hash__(self) -> int:
+        return self._nCellId

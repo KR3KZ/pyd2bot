@@ -1,7 +1,8 @@
+from pyd2bot.gameData.enums.playerTypeEnum import PlayerTypeEnum
+from pyd2bot.gameData.enums.statIdsEnum import StatIds
 from pyd2bot.logic.frames import IFrame
 import logging
 logger = logging.getLogger("bot")
-
 
 class GameFightFrame(IFrame):
     
@@ -16,13 +17,13 @@ class GameFightFrame(IFrame):
         
         elif mtype == "GameFightTurnReadyRequestMessage":
             if int(msg["id"]) == self.bot.characterId:
-                self.bot.isFightTurn.set()
+                self.bot.isTurn.set()
 
         elif mtype == "GameFightTurnEndMessage":
             if int(msg["id"]) == self.bot.characterId:
                 self.bot.turnEnded.set()
                 self.bot.turnStarted.clear()
-                self.bot.isFightTurn.clear()
+                self.bot.isTurn.clear()
 
         elif mtype == "GameFightEndMessage":
             self.bot.isInFight.clear()
@@ -64,26 +65,29 @@ class GameFightFrame(IFrame):
             return True
 
         elif mtype == "GameFightSynchronizeMessage":
-            self.monsters = []
+            currMap = self.bot.currMap
+            currMap.entities = {}
             for fighter in msg["fighters"]:
                 fcellId = fighter["disposition"]["cellId"]
-                self.bot.currMap.entities[fcellId] = {
+                currMap.entities[fcellId] = {
                     "id": int(fighter["contextualId"]),
                     "invisibilityState": fighter["stats"]["invisibilityState"],
                     "summoned": fighter["stats"]["summoned"]
                 }
                 if fighter["__type__"] == "GameFightCharacterInformations" and int(fighter["contextualId"]) == self.bot.characterId:
                     self.currCellId = fcellId
-                    self.bot.currMap.entities[self.currCellId]["level"] = fighter["stats"]["level"]
+                    currMap.entities[fcellId]["level"] = fighter["stats"]["level"]
+                    currMap.entities[fcellId]["type"] = PlayerTypeEnum.HUMAN
                     for characteristic in fighter["stats"]["characteristics"]["characteristics"]:
                         value = characteristic["additional"] + characteristic["alignGiftBonus"] + characteristic["base"] +\
                             characteristic["objectsAndMountBonus"]
-                        if characteristic["characteristicId"] == 23:
-                            self.bot.currPM = value - characteristic["used"]
-                        elif characteristic["characteristicId"] == 1:
-                            self.bot.currPA = value - characteristic["used"]
+                        if characteristic["characteristicId"] == StatIds.ACTION_POINTS:
+                            self.bot.currPM = int(value - characteristic["used"])
+                        elif characteristic["characteristicId"] == StatIds.MOVEMENT_POINTS:
+                            self.bot.currPA = int(value - characteristic["used"])
                 else:
-                    self.bot.currMap.entities[fcellId]["level"] = fighter["stats"]["creatureLevel"]
+                    currMap.entities[fcellId]["type"] = PlayerTypeEnum.MONSTER
+                    currMap.entities[fcellId]["level"] = fighter["stats"]["creatureLevel"]
             return True
 
         elif mtype == "GameEntitiesDispositionMessage":
@@ -97,3 +101,4 @@ class GameFightFrame(IFrame):
             endCellId = int(msg["keyMovements"][-1]) & 4095
             entity = self.bot.currMap.entities.pop(startCellId)
             self.bot.currMap.entities[endCellId] = entity
+            return True

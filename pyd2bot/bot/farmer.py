@@ -1,6 +1,5 @@
 import logging
 import random
-from .fighter import Fighter
 from . import Walker
 logger = logging.getLogger("bot")
 
@@ -24,7 +23,10 @@ class Farmer(Walker):
             ielem = self.currMapInteractiveElems[elem_id]
             selem = self.currMapStatedElems[elem_id]
             if ielem["onCurrentMap"] and selem["elementState"] == 0 and ielem["enabledSkills"]:
-                return ielem["enabledSkills"][0]
+                currMapZone = self.currMap.zones.getZone(self.currCellId)
+                cellId = selem["elementCellId"]
+                if cellId in currMapZone:
+                    return ielem["enabledSkills"][0]
         return None     
 
     def collectElement(self, elementId, skill):
@@ -67,7 +69,7 @@ class Farmer(Walker):
             elementId, enabledSkill = self.findCollectable()
             if not elementId:
                 return 
-            if self.collectElement(id, enabledSkill):
+            if self.collectElement(elementId, enabledSkill):
                 self._collected.add(elementId)
             
             

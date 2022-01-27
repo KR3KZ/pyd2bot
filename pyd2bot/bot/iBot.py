@@ -1,4 +1,5 @@
 import threading
+from pyd2bot.game.fight.managers.StatsManager import StatsManager
 from pyd2bot.gameData.world.map import Map
 from pyd2bot.logic.managers import EventsManager
 from pyd2bot.utils.pathFinding import Pathfinding
@@ -52,7 +53,7 @@ class IBot:
         self.isInFight = threading.Event()
         self.canSayReady = threading.Event()
         self.isReady = threading.Event()
-        self.isFightTurn = threading.Event()
+        self.isTurn = threading.Event()
         self.turnStarted = threading.Event()
         self.turnEnded = threading.Event()
         self.currPA = None
