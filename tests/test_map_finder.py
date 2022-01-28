@@ -2,7 +2,7 @@ from asyncio.log import logger
 import logging
 from time import perf_counter
 from pyd2bot.gameData.mapReader import MapLoader
-from com.ankamagames.atouin.data.map.Map import CellData, Map
+from com.ankamagames.atouin.data.map.map import CellData, Map
 from com.ankamagames.jerakine.types.positions.mapPoint import MapPoint
 from pyd2bot.utils.pathFinding import Pathfinding
 from pyd2bot.gameData.world.mapZones import MapZones

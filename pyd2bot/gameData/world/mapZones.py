@@ -2,7 +2,7 @@ import logging
 import random
 from typing import TYPE_CHECKING, Literal
 if TYPE_CHECKING:
-    from com.ankamagames.atouin.data.map.Map import CellData, Map
+    from com.ankamagames.atouin.data.map.map import CellData, Map
 logger = logging.getLogger("bot")
 
 class Zone(dict[int, 'Cell']):

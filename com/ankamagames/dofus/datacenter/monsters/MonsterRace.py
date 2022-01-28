@@ -1,7 +1,7 @@
                   
 from pyd2bot.dofus.datacenter.items.GroupItemCriterion import GroupItemCriterion
 from pyd2bot.dofus.datacenter.monsters.MonsterGrade import MonsterGrade
-from pyd2bot.gameData.IdAccessors import IdAccessors
+from com.ankamagames.dofus.types.idAccessors import IdAccessors
 from pyd2bot.jerakine.data.I18n import I18n
 
 

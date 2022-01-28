@@ -2,7 +2,7 @@
 
 from com.ankamagames.jerakine.data import GameData
 from com.ankamagames.jerakine.interfaces.iDatacenter import IDataCenter
-from pyd2bot.gameData.IdAccessors import IdAccessors
+from com.ankamagames.dofus.types.idAccessors import IdAccessors
 
 
 class SpellState(IDataCenter):

@@ -1,5 +1,5 @@
             
-from pyd2bot.gameData.IdAccessors import IdAccessors
+from com.ankamagames.dofus.types.idAccessors import IdAccessors
 
 
 class MonsterMiniBoss:

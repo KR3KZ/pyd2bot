@@ -1,2 +1,0 @@
-from .ItemCriterionOperator import ItemCriterionOperator
-from .IItemCriterion import IItemCriterion

@@ -1,14 +1,36 @@
                                                                                     
 import logging
-from com.ankamagames.dofus.internalDatacenter.stats import EntityStats
-from pyd2bot.game.stats.detailedStats import DetailedStat
-from pyd2bot.game.stats.stat import Stat
-from pyd2bot.game.stats.usableStat import UsableStat
+from com.ankamagames.jerakine.managers.storeDataManager import StoreDataManager
+from com.ankamagames.jerakine.types.dataStoreType import DataStoreType
+from pyd2bot.gameData.enums.dataStoreEnum import DataStoreEnum
 logger = logging.getLogger("bot")
 
 
-_entityStats = {}
-   
+class StatsManager:
+
+   _entityStats = {}
+   _self:'StatsManager' = None
+   DEFAULT_IS_VERBOSE = False
+   DATA_STORE_CATEGORY = "ComputerModule_statsManager"
+   DATA_STORE_KEY_IS_VERBOSE = "statsManagerIsVerbose"
+   _dataStoreType:DataStoreType = None
+
+
+   def __init__(self):
+      self._entityStats = dict()
+      self._isVerbose = self.DEFAULT_IS_VERBOSE
+      self._statListeners = dict()
+      logger.info("Instantiating stats manager")
+      if self._dataStoreType is None:
+         self._dataStoreType = DataStoreType(self.DATA_STORE_CATEGORY, True, DataStoreEnum.LOCATION_LOCAL, DataStoreEnum.BIND_COMPUTER)
+      rawIsVerbose = StoreDataManager.getInstance().getData(self._dataStoreType, self.DATA_STORE_KEY_IS_VERBOSE)
+      self._isVerbose = rawIsVerbose if isinstance(rawIsVerbose, bool) else self.DEFAULT_IS_VERBOSE
+
+      
+   def getInstance(self) -> StatsManager: 
+      if self._self is None:
+         self._self = StatsManager()
+         return self._self
 
 def setStats(stats:EntityStats) -> bool:
    if stats == None:

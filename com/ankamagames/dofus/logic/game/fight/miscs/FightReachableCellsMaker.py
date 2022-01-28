@@ -1,17 +1,20 @@
 
    
 import logging
-from com.ankamagames.dofus.internalDatacenter.stats import EntityStats
+from com.ankamagames.atouin.data.map.map import Map
+from com.ankamagames.dofus.internalDatacenter.stats.entityStats import EntityStats
 from com.ankamagames.dofus.internalDatacenter.stats.stat import Stat
 from com.ankamagames.dofus.logic.common.managers import StatsManager
+from com.ankamagames.dofus.logic.game.common.managers.entitiesManager import EntitiesManager
 from com.ankamagames.dofus.logic.game.fight.frames.fightEntitiesFrame import FightEntitiesFrame
+from com.ankamagames.dofus.network.messages.game.context.EntityDispositionInformations import EntityDispositionInformations
+from com.ankamagames.dofus.network.types.game.context.fight.GameFightFighterInformations import GameFightFighterInformations
 from com.ankamagames.dofus.network.types.game.context.fight.GameFightMonsterInformations import GameFightMonsterInformations
 from pyd2bot.bot import IBot
 from damageCalculation.tools.StatIds import StatIds
 from com.ankamagames.atouin.data.map.CellData import CellData
-from com.ankamagames.atouin.data.map.Map import Map
 from com.ankamagames.jerakine.types.positions.mapPoint import MapPoint
-
+from com.ankamagames.dofus.logic.game.fight.miscs.tackleUtil import TackleUtil
 
 logger = logging.getLogger("bot")
 
@@ -117,7 +120,7 @@ class FightReachableCellsMaker:
       for i in self._cellGrid:
          self._cellGrid[i] = list[_ReachableCellData](self._mp * 2 + 1)
       
-      entities = EntitiesManager.entities
+      entities = EntitiesManager.getInstance().entities
       for entity in entities:
          if entity.id != infos.contextualId and entity.position:
             x = entity.position.x - self._mapPoint.x + self._mp

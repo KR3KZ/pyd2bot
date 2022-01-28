@@ -4,7 +4,7 @@ from functools import lru_cache
 import logging
 import random
 from pyd2bot.gameData.mapReader import MapLoader
-from com.ankamagames.atouin.data.map.Map import Map
+from com.ankamagames.atouin.data.map.map import Map
 from com.ankamagames.jerakine.types.positions.mapPoint import MapPoint
 from pyd2bot.gameData.world.mapPosition import MapPosition
 from com.ankamagames.jerakine.types.positions.mouvementPath import MovementPath

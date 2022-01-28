@@ -1,7 +1,7 @@
                         
 import logging
-from pyd2bot.jerakine.data.AbstractDataManager import AbstractDataManager
-from pyd2bot.jerakine.data import GameDataFileAccessor
+from com.ankamagames.jerakine.data import AbstractDataManager, GameDataFileAccessor
+from com.ankamagames.jerakine.newCache.impl.cache import Cache
 logger = logging.getLogger("bot")
 
 

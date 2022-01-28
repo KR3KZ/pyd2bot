@@ -1,8 +1,7 @@
-      
 
 
-from pyd2bot.dofus.datacenter.monsters.MonsterBonusCharacteristics import MonsterBonusCharacteristics
-from pyd2bot.dofus.datacenter.monsters.monster import Monster
+from com.ankamagames.dofus.datacenter.monsters.Monster import Monster
+from com.ankamagames.dofus.datacenter.monsters.MonsterBonusCharacteristics import MonsterBonusCharacteristics
 
 
 class MonsterGrade:

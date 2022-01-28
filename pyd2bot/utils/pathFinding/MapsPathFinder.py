@@ -1,7 +1,7 @@
 from asyncio.log import logger
 import logging
 from pyd2bot.gameData.mapReader import MapLoader
-from com.ankamagames.atouin.data.map.Map import CellData, Map
+from com.ankamagames.atouin.data.map.map import CellData, Map
 from pyd2bot.gameData.world.mapPosition import MapPosition
 from pyd2bot.utils.pathFinding.cellsPathFinder import CellNode
 from pyd2bot.utils.pathFinding.lightMapNode import LightMapNode

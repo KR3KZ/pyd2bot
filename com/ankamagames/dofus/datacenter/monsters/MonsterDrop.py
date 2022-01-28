@@ -1,7 +1,9 @@
-         
-from pyd2bot.dofus.datacenter.items.GroupItemCriterion import GroupItemCriterion
-from pyd2bot.dofus.datacenter.monsters.MonsterDropCoefficient import MonsterDropCoefficient
-from pyd2bot.dofus.datacenter.monsters.monster import Monster
+
+
+from com.ankamagames.dofus.datacenter.items.criterion import GroupItemCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.MonsterGroupChallengeCriterion import MonsterGroupChallengeCriterion
+from com.ankamagames.dofus.datacenter.monsters.monster import Monster
+from com.ankamagames.dofus.datacenter.monsters.monsterDropCoefficient import MonsterDropCoefficient
 
 
 class MonsterDrop:
@@ -31,7 +33,7 @@ class MonsterDrop:
    
    specificDropCoefficient:list[MonsterDropCoefficient]
    
-   _monster:Monster
+   _monster:MonsterGroupChallengeCriterion
    
    _conditions:GroupItemCriterion
    

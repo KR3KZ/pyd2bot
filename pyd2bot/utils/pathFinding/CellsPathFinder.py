@@ -1,4 +1,4 @@
-from com.ankamagames.atouin.data.map.Map import Map, CellData
+from com.ankamagames.atouin.data.map.map import Map, CellData
 from com.ankamagames.jerakine.types.positions.mapPoint import MapPoint
 from com.ankamagames.jerakine.types.positions.mouvementPath import MovementPath
 from com.ankamagames.jerakine.types.positions.pathElement import PathElement

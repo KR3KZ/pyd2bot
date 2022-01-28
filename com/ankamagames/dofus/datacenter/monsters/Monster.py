@@ -1,7 +1,6 @@
 from com.ankamagames.dofus.datacenter.items.criterion import GroupItemCriterion
-from com.ankamagames.dofus.datacenter.monsters import MonsterDrop, MonsterRace, MonsterGrade
 from com.ankamagames.jerakine.data import GameData
-from pyd2bot.gameData.IdAccessors import IdAccessors
+from com.ankamagames.dofus.types.idAccessors import IdAccessors
 
 
 class Monster:   

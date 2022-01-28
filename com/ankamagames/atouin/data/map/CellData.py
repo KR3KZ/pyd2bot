@@ -1,7 +1,8 @@
 from typing import TYPE_CHECKING
+
+from pyd2bot.utils.binaryIO.binaryStream import BinaryStream
 if TYPE_CHECKING:
-    from .Map import Map
-from pyd2bot.utils.binaryIO import BinaryStream
+    from .map import Map
 import math 
 
 

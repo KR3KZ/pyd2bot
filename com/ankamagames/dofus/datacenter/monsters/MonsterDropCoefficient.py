@@ -1,8 +1,7 @@
-         
 
 
-from pyd2bot.dofus.datacenter.items.GroupItemCriterion import GroupItemCriterion
-from pyd2bot.dofus.datacenter.monsters.monster import Monster
+from com.ankamagames.dofus.datacenter.items.criterion import GroupItemCriterion
+from com.ankamagames.dofus.datacenter.monsters.monster import Monster
 
 
 class MonsterDropCoefficient:

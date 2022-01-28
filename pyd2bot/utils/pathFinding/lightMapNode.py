@@ -1,5 +1,5 @@
 # noeud utilisé pour les parcours de zones (besoin:pas de création de chemin)
-from com.ankamagames.atouin.data.map.Map import Map, CellData
+from com.ankamagames.atouin.data.map.map import Map, CellData
 from pyd2bot.gameData.world.mapZones import MapZones
 from pyd2bot.utils.pathFinding.pathFinder import PathNode
 DOUBLE_MAX = 1.7976931348623158E+308

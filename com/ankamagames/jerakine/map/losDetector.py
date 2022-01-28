@@ -1,5 +1,5 @@
 import math
-from com.ankamagames.atouin.data.map.Map import Map
+from com.ankamagames.atouin.data.map.map import Map
 from com.ankamagames.jerakine.types.positions.mapPoint import MapPoint
 from mapTools import MapTools
 

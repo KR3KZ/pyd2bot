@@ -1,5 +1,5 @@
 import math
-from com.ankamagames.atouin.data.map.Map import Map
+from com.ankamagames.atouin.data.map.map import Map
 
 class Direction:
     direction:int

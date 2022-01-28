@@ -1,8 +1,8 @@
 import sys
 from typing import Any
+from com.ankamagames.jerakine.data.IposInit import IPostInit
 from dataReader.d2o import GameDataField
-from pyd2bot.jerakine.data.IposInit import IPostInit
-from com.ankamagames.jerakine.network.Binarystream import BinaryStream
+from pyd2bot.utils.binaryIO.binaryStream import BinaryStream
 
 
 class GameDataClassDefinition:

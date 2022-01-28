@@ -1,3 +1,6 @@
+from pyd2bot.utils.binaryIO.binaryStream import BinaryStream
+
+
 class Fixture:
     
     def __init__(self, raw):
