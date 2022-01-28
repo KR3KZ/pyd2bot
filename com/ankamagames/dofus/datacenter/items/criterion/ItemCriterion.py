@@ -1,5 +1,7 @@
-import logging                              
-from com.ankamagames.dofus.datacenter.items import IItemCriterion, ItemCriterionOperator
+import logging
+from com.ankamagames.dofus.datacenter.items.criterion.IItemCriterion import IItemCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterionOperator import ItemCriterionOperator
+from com.ankamagames.dofus.internalDatacenter.stats.entityStats import EntityStats                              
 from com.ankamagames.dofus.logic.common.managers import StatsManager
 from com.ankamagames.jerakine.data import I18n
 from damageCalculation.tools import StatIds

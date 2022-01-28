@@ -1,9 +1,15 @@
 from argparse import ArgumentError
 import os
 import logging
-from pyd2bot.utils.crypto import RSACipher, RSA, PKCS1
-from pyd2bot.utils.binaryIO import ByteArray
-from pyd2bot.utils.crypto import CBCMode, NullPad, AESKey, SimpleIVMode
+from com.ankamagames.jerakine.network.customDataWrapper import ByteArray
+from com.hurlan.crypto.symmetric.aESKey import AESKey
+from com.hurlan.crypto.symmetric.cBCMode import CBCMode
+from com.hurlan.crypto.symmetric.nullPAd import NullPad
+from com.hurlan.crypto.symmetric.pKCS1 import PKCS1
+from com.hurlan.crypto.symmetric.rSAKey import RSACipher
+from com.hurlan.crypto.symmetric.simpleIVMode import SimpleIVMode
+from Cryptodome.PublicKey import RSA
+
 logger = logging.getLogger("bot")
 ROOTDIR = os.path.dirname(__file__)
 

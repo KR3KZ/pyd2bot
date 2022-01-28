@@ -1,6 +1,8 @@
                         
 import logging
-from com.ankamagames.jerakine.data import AbstractDataManager, GameDataFileAccessor
+from com.ankamagames.jerakine.data.abstractDataManager import AbstractDataManager
+from com.ankamagames.jerakine.data.gameDataFileAccessor import GameDataFileAccessor
+from com.ankamagames.jerakine.newCache.LruGarbageCollector import LruGarbageCollector
 from com.ankamagames.jerakine.newCache.impl.cache import Cache
 logger = logging.getLogger("bot")
 

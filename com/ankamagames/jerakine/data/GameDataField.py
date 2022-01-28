@@ -1,29 +1,100 @@
-class GameDataClassDefinition:
-      
+import logging
+from types import FunctionType
+from typing import Any
+from com.ankamagames.jerakine.data.gameDataFileAccessor import GameDataFileAccessor
+from com.ankamagames.jerakine.enum.gameDataTypeEnum import GameDataTypeEnum
+from pyd2bot.utils.binaryIO.binaryStream import BinaryStream
+logger = logging.getLogger("bot")
+
+class GameDataField:
    
-   _class:Class
+   NULL_IDENTIFIER:int = -1431655766
+   _classesByName:dict = dict()
+   name:str
+   readData:FunctionType
+   _innerReadMethods:list[FunctionType]
+   _innerTypeNames:list[str]
    
-   _fields:list[GameDataField]
-   
-   def __init__(self, packageName:str, className:str):
+
+   def __init__(self, fieldName:str):
       super().__init__()
-      self._class = getDefinitionByName(packageName + "." + className)
-      self._fields = list[GameDataField]()
+      self.name = fieldName
    
-   @property
-   def fields(self) -> list[GameDataField]:
-      return self._fields
+   def getobjectByName(self, className:str) -> object:
+      c:object = self._classesByName[className]
+      if c == None:
+         c = globals()[className]
+         self._classesByName[className] = c
+      return c
    
-   def read(self, module:str, stream:BinaryStream) -> *:
-      field:GameDataField = None
-      inst = self._class()
-      for field in self._fields:
-         inst[field.name] = field.readData(module,stream)
-      if isinstance(inst, IPostInit):
-         IPostInit(inst).postInit()
-      return inst
+   def readType(self, stream:BinaryStream) -> None:
+      type:int = stream.readInt()
+      self.readData = self.getReadMethod(type,stream)
    
-   def addField(self, fieldName:str, stream:BinaryStream) -> None:
-      field:GameDataField = GameDataField(fieldName)
-      field.readType(stream)
-      self._fields.append(field)
+   def getReadMethod(self, type:int, stream:BinaryStream) -> FunctionType:
+      if type == GameDataTypeEnum.INT:
+         return self.readInteger
+
+      elif type == GameDataTypeEnum.BOOLEAN:
+         return self.readbool
+
+      elif type == GameDataTypeEnum.STRING:
+         return self.readstr
+
+      elif type == GameDataTypeEnum.NUMBER:
+         return self.readfloat
+
+      elif type == GameDataTypeEnum.I18N:
+         return self.readI18n
+
+      elif type == GameDataTypeEnum.UINT:
+         return self.readUnsignedInteger
+
+      elif type == GameDataTypeEnum.VECTOR:
+         if not self._innerReadMethods:
+            self._innerReadMethods = list[FunctionType]()
+            self._innerTypeNames = list[str]()
+         self._innerTypeNames.append(stream.readUTF())
+         self._innerReadMethods.unshift(self.getReadMethod(stream.readInt(),stream))
+         return self.readVector
+
+      else:
+         if type > 0:
+            return self.readobject
+         raise Exception("Unknown type \'" + type + "\'.")
+   
+   def readVector(self, moduleName:str, stream:BinaryStream, innerIndex:int = 0) -> Any:
+      len:int = stream.readInt()
+      vectorTypeName:str = self._innerTypeNames[innerIndex]
+      content = getobjectByName(vectorTypeName)(len,True)
+      for i in range(0, len, 1):
+         content[i] = self._innerReadMethods[innerIndex](moduleName,stream,innerIndex + 1)
+      return content
+   
+   def readobject(self, moduleName:str, stream:BinaryStream, innerIndex:int = 0) -> Any:
+      classIdentifier:int = stream.readInt()
+      if classIdentifier == self.NULL_IDENTIFIER:
+         return None
+      classDefinition:GameDataobjectDefinition = GameDataFileAccessor.getInstance().getobjectDefinition(moduleName, classIdentifier)
+      return classDefinition.read(moduleName,stream)
+   
+   def readInteger(self, moduleName:str, stream:BinaryStream, innerIndex:int = 0) -> Any:
+      return stream.readInt()
+   
+   def readbool(self, moduleName:str, stream:BinaryStream, innerIndex:int = 0) -> Any:
+      return stream.readbool()
+   
+   def readstr(self, moduleName:str, stream:BinaryStream, innerIndex:int = 0) -> Any:
+      result = stream.readUTF()
+      if result == "None":
+         result = None
+      return result
+   
+   def readfloat(self, moduleName:str, stream:BinaryStream, innerIndex:int = 0) -> Any:
+      return stream.readDouble()
+   
+   def readI18n(self, moduleName:str, stream:BinaryStream, innerIndex:int = 0) -> Any:
+      return stream.readInt()
+   
+   def readUnsignedInteger(self, moduleName:str, stream:BinaryStream, innerIndex:int = 0) -> Any:
+      return stream.readUnsignedInt()

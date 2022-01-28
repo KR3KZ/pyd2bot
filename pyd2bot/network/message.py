@@ -1,5 +1,6 @@
 import logging
-from ..utils.binaryIO import ByteArray, Buffer
+
+from com.ankamagames.jerakine.network.customDataWrapper import Buffer, ByteArray
 from .protocol import DofusProtocol
 from . import msgReceiver
 

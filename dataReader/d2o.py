@@ -3,7 +3,7 @@
 
 from collections import OrderedDict
 import sys
-from pyd2bot.utils.binaryIO import BinaryStream
+from pyd2bot.utils.binaryIO.binaryStream import BinaryStream
 from io import BytesIO
 # Exceptions
 

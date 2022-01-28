@@ -1,10 +1,13 @@
 import logging
 import math
-import sys
 from xmlrpc.client import MAXINT
-from pyd2bot.jerakine.types.CustomSharedObject import CustomSharedObject
-from pyd2bot.jerakine.managers import StoreDataManager
-from pyd2bot.jerakine import JerakineConstants
+from com.ankamagames.jerakine import JerakineConstants
+from com.ankamagames.jerakine.managers.storeDataManager import StoreDataManager
+from com.ankamagames.jerakine.newCache.LruGarbageCollector import LruGarbageCollector
+from com.ankamagames.jerakine.newCache.iCache import ICache
+from com.ankamagames.jerakine.newCache.impl.cache import Cache
+from com.ankamagames.jerakine.newCache.impl.infiniteCache import InfiniteCache
+from com.ankamagames.jerakine.types.customSharedObject import CustomSharedObject
 logger = logging.getLogger("bot")
 
 

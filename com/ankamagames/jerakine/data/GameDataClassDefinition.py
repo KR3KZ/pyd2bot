@@ -1,7 +1,8 @@
+from struct import pack
 import sys
 from typing import Any
 from com.ankamagames.jerakine.data.IposInit import IPostInit
-from dataReader.d2o import GameDataField
+from .GameDataField import GameDataField
 from pyd2bot.utils.binaryIO.binaryStream import BinaryStream
 
 
@@ -10,9 +11,16 @@ class GameDataClassDefinition:
    _class:object
    _fields:list[GameDataField]
    
-   def __init__(self, packageName:str, className:str):
+   def __init__(self, packageName:bytes, className:bytes):
       super().__init__()
-      self._class = getattr(sys.modules[__name__], packageName + "." + className)
+      packageName = packageName.decode('utf-8')
+      className = className.decode('utf-8')
+      self._fields = list()  
+      moduleName = packageName + '.' + className[0].lower() + className[1:]    
+      print(moduleName, className)
+      __import__(moduleName, fromlist=[className])
+      module = sys.modules[moduleName]
+      self._class = getattr(module, className)
       self._fields = list[GameDataField]()
    
    @property
@@ -28,7 +36,7 @@ class GameDataClassDefinition:
          inst.postInit()
       return inst
    
-   def addField(self, fieldName:str, stream:BinaryStream) -> None:
-      field:GameDataField = GameDataField(fieldName)
+   def addField(self, fieleName:str, stream:BinaryStream) -> None:
+      field:GameDataField = GameDataField(fieleName)
       field.readType(stream)
       self._fields.append(field)

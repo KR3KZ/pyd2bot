@@ -1,7 +1,9 @@
 
 
 from black import Any
-from com.ankamagames.jerakine.newCache.iCacheGarbageCollector import ICacheGarbageCollector
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+   from com.ankamagames.jerakine.newCache.iCacheGarbageCollector import ICacheGarbageCollector
 from com.ankamagames.jerakine.newCache.iCache import ICache
 from com.ankamagames.jerakine.newCache.impl.infiniteCache import InfiniteCache
 
@@ -10,16 +12,16 @@ class Cache(InfiniteCache, ICache):
    
    _namedCacheIndex:list = list()
    _bounds:int
-   _gc:ICacheGarbageCollector
+   _gc:'ICacheGarbageCollector'
    _name:str
    
-   def __init__(self, bounds:int, gc:ICacheGarbageCollector):
+   def __init__(self, bounds:int, gc:'ICacheGarbageCollector'):
       super().__init__()
       self._bounds = bounds
       self._gc = gc
       self._gc.cache = self
    
-   def create(self, bounds:int, gc:ICacheGarbageCollector, name:str) -> 'Cache':
+   def create(self, bounds:int, gc:'ICacheGarbageCollector', name:str) -> 'Cache':
       cache:Cache = None
       if name and self._namedCacheIndex[name]:
          return self._namedCacheIndex[name]

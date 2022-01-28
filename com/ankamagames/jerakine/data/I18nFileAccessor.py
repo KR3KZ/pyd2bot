@@ -1,8 +1,8 @@
 
 import logging
 import pathlib
-from com.ankamagames.jerakine.network.Binarystream import BinaryStream
 from com.ankamagames.jerakine.utils.errors.singletonError import SingletonError
+from pyd2bot.utils.binaryIO.binaryStream import BinaryStream
 logger = logging.getLogger("bot")
 
 

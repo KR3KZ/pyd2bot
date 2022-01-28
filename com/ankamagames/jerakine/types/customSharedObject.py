@@ -1,10 +1,12 @@
 # utf-8
 import io
-import miniamf
 import logging
 import os
-from dataReader.d2o import D2OReader
-from com.ankamagames.dofus import Constants as pyd2Constants
+import miniamf
+from com.ankamagames.dofus import Constants as Constants
+from com.ankamagames.jerakine.data.gameDataFileAccessor import \
+    GameDataFileAccessor
+
 logger = logging.getLogger("bot")
 
 
@@ -15,7 +17,7 @@ class CustomSharedObjectFileFormatError(Exception):
 class CustomSharedObject:
    
    DATAFILE_EXTENSION = "dat"
-   COMMON_FOLDER = pyd2Constants.DOFUS_COMMON_DIR
+   COMMON_FOLDER = Constants.DOFUS_COMMON_DIR
    directory = "Dofus"
    useDefaultDirectory = False
    clearedCacheAndRebooting = False
@@ -89,7 +91,9 @@ class CustomSharedObject:
          try:
             with open(self._file, "rb") as fp:
                self._fileStream = fp
-               self.data = D2OReader(self._fileStream).readObjects()
+               fileAccessor = GameDataFileAccessor.getInstance()
+               fileAccessor.init(self._file)
+               self.data = fileAccessor.getObject()
          except Exception as e:
             if self._fileStream:
                self._fileStream.close()

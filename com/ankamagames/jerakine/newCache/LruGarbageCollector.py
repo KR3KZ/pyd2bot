@@ -1,6 +1,7 @@
 from com.ankamagames.jerakine.interfaces.iDestroyable import IDestroyable
 from com.ankamagames.jerakine.newCache.iCache import ICache
 from com.ankamagames.jerakine.newCache.iCacheGarbageCollector import ICacheGarbageCollector
+from com.ankamagames.jerakine.pools.pool import Pool
 from com.ankamagames.jerakine.pools.poolable import Poolable
 
 
@@ -23,16 +24,20 @@ class UsageCountHelper(Poolable):
 
 class LruGarbageCollector(ICacheGarbageCollector):
    
-   _pool:Pool
-   _usageCount:dict
-   _cache:ICache
+   _pool:Pool = None
+   _usageCount:dict = None
+   _cache:ICache = None
    
    def __init__(self):
       self._usageCount = dict(True)
       super().__init__()
-      if not _pool:
+      if not self._pool:
          _pool = Pool(UsageCountHelper,500,50)
    
+   @property
+   def cache(self) -> ICache:
+      return self._cache
+
    @cache.setter
    def cache(self, cache:ICache) -> None:
       self._cache = cache
@@ -44,16 +49,13 @@ class LruGarbageCollector(ICacheGarbageCollector):
          self._usageCount[ref] = 1
    
    def purge(self, bounds:int) -> None:
-      obj = None
-      el:UsageCountHelper = None
-      poke = None
       elements:list = list()
       for obj in self._usageCount:
-         elements.append(_pool.checkOut())
-      elements.sortOn("count", list.NUMERIC | list.DESCENDING)
+         elements.append(self._pool.checkOut())
+      elements = sorted(elements, key=lambda x: x.count, reverse=True)
       for el in elements:
          el.free()
-         _pool.checkIn(el)
+         self._pool.checkIn(el)
       while self._cache.size > bounds and len(elements):
          poke = self._cache.extract(elements.pop().ref)
          if isinstance(poke, IDestroyable):

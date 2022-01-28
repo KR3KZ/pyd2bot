@@ -2,7 +2,7 @@ import logging
 from re import S
 from com.ankamagames.dofus.types.idAccessors import IdAccessors
 from com.ankamagames.jerakine.data import I18n
-from com.ankamagames.jerakine.data.GameData import GameData
+from com.ankamagames.jerakine.data.gameData import GameData
 from com.ankamagames.jerakine.interfaces.iDatacenter import IDataCenter
 logger = logging.getLogger("bot")
 

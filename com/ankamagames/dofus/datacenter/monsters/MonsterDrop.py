@@ -2,8 +2,11 @@
 
 from com.ankamagames.dofus.datacenter.items.criterion import GroupItemCriterion
 from com.ankamagames.dofus.datacenter.items.criterion.MonsterGroupChallengeCriterion import MonsterGroupChallengeCriterion
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+   from com.ankamagames.dofus.datacenter.monsters.monsterDropCoefficient import MonsterDropCoefficient
 from com.ankamagames.dofus.datacenter.monsters.monster import Monster
-from com.ankamagames.dofus.datacenter.monsters.monsterDropCoefficient import MonsterDropCoefficient
+   
 
 
 class MonsterDrop:
@@ -31,7 +34,7 @@ class MonsterDrop:
    
    hasCriteria:bool
    
-   specificDropCoefficient:list[MonsterDropCoefficient]
+   specificDropCoefficient:list['MonsterDropCoefficient']
    
    _monster:MonsterGroupChallengeCriterion
    

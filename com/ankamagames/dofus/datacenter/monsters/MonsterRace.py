@@ -1,17 +1,16 @@
-                  
-from pyd2bot.dofus.datacenter.items.GroupItemCriterion import GroupItemCriterion
-from pyd2bot.dofus.datacenter.monsters.MonsterGrade import MonsterGrade
+from com.ankamagames.dofus.datacenter.items.criterion.GroupItemCriterion import GroupItemCriterion
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+   from com.ankamagames.dofus.datacenter.monsters.monsterGrade import MonsterGrade
 from com.ankamagames.dofus.types.idAccessors import IdAccessors
-from pyd2bot.jerakine.data.I18n import I18n
+from com.ankamagames.jerakine.data import I18n
+from com.ankamagames.jerakine.data.gameData import GameData
 
 
 class MonsterRace:
    
    MODULE:str = "MonsterRaces"
-   
-   idAccessors:IdAccessors = IdAccessors(MonsterRace.getMonsterRaceById, MonsterRace.getMonsterRaces)
       
-   
    id:int
    
    superRaceId:int
@@ -34,12 +33,14 @@ class MonsterRace:
       super().__init__()
    
    @staticmethod
-   def getMonsterRaceById(id:int) -> MonsterGrade:
+   def getMonsterRaceById(id:int) -> 'MonsterGrade':
       return GameData.getObject(MonsterRace.MODULE,id)
    
    @staticmethod
    def getMonsterRaces() -> list:
       return GameData.getObjects(MonsterRace.MODULE)
+
+   idAccessors:IdAccessors = IdAccessors(getMonsterRaceById, getMonsterRaces)
    
    @property
    def name(self) -> str:

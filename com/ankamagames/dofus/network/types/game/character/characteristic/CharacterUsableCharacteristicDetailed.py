@@ -1,5 +1,7 @@
                
-from pyd2bot.game.characteristic.CharacterCharacteristicDetailed import CharacterCharacteristicDetailed
+
+
+from com.ankamagames.dofus.network.types.game.character.characteristic.CharacterCharacteristicDetailed import CharacterCharacteristicDetailed
 
 
 class CharacterUsableCharacteristicDetailed(CharacterCharacteristicDetailed):

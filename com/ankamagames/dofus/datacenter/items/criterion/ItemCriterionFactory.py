@@ -1,6 +1,6 @@
 import logging
-from com.ankamagames.dofus.datacenter.items.ItemCriterion import ItemCriterion
-from com.ankamagames.dofus.datacenter.items.UnusableItemCriterion import UnusableItemCriterion   
+from com.ankamagames.dofus.datacenter.items.criterion.IItemCriterion import IItemCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.UnusableItemCriterion import UnusableItemCriterion
 logger = logging.getLogger("bot")        
 
 
@@ -8,7 +8,7 @@ class ItemCriterionFactory:
    def __init__(self):
       super().__init__()
    
-   def create(self, pServerCriterionForm:str) -> ItemCriterion:
+   def create(self, pServerCriterionForm:str) -> IItemCriterion:
       criterion = None
       s:str = pServerCriterionForm[0:2]
       if s == "BI":

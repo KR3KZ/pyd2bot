@@ -1,7 +1,7 @@
 from ast import FunctionType
-from pyd2bot.jerakine.data.I18nFileAccessor import I18nFileAccessor
-from pyd2bot.jerakine.enum.GameDataTypeEnum import GameDataTypeEnum
-from pyd2bot.utils.binaryIO import BinaryStream
+from com.ankamagames.jerakine.data.I18nFileAccessor import I18nFileAccessor
+from com.ankamagames.jerakine.enum.gameDataTypeEnum import GameDataTypeEnum
+from pyd2bot.utils.binaryIO.binaryStream import BinaryStream
 
 
 class GameDataProcess:

@@ -1,5 +1,10 @@
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+   from com.ankamagames.dofus.datacenter.monsters.monsterDrop import MonsterDrop
+   from com.ankamagames.dofus.datacenter.monsters.monsterGrade import MonsterGrade
+from com.ankamagames.dofus.datacenter.monsters.monsterRace import MonsterRace
 from com.ankamagames.dofus.datacenter.items.criterion import GroupItemCriterion
-from com.ankamagames.jerakine.data import GameData
+from com.ankamagames.jerakine.data.gameData import GameData
 from com.ankamagames.dofus.types.idAccessors import IdAccessors
 
 
@@ -25,7 +30,7 @@ class Monster:
    
    race:int
    
-   grades:list[MonsterGrade]
+   grades:list['MonsterGrade']
    
    look:str
    
@@ -41,9 +46,9 @@ class Monster:
    
    isBoss:bool
    
-   drops:list[MonsterDrop]
+   drops:list['MonsterDrop']
    
-   temporisDrops:list[MonsterDrop]
+   temporisDrops:list['MonsterDrop']
    
    subareas:list[int]
    
@@ -115,7 +120,7 @@ class Monster:
             return False
       return True
    
-   def getMonsterGrade(self, grade:int) -> MonsterGrade:
+   def getMonsterGrade(self, grade:int) -> 'MonsterGrade':
       if grade < 1 or grade > len(self.grades):
          grade = len(self.grades)
       return self.grades[grade - 1]

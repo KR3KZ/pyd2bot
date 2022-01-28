@@ -1,4 +1,7 @@
-from pyd2bot.jerakine.data.I18nFileAccessor import I18nFileAccessor
+
+
+from com.ankamagames.jerakine.data.I18nFileAccessor import I18nFileAccessor
+from com.ankamagames.jerakine.data.abstractDataManager import AbstractDataManager
 
 
 class I18n(AbstractDataManager):
@@ -8,12 +11,12 @@ class I18n(AbstractDataManager):
       super().__init__()
    
    def addOverride(self, id:int, newId:int) -> None:
-      I18nFileAccessor().overrideId(id,newId)
+      I18nFileAccessor.getInstance().overrideId(id,newId)
    
    def getText(self, id:int, params:list = None, replace:str = "%") -> str:
       if not id:
          return None
-      txt:str = I18nFileAccessor().getText(id)
+      txt:str = I18nFileAccessor.getInstance().getText(id)
       if txt == None or txt == "None":
          return "[UNKNOWN_TEXT_ID_" + id + "]"
       return I18n.replaceParams(txt,params,replace)
@@ -21,19 +24,19 @@ class I18n(AbstractDataManager):
    def getUnDiacriticalText(self, id:int, params:list = None, replace:str = "%") -> str:
       if not id:
          return None
-      txt:str = I18nFileAccessor().getUnDiacriticalText(id)
+      txt:str = I18nFileAccessor.getInstance().getUnDiacriticalText(id)
       if txt == None or txt == "None":
          return "[UNKNOWN_TEXT_ID_" + id + "]"
       return I18n.replaceParams(txt,params,replace)
    
    def getUiText(self, textId:str, params:list = None, replace:str = "%") -> str:
-      txt:str = I18nFileAccessor().getNamedText(textId)
+      txt:str = I18nFileAccessor.getInstance().getNamedText(textId)
       if txt == None or txt == "None":
          return "[UNKNOWN_TEXT_NAME_" + textId + "]"
       return self.replaceParams(txt,params,replace)
    
    def hasUiText(self, textId:str) -> bool:
-      return I18nFileAccessor().hasNamedText(textId)
+      return I18nFileAccessor.getInstance().hasNamedText(textId)
    
    @staticmethod
    def replaceParams(text:str, params:list, replace:str) -> str:

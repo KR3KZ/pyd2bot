@@ -1,9 +1,13 @@
                      
 
 import logging
-from com.ankamagames.dofus.datacenter.items import ItemCriterionFactory
-from com.ankamagames.dofus.datacenter.items.IItemCriterion import IItemCriterion
+
+from com.ankamagames.dofus.datacenter.items.criterion.IItemCriterion import \
+    IItemCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterionFactory import ItemCriterionFactory
+
 from pyd2bot.utils import strUtils
+
 logger = logging.getLogger("bot")
       
 

@@ -1,22 +1,23 @@
 import logging
 from pathlib import Path
 from typing import Any
-from dataReader.d2o import GameDataProcess
-from pyd2bot.utils.binaryIO import BinaryStream
+from com.ankamagames.jerakine.data.gameDataClassDefinition import GameDataClassDefinition
+from com.ankamagames.jerakine.data.gameDataProcess import GameDataProcess
+from com.ankamagames.jerakine.utils.errors.singletonError import SingletonError
 from com.hurlan.crypto.signature import Signature
-from com.ankamagames.jerakine.utils.errors.singletonError import SingletonError 
+from pyd2bot.utils.binaryIO.binaryStream import BinaryStream
 logger = logging.getLogger("bot")
 
 
 class GameDataFileAccessor:
    
-   _self:'GameDataFileAccessor'
-   _streams:dict[str, BinaryStream]
-   _streamStartIndex:dict
-   _indexes:dict
-   _classes:dict
-   _counter:dict
-   _gameDataProcessor:dict
+   _self:'GameDataFileAccessor' = None
+   _streams = dict[str, BinaryStream]()
+   _streamStartIndex = dict()
+   _indexes = dict()
+   _classes = dict()
+   _counter = dict()
+   _gameDataProcessor = dict()
    
    def __init__(self):
       super().__init__()
@@ -40,7 +41,7 @@ class GameDataFileAccessor:
          self._streamStartIndex = dict[int]()
       stream = self._streams.get(moduleName)
       if not stream:
-         stream = BinaryStream(nativeFile.open("rb"))
+         stream = BinaryStream(nativeFile.open("rb"), True)
          self._streams[moduleName] = stream
          self._streamStartIndex[moduleName] = 7
       else:
@@ -94,6 +95,7 @@ class GameDataFileAccessor:
          headers = stream.readBytes(3)
          if headers != b'D2O':
             raise Exception("Malformated game data file. (D2O)")
+      
       indexesPointer:int = stream.readInt()
       stream.position(contentOffset + indexesPointer)
       indexesLength:int = stream.readInt()
@@ -163,3 +165,10 @@ class GameDataFileAccessor:
          fieldName = stream.readUTF()
          classDef.addField(fieldName,stream)
       store[classId] = classDef
+
+
+if __name__ == '__main__':
+   a = GameDataFileAccessor.getInstance()
+   f = r"C:\Users\majdoub\AppData\Local\Ankama\Dofus\data\common\Monsters.d2o"
+   a.init(f)
+   print(a._classes)

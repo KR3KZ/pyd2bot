@@ -2,9 +2,9 @@
 
    
 import logging
-from pyd2bot.game.stats.detailedStats import DetailedStat
-from pyd2bot.game.stats.stat import Stat
-from pyd2bot.game.stats.usableStat import UsableStat
+from com.ankamagames.dofus.internalDatacenter.stats.detailedStats import DetailedStat
+from com.ankamagames.dofus.internalDatacenter.stats.stat import Stat
+from com.ankamagames.dofus.internalDatacenter.stats.usableStat import UsableStat
 from damageCalculation.tools import StatIds
 logger = logging.getLogger("bot")
 
