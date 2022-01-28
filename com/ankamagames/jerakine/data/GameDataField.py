@@ -1,7 +1,8 @@
 import logging
+import re
 from types import FunctionType
 from typing import Any
-from com.ankamagames.jerakine.data.gameDataFileAccessor import GameDataFileAccessor
+from com.ankamagames.jerakine.data.gameDataFileAccessor import GameDataFileAccessor as fm
 from com.ankamagames.jerakine.enum.gameDataTypeEnum import GameDataTypeEnum
 from pyd2bot.utils.binaryIO.binaryStream import BinaryStream
 logger = logging.getLogger("bot")
@@ -10,10 +11,10 @@ class GameDataField:
    
    NULL_IDENTIFIER:int = -1431655766
    _classesByName:dict = dict()
-   name:str
-   readData:FunctionType
-   _innerReadMethods:list[FunctionType]
-   _innerTypeNames:list[str]
+   name:bytes = None
+   readData:FunctionType = None
+   _innerReadMethods = list[FunctionType]()
+   _innerTypeNames = list[str]()
    
 
    def __init__(self, fieldName:str):
@@ -55,7 +56,7 @@ class GameDataField:
             self._innerReadMethods = list[FunctionType]()
             self._innerTypeNames = list[str]()
          self._innerTypeNames.append(stream.readUTF())
-         self._innerReadMethods.unshift(self.getReadMethod(stream.readInt(),stream))
+         self._innerReadMethods.insert(0, self.getReadMethod(stream.readInt(), stream))
          return self.readVector
 
       else:
@@ -66,17 +67,23 @@ class GameDataField:
    def readVector(self, moduleName:str, stream:BinaryStream, innerIndex:int = 0) -> Any:
       len:int = stream.readInt()
       vectorTypeName:str = self._innerTypeNames[innerIndex]
-      content = getobjectByName(vectorTypeName)(len,True)
-      for i in range(0, len, 1):
-         content[i] = self._innerReadMethods[innerIndex](moduleName,stream,innerIndex + 1)
+      m = re.fullmatch(r"Vector\.<(?P<module>\S+)::(?P<classname>\S+)>", vectorTypeName.decode("utf-8"))
+      if m:
+         arrayElementModule = m.group("module")
+         arrayElementClassName = m.group("classname")
+         content = list[arrayElementClassName]([True] * len)
+      else:
+         raise Exception("Unknown vector type \'" + vectorTypeName + "\'.")
+      for i in range(len):
+         content.append(self._innerReadMethods[innerIndex](moduleName, stream, innerIndex + 1))
       return content
    
    def readobject(self, moduleName:str, stream:BinaryStream, innerIndex:int = 0) -> Any:
       classIdentifier:int = stream.readInt()
       if classIdentifier == self.NULL_IDENTIFIER:
          return None
-      classDefinition:GameDataobjectDefinition = GameDataFileAccessor.getInstance().getobjectDefinition(moduleName, classIdentifier)
-      return classDefinition.read(moduleName,stream)
+      classDefinition = fm.getInstance().getClassDefinition(moduleName, classIdentifier)
+      return classDefinition.read(moduleName, stream)
    
    def readInteger(self, moduleName:str, stream:BinaryStream, innerIndex:int = 0) -> Any:
       return stream.readInt()

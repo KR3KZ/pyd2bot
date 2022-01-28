@@ -57,7 +57,7 @@ class MonsterDrop:
          self._conditions = GroupItemCriterion(self.criteria)
       return self._conditions
    
-   def getSpecificDropCoeffByGrade(self, grade:int) -> MonsterDropCoefficient:
+   def getSpecificDropCoeffByGrade(self, grade:int) -> 'MonsterDropCoefficient':
       dropCoeff:MonsterDropCoefficient = None
       for dropCoeff in self.specificDropCoefficient:
          if grade == dropCoeff.monsterGrade:

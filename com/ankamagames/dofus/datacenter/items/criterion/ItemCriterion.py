@@ -3,7 +3,7 @@ from com.ankamagames.dofus.datacenter.items.criterion.IItemCriterion import IIte
 from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterionOperator import ItemCriterionOperator
 from com.ankamagames.dofus.internalDatacenter.stats.entityStats import EntityStats                              
 from com.ankamagames.dofus.logic.common.managers import StatsManager
-from com.ankamagames.jerakine.data import I18n
+from com.ankamagames.jerakine.data import i18n
 from damageCalculation.tools import StatIds
 
 logger = logging.getLogger("bot")
@@ -72,22 +72,22 @@ class ItemCriterion(IItemCriterion):
       index:int = 0
 
       if self._criterionRef == "CM":
-         readableCriterionRef = I18n.getUiText("ui.stats.movementPoints")
+         readableCriterionRef = i18n.getUiText("ui.stats.movementPoints")
          
       elif self._criterionRef == "CP":
-         readableCriterionRef = I18n.getUiText("ui.stats.actionPoints")
+         readableCriterionRef = i18n.getUiText("ui.stats.actionPoints")
          
       elif self._criterionRef == "CH":
-         readableCriterionRef = I18n.getUiText("ui.pvp.honourPoints")
+         readableCriterionRef = i18n.getUiText("ui.pvp.honourPoints")
          
       elif self._criterionRef == "CD":
-         readableCriterionRef = I18n.getUiText("ui.pvp.disgracePoints")
+         readableCriterionRef = i18n.getUiText("ui.pvp.disgracePoints")
          
       elif self._criterionRef == "CT":
-         readableCriterionRef = I18n.getUiText("ui.stats.takleBlock")
+         readableCriterionRef = i18n.getUiText("ui.stats.takleBlock")
          
       elif self._criterionRef == "Ct":
-         readableCriterionRef = I18n.getUiText("ui.stats.takleEvade")
+         readableCriterionRef = i18n.getUiText("ui.stats.takleEvade")
          
       else:
          knownCriteriaList = ["CS","Cs","CV","Cv","CA","Ca","CI","Ci","CW","Cw","CC","Cc","PG","PJ","Pj","PM","PA","PN","PE","<NO>","PS","PR","PL","PK","Pg","Pr","Ps","Pa","PP","PZ","CM","Qa","CP","ca","cc","ci","cs","cv","cw","Pl"]

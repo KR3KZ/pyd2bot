@@ -1,42 +1,43 @@
-from struct import pack
+import importlib
 import sys
+from struct import pack
 from typing import Any
-from com.ankamagames.jerakine.data.IposInit import IPostInit
-from .GameDataField import GameDataField
+
+import com.ankamagames.jerakine.data.gameDataField as gdf
+from com.ankamagames.jerakine.data.iposInit import IPostInit
 from pyd2bot.utils.binaryIO.binaryStream import BinaryStream
 
 
 class GameDataClassDefinition:
       
    _class:object
-   _fields:list[GameDataField]
+   _fields:list[gdf.GameDataField]
    
    def __init__(self, packageName:bytes, className:bytes):
       super().__init__()
       packageName = packageName.decode('utf-8')
-      className = className.decode('utf-8')
+      className:str = className.decode('utf-8')
       self._fields = list()  
-      moduleName = packageName + '.' + className[0].lower() + className[1:]    
-      print(moduleName, className)
-      __import__(moduleName, fromlist=[className])
-      module = sys.modules[moduleName]
+      moduleName = packageName + '.' + className[0].lower() + className[1:]
+      print(moduleName)  
+      module = importlib.import_module(moduleName)
       self._class = getattr(module, className)
-      self._fields = list[GameDataField]()
+      self._fields = list[gdf.GameDataField]()
    
    @property
-   def fields(self) -> list[GameDataField]:
+   def fields(self) -> list[gdf.GameDataField]:
       return self._fields
    
    def read(self, module:str, stream:BinaryStream) -> Any:
-      field:GameDataField = None
+      field = None
       inst = self._class()
       for field in self._fields:
-         inst[field.name] = field.readData(module,stream)
+         setattr(inst, field.name.decode('utf-8'), field.readData(module, stream))
       if isinstance(inst, IPostInit):
          inst.postInit()
       return inst
    
-   def addField(self, fieleName:str, stream:BinaryStream) -> None:
-      field:GameDataField = GameDataField(fieleName)
+   def addField(self, fileName:str, stream:BinaryStream) -> None:
+      field = gdf.GameDataField(fileName)
       field.readType(stream)
       self._fields.append(field)

@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
    from com.ankamagames.dofus.datacenter.monsters.monsterGrade import MonsterGrade
 from com.ankamagames.dofus.types.idAccessors import IdAccessors
-from com.ankamagames.jerakine.data import I18n
+from com.ankamagames.jerakine.data import i18n
 from com.ankamagames.jerakine.data.gameData import GameData
 
 
@@ -45,7 +45,7 @@ class MonsterRace:
    @property
    def name(self) -> str:
       if not self._name:
-         self._name = I18n.getText(self.nameId)
+         self._name = i18n.getText(self.nameId)
       return self._name
    
    @property

@@ -1,7 +1,7 @@
 
 
-from com.ankamagames.dofus.datacenter.monsters.Monster import Monster
-from com.ankamagames.dofus.datacenter.monsters.MonsterBonusCharacteristics import MonsterBonusCharacteristics
+from com.ankamagames.dofus.datacenter.monsters.monster import Monster
+from com.ankamagames.dofus.datacenter.monsters.monsterBonusCharacteristics import MonsterBonusCharacteristics
 
 
 class MonsterGrade:

@@ -1,7 +1,7 @@
 import logging
 from re import S
 from com.ankamagames.dofus.types.idAccessors import IdAccessors
-from com.ankamagames.jerakine.data import I18n
+from com.ankamagames.jerakine.data import i18n
 from com.ankamagames.jerakine.data.gameData import GameData
 from com.ankamagames.jerakine.interfaces.iDatacenter import IDataCenter
 logger = logging.getLogger("bot")
@@ -115,31 +115,31 @@ class Breed(IDataCenter):
    @property
    def shortName(self) -> str:
       if not self._shortName:
-         self._shortName = I18n.getText(self.shortNameId)
+         self._shortName = i18n.getText(self.shortNameId)
       return self._shortName
    
    @property
    def longName(self) -> str:
       if not self._longName:
-         self._longName = I18n.getText(self.longNameId)
+         self._longName = i18n.getText(self.longNameId)
       return self._longName
    
    @property
    def description(self) -> str:
       if not self._description:
-         self._description = I18n.getText(self.descriptionId)
+         self._description = i18n.getText(self.descriptionId)
       return self._description
    
    @property
    def gameplayDescription(self) -> str:
       if not self._gameplayDescription:
-         self._gameplayDescription = I18n.getText(self.gameplayDescriptionId)
+         self._gameplayDescription = i18n.getText(self.gameplayDescriptionId)
       return self._gameplayDescription
    
    @property
    def gameplayClassDescription(self) -> str:
       if not self._gameplayClassDescription:
-         self._gameplayClassDescription = I18n.getText(self.gameplayClassDescriptionId)
+         self._gameplayClassDescription = i18n.getText(self.gameplayClassDescriptionId)
       return self._gameplayClassDescription
    
    @property

@@ -1,7 +1,7 @@
 import logging
 from pathlib import Path
 from typing import Any
-from com.ankamagames.jerakine.data.gameDataClassDefinition import GameDataClassDefinition
+import com.ankamagames.jerakine.data.gameDataClassDefinition as gdcd
 from com.ankamagames.jerakine.data.gameDataProcess import GameDataProcess
 from com.ankamagames.jerakine.utils.errors.singletonError import SingletonError
 from com.hurlan.crypto.signature import Signature
@@ -117,8 +117,8 @@ class GameDataFileAccessor:
    def getDataProcessor(self, moduleName:str) -> GameDataProcess:
       return self._gameDataProcessor[moduleName]
    
-   def getClassDefinition(self, moduleName:str, classId:int) -> GameDataClassDefinition:
-      return self._classes[moduleName][classId]
+   def getClassDefinition(self, moduleName:str, classId:int) -> 'gdcd.GameDataClassDefinition':
+      return self._classes.get(moduleName, {}).get(classId)
    
    def getCount(self, moduleName:str) -> int:
       return self._counter[moduleName]
@@ -134,7 +134,7 @@ class GameDataFileAccessor:
       return self._classes[moduleName][classId].read(moduleName, self._streams[moduleName])
    
    def getObjects(self, moduleName:str) -> list:
-      if not self._counter or not self._counter[moduleName]:
+      if not self._counter or not self._counter.get(moduleName):
          return None
       len = self._counter[moduleName]
       classes:dict = self._classes[moduleName]
@@ -159,7 +159,7 @@ class GameDataFileAccessor:
       fieldName:str = None
       className:str = stream.readUTF()
       packageName:str = stream.readUTF()
-      classDef:GameDataClassDefinition = GameDataClassDefinition(packageName,className)
+      classDef = gdcd.GameDataClassDefinition(packageName, className)
       fieldsCount:int = stream.readInt()
       for i in range(0, fieldsCount, 1):
          fieldName = stream.readUTF()
@@ -171,4 +171,4 @@ if __name__ == '__main__':
    a = GameDataFileAccessor.getInstance()
    f = r"C:\Users\majdoub\AppData\Local\Ankama\Dofus\data\common\Monsters.d2o"
    a.init(f)
-   print(a._classes)
+   print(a.getObjects("Monsters"))

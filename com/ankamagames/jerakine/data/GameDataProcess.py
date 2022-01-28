@@ -1,5 +1,5 @@
 from ast import FunctionType
-from com.ankamagames.jerakine.data.I18nFileAccessor import I18nFileAccessor
+from com.ankamagames.jerakine.data.i18nFileAccessor import I18nFileAccessor
 from com.ankamagames.jerakine.enum.gameDataTypeEnum import GameDataTypeEnum
 from pyd2bot.utils.binaryIO.binaryStream import BinaryStream
 
@@ -188,7 +188,7 @@ class GameDataProcess:
       self._searchFieldType = dict()
       self._searchFieldCount = dict()
       fieldListSize:int = self._stream.readInt()
-      indexSearchOffset:int = self._stream.position(self._stream.position() + fieldListSize + 4)
+      indexSearchOffset = self._stream.position() + fieldListSize + 4
       while fieldListSize:
          size = self._stream.remaining()
          fieldName = self._stream.readUTF()
