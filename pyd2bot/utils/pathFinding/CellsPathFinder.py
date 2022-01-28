@@ -1,7 +1,7 @@
-from pyd2bot.gameData.world.map import Map, Cell
-from pyd2bot.gameData.world.mapPoint import MapPoint
-from pyd2bot.gameData.world.mouvementPath import MovementPath
-from pyd2bot.gameData.world.pathElement import PathElement
+from com.ankamagames.atouin.data.map.Map import Map, CellData
+from com.ankamagames.jerakine.types.positions.mapPoint import MapPoint
+from com.ankamagames.jerakine.types.positions.mouvementPath import MovementPath
+from com.ankamagames.jerakine.types.positions.pathElement import PathElement
 from pyd2bot.utils.pathFinding.path import PathNode
 from pyd2bot.utils.pathFinding.pathFinder import Pathfinder
 
@@ -14,7 +14,7 @@ class CellNode(PathNode):
     VERTICAL_RUN_DURATION = 150
     DIAGONAL_RUN_DURATION = 170
     
-    def __init__(self, cell:Cell, lastDirection:int=-1, parent:'CellNode'=None):
+    def __init__(self, cell:CellData, lastDirection:int=-1, parent:'CellNode'=None):
         super().__init__(cell.id, lastDirection, parent)
         self.x = cell.x
         self.y = cell.y
@@ -25,7 +25,7 @@ class CellNode(PathNode):
         self.checkedCells = []
     
 
-    def checkCell(self, cell:Cell) -> bool: 
+    def checkCell(self, cell:CellData) -> bool: 
         for checkedCell in self.checkedCells:
             if checkedCell == cell:
                 return False
@@ -96,6 +96,6 @@ class CellsPathfinder(Pathfinder):
             return None
         mpPath = [MapPoint.fromCellId(cellId) for cellId in iPath]
         mp = MovementPath([PathElement(mpPath[i], mpPath[i].orientationTo(mpPath[i + 1])) for i in range(len(mpPath) - 1)])
-        mp.append(PathElement(mpPath[-1], mp[-1].orientation))
+        mp.append(PathElement(mpPath[-1], mp[-1]._nOrientation))
         return mp
     

@@ -111,4 +111,4 @@ def parseFile(file_p, out_p):
         fp.write(code)
 
 # parseFolderFiles("pyd2bot/game/target.as", "pyd2bot/game/target.as")
-parseFile("AS3ToPythonConverter/target.as", "AS3ToPythonConverter/GameDataProcess.py")
+parseFile("AS3ToPythonConverter/target.as", "AS3ToPythonConverter/GameDataField.py")

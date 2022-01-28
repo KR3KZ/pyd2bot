@@ -6,7 +6,9 @@ from struct import *
 
 class BinaryStream:
     """Allow some binary operations on a stream opened in binary mode"""
-    def __init__(self, base_stream:io.BytesIO, big_endian=False):
+    def __init__(self, base_stream:io.BytesIO=None, big_endian=False):
+        if not base_stream:
+            self._base_stream = io.BytesIO()
         self._base_stream = base_stream
         self._big_endian = big_endian
 

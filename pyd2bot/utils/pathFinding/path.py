@@ -1,5 +1,5 @@
 import math
-from pyd2bot.gameData.world.map import Map
+from com.ankamagames.atouin.data.map.Map import Map
 
 class Direction:
     direction:int
@@ -105,7 +105,6 @@ class Path(list[PathNode]):
         if direction != Map.LEFT and direction != Map.RIGHT and direction != Map.UP and direction != Map.DOWN:
             raise Exception("Invalid direction for create a node path.")
         self.append(SimplePathNode(id, direction))
-
 
 class SimplePathNode(PathNode):  # pour les paths enregistrés dans le fichier "paths.txt"
 

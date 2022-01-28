@@ -1,6 +1,6 @@
 import threading
-from pyd2bot.game.fight.managers.StatsManager import StatsManager
-from pyd2bot.gameData.world.map import Map
+from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManager
+from com.ankamagames.atouin.data.map.Map import Map
 from pyd2bot.logic.managers import EventsManager
 from pyd2bot.utils.pathFinding import Pathfinding
 from pyd2bot.network import Connection, MsgListner

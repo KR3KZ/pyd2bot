@@ -1,7 +1,7 @@
 from functools import reduce
 import logging
 import random
-from pyd2bot.utils.binaryIO.customDataWrapper import ByteArray
+from com.ankamagames.jerakine.network.customDataWrapper import ByteArray
 import json
 import os
 

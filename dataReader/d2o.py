@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from collections import OrderedDict
+import sys
 from pyd2bot.utils.binaryIO import BinaryStream
 from io import BytesIO
 # Exceptions
@@ -103,9 +104,10 @@ class D2OReader:
 
 class GameDataClassDefinition:
     def __init__(self, class_pkg:bytes, class_name:bytes, d2o_reader:D2OReader):
-        names = class_name.decode('utf-8').split('.')
-        self._name = names[-1]
-        self._pckg = class_pkg.decode('utf-8') + ".".join(names[:-1])
+        self._name = class_name.decode('utf-8')
+        self._pckg = class_pkg.decode('utf-8')
+        print(sys.modules)
+        self._class = getattr(sys.modules[self._pckg], self._name)
         self._fields = list[GameDataField]()
         self._d2o_reader = d2o_reader
 
@@ -113,8 +115,10 @@ class GameDataClassDefinition:
         return self._fields
 
     def read(self, raw):
-        as_dict = dict[str, GameDataField]({field.name: field.readData(raw) for field in self._fields})
-        return type(self._name, (object,), as_dict)
+        inst:object = self._class()
+        for field in self._fields:
+            inst.__setattr__(field.name, field.readData(raw))
+        return inst
 
     def addField(self, name, raw):
         field = GameDataField(name, self._d2o_reader)
@@ -136,20 +140,27 @@ class GameDataField:
     def getReadMethod(self, read_id, raw:BinaryStream):
         if read_id == -1:
             return self._read_integer
+
         elif read_id == -2:
             return self._read_boolean
+
         elif read_id == -3:
             return self._read_string
+
         elif read_id == -4:
             return self._read_number
+
         elif read_id == -5:
             return self._read_i18n
+
         elif read_id == -6:
             return self._read_unsigned_integer
+
         elif read_id == -99:
             self._inner_type_names.append(raw.readUTF())
             self._inner_read_methods = [self.getReadMethod(raw.readInt(), raw)] + self._inner_read_methods
             return self._read_vector
+
         else:
             if read_id > 0:
                 return self._read_object

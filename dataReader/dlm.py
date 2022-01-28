@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 import zlib, tempfile, io
-from pyd2bot.gameData.world.map import Map
-from pyd2bot.utils.binaryIO.binarystream import BinaryStream
+from com.ankamagames.atouin.data.map.Map import Map
+from com.ankamagames.jerakine.network.Binarystream import BinaryStream
 
 
 class InvalidDLMFile(Exception):

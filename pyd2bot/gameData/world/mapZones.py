@@ -2,12 +2,12 @@ import logging
 import random
 from typing import TYPE_CHECKING, Literal
 if TYPE_CHECKING:
-    from pyd2bot.gameData.world.map import Cell, Map
+    from com.ankamagames.atouin.data.map.Map import CellData, Map
 logger = logging.getLogger("bot")
 
 class Zone(dict[int, 'Cell']):
 
-    def __init__(self, map:'Map', cells:dict[int, 'Cell']):
+    def __init__(self, map:'Map', cells:dict[int, 'CellData']):
         super().__init__(cells)
         self._ouGoingCells  = dict[int, list[int]]()
         self._possibleDirections = list[int]()
@@ -38,7 +38,7 @@ class MapZones(list[Zone]):
     def __init__(self, map:'Map'):
         super().__init__()
         seen = set['Cell']()
-        def conxComponent(cellId) -> dict[int, 'Cell']:
+        def conxComponent(cellId) -> dict[int, 'CellData']:
             ret = {}
             nodes = set([cellId])
             while nodes:

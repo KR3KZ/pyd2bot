@@ -4,10 +4,10 @@ from functools import lru_cache
 import logging
 import random
 from pyd2bot.gameData.mapReader import MapLoader
-from pyd2bot.gameData.world.map import Map
-from pyd2bot.gameData.world.mapPoint import MapPoint
+from com.ankamagames.atouin.data.map.Map import Map
+from com.ankamagames.jerakine.types.positions.mapPoint import MapPoint
 from pyd2bot.gameData.world.mapPosition import MapPosition
-from pyd2bot.gameData.world.mouvementPath import MovementPath
+from com.ankamagames.jerakine.types.positions.mouvementPath import MovementPath
 from pyd2bot.utils.pathFinding.cellsPathFinder import CellsPathfinder
 from pyd2bot.utils.pathFinding.MapsPathFinder import MapNode, MapsPathfinder
 from pyd2bot.utils.pathFinding.lightMapNode import LightMapNode

@@ -1,4 +1,5 @@
-from pyd2bot.utils.crypto import AESKey, CBCMode, SimpleIVMode, NullPad, signature
+from com.hurlan.crypto import signature
+from pyd2bot.utils.crypto import AESKey, CBCMode, SimpleIVMode, NullPad
 from pyd2bot.logic.managers import AuthentificationManager
 from pyd2bot.utils.binaryIO import ByteArray
 

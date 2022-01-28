@@ -3,7 +3,7 @@ from pathlib import Path
 from tqdm import tqdm
 from .d2p import D2PReader, InvalidD2PFile
 from .swl import SWLReader, InvalidSWLFile
-import pyd2bot.Constants as Constants
+import com.ankamagames.dofus.Constants as Constants
 
 work_dir = Path(os.path.dirname(__file__))
 D2P_MAPS_PATH = "C:\\Users\\majdoub\\AppData\\Local\\Ankama\\Dofus\\content\\maps"

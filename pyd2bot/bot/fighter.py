@@ -1,10 +1,8 @@
 import collections
 from time import sleep, perf_counter
-
-from pyd2bot.gameData.world.mapPoint import MapPoint
+from com.ankamagames.jerakine.types.positions.mapPoint import MapPoint
 from .walker import Walker
 import logging
-from pyd2bot.game.fight.LosDetector import LosDetector
 logger = logging.getLogger("bot")
 
 class Fighter(Walker):

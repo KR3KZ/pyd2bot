@@ -1,7 +1,7 @@
 
 import hashlib
-from pyd2bot.utils.crypto.signature import SignatureKey, Signature
-from pyd2bot.utils.binaryIO.customDataWrapper import ByteArray
+from com.hurlan.crypto.signature import SignatureKey, Signature
+from com.ankamagames.jerakine.network.customDataWrapper import ByteArray
 from Cryptodome.PublicKey import RSA
 
 k1_path = r"C:\Users\majdoub\OneDrive\Documents\pyd2bot\pyd2bot\gameData\binaryData\ServerControlFrame_PUBLIC_KEY_V1.bin"

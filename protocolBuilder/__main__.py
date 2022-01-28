@@ -4,7 +4,7 @@ from .protocol_parser import ProtocolParser
 import json 
 import subprocess
 import os
-import pyd2bot.Constants as Constants
+import com.ankamagames.dofus.Constants as Constants
 work_dir = Path(os.path.dirname(__file__))
 
 if __name__ == "__main__":

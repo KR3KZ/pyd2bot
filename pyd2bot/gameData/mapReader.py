@@ -1,5 +1,5 @@
 from functools import lru_cache
-import pyd2bot.Constants as Constants
+from com.ankamagames.dofus import Constants
 from dataReader.dlm import DLM
 
 
