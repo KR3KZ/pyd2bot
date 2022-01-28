@@ -5,21 +5,31 @@ from pyd2bot.utils.binaryIO.binaryStream import BinaryStream
 
 
 class GameDataProcess:
-   
-   _searchFieldIndex:dict
-   _searchFieldCount:dict
-   _searchFieldType:dict
-   _queryableField:list[str]
-   _stream:BinaryStream
-   _currentStream:BinaryStream
-   _sortIndex:dict
-   
+
    def __init__(self, stream:BinaryStream):
-      super().__init__()
       self._stream = stream
-      self._sortIndex = dict()
+      self._sort_index = dict()
+      self._queryable_field = list()
+      self._search_field_index = dict()
+      self._search_field_type = dict()
+      self._search_field_count = dict()
+      
+      self._queryableField = list()
+      self._searchFieldType = dict()
       self.parseStream()
-   
+
+   def parseStream(self):
+      length = self._stream.readInt()
+      off = self._stream.position + length + 4
+      while length:
+         available = self._stream.remaining()
+         string = self._stream.readUTF()
+         self._queryable_field.append(string)
+         self._search_field_index[string] = self._stream.readInt() + off
+         self._search_field_type[string] = self._stream.readInt()
+         self._search_field_count[string] = self._stream.readInt()
+         length = length - (available - self._stream.remaining())
+
    def getQueryableField(self) -> list[str]:
       return self._queryableField
    
@@ -180,20 +190,4 @@ class GameDataProcess:
          readFct = self._stream.readUnsignedInt
       return readFct
    
-   def parseStream(self) -> None:
-      size:int = 0
-      fieldName:str = None
-      self._queryableField = list[str]()
-      self._searchFieldIndex = dict()
-      self._searchFieldType = dict()
-      self._searchFieldCount = dict()
-      fieldListSize:int = self._stream.readInt()
-      indexSearchOffset = self._stream.position() + fieldListSize + 4
-      while fieldListSize:
-         size = self._stream.remaining()
-         fieldName = self._stream.readUTF()
-         self._queryableField.append(fieldName)
-         self._searchFieldIndex[fieldName] = self._stream.readInt() + indexSearchOffset
-         self._searchFieldType[fieldName] = self._stream.readInt()
-         self._searchFieldCount[fieldName] = self._stream.readInt()
-         fieldListSize -= size - self._stream.remaining()
+

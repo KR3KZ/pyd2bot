@@ -4,8 +4,8 @@ import logging
 import os
 import miniamf
 from com.ankamagames.dofus import Constants as Constants
-from com.ankamagames.jerakine.data.gameDataFileAccessor import \
-    GameDataFileAccessor
+from com.ankamagames.jerakine.data.moduleReader import \
+    ModuleReader
 
 logger = logging.getLogger("bot")
 
@@ -91,7 +91,7 @@ class CustomSharedObject:
          try:
             with open(self._file, "rb") as fp:
                self._fileStream = fp
-               fileAccessor = GameDataFileAccessor.getInstance()
+               fileAccessor = ModuleReader.getInstance()
                fileAccessor.init(self._file)
                self.data = fileAccessor.getObject()
          except Exception as e:

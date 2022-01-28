@@ -17,4 +17,4 @@ class Fixture:
         self.greenMultiplier = raw.readByte()
         self.blueMultiplier = raw.readByte()
         self.hue = self.redMultiplier | self.greenMultiplier | self.blueMultiplier
-        self.alpha = raw.read_uchar()
+        self.alpha = raw.readUchar()

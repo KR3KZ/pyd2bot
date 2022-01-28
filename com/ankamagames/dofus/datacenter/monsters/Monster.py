@@ -1,4 +1,5 @@
 from typing import TYPE_CHECKING
+from com.ankamagames.dofus.datacenter.monsters.animFunMonsterData import AnimFunMonsterData
 if TYPE_CHECKING:
    from com.ankamagames.dofus.datacenter.monsters.monsterDrop import MonsterDrop
    from com.ankamagames.dofus.datacenter.monsters.monsterGrade import MonsterGrade
@@ -42,7 +43,7 @@ class Monster:
    
    canTackle:bool
    
-   # animFunList:list[AnimFunMonsterData]
+   animFunList:list[AnimFunMonsterData]
    
    isBoss:bool
    
