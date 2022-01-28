@@ -4,7 +4,7 @@ from com.ankamagames.atouin.data.map.CellData import CellData
 from com.ankamagames.atouin.data.map.layer import Layer
 from pyd2bot.gameData.world.mapPosition import MapPosition
 from pyd2bot.gameData.world.mapZones import MapZones
-from pyd2bot.utils.binaryIO.binaryStream import BinaryStream
+from com.ankamagames.jerakine.data.binaryStream import BinaryStream
 import logging
 from mapTools import MapTools
 logger = logging.getLogger("bot")

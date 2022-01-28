@@ -2,12 +2,10 @@ from .detailedStats import DetailedStat
 
 
 class UsableStat(DetailedStat):
-       
-      
    usedValue:float = 0
    
    def __init__(self, id:float, baseValue:float, additionalValue:float, objectsAndMountBonusValue:float, alignGiftBonusValue:float, contextModifValue:float, usedValue:float):
-      super().self.__init__(id,baseValue,additionalValue,objectsAndMountBonusValue,alignGiftBonusValue,contextModifValue)
+      super().self.__init__(id, baseValue,additionalValue, objectsAndMountBonusValue, alignGiftBonusValue, contextModifValue)
       self.usedValue = usedValue
    
    def __str__(self) -> str:

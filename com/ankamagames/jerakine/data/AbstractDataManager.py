@@ -1,6 +1,5 @@
 import logging
 import math
-from xmlrpc.client import MAXINT
 from com.ankamagames.jerakine import JerakineConstants
 from com.ankamagames.jerakine.managers.storeDataManager import StoreDataManager
 from com.ankamagames.jerakine.newCache.LruGarbageCollector import LruGarbageCollector
@@ -12,15 +11,12 @@ logger = logging.getLogger("bot")
 
 
 class AbstractDataManager:
-   
    DATA_KEY:str = "data"
-   _cacheSO:ICache
-   _cacheKey:ICache
-   _soPrefix:str = ""
-   
    
    def __init__(self):
-      super().__init__()
+      self._cacheSO:ICache = None
+      self._cacheKey:ICache = None
+      self._soPrefix:str = ""
    
    def getObject(self, key:int) -> object:
       realKey:str = self._soPrefix + str(key)
@@ -49,16 +45,16 @@ class AbstractDataManager:
       for fileNum in fileList:
          soName = self._soPrefix + fileNum
          if self._cacheSO.contains(soName):
-            data = data.concat(CustomSharedObject(self._cacheSO.peek(soName)).data[self.DATA_KEY])
+            data = data.extend(CustomSharedObject(self._cacheSO.peek(soName)).data[self.DATA_KEY])
          else:
             so = CustomSharedObject.getLocal(soName)
             if so and self.DATA_KEY in so.data:
                self._cacheSO.store(soName,so)
-               data = data.concat(so.data[self.DATA_KEY])
+               data = data.extend(so.data[self.DATA_KEY])
       return data
    
    def init(self, soCacheSize:int, keyCacheSize:int, soPrefix:str = "") -> None:
-      if keyCacheSize == MAXINT:
+      if keyCacheSize == float("inf"):
          self._cacheKey = InfiniteCache()
       else:
          self._cacheKey = Cache.create(keyCacheSize, LruGarbageCollector(), self.__class__.__name__ + "_key")

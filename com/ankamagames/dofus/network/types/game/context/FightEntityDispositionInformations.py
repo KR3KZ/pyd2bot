@@ -1,7 +1,8 @@
 
 
-from pyd2bot.game.fight.context.EntityDispositionInformations import EntityDispositionInformations
 
+
+from com.ankamagames.dofus.network.messages.game.context.EntityDispositionInformations import EntityDispositionInformations
 
 class FightEntityDispositionInformations(EntityDispositionInformations):
    carryingCharacterId:float = 0

@@ -1,6 +1,6 @@
 from typing import TYPE_CHECKING
 
-from pyd2bot.utils.binaryIO.binaryStream import BinaryStream
+from com.ankamagames.jerakine.data.binaryStream import BinaryStream
 if TYPE_CHECKING:
     from .map import Map
 import math 

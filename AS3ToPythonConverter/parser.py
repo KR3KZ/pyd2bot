@@ -4,7 +4,6 @@ import re
 from tqdm import tqdm
 
 patterns = {
-
     "package \S+\n?": "",
     "import \S+\n?": "",
     "public ": "",
@@ -19,7 +18,6 @@ patterns = {
     ";": "",
     "^(.*){(.*)\n?": "",
     "^(.*)}(.*)\n?": "",
-
     ":\*": "",
     "null": "None",
     "Number": "float",
@@ -38,10 +36,8 @@ patterns = {
     "Dictionary": "dict",
     "undefined": "None",
     ".push": ".append",
-
     " (?:implements|extends) (.*)": r"(\1)",
     "^(?:\s*)class ([A-Z]+\S+)": r"class \1:",
-
     "= (.*) \? (.*) : (.*)": r"= \2 if \1 else \3",
     "(if|elif|else|for|while)\((.*)\)": r"\1 \2:",
     "Vector\.<(\S+)>": r"list[\1]",
@@ -55,7 +51,6 @@ patterns = {
     r'^(.*)function set (\S+)\((.*)\) : (\S+)$': r"\1@\2.setter\n\1def \2(self, \3) -> \4:",
     "function [A-Z]+(\S+)\((.*)\)": r"def __init__(self, \2):",
     "\(?(\S+) as (\S+)\)?": r"\1",
-
     "_log:Logger = Log\.getLogger\((.*)\)": r'logger = logging.getLogger("bot")',
     ", \)": r")",
     "!==": r"is not",
@@ -94,8 +89,8 @@ patterns = {
     "IDataInput": "BinaryStream",
     "Object": "object",
     "-> \*": "-> Any",
-    "Class": "object"
-
+    "Class": "object",
+    ".concat": ".extend",
 
 }
 
@@ -113,4 +108,4 @@ def parseFile(file_p, out_p):
         fp.write(code)
 
 # parseFolderFiles("pyd2bot/game/target.as", "pyd2bot/game/target.as")
-parseFile("AS3ToPythonConverter/target.as", "AS3ToPythonConverter/GameDataField.py")
+parseFile("AS3ToPythonConverter/target.as", "AS3ToPythonConverter/SoftReference.py")

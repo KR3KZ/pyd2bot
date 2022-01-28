@@ -1,6 +1,5 @@
                   
-from pyd2bot.game.characteristic.CharacterCharacteristics import CharacterCharacteristics
-
+from com.ankamagames.dofus.network.types.game.character.characteristic.CharacterCharacteristics import CharacterCharacteristics
 
 class GameFightCharacteristics:
    characteristics:CharacterCharacteristics

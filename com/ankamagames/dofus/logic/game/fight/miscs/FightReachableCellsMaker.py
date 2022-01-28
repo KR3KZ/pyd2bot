@@ -4,7 +4,7 @@ import logging
 from com.ankamagames.atouin.data.map.map import Map
 from com.ankamagames.dofus.internalDatacenter.stats.entityStats import EntityStats
 from com.ankamagames.dofus.internalDatacenter.stats.stat import Stat
-from com.ankamagames.dofus.logic.common.managers import StatsManager
+from com.ankamagames.dofus.logic.common.managers.statsManager import StatsManager
 from com.ankamagames.dofus.logic.game.common.managers.entitiesManager import EntitiesManager
 from com.ankamagames.dofus.logic.game.fight.frames.fightEntitiesFrame import FightEntitiesFrame
 from com.ankamagames.dofus.network.messages.game.context.EntityDispositionInformations import EntityDispositionInformations
@@ -15,7 +15,6 @@ from damageCalculation.tools.StatIds import StatIds
 from com.ankamagames.atouin.data.map.CellData import CellData
 from com.ankamagames.jerakine.types.positions.mapPoint import MapPoint
 from com.ankamagames.dofus.logic.game.fight.miscs.tackleUtil import TackleUtil
-
 logger = logging.getLogger("bot")
 
 
@@ -95,7 +94,7 @@ class FightReachableCellsMaker:
    def __init__(self, player:IBot, infos:GameFightMonsterInformations, fromCellId:int = -1, movementPoint:int = -1):
       self.player = player
       entitiesFrame:FightEntitiesFrame = self.player.msgListner.getFrame(FightEntitiesFrame)
-      stats:EntityStats = StatsManager.getStats(infos.contextualId)
+      stats = StatsManager().getStats(infos.contextualId)
       movementPoints:Stat = stats.getStat(StatIds.MOVEMENT_POINTS)
       movementPointsValue:float = float(movementPoints.totalValue) if movementPoints is not None else float(0)
       self._reachableCells = list[int]()

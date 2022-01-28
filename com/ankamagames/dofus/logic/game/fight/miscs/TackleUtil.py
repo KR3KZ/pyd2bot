@@ -1,9 +1,8 @@
                                                                   
-from com.ankamagames.dofus.datacenter.monsters import monster
 from com.ankamagames.dofus.internalDatacenter.dataEnum import DataEnum
 from com.ankamagames.dofus.internalDatacenter.stats.entityStats import EntityStats
 from com.ankamagames.dofus.internalDatacenter.stats.stat import Stat
-from com.ankamagames.dofus.logic.common.managers import StatsManager
+from com.ankamagames.dofus.logic.common.managers.statsManager import StatsManager
 from com.ankamagames.dofus.logic.game.common.managers.entitiesManager import EntitiesManager
 from com.ankamagames.dofus.logic.game.fight.frames import FightEntitiesFrame
 from com.ankamagames.dofus.logic.game.fight.managers.fightersStateManager import FightersStateManager
@@ -54,7 +53,7 @@ class TackleUtil:
             if entity:
                infos = entitiesFrame.getEntityInfos(entity.id)
                if TackleUtil.canBeTackler(infos, playerInfos):
-                  tacklerStats = StatsManager.getStats(entity.id)
+                  tacklerStats = StatsManager().getStats(entity.id)
                   tackle = float(tacklerStats.getStatTotalValue(StatIds.TACKLE_BLOCK)) if tacklerStats is not None else float(0)
                   if tackle < 0:
                      tackle = 0

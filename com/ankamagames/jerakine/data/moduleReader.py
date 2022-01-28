@@ -1,11 +1,9 @@
 from collections import OrderedDict
 import logging
-from com.ankamagames.jerakine.metaclasses.singleton import Singleton
-from pathlib import Path
 from typing import Any
 from com.ankamagames.jerakine.data.gameDataProcess import GameDataProcess
 from com.hurlan.crypto.signature import Signature
-from pyd2bot.utils.binaryIO.binaryStream import BinaryStream
+from com.ankamagames.jerakine.data.binaryStream import BinaryStream
 from com.ankamagames.jerakine.data.gameDataClassDefinition import GameDataClassDefinition
 logger = logging.getLogger("bot")
 
@@ -16,7 +14,7 @@ class InvalidD2OFile(Exception):
 class ModuleReader:
    
    def __init__(self, stream:BinaryStream) -> None:
-      """Init the class with the informations about files in the D2P"""
+      """Init the class with the informations about files in the D2O"""
       if not isinstance(stream, BinaryStream):
          stream = BinaryStream(stream, True)
       # Attributes

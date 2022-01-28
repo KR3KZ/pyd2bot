@@ -1,24 +1,13 @@
 
 import logging
 import pathlib
-from com.ankamagames.jerakine.utils.errors.singletonError import SingletonError
-from pyd2bot.utils.binaryIO.binaryStream import BinaryStream
+from com.ankamagames.jerakine.metaclasses.singleton import Singleton
+from com.ankamagames.jerakine.data.binaryStream import BinaryStream
 logger = logging.getLogger("bot")
 
 
-class I18nFileAccessor:
-   _self = None
+class I18nFileAccessor(metaclass=Singleton):
 
-   def __init__(self):
-      super().__init__()
-      if self._self:
-         raise SingletonError()
-   
-   @classmethod
-   def getInstance(cls) -> 'I18nFileAccessor':
-      if not cls._self:
-         cls._self = I18nFileAccessor()
-      return cls._self
 
    def init(self, fileUri:str): 
       nativeFile = pathlib.Path(fileUri)
@@ -71,8 +60,8 @@ class I18nFileAccessor:
    def logInit() -> None:
       logger.debug("Initialized !")
 
-   # def setEntries(textKey:str) -> None:
-   #    LangManager().setEntry:(textKey, getNamedText(textKey))
+   def setEntries(textKey:str) -> None:
+      LangManager().setEntry(textKey, getNamedText(textKey))
 
    def overrideId(self, oldId:int, newId:int) -> None:
       self.indexes[oldId] = self.indexes[newId]

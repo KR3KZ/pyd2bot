@@ -1,8 +1,8 @@
                               
 import pathlib
-from pyd2bot.jerakine.data.I18nFileAccessor import I18nFileAccessor
-from pyd2bot.jerakine import JerakineConstants
-from pyd2bot.jerakine.managers import StoreDataManager
+from com.ankamagames.jerakine import JerakineConstants
+from com.ankamagames.jerakine.data.i18nFileAccessor import I18nFileAccessor
+from com.ankamagames.jerakine.managers.storeDataManager import StoreDataManager
 
 
 class I18nUpdater(DataUpdateManager):      
@@ -11,8 +11,9 @@ class I18nUpdater(DataUpdateManager):
    _files:list = []
 
    
-   def initI18n(self, language:str, metaFileListe:Uri, clearAll:bool = False) -> None:
+   def initI18n(self, language:str, metaFileListe:str, clearAll:bool = False) -> None:
       self._language = language
+      self._storeKey = "i18n_" + language
       super().init(metaFileListe, clearAll)
    
    def checkFileVersion(self, sFileName:str, sVersion:str) -> bool:
@@ -27,14 +28,13 @@ class I18nUpdater(DataUpdateManager):
       realCount:int = 0
       file = None
 
-      if ftype =="d2i":
-            self.fileaccessor = I18nFileAccessor(file_path)
+      if ftype == "d2i":
+            self.fileaccessor = I18nFileAccessor().init(file_path)
             self._versions[file_path] = version
-            StoreDataManager.setData(JerakineConstants.DATASTORE_FILES_INFO, _storeKey, self._versions)
+            StoreDataManager().setData(JerakineConstants.DATASTORE_FILES_INFO, self._storeKey, self._versions)
             dispatchEvent(LangFileEvent(LangFileEvent.COMPLETE, False, False, file_path))
             _dataFilesLoaded = True
-            _loadedFileCount += 1
-            break
+            self._loadedFileCount += 1
 
       elif ftype == "meta":
             meta = LangMetaData.fromXml(e.resource, file_path.uri, self.checkFileVersion())
@@ -49,7 +49,7 @@ class I18nUpdater(DataUpdateManager):
                   self._files.append(uri)
                   realCount += 1
             if realCount:
-               _loader.load(_files)
+               self._loader.load(_files)
             else:
                dispatchEvent(Event(Event.COMPLETE))
             break

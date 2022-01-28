@@ -1,9 +1,10 @@
-                     
-from pyd2bot.game.fight.characteristic.GameFightCharacteristics import GameFightCharacteristics
-from pyd2bot.game.fight.context.EntityDispositionInformations import EntityDispositionInformations
-from pyd2bot.game.fight.context.GameContextBasicSpawnInformation import GameContextBasicSpawnInformation
-from pyd2bot.game.fight.context.GameFightFighterInformations import GameFightFighterInformations
-from com.ankamagames.dofus.network.messages.types.game.look import EntityLook
+
+
+from com.ankamagames.dofus.network.messages.game.context.EntityDispositionInformations import EntityDispositionInformations
+from com.ankamagames.dofus.network.types.game.character.characteristic.GameFightCharacteristics import GameFightCharacteristics
+from com.ankamagames.dofus.network.types.game.context.fight.GameContextBasicSpawnInformation import GameContextBasicSpawnInformation
+from com.ankamagames.dofus.network.types.game.context.fight.GameFightFighterInformations import GameFightFighterInformations
+from com.ankamagames.dofus.network.types.game.look.entityLook import EntityLook
 
 
 class GameFightAIInformations(GameFightFighterInformations):

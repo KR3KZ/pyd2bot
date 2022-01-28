@@ -1,9 +1,9 @@
-                  
-from pyd2bot.game.characteristic.CharacterCharacteristic import CharacterCharacteristic
+from com.ankamagames.dofus.network.types.game.character.characteristic.CharacterCharacteristic import CharacterCharacteristic
+from com.ankamagames.dofus.network.types.game.character.characteristic.CharacterCharacteristicDetailed import CharacterCharacteristicDetailed
 
 
 class CharacterCharacteristics:
-   characteristics:list[CharacterCharacteristic]
+   characteristics:list[CharacterCharacteristicDetailed]
 
    def __init__(self):
       self.characteristics = list[CharacterCharacteristic]()

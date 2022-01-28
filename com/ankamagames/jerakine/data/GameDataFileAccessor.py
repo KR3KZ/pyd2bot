@@ -5,7 +5,7 @@ if TYPE_CHECKING:
     from com.ankamagames.jerakine.data.gameDataClassDefinition import GameDataClassDefinition
 from com.ankamagames.jerakine.data.moduleReader import ModuleReader
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
-from pyd2bot.utils.binaryIO.binaryStream import BinaryStream
+from com.ankamagames.jerakine.data.binaryStream import BinaryStream
 
 
 class GameDataFileAccessor(metaclass=Singleton):
@@ -33,7 +33,7 @@ class GameDataFileAccessor(metaclass=Singleton):
     def getObject(self, moduleName:str, objectId) -> Any:
         return self._modules[moduleName].getObject(objectId)
     
-    def getObjects(self, moduleName:str) -> list:
+    def getObjects(self, moduleName:str) -> list[object]:
         return self._modules[moduleName].getObjects()
     
     def close(self) -> None:

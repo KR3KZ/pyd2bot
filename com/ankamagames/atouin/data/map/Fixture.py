@@ -1,4 +1,4 @@
-from pyd2bot.utils.binaryIO.binaryStream import BinaryStream
+from com.ankamagames.jerakine.data.binaryStream import BinaryStream
 
 
 class Fixture:

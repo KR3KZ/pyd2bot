@@ -2,7 +2,7 @@ import logging
 from com.ankamagames.dofus.datacenter.items.criterion.IItemCriterion import IItemCriterion
 from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterionOperator import ItemCriterionOperator
 from com.ankamagames.dofus.internalDatacenter.stats.entityStats import EntityStats                              
-from com.ankamagames.dofus.logic.common.managers import StatsManager
+from com.ankamagames.dofus.logic.common.managers.statsManager import StatsManager
 from com.ankamagames.jerakine.data import i18n
 from damageCalculation.tools import StatIds
 
@@ -107,7 +107,7 @@ class ItemCriterion(IItemCriterion):
    def getCriterion(self) -> int:
       criterion:int = 0
       player:PlayedCharacterManager = PlayedCharacterManager()
-      statsManager:StatsManager = StatsManager()
+      statsManager:statsManager = statsManager()
 
       if statsManager == None:
          return 0

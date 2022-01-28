@@ -1,6 +1,6 @@
 from pyd2bot.gameData.world.GraphicalElement import GraphicalElement
 from pyd2bot.gameData.world.soundElement import SoundElement
-from pyd2bot.utils.binaryIO.binaryStream import BinaryStream
+from com.ankamagames.jerakine.data.binaryStream import BinaryStream
 
 
 class Layer:

@@ -1,11 +1,10 @@
 
-from pyd2bot.game.fight.context.EntityDispositionInformations import EntityDispositionInformations
-from pyd2bot.game.fight.context.GameContextActorPositionInformations import GameContextActorPositionInformations
-from com.ankamagames.dofus.network.messages.types.game.look import EntityLook
 
+from com.ankamagames.dofus.network.messages.game.context.EntityDispositionInformations import EntityDispositionInformations
+from com.ankamagames.dofus.network.types.game.context.GameContextActorPositionInformations import GameContextActorPositionInformations
+from com.ankamagames.dofus.network.types.game.look.entityLook import EntityLook
 
 class GameContextActorInformations(GameContextActorPositionInformations):
-   
    
    def __init__(self):
       self.look = EntityLook()

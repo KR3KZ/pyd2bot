@@ -3,7 +3,7 @@ from typing import Any, TYPE_CHECKING
 if TYPE_CHECKING:
    from com.ankamagames.jerakine.data.moduleReader import ModuleReader
 from com.ankamagames.jerakine.data.iposInit import IPostInit
-from pyd2bot.utils.binaryIO.binaryStream import BinaryStream
+from com.ankamagames.jerakine.data.binaryStream import BinaryStream
 from com.ankamagames.jerakine.data.gameDataField import GameDataField
 
 class GameDataClassDefinition:

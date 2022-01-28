@@ -5,7 +5,7 @@ import sys
 from types import FunctionType
 from typing import TYPE_CHECKING, Any
 from com.ankamagames.jerakine.enum.gameDataTypeEnum import GameDataTypeEnum
-from pyd2bot.utils.binaryIO.binaryStream import BinaryStream
+from com.ankamagames.jerakine.data.binaryStream import BinaryStream
 if TYPE_CHECKING:
    from com.ankamagames.jerakine.data.moduleReader import \
        ModuleReader

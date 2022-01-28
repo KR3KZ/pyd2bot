@@ -1,6 +1,8 @@
 
 
-from pyd2bot.game.fight.context.GameContextActorPositionInformations import GameContextActorPositionInformations
+
+
+from com.ankamagames.dofus.network.types.game.context.GameContextActorPositionInformations import GameContextActorPositionInformations
 
 
 class GameContextBasicSpawnInformation:
@@ -11,9 +13,6 @@ class GameContextBasicSpawnInformation:
    def __init__(self):
       self.informations = GameContextActorPositionInformations()
       super().__init__()
-   
-   def getTypeId(self) -> int:
-      return 2015
    
    def initGameContextBasicSpawnInformation(self, teamId:int = 2, alive:bool = False, informations:GameContextActorPositionInformations = None) -> 'GameContextBasicSpawnInformation':
       self.teamId = teamId

@@ -3,9 +3,9 @@ import base64
 import sys
 from typing import Any
 from com.ankamagames.jerakine import JerakineConstants
+from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 from com.ankamagames.jerakine.types.customSharedObject import CustomSharedObject
 from com.ankamagames.jerakine.types.dataStoreType import DataStoreType
-from com.ankamagames.jerakine.utils.errors.singletonError import SingletonError
 from pyd2bot.gameData.enums.dataStoreEnum import DataStoreEnum
 logger = logging.getLogger("bot")
 
@@ -16,13 +16,9 @@ class Secure:
    pass
 
 
-class StoreDataManager:
-
-   _self = None
+class StoreDataManager(metaclass=Singleton):
 
    def __init__(self) -> None:
-      if self._self:
-         raise SingletonError("StoreDataManager is a singleton !")
       self._aData:list = []
       self._bStoreSequence:bool = False
       self._nCurrentSequenceNum:int = 0
@@ -45,11 +41,6 @@ class StoreDataManager:
             self._aRegisteredClassAlias[className] = True
          self._aRegisteredClassAlias[className] = True
 
-   def getInstance(self) -> 'StoreDataManager':
-      if self._self is None:
-         self._self = StoreDataManager()
-      return self._self
-
    def getSharedObject(self, sName:str) -> 'CustomSharedObject':
       if sName in self._aSharedObjectCache:
          return self._aSharedObjectCache[sName]
@@ -58,7 +49,6 @@ class StoreDataManager:
       return so
 
    def getData(self, dataType:DataStoreType, sKey:str) -> Any:
-      so:CustomSharedObject = None
       if dataType.persistant:
          if dataType.location == DataStoreEnum.LOCATION_LOCAL:
             so = self.getSharedObject(dataType.category)
