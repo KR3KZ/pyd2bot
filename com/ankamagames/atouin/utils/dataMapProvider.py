@@ -1,17 +1,18 @@
 import logging
-from AS3ToPythonConverter.iObstacle import IObstacle
 from com.ankamagames.atouin.atouinConstants import AtouinConstants
 from com.ankamagames.atouin.data.map.CellData import CellData
+from com.ankamagames.atouin.data.map.map import Map
+import com.ankamagames.atouin.managers.mapDisplayManager as mdmm
 from com.ankamagames.dofus.logic.game.common.managers.entitiesManager import EntitiesManager
-from com.ankamagames.jerakine.entities.interfaces.IEntity import IEntity
+from com.ankamagames.jerakine.interfaces.iObstacle import IObstacle
 from com.ankamagames.jerakine.map.iDataMapProvider import IDataMapProvider
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 from com.ankamagames.jerakine.types.positions.mapPoint import MapPoint
 from mapTools import MapTools
 logger = logging.getLogger("bot")
 
-class DataMapProvider(IDataMapProvider, metaclass=Singleton):
-    
+class DataMapProvider(IDataMapProvider):
+    __metaclass__ = Singleton
     TOLERANCE_ELEVATION:int = 11
     _playerobject:object
     isInFight:bool
@@ -20,23 +21,22 @@ class DataMapProvider(IDataMapProvider, metaclass=Singleton):
     _specialEffects:dict
     
     def __init__(self):
-        self.obstaclesCells = list[int](0)
+        self.obstaclesCells = list[int]()
         self._updatedCell = dict()
         self._specialEffects = dict()
         super().__init__()
-    
-    def init(self, playerobject:object) -> None:
-        self._playerobject = playerobject
-    
+        
+    @classmethod
+    def init(cls, playerobject:object):
+        cls._playerobject = playerobject
+
     def pointLos(self, x:int, y:int, bAllowTroughEntity:bool = True) -> bool:
-        cellEntities:list = None
-        o:IObstacle = None
         cellId:int = MapTools.getCellIdByCoord(x,y)
-        los:bool = CellData(MapDisplayManager().getDataMapContainer().dataMap.cells[cellId]).los
-        if self._updatedCell[cellId] != None:
+        los:bool = mdmm.MapDisplayManager().currentDataMap.cells[cellId].los
+        if self._updatedCell.get(cellId):
             los = self._updatedCell[cellId]
         if not bAllowTroughEntity:
-            cellEntities = EntitiesManager().getEntitiesOnCell(cellId,IObstacle)
+            cellEntities = EntitiesManager().getEntitiesOnCell(cellId, IObstacle)
             if len(cellEntities):
                 for o in cellEntities:
                     if not IObstacle(o).canSeeThrough():
@@ -45,52 +45,43 @@ class DataMapProvider(IDataMapProvider, metaclass=Singleton):
     
     def farmCell(self, x:int, y:int) -> bool:
         cellId:int = MapTools.getCellIdByCoord(x,y)
-        return CellData(MapDisplayManager().getDataMapContainer().dataMap.cells[cellId]).farmCell
+        return mdmm.MapDisplayManager().currentDataMap.cells[cellId].farmCell
     
     def cellByIdIsHavenbagCell(self, cellId:int) -> bool:
-        return CellData(MapDisplayManager().getDataMapContainer().dataMap.cells[cellId]).havenbagCell
+        return mdmm.MapDisplayManager().currentDataMap.cells[cellId].havenbagCell
     
     def cellByCoordsIsHavenbagCell(self, x:int, y:int) -> bool:
         cellId:int = MapTools.getCellIdByCoord(x,y)
-        return CellData(MapDisplayManager().getDataMapContainer().dataMap.cells[cellId]).havenbagCell
+        return mdmm.MapDisplayManager().currentDataMap.cells[cellId].havenbagCell
     
     def isChangeZone(self, cell1:int, cell2:int) -> bool:
-        cellData1:CellData = CellData(MapDisplayManager().getDataMapContainer().dataMap.cells[cell1])
-        cellData2:CellData = CellData(MapDisplayManager().getDataMapContainer().dataMap.cells[cell2])
+        cellData1:CellData = mdmm.MapDisplayManager().currentDataMap.cells[cell1]
+        cellData2:CellData = mdmm.MapDisplayManager().currentDataMap.cells[cell2]
         dif:int = abs(abs(cellData1.floor) - abs(cellData2.floor))
         return cellData1.moveZone != cellData2.moveZone and dif == 0
     
     def pointMov(self, x:int, y:int, bAllowTroughEntity:bool = True, previousCellId:int = -1, endCellId:int = -1, aNoneObstacles:bool = True) -> bool:
-        dataMap:Map = None
-        useNewSystem:bool = False
-        cellId:int = 0
-        cellData:CellData = None
-        mov:bool = False
-        previousCellData:CellData = None
-        dif:int = 0
-        e:IEntity = None
-        o:IObstacle = None
         if MapPoint.isInMap(x,y):
-            dataMap = MapDisplayManager().getDataMapContainer().dataMap
+            dataMap:Map = mdmm.MapDisplayManager().currentDataMap
             useNewSystem = dataMap.isUsingNewMovementSystem
             cellId = MapTools.getCellIdByCoord(x,y)
-            cellData = CellData(dataMap.cells[cellId])
+            cellData = dataMap.cells[cellId]
             mov = cellData.mov and (not self.isInFight or not cellData.nonWalkableDuringFight)
-            if self._updatedCell[cellId] != None:
+            if self._updatedCell.get(cellId) != None:
                 mov = self._updatedCell[cellId]
             if mov and useNewSystem and previousCellId != -1 and previousCellId != cellId:
-                previousCellData = CellData(dataMap.cells[previousCellId])
+                previousCellData = dataMap.cells[previousCellId]
                 dif = abs(abs(cellData.floor) - abs(previousCellData.floor))
                 if previousCellData.moveZone != cellData.moveZone and dif > 0 or previousCellData.moveZone == cellData.moveZone and cellData.moveZone == 0 and dif > self.TOLERANCE_ELEVATION:
                     mov = False
             if not bAllowTroughEntity:
                 for e in EntitiesManager().entities:
-                    if e and e is IObstacle and e.position and e.position.cellId == cellId:
+                    if e and isinstance(e, IObstacle) and e.position and e.position.cellId == cellId:
                         o = e
                         if not (endCellId == cellId and o.canWalkTo()):
                             if not o.canWalkThrough():
                                 return False
-                if aNoneObstacles and (self.obstaclesCells.find(cellId) != -1 and cellId != endCellId):
+                if aNoneObstacles and (cellId not in self.obstaclesCells and cellId != endCellId):
                     return False
         else:
             mov = False
@@ -98,12 +89,12 @@ class DataMapProvider(IDataMapProvider, metaclass=Singleton):
     
     def pointCanStop(self, x:int, y:int, bAllowTroughEntity:bool = True) -> bool:
         cellId:int = MapTools.getCellIdByCoord(x,y)
-        cellData:CellData = CellData(MapDisplayManager().getDataMapContainer().dataMap.cells[cellId])
-        return self.pointMov(x,y,bAllowTroughEntity) and (self.isInFight or not cellData.nonWalkableDuringRP)
+        cellData:CellData = mdmm.MapDisplayManager().currentDataMap.cells[cellId]
+        return self.pointMov(x, y, bAllowTroughEntity) and (self.isInFight or not cellData.nonWalkableDuringRP)
     
     def fillEntityOnCelllist(self, v:list[bool], allowThroughEntity:bool) -> list[bool]:
         for e in EntitiesManager().entities:
-            if isinstance(e, self._playerobject) and (not allowThroughEntity or not e.allowMovementThrough) and e.position != None:
+            if isinstance(e, self._playerobject) and (not allowThroughEntity or not e.allowMovementThrough) and e.position is not None:
                 v[e.position.cellId] = True
         return v
     
@@ -117,29 +108,29 @@ class DataMapProvider(IDataMapProvider, metaclass=Singleton):
             else:
                 weight += 11 + abs(speed)
             entity = EntitiesManager().getEntityOnCell(cellId, self._playerobject)
-            if entity and not entity["allowMovementThrough"]:
+            if entity and not getattr(entity, "allowMovementThrough"):
                 weight = 20
             else:
-                if EntitiesManager().getEntityOnCell(cellId, self._playerobject) != None:
+                if EntitiesManager().getEntityOnCell(cellId, self._playerobject) is not None:
                     weight += 0.3
-                if EntitiesManager().getEntityOnCell(MapTools.getCellIdByCoord(x + 1,y), self._playerobject) != None:
+                if EntitiesManager().getEntityOnCell(MapTools.getCellIdByCoord(x + 1,y), self._playerobject) is not None:
                     weight += 0.3
-                if EntitiesManager().getEntityOnCell(MapTools.getCellIdByCoord(x,y + 1), self._playerobject) != None:
+                if EntitiesManager().getEntityOnCell(MapTools.getCellIdByCoord(x,y + 1), self._playerobject) is not None:
                     weight += 0.3
-                if EntitiesManager().getEntityOnCell(MapTools.getCellIdByCoord(x - 1,y), self._playerobject) != None:
+                if EntitiesManager().getEntityOnCell(MapTools.getCellIdByCoord(x - 1,y), self._playerobject) is not None:
                     weight += 0.3
-                if EntitiesManager().getEntityOnCell(MapTools.getCellIdByCoord(x,y - 1), self._playerobject) != None:
+                if EntitiesManager().getEntityOnCell(MapTools.getCellIdByCoord(x,y - 1), self._playerobject) is not None:
                     weight += 0.3
                 if (self.pointSpecialEffects(x,y) & 2) == 2:
                     weight += 0.2
         return weight
     
     def getCellSpeed(self, cellId:int) -> int:
-        return MapDisplayManager().getDataMapContainer().dataMap.cells[cellId]
+        return mdmm.MapDisplayManager().currentDataMap.cells[cellId].speed
     
     def pointSpecialEffects(self, x:int, y:int) -> int:
         cellId:int = MapTools.getCellIdByCoord(x,y)
-        if self._specialEffects[cellId]:
+        if self._specialEffects.get(cellId):
             return self._specialEffects[cellId]
         return 0
     

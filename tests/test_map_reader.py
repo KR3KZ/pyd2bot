@@ -1,6 +1,6 @@
 import pickle
 from time import perf_counter
-from pyd2bot.gameData.mapReader import MapLoader
+from com.ankamagames.jerakine.resources.loaders.MapLoader import MapLoader
 
 def test_cach():
     t = perf_counter()

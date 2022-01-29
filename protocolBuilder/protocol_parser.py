@@ -2,6 +2,25 @@ import re
 from pathlib import Path
 from tqdm import tqdm
 
+TO_PTYPE = {
+    "UnsignedByte": "int", 
+    "Int": "int",
+    "ByteArray": "bytes",
+    "VarUhShort": "int",
+    "UTF": "str",
+    "Byte": "int",
+    "VarShort": "int",
+    "Boolean": "bool",
+    "VarUhLong": "int",
+    "VarInt": "int",
+    "UnsignedShort": "int",
+    "UnsignedInt": "int",
+    "Short": "int",
+    "Double": "float",
+    "VarUhInt": "int",
+    "Float": "float",
+    "VarLong": "int",
+}
 class ProtocolParser:
     CLASS_PATTERN = r"\s*public class (?P<name>\w+) (?:extends (?P<parent>\w+) )?implements (?P<interface>\w+)\n"
     ID_PATTERN = r"\s*public static const protocolId:uint = (?P<id>\d+);\n"
@@ -49,14 +68,17 @@ class ProtocolParser:
                 name = as_file_path.name[:-3]
                 msg_type[name] = {
                     "name": name,
-                    "path": as_file_path
+                    "path": as_file_path,
+                    "rpath": str(as_file_path.relative_to(path)),
+                    "package": ".".join(as_file_path.parts[as_file_path.parts.index("com"):-2]+(name,)),
                 }
             self.json["type"].update(msg_type)
     
     def parseVar(self, name, type_name, lines):
         var_type = None
         if type_name in ["Boolean", "ByteArray"]:
-            return dict(name=name, length=None, type=type_name, optional=False)
+            return dict(name=name, length=None, type=type_name, ptype="bool", optional=False)
+
         if type_name in self.json["type"]:
             var_type = type_name
 
@@ -84,11 +106,12 @@ class ProtocolParser:
                 optional = True
         if var_type is None:
             raise Exception(f"Unable to parse 'var_type' of attrib {name} from class_type {type_name}")
-        
+
         return {
             "name": name,
             "length": None,
             "type": var_type,
+            "pytype": TO_PTYPE[var_type] if var_type in TO_PTYPE else var_type,
             "optional": optional
         }
 
@@ -176,4 +199,4 @@ class ProtocolParser:
         msg_type["boolVars"] = list(boolVars)
         msg_type["hash_function"] = hash_function
         del msg_type["path"]
-
+    

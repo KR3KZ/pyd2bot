@@ -1,4 +1,5 @@
 import importlib
+import sys
 from typing import Any, TYPE_CHECKING
 if TYPE_CHECKING:
    from com.ankamagames.jerakine.data.moduleReader import ModuleReader
@@ -11,7 +12,10 @@ class GameDataClassDefinition:
    def __init__(self, packageName:str, className:str, moduleReader:'ModuleReader') -> None:
       self._fields = list()  
       moduleName = packageName + '.' + className[0].lower() + className[1:]
-      module = importlib.import_module(moduleName)
+      try:
+         module = sys.modules[moduleName]
+      except:
+         module = importlib.import_module(moduleName)
       self._moduleName = moduleName
       self._name = className
       self._class = getattr(module, className)

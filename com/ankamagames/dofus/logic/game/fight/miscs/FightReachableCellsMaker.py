@@ -3,6 +3,7 @@
 import logging
 from com.ankamagames.atouin.data.map.map import Map
 from com.ankamagames.dofus.internalDatacenter.stats.stat import Stat
+from com.ankamagames.dofus.kernel.kernel import Kernel
 from com.ankamagames.dofus.logic.common.managers.statsManager import StatsManager
 from com.ankamagames.dofus.logic.game.common.managers.entitiesManager import EntitiesManager
 from com.ankamagames.dofus.logic.game.fight.frames.fightEntitiesFrame import FightEntitiesFrame
@@ -90,9 +91,8 @@ class FightReachableCellsMaker:
    _waitingCells:list[_ReachableCellData]
    _watchedCells:list[_ReachableCellData]
    
-   def __init__(self, player:IBot, infos:GameFightMonsterInformations, fromCellId:int = -1, movementPoint:int = -1):
-      self.player = player
-      entitiesFrame:FightEntitiesFrame = self.player.msgListner.getFrame(FightEntitiesFrame)
+   def __init__(self, infos:GameFightMonsterInformations, fromCellId:int = -1, movementPoint:int = -1):
+      entitiesFrame:FightEntitiesFrame = Kernel().getWorker().getFrame(FightEntitiesFrame)
       stats = StatsManager().getStats(infos.contextualId)
       movementPoints:Stat = stats.getStat(StatIds.MOVEMENT_POINTS)
       movementPointsValue:float = float(movementPoints.totalValue) if movementPoints is not None else float(0)
@@ -118,7 +118,7 @@ class FightReachableCellsMaker:
       for i in self._cellGrid:
          self._cellGrid[i] = list[_ReachableCellData](self._mp * 2 + 1)
       
-      entities = EntitiesManager.getInstance().entities
+      entities = EntitiesManager().entities
       for entity in entities:
          if entity.id != infos.contextualId and entity.position:
             x = entity.position.x - self._mapPoint.x + self._mp

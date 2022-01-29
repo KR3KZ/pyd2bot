@@ -4,7 +4,7 @@ import random
 from pyd2bot.utils.crypto import RSA, RSACipher, PKCS1
 from pyd2bot.utils.binaryIO import ByteArray
 from pyd2bot.logic.frames import IFrame
-from pyd2bot.gameData.enums.ServerStatusEnum import ServerStatusEnum
+from com.ankamagames.dofus.network.enums.ServerStatusEnum import ServerStatusEnum
 import logging
 logger = logging.getLogger("bot")
 

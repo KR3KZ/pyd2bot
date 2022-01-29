@@ -1,7 +1,5 @@
-PyQt5
-pyyaml
 scapy
 wdom
 tqdm
 pycryptodomex
-mini-amf
+whistle

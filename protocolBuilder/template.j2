@@ -1,0 +1,9 @@
+class {{msg["name"]}}{% if msg["parent"] != None %}({{msg["parent"]}}){% endif %}:
+    {% for field in msg["vars"] -%}
+    {{field["name"]}}:{{field["pytype"] if field["pytype"] else field["type"]}}{% if field["optional"] == True %} = None{% endif %}
+    {% endfor %}
+    def __init__(self, {% for field in msg["vars"] -%}
+        {{field["name"]}}:{{field["pytype"] if field["pytype"] else field["type"]}}{% if field["optional"] == True %} = None{% endif %}{% if not loop.last %}, {% endif %}{% endfor %}):
+        {% for field in msg["vars"] -%}
+        self.{{field["name"]}} = {{field["name"]}}
+        {% endfor %}

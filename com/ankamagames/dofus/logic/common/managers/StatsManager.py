@@ -11,7 +11,7 @@ from com.ankamagames.dofus.network.types.game.character.characteristic.Character
 from com.ankamagames.jerakine.managers.storeDataManager import StoreDataManager
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 from com.ankamagames.jerakine.types.dataStoreType import DataStoreType
-from pyd2bot.gameData.enums.dataStoreEnum import DataStoreEnum
+from com.ankamagames.jerakine.types.enums.dataStoreEnum import DataStoreEnum
 logger = logging.getLogger("bot")
 
 

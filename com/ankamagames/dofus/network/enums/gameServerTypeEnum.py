@@ -1,5 +1,4 @@
-from black import Enum
-
+from enum import Enum
 
 class GameServerTypeEnum(Enum):
     SERVER_TYPE_UNDEFINED:int = -1

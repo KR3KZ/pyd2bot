@@ -1,5 +1,4 @@
 from typing import TYPE_CHECKING
-
 from com.ankamagames.jerakine.data.binaryStream import BinaryStream
 if TYPE_CHECKING:
     from .map import Map

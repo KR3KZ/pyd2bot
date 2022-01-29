@@ -24,41 +24,22 @@ logger = logging.getLogger("bot")
 
 class Worker(EventDispatcher, MessageHandler):
    
-   
-   
    DEBUG_FRAMES:bool = True
-   
    DEBUG_MESSAGES:bool = True
-   
    LONG_MESSAGE_QUEUE:int = 100
-   
    MAX_TIME_FRAME:int = 40
-      
-   
    _messagesQueue:list[Message]
-   
    _treatmentsQueue:list[Treatment]
-   
    _framesList:list[Frame]
-   
    _processingMessage:bool
-   
    _framesToAdd:list[Frame]
-   
    _framesToRemove:list[Frame]
-   
    _paused:bool
-   
    _pausedQueue:list[Message]
-   
    _terminated:bool = False
-   
    _terminating:bool = False
-   
    _unstoppableMsgobjectList:list
-   
    _framesBeingDeleted:dict
-   
    _currentFrameTypesCache:dict
    
    def __init__(self):
@@ -308,7 +289,7 @@ class Worker(EventDispatcher, MessageHandler):
       if frame.pulled():
          index = self._framesList.find(frame)
          if index > -1:
-            self._framesList.splice(index,1)
+            self._framesList.splice(index, 1)
             del self._currentFrameTypesCache[type(frame)]
             del self._framesBeingDeleted[frame]
          # if hasEventListener(FramePulledEvent.EVENT_FRAME_PULLED):

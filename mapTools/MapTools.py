@@ -10,7 +10,6 @@ MIN_Y_COORD:int = -19
 MAX_Y_COORD:int = 13
 EVERY_CELL_ID:list
 mapCountCell:int = None
-isInit:bool = False
 INVALID_CELL_ID:int = -1
 PSEUDO_INFINITE:int = 63
 COEFF_FOR_REBASE_ON_CLOSEST_8_DIRECTION:float = math.tan(math.pi / 8)
@@ -89,9 +88,6 @@ def getCellIdByCoord(param1:int, param2:int) -> int:
     return int(math.floor(float((param1 - param2) * MAP_GRID_WIDTH + param2 + (param1 - param2) / 2)))
 
 def isValidCoord(param1:int, param2:int) -> bool:
-    if not isInit:
-        raise Exception("MapTools must be initiliazed with method .initForDofus2 or .initForDofus3")
-
     if param2 >= -param1 and param2 <= param1 and param2 <= MAP_GRID_WIDTH + MAX_Y_COORD - param1:
         return param2 >= param1 - (MAP_GRID_HEIGHT - MIN_Y_COORD)
         

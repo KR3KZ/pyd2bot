@@ -26,7 +26,7 @@ MAX_LOGIN_ATTEMPTS = 3
 
 ROOTDIR = Path(os.path.dirname(__file__))
 
-MAPS_PATH = ROOTDIR / "gameData/dlmMaps"
+MAPS_PATH = "content/maps"
 
 DOFUS_ROOTDIR = Path(r"C:\Users\majdoub\AppData\Local\Ankama\Dofus")
 

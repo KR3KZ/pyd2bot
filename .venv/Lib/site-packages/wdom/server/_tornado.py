@@ -1,0 +1,197 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""Wrapper module of tornado web server to use WDOM."""
+
+import asyncio
+import logging
+import socket
+from typing import Any, TYPE_CHECKING
+
+from tornado import web, websocket
+from tornado.httpserver import HTTPServer
+
+from wdom.util import install_asyncio
+from wdom.options import config
+from wdom.server.handler import on_websocket_message
+
+if TYPE_CHECKING:
+    from typing import List  # noqa
+
+logger = logging.getLogger(__name__)
+install_asyncio()
+connections = []  # type: List[WSHandler]
+server_config = dict()
+
+
+def is_connected() -> bool:
+    """Check if tornado web server has a client connection."""
+    return any(connections)
+
+
+class MainHandler(web.RequestHandler):
+    """Main handler to serve document of the application."""
+
+    def get(self) -> None:
+        """Return whole html representation of the root document."""
+        from wdom.document import get_document
+        logger.info('connected')
+        self.write(get_document().build())
+
+
+class WSHandler(websocket.WebSocketHandler):
+    """Handler class of web socket connection."""
+
+    def open(self) -> None:
+        """Execute when connection open."""
+        logger.info('WebSocket OPEN')
+        connections.append(self)
+
+    def on_message(self, message: str) -> None:
+        """Execute when get message from client."""
+        on_websocket_message(message)
+
+    async def terminate(self) -> None:
+        """Terminate server if no more connection exists."""
+        await asyncio.sleep(config.shutdown_wait)
+        # stop server and close loop if no more connection exists
+        if not is_connected():
+            stop_server(self.application.server)
+            self.application.loop.stop()
+
+    def on_close(self) -> None:
+        """Execute when connection closed."""
+        logger.info('WebSocket CLOSED')
+        if self in connections:
+            # Remove this connection from connection-list
+            connections.remove(self)
+        # close if auto_shutdown is enabled and there is no more connection
+        if config.auto_shutdown and not is_connected():
+            asyncio.ensure_future(self.terminate())
+
+
+class StaticFileHandlerNoCache(web.StaticFileHandler):
+    """Provides static files without browser cache.
+
+    Usefull for debug purpose.
+    """
+
+    def set_extra_headers(self, path: str) -> None:
+        """Set no-cache header."""
+        self.set_header('Cache-control', 'no-cache')
+
+
+StaticFileHandler = web.StaticFileHandler
+if config.debug:
+    StaticFileHandler = StaticFileHandlerNoCache
+
+
+class Application(web.Application):
+    """Application for a tornado web server.
+
+    This class is based on tornado.web.Application, but including some utility
+    methods to make it easy to set up app.
+    """
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        """Initialize application."""
+        super().__init__(
+            [(r'/', MainHandler), (r'/wdom_ws', WSHandler)],
+            *args,
+            debug=config.debug,
+            autoreload=False,
+            compiled_template_cashe=False,
+            **kwargs
+        )
+
+    def log_request(self, handler: web.RequestHandler) -> None:
+        """Handle access log."""
+        if 'log_function' in self.settings:
+            self.settings['log_function'](handler)
+            return
+        status = handler.get_status()
+        if status < 400:
+            log_method = logger.info
+        elif status < 500:
+            log_method = logger.warning
+        else:
+            log_method = logger.error
+        request_time = 1000.0 * handler.request.request_time()
+        if request_time > 10:
+            logger.warning('%d %s %.2fms',
+                           status, handler._request_summary(), request_time)
+        else:
+            log_method('%d %s', status, handler._request_summary())
+
+    def add_static_path(self, prefix: str, path: str) -> None:
+        """Add path to serve static files.
+
+        ``prefix`` is used for url prefix to serve static files and ``path`` is
+        a path to the static file directory. ``prefix = '/_static'`` is
+        reserved for the server, so do not use it for your app.
+        """
+        pattern = prefix
+        if not pattern.startswith('/'):
+            pattern = '/' + pattern
+        if not pattern.endswith('/(.*)'):
+            pattern = pattern + '/(.*)'
+        self.add_handlers(
+            r'.*',  # add static path for all virtual host
+            [(pattern, StaticFileHandler, dict(path=path))]
+        )
+
+    def add_favicon_path(self, path: str) -> None:
+        """Add path to serve favicon file.
+
+        ``path`` should be a directory, which contains favicon file
+        (``favicon.ico``) for your app.
+        """
+        spec = web.URLSpec(
+            '/(favicon.ico)',
+            StaticFileHandler,
+            dict(path=path)
+        )
+        # Need some check
+        handlers = self.handlers[0][1]
+        handlers.append(spec)
+
+
+main_application = Application()
+
+
+def get_app(*args: Any, **kwargs: Any) -> Application:
+    """Return Application object to serve ``document``."""
+    return main_application
+
+
+def set_application(app: Application) -> None:
+    """Set application as a root application for the server."""
+    global main_application
+    main_application = app
+
+
+def start_server(app: web.Application = None, port: int = None,
+                 address: str = None, **kwargs: Any) -> HTTPServer:
+    """Start server with ``app`` on ``localhost:port``.
+
+    If port is not specified, use command line option of ``--port``.
+    """
+    app = app or get_app()
+    port = port if port is not None else config.port
+    address = address if address is not None else config.address
+
+    server = app.listen(port, address=address)
+    app.server = server
+    app.loop = asyncio.get_event_loop()
+    server_config['address'] = address
+    for sock in server._sockets.values():
+        if sock.family == socket.AF_INET:
+            server_config['port'] = sock.getsockname()[1]
+            break
+    return server
+
+
+def stop_server(server: HTTPServer) -> None:
+    """Terminate given server."""
+    server.stop()
+    logger.info('Server terminated')

@@ -6,7 +6,7 @@ from com.ankamagames.jerakine import JerakineConstants
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 from com.ankamagames.jerakine.types.customSharedObject import CustomSharedObject
 from com.ankamagames.jerakine.types.dataStoreType import DataStoreType
-from pyd2bot.gameData.enums.dataStoreEnum import DataStoreEnum
+from com.ankamagames.jerakine.types.enums.dataStoreEnum import DataStoreEnum
 logger = logging.getLogger("bot")
 
 class IExternalizable:

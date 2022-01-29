@@ -13,7 +13,6 @@ from com.ankamagames.dofus.network.types.game.context.fight.GameFightFighterInfo
 from com.ankamagames.dofus import Constants
 from com.ankamagames.dofus.network.types.game.context.fight.GameFightMonsterInformations import GameFightMonsterInformations
 from com.ankamagames.jerakine.entities.interfaces.IEntity import IEntity
-from pyd2bot.gameData.enums.GameActionFightInvisibilityStateEnum import GameActionFightInvisibilityStateEnum
 from damageCalculation.tools.StatIds import StatIds
 from com.ankamagames.jerakine.types.positions.mapPoint import MapPoint
 from com.ankamagames.jerakine.types.positions.mouvementPath import MovementPath

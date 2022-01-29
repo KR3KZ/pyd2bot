@@ -3,7 +3,7 @@ if TYPE_CHECKING:
     from pyd2bot.bot import IBot
 from pyd2bot.logic.managers import AuthentificationManager
 from pyd2bot.logic.managers.interClientManager import InterClientManager
-from pyd2bot.gameData.enums.IdentificationFailureReasons import IdentificationFailureReason
+from com.ankamagames.dofus.network.enums.IdentificationFailureReasonsEnum import IdentificationFailureReasonEnum
 from pyd2bot.logic.frames import IFrame
 import logging
 logger = logging.getLogger("bot")
@@ -57,7 +57,7 @@ class AuthentificationFrame(IFrame):
             return True
         
         elif mtype == "IdentificationFailedMessage":
-            reason = IdentificationFailureReason(msg["reason"])
+            reason = IdentificationFailureReasonEnum(msg["reason"])
             logger.error("Identification failed for reason: %s" % reason)
             self.conn.interrupt()
             return True

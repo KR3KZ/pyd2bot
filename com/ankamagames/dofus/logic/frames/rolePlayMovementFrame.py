@@ -1,5 +1,5 @@
 import logging
-from pyd2bot.gameData.mapReader import MapLoader
+from com.ankamagames.jerakine.resources.loaders.MapLoader import MapLoader
 from pyd2bot.logic.frames import IFrame
 logger = logging.getLogger("bot")
 

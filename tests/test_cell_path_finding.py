@@ -1,5 +1,5 @@
 from time import perf_counter
-from pyd2bot.gameData.mapReader import MapLoader
+from com.ankamagames.jerakine.resources.loaders.MapLoader import MapLoader
 from pyd2bot.utils.pathFinding import Pathfinding
     
 

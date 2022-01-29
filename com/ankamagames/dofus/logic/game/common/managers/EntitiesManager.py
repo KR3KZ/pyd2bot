@@ -1,33 +1,22 @@
 import logging
-
 from com.ankamagames.jerakine.entities.interfaces.IEntity import IEntity
-from com.ankamagames.jerakine.utils.errors.singletonError import SingletonError
+from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 logger = logging.getLogger("bot")  
 
 
-class EntitiesManager:
+class EntitiesManager(metaclass=Singleton):
 
    RANDOM_ENTITIES_ID_START:float = -1000000
    _entitiesScheduledForDestruction:list = []
    _currentRandomEntity:float = -1000000
    _entities = dict[IEntity]()
-   _self = None
 
    def __init__(self):
-      if self._self:
-         raise SingletonError("Warning : EntitiesManager is a singleton class and shoulnd\'t be instancied directly!");
       self._entities = []
       self._entitiesScheduledForDestruction = []
-      # Atouin.getInstance().options.addEventListener(PropertyChangeEvent.PROPERTY_CHANGED,self.onPropertyChanged);
-
-   @classmethod
-   def getInstance(cls) -> 'EntitiesManager': 
-      if not cls._self:
-         _self = EntitiesManager()
-      return _self
 
    def addAnimatedEntity(self, entityID:float, entity:IEntity, strata:int = 0) -> None:
-      if self._entities[entityID] != None:
+      if self._entities.get(entityID) != None:
          logger.warn("Entity overwriting! Entity " + entityID + " has been replaced.")
       self._entities[entityID] = entity
 
@@ -42,7 +31,7 @@ class EntitiesManager:
       return 0
 
    def removeEntity(self, entityID:float) -> None:
-      if self._entities[entityID]:
+      if self._entities.get(entityID):
          del self._entities[entityID]
          if self._entitiesScheduledForDestruction[entityID]:
             del self._entitiesScheduledForDestruction[entityID]
@@ -111,4 +100,3 @@ class EntitiesManager:
                      result.append(e)
                      break
       return result
-

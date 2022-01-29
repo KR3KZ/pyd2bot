@@ -20,7 +20,7 @@ class DLM:
         dlm_uncompressed.write(zlib.decompress(raw))
         dlm_uncompressed.seek(0)
         dlm_raw = BinaryStream(dlm_uncompressed, True)
-        
+
         header = dlm_raw.readByte()
         if header != 77:
             raise Exception("Unknown file format.")
