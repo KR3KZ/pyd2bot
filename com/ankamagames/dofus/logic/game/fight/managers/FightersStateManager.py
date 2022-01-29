@@ -1,22 +1,15 @@
 import logging
 from com.ankamagames.dofus.datacenter.spells.SpellState import SpellState
 from com.ankamagames.dofus.logic.game.fight.types.FighterStatus import FighterStatus
+from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 logger = logging.getLogger("bot")
 
 
-class FightersStateManager:
-   
-   _self:'FightersStateManager' = None
-
+class FightersStateManager(metaclass=Singleton):
 
    def __init__(self) -> None:
       self._entityStates = dict()
-
-   def getInstance(cls) -> 'FightersStateManager':
-      if not cls._self:
-         cls._self = FightersStateManager()
-      return cls._self
-
+      
    def addStateOnTarget(self, targetId:float, stateId:int, delta:int = 1) -> None:
       if not self._entityStates[targetId]:
          self._entityStates[targetId] = dict()

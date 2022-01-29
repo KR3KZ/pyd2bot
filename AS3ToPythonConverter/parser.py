@@ -107,5 +107,5 @@ def parseFile(file_p, out_p):
     with open(out_p, "w") as fp:
         fp.write(code)
 
-# parseFolderFiles("pyd2bot/game/target.as", "pyd2bot/game/target.as")
-parseFile("AS3ToPythonConverter/target.as", "AS3ToPythonConverter/SoftReference.py")
+# parseFolderFiles("AS3ToPythonConverter/scripts", "AS3ToPythonConverter/pyscripts")
+parseFile("AS3ToPythonConverter/target.as", "AS3ToPythonConverter/mapDisplayManager.py")

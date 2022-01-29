@@ -63,6 +63,7 @@ class EntitiesManager:
          ts = self._entities[entityId]
          ts.visible = visible
 
+   @property
    def entities(self) -> list:
       return self._entities
 
@@ -82,12 +83,12 @@ class EntitiesManager:
       return self._currentRandomEntity
 
    def getEntityOnCell(self, cellId:int, oClass = None) -> IEntity:
-      useFilter = oClass != None
-      isMultiFilter:bool = useFilter and oClass is list
+      useFilter = oClass is not None
+      isMultiFilter:bool = useFilter and isinstance(oClass, list)
       for e in self._entities:
          if e and e.position and e.position.cellId == cellId:
             if not isMultiFilter:
-               if not useFilter or not isMultiFilter and e is oClass:
+               if not useFilter or not isMultiFilter and isinstance(e, oClass):
                   return e
             else:
                for i in range(oClass):

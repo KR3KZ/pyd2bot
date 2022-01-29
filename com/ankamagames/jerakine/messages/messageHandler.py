@@ -1,0 +1,2 @@
+class MessageHandler:
+    pass

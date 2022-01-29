@@ -1,7 +1,7 @@
 from abc import ABC
 
 
-class  Poolable(ABC):
+class Poolable(ABC):
         
-    def free() -> None:
+    def free(self) -> None:
         pass
