@@ -33,7 +33,7 @@ class Connection:
             msg = Message.from_json(msgjson)
             self._counter += 1
             msg.count = self._counter 
-            self._sock.sendall(msg.bytes())
+            self._sock.sendall(msg.serialize())
         except OSError as e:
             pass 
         logger.debug("Sent message {0}".format(msgjson["__type__"]))

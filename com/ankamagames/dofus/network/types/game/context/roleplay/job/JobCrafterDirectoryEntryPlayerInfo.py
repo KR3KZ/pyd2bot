@@ -4,7 +4,7 @@ from com.ankamagames.dofus.network.types.game.character.status.PlayerStatus impo
 
 class JobCrafterDirectoryEntryPlayerInfo(NetworkMessage):
     protocolId = 4905
-    playerId:float
+    playerId:int
     playerName:str
     alignmentSide:int
     breed:int
@@ -12,7 +12,7 @@ class JobCrafterDirectoryEntryPlayerInfo(NetworkMessage):
     isInWorkshop:bool
     worldX:int
     worldY:int
-    mapId:float
+    mapId:int
     subAreaId:int
     canCraftLegendary:bool
     status:PlayerStatus

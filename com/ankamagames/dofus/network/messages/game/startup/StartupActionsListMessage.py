@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.startup.StartupActionAddObject imp
 
 class StartupActionsListMessage(NetworkMessage):
     protocolId = 798
-    actions:list[StartupActionAddObject]
+    actions:StartupActionAddObject
     

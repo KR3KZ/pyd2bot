@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.achievement.AchievementAchieved im
 
 class AchievementListMessage(NetworkMessage):
     protocolId = 4607
-    finishedAchievements:list[AchievementAchieved]
+    finishedAchievements:AchievementAchieved
     

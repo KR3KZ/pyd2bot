@@ -3,6 +3,6 @@ from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessa
 
 class GameActionFightDispellMessage(AbstractGameActionMessage):
     protocolId = 4560
-    targetId:float
+    targetId:int
     verboseCast:bool
     

@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.job.JobExperience
 
 class JobExperienceMultiUpdateMessage(NetworkMessage):
     protocolId = 4771
-    experiencesUpdate:list[JobExperience]
+    experiencesUpdate:JobExperience
     

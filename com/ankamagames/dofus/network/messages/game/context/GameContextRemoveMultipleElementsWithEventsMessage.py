@@ -3,5 +3,5 @@ from com.ankamagames.dofus.network.messages.game.context.GameContextRemoveMultip
 
 class GameContextRemoveMultipleElementsWithEventsMessage(GameContextRemoveMultipleElementsMessage):
     protocolId = 7428
-    elementEventIds:list[int]
+    elementEventIds:int
     

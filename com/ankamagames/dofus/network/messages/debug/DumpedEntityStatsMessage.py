@@ -4,6 +4,6 @@ from com.ankamagames.dofus.network.types.game.character.characteristic.Character
 
 class DumpedEntityStatsMessage(NetworkMessage):
     protocolId = 3665
-    actorId:float
+    actorId:int
     stats:CharacterCharacteristics
     

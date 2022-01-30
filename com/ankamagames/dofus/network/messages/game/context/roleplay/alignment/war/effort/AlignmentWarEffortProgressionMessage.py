@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.alignment.war.eff
 
 class AlignmentWarEffortProgressionMessage(NetworkMessage):
     protocolId = 2084
-    effortProgressions:list[AlignmentWarEffortInformation]
+    effortProgressions:AlignmentWarEffortInformation
     

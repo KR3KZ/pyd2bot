@@ -3,11 +3,11 @@ from com.ankamagames.dofus.network.types.game.context.fight.FightResultAdditiona
 
 class FightResultExperienceData(FightResultAdditionalData):
     protocolId = 9530
-    experience:float
-    experienceLevelFloor:float
-    experienceNextLevelFloor:float
-    experienceFightDelta:float
-    experienceForGuild:float
-    experienceForMount:float
+    experience:int
+    experienceLevelFloor:int
+    experienceNextLevelFloor:int
+    experienceFightDelta:int
+    experienceForGuild:int
+    experienceForMount:int
     rerollExperienceMul:int
     

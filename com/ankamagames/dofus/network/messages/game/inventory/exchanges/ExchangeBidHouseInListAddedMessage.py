@@ -7,6 +7,6 @@ class ExchangeBidHouseInListAddedMessage(NetworkMessage):
     itemUID:int
     objectGID:int
     objectType:int
-    effects:list[ObjectEffect]
-    prices:list[float]
+    effects:ObjectEffect
+    prices:int
     

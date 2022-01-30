@@ -7,12 +7,12 @@ class ExchangeGuildTaxCollectorGetMessage(NetworkMessage):
     collectorName:str
     worldX:int
     worldY:int
-    mapId:float
+    mapId:int
     subAreaId:int
     userName:str
-    callerId:float
+    callerId:int
     callerName:str
-    experience:float
+    experience:int
     pods:int
-    objectsInfos:list[ObjectItemGenericQuantity]
+    objectsInfos:ObjectItemGenericQuantity
     

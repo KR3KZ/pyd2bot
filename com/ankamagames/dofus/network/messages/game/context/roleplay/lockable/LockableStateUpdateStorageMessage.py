@@ -3,6 +3,6 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.lockable.Locka
 
 class LockableStateUpdateStorageMessage(LockableStateUpdateAbstractMessage):
     protocolId = 5127
-    mapId:float
+    mapId:int
     elementId:int
     

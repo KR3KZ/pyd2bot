@@ -47,7 +47,7 @@ class ByteArray(bytearray):
 
     def readbool(self):
         ans = self.read(1)
-        assert ans[0] in [0, 1]
+        assert ans[0] in [0, 1], f"Invalid bool {ans[0]}"
         return bool(ans[0])
 
     def writeBoolean(self, b):

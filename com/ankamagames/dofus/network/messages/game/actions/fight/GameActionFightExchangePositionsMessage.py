@@ -3,7 +3,7 @@ from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessa
 
 class GameActionFightExchangePositionsMessage(AbstractGameActionMessage):
     protocolId = 8844
-    targetId:float
+    targetId:int
     casterCellId:int
     targetCellId:int
     

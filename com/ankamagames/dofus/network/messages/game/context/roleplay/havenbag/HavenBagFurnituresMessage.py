@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.guild.HavenBagFurnitureInformation
 
 class HavenBagFurnituresMessage(NetworkMessage):
     protocolId = 6373
-    furnituresInfos:list[HavenBagFurnitureInformation]
+    furnituresInfos:HavenBagFurnitureInformation
     

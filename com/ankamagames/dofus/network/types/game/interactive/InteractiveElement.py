@@ -7,7 +7,7 @@ class InteractiveElement(NetworkMessage):
     protocolId = 4768
     elementId:int
     elementTypeId:int
-    enabledSkills:list[InteractiveElementSkill]
-    disabledSkills:list[InteractiveElementSkill]
+    enabledSkills:InteractiveElementSkill
+    disabledSkills:InteractiveElementSkill
     onCurrentMap:bool
     

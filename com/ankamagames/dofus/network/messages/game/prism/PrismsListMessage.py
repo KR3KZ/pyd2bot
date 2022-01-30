@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.prism.PrismSubareaEmptyInfo import
 
 class PrismsListMessage(NetworkMessage):
     protocolId = 3236
-    prisms:list[PrismSubareaEmptyInfo]
+    prisms:PrismSubareaEmptyInfo
     

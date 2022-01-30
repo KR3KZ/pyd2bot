@@ -9,8 +9,8 @@ class HouseInformationsForGuild(HouseInformations):
     ownerTag:AccountTagInformation
     worldX:int
     worldY:int
-    mapId:float
+    mapId:int
     subAreaId:int
-    skillListIds:list[int]
+    skillListIds:int
     guildshareParams:int
     

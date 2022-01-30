@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.friend.FriendInformations import F
 
 class FriendsListMessage(NetworkMessage):
     protocolId = 6666
-    friendsList:list[FriendInformations]
+    friendsList:FriendInformations
     

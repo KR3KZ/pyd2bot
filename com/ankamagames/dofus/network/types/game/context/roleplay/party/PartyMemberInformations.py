@@ -13,8 +13,8 @@ class PartyMemberInformations(CharacterBaseInformations):
     alignmentSide:int
     worldX:int
     worldY:int
-    mapId:float
+    mapId:int
     subAreaId:int
     status:PlayerStatus
-    entities:list[PartyEntityBaseInformation]
+    entities:PartyEntityBaseInformation
     

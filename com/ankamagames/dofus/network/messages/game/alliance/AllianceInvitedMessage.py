@@ -4,7 +4,7 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.BasicNamedAllianc
 
 class AllianceInvitedMessage(NetworkMessage):
     protocolId = 6009
-    recruterId:float
+    recruterId:int
     recruterName:str
     allianceInfo:BasicNamedAllianceInformations
     

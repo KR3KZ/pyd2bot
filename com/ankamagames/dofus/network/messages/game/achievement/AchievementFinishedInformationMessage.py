@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.messages.game.achievement.AchievementFinished
 class AchievementFinishedInformationMessage(AchievementFinishedMessage):
     protocolId = 9768
     name:str
-    playerId:float
+    playerId:int
     

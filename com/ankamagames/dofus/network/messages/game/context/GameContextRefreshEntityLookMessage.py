@@ -4,6 +4,6 @@ from com.ankamagames.dofus.network.types.game.look.EntityLook import EntityLook
 
 class GameContextRefreshEntityLookMessage(NetworkMessage):
     protocolId = 5261
-    id:float
+    id:int
     look:EntityLook
     

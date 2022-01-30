@@ -3,6 +3,6 @@ from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessa
 
 class GameActionFightInvisibleDetectedMessage(AbstractGameActionMessage):
     protocolId = 5294
-    targetId:float
+    targetId:int
     cellId:int
     

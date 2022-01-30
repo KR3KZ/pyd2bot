@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.house.HouseInformationsForGuild im
 
 class GuildHousesInformationMessage(NetworkMessage):
     protocolId = 9308
-    housesInformations:list[HouseInformationsForGuild]
+    housesInformations:HouseInformationsForGuild
     

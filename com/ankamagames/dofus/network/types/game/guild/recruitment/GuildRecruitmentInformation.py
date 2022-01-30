@@ -7,10 +7,10 @@ class GuildRecruitmentInformation(NetworkMessage):
     recruitmentType:int
     recruitmentTitle:str
     recruitmentText:str
-    selectedLanguages:list[int]
-    selectedCriterion:list[int]
+    selectedLanguages:int
+    selectedCriterion:int
     minLevel:int
     minSuccess:int
     lastEditPlayerName:str
-    lastEditDate:float
+    lastEditDate:int
     

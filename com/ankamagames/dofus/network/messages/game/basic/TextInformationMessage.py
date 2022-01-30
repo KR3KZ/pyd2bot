@@ -5,5 +5,5 @@ class TextInformationMessage(NetworkMessage):
     protocolId = 3712
     msgType:int
     msgId:int
-    parameters:list[str]
+    parameters:str
     

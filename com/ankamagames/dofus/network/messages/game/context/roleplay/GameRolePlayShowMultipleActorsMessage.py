@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.GameRolePlayActor
 
 class GameRolePlayShowMultipleActorsMessage(NetworkMessage):
     protocolId = 1377
-    informationsList:list[GameRolePlayActorInformations]
+    informationsList:GameRolePlayActorInformations
     

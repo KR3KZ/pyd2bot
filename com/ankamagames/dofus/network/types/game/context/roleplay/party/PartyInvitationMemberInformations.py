@@ -6,7 +6,7 @@ class PartyInvitationMemberInformations(CharacterBaseInformations):
     protocolId = 436
     worldX:int
     worldY:int
-    mapId:float
+    mapId:int
     subAreaId:int
-    entities:list[PartyEntityBaseInformation]
+    entities:PartyEntityBaseInformation
     

@@ -6,5 +6,5 @@ class HouseInstanceInformations(NetworkMessage):
     protocolId = 3243
     instanceId:int
     ownerTag:AccountTagInformation
-    price:float
+    price:int
     

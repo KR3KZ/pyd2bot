@@ -1,33 +1,21 @@
+from functools import partial
 import re
 from pathlib import Path
 from tqdm import tqdm
 
-TO_PTYPE = {
-    "UnsignedByte": "int", 
-    "Int": "int",
-    "ByteArray": "bytes",
-    "VarUhShort": "int",
-    "UTF": "str",
-    "Byte": "int",
-    "VarShort": "int",
-    "Boolean": "bool",
-    "VarUhLong": "int",
-    "VarInt": "int",
-    "UnsignedShort": "int",
-    "UnsignedInt": "int",
-    "Short": "int",
-    "Double": "float",
-    "VarUhInt": "int",
-    "Float": "float",
-    "VarLong": "int",
+from com.ankamagames.jerakine.enum.gameDataTypeEnum import GameDataTypeEnum
+from protocolBuilder.typeEnum import TypeEnum
 
-    "Number": "float",
+TO_PTYPE = {
+    "Array": "list",
+    "Boolean": "bool",
+    "Float": "float",
+    "Number": "int",
     "uint": "int",
     "String": "str",
-    "void": "Any",
-    "Array": "list",
-
+    "ByteArray": "bytearray",
 }
+
 class ProtocolParser:
     CLASS_PATTERN = r"\s*public class (?P<name>\w+) (?:extends (?P<parent>\w+) )?implements (?P<interface>\w+)\n"
     ID_PATTERN = r"\s*public static const protocolId:uint = (?P<id>\d+);\n"
@@ -63,7 +51,7 @@ class ProtocolParser:
         self.json["primitives"] = list({
             v["type"]
             for t in self.json["type"].values()
-            for v in t["vars"]
+            for v in t["fields"]
             if v["type"] and not v["type"] in self.json["type"]
         })
         return self.json
@@ -76,26 +64,34 @@ class ProtocolParser:
                 msg_type[name] = {
                     "name": name,
                     "path": as_file_path,
-                    "rpath": str(as_file_path.relative_to(path)),
                     "package": ".".join(as_file_path.parts[as_file_path.parts.index("com"):-1]+(name,)),
                 }
             self.json["type"].update(msg_type)
     
-    def parseVar(self, name, type_name, lines):
+    def parseVar(self, name, typename, lines):
         var_type = None
+        dynamicType = False
 
-        if type_name in ["Boolean", "ByteArray"]:
-            return dict(name=name, length=None, type=type_name, pytype="bool", optional=False)
+        if typename in ["Boolean", "ByteArray"]:
+            return {
+                "name": name,
+                "type": typename,
+                "typeId": TypeEnum.fromString(typename).value,
+                "typename": TO_PTYPE.get(typename),
+                "optional": False,
+                "length": None,
+                "dynamicType": False,
+            }
 
-        if type_name in self.json["type"]:
-            var_type = type_name
+        if typename in self.json["type"]:
+            var_type = typename
 
-        m = re.fullmatch(self.VECTOR_TYPE_PATTERN, type_name)
+        m = re.fullmatch(self.VECTOR_TYPE_PATTERN, typename)
         if m:
             return self.parseVectorVar(name, m.group("type"), lines)
 
         attr_assign_pattern = self.ATTR_ASSIGN_PATTERN_OF_NAME % name
-        dynamic_type_pattern = self.DYNAMIC_TYPE_PATTERN_OF_TYPE % type_name
+        dynamic_type_pattern = self.DYNAMIC_TYPE_PATTERN_OF_TYPE % typename
         optional_var_pattern = self.OPTIONAL_VAR_PATTERN_OF_NAME % name
 
         optional = False
@@ -107,26 +103,32 @@ class ProtocolParser:
 
             m = re.fullmatch(dynamic_type_pattern, line)
             if m:
-                var_type = False
+                dynamicType = True
+                var_type = None
 
             m = re.fullmatch(optional_var_pattern, line)
             if m:
                 optional = True
 
-        if var_type is None:
-            raise Exception(f"Unable to parse 'var_type' of attrib {name} from class_type {type_name}")
-
+        if var_type is None and not dynamicType:
+            raise Exception(f"Unable to parse 'var_type' of attrib {name} from class_type {typename}")
+            
         return {
             "name": name,
             "length": None,
             "type": var_type,
-            "pytype": TO_PTYPE[type_name] if type_name in TO_PTYPE else type_name,
+            "dynamicType": dynamicType,
+            "typeId": TypeEnum.fromString(var_type).value,
+            "typename": TO_PTYPE.get(typename, typename),
             "optional": optional
         }
 
     def parseVectorVar(self, name, typename, lines):
+        var_type = None
+        dynamicType = False
+
         if typename in self.json["type"]:
-            type = typename
+            var_type = typename
 
         vector_attr_write_pattern = self.VECTOR_ATTR_WRITE_PATTERN_OF_NAME % name
         vector_len_write_pattern = self.VECTOR_LEN_WRITE_PATTERN_OF_NAME % name
@@ -135,46 +137,52 @@ class ProtocolParser:
             typename,
         )
         dynamic_type_pattern = self.DYNAMIC_TYPE_PATTERN_OF_TYPE % typename
-
+        lengthType = None
+        length = None
         for line in lines:
             m = re.fullmatch(vector_attr_write_pattern, line)
             if m:
-                type = m.group("type")
+                var_type = m.group("type")
 
             m = re.fullmatch(dynamic_type_pattern, line)
             if m:
-                type = False
+                dynamicType = True
+                var_type = None
 
             m = re.fullmatch(vector_len_write_pattern, line)
             if m:
-                length = m.group("type")
+                lengthType = m.group("type")
 
             m = re.fullmatch(vector_const_len_pattern, line)
             if m:
                 length = int(m.group("size"))
 
         return dict({
-            "name":name,
-            "length":length,
-            "type":type,
-            "pytype": TO_PTYPE[typename] if typename in TO_PTYPE else typename,
+            "name": name,
+            "length": length,
+            "dynamicType": dynamicType,
+            "lengthTypeId": TypeEnum.fromString(lengthType).value,
+            "type": var_type,
+            "typeId": TypeEnum.fromString(var_type).value,
+            "typename": TO_PTYPE[typename] if typename in TO_PTYPE else typename,
             "optional":False
         })
 
     def parseMsgType(self, msg_type):
-        vars = []
+        fields = []
         hash_function = False
         wrapped_booleans = set()
 
         with open(msg_type["path"], 'r') as fp:
             lines = list(fp.readlines())
             msg_type["parent"] = None
+
             for line in lines:
                 m = re.fullmatch(self.CLASS_PATTERN, line)
                 if m:
                     assert m.group("name") == msg_type["name"]
                     parent = m.group("parent")
-                    if parent not in self.json["type"]:
+                    if not self.json["type"].get(parent):
                         parent = None
                     msg_type["parent"] = parent
 
@@ -185,7 +193,7 @@ class ProtocolParser:
                 m = re.fullmatch(self.PUBLIC_VAR_PATTERN, line)
                 if m:
                     var = self.parseVar(m.group("name"), m.group("type"), lines)
-                    vars.append(var)
+                    fields.append(var)
 
                 m = re.fullmatch(self.HASH_FUNCTION_PATTERN, line)
                 if m:
@@ -205,14 +213,15 @@ class ProtocolParser:
             assert protocolId not in self.json["type_by_id"]
             self.json["type_by_id"][protocolId] = msg_type
 
-        if sum(var["type"] == "Boolean" for var in vars) > 1:
-            boolVars = [var for var in vars if var["name"] in wrapped_booleans]
-            vars = [var for var in vars if var["name"] not in wrapped_booleans]
+        if sum(field["type"] == "Boolean" for field in fields) > 1:
+            boolfields = [var for var in fields if var["name"] in wrapped_booleans]
+            fields = [var for var in fields if var["name"] not in wrapped_booleans]
+            
         else:
-            boolVars = []
+            boolfields = []
 
-        msg_type["vars"] = list(vars)
-        msg_type["boolVars"] = list(boolVars)
+        msg_type["fields"] = list(fields)
+        msg_type["boolfields"] = list(boolfields)
         msg_type["hash_function"] = hash_function
         del msg_type["path"]
     

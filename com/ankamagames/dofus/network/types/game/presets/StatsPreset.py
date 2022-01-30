@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.presets.SimpleCharacterCharacteris
 
 class StatsPreset(Preset):
     protocolId = 6559
-    stats:list[SimpleCharacterCharacteristicForPreset]
+    stats:SimpleCharacterCharacteristicForPreset
     

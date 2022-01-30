@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.context.fight.FightTeamMemberInfor
 
 class FightTeamInformations(AbstractFightTeamInformations):
     protocolId = 4654
-    teamMembers:list[FightTeamMemberInformations]
+    teamMembers:FightTeamMemberInformations
     

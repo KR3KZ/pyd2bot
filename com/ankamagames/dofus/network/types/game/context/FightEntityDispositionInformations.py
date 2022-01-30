@@ -3,5 +3,5 @@ from com.ankamagames.dofus.network.types.game.context.EntityDispositionInformati
 
 class FightEntityDispositionInformations(EntityDispositionInformations):
     protocolId = 7794
-    carryingCharacterId:float
+    carryingCharacterId:int
     

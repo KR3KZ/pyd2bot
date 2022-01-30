@@ -4,6 +4,6 @@ from com.ankamagames.dofus.network.types.game.data.items.ObjectItemToSellInHuman
 
 class ExchangeStartOkHumanVendorMessage(NetworkMessage):
     protocolId = 9011
-    sellerId:float
-    objectsInfos:list[ObjectItemToSellInHumanVendorShop]
+    sellerId:int
+    objectsInfos:ObjectItemToSellInHumanVendorShop
     

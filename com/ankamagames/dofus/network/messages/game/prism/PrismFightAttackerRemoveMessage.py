@@ -5,5 +5,5 @@ class PrismFightAttackerRemoveMessage(NetworkMessage):
     protocolId = 300
     subAreaId:int
     fightId:int
-    fighterToRemoveId:float
+    fighterToRemoveId:int
     

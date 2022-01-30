@@ -5,5 +5,5 @@ class ExchangeBidHouseBuyMessage(NetworkMessage):
     protocolId = 3195
     uid:int
     qty:int
-    price:float
+    price:int
     

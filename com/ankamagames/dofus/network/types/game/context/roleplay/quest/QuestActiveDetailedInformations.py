@@ -5,5 +5,5 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.quest.QuestObject
 class QuestActiveDetailedInformations(QuestActiveInformations):
     protocolId = 2409
     stepId:int
-    objectives:list[QuestObjectiveInformations]
+    objectives:QuestObjectiveInformations
     

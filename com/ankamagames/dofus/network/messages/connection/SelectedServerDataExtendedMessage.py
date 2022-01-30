@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.connection.GameServerInformations impor
 
 class SelectedServerDataExtendedMessage(SelectedServerDataMessage):
     protocolId = 2850
-    servers:list[GameServerInformations]
+    servers:GameServerInformations
     

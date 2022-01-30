@@ -6,10 +6,10 @@ from com.ankamagames.dofus.network.types.game.shortcut.Shortcut import Shortcut
 
 class SlaveSwitchContextMessage(NetworkMessage):
     protocolId = 6013
-    masterId:float
-    slaveId:float
+    masterId:int
+    slaveId:int
     slaveTurn:int
-    slaveSpells:list[SpellItem]
+    slaveSpells:SpellItem
     slaveStats:CharacterCharacteristicsInformations
-    shortcuts:list[Shortcut]
+    shortcuts:Shortcut
     

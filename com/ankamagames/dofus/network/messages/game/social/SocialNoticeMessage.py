@@ -5,6 +5,6 @@ class SocialNoticeMessage(NetworkMessage):
     protocolId = 8560
     content:str
     timestamp:int
-    memberId:float
+    memberId:int
     memberName:str
     

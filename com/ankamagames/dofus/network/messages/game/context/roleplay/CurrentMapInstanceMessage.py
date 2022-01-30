@@ -3,5 +3,5 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.CurrentMapMess
 
 class CurrentMapInstanceMessage(CurrentMapMessage):
     protocolId = 7422
-    instantiatedMapId:float
+    instantiatedMapId:int
     

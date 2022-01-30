@@ -5,6 +5,6 @@ class SpawnCompanionInformation(SpawnInformation):
     protocolId = 8892
     modelId:int
     level:int
-    summonerId:float
-    ownerId:float
+    summonerId:int
+    ownerId:int
     

@@ -4,7 +4,7 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.party.Abstract
 class AbstractPartyMemberInFightMessage(AbstractPartyMessage):
     protocolId = 1888
     reason:int
-    memberId:float
+    memberId:int
     memberAccountId:int
     memberName:str
     fightId:int

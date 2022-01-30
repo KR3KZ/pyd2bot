@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.friend.AcquaintanceInformation imp
 
 class AcquaintancesListMessage(NetworkMessage):
     protocolId = 2842
-    acquaintanceList:list[AcquaintanceInformation]
+    acquaintanceList:AcquaintanceInformation
     

@@ -4,9 +4,9 @@ from com.ankamagames.dofus.network.messages.game.PaginationRequestAbstractMessag
 class GuildSummaryRequestMessage(PaginationRequestAbstractMessage):
     protocolId = 9211
     nameFilter:str
-    criterionFilter:list[int]
-    languagesFilter:list[int]
-    recruitmentTypeFilter:list[int]
+    criterionFilter:int
+    languagesFilter:int
+    recruitmentTypeFilter:int
     minLevelFilter:int
     maxLevelFilter:int
     minPlayerLevelFilter:int

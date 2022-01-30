@@ -3,6 +3,6 @@ from com.ankamagames.dofus.network.messages.game.atlas.compass.CompassUpdateMess
 
 class CompassUpdatePartyMemberMessage(CompassUpdateMessage):
     protocolId = 9272
-    memberId:float
+    memberId:int
     active:bool
     

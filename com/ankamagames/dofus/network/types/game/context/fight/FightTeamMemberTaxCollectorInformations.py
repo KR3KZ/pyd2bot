@@ -7,5 +7,5 @@ class FightTeamMemberTaxCollectorInformations(FightTeamMemberInformations):
     lastNameId:int
     level:int
     guildId:int
-    uid:float
+    uid:int
     

@@ -7,9 +7,9 @@ class PartyInvitationDetailsMessage(AbstractPartyMessage):
     protocolId = 3615
     partyType:int
     partyName:str
-    fromId:float
+    fromId:int
     fromName:str
-    leaderId:float
-    members:list[PartyInvitationMemberInformations]
-    guests:list[PartyGuestInformations]
+    leaderId:int
+    members:PartyInvitationMemberInformations
+    guests:PartyGuestInformations
     

@@ -6,5 +6,5 @@ class AnomalySubareaInformation(NetworkMessage):
     subAreaId:int
     rewardRate:int
     hasAnomaly:bool
-    anomalyClosingTime:float
+    anomalyClosingTime:int
     

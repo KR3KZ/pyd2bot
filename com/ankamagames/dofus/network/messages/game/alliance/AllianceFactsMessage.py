@@ -6,8 +6,8 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.GuildInAllianceIn
 class AllianceFactsMessage(NetworkMessage):
     protocolId = 6820
     infos:AllianceFactSheetInformations
-    guilds:list[GuildInAllianceInformations]
-    controlledSubareaIds:list[int]
-    leaderCharacterId:float
+    guilds:GuildInAllianceInformations
+    controlledSubareaIds:int
+    leaderCharacterId:int
     leaderCharacterName:str
     

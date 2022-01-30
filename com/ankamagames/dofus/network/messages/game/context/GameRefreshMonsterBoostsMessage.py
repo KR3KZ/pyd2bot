@@ -5,6 +5,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.MonsterBoosts imp
 
 class GameRefreshMonsterBoostsMessage(NetworkMessage):
     protocolId = 2110
-    monsterBoosts:list[MonsterBoosts]
-    familyBoosts:list[MonsterBoosts]
+    monsterBoosts:MonsterBoosts
+    familyBoosts:MonsterBoosts
     

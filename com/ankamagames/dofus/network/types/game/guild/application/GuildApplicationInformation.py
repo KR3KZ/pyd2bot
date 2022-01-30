@@ -6,5 +6,5 @@ class GuildApplicationInformation(NetworkMessage):
     protocolId = 7662
     playerInfo:ApplicationPlayerInformation
     applyText:str
-    creationDate:float
+    creationDate:int
     

@@ -3,7 +3,7 @@ from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessa
 
 class GameActionFightSlideMessage(AbstractGameActionMessage):
     protocolId = 914
-    targetId:float
+    targetId:int
     startCellId:int
     endCellId:int
     

@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.breach.ExtendedBr
 
 class BreachBranchesMessage(NetworkMessage):
     protocolId = 2907
-    branches:list[ExtendedBreachBranch]
+    branches:ExtendedBreachBranch
     

@@ -3,6 +3,6 @@ from com.ankamagames.dofus.network.messages.web.haapi.HaapiValidationMessage imp
 
 class HaapiBuyValidationMessage(HaapiValidationMessage):
     protocolId = 9648
-    amount:float
+    amount:int
     email:str
     

@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.context.IdentifiedEntityDispositio
 
 class GameEntitiesDispositionMessage(NetworkMessage):
     protocolId = 853
-    dispositions:list[IdentifiedEntityDispositionInformations]
+    dispositions:IdentifiedEntityDispositionInformations
     

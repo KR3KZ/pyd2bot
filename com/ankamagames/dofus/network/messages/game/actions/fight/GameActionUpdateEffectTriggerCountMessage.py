@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.context.fight.GameFightEffectTrigg
 
 class GameActionUpdateEffectTriggerCountMessage(NetworkMessage):
     protocolId = 6461
-    targetIds:list[GameFightEffectTriggerCount]
+    targetIds:GameFightEffectTriggerCount
     

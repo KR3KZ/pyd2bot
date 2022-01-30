@@ -5,6 +5,6 @@ class GameActionFightTriggerGlyphTrapMessage(AbstractGameActionMessage):
     protocolId = 1777
     markId:int
     markImpactCell:int
-    triggeringCharacterId:float
+    triggeringCharacterId:int
     triggeredSpellId:int
     

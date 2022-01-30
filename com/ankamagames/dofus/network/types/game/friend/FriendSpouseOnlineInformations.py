@@ -3,6 +3,6 @@ from com.ankamagames.dofus.network.types.game.friend.FriendSpouseInformations im
 
 class FriendSpouseOnlineInformations(FriendSpouseInformations):
     protocolId = 1910
-    mapId:float
+    mapId:int
     subAreaId:int
     

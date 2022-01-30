@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.job.DecraftedItem
 
 class DecraftResultMessage(NetworkMessage):
     protocolId = 7257
-    results:list[DecraftedItemStackInfo]
+    results:DecraftedItemStackInfo
     

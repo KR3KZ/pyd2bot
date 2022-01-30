@@ -9,5 +9,5 @@ class GameServerInformations(NetworkMessage):
     completion:int
     charactersCount:int
     charactersSlots:int
-    date:float
+    date:int
     

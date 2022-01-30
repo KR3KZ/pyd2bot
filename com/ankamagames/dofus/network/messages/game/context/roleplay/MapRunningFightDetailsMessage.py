@@ -6,6 +6,6 @@ from com.ankamagames.dofus.network.types.game.context.fight.GameFightFighterLigh
 class MapRunningFightDetailsMessage(NetworkMessage):
     protocolId = 3380
     fightId:int
-    attackers:list[GameFightFighterLightInformations]
-    defenders:list[GameFightFighterLightInformations]
+    attackers:GameFightFighterLightInformations
+    defenders:GameFightFighterLightInformations
     

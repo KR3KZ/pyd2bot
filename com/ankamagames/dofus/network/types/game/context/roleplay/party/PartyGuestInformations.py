@@ -6,12 +6,12 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.party.entity.Part
 
 class PartyGuestInformations(NetworkMessage):
     protocolId = 1057
-    guestId:float
-    hostId:float
+    guestId:int
+    hostId:int
     name:str
     guestLook:EntityLook
     breed:int
     sex:bool
     status:PlayerStatus
-    entities:list[PartyEntityBaseInformation]
+    entities:PartyEntityBaseInformation
     

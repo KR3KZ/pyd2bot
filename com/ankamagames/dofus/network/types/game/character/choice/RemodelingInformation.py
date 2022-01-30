@@ -7,5 +7,5 @@ class RemodelingInformation(NetworkMessage):
     breed:int
     sex:bool
     cosmeticId:int
-    colors:list[int]
+    colors:int
     

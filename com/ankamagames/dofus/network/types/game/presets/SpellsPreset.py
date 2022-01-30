@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.presets.SpellForPreset import Spel
 
 class SpellsPreset(Preset):
     protocolId = 1337
-    spells:list[SpellForPreset]
+    spells:SpellForPreset
     

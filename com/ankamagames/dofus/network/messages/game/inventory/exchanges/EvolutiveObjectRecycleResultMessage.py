@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.inventory.exchanges.RecycledItem i
 
 class EvolutiveObjectRecycleResultMessage(NetworkMessage):
     protocolId = 8805
-    recycledItems:list[RecycledItem]
+    recycledItems:RecycledItem
     

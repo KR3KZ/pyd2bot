@@ -1,3 +1,8 @@
+from ast import Bytes
+from ctypes.wintypes import BYTE
+from pickle import BYTEARRAY8
+
+
 class GameDataTypeEnum:
       
     INT:int = -1

@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
 class HelloConnectMessage(NetworkMessage):
     protocolId = 6739
     salt:str
-    key:list[int]
+    key:int
     

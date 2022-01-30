@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.presets.Preset import Preset
 
 class PresetsMessage(NetworkMessage):
     protocolId = 1706
-    presets:list[Preset]
+    presets:Preset
     

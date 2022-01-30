@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.party.PartyInv
 class PartyInvitationDungeonDetailsMessage(PartyInvitationDetailsMessage):
     protocolId = 7340
     dungeonId:int
-    playersDungeonReady:list[bool]
+    playersDungeonReady:bool
     

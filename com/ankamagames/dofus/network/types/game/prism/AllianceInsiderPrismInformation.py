@@ -6,7 +6,7 @@ class AllianceInsiderPrismInformation(PrismInformation):
     protocolId = 8201
     lastTimeSlotModificationDate:int
     lastTimeSlotModificationAuthorGuildId:int
-    lastTimeSlotModificationAuthorId:float
+    lastTimeSlotModificationAuthorId:int
     lastTimeSlotModificationAuthorName:str
-    modulesObjects:list[ObjectItem]
+    modulesObjects:ObjectItem
     

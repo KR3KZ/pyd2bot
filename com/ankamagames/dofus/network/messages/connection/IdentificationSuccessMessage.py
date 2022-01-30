@@ -9,8 +9,8 @@ class IdentificationSuccessMessage(NetworkMessage):
     accountId:int
     communityId:int
     secretQuestion:str
-    accountCreation:float
-    subscriptionElapsedDuration:float
-    subscriptionEndDate:float
+    accountCreation:int
+    subscriptionElapsedDuration:int
+    subscriptionEndDate:int
     havenbagAvailableRoom:int
     

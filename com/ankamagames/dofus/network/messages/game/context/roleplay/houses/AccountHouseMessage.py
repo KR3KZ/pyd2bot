@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.house.AccountHouseInformations imp
 
 class AccountHouseMessage(NetworkMessage):
     protocolId = 7236
-    houses:list[AccountHouseInformations]
+    houses:AccountHouseInformations
     

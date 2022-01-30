@@ -6,7 +6,7 @@ class PartyInvitationMessage(AbstractPartyMessage):
     partyType:int
     partyName:str
     maxParticipants:int
-    fromId:float
+    fromId:int
     fromName:str
-    toId:float
+    toId:int
     

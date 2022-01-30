@@ -58,10 +58,7 @@ class MonsterGrade:
    bonusCharacteristics:MonsterBonusCharacteristics = None
    
    _monster:Monster
-   
-   def __init__(self):
-      super().__init__()
-   
+
    @property
    def monster(self) -> Monster:
       if not self._monster:

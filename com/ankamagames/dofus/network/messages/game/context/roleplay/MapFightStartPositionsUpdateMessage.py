@@ -4,6 +4,6 @@ from com.ankamagames.dofus.network.types.game.context.fight.FightStartingPositio
 
 class MapFightStartPositionsUpdateMessage(NetworkMessage):
     protocolId = 5408
-    mapId:float
+    mapId:int
     fightStartPositions:FightStartingPositions
     

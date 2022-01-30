@@ -4,8 +4,8 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.quest.QuestActive
 
 class QuestListMessage(NetworkMessage):
     protocolId = 5774
-    finishedQuestsIds:list[int]
-    finishedQuestsCounts:list[int]
-    activeQuests:list[QuestActiveInformations]
-    reinitDoneQuestsIds:list[int]
+    finishedQuestsIds:int
+    finishedQuestsCounts:int
+    activeQuests:QuestActiveInformations
+    reinitDoneQuestsIds:int
     

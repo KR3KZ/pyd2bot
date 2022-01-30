@@ -15,7 +15,7 @@ class HouseInformationsForSell(NetworkMessage):
     subAreaId:int
     nbRoom:int
     nbChest:int
-    skillListIds:list[int]
+    skillListIds:int
     isLocked:bool
-    price:float
+    price:int
     

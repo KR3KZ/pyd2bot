@@ -5,6 +5,6 @@ from com.ankamagames.dofus.network.types.game.guild.tax.TaxCollectorFightersInfo
 class TaxCollectorListMessage(AbstractTaxCollectorListMessage):
     protocolId = 4811
     nbcollectorMax:int
-    fightersInformations:list[TaxCollectorFightersInformation]
+    fightersInformations:TaxCollectorFightersInformation
     infoType:int
     

@@ -11,5 +11,5 @@ class GameContextSummonsInformation(NetworkMessage):
     wave:int
     look:EntityLook
     stats:GameFightCharacteristics
-    summons:list[GameContextBasicSpawnInformation]
+    summons:GameContextBasicSpawnInformation
     

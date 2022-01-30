@@ -3,10 +3,10 @@ from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeSta
 
 class ExchangeStartedWithPodsMessage(ExchangeStartedMessage):
     protocolId = 2123
-    firstCharacterId:float
+    firstCharacterId:int
     firstCharacterCurrentWeight:int
     firstCharacterMaxWeight:int
-    secondCharacterId:float
+    secondCharacterId:int
     secondCharacterCurrentWeight:int
     secondCharacterMaxWeight:int
     

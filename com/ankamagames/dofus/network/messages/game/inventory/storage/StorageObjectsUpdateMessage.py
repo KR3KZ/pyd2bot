@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.data.items.ObjectItem import Objec
 
 class StorageObjectsUpdateMessage(NetworkMessage):
     protocolId = 7209
-    objectList:list[ObjectItem]
+    objectList:ObjectItem
     

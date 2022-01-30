@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.context.fight.GameFightFighterInfo
 
 class GameFightSynchronizeMessage(NetworkMessage):
     protocolId = 3028
-    fighters:list[GameFightFighterInformations]
+    fighters:GameFightFighterInformations
     

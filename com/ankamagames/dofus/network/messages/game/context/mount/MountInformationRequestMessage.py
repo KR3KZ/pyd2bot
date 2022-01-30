@@ -3,6 +3,6 @@ from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
 
 class MountInformationRequestMessage(NetworkMessage):
     protocolId = 2112
-    id:float
-    time:float
+    id:int
+    time:int
     

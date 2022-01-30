@@ -5,5 +5,5 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.MonsterInGroupLig
 class AlternativeMonstersInGroupLightInformations(NetworkMessage):
     protocolId = 1183
     playerCount:int
-    monsters:list[MonsterInGroupLightInformations]
+    monsters:MonsterInGroupLightInformations
     

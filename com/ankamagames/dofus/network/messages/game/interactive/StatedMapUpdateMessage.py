@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.interactive.StatedElement import S
 
 class StatedMapUpdateMessage(NetworkMessage):
     protocolId = 8689
-    statedElements:list[StatedElement]
+    statedElements:StatedElement
     

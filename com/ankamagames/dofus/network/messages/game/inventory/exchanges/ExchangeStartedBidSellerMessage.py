@@ -6,5 +6,5 @@ from com.ankamagames.dofus.network.types.game.data.items.ObjectItemToSellInBid i
 class ExchangeStartedBidSellerMessage(NetworkMessage):
     protocolId = 7532
     sellerDescriptor:SellerBuyerDescriptor
-    objectsInfos:list[ObjectItemToSellInBid]
+    objectsInfos:ObjectItemToSellInBid
     

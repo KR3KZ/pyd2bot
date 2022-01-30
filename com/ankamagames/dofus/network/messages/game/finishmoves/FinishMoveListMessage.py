@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.finishmoves.FinishMoveInformations
 
 class FinishMoveListMessage(NetworkMessage):
     protocolId = 596
-    finishMoves:list[FinishMoveInformations]
+    finishMoves:FinishMoveInformations
     

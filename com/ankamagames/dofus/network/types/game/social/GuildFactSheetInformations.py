@@ -4,7 +4,7 @@ from com.ankamagames.dofus.network.types.game.guild.recruitment.GuildRecruitment
 
 class GuildFactSheetInformations(GuildInformations):
     protocolId = 7387
-    leaderId:float
+    leaderId:int
     nbMembers:int
     lastActivityDay:int
     recruitment:GuildRecruitmentInformation

@@ -3,5 +3,5 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.party.Abstract
 
 class PartyFollowMemberRequestMessage(AbstractPartyMessage):
     protocolId = 8603
-    playerId:float
+    playerId:int
     

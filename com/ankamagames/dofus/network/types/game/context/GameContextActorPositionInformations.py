@@ -4,6 +4,6 @@ from com.ankamagames.dofus.network.types.game.context.EntityDispositionInformati
 
 class GameContextActorPositionInformations(NetworkMessage):
     protocolId = 1244
-    contextualId:float
+    contextualId:int
     disposition:EntityDispositionInformations
     

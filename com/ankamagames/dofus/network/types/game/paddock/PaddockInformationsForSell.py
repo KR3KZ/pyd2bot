@@ -9,5 +9,5 @@ class PaddockInformationsForSell(NetworkMessage):
     subAreaId:int
     nbMount:int
     nbObject:int
-    price:float
+    price:int
     

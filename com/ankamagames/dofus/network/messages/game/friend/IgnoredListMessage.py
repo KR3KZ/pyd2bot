@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.friend.IgnoredInformations import 
 
 class IgnoredListMessage(NetworkMessage):
     protocolId = 1938
-    ignoredList:list[IgnoredInformations]
+    ignoredList:IgnoredInformations
     

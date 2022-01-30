@@ -5,6 +5,6 @@ from com.ankamagames.dofus.network.types.game.achievement.Achievement import Ach
 
 class AchievementDetailedListMessage(NetworkMessage):
     protocolId = 9855
-    startedAchievements:list[Achievement]
-    finishedAchievements:list[Achievement]
+    startedAchievements:Achievement
+    finishedAchievements:Achievement
     

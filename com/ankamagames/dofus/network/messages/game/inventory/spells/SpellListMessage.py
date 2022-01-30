@@ -5,5 +5,5 @@ from com.ankamagames.dofus.network.types.game.data.items.SpellItem import SpellI
 class SpellListMessage(NetworkMessage):
     protocolId = 4091
     spellPrevisualization:bool
-    spells:list[SpellItem]
+    spells:SpellItem
     

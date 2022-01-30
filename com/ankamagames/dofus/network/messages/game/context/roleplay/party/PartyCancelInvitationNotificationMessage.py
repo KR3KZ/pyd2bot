@@ -3,6 +3,6 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.party.Abstract
 
 class PartyCancelInvitationNotificationMessage(AbstractPartyEventMessage):
     protocolId = 1489
-    cancelerId:float
-    guestId:float
+    cancelerId:int
+    guestId:int
     

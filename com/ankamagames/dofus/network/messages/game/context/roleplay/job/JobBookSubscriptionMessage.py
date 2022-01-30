@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.job.JobBookSubscr
 
 class JobBookSubscriptionMessage(NetworkMessage):
     protocolId = 8266
-    subscriptions:list[JobBookSubscription]
+    subscriptions:JobBookSubscription
     

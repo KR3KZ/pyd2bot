@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.look.IndexedEntityLook import Inde
 
 class HumanOptionFollowers(HumanOption):
     protocolId = 77
-    followingCharactersLook:list[IndexedEntityLook]
+    followingCharactersLook:IndexedEntityLook
     

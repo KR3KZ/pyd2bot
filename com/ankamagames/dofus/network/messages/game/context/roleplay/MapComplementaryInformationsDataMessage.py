@@ -11,13 +11,13 @@ from com.ankamagames.dofus.network.types.game.context.fight.FightStartingPositio
 class MapComplementaryInformationsDataMessage(NetworkMessage):
     protocolId = 1182
     subAreaId:int
-    mapId:float
-    houses:list[HouseInformations]
-    actors:list[GameRolePlayActorInformations]
-    interactiveElements:list[InteractiveElement]
-    statedElements:list[StatedElement]
-    obstacles:list[MapObstacle]
-    fights:list[FightCommonInformations]
+    mapId:int
+    houses:HouseInformations
+    actors:GameRolePlayActorInformations
+    interactiveElements:InteractiveElement
+    statedElements:StatedElement
+    obstacles:MapObstacle
+    fights:FightCommonInformations
     hasAggressiveMonsters:bool
     fightStartPositions:FightStartingPositions
     

@@ -3,6 +3,6 @@ from com.ankamagames.dofus.network.types.game.data.items.ObjectItemMinimalInform
 
 class ObjectItemToSellInNpcShop(ObjectItemMinimalInformation):
     protocolId = 6097
-    objectPrice:float
+    objectPrice:int
     buyCriterion:str
     

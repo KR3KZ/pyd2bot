@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.social.AllianceFactSheetInformatio
 
 class AllianceListMessage(NetworkMessage):
     protocolId = 3861
-    alliances:list[AllianceFactSheetInformations]
+    alliances:AllianceFactSheetInformations
     

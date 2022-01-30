@@ -5,7 +5,7 @@ class SelectedServerDataMessage(NetworkMessage):
     protocolId = 3966
     serverId:int
     address:str
-    ports:list[int]
+    ports:int
     canCreateNewCharacter:bool
-    ticket:list[int]
+    ticket:int
     

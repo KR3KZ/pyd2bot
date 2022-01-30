@@ -5,6 +5,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.party.DungeonPart
 class DungeonPartyFinderRoomContentUpdateMessage(NetworkMessage):
     protocolId = 6719
     dungeonId:int
-    addedPlayers:list[DungeonPartyFinderPlayer]
-    removedPlayersIds:list[float]
+    addedPlayers:DungeonPartyFinderPlayer
+    removedPlayersIds:int
     

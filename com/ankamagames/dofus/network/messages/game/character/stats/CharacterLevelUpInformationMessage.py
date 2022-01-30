@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.messages.game.character.stats.CharacterLevelU
 class CharacterLevelUpInformationMessage(CharacterLevelUpMessage):
     protocolId = 2461
     name:str
-    id:float
+    id:int
     

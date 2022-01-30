@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.character.characteristic.Character
 
 class CharacterCharacteristics(NetworkMessage):
     protocolId = 5368
-    characteristics:list[CharacterCharacteristic]
+    characteristics:CharacterCharacteristic
     

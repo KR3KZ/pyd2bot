@@ -4,6 +4,6 @@ from com.ankamagames.dofus.network.types.game.character.restriction.ActorRestric
 
 class SetCharacterRestrictionsMessage(NetworkMessage):
     protocolId = 7853
-    actorId:float
+    actorId:int
     restrictions:ActorRestrictionsInformations
     

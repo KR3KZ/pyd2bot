@@ -6,11 +6,11 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.treasureHunt.Trea
 class TreasureHuntMessage(NetworkMessage):
     protocolId = 4513
     questType:int
-    startMapId:float
-    knownStepsList:list[TreasureHuntStep]
+    startMapId:int
+    knownStepsList:TreasureHuntStep
     totalStepCount:int
     checkPointCurrent:int
     checkPointTotal:int
     availableRetryCount:int
-    flags:list[TreasureHuntFlag]
+    flags:TreasureHuntFlag
     

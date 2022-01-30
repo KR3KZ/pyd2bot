@@ -6,5 +6,5 @@ class ActorAlignmentInformations(NetworkMessage):
     alignmentSide:int
     alignmentValue:int
     alignmentGrade:int
-    characterPower:float
+    characterPower:int
     

@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.context.EntityMovementInformations
 
 class GameContextMoveMultipleElementsMessage(NetworkMessage):
     protocolId = 2401
-    movements:list[EntityMovementInformations]
+    movements:EntityMovementInformations
     

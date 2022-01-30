@@ -5,5 +5,5 @@ from com.ankamagames.dofus.network.types.game.havenbag.HavenBagRoomPreviewInform
 class HavenBagRoomUpdateMessage(NetworkMessage):
     protocolId = 1606
     action:int
-    roomsPreview:list[HavenBagRoomPreviewInformation]
+    roomsPreview:HavenBagRoomPreviewInformation
     

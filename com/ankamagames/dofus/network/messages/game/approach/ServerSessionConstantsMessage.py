@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.approach.ServerSessionConstant imp
 
 class ServerSessionConstantsMessage(NetworkMessage):
     protocolId = 646
-    variables:list[ServerSessionConstant]
+    variables:ServerSessionConstant
     

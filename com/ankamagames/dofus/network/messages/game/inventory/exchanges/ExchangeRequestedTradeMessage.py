@@ -3,6 +3,6 @@ from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeReq
 
 class ExchangeRequestedTradeMessage(ExchangeRequestedMessage):
     protocolId = 9612
-    source:float
-    target:float
+    source:int
+    target:int
     

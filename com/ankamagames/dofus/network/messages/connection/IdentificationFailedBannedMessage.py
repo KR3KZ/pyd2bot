@@ -3,5 +3,5 @@ from com.ankamagames.dofus.network.messages.connection.IdentificationFailedMessa
 
 class IdentificationFailedBannedMessage(IdentificationFailedMessage):
     protocolId = 4124
-    banEndDate:float
+    banEndDate:int
     

@@ -4,7 +4,7 @@ from com.ankamagames.dofus.network.types.game.character.status.PlayerStatus impo
 
 class AcquaintanceOnlineInformation(AcquaintanceInformation):
     protocolId = 4750
-    playerId:float
+    playerId:int
     playerName:str
     moodSmileyId:int
     status:PlayerStatus

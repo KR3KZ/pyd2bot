@@ -3,7 +3,7 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.party.Abstract
 
 class PartyUpdateLightMessage(AbstractPartyEventMessage):
     protocolId = 585
-    id:float
+    id:int
     lifePoints:int
     maxLifePoints:int
     prospecting:int

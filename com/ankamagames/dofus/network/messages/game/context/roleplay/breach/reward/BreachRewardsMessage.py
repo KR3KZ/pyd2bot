@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.breach.BreachRewa
 
 class BreachRewardsMessage(NetworkMessage):
     protocolId = 3565
-    rewards:list[BreachReward]
+    rewards:BreachReward
     

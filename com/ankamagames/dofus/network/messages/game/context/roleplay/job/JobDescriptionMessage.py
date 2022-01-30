@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.job.JobDescriptio
 
 class JobDescriptionMessage(NetworkMessage):
     protocolId = 8838
-    jobsDescription:list[JobDescription]
+    jobsDescription:JobDescription
     

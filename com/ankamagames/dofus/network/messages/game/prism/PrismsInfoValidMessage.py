@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.prism.PrismFightersInformation imp
 
 class PrismsInfoValidMessage(NetworkMessage):
     protocolId = 9294
-    fights:list[PrismFightersInformation]
+    fights:PrismFightersInformation
     

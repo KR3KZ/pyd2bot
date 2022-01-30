@@ -3,7 +3,7 @@ from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessa
 
 class AbstractGameActionFightTargetedAbilityMessage(AbstractGameActionMessage):
     protocolId = 8860
-    targetId:float
+    targetId:int
     destinationCellId:int
     critical:int
     

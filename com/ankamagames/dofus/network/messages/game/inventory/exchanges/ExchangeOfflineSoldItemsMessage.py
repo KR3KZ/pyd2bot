@@ -5,6 +5,6 @@ from com.ankamagames.dofus.network.types.game.data.items.ObjectItemQuantityPrice
 
 class ExchangeOfflineSoldItemsMessage(NetworkMessage):
     protocolId = 5671
-    bidHouseItems:list[ObjectItemQuantityPriceDateEffects]
-    merchantItems:list[ObjectItemQuantityPriceDateEffects]
+    bidHouseItems:ObjectItemQuantityPriceDateEffects
+    merchantItems:ObjectItemQuantityPriceDateEffects
     

@@ -7,5 +7,5 @@ class CharacterRemodelingInformation(AbstractCharacterInformation):
     breed:int
     sex:bool
     cosmeticId:int
-    colors:list[int]
+    colors:int
     

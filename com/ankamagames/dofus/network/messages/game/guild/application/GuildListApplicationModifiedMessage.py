@@ -6,5 +6,5 @@ class GuildListApplicationModifiedMessage(NetworkMessage):
     protocolId = 8105
     apply:GuildApplicationInformation
     state:int
-    playerId:float
+    playerId:int
     

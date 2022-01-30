@@ -7,6 +7,6 @@ from com.ankamagames.dofus.network.types.game.look.EntityLook import EntityLook
 class JobCrafterDirectoryEntryMessage(NetworkMessage):
     protocolId = 3827
     playerInfo:JobCrafterDirectoryEntryPlayerInfo
-    jobInfoList:list[JobCrafterDirectoryEntryJobInfo]
+    jobInfoList:JobCrafterDirectoryEntryJobInfo
     playerLook:EntityLook
     

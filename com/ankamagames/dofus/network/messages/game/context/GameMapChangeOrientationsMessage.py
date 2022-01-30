@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.context.ActorOrientation import Ac
 
 class GameMapChangeOrientationsMessage(NetworkMessage):
     protocolId = 5656
-    orientations:list[ActorOrientation]
+    orientations:ActorOrientation
     

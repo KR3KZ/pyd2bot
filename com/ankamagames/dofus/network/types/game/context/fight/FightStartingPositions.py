@@ -3,6 +3,6 @@ from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
 
 class FightStartingPositions(NetworkMessage):
     protocolId = 9707
-    positionsForChallengers:list[int]
-    positionsForDefenders:list[int]
+    positionsForChallengers:int
+    positionsForDefenders:int
     

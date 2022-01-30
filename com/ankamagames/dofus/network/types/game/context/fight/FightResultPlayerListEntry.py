@@ -5,5 +5,5 @@ from com.ankamagames.dofus.network.types.game.context.fight.FightResultAdditiona
 class FightResultPlayerListEntry(FightResultFighterListEntry):
     protocolId = 9771
     level:int
-    additional:list[FightResultAdditionalData]
+    additional:FightResultAdditionalData
     

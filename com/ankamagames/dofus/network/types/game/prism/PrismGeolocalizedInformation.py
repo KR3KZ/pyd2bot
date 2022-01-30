@@ -6,6 +6,6 @@ class PrismGeolocalizedInformation(PrismSubareaEmptyInfo):
     protocolId = 2406
     worldX:int
     worldY:int
-    mapId:float
+    mapId:int
     prism:PrismInformation
     

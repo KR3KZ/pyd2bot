@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.data.items.ObjectItem import Objec
 
 class ChatClientMultiWithObjectMessage(ChatClientMultiMessage):
     protocolId = 1682
-    objects:list[ObjectItem]
+    objects:ObjectItem
     

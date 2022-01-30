@@ -3,6 +3,6 @@ from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessa
 
 class GameActionFightTeleportOnSameMapMessage(AbstractGameActionMessage):
     protocolId = 7589
-    targetId:float
+    targetId:int
     cellId:int
     

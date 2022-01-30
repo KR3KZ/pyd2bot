@@ -7,6 +7,6 @@ from com.ankamagames.dofus.network.types.game.prism.PrismSubareaEmptyInfo import
 class AllianceInsiderInfoMessage(NetworkMessage):
     protocolId = 3553
     allianceInfos:AllianceFactSheetInformations
-    guilds:list[GuildInsiderFactSheetInformations]
-    prisms:list[PrismSubareaEmptyInfo]
+    guilds:GuildInsiderFactSheetInformations
+    prisms:PrismSubareaEmptyInfo
     

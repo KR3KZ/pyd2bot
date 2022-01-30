@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.entity.EntityInformation import En
 
 class EntitiesInformationMessage(NetworkMessage):
     protocolId = 5147
-    entities:list[EntityInformation]
+    entities:EntityInformation
     

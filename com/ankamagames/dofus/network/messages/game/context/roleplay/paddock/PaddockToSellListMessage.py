@@ -6,5 +6,5 @@ class PaddockToSellListMessage(NetworkMessage):
     protocolId = 3451
     pageIndex:int
     totalPage:int
-    paddockList:list[PaddockInformationsForSell]
+    paddockList:PaddockInformationsForSell
     

@@ -5,6 +5,6 @@ from com.ankamagames.dofus.network.types.game.actions.fight.AbstractFightDispell
 class FightDispellableEffectExtendedInformations(NetworkMessage):
     protocolId = 8005
     actionId:int
-    sourceId:float
+    sourceId:int
     effect:AbstractFightDispellableEffect
     

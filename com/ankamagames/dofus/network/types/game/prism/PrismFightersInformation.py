@@ -8,6 +8,6 @@ class PrismFightersInformation(NetworkMessage):
     protocolId = 8909
     subAreaId:int
     waitingForHelpInfo:ProtectedEntityWaitingForHelpInfo
-    allyCharactersInformations:list[CharacterMinimalPlusLookInformations]
-    enemyCharactersInformations:list[CharacterMinimalPlusLookInformations]
+    allyCharactersInformations:CharacterMinimalPlusLookInformations
+    enemyCharactersInformations:CharacterMinimalPlusLookInformations
     

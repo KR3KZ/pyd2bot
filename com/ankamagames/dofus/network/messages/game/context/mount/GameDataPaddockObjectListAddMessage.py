@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.paddock.PaddockItem import Paddock
 
 class GameDataPaddockObjectListAddMessage(NetworkMessage):
     protocolId = 6584
-    paddockItemDescription:list[PaddockItem]
+    paddockItemDescription:PaddockItem
     

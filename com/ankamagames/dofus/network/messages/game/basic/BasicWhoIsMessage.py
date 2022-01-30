@@ -9,10 +9,10 @@ class BasicWhoIsMessage(NetworkMessage):
     accountTag:AccountTagInformation
     accountId:int
     playerName:str
-    playerId:float
+    playerId:int
     areaId:int
     serverId:int
     originServerId:int
-    socialGroups:list[AbstractSocialGroupInfos]
+    socialGroups:AbstractSocialGroupInfos
     playerState:int
     

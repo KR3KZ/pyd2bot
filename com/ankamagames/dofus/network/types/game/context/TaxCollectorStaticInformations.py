@@ -7,5 +7,5 @@ class TaxCollectorStaticInformations(NetworkMessage):
     firstNameId:int
     lastNameId:int
     guildIdentity:GuildInformations
-    callerId:float
+    callerId:int
     

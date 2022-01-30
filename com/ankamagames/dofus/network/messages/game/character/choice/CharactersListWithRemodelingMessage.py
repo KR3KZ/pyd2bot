@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.character.choice.CharacterToRemode
 
 class CharactersListWithRemodelingMessage(CharactersListMessage):
     protocolId = 3532
-    charactersToRemodel:list[CharacterToRemodelInformations]
+    charactersToRemodel:CharacterToRemodelInformations
     

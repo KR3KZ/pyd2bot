@@ -5,5 +5,5 @@ from com.ankamagames.dofus.network.types.game.data.items.effects.ObjectEffect im
 class ObjectItemMinimalInformation(Item):
     protocolId = 4918
     objectGID:int
-    effects:list[ObjectEffect]
+    effects:ObjectEffect
     

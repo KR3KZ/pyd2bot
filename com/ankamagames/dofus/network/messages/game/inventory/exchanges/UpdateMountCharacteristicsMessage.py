@@ -5,5 +5,5 @@ from com.ankamagames.dofus.network.types.game.mount.UpdateMountCharacteristic im
 class UpdateMountCharacteristicsMessage(NetworkMessage):
     protocolId = 9937
     rideId:int
-    boostToUpdateList:list[UpdateMountCharacteristic]
+    boostToUpdateList:UpdateMountCharacteristic
     

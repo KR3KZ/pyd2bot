@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.interactive.InteractiveElement imp
 
 class InteractiveMapUpdateMessage(NetworkMessage):
     protocolId = 8375
-    interactiveElements:list[InteractiveElement]
+    interactiveElements:InteractiveElement
     

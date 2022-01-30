@@ -4,14 +4,14 @@ from com.ankamagames.dofus.network.types.game.data.items.effects.ObjectEffectInt
 
 class ObjectEffectMount(ObjectEffect):
     protocolId = 4916
-    id:float
-    expirationDate:float
+    id:int
+    expirationDate:int
     model:int
     name:str
     owner:str
     level:int
     reproductionCount:int
     reproductionCountMax:int
-    effects:list[ObjectEffectInteger]
-    capacities:list[int]
+    effects:ObjectEffectInteger
+    capacities:int
     

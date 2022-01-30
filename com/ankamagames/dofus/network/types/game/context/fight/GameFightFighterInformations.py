@@ -8,5 +8,5 @@ class GameFightFighterInformations(GameContextActorInformations):
     spawnInfo:GameContextBasicSpawnInformation
     wave:int
     stats:GameFightCharacteristics
-    previousPositions:list[int]
+    previousPositions:int
     

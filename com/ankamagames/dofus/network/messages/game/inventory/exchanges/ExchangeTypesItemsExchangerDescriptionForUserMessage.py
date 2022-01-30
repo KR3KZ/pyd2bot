@@ -5,5 +5,5 @@ from com.ankamagames.dofus.network.types.game.data.items.BidExchangerObjectInfo 
 class ExchangeTypesItemsExchangerDescriptionForUserMessage(NetworkMessage):
     protocolId = 6681
     objectType:int
-    itemTypeDescriptions:list[BidExchangerObjectInfo]
+    itemTypeDescriptions:BidExchangerObjectInfo
     

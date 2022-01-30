@@ -4,7 +4,7 @@ from com.ankamagames.dofus.network.types.game.data.items.ObjectItemToSellInNpcSh
 
 class ExchangeStartOkNpcShopMessage(NetworkMessage):
     protocolId = 8584
-    npcSellerId:float
+    npcSellerId:int
     tokenId:int
-    objectsInfos:list[ObjectItemToSellInNpcShop]
+    objectsInfos:ObjectItemToSellInNpcShop
     

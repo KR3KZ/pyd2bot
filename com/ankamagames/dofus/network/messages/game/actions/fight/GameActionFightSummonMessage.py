@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.context.fight.GameFightFighterInfo
 
 class GameActionFightSummonMessage(AbstractGameActionMessage):
     protocolId = 2879
-    summons:list[GameFightFighterInformations]
+    summons:GameFightFighterInformations
     

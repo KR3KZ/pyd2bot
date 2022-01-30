@@ -7,5 +7,5 @@ class HumanInformations(NetworkMessage):
     protocolId = 7547
     restrictions:ActorRestrictionsInformations
     sex:bool
-    options:list[HumanOption]
+    options:HumanOption
     

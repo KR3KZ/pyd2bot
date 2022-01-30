@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.fight.arena.Leagu
 
 class GameRolePlayArenaInvitationCandidatesAnswerMessage(NetworkMessage):
     protocolId = 4913
-    candidates:list[LeagueFriendInformations]
+    candidates:LeagueFriendInformations
     

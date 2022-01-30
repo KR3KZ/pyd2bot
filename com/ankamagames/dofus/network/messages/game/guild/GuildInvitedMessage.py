@@ -4,7 +4,7 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.BasicGuildInforma
 
 class GuildInvitedMessage(NetworkMessage):
     protocolId = 7582
-    recruterId:float
+    recruterId:int
     recruterName:str
     guildInfo:BasicGuildInformations
     

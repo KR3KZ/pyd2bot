@@ -3,5 +3,5 @@ from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeReq
 
 class ExchangePlayerRequestMessage(ExchangeRequestMessage):
     protocolId = 2400
-    target:float
+    target:int
     

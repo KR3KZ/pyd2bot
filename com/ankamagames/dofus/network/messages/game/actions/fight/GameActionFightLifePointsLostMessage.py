@@ -3,7 +3,7 @@ from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessa
 
 class GameActionFightLifePointsLostMessage(AbstractGameActionMessage):
     protocolId = 4520
-    targetId:float
+    targetId:int
     loss:int
     permanentDamages:int
     elementId:int

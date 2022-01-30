@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.guild.tax.TaxCollectorMovement imp
 
 class TaxCollectorMovementsOfflineMessage(NetworkMessage):
     protocolId = 3016
-    movements:list[TaxCollectorMovement]
+    movements:TaxCollectorMovement
     

@@ -1,8 +1,9 @@
 import socket
+from time import sleep
 from scapy.all import AsyncSniffer, Packet
-from .message import Message
-from pyd2bot.utils.binaryIO import Buffer
-
+from com.ankamagames.jerakine.network.customDataWrapper import Buffer
+from pyd2bot.network.message import Message
+import signal
 class DofusSniffer(AsyncSniffer):
     
     def __init__(self, action, capture_file=None):
@@ -49,11 +50,14 @@ class DofusSniffer(AsyncSniffer):
                     msg = Message.fromRaw(buf, isfromClient, src=src, dst=dst)
                     if not msg:
                         break
-                    print(f"Received msg. {msg.json()['__type__']}, src {src} -> dst: {dst}")
-                    if msg.name == "RawDataMessage":
-                        with open(r"C:\Users\majdoub\OneDrive\Documents\pyd2bot\tests\rawd.bin", 'wb') as fp:
-                            fp.write(msg.json()["content"])
                     handle(msg)
                     
-
+if __name__  == "__main__":
+    def handle(msgBinary:Message):
+        msg = msgBinary.deserialize()
+        print(msg.__class__.__name__, msg.__dict__)
+    mySniffer = DofusSniffer(handle)
+    mySniffer.start()
+    signal.signal(signal.SIGINT, mySniffer.stop)
+    mySniffer.join()
         

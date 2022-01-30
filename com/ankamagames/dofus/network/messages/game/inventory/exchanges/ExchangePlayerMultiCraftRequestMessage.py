@@ -3,6 +3,6 @@ from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeReq
 
 class ExchangePlayerMultiCraftRequestMessage(ExchangeRequestMessage):
     protocolId = 6947
-    target:float
+    target:int
     skillId:int
     

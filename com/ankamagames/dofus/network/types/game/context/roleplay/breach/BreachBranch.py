@@ -7,9 +7,9 @@ class BreachBranch(NetworkMessage):
     protocolId = 5320
     room:int
     element:int
-    bosses:list[MonsterInGroupLightInformations]
-    map:float
+    bosses:MonsterInGroupLightInformations
+    map:int
     score:int
     relativeScore:int
-    monsters:list[MonsterInGroupLightInformations]
+    monsters:MonsterInGroupLightInformations
     

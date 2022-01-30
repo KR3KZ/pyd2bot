@@ -5,5 +5,5 @@ from com.ankamagames.dofus.network.types.game.interactive.skill.SkillActionDescr
 class JobDescription(NetworkMessage):
     protocolId = 2005
     jobId:int
-    skills:list[SkillActionDescription]
+    skills:SkillActionDescription
     

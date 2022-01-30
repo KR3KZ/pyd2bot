@@ -4,6 +4,6 @@ from com.ankamagames.dofus.network.types.game.house.HouseInstanceInformations im
 
 class HouseOnMapInformations(HouseInformations):
     protocolId = 8890
-    doorsOnMap:list[int]
-    houseInstances:list[HouseInstanceInformations]
+    doorsOnMap:int
+    houseInstances:HouseInstanceInformations
     

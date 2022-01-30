@@ -3,6 +3,6 @@ from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessa
 
 class GameActionFightThrowCharacterMessage(AbstractGameActionMessage):
     protocolId = 1069
-    targetId:float
+    targetId:int
     cellId:int
     

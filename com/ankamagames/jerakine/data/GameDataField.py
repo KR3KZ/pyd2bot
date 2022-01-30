@@ -1,14 +1,9 @@
-import importlib
 import logging
-import re
-import sys
-from types import FunctionType
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING
 from com.ankamagames.jerakine.enum.gameDataTypeEnum import GameDataTypeEnum
 from com.ankamagames.jerakine.data.binaryStream import BinaryStream
 if TYPE_CHECKING:
-   from com.ankamagames.jerakine.data.moduleReader import \
-       ModuleReader
+   from com.ankamagames.jerakine.data.moduleReader import ModuleReader
 logger = logging.getLogger("bot")
 
 class GameDataField:
@@ -16,17 +11,19 @@ class GameDataField:
    NULL_IDENTIFIER:int = -1431655766
 
 
-   def __init__(self, name:bytes, moduleReader:'ModuleReader'):
+   def __init__(self, name:str, moduleReader:'ModuleReader'):
       self.name = name
       self._innerReadMethods = list()
       self._innerTypeNames = list()
       self.moduleReader = moduleReader
+      self._classesByName = dict()
 
    def readType(self, stream:BinaryStream):
       typeId = stream.readInt()
       self.readData = self.getReadMethod(typeId, stream)
 
    def getReadMethod(self, typeId, stream:BinaryStream):
+
       if typeId == GameDataTypeEnum.INT:
          return self.readInteger
 

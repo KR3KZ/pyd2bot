@@ -3,5 +3,5 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.job.JobExperie
 
 class JobExperienceOtherPlayerUpdateMessage(JobExperienceUpdateMessage):
     protocolId = 5477
-    playerId:float
+    playerId:int
     

@@ -5,7 +5,6 @@ from com.ankamagames.dofus.datacenter.monsters.monster import Monster
 
 
 class MonsterDropCoefficient:
-      
    
    monsterId:int
    
@@ -18,9 +17,6 @@ class MonsterDropCoefficient:
    _monster:Monster
    
    _conditions:GroupItemCriterion
-   
-   def __init__(self):
-      super().__init__()
    
    @property
    def monster(self) -> Monster:

@@ -7,7 +7,7 @@ class FightCommonInformations(NetworkMessage):
     protocolId = 5008
     fightId:int
     fightType:int
-    fightTeams:list[FightTeamInformations]
-    fightTeamsPositions:list[int]
-    fightTeamsOptions:list[FightOptionsInformations]
+    fightTeams:FightTeamInformations
+    fightTeamsPositions:int
+    fightTeamsOptions:FightOptionsInformations
     

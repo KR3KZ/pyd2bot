@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.data.items.ObjectItemToSell import
 
 class ExchangeShopStockStartedMessage(NetworkMessage):
     protocolId = 2502
-    objectsInfos:list[ObjectItemToSell]
+    objectsInfos:ObjectItemToSell
     

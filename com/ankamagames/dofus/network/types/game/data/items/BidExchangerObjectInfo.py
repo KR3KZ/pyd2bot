@@ -7,6 +7,6 @@ class BidExchangerObjectInfo(NetworkMessage):
     objectUID:int
     objectGID:int
     objectType:int
-    effects:list[ObjectEffect]
-    prices:list[float]
+    effects:ObjectEffect
+    prices:int
     

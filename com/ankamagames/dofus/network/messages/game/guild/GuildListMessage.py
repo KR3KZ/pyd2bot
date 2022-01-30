@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.GuildInformations
 
 class GuildListMessage(NetworkMessage):
     protocolId = 5503
-    guilds:list[GuildInformations]
+    guilds:GuildInformations
     

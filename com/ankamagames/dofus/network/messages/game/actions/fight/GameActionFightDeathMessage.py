@@ -3,5 +3,5 @@ from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessa
 
 class GameActionFightDeathMessage(AbstractGameActionMessage):
     protocolId = 7663
-    targetId:float
+    targetId:int
     

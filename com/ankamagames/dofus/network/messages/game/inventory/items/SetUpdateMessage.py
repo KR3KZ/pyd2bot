@@ -5,6 +5,6 @@ from com.ankamagames.dofus.network.types.game.data.items.effects.ObjectEffect im
 class SetUpdateMessage(NetworkMessage):
     protocolId = 2982
     setId:int
-    setObjects:list[int]
-    setEffects:list[ObjectEffect]
+    setObjects:int
+    setEffects:ObjectEffect
     

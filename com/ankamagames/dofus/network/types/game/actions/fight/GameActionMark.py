@@ -4,13 +4,13 @@ from com.ankamagames.dofus.network.types.game.actions.fight.GameActionMarkedCell
 
 class GameActionMark(NetworkMessage):
     protocolId = 158
-    markAuthorId:float
+    markAuthorId:int
     markTeamId:int
     markSpellId:int
     markSpellLevel:int
     markId:int
     markType:int
     markimpactCell:int
-    cells:list[GameActionMarkedCell]
+    cells:GameActionMarkedCell
     active:bool
     

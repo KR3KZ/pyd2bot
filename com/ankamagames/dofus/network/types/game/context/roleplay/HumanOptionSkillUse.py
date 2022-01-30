@@ -5,5 +5,5 @@ class HumanOptionSkillUse(HumanOption):
     protocolId = 2427
     elementId:int
     skillId:int
-    skillEndTime:float
+    skillEndTime:int
     

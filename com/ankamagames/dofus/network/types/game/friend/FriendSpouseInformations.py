@@ -6,7 +6,7 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.GuildInformations
 class FriendSpouseInformations(NetworkMessage):
     protocolId = 9956
     spouseAccountId:int
-    spouseId:float
+    spouseId:int
     spouseName:str
     spouseLevel:int
     breed:int

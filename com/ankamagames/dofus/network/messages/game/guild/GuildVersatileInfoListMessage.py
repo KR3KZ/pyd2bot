@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.social.GuildVersatileInformations 
 
 class GuildVersatileInfoListMessage(NetworkMessage):
     protocolId = 211
-    guilds:list[GuildVersatileInformations]
+    guilds:GuildVersatileInformations
     

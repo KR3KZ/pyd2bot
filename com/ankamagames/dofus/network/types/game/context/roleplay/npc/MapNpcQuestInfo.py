@@ -4,7 +4,7 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.quest.GameRolePla
 
 class MapNpcQuestInfo(NetworkMessage):
     protocolId = 7429
-    mapId:float
-    npcsIdsWithQuest:list[int]
-    questFlags:list[GameRolePlayNpcQuestFlag]
+    mapId:int
+    npcsIdsWithQuest:int
+    questFlags:GameRolePlayNpcQuestFlag
     

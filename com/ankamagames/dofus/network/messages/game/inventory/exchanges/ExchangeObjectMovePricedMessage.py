@@ -3,5 +3,5 @@ from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeObj
 
 class ExchangeObjectMovePricedMessage(ExchangeObjectMoveMessage):
     protocolId = 1384
-    price:float
+    price:int
     

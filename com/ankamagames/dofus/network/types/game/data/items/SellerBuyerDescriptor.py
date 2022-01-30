@@ -3,10 +3,10 @@ from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
 
 class SellerBuyerDescriptor(NetworkMessage):
     protocolId = 5475
-    quantities:list[int]
-    types:list[int]
-    taxPercentage:float
-    taxModificationPercentage:float
+    quantities:int
+    types:int
+    taxPercentage:int
+    taxModificationPercentage:int
     maxItemLevel:int
     maxItemPerAccount:int
     npcContextualId:int

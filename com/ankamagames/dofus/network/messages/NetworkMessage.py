@@ -1,6 +1,5 @@
 class NetworkMessage:
     
     
-    def __init__(self, dict) -> None:
-        
+    def __init__(self) -> None:
         pass

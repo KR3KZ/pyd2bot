@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.party.NamedPartyT
 
 class MapRunningFightDetailsExtendedMessage(MapRunningFightDetailsMessage):
     protocolId = 9456
-    namedPartyTeams:list[NamedPartyTeam]
+    namedPartyTeams:NamedPartyTeam
     

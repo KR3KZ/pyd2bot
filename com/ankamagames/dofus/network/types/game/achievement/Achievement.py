@@ -6,6 +6,6 @@ from com.ankamagames.dofus.network.types.game.achievement.AchievementStartedObje
 class Achievement(NetworkMessage):
     protocolId = 8621
     id:int
-    finishedObjective:list[AchievementObjective]
-    startedObjectives:list[AchievementStartedObjective]
+    finishedObjective:AchievementObjective
+    startedObjectives:AchievementStartedObjective
     

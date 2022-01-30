@@ -3,5 +3,5 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.party.Abstract
 
 class PartyAbdicateThroneMessage(AbstractPartyMessage):
     protocolId = 6752
-    playerId:float
+    playerId:int
     

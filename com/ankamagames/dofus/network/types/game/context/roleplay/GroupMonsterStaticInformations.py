@@ -6,5 +6,5 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.MonsterInGroupInf
 class GroupMonsterStaticInformations(NetworkMessage):
     protocolId = 9226
     mainCreatureLightInfos:MonsterInGroupLightInformations
-    underlings:list[MonsterInGroupInformations]
+    underlings:MonsterInGroupInformations
     

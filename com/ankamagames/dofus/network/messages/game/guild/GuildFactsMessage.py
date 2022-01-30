@@ -8,5 +8,5 @@ class GuildFactsMessage(NetworkMessage):
     infos:GuildFactSheetInformations
     creationDate:int
     nbTaxCollectors:int
-    members:list[CharacterMinimalGuildPublicInformations]
+    members:CharacterMinimalGuildPublicInformations
     

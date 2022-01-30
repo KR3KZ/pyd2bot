@@ -6,7 +6,7 @@ class ObjectItem(Item):
     protocolId = 2916
     position:int
     objectGID:int
-    effects:list[ObjectEffect]
+    effects:ObjectEffect
     objectUID:int
     quantity:int
     

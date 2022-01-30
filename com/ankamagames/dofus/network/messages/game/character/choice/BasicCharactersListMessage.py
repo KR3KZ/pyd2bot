@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.character.choice.CharacterBaseInfo
 
 class BasicCharactersListMessage(NetworkMessage):
     protocolId = 8228
-    characters:list[CharacterBaseInformations]
+    characters:CharacterBaseInformations
     

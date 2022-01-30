@@ -3,5 +3,5 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.quest.QuestSte
 
 class WatchQuestStepInfoRequestMessage(QuestStepInfoRequestMessage):
     protocolId = 8640
-    playerId:float
+    playerId:int
     

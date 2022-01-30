@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.data.items.ObjectItemToSell import
 
 class ExchangeShopStockMultiMovementUpdatedMessage(NetworkMessage):
     protocolId = 8646
-    objectInfoList:list[ObjectItemToSell]
+    objectInfoList:ObjectItemToSell
     

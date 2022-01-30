@@ -3,5 +3,5 @@ from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessa
 
 class GameActionFightVanishMessage(AbstractGameActionMessage):
     protocolId = 5414
-    targetId:float
+    targetId:int
     

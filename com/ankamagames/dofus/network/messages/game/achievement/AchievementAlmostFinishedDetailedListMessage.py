@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.achievement.Achievement import Ach
 
 class AchievementAlmostFinishedDetailedListMessage(NetworkMessage):
     protocolId = 6475
-    almostFinishedAchievements:list[Achievement]
+    almostFinishedAchievements:Achievement
     

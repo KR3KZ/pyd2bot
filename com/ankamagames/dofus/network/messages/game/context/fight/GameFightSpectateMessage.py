@@ -7,10 +7,10 @@ from com.ankamagames.dofus.network.types.game.context.fight.GameFightEffectTrigg
 
 class GameFightSpectateMessage(NetworkMessage):
     protocolId = 8991
-    effects:list[FightDispellableEffectExtendedInformations]
-    marks:list[GameActionMark]
+    effects:FightDispellableEffectExtendedInformations
+    marks:GameActionMark
     gameTurn:int
     fightStart:int
-    idols:list[Idol]
-    fxTriggerCounts:list[GameFightEffectTriggerCount]
+    idols:Idol
+    fxTriggerCounts:GameFightEffectTriggerCount
     

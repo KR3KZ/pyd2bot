@@ -5,7 +5,7 @@ from com.ankamagames.dofus.network.types.game.character.characteristic.Character
 class GameFightCharacteristics(NetworkMessage):
     protocolId = 7425
     characteristics:CharacterCharacteristics
-    summoner:float
+    summoner:int
     summoned:bool
     invisibilityState:int
     

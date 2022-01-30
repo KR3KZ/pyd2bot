@@ -5,5 +5,5 @@ class HouseBuyResultMessage(NetworkMessage):
     protocolId = 9533
     houseId:int
     instanceId:int
-    realPrice:float
+    realPrice:int
     

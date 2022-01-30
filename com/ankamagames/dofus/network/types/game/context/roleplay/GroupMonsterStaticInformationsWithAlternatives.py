@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.AlternativeMonste
 
 class GroupMonsterStaticInformationsWithAlternatives(GroupMonsterStaticInformations):
     protocolId = 1240
-    alternatives:list[AlternativeMonstersInGroupLightInformations]
+    alternatives:AlternativeMonstersInGroupLightInformations
     

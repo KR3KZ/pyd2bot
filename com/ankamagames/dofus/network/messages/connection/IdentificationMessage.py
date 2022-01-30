@@ -6,8 +6,8 @@ class IdentificationMessage(NetworkMessage):
     protocolId = 4337
     version:Version
     lang:str
-    credentials:list[int]
+    credentials:int
     serverId:int
-    sessionOptionalSalt:float
-    failedAttempts:list[int]
+    sessionOptionalSalt:int
+    failedAttempts:int
     

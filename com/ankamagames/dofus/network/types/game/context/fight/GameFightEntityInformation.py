@@ -5,5 +5,5 @@ class GameFightEntityInformation(GameFightFighterInformations):
     protocolId = 5544
     entityModelId:int
     level:int
-    masterId:float
+    masterId:int
     

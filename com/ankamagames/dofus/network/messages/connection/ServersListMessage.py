@@ -4,7 +4,7 @@ from com.ankamagames.dofus.network.types.connection.GameServerInformations impor
 
 class ServersListMessage(NetworkMessage):
     protocolId = 786
-    servers:list[GameServerInformations]
+    servers:GameServerInformations
     alreadyConnectedToServerId:int
     canCreateNewCharacter:bool
     

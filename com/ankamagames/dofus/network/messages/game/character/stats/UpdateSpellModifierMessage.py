@@ -4,6 +4,6 @@ from com.ankamagames.dofus.network.types.game.character.characteristic.Character
 
 class UpdateSpellModifierMessage(NetworkMessage):
     protocolId = 1672
-    actorId:float
+    actorId:int
     spellModifier:CharacterSpellModification
     

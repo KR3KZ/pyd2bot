@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.quest.QuestActive
 
 class FollowedQuestsMessage(NetworkMessage):
     protocolId = 414
-    quests:list[QuestActiveDetailedInformations]
+    quests:QuestActiveDetailedInformations
     

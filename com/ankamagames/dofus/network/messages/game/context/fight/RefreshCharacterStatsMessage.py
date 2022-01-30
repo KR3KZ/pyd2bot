@@ -4,6 +4,6 @@ from com.ankamagames.dofus.network.types.game.context.fight.GameFightCharacteris
 
 class RefreshCharacterStatsMessage(NetworkMessage):
     protocolId = 154
-    fighterId:float
+    fighterId:int
     stats:GameFightCharacteristics
     

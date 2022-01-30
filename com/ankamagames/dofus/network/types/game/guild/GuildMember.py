@@ -6,7 +6,7 @@ class GuildMember(CharacterMinimalInformations):
     protocolId = 5491
     breed:int
     rank:int
-    givenExperience:float
+    givenExperience:int
     experienceGivenPercent:int
     rights:int
     connected:int

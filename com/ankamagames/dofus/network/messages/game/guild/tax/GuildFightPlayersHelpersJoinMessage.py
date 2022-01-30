@@ -4,6 +4,6 @@ from com.ankamagames.dofus.network.types.game.character.CharacterMinimalPlusLook
 
 class GuildFightPlayersHelpersJoinMessage(NetworkMessage):
     protocolId = 4751
-    fightId:float
+    fightId:int
     playerInfo:CharacterMinimalPlusLookInformations
     

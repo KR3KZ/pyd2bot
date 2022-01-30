@@ -4,6 +4,6 @@ from com.ankamagames.dofus.network.types.game.data.items.ObjectItem import Objec
 
 class ExchangeStartedTaxCollectorShopMessage(NetworkMessage):
     protocolId = 2236
-    objects:list[ObjectItem]
-    kamas:float
+    objects:ObjectItem
+    kamas:int
     

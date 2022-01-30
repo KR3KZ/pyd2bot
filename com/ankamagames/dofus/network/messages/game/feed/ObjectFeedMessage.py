@@ -5,5 +5,5 @@ from com.ankamagames.dofus.network.types.game.data.items.ObjectItemQuantity impo
 class ObjectFeedMessage(NetworkMessage):
     protocolId = 5845
     objectUID:int
-    meal:list[ObjectItemQuantity]
+    meal:ObjectItemQuantity
     

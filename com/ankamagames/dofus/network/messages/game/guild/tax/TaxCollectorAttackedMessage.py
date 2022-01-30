@@ -8,7 +8,7 @@ class TaxCollectorAttackedMessage(NetworkMessage):
     lastNameId:int
     worldX:int
     worldY:int
-    mapId:float
+    mapId:int
     subAreaId:int
     guild:BasicGuildInformations
     

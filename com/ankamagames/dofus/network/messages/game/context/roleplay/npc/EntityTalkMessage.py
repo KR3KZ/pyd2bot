@@ -3,7 +3,7 @@ from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
 
 class EntityTalkMessage(NetworkMessage):
     protocolId = 4321
-    entityId:float
+    entityId:int
     textId:int
-    parameters:list[str]
+    parameters:str
     

@@ -5,5 +5,5 @@ class QuestObjectiveInformations(NetworkMessage):
     protocolId = 4677
     objectiveId:int
     objectiveStatus:bool
-    dialogParams:list[str]
+    dialogParams:str
     

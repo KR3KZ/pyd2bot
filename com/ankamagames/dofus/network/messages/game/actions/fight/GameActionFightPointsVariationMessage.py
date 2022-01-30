@@ -3,6 +3,6 @@ from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessa
 
 class GameActionFightPointsVariationMessage(AbstractGameActionMessage):
     protocolId = 7694
-    targetId:float
+    targetId:int
     delta:int
     

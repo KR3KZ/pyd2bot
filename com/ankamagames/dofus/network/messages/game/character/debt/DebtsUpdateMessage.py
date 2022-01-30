@@ -5,5 +5,5 @@ from com.ankamagames.dofus.network.types.game.character.debt.DebtInformation imp
 class DebtsUpdateMessage(NetworkMessage):
     protocolId = 2524
     action:int
-    debts:list[DebtInformation]
+    debts:DebtInformation
     

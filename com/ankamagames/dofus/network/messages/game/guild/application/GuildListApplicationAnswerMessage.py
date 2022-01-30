@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.guild.application.GuildApplication
 
 class GuildListApplicationAnswerMessage(PaginationAnswerAbstractMessage):
     protocolId = 1223
-    applies:list[GuildApplicationInformation]
+    applies:GuildApplicationInformation
     

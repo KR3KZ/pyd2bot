@@ -5,5 +5,5 @@ from com.ankamagames.dofus.network.types.game.paddock.PaddockContentInformations
 class GuildInformationsPaddocksMessage(NetworkMessage):
     protocolId = 178
     nbPaddockMax:int
-    paddocksInformations:list[PaddockContentInformations]
+    paddocksInformations:PaddockContentInformations
     

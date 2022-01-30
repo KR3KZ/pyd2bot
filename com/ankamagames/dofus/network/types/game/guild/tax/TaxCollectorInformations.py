@@ -6,7 +6,7 @@ from com.ankamagames.dofus.network.types.game.guild.tax.TaxCollectorComplementar
 
 class TaxCollectorInformations(NetworkMessage):
     protocolId = 3820
-    uniqueId:float
+    uniqueId:int
     firtNameId:int
     lastNameId:int
     additionalInfos:AdditionalTaxCollectorInformations
@@ -15,5 +15,5 @@ class TaxCollectorInformations(NetworkMessage):
     subAreaId:int
     state:int
     look:EntityLook
-    complements:list[TaxCollectorComplementaryInformations]
+    complements:TaxCollectorComplementaryInformations
     

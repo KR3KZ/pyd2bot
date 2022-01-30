@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.AnomalySubareaInf
 
 class AnomalySubareaInformationResponseMessage(NetworkMessage):
     protocolId = 6030
-    subareas:list[AnomalySubareaInformation]
+    subareas:AnomalySubareaInformation
     

@@ -7,6 +7,6 @@ class HouseToSellFilterMessage(NetworkMessage):
     atLeastNbRoom:int
     atLeastNbChest:int
     skillRequested:int
-    maxPrice:float
+    maxPrice:int
     orderBy:int
     

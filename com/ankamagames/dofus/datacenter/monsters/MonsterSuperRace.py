@@ -1,5 +1,6 @@
 from com.ankamagames.dofus.types.idAccessors import IdAccessors
-from com.ankamagames.jerakine.data import GameData, i18n
+from com.ankamagames.jerakine.data.gameData import GameData
+from com.ankamagames.jerakine.data.i18n import I18n
 from com.ankamagames.jerakine.interfaces.iDatacenter import IDataCenter
 
 
@@ -24,8 +25,7 @@ class MonsterSuperRace(IDataCenter):
    @property
    def name(self) -> str:
       if not self._name:
-         self._name = i18n.getText(self.nameId)
+         self._name = I18n.getText(self.nameId)
       return self._name
-
    
    idAccessors:IdAccessors = IdAccessors(getMonsterSuperRaceById,getMonsterSuperRaces)

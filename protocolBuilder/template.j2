@@ -3,15 +3,15 @@
 from {{parent.package}} import {{parent.name}}
 {%- else -%}
 from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage{% endif %}
-{%- for field in cls.vars -%}
-{%- if field.pytype not in primitives %}
-from {{types[field.pytype].package}} import {{field.pytype}}{% endif %}
+{%- for field in cls.fields -%}
+{%- if field.typename not in primitives %}
+from {{types[field.typename].package}} import {{field.typename}}{% endif %}
 {%- endfor %}
 
 
 class {{cls.name}}({% if parent != None %}{{parent.name}}{% else %}NetworkMessage{% endif %}):
     protocolId = {{cls.protocolId}}
-    {% for field in cls.vars -%}
-    {{field.name}}:{%if field.length != None%}list[{{field.pytype}}]{% else %}{{field.pytype}}{% endif %}{% if field.optional %} = None{% endif %}
+    {% for field in cls.fields -%}
+    {{field.name}}:{%if field.length != None%}list[{{field.typename}}]{% else %}{{field.typename}}{% endif %}{% if field.optional %} = None{% endif %}
     {% endfor %}
 

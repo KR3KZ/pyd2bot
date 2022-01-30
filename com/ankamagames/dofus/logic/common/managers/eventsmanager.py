@@ -49,7 +49,7 @@ class EventsManager:
                     self._callBacks[mtype].remove((func, oneShot, ret))
 
     def registerOnMsgCallback(self, msgName:str, func:FunctionType, oneShot:bool=True, ret:list[dict]=None):
-        if not Message.protocol.getMsgTypeByName(msgName):
+        if not Message.parser.getMsgSpecByName(msgName):
             raise ValueError("Unknown msgName: {0}".format(msgName))
         if msgName not in self._callBacks:
             self._callBacks[msgName] = []

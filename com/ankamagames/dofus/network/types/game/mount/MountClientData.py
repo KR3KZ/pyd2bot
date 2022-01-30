@@ -4,15 +4,15 @@ from com.ankamagames.dofus.network.types.game.data.items.effects.ObjectEffectInt
 
 class MountClientData(NetworkMessage):
     protocolId = 9874
-    id:float
+    id:int
     model:int
-    ancestor:list[int]
-    behaviors:list[int]
+    ancestor:int
+    behaviors:int
     name:str
     ownerId:int
-    experience:float
-    experienceForLevel:float
-    experienceForNextLevel:float
+    experience:int
+    experienceForLevel:int
+    experienceForNextLevel:int
     level:int
     maxPods:int
     stamina:int
@@ -28,9 +28,9 @@ class MountClientData(NetworkMessage):
     loveMax:int
     fecondationTime:int
     boostLimiter:int
-    boostMax:float
+    boostMax:int
     reproductionCount:int
     reproductionCountMax:int
     harnessGID:int
-    effectList:list[ObjectEffectInteger]
+    effectList:ObjectEffectInteger
     

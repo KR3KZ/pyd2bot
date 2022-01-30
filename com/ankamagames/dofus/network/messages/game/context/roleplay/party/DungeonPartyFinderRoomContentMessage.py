@@ -5,5 +5,5 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.party.DungeonPart
 class DungeonPartyFinderRoomContentMessage(NetworkMessage):
     protocolId = 5100
     dungeonId:int
-    players:list[DungeonPartyFinderPlayer]
+    players:DungeonPartyFinderPlayer
     

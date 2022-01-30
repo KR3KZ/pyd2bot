@@ -6,6 +6,6 @@ class TaxCollectorMovementMessage(NetworkMessage):
     protocolId = 4589
     movementType:int
     basicInfos:TaxCollectorBasicInformations
-    playerId:float
+    playerId:int
     playerName:str
     

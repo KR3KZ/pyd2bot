@@ -5,7 +5,7 @@ class GameFightStartingMessage(NetworkMessage):
     protocolId = 2951
     fightType:int
     fightId:int
-    attackerId:float
-    defenderId:float
+    attackerId:int
+    defenderId:int
     containsBoss:bool
     

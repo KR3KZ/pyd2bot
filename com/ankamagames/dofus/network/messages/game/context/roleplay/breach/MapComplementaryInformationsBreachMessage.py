@@ -7,5 +7,5 @@ class MapComplementaryInformationsBreachMessage(MapComplementaryInformationsData
     floor:int
     room:int
     infinityMode:int
-    branches:list[BreachBranch]
+    branches:BreachBranch
     

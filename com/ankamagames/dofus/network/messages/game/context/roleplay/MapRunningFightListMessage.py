@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.context.fight.FightExternalInforma
 
 class MapRunningFightListMessage(NetworkMessage):
     protocolId = 1018
-    fights:list[FightExternalInformations]
+    fights:FightExternalInformations
     

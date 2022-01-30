@@ -5,7 +5,7 @@ class JobExperience(NetworkMessage):
     protocolId = 1579
     jobId:int
     jobLevel:int
-    jobXP:float
-    jobXpLevelFloor:float
-    jobXpNextLevelFloor:float
+    jobXP:int
+    jobXpLevelFloor:int
+    jobXpNextLevelFloor:int
     

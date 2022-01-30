@@ -5,5 +5,5 @@ class NpcGenericActionRequestMessage(NetworkMessage):
     protocolId = 1598
     npcId:int
     npcActionId:int
-    npcMapId:float
+    npcMapId:int
     

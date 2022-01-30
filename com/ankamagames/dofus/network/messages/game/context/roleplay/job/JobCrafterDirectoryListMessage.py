@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.job.JobCrafterDir
 
 class JobCrafterDirectoryListMessage(NetworkMessage):
     protocolId = 7620
-    listEntries:list[JobCrafterDirectoryListEntry]
+    listEntries:JobCrafterDirectoryListEntry
     

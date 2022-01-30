@@ -6,6 +6,6 @@ class PartyMemberGeoPosition(NetworkMessage):
     memberId:int
     worldX:int
     worldY:int
-    mapId:float
+    mapId:int
     subAreaId:int
     

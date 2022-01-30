@@ -5,5 +5,5 @@ from com.ankamagames.dofus.network.types.game.data.items.ForgettableSpellItem im
 class ForgettableSpellListUpdateMessage(NetworkMessage):
     protocolId = 9946
     action:int
-    spells:list[ForgettableSpellItem]
+    spells:ForgettableSpellItem
     

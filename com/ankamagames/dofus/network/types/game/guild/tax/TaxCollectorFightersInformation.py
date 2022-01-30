@@ -5,7 +5,7 @@ from com.ankamagames.dofus.network.types.game.character.CharacterMinimalPlusLook
 
 class TaxCollectorFightersInformation(NetworkMessage):
     protocolId = 9650
-    collectorId:float
-    allyCharactersInformations:list[CharacterMinimalPlusLookInformations]
-    enemyCharactersInformations:list[CharacterMinimalPlusLookInformations]
+    collectorId:int
+    allyCharactersInformations:CharacterMinimalPlusLookInformations
+    enemyCharactersInformations:CharacterMinimalPlusLookInformations
     

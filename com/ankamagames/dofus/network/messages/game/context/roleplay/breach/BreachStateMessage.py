@@ -6,7 +6,7 @@ from com.ankamagames.dofus.network.types.game.data.items.effects.ObjectEffectInt
 class BreachStateMessage(NetworkMessage):
     protocolId = 5776
     owner:CharacterMinimalInformations
-    bonuses:list[ObjectEffectInteger]
+    bonuses:ObjectEffectInteger
     bugdet:int
     saved:bool
     

@@ -5,5 +5,5 @@ class PaddockSellBuyDialogMessage(NetworkMessage):
     protocolId = 7880
     bsell:bool
     ownerId:int
-    price:float
+    price:int
     

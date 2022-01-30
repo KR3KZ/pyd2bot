@@ -4,6 +4,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.HumanOption impor
 class HumanOptionObjectUse(HumanOption):
     protocolId = 1192
     delayTypeId:int
-    delayEndTime:float
+    delayEndTime:int
     objectGID:int
     

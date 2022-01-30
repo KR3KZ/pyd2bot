@@ -8,8 +8,8 @@ class TaxCollectorDialogQuestionExtendedMessage(TaxCollectorDialogQuestionBasicM
     wisdom:int
     taxCollectorsCount:int
     taxCollectorAttack:int
-    kamas:float
-    experience:float
+    kamas:int
+    experience:int
     pods:int
-    itemsValue:float
+    itemsValue:int
     

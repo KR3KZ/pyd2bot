@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from pathlib import Path
-from .protocol_parser import ProtocolParser
+from .protocolParser import ProtocolParser
 import json 
 import subprocess
 import os

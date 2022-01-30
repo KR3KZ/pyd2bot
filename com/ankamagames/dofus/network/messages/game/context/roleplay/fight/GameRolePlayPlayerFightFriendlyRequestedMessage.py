@@ -4,6 +4,6 @@ from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
 class GameRolePlayPlayerFightFriendlyRequestedMessage(NetworkMessage):
     protocolId = 2157
     fightId:int
-    sourceId:float
-    targetId:float
+    sourceId:int
+    targetId:int
     

@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.npc.MapNpcQuestIn
 
 class ListMapNpcsQuestStatusUpdateMessage(NetworkMessage):
     protocolId = 5996
-    mapInfo:list[MapNpcQuestInfo]
+    mapInfo:MapNpcQuestInfo
     

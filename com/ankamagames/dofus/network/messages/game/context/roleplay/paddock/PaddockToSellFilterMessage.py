@@ -6,6 +6,6 @@ class PaddockToSellFilterMessage(NetworkMessage):
     areaId:int
     atLeastNbMount:int
     atLeastNbMachine:int
-    maxPrice:float
+    maxPrice:int
     orderBy:int
     

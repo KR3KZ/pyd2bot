@@ -4,8 +4,8 @@ from com.ankamagames.dofus.network.types.game.context.fight.GameFightSpellCooldo
 
 class GameFightResumeSlaveInfo(NetworkMessage):
     protocolId = 8117
-    slaveId:float
-    spellCooldowns:list[GameFightSpellCooldown]
+    slaveId:int
+    spellCooldowns:GameFightSpellCooldown
     summonCount:int
     bombCount:int
     

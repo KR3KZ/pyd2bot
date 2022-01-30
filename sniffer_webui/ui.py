@@ -100,7 +100,7 @@ class MsgView(Tr):
             Td(str(msg.count)),
             Td(msg.name),
             Td(str(msg.id)),
-            Td(str(len(msg.data))),
+            Td(str(len(msg.raw))),
             self.contents,
         )
 

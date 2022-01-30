@@ -3,7 +3,7 @@ from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
 
 class PaddockBuyResultMessage(NetworkMessage):
     protocolId = 6835
-    paddockId:float
+    paddockId:int
     bought:bool
-    realPrice:float
+    realPrice:int
     

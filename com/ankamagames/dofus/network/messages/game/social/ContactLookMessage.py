@@ -6,6 +6,6 @@ class ContactLookMessage(NetworkMessage):
     protocolId = 6590
     requestId:int
     playerName:str
-    playerId:float
+    playerId:int
     look:EntityLook
     

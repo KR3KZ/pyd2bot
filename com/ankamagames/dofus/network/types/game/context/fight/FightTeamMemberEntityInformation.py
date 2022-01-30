@@ -5,5 +5,5 @@ class FightTeamMemberEntityInformation(FightTeamMemberInformations):
     protocolId = 5487
     entityModelId:int
     level:int
-    masterId:float
+    masterId:int
     

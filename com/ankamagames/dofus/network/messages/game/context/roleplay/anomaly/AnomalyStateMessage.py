@@ -5,5 +5,5 @@ class AnomalyStateMessage(NetworkMessage):
     protocolId = 4879
     subAreaId:int
     open:bool
-    closingTime:float
+    closingTime:int
     

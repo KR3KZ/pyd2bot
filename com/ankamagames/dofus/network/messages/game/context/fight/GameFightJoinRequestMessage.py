@@ -3,6 +3,6 @@ from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
 
 class GameFightJoinRequestMessage(NetworkMessage):
     protocolId = 6519
-    fighterId:float
+    fighterId:int
     fightId:int
     

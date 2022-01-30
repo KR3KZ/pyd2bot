@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.data.items.ObjectItem import Objec
 
 class ExchangeStartedMountStockMessage(NetworkMessage):
     protocolId = 5729
-    objectsInfos:list[ObjectItem]
+    objectsInfos:ObjectItem
     

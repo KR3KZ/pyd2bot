@@ -3,7 +3,7 @@ from com.ankamagames.dofus.network.messages.game.chat.ChatAbstractServerMessage 
 
 class ChatServerMessage(ChatAbstractServerMessage):
     protocolId = 8853
-    senderId:float
+    senderId:int
     senderName:str
     prefix:str
     senderAccountId:int

@@ -5,5 +5,5 @@ from com.ankamagames.dofus.network.types.game.interactive.zaap.TeleportDestinati
 class TeleportDestinationsMessage(NetworkMessage):
     protocolId = 5651
     type:int
-    destinations:list[TeleportDestination]
+    destinations:TeleportDestination
     

@@ -5,5 +5,5 @@ from com.ankamagames.dofus.network.types.game.context.MapCoordinatesExtended imp
 class AtlasPointsInformations(NetworkMessage):
     protocolId = 4410
     type:int
-    coords:list[MapCoordinatesExtended]
+    coords:MapCoordinatesExtended
     

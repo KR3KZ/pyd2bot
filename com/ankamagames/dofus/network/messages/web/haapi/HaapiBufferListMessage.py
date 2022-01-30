@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.web.haapi.BufferInformation import Buff
 
 class HaapiBufferListMessage(NetworkMessage):
     protocolId = 518
-    buffers:list[BufferInformation]
+    buffers:BufferInformation
     

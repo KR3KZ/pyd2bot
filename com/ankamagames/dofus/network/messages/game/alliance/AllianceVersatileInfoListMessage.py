@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.social.AllianceVersatileInformatio
 
 class AllianceVersatileInfoListMessage(NetworkMessage):
     protocolId = 9853
-    alliances:list[AllianceVersatileInformations]
+    alliances:AllianceVersatileInformations
     

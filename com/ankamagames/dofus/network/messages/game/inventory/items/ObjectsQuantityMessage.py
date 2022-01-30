@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.data.items.ObjectItemQuantity impo
 
 class ObjectsQuantityMessage(NetworkMessage):
     protocolId = 5570
-    objectsUIDAndQty:list[ObjectItemQuantity]
+    objectsUIDAndQty:ObjectItemQuantity
     

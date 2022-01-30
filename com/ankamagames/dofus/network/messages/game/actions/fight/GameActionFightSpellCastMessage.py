@@ -5,5 +5,5 @@ class GameActionFightSpellCastMessage(AbstractGameActionFightTargetedAbilityMess
     protocolId = 2648
     spellId:int
     spellLevel:int
-    portalsIds:list[int]
+    portalsIds:int
     

@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.mount.MountClientData import Mount
 
 class ExchangeMountsStableAddMessage(NetworkMessage):
     protocolId = 8697
-    mountDescription:list[MountClientData]
+    mountDescription:MountClientData
     

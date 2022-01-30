@@ -9,5 +9,5 @@ class StartupActionAddObject(NetworkMessage):
     text:str
     descUrl:str
     pictureUrl:str
-    items:list[ObjectItemInformationWithQuantity]
+    items:ObjectItemInformationWithQuantity
     

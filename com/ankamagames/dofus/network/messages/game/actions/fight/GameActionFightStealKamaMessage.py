@@ -3,6 +3,6 @@ from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessa
 
 class GameActionFightStealKamaMessage(AbstractGameActionMessage):
     protocolId = 8847
-    targetId:float
-    amount:float
+    targetId:int
+    amount:int
     

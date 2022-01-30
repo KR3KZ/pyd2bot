@@ -11,6 +11,6 @@ class GuildInfosUpgradeMessage(NetworkMessage):
     taxCollectorProspecting:int
     taxCollectorWisdom:int
     boostPoints:int
-    spellId:list[int]
-    spellLevel:list[int]
+    spellId:int
+    spellLevel:int
     

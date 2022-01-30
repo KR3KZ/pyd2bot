@@ -3,7 +3,7 @@ from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
 
 class GameMapMovementMessage(NetworkMessage):
     protocolId = 1972
-    keyMovements:list[int]
+    keyMovements:int
     forcedDirection:int
-    actorId:float
+    actorId:int
     

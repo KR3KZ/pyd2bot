@@ -5,6 +5,6 @@ from com.ankamagames.dofus.network.types.game.character.status.PlayerStatus impo
 class PlayerStatusUpdateMessage(NetworkMessage):
     protocolId = 120
     accountId:int
-    playerId:float
+    playerId:int
     status:PlayerStatus
     

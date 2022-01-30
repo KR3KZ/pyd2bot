@@ -5,5 +5,5 @@ class TeleportRequestMessage(NetworkMessage):
     protocolId = 1539
     sourceType:int
     destinationType:int
-    mapId:float
+    mapId:int
     

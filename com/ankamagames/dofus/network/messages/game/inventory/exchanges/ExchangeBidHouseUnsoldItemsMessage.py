@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.data.items.ObjectItemGenericQuanti
 
 class ExchangeBidHouseUnsoldItemsMessage(NetworkMessage):
     protocolId = 5576
-    items:list[ObjectItemGenericQuantity]
+    items:ObjectItemGenericQuantity
     

@@ -8,6 +8,6 @@ class GameFightEndMessage(NetworkMessage):
     duration:int
     rewardRate:int
     lootShareLimitMalus:int
-    results:list[FightResultListEntry]
-    namedPartyTeamsOutcomes:list[NamedPartyTeamWithOutcome]
+    results:FightResultListEntry
+    namedPartyTeamsOutcomes:NamedPartyTeamWithOutcome
     

@@ -3,5 +3,5 @@ from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessa
 
 class GameActionFightReflectSpellMessage(AbstractGameActionMessage):
     protocolId = 8272
-    targetId:float
+    targetId:int
     

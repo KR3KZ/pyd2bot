@@ -7,6 +7,6 @@ class HouseSellingUpdateMessage(NetworkMessage):
     houseId:int
     instanceId:int
     secondHand:bool
-    realPrice:float
+    realPrice:int
     buyerTag:AccountTagInformation
     

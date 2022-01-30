@@ -4,5 +4,5 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.party.NamedPartyT
 
 class GameFightSpectatorJoinMessage(GameFightJoinMessage):
     protocolId = 6927
-    namedPartyTeams:list[NamedPartyTeam]
+    namedPartyTeams:NamedPartyTeam
     
