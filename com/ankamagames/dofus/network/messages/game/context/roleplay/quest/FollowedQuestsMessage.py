@@ -6,3 +6,4 @@ class FollowedQuestsMessage(NetworkMessage):
     protocolId = 414
     quests:QuestActiveDetailedInformations
     
+    

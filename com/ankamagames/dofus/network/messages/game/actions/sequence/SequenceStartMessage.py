@@ -6,3 +6,4 @@ class SequenceStartMessage(NetworkMessage):
     sequenceType:int
     authorId:int
     
+    

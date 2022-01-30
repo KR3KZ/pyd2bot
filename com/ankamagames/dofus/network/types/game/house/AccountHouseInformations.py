@@ -10,3 +10,4 @@ class AccountHouseInformations(HouseInformations):
     mapId:int
     subAreaId:int
     
+    

@@ -5,3 +5,4 @@ class JobCrafterDirectoryEntryRequestMessage(NetworkMessage):
     protocolId = 3858
     playerId:int
     
+    

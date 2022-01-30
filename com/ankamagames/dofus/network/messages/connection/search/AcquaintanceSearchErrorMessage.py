@@ -5,3 +5,4 @@ class AcquaintanceSearchErrorMessage(NetworkMessage):
     protocolId = 6994
     reason:int
     
+    

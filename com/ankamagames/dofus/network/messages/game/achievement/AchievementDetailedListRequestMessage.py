@@ -5,3 +5,4 @@ class AchievementDetailedListRequestMessage(NetworkMessage):
     protocolId = 5957
     categoryId:int
     
+    

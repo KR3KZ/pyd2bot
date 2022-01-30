@@ -6,3 +6,4 @@ class GameRolePlayShowChallengeMessage(NetworkMessage):
     protocolId = 5734
     commonsInfos:FightCommonInformations
     
+    

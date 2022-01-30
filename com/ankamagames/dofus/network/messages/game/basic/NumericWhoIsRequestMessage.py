@@ -5,3 +5,4 @@ class NumericWhoIsRequestMessage(NetworkMessage):
     protocolId = 4159
     playerId:int
     
+    

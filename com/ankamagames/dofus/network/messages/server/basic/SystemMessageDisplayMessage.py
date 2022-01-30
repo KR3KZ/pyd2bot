@@ -7,3 +7,4 @@ class SystemMessageDisplayMessage(NetworkMessage):
     msgId:int
     parameters:str
     
+    

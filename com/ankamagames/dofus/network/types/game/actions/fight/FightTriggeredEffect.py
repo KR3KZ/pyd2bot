@@ -8,3 +8,4 @@ class FightTriggeredEffect(AbstractFightDispellableEffect):
     param3:int
     delay:int
     
+    

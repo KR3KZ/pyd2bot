@@ -5,3 +5,4 @@ class CheckIntegrityMessage(NetworkMessage):
     protocolId = 1296
     data:int
     
+    

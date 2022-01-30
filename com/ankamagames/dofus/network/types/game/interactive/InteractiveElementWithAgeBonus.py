@@ -5,3 +5,4 @@ class InteractiveElementWithAgeBonus(InteractiveElement):
     protocolId = 2510
     ageBonus:int
     
+    

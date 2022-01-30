@@ -5,3 +5,4 @@ class ShortcutEntitiesPreset(Shortcut):
     protocolId = 3590
     presetId:int
     
+    

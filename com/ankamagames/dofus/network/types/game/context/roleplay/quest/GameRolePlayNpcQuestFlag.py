@@ -6,3 +6,4 @@ class GameRolePlayNpcQuestFlag(NetworkMessage):
     questsToValidId:int
     questsToStartId:int
     
+    

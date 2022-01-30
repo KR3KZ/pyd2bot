@@ -6,3 +6,4 @@ class CharacterLevelUpInformationMessage(CharacterLevelUpMessage):
     name:str
     id:int
     
+    

@@ -8,3 +8,4 @@ class GameRolePlaySpellAnimMessage(NetworkMessage):
     spellId:int
     spellLevel:int
     
+    

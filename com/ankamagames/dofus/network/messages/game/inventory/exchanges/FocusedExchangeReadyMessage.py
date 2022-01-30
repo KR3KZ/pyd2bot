@@ -5,3 +5,4 @@ class FocusedExchangeReadyMessage(ExchangeReadyMessage):
     protocolId = 2904
     focusActionId:int
     
+    

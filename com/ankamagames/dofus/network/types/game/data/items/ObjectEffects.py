@@ -6,3 +6,4 @@ class ObjectEffects(NetworkMessage):
     protocolId = 5613
     effects:ObjectEffect
     
+    

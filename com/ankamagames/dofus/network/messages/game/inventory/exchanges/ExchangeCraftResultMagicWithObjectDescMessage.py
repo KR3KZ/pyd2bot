@@ -5,3 +5,4 @@ class ExchangeCraftResultMagicWithObjectDescMessage(ExchangeCraftResultWithObjec
     protocolId = 6242
     magicPoolStatus:int
     
+    

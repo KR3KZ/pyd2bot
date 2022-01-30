@@ -6,3 +6,4 @@ class FullStatsPreset(Preset):
     protocolId = 9471
     stats:CharacterCharacteristicForPreset
     
+    

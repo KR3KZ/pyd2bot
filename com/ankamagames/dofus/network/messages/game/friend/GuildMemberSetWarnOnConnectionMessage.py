@@ -5,3 +5,4 @@ class GuildMemberSetWarnOnConnectionMessage(NetworkMessage):
     protocolId = 4147
     enable:bool
     
+    

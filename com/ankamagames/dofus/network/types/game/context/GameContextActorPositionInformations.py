@@ -7,3 +7,4 @@ class GameContextActorPositionInformations(NetworkMessage):
     contextualId:int
     disposition:EntityDispositionInformations
     
+    

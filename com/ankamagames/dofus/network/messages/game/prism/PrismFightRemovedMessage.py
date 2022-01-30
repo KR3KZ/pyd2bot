@@ -5,3 +5,4 @@ class PrismFightRemovedMessage(NetworkMessage):
     protocolId = 9563
     subAreaId:int
     
+    

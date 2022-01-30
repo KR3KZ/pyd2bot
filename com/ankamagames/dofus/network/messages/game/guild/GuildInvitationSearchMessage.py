@@ -6,3 +6,4 @@ class GuildInvitationSearchMessage(NetworkMessage):
     protocolId = 5666
     target:AbstractPlayerSearchInformation
     
+    

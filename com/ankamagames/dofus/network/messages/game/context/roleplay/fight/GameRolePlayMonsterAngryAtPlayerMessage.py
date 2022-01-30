@@ -8,3 +8,4 @@ class GameRolePlayMonsterAngryAtPlayerMessage(NetworkMessage):
     angryStartTime:int
     attackTime:int
     
+    

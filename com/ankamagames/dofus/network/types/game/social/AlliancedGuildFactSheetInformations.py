@@ -6,3 +6,4 @@ class AlliancedGuildFactSheetInformations(GuildInformations):
     protocolId = 1714
     allianceInfos:BasicNamedAllianceInformations
     
+    

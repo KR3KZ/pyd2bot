@@ -5,3 +5,4 @@ class GameRolePlayShowActorWithEventMessage(GameRolePlayShowActorMessage):
     protocolId = 2684
     actorEventId:int
     
+    

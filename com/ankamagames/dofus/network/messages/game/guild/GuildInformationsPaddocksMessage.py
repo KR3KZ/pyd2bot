@@ -7,3 +7,4 @@ class GuildInformationsPaddocksMessage(NetworkMessage):
     nbPaddockMax:int
     paddocksInformations:PaddockContentInformations
     
+    

@@ -6,3 +6,4 @@ class QuestObjectiveInformationsWithCompletion(QuestObjectiveInformations):
     curCompletion:int
     maxCompletion:int
     
+    

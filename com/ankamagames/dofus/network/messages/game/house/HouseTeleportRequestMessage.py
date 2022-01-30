@@ -6,3 +6,4 @@ class HouseTeleportRequestMessage(NetworkMessage):
     houseId:int
     houseInstanceId:int
     
+    

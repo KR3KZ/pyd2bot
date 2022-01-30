@@ -5,3 +5,4 @@ class QuestStartRequestMessage(NetworkMessage):
     protocolId = 6071
     questId:int
     
+    

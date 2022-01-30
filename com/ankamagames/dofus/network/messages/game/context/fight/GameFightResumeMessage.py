@@ -8,3 +8,4 @@ class GameFightResumeMessage(GameFightSpectateMessage):
     summonCount:int
     bombCount:int
     
+    

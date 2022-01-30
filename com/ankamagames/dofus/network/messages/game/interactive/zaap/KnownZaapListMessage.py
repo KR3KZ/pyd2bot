@@ -5,3 +5,4 @@ class KnownZaapListMessage(NetworkMessage):
     protocolId = 4096
     destinations:int
     
+    

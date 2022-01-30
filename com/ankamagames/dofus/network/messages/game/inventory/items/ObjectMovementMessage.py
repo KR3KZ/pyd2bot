@@ -6,3 +6,4 @@ class ObjectMovementMessage(NetworkMessage):
     objectUID:int
     position:int
     
+    

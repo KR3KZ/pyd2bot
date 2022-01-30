@@ -6,3 +6,4 @@ class CharacterSelectionWithRemodelMessage(CharacterSelectionMessage):
     protocolId = 2652
     remodel:RemodelingInformation
     
+    

@@ -6,3 +6,4 @@ class AchievementDetailsMessage(NetworkMessage):
     protocolId = 5303
     achievement:Achievement
     
+    

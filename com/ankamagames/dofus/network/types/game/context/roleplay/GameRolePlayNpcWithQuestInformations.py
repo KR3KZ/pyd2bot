@@ -6,3 +6,4 @@ class GameRolePlayNpcWithQuestInformations(GameRolePlayNpcInformations):
     protocolId = 3824
     questFlag:GameRolePlayNpcQuestFlag
     
+    

@@ -7,3 +7,4 @@ class DiceRollRequestMessage(NetworkMessage):
     faces:int
     channel:int
     
+    

@@ -5,3 +5,4 @@ class ExchangePlayerRequestMessage(ExchangeRequestMessage):
     protocolId = 2400
     target:int
     
+    

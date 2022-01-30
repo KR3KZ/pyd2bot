@@ -6,3 +6,4 @@ class QuestStepStartedMessage(NetworkMessage):
     questId:int
     stepId:int
     
+    

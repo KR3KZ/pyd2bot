@@ -6,3 +6,4 @@ class PaddockSellRequestMessage(NetworkMessage):
     price:int
     forSale:bool
     
+    

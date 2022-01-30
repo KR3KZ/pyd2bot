@@ -5,3 +5,4 @@ class AbstractCharacterInformation(NetworkMessage):
     protocolId = 2714
     id:int
     
+    

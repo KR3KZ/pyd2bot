@@ -6,3 +6,4 @@ class JobBookSubscription(NetworkMessage):
     jobId:int
     subscribed:bool
     
+    

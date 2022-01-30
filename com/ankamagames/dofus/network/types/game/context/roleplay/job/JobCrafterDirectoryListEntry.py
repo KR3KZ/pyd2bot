@@ -8,3 +8,4 @@ class JobCrafterDirectoryListEntry(NetworkMessage):
     playerInfo:JobCrafterDirectoryEntryPlayerInfo
     jobInfo:JobCrafterDirectoryEntryJobInfo
     
+    

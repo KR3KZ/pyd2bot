@@ -5,3 +5,4 @@ class PlayerStatusExtended(PlayerStatus):
     protocolId = 1176
     message:str
     
+    

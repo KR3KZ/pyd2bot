@@ -6,3 +6,4 @@ class CharacterToRemodelInformations(CharacterRemodelingInformation):
     possibleChangeMask:int
     mandatoryChangeMask:int
     
+    

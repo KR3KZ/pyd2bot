@@ -5,3 +5,4 @@ class HouseKickRequestMessage(NetworkMessage):
     protocolId = 8499
     id:int
     
+    

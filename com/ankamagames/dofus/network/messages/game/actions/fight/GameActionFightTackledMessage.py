@@ -5,3 +5,4 @@ class GameActionFightTackledMessage(AbstractGameActionMessage):
     protocolId = 4448
     tacklersIds:int
     
+    

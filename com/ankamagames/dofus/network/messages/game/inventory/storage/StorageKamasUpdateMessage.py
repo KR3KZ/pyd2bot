@@ -5,3 +5,4 @@ class StorageKamasUpdateMessage(NetworkMessage):
     protocolId = 4689
     kamasTotal:int
     
+    

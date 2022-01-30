@@ -6,3 +6,4 @@ class QuestObjectiveValidationMessage(NetworkMessage):
     questId:int
     objectiveId:int
     
+    

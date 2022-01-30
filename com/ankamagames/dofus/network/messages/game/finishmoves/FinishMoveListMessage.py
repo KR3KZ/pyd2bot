@@ -6,3 +6,4 @@ class FinishMoveListMessage(NetworkMessage):
     protocolId = 596
     finishMoves:FinishMoveInformations
     
+    

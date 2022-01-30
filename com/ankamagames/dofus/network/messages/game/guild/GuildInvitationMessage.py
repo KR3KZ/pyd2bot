@@ -5,3 +5,4 @@ class GuildInvitationMessage(NetworkMessage):
     protocolId = 2715
     targetId:int
     
+    

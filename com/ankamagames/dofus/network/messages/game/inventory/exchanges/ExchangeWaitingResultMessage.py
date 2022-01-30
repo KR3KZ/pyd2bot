@@ -5,3 +5,4 @@ class ExchangeWaitingResultMessage(NetworkMessage):
     protocolId = 4369
     bwait:bool
     
+    

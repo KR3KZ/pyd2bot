@@ -6,3 +6,4 @@ class GameActionFightSpellImmunityMessage(AbstractGameActionMessage):
     targetId:int
     spellId:int
     
+    

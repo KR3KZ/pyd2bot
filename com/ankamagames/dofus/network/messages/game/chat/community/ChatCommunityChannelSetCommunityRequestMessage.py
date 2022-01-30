@@ -5,3 +5,4 @@ class ChatCommunityChannelSetCommunityRequestMessage(NetworkMessage):
     protocolId = 9201
     communityId:int
     
+    

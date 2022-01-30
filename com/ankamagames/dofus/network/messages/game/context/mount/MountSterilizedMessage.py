@@ -5,3 +5,4 @@ class MountSterilizedMessage(NetworkMessage):
     protocolId = 3777
     mountId:int
     
+    

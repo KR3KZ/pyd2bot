@@ -6,3 +6,4 @@ class ExchangeRequestedTradeMessage(ExchangeRequestedMessage):
     source:int
     target:int
     
+    

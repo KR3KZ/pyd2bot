@@ -5,3 +5,4 @@ class QuestStepInfoRequestMessage(NetworkMessage):
     protocolId = 5562
     questId:int
     
+    

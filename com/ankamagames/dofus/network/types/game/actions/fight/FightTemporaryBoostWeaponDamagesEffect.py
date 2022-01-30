@@ -5,3 +5,4 @@ class FightTemporaryBoostWeaponDamagesEffect(FightTemporaryBoostEffect):
     protocolId = 15
     weaponTypeId:int
     
+    

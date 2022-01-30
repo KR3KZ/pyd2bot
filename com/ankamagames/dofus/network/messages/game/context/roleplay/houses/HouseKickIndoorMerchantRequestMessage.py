@@ -5,3 +5,4 @@ class HouseKickIndoorMerchantRequestMessage(NetworkMessage):
     protocolId = 8862
     cellId:int
     
+    

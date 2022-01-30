@@ -7,3 +7,4 @@ class GuildFightPlayersHelpersJoinMessage(NetworkMessage):
     fightId:int
     playerInfo:CharacterMinimalPlusLookInformations
     
+    

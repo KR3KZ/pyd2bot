@@ -5,3 +5,4 @@ class FightTemporaryBoostStateEffect(FightTemporaryBoostEffect):
     protocolId = 8281
     stateId:int
     
+    

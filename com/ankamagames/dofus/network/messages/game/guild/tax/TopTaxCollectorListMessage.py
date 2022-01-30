@@ -5,3 +5,4 @@ class TopTaxCollectorListMessage(AbstractTaxCollectorListMessage):
     protocolId = 3617
     isDungeon:bool
     
+    

@@ -5,3 +5,4 @@ class UpdateMountCharacteristic(NetworkMessage):
     protocolId = 826
     type:int
     
+    

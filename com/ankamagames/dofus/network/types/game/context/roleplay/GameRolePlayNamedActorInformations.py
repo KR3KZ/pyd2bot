@@ -5,3 +5,4 @@ class GameRolePlayNamedActorInformations(GameRolePlayActorInformations):
     protocolId = 6660
     name:str
     
+    

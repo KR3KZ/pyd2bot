@@ -5,3 +5,4 @@ class PartyAbdicateThroneMessage(AbstractPartyMessage):
     protocolId = 6752
     playerId:int
     
+    

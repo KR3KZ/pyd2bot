@@ -5,3 +5,4 @@ class SpawnScaledMonsterInformation(BaseSpawnMonsterInformation):
     protocolId = 6368
     creatureLevel:int
     
+    

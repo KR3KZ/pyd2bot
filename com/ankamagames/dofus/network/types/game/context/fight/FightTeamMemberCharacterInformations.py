@@ -6,3 +6,4 @@ class FightTeamMemberCharacterInformations(FightTeamMemberInformations):
     name:str
     level:int
     
+    

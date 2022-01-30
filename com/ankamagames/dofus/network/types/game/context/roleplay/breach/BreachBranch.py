@@ -13,3 +13,4 @@ class BreachBranch(NetworkMessage):
     relativeScore:int
     monsters:MonsterInGroupLightInformations
     
+    

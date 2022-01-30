@@ -7,3 +7,4 @@ class BreachInvitationOfferMessage(NetworkMessage):
     host:CharacterMinimalInformations
     timeLeftBeforeCancel:int
     
+    

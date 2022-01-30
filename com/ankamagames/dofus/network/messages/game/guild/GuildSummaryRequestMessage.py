@@ -14,4 +14,7 @@ class GuildSummaryRequestMessage(PaginationRequestAbstractMessage):
     minSuccessFilter:int
     maxSuccessFilter:int
     sortType:int
+    hideFullFilter:bool
+    sortDescending:bool
+    
     

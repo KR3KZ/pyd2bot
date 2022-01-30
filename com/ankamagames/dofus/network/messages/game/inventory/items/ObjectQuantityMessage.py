@@ -7,3 +7,4 @@ class ObjectQuantityMessage(NetworkMessage):
     quantity:int
     origin:int
     
+    

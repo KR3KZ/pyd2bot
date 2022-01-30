@@ -6,3 +6,4 @@ class IconNamedPresetSaveRequestMessage(IconPresetSaveRequestMessage):
     name:str
     type:int
     
+    

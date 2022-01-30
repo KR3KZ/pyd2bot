@@ -8,3 +8,4 @@ class JobCrafterDirectoryEntryJobInfo(NetworkMessage):
     free:bool
     minLevel:int
     
+    

@@ -5,3 +5,4 @@ class LockableUseCodeMessage(NetworkMessage):
     protocolId = 5618
     code:str
     
+    

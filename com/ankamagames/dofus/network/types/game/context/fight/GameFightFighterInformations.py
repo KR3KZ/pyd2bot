@@ -10,3 +10,4 @@ class GameFightFighterInformations(GameContextActorInformations):
     stats:GameFightCharacteristics
     previousPositions:int
     
+    

@@ -5,3 +5,4 @@ class GuildCreationResultMessage(NetworkMessage):
     protocolId = 42
     result:int
     
+    

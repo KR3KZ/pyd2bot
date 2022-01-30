@@ -5,3 +5,4 @@ class TreasureHuntDigRequestMessage(NetworkMessage):
     protocolId = 6219
     questType:int
     
+    

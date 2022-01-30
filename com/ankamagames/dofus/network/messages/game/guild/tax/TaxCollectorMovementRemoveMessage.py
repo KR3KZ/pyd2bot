@@ -5,3 +5,4 @@ class TaxCollectorMovementRemoveMessage(NetworkMessage):
     protocolId = 5927
     collectorId:int
     
+    

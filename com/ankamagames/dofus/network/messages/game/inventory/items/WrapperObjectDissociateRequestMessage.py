@@ -6,3 +6,4 @@ class WrapperObjectDissociateRequestMessage(NetworkMessage):
     hostUID:int
     hostPos:int
     
+    

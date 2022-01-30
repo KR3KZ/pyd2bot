@@ -7,3 +7,4 @@ class HavenBagFurnitureInformation(NetworkMessage):
     funitureId:int
     orientation:int
     
+    

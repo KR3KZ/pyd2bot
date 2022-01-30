@@ -7,3 +7,4 @@ class BreachInvitationResponseMessage(NetworkMessage):
     guest:CharacterMinimalInformations
     accept:bool
     
+    

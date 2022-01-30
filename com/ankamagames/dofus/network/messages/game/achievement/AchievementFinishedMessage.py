@@ -6,3 +6,4 @@ class AchievementFinishedMessage(NetworkMessage):
     protocolId = 8970
     achievement:AchievementAchievedRewardable
     
+    

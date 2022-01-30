@@ -5,3 +5,4 @@ class PresetUseResultWithMissingIdsMessage(PresetUseResultMessage):
     protocolId = 2217
     missingIds:int
     
+    

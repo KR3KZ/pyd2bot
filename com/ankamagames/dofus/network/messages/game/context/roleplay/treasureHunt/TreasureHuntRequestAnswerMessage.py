@@ -6,3 +6,4 @@ class TreasureHuntRequestAnswerMessage(NetworkMessage):
     questType:int
     result:int
     
+    

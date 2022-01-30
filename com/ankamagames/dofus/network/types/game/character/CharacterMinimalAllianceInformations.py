@@ -6,3 +6,4 @@ class CharacterMinimalAllianceInformations(CharacterMinimalGuildInformations):
     protocolId = 4354
     alliance:BasicAllianceInformations
     
+    

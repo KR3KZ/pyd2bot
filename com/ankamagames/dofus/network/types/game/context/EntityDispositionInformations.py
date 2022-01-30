@@ -6,3 +6,4 @@ class EntityDispositionInformations(NetworkMessage):
     cellId:int
     direction:int
     
+    

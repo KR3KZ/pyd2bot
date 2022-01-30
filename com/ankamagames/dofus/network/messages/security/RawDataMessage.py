@@ -5,3 +5,4 @@ class RawDataMessage(NetworkMessage):
     protocolId = 6253
     content:bytearray
     
+    

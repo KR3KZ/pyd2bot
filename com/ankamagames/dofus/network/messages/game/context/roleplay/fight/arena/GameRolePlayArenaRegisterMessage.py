@@ -5,3 +5,4 @@ class GameRolePlayArenaRegisterMessage(NetworkMessage):
     protocolId = 5010
     battleMode:int
     
+    

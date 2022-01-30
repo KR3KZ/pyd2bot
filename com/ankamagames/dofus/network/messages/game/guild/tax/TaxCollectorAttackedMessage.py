@@ -12,3 +12,4 @@ class TaxCollectorAttackedMessage(NetworkMessage):
     subAreaId:int
     guild:BasicGuildInformations
     
+    

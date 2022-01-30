@@ -7,3 +7,4 @@ class GameMapMovementMessage(NetworkMessage):
     forcedDirection:int
     actorId:int
     
+    

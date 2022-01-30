@@ -7,3 +7,4 @@ class SequenceEndMessage(NetworkMessage):
     authorId:int
     sequenceType:int
     
+    

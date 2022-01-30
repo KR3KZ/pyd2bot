@@ -8,3 +8,4 @@ class GuildInvitedMessage(NetworkMessage):
     recruterName:str
     guildInfo:BasicGuildInformations
     
+    

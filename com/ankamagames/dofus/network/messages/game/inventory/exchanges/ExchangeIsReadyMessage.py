@@ -6,3 +6,4 @@ class ExchangeIsReadyMessage(NetworkMessage):
     id:int
     ready:bool
     
+    

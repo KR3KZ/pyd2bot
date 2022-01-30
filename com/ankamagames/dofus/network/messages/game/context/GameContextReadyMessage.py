@@ -5,3 +5,4 @@ class GameContextReadyMessage(NetworkMessage):
     protocolId = 912
     mapId:int
     
+    

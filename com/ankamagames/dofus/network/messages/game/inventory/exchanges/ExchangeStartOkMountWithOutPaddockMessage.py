@@ -6,3 +6,4 @@ class ExchangeStartOkMountWithOutPaddockMessage(NetworkMessage):
     protocolId = 9985
     stabledMountsDescription:MountClientData
     
+    

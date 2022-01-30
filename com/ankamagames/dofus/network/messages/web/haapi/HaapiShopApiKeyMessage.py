@@ -5,3 +5,4 @@ class HaapiShopApiKeyMessage(NetworkMessage):
     protocolId = 6787
     token:str
     
+    

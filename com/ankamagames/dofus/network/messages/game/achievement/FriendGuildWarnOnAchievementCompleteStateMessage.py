@@ -5,3 +5,4 @@ class FriendGuildWarnOnAchievementCompleteStateMessage(NetworkMessage):
     protocolId = 8244
     enable:bool
     
+    

@@ -6,3 +6,4 @@ class GameRolePlayMountInformations(GameRolePlayNamedActorInformations):
     ownerName:str
     level:int
     
+    

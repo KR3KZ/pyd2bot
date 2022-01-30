@@ -6,3 +6,4 @@ class ExchangeCraftResultWithObjectDescMessage(ExchangeCraftResultMessage):
     protocolId = 118
     objectInfo:ObjectItemNotInContainer
     
+    

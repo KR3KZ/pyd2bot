@@ -6,3 +6,4 @@ class PrismFightJoinLeaveRequestMessage(NetworkMessage):
     subAreaId:int
     join:bool
     
+    

@@ -6,3 +6,4 @@ class GuildInformations(BasicGuildInformations):
     protocolId = 1201
     guildEmblem:GuildEmblem
     
+    

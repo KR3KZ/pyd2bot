@@ -5,3 +5,4 @@ class GuildPaddockTeleportRequestMessage(NetworkMessage):
     protocolId = 7914
     paddockId:int
     
+    

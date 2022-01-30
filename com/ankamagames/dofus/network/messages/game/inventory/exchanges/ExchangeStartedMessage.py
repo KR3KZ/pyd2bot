@@ -5,3 +5,4 @@ class ExchangeStartedMessage(NetworkMessage):
     protocolId = 8540
     exchangeType:int
     
+    

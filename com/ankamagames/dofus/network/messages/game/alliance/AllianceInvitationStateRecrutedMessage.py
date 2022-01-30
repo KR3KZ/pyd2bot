@@ -5,3 +5,4 @@ class AllianceInvitationStateRecrutedMessage(NetworkMessage):
     protocolId = 7918
     invitationState:int
     
+    

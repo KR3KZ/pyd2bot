@@ -6,3 +6,4 @@ class HelloConnectMessage(NetworkMessage):
     salt:str
     key:int
     
+    

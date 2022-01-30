@@ -6,3 +6,4 @@ class FriendJoinRequestMessage(NetworkMessage):
     protocolId = 535
     target:AbstractPlayerSearchInformation
     
+    

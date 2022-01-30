@@ -7,3 +7,4 @@ class HumanOptionAlliance(HumanOption):
     allianceInformations:AllianceInformations
     aggressable:int
     
+    

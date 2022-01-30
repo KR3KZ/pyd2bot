@@ -7,3 +7,4 @@ class DumpedEntityStatsMessage(NetworkMessage):
     actorId:int
     stats:CharacterCharacteristics
     
+    

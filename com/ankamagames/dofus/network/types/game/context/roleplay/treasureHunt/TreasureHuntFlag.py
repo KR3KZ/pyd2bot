@@ -6,3 +6,4 @@ class TreasureHuntFlag(NetworkMessage):
     mapId:int
     state:int
     
+    

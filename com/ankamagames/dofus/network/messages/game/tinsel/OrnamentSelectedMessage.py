@@ -5,3 +5,4 @@ class OrnamentSelectedMessage(NetworkMessage):
     protocolId = 7637
     ornamentId:int
     
+    

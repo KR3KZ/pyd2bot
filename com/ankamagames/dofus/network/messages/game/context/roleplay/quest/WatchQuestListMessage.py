@@ -5,3 +5,4 @@ class WatchQuestListMessage(QuestListMessage):
     protocolId = 9128
     playerId:int
     
+    

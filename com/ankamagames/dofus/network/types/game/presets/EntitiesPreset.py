@@ -6,3 +6,4 @@ class EntitiesPreset(Preset):
     iconId:int
     entityIds:int
     
+    

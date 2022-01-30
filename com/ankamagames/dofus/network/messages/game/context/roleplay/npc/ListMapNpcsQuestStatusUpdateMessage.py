@@ -6,3 +6,4 @@ class ListMapNpcsQuestStatusUpdateMessage(NetworkMessage):
     protocolId = 5996
     mapInfo:MapNpcQuestInfo
     
+    

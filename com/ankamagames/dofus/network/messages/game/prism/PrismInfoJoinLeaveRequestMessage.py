@@ -5,3 +5,4 @@ class PrismInfoJoinLeaveRequestMessage(NetworkMessage):
     protocolId = 6247
     join:bool
     
+    

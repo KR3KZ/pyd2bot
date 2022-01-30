@@ -5,3 +5,4 @@ class SkillActionDescriptionCraft(SkillActionDescription):
     protocolId = 6151
     probability:int
     
+    

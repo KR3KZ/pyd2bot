@@ -5,3 +5,4 @@ class FriendSetWarnOnLevelGainMessage(NetworkMessage):
     protocolId = 4065
     enable:bool
     
+    

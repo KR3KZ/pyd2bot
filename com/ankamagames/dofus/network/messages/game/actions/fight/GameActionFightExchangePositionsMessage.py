@@ -7,3 +7,4 @@ class GameActionFightExchangePositionsMessage(AbstractGameActionMessage):
     casterCellId:int
     targetCellId:int
     
+    

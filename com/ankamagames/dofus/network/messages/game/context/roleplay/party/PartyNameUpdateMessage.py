@@ -5,3 +5,4 @@ class PartyNameUpdateMessage(AbstractPartyMessage):
     protocolId = 4910
     partyName:str
     
+    

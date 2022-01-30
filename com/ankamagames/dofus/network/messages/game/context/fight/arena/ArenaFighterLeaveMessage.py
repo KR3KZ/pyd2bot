@@ -6,3 +6,4 @@ class ArenaFighterLeaveMessage(NetworkMessage):
     protocolId = 1880
     leaver:CharacterBasicMinimalInformations
     
+    

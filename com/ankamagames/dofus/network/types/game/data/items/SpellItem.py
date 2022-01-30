@@ -6,3 +6,4 @@ class SpellItem(Item):
     spellId:int
     spellLevel:int
     
+    

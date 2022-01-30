@@ -6,3 +6,4 @@ class GameActionFightCarryCharacterMessage(AbstractGameActionMessage):
     targetId:int
     cellId:int
     
+    

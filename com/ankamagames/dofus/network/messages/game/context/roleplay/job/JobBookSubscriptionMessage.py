@@ -6,3 +6,4 @@ class JobBookSubscriptionMessage(NetworkMessage):
     protocolId = 8266
     subscriptions:JobBookSubscription
     
+    

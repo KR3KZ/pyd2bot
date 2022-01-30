@@ -6,3 +6,4 @@ class CurrentMapMessage(NetworkMessage):
     mapId:int
     mapKey:str
     
+    

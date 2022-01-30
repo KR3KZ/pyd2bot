@@ -5,3 +5,4 @@ class IgnoredAddFailureMessage(NetworkMessage):
     protocolId = 4052
     reason:int
     
+    

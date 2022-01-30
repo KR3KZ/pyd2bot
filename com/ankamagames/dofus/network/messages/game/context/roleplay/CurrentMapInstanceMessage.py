@@ -5,3 +5,4 @@ class CurrentMapInstanceMessage(CurrentMapMessage):
     protocolId = 7422
     instantiatedMapId:int
     
+    

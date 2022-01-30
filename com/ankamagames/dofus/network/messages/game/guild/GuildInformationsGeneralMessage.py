@@ -12,3 +12,4 @@ class GuildInformationsGeneralMessage(NetworkMessage):
     nbTotalMembers:int
     nbConnectedMembers:int
     
+    

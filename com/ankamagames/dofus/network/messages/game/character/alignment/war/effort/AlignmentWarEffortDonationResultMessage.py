@@ -5,3 +5,4 @@ class AlignmentWarEffortDonationResultMessage(NetworkMessage):
     protocolId = 6010
     result:int
     
+    

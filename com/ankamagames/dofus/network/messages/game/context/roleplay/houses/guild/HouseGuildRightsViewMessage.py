@@ -6,3 +6,4 @@ class HouseGuildRightsViewMessage(NetworkMessage):
     houseId:int
     instanceId:int
     
+    

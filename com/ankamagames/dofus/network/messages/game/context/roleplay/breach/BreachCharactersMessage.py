@@ -5,3 +5,4 @@ class BreachCharactersMessage(NetworkMessage):
     protocolId = 6300
     characters:int
     
+    

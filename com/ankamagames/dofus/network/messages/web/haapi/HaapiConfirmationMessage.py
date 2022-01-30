@@ -9,3 +9,4 @@ class HaapiConfirmationMessage(NetworkMessage):
     action:int
     transaction:str
     
+    

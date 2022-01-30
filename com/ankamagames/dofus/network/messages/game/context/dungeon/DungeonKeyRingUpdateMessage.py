@@ -6,3 +6,4 @@ class DungeonKeyRingUpdateMessage(NetworkMessage):
     dungeonId:int
     available:bool
     
+    

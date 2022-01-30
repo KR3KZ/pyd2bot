@@ -6,3 +6,4 @@ class BreachInvitationCloseMessage(NetworkMessage):
     protocolId = 3262
     host:CharacterMinimalInformations
     
+    

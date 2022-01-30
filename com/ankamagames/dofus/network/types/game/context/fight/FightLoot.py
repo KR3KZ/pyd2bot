@@ -6,3 +6,4 @@ class FightLoot(NetworkMessage):
     objects:int
     kamas:int
     
+    

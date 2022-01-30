@@ -5,3 +5,4 @@ class ExchangeErrorMessage(NetworkMessage):
     protocolId = 6446
     errorType:int
     
+    

@@ -6,3 +6,4 @@ class GameActionFightDodgePointLossMessage(AbstractGameActionMessage):
     targetId:int
     amount:int
     
+    

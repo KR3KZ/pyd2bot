@@ -5,3 +5,4 @@ class ServerSessionConstantInteger(ServerSessionConstant):
     protocolId = 6620
     value:int
     
+    

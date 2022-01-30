@@ -9,3 +9,4 @@ class GameFightCharacteristics(NetworkMessage):
     summoned:bool
     invisibilityState:int
     
+    

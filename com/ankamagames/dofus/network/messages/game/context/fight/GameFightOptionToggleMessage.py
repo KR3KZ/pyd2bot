@@ -5,3 +5,4 @@ class GameFightOptionToggleMessage(NetworkMessage):
     protocolId = 2382
     option:int
     
+    

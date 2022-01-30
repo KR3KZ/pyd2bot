@@ -5,3 +5,4 @@ class EmoteRemoveMessage(NetworkMessage):
     protocolId = 8124
     emoteId:int
     
+    

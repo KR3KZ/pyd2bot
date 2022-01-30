@@ -6,3 +6,4 @@ class StatedElementUpdatedMessage(NetworkMessage):
     protocolId = 3961
     statedElement:StatedElement
     
+    

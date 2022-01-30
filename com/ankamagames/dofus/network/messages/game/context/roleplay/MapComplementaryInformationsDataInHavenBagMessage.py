@@ -9,3 +9,4 @@ class MapComplementaryInformationsDataInHavenBagMessage(MapComplementaryInformat
     roomId:int
     maxRoomId:int
     
+    

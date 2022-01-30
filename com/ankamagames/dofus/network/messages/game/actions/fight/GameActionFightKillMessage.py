@@ -5,3 +5,4 @@ class GameActionFightKillMessage(AbstractGameActionMessage):
     protocolId = 8091
     targetId:int
     
+    

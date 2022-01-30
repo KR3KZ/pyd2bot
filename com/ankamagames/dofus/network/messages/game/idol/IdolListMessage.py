@@ -8,3 +8,4 @@ class IdolListMessage(NetworkMessage):
     partyChosenIdols:int
     partyIdols:PartyIdol
     
+    

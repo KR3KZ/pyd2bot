@@ -9,3 +9,4 @@ class QuestListMessage(NetworkMessage):
     activeQuests:QuestActiveInformations
     reinitDoneQuestsIds:int
     
+    

@@ -5,3 +5,4 @@ class ServerOptionalFeaturesMessage(NetworkMessage):
     protocolId = 189
     features:int
     
+    

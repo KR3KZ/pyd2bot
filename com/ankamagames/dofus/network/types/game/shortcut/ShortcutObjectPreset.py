@@ -5,3 +5,4 @@ class ShortcutObjectPreset(ShortcutObject):
     protocolId = 5044
     presetId:int
     
+    

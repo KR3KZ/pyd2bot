@@ -6,3 +6,4 @@ class ForgettableSpellClientActionMessage(NetworkMessage):
     spellId:int
     action:int
     
+    

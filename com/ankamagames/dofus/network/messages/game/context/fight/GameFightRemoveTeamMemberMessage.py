@@ -7,3 +7,4 @@ class GameFightRemoveTeamMemberMessage(NetworkMessage):
     teamId:int
     charId:int
     
+    

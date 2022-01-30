@@ -33,4 +33,10 @@ class MountClientData(NetworkMessage):
     reproductionCountMax:int
     harnessGID:int
     effectList:ObjectEffectInteger
+    sex:bool
+    isRideable:bool
+    isWild:bool
+    isFecondationReady:bool
+    useHarnessColors:bool
+    
     

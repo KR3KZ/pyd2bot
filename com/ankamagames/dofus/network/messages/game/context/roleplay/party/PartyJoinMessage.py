@@ -13,3 +13,4 @@ class PartyJoinMessage(AbstractPartyMessage):
     restricted:bool
     partyName:str
     
+    

@@ -5,3 +5,4 @@ class ProtocolRequired(NetworkMessage):
     protocolId = 5716
     version:str
     
+    

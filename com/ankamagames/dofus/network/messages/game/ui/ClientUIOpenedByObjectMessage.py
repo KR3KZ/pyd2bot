@@ -5,3 +5,4 @@ class ClientUIOpenedByObjectMessage(ClientUIOpenedMessage):
     protocolId = 8823
     uid:int
     
+    

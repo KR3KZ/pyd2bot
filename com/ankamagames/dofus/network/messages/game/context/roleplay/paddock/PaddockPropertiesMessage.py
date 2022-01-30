@@ -6,3 +6,4 @@ class PaddockPropertiesMessage(NetworkMessage):
     protocolId = 3194
     properties:PaddockInstancesInformations
     
+    

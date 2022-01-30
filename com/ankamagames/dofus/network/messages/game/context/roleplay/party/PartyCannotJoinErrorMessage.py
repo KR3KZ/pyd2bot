@@ -5,3 +5,4 @@ class PartyCannotJoinErrorMessage(AbstractPartyMessage):
     protocolId = 8807
     reason:int
     
+    

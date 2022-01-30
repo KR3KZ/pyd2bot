@@ -10,3 +10,4 @@ class PartyInvitationMemberInformations(CharacterBaseInformations):
     subAreaId:int
     entities:PartyEntityBaseInformation
     
+    

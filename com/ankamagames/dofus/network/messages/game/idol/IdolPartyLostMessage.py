@@ -5,3 +5,4 @@ class IdolPartyLostMessage(NetworkMessage):
     protocolId = 7502
     idolId:int
     
+    

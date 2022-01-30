@@ -5,3 +5,4 @@ class ExchangeCraftResultMessage(NetworkMessage):
     protocolId = 8524
     craftResult:int
     
+    

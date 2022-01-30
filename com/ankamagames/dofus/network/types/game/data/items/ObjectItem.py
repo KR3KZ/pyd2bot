@@ -10,3 +10,4 @@ class ObjectItem(Item):
     objectUID:int
     quantity:int
     
+    

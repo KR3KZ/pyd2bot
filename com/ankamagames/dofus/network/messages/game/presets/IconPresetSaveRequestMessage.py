@@ -7,3 +7,4 @@ class IconPresetSaveRequestMessage(NetworkMessage):
     symbolId:int
     updateData:bool
     
+    

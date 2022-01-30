@@ -6,3 +6,4 @@ class TaxCollectorStateUpdateMessage(NetworkMessage):
     uniqueId:int
     state:int
     
+    

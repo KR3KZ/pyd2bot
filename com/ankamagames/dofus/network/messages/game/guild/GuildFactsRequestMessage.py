@@ -5,3 +5,4 @@ class GuildFactsRequestMessage(NetworkMessage):
     protocolId = 4628
     guildId:int
     
+    

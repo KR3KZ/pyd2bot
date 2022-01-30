@@ -8,3 +8,4 @@ class ExchangeMountSterilizeFromPaddockMessage(NetworkMessage):
     worldY:int
     sterilizator:str
     
+    

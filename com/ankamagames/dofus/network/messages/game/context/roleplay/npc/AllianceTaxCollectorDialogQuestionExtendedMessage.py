@@ -6,3 +6,4 @@ class AllianceTaxCollectorDialogQuestionExtendedMessage(TaxCollectorDialogQuesti
     protocolId = 7917
     alliance:BasicNamedAllianceInformations
     
+    

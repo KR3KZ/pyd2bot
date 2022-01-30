@@ -9,3 +9,4 @@ class ActivitySuggestionsRequestMessage(NetworkMessage):
     activityCategoryId:int
     nbCards:int
     
+    

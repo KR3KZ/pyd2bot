@@ -6,3 +6,4 @@ class CharacterDeletionRequestMessage(NetworkMessage):
     characterId:int
     secretAnswerHash:str
     
+    

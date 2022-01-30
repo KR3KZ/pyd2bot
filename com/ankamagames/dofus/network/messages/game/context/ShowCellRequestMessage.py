@@ -5,3 +5,4 @@ class ShowCellRequestMessage(NetworkMessage):
     protocolId = 4305
     cellId:int
     
+    

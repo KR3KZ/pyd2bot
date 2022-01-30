@@ -6,3 +6,4 @@ class ExchangeBidHouseBuyResultMessage(NetworkMessage):
     uid:int
     bought:bool
     
+    

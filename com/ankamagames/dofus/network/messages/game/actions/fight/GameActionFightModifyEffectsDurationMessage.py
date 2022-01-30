@@ -6,3 +6,4 @@ class GameActionFightModifyEffectsDurationMessage(AbstractGameActionMessage):
     targetId:int
     delta:int
     
+    

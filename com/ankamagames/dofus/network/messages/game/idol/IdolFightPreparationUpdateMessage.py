@@ -7,3 +7,4 @@ class IdolFightPreparationUpdateMessage(NetworkMessage):
     idolSource:int
     idols:Idol
     
+    

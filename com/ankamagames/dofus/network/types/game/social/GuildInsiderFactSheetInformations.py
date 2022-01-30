@@ -7,3 +7,4 @@ class GuildInsiderFactSheetInformations(GuildFactSheetInformations):
     nbConnectedMembers:int
     nbTaxCollectors:int
     
+    

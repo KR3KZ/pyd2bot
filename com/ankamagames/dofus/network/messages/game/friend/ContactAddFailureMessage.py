@@ -5,3 +5,4 @@ class ContactAddFailureMessage(NetworkMessage):
     protocolId = 7999
     reason:int
     
+    

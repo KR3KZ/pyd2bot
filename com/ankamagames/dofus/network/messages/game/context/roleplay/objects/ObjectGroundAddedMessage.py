@@ -6,3 +6,4 @@ class ObjectGroundAddedMessage(NetworkMessage):
     cellId:int
     objectGID:int
     
+    

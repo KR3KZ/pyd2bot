@@ -6,3 +6,4 @@ class BasicStatMessage(NetworkMessage):
     timeSpent:int
     statId:int
     
+    

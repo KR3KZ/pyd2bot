@@ -5,3 +5,4 @@ class AccessoryPreviewErrorMessage(NetworkMessage):
     protocolId = 2038
     error:int
     
+    

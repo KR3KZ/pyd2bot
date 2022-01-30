@@ -6,3 +6,4 @@ class GameActionFightDispellableEffectMessage(AbstractGameActionMessage):
     protocolId = 9416
     effect:AbstractFightDispellableEffect
     
+    

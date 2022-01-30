@@ -6,3 +6,4 @@ class DungeonKeyRingMessage(NetworkMessage):
     availables:int
     unavailables:int
     
+    

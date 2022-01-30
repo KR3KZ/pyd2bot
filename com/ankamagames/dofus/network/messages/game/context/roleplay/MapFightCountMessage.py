@@ -5,3 +5,4 @@ class MapFightCountMessage(NetworkMessage):
     protocolId = 9018
     fightCount:int
     
+    

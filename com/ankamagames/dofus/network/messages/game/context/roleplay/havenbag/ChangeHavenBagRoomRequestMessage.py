@@ -5,3 +5,4 @@ class ChangeHavenBagRoomRequestMessage(NetworkMessage):
     protocolId = 7038
     roomId:int
     
+    

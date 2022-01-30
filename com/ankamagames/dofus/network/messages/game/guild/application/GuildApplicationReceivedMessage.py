@@ -6,3 +6,4 @@ class GuildApplicationReceivedMessage(NetworkMessage):
     playerName:str
     playerId:int
     
+    

@@ -5,3 +5,4 @@ class ExchangeBidHouseGenericItemAddedMessage(NetworkMessage):
     protocolId = 7602
     objGenericId:int
     
+    

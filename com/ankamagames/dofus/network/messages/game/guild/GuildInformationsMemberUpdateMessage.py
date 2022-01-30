@@ -6,3 +6,4 @@ class GuildInformationsMemberUpdateMessage(NetworkMessage):
     protocolId = 6301
     member:GuildMember
     
+    

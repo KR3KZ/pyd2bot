@@ -5,3 +5,4 @@ class PresetUseRequestMessage(NetworkMessage):
     protocolId = 1855
     presetId:int
     
+    

@@ -6,3 +6,4 @@ class GameFightRefreshFighterMessage(NetworkMessage):
     protocolId = 6738
     informations:GameContextActorInformations
     
+    

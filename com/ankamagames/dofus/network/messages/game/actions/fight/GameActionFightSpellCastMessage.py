@@ -7,3 +7,4 @@ class GameActionFightSpellCastMessage(AbstractGameActionFightTargetedAbilityMess
     spellLevel:int
     portalsIds:int
     
+    

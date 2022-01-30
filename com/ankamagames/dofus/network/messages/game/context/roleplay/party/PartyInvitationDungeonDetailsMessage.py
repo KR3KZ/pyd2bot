@@ -6,3 +6,4 @@ class PartyInvitationDungeonDetailsMessage(PartyInvitationDetailsMessage):
     dungeonId:int
     playersDungeonReady:bool
     
+    

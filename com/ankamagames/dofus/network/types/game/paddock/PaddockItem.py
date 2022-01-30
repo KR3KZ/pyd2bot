@@ -6,3 +6,4 @@ class PaddockItem(ObjectItemInRolePlay):
     protocolId = 5575
     durability:ItemDurability
     
+    

@@ -5,3 +5,4 @@ class PartyMemberEjectedMessage(PartyMemberRemoveMessage):
     protocolId = 7777
     kickerId:int
     
+    

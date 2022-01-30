@@ -6,3 +6,4 @@ class AtlasPointInformationsMessage(NetworkMessage):
     protocolId = 6676
     type:AtlasPointsInformations
     
+    

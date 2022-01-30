@@ -6,3 +6,4 @@ class PartyLocateMembersMessage(AbstractPartyMessage):
     protocolId = 3205
     geopositions:PartyMemberGeoPosition
     
+    

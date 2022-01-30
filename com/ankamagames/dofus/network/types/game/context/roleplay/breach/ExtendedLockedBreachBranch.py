@@ -5,3 +5,4 @@ class ExtendedLockedBreachBranch(ExtendedBreachBranch):
     protocolId = 169
     unlockPrice:int
     
+    

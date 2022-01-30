@@ -5,3 +5,4 @@ class ObjectEffectInteger(ObjectEffect):
     protocolId = 2163
     value:int
     
+    

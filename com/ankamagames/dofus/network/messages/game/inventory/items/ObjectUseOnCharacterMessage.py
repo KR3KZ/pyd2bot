@@ -5,3 +5,4 @@ class ObjectUseOnCharacterMessage(ObjectUseMessage):
     protocolId = 8768
     characterId:int
     
+    

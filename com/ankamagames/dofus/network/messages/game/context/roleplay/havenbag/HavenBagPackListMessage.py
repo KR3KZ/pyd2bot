@@ -5,3 +5,4 @@ class HavenBagPackListMessage(NetworkMessage):
     protocolId = 268
     packIds:int
     
+    

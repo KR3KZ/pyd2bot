@@ -5,3 +5,4 @@ class ExchangeSetCraftRecipeMessage(NetworkMessage):
     protocolId = 1333
     objectGID:int
     
+    

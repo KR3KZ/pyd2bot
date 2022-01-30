@@ -6,3 +6,4 @@ class AllianceListMessage(NetworkMessage):
     protocolId = 3861
     alliances:AllianceFactSheetInformations
     
+    

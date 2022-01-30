@@ -5,3 +5,4 @@ class StartupActionsAllAttributionMessage(NetworkMessage):
     protocolId = 2956
     characterId:int
     
+    

@@ -5,3 +5,4 @@ class CharacterUsableCharacteristicDetailed(CharacterCharacteristicDetailed):
     protocolId = 9575
     used:int
     
+    

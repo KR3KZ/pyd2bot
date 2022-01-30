@@ -5,3 +5,4 @@ class CharacterMinimalGuildPublicInformations(CharacterMinimalInformations):
     protocolId = 393
     rank:int
     
+    

@@ -5,3 +5,4 @@ class MountReleasedMessage(NetworkMessage):
     protocolId = 843
     mountId:int
     
+    

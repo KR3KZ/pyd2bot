@@ -11,3 +11,4 @@ class PaddockInformationsForSell(NetworkMessage):
     nbObject:int
     price:int
     
+    

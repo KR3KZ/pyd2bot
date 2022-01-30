@@ -5,3 +5,4 @@ class SkillActionDescription(NetworkMessage):
     protocolId = 2262
     skillId:int
     
+    

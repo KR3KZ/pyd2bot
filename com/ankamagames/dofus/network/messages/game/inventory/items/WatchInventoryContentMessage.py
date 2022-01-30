@@ -4,3 +4,4 @@ from com.ankamagames.dofus.network.messages.game.inventory.items.InventoryConten
 class WatchInventoryContentMessage(InventoryContentMessage):
     protocolId = 8233
     
+    

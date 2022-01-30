@@ -6,3 +6,4 @@ class ExchangeShopStockMultiMovementUpdatedMessage(NetworkMessage):
     protocolId = 8646
     objectInfoList:ObjectItemToSell
     
+    

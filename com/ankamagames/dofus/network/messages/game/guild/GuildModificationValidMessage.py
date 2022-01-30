@@ -7,3 +7,4 @@ class GuildModificationValidMessage(NetworkMessage):
     guildName:str
     guildEmblem:GuildEmblem
     
+    

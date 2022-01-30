@@ -14,3 +14,4 @@ class GameActionMark(NetworkMessage):
     cells:GameActionMarkedCell
     active:bool
     
+    

@@ -8,3 +8,4 @@ class ForgettableSpellsPreset(Preset):
     baseSpellsPreset:SpellsPreset
     forgettableSpells:SpellForPreset
     
+    

@@ -5,3 +5,4 @@ class SequenceNumberMessage(NetworkMessage):
     protocolId = 1059
     number:int
     
+    

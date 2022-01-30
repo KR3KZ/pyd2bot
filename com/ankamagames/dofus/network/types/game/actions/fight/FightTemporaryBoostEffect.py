@@ -5,3 +5,4 @@ class FightTemporaryBoostEffect(AbstractFightDispellableEffect):
     protocolId = 7366
     delta:int
     
+    

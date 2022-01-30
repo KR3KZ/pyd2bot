@@ -12,3 +12,4 @@ class LeagueFriendInformations(AbstractContactInformations):
     totalLeaguePoints:int
     ladderPosition:int
     
+    

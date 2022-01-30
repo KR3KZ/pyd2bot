@@ -5,3 +5,4 @@ class FightAllianceTeamInformations(FightTeamInformations):
     protocolId = 2398
     relation:int
     
+    

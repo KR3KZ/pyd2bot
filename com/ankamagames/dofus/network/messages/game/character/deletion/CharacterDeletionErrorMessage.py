@@ -5,3 +5,4 @@ class CharacterDeletionErrorMessage(NetworkMessage):
     protocolId = 4473
     reason:int
     
+    

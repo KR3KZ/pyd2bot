@@ -6,3 +6,4 @@ class MountEmoteIconUsedOkMessage(NetworkMessage):
     mountId:int
     reactionType:int
     
+    

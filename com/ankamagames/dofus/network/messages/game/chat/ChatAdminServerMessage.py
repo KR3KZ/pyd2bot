@@ -4,3 +4,4 @@ from com.ankamagames.dofus.network.messages.game.chat.ChatServerMessage import C
 class ChatAdminServerMessage(ChatServerMessage):
     protocolId = 6581
     
+    

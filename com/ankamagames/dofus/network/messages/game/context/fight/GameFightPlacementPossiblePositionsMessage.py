@@ -7,3 +7,4 @@ class GameFightPlacementPossiblePositionsMessage(NetworkMessage):
     positionsForDefenders:int
     teamNumber:int
     
+    

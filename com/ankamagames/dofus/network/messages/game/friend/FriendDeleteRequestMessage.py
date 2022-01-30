@@ -5,3 +5,4 @@ class FriendDeleteRequestMessage(NetworkMessage):
     protocolId = 7400
     accountId:int
     
+    

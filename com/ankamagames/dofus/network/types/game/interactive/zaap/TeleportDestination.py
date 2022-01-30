@@ -9,3 +9,4 @@ class TeleportDestination(NetworkMessage):
     level:int
     cost:int
     
+    

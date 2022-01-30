@@ -6,3 +6,4 @@ class GameActionFightSummonMessage(AbstractGameActionMessage):
     protocolId = 2879
     summons:GameFightFighterInformations
     
+    

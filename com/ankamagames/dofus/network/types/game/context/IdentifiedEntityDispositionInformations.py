@@ -5,3 +5,4 @@ class IdentifiedEntityDispositionInformations(EntityDispositionInformations):
     protocolId = 8490
     id:int
     
+    

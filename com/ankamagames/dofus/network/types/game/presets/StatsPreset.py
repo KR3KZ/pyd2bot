@@ -6,3 +6,4 @@ class StatsPreset(Preset):
     protocolId = 6559
     stats:SimpleCharacterCharacteristicForPreset
     
+    

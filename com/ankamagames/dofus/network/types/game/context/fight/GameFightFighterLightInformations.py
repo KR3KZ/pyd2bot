@@ -7,4 +7,7 @@ class GameFightFighterLightInformations(NetworkMessage):
     wave:int
     level:int
     breed:int
+    sex:bool
+    alive:bool
+    
     

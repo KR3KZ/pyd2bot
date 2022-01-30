@@ -6,3 +6,4 @@ class GuildUpdateApplicationMessage(NetworkMessage):
     applyText:str
     guildId:int
     
+    

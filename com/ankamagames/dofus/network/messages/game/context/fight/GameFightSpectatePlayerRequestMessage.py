@@ -5,3 +5,4 @@ class GameFightSpectatePlayerRequestMessage(NetworkMessage):
     protocolId = 9098
     playerId:int
     
+    

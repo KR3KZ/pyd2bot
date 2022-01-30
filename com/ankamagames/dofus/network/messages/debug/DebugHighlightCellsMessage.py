@@ -6,3 +6,4 @@ class DebugHighlightCellsMessage(NetworkMessage):
     color:int
     cells:int
     
+    

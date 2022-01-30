@@ -5,3 +5,4 @@ class CharacterCanBeCreatedResultMessage(NetworkMessage):
     protocolId = 9527
     yesYouCan:bool
     
+    

@@ -5,3 +5,4 @@ class ExchangeMultiCraftCrafterCanUseHisRessourcesMessage(NetworkMessage):
     protocolId = 264
     allowed:bool
     
+    

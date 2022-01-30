@@ -14,3 +14,4 @@ class ApplicationPlayerInformation(NetworkMessage):
     accountNickname:str
     status:PlayerStatus
     
+    

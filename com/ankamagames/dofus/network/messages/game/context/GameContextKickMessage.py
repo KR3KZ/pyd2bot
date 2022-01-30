@@ -5,3 +5,4 @@ class GameContextKickMessage(NetworkMessage):
     protocolId = 2712
     targetId:int
     
+    

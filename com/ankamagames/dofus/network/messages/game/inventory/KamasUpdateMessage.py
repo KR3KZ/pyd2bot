@@ -5,3 +5,4 @@ class KamasUpdateMessage(NetworkMessage):
     protocolId = 4370
     kamasTotal:int
     
+    

@@ -10,3 +10,4 @@ class GameFightFighterNamedInformations(GameFightFighterInformations):
     ladderPosition:int
     hiddenInPrefight:bool
     
+    

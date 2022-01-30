@@ -9,3 +9,4 @@ class FightTeamMemberTaxCollectorInformations(FightTeamMemberInformations):
     guildId:int
     uid:int
     
+    

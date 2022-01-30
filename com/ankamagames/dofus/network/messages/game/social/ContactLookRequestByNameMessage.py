@@ -5,3 +5,4 @@ class ContactLookRequestByNameMessage(ContactLookRequestMessage):
     protocolId = 4808
     playerName:str
     
+    

@@ -8,3 +8,4 @@ class SymbioticObjectAssociateRequestMessage(NetworkMessage):
     hostUID:int
     hostPos:int
     
+    

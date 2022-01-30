@@ -8,3 +8,4 @@ class FightResultListEntry(NetworkMessage):
     wave:int
     rewards:FightLoot
     
+    

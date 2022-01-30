@@ -6,3 +6,4 @@ class TreasureHuntAvailableRetryCountUpdateMessage(NetworkMessage):
     questType:int
     availableRetryCount:int
     
+    

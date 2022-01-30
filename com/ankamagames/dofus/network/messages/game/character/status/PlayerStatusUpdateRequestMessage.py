@@ -6,3 +6,4 @@ class PlayerStatusUpdateRequestMessage(NetworkMessage):
     protocolId = 1504
     status:PlayerStatus
     
+    

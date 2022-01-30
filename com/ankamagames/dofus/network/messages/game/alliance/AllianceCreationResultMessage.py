@@ -5,3 +5,4 @@ class AllianceCreationResultMessage(NetworkMessage):
     protocolId = 4954
     result:int
     
+    

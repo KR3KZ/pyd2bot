@@ -6,3 +6,4 @@ class GameActionFightPointsVariationMessage(AbstractGameActionMessage):
     targetId:int
     delta:int
     
+    

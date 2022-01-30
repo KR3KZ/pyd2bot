@@ -6,3 +6,4 @@ class ExchangeReplyTaxVendorMessage(NetworkMessage):
     objectValue:int
     totalTaxValue:int
     
+    

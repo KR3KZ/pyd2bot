@@ -5,3 +5,4 @@ class CharacterBasicMinimalInformations(AbstractCharacterInformation):
     protocolId = 4480
     name:str
     
+    

@@ -6,3 +6,4 @@ class AchievementFinishedInformationMessage(AchievementFinishedMessage):
     name:str
     playerId:int
     
+    

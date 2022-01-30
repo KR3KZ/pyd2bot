@@ -5,3 +5,4 @@ class PartyModifiableStatusMessage(AbstractPartyMessage):
     protocolId = 4439
     enabled:bool
     
+    

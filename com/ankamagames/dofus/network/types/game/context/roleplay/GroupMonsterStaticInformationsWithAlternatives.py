@@ -6,3 +6,4 @@ class GroupMonsterStaticInformationsWithAlternatives(GroupMonsterStaticInformati
     protocolId = 1240
     alternatives:AlternativeMonstersInGroupLightInformations
     
+    

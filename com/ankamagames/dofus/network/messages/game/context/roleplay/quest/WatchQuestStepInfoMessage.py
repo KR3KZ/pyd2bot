@@ -5,3 +5,4 @@ class WatchQuestStepInfoMessage(QuestStepInfoMessage):
     protocolId = 2727
     playerId:int
     
+    

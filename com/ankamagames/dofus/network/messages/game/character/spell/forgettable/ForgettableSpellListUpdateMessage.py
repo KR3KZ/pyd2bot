@@ -7,3 +7,4 @@ class ForgettableSpellListUpdateMessage(NetworkMessage):
     action:int
     spells:ForgettableSpellItem
     
+    

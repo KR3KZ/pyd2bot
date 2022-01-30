@@ -6,3 +6,4 @@ class SpellVariantActivationMessage(NetworkMessage):
     spellId:int
     result:bool
     
+    

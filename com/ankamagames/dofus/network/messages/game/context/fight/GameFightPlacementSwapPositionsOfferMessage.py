@@ -9,3 +9,4 @@ class GameFightPlacementSwapPositionsOfferMessage(NetworkMessage):
     requestedId:int
     requestedCellId:int
     
+    

@@ -6,3 +6,4 @@ class CompassUpdatePartyMemberMessage(CompassUpdateMessage):
     memberId:int
     active:bool
     
+    

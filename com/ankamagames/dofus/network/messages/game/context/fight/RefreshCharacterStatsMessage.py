@@ -7,3 +7,4 @@ class RefreshCharacterStatsMessage(NetworkMessage):
     fighterId:int
     stats:GameFightCharacteristics
     
+    

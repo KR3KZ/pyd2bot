@@ -5,3 +5,4 @@ class GameFightPlacementPositionRequestMessage(NetworkMessage):
     protocolId = 5499
     cellId:int
     
+    

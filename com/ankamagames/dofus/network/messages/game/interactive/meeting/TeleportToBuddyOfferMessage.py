@@ -7,3 +7,4 @@ class TeleportToBuddyOfferMessage(NetworkMessage):
     buddyId:int
     timeLeft:int
     
+    

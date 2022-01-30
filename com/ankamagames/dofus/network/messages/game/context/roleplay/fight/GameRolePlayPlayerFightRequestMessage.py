@@ -7,3 +7,4 @@ class GameRolePlayPlayerFightRequestMessage(NetworkMessage):
     targetCellId:int
     friendly:bool
     
+    

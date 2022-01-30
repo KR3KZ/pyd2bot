@@ -5,3 +5,4 @@ class GuestLimitationMessage(NetworkMessage):
     protocolId = 1036
     reason:int
     
+    

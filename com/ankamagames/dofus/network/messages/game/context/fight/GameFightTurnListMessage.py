@@ -6,3 +6,4 @@ class GameFightTurnListMessage(NetworkMessage):
     ids:int
     deadsIds:int
     
+    

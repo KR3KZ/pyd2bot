@@ -5,3 +5,4 @@ class IdentificationFailedMessage(NetworkMessage):
     protocolId = 7135
     reason:int
     
+    

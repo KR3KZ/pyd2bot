@@ -6,3 +6,4 @@ class SelectedServerDataExtendedMessage(SelectedServerDataMessage):
     protocolId = 2850
     servers:GameServerInformations
     
+    

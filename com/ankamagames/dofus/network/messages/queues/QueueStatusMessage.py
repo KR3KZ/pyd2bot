@@ -6,3 +6,4 @@ class QueueStatusMessage(NetworkMessage):
     position:int
     total:int
     
+    

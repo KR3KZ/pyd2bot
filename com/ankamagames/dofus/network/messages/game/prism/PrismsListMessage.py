@@ -6,3 +6,4 @@ class PrismsListMessage(NetworkMessage):
     protocolId = 3236
     prisms:PrismSubareaEmptyInfo
     
+    

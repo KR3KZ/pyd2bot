@@ -5,3 +5,4 @@ class SpellVariantActivationRequestMessage(NetworkMessage):
     protocolId = 4887
     spellId:int
     
+    

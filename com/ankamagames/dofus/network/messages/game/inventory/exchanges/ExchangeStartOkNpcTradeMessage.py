@@ -5,3 +5,4 @@ class ExchangeStartOkNpcTradeMessage(NetworkMessage):
     protocolId = 4055
     npcId:int
     
+    

@@ -5,3 +5,4 @@ class PartyIdol(Idol):
     protocolId = 563
     ownersIds:int
     
+    

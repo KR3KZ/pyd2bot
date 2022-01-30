@@ -7,3 +7,4 @@ class NpcDialogQuestionMessage(NetworkMessage):
     dialogParams:str
     visibleReplies:int
     
+    

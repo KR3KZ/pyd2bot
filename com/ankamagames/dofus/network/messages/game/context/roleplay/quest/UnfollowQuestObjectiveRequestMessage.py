@@ -6,3 +6,4 @@ class UnfollowQuestObjectiveRequestMessage(NetworkMessage):
     questId:int
     objectiveId:int
     
+    

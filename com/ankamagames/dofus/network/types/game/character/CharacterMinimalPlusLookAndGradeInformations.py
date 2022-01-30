@@ -5,3 +5,4 @@ class CharacterMinimalPlusLookAndGradeInformations(CharacterMinimalPlusLookInfor
     protocolId = 7522
     grade:int
     
+    

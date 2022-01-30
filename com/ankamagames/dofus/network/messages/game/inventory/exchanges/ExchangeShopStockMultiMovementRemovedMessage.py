@@ -5,3 +5,4 @@ class ExchangeShopStockMultiMovementRemovedMessage(NetworkMessage):
     protocolId = 3309
     objectIdList:int
     
+    

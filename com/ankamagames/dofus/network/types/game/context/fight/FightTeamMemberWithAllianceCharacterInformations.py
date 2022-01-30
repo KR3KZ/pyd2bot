@@ -6,3 +6,4 @@ class FightTeamMemberWithAllianceCharacterInformations(FightTeamMemberCharacterI
     protocolId = 2689
     allianceInfos:BasicAllianceInformations
     
+    

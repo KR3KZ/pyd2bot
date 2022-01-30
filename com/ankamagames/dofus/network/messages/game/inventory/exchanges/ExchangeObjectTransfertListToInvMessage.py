@@ -5,3 +5,4 @@ class ExchangeObjectTransfertListToInvMessage(NetworkMessage):
     protocolId = 1721
     ids:int
     
+    

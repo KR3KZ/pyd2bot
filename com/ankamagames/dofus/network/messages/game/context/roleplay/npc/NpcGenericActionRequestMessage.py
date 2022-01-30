@@ -7,3 +7,4 @@ class NpcGenericActionRequestMessage(NetworkMessage):
     npcActionId:int
     npcMapId:int
     
+    

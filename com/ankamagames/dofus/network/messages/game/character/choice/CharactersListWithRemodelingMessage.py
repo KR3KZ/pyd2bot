@@ -6,3 +6,4 @@ class CharactersListWithRemodelingMessage(CharactersListMessage):
     protocolId = 3532
     charactersToRemodel:CharacterToRemodelInformations
     
+    

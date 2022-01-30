@@ -5,3 +5,4 @@ class ObjectUseMessage(NetworkMessage):
     protocolId = 3065
     objectUID:int
     
+    

@@ -7,3 +7,4 @@ class GameFightEntityInformation(GameFightFighterInformations):
     level:int
     masterId:int
     
+    

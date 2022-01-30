@@ -6,3 +6,4 @@ class QuestStepValidatedMessage(NetworkMessage):
     questId:int
     stepId:int
     
+    

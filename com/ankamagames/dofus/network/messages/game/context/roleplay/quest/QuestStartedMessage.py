@@ -5,3 +5,4 @@ class QuestStartedMessage(NetworkMessage):
     protocolId = 475
     questId:int
     
+    

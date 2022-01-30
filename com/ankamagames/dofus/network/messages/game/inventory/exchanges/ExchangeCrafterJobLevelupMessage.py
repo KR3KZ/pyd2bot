@@ -5,3 +5,4 @@ class ExchangeCrafterJobLevelupMessage(NetworkMessage):
     protocolId = 6591
     crafterJobLevel:int
     
+    

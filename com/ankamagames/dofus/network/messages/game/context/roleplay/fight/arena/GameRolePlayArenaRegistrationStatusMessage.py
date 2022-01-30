@@ -7,3 +7,4 @@ class GameRolePlayArenaRegistrationStatusMessage(NetworkMessage):
     step:int
     battleMode:int
     
+    

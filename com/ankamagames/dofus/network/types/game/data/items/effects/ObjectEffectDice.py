@@ -7,3 +7,4 @@ class ObjectEffectDice(ObjectEffect):
     diceSide:int
     diceConst:int
     
+    

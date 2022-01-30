@@ -14,4 +14,9 @@ class ObjectEffectMount(ObjectEffect):
     reproductionCountMax:int
     effects:ObjectEffectInteger
     capacities:int
+    sex:bool
+    isRideable:bool
+    isFeconded:bool
+    isFecondationReady:bool
+    
     

@@ -6,3 +6,4 @@ class ChangeMapMessage(NetworkMessage):
     mapId:int
     autopilot:bool
     
+    

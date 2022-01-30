@@ -5,3 +5,4 @@ class QuestValidatedMessage(NetworkMessage):
     protocolId = 1984
     questId:int
     
+    

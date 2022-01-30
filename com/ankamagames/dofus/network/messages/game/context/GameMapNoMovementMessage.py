@@ -6,3 +6,4 @@ class GameMapNoMovementMessage(NetworkMessage):
     cellX:int
     cellY:int
     
+    

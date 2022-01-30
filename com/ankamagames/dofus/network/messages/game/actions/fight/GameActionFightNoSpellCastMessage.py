@@ -5,3 +5,4 @@ class GameActionFightNoSpellCastMessage(NetworkMessage):
     protocolId = 8111
     spellLevelId:int
     
+    

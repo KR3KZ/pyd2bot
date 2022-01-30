@@ -12,6 +12,10 @@ from {{types[field.typename].package}} import {{field.typename}}{% endif %}
 class {{cls.name}}({% if parent != None %}{{parent.name}}{% else %}NetworkMessage{% endif %}):
     protocolId = {{cls.protocolId}}
     {% for field in cls.fields -%}
-    {{field.name}}:{%if field.length != None%}list[{{field.typename}}]{% else %}{{field.typename}}{% endif %}{% if field.optional %} = None{% endif %}
+    {{field.name}}:{%if field.length != None%}list[{{field.typename}}]{% else %}{{field.typename}}{% endif %}
     {% endfor %}
+    {%- for field in cls.boolfields -%}
+    {{field.name}}:{{field.typename}}
+    {% endfor %}
+    
 

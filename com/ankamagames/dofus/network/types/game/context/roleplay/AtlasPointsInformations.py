@@ -7,3 +7,4 @@ class AtlasPointsInformations(NetworkMessage):
     type:int
     coords:MapCoordinatesExtended
     
+    

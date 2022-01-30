@@ -5,3 +5,4 @@ class AllianceInvitationAnswerMessage(NetworkMessage):
     protocolId = 6962
     accept:bool
     
+    

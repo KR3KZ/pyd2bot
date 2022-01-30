@@ -5,3 +5,4 @@ class ShortcutBarAddErrorMessage(NetworkMessage):
     protocolId = 1782
     error:int
     
+    

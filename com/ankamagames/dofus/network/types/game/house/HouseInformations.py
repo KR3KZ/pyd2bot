@@ -6,3 +6,4 @@ class HouseInformations(NetworkMessage):
     houseId:int
     modelId:int
     
+    

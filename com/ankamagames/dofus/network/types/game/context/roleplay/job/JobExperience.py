@@ -9,3 +9,4 @@ class JobExperience(NetworkMessage):
     jobXpLevelFloor:int
     jobXpNextLevelFloor:int
     
+    

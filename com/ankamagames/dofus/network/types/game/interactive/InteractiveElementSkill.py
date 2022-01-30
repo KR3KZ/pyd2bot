@@ -6,3 +6,4 @@ class InteractiveElementSkill(NetworkMessage):
     skillId:int
     skillInstanceUid:int
     
+    

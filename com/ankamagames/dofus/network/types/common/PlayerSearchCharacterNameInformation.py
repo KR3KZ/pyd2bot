@@ -5,3 +5,4 @@ class PlayerSearchCharacterNameInformation(AbstractPlayerSearchInformation):
     protocolId = 6431
     name:str
     
+    

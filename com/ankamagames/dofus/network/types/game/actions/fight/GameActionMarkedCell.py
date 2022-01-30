@@ -8,3 +8,4 @@ class GameActionMarkedCell(NetworkMessage):
     cellColor:int
     cellsType:int
     
+    

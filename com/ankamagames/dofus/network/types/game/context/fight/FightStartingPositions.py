@@ -6,3 +6,4 @@ class FightStartingPositions(NetworkMessage):
     positionsForChallengers:int
     positionsForDefenders:int
     
+    

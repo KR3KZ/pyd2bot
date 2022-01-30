@@ -7,3 +7,4 @@ class HouseSellRequestMessage(NetworkMessage):
     amount:int
     forSale:bool
     
+    

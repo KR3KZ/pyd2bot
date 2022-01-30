@@ -6,3 +6,4 @@ class AcquaintancesListMessage(NetworkMessage):
     protocolId = 2842
     acquaintanceList:AcquaintanceInformation
     
+    

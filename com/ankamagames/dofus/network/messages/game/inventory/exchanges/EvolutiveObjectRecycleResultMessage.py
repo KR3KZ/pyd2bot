@@ -6,3 +6,4 @@ class EvolutiveObjectRecycleResultMessage(NetworkMessage):
     protocolId = 8805
     recycledItems:RecycledItem
     
+    

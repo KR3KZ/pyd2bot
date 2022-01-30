@@ -5,3 +5,4 @@ class GameFightPlacementSwapPositionsAcceptMessage(NetworkMessage):
     protocolId = 2140
     requestId:int
     
+    

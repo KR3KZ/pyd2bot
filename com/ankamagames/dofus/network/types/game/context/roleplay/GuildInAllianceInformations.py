@@ -6,3 +6,4 @@ class GuildInAllianceInformations(GuildInformations):
     nbMembers:int
     joinDate:int
     
+    

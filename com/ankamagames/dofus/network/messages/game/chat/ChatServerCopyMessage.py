@@ -6,3 +6,4 @@ class ChatServerCopyMessage(ChatAbstractServerMessage):
     receiverId:int
     receiverName:str
     
+    

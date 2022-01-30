@@ -5,3 +5,4 @@ class MapInformationsRequestMessage(NetworkMessage):
     protocolId = 2396
     mapId:int
     
+    

@@ -6,3 +6,4 @@ class HaapiBuyValidationMessage(HaapiValidationMessage):
     amount:int
     email:str
     
+    

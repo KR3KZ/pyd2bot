@@ -15,3 +15,4 @@ class FriendSpouseInformations(NetworkMessage):
     guildInfo:GuildInformations
     alignmentSide:int
     
+    

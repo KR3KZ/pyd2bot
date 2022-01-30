@@ -7,3 +7,4 @@ class CheckFileMessage(NetworkMessage):
     type:int
     value:str
     
+    

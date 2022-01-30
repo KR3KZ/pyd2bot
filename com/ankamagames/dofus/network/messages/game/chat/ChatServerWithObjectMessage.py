@@ -6,3 +6,4 @@ class ChatServerWithObjectMessage(ChatServerMessage):
     protocolId = 5967
     objects:ObjectItem
     
+    

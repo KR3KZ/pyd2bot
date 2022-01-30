@@ -13,4 +13,9 @@ class GuildRecruitmentInformation(NetworkMessage):
     minSuccess:int
     lastEditPlayerName:str
     lastEditDate:int
+    minLevelFacultative:bool
+    minSuccessFacultative:bool
+    invalidatedByModeration:bool
+    recruitmentAutoLocked:bool
+    
     

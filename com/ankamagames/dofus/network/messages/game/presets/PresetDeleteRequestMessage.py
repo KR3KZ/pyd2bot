@@ -5,3 +5,4 @@ class PresetDeleteRequestMessage(NetworkMessage):
     protocolId = 3688
     presetId:int
     
+    

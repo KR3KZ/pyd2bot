@@ -5,3 +5,4 @@ class BaseSpawnMonsterInformation(SpawnInformation):
     protocolId = 736
     creatureGenericId:int
     
+    

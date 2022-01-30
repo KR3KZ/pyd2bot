@@ -7,3 +7,4 @@ class GameFightEffectTriggerCount(NetworkMessage):
     targetId:int
     count:int
     
+    

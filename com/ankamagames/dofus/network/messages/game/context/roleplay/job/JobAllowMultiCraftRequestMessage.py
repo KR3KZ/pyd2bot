@@ -5,3 +5,4 @@ class JobAllowMultiCraftRequestMessage(NetworkMessage):
     protocolId = 5111
     enabled:bool
     
+    

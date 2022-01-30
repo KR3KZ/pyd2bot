@@ -5,3 +5,4 @@ class ServerSessionConstantLong(ServerSessionConstant):
     protocolId = 4492
     value:int
     
+    

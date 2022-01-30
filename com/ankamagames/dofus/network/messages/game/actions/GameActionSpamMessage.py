@@ -5,3 +5,4 @@ class GameActionSpamMessage(NetworkMessage):
     protocolId = 6276
     cells:int
     
+    

@@ -5,3 +5,4 @@ class PartyRefuseInvitationNotificationMessage(AbstractPartyEventMessage):
     protocolId = 349
     guestId:int
     
+    

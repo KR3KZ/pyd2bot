@@ -5,3 +5,4 @@ class LifePointsRegenBeginMessage(NetworkMessage):
     protocolId = 9626
     regenRate:int
     
+    

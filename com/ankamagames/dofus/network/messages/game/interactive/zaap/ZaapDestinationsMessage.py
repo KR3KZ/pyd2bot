@@ -5,3 +5,4 @@ class ZaapDestinationsMessage(TeleportDestinationsMessage):
     protocolId = 4167
     spawnMapId:int
     
+    

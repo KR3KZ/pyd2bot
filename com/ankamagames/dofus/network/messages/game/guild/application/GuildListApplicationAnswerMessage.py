@@ -6,3 +6,4 @@ class GuildListApplicationAnswerMessage(PaginationAnswerAbstractMessage):
     protocolId = 1223
     applies:GuildApplicationInformation
     
+    

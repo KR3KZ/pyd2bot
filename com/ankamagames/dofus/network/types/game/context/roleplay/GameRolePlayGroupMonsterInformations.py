@@ -7,4 +7,8 @@ class GameRolePlayGroupMonsterInformations(GameRolePlayActorInformations):
     staticInfos:GroupMonsterStaticInformations
     lootShare:int
     alignmentSide:int
+    keyRingBonus:bool
+    hasHardcoreDrop:bool
+    hasAVARewardToken:bool
+    
     

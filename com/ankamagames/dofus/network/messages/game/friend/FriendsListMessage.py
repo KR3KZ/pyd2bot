@@ -6,3 +6,4 @@ class FriendsListMessage(NetworkMessage):
     protocolId = 6666
     friendsList:FriendInformations
     
+    

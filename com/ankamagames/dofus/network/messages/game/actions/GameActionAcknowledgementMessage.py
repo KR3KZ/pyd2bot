@@ -6,3 +6,4 @@ class GameActionAcknowledgementMessage(NetworkMessage):
     valid:bool
     actionId:int
     
+    

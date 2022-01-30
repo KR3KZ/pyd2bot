@@ -6,3 +6,4 @@ class PresetUseResultMessage(NetworkMessage):
     presetId:int
     code:int
     
+    

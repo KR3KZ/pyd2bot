@@ -6,3 +6,4 @@ class ItemDurability(NetworkMessage):
     durability:int
     durabilityMax:int
     
+    

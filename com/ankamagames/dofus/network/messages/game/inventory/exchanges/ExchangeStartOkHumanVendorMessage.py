@@ -7,3 +7,4 @@ class ExchangeStartOkHumanVendorMessage(NetworkMessage):
     sellerId:int
     objectsInfos:ObjectItemToSellInHumanVendorShop
     
+    

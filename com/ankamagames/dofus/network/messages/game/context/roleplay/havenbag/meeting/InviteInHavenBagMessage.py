@@ -7,3 +7,4 @@ class InviteInHavenBagMessage(NetworkMessage):
     guestInformations:CharacterMinimalInformations
     accept:bool
     
+    

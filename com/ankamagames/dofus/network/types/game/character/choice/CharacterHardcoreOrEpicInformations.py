@@ -7,3 +7,4 @@ class CharacterHardcoreOrEpicInformations(CharacterBaseInformations):
     deathCount:int
     deathMaxLevel:int
     
+    

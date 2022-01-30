@@ -7,3 +7,4 @@ class LockableStateUpdateHouseDoorMessage(LockableStateUpdateAbstractMessage):
     instanceId:int
     secondHand:bool
     
+    

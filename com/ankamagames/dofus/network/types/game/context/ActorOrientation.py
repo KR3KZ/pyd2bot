@@ -6,3 +6,4 @@ class ActorOrientation(NetworkMessage):
     id:int
     direction:int
     
+    

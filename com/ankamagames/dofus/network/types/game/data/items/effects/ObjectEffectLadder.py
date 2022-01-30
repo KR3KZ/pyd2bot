@@ -5,3 +5,4 @@ class ObjectEffectLadder(ObjectEffectCreature):
     protocolId = 7384
     monsterCount:int
     
+    

@@ -6,3 +6,4 @@ class AchievementListMessage(NetworkMessage):
     protocolId = 4607
     finishedAchievements:AchievementAchieved
     
+    

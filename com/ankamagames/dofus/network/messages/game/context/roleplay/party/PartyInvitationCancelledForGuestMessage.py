@@ -5,3 +5,4 @@ class PartyInvitationCancelledForGuestMessage(AbstractPartyMessage):
     protocolId = 1943
     cancelerId:int
     
+    

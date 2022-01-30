@@ -11,3 +11,4 @@ class AbstractFightDispellableEffect(NetworkMessage):
     effectId:int
     parentBoostUid:int
     
+    

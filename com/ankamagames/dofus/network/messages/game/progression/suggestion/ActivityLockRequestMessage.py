@@ -6,3 +6,4 @@ class ActivityLockRequestMessage(NetworkMessage):
     activityId:int
     lock:bool
     
+    

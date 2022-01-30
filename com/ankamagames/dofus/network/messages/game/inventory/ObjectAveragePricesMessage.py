@@ -6,3 +6,4 @@ class ObjectAveragePricesMessage(NetworkMessage):
     ids:int
     avgPrices:int
     
+    

@@ -6,3 +6,4 @@ class ServerStatusUpdateMessage(NetworkMessage):
     protocolId = 1411
     server:GameServerInformations
     
+    

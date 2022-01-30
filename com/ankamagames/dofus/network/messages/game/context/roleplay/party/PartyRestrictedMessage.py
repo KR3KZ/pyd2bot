@@ -5,3 +5,4 @@ class PartyRestrictedMessage(AbstractPartyMessage):
     protocolId = 6433
     restricted:bool
     
+    

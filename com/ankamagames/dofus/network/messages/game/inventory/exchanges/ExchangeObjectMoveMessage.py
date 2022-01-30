@@ -6,3 +6,4 @@ class ExchangeObjectMoveMessage(NetworkMessage):
     objectUID:int
     quantity:int
     
+    

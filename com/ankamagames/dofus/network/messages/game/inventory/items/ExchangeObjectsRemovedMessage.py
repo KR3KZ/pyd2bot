@@ -5,3 +5,4 @@ class ExchangeObjectsRemovedMessage(ExchangeObjectMessage):
     protocolId = 4841
     objectUID:int
     
+    

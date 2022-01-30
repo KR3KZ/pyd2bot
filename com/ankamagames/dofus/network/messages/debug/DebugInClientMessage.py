@@ -6,3 +6,4 @@ class DebugInClientMessage(NetworkMessage):
     level:int
     message:str
     
+    

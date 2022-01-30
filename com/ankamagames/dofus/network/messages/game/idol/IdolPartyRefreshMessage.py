@@ -6,3 +6,4 @@ class IdolPartyRefreshMessage(NetworkMessage):
     protocolId = 7517
     partyIdol:PartyIdol
     
+    

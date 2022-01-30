@@ -9,3 +9,4 @@ class Version(NetworkMessage):
     build:int
     buildType:int
     
+    

@@ -7,3 +7,4 @@ class CharacterAlignmentWarEffortProgressionMessage(NetworkMessage):
     alignmentWarEffortDailyDonation:int
     alignmentWarEffortPersonalDonation:int
     
+    

@@ -8,3 +8,4 @@ class ExchangeOfflineSoldItemsMessage(NetworkMessage):
     bidHouseItems:ObjectItemQuantityPriceDateEffects
     merchantItems:ObjectItemQuantityPriceDateEffects
     
+    

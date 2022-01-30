@@ -6,3 +6,4 @@ class ChallengeTargetsListMessage(NetworkMessage):
     targetIds:int
     targetCells:int
     
+    

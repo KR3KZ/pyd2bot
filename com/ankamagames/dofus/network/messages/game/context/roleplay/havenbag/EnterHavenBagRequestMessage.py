@@ -5,3 +5,4 @@ class EnterHavenBagRequestMessage(NetworkMessage):
     protocolId = 8214
     havenBagOwner:int
     
+    

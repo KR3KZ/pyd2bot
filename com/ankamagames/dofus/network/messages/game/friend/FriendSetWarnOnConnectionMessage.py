@@ -5,3 +5,4 @@ class FriendSetWarnOnConnectionMessage(NetworkMessage):
     protocolId = 6228
     enable:bool
     
+    

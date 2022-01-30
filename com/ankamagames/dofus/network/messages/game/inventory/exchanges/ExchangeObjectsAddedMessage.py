@@ -6,3 +6,4 @@ class ExchangeObjectsAddedMessage(ExchangeObjectMessage):
     protocolId = 6503
     object:ObjectItem
     
+    

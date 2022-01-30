@@ -5,3 +5,4 @@ class PortalUseRequestMessage(NetworkMessage):
     protocolId = 1831
     portalId:int
     
+    

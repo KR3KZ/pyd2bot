@@ -5,3 +5,4 @@ class GameFightTurnFinishMessage(NetworkMessage):
     protocolId = 6692
     isAfk:bool
     
+    

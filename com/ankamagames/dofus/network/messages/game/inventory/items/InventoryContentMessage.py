@@ -7,3 +7,4 @@ class InventoryContentMessage(NetworkMessage):
     objects:ObjectItem
     kamas:int
     
+    

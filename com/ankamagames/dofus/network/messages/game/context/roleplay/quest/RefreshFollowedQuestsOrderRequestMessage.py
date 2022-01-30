@@ -5,3 +5,4 @@ class RefreshFollowedQuestsOrderRequestMessage(NetworkMessage):
     protocolId = 1088
     quests:int
     
+    

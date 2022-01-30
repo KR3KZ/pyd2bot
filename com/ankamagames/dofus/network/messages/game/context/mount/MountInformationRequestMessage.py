@@ -6,3 +6,4 @@ class MountInformationRequestMessage(NetworkMessage):
     id:int
     time:int
     
+    

@@ -6,3 +6,4 @@ class ArenaRanking(NetworkMessage):
     rank:int
     bestRank:int
     
+    

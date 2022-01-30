@@ -5,3 +5,4 @@ class GuildKickRequestMessage(NetworkMessage):
     protocolId = 3965
     kickedId:int
     
+    

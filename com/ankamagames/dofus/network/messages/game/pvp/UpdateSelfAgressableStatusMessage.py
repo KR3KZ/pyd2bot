@@ -6,3 +6,4 @@ class UpdateSelfAgressableStatusMessage(NetworkMessage):
     status:int
     probationTime:int
     
+    

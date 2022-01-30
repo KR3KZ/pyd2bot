@@ -6,3 +6,4 @@ class TreasureHuntStepFollowDirectionToPOI(TreasureHuntStep):
     direction:int
     poiLabelId:int
     
+    

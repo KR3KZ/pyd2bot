@@ -7,3 +7,4 @@ class TreasureHuntFlagRequestAnswerMessage(NetworkMessage):
     result:int
     index:int
     
+    

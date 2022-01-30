@@ -6,3 +6,4 @@ class AchievementAlmostFinishedDetailedListMessage(NetworkMessage):
     protocolId = 6475
     almostFinishedAchievements:Achievement
     
+    

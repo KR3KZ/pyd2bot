@@ -6,3 +6,4 @@ class HavenBagDailyLoteryMessage(NetworkMessage):
     returnType:int
     gameActionId:str
     
+    

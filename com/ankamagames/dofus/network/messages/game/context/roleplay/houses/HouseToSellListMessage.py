@@ -8,3 +8,4 @@ class HouseToSellListMessage(NetworkMessage):
     totalPage:int
     houseList:HouseInformationsForSell
     
+    

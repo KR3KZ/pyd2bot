@@ -6,3 +6,4 @@ class DebtInformation(NetworkMessage):
     id:int
     timestamp:int
     
+    

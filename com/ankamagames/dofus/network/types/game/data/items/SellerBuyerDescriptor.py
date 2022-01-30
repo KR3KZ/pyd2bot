@@ -12,3 +12,4 @@ class SellerBuyerDescriptor(NetworkMessage):
     npcContextualId:int
     unsoldDelay:int
     
+    

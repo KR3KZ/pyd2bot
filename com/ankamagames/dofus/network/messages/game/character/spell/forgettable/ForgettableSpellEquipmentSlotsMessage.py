@@ -5,3 +5,4 @@ class ForgettableSpellEquipmentSlotsMessage(NetworkMessage):
     protocolId = 7772
     quantity:int
     
+    

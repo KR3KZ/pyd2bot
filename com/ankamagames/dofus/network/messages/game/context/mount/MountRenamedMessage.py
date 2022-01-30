@@ -6,3 +6,4 @@ class MountRenamedMessage(NetworkMessage):
     mountId:int
     name:str
     
+    

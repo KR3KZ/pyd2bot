@@ -5,3 +5,4 @@ class HaapiAuthErrorMessage(NetworkMessage):
     protocolId = 5003
     type:int
     
+    

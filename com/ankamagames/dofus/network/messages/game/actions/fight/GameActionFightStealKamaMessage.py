@@ -6,3 +6,4 @@ class GameActionFightStealKamaMessage(AbstractGameActionMessage):
     targetId:int
     amount:int
     
+    

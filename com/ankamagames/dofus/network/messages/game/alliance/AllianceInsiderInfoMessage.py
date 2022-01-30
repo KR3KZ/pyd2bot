@@ -10,3 +10,4 @@ class AllianceInsiderInfoMessage(NetworkMessage):
     guilds:GuildInsiderFactSheetInformations
     prisms:PrismSubareaEmptyInfo
     
+    

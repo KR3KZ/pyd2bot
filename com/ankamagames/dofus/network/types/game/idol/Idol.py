@@ -7,3 +7,4 @@ class Idol(NetworkMessage):
     xpBonusPercent:int
     dropBonusPercent:int
     
+    

@@ -6,3 +6,4 @@ class StorageObjectsUpdateMessage(NetworkMessage):
     protocolId = 7209
     objectList:ObjectItem
     
+    

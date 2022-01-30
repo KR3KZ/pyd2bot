@@ -5,3 +5,4 @@ class GameFightNewRoundMessage(NetworkMessage):
     protocolId = 1656
     roundNumber:int
     
+    

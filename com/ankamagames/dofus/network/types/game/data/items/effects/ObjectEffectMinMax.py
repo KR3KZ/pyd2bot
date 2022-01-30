@@ -6,3 +6,4 @@ class ObjectEffectMinMax(ObjectEffect):
     min:int
     max:int
     
+    

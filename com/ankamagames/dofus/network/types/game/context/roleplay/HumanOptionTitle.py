@@ -6,3 +6,4 @@ class HumanOptionTitle(HumanOption):
     titleId:int
     titleParam:str
     
+    

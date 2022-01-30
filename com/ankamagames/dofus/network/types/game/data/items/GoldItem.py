@@ -5,3 +5,4 @@ class GoldItem(Item):
     protocolId = 396
     sum:int
     
+    

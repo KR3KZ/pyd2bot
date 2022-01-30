@@ -10,3 +10,4 @@ class ObjectItemToSell(Item):
     quantity:int
     objectPrice:int
     
+    

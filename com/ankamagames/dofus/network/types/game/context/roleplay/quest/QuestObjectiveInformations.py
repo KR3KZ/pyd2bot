@@ -7,3 +7,4 @@ class QuestObjectiveInformations(NetworkMessage):
     objectiveStatus:bool
     dialogParams:str
     
+    

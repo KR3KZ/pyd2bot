@@ -5,3 +5,4 @@ class BreachGameFightEndMessage(GameFightEndMessage):
     protocolId = 7323
     budget:int
     
+    

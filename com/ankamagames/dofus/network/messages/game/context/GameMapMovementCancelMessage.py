@@ -5,3 +5,4 @@ class GameMapMovementCancelMessage(NetworkMessage):
     protocolId = 4409
     cellId:int
     
+    

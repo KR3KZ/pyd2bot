@@ -7,3 +7,4 @@ class ExchangeBidHouseBuyMessage(NetworkMessage):
     qty:int
     price:int
     
+    

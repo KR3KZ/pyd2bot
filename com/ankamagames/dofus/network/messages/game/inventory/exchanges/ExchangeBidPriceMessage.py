@@ -6,3 +6,4 @@ class ExchangeBidPriceMessage(NetworkMessage):
     genericId:int
     averagePrice:int
     
+    

@@ -6,3 +6,4 @@ class ExchangeObjectTransfertListWithQuantityToInvMessage(NetworkMessage):
     ids:int
     qtys:int
     
+    

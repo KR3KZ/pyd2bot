@@ -5,3 +5,4 @@ class GameActionFightReflectSpellMessage(AbstractGameActionMessage):
     protocolId = 8272
     targetId:int
     
+    

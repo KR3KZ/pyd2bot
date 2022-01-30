@@ -5,3 +5,4 @@ class ShortcutSpell(Shortcut):
     protocolId = 445
     spellId:int
     
+    

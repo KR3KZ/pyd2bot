@@ -5,3 +5,4 @@ class ForgettableSpellItem(SpellItem):
     protocolId = 2497
     available:bool
     
+    

@@ -6,3 +6,4 @@ class HaapiCancelBidRequestMessage(NetworkMessage):
     id:int
     type:int
     
+    

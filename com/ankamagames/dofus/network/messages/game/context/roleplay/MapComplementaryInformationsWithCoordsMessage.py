@@ -6,3 +6,4 @@ class MapComplementaryInformationsWithCoordsMessage(MapComplementaryInformations
     worldX:int
     worldY:int
     
+    

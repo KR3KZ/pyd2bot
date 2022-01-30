@@ -5,3 +5,4 @@ class CharacterNameSuggestionSuccessMessage(NetworkMessage):
     protocolId = 428
     suggestion:str
     
+    

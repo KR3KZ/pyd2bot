@@ -6,3 +6,4 @@ class GuildBulletinSetRequestMessage(SocialNoticeSetRequestMessage):
     content:str
     notifyMembers:bool
     
+    

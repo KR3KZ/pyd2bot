@@ -9,3 +9,4 @@ class DecraftedItemStackInfo(NetworkMessage):
     runesId:int
     runesQty:int
     
+    

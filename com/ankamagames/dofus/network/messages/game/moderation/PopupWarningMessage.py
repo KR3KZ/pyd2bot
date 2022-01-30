@@ -7,3 +7,4 @@ class PopupWarningMessage(NetworkMessage):
     author:str
     content:str
     
+    

@@ -17,3 +17,4 @@ class TaxCollectorInformations(NetworkMessage):
     look:EntityLook
     complements:TaxCollectorComplementaryInformations
     
+    

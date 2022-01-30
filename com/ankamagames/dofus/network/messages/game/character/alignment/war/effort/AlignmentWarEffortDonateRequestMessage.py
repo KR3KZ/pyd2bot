@@ -5,3 +5,4 @@ class AlignmentWarEffortDonateRequestMessage(NetworkMessage):
     protocolId = 5249
     donation:int
     
+    

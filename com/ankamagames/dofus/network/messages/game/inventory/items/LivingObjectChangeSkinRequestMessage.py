@@ -7,3 +7,4 @@ class LivingObjectChangeSkinRequestMessage(NetworkMessage):
     livingPosition:int
     skinId:int
     
+    

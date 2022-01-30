@@ -5,3 +5,4 @@ class ExchangeShopStockMovementRemovedMessage(NetworkMessage):
     protocolId = 7025
     objectId:int
     
+    

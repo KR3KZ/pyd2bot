@@ -6,3 +6,4 @@ class ExchangePodsModifiedMessage(ExchangeObjectMessage):
     currentWeight:int
     maxWeight:int
     
+    

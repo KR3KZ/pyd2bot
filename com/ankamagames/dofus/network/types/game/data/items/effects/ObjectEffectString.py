@@ -5,3 +5,4 @@ class ObjectEffectString(ObjectEffect):
     protocolId = 576
     value:str
     
+    

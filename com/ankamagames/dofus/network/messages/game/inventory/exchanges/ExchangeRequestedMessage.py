@@ -5,3 +5,4 @@ class ExchangeRequestedMessage(NetworkMessage):
     protocolId = 5525
     exchangeType:int
     
+    

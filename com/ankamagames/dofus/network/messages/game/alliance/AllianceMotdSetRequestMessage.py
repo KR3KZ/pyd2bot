@@ -5,3 +5,4 @@ class AllianceMotdSetRequestMessage(SocialNoticeSetRequestMessage):
     protocolId = 3707
     content:str
     
+    

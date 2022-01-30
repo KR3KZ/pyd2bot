@@ -6,3 +6,4 @@ class MapObstacleUpdateMessage(NetworkMessage):
     protocolId = 9984
     obstacles:MapObstacle
     
+    

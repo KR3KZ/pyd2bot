@@ -8,3 +8,4 @@ class SetUpdateMessage(NetworkMessage):
     setObjects:int
     setEffects:ObjectEffect
     
+    

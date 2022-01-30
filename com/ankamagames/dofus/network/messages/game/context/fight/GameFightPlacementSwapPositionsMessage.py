@@ -6,3 +6,4 @@ class GameFightPlacementSwapPositionsMessage(NetworkMessage):
     protocolId = 995
     dispositions:list[IdentifiedEntityDispositionInformations]
     
+    

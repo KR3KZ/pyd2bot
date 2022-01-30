@@ -5,3 +5,4 @@ class ExchangeCraftPaymentModifiedMessage(NetworkMessage):
     protocolId = 8641
     goldSum:int
     
+    

@@ -6,3 +6,4 @@ class MapComplementaryInformationsAnomalyMessage(MapComplementaryInformationsDat
     level:int
     closingTime:int
     
+    

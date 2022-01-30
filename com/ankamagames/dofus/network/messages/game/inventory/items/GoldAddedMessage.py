@@ -6,3 +6,4 @@ class GoldAddedMessage(NetworkMessage):
     protocolId = 1408
     gold:GoldItem
     
+    

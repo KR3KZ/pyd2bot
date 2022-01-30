@@ -5,4 +5,10 @@ class FightTeamLightInformations(AbstractFightTeamInformations):
     protocolId = 68
     teamMembersCount:int
     meanLevel:int
+    hasFriend:bool
+    hasGuildMember:bool
+    hasAllianceMember:bool
+    hasGroupMember:bool
+    hasMyTaxCollector:bool
+    
     

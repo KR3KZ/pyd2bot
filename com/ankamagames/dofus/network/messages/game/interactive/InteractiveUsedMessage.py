@@ -9,3 +9,4 @@ class InteractiveUsedMessage(NetworkMessage):
     duration:int
     canMove:bool
     
+    

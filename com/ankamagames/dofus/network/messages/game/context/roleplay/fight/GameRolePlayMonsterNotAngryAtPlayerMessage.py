@@ -6,3 +6,4 @@ class GameRolePlayMonsterNotAngryAtPlayerMessage(NetworkMessage):
     playerId:int
     monsterGroupId:int
     
+    

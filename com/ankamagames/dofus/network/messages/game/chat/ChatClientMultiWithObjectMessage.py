@@ -6,3 +6,4 @@ class ChatClientMultiWithObjectMessage(ChatClientMultiMessage):
     protocolId = 1682
     objects:ObjectItem
     
+    

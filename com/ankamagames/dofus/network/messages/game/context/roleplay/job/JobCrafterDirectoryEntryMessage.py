@@ -10,3 +10,4 @@ class JobCrafterDirectoryEntryMessage(NetworkMessage):
     jobInfoList:JobCrafterDirectoryEntryJobInfo
     playerLook:EntityLook
     
+    

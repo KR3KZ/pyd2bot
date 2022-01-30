@@ -5,3 +5,4 @@ class CharacterBaseInformations(CharacterMinimalPlusLookInformations):
     protocolId = 8097
     sex:bool
     
+    

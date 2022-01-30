@@ -5,3 +5,4 @@ class ExchangeStoppedMessage(NetworkMessage):
     protocolId = 8743
     id:int
     
+    

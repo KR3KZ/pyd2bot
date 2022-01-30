@@ -8,3 +8,4 @@ class AllianceInvitedMessage(NetworkMessage):
     recruterName:str
     allianceInfo:BasicNamedAllianceInformations
     
+    

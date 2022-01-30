@@ -6,3 +6,4 @@ class ExchangePlayerMultiCraftRequestMessage(ExchangeRequestMessage):
     target:int
     skillId:int
     
+    

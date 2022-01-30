@@ -6,3 +6,4 @@ class JobCrafterDirectoryDefineSettingsMessage(NetworkMessage):
     protocolId = 6260
     settings:JobCrafterDirectorySettings
     
+    

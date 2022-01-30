@@ -6,3 +6,4 @@ class PartyNewGuestMessage(AbstractPartyEventMessage):
     protocolId = 1263
     guest:PartyGuestInformations
     
+    

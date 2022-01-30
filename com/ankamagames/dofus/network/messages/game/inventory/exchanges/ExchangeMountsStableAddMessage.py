@@ -6,3 +6,4 @@ class ExchangeMountsStableAddMessage(NetworkMessage):
     protocolId = 8697
     mountDescription:MountClientData
     
+    

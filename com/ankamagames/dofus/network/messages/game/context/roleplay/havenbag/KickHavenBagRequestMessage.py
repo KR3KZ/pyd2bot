@@ -5,3 +5,4 @@ class KickHavenBagRequestMessage(NetworkMessage):
     protocolId = 188
     guestId:int
     
+    

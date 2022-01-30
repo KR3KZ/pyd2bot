@@ -7,3 +7,4 @@ class SpellListMessage(NetworkMessage):
     spellPrevisualization:bool
     spells:SpellItem
     
+    

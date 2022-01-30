@@ -5,3 +5,4 @@ class ChatSmileyExtraPackListMessage(NetworkMessage):
     protocolId = 8664
     packIds:int
     
+    

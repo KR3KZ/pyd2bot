@@ -5,3 +5,4 @@ class TeleportHavenBagAnswerMessage(NetworkMessage):
     protocolId = 597
     accept:bool
     
+    

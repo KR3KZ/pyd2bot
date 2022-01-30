@@ -5,3 +5,4 @@ class InteractiveElementNamedSkill(InteractiveElementSkill):
     protocolId = 3340
     nameId:int
     
+    

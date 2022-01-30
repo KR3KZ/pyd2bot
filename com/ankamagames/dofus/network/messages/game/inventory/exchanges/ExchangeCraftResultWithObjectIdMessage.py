@@ -5,3 +5,4 @@ class ExchangeCraftResultWithObjectIdMessage(ExchangeCraftResultMessage):
     protocolId = 7556
     objectGenericId:int
     
+    

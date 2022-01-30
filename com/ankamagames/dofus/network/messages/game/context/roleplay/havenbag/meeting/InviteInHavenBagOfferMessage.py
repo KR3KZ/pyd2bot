@@ -7,3 +7,4 @@ class InviteInHavenBagOfferMessage(NetworkMessage):
     hostInformations:CharacterMinimalInformations
     timeLeftBeforeCancel:int
     
+    

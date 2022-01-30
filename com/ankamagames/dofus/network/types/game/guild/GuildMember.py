@@ -16,4 +16,7 @@ class GuildMember(CharacterMinimalInformations):
     accountId:int
     achievementPoints:int
     status:PlayerStatus
+    sex:bool
+    havenBagShared:bool
+    
     

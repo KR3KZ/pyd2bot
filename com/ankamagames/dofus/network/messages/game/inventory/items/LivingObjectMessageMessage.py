@@ -8,3 +8,4 @@ class LivingObjectMessageMessage(NetworkMessage):
     owner:str
     objectGenericId:int
     
+    

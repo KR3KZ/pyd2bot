@@ -5,3 +5,4 @@ class ObjectUseOnCellMessage(ObjectUseMessage):
     protocolId = 5623
     cells:int
     
+    

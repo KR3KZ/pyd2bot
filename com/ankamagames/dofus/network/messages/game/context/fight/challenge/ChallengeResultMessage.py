@@ -6,3 +6,4 @@ class ChallengeResultMessage(NetworkMessage):
     challengeId:int
     success:bool
     
+    

@@ -5,3 +5,4 @@ class StatisticDataByte(StatisticData):
     protocolId = 6844
     value:int
     
+    

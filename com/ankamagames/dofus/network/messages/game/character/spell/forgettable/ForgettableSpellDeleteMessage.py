@@ -6,3 +6,4 @@ class ForgettableSpellDeleteMessage(NetworkMessage):
     reason:int
     spells:int
     
+    

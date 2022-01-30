@@ -5,3 +5,4 @@ class TreasureHuntDigRequestAnswerFailedMessage(TreasureHuntDigRequestAnswerMess
     protocolId = 862
     wrongFlagCount:int
     
+    

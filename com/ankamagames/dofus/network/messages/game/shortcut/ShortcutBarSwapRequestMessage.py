@@ -7,3 +7,4 @@ class ShortcutBarSwapRequestMessage(NetworkMessage):
     firstSlot:int
     secondSlot:int
     
+    

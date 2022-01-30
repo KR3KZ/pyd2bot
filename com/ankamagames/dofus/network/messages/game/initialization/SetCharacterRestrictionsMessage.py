@@ -7,3 +7,4 @@ class SetCharacterRestrictionsMessage(NetworkMessage):
     actorId:int
     restrictions:ActorRestrictionsInformations
     
+    

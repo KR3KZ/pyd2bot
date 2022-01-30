@@ -6,3 +6,4 @@ class MimicryObjectPreviewMessage(NetworkMessage):
     protocolId = 1198
     result:ObjectItem
     
+    

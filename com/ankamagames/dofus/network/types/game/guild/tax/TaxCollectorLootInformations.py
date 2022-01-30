@@ -8,3 +8,4 @@ class TaxCollectorLootInformations(TaxCollectorComplementaryInformations):
     pods:int
     itemsValue:int
     
+    

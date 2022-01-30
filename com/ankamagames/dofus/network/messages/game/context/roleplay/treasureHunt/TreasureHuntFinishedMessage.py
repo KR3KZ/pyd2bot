@@ -5,3 +5,4 @@ class TreasureHuntFinishedMessage(NetworkMessage):
     protocolId = 5016
     questType:int
     
+    

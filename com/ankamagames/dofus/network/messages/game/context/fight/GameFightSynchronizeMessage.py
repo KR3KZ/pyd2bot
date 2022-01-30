@@ -6,3 +6,4 @@ class GameFightSynchronizeMessage(NetworkMessage):
     protocolId = 3028
     fighters:GameFightFighterInformations
     
+    

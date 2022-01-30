@@ -7,3 +7,4 @@ class CharacterSelectedSuccessMessage(NetworkMessage):
     infos:CharacterBaseInformations
     isCollectingStats:bool
     
+    

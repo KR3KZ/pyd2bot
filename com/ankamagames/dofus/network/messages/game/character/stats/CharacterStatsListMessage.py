@@ -6,3 +6,4 @@ class CharacterStatsListMessage(NetworkMessage):
     protocolId = 2227
     stats:CharacterCharacteristicsInformations
     
+    

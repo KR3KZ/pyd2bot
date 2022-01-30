@@ -6,3 +6,4 @@ class ReloginTokenStatusMessage(NetworkMessage):
     validToken:bool
     ticket:int
     
+    

@@ -5,3 +5,4 @@ class CharactersListMessage(BasicCharactersListMessage):
     protocolId = 269
     hasStartupActions:bool
     
+    

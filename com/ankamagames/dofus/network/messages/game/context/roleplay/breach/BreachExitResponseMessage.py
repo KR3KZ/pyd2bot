@@ -5,3 +5,4 @@ class BreachExitResponseMessage(NetworkMessage):
     protocolId = 7143
     exited:bool
     
+    

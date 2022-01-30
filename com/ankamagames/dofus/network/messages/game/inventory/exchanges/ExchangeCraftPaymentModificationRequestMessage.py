@@ -5,3 +5,4 @@ class ExchangeCraftPaymentModificationRequestMessage(NetworkMessage):
     protocolId = 5785
     quantity:int
     
+    

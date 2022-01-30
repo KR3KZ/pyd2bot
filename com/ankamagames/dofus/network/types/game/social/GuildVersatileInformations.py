@@ -8,3 +8,4 @@ class GuildVersatileInformations(NetworkMessage):
     guildLevel:int
     nbMembers:int
     
+    

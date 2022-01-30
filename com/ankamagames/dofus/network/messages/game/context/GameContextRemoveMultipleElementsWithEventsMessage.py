@@ -5,3 +5,4 @@ class GameContextRemoveMultipleElementsWithEventsMessage(GameContextRemoveMultip
     protocolId = 7428
     elementEventIds:int
     
+    

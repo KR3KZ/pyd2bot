@@ -6,3 +6,4 @@ class ShortcutBarRemovedMessage(NetworkMessage):
     barType:int
     slot:int
     
+    

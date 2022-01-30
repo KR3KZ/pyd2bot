@@ -8,3 +8,4 @@ class DungeonPartyFinderRoomContentUpdateMessage(NetworkMessage):
     addedPlayers:DungeonPartyFinderPlayer
     removedPlayersIds:int
     
+    

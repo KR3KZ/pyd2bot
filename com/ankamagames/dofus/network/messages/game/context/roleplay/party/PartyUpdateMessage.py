@@ -6,3 +6,4 @@ class PartyUpdateMessage(AbstractPartyEventMessage):
     protocolId = 1769
     memberInformations:PartyMemberInformations
     
+    

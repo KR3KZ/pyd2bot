@@ -7,3 +7,4 @@ class AbstractContactInformations(NetworkMessage):
     accountId:int
     accountTag:AccountTagInformation
     
+    

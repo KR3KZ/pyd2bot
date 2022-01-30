@@ -5,3 +5,4 @@ class GuildFightTakePlaceRequestMessage(GuildFightJoinRequestMessage):
     protocolId = 1932
     replacedCharacterId:int
     
+    

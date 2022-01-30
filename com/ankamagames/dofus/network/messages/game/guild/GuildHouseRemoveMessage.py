@@ -7,3 +7,4 @@ class GuildHouseRemoveMessage(NetworkMessage):
     instanceId:int
     secondHand:bool
     
+    

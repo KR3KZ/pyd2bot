@@ -6,3 +6,4 @@ class GuildFightPlayersEnemyRemoveMessage(NetworkMessage):
     fightId:int
     playerId:int
     
+    

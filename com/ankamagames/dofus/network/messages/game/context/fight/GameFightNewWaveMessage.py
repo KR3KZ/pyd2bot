@@ -7,3 +7,4 @@ class GameFightNewWaveMessage(NetworkMessage):
     teamId:int
     nbTurnBeforeNextWave:int
     
+    

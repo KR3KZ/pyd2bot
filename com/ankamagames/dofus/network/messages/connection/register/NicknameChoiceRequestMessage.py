@@ -5,3 +5,4 @@ class NicknameChoiceRequestMessage(NetworkMessage):
     protocolId = 3297
     nickname:str
     
+    

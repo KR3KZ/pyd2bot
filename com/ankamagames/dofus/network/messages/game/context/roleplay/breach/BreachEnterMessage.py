@@ -5,3 +5,4 @@ class BreachEnterMessage(NetworkMessage):
     protocolId = 6485
     owner:int
     
+    

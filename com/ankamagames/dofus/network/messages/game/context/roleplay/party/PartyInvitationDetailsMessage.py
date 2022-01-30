@@ -13,3 +13,4 @@ class PartyInvitationDetailsMessage(AbstractPartyMessage):
     members:PartyInvitationMemberInformations
     guests:PartyGuestInformations
     
+    

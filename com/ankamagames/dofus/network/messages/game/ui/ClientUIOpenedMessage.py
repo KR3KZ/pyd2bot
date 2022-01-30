@@ -5,3 +5,4 @@ class ClientUIOpenedMessage(NetworkMessage):
     protocolId = 7354
     type:int
     
+    

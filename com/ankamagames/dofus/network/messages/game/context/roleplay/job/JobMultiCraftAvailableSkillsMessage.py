@@ -6,3 +6,4 @@ class JobMultiCraftAvailableSkillsMessage(JobAllowMultiCraftRequestMessage):
     playerId:int
     skills:int
     
+    

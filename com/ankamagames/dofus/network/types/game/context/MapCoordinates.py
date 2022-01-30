@@ -6,3 +6,4 @@ class MapCoordinates(NetworkMessage):
     worldX:int
     worldY:int
     
+    

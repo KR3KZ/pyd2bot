@@ -6,3 +6,4 @@ class AccountHouseMessage(NetworkMessage):
     protocolId = 7236
     houses:AccountHouseInformations
     
+    

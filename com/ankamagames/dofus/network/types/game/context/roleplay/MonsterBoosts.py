@@ -7,3 +7,4 @@ class MonsterBoosts(NetworkMessage):
     xpBoost:int
     dropBoost:int
     
+    

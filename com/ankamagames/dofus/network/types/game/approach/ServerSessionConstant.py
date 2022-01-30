@@ -5,3 +5,4 @@ class ServerSessionConstant(NetworkMessage):
     protocolId = 7504
     id:int
     
+    

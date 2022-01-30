@@ -5,3 +5,4 @@ class EmotePlayMassiveMessage(EmotePlayAbstractMessage):
     protocolId = 7780
     actorIds:int
     
+    

@@ -7,3 +7,4 @@ class TeleportToBuddyAnswerMessage(NetworkMessage):
     buddyId:int
     accept:bool
     
+    

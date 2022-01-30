@@ -6,3 +6,4 @@ class GameRolePlayShowMultipleActorsMessage(NetworkMessage):
     protocolId = 1377
     informationsList:GameRolePlayActorInformations
     
+    

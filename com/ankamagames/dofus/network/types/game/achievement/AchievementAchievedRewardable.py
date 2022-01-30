@@ -5,3 +5,4 @@ class AchievementAchievedRewardable(AchievementAchieved):
     protocolId = 4851
     finishedlevel:int
     
+    

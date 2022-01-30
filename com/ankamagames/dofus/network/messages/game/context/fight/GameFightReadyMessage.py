@@ -5,3 +5,4 @@ class GameFightReadyMessage(NetworkMessage):
     protocolId = 3480
     isReady:bool
     
+    

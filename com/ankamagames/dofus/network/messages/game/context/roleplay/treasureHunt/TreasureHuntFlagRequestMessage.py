@@ -6,3 +6,4 @@ class TreasureHuntFlagRequestMessage(NetworkMessage):
     questType:int
     index:int
     
+    

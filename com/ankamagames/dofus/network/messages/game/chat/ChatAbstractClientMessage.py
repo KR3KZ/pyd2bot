@@ -5,3 +5,4 @@ class ChatAbstractClientMessage(NetworkMessage):
     protocolId = 1037
     content:str
     
+    

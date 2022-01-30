@@ -6,3 +6,4 @@ class HumanOptionFollowers(HumanOption):
     protocolId = 77
     followingCharactersLook:IndexedEntityLook
     
+    

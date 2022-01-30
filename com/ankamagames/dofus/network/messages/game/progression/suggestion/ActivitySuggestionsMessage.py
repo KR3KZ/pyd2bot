@@ -6,3 +6,4 @@ class ActivitySuggestionsMessage(NetworkMessage):
     lockedActivitiesIds:int
     unlockedActivitiesIds:int
     
+    

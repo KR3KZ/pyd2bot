@@ -5,3 +5,4 @@ class UpdateMountIntegerCharacteristic(UpdateMountCharacteristic):
     protocolId = 305
     value:int
     
+    

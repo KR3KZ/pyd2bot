@@ -8,3 +8,4 @@ class GuildPlayerApplicationInformationMessage(GuildPlayerApplicationAbstractMes
     guildInformation:GuildInformations
     apply:GuildApplicationInformation
     
+    

@@ -8,3 +8,4 @@ class AnomalySubareaInformation(NetworkMessage):
     hasAnomaly:bool
     anomalyClosingTime:int
     
+    

@@ -7,3 +7,4 @@ class IgnoredAddedMessage(NetworkMessage):
     ignoreAdded:IgnoredInformations
     session:bool
     
+    

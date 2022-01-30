@@ -5,3 +5,4 @@ class GuildApplicationDeletedMessage(NetworkMessage):
     protocolId = 5546
     deleted:bool
     
+    

@@ -5,3 +5,4 @@ class LockableCodeResultMessage(NetworkMessage):
     protocolId = 3222
     result:int
     
+    

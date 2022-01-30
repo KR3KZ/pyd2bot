@@ -5,3 +5,4 @@ class ShortcutSmiley(Shortcut):
     protocolId = 4590
     smileyId:int
     
+    

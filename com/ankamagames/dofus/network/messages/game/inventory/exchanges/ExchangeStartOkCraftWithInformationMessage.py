@@ -5,3 +5,4 @@ class ExchangeStartOkCraftWithInformationMessage(ExchangeStartOkCraftMessage):
     protocolId = 9154
     skillId:int
     
+    

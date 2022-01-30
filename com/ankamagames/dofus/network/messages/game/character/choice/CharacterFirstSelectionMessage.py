@@ -5,3 +5,4 @@ class CharacterFirstSelectionMessage(CharacterSelectionMessage):
     protocolId = 3196
     doTutorial:bool
     
+    

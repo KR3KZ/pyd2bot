@@ -5,3 +5,4 @@ class LifePointsRegenEndMessage(UpdateLifePointsMessage):
     protocolId = 5501
     lifePointsGained:int
     
+    

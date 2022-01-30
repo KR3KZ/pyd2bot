@@ -6,3 +6,4 @@ class ExchangeStartedBidBuyerMessage(NetworkMessage):
     protocolId = 9037
     buyerDescriptor:SellerBuyerDescriptor
     
+    

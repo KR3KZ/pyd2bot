@@ -8,3 +8,4 @@ class HouseGuildShareRequestMessage(NetworkMessage):
     enable:bool
     rights:int
     
+    

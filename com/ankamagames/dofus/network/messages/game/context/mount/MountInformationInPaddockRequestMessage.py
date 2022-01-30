@@ -5,3 +5,4 @@ class MountInformationInPaddockRequestMessage(NetworkMessage):
     protocolId = 6636
     mapRideId:int
     
+    

@@ -5,3 +5,4 @@ class GuildInAllianceVersatileInformations(GuildVersatileInformations):
     protocolId = 9740
     allianceId:int
     
+    

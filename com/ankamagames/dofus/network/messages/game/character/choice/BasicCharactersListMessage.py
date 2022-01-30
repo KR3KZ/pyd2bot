@@ -6,3 +6,4 @@ class BasicCharactersListMessage(NetworkMessage):
     protocolId = 8228
     characters:CharacterBaseInformations
     
+    

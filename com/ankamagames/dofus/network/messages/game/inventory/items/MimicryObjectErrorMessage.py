@@ -5,3 +5,4 @@ class MimicryObjectErrorMessage(SymbioticObjectErrorMessage):
     protocolId = 5767
     preview:bool
     
+    

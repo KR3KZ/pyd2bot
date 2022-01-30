@@ -5,3 +5,4 @@ class ExchangeBidHouseGenericItemRemovedMessage(NetworkMessage):
     protocolId = 9780
     objGenericId:int
     
+    

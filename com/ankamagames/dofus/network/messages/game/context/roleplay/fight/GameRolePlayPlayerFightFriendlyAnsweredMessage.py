@@ -8,3 +8,4 @@ class GameRolePlayPlayerFightFriendlyAnsweredMessage(NetworkMessage):
     targetId:int
     accept:bool
     
+    

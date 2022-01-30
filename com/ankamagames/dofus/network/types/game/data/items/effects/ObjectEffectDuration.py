@@ -7,3 +7,4 @@ class ObjectEffectDuration(ObjectEffect):
     hours:int
     minutes:int
     
+    

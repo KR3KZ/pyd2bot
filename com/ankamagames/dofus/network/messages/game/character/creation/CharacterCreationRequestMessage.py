@@ -9,3 +9,4 @@ class CharacterCreationRequestMessage(NetworkMessage):
     colors:list[int]
     cosmeticId:int
     
+    

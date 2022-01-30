@@ -6,3 +6,4 @@ class FinishMoveSetRequestMessage(NetworkMessage):
     finishMoveId:int
     finishMoveState:bool
     
+    

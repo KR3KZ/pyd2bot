@@ -7,3 +7,4 @@ class BasicGuildInformations(AbstractSocialGroupInfos):
     guildName:str
     guildLevel:int
     
+    

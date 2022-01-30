@@ -9,3 +9,4 @@ class CharacterCharacteristicDetailed(CharacterCharacteristic):
     alignGiftBonus:int
     contextModif:int
     
+    

@@ -5,3 +5,4 @@ class JobCrafterDirectoryListRequestMessage(NetworkMessage):
     protocolId = 5786
     jobId:int
     
+    

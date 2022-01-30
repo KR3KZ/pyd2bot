@@ -6,3 +6,4 @@ class GameActionFightInvisibleDetectedMessage(AbstractGameActionMessage):
     targetId:int
     cellId:int
     
+    

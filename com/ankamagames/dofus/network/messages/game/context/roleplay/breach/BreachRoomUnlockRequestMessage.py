@@ -5,3 +5,4 @@ class BreachRoomUnlockRequestMessage(NetworkMessage):
     protocolId = 8276
     roomId:int
     
+    

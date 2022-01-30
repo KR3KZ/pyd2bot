@@ -6,3 +6,4 @@ class MapComplementaryInformationsDataInHouseMessage(MapComplementaryInformation
     protocolId = 2024
     currentHouse:HouseInformationsInside
     
+    

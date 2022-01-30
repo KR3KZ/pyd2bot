@@ -6,3 +6,4 @@ class BasicWhoIsNoMatchMessage(NetworkMessage):
     protocolId = 7631
     target:AbstractPlayerSearchInformation
     
+    

@@ -6,3 +6,4 @@ class IdolsPreset(Preset):
     iconId:int
     idolIds:int
     
+    

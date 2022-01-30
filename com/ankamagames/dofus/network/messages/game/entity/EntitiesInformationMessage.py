@@ -6,3 +6,4 @@ class EntitiesInformationMessage(NetworkMessage):
     protocolId = 5147
     entities:EntityInformation
     
+    

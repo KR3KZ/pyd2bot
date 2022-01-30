@@ -6,3 +6,4 @@ class ObtainedItemMessage(NetworkMessage):
     genericId:int
     baseQuantity:int
     
+    

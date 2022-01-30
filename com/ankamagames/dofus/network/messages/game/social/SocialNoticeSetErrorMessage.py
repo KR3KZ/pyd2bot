@@ -5,3 +5,4 @@ class SocialNoticeSetErrorMessage(NetworkMessage):
     protocolId = 3378
     reason:int
     
+    

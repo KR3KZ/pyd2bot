@@ -8,3 +8,4 @@ class GuildChangeMemberParametersMessage(NetworkMessage):
     experienceGivenPercent:int
     rights:int
     
+    

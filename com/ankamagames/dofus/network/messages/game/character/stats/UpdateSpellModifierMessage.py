@@ -7,3 +7,4 @@ class UpdateSpellModifierMessage(NetworkMessage):
     actorId:int
     spellModifier:CharacterSpellModification
     
+    

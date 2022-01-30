@@ -5,3 +5,4 @@ class ObjectEffect(NetworkMessage):
     protocolId = 5685
     actionId:int
     
+    

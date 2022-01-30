@@ -10,3 +10,4 @@ class ExchangeStartedWithPodsMessage(ExchangeStartedMessage):
     secondCharacterCurrentWeight:int
     secondCharacterMaxWeight:int
     
+    

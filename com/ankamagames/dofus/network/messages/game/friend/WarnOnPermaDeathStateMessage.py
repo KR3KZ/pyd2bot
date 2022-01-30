@@ -5,3 +5,4 @@ class WarnOnPermaDeathStateMessage(NetworkMessage):
     protocolId = 8629
     enable:bool
     
+    

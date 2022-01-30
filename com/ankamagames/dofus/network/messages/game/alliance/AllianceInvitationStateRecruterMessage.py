@@ -6,3 +6,4 @@ class AllianceInvitationStateRecruterMessage(NetworkMessage):
     recrutedName:str
     invitationState:int
     
+    

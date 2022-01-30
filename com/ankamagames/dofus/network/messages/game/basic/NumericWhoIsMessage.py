@@ -6,3 +6,4 @@ class NumericWhoIsMessage(NetworkMessage):
     playerId:int
     accountId:int
     
+    

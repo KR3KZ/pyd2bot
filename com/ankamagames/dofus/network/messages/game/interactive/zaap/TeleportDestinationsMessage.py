@@ -7,3 +7,4 @@ class TeleportDestinationsMessage(NetworkMessage):
     type:int
     destinations:TeleportDestination
     
+    

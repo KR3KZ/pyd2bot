@@ -6,3 +6,4 @@ class GameActionFightDropCharacterMessage(AbstractGameActionMessage):
     targetId:int
     cellId:int
     
+    

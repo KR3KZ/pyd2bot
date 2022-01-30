@@ -7,3 +7,4 @@ class GameActionFightSpellCooldownVariationMessage(AbstractGameActionMessage):
     spellId:int
     value:int
     
+    

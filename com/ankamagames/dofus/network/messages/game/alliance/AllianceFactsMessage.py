@@ -11,3 +11,4 @@ class AllianceFactsMessage(NetworkMessage):
     leaderCharacterId:int
     leaderCharacterName:str
     
+    

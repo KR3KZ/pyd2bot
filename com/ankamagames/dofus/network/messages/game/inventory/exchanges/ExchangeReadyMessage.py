@@ -6,3 +6,4 @@ class ExchangeReadyMessage(NetworkMessage):
     ready:bool
     step:int
     
+    

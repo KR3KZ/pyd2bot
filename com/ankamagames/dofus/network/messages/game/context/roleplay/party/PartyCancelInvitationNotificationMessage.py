@@ -6,3 +6,4 @@ class PartyCancelInvitationNotificationMessage(AbstractPartyEventMessage):
     cancelerId:int
     guestId:int
     
+    

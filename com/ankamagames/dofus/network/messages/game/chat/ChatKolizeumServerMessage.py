@@ -5,3 +5,4 @@ class ChatKolizeumServerMessage(ChatServerMessage):
     protocolId = 4380
     originServerId:int
     
+    

@@ -9,3 +9,4 @@ class TaxCollectorAttackedResultMessage(NetworkMessage):
     basicInfos:TaxCollectorBasicInformations
     guild:BasicGuildInformations
     
+    

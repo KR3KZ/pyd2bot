@@ -6,3 +6,4 @@ class ConsoleMessage(NetworkMessage):
     type:int
     content:str
     
+    

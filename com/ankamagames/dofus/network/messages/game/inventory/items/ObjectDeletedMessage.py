@@ -5,3 +5,4 @@ class ObjectDeletedMessage(NetworkMessage):
     protocolId = 7574
     objectUID:int
     
+    

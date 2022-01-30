@@ -6,3 +6,4 @@ class ExchangeStartOkRecycleTradeMessage(NetworkMessage):
     percentToPrism:int
     percentToPlayer:int
     
+    

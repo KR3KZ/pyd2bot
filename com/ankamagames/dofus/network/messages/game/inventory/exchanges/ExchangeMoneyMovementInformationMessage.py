@@ -5,3 +5,4 @@ class ExchangeMoneyMovementInformationMessage(NetworkMessage):
     protocolId = 6336
     limit:int
     
+    

@@ -8,3 +8,4 @@ class HumanOptionOrnament(HumanOption):
     leagueId:int
     ladderPosition:int
     
+    

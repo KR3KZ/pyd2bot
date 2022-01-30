@@ -6,3 +6,4 @@ class AcquaintanceSearchMessage(NetworkMessage):
     protocolId = 9528
     tag:AccountTagInformation
     
+    

@@ -5,3 +5,4 @@ class DocumentReadingBeginMessage(NetworkMessage):
     protocolId = 3768
     documentId:int
     
+    

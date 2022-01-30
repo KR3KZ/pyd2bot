@@ -5,3 +5,4 @@ class ChallengeTargetsListRequestMessage(NetworkMessage):
     protocolId = 8411
     challengeId:int
     
+    

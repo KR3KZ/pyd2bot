@@ -9,3 +9,4 @@ class TaxCollectorStaticInformations(NetworkMessage):
     guildIdentity:GuildInformations
     callerId:int
     
+    

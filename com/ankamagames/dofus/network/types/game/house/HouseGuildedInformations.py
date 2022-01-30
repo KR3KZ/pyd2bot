@@ -6,3 +6,4 @@ class HouseGuildedInformations(HouseInstanceInformations):
     protocolId = 856
     guildInfo:GuildInformations
     
+    

@@ -6,3 +6,4 @@ class GameRolePlayDelayedActionFinishedMessage(NetworkMessage):
     delayedCharacterId:int
     delayTypeId:int
     
+    

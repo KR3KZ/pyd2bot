@@ -11,3 +11,4 @@ class InteractiveElement(NetworkMessage):
     disabledSkills:InteractiveElementSkill
     onCurrentMap:bool
     
+    

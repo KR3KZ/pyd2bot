@@ -6,3 +6,4 @@ class MapRunningFightListMessage(NetworkMessage):
     protocolId = 1018
     fights:FightExternalInformations
     
+    

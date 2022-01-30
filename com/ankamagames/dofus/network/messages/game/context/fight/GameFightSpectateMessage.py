@@ -14,3 +14,4 @@ class GameFightSpectateMessage(NetworkMessage):
     idols:Idol
     fxTriggerCounts:GameFightEffectTriggerCount
     
+    

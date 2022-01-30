@@ -5,3 +5,4 @@ class SetEnableAVARequestMessage(NetworkMessage):
     protocolId = 3626
     enable:bool
     
+    

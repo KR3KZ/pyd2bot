@@ -5,3 +5,4 @@ class PartyKickRequestMessage(AbstractPartyMessage):
     protocolId = 6075
     playerId:int
     
+    

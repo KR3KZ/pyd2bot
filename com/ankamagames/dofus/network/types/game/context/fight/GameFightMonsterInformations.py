@@ -7,3 +7,4 @@ class GameFightMonsterInformations(GameFightAIInformations):
     creatureGrade:int
     creatureLevel:int
     
+    

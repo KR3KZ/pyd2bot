@@ -6,3 +6,4 @@ class GameMapMovementRequestMessage(NetworkMessage):
     keyMovements:int
     mapId:int
     
+    

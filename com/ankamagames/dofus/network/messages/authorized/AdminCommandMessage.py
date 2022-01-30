@@ -5,3 +5,4 @@ class AdminCommandMessage(NetworkMessage):
     protocolId = 4583
     content:str
     
+    

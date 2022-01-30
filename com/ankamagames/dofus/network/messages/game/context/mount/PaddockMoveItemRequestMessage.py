@@ -6,3 +6,4 @@ class PaddockMoveItemRequestMessage(NetworkMessage):
     oldCellId:int
     newCellId:int
     
+    

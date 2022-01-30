@@ -8,3 +8,4 @@ class StatedElement(NetworkMessage):
     elementState:int
     onCurrentMap:bool
     
+    

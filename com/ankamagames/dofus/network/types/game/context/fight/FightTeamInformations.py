@@ -6,3 +6,4 @@ class FightTeamInformations(AbstractFightTeamInformations):
     protocolId = 4654
     teamMembers:FightTeamMemberInformations
     
+    

@@ -5,3 +5,4 @@ class IdolPartyRegisterRequestMessage(NetworkMessage):
     protocolId = 868
     register:bool
     
+    

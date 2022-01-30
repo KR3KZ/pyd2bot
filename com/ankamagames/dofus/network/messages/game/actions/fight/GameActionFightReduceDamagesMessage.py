@@ -6,3 +6,4 @@ class GameActionFightReduceDamagesMessage(AbstractGameActionMessage):
     targetId:int
     amount:int
     
+    

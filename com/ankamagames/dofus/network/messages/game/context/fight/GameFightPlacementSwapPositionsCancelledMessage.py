@@ -6,3 +6,4 @@ class GameFightPlacementSwapPositionsCancelledMessage(NetworkMessage):
     requestId:int
     cancellerId:int
     
+    

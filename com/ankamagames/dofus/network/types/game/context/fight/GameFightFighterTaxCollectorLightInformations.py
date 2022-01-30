@@ -6,3 +6,4 @@ class GameFightFighterTaxCollectorLightInformations(GameFightFighterLightInforma
     firstNameId:int
     lastNameId:int
     
+    

@@ -5,3 +5,4 @@ class UpdateMountBooleanCharacteristic(UpdateMountCharacteristic):
     protocolId = 1756
     value:bool
     
+    

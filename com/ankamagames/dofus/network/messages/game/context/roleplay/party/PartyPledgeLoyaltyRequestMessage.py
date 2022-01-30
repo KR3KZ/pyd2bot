@@ -5,3 +5,4 @@ class PartyPledgeLoyaltyRequestMessage(AbstractPartyMessage):
     protocolId = 8034
     loyal:bool
     
+    

@@ -6,3 +6,4 @@ class NpcDialogCreationMessage(NetworkMessage):
     mapId:int
     npcId:int
     
+    

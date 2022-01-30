@@ -5,3 +5,4 @@ class AlmanachCalendarDateMessage(NetworkMessage):
     protocolId = 2577
     date:int
     
+    

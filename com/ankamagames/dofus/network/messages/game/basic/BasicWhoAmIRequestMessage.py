@@ -5,3 +5,4 @@ class BasicWhoAmIRequestMessage(NetworkMessage):
     protocolId = 1281
     verbose:bool
     
+    

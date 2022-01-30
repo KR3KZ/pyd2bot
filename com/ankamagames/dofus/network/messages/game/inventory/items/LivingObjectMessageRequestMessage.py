@@ -7,3 +7,4 @@ class LivingObjectMessageRequestMessage(NetworkMessage):
     parameters:str
     livingObject:int
     
+    

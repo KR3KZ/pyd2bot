@@ -5,3 +5,4 @@ class GameFightTurnResumeMessage(GameFightTurnStartMessage):
     protocolId = 9827
     remainingTime:int
     
+    

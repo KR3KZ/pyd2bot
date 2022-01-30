@@ -7,3 +7,4 @@ class DebtsUpdateMessage(NetworkMessage):
     action:int
     debts:DebtInformation
     
+    

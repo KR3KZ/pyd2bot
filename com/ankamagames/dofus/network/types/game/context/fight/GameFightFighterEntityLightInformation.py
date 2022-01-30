@@ -6,3 +6,4 @@ class GameFightFighterEntityLightInformation(GameFightFighterLightInformations):
     entityModelId:int
     masterId:int
     
+    

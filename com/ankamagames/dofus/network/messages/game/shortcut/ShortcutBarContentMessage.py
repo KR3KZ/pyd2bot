@@ -7,3 +7,4 @@ class ShortcutBarContentMessage(NetworkMessage):
     barType:int
     shortcuts:Shortcut
     
+    

@@ -18,3 +18,4 @@ class PartyMemberInformations(CharacterBaseInformations):
     status:PlayerStatus
     entities:PartyEntityBaseInformation
     
+    

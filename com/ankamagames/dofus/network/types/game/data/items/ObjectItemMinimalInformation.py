@@ -7,3 +7,4 @@ class ObjectItemMinimalInformation(Item):
     objectGID:int
     effects:ObjectEffect
     
+    

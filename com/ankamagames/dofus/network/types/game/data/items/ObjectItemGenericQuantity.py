@@ -6,3 +6,4 @@ class ObjectItemGenericQuantity(Item):
     objectGID:int
     quantity:int
     
+    

@@ -5,4 +5,7 @@ from com.ankamagames.dofus.network.types.common.AccountTagInformation import Acc
 class IgnoredDeleteResultMessage(NetworkMessage):
     protocolId = 9652
     tag:AccountTagInformation
+    success:bool
+    session:bool
+    
     

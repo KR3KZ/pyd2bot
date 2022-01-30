@@ -5,3 +5,4 @@ class TreasureHuntShowLegendaryUIMessage(NetworkMessage):
     protocolId = 117
     availableLegendaryIds:int
     
+    

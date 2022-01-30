@@ -8,3 +8,4 @@ class ObjectItemQuantityPriceDateEffects(ObjectItemGenericQuantity):
     effects:ObjectEffects
     date:int
     
+    

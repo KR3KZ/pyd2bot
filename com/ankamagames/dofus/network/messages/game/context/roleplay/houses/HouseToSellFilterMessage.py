@@ -10,3 +10,4 @@ class HouseToSellFilterMessage(NetworkMessage):
     maxPrice:int
     orderBy:int
     
+    

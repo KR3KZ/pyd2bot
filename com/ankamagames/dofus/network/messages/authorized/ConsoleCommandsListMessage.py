@@ -7,3 +7,4 @@ class ConsoleCommandsListMessage(NetworkMessage):
     args:str
     descriptions:str
     
+    

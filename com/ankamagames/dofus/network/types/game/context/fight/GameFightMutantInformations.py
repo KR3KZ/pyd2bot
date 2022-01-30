@@ -5,3 +5,4 @@ class GameFightMutantInformations(GameFightFighterNamedInformations):
     protocolId = 2861
     powerLevel:int
     
+    

@@ -6,3 +6,4 @@ class GameFightTurnStartMessage(NetworkMessage):
     id:int
     waitTime:int
     
+    

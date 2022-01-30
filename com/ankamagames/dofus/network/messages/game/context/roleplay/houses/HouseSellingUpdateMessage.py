@@ -10,3 +10,4 @@ class HouseSellingUpdateMessage(NetworkMessage):
     realPrice:int
     buyerTag:AccountTagInformation
     
+    

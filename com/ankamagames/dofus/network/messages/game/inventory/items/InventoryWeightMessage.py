@@ -7,3 +7,4 @@ class InventoryWeightMessage(NetworkMessage):
     shopWeight:int
     weightMax:int
     
+    

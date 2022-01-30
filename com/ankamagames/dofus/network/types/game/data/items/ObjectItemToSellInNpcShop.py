@@ -6,3 +6,4 @@ class ObjectItemToSellInNpcShop(ObjectItemMinimalInformation):
     objectPrice:int
     buyCriterion:str
     
+    

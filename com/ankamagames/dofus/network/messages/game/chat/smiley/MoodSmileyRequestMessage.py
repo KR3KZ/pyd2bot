@@ -5,3 +5,4 @@ class MoodSmileyRequestMessage(NetworkMessage):
     protocolId = 610
     smileyId:int
     
+    

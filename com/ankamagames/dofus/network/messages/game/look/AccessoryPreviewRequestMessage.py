@@ -5,3 +5,4 @@ class AccessoryPreviewRequestMessage(NetworkMessage):
     protocolId = 35
     genericId:int
     
+    

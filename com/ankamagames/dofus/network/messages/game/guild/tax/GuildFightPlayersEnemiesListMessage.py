@@ -7,3 +7,4 @@ class GuildFightPlayersEnemiesListMessage(NetworkMessage):
     fightId:int
     playerInfo:CharacterMinimalPlusLookInformations
     
+    

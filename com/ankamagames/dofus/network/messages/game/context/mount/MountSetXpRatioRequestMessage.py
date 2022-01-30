@@ -5,3 +5,4 @@ class MountSetXpRatioRequestMessage(NetworkMessage):
     protocolId = 9275
     xpRatio:int
     
+    

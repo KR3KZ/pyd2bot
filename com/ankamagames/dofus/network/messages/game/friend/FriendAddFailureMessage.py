@@ -5,3 +5,4 @@ class FriendAddFailureMessage(NetworkMessage):
     protocolId = 4074
     reason:int
     
+    

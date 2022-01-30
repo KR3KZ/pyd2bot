@@ -6,3 +6,4 @@ class StartupActionAddMessage(NetworkMessage):
     protocolId = 1592
     newAction:StartupActionAddObject
     
+    

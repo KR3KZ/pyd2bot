@@ -5,3 +5,4 @@ class ShortcutBarSwapErrorMessage(NetworkMessage):
     protocolId = 3330
     error:int
     
+    

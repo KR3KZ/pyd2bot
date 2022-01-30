@@ -6,3 +6,4 @@ class GameActionUpdateEffectTriggerCountMessage(NetworkMessage):
     protocolId = 6461
     targetIds:GameFightEffectTriggerCount
     
+    

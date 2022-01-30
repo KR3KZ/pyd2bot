@@ -5,3 +5,4 @@ class ExchangeObjectMessage(NetworkMessage):
     protocolId = 1966
     remote:bool
     
+    

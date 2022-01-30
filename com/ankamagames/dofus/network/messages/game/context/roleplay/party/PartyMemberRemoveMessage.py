@@ -5,3 +5,4 @@ class PartyMemberRemoveMessage(AbstractPartyEventMessage):
     protocolId = 9078
     leavingPlayerId:int
     
+    

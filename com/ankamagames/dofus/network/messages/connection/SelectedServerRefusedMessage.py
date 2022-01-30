@@ -7,3 +7,4 @@ class SelectedServerRefusedMessage(NetworkMessage):
     error:int
     serverStatus:int
     
+    

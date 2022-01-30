@@ -6,3 +6,4 @@ class GameContextMoveElementMessage(NetworkMessage):
     protocolId = 5628
     movement:EntityMovementInformations
     
+    

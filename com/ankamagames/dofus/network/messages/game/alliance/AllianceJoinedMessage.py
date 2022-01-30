@@ -8,3 +8,4 @@ class AllianceJoinedMessage(NetworkMessage):
     enabled:bool
     leadingGuildId:int
     
+    

@@ -6,3 +6,4 @@ class BreachRoomUnlockResultMessage(NetworkMessage):
     roomId:int
     result:int
     
+    

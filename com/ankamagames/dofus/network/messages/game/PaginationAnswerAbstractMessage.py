@@ -7,3 +7,4 @@ class PaginationAnswerAbstractMessage(NetworkMessage):
     count:int
     total:int
     
+    

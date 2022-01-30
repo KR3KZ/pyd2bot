@@ -8,3 +8,4 @@ class ExchangeStartedBidSellerMessage(NetworkMessage):
     sellerDescriptor:SellerBuyerDescriptor
     objectsInfos:ObjectItemToSellInBid
     
+    

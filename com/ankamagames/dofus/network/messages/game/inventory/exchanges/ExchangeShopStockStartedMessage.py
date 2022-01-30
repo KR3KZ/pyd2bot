@@ -6,3 +6,4 @@ class ExchangeShopStockStartedMessage(NetworkMessage):
     protocolId = 2502
     objectsInfos:ObjectItemToSell
     
+    

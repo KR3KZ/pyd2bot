@@ -5,9 +5,10 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.fight.arena.Arena
 
 class ArenaRankInfos(NetworkMessage):
     protocolId = 750
-    ranking:ArenaRanking = None
-    leagueRanking:ArenaLeagueRanking = None
+    ranking:ArenaRanking
+    leagueRanking:ArenaLeagueRanking
     victoryCount:int
     fightcount:int
     numFightNeededForLadder:int
+    
     

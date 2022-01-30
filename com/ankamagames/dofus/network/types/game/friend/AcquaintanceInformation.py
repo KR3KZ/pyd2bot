@@ -5,3 +5,4 @@ class AcquaintanceInformation(AbstractContactInformations):
     protocolId = 6223
     playerState:int
     
+    

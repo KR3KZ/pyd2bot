@@ -8,3 +8,4 @@ class HouseInformationsInside(HouseInformations):
     worldX:int
     worldY:int
     
+    

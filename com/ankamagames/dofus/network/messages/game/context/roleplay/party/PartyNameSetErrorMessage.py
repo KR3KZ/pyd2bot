@@ -5,3 +5,4 @@ class PartyNameSetErrorMessage(AbstractPartyMessage):
     protocolId = 9899
     result:int
     
+    

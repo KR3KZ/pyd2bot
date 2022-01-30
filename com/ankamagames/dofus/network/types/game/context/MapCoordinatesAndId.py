@@ -5,3 +5,4 @@ class MapCoordinatesAndId(MapCoordinates):
     protocolId = 1741
     mapId:int
     
+    

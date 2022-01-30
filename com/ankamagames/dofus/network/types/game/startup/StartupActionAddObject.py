@@ -11,3 +11,4 @@ class StartupActionAddObject(NetworkMessage):
     pictureUrl:str
     items:ObjectItemInformationWithQuantity
     
+    

@@ -5,3 +5,4 @@ class CharacterCharacteristicForPreset(SimpleCharacterCharacteristicForPreset):
     protocolId = 4303
     stuff:int
     
+    

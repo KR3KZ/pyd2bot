@@ -7,3 +7,4 @@ class PaddockSellBuyDialogMessage(NetworkMessage):
     ownerId:int
     price:int
     
+    

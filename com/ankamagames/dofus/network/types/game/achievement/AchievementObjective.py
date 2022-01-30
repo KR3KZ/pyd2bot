@@ -6,3 +6,4 @@ class AchievementObjective(NetworkMessage):
     id:int
     maxValue:int
     
+    

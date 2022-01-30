@@ -5,3 +5,4 @@ class PaddockRemoveItemRequestMessage(NetworkMessage):
     protocolId = 9863
     cellId:int
     
+    

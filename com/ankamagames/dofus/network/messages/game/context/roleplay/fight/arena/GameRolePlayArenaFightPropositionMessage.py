@@ -7,3 +7,4 @@ class GameRolePlayArenaFightPropositionMessage(NetworkMessage):
     alliesId:int
     duration:int
     
+    

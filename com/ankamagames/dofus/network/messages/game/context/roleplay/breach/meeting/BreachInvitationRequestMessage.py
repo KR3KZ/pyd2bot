@@ -5,3 +5,4 @@ class BreachInvitationRequestMessage(NetworkMessage):
     protocolId = 7544
     guests:int
     
+    

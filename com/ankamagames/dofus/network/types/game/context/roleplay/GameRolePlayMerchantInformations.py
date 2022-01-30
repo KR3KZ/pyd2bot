@@ -7,3 +7,4 @@ class GameRolePlayMerchantInformations(GameRolePlayNamedActorInformations):
     sellType:int
     options:HumanOption
     
+    

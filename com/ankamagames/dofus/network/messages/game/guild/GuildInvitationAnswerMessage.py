@@ -5,3 +5,4 @@ class GuildInvitationAnswerMessage(NetworkMessage):
     protocolId = 8895
     accept:bool
     
+    

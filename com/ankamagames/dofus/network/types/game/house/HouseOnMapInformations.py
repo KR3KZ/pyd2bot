@@ -7,3 +7,4 @@ class HouseOnMapInformations(HouseInformations):
     doorsOnMap:int
     houseInstances:HouseInstanceInformations
     
+    

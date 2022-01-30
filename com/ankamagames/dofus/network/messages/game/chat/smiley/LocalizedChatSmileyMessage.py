@@ -5,3 +5,4 @@ class LocalizedChatSmileyMessage(ChatSmileyMessage):
     protocolId = 5134
     cellId:int
     
+    

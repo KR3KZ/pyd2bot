@@ -5,3 +5,4 @@ class GuildInvitationStateRecrutedMessage(NetworkMessage):
     protocolId = 621
     invitationState:int
     
+    

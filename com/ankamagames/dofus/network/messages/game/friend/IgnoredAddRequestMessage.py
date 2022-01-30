@@ -7,3 +7,4 @@ class IgnoredAddRequestMessage(NetworkMessage):
     target:AbstractPlayerSearchInformation
     session:bool
     
+    

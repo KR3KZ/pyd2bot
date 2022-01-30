@@ -6,3 +6,4 @@ class InviteInHavenBagClosedMessage(NetworkMessage):
     protocolId = 5490
     hostInformations:CharacterMinimalInformations
     
+    

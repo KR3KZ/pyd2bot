@@ -5,3 +5,4 @@ class AllianceInvitationMessage(NetworkMessage):
     protocolId = 235
     targetId:int
     
+    

@@ -6,3 +6,4 @@ class RecycleResultMessage(NetworkMessage):
     nuggetsForPrism:int
     nuggetsForPlayer:int
     
+    

@@ -6,3 +6,4 @@ class GameRolePlayPlayerFightFriendlyAnswerMessage(NetworkMessage):
     fightId:int
     accept:bool
     
+    

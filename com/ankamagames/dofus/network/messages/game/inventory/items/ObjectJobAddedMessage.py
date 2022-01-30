@@ -5,3 +5,4 @@ class ObjectJobAddedMessage(NetworkMessage):
     protocolId = 5325
     jobId:int
     
+    

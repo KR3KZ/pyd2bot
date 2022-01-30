@@ -7,3 +7,4 @@ class MapRewardRateMessage(NetworkMessage):
     subAreaRate:int
     totalRate:int
     
+    

@@ -5,3 +5,4 @@ class IdentificationAccountForceMessage(IdentificationMessage):
     protocolId = 2449
     forcedAccountLogin:str
     
+    

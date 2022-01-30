@@ -5,3 +5,4 @@ class GameActionFightLifeAndShieldPointsLostMessage(GameActionFightLifePointsLos
     protocolId = 6816
     shieldLoss:int
     
+    

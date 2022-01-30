@@ -5,3 +5,4 @@ class LockableChangeCodeMessage(NetworkMessage):
     protocolId = 768
     code:str
     
+    

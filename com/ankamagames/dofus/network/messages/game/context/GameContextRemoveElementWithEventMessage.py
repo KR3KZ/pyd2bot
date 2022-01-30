@@ -5,3 +5,4 @@ class GameContextRemoveElementWithEventMessage(GameContextRemoveElementMessage):
     protocolId = 9473
     elementEventId:int
     
+    

@@ -9,3 +9,4 @@ class PrismGeolocalizedInformation(PrismSubareaEmptyInfo):
     mapId:int
     prism:PrismInformation
     
+    

@@ -21,3 +21,4 @@ class MapComplementaryInformationsDataMessage(NetworkMessage):
     hasAggressiveMonsters:bool
     fightStartPositions:FightStartingPositions
     
+    

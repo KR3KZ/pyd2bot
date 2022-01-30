@@ -6,3 +6,4 @@ class JobExperienceUpdateMessage(NetworkMessage):
     protocolId = 3940
     experiencesUpdate:JobExperience
     
+    

@@ -5,3 +5,4 @@ class ExchangeCraftCountRequestMessage(NetworkMessage):
     protocolId = 7316
     count:int
     
+    

@@ -5,3 +5,4 @@ class ShortcutBarRemoveErrorMessage(NetworkMessage):
     protocolId = 5661
     error:int
     
+    

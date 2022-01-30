@@ -10,3 +10,4 @@ class TaxCollectorBasicInformations(NetworkMessage):
     mapId:int
     subAreaId:int
     
+    

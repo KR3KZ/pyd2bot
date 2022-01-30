@@ -7,3 +7,4 @@ class ObjectAddedMessage(NetworkMessage):
     object:ObjectItem
     origin:int
     
+    

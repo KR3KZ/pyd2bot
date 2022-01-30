@@ -6,3 +6,4 @@ class PrismSettingsRequestMessage(NetworkMessage):
     subAreaId:int
     startDefenseTime:int
     
+    

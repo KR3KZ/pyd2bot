@@ -6,3 +6,4 @@ class AllianceVersatileInfoListMessage(NetworkMessage):
     protocolId = 9853
     alliances:AllianceVersatileInformations
     
+    

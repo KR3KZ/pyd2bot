@@ -5,3 +5,4 @@ class GameActionFightDispellEffectMessage(GameActionFightDispellMessage):
     protocolId = 1560
     boostUID:int
     
+    

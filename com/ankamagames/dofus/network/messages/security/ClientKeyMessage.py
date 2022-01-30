@@ -5,3 +5,4 @@ class ClientKeyMessage(NetworkMessage):
     protocolId = 7137
     key:str
     
+    

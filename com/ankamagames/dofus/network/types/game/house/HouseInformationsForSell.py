@@ -19,3 +19,4 @@ class HouseInformationsForSell(NetworkMessage):
     isLocked:bool
     price:int
     
+    

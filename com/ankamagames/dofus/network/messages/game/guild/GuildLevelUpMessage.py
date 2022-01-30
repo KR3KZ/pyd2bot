@@ -5,3 +5,4 @@ class GuildLevelUpMessage(NetworkMessage):
     protocolId = 7669
     newLevel:int
     
+    

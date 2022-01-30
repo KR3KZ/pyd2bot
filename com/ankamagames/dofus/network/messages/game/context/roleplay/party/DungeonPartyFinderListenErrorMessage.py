@@ -5,3 +5,4 @@ class DungeonPartyFinderListenErrorMessage(NetworkMessage):
     protocolId = 7331
     dungeonId:int
     
+    

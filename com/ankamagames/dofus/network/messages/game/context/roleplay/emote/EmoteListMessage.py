@@ -5,3 +5,4 @@ class EmoteListMessage(NetworkMessage):
     protocolId = 9032
     emoteIds:int
     
+    

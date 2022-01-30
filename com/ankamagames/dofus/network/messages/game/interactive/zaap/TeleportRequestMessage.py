@@ -7,3 +7,4 @@ class TeleportRequestMessage(NetworkMessage):
     destinationType:int
     mapId:int
     
+    

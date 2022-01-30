@@ -7,3 +7,4 @@ class MoodSmileyUpdateMessage(NetworkMessage):
     playerId:int
     smileyId:int
     
+    

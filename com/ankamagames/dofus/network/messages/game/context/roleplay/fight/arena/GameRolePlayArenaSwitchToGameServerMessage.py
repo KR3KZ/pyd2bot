@@ -7,3 +7,4 @@ class GameRolePlayArenaSwitchToGameServerMessage(NetworkMessage):
     ticket:int
     homeServerId:int
     
+    

@@ -6,3 +6,4 @@ class ExchangeBuyMessage(NetworkMessage):
     objectToBuyId:int
     quantity:int
     
+    

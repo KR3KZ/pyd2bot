@@ -8,3 +8,4 @@ class AllianceVersatileInformations(NetworkMessage):
     nbMembers:int
     nbSubarea:int
     
+    

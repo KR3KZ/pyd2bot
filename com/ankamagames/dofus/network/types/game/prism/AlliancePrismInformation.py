@@ -6,3 +6,4 @@ class AlliancePrismInformation(PrismInformation):
     protocolId = 1469
     alliance:AllianceInformations
     
+    

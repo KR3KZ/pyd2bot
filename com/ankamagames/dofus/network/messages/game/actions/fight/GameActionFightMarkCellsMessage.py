@@ -6,3 +6,4 @@ class GameActionFightMarkCellsMessage(AbstractGameActionMessage):
     protocolId = 1180
     mark:GameActionMark
     
+    

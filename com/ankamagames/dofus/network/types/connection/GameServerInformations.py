@@ -10,4 +10,7 @@ class GameServerInformations(NetworkMessage):
     charactersCount:int
     charactersSlots:int
     date:int
+    isMonoAccount:bool
+    isSelectable:bool
+    
     

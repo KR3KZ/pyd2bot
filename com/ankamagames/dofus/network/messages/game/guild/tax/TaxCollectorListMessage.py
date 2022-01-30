@@ -8,3 +8,4 @@ class TaxCollectorListMessage(AbstractTaxCollectorListMessage):
     fightersInformations:TaxCollectorFightersInformation
     infoType:int
     
+    

@@ -6,3 +6,4 @@ class ExchangeShopStockMovementUpdatedMessage(NetworkMessage):
     protocolId = 9932
     objectInfo:ObjectItemToSell
     
+    

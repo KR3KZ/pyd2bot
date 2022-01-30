@@ -6,3 +6,4 @@ class LockableShowCodeDialogMessage(NetworkMessage):
     changeOrUse:bool
     codeSize:int
     
+    

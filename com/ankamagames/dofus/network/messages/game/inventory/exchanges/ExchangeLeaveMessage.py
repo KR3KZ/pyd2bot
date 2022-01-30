@@ -5,3 +5,4 @@ class ExchangeLeaveMessage(LeaveDialogMessage):
     protocolId = 8813
     success:bool
     
+    

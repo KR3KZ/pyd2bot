@@ -5,3 +5,4 @@ class AchievementRewardSuccessMessage(NetworkMessage):
     protocolId = 2669
     achievementId:int
     
+    

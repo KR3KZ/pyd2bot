@@ -4,3 +4,4 @@ from com.ankamagames.dofus.network.types.game.context.GameContextActorInformatio
 class GameRolePlayActorInformations(GameContextActorInformations):
     protocolId = 102
     
+    

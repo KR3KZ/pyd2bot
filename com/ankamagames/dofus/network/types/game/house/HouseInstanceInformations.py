@@ -7,4 +7,9 @@ class HouseInstanceInformations(NetworkMessage):
     instanceId:int
     ownerTag:AccountTagInformation
     price:int
+    secondHand:bool
+    isLocked:bool
+    hasOwner:bool
+    isSaleLocked:bool
+    
     

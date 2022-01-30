@@ -5,3 +5,4 @@ class FightTeamMemberInformations(NetworkMessage):
     protocolId = 5640
     id:int
     
+    

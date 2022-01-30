@@ -6,3 +6,4 @@ class LockableStateUpdateStorageMessage(LockableStateUpdateAbstractMessage):
     mapId:int
     elementId:int
     
+    

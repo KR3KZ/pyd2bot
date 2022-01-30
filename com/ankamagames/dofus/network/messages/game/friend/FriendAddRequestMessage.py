@@ -6,3 +6,4 @@ class FriendAddRequestMessage(NetworkMessage):
     protocolId = 6214
     target:AbstractPlayerSearchInformation
     
+    

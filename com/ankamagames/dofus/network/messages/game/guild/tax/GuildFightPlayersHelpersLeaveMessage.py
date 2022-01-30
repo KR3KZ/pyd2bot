@@ -6,3 +6,4 @@ class GuildFightPlayersHelpersLeaveMessage(NetworkMessage):
     fightId:int
     playerId:int
     
+    

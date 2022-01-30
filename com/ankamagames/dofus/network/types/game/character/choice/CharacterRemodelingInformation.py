@@ -9,3 +9,4 @@ class CharacterRemodelingInformation(AbstractCharacterInformation):
     cosmeticId:int
     colors:int
     
+    

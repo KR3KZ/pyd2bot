@@ -5,3 +5,4 @@ class AllianceFactSheetInformations(AllianceInformations):
     protocolId = 9654
     creationDate:int
     
+    

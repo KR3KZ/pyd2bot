@@ -6,3 +6,4 @@ class AlignmentRankUpdateMessage(NetworkMessage):
     alignmentRank:int
     verbose:bool
     
+    

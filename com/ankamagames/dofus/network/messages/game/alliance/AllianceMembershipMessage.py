@@ -4,3 +4,4 @@ from com.ankamagames.dofus.network.messages.game.alliance.AllianceJoinedMessage 
 class AllianceMembershipMessage(AllianceJoinedMessage):
     protocolId = 813
     
+    

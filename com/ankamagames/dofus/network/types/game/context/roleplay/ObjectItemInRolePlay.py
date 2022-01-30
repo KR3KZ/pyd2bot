@@ -6,3 +6,4 @@ class ObjectItemInRolePlay(NetworkMessage):
     cellId:int
     objectGID:int
     
+    

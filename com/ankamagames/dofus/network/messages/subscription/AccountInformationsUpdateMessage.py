@@ -5,3 +5,4 @@ class AccountInformationsUpdateMessage(NetworkMessage):
     protocolId = 3664
     subscriptionEndDate:int
     
+    

@@ -5,3 +5,4 @@ class FightEntityDispositionInformations(EntityDispositionInformations):
     protocolId = 7794
     carryingCharacterId:int
     
+    

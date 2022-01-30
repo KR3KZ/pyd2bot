@@ -8,3 +8,4 @@ class GroupMonsterStaticInformations(NetworkMessage):
     mainCreatureLightInfos:MonsterInGroupLightInformations
     underlings:MonsterInGroupInformations
     
+    

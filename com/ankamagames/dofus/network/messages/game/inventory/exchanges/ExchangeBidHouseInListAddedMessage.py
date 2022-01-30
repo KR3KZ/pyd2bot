@@ -10,3 +10,4 @@ class ExchangeBidHouseInListAddedMessage(NetworkMessage):
     effects:ObjectEffect
     prices:int
     
+    

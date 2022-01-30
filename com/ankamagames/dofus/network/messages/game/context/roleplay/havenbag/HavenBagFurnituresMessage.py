@@ -6,3 +6,4 @@ class HavenBagFurnituresMessage(NetworkMessage):
     protocolId = 6373
     furnituresInfos:HavenBagFurnitureInformation
     
+    

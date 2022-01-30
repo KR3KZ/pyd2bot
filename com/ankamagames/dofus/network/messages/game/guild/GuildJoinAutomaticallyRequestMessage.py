@@ -5,3 +5,4 @@ class GuildJoinAutomaticallyRequestMessage(NetworkMessage):
     protocolId = 6478
     guildId:int
     
+    

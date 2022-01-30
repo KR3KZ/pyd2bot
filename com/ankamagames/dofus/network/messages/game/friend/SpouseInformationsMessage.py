@@ -6,3 +6,4 @@ class SpouseInformationsMessage(NetworkMessage):
     protocolId = 8493
     spouse:FriendSpouseInformations
     
+    

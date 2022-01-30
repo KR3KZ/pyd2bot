@@ -6,3 +6,4 @@ class GuildInvitationStateRecruterMessage(NetworkMessage):
     recrutedName:str
     invitationState:int
     
+    

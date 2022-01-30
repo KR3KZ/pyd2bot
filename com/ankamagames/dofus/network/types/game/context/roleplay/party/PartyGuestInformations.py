@@ -15,3 +15,4 @@ class PartyGuestInformations(NetworkMessage):
     status:PlayerStatus
     entities:PartyEntityBaseInformation
     
+    

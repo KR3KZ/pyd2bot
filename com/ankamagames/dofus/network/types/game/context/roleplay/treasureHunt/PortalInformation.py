@@ -6,3 +6,4 @@ class PortalInformation(NetworkMessage):
     portalId:int
     areaId:int
     
+    

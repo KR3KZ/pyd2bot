@@ -6,3 +6,4 @@ class TreasureHuntStepFollowDirection(TreasureHuntStep):
     direction:int
     mapCount:int
     
+    

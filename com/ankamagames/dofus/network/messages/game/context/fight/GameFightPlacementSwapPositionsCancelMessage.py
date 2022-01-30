@@ -5,3 +5,4 @@ class GameFightPlacementSwapPositionsCancelMessage(NetworkMessage):
     protocolId = 7054
     requestId:int
     
+    

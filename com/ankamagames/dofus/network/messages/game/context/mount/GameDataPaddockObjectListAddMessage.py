@@ -6,3 +6,4 @@ class GameDataPaddockObjectListAddMessage(NetworkMessage):
     protocolId = 6584
     paddockItemDescription:PaddockItem
     
+    

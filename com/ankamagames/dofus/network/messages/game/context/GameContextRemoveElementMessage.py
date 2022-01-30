@@ -5,3 +5,4 @@ class GameContextRemoveElementMessage(NetworkMessage):
     protocolId = 5284
     id:int
     
+    

@@ -5,3 +5,4 @@ class TreasureHuntLegendaryRequestMessage(NetworkMessage):
     protocolId = 6283
     legendaryId:int
     
+    

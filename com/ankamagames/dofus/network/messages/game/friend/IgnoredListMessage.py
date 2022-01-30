@@ -6,3 +6,4 @@ class IgnoredListMessage(NetworkMessage):
     protocolId = 1938
     ignoredList:IgnoredInformations
     
+    

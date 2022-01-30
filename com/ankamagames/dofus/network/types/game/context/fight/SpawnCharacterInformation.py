@@ -6,3 +6,4 @@ class SpawnCharacterInformation(SpawnInformation):
     name:str
     level:int
     
+    

@@ -5,3 +5,4 @@ class GameActionFightUnmarkCellsMessage(AbstractGameActionMessage):
     protocolId = 302
     markId:int
     
+    

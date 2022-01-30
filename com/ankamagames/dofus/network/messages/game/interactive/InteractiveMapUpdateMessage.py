@@ -6,3 +6,4 @@ class InteractiveMapUpdateMessage(NetworkMessage):
     protocolId = 8375
     interactiveElements:InteractiveElement
     
+    

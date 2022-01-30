@@ -5,3 +5,4 @@ class MountDataErrorMessage(NetworkMessage):
     protocolId = 24
     reason:int
     
+    

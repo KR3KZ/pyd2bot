@@ -9,3 +9,4 @@ class PrismInformation(NetworkMessage):
     placementDate:int
     rewardTokenCount:int
     
+    

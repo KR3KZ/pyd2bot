@@ -13,3 +13,4 @@ class SlaveSwitchContextMessage(NetworkMessage):
     slaveStats:CharacterCharacteristicsInformations
     shortcuts:Shortcut
     
+    

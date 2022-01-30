@@ -5,3 +5,4 @@ class PrismSetSabotagedRequestMessage(NetworkMessage):
     protocolId = 1746
     subAreaId:int
     
+    

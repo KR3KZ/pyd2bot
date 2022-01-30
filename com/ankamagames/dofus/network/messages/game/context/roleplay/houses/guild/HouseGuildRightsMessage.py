@@ -10,3 +10,4 @@ class HouseGuildRightsMessage(NetworkMessage):
     guildInfo:GuildInformations
     rights:int
     
+    

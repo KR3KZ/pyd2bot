@@ -4,3 +4,4 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.treasureHunt.Trea
 class TreasureHuntStepFight(TreasureHuntStep):
     protocolId = 4747
     
+    

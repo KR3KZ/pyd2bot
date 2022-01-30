@@ -5,3 +5,4 @@ class PartyLeaderUpdateMessage(AbstractPartyEventMessage):
     protocolId = 4003
     partyLeaderId:int
     
+    

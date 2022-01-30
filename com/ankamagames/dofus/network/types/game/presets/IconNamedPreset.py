@@ -6,3 +6,4 @@ class IconNamedPreset(PresetsContainerPreset):
     iconId:int
     name:str
     
+    

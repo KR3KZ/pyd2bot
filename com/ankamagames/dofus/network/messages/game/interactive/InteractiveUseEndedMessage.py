@@ -6,3 +6,4 @@ class InteractiveUseEndedMessage(NetworkMessage):
     elemId:int
     skillId:int
     
+    

@@ -7,3 +7,4 @@ class BasicLatencyStatsMessage(NetworkMessage):
     sampleCount:int
     max:int
     
+    

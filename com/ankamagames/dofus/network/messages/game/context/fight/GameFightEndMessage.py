@@ -11,3 +11,4 @@ class GameFightEndMessage(NetworkMessage):
     results:FightResultListEntry
     namedPartyTeamsOutcomes:NamedPartyTeamWithOutcome
     
+    

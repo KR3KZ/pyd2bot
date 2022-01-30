@@ -6,3 +6,4 @@ class ExchangeStartOkMulticraftCustomerMessage(NetworkMessage):
     skillId:int
     crafterJobLevel:int
     
+    

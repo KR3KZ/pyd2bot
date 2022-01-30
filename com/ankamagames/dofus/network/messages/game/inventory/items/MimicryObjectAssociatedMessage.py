@@ -4,3 +4,4 @@ from com.ankamagames.dofus.network.messages.game.inventory.items.SymbioticObject
 class MimicryObjectAssociatedMessage(SymbioticObjectAssociatedMessage):
     protocolId = 8169
     
+    

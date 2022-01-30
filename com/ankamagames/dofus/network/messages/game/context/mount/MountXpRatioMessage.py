@@ -5,3 +5,4 @@ class MountXpRatioMessage(NetworkMessage):
     protocolId = 1527
     ratio:int
     
+    

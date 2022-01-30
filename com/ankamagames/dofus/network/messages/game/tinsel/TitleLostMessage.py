@@ -5,3 +5,4 @@ class TitleLostMessage(NetworkMessage):
     protocolId = 1427
     titleId:int
     
+    

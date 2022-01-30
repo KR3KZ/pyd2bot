@@ -5,3 +5,4 @@ class GameFightTurnReadyRequestMessage(NetworkMessage):
     protocolId = 4389
     id:int
     
+    

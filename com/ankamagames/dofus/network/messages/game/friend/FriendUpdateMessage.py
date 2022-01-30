@@ -6,3 +6,4 @@ class FriendUpdateMessage(NetworkMessage):
     protocolId = 2011
     friendUpdated:FriendInformations
     
+    

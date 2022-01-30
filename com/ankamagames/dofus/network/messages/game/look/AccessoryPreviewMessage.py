@@ -6,3 +6,4 @@ class AccessoryPreviewMessage(NetworkMessage):
     protocolId = 5355
     look:EntityLook
     
+    

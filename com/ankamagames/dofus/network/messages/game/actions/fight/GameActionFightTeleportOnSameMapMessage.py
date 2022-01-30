@@ -6,3 +6,4 @@ class GameActionFightTeleportOnSameMapMessage(AbstractGameActionMessage):
     targetId:int
     cellId:int
     
+    

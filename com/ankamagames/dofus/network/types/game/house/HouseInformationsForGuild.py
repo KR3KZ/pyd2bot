@@ -14,3 +14,4 @@ class HouseInformationsForGuild(HouseInformations):
     skillListIds:int
     guildshareParams:int
     
+    

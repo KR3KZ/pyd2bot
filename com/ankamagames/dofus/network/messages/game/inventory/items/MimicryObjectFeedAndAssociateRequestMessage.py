@@ -7,3 +7,4 @@ class MimicryObjectFeedAndAssociateRequestMessage(SymbioticObjectAssociateReques
     foodPos:int
     preview:bool
     
+    

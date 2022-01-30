@@ -5,3 +5,4 @@ class SkillActionDescriptionTimed(SkillActionDescription):
     protocolId = 9286
     time:int
     
+    

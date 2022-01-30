@@ -7,3 +7,4 @@ class GameRolePlayHumanoidInformations(GameRolePlayNamedActorInformations):
     humanoidInfo:HumanInformations
     accountId:int
     
+    

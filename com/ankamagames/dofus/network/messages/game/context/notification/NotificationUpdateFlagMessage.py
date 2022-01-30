@@ -5,3 +5,4 @@ class NotificationUpdateFlagMessage(NetworkMessage):
     protocolId = 8604
     index:int
     
+    

@@ -6,3 +6,4 @@ class ExchangeOnHumanVendorRequestMessage(NetworkMessage):
     humanVendorId:int
     humanVendorCell:int
     
+    

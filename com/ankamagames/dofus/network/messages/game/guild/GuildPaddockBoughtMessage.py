@@ -6,3 +6,4 @@ class GuildPaddockBoughtMessage(NetworkMessage):
     protocolId = 6217
     paddockInfo:PaddockContentInformations
     
+    

@@ -5,3 +5,4 @@ class MountHarnessColorsUpdateRequestMessage(NetworkMessage):
     protocolId = 7947
     useHarnessColors:bool
     
+    

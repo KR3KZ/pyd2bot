@@ -5,3 +5,4 @@ class GameActionFightVanishMessage(AbstractGameActionMessage):
     protocolId = 5414
     targetId:int
     
+    

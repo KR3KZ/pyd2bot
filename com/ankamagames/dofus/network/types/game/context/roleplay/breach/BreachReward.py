@@ -9,3 +9,4 @@ class BreachReward(NetworkMessage):
     remainingQty:int
     price:int
     
+    

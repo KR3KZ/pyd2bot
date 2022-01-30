@@ -6,3 +6,4 @@ class LoginQueueStatusMessage(NetworkMessage):
     position:int
     total:int
     
+    

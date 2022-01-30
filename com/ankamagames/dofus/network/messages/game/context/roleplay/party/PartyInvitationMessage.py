@@ -10,3 +10,4 @@ class PartyInvitationMessage(AbstractPartyMessage):
     fromName:str
     toId:int
     
+    

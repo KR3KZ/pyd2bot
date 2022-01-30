@@ -13,4 +13,7 @@ class FriendOnlineInformations(FriendInformations):
     guildInfo:GuildInformations
     moodSmileyId:int
     status:PlayerStatus
+    sex:bool
+    havenBagShared:bool
+    
     

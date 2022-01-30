@@ -5,3 +5,4 @@ class FriendStatusShareStateMessage(NetworkMessage):
     protocolId = 433
     share:bool
     
+    

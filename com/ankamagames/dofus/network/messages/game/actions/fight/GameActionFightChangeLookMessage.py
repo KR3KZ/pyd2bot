@@ -7,3 +7,4 @@ class GameActionFightChangeLookMessage(AbstractGameActionMessage):
     targetId:int
     entityLook:EntityLook
     
+    

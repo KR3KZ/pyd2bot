@@ -7,3 +7,4 @@ class TeleportBuddiesRequestedMessage(NetworkMessage):
     inviterId:int
     invalidBuddiesIds:int
     
+    

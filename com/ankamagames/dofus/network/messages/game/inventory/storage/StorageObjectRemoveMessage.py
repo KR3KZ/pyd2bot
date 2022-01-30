@@ -5,3 +5,4 @@ class StorageObjectRemoveMessage(NetworkMessage):
     protocolId = 4970
     objectUID:int
     
+    

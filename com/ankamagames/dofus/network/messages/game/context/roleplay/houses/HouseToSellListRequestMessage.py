@@ -5,3 +5,4 @@ class HouseToSellListRequestMessage(NetworkMessage):
     protocolId = 1679
     pageIndex:int
     
+    

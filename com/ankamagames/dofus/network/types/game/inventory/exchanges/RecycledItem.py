@@ -6,3 +6,4 @@ class RecycledItem(NetworkMessage):
     id:int
     qty:int
     
+    

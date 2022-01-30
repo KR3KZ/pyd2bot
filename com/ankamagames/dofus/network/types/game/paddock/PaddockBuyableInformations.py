@@ -6,3 +6,4 @@ class PaddockBuyableInformations(NetworkMessage):
     price:int
     locked:bool
     
+    

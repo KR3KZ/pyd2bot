@@ -5,3 +5,4 @@ class GuildFightJoinRequestMessage(NetworkMessage):
     protocolId = 9050
     taxCollectorId:int
     
+    

@@ -9,3 +9,4 @@ class DungeonPartyFinderPlayer(NetworkMessage):
     sex:bool
     level:int
     
+    

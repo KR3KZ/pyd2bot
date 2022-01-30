@@ -6,3 +6,4 @@ class AlignmentWarEffortProgressionMessage(NetworkMessage):
     protocolId = 2084
     effortProgressions:AlignmentWarEffortInformation
     
+    

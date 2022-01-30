@@ -5,3 +5,4 @@ class SymbioticObjectAssociatedMessage(NetworkMessage):
     protocolId = 4986
     hostUID:int
     
+    

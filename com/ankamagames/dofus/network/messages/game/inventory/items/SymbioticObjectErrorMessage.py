@@ -5,3 +5,4 @@ class SymbioticObjectErrorMessage(ObjectErrorMessage):
     protocolId = 8441
     errorCode:int
     
+    

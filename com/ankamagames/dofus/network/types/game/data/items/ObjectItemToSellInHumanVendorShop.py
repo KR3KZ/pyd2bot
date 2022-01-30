@@ -11,3 +11,4 @@ class ObjectItemToSellInHumanVendorShop(Item):
     objectPrice:int
     publicPrice:int
     
+    

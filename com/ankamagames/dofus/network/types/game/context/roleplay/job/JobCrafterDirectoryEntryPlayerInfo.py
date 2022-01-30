@@ -17,3 +17,4 @@ class JobCrafterDirectoryEntryPlayerInfo(NetworkMessage):
     canCraftLegendary:bool
     status:PlayerStatus
     
+    

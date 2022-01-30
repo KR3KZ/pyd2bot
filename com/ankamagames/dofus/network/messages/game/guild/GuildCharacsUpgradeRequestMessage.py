@@ -5,3 +5,4 @@ class GuildCharacsUpgradeRequestMessage(NetworkMessage):
     protocolId = 3240
     charaTypeTarget:int
     
+    

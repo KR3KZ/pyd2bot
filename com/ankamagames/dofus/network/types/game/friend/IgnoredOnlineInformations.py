@@ -8,3 +8,4 @@ class IgnoredOnlineInformations(IgnoredInformations):
     breed:int
     sex:bool
     
+    

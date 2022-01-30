@@ -8,3 +8,4 @@ class GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage(GameRolePlayArenaUpdate
     team:ArenaRankInfos
     duel:ArenaRankInfos
     
+    

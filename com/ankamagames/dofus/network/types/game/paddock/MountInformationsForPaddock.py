@@ -7,3 +7,4 @@ class MountInformationsForPaddock(NetworkMessage):
     name:str
     ownerName:str
     
+    

@@ -6,3 +6,4 @@ class GameFightHumanReadyStateMessage(NetworkMessage):
     characterId:int
     isReady:bool
     
+    

@@ -5,3 +5,4 @@ class CharacterNameSuggestionFailureMessage(NetworkMessage):
     protocolId = 3074
     reason:int
     
+    

@@ -4,3 +4,4 @@ from com.ankamagames.dofus.network.messages.game.social.SocialNoticeMessage impo
 class AllianceMotdMessage(SocialNoticeMessage):
     protocolId = 4427
     
+    

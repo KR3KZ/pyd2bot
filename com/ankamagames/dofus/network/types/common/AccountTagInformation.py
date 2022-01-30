@@ -6,3 +6,4 @@ class AccountTagInformation(NetworkMessage):
     nickname:str
     tagNumber:str
     
+    

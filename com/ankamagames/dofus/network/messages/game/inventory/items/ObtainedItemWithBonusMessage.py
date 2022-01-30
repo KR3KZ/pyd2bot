@@ -5,3 +5,4 @@ class ObtainedItemWithBonusMessage(ObtainedItemMessage):
     protocolId = 7390
     bonusQuantity:int
     
+    

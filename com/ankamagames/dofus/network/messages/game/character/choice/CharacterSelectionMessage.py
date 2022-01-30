@@ -5,3 +5,4 @@ class CharacterSelectionMessage(NetworkMessage):
     protocolId = 3123
     id:int
     
+    

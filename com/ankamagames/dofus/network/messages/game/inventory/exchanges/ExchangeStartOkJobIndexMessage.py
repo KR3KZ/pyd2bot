@@ -5,3 +5,4 @@ class ExchangeStartOkJobIndexMessage(NetworkMessage):
     protocolId = 1146
     jobs:int
     
+    

@@ -7,3 +7,4 @@ class FightTeamMemberEntityInformation(FightTeamMemberInformations):
     level:int
     masterId:int
     
+    

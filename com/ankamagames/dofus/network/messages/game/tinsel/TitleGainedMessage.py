@@ -5,3 +5,4 @@ class TitleGainedMessage(NetworkMessage):
     protocolId = 3386
     titleId:int
     
+    

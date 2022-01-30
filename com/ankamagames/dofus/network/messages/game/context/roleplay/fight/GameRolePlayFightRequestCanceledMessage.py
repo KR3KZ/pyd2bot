@@ -7,3 +7,4 @@ class GameRolePlayFightRequestCanceledMessage(NetworkMessage):
     sourceId:int
     targetId:int
     
+    

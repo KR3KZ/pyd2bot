@@ -5,3 +5,4 @@ class ObjectErrorMessage(NetworkMessage):
     protocolId = 9603
     reason:int
     
+    

@@ -5,3 +5,4 @@ class OrnamentGainedMessage(NetworkMessage):
     protocolId = 3920
     ornamentId:int
     
+    

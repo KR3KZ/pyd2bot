@@ -6,3 +6,4 @@ class AlignmentWarEffortInformation(NetworkMessage):
     alignmentSide:int
     alignmentWarEffort:int
     
+    

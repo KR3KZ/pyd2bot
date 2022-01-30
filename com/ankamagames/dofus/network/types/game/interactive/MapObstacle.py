@@ -6,3 +6,4 @@ class MapObstacle(NetworkMessage):
     obstacleCellId:int
     state:int
     
+    

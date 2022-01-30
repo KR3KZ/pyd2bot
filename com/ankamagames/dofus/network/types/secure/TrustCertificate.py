@@ -6,3 +6,4 @@ class TrustCertificate(NetworkMessage):
     id:int
     hash:str
     
+    

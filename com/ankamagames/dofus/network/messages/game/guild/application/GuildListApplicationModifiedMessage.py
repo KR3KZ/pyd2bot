@@ -8,3 +8,4 @@ class GuildListApplicationModifiedMessage(NetworkMessage):
     state:int
     playerId:int
     
+    

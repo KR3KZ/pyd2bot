@@ -8,3 +8,4 @@ class PrismFightDefenderAddMessage(NetworkMessage):
     fightId:int
     defender:CharacterMinimalPlusLookInformations
     
+    

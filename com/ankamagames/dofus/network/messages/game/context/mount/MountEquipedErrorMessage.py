@@ -5,3 +5,4 @@ class MountEquipedErrorMessage(NetworkMessage):
     protocolId = 1774
     errorType:int
     
+    

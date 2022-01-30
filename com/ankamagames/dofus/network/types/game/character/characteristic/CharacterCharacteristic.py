@@ -5,3 +5,4 @@ class CharacterCharacteristic(NetworkMessage):
     protocolId = 4565
     characteristicId:int
     
+    

@@ -4,3 +4,4 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.party.Abstract
 class AbstractPartyEventMessage(AbstractPartyMessage):
     protocolId = 2544
     
+    

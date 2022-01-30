@@ -4,3 +4,4 @@ from com.ankamagames.dofus.network.messages.game.social.BulletinMessage import B
 class AllianceBulletinMessage(BulletinMessage):
     protocolId = 4021
     
+    

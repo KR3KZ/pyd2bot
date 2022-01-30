@@ -6,3 +6,4 @@ class IgnoredDeleteRequestMessage(NetworkMessage):
     accountId:int
     session:bool
     
+    

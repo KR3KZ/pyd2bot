@@ -7,3 +7,4 @@ class GameRolePlayNpcInformations(GameRolePlayActorInformations):
     sex:bool
     specialArtworkId:int
     
+    

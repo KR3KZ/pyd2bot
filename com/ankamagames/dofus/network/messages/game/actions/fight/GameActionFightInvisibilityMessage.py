@@ -6,3 +6,4 @@ class GameActionFightInvisibilityMessage(AbstractGameActionMessage):
     targetId:int
     state:int
     
+    

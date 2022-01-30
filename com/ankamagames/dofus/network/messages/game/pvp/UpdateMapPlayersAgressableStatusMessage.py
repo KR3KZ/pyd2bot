@@ -6,3 +6,4 @@ class UpdateMapPlayersAgressableStatusMessage(NetworkMessage):
     playerIds:int
     enable:int
     
+    

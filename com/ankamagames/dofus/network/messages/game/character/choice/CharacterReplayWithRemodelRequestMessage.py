@@ -6,3 +6,4 @@ class CharacterReplayWithRemodelRequestMessage(CharacterReplayRequestMessage):
     protocolId = 3832
     remodel:RemodelingInformation
     
+    

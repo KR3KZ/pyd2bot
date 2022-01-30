@@ -8,3 +8,4 @@ class PartyEntityBaseInformation(NetworkMessage):
     entityModelId:int
     entityLook:EntityLook
     
+    

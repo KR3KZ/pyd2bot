@@ -6,3 +6,4 @@ class GameContextMoveMultipleElementsMessage(NetworkMessage):
     protocolId = 2401
     movements:EntityMovementInformations
     
+    

@@ -6,3 +6,4 @@ class StatsUpgradeResultMessage(NetworkMessage):
     result:int
     nbCharacBoost:int
     
+    

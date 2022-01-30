@@ -6,3 +6,4 @@ class TreasureHuntFlagRemoveRequestMessage(NetworkMessage):
     questType:int
     index:int
     
+    

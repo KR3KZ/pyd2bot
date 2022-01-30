@@ -5,3 +5,4 @@ class GameMapChangeOrientationRequestMessage(NetworkMessage):
     protocolId = 4770
     direction:int
     
+    

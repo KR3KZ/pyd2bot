@@ -5,4 +5,7 @@ class IdolSelectErrorMessage(NetworkMessage):
     protocolId = 4378
     reason:int
     idolId:int
+    activate:bool
+    party:bool
+    
     

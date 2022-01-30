@@ -5,3 +5,4 @@ class TreasureHuntGiveUpRequestMessage(NetworkMessage):
     protocolId = 2962
     questType:int
     
+    

@@ -5,3 +5,4 @@ class GameFightTurnEndMessage(NetworkMessage):
     protocolId = 4443
     id:int
     
+    

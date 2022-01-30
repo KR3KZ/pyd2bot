@@ -9,3 +9,4 @@ class AbstractFightTeamInformations(NetworkMessage):
     teamTypeId:int
     nbWaves:int
     
+    

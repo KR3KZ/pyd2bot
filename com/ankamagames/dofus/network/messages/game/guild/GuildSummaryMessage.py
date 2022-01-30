@@ -6,3 +6,4 @@ class GuildSummaryMessage(PaginationAnswerAbstractMessage):
     protocolId = 4399
     guilds:GuildFactSheetInformations
     
+    

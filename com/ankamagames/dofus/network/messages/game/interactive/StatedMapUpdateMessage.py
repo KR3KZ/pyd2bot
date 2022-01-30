@@ -6,3 +6,4 @@ class StatedMapUpdateMessage(NetworkMessage):
     protocolId = 8689
     statedElements:StatedElement
     
+    

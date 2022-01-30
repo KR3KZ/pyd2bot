@@ -9,3 +9,4 @@ class GameFightCharacterInformations(GameFightFighterNamedInformations):
     breed:int
     sex:bool
     
+    

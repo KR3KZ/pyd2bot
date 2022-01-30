@@ -6,3 +6,4 @@ class HumanOptionEmote(HumanOption):
     emoteId:int
     emoteStartTime:int
     
+    

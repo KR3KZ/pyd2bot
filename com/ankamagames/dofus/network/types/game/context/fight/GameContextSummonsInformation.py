@@ -13,3 +13,4 @@ class GameContextSummonsInformation(NetworkMessage):
     stats:GameFightCharacteristics
     summons:GameContextBasicSpawnInformation
     
+    

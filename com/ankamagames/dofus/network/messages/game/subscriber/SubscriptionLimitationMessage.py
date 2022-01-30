@@ -5,3 +5,4 @@ class SubscriptionLimitationMessage(NetworkMessage):
     protocolId = 969
     reason:int
     
+    

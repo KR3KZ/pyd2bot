@@ -6,3 +6,4 @@ class GameRolePlayPlayerLifeStatusMessage(NetworkMessage):
     state:int
     phenixMapId:int
     
+    

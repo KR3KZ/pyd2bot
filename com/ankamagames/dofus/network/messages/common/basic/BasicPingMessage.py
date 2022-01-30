@@ -5,3 +5,4 @@ class BasicPingMessage(NetworkMessage):
     protocolId = 8161
     quiet:bool
     
+    

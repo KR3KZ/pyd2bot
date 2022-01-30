@@ -5,3 +5,4 @@ class LeaveDialogMessage(NetworkMessage):
     protocolId = 2209
     dialogType:int
     
+    

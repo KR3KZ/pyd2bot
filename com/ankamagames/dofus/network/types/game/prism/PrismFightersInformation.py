@@ -11,3 +11,4 @@ class PrismFightersInformation(NetworkMessage):
     allyCharactersInformations:CharacterMinimalPlusLookInformations
     enemyCharactersInformations:CharacterMinimalPlusLookInformations
     
+    

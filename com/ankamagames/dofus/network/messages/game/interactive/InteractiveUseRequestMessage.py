@@ -6,3 +6,4 @@ class InteractiveUseRequestMessage(NetworkMessage):
     elemId:int
     skillInstanceUid:int
     
+    

@@ -9,3 +9,4 @@ class TaxCollectorMovementMessage(NetworkMessage):
     playerId:int
     playerName:str
     
+    

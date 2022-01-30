@@ -5,3 +5,4 @@ class NpcDialogReplyMessage(NetworkMessage):
     protocolId = 398
     replyId:int
     
+    

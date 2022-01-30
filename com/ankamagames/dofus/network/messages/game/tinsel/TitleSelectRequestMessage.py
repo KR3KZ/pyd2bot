@@ -5,3 +5,4 @@ class TitleSelectRequestMessage(NetworkMessage):
     protocolId = 8025
     titleId:int
     
+    

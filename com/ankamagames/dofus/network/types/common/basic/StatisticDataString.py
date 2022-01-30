@@ -5,3 +5,4 @@ class StatisticDataString(StatisticData):
     protocolId = 6983
     value:str
     
+    

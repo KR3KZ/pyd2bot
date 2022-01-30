@@ -6,3 +6,4 @@ class CharacterCharacteristics(NetworkMessage):
     protocolId = 5368
     characteristics:CharacterCharacteristic
     
+    

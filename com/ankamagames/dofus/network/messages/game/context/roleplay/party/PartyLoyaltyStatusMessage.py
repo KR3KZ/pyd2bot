@@ -5,3 +5,4 @@ class PartyLoyaltyStatusMessage(AbstractPartyMessage):
     protocolId = 5410
     loyal:bool
     
+    

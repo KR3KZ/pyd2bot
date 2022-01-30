@@ -6,3 +6,4 @@ class DebtsDeleteMessage(NetworkMessage):
     reason:int
     debts:int
     
+    

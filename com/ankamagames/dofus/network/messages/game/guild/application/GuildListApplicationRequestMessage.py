@@ -4,3 +4,4 @@ from com.ankamagames.dofus.network.messages.game.PaginationRequestAbstractMessag
 class GuildListApplicationRequestMessage(PaginationRequestAbstractMessage):
     protocolId = 2316
     
+    

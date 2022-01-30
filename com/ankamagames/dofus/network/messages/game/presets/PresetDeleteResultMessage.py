@@ -6,3 +6,4 @@ class PresetDeleteResultMessage(NetworkMessage):
     presetId:int
     code:int
     
+    

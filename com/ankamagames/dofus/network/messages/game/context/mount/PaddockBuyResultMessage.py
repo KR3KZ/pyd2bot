@@ -7,3 +7,4 @@ class PaddockBuyResultMessage(NetworkMessage):
     bought:bool
     realPrice:int
     
+    

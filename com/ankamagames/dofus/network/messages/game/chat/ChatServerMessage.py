@@ -8,3 +8,4 @@ class ChatServerMessage(ChatAbstractServerMessage):
     prefix:str
     senderAccountId:int
     
+    

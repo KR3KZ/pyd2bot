@@ -6,3 +6,4 @@ class BufferInformation(NetworkMessage):
     id:int
     amount:int
     
+    

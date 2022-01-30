@@ -6,3 +6,4 @@ class ChatClientPrivateWithObjectMessage(ChatClientPrivateMessage):
     protocolId = 1043
     objects:ObjectItem
     
+    

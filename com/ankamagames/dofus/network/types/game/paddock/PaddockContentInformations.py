@@ -12,3 +12,4 @@ class PaddockContentInformations(PaddockInformations):
     abandonned:bool
     mountsInformations:MountInformationsForPaddock
     
+    

@@ -6,3 +6,4 @@ class ExchangeObjectModifiedInBagMessage(ExchangeObjectMessage):
     protocolId = 1456
     object:ObjectItem
     
+    

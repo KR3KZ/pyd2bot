@@ -7,3 +7,4 @@ class JobLevelUpMessage(NetworkMessage):
     newLevel:int
     jobsDescription:JobDescription
     
+    

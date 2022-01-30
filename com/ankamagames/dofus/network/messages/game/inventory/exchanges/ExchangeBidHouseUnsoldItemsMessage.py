@@ -6,3 +6,4 @@ class ExchangeBidHouseUnsoldItemsMessage(NetworkMessage):
     protocolId = 5576
     items:ObjectItemGenericQuantity
     
+    

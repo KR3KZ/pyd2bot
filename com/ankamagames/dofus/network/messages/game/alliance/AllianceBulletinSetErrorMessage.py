@@ -4,3 +4,4 @@ from com.ankamagames.dofus.network.messages.game.social.SocialNoticeSetErrorMess
 class AllianceBulletinSetErrorMessage(SocialNoticeSetErrorMessage):
     protocolId = 9529
     
+    

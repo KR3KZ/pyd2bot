@@ -5,3 +5,4 @@ class BreachTeleportResponseMessage(NetworkMessage):
     protocolId = 4766
     teleported:bool
     
+    

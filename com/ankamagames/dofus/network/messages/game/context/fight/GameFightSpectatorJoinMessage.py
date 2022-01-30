@@ -6,3 +6,4 @@ class GameFightSpectatorJoinMessage(GameFightJoinMessage):
     protocolId = 6927
     namedPartyTeams:NamedPartyTeam
     
+    

@@ -6,3 +6,4 @@ class TeleportOnSameMapMessage(NetworkMessage):
     targetId:int
     cellId:int
     
+    

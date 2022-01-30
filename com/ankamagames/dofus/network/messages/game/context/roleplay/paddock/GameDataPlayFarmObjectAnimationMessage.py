@@ -5,3 +5,4 @@ class GameDataPlayFarmObjectAnimationMessage(NetworkMessage):
     protocolId = 7212
     cellId:int
     
+    

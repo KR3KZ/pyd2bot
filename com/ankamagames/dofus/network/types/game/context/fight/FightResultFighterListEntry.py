@@ -6,3 +6,4 @@ class FightResultFighterListEntry(FightResultListEntry):
     id:int
     alive:bool
     
+    

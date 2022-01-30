@@ -6,3 +6,4 @@ class TaxCollectorGuildInformations(TaxCollectorComplementaryInformations):
     protocolId = 2529
     guild:BasicGuildInformations
     
+    

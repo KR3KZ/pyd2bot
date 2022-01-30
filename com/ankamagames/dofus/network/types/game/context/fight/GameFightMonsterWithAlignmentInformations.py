@@ -6,3 +6,4 @@ class GameFightMonsterWithAlignmentInformations(GameFightMonsterInformations):
     protocolId = 108
     alignmentInfos:ActorAlignmentInformations
     
+    

@@ -6,3 +6,4 @@ class TreasureHuntStepFollowDirectionToHint(TreasureHuntStep):
     direction:int
     npcId:int
     
+    

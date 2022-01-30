@@ -9,3 +9,4 @@ class Achievement(NetworkMessage):
     finishedObjective:AchievementObjective
     startedObjectives:AchievementStartedObjective
     
+    

@@ -6,3 +6,4 @@ class BreachBranchesMessage(NetworkMessage):
     protocolId = 2907
     branches:ExtendedBreachBranch
     
+    

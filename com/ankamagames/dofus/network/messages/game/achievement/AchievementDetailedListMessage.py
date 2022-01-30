@@ -8,3 +8,4 @@ class AchievementDetailedListMessage(NetworkMessage):
     startedAchievements:Achievement
     finishedAchievements:Achievement
     
+    

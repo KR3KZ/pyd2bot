@@ -7,3 +7,4 @@ class DungeonPartyFinderRoomContentMessage(NetworkMessage):
     dungeonId:int
     players:DungeonPartyFinderPlayer
     
+    

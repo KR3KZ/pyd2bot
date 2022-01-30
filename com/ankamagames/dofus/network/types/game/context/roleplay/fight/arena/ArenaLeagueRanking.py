@@ -9,3 +9,4 @@ class ArenaLeagueRanking(NetworkMessage):
     totalLeaguePoints:int
     ladderPosition:int
     
+    

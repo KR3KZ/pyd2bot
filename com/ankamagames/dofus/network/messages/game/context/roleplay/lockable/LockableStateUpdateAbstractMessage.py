@@ -5,3 +5,4 @@ class LockableStateUpdateAbstractMessage(NetworkMessage):
     protocolId = 5676
     locked:bool
     
+    

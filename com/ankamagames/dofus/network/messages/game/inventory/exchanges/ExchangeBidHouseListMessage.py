@@ -6,3 +6,4 @@ class ExchangeBidHouseListMessage(NetworkMessage):
     id:int
     follow:bool
     
+    

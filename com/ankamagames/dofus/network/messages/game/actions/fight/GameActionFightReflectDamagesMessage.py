@@ -5,3 +5,4 @@ class GameActionFightReflectDamagesMessage(AbstractGameActionMessage):
     protocolId = 140
     targetId:int
     
+    

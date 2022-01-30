@@ -7,3 +7,4 @@ class JobCrafterDirectorySettings(NetworkMessage):
     minLevel:int
     free:bool
     
+    

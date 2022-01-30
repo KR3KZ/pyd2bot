@@ -6,3 +6,4 @@ class SpellsPreset(Preset):
     protocolId = 1337
     spells:SpellForPreset
     
+    

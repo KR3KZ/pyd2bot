@@ -6,3 +6,4 @@ class AllianceChangeGuildRightsMessage(NetworkMessage):
     guildId:int
     rights:int
     
+    

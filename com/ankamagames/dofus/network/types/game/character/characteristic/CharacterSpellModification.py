@@ -8,3 +8,4 @@ class CharacterSpellModification(NetworkMessage):
     spellId:int
     value:CharacterCharacteristicDetailed
     
+    

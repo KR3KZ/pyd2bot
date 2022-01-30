@@ -6,3 +6,4 @@ class GameContextActorInformations(GameContextActorPositionInformations):
     protocolId = 801
     look:EntityLook
     
+    

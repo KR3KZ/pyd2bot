@@ -5,3 +5,4 @@ class BreachBudgetMessage(NetworkMessage):
     protocolId = 1903
     bugdet:int
     
+    

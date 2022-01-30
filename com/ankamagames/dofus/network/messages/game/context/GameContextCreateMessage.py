@@ -5,3 +5,4 @@ class GameContextCreateMessage(NetworkMessage):
     protocolId = 4950
     context:int
     
+    

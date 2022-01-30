@@ -9,3 +9,4 @@ class FriendInformations(AbstractContactInformations):
     leagueId:int
     ladderPosition:int
     
+    

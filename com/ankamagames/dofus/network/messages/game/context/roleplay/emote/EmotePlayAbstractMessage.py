@@ -6,3 +6,4 @@ class EmotePlayAbstractMessage(NetworkMessage):
     emoteId:int
     emoteStartTime:int
     
+    

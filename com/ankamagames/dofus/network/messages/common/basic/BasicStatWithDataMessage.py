@@ -6,3 +6,4 @@ class BasicStatWithDataMessage(BasicStatMessage):
     protocolId = 1144
     datas:StatisticData
     
+    

@@ -7,3 +7,4 @@ class HumanOptionObjectUse(HumanOption):
     delayEndTime:int
     objectGID:int
     
+    

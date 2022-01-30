@@ -6,3 +6,4 @@ class CharacterMinimalGuildInformations(CharacterMinimalPlusLookInformations):
     protocolId = 4548
     guild:BasicGuildInformations
     
+    

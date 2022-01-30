@@ -6,3 +6,4 @@ class HumanOptionGuild(HumanOption):
     protocolId = 1437
     guildInformations:GuildInformations
     
+    

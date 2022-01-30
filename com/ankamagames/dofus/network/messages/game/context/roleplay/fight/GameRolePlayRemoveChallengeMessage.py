@@ -5,3 +5,4 @@ class GameRolePlayRemoveChallengeMessage(NetworkMessage):
     protocolId = 5911
     fightId:int
     
+    

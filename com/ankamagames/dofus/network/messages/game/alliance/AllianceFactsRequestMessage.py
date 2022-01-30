@@ -5,3 +5,4 @@ class AllianceFactsRequestMessage(NetworkMessage):
     protocolId = 8146
     allianceId:int
     
+    

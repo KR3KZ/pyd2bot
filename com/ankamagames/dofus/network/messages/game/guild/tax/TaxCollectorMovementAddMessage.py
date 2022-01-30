@@ -6,3 +6,4 @@ class TaxCollectorMovementAddMessage(NetworkMessage):
     protocolId = 6509
     informations:TaxCollectorInformations
     
+    

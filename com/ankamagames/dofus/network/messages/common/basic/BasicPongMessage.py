@@ -5,3 +5,4 @@ class BasicPongMessage(NetworkMessage):
     protocolId = 2330
     quiet:bool
     
+    

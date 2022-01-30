@@ -6,3 +6,4 @@ class NamedPartyTeam(NetworkMessage):
     teamId:int
     partyName:str
     
+    

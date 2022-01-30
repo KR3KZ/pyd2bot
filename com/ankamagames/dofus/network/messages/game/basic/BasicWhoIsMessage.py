@@ -15,4 +15,7 @@ class BasicWhoIsMessage(NetworkMessage):
     originServerId:int
     socialGroups:AbstractSocialGroupInfos
     playerState:int
+    self:bool
+    verbose:bool
+    
     

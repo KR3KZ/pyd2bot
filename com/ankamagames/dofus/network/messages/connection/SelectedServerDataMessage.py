@@ -9,3 +9,4 @@ class SelectedServerDataMessage(NetworkMessage):
     canCreateNewCharacter:bool
     ticket:int
     
+    

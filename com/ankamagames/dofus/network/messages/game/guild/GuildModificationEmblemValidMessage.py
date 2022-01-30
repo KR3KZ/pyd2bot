@@ -6,3 +6,4 @@ class GuildModificationEmblemValidMessage(NetworkMessage):
     protocolId = 3249
     guildEmblem:GuildEmblem
     
+    

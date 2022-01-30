@@ -6,3 +6,4 @@ class GameActionFightActivateGlyphTrapMessage(AbstractGameActionMessage):
     markId:int
     active:bool
     
+    

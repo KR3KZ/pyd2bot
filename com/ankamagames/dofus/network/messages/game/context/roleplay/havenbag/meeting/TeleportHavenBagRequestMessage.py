@@ -5,3 +5,4 @@ class TeleportHavenBagRequestMessage(NetworkMessage):
     protocolId = 5838
     guestId:int
     
+    

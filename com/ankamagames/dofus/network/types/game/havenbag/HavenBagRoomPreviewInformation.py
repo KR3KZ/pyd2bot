@@ -6,3 +6,4 @@ class HavenBagRoomPreviewInformation(NetworkMessage):
     roomId:int
     themeId:int
     
+    

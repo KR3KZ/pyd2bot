@@ -6,3 +6,4 @@ class PaddockInformations(NetworkMessage):
     maxOutdoorMount:int
     maxItems:int
     
+    

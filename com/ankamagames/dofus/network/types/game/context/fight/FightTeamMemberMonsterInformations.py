@@ -6,3 +6,4 @@ class FightTeamMemberMonsterInformations(FightTeamMemberInformations):
     monsterId:int
     grade:int
     
+    

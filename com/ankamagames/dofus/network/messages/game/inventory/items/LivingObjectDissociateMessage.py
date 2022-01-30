@@ -6,3 +6,4 @@ class LivingObjectDissociateMessage(NetworkMessage):
     livingUID:int
     livingPosition:int
     
+    

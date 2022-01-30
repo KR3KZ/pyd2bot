@@ -5,3 +5,4 @@ class InvalidPresetsMessage(NetworkMessage):
     protocolId = 5030
     presetIds:int
     
+    

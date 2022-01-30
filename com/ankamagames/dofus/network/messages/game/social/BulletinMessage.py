@@ -5,3 +5,4 @@ class BulletinMessage(SocialNoticeMessage):
     protocolId = 9541
     lastNotifiedTimestamp:int
     
+    

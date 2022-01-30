@@ -9,3 +9,4 @@ class PartyMemberGeoPosition(NetworkMessage):
     mapId:int
     subAreaId:int
     
+    

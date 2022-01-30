@@ -7,3 +7,4 @@ class GameRolePlayArenaFighterStatusMessage(NetworkMessage):
     playerId:int
     accepted:bool
     
+    

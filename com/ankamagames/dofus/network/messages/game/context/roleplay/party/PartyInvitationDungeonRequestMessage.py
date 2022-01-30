@@ -5,3 +5,4 @@ class PartyInvitationDungeonRequestMessage(PartyInvitationRequestMessage):
     protocolId = 8333
     dungeonId:int
     
+    

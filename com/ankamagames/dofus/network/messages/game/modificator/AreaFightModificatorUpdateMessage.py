@@ -5,3 +5,4 @@ class AreaFightModificatorUpdateMessage(NetworkMessage):
     protocolId = 4779
     spellPairId:int
     
+    

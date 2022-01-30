@@ -6,3 +6,4 @@ class AnomalySubareaInformationResponseMessage(NetworkMessage):
     protocolId = 6030
     subareas:AnomalySubareaInformation
     
+    

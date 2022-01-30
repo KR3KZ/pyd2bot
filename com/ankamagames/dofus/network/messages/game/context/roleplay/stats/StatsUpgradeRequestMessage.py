@@ -7,3 +7,4 @@ class StatsUpgradeRequestMessage(NetworkMessage):
     statId:int
     boostPoint:int
     
+    

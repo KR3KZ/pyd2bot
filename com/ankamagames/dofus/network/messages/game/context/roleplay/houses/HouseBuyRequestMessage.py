@@ -5,3 +5,4 @@ class HouseBuyRequestMessage(NetworkMessage):
     protocolId = 4286
     proposedPrice:int
     
+    

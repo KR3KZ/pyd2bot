@@ -5,3 +5,4 @@ class ExchangeObjectMovePricedMessage(ExchangeObjectMoveMessage):
     protocolId = 1384
     price:int
     
+    

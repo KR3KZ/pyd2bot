@@ -7,3 +7,4 @@ class NamedPartyTeamWithOutcome(NetworkMessage):
     team:NamedPartyTeam
     outcome:int
     
+    

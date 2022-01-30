@@ -5,3 +5,4 @@ class BreachKickRequestMessage(NetworkMessage):
     protocolId = 2909
     target:int
     
+    

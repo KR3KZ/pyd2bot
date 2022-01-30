@@ -7,3 +7,4 @@ class PrismFightAttackerRemoveMessage(NetworkMessage):
     fightId:int
     fighterToRemoveId:int
     
+    

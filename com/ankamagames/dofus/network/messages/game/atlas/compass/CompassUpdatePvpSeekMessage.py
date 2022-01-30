@@ -6,3 +6,4 @@ class CompassUpdatePvpSeekMessage(CompassUpdateMessage):
     memberId:int
     memberName:str
     
+    

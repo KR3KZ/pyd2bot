@@ -5,3 +5,4 @@ class PaddockBuyRequestMessage(NetworkMessage):
     protocolId = 8638
     proposedPrice:int
     
+    

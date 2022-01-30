@@ -7,3 +7,4 @@ class ObjectSetPositionMessage(NetworkMessage):
     position:int
     quantity:int
     
+    

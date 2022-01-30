@@ -7,3 +7,4 @@ class GameRolePlayDelayedActionMessage(NetworkMessage):
     delayTypeId:int
     delayEndTime:int
     
+    

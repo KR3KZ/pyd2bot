@@ -5,3 +5,4 @@ class ExchangeBidHouseItemRemoveOkMessage(NetworkMessage):
     protocolId = 5455
     sellerId:int
     
+    

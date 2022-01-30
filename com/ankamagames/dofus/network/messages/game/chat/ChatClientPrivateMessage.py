@@ -6,3 +6,4 @@ class ChatClientPrivateMessage(ChatAbstractClientMessage):
     protocolId = 1814
     receiver:AbstractPlayerSearchInformation
     
+    

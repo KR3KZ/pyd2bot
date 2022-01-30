@@ -8,4 +8,7 @@ class ServerSettingsMessage(NetworkMessage):
     gameType:int
     arenaLeaveBanTime:int
     itemMaxLevel:int
+    isMonoAccount:bool
+    hasFreeAutopilot:bool
+    
     

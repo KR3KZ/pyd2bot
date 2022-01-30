@@ -6,3 +6,4 @@ class GameFightSpellCooldown(NetworkMessage):
     spellId:int
     cooldown:int
     
+    

@@ -7,3 +7,4 @@ class MapFightStartPositionsUpdateMessage(NetworkMessage):
     mapId:int
     fightStartPositions:FightStartingPositions
     
+    

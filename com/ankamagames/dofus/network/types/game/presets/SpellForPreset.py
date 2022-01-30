@@ -6,3 +6,4 @@ class SpellForPreset(NetworkMessage):
     spellId:int
     shortcuts:int
     
+    

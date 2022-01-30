@@ -9,3 +9,4 @@ class GameFightResumeSlaveInfo(NetworkMessage):
     summonCount:int
     bombCount:int
     
+    

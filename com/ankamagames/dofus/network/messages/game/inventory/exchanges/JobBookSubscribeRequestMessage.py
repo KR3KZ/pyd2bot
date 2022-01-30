@@ -5,3 +5,4 @@ class JobBookSubscribeRequestMessage(NetworkMessage):
     protocolId = 4809
     jobIds:int
     
+    

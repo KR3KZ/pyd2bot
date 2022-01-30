@@ -6,3 +6,4 @@ class GameActionFightDispellMessage(AbstractGameActionMessage):
     targetId:int
     verboseCast:bool
     
+    

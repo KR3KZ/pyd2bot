@@ -5,3 +5,4 @@ class GameRolePlayTreasureHintInformations(GameRolePlayActorInformations):
     protocolId = 8741
     npcId:int
     
+    

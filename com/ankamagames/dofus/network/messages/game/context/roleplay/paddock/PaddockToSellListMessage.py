@@ -8,3 +8,4 @@ class PaddockToSellListMessage(NetworkMessage):
     totalPage:int
     paddockList:PaddockInformationsForSell
     
+    

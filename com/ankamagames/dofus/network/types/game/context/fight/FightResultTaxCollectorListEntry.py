@@ -8,3 +8,4 @@ class FightResultTaxCollectorListEntry(FightResultFighterListEntry):
     guildInfo:BasicGuildInformations
     experienceForGuild:int
     
+    

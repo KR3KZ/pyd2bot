@@ -5,3 +5,4 @@ class Preset(NetworkMessage):
     protocolId = 6024
     id:int
     
+    

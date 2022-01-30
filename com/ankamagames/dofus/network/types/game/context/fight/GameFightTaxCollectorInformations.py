@@ -7,3 +7,4 @@ class GameFightTaxCollectorInformations(GameFightAIInformations):
     lastNameId:int
     level:int
     
+    

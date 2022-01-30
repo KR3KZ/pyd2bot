@@ -6,3 +6,4 @@ class SkillActionDescriptionCollect(SkillActionDescriptionTimed):
     min:int
     max:int
     
+    

@@ -8,3 +8,4 @@ class PlayerStatusUpdateMessage(NetworkMessage):
     playerId:int
     status:PlayerStatus
     
+    

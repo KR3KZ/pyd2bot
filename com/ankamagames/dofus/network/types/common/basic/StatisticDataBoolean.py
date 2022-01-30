@@ -5,3 +5,4 @@ class StatisticDataBoolean(StatisticData):
     protocolId = 8397
     value:bool
     
+    

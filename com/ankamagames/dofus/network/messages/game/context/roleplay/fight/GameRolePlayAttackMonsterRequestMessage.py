@@ -5,3 +5,4 @@ class GameRolePlayAttackMonsterRequestMessage(NetworkMessage):
     protocolId = 3767
     monsterGroupId:int
     
+    

@@ -5,3 +5,4 @@ class BreachRewardBuyMessage(NetworkMessage):
     protocolId = 2995
     id:int
     
+    

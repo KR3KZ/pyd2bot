@@ -6,3 +6,4 @@ class AllianceModificationEmblemValidMessage(NetworkMessage):
     protocolId = 8937
     Alliancemblem:GuildEmblem
     
+    

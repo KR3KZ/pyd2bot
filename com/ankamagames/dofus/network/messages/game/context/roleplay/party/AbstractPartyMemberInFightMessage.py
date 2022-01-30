@@ -10,3 +10,4 @@ class AbstractPartyMemberInFightMessage(AbstractPartyMessage):
     fightId:int
     timeBeforeFightStart:int
     
+    

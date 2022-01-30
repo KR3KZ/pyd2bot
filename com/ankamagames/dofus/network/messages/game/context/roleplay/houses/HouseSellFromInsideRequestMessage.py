@@ -4,3 +4,4 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.houses.HouseSe
 class HouseSellFromInsideRequestMessage(HouseSellRequestMessage):
     protocolId = 5075
     
+    

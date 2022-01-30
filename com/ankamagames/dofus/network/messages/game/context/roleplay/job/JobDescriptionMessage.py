@@ -6,3 +6,4 @@ class JobDescriptionMessage(NetworkMessage):
     protocolId = 8838
     jobsDescription:JobDescription
     
+    

@@ -5,3 +5,4 @@ class GameFightFighterNamedLightInformations(GameFightFighterLightInformations):
     protocolId = 2754
     name:str
     
+    

@@ -5,3 +5,4 @@ class GuildGetInformationsMessage(NetworkMessage):
     protocolId = 5805
     infoType:int
     
+    

@@ -5,3 +5,4 @@ class PartyMemberArenaInformations(PartyMemberInformations):
     protocolId = 2694
     rank:int
     
+    

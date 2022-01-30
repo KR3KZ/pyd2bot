@@ -7,3 +7,4 @@ class PaddockGuildedInformations(PaddockBuyableInformations):
     deserted:bool
     guildInfo:GuildInformations
     
+    

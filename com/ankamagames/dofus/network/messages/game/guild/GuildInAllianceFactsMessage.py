@@ -6,3 +6,4 @@ class GuildInAllianceFactsMessage(GuildFactsMessage):
     protocolId = 6925
     allianceInfos:BasicNamedAllianceInformations
     
+    

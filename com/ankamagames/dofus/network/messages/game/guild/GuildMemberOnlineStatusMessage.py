@@ -6,3 +6,4 @@ class GuildMemberOnlineStatusMessage(NetworkMessage):
     memberId:int
     online:bool
     
+    

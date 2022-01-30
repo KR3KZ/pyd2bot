@@ -5,3 +5,4 @@ class FriendSpouseFollowWithCompassRequestMessage(NetworkMessage):
     protocolId = 8825
     enable:bool
     
+    

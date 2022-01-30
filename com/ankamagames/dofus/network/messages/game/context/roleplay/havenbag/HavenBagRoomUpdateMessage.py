@@ -7,3 +7,4 @@ class HavenBagRoomUpdateMessage(NetworkMessage):
     action:int
     roomsPreview:HavenBagRoomPreviewInformation
     
+    

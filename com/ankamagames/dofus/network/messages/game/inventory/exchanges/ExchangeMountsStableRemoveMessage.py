@@ -5,3 +5,4 @@ class ExchangeMountsStableRemoveMessage(NetworkMessage):
     protocolId = 9668
     mountsId:int
     
+    

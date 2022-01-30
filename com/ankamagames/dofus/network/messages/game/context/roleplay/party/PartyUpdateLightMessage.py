@@ -9,3 +9,4 @@ class PartyUpdateLightMessage(AbstractPartyEventMessage):
     prospecting:int
     regenRate:int
     
+    

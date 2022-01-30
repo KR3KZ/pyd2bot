@@ -5,3 +5,4 @@ class PrismsListRegisterMessage(NetworkMessage):
     protocolId = 4105
     listen:int
     
+    

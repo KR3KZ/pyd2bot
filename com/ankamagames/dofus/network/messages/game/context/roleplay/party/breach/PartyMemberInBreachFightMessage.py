@@ -6,3 +6,4 @@ class PartyMemberInBreachFightMessage(AbstractPartyMemberInFightMessage):
     floor:int
     room:int
     
+    

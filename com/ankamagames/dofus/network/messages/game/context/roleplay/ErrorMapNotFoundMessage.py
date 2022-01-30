@@ -5,3 +5,4 @@ class ErrorMapNotFoundMessage(NetworkMessage):
     protocolId = 1147
     mapId:int
     
+    

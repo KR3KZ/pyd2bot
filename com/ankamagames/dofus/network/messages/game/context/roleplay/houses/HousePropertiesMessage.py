@@ -8,3 +8,4 @@ class HousePropertiesMessage(NetworkMessage):
     doorsOnMap:int
     properties:HouseInstanceInformations
     
+    

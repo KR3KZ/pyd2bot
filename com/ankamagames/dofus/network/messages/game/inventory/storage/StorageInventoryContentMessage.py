@@ -4,3 +4,4 @@ from com.ankamagames.dofus.network.messages.game.inventory.items.InventoryConten
 class StorageInventoryContentMessage(InventoryContentMessage):
     protocolId = 561
     
+    

@@ -5,3 +5,4 @@ class CharacterCapabilitiesMessage(NetworkMessage):
     protocolId = 344
     guildEmblemSymbolCategories:int
     
+    

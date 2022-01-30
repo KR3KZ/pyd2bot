@@ -7,3 +7,4 @@ class FriendDeleteResultMessage(NetworkMessage):
     success:bool
     tag:AccountTagInformation
     
+    

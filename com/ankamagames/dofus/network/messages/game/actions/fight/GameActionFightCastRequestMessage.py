@@ -6,3 +6,4 @@ class GameActionFightCastRequestMessage(NetworkMessage):
     spellId:int
     cellId:int
     
+    

@@ -6,3 +6,4 @@ class ChallengeTargetUpdateMessage(NetworkMessage):
     challengeId:int
     targetId:int
     
+    

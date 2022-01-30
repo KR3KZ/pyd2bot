@@ -6,3 +6,4 @@ class GameActionFightLifePointsGainMessage(AbstractGameActionMessage):
     targetId:int
     delta:int
     
+    

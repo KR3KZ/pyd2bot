@@ -4,3 +4,4 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.treasureHunt.Trea
 class TreasureHuntStepDig(TreasureHuntStep):
     protocolId = 199
     
+    

@@ -5,3 +5,4 @@ class OrnamentLostMessage(NetworkMessage):
     protocolId = 94
     ornamentId:int
     
+    

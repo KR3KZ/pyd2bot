@@ -14,3 +14,4 @@ class KohUpdateMessage(NetworkMessage):
     allianceMapMyAllianceScore:int
     nextTickTime:int
     
+    

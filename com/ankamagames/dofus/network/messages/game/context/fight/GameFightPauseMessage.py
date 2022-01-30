@@ -5,3 +5,4 @@ class GameFightPauseMessage(NetworkMessage):
     protocolId = 8818
     isPaused:bool
     
+    

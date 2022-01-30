@@ -6,3 +6,4 @@ class JobCrafterDirectoryAddMessage(NetworkMessage):
     protocolId = 1829
     listEntry:JobCrafterDirectoryListEntry
     
+    

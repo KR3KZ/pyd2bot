@@ -5,3 +5,4 @@ class SubscriptionZoneMessage(NetworkMessage):
     protocolId = 3082
     active:bool
     
+    

@@ -7,3 +7,4 @@ class ItemForPresetUpdateMessage(NetworkMessage):
     presetId:int
     presetItem:ItemForPreset
     
+    

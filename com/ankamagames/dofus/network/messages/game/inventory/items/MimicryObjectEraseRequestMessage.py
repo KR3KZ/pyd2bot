@@ -6,3 +6,4 @@ class MimicryObjectEraseRequestMessage(NetworkMessage):
     hostUID:int
     hostPos:int
     
+    

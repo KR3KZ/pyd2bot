@@ -5,3 +5,4 @@ class CharacterMinimalInformations(CharacterBasicMinimalInformations):
     protocolId = 6674
     level:int
     
+    

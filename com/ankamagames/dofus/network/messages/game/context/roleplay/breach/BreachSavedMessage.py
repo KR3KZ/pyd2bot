@@ -5,3 +5,4 @@ class BreachSavedMessage(NetworkMessage):
     protocolId = 4537
     saved:bool
     
+    

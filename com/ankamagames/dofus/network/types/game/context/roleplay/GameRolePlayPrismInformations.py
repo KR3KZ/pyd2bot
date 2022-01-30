@@ -6,3 +6,4 @@ class GameRolePlayPrismInformations(GameRolePlayActorInformations):
     protocolId = 6265
     prism:PrismInformation
     
+    

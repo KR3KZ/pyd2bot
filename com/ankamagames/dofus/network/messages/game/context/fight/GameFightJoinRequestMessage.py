@@ -6,3 +6,4 @@ class GameFightJoinRequestMessage(NetworkMessage):
     fighterId:int
     fightId:int
     
+    

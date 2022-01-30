@@ -7,3 +7,4 @@ class ExchangeBidHouseInListRemovedMessage(NetworkMessage):
     objectGID:int
     objectType:int
     
+    

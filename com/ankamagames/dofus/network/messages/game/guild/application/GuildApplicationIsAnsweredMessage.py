@@ -7,3 +7,4 @@ class GuildApplicationIsAnsweredMessage(NetworkMessage):
     accepted:bool
     guildInformation:GuildInformations
     
+    

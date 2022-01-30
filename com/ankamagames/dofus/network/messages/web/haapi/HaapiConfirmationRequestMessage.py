@@ -8,3 +8,4 @@ class HaapiConfirmationRequestMessage(NetworkMessage):
     rate:int
     action:int
     
+    

@@ -6,3 +6,4 @@ class GuildMemberLeavingMessage(NetworkMessage):
     kicked:bool
     memberId:int
     
+    

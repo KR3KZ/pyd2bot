@@ -5,3 +5,4 @@ class PartyEntityUpdateLightMessage(PartyUpdateLightMessage):
     protocolId = 6677
     indexId:int
     
+    

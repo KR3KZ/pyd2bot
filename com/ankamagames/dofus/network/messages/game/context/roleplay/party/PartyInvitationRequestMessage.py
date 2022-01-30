@@ -6,3 +6,4 @@ class PartyInvitationRequestMessage(NetworkMessage):
     protocolId = 6419
     target:AbstractPlayerSearchInformation
     
+    

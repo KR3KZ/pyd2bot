@@ -14,3 +14,4 @@ class TreasureHuntMessage(NetworkMessage):
     availableRetryCount:int
     flags:TreasureHuntFlag
     
+    

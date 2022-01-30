@@ -5,3 +5,4 @@ class CinematicMessage(NetworkMessage):
     protocolId = 5054
     cinematicId:int
     
+    

@@ -6,3 +6,4 @@ class GuildFightLeaveRequestMessage(NetworkMessage):
     taxCollectorId:int
     characterId:int
     
+    

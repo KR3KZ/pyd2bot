@@ -6,3 +6,4 @@ class PaginationRequestAbstractMessage(NetworkMessage):
     offset:int
     count:int
     
+    

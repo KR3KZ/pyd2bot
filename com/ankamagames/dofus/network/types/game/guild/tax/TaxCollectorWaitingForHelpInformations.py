@@ -6,3 +6,4 @@ class TaxCollectorWaitingForHelpInformations(TaxCollectorComplementaryInformatio
     protocolId = 3199
     waitingForHelpInfo:ProtectedEntityWaitingForHelpInfo
     
+    

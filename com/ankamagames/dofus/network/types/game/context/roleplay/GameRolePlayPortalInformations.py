@@ -6,3 +6,4 @@ class GameRolePlayPortalInformations(GameRolePlayActorInformations):
     protocolId = 8125
     portal:PortalInformation
     
+    

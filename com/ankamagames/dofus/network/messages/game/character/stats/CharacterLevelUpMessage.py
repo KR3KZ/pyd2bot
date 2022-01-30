@@ -5,3 +5,4 @@ class CharacterLevelUpMessage(NetworkMessage):
     protocolId = 6501
     newLevel:int
     
+    

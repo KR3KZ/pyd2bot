@@ -6,3 +6,4 @@ class InteractiveElementUpdatedMessage(NetworkMessage):
     protocolId = 7321
     interactiveElement:InteractiveElement
     
+    

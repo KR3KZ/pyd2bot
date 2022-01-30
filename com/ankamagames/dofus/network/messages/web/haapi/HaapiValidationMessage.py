@@ -6,3 +6,4 @@ class HaapiValidationMessage(NetworkMessage):
     action:int
     code:int
     
+    

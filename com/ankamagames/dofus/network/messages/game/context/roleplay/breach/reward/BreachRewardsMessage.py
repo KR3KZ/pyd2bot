@@ -6,3 +6,4 @@ class BreachRewardsMessage(NetworkMessage):
     protocolId = 3565
     rewards:BreachReward
     
+    

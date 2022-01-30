@@ -8,3 +8,4 @@ class GameActionFightLifePointsLostMessage(AbstractGameActionMessage):
     permanentDamages:int
     elementId:int
     
+    

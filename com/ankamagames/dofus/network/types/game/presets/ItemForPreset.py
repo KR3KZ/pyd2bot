@@ -7,3 +7,4 @@ class ItemForPreset(NetworkMessage):
     objGid:int
     objUid:int
     
+    

@@ -6,3 +6,4 @@ class GameRolePlayArenaUpdatePlayerInfosMessage(NetworkMessage):
     protocolId = 8202
     solo:ArenaRankInfos
     
+    

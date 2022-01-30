@@ -6,3 +6,4 @@ class GuildHouseUpdateInformationMessage(NetworkMessage):
     protocolId = 6703
     housesInformations:HouseInformationsForGuild
     
+    

@@ -5,3 +5,4 @@ class HaapiValidationRequestMessage(NetworkMessage):
     protocolId = 3931
     transaction:str
     
+    

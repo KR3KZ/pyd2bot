@@ -8,3 +8,4 @@ class FightDispellableEffectExtendedInformations(NetworkMessage):
     sourceId:int
     effect:AbstractFightDispellableEffect
     
+    

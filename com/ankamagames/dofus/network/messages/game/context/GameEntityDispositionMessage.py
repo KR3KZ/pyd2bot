@@ -6,3 +6,4 @@ class GameEntityDispositionMessage(NetworkMessage):
     protocolId = 8701
     disposition:IdentifiedEntityDispositionInformations
     
+    

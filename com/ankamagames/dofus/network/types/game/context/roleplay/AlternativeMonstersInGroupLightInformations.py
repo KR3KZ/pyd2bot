@@ -7,3 +7,4 @@ class AlternativeMonstersInGroupLightInformations(NetworkMessage):
     playerCount:int
     monsters:MonsterInGroupLightInformations
     
+    

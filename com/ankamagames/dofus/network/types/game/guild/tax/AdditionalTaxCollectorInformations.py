@@ -6,3 +6,4 @@ class AdditionalTaxCollectorInformations(NetworkMessage):
     collectorCallerName:str
     date:int
     
+    

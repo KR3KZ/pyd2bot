@@ -7,3 +7,4 @@ class SimpleCharacterCharacteristicForPreset(NetworkMessage):
     base:int
     additionnal:int
     
+    

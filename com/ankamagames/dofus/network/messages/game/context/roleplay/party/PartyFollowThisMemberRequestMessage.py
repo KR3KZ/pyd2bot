@@ -5,3 +5,4 @@ class PartyFollowThisMemberRequestMessage(PartyFollowMemberRequestMessage):
     protocolId = 4755
     enabled:bool
     
+    

@@ -6,3 +6,4 @@ class GameRolePlayShowActorMessage(NetworkMessage):
     protocolId = 503
     informations:GameRolePlayActorInformations
     
+    

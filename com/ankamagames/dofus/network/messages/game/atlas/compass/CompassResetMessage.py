@@ -5,3 +5,4 @@ class CompassResetMessage(NetworkMessage):
     protocolId = 4432
     type:int
     
+    

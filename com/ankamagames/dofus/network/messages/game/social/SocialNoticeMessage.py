@@ -8,3 +8,4 @@ class SocialNoticeMessage(NetworkMessage):
     memberId:int
     memberName:str
     
+    

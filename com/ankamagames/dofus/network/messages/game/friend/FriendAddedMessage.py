@@ -6,3 +6,4 @@ class FriendAddedMessage(NetworkMessage):
     protocolId = 9476
     friendAdded:FriendInformations
     
+    

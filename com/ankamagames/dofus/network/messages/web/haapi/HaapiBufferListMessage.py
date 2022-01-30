@@ -6,3 +6,4 @@ class HaapiBufferListMessage(NetworkMessage):
     protocolId = 518
     buffers:BufferInformation
     
+    

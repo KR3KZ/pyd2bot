@@ -8,3 +8,4 @@ class ServersListMessage(NetworkMessage):
     alreadyConnectedToServerId:int
     canCreateNewCharacter:bool
     
+    

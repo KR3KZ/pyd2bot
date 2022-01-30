@@ -12,3 +12,4 @@ class FightExternalInformations(NetworkMessage):
     fightTeams:list[FightTeamLightInformations]
     fightTeamsOptions:list[FightOptionsInformations]
     
+    

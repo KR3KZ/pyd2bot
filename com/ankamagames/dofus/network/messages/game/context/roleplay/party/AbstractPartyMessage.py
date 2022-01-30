@@ -5,3 +5,4 @@ class AbstractPartyMessage(NetworkMessage):
     protocolId = 3299
     partyId:int
     
+    

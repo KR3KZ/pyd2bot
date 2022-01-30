@@ -5,3 +5,4 @@ class ExchangeBidHousePriceMessage(NetworkMessage):
     protocolId = 8992
     genId:int
     
+    

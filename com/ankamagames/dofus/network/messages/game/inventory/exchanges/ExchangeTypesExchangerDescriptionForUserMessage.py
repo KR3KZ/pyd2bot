@@ -6,3 +6,4 @@ class ExchangeTypesExchangerDescriptionForUserMessage(NetworkMessage):
     objectType:int
     typeDescription:int
     
+    

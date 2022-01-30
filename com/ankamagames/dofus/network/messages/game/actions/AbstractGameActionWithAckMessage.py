@@ -5,3 +5,4 @@ class AbstractGameActionWithAckMessage(AbstractGameActionMessage):
     protocolId = 3549
     waitAckId:int
     
+    

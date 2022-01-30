@@ -6,3 +6,4 @@ class MountDataMessage(NetworkMessage):
     protocolId = 5244
     mountData:MountClientData
     
+    

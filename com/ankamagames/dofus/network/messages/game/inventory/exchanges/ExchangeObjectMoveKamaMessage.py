@@ -5,3 +5,4 @@ class ExchangeObjectMoveKamaMessage(NetworkMessage):
     protocolId = 427
     quantity:int
     
+    

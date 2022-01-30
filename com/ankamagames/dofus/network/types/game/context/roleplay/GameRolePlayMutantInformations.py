@@ -6,3 +6,4 @@ class GameRolePlayMutantInformations(GameRolePlayHumanoidInformations):
     monsterId:int
     powerLevel:int
     
+    

@@ -5,3 +5,4 @@ class GameFightFighterMonsterLightInformations(GameFightFighterLightInformations
     protocolId = 4254
     creatureGenericId:int
     
+    

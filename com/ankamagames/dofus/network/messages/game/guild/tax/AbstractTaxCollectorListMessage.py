@@ -6,3 +6,4 @@ class AbstractTaxCollectorListMessage(NetworkMessage):
     protocolId = 6496
     informations:TaxCollectorInformations
     
+    

@@ -6,3 +6,4 @@ class ObjectDeleteMessage(NetworkMessage):
     objectUID:int
     quantity:int
     
+    

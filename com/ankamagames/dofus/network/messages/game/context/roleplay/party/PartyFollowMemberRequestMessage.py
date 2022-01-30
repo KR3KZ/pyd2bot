@@ -5,3 +5,4 @@ class PartyFollowMemberRequestMessage(AbstractPartyMessage):
     protocolId = 8603
     playerId:int
     
+    

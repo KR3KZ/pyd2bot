@@ -7,4 +7,7 @@ class AccountCapabilitiesMessage(NetworkMessage):
     breedsVisible:int
     breedsAvailable:int
     status:int
+    tutorialAvailable:bool
+    canCreateNewCharacter:bool
+    
     

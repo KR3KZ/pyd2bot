@@ -5,3 +5,4 @@ class ChatErrorMessage(NetworkMessage):
     protocolId = 5479
     reason:int
     
+    

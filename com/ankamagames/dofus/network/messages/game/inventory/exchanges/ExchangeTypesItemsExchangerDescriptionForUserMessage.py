@@ -7,3 +7,4 @@ class ExchangeTypesItemsExchangerDescriptionForUserMessage(NetworkMessage):
     objectType:int
     itemTypeDescriptions:BidExchangerObjectInfo
     
+    

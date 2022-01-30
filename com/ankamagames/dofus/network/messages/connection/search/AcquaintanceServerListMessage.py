@@ -5,3 +5,4 @@ class AcquaintanceServerListMessage(NetworkMessage):
     protocolId = 8752
     servers:int
     
+    

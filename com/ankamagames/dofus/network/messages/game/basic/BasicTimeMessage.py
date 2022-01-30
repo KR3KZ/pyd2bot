@@ -6,3 +6,4 @@ class BasicTimeMessage(NetworkMessage):
     timestamp:int
     timezoneOffset:int
     
+    

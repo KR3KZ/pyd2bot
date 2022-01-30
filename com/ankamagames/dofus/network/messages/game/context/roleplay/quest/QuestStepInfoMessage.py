@@ -6,3 +6,4 @@ class QuestStepInfoMessage(NetworkMessage):
     protocolId = 7690
     infos:QuestActiveInformations
     
+    

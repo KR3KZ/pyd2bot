@@ -9,3 +9,4 @@ class PaddockToSellFilterMessage(NetworkMessage):
     maxPrice:int
     orderBy:int
     
+    

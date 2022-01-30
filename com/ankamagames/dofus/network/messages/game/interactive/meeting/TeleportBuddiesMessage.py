@@ -5,3 +5,4 @@ class TeleportBuddiesMessage(NetworkMessage):
     protocolId = 9150
     dungeonId:int
     
+    

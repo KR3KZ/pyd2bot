@@ -6,3 +6,4 @@ class MapRunningFightDetailsExtendedMessage(MapRunningFightDetailsMessage):
     protocolId = 9456
     namedPartyTeams:NamedPartyTeam
     
+    

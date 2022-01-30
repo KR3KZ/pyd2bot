@@ -7,3 +7,4 @@ class HouseGuildNoneMessage(NetworkMessage):
     instanceId:int
     secondHand:bool
     
+    

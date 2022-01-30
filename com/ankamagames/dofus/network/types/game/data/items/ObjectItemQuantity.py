@@ -6,3 +6,4 @@ class ObjectItemQuantity(Item):
     objectUID:int
     quantity:int
     
+    

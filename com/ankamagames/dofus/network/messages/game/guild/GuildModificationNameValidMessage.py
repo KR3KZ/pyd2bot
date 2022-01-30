@@ -5,3 +5,4 @@ class GuildModificationNameValidMessage(NetworkMessage):
     protocolId = 5982
     guildName:str
     
+    

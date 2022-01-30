@@ -6,3 +6,4 @@ class ObjectsAddedMessage(NetworkMessage):
     protocolId = 1568
     object:ObjectItem
     
+    

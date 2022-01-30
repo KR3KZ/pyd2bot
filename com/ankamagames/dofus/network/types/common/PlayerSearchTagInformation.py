@@ -6,3 +6,4 @@ class PlayerSearchTagInformation(AbstractPlayerSearchInformation):
     protocolId = 3556
     tag:AccountTagInformation
     
+    

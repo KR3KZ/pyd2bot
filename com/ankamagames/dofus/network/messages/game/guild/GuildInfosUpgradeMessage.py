@@ -14,3 +14,4 @@ class GuildInfosUpgradeMessage(NetworkMessage):
     spellId:int
     spellLevel:int
     
+    

@@ -7,3 +7,4 @@ class BasicWhoIsRequestMessage(NetworkMessage):
     verbose:bool
     target:AbstractPlayerSearchInformation
     
+    

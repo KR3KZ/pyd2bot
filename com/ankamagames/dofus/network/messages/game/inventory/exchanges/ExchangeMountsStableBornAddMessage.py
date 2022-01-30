@@ -4,3 +4,4 @@ from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeMou
 class ExchangeMountsStableBornAddMessage(ExchangeMountsStableAddMessage):
     protocolId = 1340
     
+    

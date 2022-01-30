@@ -5,3 +5,4 @@ class StatisticDataShort(StatisticData):
     protocolId = 5872
     value:int
     
+    

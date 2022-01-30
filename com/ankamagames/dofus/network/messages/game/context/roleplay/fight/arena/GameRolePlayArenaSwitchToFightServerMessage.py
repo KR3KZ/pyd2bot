@@ -7,3 +7,4 @@ class GameRolePlayArenaSwitchToFightServerMessage(NetworkMessage):
     ports:int
     ticket:int
     
+    

@@ -6,3 +6,4 @@ class GameMapChangeOrientationsMessage(NetworkMessage):
     protocolId = 5656
     orientations:ActorOrientation
     
+    

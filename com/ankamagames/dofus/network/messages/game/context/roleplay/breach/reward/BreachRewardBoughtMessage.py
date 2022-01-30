@@ -6,3 +6,4 @@ class BreachRewardBoughtMessage(NetworkMessage):
     id:int
     bought:bool
     
+    

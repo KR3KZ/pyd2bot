@@ -6,3 +6,4 @@ class ExchangeBidHouseSearchMessage(NetworkMessage):
     genId:int
     follow:bool
     
+    

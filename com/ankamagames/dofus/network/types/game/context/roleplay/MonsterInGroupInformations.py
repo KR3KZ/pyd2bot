@@ -6,3 +6,4 @@ class MonsterInGroupInformations(MonsterInGroupLightInformations):
     protocolId = 2614
     look:EntityLook
     
+    

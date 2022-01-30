@@ -5,3 +5,4 @@ class TeleportBuddiesAnswerMessage(NetworkMessage):
     protocolId = 3499
     accept:bool
     
+    

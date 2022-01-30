@@ -7,3 +7,4 @@ class GameActionFightSlideMessage(AbstractGameActionMessage):
     startCellId:int
     endCellId:int
     
+    

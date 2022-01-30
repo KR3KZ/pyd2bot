@@ -7,3 +7,4 @@ class ObjectFeedMessage(NetworkMessage):
     objectUID:int
     meal:ObjectItemQuantity
     
+    

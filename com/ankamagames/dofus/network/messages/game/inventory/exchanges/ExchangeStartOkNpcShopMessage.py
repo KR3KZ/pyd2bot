@@ -8,3 +8,4 @@ class ExchangeStartOkNpcShopMessage(NetworkMessage):
     tokenId:int
     objectsInfos:ObjectItemToSellInNpcShop
     
+    

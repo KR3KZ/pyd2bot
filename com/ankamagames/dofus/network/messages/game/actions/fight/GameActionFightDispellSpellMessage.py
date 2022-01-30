@@ -5,3 +5,4 @@ class GameActionFightDispellSpellMessage(GameActionFightDispellMessage):
     protocolId = 6878
     spellId:int
     
+    

@@ -5,3 +5,4 @@ class CharacterSelectedForceMessage(NetworkMessage):
     protocolId = 6158
     id:int
     
+    

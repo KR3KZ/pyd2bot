@@ -6,3 +6,4 @@ class JobCrafterDirectorySettingsMessage(NetworkMessage):
     protocolId = 8518
     craftersSettings:JobCrafterDirectorySettings
     
+    

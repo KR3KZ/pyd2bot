@@ -6,3 +6,4 @@ class ChatServerCopyWithObjectMessage(ChatServerCopyMessage):
     protocolId = 9930
     objects:ObjectItem
     
+    

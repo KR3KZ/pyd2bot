@@ -7,3 +7,4 @@ class ChatSmileyMessage(NetworkMessage):
     smileyId:int
     accountId:int
     
+    

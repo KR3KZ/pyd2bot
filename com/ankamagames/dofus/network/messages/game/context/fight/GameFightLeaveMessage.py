@@ -5,3 +5,4 @@ class GameFightLeaveMessage(NetworkMessage):
     protocolId = 4663
     charId:int
     
+    

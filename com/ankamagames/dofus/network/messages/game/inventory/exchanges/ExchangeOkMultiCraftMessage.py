@@ -7,3 +7,4 @@ class ExchangeOkMultiCraftMessage(NetworkMessage):
     otherId:int
     role:int
     
+    

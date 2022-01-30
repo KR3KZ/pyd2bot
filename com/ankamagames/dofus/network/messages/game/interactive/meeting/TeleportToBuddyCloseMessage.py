@@ -6,3 +6,4 @@ class TeleportToBuddyCloseMessage(NetworkMessage):
     dungeonId:int
     buddyId:int
     
+    

@@ -4,18 +4,8 @@ from pathlib import Path
 import sys
 from jinja2 import Template
 import json
-
 from tqdm import tqdm
 
-# def convertToClassInstance(self, jsonObj):
-#     moduleName = jsonObj["package"]
-#     try:
-#         module = sys.modules[moduleName]
-#     except:
-#         module = importlib.import_module(moduleName)
-#     cls = getattr(module, jsonObj["name"])
-#     for field in jsonObj["fields"]:
-#         if field["legth"] is None:
 
 with open("protocolBuilder/spec.json", 'r') as fp:
     json_spec = json.load(fp)

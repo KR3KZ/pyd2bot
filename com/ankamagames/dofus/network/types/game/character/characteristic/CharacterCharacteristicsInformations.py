@@ -17,3 +17,4 @@ class CharacterCharacteristicsInformations(NetworkMessage):
     spellModifications:CharacterSpellModification
     probationTime:int
     
+    

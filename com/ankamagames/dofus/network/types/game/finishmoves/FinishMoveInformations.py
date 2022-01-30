@@ -6,3 +6,4 @@ class FinishMoveInformations(NetworkMessage):
     finishMoveId:int
     finishMoveState:bool
     
+    

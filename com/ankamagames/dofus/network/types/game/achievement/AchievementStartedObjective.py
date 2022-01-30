@@ -5,3 +5,4 @@ class AchievementStartedObjective(AchievementObjective):
     protocolId = 5823
     value:int
     
+    

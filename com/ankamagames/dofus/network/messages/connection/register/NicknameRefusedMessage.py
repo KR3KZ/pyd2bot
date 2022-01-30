@@ -5,3 +5,4 @@ class NicknameRefusedMessage(NetworkMessage):
     protocolId = 2705
     reason:int
     
+    

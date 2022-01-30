@@ -9,3 +9,4 @@ class HumanInformations(NetworkMessage):
     sex:bool
     options:HumanOption
     
+    

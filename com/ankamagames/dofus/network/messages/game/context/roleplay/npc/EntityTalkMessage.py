@@ -7,3 +7,4 @@ class EntityTalkMessage(NetworkMessage):
     textId:int
     parameters:str
     
+    

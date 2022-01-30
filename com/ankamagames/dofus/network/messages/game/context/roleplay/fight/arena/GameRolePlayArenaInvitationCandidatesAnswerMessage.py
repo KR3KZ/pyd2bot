@@ -6,3 +6,4 @@ class GameRolePlayArenaInvitationCandidatesAnswerMessage(NetworkMessage):
     protocolId = 4913
     candidates:LeagueFriendInformations
     
+    

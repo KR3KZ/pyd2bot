@@ -5,3 +5,4 @@ class ObjectGroundRemovedMultipleMessage(NetworkMessage):
     protocolId = 6993
     cells:int
     
+    

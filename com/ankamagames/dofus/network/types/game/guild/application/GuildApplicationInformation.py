@@ -8,3 +8,4 @@ class GuildApplicationInformation(NetworkMessage):
     applyText:str
     creationDate:int
     
+    

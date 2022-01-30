@@ -6,3 +6,4 @@ class PrismSubareaEmptyInfo(NetworkMessage):
     subAreaId:int
     allianceId:int
     
+    

@@ -8,3 +8,4 @@ class SubEntity(NetworkMessage):
     bindingPointIndex:int
     subEntityLook:EntityLook
     
+    

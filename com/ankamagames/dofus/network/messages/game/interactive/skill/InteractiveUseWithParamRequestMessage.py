@@ -5,3 +5,4 @@ class InteractiveUseWithParamRequestMessage(InteractiveUseRequestMessage):
     protocolId = 6220
     id:int
     
+    

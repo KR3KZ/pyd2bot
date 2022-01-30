@@ -6,3 +6,4 @@ class GameActionFightMultipleSummonMessage(AbstractGameActionMessage):
     protocolId = 710
     summons:GameContextSummonsInformation
     
+    

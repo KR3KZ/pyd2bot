@@ -7,3 +7,4 @@ class GameRolePlayGroupMonsterWaveInformations(GameRolePlayGroupMonsterInformati
     nbWaves:int
     alternatives:GroupMonsterStaticInformations
     
+    

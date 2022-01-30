@@ -10,3 +10,4 @@ class BidExchangerObjectInfo(NetworkMessage):
     effects:ObjectEffect
     prices:int
     
+    

@@ -6,3 +6,4 @@ class DecraftResultMessage(NetworkMessage):
     protocolId = 7257
     results:DecraftedItemStackInfo
     
+    

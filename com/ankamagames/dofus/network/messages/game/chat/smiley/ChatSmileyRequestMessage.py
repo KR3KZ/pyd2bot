@@ -5,3 +5,4 @@ class ChatSmileyRequestMessage(NetworkMessage):
     protocolId = 9062
     smileyId:int
     
+    

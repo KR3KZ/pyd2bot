@@ -7,3 +7,4 @@ class ExchangeStartedTaxCollectorShopMessage(NetworkMessage):
     objects:ObjectItem
     kamas:int
     
+    

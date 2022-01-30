@@ -6,3 +6,4 @@ class ObjectsQuantityMessage(NetworkMessage):
     protocolId = 5570
     objectsUIDAndQty:ObjectItemQuantity
     
+    

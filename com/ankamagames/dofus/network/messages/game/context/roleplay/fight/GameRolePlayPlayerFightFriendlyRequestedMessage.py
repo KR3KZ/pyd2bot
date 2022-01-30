@@ -7,3 +7,4 @@ class GameRolePlayPlayerFightFriendlyRequestedMessage(NetworkMessage):
     sourceId:int
     targetId:int
     
+    

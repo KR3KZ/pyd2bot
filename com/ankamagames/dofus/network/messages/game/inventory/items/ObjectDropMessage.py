@@ -6,3 +6,4 @@ class ObjectDropMessage(NetworkMessage):
     objectUID:int
     quantity:int
     
+    

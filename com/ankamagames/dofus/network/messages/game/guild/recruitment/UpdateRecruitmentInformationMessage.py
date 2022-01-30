@@ -6,3 +6,4 @@ class UpdateRecruitmentInformationMessage(NetworkMessage):
     protocolId = 3169
     recruitmentData:GuildRecruitmentInformation
     
+    

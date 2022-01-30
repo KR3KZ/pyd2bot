@@ -5,3 +5,4 @@ class ServerSessionConstantString(ServerSessionConstant):
     protocolId = 8535
     value:str
     
+    

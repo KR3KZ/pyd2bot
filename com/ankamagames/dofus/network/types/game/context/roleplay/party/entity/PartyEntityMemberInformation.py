@@ -9,3 +9,4 @@ class PartyEntityMemberInformation(PartyEntityBaseInformation):
     prospecting:int
     regenRate:int
     
+    

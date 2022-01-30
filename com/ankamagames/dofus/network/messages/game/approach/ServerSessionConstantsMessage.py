@@ -6,3 +6,4 @@ class ServerSessionConstantsMessage(NetworkMessage):
     protocolId = 646
     variables:ServerSessionConstant
     
+    

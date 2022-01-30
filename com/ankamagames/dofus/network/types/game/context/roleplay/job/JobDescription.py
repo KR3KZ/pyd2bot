@@ -7,3 +7,4 @@ class JobDescription(NetworkMessage):
     jobId:int
     skills:SkillActionDescription
     
+    

@@ -5,3 +5,4 @@ class PrismInfoInValidMessage(NetworkMessage):
     protocolId = 7307
     reason:int
     
+    

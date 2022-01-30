@@ -6,3 +6,4 @@ class GuildListMessage(NetworkMessage):
     protocolId = 5503
     guilds:GuildInformations
     
+    

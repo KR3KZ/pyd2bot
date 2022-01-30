@@ -10,4 +10,8 @@ class IdentificationMessage(NetworkMessage):
     serverId:int
     sessionOptionalSalt:int
     failedAttempts:int
+    autoconnect:bool
+    useCertificate:bool
+    useLoginToken:bool
+    
     

@@ -8,3 +8,4 @@ class ChatAbstractServerMessage(NetworkMessage):
     timestamp:int
     fingerprint:str
     
+    

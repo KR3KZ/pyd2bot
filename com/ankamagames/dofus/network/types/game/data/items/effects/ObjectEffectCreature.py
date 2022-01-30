@@ -5,3 +5,4 @@ class ObjectEffectCreature(ObjectEffect):
     protocolId = 8829
     monsterFamilyId:int
     
+    

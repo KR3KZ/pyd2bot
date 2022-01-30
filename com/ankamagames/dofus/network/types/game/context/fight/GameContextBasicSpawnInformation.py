@@ -8,3 +8,4 @@ class GameContextBasicSpawnInformation(NetworkMessage):
     alive:bool
     informations:GameContextActorPositionInformations
     
+    

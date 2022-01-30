@@ -7,3 +7,4 @@ class GuildJoinedMessage(NetworkMessage):
     guildInfo:GuildInformations
     memberRights:int
     
+    

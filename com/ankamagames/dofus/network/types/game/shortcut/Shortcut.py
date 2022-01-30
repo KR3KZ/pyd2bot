@@ -5,3 +5,4 @@ class Shortcut(NetworkMessage):
     protocolId = 5511
     slot:int
     
+    

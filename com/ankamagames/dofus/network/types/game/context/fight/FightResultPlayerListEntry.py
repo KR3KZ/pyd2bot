@@ -7,3 +7,4 @@ class FightResultPlayerListEntry(FightResultFighterListEntry):
     level:int
     additional:FightResultAdditionalData
     
+    

@@ -5,3 +5,4 @@ class ShortcutEmote(Shortcut):
     protocolId = 3292
     emoteId:int
     
+    

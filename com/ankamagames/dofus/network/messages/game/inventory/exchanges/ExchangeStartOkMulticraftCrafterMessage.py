@@ -5,3 +5,4 @@ class ExchangeStartOkMulticraftCrafterMessage(NetworkMessage):
     protocolId = 282
     skillId:int
     
+    

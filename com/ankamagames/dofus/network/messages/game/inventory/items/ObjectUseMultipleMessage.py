@@ -5,3 +5,4 @@ class ObjectUseMultipleMessage(ObjectUseMessage):
     protocolId = 1126
     quantity:int
     
+    

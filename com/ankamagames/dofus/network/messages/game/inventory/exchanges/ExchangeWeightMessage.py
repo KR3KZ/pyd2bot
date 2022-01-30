@@ -6,3 +6,4 @@ class ExchangeWeightMessage(NetworkMessage):
     currentWeight:int
     maxWeight:int
     
+    

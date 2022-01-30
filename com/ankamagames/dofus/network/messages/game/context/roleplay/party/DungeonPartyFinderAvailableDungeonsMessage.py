@@ -5,3 +5,4 @@ class DungeonPartyFinderAvailableDungeonsMessage(NetworkMessage):
     protocolId = 2640
     dungeonIds:int
     
+    

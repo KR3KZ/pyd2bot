@@ -6,3 +6,4 @@ class ChannelEnablingChangeMessage(NetworkMessage):
     channel:int
     enable:bool
     
+    

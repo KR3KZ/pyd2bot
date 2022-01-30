@@ -7,3 +7,4 @@ class QuestActiveDetailedInformations(QuestActiveInformations):
     stepId:int
     objectives:QuestObjectiveInformations
     
+    

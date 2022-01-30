@@ -6,3 +6,4 @@ class StartupActionsObjetAttributionMessage(NetworkMessage):
     actionId:int
     characterId:int
     
+    

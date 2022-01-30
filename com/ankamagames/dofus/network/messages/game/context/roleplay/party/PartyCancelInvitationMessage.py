@@ -5,3 +5,4 @@ class PartyCancelInvitationMessage(AbstractPartyMessage):
     protocolId = 7066
     guestId:int
     
+    

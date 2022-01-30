@@ -6,3 +6,4 @@ class GameFightStartMessage(NetworkMessage):
     protocolId = 5357
     idols:Idol
     
+    

@@ -5,3 +5,4 @@ class GuildMotdSetRequestMessage(SocialNoticeSetRequestMessage):
     protocolId = 3391
     content:str
     
+    

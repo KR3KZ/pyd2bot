@@ -6,3 +6,4 @@ class ExchangeObjectUseInWorkshopMessage(NetworkMessage):
     objectUID:int
     quantity:int
     
+    

@@ -5,3 +5,4 @@ class MapCoordinatesExtended(MapCoordinatesAndId):
     protocolId = 3550
     subAreaId:int
     
+    

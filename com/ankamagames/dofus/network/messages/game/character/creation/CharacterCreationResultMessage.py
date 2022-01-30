@@ -5,3 +5,4 @@ class CharacterCreationResultMessage(NetworkMessage):
     protocolId = 110
     result:int
     
+    

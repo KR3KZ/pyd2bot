@@ -6,3 +6,4 @@ class EnabledChannelsMessage(NetworkMessage):
     channels:int
     disallowed:int
     
+    

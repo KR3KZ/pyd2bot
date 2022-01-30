@@ -6,3 +6,4 @@ class BasicAllianceInformations(AbstractSocialGroupInfos):
     allianceId:int
     allianceTag:str
     
+    

@@ -5,3 +5,4 @@ class NotificationListMessage(NetworkMessage):
     protocolId = 7026
     flags:int
     
+    

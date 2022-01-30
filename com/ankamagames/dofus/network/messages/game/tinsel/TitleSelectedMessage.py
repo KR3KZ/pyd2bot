@@ -5,3 +5,4 @@ class TitleSelectedMessage(NetworkMessage):
     protocolId = 8922
     titleId:int
     
+    

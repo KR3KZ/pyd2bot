@@ -9,3 +9,4 @@ class TaxCollectorFightersInformation(NetworkMessage):
     allyCharactersInformations:CharacterMinimalPlusLookInformations
     enemyCharactersInformations:CharacterMinimalPlusLookInformations
     
+    

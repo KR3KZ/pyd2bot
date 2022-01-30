@@ -6,3 +6,4 @@ class PrismsInfoValidMessage(NetworkMessage):
     protocolId = 9294
     fights:PrismFightersInformation
     
+    

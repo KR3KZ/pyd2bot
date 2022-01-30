@@ -5,3 +5,4 @@ class JobExperienceOtherPlayerUpdateMessage(JobExperienceUpdateMessage):
     protocolId = 5477
     playerId:int
     
+    

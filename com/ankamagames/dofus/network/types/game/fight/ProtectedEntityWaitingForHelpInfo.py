@@ -7,3 +7,4 @@ class ProtectedEntityWaitingForHelpInfo(NetworkMessage):
     waitTimeForPlacement:int
     nbPositionForDefensors:int
     
+    

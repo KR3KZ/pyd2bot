@@ -6,3 +6,4 @@ class PaddockInstancesInformations(PaddockInformations):
     protocolId = 3435
     paddocks:PaddockBuyableInformations
     
+    

@@ -5,3 +5,4 @@ class ExchangeItemAutoCraftStopedMessage(NetworkMessage):
     protocolId = 470
     reason:int
     
+    

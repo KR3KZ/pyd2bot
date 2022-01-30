@@ -6,3 +6,4 @@ class AllianceModificationNameAndTagValidMessage(NetworkMessage):
     allianceName:str
     allianceTag:str
     
+    

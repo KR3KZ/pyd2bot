@@ -6,3 +6,4 @@ class HaapiSessionMessage(NetworkMessage):
     key:str
     type:int
     
+    

@@ -8,3 +8,4 @@ class TitlesAndOrnamentsListMessage(NetworkMessage):
     activeTitle:int
     activeOrnament:int
     
+    

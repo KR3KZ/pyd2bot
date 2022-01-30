@@ -9,3 +9,4 @@ class RemodelingInformation(NetworkMessage):
     cosmeticId:int
     colors:int
     
+    

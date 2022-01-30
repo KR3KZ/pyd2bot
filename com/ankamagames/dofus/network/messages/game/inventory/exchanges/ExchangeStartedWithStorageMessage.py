@@ -5,3 +5,4 @@ class ExchangeStartedWithStorageMessage(ExchangeStartedMessage):
     protocolId = 7302
     storageMaxSlot:int
     
+    

@@ -9,3 +9,4 @@ class GameFightStartingMessage(NetworkMessage):
     defenderId:int
     containsBoss:bool
     
+    

@@ -5,3 +5,4 @@ class IdentificationSuccessWithLoginTokenMessage(IdentificationSuccessMessage):
     protocolId = 2204
     loginToken:str
     
+    

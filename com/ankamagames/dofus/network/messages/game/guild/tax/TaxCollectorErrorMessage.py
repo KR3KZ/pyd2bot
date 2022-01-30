@@ -5,3 +5,4 @@ class TaxCollectorErrorMessage(NetworkMessage):
     protocolId = 4836
     reason:int
     
+    

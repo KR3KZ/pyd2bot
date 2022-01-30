@@ -6,3 +6,4 @@ class PartyMemberInStandardFightMessage(AbstractPartyMemberInFightMessage):
     protocolId = 6653
     fightMap:MapCoordinatesExtended
     
+    

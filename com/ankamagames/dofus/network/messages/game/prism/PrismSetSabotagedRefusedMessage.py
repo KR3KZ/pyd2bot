@@ -6,3 +6,4 @@ class PrismSetSabotagedRefusedMessage(NetworkMessage):
     subAreaId:int
     reason:int
     
+    

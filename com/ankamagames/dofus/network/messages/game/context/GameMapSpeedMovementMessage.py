@@ -5,3 +5,4 @@ class GameMapSpeedMovementMessage(NetworkMessage):
     protocolId = 8414
     speedMultiplier:int
     
+    

@@ -6,3 +6,4 @@ class MoodSmileyResultMessage(NetworkMessage):
     resultCode:int
     smileyId:int
     
+    

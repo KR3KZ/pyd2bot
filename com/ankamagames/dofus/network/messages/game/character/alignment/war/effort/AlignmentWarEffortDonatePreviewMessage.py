@@ -5,3 +5,4 @@ class AlignmentWarEffortDonatePreviewMessage(NetworkMessage):
     protocolId = 2736
     xp:int
     
+    

@@ -5,3 +5,4 @@ class BreachInvitationAnswerMessage(NetworkMessage):
     protocolId = 5975
     accept:bool
     
+    

@@ -10,3 +10,4 @@ class BreachStateMessage(NetworkMessage):
     bugdet:int
     saved:bool
     
+    

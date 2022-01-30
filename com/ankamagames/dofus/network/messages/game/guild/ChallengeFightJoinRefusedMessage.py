@@ -6,3 +6,4 @@ class ChallengeFightJoinRefusedMessage(NetworkMessage):
     playerId:int
     reason:int
     
+    

@@ -6,3 +6,4 @@ class ShortcutObjectItem(ShortcutObject):
     itemUID:int
     itemGID:int
     
+    

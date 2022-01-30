@@ -6,3 +6,4 @@ class ContactLookRequestMessage(NetworkMessage):
     requestId:int
     contactType:int
     
+    

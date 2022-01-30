@@ -6,3 +6,4 @@ class CheckFileRequestMessage(NetworkMessage):
     filename:str
     type:int
     
+    

@@ -7,3 +7,4 @@ class GameRolePlayArenaPlayerBehavioursMessage(NetworkMessage):
     sanctions:str
     banDuration:int
     
+    

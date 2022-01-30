@@ -9,3 +9,4 @@ class ContactLookMessage(NetworkMessage):
     playerId:int
     look:EntityLook
     
+    

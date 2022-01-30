@@ -5,3 +5,4 @@ class FightTemporarySpellImmunityEffect(AbstractFightDispellableEffect):
     protocolId = 4141
     immuneSpellId:int
     
+    

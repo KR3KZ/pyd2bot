@@ -4,3 +4,4 @@ from com.ankamagames.dofus.network.messages.debug.DebugInClientMessage import De
 class ClientYouAreDrunkMessage(DebugInClientMessage):
     protocolId = 159
     
+    

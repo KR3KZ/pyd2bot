@@ -5,3 +5,4 @@ class ExchangeObjectRemovedFromBagMessage(ExchangeObjectMessage):
     protocolId = 1851
     objectUID:int
     
+    

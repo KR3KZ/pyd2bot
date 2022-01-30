@@ -6,3 +6,4 @@ class AchievementAchieved(NetworkMessage):
     id:int
     achievedBy:int
     
+    

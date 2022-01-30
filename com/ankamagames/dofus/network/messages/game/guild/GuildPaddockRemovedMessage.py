@@ -5,3 +5,4 @@ class GuildPaddockRemovedMessage(NetworkMessage):
     protocolId = 9960
     paddockId:int
     
+    

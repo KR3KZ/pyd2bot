@@ -13,3 +13,4 @@ class TaxCollectorDialogQuestionExtendedMessage(TaxCollectorDialogQuestionBasicM
     pods:int
     itemsValue:int
     
+    

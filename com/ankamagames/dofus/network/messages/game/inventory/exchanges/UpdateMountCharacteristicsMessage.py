@@ -7,3 +7,4 @@ class UpdateMountCharacteristicsMessage(NetworkMessage):
     rideId:int
     boostToUpdateList:UpdateMountCharacteristic
     
+    

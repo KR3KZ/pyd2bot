@@ -5,3 +5,4 @@ class MigratedServerListMessage(NetworkMessage):
     protocolId = 970
     migratedServerIds:int
     
+    

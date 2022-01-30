@@ -6,3 +6,4 @@ class UpdateLifePointsMessage(NetworkMessage):
     lifePoints:int
     maxLifePoints:int
     
+    

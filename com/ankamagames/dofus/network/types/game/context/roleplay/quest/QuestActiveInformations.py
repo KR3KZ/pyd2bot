@@ -5,3 +5,4 @@ class QuestActiveInformations(NetworkMessage):
     protocolId = 1975
     questId:int
     
+    

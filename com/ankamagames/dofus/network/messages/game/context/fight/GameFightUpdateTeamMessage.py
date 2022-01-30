@@ -7,3 +7,4 @@ class GameFightUpdateTeamMessage(NetworkMessage):
     fightId:int
     team:FightTeamInformations
     
+    

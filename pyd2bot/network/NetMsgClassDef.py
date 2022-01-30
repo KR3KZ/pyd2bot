@@ -6,11 +6,9 @@ import pyd2bot.network.NetMsgDataField as nmdf
 from pyd2bot.network.protocolSpec import ProtocolSpec
 logger = logging.getLogger("bot")
 
-
 class NetMsgClassDef:
    
    def __init__(self, className:str, raw:ByteArray) -> None:
-      logger.debug("Getting spec for {}".format(className))
       classSpec = ProtocolSpec.getClassSpecByName(className)
       self._parent = classSpec["parent"]
       self._fields = classSpec["fields"]
@@ -29,16 +27,10 @@ class NetMsgClassDef:
       else:
          inst = childInstance
 
-      logger.debug("------------------ Deserializing {} STARTED-----------------".format(self._cls.__name__))
-
       if self._parent is not None:
-         logger.debug("Class has parent {}".format(self._parent))
          inst = NetMsgClassDef(self._parent, self.raw).deserialize(inst)
-         logger.debug("End of parent deserialization")
-         logger.debug("BytesArray positon: {}".format(self.raw.position))
          
       for field, value in self.readBooleans(self._boolfields, self.raw).items():
-         logger.debug("{} = {}".format(field, value))
          setattr(inst, field, value)
 
       for field in self._fields:
@@ -46,16 +38,8 @@ class NetMsgClassDef:
          if field["optional"]:
             if not self.raw.readByte():
                 continue
-         logger.debug("deserializing field {}".format(attrib))
-         try:
-            value = nmdf.NetMsgDataField(field, self.raw).deserialize()
-         except Exception as e:
-            logger.debug(inst.__class__.__name__)
-            logger.debug(self._fields)
-            logger.error(exec_info=True)
-            raise KeyboardInterrupt
+         value = nmdf.NetMsgDataField(field, self.raw).deserialize()
          setattr(inst, attrib, value)
-      logger.debug("------------------ Deserializing {} ENDED---------------------".format(self._cls.__name__))
       return inst
 
    def readBooleans(self, boolfields, raw: ByteArray):

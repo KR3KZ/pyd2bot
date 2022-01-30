@@ -6,3 +6,4 @@ class ExchangeBidPriceForSellerMessage(ExchangeBidPriceMessage):
     allIdentical:bool
     minimalPrices:int
     
+    

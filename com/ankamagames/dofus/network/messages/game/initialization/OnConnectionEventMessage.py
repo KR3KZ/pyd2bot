@@ -5,3 +5,4 @@ class OnConnectionEventMessage(NetworkMessage):
     protocolId = 4485
     eventType:int
     
+    

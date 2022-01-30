@@ -5,3 +5,4 @@ class FightResultMutantListEntry(FightResultFighterListEntry):
     protocolId = 815
     level:int
     
+    

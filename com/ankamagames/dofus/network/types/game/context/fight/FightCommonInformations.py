@@ -11,3 +11,4 @@ class FightCommonInformations(NetworkMessage):
     fightTeamsPositions:int
     fightTeamsOptions:FightOptionsInformations
     
+    

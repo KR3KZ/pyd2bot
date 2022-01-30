@@ -6,3 +6,4 @@ class GameRolePlayAggressionMessage(NetworkMessage):
     attackerId:int
     defenderId:int
     
+    

@@ -5,3 +5,4 @@ class PartyKickedByMessage(AbstractPartyMessage):
     protocolId = 8439
     kickerId:int
     
+    

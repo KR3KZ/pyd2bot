@@ -5,3 +5,4 @@ class HaapiApiKeyMessage(NetworkMessage):
     protocolId = 9970
     token:str
     
+    

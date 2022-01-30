@@ -6,3 +6,4 @@ class GameRolePlayArenaFightAnswerMessage(NetworkMessage):
     fightId:int
     accept:bool
     
+    

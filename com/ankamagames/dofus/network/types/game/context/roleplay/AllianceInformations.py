@@ -6,3 +6,4 @@ class AllianceInformations(BasicNamedAllianceInformations):
     protocolId = 5338
     allianceEmblem:GuildEmblem
     
+    

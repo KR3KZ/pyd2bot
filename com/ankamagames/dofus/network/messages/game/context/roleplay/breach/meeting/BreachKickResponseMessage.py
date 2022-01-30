@@ -7,3 +7,4 @@ class BreachKickResponseMessage(NetworkMessage):
     target:CharacterMinimalInformations
     kicked:bool
     
+    

@@ -6,3 +6,4 @@ class ObjectModifiedMessage(NetworkMessage):
     protocolId = 2793
     object:ObjectItem
     
+    

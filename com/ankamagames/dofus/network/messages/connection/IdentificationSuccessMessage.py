@@ -13,4 +13,8 @@ class IdentificationSuccessMessage(NetworkMessage):
     subscriptionElapsedDuration:int
     subscriptionEndDate:int
     havenbagAvailableRoom:int
+    hasRights:bool
+    hasConsoleRight:bool
+    wasAlreadyConnected:bool
+    
     

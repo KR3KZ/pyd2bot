@@ -6,3 +6,4 @@ class AbstractGameActionMessage(NetworkMessage):
     actionId:int
     sourceId:int
     
+    

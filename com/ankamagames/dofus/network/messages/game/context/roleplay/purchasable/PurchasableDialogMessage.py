@@ -6,4 +6,7 @@ class PurchasableDialogMessage(NetworkMessage):
     purchasableId:int
     purchasableInstanceId:int
     price:int
+    buyOrSell:bool
+    secondHand:bool
+    
     

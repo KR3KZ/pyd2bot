@@ -6,3 +6,4 @@ class EmotePlayMessage(EmotePlayAbstractMessage):
     actorId:int
     accountId:int
     
+    

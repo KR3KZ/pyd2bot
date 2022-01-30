@@ -6,3 +6,4 @@ class AllianceGuildLeavingMessage(NetworkMessage):
     kicked:bool
     guildId:int
     
+    

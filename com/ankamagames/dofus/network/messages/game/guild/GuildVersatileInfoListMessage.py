@@ -6,3 +6,4 @@ class GuildVersatileInfoListMessage(NetworkMessage):
     protocolId = 211
     guilds:GuildVersatileInformations
     
+    

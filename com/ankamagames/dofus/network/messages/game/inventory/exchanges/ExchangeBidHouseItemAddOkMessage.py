@@ -6,3 +6,4 @@ class ExchangeBidHouseItemAddOkMessage(NetworkMessage):
     protocolId = 7844
     itemInfo:ObjectItemToSellInBid
     
+    

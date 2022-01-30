@@ -6,3 +6,4 @@ class AuthenticationTicketMessage(NetworkMessage):
     lang:str
     ticket:str
     
+    

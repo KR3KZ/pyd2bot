@@ -6,3 +6,4 @@ class TaxCollectorMovementsOfflineMessage(NetworkMessage):
     protocolId = 3016
     movements:TaxCollectorMovement
     
+    

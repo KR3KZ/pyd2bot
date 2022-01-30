@@ -8,3 +8,4 @@ class GuildEmblem(NetworkMessage):
     backgroundShape:int
     backgroundColor:int
     
+    

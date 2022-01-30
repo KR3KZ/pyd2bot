@@ -9,3 +9,4 @@ class AcquaintanceOnlineInformation(AcquaintanceInformation):
     moodSmileyId:int
     status:PlayerStatus
     
+    

@@ -6,3 +6,4 @@ class GameRolePlayCharacterInformations(GameRolePlayHumanoidInformations):
     protocolId = 9532
     alignmentInfos:ActorAlignmentInformations
     
+    

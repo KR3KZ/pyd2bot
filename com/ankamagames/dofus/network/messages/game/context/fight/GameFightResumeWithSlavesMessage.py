@@ -6,3 +6,4 @@ class GameFightResumeWithSlavesMessage(GameFightResumeMessage):
     protocolId = 6205
     slavesInfo:GameFightResumeSlaveInfo
     
+    

@@ -5,3 +5,4 @@ class GameContextRemoveMultipleElementsMessage(NetworkMessage):
     protocolId = 9667
     elementsIds:int
     
+    

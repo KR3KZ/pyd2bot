@@ -6,3 +6,4 @@ class IdentificationFailedForBadVersionMessage(IdentificationFailedMessage):
     protocolId = 7294
     requiredVersion:Version
     
+    

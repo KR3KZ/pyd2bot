@@ -10,3 +10,4 @@ class AllianceInsiderPrismInformation(PrismInformation):
     lastTimeSlotModificationAuthorName:str
     modulesObjects:ObjectItem
     
+    

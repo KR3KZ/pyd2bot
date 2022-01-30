@@ -8,3 +8,4 @@ class CharacterExperienceGainMessage(NetworkMessage):
     experienceGuild:int
     experienceIncarnation:int
     
+    

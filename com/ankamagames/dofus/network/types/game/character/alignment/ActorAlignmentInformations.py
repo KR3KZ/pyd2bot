@@ -8,3 +8,4 @@ class ActorAlignmentInformations(NetworkMessage):
     alignmentGrade:int
     characterPower:int
     
+    

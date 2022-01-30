@@ -5,3 +5,4 @@ class EmotePlayErrorMessage(NetworkMessage):
     protocolId = 9167
     emoteId:int
     
+    

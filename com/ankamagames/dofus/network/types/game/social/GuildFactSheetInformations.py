@@ -10,3 +10,4 @@ class GuildFactSheetInformations(GuildInformations):
     recruitment:GuildRecruitmentInformation
     nbPendingApply:int
     
+    

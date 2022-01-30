@@ -7,3 +7,4 @@ class CompassUpdateMessage(NetworkMessage):
     type:int
     coords:MapCoordinates
     
+    

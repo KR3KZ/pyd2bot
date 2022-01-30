@@ -5,3 +5,4 @@ class PauseDialogMessage(NetworkMessage):
     protocolId = 8906
     dialogType:int
     
+    

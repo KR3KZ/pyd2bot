@@ -6,3 +6,4 @@ class PrismFightAddedMessage(NetworkMessage):
     protocolId = 5778
     fight:PrismFightersInformation
     
+    

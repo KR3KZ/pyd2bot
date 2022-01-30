@@ -6,3 +6,4 @@ class JobCrafterDirectoryRemoveMessage(NetworkMessage):
     jobId:int
     playerId:int
     
+    

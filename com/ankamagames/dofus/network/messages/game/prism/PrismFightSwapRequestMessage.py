@@ -6,3 +6,4 @@ class PrismFightSwapRequestMessage(NetworkMessage):
     subAreaId:int
     targetId:int
     
+    

@@ -5,3 +5,4 @@ class BasicNamedAllianceInformations(BasicAllianceInformations):
     protocolId = 949
     allianceName:str
     
+    

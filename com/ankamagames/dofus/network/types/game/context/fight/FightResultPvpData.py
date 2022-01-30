@@ -9,3 +9,4 @@ class FightResultPvpData(FightResultAdditionalData):
     honor:int
     honorDelta:int
     
+    

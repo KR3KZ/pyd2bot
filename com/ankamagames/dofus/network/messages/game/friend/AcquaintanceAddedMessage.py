@@ -6,3 +6,4 @@ class AcquaintanceAddedMessage(NetworkMessage):
     protocolId = 6756
     acquaintanceAdded:AcquaintanceInformation
     
+    

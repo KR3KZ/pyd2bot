@@ -6,3 +6,4 @@ class GameActionFightCastOnTargetRequestMessage(NetworkMessage):
     spellId:int
     targetId:int
     
+    

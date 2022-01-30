@@ -8,3 +8,4 @@ class AllianceCreationValidMessage(NetworkMessage):
     allianceTag:str
     allianceEmblem:GuildEmblem
     
+    

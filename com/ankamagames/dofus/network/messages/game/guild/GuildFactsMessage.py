@@ -10,3 +10,4 @@ class GuildFactsMessage(NetworkMessage):
     nbTaxCollectors:int
     members:CharacterMinimalGuildPublicInformations
     
+    

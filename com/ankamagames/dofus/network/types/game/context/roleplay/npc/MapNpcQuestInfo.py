@@ -8,3 +8,4 @@ class MapNpcQuestInfo(NetworkMessage):
     npcsIdsWithQuest:int
     questFlags:GameRolePlayNpcQuestFlag
     
+    

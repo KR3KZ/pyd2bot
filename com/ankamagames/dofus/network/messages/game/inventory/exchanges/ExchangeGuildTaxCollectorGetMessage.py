@@ -16,3 +16,4 @@ class ExchangeGuildTaxCollectorGetMessage(NetworkMessage):
     pods:int
     objectsInfos:ObjectItemGenericQuantity
     
+    

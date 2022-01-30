@@ -17,3 +17,4 @@ class GuildSubmitApplicationMessage(NetworkMessage):
     filterSearchName:str
     filterLastSort:str
     
+    

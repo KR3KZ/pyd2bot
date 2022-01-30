@@ -5,3 +5,4 @@ class GameActionFightCloseCombatMessage(AbstractGameActionFightTargetedAbilityMe
     protocolId = 9973
     weaponGenericId:int
     
+    

@@ -5,3 +5,4 @@ class HavenBagPermissionsUpdateMessage(NetworkMessage):
     protocolId = 3186
     permissions:int
     
+    

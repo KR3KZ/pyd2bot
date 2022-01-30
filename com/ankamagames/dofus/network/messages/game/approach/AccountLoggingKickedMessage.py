@@ -7,3 +7,4 @@ class AccountLoggingKickedMessage(NetworkMessage):
     hours:int
     minutes:int
     
+    

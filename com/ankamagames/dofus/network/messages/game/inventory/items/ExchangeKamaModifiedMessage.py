@@ -5,3 +5,4 @@ class ExchangeKamaModifiedMessage(ExchangeObjectMessage):
     protocolId = 1705
     quantity:int
     
+    

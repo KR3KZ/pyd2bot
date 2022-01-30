@@ -5,3 +5,4 @@ class CharacterReplayRequestMessage(NetworkMessage):
     protocolId = 9614
     characterId:int
     
+    

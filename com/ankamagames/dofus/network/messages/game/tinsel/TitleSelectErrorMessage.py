@@ -5,3 +5,4 @@ class TitleSelectErrorMessage(NetworkMessage):
     protocolId = 2014
     reason:int
     
+    

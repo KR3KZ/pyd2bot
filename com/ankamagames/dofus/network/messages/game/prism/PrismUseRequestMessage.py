@@ -5,3 +5,4 @@ class PrismUseRequestMessage(NetworkMessage):
     protocolId = 8164
     moduleToUse:int
     
+    

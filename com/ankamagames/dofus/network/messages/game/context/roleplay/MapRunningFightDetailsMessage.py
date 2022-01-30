@@ -9,3 +9,4 @@ class MapRunningFightDetailsMessage(NetworkMessage):
     attackers:GameFightFighterLightInformations
     defenders:GameFightFighterLightInformations
     
+    

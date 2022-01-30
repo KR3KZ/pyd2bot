@@ -5,3 +5,4 @@ class AllianceKickRequestMessage(NetworkMessage):
     protocolId = 1648
     kickedId:int
     
+    

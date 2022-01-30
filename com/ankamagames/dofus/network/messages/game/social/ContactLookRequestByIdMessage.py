@@ -5,3 +5,4 @@ class ContactLookRequestByIdMessage(ContactLookRequestMessage):
     protocolId = 7749
     playerId:int
     
+    

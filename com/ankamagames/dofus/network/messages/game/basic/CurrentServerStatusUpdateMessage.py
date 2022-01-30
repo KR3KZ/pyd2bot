@@ -5,3 +5,4 @@ class CurrentServerStatusUpdateMessage(NetworkMessage):
     protocolId = 547
     status:int
     
+    

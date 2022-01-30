@@ -6,3 +6,4 @@ class GuildApplicationAnswerMessage(NetworkMessage):
     accepted:bool
     playerId:int
     
+    

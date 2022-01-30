@@ -5,3 +5,4 @@ class CharacterCharacteristicValue(CharacterCharacteristic):
     protocolId = 1995
     total:int
     
+    

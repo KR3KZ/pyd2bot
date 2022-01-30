@@ -5,3 +5,4 @@ class OrnamentSelectErrorMessage(NetworkMessage):
     protocolId = 4098
     reason:int
     
+    

@@ -6,3 +6,4 @@ class SlaveNoLongerControledMessage(NetworkMessage):
     masterId:int
     slaveId:int
     
+    

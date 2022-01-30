@@ -7,3 +7,4 @@ class HumanOptionSkillUse(HumanOption):
     skillId:int
     skillEndTime:int
     
+    

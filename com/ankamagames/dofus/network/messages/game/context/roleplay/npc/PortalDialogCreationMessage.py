@@ -5,3 +5,4 @@ class PortalDialogCreationMessage(NpcDialogCreationMessage):
     protocolId = 2919
     type:int
     
+    

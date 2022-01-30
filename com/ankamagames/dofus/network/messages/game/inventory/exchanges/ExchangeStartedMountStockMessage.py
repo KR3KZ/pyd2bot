@@ -6,3 +6,4 @@ class ExchangeStartedMountStockMessage(NetworkMessage):
     protocolId = 5729
     objectsInfos:ObjectItem
     
+    

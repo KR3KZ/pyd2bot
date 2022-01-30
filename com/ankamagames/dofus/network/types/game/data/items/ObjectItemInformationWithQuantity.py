@@ -5,3 +5,4 @@ class ObjectItemInformationWithQuantity(ObjectItemMinimalInformation):
     protocolId = 4715
     quantity:int
     
+    

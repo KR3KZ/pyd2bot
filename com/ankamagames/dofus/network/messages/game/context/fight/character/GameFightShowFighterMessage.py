@@ -6,3 +6,4 @@ class GameFightShowFighterMessage(NetworkMessage):
     protocolId = 2781
     informations:GameFightFighterInformations
     
+    

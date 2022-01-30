@@ -10,4 +10,12 @@ class FightResultExperienceData(FightResultAdditionalData):
     experienceForGuild:int
     experienceForMount:int
     rerollExperienceMul:int
+    showExperience:bool
+    showExperienceLevelFloor:bool
+    showExperienceNextLevelFloor:bool
+    showExperienceFightDelta:bool
+    showExperienceForGuild:bool
+    showExperienceForMount:bool
+    isIncarnationExperience:bool
+    
     

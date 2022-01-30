@@ -5,3 +5,4 @@ class SpouseStatusMessage(NetworkMessage):
     protocolId = 5406
     hasSpouse:bool
     
+    

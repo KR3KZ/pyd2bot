@@ -7,3 +7,4 @@ class CharacterMinimalPlusLookInformations(CharacterMinimalInformations):
     entityLook:EntityLook
     breed:int
     
+    

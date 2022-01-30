@@ -6,3 +6,4 @@ class FollowQuestObjectiveRequestMessage(NetworkMessage):
     questId:int
     objectiveId:int
     
+    

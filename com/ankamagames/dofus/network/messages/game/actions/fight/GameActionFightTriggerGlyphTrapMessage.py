@@ -8,3 +8,4 @@ class GameActionFightTriggerGlyphTrapMessage(AbstractGameActionMessage):
     triggeringCharacterId:int
     triggeredSpellId:int
     
+    

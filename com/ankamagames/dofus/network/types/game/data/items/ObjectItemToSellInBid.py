@@ -5,3 +5,4 @@ class ObjectItemToSellInBid(ObjectItemToSell):
     protocolId = 3500
     unsoldDelay:int
     
+    

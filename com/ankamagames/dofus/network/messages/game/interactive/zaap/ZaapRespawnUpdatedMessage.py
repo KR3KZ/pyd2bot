@@ -5,3 +5,4 @@ class ZaapRespawnUpdatedMessage(NetworkMessage):
     protocolId = 2988
     mapId:int
     
+    

@@ -6,3 +6,4 @@ class BreachBonusMessage(NetworkMessage):
     protocolId = 1689
     bonus:ObjectEffectInteger
     
+    

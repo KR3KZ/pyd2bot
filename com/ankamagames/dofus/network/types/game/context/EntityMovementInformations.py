@@ -6,3 +6,4 @@ class EntityMovementInformations(NetworkMessage):
     id:int
     steps:int
     
+    

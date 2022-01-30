@@ -6,3 +6,4 @@ class FighterStatsListMessage(NetworkMessage):
     protocolId = 534
     stats:CharacterCharacteristicsInformations
     
+    

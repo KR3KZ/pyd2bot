@@ -5,3 +5,4 @@ class AllianceFactsErrorMessage(NetworkMessage):
     protocolId = 8954
     allianceId:int
     
+    

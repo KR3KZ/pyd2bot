@@ -5,3 +5,4 @@ class ChangeThemeRequestMessage(NetworkMessage):
     protocolId = 8958
     theme:int
     
+    

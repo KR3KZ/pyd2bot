@@ -7,3 +7,4 @@ class EntityInformation(NetworkMessage):
     experience:int
     status:bool
     
+    

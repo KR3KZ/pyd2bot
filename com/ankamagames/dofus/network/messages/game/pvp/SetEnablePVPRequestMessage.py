@@ -5,3 +5,4 @@ class SetEnablePVPRequestMessage(NetworkMessage):
     protocolId = 4228
     enable:bool
     
+    

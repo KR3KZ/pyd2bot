@@ -6,3 +6,4 @@ class AllianceBulletinSetRequestMessage(SocialNoticeSetRequestMessage):
     content:str
     notifyMembers:bool
     
+    

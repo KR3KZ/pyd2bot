@@ -5,3 +5,4 @@ class FightTemporarySpellBoostEffect(FightTemporaryBoostEffect):
     protocolId = 540
     boostedSpellId:int
     
+    

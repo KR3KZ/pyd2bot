@@ -5,3 +5,4 @@ class ActivityHideRequestMessage(NetworkMessage):
     protocolId = 9127
     activityId:int
     
+    

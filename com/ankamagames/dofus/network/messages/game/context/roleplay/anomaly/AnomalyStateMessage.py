@@ -7,3 +7,4 @@ class AnomalyStateMessage(NetworkMessage):
     open:bool
     closingTime:int
     
+    
