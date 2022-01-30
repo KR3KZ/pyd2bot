@@ -20,6 +20,13 @@ TO_PTYPE = {
     "VarUhInt": "int",
     "Float": "float",
     "VarLong": "int",
+
+    "Number": "float",
+    "uint": "int",
+    "String": "str",
+    "void": "Any",
+    "Array": "list",
+
 }
 class ProtocolParser:
     CLASS_PATTERN = r"\s*public class (?P<name>\w+) (?:extends (?P<parent>\w+) )?implements (?P<interface>\w+)\n"
@@ -70,14 +77,15 @@ class ProtocolParser:
                     "name": name,
                     "path": as_file_path,
                     "rpath": str(as_file_path.relative_to(path)),
-                    "package": ".".join(as_file_path.parts[as_file_path.parts.index("com"):-2]+(name,)),
+                    "package": ".".join(as_file_path.parts[as_file_path.parts.index("com"):-1]+(name,)),
                 }
             self.json["type"].update(msg_type)
     
     def parseVar(self, name, type_name, lines):
         var_type = None
+
         if type_name in ["Boolean", "ByteArray"]:
-            return dict(name=name, length=None, type=type_name, ptype="bool", optional=False)
+            return dict(name=name, length=None, type=type_name, pytype="bool", optional=False)
 
         if type_name in self.json["type"]:
             var_type = type_name
@@ -104,6 +112,7 @@ class ProtocolParser:
             m = re.fullmatch(optional_var_pattern, line)
             if m:
                 optional = True
+
         if var_type is None:
             raise Exception(f"Unable to parse 'var_type' of attrib {name} from class_type {type_name}")
 
@@ -111,7 +120,7 @@ class ProtocolParser:
             "name": name,
             "length": None,
             "type": var_type,
-            "pytype": TO_PTYPE[var_type] if var_type in TO_PTYPE else var_type,
+            "pytype": TO_PTYPE[type_name] if type_name in TO_PTYPE else type_name,
             "optional": optional
         }
 
@@ -144,7 +153,13 @@ class ProtocolParser:
             if m:
                 length = int(m.group("size"))
 
-        return dict(name=name, length=length, type=type, optional=False)
+        return dict({
+            "name":name,
+            "length":length,
+            "type":type,
+            "pytype": TO_PTYPE[typename] if typename in TO_PTYPE else typename,
+            "optional":False
+        })
 
     def parseMsgType(self, msg_type):
         vars = []
@@ -153,6 +168,7 @@ class ProtocolParser:
 
         with open(msg_type["path"], 'r') as fp:
             lines = list(fp.readlines())
+            msg_type["parent"] = None
             for line in lines:
                 m = re.fullmatch(self.CLASS_PATTERN, line)
                 if m:

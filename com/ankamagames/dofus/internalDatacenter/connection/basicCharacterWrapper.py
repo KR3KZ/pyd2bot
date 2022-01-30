@@ -1,4 +1,4 @@
-from com.ankamagames.dofus.network.types.game.look.entityLook import EntityLook
+from com.ankamagames.dofus.network.types.game.look.EntityLook import EntityLook
 from com.ankamagames.jerakine.interfaces.iDatacenter import IDataCenter
 
 

@@ -1,9 +1,17 @@
-class {{msg["name"]}}{% if msg["parent"] != None %}({{msg["parent"]}}){% endif %}:
-    {% for field in msg["vars"] -%}
-    {{field["name"]}}:{{field["pytype"] if field["pytype"] else field["type"]}}{% if field["optional"] == True %} = None{% endif %}
+{%- set parent = types[cls.parent] if cls.parent else None -%}
+{% if parent != None -%}
+from {{parent.package}} import {{parent.name}}
+{%- else -%}
+from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage{% endif %}
+{%- for field in cls.vars -%}
+{%- if field.pytype not in primitives %}
+from {{types[field.pytype].package}} import {{field.pytype}}{% endif %}
+{%- endfor %}
+
+
+class {{cls.name}}({% if parent != None %}{{parent.name}}{% else %}NetworkMessage{% endif %}):
+    protocolId = {{cls.protocolId}}
+    {% for field in cls.vars -%}
+    {{field.name}}:{%if field.length != None%}list[{{field.pytype}}]{% else %}{{field.pytype}}{% endif %}{% if field.optional %} = None{% endif %}
     {% endfor %}
-    def __init__(self, {% for field in msg["vars"] -%}
-        {{field["name"]}}:{{field["pytype"] if field["pytype"] else field["type"]}}{% if field["optional"] == True %} = None{% endif %}{% if not loop.last %}, {% endif %}{% endfor %}):
-        {% for field in msg["vars"] -%}
-        self.{{field["name"]}} = {{field["name"]}}
-        {% endfor %}
+

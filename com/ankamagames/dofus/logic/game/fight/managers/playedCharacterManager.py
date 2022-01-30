@@ -5,7 +5,7 @@ from com.ankamagames.dofus.kernel.kernel import Kernel
 from com.ankamagames.dofus.logic.common.managers.statsManager import StatsManager
 from com.ankamagames.dofus.network.protocolConstantsEnum import ProtocolConstantsEnum
 from com.ankamagames.dofus.network.types.game.character.choice.characterBaseInformations import CharacterBaseInformations
-from com.ankamagames.dofus.network.types.game.look.entityLook import EntityLook
+from com.ankamagames.dofus.network.types.game.look.EntityLook import EntityLook
 from com.ankamagames.jerakine.interfaces.iDestroyable import IDestroyable
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 from com.ankamagames.jerakine.types.positions.mapPoint import Point

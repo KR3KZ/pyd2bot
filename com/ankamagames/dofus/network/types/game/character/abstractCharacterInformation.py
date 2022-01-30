@@ -1,16 +1,7 @@
-from com.ankamagames.jerakine.network.iNetworkType import INetworkType
+from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
 
 
-class AbstractCharacterInformation(INetworkType):
-
-   id:float = 0
-   
-   def __init__(self):
-      super().__init__()
-   
-   def initAbstractCharacterInformation(self, id:float = 0) -> 'AbstractCharacterInformation':
-      self.id = id
-      return self
-   
-   def reset(self) -> None:
-      self.id = 0
+class AbstractCharacterInformation(NetworkMessage):
+    protocolId = 2714
+    id:float
+    

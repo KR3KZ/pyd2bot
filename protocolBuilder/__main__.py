@@ -27,7 +27,8 @@ if __name__ == "__main__":
     ]
     
     protocol_json = ProtocolParser().run(src_paths)
-    with Constants.PROTOCOL_SPEC_PATH.open("w") as fp:
+    # Constants.PROTOCOL_SPEC_PATH
+    with open("protocolBuilder/spec.json", "w") as fp:
         json.dump(protocol_json, fp)
         
     

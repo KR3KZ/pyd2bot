@@ -1,17 +1,9 @@
-from com.ankamagames.dofus.network.messages.game.context.EntityDispositionInformations import EntityDispositionInformations
+from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.types.game.context.EntityDispositionInformations import EntityDispositionInformations
 
-class GameContextActorPositionInformations:
-   contextualId:float = 0
-   disposition:EntityDispositionInformations
-   
-   def __init__(self):
-      self.disposition = EntityDispositionInformations()
-   
-   def initGameContextActorPositionInformations(self, contextualId:float = 0, disposition:EntityDispositionInformations = None) -> 'GameContextActorPositionInformations':
-      self.contextualId = contextualId
-      self.disposition = disposition
-      return self
-   
-   def reset(self) -> None:
-      self.contextualId = 0
-      self.disposition = EntityDispositionInformations()
+
+class GameContextActorPositionInformations(NetworkMessage):
+    protocolId = 1244
+    contextualId:float
+    disposition:EntityDispositionInformations
+    

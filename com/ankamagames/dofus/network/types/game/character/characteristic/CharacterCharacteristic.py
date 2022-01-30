@@ -1,13 +1,7 @@
-               
-class CharacterCharacteristic:
-   characteristicId:int = 0
-   
-   def __init__(self):
-      super().__init__()
+from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
 
-   def initCharacterCharacteristic(self, characteristicId:int = 0) -> 'CharacterCharacteristic':
-      self.characteristicId = characteristicId
-      return self
-   
-   def reset(self) -> None:
-      self.characteristicId = 0
+
+class CharacterCharacteristic(NetworkMessage):
+    protocolId = 4565
+    characteristicId:int
+    
