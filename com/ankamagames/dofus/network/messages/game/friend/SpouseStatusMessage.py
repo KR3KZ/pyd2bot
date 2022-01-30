@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class SpouseStatusMessage(NetworkMessage):
+class SpouseStatusMessage(INetworkMessage):
     protocolId = 5406
     hasSpouse:bool
     

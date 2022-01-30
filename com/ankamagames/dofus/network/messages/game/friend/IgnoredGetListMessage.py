@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class IgnoredGetListMessage(NetworkMessage):
+class IgnoredGetListMessage(INetworkMessage):
     protocolId = 4403
     
     

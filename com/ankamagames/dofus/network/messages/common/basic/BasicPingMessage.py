@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class BasicPingMessage(NetworkMessage):
+class BasicPingMessage(INetworkMessage):
     protocolId = 8161
     quiet:bool
     

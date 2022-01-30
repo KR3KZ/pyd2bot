@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.context.roleplay.breach.ExtendedBreachBranch import ExtendedBreachBranch
 
 
-class BreachBranchesMessage(NetworkMessage):
+class BreachBranchesMessage(INetworkMessage):
     protocolId = 2907
     branches:ExtendedBreachBranch
     

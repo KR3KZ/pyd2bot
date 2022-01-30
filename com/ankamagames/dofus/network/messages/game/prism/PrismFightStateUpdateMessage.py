@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class PrismFightStateUpdateMessage(NetworkMessage):
+class PrismFightStateUpdateMessage(INetworkMessage):
     protocolId = 7379
     state:int
     

@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class LifePointsRegenBeginMessage(NetworkMessage):
+class LifePointsRegenBeginMessage(INetworkMessage):
     protocolId = 9626
     regenRate:int
     

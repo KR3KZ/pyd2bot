@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ExchangeStartOkRecycleTradeMessage(NetworkMessage):
+class ExchangeStartOkRecycleTradeMessage(INetworkMessage):
     protocolId = 9169
     percentToPrism:int
     percentToPlayer:int

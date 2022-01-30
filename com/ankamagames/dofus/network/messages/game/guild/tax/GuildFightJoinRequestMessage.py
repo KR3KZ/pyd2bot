@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GuildFightJoinRequestMessage(NetworkMessage):
+class GuildFightJoinRequestMessage(INetworkMessage):
     protocolId = 9050
     taxCollectorId:int
     

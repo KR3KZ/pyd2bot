@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class RefreshFollowedQuestsOrderRequestMessage(NetworkMessage):
+class RefreshFollowedQuestsOrderRequestMessage(INetworkMessage):
     protocolId = 1088
     quests:int
     

@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ExchangeStartOkNpcTradeMessage(NetworkMessage):
+class ExchangeStartOkNpcTradeMessage(INetworkMessage):
     protocolId = 4055
     npcId:int
     

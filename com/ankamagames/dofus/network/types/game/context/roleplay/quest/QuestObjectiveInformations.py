@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class QuestObjectiveInformations(NetworkMessage):
+class QuestObjectiveInformations(INetworkMessage):
     protocolId = 4677
     objectiveId:int
     objectiveStatus:bool

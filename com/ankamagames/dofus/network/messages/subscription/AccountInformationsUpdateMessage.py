@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class AccountInformationsUpdateMessage(NetworkMessage):
+class AccountInformationsUpdateMessage(INetworkMessage):
     protocolId = 3664
     subscriptionEndDate:int
     

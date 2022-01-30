@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameFightTurnEndMessage(NetworkMessage):
+class GameFightTurnEndMessage(INetworkMessage):
     protocolId = 4443
     id:int
     

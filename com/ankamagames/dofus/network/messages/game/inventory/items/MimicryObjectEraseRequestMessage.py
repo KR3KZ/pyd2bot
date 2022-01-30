@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class MimicryObjectEraseRequestMessage(NetworkMessage):
+class MimicryObjectEraseRequestMessage(INetworkMessage):
     protocolId = 3575
     hostUID:int
     hostPos:int

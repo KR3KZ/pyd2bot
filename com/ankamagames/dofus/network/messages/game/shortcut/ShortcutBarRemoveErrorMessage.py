@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ShortcutBarRemoveErrorMessage(NetworkMessage):
+class ShortcutBarRemoveErrorMessage(INetworkMessage):
     protocolId = 5661
     error:int
     

@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GuildKickRequestMessage(NetworkMessage):
+class GuildKickRequestMessage(INetworkMessage):
     protocolId = 3965
     kickedId:int
     

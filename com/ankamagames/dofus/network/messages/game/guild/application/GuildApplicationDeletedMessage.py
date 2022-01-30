@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GuildApplicationDeletedMessage(NetworkMessage):
+class GuildApplicationDeletedMessage(INetworkMessage):
     protocolId = 5546
     deleted:bool
     

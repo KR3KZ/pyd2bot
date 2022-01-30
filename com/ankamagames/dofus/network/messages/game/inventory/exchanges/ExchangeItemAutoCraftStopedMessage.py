@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ExchangeItemAutoCraftStopedMessage(NetworkMessage):
+class ExchangeItemAutoCraftStopedMessage(INetworkMessage):
     protocolId = 470
     reason:int
     

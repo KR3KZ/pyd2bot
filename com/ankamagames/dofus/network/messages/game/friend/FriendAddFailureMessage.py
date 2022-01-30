@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class FriendAddFailureMessage(NetworkMessage):
+class FriendAddFailureMessage(INetworkMessage):
     protocolId = 4074
     reason:int
     

@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.common.AccountTagInformation import AccountTagInformation
 
 
-class IdentificationSuccessMessage(NetworkMessage):
+class IdentificationSuccessMessage(INetworkMessage):
     protocolId = 331
     login:str
     accountTag:AccountTagInformation

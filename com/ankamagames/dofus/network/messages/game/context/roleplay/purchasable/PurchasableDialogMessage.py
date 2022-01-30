@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class PurchasableDialogMessage(NetworkMessage):
+class PurchasableDialogMessage(INetworkMessage):
     protocolId = 582
     purchasableId:int
     purchasableInstanceId:int

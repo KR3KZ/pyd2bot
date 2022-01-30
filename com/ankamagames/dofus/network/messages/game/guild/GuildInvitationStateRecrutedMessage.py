@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GuildInvitationStateRecrutedMessage(NetworkMessage):
+class GuildInvitationStateRecrutedMessage(INetworkMessage):
     protocolId = 621
     invitationState:int
     

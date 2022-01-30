@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class InteractiveUseErrorMessage(NetworkMessage):
+class InteractiveUseErrorMessage(INetworkMessage):
     protocolId = 778
     elemId:int
     skillInstanceUid:int

@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GuildModificationStartedMessage(NetworkMessage):
+class GuildModificationStartedMessage(INetworkMessage):
     protocolId = 310
     canChangeName:bool
     canChangeEmblem:bool

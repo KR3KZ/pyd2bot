@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ChannelEnablingMessage(NetworkMessage):
+class ChannelEnablingMessage(INetworkMessage):
     protocolId = 499
     channel:int
     enable:bool

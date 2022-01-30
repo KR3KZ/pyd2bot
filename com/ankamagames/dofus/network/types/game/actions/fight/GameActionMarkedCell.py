@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameActionMarkedCell(NetworkMessage):
+class GameActionMarkedCell(INetworkMessage):
     protocolId = 2389
     cellId:int
     zoneSize:int

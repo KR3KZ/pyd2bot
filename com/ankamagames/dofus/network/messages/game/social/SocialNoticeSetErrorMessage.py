@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class SocialNoticeSetErrorMessage(NetworkMessage):
+class SocialNoticeSetErrorMessage(INetworkMessage):
     protocolId = 3378
     reason:int
     

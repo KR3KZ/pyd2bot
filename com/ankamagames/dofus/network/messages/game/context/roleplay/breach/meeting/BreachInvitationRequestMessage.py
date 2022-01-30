@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class BreachInvitationRequestMessage(NetworkMessage):
+class BreachInvitationRequestMessage(INetworkMessage):
     protocolId = 7544
     guests:int
     

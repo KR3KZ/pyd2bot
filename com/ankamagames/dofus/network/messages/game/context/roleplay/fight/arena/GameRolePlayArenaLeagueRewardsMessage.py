@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameRolePlayArenaLeagueRewardsMessage(NetworkMessage):
+class GameRolePlayArenaLeagueRewardsMessage(INetworkMessage):
     protocolId = 2090
     seasonId:int
     leagueId:int

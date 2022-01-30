@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class IdolSelectErrorMessage(NetworkMessage):
+class IdolSelectErrorMessage(INetworkMessage):
     protocolId = 4378
     reason:int
     idolId:int

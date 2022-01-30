@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class CharacterCreationRequestMessage(NetworkMessage):
+class CharacterCreationRequestMessage(INetworkMessage):
     protocolId = 5026
     name:str
     breed:int

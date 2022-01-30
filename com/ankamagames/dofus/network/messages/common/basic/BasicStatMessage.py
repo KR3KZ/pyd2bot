@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class BasicStatMessage(NetworkMessage):
+class BasicStatMessage(INetworkMessage):
     protocolId = 514
     timeSpent:int
     statId:int

@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ChatErrorMessage(NetworkMessage):
+class ChatErrorMessage(INetworkMessage):
     protocolId = 5479
     reason:int
     

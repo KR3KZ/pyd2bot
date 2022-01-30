@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class PlayerStatus(NetworkMessage):
+class PlayerStatus(INetworkMessage):
     protocolId = 3077
     statusId:int
     

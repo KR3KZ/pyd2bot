@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class BasicDateMessage(NetworkMessage):
+class BasicDateMessage(INetworkMessage):
     protocolId = 4911
     day:int
     month:int

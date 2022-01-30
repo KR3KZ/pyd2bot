@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class AllianceGuildLeavingMessage(NetworkMessage):
+class AllianceGuildLeavingMessage(INetworkMessage):
     protocolId = 129
     kicked:bool
     guildId:int

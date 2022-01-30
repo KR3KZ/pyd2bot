@@ -1,4 +1,4 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.house.HouseInformations import HouseInformations
 from com.ankamagames.dofus.network.types.game.context.roleplay.GameRolePlayActorInformations import GameRolePlayActorInformations
 from com.ankamagames.dofus.network.types.game.interactive.InteractiveElement import InteractiveElement
@@ -8,7 +8,7 @@ from com.ankamagames.dofus.network.types.game.context.fight.FightCommonInformati
 from com.ankamagames.dofus.network.types.game.context.fight.FightStartingPositions import FightStartingPositions
 
 
-class MapComplementaryInformationsDataMessage(NetworkMessage):
+class MapComplementaryInformationsDataMessage(INetworkMessage):
     protocolId = 1182
     subAreaId:int
     mapId:int

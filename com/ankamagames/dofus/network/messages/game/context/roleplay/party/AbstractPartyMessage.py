@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class AbstractPartyMessage(NetworkMessage):
+class AbstractPartyMessage(INetworkMessage):
     protocolId = 3299
     partyId:int
     

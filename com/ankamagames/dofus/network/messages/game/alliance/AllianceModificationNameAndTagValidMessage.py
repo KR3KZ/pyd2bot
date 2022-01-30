@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class AllianceModificationNameAndTagValidMessage(NetworkMessage):
+class AllianceModificationNameAndTagValidMessage(INetworkMessage):
     protocolId = 8950
     allianceName:str
     allianceTag:str

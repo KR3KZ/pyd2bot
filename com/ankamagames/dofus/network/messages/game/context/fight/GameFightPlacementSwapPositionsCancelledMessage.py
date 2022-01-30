@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameFightPlacementSwapPositionsCancelledMessage(NetworkMessage):
+class GameFightPlacementSwapPositionsCancelledMessage(INetworkMessage):
     protocolId = 998
     requestId:int
     cancellerId:int

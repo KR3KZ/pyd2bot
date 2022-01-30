@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.data.items.effects.ObjectEffectInteger import ObjectEffectInteger
 
 
-class MountClientData(NetworkMessage):
+class MountClientData(INetworkMessage):
     protocolId = 9874
     id:int
     model:int

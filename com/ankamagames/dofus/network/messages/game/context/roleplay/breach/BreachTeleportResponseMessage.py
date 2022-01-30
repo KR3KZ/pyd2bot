@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class BreachTeleportResponseMessage(NetworkMessage):
+class BreachTeleportResponseMessage(INetworkMessage):
     protocolId = 4766
     teleported:bool
     

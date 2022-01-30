@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameFightJoinMessage(NetworkMessage):
+class GameFightJoinMessage(INetworkMessage):
     protocolId = 1185
     timeMaxBeforeFightStart:int
     fightType:int

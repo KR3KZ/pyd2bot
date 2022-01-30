@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class MapRewardRateMessage(NetworkMessage):
+class MapRewardRateMessage(INetworkMessage):
     protocolId = 1514
     mapRate:int
     subAreaRate:int

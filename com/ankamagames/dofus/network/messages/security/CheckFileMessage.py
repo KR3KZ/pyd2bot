@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class CheckFileMessage(NetworkMessage):
+class CheckFileMessage(INetworkMessage):
     protocolId = 6281
     filenameHash:str
     type:int

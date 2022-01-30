@@ -1,9 +1,12 @@
 from ctypes import ArgumentError
 import logging
+from AS3ToPythonConverter.iServerConnection import IServerConnection
 from com.ankamagames.dofus.kernel.kernel import Kernel
 from com.ankamagames.dofus.kernel.net.connectionType import ConnectionType
 from com.ankamagames.dofus.kernel.net.disconnectionReason import DisconnectionReason
+from com.ankamagames.dofus.kernel.net.disconnectionReasonEnum import DisconnectionReasonEnum
 from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerManager
+from com.ankamagames.dofus.network.messages.common.basic.BasicPingMessage import BasicPingMessage
 from com.ankamagames.jerakine.network.multiConnection import MultiConnection
 logger = logging.getLogger("bot")
 
@@ -129,7 +132,7 @@ def resume(self) -> None:
 
 def startConnectionTimer(self) -> None:
    if not _connectionTimeout:
-      _connectionTimeout = BenchmarkTimer(4000,1,"ConnectionsHandler._connectionTimeout (connectToKoliServer)")
+      _connectionTimeout = BenchmarkTimer(4000, 1, "ConnectionsHandler._connectionTimeout (connectToKoliServer)")
       _connectionTimeout.addEventListener(TimerEvent.TIMER,onConnectionTimeout)
    else:
       _connectionTimeout.reset()

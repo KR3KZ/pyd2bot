@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class HouseInformations(NetworkMessage):
+class HouseInformations(INetworkMessage):
     protocolId = 3346
     houseId:int
     modelId:int

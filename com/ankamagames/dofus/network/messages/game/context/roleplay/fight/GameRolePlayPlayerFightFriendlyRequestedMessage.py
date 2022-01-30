@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameRolePlayPlayerFightFriendlyRequestedMessage(NetworkMessage):
+class GameRolePlayPlayerFightFriendlyRequestedMessage(INetworkMessage):
     protocolId = 2157
     fightId:int
     sourceId:int

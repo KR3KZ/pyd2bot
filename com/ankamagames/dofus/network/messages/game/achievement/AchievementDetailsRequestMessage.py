@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class AchievementDetailsRequestMessage(NetworkMessage):
+class AchievementDetailsRequestMessage(INetworkMessage):
     protocolId = 5136
     achievementId:int
     

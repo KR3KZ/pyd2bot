@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class CharacterSelectedErrorMessage(NetworkMessage):
+class CharacterSelectedErrorMessage(INetworkMessage):
     protocolId = 9221
     
     

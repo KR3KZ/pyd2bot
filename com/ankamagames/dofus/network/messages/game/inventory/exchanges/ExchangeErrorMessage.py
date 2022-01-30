@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ExchangeErrorMessage(NetworkMessage):
+class ExchangeErrorMessage(INetworkMessage):
     protocolId = 6446
     errorType:int
     

@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class FinishMoveSetRequestMessage(NetworkMessage):
+class FinishMoveSetRequestMessage(INetworkMessage):
     protocolId = 2738
     finishMoveId:int
     finishMoveState:bool

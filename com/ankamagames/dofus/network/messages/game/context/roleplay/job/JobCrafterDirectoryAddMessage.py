@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.context.roleplay.job.JobCrafterDirectoryListEntry import JobCrafterDirectoryListEntry
 
 
-class JobCrafterDirectoryAddMessage(NetworkMessage):
+class JobCrafterDirectoryAddMessage(INetworkMessage):
     protocolId = 1829
     listEntry:JobCrafterDirectoryListEntry
     

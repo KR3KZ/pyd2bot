@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ChatCommunityChannelCommunityMessage(NetworkMessage):
+class ChatCommunityChannelCommunityMessage(INetworkMessage):
     protocolId = 9671
     communityId:int
     

@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ChangeThemeRequestMessage(NetworkMessage):
+class ChangeThemeRequestMessage(INetworkMessage):
     protocolId = 8958
     theme:int
     

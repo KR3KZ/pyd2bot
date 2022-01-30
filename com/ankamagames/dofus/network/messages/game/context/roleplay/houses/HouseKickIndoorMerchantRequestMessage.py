@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class HouseKickIndoorMerchantRequestMessage(NetworkMessage):
+class HouseKickIndoorMerchantRequestMessage(INetworkMessage):
     protocolId = 8862
     cellId:int
     

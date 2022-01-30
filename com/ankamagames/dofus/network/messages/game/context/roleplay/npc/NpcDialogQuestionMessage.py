@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class NpcDialogQuestionMessage(NetworkMessage):
+class NpcDialogQuestionMessage(INetworkMessage):
     protocolId = 8384
     messageId:int
     dialogParams:str

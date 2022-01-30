@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.paddock.PaddockInformationsForSell import PaddockInformationsForSell
 
 
-class PaddockToSellListMessage(NetworkMessage):
+class PaddockToSellListMessage(INetworkMessage):
     protocolId = 3451
     pageIndex:int
     totalPage:int

@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class HouseSellRequestMessage(NetworkMessage):
+class HouseSellRequestMessage(INetworkMessage):
     protocolId = 9330
     instanceId:int
     amount:int

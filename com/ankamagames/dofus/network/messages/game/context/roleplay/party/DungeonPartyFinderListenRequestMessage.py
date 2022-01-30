@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class DungeonPartyFinderListenRequestMessage(NetworkMessage):
+class DungeonPartyFinderListenRequestMessage(INetworkMessage):
     protocolId = 1266
     dungeonId:int
     

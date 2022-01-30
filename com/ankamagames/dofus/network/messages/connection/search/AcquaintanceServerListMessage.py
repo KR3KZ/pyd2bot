@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class AcquaintanceServerListMessage(NetworkMessage):
+class AcquaintanceServerListMessage(INetworkMessage):
     protocolId = 8752
     servers:int
     

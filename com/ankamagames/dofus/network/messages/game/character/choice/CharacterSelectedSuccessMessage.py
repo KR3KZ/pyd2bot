@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.character.choice.CharacterBaseInformations import CharacterBaseInformations
 
 
-class CharacterSelectedSuccessMessage(NetworkMessage):
+class CharacterSelectedSuccessMessage(INetworkMessage):
     protocolId = 9833
     infos:CharacterBaseInformations
     isCollectingStats:bool

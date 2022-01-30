@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class FriendSetWarnOnConnectionMessage(NetworkMessage):
+class FriendSetWarnOnConnectionMessage(INetworkMessage):
     protocolId = 6228
     enable:bool
     

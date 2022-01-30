@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.mount.MountClientData import MountClientData
 
 
-class ExchangeMountsStableAddMessage(NetworkMessage):
+class ExchangeMountsStableAddMessage(INetworkMessage):
     protocolId = 8697
     mountDescription:MountClientData
     

@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameFightOptionStateUpdateMessage(NetworkMessage):
+class GameFightOptionStateUpdateMessage(INetworkMessage):
     protocolId = 4608
     fightId:int
     teamId:int

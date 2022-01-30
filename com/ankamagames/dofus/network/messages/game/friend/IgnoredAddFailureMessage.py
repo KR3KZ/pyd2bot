@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class IgnoredAddFailureMessage(NetworkMessage):
+class IgnoredAddFailureMessage(INetworkMessage):
     protocolId = 4052
     reason:int
     

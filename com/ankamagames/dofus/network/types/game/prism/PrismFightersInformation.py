@@ -1,10 +1,10 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.fight.ProtectedEntityWaitingForHelpInfo import ProtectedEntityWaitingForHelpInfo
 from com.ankamagames.dofus.network.types.game.character.CharacterMinimalPlusLookInformations import CharacterMinimalPlusLookInformations
 from com.ankamagames.dofus.network.types.game.character.CharacterMinimalPlusLookInformations import CharacterMinimalPlusLookInformations
 
 
-class PrismFightersInformation(NetworkMessage):
+class PrismFightersInformation(INetworkMessage):
     protocolId = 8909
     subAreaId:int
     waitingForHelpInfo:ProtectedEntityWaitingForHelpInfo

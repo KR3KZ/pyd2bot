@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class UpdateMapPlayersAgressableStatusMessage(NetworkMessage):
+class UpdateMapPlayersAgressableStatusMessage(INetworkMessage):
     protocolId = 3658
     playerIds:int
     enable:int

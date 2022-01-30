@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameRolePlaySpellAnimMessage(NetworkMessage):
+class GameRolePlaySpellAnimMessage(INetworkMessage):
     protocolId = 8430
     casterId:int
     targetCellId:int

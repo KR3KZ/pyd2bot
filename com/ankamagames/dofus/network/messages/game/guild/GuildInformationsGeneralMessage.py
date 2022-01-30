@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GuildInformationsGeneralMessage(NetworkMessage):
+class GuildInformationsGeneralMessage(INetworkMessage):
     protocolId = 8015
     abandonnedPaddock:bool
     level:int

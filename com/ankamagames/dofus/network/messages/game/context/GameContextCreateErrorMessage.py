@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameContextCreateErrorMessage(NetworkMessage):
+class GameContextCreateErrorMessage(INetworkMessage):
     protocolId = 5698
     
     

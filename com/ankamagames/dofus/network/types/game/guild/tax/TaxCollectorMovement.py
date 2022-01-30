@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.guild.tax.TaxCollectorBasicInformations import TaxCollectorBasicInformations
 
 
-class TaxCollectorMovement(NetworkMessage):
+class TaxCollectorMovement(INetworkMessage):
     protocolId = 6775
     movementType:int
     basicInfos:TaxCollectorBasicInformations

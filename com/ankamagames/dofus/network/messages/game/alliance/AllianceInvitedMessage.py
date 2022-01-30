@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.context.roleplay.BasicNamedAllianceInformations import BasicNamedAllianceInformations
 
 
-class AllianceInvitedMessage(NetworkMessage):
+class AllianceInvitedMessage(INetworkMessage):
     protocolId = 6009
     recruterId:int
     recruterName:str

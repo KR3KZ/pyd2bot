@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class SequenceNumberMessage(NetworkMessage):
+class SequenceNumberMessage(INetworkMessage):
     protocolId = 1059
     number:int
     

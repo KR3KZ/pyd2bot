@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.guild.GuildMember import GuildMember
 
 
-class GuildInformationsMembersMessage(NetworkMessage):
+class GuildInformationsMembersMessage(INetworkMessage):
     protocolId = 3627
     members:GuildMember
     

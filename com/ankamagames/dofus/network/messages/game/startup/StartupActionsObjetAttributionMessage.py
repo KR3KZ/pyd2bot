@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class StartupActionsObjetAttributionMessage(NetworkMessage):
+class StartupActionsObjetAttributionMessage(INetworkMessage):
     protocolId = 8408
     actionId:int
     characterId:int

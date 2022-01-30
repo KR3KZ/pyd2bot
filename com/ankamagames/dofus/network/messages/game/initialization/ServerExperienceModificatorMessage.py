@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ServerExperienceModificatorMessage(NetworkMessage):
+class ServerExperienceModificatorMessage(INetworkMessage):
     protocolId = 7180
     experiencePercent:int
     

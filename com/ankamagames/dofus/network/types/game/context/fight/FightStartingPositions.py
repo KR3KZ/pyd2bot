@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class FightStartingPositions(NetworkMessage):
+class FightStartingPositions(INetworkMessage):
     protocolId = 9707
     positionsForChallengers:int
     positionsForDefenders:int

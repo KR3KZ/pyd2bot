@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class KnownZaapListMessage(NetworkMessage):
+class KnownZaapListMessage(INetworkMessage):
     protocolId = 4096
     destinations:int
     

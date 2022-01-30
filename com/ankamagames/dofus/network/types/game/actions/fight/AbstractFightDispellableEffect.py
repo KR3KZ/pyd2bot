@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class AbstractFightDispellableEffect(NetworkMessage):
+class AbstractFightDispellableEffect(INetworkMessage):
     protocolId = 1657
     uid:int
     targetId:int

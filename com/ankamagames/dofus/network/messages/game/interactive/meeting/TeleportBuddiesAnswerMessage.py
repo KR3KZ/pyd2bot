@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class TeleportBuddiesAnswerMessage(NetworkMessage):
+class TeleportBuddiesAnswerMessage(INetworkMessage):
     protocolId = 3499
     accept:bool
     

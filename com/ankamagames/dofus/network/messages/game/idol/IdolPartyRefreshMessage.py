@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.idol.PartyIdol import PartyIdol
 
 
-class IdolPartyRefreshMessage(NetworkMessage):
+class IdolPartyRefreshMessage(INetworkMessage):
     protocolId = 7517
     partyIdol:PartyIdol
     

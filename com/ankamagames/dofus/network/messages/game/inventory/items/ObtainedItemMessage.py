@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ObtainedItemMessage(NetworkMessage):
+class ObtainedItemMessage(INetworkMessage):
     protocolId = 4201
     genericId:int
     baseQuantity:int

@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class HavenBagPermissionsUpdateMessage(NetworkMessage):
+class HavenBagPermissionsUpdateMessage(INetworkMessage):
     protocolId = 3186
     permissions:int
     

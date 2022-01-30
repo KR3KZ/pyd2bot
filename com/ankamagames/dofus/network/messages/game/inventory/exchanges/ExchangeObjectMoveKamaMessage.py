@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ExchangeObjectMoveKamaMessage(NetworkMessage):
+class ExchangeObjectMoveKamaMessage(INetworkMessage):
     protocolId = 427
     quantity:int
     

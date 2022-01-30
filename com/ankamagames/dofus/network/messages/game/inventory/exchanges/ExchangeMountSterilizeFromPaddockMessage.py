@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ExchangeMountSterilizeFromPaddockMessage(NetworkMessage):
+class ExchangeMountSterilizeFromPaddockMessage(INetworkMessage):
     protocolId = 2234
     name:str
     worldX:int

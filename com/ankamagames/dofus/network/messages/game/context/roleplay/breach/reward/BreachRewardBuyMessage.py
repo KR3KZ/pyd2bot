@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class BreachRewardBuyMessage(NetworkMessage):
+class BreachRewardBuyMessage(INetworkMessage):
     protocolId = 2995
     id:int
     

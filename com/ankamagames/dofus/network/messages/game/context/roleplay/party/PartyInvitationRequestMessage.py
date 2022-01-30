@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.common.AbstractPlayerSearchInformation import AbstractPlayerSearchInformation
 
 
-class PartyInvitationRequestMessage(NetworkMessage):
+class PartyInvitationRequestMessage(INetworkMessage):
     protocolId = 6419
     target:AbstractPlayerSearchInformation
     

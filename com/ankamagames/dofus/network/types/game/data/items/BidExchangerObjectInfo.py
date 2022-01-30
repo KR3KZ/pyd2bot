@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.data.items.effects.ObjectEffect import ObjectEffect
 
 
-class BidExchangerObjectInfo(NetworkMessage):
+class BidExchangerObjectInfo(INetworkMessage):
     protocolId = 461
     objectUID:int
     objectGID:int

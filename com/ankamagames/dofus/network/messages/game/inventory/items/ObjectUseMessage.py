@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ObjectUseMessage(NetworkMessage):
+class ObjectUseMessage(INetworkMessage):
     protocolId = 3065
     objectUID:int
     

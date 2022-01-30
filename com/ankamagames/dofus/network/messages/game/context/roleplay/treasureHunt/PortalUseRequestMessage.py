@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class PortalUseRequestMessage(NetworkMessage):
+class PortalUseRequestMessage(INetworkMessage):
     protocolId = 1831
     portalId:int
     

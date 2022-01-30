@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class BreachCharactersMessage(NetworkMessage):
+class BreachCharactersMessage(INetworkMessage):
     protocolId = 6300
     characters:int
     

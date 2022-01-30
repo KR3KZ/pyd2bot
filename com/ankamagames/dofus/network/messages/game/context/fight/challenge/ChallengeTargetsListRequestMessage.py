@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ChallengeTargetsListRequestMessage(NetworkMessage):
+class ChallengeTargetsListRequestMessage(INetworkMessage):
     protocolId = 8411
     challengeId:int
     

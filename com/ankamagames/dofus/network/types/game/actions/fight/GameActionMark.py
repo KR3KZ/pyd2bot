@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.actions.fight.GameActionMarkedCell import GameActionMarkedCell
 
 
-class GameActionMark(NetworkMessage):
+class GameActionMark(INetworkMessage):
     protocolId = 158
     markAuthorId:int
     markTeamId:int

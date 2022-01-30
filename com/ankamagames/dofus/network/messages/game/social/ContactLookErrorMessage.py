@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ContactLookErrorMessage(NetworkMessage):
+class ContactLookErrorMessage(INetworkMessage):
     protocolId = 9873
     requestId:int
     

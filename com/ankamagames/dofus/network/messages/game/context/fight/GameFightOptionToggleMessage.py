@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameFightOptionToggleMessage(NetworkMessage):
+class GameFightOptionToggleMessage(INetworkMessage):
     protocolId = 2382
     option:int
     

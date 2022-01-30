@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.context.roleplay.job.DecraftedItemStackInfo import DecraftedItemStackInfo
 
 
-class DecraftResultMessage(NetworkMessage):
+class DecraftResultMessage(INetworkMessage):
     protocolId = 7257
     results:DecraftedItemStackInfo
     

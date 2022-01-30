@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ExchangeSellMessage(NetworkMessage):
+class ExchangeSellMessage(INetworkMessage):
     protocolId = 5196
     objectToSellId:int
     quantity:int

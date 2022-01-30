@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class SellerBuyerDescriptor(NetworkMessage):
+class SellerBuyerDescriptor(INetworkMessage):
     protocolId = 5475
     quantities:int
     types:int

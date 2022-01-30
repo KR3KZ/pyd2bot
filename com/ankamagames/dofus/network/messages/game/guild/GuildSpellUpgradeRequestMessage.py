@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GuildSpellUpgradeRequestMessage(NetworkMessage):
+class GuildSpellUpgradeRequestMessage(INetworkMessage):
     protocolId = 8207
     spellId:int
     

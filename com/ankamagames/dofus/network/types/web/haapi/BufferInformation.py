@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class BufferInformation(NetworkMessage):
+class BufferInformation(INetworkMessage):
     protocolId = 3684
     id:int
     amount:int

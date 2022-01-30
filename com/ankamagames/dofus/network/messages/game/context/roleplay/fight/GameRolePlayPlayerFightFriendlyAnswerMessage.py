@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameRolePlayPlayerFightFriendlyAnswerMessage(NetworkMessage):
+class GameRolePlayPlayerFightFriendlyAnswerMessage(INetworkMessage):
     protocolId = 9468
     fightId:int
     accept:bool

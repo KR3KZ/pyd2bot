@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameDataPaddockObjectRemoveMessage(NetworkMessage):
+class GameDataPaddockObjectRemoveMessage(INetworkMessage):
     protocolId = 7808
     cellId:int
     

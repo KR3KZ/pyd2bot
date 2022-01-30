@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class AchievementObjective(NetworkMessage):
+class AchievementObjective(INetworkMessage):
     protocolId = 8917
     id:int
     maxValue:int

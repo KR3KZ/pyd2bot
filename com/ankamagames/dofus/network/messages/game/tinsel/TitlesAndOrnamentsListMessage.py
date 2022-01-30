@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class TitlesAndOrnamentsListMessage(NetworkMessage):
+class TitlesAndOrnamentsListMessage(INetworkMessage):
     protocolId = 6204
     titles:int
     ornaments:int

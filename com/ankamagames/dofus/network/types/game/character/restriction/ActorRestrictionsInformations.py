@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ActorRestrictionsInformations(NetworkMessage):
+class ActorRestrictionsInformations(INetworkMessage):
     protocolId = 8982
     cantBeAggressed:bool
     cantBeChallenged:bool

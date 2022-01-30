@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class SubscriptionZoneMessage(NetworkMessage):
+class SubscriptionZoneMessage(INetworkMessage):
     protocolId = 3082
     active:bool
     

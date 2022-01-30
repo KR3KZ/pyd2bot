@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class TaxCollectorErrorMessage(NetworkMessage):
+class TaxCollectorErrorMessage(INetworkMessage):
     protocolId = 4836
     reason:int
     

@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class AchievementDetailedListRequestMessage(NetworkMessage):
+class AchievementDetailedListRequestMessage(INetworkMessage):
     protocolId = 5957
     categoryId:int
     

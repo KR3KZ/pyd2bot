@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class HavenBagRoomPreviewInformation(NetworkMessage):
+class HavenBagRoomPreviewInformation(INetworkMessage):
     protocolId = 8913
     roomId:int
     themeId:int

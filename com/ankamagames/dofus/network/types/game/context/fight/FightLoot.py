@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class FightLoot(NetworkMessage):
+class FightLoot(INetworkMessage):
     protocolId = 7224
     objects:int
     kamas:int

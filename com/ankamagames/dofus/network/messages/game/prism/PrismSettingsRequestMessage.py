@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class PrismSettingsRequestMessage(NetworkMessage):
+class PrismSettingsRequestMessage(INetworkMessage):
     protocolId = 8342
     subAreaId:int
     startDefenseTime:int

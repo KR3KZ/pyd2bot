@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GuildLevelUpMessage(NetworkMessage):
+class GuildLevelUpMessage(INetworkMessage):
     protocolId = 7669
     newLevel:int
     

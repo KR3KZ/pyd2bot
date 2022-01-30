@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class TeleportBuddiesRequestedMessage(NetworkMessage):
+class TeleportBuddiesRequestedMessage(INetworkMessage):
     protocolId = 9435
     dungeonId:int
     inviterId:int

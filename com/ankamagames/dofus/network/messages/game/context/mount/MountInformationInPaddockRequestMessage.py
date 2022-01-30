@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class MountInformationInPaddockRequestMessage(NetworkMessage):
+class MountInformationInPaddockRequestMessage(INetworkMessage):
     protocolId = 6636
     mapRideId:int
     

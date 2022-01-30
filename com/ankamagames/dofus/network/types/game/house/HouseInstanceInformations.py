@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.common.AccountTagInformation import AccountTagInformation
 
 
-class HouseInstanceInformations(NetworkMessage):
+class HouseInstanceInformations(INetworkMessage):
     protocolId = 3243
     instanceId:int
     ownerTag:AccountTagInformation

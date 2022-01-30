@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameFightStartingMessage(NetworkMessage):
+class GameFightStartingMessage(INetworkMessage):
     protocolId = 2951
     fightType:int
     fightId:int

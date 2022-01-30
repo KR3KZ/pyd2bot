@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameRolePlayFightRequestCanceledMessage(NetworkMessage):
+class GameRolePlayFightRequestCanceledMessage(INetworkMessage):
     protocolId = 4478
     fightId:int
     sourceId:int

@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class PrismFightSwapRequestMessage(NetworkMessage):
+class PrismFightSwapRequestMessage(INetworkMessage):
     protocolId = 4070
     subAreaId:int
     targetId:int

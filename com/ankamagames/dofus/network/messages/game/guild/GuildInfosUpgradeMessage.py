@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GuildInfosUpgradeMessage(NetworkMessage):
+class GuildInfosUpgradeMessage(INetworkMessage):
     protocolId = 2887
     maxTaxCollectorsCount:int
     taxCollectorsCount:int

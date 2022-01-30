@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameFightTurnReadyRequestMessage(NetworkMessage):
+class GameFightTurnReadyRequestMessage(INetworkMessage):
     protocolId = 4389
     id:int
     

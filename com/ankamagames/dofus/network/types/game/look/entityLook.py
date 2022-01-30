@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.look.SubEntity import SubEntity
 
 
-class EntityLook(NetworkMessage):
+class EntityLook(INetworkMessage):
     protocolId = 9546
     bonesId:int
     skins:int

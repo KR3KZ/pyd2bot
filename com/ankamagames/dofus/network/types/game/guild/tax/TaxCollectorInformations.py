@@ -1,10 +1,10 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.guild.tax.AdditionalTaxCollectorInformations import AdditionalTaxCollectorInformations
 from com.ankamagames.dofus.network.types.game.look.EntityLook import EntityLook
 from com.ankamagames.dofus.network.types.game.guild.tax.TaxCollectorComplementaryInformations import TaxCollectorComplementaryInformations
 
 
-class TaxCollectorInformations(NetworkMessage):
+class TaxCollectorInformations(INetworkMessage):
     protocolId = 3820
     uniqueId:int
     firtNameId:int

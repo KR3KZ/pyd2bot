@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class NpcDialogCreationMessage(NetworkMessage):
+class NpcDialogCreationMessage(INetworkMessage):
     protocolId = 5848
     mapId:int
     npcId:int

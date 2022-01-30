@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ArenaRanking(NetworkMessage):
+class ArenaRanking(INetworkMessage):
     protocolId = 6311
     rank:int
     bestRank:int

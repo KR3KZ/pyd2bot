@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.data.items.ObjectItem import ObjectItem
 
 
-class StorageObjectUpdateMessage(NetworkMessage):
+class StorageObjectUpdateMessage(INetworkMessage):
     protocolId = 728
     object:ObjectItem
     

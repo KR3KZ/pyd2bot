@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameRolePlayArenaRegistrationStatusMessage(NetworkMessage):
+class GameRolePlayArenaRegistrationStatusMessage(INetworkMessage):
     protocolId = 4323
     registered:bool
     step:int

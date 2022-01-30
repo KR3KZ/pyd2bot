@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameFightSpectatePlayerRequestMessage(NetworkMessage):
+class GameFightSpectatePlayerRequestMessage(INetworkMessage):
     protocolId = 9098
     playerId:int
     

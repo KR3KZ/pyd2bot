@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ExchangeWaitingResultMessage(NetworkMessage):
+class ExchangeWaitingResultMessage(INetworkMessage):
     protocolId = 4369
     bwait:bool
     

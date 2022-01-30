@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class LivingObjectDissociateMessage(NetworkMessage):
+class LivingObjectDissociateMessage(INetworkMessage):
     protocolId = 9254
     livingUID:int
     livingPosition:int

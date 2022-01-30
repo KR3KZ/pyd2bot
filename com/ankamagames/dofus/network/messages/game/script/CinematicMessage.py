@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class CinematicMessage(NetworkMessage):
+class CinematicMessage(INetworkMessage):
     protocolId = 5054
     cinematicId:int
     

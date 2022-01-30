@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class TeleportToBuddyOfferMessage(NetworkMessage):
+class TeleportToBuddyOfferMessage(INetworkMessage):
     protocolId = 4009
     dungeonId:int
     buddyId:int

@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class AccountCapabilitiesMessage(NetworkMessage):
+class AccountCapabilitiesMessage(INetworkMessage):
     protocolId = 8644
     accountId:int
     breedsVisible:int

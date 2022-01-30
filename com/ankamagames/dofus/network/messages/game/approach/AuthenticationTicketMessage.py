@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class AuthenticationTicketMessage(NetworkMessage):
+class AuthenticationTicketMessage(INetworkMessage):
     protocolId = 9517
     lang:str
     ticket:str

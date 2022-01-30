@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ExchangeObjectMessage(NetworkMessage):
+class ExchangeObjectMessage(INetworkMessage):
     protocolId = 1966
     remote:bool
     

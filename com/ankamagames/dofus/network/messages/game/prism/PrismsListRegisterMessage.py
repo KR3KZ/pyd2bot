@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class PrismsListRegisterMessage(NetworkMessage):
+class PrismsListRegisterMessage(INetworkMessage):
     protocolId = 4105
     listen:int
     

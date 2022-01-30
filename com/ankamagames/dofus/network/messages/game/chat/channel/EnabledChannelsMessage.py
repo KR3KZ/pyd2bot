@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class EnabledChannelsMessage(NetworkMessage):
+class EnabledChannelsMessage(INetworkMessage):
     protocolId = 9261
     channels:int
     disallowed:int

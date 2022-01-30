@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class UpdateLifePointsMessage(NetworkMessage):
+class UpdateLifePointsMessage(INetworkMessage):
     protocolId = 1857
     lifePoints:int
     maxLifePoints:int

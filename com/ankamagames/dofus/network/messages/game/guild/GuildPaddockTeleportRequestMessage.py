@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GuildPaddockTeleportRequestMessage(NetworkMessage):
+class GuildPaddockTeleportRequestMessage(INetworkMessage):
     protocolId = 7914
     paddockId:int
     

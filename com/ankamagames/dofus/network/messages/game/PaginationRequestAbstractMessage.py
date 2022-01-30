@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class PaginationRequestAbstractMessage(NetworkMessage):
+class PaginationRequestAbstractMessage(INetworkMessage):
     protocolId = 789
     offset:int
     count:int

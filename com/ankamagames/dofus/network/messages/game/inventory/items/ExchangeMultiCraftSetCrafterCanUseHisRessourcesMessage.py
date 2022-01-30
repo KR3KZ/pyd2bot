@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ExchangeMultiCraftSetCrafterCanUseHisRessourcesMessage(NetworkMessage):
+class ExchangeMultiCraftSetCrafterCanUseHisRessourcesMessage(INetworkMessage):
     protocolId = 4258
     allow:bool
     

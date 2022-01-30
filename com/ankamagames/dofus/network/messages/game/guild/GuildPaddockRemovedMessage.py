@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GuildPaddockRemovedMessage(NetworkMessage):
+class GuildPaddockRemovedMessage(INetworkMessage):
     protocolId = 9960
     paddockId:int
     

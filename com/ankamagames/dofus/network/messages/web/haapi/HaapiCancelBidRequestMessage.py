@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class HaapiCancelBidRequestMessage(NetworkMessage):
+class HaapiCancelBidRequestMessage(INetworkMessage):
     protocolId = 3479
     id:int
     type:int

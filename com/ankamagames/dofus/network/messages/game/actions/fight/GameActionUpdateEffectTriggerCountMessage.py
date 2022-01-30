@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.context.fight.GameFightEffectTriggerCount import GameFightEffectTriggerCount
 
 
-class GameActionUpdateEffectTriggerCountMessage(NetworkMessage):
+class GameActionUpdateEffectTriggerCountMessage(INetworkMessage):
     protocolId = 6461
     targetIds:GameFightEffectTriggerCount
     

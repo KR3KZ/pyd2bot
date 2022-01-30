@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class CheckIntegrityMessage(NetworkMessage):
+class CheckIntegrityMessage(INetworkMessage):
     protocolId = 1296
     data:int
     

@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class NicknameChoiceRequestMessage(NetworkMessage):
+class NicknameChoiceRequestMessage(INetworkMessage):
     protocolId = 3297
     nickname:str
     

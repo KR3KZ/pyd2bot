@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class WarnOnPermaDeathMessage(NetworkMessage):
+class WarnOnPermaDeathMessage(INetworkMessage):
     protocolId = 9760
     enable:bool
     

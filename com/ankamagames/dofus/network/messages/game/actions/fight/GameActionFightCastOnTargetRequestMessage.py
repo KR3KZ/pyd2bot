@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameActionFightCastOnTargetRequestMessage(NetworkMessage):
+class GameActionFightCastOnTargetRequestMessage(INetworkMessage):
     protocolId = 8001
     spellId:int
     targetId:int

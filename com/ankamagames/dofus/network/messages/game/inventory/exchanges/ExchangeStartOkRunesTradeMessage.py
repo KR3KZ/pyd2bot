@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ExchangeStartOkRunesTradeMessage(NetworkMessage):
+class ExchangeStartOkRunesTradeMessage(INetworkMessage):
     protocolId = 1847
     
     

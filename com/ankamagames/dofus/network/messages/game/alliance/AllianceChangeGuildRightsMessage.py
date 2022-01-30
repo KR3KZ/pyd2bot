@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class AllianceChangeGuildRightsMessage(NetworkMessage):
+class AllianceChangeGuildRightsMessage(INetworkMessage):
     protocolId = 8453
     guildId:int
     rights:int

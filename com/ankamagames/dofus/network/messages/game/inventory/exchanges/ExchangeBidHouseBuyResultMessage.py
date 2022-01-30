@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ExchangeBidHouseBuyResultMessage(NetworkMessage):
+class ExchangeBidHouseBuyResultMessage(INetworkMessage):
     protocolId = 3743
     uid:int
     bought:bool

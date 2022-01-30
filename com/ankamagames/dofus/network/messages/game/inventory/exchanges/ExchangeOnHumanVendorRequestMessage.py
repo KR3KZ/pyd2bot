@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ExchangeOnHumanVendorRequestMessage(NetworkMessage):
+class ExchangeOnHumanVendorRequestMessage(INetworkMessage):
     protocolId = 4359
     humanVendorId:int
     humanVendorCell:int

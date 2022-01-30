@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class PresetDeleteResultMessage(NetworkMessage):
+class PresetDeleteResultMessage(INetworkMessage):
     protocolId = 7560
     presetId:int
     code:int

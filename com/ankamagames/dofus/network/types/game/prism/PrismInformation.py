@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class PrismInformation(NetworkMessage):
+class PrismInformation(INetworkMessage):
     protocolId = 6060
     typeId:int
     state:int

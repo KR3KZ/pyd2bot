@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.interactive.MapObstacle import MapObstacle
 
 
-class MapObstacleUpdateMessage(NetworkMessage):
+class MapObstacleUpdateMessage(INetworkMessage):
     protocolId = 9984
     obstacles:MapObstacle
     

@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class TrustCertificate(NetworkMessage):
+class TrustCertificate(INetworkMessage):
     protocolId = 8866
     id:int
     hash:str

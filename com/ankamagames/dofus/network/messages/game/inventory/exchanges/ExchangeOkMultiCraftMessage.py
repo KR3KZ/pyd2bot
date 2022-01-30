@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ExchangeOkMultiCraftMessage(NetworkMessage):
+class ExchangeOkMultiCraftMessage(INetworkMessage):
     protocolId = 2595
     initiatorId:int
     otherId:int

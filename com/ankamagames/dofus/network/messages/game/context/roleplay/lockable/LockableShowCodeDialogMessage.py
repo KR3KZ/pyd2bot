@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class LockableShowCodeDialogMessage(NetworkMessage):
+class LockableShowCodeDialogMessage(INetworkMessage):
     protocolId = 3045
     changeOrUse:bool
     codeSize:int

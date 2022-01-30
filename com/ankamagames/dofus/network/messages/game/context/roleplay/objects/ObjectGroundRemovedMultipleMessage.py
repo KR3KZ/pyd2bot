@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ObjectGroundRemovedMultipleMessage(NetworkMessage):
+class ObjectGroundRemovedMultipleMessage(INetworkMessage):
     protocolId = 6993
     cells:int
     

@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.context.fight.FightLoot import FightLoot
 
 
-class FightResultListEntry(NetworkMessage):
+class FightResultListEntry(INetworkMessage):
     protocolId = 6627
     outcome:int
     wave:int

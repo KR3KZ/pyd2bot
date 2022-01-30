@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GuestModeMessage(NetworkMessage):
+class GuestModeMessage(INetworkMessage):
     protocolId = 9430
     active:bool
     

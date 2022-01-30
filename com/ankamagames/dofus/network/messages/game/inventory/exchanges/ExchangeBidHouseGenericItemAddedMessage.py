@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ExchangeBidHouseGenericItemAddedMessage(NetworkMessage):
+class ExchangeBidHouseGenericItemAddedMessage(INetworkMessage):
     protocolId = 7602
     objGenericId:int
     

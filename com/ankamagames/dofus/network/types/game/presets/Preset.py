@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class Preset(NetworkMessage):
+class Preset(INetworkMessage):
     protocolId = 6024
     id:int
     

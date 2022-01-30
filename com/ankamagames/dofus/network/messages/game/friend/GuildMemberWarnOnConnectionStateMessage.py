@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GuildMemberWarnOnConnectionStateMessage(NetworkMessage):
+class GuildMemberWarnOnConnectionStateMessage(INetworkMessage):
     protocolId = 2986
     enable:bool
     

@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameFightNewRoundMessage(NetworkMessage):
+class GameFightNewRoundMessage(INetworkMessage):
     protocolId = 1656
     roundNumber:int
     

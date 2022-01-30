@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class MountSterilizedMessage(NetworkMessage):
+class MountSterilizedMessage(INetworkMessage):
     protocolId = 3777
     mountId:int
     

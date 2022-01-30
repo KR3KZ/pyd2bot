@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameFightTurnListMessage(NetworkMessage):
+class GameFightTurnListMessage(INetworkMessage):
     protocolId = 7238
     ids:int
     deadsIds:int

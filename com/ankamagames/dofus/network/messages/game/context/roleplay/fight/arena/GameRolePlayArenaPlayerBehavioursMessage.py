@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameRolePlayArenaPlayerBehavioursMessage(NetworkMessage):
+class GameRolePlayArenaPlayerBehavioursMessage(INetworkMessage):
     protocolId = 92
     flags:str
     sanctions:str

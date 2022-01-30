@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.idol.Idol import Idol
 
 
-class GameFightStartMessage(NetworkMessage):
+class GameFightStartMessage(INetworkMessage):
     protocolId = 5357
     idols:Idol
     

@@ -1,10 +1,10 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.look.EntityLook import EntityLook
 from com.ankamagames.dofus.network.types.game.character.status.PlayerStatus import PlayerStatus
 from com.ankamagames.dofus.network.types.game.context.roleplay.party.entity.PartyEntityBaseInformation import PartyEntityBaseInformation
 
 
-class PartyGuestInformations(NetworkMessage):
+class PartyGuestInformations(INetworkMessage):
     protocolId = 1057
     guestId:int
     hostId:int

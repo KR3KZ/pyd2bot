@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class OrnamentSelectRequestMessage(NetworkMessage):
+class OrnamentSelectRequestMessage(INetworkMessage):
     protocolId = 4149
     ornamentId:int
     

@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ZaapRespawnUpdatedMessage(NetworkMessage):
+class ZaapRespawnUpdatedMessage(INetworkMessage):
     protocolId = 2988
     mapId:int
     

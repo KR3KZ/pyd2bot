@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class BasicWhoAmIRequestMessage(NetworkMessage):
+class BasicWhoAmIRequestMessage(INetworkMessage):
     protocolId = 1281
     verbose:bool
     

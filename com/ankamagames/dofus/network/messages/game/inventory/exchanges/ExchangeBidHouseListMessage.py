@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ExchangeBidHouseListMessage(NetworkMessage):
+class ExchangeBidHouseListMessage(INetworkMessage):
     protocolId = 2675
     id:int
     follow:bool

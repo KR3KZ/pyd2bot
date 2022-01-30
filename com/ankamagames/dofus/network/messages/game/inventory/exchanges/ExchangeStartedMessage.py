@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ExchangeStartedMessage(NetworkMessage):
+class ExchangeStartedMessage(INetworkMessage):
     protocolId = 8540
     exchangeType:int
     

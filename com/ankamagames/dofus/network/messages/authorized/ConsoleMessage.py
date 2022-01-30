@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ConsoleMessage(NetworkMessage):
+class ConsoleMessage(INetworkMessage):
     protocolId = 3282
     type:int
     content:str

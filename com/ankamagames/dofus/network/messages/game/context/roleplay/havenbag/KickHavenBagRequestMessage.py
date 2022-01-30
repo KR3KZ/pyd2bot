@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class KickHavenBagRequestMessage(NetworkMessage):
+class KickHavenBagRequestMessage(INetworkMessage):
     protocolId = 188
     guestId:int
     

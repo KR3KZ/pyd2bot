@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class CharacterSelectionMessage(NetworkMessage):
+class CharacterSelectionMessage(INetworkMessage):
     protocolId = 3123
     id:int
     

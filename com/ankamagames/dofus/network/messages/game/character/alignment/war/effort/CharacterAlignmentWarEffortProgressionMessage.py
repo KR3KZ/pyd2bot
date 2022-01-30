@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class CharacterAlignmentWarEffortProgressionMessage(NetworkMessage):
+class CharacterAlignmentWarEffortProgressionMessage(INetworkMessage):
     protocolId = 7324
     alignmentWarEffortDailyLimit:int
     alignmentWarEffortDailyDonation:int

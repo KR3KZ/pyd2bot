@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class HouseToSellFilterMessage(NetworkMessage):
+class HouseToSellFilterMessage(INetworkMessage):
     protocolId = 3571
     areaId:int
     atLeastNbRoom:int

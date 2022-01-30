@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class RecycledItem(NetworkMessage):
+class RecycledItem(INetworkMessage):
     protocolId = 161
     id:int
     qty:int

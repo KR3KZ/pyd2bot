@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class SetEnableAVARequestMessage(NetworkMessage):
+class SetEnableAVARequestMessage(INetworkMessage):
     protocolId = 3626
     enable:bool
     

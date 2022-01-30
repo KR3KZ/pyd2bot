@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameMapMovementCancelMessage(NetworkMessage):
+class GameMapMovementCancelMessage(INetworkMessage):
     protocolId = 4409
     cellId:int
     

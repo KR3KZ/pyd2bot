@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class MountInformationsForPaddock(NetworkMessage):
+class MountInformationsForPaddock(INetworkMessage):
     protocolId = 1513
     modelId:int
     name:str

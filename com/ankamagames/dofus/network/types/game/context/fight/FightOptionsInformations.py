@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class FightOptionsInformations(NetworkMessage):
+class FightOptionsInformations(INetworkMessage):
     protocolId = 5639
     isSecret:bool
     isRestrictedToPartyOnly:bool

@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class PresetUseResultMessage(NetworkMessage):
+class PresetUseResultMessage(INetworkMessage):
     protocolId = 8808
     presetId:int
     code:int

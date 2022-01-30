@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class PrismSubareaEmptyInfo(NetworkMessage):
+class PrismSubareaEmptyInfo(INetworkMessage):
     protocolId = 6884
     subAreaId:int
     allianceId:int

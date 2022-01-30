@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ExchangeBidHouseInListRemovedMessage(NetworkMessage):
+class ExchangeBidHouseInListRemovedMessage(INetworkMessage):
     protocolId = 3610
     itemUID:int
     objectGID:int

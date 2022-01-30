@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class MountRidingMessage(NetworkMessage):
+class MountRidingMessage(INetworkMessage):
     protocolId = 6231
     isRiding:bool
     isAutopilot:bool

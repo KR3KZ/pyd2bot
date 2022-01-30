@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class DebugHighlightCellsMessage(NetworkMessage):
+class DebugHighlightCellsMessage(INetworkMessage):
     protocolId = 307
     color:int
     cells:int

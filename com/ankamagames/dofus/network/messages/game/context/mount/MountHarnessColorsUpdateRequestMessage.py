@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class MountHarnessColorsUpdateRequestMessage(NetworkMessage):
+class MountHarnessColorsUpdateRequestMessage(INetworkMessage):
     protocolId = 7947
     useHarnessColors:bool
     

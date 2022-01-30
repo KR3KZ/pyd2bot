@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.character.characteristic.CharacterCharacteristics import CharacterCharacteristics
 
 
-class GameFightCharacteristics(NetworkMessage):
+class GameFightCharacteristics(INetworkMessage):
     protocolId = 7425
     characteristics:CharacterCharacteristics
     summoner:int

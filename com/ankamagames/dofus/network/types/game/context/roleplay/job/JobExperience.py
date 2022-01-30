@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class JobExperience(NetworkMessage):
+class JobExperience(INetworkMessage):
     protocolId = 1579
     jobId:int
     jobLevel:int

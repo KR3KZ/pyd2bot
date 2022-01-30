@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GuildPlayerApplicationAbstractMessage(NetworkMessage):
+class GuildPlayerApplicationAbstractMessage(INetworkMessage):
     protocolId = 5896
     
     

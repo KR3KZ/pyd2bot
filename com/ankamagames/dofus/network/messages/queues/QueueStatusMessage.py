@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class QueueStatusMessage(NetworkMessage):
+class QueueStatusMessage(INetworkMessage):
     protocolId = 2197
     position:int
     total:int

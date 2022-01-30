@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.context.ActorOrientation import ActorOrientation
 
 
-class GameMapChangeOrientationMessage(NetworkMessage):
+class GameMapChangeOrientationMessage(INetworkMessage):
     protocolId = 595
     orientation:ActorOrientation
     

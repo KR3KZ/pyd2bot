@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ProtectedEntityWaitingForHelpInfo(NetworkMessage):
+class ProtectedEntityWaitingForHelpInfo(INetworkMessage):
     protocolId = 2847
     timeLeftBeforeFight:int
     waitTimeForPlacement:int

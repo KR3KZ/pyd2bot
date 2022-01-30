@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class LivingObjectMessageMessage(NetworkMessage):
+class LivingObjectMessageMessage(INetworkMessage):
     protocolId = 2593
     msgId:int
     timeStamp:int

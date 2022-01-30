@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class HaapiShopApiKeyRequestMessage(NetworkMessage):
+class HaapiShopApiKeyRequestMessage(INetworkMessage):
     protocolId = 4578
     
     

@@ -3,9 +3,11 @@ from types import FunctionType
 from whistle import Event, EventDispatcher
 from AS3ToPythonConverter.iServerConnection import IServerConnection
 from com.ankamagames.jerakine.messages.message import Message
+from com.ankamagames.jerakine.messages.messageHandler import MessageHandler
 from com.ankamagames.jerakine.network.events.basicEvent import BasicEvent
 from com.ankamagames.jerakine.network.events.iOErrorEvent import IOErrorEvent
 from com.ankamagames.jerakine.network.events.securityErrorEvent import SecurityErrorEvent
+from com.ankamagames.jerakine.network.iMessagerouter import IMessageRouter
 from com.ankamagames.tubul.interfaces.iEventDispatcher import IEventDispatcher
 logger = logging.getLogger("bot")
 
@@ -64,9 +66,9 @@ class MultiConnection(EventDispatcher):
       return self._connectionCount
    
    def addConnection(self, conn:IServerConnection, id:str) -> None:
-      if self._connectionById[id]:
+      if self._connectionById.get(id):
          self.removeConnection(id)
-      if self._idByConnection[conn]:
+      if self._idByConnection.get(conn):
          self.removeConnection(conn)
       self._connectionById[id] = conn
       self._idByConnection[conn] = id
@@ -184,12 +186,10 @@ class MultiConnection(EventDispatcher):
       self._connectionByMsg[msg] = conn
    
    def onSubConnectionEvent(self, e:Event) -> None:
-      switch(e.type)
-         case Event.CONNECT:
-            ++self._connectionConnectedCount
-            break
-         case Event.CLOSE:
-            --self._connectionConnectedCount
+      if e.type == Event.CONNECT:
+         self._connectionConnectedCount+=1
+      elif e.type == Event.CLOSE:
+         self._connectionConnectedCount-=1
       self._connectionByEvent[e] = e.target
       if hasEventListener(e.type):
          dispatchEvent(e)
@@ -212,5 +212,5 @@ class MessageWatcher(MessageHandler):
       self.conn = conn
 
    def process(self, msg:Message) -> bool:
-      self.watchFunctionType(msg,self.conn)
+      self.watchFunctionType(msg, self.conn)
       return self.handler.process(msg)

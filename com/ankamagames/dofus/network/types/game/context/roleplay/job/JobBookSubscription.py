@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class JobBookSubscription(NetworkMessage):
+class JobBookSubscription(INetworkMessage):
     protocolId = 6658
     jobId:int
     subscribed:bool

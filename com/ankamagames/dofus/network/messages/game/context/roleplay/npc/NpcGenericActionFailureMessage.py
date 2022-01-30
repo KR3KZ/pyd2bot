@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class NpcGenericActionFailureMessage(NetworkMessage):
+class NpcGenericActionFailureMessage(INetworkMessage):
     protocolId = 1901
     
     

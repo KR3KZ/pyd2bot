@@ -1,9 +1,9 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.achievement.AchievementObjective import AchievementObjective
 from com.ankamagames.dofus.network.types.game.achievement.AchievementStartedObjective import AchievementStartedObjective
 
 
-class Achievement(NetworkMessage):
+class Achievement(INetworkMessage):
     protocolId = 8621
     id:int
     finishedObjective:AchievementObjective

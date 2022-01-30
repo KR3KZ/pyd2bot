@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class SpellVariantActivationRequestMessage(NetworkMessage):
+class SpellVariantActivationRequestMessage(INetworkMessage):
     protocolId = 4887
     spellId:int
     

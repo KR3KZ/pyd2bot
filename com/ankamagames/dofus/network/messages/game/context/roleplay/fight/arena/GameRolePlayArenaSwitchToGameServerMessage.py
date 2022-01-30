@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameRolePlayArenaSwitchToGameServerMessage(NetworkMessage):
+class GameRolePlayArenaSwitchToGameServerMessage(INetworkMessage):
     protocolId = 651
     validToken:bool
     ticket:int

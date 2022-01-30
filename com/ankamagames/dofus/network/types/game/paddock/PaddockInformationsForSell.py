@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class PaddockInformationsForSell(NetworkMessage):
+class PaddockInformationsForSell(INetworkMessage):
     protocolId = 1249
     guildOwner:str
     worldX:int

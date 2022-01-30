@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.friend.AcquaintanceInformation import AcquaintanceInformation
 
 
-class AcquaintanceAddedMessage(NetworkMessage):
+class AcquaintanceAddedMessage(INetworkMessage):
     protocolId = 6756
     acquaintanceAdded:AcquaintanceInformation
     

@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GuildFactsRequestMessage(NetworkMessage):
+class GuildFactsRequestMessage(INetworkMessage):
     protocolId = 4628
     guildId:int
     

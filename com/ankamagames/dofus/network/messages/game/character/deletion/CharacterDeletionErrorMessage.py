@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class CharacterDeletionErrorMessage(NetworkMessage):
+class CharacterDeletionErrorMessage(INetworkMessage):
     protocolId = 4473
     reason:int
     

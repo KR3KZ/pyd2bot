@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class AdditionalTaxCollectorInformations(NetworkMessage):
+class AdditionalTaxCollectorInformations(INetworkMessage):
     protocolId = 9432
     collectorCallerName:str
     date:int

@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class NotificationListMessage(NetworkMessage):
+class NotificationListMessage(INetworkMessage):
     protocolId = 7026
     flags:int
     

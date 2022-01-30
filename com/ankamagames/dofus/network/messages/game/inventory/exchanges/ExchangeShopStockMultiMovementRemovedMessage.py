@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ExchangeShopStockMultiMovementRemovedMessage(NetworkMessage):
+class ExchangeShopStockMultiMovementRemovedMessage(INetworkMessage):
     protocolId = 3309
     objectIdList:int
     

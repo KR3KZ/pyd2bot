@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class TeleportOnSameMapMessage(NetworkMessage):
+class TeleportOnSameMapMessage(INetworkMessage):
     protocolId = 9521
     targetId:int
     cellId:int

@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class LockableCodeResultMessage(NetworkMessage):
+class LockableCodeResultMessage(INetworkMessage):
     protocolId = 3222
     result:int
     

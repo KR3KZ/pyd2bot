@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class HouseKickRequestMessage(NetworkMessage):
+class HouseKickRequestMessage(INetworkMessage):
     protocolId = 8499
     id:int
     

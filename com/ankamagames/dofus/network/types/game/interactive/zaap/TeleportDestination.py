@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class TeleportDestination(NetworkMessage):
+class TeleportDestination(INetworkMessage):
     protocolId = 9066
     type:int
     mapId:int

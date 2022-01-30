@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class AnomalyStateMessage(NetworkMessage):
+class AnomalyStateMessage(INetworkMessage):
     protocolId = 4879
     subAreaId:int
     open:bool

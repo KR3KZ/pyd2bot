@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class FriendWarnOnLevelGainStateMessage(NetworkMessage):
+class FriendWarnOnLevelGainStateMessage(INetworkMessage):
     protocolId = 7352
     enable:bool
     

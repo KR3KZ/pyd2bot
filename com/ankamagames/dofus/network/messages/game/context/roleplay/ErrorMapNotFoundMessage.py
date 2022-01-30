@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ErrorMapNotFoundMessage(NetworkMessage):
+class ErrorMapNotFoundMessage(INetworkMessage):
     protocolId = 1147
     mapId:int
     

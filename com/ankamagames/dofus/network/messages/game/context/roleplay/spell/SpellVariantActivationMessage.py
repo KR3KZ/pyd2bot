@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class SpellVariantActivationMessage(NetworkMessage):
+class SpellVariantActivationMessage(INetworkMessage):
     protocolId = 8666
     spellId:int
     result:bool

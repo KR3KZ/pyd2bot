@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GuildApplicationListenMessage(NetworkMessage):
+class GuildApplicationListenMessage(INetworkMessage):
     protocolId = 9375
     listen:bool
     

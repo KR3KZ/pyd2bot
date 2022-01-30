@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.data.items.ObjectItem import ObjectItem
 
 
-class MimicryObjectPreviewMessage(NetworkMessage):
+class MimicryObjectPreviewMessage(INetworkMessage):
     protocolId = 1198
     result:ObjectItem
     

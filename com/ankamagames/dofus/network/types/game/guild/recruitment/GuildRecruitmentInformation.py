@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GuildRecruitmentInformation(NetworkMessage):
+class GuildRecruitmentInformation(INetworkMessage):
     protocolId = 4584
     guildId:int
     recruitmentType:int

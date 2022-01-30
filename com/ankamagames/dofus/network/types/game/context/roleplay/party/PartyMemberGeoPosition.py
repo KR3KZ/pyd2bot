@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class PartyMemberGeoPosition(NetworkMessage):
+class PartyMemberGeoPosition(INetworkMessage):
     protocolId = 6723
     memberId:int
     worldX:int

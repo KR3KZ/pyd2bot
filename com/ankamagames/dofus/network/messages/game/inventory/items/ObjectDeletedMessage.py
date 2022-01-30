@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ObjectDeletedMessage(NetworkMessage):
+class ObjectDeletedMessage(INetworkMessage):
     protocolId = 7574
     objectUID:int
     

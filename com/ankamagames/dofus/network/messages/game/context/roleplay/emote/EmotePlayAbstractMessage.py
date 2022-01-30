@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class EmotePlayAbstractMessage(NetworkMessage):
+class EmotePlayAbstractMessage(INetworkMessage):
     protocolId = 4497
     emoteId:int
     emoteStartTime:int

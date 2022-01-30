@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class TaxCollectorBasicInformations(NetworkMessage):
+class TaxCollectorBasicInformations(INetworkMessage):
     protocolId = 1488
     firstNameId:int
     lastNameId:int

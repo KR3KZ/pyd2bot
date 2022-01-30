@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameFightTurnFinishMessage(NetworkMessage):
+class GameFightTurnFinishMessage(INetworkMessage):
     protocolId = 6692
     isAfk:bool
     

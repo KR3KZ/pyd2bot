@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class SystemMessageDisplayMessage(NetworkMessage):
+class SystemMessageDisplayMessage(INetworkMessage):
     protocolId = 4698
     hangUp:bool
     msgId:int

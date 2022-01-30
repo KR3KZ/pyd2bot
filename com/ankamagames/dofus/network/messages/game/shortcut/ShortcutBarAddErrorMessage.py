@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ShortcutBarAddErrorMessage(NetworkMessage):
+class ShortcutBarAddErrorMessage(INetworkMessage):
     protocolId = 1782
     error:int
     

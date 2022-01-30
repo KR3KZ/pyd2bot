@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class MoodSmileyUpdateMessage(NetworkMessage):
+class MoodSmileyUpdateMessage(INetworkMessage):
     protocolId = 8249
     accountId:int
     playerId:int

@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class EntityDispositionInformations(NetworkMessage):
+class EntityDispositionInformations(INetworkMessage):
     protocolId = 7424
     cellId:int
     direction:int

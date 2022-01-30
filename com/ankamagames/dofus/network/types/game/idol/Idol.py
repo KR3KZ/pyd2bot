@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class Idol(NetworkMessage):
+class Idol(INetworkMessage):
     protocolId = 960
     id:int
     xpBonusPercent:int

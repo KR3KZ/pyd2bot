@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GuildRecruitmentInvalidateMessage(NetworkMessage):
+class GuildRecruitmentInvalidateMessage(INetworkMessage):
     protocolId = 5759
     
     

@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class JobCrafterDirectoryEntryRequestMessage(NetworkMessage):
+class JobCrafterDirectoryEntryRequestMessage(INetworkMessage):
     protocolId = 3858
     playerId:int
     

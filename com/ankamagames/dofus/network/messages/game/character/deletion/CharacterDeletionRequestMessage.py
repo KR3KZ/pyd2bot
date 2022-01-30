@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class CharacterDeletionRequestMessage(NetworkMessage):
+class CharacterDeletionRequestMessage(INetworkMessage):
     protocolId = 8394
     characterId:int
     secretAnswerHash:str

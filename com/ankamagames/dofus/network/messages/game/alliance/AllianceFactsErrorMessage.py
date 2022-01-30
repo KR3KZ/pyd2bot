@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class AllianceFactsErrorMessage(NetworkMessage):
+class AllianceFactsErrorMessage(INetworkMessage):
     protocolId = 8954
     allianceId:int
     

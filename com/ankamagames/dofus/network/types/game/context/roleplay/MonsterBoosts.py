@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class MonsterBoosts(NetworkMessage):
+class MonsterBoosts(INetworkMessage):
     protocolId = 7719
     id:int
     xpBoost:int

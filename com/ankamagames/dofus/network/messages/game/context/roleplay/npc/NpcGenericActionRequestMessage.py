@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class NpcGenericActionRequestMessage(NetworkMessage):
+class NpcGenericActionRequestMessage(INetworkMessage):
     protocolId = 1598
     npcId:int
     npcActionId:int

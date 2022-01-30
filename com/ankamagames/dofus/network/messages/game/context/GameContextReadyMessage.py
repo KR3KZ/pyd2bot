@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameContextReadyMessage(NetworkMessage):
+class GameContextReadyMessage(INetworkMessage):
     protocolId = 912
     mapId:int
     

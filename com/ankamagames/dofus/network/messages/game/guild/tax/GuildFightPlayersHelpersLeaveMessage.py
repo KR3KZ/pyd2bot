@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GuildFightPlayersHelpersLeaveMessage(NetworkMessage):
+class GuildFightPlayersHelpersLeaveMessage(INetworkMessage):
     protocolId = 5749
     fightId:int
     playerId:int

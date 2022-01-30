@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ExchangeCraftCountModifiedMessage(NetworkMessage):
+class ExchangeCraftCountModifiedMessage(INetworkMessage):
     protocolId = 2567
     count:int
     

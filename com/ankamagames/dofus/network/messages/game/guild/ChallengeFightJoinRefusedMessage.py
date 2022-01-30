@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ChallengeFightJoinRefusedMessage(NetworkMessage):
+class ChallengeFightJoinRefusedMessage(INetworkMessage):
     protocolId = 2066
     playerId:int
     reason:int

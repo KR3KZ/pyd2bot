@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ExchangeCraftResultMessage(NetworkMessage):
+class ExchangeCraftResultMessage(INetworkMessage):
     protocolId = 8524
     craftResult:int
     

@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameFightPlacementSwapPositionsOfferMessage(NetworkMessage):
+class GameFightPlacementSwapPositionsOfferMessage(INetworkMessage):
     protocolId = 519
     requestId:int
     requesterId:int

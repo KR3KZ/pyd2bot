@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ObjectEffect(NetworkMessage):
+class ObjectEffect(INetworkMessage):
     protocolId = 5685
     actionId:int
     

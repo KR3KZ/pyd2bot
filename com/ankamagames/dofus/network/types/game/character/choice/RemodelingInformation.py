@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class RemodelingInformation(NetworkMessage):
+class RemodelingInformation(INetworkMessage):
     protocolId = 8002
     name:str
     breed:int

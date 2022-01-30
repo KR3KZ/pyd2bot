@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class LockableStateUpdateAbstractMessage(NetworkMessage):
+class LockableStateUpdateAbstractMessage(INetworkMessage):
     protocolId = 5676
     locked:bool
     

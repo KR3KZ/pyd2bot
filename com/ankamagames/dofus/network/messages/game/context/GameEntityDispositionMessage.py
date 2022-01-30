@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.context.IdentifiedEntityDispositionInformations import IdentifiedEntityDispositionInformations
 
 
-class GameEntityDispositionMessage(NetworkMessage):
+class GameEntityDispositionMessage(INetworkMessage):
     protocolId = 8701
     disposition:IdentifiedEntityDispositionInformations
     

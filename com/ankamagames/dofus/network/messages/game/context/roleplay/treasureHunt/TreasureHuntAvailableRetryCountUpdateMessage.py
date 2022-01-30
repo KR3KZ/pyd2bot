@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class TreasureHuntAvailableRetryCountUpdateMessage(NetworkMessage):
+class TreasureHuntAvailableRetryCountUpdateMessage(INetworkMessage):
     protocolId = 3416
     questType:int
     availableRetryCount:int

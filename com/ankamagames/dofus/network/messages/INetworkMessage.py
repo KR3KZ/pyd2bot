@@ -1,4 +1,4 @@
-class NetworkMessage:
+class INetworkMessage:
     
     
     def __init__(self) -> None:

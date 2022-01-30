@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.character.CharacterMinimalPlusLookInformations import CharacterMinimalPlusLookInformations
 
 
-class PrismFightDefenderAddMessage(NetworkMessage):
+class PrismFightDefenderAddMessage(INetworkMessage):
     protocolId = 58
     subAreaId:int
     fightId:int

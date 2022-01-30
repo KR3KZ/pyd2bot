@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameRolePlayPlayerLifeStatusMessage(NetworkMessage):
+class GameRolePlayPlayerLifeStatusMessage(INetworkMessage):
     protocolId = 7689
     state:int
     phenixMapId:int

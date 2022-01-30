@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GuildVersatileInformations(NetworkMessage):
+class GuildVersatileInformations(INetworkMessage):
     protocolId = 4170
     guildId:int
     leaderId:int

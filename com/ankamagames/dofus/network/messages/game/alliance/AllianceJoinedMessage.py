@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.context.roleplay.AllianceInformations import AllianceInformations
 
 
-class AllianceJoinedMessage(NetworkMessage):
+class AllianceJoinedMessage(INetworkMessage):
     protocolId = 1981
     allianceInfo:AllianceInformations
     enabled:bool

@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameMapMovementMessage(NetworkMessage):
+class GameMapMovementMessage(INetworkMessage):
     protocolId = 1972
     keyMovements:int
     forcedDirection:int

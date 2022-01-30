@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class MountHarnessDissociateRequestMessage(NetworkMessage):
+class MountHarnessDissociateRequestMessage(INetworkMessage):
     protocolId = 9897
     
     

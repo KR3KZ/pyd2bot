@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class UpdateSelfAgressableStatusMessage(NetworkMessage):
+class UpdateSelfAgressableStatusMessage(INetworkMessage):
     protocolId = 4140
     status:int
     probationTime:int

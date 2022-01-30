@@ -1,9 +1,9 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.data.items.ObjectItemQuantityPriceDateEffects import ObjectItemQuantityPriceDateEffects
 from com.ankamagames.dofus.network.types.game.data.items.ObjectItemQuantityPriceDateEffects import ObjectItemQuantityPriceDateEffects
 
 
-class ExchangeOfflineSoldItemsMessage(NetworkMessage):
+class ExchangeOfflineSoldItemsMessage(INetworkMessage):
     protocolId = 5671
     bidHouseItems:ObjectItemQuantityPriceDateEffects
     merchantItems:ObjectItemQuantityPriceDateEffects

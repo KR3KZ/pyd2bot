@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameRolePlayMonsterNotAngryAtPlayerMessage(NetworkMessage):
+class GameRolePlayMonsterNotAngryAtPlayerMessage(INetworkMessage):
     protocolId = 7726
     playerId:int
     monsterGroupId:int

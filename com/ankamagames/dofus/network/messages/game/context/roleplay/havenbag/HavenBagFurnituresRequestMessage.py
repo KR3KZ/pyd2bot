@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class HavenBagFurnituresRequestMessage(NetworkMessage):
+class HavenBagFurnituresRequestMessage(INetworkMessage):
     protocolId = 8486
     cellIds:int
     funitureIds:int

@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameRolePlayArenaFightAnswerMessage(NetworkMessage):
+class GameRolePlayArenaFightAnswerMessage(INetworkMessage):
     protocolId = 5799
     fightId:int
     accept:bool

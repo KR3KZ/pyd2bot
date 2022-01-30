@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ObjectGroundAddedMessage(NetworkMessage):
+class ObjectGroundAddedMessage(INetworkMessage):
     protocolId = 3936
     cellId:int
     objectGID:int

@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.data.items.effects.ObjectEffect import ObjectEffect
 
 
-class ExchangeBidHouseInListAddedMessage(NetworkMessage):
+class ExchangeBidHouseInListAddedMessage(INetworkMessage):
     protocolId = 213
     itemUID:int
     objectGID:int

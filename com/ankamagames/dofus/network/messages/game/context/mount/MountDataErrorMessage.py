@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class MountDataErrorMessage(NetworkMessage):
+class MountDataErrorMessage(INetworkMessage):
     protocolId = 24
     reason:int
     

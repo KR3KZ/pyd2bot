@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.achievement.Achievement import Achievement
 
 
-class AchievementAlmostFinishedDetailedListMessage(NetworkMessage):
+class AchievementAlmostFinishedDetailedListMessage(INetworkMessage):
     protocolId = 6475
     almostFinishedAchievements:Achievement
     

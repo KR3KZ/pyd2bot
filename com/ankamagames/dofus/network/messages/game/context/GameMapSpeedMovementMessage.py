@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class GameMapSpeedMovementMessage(NetworkMessage):
+class GameMapSpeedMovementMessage(INetworkMessage):
     protocolId = 8414
     speedMultiplier:int
     

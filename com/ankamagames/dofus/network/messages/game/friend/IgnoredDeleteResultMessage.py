@@ -1,8 +1,8 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.common.AccountTagInformation import AccountTagInformation
 
 
-class IgnoredDeleteResultMessage(NetworkMessage):
+class IgnoredDeleteResultMessage(INetworkMessage):
     protocolId = 9652
     tag:AccountTagInformation
     success:bool

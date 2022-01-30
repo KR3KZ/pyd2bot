@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ObjectItemInRolePlay(NetworkMessage):
+class ObjectItemInRolePlay(INetworkMessage):
     protocolId = 4848
     cellId:int
     objectGID:int

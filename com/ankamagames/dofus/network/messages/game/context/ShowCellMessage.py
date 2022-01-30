@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class ShowCellMessage(NetworkMessage):
+class ShowCellMessage(INetworkMessage):
     protocolId = 2286
     sourceId:int
     cellId:int

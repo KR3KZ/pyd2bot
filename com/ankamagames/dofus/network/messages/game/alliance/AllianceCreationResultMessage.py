@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class AllianceCreationResultMessage(NetworkMessage):
+class AllianceCreationResultMessage(INetworkMessage):
     protocolId = 4954
     result:int
     

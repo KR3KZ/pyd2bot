@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class MountSetXpRatioRequestMessage(NetworkMessage):
+class MountSetXpRatioRequestMessage(INetworkMessage):
     protocolId = 9275
     xpRatio:int
     

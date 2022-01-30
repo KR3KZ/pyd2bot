@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class DungeonKeyRingUpdateMessage(NetworkMessage):
+class DungeonKeyRingUpdateMessage(INetworkMessage):
     protocolId = 2874
     dungeonId:int
     available:bool

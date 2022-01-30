@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class BasicAckMessage(NetworkMessage):
+class BasicAckMessage(INetworkMessage):
     protocolId = 45
     seq:int
     lastPacketId:int

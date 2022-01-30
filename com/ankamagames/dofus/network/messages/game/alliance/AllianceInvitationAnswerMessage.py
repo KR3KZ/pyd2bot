@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 
 
-class AllianceInvitationAnswerMessage(NetworkMessage):
+class AllianceInvitationAnswerMessage(INetworkMessage):
     protocolId = 6962
     accept:bool
     
