@@ -4,8 +4,12 @@ import re
 from tqdm import tqdm
 
 patterns = {
+    "^\s*from com.ankamagames.jerakine.logger.Log import Log": "",
+    "^\s*import com.ankamagames.jerakine.logger.Logger;": "from com.ankamagames.jerakine.logger.Logger import Logger",
     "package \S+\n?": "",
-    "import \S+\n?": "",
+
+    "^\s*import (\S+(?:\.\S+)*)\.(\S+);": r"from \1.\2 import \2",
+    "getQualifiedobjectName\((\S+)\)": r"\1.__class__.__name__",
     "public ": "",
     "static ": "",
     "private ": "",
@@ -51,7 +55,7 @@ patterns = {
     r'^(.*)function set (\S+)\((.*)\) : (\S+)$': r"\1@\2.setter\n\1def \2(self, \3) -> \4:",
     "function [A-Z]+(\S+)\((.*)\)": r"def __init__(self, \2):",
     "\(?(\S+) as (\S+)\)?": r"\1",
-    "_log:Logger = Log\.getLogger\((.*)\)": r'logger = logging.getLogger("bot")',
+    "_log:Logger = Log\.getLogger\((.*)\)": r'logger = Logger(__name__)',
     ", \)": r")",
     "!==": r"is not",
     "!(\w+)": r"not \1",
@@ -108,4 +112,4 @@ def parseFile(file_p, out_p):
         fp.write(code)
 
 # parseFolderFiles("AS3ToPythonConverter/scripts", "AS3ToPythonConverter/connectionType")
-parseFile("AS3ToPythonConverter/target.as", "AS3ToPythonConverter/BenchmarkTimer.py")
+parseFile("scripts/AS3ToPythonConverter/target.as", "scripts/AS3ToPythonConverter/WorldPathFinder.py")

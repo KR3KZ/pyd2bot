@@ -1,18 +1,17 @@
-import logging
 from com.ankamagames.atouin.utils.dataMapProvider import DataMapProvider
 from com.ankamagames.dofus.logic.common.managers.statsManager import StatsManager
 from com.ankamagames.dofus.logic.common.managers.authentificationManager import AuthentificationManager
-from com.ankamagames.dofus.logic.game.fight.managers.currentPlayedFighterManager import CurrentPlayedFighterManager
-from com.ankamagames.dofus.logic.game.fight.managers.fightersStateManager import FightersStateManager
-from com.ankamagames.dofus.logic.game.fight.managers.playedCharacterManager import PlayedCharacterManager
+from ankamagames.dofus.logic.game.fight.managers.CurrentPlayedFighterManager import CurrentPlayedFighterManager
+from ankamagames.dofus.logic.game.fight.managers.FightersStateManager import FightersStateManager
+from ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
 from com.ankamagames.dofus.network.metadata import Metadata
 from com.ankamagames.dofus.types.entities.animatedCharacter import AnimatedCharacter
 from com.ankamagames.jerakine.managers.Worker import Worker
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 from com.ankamagames.jerakine.utils.displays.FrameIdManager import FrameIdManager
 from com.ankamagames.dofus.kernel.net import ConnectionsHandler
-logger = logging.getLogger("bot")
-
+from ankamagames.jerakine.logger.Logger import Logger
+logger = Logger('kernel')
 
 class Kernel(metaclass=Singleton):
    
@@ -32,7 +31,7 @@ class Kernel(metaclass=Singleton):
       FrameIdManager()
       self._worker.clear()
       self.addInitialFrames(True)
-      logger.info("Using protocole #" + Metadata.PROTOCOL_BUILD + ", built on " + Metadata.PROTOCOL_DATE)
+      logger.info(f"Using protocole #{Metadata.PROTOCOL_BUILD}, built on {Metadata.PROTOCOL_DATE}")
    
    def postInit(self) -> None:
       DataMapProvider.init(AnimatedCharacter)

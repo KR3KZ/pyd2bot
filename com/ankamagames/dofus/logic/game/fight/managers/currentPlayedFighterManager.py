@@ -4,9 +4,9 @@ from com.ankamagames.dofus.datacenter.spells.SpellState import SpellState
 from com.ankamagames.dofus.internalDatacenter.dataEnum import DataEnum
 from com.ankamagames.dofus.internalDatacenter.stats.entityStats import EntityStats
 from com.ankamagames.dofus.logic.common.managers.statsManager import StatsManager
-from com.ankamagames.dofus.logic.game.common.misc.dofusEntities import DofusEntities
-from com.ankamagames.dofus.logic.game.fight.managers.fightersStateManager import FightersStateManager
-from com.ankamagames.dofus.logic.game.fight.managers.playedCharacterManager import PlayedCharacterManager
+from ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEntities
+from ankamagames.dofus.logic.game.fight.managers.FightersStateManager import FightersStateManager
+from ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
 from com.ankamagames.dofus.types.entities.animatedCharacter import AnimatedCharacter
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 from damageCalculation.tools import StatIds

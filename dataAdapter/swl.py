@@ -1,9 +1,11 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-from pyd2bot.utils.binaryIO import BinaryStream
 
 # Exceptions
+
+
+from ankamagames.jerakine.data.binaryStream import BinaryStream
 
 
 class InvalidSWLFile(Exception):

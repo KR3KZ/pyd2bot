@@ -5,7 +5,7 @@ from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 class XmlConfig(metaclass=Singleton):
     
     
-    _constants:list
+    _constants = dict[str, Any]()
 
     def init(self, constants:list) -> None:
         self._constants = constants
@@ -15,10 +15,10 @@ class XmlConfig(metaclass=Singleton):
             self._constants[i] = constants[i]
     
     def getEntry(self, name:str) -> Any:
-        return self._constants[name]
+        return self._constants.get(name)
     
     def getboolEntry(self, name:str) -> bool:
-        v = self._constants[name]
+        v = self._constants.get(name)
         if v is str:
             return str(v).lower() == "True" or v == "1"
         return v

@@ -2,7 +2,7 @@ from functools import lru_cache
 from pathlib import Path
 from com.ankamagames.dofus import Constants
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
-from dataReader.dlm import DLM
+from dataAdapter.dlm import DLM
 
 
 class MapLoader(metaclass=Singleton):
@@ -13,7 +13,9 @@ class MapLoader(metaclass=Singleton):
         self._reader = DLM(self.DLM_KEY)
 
     @lru_cache(maxsize = 256)
-    def load(self, mapId):
+    def load(self, mapId, key=None):
+        if key is not None:
+            self._reader.setKey(key)
         map_p = Path(Constants.MAPS_PATH) / MapLoader.getMapURI(mapId)
         if not map_p.exists():
             raise Exception(f"Map {mapId} not found in path {map_p}")

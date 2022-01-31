@@ -15,6 +15,9 @@ class DLM:
             raise InvalidDLMFile("Map decryption key is empty.")
         self._key = key
 
+    def setKey(self, key):
+        self._key = key
+        
     def read(self, raw:bytes):
         dlm_uncompressed = tempfile.TemporaryFile()
         dlm_uncompressed.write(zlib.decompress(raw))

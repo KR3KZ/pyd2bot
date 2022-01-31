@@ -5,7 +5,7 @@ from com.ankamagames.atouin.data.map.map import Map
 from com.ankamagames.dofus.internalDatacenter.stats.stat import Stat
 from com.ankamagames.dofus.kernel.kernel import Kernel
 from com.ankamagames.dofus.logic.common.managers.statsManager import StatsManager
-from com.ankamagames.dofus.logic.game.common.managers.entitiesManager import EntitiesManager
+from ankamagames.dofus.logic.game.common.managers.EntitiesManager import EntitiesManager
 from com.ankamagames.dofus.logic.game.fight.frames.fightEntitiesFrame import FightEntitiesFrame
 from com.ankamagames.dofus.network.messages.game.context.EntityDispositionInformations import EntityDispositionInformations
 from com.ankamagames.dofus.network.types.game.context.fight.GameFightFighterInformations import GameFightFighterInformations
@@ -14,7 +14,7 @@ from pyd2bot.bot import IBot
 from damageCalculation.tools.StatIds import StatIds
 from com.ankamagames.atouin.data.map.CellData import CellData
 from com.ankamagames.jerakine.types.positions.mapPoint import MapPoint
-import com.ankamagames.dofus.logic.game.fight.miscs.tackleUtil as TackleUtil
+import ankamagames.dofus.logic.game.fight.miscs.TackleUtil as TackleUtil
 logger = logging.getLogger("bot")
 
 
