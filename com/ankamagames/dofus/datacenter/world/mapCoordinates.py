@@ -1,6 +1,6 @@
 from com.ankamagames.dofus.datacenter.world.MapPosition import MapPosition
 from com.ankamagames.jerakine.data.GameData import GameData
-from com.ankamagames.jerakine.interfaces.iDatacenter import IDataCenter
+from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
 from com.ankamagames.jerakine.logger.Logger import Logger
 
 

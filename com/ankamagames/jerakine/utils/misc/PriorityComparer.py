@@ -1,4 +1,4 @@
-from com.ankamagames.jerakine.utils.misc.priotizable import Prioritizable
+from com.ankamagames.jerakine.utils.misc.Priotizable import Prioritizable
 
 
 class PriorityComparer:

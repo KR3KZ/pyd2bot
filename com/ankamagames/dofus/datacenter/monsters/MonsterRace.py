@@ -1,8 +1,8 @@
 from com.ankamagames.dofus.datacenter.items.criterion.GroupItemCriterion import GroupItemCriterion
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-   from com.ankamagames.dofus.datacenter.monsters.monsterGrade import MonsterGrade
-from com.ankamagames.dofus.types.idAccessors import IdAccessors
+   from com.ankamagames.dofus.datacenter.monsters.MonsterGrade import MonsterGrade
+from com.ankamagames.dofus.types.IdAccessors import IdAccessors
 from com.ankamagames.jerakine.data.I18n import I18n
 from com.ankamagames.jerakine.data.GameData import GameData
 

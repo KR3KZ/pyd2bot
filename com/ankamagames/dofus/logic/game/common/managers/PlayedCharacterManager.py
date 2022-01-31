@@ -1,5 +1,12 @@
 from com.ankamagames.dofus.datacenter.world.SubArea import SubArea
 from com.ankamagames.dofus.datacenter.world.WorldMap import WorldMap
+from com.ankamagames.dofus.internalDatacenter.items.ItemWrapper import ItemWrapper
+from com.ankamagames.dofus.internalDatacenter.items.WeaponWrapper import WeaponWrapper
+from com.ankamagames.dofus.internalDatacenter.jobs.KnownJobWrapper import KnownJobWrapper
+from com.ankamagames.dofus.internalDatacenter.world.WorldPointWrapper import WorldPointWrapper
+from com.ankamagames.dofus.network.enums.CharacterInventoryPositionEnum import CharacterInventoryPositionEnum
+from com.ankamagames.dofus.network.enums.PlayerLifeStatusEnum import PlayerLifeStatusEnum
+from com.ankamagames.dofus.network.types.game.character.characteristic.CharacterCharacteristicsInformations import CharacterCharacteristicsInformations
 from com.ankamagames.dofus.network.types.game.character.restriction.ActorRestrictionsInformations import ActorRestrictionsInformations
 from com.ankamagames.dofus.network.types.game.context.roleplay.GuildInformations import GuildInformations
 from com.ankamagames.dofus.network.types.game.guild.application.GuildApplicationInformation import GuildApplicationInformation
@@ -12,9 +19,10 @@ from com.ankamagames.dofus.logic.common.managers.statsManager import StatsManage
 from com.ankamagames.dofus.network.protocolConstantsEnum import ProtocolConstantsEnum
 from com.ankamagames.dofus.network.types.game.character.choice.characterBaseInformations import CharacterBaseInformations
 from com.ankamagames.dofus.network.types.game.look.EntityLook import EntityLook
-from com.ankamagames.jerakine.interfaces.iDestroyable import IDestroyable
+from com.ankamagames.jerakine.interfaces.IDestroyable import IDestroyable
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
-from com.ankamagames.jerakine.types.positions.mapPoint import Point
+from com.ankamagames.jerakine.types.Callback import Callback
+from com.ankamagames.jerakine.types.positions.MapPoint import Point
 from damageCalculation.tools import StatIds
 logger = Logger(__name__)
 

@@ -1,13 +1,21 @@
                                                             
+import math
+from os import stat
+from com.ankamagames.dofus.datacenter.effects.EffectInstance import EffectInstance
+from com.ankamagames.dofus.datacenter.items.criterion.GroupItemCriterion import GroupItemCriterion
+from com.ankamagames.dofus.datacenter.items.ItemSet import ItemSet
+from com.ankamagames.dofus.datacenter.items.ItemType import ItemType
 from com.ankamagames.dofus.internalDatacenter.dataEnum import DataEnum
-from com.ankamagames.dofus.types.idAccessors import IdAccessors
+from com.ankamagames.dofus.types.IdAccessors import IdAccessors
+from com.ankamagames.dofus.types.enums.ItemCategoryEnum import ItemCategoryEnum
 from com.ankamagames.jerakine.data.IposInit import IPostInit
 from com.ankamagames.jerakine.data.I18n import I18n
 from com.ankamagames.jerakine.data.GameData import GameData
 from com.ankamagames.jerakine.data.GameDataFileAccessor import GameDataFileAccessor
-from com.ankamagames.jerakine.interfaces.iDatacenter import IDataCenter
+from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
 from com.ankamagames.jerakine.logger.Logger import Logger
 logger = Logger(__name__)
+
 
 class Item(IPostInit, IDataCenter):
    
@@ -153,25 +161,27 @@ class Item(IPostInit, IDataCenter):
    
    def __init__(self):
       super().__init__()
-   
-   def getItemById(self, id:int, returnDefaultItemIfNull:bool = True) -> Item:
-      item:Item = GameData.getObject(MODULE,id)
+
+   @classmethod 
+   def getItemById(cls, id:int, returnDefaultItemIfNull:bool = True) -> 'Item':
+      item:Item = GameData.getObject(cls.MODULE, id)
       if item or not returnDefaultItemIfNull:
          return item
       logger.error("Impossible de trouver l\'objet " + id + ", remplacement par l\'objet 666")
-      return GameData.getObject(MODULE,666)
+      return GameData.getObject(cls.MODULE, 666)
 
-   idAccessors:IdAccessors = IdAccessors(getItemById,getItems)
+   @staticmethod
+   def getItems(cls) -> list:
+      return GameData.getObjects(cls.MODULE)
 
-   def getItems(self) -> list:
-      return GameData.getObjects(MODULE)
+   idAccessors:IdAccessors = IdAccessors(getItemById, getItems)
    
-   def getItemsByIds(self, ids:list[int]) -> list[Item]:
+   def getItemsByIds(cls, ids:list[int]) -> list['Item']:
       id = None
       item = None
       items:list[Item] = list[Item]()
       for id in ids:
-         item = GameDataFileAccessor().getObject(MODULE,id)
+         item = GameDataFileAccessor().getObject(cls.MODULE,id)
          if item:
             items.append(item)
       return items
@@ -221,7 +231,7 @@ class Item(IPostInit, IDataCenter):
       self._weight = n
    
    @property
-   def type(self) -> Object:
+   def type(self) -> object:
       if not self._type:
          self._type = ItemType.getItemTypeById(self.typeId)
       return self._type
@@ -235,15 +245,6 @@ class Item(IPostInit, IDataCenter):
       if not self._itemSet:
          self._itemSet = ItemSet.getItemSetById(self.itemSetId)
       return self._itemSet
-   
-   @property
-   def appearance(self) -> TiphonEntityLook:
-      appearance:Appearance = None
-      if not self._appearance:
-         appearance = Appearance.getAppearanceById(self.appearanceId)
-         if appearance:
-            self._appearance = TiphonEntityLook.fromstr(appearance.data)
-      return self._appearance
    
    @property
    def recipes(self) -> list:
@@ -316,10 +317,10 @@ class Item(IPostInit, IDataCenter):
       if not self._craftXpByJobLevel:
          self._craftXpByJobLevel = dict()
       if not self._craftXpByJobLevel[jobLevel]:
-         if jobLevel - MAX_JOB_LEVEL_GAP > self.level:
+         if jobLevel - self.MAX_JOB_LEVEL_GAP > self.level:
             self._craftXpByJobLevel[jobLevel] = 0
             return self._craftXpByJobLevel[jobLevel]
-         basicXp = 20 * self.level / (Math.pow(jobLevel - self.level,1.1) / 10 + 1)
+         basicXp = 20 * self.level / (math.pow(jobLevel - self.level,1.1) / 10 + 1)
          if self.craftXpRatio > -1:
             xpWithRatio = basicXp * (self.craftXpRatio / 100)
          elif self.type.craftXpRatio > -1:
@@ -346,7 +347,7 @@ class Item(IPostInit, IDataCenter):
          self._basicExperienceAsFood = experienceInt / 100000
       return self._basicExperienceAsFood
    
-   def copy(self, src:Item, to:Item) -> None:
+   def copy(self, src:'Item', to:'Item') -> None:
       to.id = src.id
       to.nameId = src.nameId
       to.typeId = src.typeId
@@ -398,12 +399,7 @@ class Item(IPostInit, IDataCenter):
       to.tooltipExpirationDate = src.tooltipExpirationDate
    
    def postInit(self) -> None:
-      if not _censoredIcons:
-         _censoredIcons = CensoredContentManager().getCensoredIndex(1)
-      if _censoredIcons[self.iconId]:
-         self.iconId = _censoredIcons[self.iconId]
-      self.name
-      self.undiatricalName
+      pass
    
    def isEvolutive(self) -> bool:
       return self.evolutiveEffectIds and len(self.evolutiveEffectIds) > 0

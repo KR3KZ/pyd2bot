@@ -1,6 +1,6 @@
 import collections
 from time import sleep, perf_counter
-from com.ankamagames.jerakine.types.positions.mapPoint import MapPoint
+from com.ankamagames.jerakine.types.positions.MapPoint import MapPoint
 from .walker import Walker
 from com.ankamagames.jerakine.logger.Logger import Logger
 logger = Logger(__name__)

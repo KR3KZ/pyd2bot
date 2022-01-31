@@ -4,10 +4,10 @@ from com.ankamagames.atouin.data.map.CellData import CellData
 from com.ankamagames.atouin.data.map.map import Map
 import com.ankamagames.atouin.managers.MapDisplayManager as mdmm
 from com.ankamagames.dofus.logic.game.common.managers.EntitiesManager import EntitiesManager
-from com.ankamagames.jerakine.interfaces.iObstacle import IObstacle
+from com.ankamagames.jerakine.interfaces.IObstacle import IObstacle
 from com.ankamagames.jerakine.map.iDataMapProvider import IDataMapProvider
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
-from com.ankamagames.jerakine.types.positions.mapPoint import MapPoint
+from com.ankamagames.jerakine.types.positions.MapPoint import MapPoint
 from mapTools import MapTools
 logger = Logger(__name__)
 

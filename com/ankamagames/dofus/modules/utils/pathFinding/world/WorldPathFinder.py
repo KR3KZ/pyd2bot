@@ -36,7 +36,7 @@ class WorldPathFinder:
     def init(self) -> None:
         if self.isInitialized():
             return
-        # self.playedCharacterManager = PlayedCharacterManager()
+        self.playedCharacterManager = PlayedCharacterManager()
         with open(Constants.WORLDGRAPH_PATH, "rb") as binaries:
             data = binaries.read()
             self.worldGraph = WorldGraph(ByteArray(data))
@@ -64,7 +64,7 @@ class WorldPathFinder:
         if self.src == None:
             callback(None)
             return
-        linkedZone = 1
+        self.linkedZone = 1
         WorldPathFinder.callback = callback
         self.dst = destinationMapId
         self.next()

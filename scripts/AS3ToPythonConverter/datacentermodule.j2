@@ -1,0 +1,23 @@
+{% if cls.hasGetObjectById or cls.hasGetObjects -%}
+from com.ankamagames.jerakine.data.GameData import GameData
+from com.ankamagames.dofus.types.IdAccessors import IdAccessors
+{% endif %}
+
+class {{cls.name}}{% if cls.parent %}({{cls.parent}}){% endif %}:
+    MODULE = "{{cls.module}}"
+    {% for field in cls.fields %}
+    {{field.name}}:{{field.type}}
+    {% endfor %}
+    {% if cls.hasGetObjects %}
+    @classmethod
+    def get{{cls.name}}s(cls) -> list['{{cls.name}}']:
+        return GameData.getObjects(cls.MODULE)
+    {% endif %}
+    {% if cls.hasGetObjectById %}
+    @classmethod
+    def get{{cls.name}}ById(cls, id) -> '{{cls.name}}':
+        return GameData.getObject(cls.MODULE, id)
+    {% endif %}
+    {% if cls.hasGetObjectById or cls.hasGetObjects -%}
+    idAccessors = IdAccessors(get{{cls.name}}ById, get{{cls.name}}s)
+    {% endif %}

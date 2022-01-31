@@ -1,5 +1,5 @@
                                                                   
-from com.ankamagames.dofus.datacenter.monsters.monster import Monster
+from com.ankamagames.dofus.datacenter.monsters.Monster import Monster
 from com.ankamagames.dofus.internalDatacenter.dataEnum import DataEnum
 from com.ankamagames.dofus.internalDatacenter.stats.entityStats import EntityStats
 from com.ankamagames.dofus.internalDatacenter.stats.stat import Stat
@@ -14,8 +14,8 @@ from com.ankamagames.dofus import Constants
 from com.ankamagames.dofus.network.types.game.context.fight.GameFightMonsterInformations import GameFightMonsterInformations
 from com.ankamagames.jerakine.entities.interfaces.IEntity import IEntity
 from damageCalculation.tools.StatIds import StatIds
-from com.ankamagames.jerakine.types.positions.mapPoint import MapPoint
-from com.ankamagames.jerakine.types.positions.mouvementPath import MovementPath
+from com.ankamagames.jerakine.types.positions.MapPoint import MapPoint
+from com.ankamagames.jerakine.types.positions.MouvementPath import MovementPath
 from mapTools import MapTools
 
 

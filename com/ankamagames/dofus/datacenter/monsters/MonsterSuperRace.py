@@ -1,7 +1,7 @@
-from com.ankamagames.dofus.types.idAccessors import IdAccessors
+from com.ankamagames.dofus.types.IdAccessors import IdAccessors
 from com.ankamagames.jerakine.data.GameData import GameData
 from com.ankamagames.jerakine.data.I18n import I18n
-from com.ankamagames.jerakine.interfaces.iDatacenter import IDataCenter
+from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
 
 
 class MonsterSuperRace(IDataCenter):

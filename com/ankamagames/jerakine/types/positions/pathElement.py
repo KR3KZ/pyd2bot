@@ -1,6 +1,6 @@
 
 
-from com.ankamagames.jerakine.types.positions.mapPoint import MapPoint
+from com.ankamagames.jerakine.types.positions.MapPoint import MapPoint
 
 
 class PathElement:

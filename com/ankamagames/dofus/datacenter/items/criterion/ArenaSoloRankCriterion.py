@@ -3,7 +3,7 @@ from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterion import ItemC
 from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterionOperator import ItemCriterionOperator
 from com.ankamagames.dofus.kernel.kernel import Kernel
 from com.ankamagames.jerakine.data.I18n import I18n
-from com.ankamagames.jerakine.interfaces.iDatacenter import IDataCenter
+from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
 
 
 class ArenaSoloRankCriterion(ItemCriterion, IDataCenter):

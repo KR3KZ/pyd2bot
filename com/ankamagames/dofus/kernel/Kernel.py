@@ -1,4 +1,5 @@
 from com.ankamagames.atouin.utils.DataMapProvider import DataMapProvider
+from com.ankamagames.dofus.kernel.net.ConnectionsHandler import ConnectionHander
 from com.ankamagames.dofus.logic.common.managers.statsManager import StatsManager
 from com.ankamagames.dofus.logic.common.managers.authentificationManager import AuthentificationManager
 from com.ankamagames.dofus.logic.game.fight.managers.CurrentPlayedFighterManager import CurrentPlayedFighterManager
@@ -9,7 +10,6 @@ from com.ankamagames.dofus.types.entities.animatedCharacter import AnimatedChara
 from com.ankamagames.jerakine.managers.Worker import Worker
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 from com.ankamagames.jerakine.utils.displays.FrameIdManager import FrameIdManager
-from com.ankamagames.dofus.kernel.net.ConnectionsHandler import ConnectionsHandler
 from com.ankamagames.jerakine.logger.Logger import Logger
 logger = Logger('kernel')
 
@@ -27,7 +27,7 @@ class Kernel(metaclass=Singleton):
    
    def panic(self, errorId:int = 0, panicArgs:list = None) -> None:
       self._worker.clear()
-      ConnectionsHandler.closeConnection()
+      ConnectionHander.closeConnection()
    
    def init(self) -> None:
       FrameIdManager()

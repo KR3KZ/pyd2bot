@@ -1,6 +1,6 @@
-from com.ankamagames.jerakine.interfaces.iDatacenter import IDataCenter
+from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
 from com.ankamagames.jerakine.types.dataStoreType import JerakineError
-from com.ankamagames.jerakine.types.positions.mapPoint import Point
+from com.ankamagames.jerakine.types.positions.MapPoint import Point
 
 
 class WorldPoint(IDataCenter):

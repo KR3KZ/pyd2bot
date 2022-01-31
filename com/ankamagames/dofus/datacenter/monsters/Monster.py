@@ -1,12 +1,12 @@
 from typing import TYPE_CHECKING
-from com.ankamagames.dofus.datacenter.monsters.animFunMonsterData import AnimFunMonsterData
+from com.ankamagames.dofus.datacenter.monsters.AnimFunMonsterData import AnimFunMonsterData
 if TYPE_CHECKING:
-   from com.ankamagames.dofus.datacenter.monsters.monsterDrop import MonsterDrop
-   from com.ankamagames.dofus.datacenter.monsters.monsterGrade import MonsterGrade
-from com.ankamagames.dofus.datacenter.monsters.monsterRace import MonsterRace
+   from com.ankamagames.dofus.datacenter.monsters.MonsterDrop import MonsterDrop
+   from com.ankamagames.dofus.datacenter.monsters.MonsterGrade import MonsterGrade
+from com.ankamagames.dofus.datacenter.monsters.MonsterRace import MonsterRace
 from com.ankamagames.dofus.datacenter.items.criterion import GroupItemCriterion
 from com.ankamagames.jerakine.data.GameData import GameData
-from com.ankamagames.dofus.types.idAccessors import IdAccessors
+from com.ankamagames.dofus.types.IdAccessors import IdAccessors
 
 
 class Monster:   

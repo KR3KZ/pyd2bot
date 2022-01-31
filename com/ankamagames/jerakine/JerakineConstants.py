@@ -1,5 +1,5 @@
 from com.ankamagames.jerakine.types.dataStoreType import DataStoreType
-from com.ankamagames.jerakine.types.enums.dataStoreEnum import DataStoreEnum
+from com.ankamagames.jerakine.types.enums.DataStoreEnum import DataStoreEnum
 
 
 LOADERS_POOL_INITIAL_SIZE:int = 5

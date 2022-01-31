@@ -1,10 +1,12 @@
+from com.ankamagames.dofus.datacenter.world.Area import Area
 from com.ankamagames.dofus.datacenter.world.MapPosition import MapPosition
-from com.ankamagames.dofus.types.idAccessors import IdAccessors
+from com.ankamagames.dofus.datacenter.world.WorldMap import WorldMap
+from com.ankamagames.dofus.types.IdAccessors import IdAccessors
 from com.ankamagames.jerakine.data.GameData import GameData
 from com.ankamagames.jerakine.data.I18n import I18n
 from com.ankamagames.jerakine.data.IposInit import IPostInit
-from com.ankamagames.jerakine.interfaces.iDatacenter import IDataCenter
-from com.ankamagames.jerakine.types.positions.mapPoint import Point
+from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
+from com.ankamagames.jerakine.types.positions.MapPoint import Point
 
 
 class SubArea(IDataCenter, IPostInit):
@@ -12,8 +14,6 @@ class SubArea(IDataCenter, IPostInit):
       MODULE:str = "SubAreas"
       
       _allSubAreas:list
-      
-      idAccessors:IdAccessors = IdAccessors(getSubAreaById,getAllSubArea)
        
       
       id:int
@@ -26,7 +26,7 @@ class SubArea(IDataCenter, IPostInit):
       
       mapIds:list[float]
       
-      bounds:Rectangle
+      # bounds:Rectangle
       
       shape:list[int]
       
@@ -75,8 +75,9 @@ class SubArea(IDataCenter, IPostInit):
       def __init__(self):
          super().__init__()
       
-      def getSubAreaById(self, id:int) -> 'SubArea':
-         subArea:SubArea = GameData.getobject(MODULE,id)
+      @staticmethod
+      def getSubAreaById(id:int) -> 'SubArea':
+         subArea:SubArea = GameData.getobject(SubArea.MODULE,id)
          if not subArea or not subArea.area:
             return None
          return subArea
@@ -87,14 +88,16 @@ class SubArea(IDataCenter, IPostInit):
          if mp:
             return mp.subArea
          return None
-      
+       
       @classmethod
       def getAllSubArea(cls) -> list:
          if cls._allSubAreas:
             return cls._allSubAreas
          _allSubAreas = GameData.getobjects(cls.MODULE)
          return _allSubAreas
-      
+           
+      idAccessors:IdAccessors = IdAccessors(getSubAreaById,getAllSubArea)
+
       @property
       def name(self) -> str:
          if not self._name:

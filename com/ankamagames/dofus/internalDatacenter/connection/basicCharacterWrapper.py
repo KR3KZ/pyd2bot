@@ -1,5 +1,5 @@
 from com.ankamagames.dofus.network.types.game.look.EntityLook import EntityLook
-from com.ankamagames.jerakine.interfaces.iDatacenter import IDataCenter
+from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
 
 
 class BasicCharacterWrapper(IDataCenter):

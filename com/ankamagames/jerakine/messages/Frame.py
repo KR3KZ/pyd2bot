@@ -1,5 +1,5 @@
 from com.ankamagames.jerakine.messages.messageHandler import MessageHandler
-from com.ankamagames.jerakine.utils.misc.priotizable import Prioritizable
+from com.ankamagames.jerakine.utils.misc.Priotizable import Prioritizable
 
 
 class Frame(MessageHandler, Prioritizable):

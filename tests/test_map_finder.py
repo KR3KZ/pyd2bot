@@ -3,7 +3,7 @@ from com.ankamagames.jerakine.logger.Logger import Logger
 from time import perf_counter
 from com.ankamagames.jerakine.resources.loaders.MapLoader import MapLoader
 from com.ankamagames.atouin.data.map.map import CellData, Map
-from com.ankamagames.jerakine.types.positions.mapPoint import MapPoint
+from com.ankamagames.jerakine.types.positions.MapPoint import MapPoint
 from pyd2bot.utils.pathFinding import Pathfinding
 from pyd2bot.gameData.world.mapZones import MapZones
 

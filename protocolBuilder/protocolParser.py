@@ -38,6 +38,7 @@ class ProtocolParser:
     OPTIONAL_VAR_PATTERN_OF_NAME = r"\s*if\(this\.%s == null\)\n"
     HASH_FUNCTION_PATTERN = r"\s*HASH_FUNCTION\(data\);\n"
     WRAPPED_BOOLEAN_PATTERN = r"\s*this.(?P<name>\w+) = BooleanByteWrapper\.getFlag\(.*;\n"
+    
     json = {
         "type": {},
         "msg_by_id": {},

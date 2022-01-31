@@ -1,4 +1,4 @@
-from .pathElement import PathElement
+from .PathElement import PathElement
 
 
 class MovementPath(list[PathElement]):

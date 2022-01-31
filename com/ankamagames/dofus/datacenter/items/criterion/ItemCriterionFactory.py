@@ -1,3 +1,30 @@
+from com.ankamagames.dofus.datacenter.items.criterion.AchievementAccountItemCriterion import AchievementAccountItemCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.AchievementItemCriterion import AchievementItemCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.AchievementObjectiveValidated import AchievementObjectiveValidated
+from com.ankamagames.dofus.datacenter.items.criterion.AchievementPointsItemCriterion import AchievementPointsItemCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.AllianceItemCriterion import AllianceItemCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.ArenaDuelRankCriterion import ArenaDuelRankCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.ArenaMaxDuelRankCriterion import ArenaMaxDuelRankCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.ArenaMaxSoloRankCriterion import ArenaMaxSoloRankCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.ArenaMaxTeamRankCriterion import ArenaMaxTeamRankCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.ArenaSoloRankCriterion import ArenaSoloRankCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.ArenaTeamRankCriterion import ArenaTeamRankCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.BonusSetItemCriterion import BonusSetItemCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterion import ItemCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.JobItemCriterion import JobItemCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.KamaItemCriterion import KamaItemCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.LevelItemCriterion import LevelItemCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.MapCharactersItemCriterion import MapCharactersItemCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.MonsterGroupChallengeCriterion import MonsterGroupChallengeCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.MountFamilyItemCriterion import MountFamilyItemCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.NewHavenbagItemCriterion import NewHavenbagItemCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.NumberOfItemMadeCriterion import floatOfItemMadeCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.NumberOfMountBirthedCriterion import floatOfMountBirthedCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.PrestigeLevelItemCriterion import PrestigeLevelItemCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.QuestItemCriterion import QuestItemCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.SkillItemCriterion import SkillItemCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.SmileyPackItemCriterion import SmileyPackItemCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.SubscriptionDurationItemCriterion import SubscriptionDurationItemCriterion
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.dofus.datacenter.items.criterion.IItemCriterion import IItemCriterion
 from com.ankamagames.dofus.datacenter.items.criterion.UnusableItemCriterion import UnusableItemCriterion
@@ -5,14 +32,14 @@ logger = Logger(__name__)
 
 
 class ItemCriterionFactory:
-   def __init__(self):
-      super().__init__()
    
    def create(self, pServerCriterionForm:str) -> IItemCriterion:
       criterion = None
       s:str = pServerCriterionForm[0:2]
+      
       if s == "BI":
          criterion = UnusableItemCriterion(pServerCriterionForm)
+
       elif s == "Ca":
          pass 
       elif s == "CA":

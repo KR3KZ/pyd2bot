@@ -2,7 +2,7 @@
 from com.ankamagames.dofus.datacenter.items.criterion.IItemCriterion import IItemCriterion
 from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterion import ItemCriterion
 from com.ankamagames.jerakine.data.I18n import I18n
-from com.ankamagames.jerakine.interfaces.iDatacenter import IDataCenter
+from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
 
 
 class MonsterGroupChallengeCriterion(ItemCriterion, IDataCenter):

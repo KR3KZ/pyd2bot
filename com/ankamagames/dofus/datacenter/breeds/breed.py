@@ -1,9 +1,9 @@
 from com.ankamagames.jerakine.logger.Logger import Logger
 from re import S
-from com.ankamagames.dofus.types.idAccessors import IdAccessors
+from com.ankamagames.dofus.types.IdAccessors import IdAccessors
 from com.ankamagames.jerakine.data import I18n
 from com.ankamagames.jerakine.data.GameData import GameData
-from com.ankamagames.jerakine.interfaces.iDatacenter import IDataCenter
+from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
 logger = Logger(__name__)
 
 class Breed(IDataCenter):

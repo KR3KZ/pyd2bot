@@ -1,10 +1,10 @@
-from com.ankamagames.dofus.types.idAccessors import IdAccessors
+from com.ankamagames.dofus.types.IdAccessors import IdAccessors
 from com.ankamagames.jerakine.data.GameData import GameData
 from com.ankamagames.jerakine.data.I18n import I18n
-from com.ankamagames.jerakine.interfaces.iDatacenter import IDataCenter
+from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.types.dataStoreType import DataStoreType
-from com.ankamagames.jerakine.types.enums.dataStoreEnum import DataStoreEnum
+from com.ankamagames.jerakine.types.enums.DataStoreEnum import DataStoreEnum
 logger = Logger(__name__)
 
 

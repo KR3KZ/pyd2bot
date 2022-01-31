@@ -1,8 +1,8 @@
 import math
 from multiprocessing.managers import Server
 import time
-from com.ankamagames.jerakine.interfaces.iDestroyable import IDestroyable
-from com.ankamagames.jerakine.utils.errors.singletonError import SingletonError
+from com.ankamagames.jerakine.interfaces.IDestroyable import IDestroyable
+from com.ankamagames.jerakine.utils.errors.SingletonError import SingletonError
 
 
 class PlayerManager(IDestroyable):

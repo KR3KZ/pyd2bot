@@ -1,4 +1,4 @@
-from com.ankamagames.jerakine.interfaces.iDestroyable import IDestroyable
+from com.ankamagames.jerakine.interfaces.IDestroyable import IDestroyable
 from com.ankamagames.jerakine.newCache.iCache import ICache
 from com.ankamagames.jerakine.newCache.iCacheGarbageCollector import ICacheGarbageCollector
 from com.ankamagames.jerakine.pools.pool import Pool

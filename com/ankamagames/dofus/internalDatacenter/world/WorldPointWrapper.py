@@ -1,5 +1,6 @@
 from com.ankamagames.atouin.managers.MapDisplayManager import MapDisplayManager
 from com.ankamagames.dofus.datacenter.world.MapPosition import MapPosition
+from com.ankamagames.dofus.datacenter.world.MapScrollAction import MapScrollAction
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.types.positions.worldPoint import WorldPoint
 logger = Logger(__name__)

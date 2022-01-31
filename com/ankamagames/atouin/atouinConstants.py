@@ -1,5 +1,5 @@
 import math
-from com.ankamagames.jerakine.types.positions.mapPoint import Point
+from com.ankamagames.jerakine.types.positions.MapPoint import Point
 
 
 class AtouinConstants:

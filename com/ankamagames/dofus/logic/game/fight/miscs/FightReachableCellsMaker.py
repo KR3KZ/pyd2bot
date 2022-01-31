@@ -13,7 +13,7 @@ from com.ankamagames.dofus.network.types.game.context.fight.GameFightMonsterInfo
 from pyd2bot.bot import IBot
 from damageCalculation.tools.StatIds import StatIds
 from com.ankamagames.atouin.data.map.CellData import CellData
-from com.ankamagames.jerakine.types.positions.mapPoint import MapPoint
+from com.ankamagames.jerakine.types.positions.MapPoint import MapPoint
 import ankamagames.dofus.logic.game.fight.miscs.TackleUtil as TackleUtil
 logger = Logger(__name__)
 

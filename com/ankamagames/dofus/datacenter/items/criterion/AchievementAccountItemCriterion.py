@@ -4,7 +4,7 @@ from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterion import ItemC
 from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterionOperator import ItemCriterionOperator
 from com.ankamagames.dofus.network.enums.gameServerTypeEnum import GameServerTypeEnum
 from com.ankamagames.jerakine.data import I18n
-from com.ankamagames.jerakine.interfaces.iDatacenter import IDataCenter
+from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
 
 
 class AchievementAccountItemCriterion(ItemCriterion, IDataCenter):

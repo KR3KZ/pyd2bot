@@ -1,7 +1,7 @@
 from com.ankamagames.atouin.data.map.map import Map, CellData
-from com.ankamagames.jerakine.types.positions.mapPoint import MapPoint
-from com.ankamagames.jerakine.types.positions.mouvementPath import MovementPath
-from com.ankamagames.jerakine.types.positions.pathElement import PathElement
+from com.ankamagames.jerakine.types.positions.MapPoint import MapPoint
+from com.ankamagames.jerakine.types.positions.MouvementPath import MovementPath
+from com.ankamagames.jerakine.types.positions.PathElement import PathElement
 from pyd2bot.utils.pathFinding.path import PathNode
 from pyd2bot.utils.pathFinding.pathFinder import Pathfinder
 

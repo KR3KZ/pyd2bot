@@ -1,8 +1,8 @@
 
 
 from com.ankamagames.jerakine.data import GameData
-from com.ankamagames.jerakine.interfaces.iDatacenter import IDataCenter
-from com.ankamagames.dofus.types.idAccessors import IdAccessors
+from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
+from com.ankamagames.dofus.types.IdAccessors import IdAccessors
 
 
 class SpellState(IDataCenter):

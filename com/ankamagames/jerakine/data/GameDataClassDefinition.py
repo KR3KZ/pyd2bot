@@ -12,7 +12,7 @@ class GameDataClassDefinition:
    
    def __init__(self, packageName:str, className:str, moduleReader:'ModuleReader') -> None:
       self._fields = list()  
-      moduleName = packageName + '.' + className[0].lower() + className[1:]
+      moduleName = packageName + '.' + className
       try:
          module = sys.modules[moduleName]
       except:
