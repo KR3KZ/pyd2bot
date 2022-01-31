@@ -1,9 +1,9 @@
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.atouin.atouinConstants import AtouinConstants
 from com.ankamagames.atouin.data.map.CellData import CellData
 from com.ankamagames.atouin.data.map.map import Map
-import ankamagames.atouin.managers.MapDisplayManager as mdmm
-from ankamagames.dofus.logic.game.common.managers.EntitiesManager import EntitiesManager
+import com.ankamagames.atouin.managers.MapDisplayManager as mdmm
+from com.ankamagames.dofus.logic.game.common.managers.EntitiesManager import EntitiesManager
 from com.ankamagames.jerakine.interfaces.iObstacle import IObstacle
 from com.ankamagames.jerakine.map.iDataMapProvider import IDataMapProvider
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton

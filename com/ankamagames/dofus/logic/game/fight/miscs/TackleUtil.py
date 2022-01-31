@@ -4,9 +4,9 @@ from com.ankamagames.dofus.internalDatacenter.dataEnum import DataEnum
 from com.ankamagames.dofus.internalDatacenter.stats.entityStats import EntityStats
 from com.ankamagames.dofus.internalDatacenter.stats.stat import Stat
 from com.ankamagames.dofus.logic.common.managers.statsManager import StatsManager
-from ankamagames.dofus.logic.game.common.managers.EntitiesManager import EntitiesManager
+from com.ankamagames.dofus.logic.game.common.managers.EntitiesManager import EntitiesManager
 from com.ankamagames.dofus.logic.game.fight.frames import FightEntitiesFrame
-from ankamagames.dofus.logic.game.fight.managers.FightersStateManager import FightersStateManager
+from com.ankamagames.dofus.logic.game.fight.managers.FightersStateManager import FightersStateManager
 from com.ankamagames.dofus.network.messages.game.context.EntityDispositionInformations import EntityDispositionInformations
 from com.ankamagames.dofus.network.types.game.context.FightEntityDispositionInformations import FightEntityDispositionInformations
 from com.ankamagames.dofus.network.types.game.context.fight.GameFightFighterInformations import GameFightFighterInformations

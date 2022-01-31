@@ -1,5 +1,5 @@
 from asyncio.log import logger
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 from time import perf_counter
 from com.ankamagames.jerakine.resources.loaders.MapLoader import MapLoader
 from com.ankamagames.atouin.data.map.map import CellData, Map

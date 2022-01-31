@@ -3,8 +3,8 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
    from com.ankamagames.dofus.datacenter.monsters.monsterGrade import MonsterGrade
 from com.ankamagames.dofus.types.idAccessors import IdAccessors
-from ankamagames.jerakine.data.I18n import I18n
-from ankamagames.jerakine.data.GameData import GameData
+from com.ankamagames.jerakine.data.I18n import I18n
+from com.ankamagames.jerakine.data.GameData import GameData
 
 
 class MonsterRace:

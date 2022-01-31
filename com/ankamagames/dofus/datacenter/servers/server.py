@@ -1,5 +1,5 @@
-import logging
-from ankamagames.jerakine.data import I18n
+from com.ankamagames.jerakine.logger.Logger import Logger
+from com.ankamagames.jerakine.data import I18n
 from com.ankamagames.dofus.types.idAccessors import IdAccessors
 from com.ankamagames.jerakine.data import GameData
 from com.ankamagames.jerakine.interfaces.iDatacenter import IDataCenter

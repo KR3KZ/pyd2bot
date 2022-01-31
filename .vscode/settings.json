@@ -1,6 +1,5 @@
 {
     "python.analysis.extraPaths": [
-        "./com"
     ],
     "python.linting.enabled": true
 }

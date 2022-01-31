@@ -1,7 +1,4 @@
-
-
-from black import Any
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 if TYPE_CHECKING:
    from com.ankamagames.jerakine.newCache.iCacheGarbageCollector import ICacheGarbageCollector
 from com.ankamagames.jerakine.newCache.iCache import ICache

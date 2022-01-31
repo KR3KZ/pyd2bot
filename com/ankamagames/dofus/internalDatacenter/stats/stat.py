@@ -1,4 +1,4 @@
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 from damageCalculation.tools import StatIds
 logger = Logger(__name__)
 

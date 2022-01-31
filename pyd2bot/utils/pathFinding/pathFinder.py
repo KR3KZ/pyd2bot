@@ -1,5 +1,5 @@
 from pyd2bot.utils.pathFinding.path import Path, PathNode
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 logger = Logger(__name__)
 
 

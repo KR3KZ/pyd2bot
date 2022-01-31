@@ -1,5 +1,5 @@
 import argparse
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 from . import ui
 
 logger = logging.getLogger("labot")

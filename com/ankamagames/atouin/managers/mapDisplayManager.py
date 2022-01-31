@@ -1,8 +1,8 @@
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 import sys
 from time import perf_counter
 from com.ankamagames.atouin.data.map.map import Map
-import com.ankamagames.atouin.utils.dataMapProvider as dmpm
+import com.ankamagames.atouin.utils.DataMapProvider as dmpm
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 from com.ankamagames.jerakine.resources.loaders.MapLoader import MapLoader
 from com.ankamagames.jerakine.types.positions.worldPoint import WorldPoint

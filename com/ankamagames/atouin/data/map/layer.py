@@ -1,6 +1,6 @@
 from com.ankamagames.atouin.data.map.elements.GraphicalElement import GraphicalElement
 from com.ankamagames.atouin.data.map.elements.soundElement import SoundElement
-from ankamagames.jerakine.data.BinaryStream import BinaryStream
+from com.ankamagames.jerakine.data.BinaryStream import BinaryStream
 
 
 class Layer:

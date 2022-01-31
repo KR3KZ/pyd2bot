@@ -1,7 +1,7 @@
 from typing import TYPE_CHECKING
-from ankamagames.jerakine.logger.Logger import Logger
+from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.enum.gameDataTypeEnum import GameDataTypeEnum
-from ankamagames.jerakine.data.BinaryStream import BinaryStream
+from com.ankamagames.jerakine.data.BinaryStream import BinaryStream
 if TYPE_CHECKING:
    from ankamagames.jerakine.data.ModuleReader import ModuleReader
 logger = Logger(__name__)

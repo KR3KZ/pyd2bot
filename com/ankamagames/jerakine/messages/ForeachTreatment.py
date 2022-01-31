@@ -1,5 +1,7 @@
 from types import FunctionType
-from com.ankamagames.jerakine.managers.Worker import Worker
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+   from com.ankamagames.jerakine.managers.Worker import Worker
 from com.ankamagames.jerakine.messages.Treatment import Treatment
 
 
@@ -7,9 +9,9 @@ class ForeachTreatment(Treatment):
       
       _iterator:int = 0
       
-      _worker:Worker
+      _worker:'Worker'
       
-      def __init__(self, obj, func:FunctionType, params:list, iterable, worker:Worker):
+      def __init__(self, obj, func:FunctionType, params:list, iterable, worker:'Worker'):
          self.params = []
          self.params.insert(0, None)
          super().__init__(obj, func, params)

@@ -3,9 +3,9 @@ import sys
 from typing import Any, TYPE_CHECKING
 if TYPE_CHECKING:
    from ankamagames.jerakine.data.ModuleReader import ModuleReader
-from ankamagames.jerakine.data.IposInit import IPostInit
-from ankamagames.jerakine.data.BinaryStream import BinaryStream
-from ankamagames.jerakine.data.GameDataField import GameDataField
+from com.ankamagames.jerakine.data.IposInit import IPostInit
+from com.ankamagames.jerakine.data.BinaryStream import BinaryStream
+from com.ankamagames.jerakine.data.GameDataField import GameDataField
 
 
 class GameDataClassDefinition:

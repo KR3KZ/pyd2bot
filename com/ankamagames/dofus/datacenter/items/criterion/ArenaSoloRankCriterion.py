@@ -1,5 +1,12 @@
-               
-   class ArenaSoloRankCriterion(ItemCriterion implements IDataCenter):
+from com.ankamagames.dofus.datacenter.items.criterion.IItemCriterion import IItemCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterion import ItemCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterionOperator import ItemCriterionOperator
+from com.ankamagames.dofus.kernel.kernel import Kernel
+from com.ankamagames.jerakine.data.I18n import I18n
+from com.ankamagames.jerakine.interfaces.iDatacenter import IDataCenter
+
+
+class ArenaSoloRankCriterion(ItemCriterion, IDataCenter):
        
       
       def __init__(self, pCriterion:str):
@@ -19,4 +26,4 @@
       
       def getCriterion(self) -> int:
          frame:PartyManagementFrame = Kernel.getWorker().getFrame(PartyManagementFrame)
-         return int(frame and frame.arenaRankSoloInfos ? int(frame.arenaRankSoloInfos.rank) : 0)
+         return frame and int(frame.arenaRankSoloInfos) ? int(frame.arenaRankSoloInfos.rank) : 0

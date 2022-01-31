@@ -1,4 +1,4 @@
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 from types import FunctionType
 from whistle import Event, EventDispatcher
 from com.ankamagames.jerakine.network.iServerConnection import IServerConnection

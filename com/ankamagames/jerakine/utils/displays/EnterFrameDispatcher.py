@@ -1,4 +1,4 @@
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 from threading import Event
 from time import perf_counter
 from types import FunctionType

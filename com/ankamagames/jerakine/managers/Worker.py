@@ -1,4 +1,5 @@
-import logging
+from whistle import EventDispatcher
+from com.ankamagames.jerakine.logger.Logger import Logger
 from mailbox import Message
 from threading import Event
 from time import perf_counter
@@ -14,10 +15,9 @@ from com.ankamagames.jerakine.messages.messageHandler import MessageHandler
 from com.ankamagames.jerakine.messages.queueableMessage import QueueableMessage
 from com.ankamagames.jerakine.pools.genericPool import GenericPool
 from com.ankamagames.jerakine.pools.poolable import Poolable
-from com.ankamagames.jerakine.utils.displays.EnterFrameDispatcher import EnterFrameDispatcher
+import com.ankamagames.jerakine.utils.displays.EnterFrameDispatcher as efd
 from com.ankamagames.jerakine.utils.displays.FrameIdManager import FrameIdManager
 from com.ankamagames.jerakine.utils.misc.PriorityComparer import PriorityComparer
-from com.ankamagames.tubul.interfaces.eventDispatcher import EventDispatcher
 logger = Logger(__name__)
 
 
@@ -76,17 +76,17 @@ class Worker(EventDispatcher, MessageHandler):
    
    def addSingleTreatmentAtPos(self, object, func:FunctionType, params:list, pos:int) -> None:
       if len(self._treatmentsQueue) == 0:
-         EnterFrameDispatcher().addWorker(self)
+         efd.EnterFrameDispatcher().addWorker(self)
       self._treatmentsQueue.insert(pos,Treatment(object,func,params))
    
    def addSingleTreatment(self, object, func:FunctionType, params:list) -> None:
       if len(self._treatmentsQueue) == 0:
-         EnterFrameDispatcher().addWorker(self)
+         efd.EnterFrameDispatcher().addWorker(self)
       self._treatmentsQueue.append(Treatment(object,func,params))
    
    def addUniqueSingleTreatment(self, object, func:FunctionType, params:list) -> None:
       if len(self._treatmentsQueue) == 0:
-         EnterFrameDispatcher().addWorker(self)
+         efd.EnterFrameDispatcher().addWorker(self)
       if not self.hasSingleTreatment(object,func,params):
          self._treatmentsQueue.append(Treatment(object,func,params))
    
@@ -94,17 +94,17 @@ class Worker(EventDispatcher, MessageHandler):
       if iterations == 0:
          return
       if len(self._treatmentsQueue) == 0:
-         EnterFrameDispatcher().addWorker(self)
+         efd.EnterFrameDispatcher().addWorker(self)
       self._treatmentsQueue.append(ForTreatment(object,func,params,iterations,self))
    
    def addForeachTreatment(self, object, func:FunctionType, params:list, iterable) -> None:
       if len(self._treatmentsQueue) == 0:
-         EnterFrameDispatcher().addWorker(self)
+         efd.EnterFrameDispatcher().addWorker(self)
       self._treatmentsQueue.append(ForeachTreatment(object,func,params,iterable,self))
    
    def addWhileTreatment(self, object, func:FunctionType, params:list) -> None:
       if len(self._treatmentsQueue) == 0:
-         EnterFrameDispatcher().addWorker(self)
+         efd.EnterFrameDispatcher().addWorker(self)
       self._treatmentsQueue.append(WhileTreatment(object,func,params))
    
    def hasSingleTreatment(self, object, func:FunctionType, params:list) -> bool:
@@ -265,22 +265,22 @@ class Worker(EventDispatcher, MessageHandler):
       self._currentFrameTypesCache = dict()
       for frame in nonPulledFrameList:
          self.appendFrame(frame)
-      EnterFrameDispatcher().removeWorker()
+      efd.EnterFrameDispatcher().removeWorker()
       self._paused = False
    
    def onEnterFrame(self, e:Event) -> None:
       self.processQueues()
    
    def run(self) -> None:
-      EnterFrameDispatcher().addWorker(self)
+      efd.EnterFrameDispatcher().addWorker(self)
    
    def appendFrame(self, frame:Frame) -> None:
       if frame.appended():
          self._framesList.append(frame)
          self._framesList.sort(PriorityComparer.compare)
          self._currentFrameTypesCache[type(frame)] = frame
-         # if hasEventListener(FramePushedEvent.EVENT_FRAME_PUSHED):
-         #    dispatchEvent(FramePushedEvent(frame))
+         if self.has_listeners(FramePushedEvent.EVENT_FRAME_PUSHED):
+            self.dispatch(FramePushedEvent.EVENT_FRAME_PUSHED, FramePushedEvent(frame))
       else:
          logger.warn("Frame " + frame + " refused to be.appended.")
    
@@ -292,8 +292,8 @@ class Worker(EventDispatcher, MessageHandler):
             self._framesList.splice(index, 1)
             del self._currentFrameTypesCache[type(frame)]
             del self._framesBeingDeleted[frame]
-         # if hasEventListener(FramePulledEvent.EVENT_FRAME_PULLED):
-         #    dispatchEvent(FramePulledEvent(frame))
+         if self.has_listeners(FramePulledEvent.EVENT_FRAME_PULLED):
+            self.dispatch(FramePulledEvent.EVENT_FRAME_PULLED, FramePulledEvent(frame))
       else:
          logger.warn("Frame " + frame + " refused to be pulled.")
    
@@ -318,7 +318,7 @@ class Worker(EventDispatcher, MessageHandler):
                   if len(self._treatmentsQueue) == 0:
                      self.processFramesInAndOut()
       if len(self._messagesQueue) == 0 and len(self._treatmentsQueue) == 0:
-         EnterFrameDispatcher().removeWorker()
+         efd.EnterFrameDispatcher().removeWorker()
    
    def processTreatments(self, startTime:int, maxTime:int) -> None:
       treatment:Treatment = None

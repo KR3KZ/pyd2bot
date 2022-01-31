@@ -1,16 +1,14 @@
 from time import perf_counter
 from types import FunctionType
 from whistle import Event
-from ankamagames.dofus.datacenter.items.criterion.GroupItemCriterion import GroupItemCriterion
-from ankamagames.dofus.datacenter.world.MapPosition import MapPosition
-from ankamagames.dofus.modules.utils.pathFinding.world.Edge import Edge
-from ankamagames.dofus.modules.utils.pathFinding.world.Node import Node
-from ankamagames.dofus.modules.utils.pathFinding.world.Transition import Transition
-from ankamagames.dofus.modules.utils.pathFinding.world.Vertex import Vertex
-from ankamagames.dofus.modules.utils.pathFinding.world.WorldGraph import WorldGraph
-from ankamagames.jerakine.logger.Logger import Logger
-from ankamagames.jerakine.utils.displays.EnterFrameConst import EnterFrameConst
-from ankamagames.jerakine.utils.displays.EnterFrameDispatcher import EnterFrameDispatcher
+from com.ankamagames.dofus.datacenter.world.MapPosition import MapPosition
+from com.ankamagames.dofus.modules.utils.pathFinding.world.Edge import Edge
+from com.ankamagames.dofus.modules.utils.pathFinding.world.Node import Node
+from com.ankamagames.dofus.modules.utils.pathFinding.world.Vertex import Vertex
+from com.ankamagames.dofus.modules.utils.pathFinding.world.WorldGraph import WorldGraph
+from com.ankamagames.jerakine.logger.Logger import Logger
+from com.ankamagames.jerakine.utils.displays.EnterFrameConst import EnterFrameConst
+from com.ankamagames.jerakine.utils.displays.EnterFrameDispatcher import EnterFrameDispatcher
 logger = Logger(__name__)
 
 
@@ -117,6 +115,7 @@ class AStar:
    
    @staticmethod
    def hasValidTransition(edge:Edge) -> bool:
+      from com.ankamagames.dofus.datacenter.items.criterion.GroupItemCriterion import GroupItemCriterion
       criterionWhiteList:list = ["Ad","DM","MI","Mk","Oc","Pc","QF","Qo","Qs","Sv"]
       valid:bool = False
       for transition in edge.transitions:

@@ -1,7 +1,7 @@
 from threading import Event
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 from com.ankamagames.jerakine.utils.displays.EnterFrameConst import EnterFrameConst
-from com.ankamagames.jerakine.utils.displays.EnterFrameDispatcher import EnterFrameDispatcher
+import com.ankamagames.jerakine.utils.displays.EnterFrameDispatcher as efd
 
 
 class FrameIdManager(metaclass=Singleton):
@@ -10,7 +10,7 @@ class FrameIdManager(metaclass=Singleton):
     def __init__(self):
         self._init:bool = False
         self._frameId:int = 0
-        EnterFrameDispatcher().addEventListener(self.onEnterFrame, EnterFrameConst.FRAME_ID_MANAGER)
+        efd.EnterFrameDispatcher().addEventListener(self.onEnterFrame, EnterFrameConst.FRAME_ID_MANAGER)
     
     @property
     def frameId(self) -> int:

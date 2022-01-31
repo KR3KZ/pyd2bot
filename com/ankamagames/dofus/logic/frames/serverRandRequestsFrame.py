@@ -1,4 +1,4 @@
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from pyd2bot.bot import IBot

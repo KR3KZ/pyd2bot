@@ -1,4 +1,4 @@
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.entities.interfaces.IEntity import IEntity
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 logger = Logger(__name__)  

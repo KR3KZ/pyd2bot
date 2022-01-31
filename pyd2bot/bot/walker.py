@@ -1,5 +1,5 @@
 from time import sleep
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 import random
 from .bot import Bot
 logger = Logger(__name__)

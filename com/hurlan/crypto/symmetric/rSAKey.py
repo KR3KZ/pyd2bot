@@ -1,5 +1,5 @@
 
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 from Cryptodome.PublicKey import RSA as RSA
 from com.ankamagames.jerakine.network.customDataWrapper import ByteArray
 from com.hurlan.crypto.symmetric.iPad import IPad 

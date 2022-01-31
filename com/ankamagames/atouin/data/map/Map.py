@@ -1,8 +1,8 @@
 from com.ankamagames.atouin.data.map.fixture import Fixture
 from com.ankamagames.atouin.data.map.CellData import CellData
 from com.ankamagames.atouin.data.map.layer import Layer
-from ankamagames.jerakine.data.BinaryStream import BinaryStream
-import logging
+from com.ankamagames.jerakine.data.BinaryStream import BinaryStream
+from com.ankamagames.jerakine.logger.Logger import Logger
 logger = Logger(__name__)
 
     

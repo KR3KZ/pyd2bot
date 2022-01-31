@@ -115,7 +115,3 @@ class EnterFrameConst(Enum):
     YOU_HAVE_ME:str = "youHaveMe"
     
     ANOTHER_USELESS_FUNCTION:str = "anotherUselessFunctionType"
-    
-    
-    def __init__(self):
-        super().__init__()

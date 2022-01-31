@@ -5,7 +5,7 @@ from pyd2bot.utils.crypto import RSA, RSACipher, PKCS1
 from pyd2bot.utils.binaryIO import ByteArray
 from pyd2bot.logic.frames import IFrame
 from com.ankamagames.dofus.network.enums.ServerStatusEnum import ServerStatusEnum
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 logger = Logger(__name__)
 
 

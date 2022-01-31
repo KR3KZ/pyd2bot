@@ -1,10 +1,10 @@
 from collections import OrderedDict
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 from typing import Any
-from ankamagames.jerakine.data.GameDataProcess import GameDataProcess
+from com.ankamagames.jerakine.data.GameDataProcess import GameDataProcess
 from com.hurlan.crypto.signature import Signature
-from ankamagames.jerakine.data.BinaryStream import BinaryStream
-from ankamagames.jerakine.data.GameDataClassDefinition import GameDataClassDefinition
+from com.ankamagames.jerakine.data.BinaryStream import BinaryStream
+from com.ankamagames.jerakine.data.GameDataClassDefinition import GameDataClassDefinition
 logger = Logger(__name__)
 
 

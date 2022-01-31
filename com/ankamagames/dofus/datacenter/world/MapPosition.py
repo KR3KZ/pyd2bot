@@ -1,11 +1,10 @@
-from ankamagames.dofus.datacenter.world.MapCoordinates import MapCoordinates
-from ankamagames.dofus.types.idAccessors import IdAccessors
-from ankamagames.jerakine.data.GameData import GameData
-from ankamagames.jerakine.data.I18n import I18n
-from ankamagames.jerakine.interfaces.iDatacenter import IDataCenter
-from ankamagames.jerakine.logger.Logger import Logger
-from ankamagames.jerakine.types.dataStoreType import DataStoreType
-from ankamagames.jerakine.types.enums.dataStoreEnum import DataStoreEnum
+from com.ankamagames.dofus.types.idAccessors import IdAccessors
+from com.ankamagames.jerakine.data.GameData import GameData
+from com.ankamagames.jerakine.data.I18n import I18n
+from com.ankamagames.jerakine.interfaces.iDatacenter import IDataCenter
+from com.ankamagames.jerakine.logger.Logger import Logger
+from com.ankamagames.jerakine.types.dataStoreType import DataStoreType
+from com.ankamagames.jerakine.types.enums.dataStoreEnum import DataStoreEnum
 logger = Logger(__name__)
 
 
@@ -91,7 +90,7 @@ class MapPosition(IDataCenter):
       
       _name:str
       
-      _subArea:SubArea
+      _subArea:'SubArea'
       
       def __init__(self):
          super().__init__()
@@ -106,6 +105,7 @@ class MapPosition(IDataCenter):
       
       @staticmethod
       def getMapIdByCoord(x:int, y:int) -> list[float]:
+         from com.ankamagames.dofus.datacenter.world.MapCoordinates import MapCoordinates
          mc:MapCoordinates = MapCoordinates.getMapCoordinatesByCoords(x,y)
          if mc:
             return mc.mapIds
@@ -120,7 +120,8 @@ class MapPosition(IDataCenter):
          return self._name
       
       @property
-      def subArea(self) -> SubArea:
+      def subArea(self) -> 'SubArea':
+         from com.ankamagames.dofus.datacenter.world.SubArea import SubArea
          if not self._subArea:
             self._subArea = SubArea.getSubAreaById(self.subAreaId)
          return self._subArea

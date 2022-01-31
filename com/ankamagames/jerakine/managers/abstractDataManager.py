@@ -1,5 +1,5 @@
                                  
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 import math
 from com.ankamagames.jerakine import JerakineConstants
 from com.ankamagames.jerakine.managers.storeDataManager import StoreDataManager

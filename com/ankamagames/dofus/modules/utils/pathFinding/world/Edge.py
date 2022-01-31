@@ -1,5 +1,5 @@
-from ankamagames.dofus.modules.utils.pathFinding.world.Transition import Transition
-from ankamagames.dofus.modules.utils.pathFinding.world.Vertex import Vertex
+from com.ankamagames.dofus.modules.utils.pathFinding.world.Transition import Transition
+from com.ankamagames.dofus.modules.utils.pathFinding.world.Vertex import Vertex
 
 
 class Edge:

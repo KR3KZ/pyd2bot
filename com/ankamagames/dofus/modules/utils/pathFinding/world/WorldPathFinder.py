@@ -1,18 +1,17 @@
 from types import FunctionType
-from ankamagames.dofus.modules.utils.pathFinding.world.Edge import Edge
-from ankamagames.dofus.modules.utils.pathFinding.world.Vertex import Vertex
-from ankamagames.dofus.modules.utils.pathFinding.world.WorldGraph import WorldGraph
+from com.ankamagames.dofus import Constants
+from com.ankamagames.dofus.modules.utils.pathFinding.astar.AStar import AStar
+from com.ankamagames.dofus.modules.utils.pathFinding.world.Edge import Edge
+from com.ankamagames.dofus.modules.utils.pathFinding.world.Vertex import Vertex
+from com.ankamagames.dofus.modules.utils.pathFinding.world.WorldGraph import WorldGraph
 from com.ankamagames.atouin.data.map.CellData import CellData
 from com.ankamagames.atouin.managers.MapDisplayManager import MapDisplayManager
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
 from com.ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEntities
-from com.ankamagames.dofus.modules.utils.pathfinding.astar.AStar import AStar
-from com.ankamagames.dofus.modules.utils.pathfinding.tools.FileLoader import FileLoader
 from com.ankamagames.dofus.modules.utils.pathFinding.tools.TimeDebug import TimeDebug
-from com.ankamagames.jerakine.data.XmlConfig import XmlConfig
 from com.ankamagames.jerakine.entities.interfaces.IEntity import IEntity
 from com.ankamagames.jerakine.logger.Logger import Logger
-from com.ankamagames.jerakine.resources.events.ResourceLoadedEvent import ResourceLoadedEvent
+from com.ankamagames.jerakine.network.customDataWrapper import ByteArray
 logger = Logger(__name__)
 
 
@@ -20,7 +19,7 @@ class WorldPathFinder:
     
     playedCharacterManager:PlayedCharacterManager
     
-    worldGraph:WorldGraph
+    worldGraph:WorldGraph = None
     
     callback:FunctionType
     
@@ -35,22 +34,21 @@ class WorldPathFinder:
         super().__init__()
 
     def init(self) -> None:
-        if WorldPathFinder.isInitialized():
+        if self.isInitialized():
             return
-        playedCharacterManager = PlayedCharacterManager()
-        FileLoader.loadExternalFile(XmlConfig().getEntry("config.data.pathFinding"), WorldPathFinder.setData)
-        
+        # self.playedCharacterManager = PlayedCharacterManager()
+        with open(Constants.WORLDGRAPH_PATH, "rb") as binaries:
+            data = binaries.read()
+            self.worldGraph = WorldGraph(ByteArray(data))
+
     def getWorldGraph(self) -> WorldGraph:
         return self.worldGraph
         
     def isInitialized(self) -> bool:
         return self.worldGraph != None
-
-    def setData(self, e:ResourceLoadedEvent) -> None:
-        worldGraph = WorldGraph(e.resource)
         
     def findPath(self, destinationMapId:float, callback:FunctionType) -> None:
-        if not WorldPathFinder.isInitialized():
+        if not self.isInitialized():
             callback(None)
             return
         playedCharacterManager = PlayedCharacterManager()
@@ -95,3 +93,7 @@ class WorldPathFinder:
             cb(None)
             return
         AStar.search(self.worldGraph, self.src, dstV, self.onAStarComplete)
+
+
+if __name__ == "__main__":
+    WorldPathFinder().init()

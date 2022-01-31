@@ -1,4 +1,4 @@
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.resources.loaders.MapLoader import MapLoader
 from pyd2bot.logic.frames import IFrame
 logger = Logger(__name__)

@@ -1,16 +1,19 @@
-import logging
-from com.ankamagames.dofus.datacenter.items.criterion.Item import Item
+import com.ankamagames.dofus.kernel.kernel as knl
+from com.ankamagames.dofus.network.types.game.character.characteristic.CharacterCharacteristicsInformations import CharacterCharacteristicsInformations
+from com.ankamagames.jerakine.logger.Logger import Logger
+# from com.ankamagames.dofus.datacenter.items.criterion.Item import Item
 from com.ankamagames.dofus.datacenter.spells.SpellState import SpellState
 from com.ankamagames.dofus.internalDatacenter.dataEnum import DataEnum
 from com.ankamagames.dofus.internalDatacenter.stats.entityStats import EntityStats
 from com.ankamagames.dofus.logic.common.managers.statsManager import StatsManager
-from ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEntities
-from ankamagames.dofus.logic.game.fight.managers.FightersStateManager import FightersStateManager
-from ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
+from com.ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEntities
+from com.ankamagames.dofus.logic.game.fight.managers.FightersStateManager import FightersStateManager
+import com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager as pc
 from com.ankamagames.dofus.types.entities.animatedCharacter import AnimatedCharacter
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 from damageCalculation.tools import StatIds
 logger = Logger(__name__)
+
 
 class CurrentPlayedFighterManager(metaclass=Singleton):
    
@@ -43,7 +46,7 @@ class CurrentPlayedFighterManager(metaclass=Singleton):
          return
       lastFighterId:float = self._currentFighterId
       self._currentFighterId = id
-      playerManager:PlayedCharacterManager = PlayedCharacterManager()
+      playerManager = pc.PlayedCharacterManager()
       self._currentFighterIsRealPlayer = self._currentFighterId == playerManager.id
       lastFighterEntity:AnimatedCharacter = DofusEntities.getEntity(lastFighterId)
       if lastFighterEntity:
@@ -60,7 +63,7 @@ class CurrentPlayedFighterManager(metaclass=Singleton):
             KernelEventsManager().processCallback(FightHookList.SlaveStatsList, self.getCharacteristicsInformations())
    
    def checkPlayableEntity(self, id:float) -> bool:
-      if id == PlayedCharacterManager().id:
+      if id == pc.PlayedCharacterManager().id:
          return True
       return self._characteristicsInformationsList.get(id) != None
    
@@ -68,14 +71,14 @@ class CurrentPlayedFighterManager(metaclass=Singleton):
       return self._currentFighterIsRealPlayer
    
    def resetPlayerSpellList(self) -> None:
-      playerManager:PlayedCharacterManager = PlayedCharacterManager()
+      playerManager = pc.PlayedCharacterManager()
       inventoryManager:InventoryManager = InventoryManager()
       if playerManager.spellsInventory != playerManager.playerSpellList:
          logger.info("Remise à jour de la liste des sorts du joueur")
          playerManager.spellsInventory = playerManager.playerSpellList
          KernelEventsManager().processCallback(HookList.SpellListUpdate,playerManager.playerSpellList)
-         if Kernel.getWorker().contains(FightSpellCastFrame):
-            Kernel.getWorker().removeFrame(Kernel.getWorker().getFrame(FightSpellCastFrame))
+         if knl.Kernel.getWorker().contains(FightSpellCastFrame):
+            knl.Kernel.getWorker().removeFrame(knl.Kernel.getWorker().getFrame(FightSpellCastFrame))
       if inventoryManager.shortcutBarSpells != playerManager.playerShortcutList:
          inventoryManager.shortcutBarSpells = playerManager.playerShortcutList
          KernelEventsManager().processCallback(InventoryHookList.ShortcutBarViewContent,ShortcutBarEnum.SPELL_SHORTCUT_BAR)
@@ -84,7 +87,7 @@ class CurrentPlayedFighterManager(metaclass=Singleton):
       self._characteristicsInformationsList[id] = characteristics
    
    def getCharacteristicsInformations(self, id:float = 0) -> CharacterCharacteristicsInformations:
-      player:PlayedCharacterManager = PlayedCharacterManager()
+      player = pc.PlayedCharacterManager()
       if id:
          if id == player.id:
             return player.characteristics
@@ -119,7 +122,7 @@ class CurrentPlayedFighterManager(metaclass=Singleton):
    
    def getSpellById(self, spellId:int) -> SpellWrapper:
       spellKnown:SpellWrapper = None
-      player:PlayedCharacterManager = PlayedCharacterManager()
+      player = pc.PlayedCharacterManager()
       for spellKnown in player.spellsInventory:
          if spellKnown.id == spellId:
             return spellKnown
@@ -144,7 +147,7 @@ class CurrentPlayedFighterManager(metaclass=Singleton):
       spellLevel:SpellLevel = spell.getSpellLevel(lvl)
       if spellLevel == None:
          return False
-      player = PlayedCharacterManager()
+      player = pc.PlayedCharacterManager()
       if self._currentFighterIsRealPlayer:
          if spellId == 0:
             if player.currentWeapon:
@@ -222,8 +225,8 @@ class CurrentPlayedFighterManager(metaclass=Singleton):
       return True
    
    def endFight(self) -> None:
-      if PlayedCharacterManager().id != self._currentFighterId:
-         self.currentFighterId = PlayedCharacterManager().id
+      if pc.PlayedCharacterManager().id != self._currentFighterId:
+         self.currentFighterId = pc.PlayedCharacterManager().id
          self.resetPlayerSpellList()
          self.updatePortrait(DofusEntities.getEntity(self._currentFighterId))
       self._currentFighterId = 0

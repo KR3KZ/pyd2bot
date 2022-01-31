@@ -1,6 +1,6 @@
-from ankamagames.dofus.modules.utils.pathFinding.world.Edge import Edge
-from ankamagames.dofus.modules.utils.pathFinding.world.Vertex import Vertex
-from ankamagames.jerakine.network.customDataWrapper import ByteArray
+from com.ankamagames.dofus.modules.utils.pathFinding.world.Edge import Edge
+from com.ankamagames.dofus.modules.utils.pathFinding.world.Vertex import Vertex
+from com.ankamagames.jerakine.network.customDataWrapper import ByteArray
 
 
 class WorldGraph:
@@ -30,9 +30,9 @@ class WorldGraph:
       return self._edges
    
    def addVertex(self, mapId:float, zone:int) -> Vertex:
-      if self._vertices[mapId] == None:
+      if self._vertices.get(mapId) == None:
          self._vertices[mapId] = dict()
-      vertex:Vertex = self._vertices[mapId][zone]
+      vertex:Vertex = self._vertices[mapId].get(zone)
       if vertex == None:
          vertex = Vertex(mapId,zone,self._vertexUid)
          self._vertexUid += 1
@@ -40,7 +40,7 @@ class WorldGraph:
       return vertex
       
    def getVertex(self, mapId:float, mapRpZone:int) -> Vertex:
-      if self._vertices[mapId] == None:
+      if self._vertices.get(mapId) == None:
          return None
       return self._vertices[mapId][mapRpZone]
    
@@ -48,9 +48,9 @@ class WorldGraph:
       return self._outgoingEdges[src.UID]
    
    def getEdge(self, src:Vertex, dest:Vertex) -> Edge:
-      if self._edges[src.UID] == None:
+      if self._edges.get(src.UID) == None:
          return None
-      return self._edges[src.UID][dest.UID]
+      return self._edges[src.UID].get(dest.UID)
       
    def addEdge(self, src:Vertex, dest:Vertex) -> Edge:
       edge:Edge = self.getEdge(src,dest)
@@ -59,10 +59,10 @@ class WorldGraph:
       if not self.doesVertexExist(src) or not self.doesVertexExist(dest):
          return None
       edge = Edge(src,dest)
-      if self._edges[src.UID] == None:
+      if self._edges.get(src.UID) == None:
          self._edges[src.UID] = dict()
       self._edges[src.UID][dest.UID] = edge
-      outgoing:list[Edge] = self._outgoingEdges[src.UID]
+      outgoing:list[Edge] = self._outgoingEdges.get(src.UID)
       if outgoing == None:
          outgoing = list[Edge]()
          self._outgoingEdges[src.UID] = outgoing

@@ -1,4 +1,5 @@
-from ankamagames.dofus.modules.utils.pathFinding.world.Vertex import Vertex
+from com.ankamagames.dofus.datacenter.world.MapPosition import MapPosition
+from com.ankamagames.dofus.modules.utils.pathFinding.world.Vertex import Vertex
 
 
 class Node:

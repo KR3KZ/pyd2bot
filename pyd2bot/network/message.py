@@ -1,4 +1,4 @@
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 
 from com.ankamagames.jerakine.network.customDataWrapper import Buffer, ByteArray
 from pyd2bot.network.NetMsgClassDef import NetMsgClassDef

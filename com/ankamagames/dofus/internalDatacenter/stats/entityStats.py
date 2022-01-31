@@ -1,7 +1,7 @@
                            
 
    
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.dofus.internalDatacenter.stats.detailedStats import DetailedStat
 from com.ankamagames.dofus.internalDatacenter.stats.stat import Stat
 from com.ankamagames.dofus.internalDatacenter.stats.usableStat import UsableStat

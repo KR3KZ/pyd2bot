@@ -1,6 +1,6 @@
 from argparse import ArgumentError
 import os
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 from com.ankamagames.jerakine.network.customDataWrapper import ByteArray
 from com.hurlan.crypto.symmetric.aESKey import AESKey

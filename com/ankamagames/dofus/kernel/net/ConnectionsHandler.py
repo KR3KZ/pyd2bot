@@ -1,5 +1,5 @@
 from ctypes import ArgumentError
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.network.iServerConnection import IServerConnection
 from com.ankamagames.dofus.kernel.kernel import Kernel
 from com.ankamagames.dofus.kernel.net.connectionType import ConnectionType

@@ -1,6 +1,6 @@
 from threading import Timer
 from com.ankamagames.jerakine.benchmark.FileLoggerEnum import FileLoggerEnum
-from ankamagames.jerakine.logger.Logger import Logger
+from com.ankamagames.jerakine.logger.Logger import Logger
 
 
 class BenchmarkTimer(Timer):

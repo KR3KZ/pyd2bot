@@ -1,4 +1,10 @@
-import logging
+from com.ankamagames.dofus.datacenter.world.SubArea import SubArea
+from com.ankamagames.dofus.datacenter.world.WorldMap import WorldMap
+from com.ankamagames.dofus.network.types.game.character.restriction.ActorRestrictionsInformations import ActorRestrictionsInformations
+from com.ankamagames.dofus.network.types.game.context.roleplay.GuildInformations import GuildInformations
+from com.ankamagames.dofus.network.types.game.guild.application.GuildApplicationInformation import GuildApplicationInformation
+from com.ankamagames.dofus.network.types.game.havenbag.HavenBagRoomPreviewInformation import HavenBagRoomPreviewInformation
+from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.dofus.internalDatacenter.dataEnum import DataEnum
 from com.ankamagames.dofus.internalDatacenter.stats.entityStats import EntityStats
 from com.ankamagames.dofus.kernel.kernel import Kernel
@@ -15,6 +21,7 @@ logger = Logger(__name__)
 
 
 class PlayedCharacterManager(IDestroyable):
+   
    __metaclass__ = Singleton
    
    _isPartyLeader:bool = False
@@ -131,8 +138,8 @@ class PlayedCharacterManager(IDestroyable):
       self._followingPlayerIds = list[float]()
       self._soloIdols = list[int]()
       self._partyIdols = list[int]()
-      self._idolsPresets = list[IdolsPresetWrapper](0)
-      self._infosAvailableCallbacks = list[Callback](0)
+      self._idolsPresets = list[IdolsPresetWrapper]()
+      self._infosAvailableCallbacks = list[Callback]()
       self.playerForgettableSpelldict = dict()
       self.lastCoord = Point(0, 0)
       self.waitingGifts = list()

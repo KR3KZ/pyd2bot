@@ -1,6 +1,6 @@
 from com.ankamagames.dofus.types.idAccessors import IdAccessors
-from ankamagames.jerakine.data.GameData import GameData
-from ankamagames.jerakine.data.I18n import I18n
+from com.ankamagames.jerakine.data.GameData import GameData
+from com.ankamagames.jerakine.data.I18n import I18n
 from com.ankamagames.jerakine.interfaces.iDatacenter import IDataCenter
 
 

@@ -1,7 +1,7 @@
                         
-from ankamagames.jerakine.logger.Logger import Logger
-from ankamagames.jerakine.data.AbstractDataManager import AbstractDataManager
-from ankamagames.jerakine.data.GameDataFileAccessor import GameDataFileAccessor
+from com.ankamagames.jerakine.logger.Logger import Logger
+from com.ankamagames.jerakine.data.AbstractDataManager import AbstractDataManager
+from com.ankamagames.jerakine.data.GameDataFileAccessor import GameDataFileAccessor
 from com.ankamagames.jerakine.newCache.LruGarbageCollector import LruGarbageCollector
 from com.ankamagames.jerakine.newCache.impl.cache import Cache
 from com.ankamagames.jerakine.utils.memory.SoftReference import SoftReference

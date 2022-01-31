@@ -1,63 +1,66 @@
+from com.ankamagames.dofus.datacenter.world.MapPosition import MapPosition
+from com.ankamagames.jerakine.data.GameData import GameData
+from com.ankamagames.jerakine.interfaces.iDatacenter import IDataCenter
+from com.ankamagames.jerakine.logger.Logger import Logger
 
 
-import os
-import json
-from typing import Any
-from pyd2bot.gameData.world.mapPosition import MapPosition
+logger = Logger(__name__)
+class MapCoordinates(IDataCenter):
+      
+      MODULE:str = "MapCoordinates"
 
-ROOTDIR = os.path.dirname(__file__)
-
-
-class MapCoordinates:
-    MODULE = "MapCoordinates"
-    UNDEFINED_COORD = -2147483648
-    compressedCoords:int
-    mapIds:list[int]
-    _x = -2147483648
-    _y = -2147483648
-    _maps:list[MapPosition]
-    
-    with open(os.path.join(ROOTDIR, "MapCoordinates.json")) as fp:
-        _json = json.load(fp)
-    _coords = {}
-    for mcoord in _json:
-        _coords[int(mcoord["compressedCoords"])] = mcoord
-    
-    def __init__(self, dictionary:dict[str, Any]):
-        for k, v in dictionary.items():
-            setattr(self, k, v)
-            
-    def getMapCoordinatesByCompressedCoords(self, i:int) -> 'MapCoordinates': 
-        return MapCoordinates(MapCoordinates._coords[i])
-    
-    def getMapCoordinatesByCoords(self, i1:int, i2:int) -> 'MapCoordinates': 
-        return MapCoordinates.getMapCoordinatesByCompressedCoords((MapCoordinates.getCompressedValue(i1) << 16) + MapCoordinates.getCompressedValue(i2))
-    
-    @staticmethod
-    def getSignedValue(i:int) -> int: 
-        i2 = i & 32767
-        return -i2 if (i & 0x8000) > 0 else i2
-    
-    @staticmethod
-    def getCompressedValue(i:int) -> int: 
-        return (0x8000 | (i & 32767)) if i < 0 else i & 32767
-    
-    @property
-    def x(self) -> int: 
-        if self._x == self.UNDEFINED_COORD:
-            self._x = self.getSignedValue((self.compressedCoords & 0xFFFF0000) >> 16)
-        return self._x
-    
-    @property
-    def y(self) -> int: 
-        if self._y == self.UNDEFINED_COORD:
-            self._y = self.getSignedValue(self.compressedCoords & 0xFFFF)
-        return self._y
-    
-    def getMaps(self) -> list[MapPosition]: 
-        if self._maps == None: 
-            self._maps = list[MapPosition]()
-            for mapId in self.mapIds:
-                self._maps.append(MapPosition.getMapPositionById(mapId))
-        return self._maps
-    
+      UNDEFINED_COORD:int = int.MIN_VALUE
+      
+      compressedCoords:int
+      
+      mapIds:list[float]
+      
+      _x:int = -2147483648
+      
+      _y:int = -2147483648
+      
+      _maps:list[MapPosition]
+      
+      def __init__(self):
+         super().__init__()
+      
+      @classmethod
+      def getMapCoordinatesByCompressedCoords(cls, compressedCoords:int) -> 'MapCoordinates':
+         return GameData.getobject(cls.MODULE, compressedCoords)
+      
+      @classmethod
+      def getMapCoordinatesByCoords(cls, x:int, y:int) -> 'MapCoordinates':
+         xCompressed:int = cls.getCompressedValue(x)
+         yCompressed:int = cls.getCompressedValue(y)
+         return cls.getMapCoordinatesByCompressedCoords((xCompressed << 16) + yCompressed)
+      
+      @classmethod
+      def getSignedValue(cls, v:int) -> int:
+         isNegative = (v & 32768) > 0
+         TrueValue = v & 32767
+         return int(0 - TrueValue) if not isNegative else int(TrueValue)
+      
+      @staticmethod
+      def getCompressedValue(v:int) -> int:
+         return int(32768 | v & 32767) if v < 0 else int(v & 32767)
+      
+      @property
+      def x(self) -> int:
+         if self._x == self.UNDEFINED_COORD:
+            self._x = self.getSignedValue((self.compressedCoords & 4294901760) >> 16)
+         return self._x
+      
+      @property
+      def y(self) -> int:
+         if self._y == self.UNDEFINED_COORD:
+            self._y = self.getSignedValue(self.compressedCoords & 65535)
+         return self._y
+      
+      @property
+      def maps(self) -> list[MapPosition]:
+         i:int = 0
+         if not self._maps:
+            self._maps = len(list[MapPosition](self.mapIds),True)
+            for i in range(len(self.mapIds)):
+               self._maps[i] = MapPosition.getMapPositionById(self.mapIds[i])
+         return self._maps

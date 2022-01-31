@@ -1,4 +1,4 @@
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 import socket
 from pyd2bot.network.message import Message
 logger = Logger(__name__)

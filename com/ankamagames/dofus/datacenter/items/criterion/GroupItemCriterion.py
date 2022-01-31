@@ -1,13 +1,10 @@
-                     
 
-import logging
-
-from com.ankamagames.dofus.datacenter.items.criterion.IItemCriterion import \
-    IItemCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterion import ItemCriterion
+from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
+from com.ankamagames.jerakine.logger.Logger import Logger
+from com.ankamagames.dofus.datacenter.items.criterion.IItemCriterion import IItemCriterion
 from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterionFactory import ItemCriterionFactory
-
 from pyd2bot.utils import strUtils
-
 logger = Logger(__name__)
       
 

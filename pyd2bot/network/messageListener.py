@@ -1,4 +1,4 @@
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 import threading
 import signal
 from typing import TYPE_CHECKING

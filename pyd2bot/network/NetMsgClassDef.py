@@ -1,5 +1,5 @@
 import importlib
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 import sys
 from com.ankamagames.jerakine.network.customDataWrapper import ByteArray
 import pyd2bot.network.NetMsgDataField as nmdf

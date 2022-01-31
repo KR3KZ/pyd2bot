@@ -1,10 +1,9 @@
 # utf-8
 import io
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 import os
-import miniamf
 from com.ankamagames.dofus import Constants as Constants
-from ankamagames.jerakine.data.ModuleReader import \
+from com.ankamagames.jerakine.data.ModuleReader import \
     ModuleReader
 
 logger = Logger(__name__)

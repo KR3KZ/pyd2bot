@@ -1,7 +1,7 @@
 from damageCalculation.tools import StatIds
 from pyd2bot.gameData.enums.playerTypeEnum import PlayerTypeEnum
 
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 logger = Logger(__name__)
 
 class GameFightFrame(IFrame):

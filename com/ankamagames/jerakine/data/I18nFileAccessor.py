@@ -1,8 +1,8 @@
 
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 import pathlib
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
-from ankamagames.jerakine.data.BinaryStream import BinaryStream
+from com.ankamagames.jerakine.data.BinaryStream import BinaryStream
 logger = Logger(__name__)
 
 

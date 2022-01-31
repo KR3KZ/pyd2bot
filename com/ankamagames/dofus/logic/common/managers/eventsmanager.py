@@ -1,6 +1,6 @@
 
 from ast import FunctionType
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 import threading
 from pyd2bot.network.message import Message
 logger = Logger(__name__)

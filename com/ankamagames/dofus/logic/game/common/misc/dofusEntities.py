@@ -1,4 +1,6 @@
-import logging
+from com.ankamagames.dofus.logic.game.common.managers.EntitiesManager import EntitiesManager
+from com.ankamagames.dofus.logic.game.misc.IEntityLocalizer import IEntityLocalizer
+from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.entities.interfaces.IEntity import IEntity
 logger = Logger(__name__)
 
@@ -6,7 +8,6 @@ logger = Logger(__name__)
 class DofusEntities:
    
    LOCALIZER_DEBUG:bool = True
-   _atouin:Atouin = Atouin()
    _localizers:list[IEntityLocalizer] = list[IEntityLocalizer]()
 
    
@@ -17,7 +18,7 @@ class DofusEntities:
          foundEntity = localizer.getEntity(entityId)
          if foundEntity:
             return foundEntity
-      return cls._atouin.getEntity(entityId)
+      return EntitiesManager().getEntity(entityId)
    
    def registerLocalizer(cls, localizer:IEntityLocalizer) -> None:
       currentLocalizer:IEntityLocalizer = None

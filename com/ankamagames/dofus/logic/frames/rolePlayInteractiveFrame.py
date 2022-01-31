@@ -1,5 +1,5 @@
 from pyd2bot.logic.frames import IFrame
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 logger = Logger(__name__)
 
 

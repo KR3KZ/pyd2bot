@@ -5,7 +5,7 @@ if TYPE_CHECKING:
    from com.ankamagames.dofus.datacenter.monsters.monsterGrade import MonsterGrade
 from com.ankamagames.dofus.datacenter.monsters.monsterRace import MonsterRace
 from com.ankamagames.dofus.datacenter.items.criterion import GroupItemCriterion
-from ankamagames.jerakine.data.GameData import GameData
+from com.ankamagames.jerakine.data.GameData import GameData
 from com.ankamagames.dofus.types.idAccessors import IdAccessors
 
 

@@ -3,9 +3,9 @@ from typing import TYPE_CHECKING, Any
 if TYPE_CHECKING:
     from ankamagames.jerakine.data.GameDataProcess import GameDataProcess
     from ankamagames.jerakine.data.GameDataClassDefinition import GameDataClassDefinition
-from ankamagames.jerakine.data.ModuleReader import ModuleReader
+from com.ankamagames.jerakine.data.ModuleReader import ModuleReader
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
-from ankamagames.jerakine.data.BinaryStream import BinaryStream
+from com.ankamagames.jerakine.data.BinaryStream import BinaryStream
 
 
 class GameDataFileAccessor(metaclass=Singleton):

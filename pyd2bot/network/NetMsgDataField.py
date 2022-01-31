@@ -1,4 +1,4 @@
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 from tkinter import N
 from com.ankamagames.jerakine.network.customDataWrapper import ByteArray
 from protocolBuilder.typeEnum import TypeEnum

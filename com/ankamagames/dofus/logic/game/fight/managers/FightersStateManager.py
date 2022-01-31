@@ -1,4 +1,4 @@
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.dofus.datacenter.spells.SpellState import SpellState
 from com.ankamagames.dofus.logic.game.fight.types.FighterStatus import FighterStatus
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton

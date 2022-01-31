@@ -1,5 +1,5 @@
-from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 import logging
+from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 import datetime
 import os
 

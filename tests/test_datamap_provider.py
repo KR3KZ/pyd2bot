@@ -1,5 +1,5 @@
-from ankamagames.atouin.managers.MapDisplayManager import MapDisplayManager
-from com.ankamagames.atouin.utils.dataMapProvider import DataMapProvider
+from com.ankamagames.atouin.managers.MapDisplayManager import MapDisplayManager
+from com.ankamagames.atouin.utils.DataMapProvider import DataMapProvider
 from com.ankamagames.dofus.types.entities.animatedCharacter import AnimatedCharacter
 from com.ankamagames.jerakine.types.positions.mapPoint import MapPoint
 

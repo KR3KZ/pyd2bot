@@ -1,9 +1,28 @@
-from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
+
+from com.ankamagames.jerakine.network.customDataWrapper import ByteArray
+from com.ankamagames.jerakine.network.iNetworkType import INetworkType
 
 
-class MapCoordinates(INetworkMessage):
-    protocolId = 3568
-    worldX:int
-    worldY:int
-    
-    
+class MapCoordinates(INetworkType):
+      
+      protocolId:int = 3568
+       
+      
+      worldX:int = 0
+      
+      worldY:int = 0
+      
+      def __init__(self):
+         super().__init__()
+      
+      def getTypeId(self) -> int:
+         return 3568
+      
+      def initMapCoordinates(self, worldX:int = 0, worldY:int = 0) -> 'MapCoordinates':
+         self.worldX = worldX
+         self.worldY = worldY
+         return self
+      
+      def reset(self) -> None:
+         self.worldX = 0
+         self.worldY = 0

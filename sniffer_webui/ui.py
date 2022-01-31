@@ -1,7 +1,7 @@
 from os import path
 from uuid import uuid4 as uuid
 from pprint import pformat
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 import asyncio
 import threading
 from wdom.document import get_document, set_app

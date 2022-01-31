@@ -5,7 +5,7 @@ from pyd2bot.logic.managers import AuthentificationManager
 from pyd2bot.logic.managers.interClientManager import InterClientManager
 from com.ankamagames.dofus.network.enums.IdentificationFailureReasonsEnum import IdentificationFailureReasonEnum
 from pyd2bot.logic.frames import IFrame
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 logger = Logger(__name__)
 
 

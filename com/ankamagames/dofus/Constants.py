@@ -34,4 +34,8 @@ DOFUS_DATA_DIR = DOFUS_ROOTDIR / "data"
 
 DOFUS_COMMON_DIR = DOFUS_DATA_DIR / "common"
 
-PROTOCOL_SPEC_PATH = ROOTDIR / "network/protocol_spec.json"
+DOFUS_CONTENT_DIR = DOFUS_ROOTDIR / "content"
+
+PROTOCOL_SPEC_PATH = ROOTDIR / "network/spec.json"
+
+WORLDGRAPH_PATH = DOFUS_CONTENT_DIR / "maps" / "world-graph.binary"

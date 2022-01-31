@@ -1,7 +1,7 @@
 
 # représente une direction composée du sens et de la cellule sortante de la map
 from functools import lru_cache
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 import random
 from com.ankamagames.jerakine.resources.loaders.MapLoader import MapLoader
 from com.ankamagames.atouin.data.map.map import Map

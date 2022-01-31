@@ -1,4 +1,4 @@
-import logging
+from com.ankamagames.jerakine.logger.Logger import Logger
 import random
 from . import Walker
 logger = Logger(__name__)
