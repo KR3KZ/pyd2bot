@@ -1,6 +1,6 @@
 
 from com.ankamagames.jerakine.network.customDataWrapper import ByteArray
-from com.ankamagames.jerakine.network.iNetworkType import INetworkType
+from com.ankamagames.jerakine.network.INetworkType import INetworkType
 
 
 class MapCoordinates(INetworkType):

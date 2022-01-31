@@ -1,25 +1,14 @@
 from com.ankamagames.dofus.datacenter.alignments.AlignmentSide import AlignmentSide
 from com.ankamagames.dofus.datacenter.effects.Effect import Effect
-from com.ankamagames.dofus.datacenter.items.Item import Item
 from com.ankamagames.dofus.datacenter.items.ItemType import ItemType
 from com.ankamagames.dofus.datacenter.items.LegendaryPowerCategory import LegendaryPowerCategory
 from com.ankamagames.dofus.datacenter.jobs.Job import Job
-from com.ankamagames.dofus.datacenter.misc.CharacterXPMapping import CharacterXPMapping
 from com.ankamagames.dofus.datacenter.monsters.Monster import Monster
 from com.ankamagames.dofus.datacenter.monsters.MonsterRace import MonsterRace
 from com.ankamagames.dofus.datacenter.monsters.MonsterSuperRace import MonsterSuperRace
-from com.ankamagames.dofus.datacenter.spells.Spell import Spell
-from com.ankamagames.dofus.datacenter.spells.SpellLevel import SpellLevel
-from com.ankamagames.dofus.datacenter.spells.SpellState import SpellState
-from com.ankamagames.dofus.logic.game.fight.miscs.ActionIdProtocol import ActionIdProtocol
 from com.ankamagames.jerakine.data.I18n import I18n
-from com.ankamagames.jerakine.data.XmlConfig import XmlConfig
 from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
 from com.ankamagames.jerakine.logger.Logger import Logger
-from com.ankamagames.jerakine.utils.display.spellZone.SpellShapeEnum import SpellShapeEnum
-from com.ankamagames.jerakine.utils.misc.StringUtils import StringUtils
-from com.ankamagames.jerakine.utils.pattern.PatternDecoder import PatternDecoder
-from mapTools.SpellZone import SpellZone
 logger = Logger(__name__)
 
 class EffectInstance(IDataCenter):
@@ -253,6 +242,7 @@ class EffectInstance(IDataCenter):
    
    @staticmethod
    def getItemName(id:int) -> str:
+      from com.ankamagames.dofus.datacenter.items.Item import Item
       o:Item = Item.getItemById(id)
       return o.name if not o else EffectInstance.UNKNOWN_NAME
    

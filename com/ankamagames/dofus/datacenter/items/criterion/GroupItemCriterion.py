@@ -4,7 +4,8 @@ from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager imp
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.dofus.datacenter.items.criterion.IItemCriterion import IItemCriterion
 from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterionFactory import ItemCriterionFactory
-from pyd2bot.utils import strUtils
+from com.ankamagames.jerakine.utils.misc.StringUtils import StringUtils
+
 logger = Logger(__name__)
       
 
@@ -24,7 +25,7 @@ class GroupItemCriterion(IItemCriterion):
       if not pCriterion:
          return
       self._cleanCriterionTextForm = str.replace(self._cleanCriterionTextForm, " ", "")
-      delimitedlist:list[str] = strUtils.getDelimitedText(self._cleanCriterionTextForm,"(",")",True)
+      delimitedlist:list[str] = StringUtils.getDelimitedText(self._cleanCriterionTextForm,"(",")",True)
       if len(delimitedlist) > 0 and delimitedlist[0] == self._cleanCriterionTextForm:
          self._cleanCriterionTextForm = self._cleanCriterionTextForm.slice(1)
          self._cleanCriterionTextForm = len(self._cleanCriterionTextForm.slice(0,self._cleanCriterionTextForm) - 1)
@@ -153,8 +154,8 @@ class GroupItemCriterion(IItemCriterion):
       searchingstr:str = self._cleanCriterionTextForm
       self._criteria = list[IItemCriterion]()
       self._operators = list[str]()
-      andIndexes:list = strUtils.getAllIndexOf("&", searchingstr)
-      orIndexes:list = strUtils.getAllIndexOf("|", searchingstr)
+      andIndexes:list = StringUtils.getAllIndexOf("&", searchingstr)
+      orIndexes:list = StringUtils.getAllIndexOf("|", searchingstr)
       if len(andIndexes) == 0 or len(orIndexes) == 0:
          self._singleOperatorType = True
          while not exit:
@@ -228,7 +229,7 @@ class GroupItemCriterion(IItemCriterion):
          return None
       pCriteria = str.replace(pCriteria, " ", "")
       if pCriteria.slice(0,1) == "(":
-         dl = strUtils.getDelimitedText(pCriteria,"(",")",True)
+         dl = StringUtils.getDelimitedText(pCriteria,"(",")",True)
          criterion = GroupItemCriterion(dl[0])
       else:
          ANDindex = pCriteria.index("&")

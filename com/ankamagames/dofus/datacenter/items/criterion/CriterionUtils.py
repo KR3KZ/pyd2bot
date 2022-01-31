@@ -14,7 +14,7 @@
          criteria:list[IItemCriterion] = list[IItemCriterion]()
          if not criteriastrForm or len(criteriastrForm) == 0:
             return criteria
-         tabParenthesis:list[str] = strUtils.getDelimitedText(criteriastrForm,"(",")",True)
+         tabParenthesis:list[str] = StringUtils.getDelimitedText(criteriastrForm,"(",")",True)
          for stringCriterion in tabParenthesis:
             newGroupCriterion = GroupItemCriterion(stringCriterion)
             criteria.append(newGroupCriterion)

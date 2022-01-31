@@ -1,5 +1,7 @@
 from logging import Logger
+import math
 from com.ankamagames.dofus.datacenter.effects.EffectInstance import EffectInstance
+from com.ankamagames.dofus.datacenter.effects.instances.EffectInstanceDice import EffectInstanceDice
 from com.ankamagames.dofus.datacenter.effects.instances.EffectInstanceInteger import EffectInstanceInteger
 from com.ankamagames.dofus.datacenter.items.ItemType import ItemType
 from com.ankamagames.dofus.datacenter.monsters.Monster import Monster
@@ -343,10 +345,10 @@ class ItemWrapper(Item, ISlotData, ICellZoneProvider, IDataCenter):
             if saO and itbt.favoriteSubAreas.find(saO.id) != -1:
                if itbt.favoriteSubAreas and len(itbt.favoriteSubAreas) and itbt.favoriteSubAreasBonus:
                   for effect in self.effects:
-                     if effect is EffectInstanceInteger and effect.bonusType == 1:
+                     if isinstance(effect, EffectInstanceInteger) and effect.bonusType == 1:
                         boostedEffect = effect.clone()
-                        EffectInstanceInteger(boostedEffect).value = math.floor(EffectInstanceInteger(boostedEffect).value * itbt.favoriteSubAreasBonus / 100)
-                        if EffectInstanceInteger(boostedEffect).value:
+                        boostedEffect.value = math.floor(boostedEffect.value * itbt.favoriteSubAreasBonus / 100)
+                        if boostedEffect.value:
                            result.append(boostedEffect)
          return result
       
@@ -520,20 +522,20 @@ class ItemWrapper(Item, ISlotData, ICellZoneProvider, IDataCenter):
                self.livingobjectFoodDate = effect.description
 
          elif effect.effectId == ActionIds.ACTION_ITEM_LIVING_ID:
-               self.livingobjectId = EffectInstanceInteger(effect).value
+               self.livingobjectId = effect.value
 
          elif effect.effectId == ActionIds.ACTION_ITEM_LIVING_MOOD:
-               self.livingobjectMood = EffectInstanceInteger(effect).value
+               self.livingobjectMood = effect.value
 
          elif effect.effectId == ActionIds.ACTION_ITEM_LIVING_SKIN:
-               self.livingobjectSkin = EffectInstanceInteger(effect).value
+               self.livingobjectSkin = effect.value
 
          elif effect.effectId == ActionIds.ACTION_ITEM_LIVING_CATEGORY:
-               self.livingobjectCategory = EffectInstanceInteger(effect).value
+               self.livingobjectCategory = effect.value
 
          elif effect.effectId == ActionIds.ACTION_ITEM_LIVING_LEVEL:
-               self.livingobjectLevel = self.getLivingobjectLevel(EffectInstanceInteger(effect).value)
-               self.livingobjectXp = EffectInstanceInteger(effect).value - self.LEVEL_STEP[self.livingobjectLevel - 1]
+               self.livingobjectLevel = self.getLivingobjectLevel(effect.value)
+               self.livingobjectXp = effect.value - self.LEVEL_STEP[self.livingobjectLevel - 1]
                self.livingobjectMaxXp = self.LEVEL_STEP[self.livingobjectLevel] - self.LEVEL_STEP[self.livingobjectLevel - 1]
       
       def updatePresets(self, effect:EffectInstance) -> None:
@@ -543,10 +545,10 @@ class ItemWrapper(Item, ISlotData, ICellZoneProvider, IDataCenter):
             return
       
       def getLivingobjectLevel(self, xp:int) -> int:
-         for i in range(0, len(LEVEL_STEP), 1):
-            if LEVEL_STEP[i] > xp:
+         for i in range(0, len(self.LEVEL_STEP), 1):
+            if self.LEVEL_STEP[i] > xp:
                return i
-         return len(LEVEL_STEP)
+         return len(self.LEVEL_STEP)
       
       def updateEffects(self, updateEffects:list[ObjectEffect]) -> None:
          effect:ObjectEffect = None

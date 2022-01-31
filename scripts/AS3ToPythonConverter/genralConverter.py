@@ -1,13 +1,23 @@
+from audioop import lin2adpcm
+import itertools
 import os
 import pathlib
 import re
+from time import perf_counter
 from tqdm import tqdm
 
 patterns = {
+    "^\n?(\s*)public static function get(\S+)ById\(id:(?:uint|int|double)\)\s*:\s*(\S+)\n?\s*{\n?\s*return\s*GameData\.getObject\(\s*MODULE\s*,\s*id\s*\)\s*as\s*(\S+);\n?\s*}\n?$$": r"\n\1@classmethod\1def get\2ById(cls, id:int) -> '\3':\1\treturn GameData.getObject(cls.MODULE, id)\n",
+    "^\n?(\s*)public static function get(\S+)s\(\)\s*:\s*Array\n?\s*{\n?\s*return\s*GameData\.getObjects\(\s*MODULE\s*\)\s*;\n?\s*}\n?$$": r"\n\1@classmethod\1def get\2s(cls) -> list['\2']:\1\treturn GameData.getObjects(cls.MODULE)\n",
+    
+    "for each\((\S+) in (.*)\)": r"for \1 in \2:",
+    "\((\S+) as (\S+)\)": r"\1",
+    
     "^\s*from com.ankamagames.jerakine.logger.Log import Log": "",
     "^\s*import com.ankamagames.jerakine.logger.Logger;": "from com.ankamagames.jerakine.logger.Logger import Logger",
     "package \S+\n?": "",
-
+    
+    "String\((.*?)\)": r"str(\1)",
     "^\s*import (\S+(?:\.\S+)*)\.(\S+);": r"from \1.\2 import \2",
     "getQualifiedobjectName\((\S+)\)": r"\1.__class__.__name__",
     "public ": "",
@@ -25,7 +35,7 @@ patterns = {
     ":\*": "",
     "null": "None",
     "Number": "float",
-    "String": "str",
+    "([\s|[|<])String([\s|]|>])": r"\1str\2",
     "void": "None",
     "Array": "list",
     "Boolean": "bool",
@@ -40,21 +50,19 @@ patterns = {
     "Dictionary": "dict",
     "undefined": "None",
     ".push": ".append",
-    " (?:implements|extends) (.*)": r"(\1)",
-    "^(?:\s*)class ([A-Z]+\S+)": r"class \1:",
-    "= (.*) \? (.*) : (.*)": r"= \2 if \1 else \3",
-    "(if|elif|else|for|while)\((.*)\)": r"\1 \2:",
+    " implements ": " ",
+    " extends ": " ",    
+
+    "(if|elif|else)\((.*?)\)": r"\1 \2:",
     "Vector\.<(\S+)>": r"list[\1]",
     "function (\S+)\((.*)\) : (\S+)": r"def \1(self, \2) -> \3:",
     "function (\S+)\((.*)\) :": r"def \1(self, \2):",
     "if !(.*)": r"if not \1",
-    "for each\((\S+) in (\S+)\)": r"for \1 in \2:",
     "(\S+)\.length": r"len(\1)",
     "throw Error(.*)": r"raise Exception\1",
     r'^(.*)function get (\S+)\((.*)\) : (\S+)$': r"\1@property\n\1def \2(self, \3) -> \4:",
     r'^(.*)function set (\S+)\((.*)\) : (\S+)$': r"\1@\2.setter\n\1def \2(self, \3) -> \4:",
     "function [A-Z]+(\S+)\((.*)\)": r"def __init__(self, \2):",
-    "\(?(\S+) as (\S+)\)?": r"\1",
     "_log:Logger = Log\.getLogger\((.*)\)": r'logger = Logger(__name__)',
     ", \)": r")",
     "!==": r"is not",
@@ -80,11 +88,10 @@ patterns = {
     "(\S+).__str__\(\)": r"str(\1)",
     "for (\S+):(\S+) = (\S+) (\S+) (.*) (\S+) (\S+) (\S+) (\S+):": r"for \1 in range(\3, \6, \9):",
     "Function" : "FunctionType",
-    "strUtils.replace\((.*),(.*),(.*)\)": r"str.replace(\1, \2, \3)",
+    "StringUtils.replace\((.*),(.*),(.*)\)": r"str.replace(\1, \2, \3)",
     ".indexOf": ".find",
     "\.substring\((.*?),(.*?)\)": r"[\1:\2]",
     "\.substring\((.*)\)": r"[:\1]",
-    " implements IDataCenter": "",
     "catch\(e\:Error\)": "except Exception as e:",
     "catch\(e\:(\S+)\)": r"except \1 as e:",
     "try": "try:",
@@ -95,21 +102,162 @@ patterns = {
     "-> \*": "-> Any",
     "Class": "object",
     ".concat": ".extend",
+    "^(\s*\S+):String = ": r"\1:str = ",
 
 }
+SWITCH_CASE_PATTERN = r"\s*(switch\(.*\)\s*\n?\{\s*(?:.|\n)+break;\s*\n\s*(?:default:)?(?:[^}]|\n)*\})"
+CASE_PATTERN1 = "(?P<spaces>\s*)case (?P<testvar>\S+) is (?P<testvalue>\S+):"
+CASE_PATTERN2 = "(?P<spaces>\s*)case (?P<testvalue>\S+):"
+
+
+def processCaseBlock(block, case_pattern, testvar=None):
+    blockLines = block.split("\n")
+    resLines = []
+    tab_size = ""
+    firstCase = True
+    for line in blockLines:
+        if "switch" in line:
+            continue
+        if "{" in line:
+            continue
+        if "}" in line:
+            continue
+        m = re.match(case_pattern, line)
+        if m:
+            if not firstCase:
+                tab_size = m.group("spaces")
+            else:
+                tab_size = ""
+            op = "if" if firstCase else "elif"
+            if firstCase:
+                firstCase = False
+            if case_pattern == CASE_PATTERN1:
+                resLines.append(tab_size + f"{op} isinstance({m.group('testvar')}, {m.group('testvalue')}):")
+            elif case_pattern == CASE_PATTERN2:
+                if firstCase:
+                    resLines.append(tab_size + f"{op} {testvar} == {m.group('testvalue')}:")
+                else:
+                    resLines.append(tab_size[3:] + f"{op} {testvar} == {m.group('testvalue')}:")
+            continue
+        if "break;" in line:
+            continue
+        if "default:" in line:
+            resLines.append(tab_size + "else:")
+            continue
+        resLines.append(line)
+    return "\n".join(resLines)
+
+
+def processSwitchCases(code):
+    switch_cases = re.findall(SWITCH_CASE_PATTERN, code, flags=re.M)
+    for switch_case in switch_cases:
+        m = re.match("switch\((?P<testvar>\S+)\)", switch_case)
+        testvar = m.group("testvar")
+        if testvar == "true":
+            processedSwitchCase = processCaseBlock(switch_case, CASE_PATTERN1)
+        else:
+            processedSwitchCase = processCaseBlock(switch_case, CASE_PATTERN2, testvar)
+        code = code.replace(switch_case, processedSwitchCase)
+    return code
+
+
+def processCompressedIfELse(line):
+    m = re.fullmatch("(?P<leftSide>[^=]* = )(?P<content>.*)", line)
+    if m:
+        leftSide = m.group("leftSide")
+        content = m.group("content")
+    else:
+        content = line
+        leftSide = ""
+    i = content.find("?")
+    if i == -1:
+        return line
+    else:
+        j = content.rfind(":")
+        return leftSide + processCompressedIfELse(content[i+1:j]) + "if " + content[:i] + "else" + content[j+1:]
+
+
+def processCompressedIfELseInAllCode(code):
+    codeLines = code.split("\n")
+    regex = r"(.*) ? (.*) : (.*)"
+    r = []
+    for line in codeLines:
+        m = re.match(regex, line)
+        if m:
+            r.append(processCompressedIfELse(line))
+        else:
+            r.append(line)
+    return "\n".join(r)
+
+def deleteFirstTwoSpaces(code):
+    lines = code.split("\n")
+    r = []
+    for line in lines:
+        if line.startswith("  "):
+            line = line[3:]
+        r.append(line)
+    return "\n".join(r)
+
+
+def handleIndent(code):
+    lines = code.split("\n")
+    r = []
+    indentSize = None
+    inClass = False
+    for i, line in enumerate(lines):
+        if not inClass:
+            reg = r"(?P<left>.*)class\s*(?P<name>\S+).*"
+            inClass = re.match(reg, line)
+            if inClass:
+                indentSize = 0
+                print(lines[i + 1])
+                for c in lines[i + 2]:
+                    if c == " ":
+                        indentSize += 1
+                print("detected indent size:", indentSize)
+                inClass = True
+        else:
+            spaceCount = sum(1 for _ in itertools.takewhile(str.isspace, line))
+            line = (spaceCount // indentSize) * 4 * ' ' + line[spaceCount:]
+        r.append(line)
+    return "\n".join(r)
+
+
+def handleClassHeader(code):
+    lines = code.split("\n")
+    r = []
+    for line in lines:
+        reg = r"(?P<left>.*)class\s*(?P<name>\S+)\s*(?P<parents>.*)"
+        m = re.match(reg, line)
+        if m:
+            parents = m.group("parents").split(" ")
+            parents = [p.replace(" ", "") for p in parents if p != "" and p.replace(" ", "") not in ["extends", "implements"]]
+            line = f"{m.group('left')}class {m.group('name')}({', '.join(parents)}):"
+        r.append(line)
+    return "\n".join(r)
+
 
 def parseFolderFiles(in_dir, out_dir):
     for f in tqdm(pathlib.Path(in_dir).glob("**/*.as")):
         parseFile(f, pathlib.Path(out_dir) / f.relative_to(in_dir).name.replace(".as", ".py"))
 
+
 def parseFile(file_p, out_p):
     with open(file_p, "r", encoding="utf8") as fp:
         code = fp.read()
+        code = handleClassHeader(code)
+        code = processCompressedIfELseInAllCode(code)
+        code = processSwitchCases(code)
         for pattern, repl in patterns.items():
-                code = re.sub(pattern, repl, code, flags=re.M)
-
+            code = re.sub(pattern, repl, code, flags=re.M)
+        code = deleteFirstTwoSpaces(code)
+        code = handleIndent(code)
     with open(out_p, "w") as fp:
         fp.write(code)
 
+
+
 # parseFolderFiles("AS3ToPythonConverter/scripts", "AS3ToPythonConverter/connectionType")
-parseFile("scripts/AS3ToPythonConverter/target.as", "scripts/AS3ToPythonConverter/ItemCategoryEnum.py")
+t = perf_counter()
+parseFile("scripts/AS3ToPythonConverter/target.as", "scripts/AS3ToPythonConverter/PresetWrapper.py")
+print("parsin took:", perf_counter() - t)

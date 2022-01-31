@@ -1,7 +1,11 @@
+from typing import TYPE_CHECKING
+from com.ankamagames.dofus.internalDatacenter.mount.MountData import MountData
+if TYPE_CHECKING:
+   from com.ankamagames.dofus.internalDatacenter.items.ItemWrapper import ItemWrapper
+   from com.ankamagames.dofus.internalDatacenter.items.WeaponWrapper import WeaponWrapper
+
 from com.ankamagames.dofus.datacenter.world.SubArea import SubArea
 from com.ankamagames.dofus.datacenter.world.WorldMap import WorldMap
-from com.ankamagames.dofus.internalDatacenter.items.ItemWrapper import ItemWrapper
-from com.ankamagames.dofus.internalDatacenter.items.WeaponWrapper import WeaponWrapper
 from com.ankamagames.dofus.internalDatacenter.jobs.KnownJobWrapper import KnownJobWrapper
 from com.ankamagames.dofus.internalDatacenter.world.WorldPointWrapper import WorldPointWrapper
 from com.ankamagames.dofus.network.enums.CharacterInventoryPositionEnum import CharacterInventoryPositionEnum
@@ -14,7 +18,6 @@ from com.ankamagames.dofus.network.types.game.havenbag.HavenBagRoomPreviewInform
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.dofus.internalDatacenter.dataEnum import DataEnum
 from com.ankamagames.dofus.internalDatacenter.stats.entityStats import EntityStats
-from com.ankamagames.dofus.kernel.kernel import Kernel
 from com.ankamagames.dofus.logic.common.managers.statsManager import StatsManager
 from com.ankamagames.dofus.network.protocolConstantsEnum import ProtocolConstantsEnum
 from com.ankamagames.dofus.network.types.game.character.choice.characterBaseInformations import CharacterBaseInformations
@@ -62,9 +65,9 @@ class PlayedCharacterManager(IDestroyable):
    
    playerShortcutList:list
    
-   inventory:list[ItemWrapper]
+   inventory:list['ItemWrapper']
    
-   currentWeapon:WeaponWrapper
+   currentWeapon:'WeaponWrapper'
    
    inventoryWeight:int
    
@@ -114,7 +117,7 @@ class PlayedCharacterManager(IDestroyable):
    
    isPetsMounting:bool = False
    
-   petsMount:ItemWrapper
+   petsMount:'ItemWrapper'
    
    hasCompanion:bool = False
    
@@ -146,7 +149,6 @@ class PlayedCharacterManager(IDestroyable):
       self._followingPlayerIds = list[float]()
       self._soloIdols = list[int]()
       self._partyIdols = list[int]()
-      self._idolsPresets = list[IdolsPresetWrapper]()
       self._infosAvailableCallbacks = list[Callback]()
       self.playerForgettableSpelldict = dict()
       self.lastCoord = Point(0, 0)
@@ -257,6 +259,7 @@ class PlayedCharacterManager(IDestroyable):
    
    @property
    def isInKoli(self) -> bool:
+      from com.ankamagames.dofus.kernel.Kernel import Kernel
       fightContextFrame:FightContextFrame = Kernel().getWorker().getFrame(FightContextFrame)
       return fightContextFrame and fightContextFrame.isKolossium
    
@@ -292,7 +295,7 @@ class PlayedCharacterManager(IDestroyable):
    def isMutated(self) -> bool:
       l:int = 0
       i:int = 0
-      rpBuffs:list[ItemWrapper] = InventoryManager().inventory.getView("roleplayBuff").content
+      rpBuffs = InventoryManager().inventory.getView("roleplayBuff").content
       if rpBuffs:
          l = len(rpBuffs)
          for i in range(l):
@@ -362,15 +365,7 @@ class PlayedCharacterManager(IDestroyable):
    @partyIdols.setter
    def partyIdols(self, pIdols:list[int]) -> None:
       self._partyIdols = pIdols
-   
-   @property
-   def idolsPresets(self) -> list[IdolsPresetWrapper]:
-      return self._idolsPresets
-   
-   @idolsPresets.setter
-   def idolsPresets(self, pIdolsPresets:list[IdolsPresetWrapper]) -> None:
-      self._idolsPresets = pIdolsPresets
-   
+
    @property
    def canBeAggressedByMonsters(self) -> bool:
       stats:EntityStats = StatsManager().getStats(self.id)

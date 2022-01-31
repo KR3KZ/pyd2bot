@@ -1,4 +1,4 @@
-import com.ankamagames.dofus.kernel.kernel as knl
+import com.ankamagames.dofus.kernel.Kernel as knl
 from com.ankamagames.dofus.network.types.game.character.characteristic.CharacterCharacteristicsInformations import CharacterCharacteristicsInformations
 from com.ankamagames.jerakine.logger.Logger import Logger
 # from com.ankamagames.dofus.datacenter.items.criterion.Item import Item

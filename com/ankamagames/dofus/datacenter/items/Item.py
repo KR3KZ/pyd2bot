@@ -1,7 +1,8 @@
                                                             
 import math
-from os import stat
-from com.ankamagames.dofus.datacenter.effects.EffectInstance import EffectInstance
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+   from com.ankamagames.dofus.datacenter.effects.EffectInstance import EffectInstance
 from com.ankamagames.dofus.datacenter.items.criterion.GroupItemCriterion import GroupItemCriterion
 from com.ankamagames.dofus.datacenter.items.ItemSet import ItemSet
 from com.ankamagames.dofus.datacenter.items.ItemType import ItemType
@@ -85,7 +86,7 @@ class Item(IPostInit, IDataCenter):
    
    bonusIsSecret:bool
    
-   possibleEffects:list[EffectInstance]
+   possibleEffects:list['EffectInstance']
    
    evolutiveEffectIds:list[int]
    
@@ -248,11 +249,6 @@ class Item(IPostInit, IDataCenter):
    
    @property
    def recipes(self) -> list:
-      numRecipes:int = 0
-      i:int = 0
-      recipe:Recipe = None
-      it:Item = None
-      gic:GroupItemCriterion = None
       if not self._recipes:
          numRecipes = len(self.recipeIds)
          self._recipes = list()
@@ -406,7 +402,8 @@ class Item(IPostInit, IDataCenter):
    
    @property
    def visible(self) -> bool:
+      
       if not self.visibility:
          return True
-      gic:GroupItemCriterion = GroupItemCriterion(self.visibility)
+      gic = GroupItemCriterion(self.visibility)
       return gic.isRespected

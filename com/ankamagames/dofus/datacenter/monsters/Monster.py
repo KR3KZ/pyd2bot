@@ -3,8 +3,7 @@ from com.ankamagames.dofus.datacenter.monsters.AnimFunMonsterData import AnimFun
 if TYPE_CHECKING:
    from com.ankamagames.dofus.datacenter.monsters.MonsterDrop import MonsterDrop
    from com.ankamagames.dofus.datacenter.monsters.MonsterGrade import MonsterGrade
-from com.ankamagames.dofus.datacenter.monsters.MonsterRace import MonsterRace
-from com.ankamagames.dofus.datacenter.items.criterion import GroupItemCriterion
+   from com.ankamagames.dofus.datacenter.monsters.MonsterRace import MonsterRace
 from com.ankamagames.jerakine.data.GameData import GameData
 from com.ankamagames.dofus.types.IdAccessors import IdAccessors
 
@@ -106,7 +105,8 @@ class Monster:
 
    
    @property
-   def type(self) -> MonsterRace:
+   def type(self) -> 'MonsterRace':
+      from com.ankamagames.dofus.datacenter.monsters.MonsterRace import MonsterRace
       return MonsterRace.getMonsterRaceById(self.race)
    
    @property
@@ -116,6 +116,7 @@ class Monster:
    @property
    def canAttack(self) -> bool:
       if self.aggressiveImmunityCriterion:
+         from com.ankamagames.dofus.datacenter.items.criterion import GroupItemCriterion
          criterions = GroupItemCriterion(self.aggressiveImmunityCriterion)
          if criterions.isRespected:
             return False

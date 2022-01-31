@@ -1,4 +1,3 @@
-from com.ankamagames.dofus.datacenter.items.criterion.GroupItemCriterion import GroupItemCriterion
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
    from com.ankamagames.dofus.datacenter.monsters.MonsterGrade import MonsterGrade
@@ -47,8 +46,8 @@ class MonsterRace:
    
    @property
    def canAttack(self) -> bool:
-      criterions:GroupItemCriterion = None
       if self.aggressiveImmunityCriterion:
+         from com.ankamagames.dofus.datacenter.items.criterion.GroupItemCriterion import GroupItemCriterion
          criterions = GroupItemCriterion(self.aggressiveImmunityCriterion)
          if criterions.isRespected:
             return False

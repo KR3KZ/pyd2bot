@@ -1,4 +1,7 @@
 from com.ankamagames.dofus.datacenter.effects.EffectInstance import EffectInstance
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+   from com.ankamagames.dofus.datacenter.effects.instances.EffectInstanceDice import EffectInstanceDice
 from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
 from com.ankamagames.jerakine.logger.Logger import Logger
 logger = Logger(__name__)

@@ -1,11 +1,13 @@
 from whistle import EventDispatcher
 from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.jerakine.messages.messageHandler import MessageHandler
+from com.ankamagames.jerakine.network.ILagometer import ILagometer
+from com.ankamagames.jerakine.network.RawDataParser import RawDataParser
 
 
 class IServerConnection(EventDispatcher):
       
-   
+   @property
    def rawParser(self) -> RawDataParser:
       pass
    
@@ -13,6 +15,7 @@ class IServerConnection(EventDispatcher):
    def rawParser(self, param1:RawDataParser) -> None:
       pass
    
+   @property
    def handler(self) -> MessageHandler:
       pass
    
@@ -38,6 +41,7 @@ class IServerConnection(EventDispatcher):
    def latencySamplesMax(self) -> int:
       pass
    
+   @property
    def lagometer(self) -> ILagometer:
       pass
    
