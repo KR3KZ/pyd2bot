@@ -1,11 +1,11 @@
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 if TYPE_CHECKING:
-    from com.ankamagames.jerakine.data.gameDataProcess import GameDataProcess
-    from com.ankamagames.jerakine.data.gameDataClassDefinition import GameDataClassDefinition
-from com.ankamagames.jerakine.data.moduleReader import ModuleReader
+    from ankamagames.jerakine.data.GameDataProcess import GameDataProcess
+    from ankamagames.jerakine.data.GameDataClassDefinition import GameDataClassDefinition
+from ankamagames.jerakine.data.ModuleReader import ModuleReader
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
-from com.ankamagames.jerakine.data.binaryStream import BinaryStream
+from ankamagames.jerakine.data.BinaryStream import BinaryStream
 
 
 class GameDataFileAccessor(metaclass=Singleton):

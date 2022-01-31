@@ -1,9 +1,10 @@
 import logging
+from ankamagames.jerakine.data import I18n
 from com.ankamagames.dofus.types.idAccessors import IdAccessors
-from com.ankamagames.jerakine.data import GameData, i18n
+from com.ankamagames.jerakine.data import GameData
 from com.ankamagames.jerakine.interfaces.iDatacenter import IDataCenter
 
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 class Server(IDataCenter):
    
@@ -56,13 +57,13 @@ class Server(IDataCenter):
    @property
    def name(self) -> str:
       if not self._name:
-         self._name = i18n.getText(self.nameId)
+         self._name = I18n.getText(self.nameId)
       return self._name
    
    @property
    def comment(self) -> str:
       if not self._comment:
-         self._comment = i18n.getText(self.commentId)
+         self._comment = I18n.getText(self.commentId)
       return self._comment
    
    @property

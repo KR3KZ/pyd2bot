@@ -1,5 +1,5 @@
 from typing import TYPE_CHECKING
-from com.ankamagames.jerakine.data.binaryStream import BinaryStream
+from ankamagames.jerakine.data.BinaryStream import BinaryStream
 if TYPE_CHECKING:
     from .map import Map
 import math 
@@ -129,6 +129,10 @@ class CellData:
     def allowsMapChange(self) -> bool:
         return self.mapChangeData != 0
     
+    @property
+    def linkedZoneRP(self):
+        return (self.linkedZone & 240) >> 4
+
     @staticmethod
     def distanceBetween(cell1:'CellData', cell2:'CellData') -> float:
         return math.sqrt((cell1.x - cell2.x)**2 + (cell1.y - cell2.y)**2)

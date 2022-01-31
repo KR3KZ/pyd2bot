@@ -1,7 +1,7 @@
 import logging
 import socket
 from pyd2bot.network.message import Message
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 class Connection:
     PORT = 5555

@@ -3,7 +3,7 @@
       
       MODULE:str = "EvolutiveItemTypes"
       
-      logger = logging.getLogger("bot")
+      logger = Logger(__name__)
       
       idAccessors:IdAccessors = IdAccessors(getEvolutiveItemTypeById,getEvolutiveItemTypes)
        

@@ -10,7 +10,7 @@ from com.ankamagames.jerakine.interfaces.iDestroyable import IDestroyable
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 from com.ankamagames.jerakine.types.positions.mapPoint import Point
 from damageCalculation.tools import StatIds
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 
 

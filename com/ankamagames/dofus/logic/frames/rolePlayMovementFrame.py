@@ -1,7 +1,7 @@
 import logging
 from com.ankamagames.jerakine.resources.loaders.MapLoader import MapLoader
 from pyd2bot.logic.frames import IFrame
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 
 class RolePlayMovementFrame(IFrame):

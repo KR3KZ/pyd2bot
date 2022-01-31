@@ -1,7 +1,7 @@
 import logging
 from com.ankamagames.jerakine.entities.interfaces.IEntity import IEntity
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
-logger = logging.getLogger("bot")  
+logger = Logger(__name__)  
 
 
 class EntitiesManager(metaclass=Singleton):

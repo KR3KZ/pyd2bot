@@ -2,8 +2,8 @@
 import logging
 import pathlib
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
-from com.ankamagames.jerakine.data.binaryStream import BinaryStream
-logger = logging.getLogger("bot")
+from ankamagames.jerakine.data.BinaryStream import BinaryStream
+logger = Logger(__name__)
 
 
 class I18nFileAccessor(metaclass=Singleton):

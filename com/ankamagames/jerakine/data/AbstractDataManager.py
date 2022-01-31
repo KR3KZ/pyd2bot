@@ -1,5 +1,6 @@
 import logging
 import math
+from ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine import JerakineConstants
 from com.ankamagames.jerakine.managers.storeDataManager import StoreDataManager
 from com.ankamagames.jerakine.newCache.LruGarbageCollector import LruGarbageCollector
@@ -7,56 +8,57 @@ from com.ankamagames.jerakine.newCache.iCache import ICache
 from com.ankamagames.jerakine.newCache.impl.cache import Cache
 from com.ankamagames.jerakine.newCache.impl.infiniteCache import InfiniteCache
 from com.ankamagames.jerakine.types.customSharedObject import CustomSharedObject
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 
 class AbstractDataManager:
    DATA_KEY:str = "data"
+   _cacheSO:ICache = None
+   _cacheKey:ICache = None
+   _soPrefix:str = ""
    
-   def __init__(self):
-      self._cacheSO:ICache = None
-      self._cacheKey:ICache = None
-      self._soPrefix:str = ""
-   
-   def getObject(self, key:int) -> object:
-      realKey:str = self._soPrefix + str(key)
-      if self._cacheKey.contains(realKey):
-         return self._cacheKey.peek(realKey)
-      chunkLength:int = StoreDataManager.getData(JerakineConstants.DATASTORE_FILES_INFO, self._soPrefix + "_chunkLength")
-      soName:str = self._soPrefix + str(math.floor(key / chunkLength))
-      if self._cacheSO.contains(soName):
-         foo = self._cacheSO.peek(soName)
-         v = CustomSharedObject(self._cacheSO.peek(soName)).data[self.DATA_KEY][key]
-         self._cacheKey.store(realKey,v)
+   @classmethod
+   def getObject(cls, key:int) -> object:
+      realKey:str = cls._soPrefix + str(key)
+      if cls._cacheKey.contains(realKey):
+         return cls._cacheKey.peek(realKey)
+      chunkLength:int = StoreDataManager.getData(JerakineConstants.DATASTORE_FILES_INFO, cls._soPrefix + "_chunkLength")
+      soName:str = cls._soPrefix + str(math.floor(key / chunkLength))
+      if cls._cacheSO.contains(soName):
+         foo = cls._cacheSO.peek(soName)
+         v = CustomSharedObject(cls._cacheSO.peek(soName)).data[cls.DATA_KEY][key]
+         cls._cacheKey.store(realKey,v)
          return v
       so = CustomSharedObject.getLocal(soName)
-      if not so or self.DATA_KEY not in so.data:
+      if not so or cls.DATA_KEY not in so.data:
          return None
-      self._cacheSO.store(soName,so)
-      v = so.data[self.DATA_KEY][key]
-      self._cacheKey.store(realKey,v)
+      cls._cacheSO.store(soName,so)
+      v = so.data[cls.DATA_KEY][key]
+      cls._cacheKey.store(realKey,v)
       return v
    
-   def getObjects(self) -> list:
-      fileList:list = StoreDataManager.getData(JerakineConstants.DATASTORE_FILES_INFO, self._soPrefix + "_filelist")
+   @classmethod
+   def getObjects(cls) -> list:
+      fileList:list = StoreDataManager.getData(JerakineConstants.DATASTORE_FILES_INFO, cls._soPrefix + "_filelist")
       if not fileList:
          return None
       data:list = list()
       for fileNum in fileList:
-         soName = self._soPrefix + fileNum
-         if self._cacheSO.contains(soName):
-            data = data.extend(CustomSharedObject(self._cacheSO.peek(soName)).data[self.DATA_KEY])
+         soName = cls._soPrefix + fileNum
+         if cls._cacheSO.contains(soName):
+            data = data.extend(CustomSharedObject(cls._cacheSO.peek(soName)).data[cls.DATA_KEY])
          else:
             so = CustomSharedObject.getLocal(soName)
-            if so and self.DATA_KEY in so.data:
-               self._cacheSO.store(soName,so)
-               data = data.extend(so.data[self.DATA_KEY])
+            if so and cls.DATA_KEY in so.data:
+               cls._cacheSO.store(soName,so)
+               data = data.extend(so.data[cls.DATA_KEY])
       return data
    
-   def init(self, soCacheSize:int, keyCacheSize:int, soPrefix:str = "") -> None:
+   @classmethod
+   def init(cls, soCacheSize:int, keyCacheSize:int, soPrefix:str = "") -> None:
       if keyCacheSize == float("inf"):
-         self._cacheKey = InfiniteCache()
+         cls._cacheKey = InfiniteCache()
       else:
-         self._cacheKey = Cache.create(keyCacheSize, LruGarbageCollector(), self.__class__.__name__ + "_key")
-      self._cacheSO = Cache.create(soCacheSize, LruGarbageCollector(), self.__class__.__name__ + "_so")
-      self._soPrefix = soPrefix
+         cls._cacheKey = Cache.create(keyCacheSize, LruGarbageCollector(), cls.__class__.__name__ + "_key")
+      cls._cacheSO = Cache.create(soCacheSize, LruGarbageCollector(), cls.__class__.__name__ + "_so")
+      cls._soPrefix = soPrefix

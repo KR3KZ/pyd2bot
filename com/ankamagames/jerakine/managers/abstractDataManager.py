@@ -8,7 +8,7 @@ from com.ankamagames.jerakine.newCache.iCache import ICache
 from com.ankamagames.jerakine.newCache.impl.cache import Cache
 from com.ankamagames.jerakine.newCache.impl.infiniteCache import InfiniteCache
 from com.ankamagames.jerakine.types.customSharedObject import CustomSharedObject
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 class AbstractDataManager(object):
 

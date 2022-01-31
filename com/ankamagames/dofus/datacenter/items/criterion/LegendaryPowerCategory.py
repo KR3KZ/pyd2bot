@@ -3,7 +3,7 @@
       
       MODULE:str = "LegendaryPowersCategories"
       
-      logger = logging.getLogger("bot")
+      logger = Logger(__name__)
       
       idAccessors:IdAccessors = IdAccessors(getLegendaryPowerCategoryById,getLegendaryPowersCategories)
        

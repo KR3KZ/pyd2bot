@@ -9,7 +9,7 @@ from com.ankamagames.jerakine.map.iDataMapProvider import IDataMapProvider
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 from com.ankamagames.jerakine.types.positions.mapPoint import MapPoint
 from mapTools import MapTools
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 class DataMapProvider(IDataMapProvider):
     __metaclass__ = Singleton

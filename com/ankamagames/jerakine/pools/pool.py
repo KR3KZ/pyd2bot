@@ -2,7 +2,7 @@ import logging
 from com.ankamagames.jerakine.pools.poolable import Poolable
 from mx.utils.LinkedList import LinkedList
 from mx.utils.LinkedListNode import LinkedListNode 
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 
 

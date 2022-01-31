@@ -18,7 +18,7 @@ from com.ankamagames.jerakine.utils.displays.EnterFrameDispatcher import EnterFr
 from com.ankamagames.jerakine.utils.displays.FrameIdManager import FrameIdManager
 from com.ankamagames.jerakine.utils.misc.PriorityComparer import PriorityComparer
 from com.ankamagames.tubul.interfaces.eventDispatcher import EventDispatcher
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 
 

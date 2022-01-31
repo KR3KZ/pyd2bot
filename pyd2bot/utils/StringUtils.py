@@ -2,7 +2,7 @@ import logging
 import re
 
 from pyparsing import delimitedList 
-logger = logging.getLogger("bot")  
+logger = Logger(__name__)  
 
 
 

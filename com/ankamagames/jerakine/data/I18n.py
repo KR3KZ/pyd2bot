@@ -1,7 +1,7 @@
 
 
-from com.ankamagames.jerakine.data.i18nFileAccessor import I18nFileAccessor
-from com.ankamagames.jerakine.data.abstractDataManager import AbstractDataManager
+from ankamagames.jerakine.data.I18nFileAccessor import I18nFileAccessor
+from ankamagames.jerakine.data.AbstractDataManager import AbstractDataManager
 
 
 class I18n(AbstractDataManager):

@@ -3,7 +3,7 @@ import logging
 from Cryptodome.PublicKey import RSA as RSA
 from com.ankamagames.jerakine.network.customDataWrapper import ByteArray
 from com.hurlan.crypto.symmetric.iPad import IPad 
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 
 class RSACipher:

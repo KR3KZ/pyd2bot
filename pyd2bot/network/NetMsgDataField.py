@@ -6,7 +6,7 @@ from pyd2bot.network.protocolSpec import ProtocolSpec
 import pyd2bot.network.NetMsgClassDef as nmcd
 from pyd2bot.network.protocolSpec import UnknownTypeIdError
 
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 
 class NetMsgDataField:

@@ -1,10 +1,10 @@
-import logging
 from typing import TYPE_CHECKING
+from ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.enum.gameDataTypeEnum import GameDataTypeEnum
-from com.ankamagames.jerakine.data.binaryStream import BinaryStream
+from ankamagames.jerakine.data.BinaryStream import BinaryStream
 if TYPE_CHECKING:
-   from com.ankamagames.jerakine.data.moduleReader import ModuleReader
-logger = logging.getLogger("bot")
+   from ankamagames.jerakine.data.ModuleReader import ModuleReader
+logger = Logger(__name__)
 
 class GameDataField:
 

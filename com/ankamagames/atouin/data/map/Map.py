@@ -1,9 +1,9 @@
 from com.ankamagames.atouin.data.map.fixture import Fixture
 from com.ankamagames.atouin.data.map.CellData import CellData
 from com.ankamagames.atouin.data.map.layer import Layer
-from com.ankamagames.jerakine.data.binaryStream import BinaryStream
+from ankamagames.jerakine.data.BinaryStream import BinaryStream
 import logging
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
     
 class Map:

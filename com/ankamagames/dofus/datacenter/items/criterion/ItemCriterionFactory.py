@@ -1,7 +1,7 @@
 import logging
 from com.ankamagames.dofus.datacenter.items.criterion.IItemCriterion import IItemCriterion
 from com.ankamagames.dofus.datacenter.items.criterion.UnusableItemCriterion import UnusableItemCriterion
-logger = logging.getLogger("bot")        
+logger = Logger(__name__)        
 
 
 class ItemCriterionFactory:

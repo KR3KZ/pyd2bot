@@ -1,7 +1,7 @@
 import logging
 import random
 from . import Walker
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 class Farmer(Walker):
 

@@ -8,7 +8,7 @@ from com.ankamagames.dofus.kernel.net.disconnectionReasonEnum import Disconnecti
 from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerManager
 from com.ankamagames.dofus.network.messages.common.basic.BasicPingMessage import BasicPingMessage
 from com.ankamagames.jerakine.network.multiConnection import MultiConnection
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 
 class ConnectionHander:

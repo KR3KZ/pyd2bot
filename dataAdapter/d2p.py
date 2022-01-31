@@ -5,7 +5,7 @@
 
 
 from collections import OrderedDict
-from com.ankamagames.jerakine.data.binaryStream import BinaryStream
+from ankamagames.jerakine.data.BinaryStream import BinaryStream
 
 
 class InvalidD2PFile(Exception):

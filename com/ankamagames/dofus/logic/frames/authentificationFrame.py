@@ -6,7 +6,7 @@ from pyd2bot.logic.managers.interClientManager import InterClientManager
 from com.ankamagames.dofus.network.enums.IdentificationFailureReasonsEnum import IdentificationFailureReasonEnum
 from pyd2bot.logic.frames import IFrame
 import logging
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 
 class AuthentificationFrame(IFrame):

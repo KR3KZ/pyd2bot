@@ -3,7 +3,7 @@
 
 from time import perf_counter
 from com.ankamagames.dofus.datacenter.monsters.monster import Monster
-from com.ankamagames.jerakine.data.gameDataFileAccessor import GameDataFileAccessor
+from ankamagames.jerakine.data.GameDataFileAccessor import GameDataFileAccessor
 
 
 if __name__ == '__main__':

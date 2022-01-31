@@ -1,6 +1,6 @@
 import logging
 from damageCalculation.tools import StatIds
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 
 class Stat:

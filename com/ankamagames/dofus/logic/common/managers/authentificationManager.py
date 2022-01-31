@@ -10,7 +10,7 @@ from com.hurlan.crypto.symmetric.pKCS1 import PKCS1
 from com.hurlan.crypto.symmetric.rSAKey import RSACipher
 from com.hurlan.crypto.symmetric.simpleIVMode import SimpleIVMode
 from Cryptodome.PublicKey import RSA
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 ROOTDIR = os.path.dirname(__file__)
 
 

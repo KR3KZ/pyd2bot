@@ -10,7 +10,7 @@ from ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import 
 from com.ankamagames.dofus.types.entities.animatedCharacter import AnimatedCharacter
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 from damageCalculation.tools import StatIds
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 class CurrentPlayedFighterManager(metaclass=Singleton):
    

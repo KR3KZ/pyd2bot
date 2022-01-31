@@ -7,7 +7,7 @@
       
       MAX_JOB_LEVEL_GAP:int = 100
       
-      logger = logging.getLogger("bot")
+      logger = Logger(__name__)
       
       _censoredIcons:dict
       

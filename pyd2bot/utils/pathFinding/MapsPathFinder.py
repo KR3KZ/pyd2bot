@@ -8,7 +8,7 @@ from pyd2bot.utils.pathFinding.lightMapNode import LightMapNode
 from pyd2bot.gameData.world.mapZones import MapZones
 from pyd2bot.utils.pathFinding.pathFinder import PathNode, Pathfinder
 
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 class MapNode(LightMapNode):
     """"Wrapper of LightMapNode"""
             

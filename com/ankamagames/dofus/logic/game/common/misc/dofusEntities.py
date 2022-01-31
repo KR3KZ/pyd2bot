@@ -1,6 +1,6 @@
 import logging
 from com.ankamagames.jerakine.entities.interfaces.IEntity import IEntity
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 
 class DofusEntities:

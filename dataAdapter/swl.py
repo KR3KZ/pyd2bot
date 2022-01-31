@@ -5,7 +5,7 @@
 # Exceptions
 
 
-from ankamagames.jerakine.data.binaryStream import BinaryStream
+from ankamagames.jerakine.data.BinaryStream import BinaryStream
 
 
 class InvalidSWLFile(Exception):

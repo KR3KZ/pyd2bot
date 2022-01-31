@@ -1,6 +1,6 @@
 import logging
 from . import IBot
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 class Bot(IBot):
 

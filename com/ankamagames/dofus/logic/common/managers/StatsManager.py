@@ -12,7 +12,7 @@ from com.ankamagames.jerakine.managers.storeDataManager import StoreDataManager
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 from com.ankamagames.jerakine.types.dataStoreType import DataStoreType
 from com.ankamagames.jerakine.types.enums.dataStoreEnum import DataStoreEnum
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 
 class StatsManager(metaclass=Singleton):

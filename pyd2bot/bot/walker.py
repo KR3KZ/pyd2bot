@@ -2,7 +2,7 @@ from time import sleep
 import logging
 import random
 from .bot import Bot
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 
 class Walker(Bot):

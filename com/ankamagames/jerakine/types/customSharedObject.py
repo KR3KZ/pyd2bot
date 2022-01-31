@@ -4,10 +4,10 @@ import logging
 import os
 import miniamf
 from com.ankamagames.dofus import Constants as Constants
-from com.ankamagames.jerakine.data.moduleReader import \
+from ankamagames.jerakine.data.ModuleReader import \
     ModuleReader
 
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 
 class CustomSharedObjectFileFormatError(Exception):

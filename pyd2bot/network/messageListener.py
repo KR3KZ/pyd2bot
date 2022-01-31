@@ -7,7 +7,7 @@ if TYPE_CHECKING:
     from pyd2bot.logic.managers import EventsManager
     from pyd2bot.network.connection import Connection
 from pyd2bot.network.message import Message, Buffer
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 
 class MsgListner(threading.Thread):

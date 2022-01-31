@@ -112,4 +112,4 @@ def parseFile(file_p, out_p):
         fp.write(code)
 
 # parseFolderFiles("AS3ToPythonConverter/scripts", "AS3ToPythonConverter/connectionType")
-parseFile("scripts/AS3ToPythonConverter/target.as", "scripts/AS3ToPythonConverter/WorldPathFinder.py")
+parseFile("scripts/AS3ToPythonConverter/target.as", "scripts/AS3ToPythonConverter/MapPosition.py")

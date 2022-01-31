@@ -1,6 +1,6 @@
 
 
-from com.ankamagames.jerakine.data.binaryStream import BinaryStream
+from ankamagames.jerakine.data.BinaryStream import BinaryStream
 
 
 class GraphicalElement:

@@ -2,7 +2,7 @@ from damageCalculation.tools import StatIds
 from pyd2bot.gameData.enums.playerTypeEnum import PlayerTypeEnum
 
 import logging
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 class GameFightFrame(IFrame):
     

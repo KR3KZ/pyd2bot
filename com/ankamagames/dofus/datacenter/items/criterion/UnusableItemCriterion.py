@@ -1,7 +1,7 @@
          
 from com.ankamagames.dofus.datacenter.items.criterion.IItemCriterion import IItemCriterion
 from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterion import ItemCriterion
-from com.ankamagames.jerakine.data import i18n
+from ankamagames.jerakine.data import I18n
 from com.ankamagames.jerakine.interfaces.iDatacenter import IDataCenter
 
 
@@ -13,7 +13,7 @@ class UnusableItemCriterion(ItemCriterion, IDataCenter):
    
    @property
    def text(self) -> str:
-      return i18n.getUiText("ui.criterion.unusableItem")
+      return I18n.getUiText("ui.criterion.unusableItem")
    
    @property
    def isRespected(self) -> bool:

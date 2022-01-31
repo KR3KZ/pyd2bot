@@ -13,7 +13,7 @@ from pyd2bot.utils.pathFinding.MapsPathFinder import MapNode, MapsPathfinder
 from pyd2bot.utils.pathFinding.lightMapNode import LightMapNode
 from pyd2bot.utils.pathFinding.path import Path, Direction
 
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
         
 class Pathfinding:
     mapNode:LightMapNode

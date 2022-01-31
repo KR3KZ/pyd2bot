@@ -4,9 +4,7 @@ from time import perf_counter
 from types import FunctionType
 from com.ankamagames.jerakine.managers import Worker
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
-logger = logging.getLogger("bot")
-
-
+logger = Logger(__name__)
 
 class EnterFrameDispatcher(metaclass=Singleton):
     
@@ -50,14 +48,14 @@ class EnterFrameDispatcher(metaclass=Singleton):
         return self._worker
         
     def addEventListener(self, listener:FunctionType, name:str, frameRate:int = 4.294967295E9) -> None:
-        if not self._controledListeners[listener]:
+        if not self._controledListeners.get(listener):
             exp1 = 0 if frameRate == float("inf") else int(1000 / frameRate)
             self._controledListeners[listener] = ControledEnterFrameListener(name, listener, frameRate <= 0 or exp1, int(self._currentTime) if not self._listenerUp else int(perf_counter()))
             if not self._listenerUp:
                 self._listenerUp = True
     
     def hasEventListener(self, listener:FunctionType) -> bool:
-        return self._controledListeners[listener] != None
+        return self._controledListeners.get(listener) != None
     
     @property
     def maxAllowedTime(self) -> int:
@@ -68,7 +66,7 @@ class EnterFrameDispatcher(metaclass=Singleton):
         self._maxAllowedTime = time
     
     def removeEventListener(self, listener:FunctionType) -> None:
-        if self._controledListeners[listener]:
+        if self._controledListeners.get(listener):
             del self._controledListeners[listener]
             if len(self._controledListeners) == 0 and not self._workerListenerUp:
                 self._listenerUp = False

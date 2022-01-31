@@ -3,7 +3,7 @@ from com.ankamagames.dofus.datacenter.items.criterion.IItemCriterion import IIte
 from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterion import ItemCriterion
 from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterionOperator import ItemCriterionOperator
 from com.ankamagames.dofus.network.enums.gameServerTypeEnum import GameServerTypeEnum
-from com.ankamagames.jerakine.data import i18n
+from ankamagames.jerakine.data import I18n
 from com.ankamagames.jerakine.interfaces.iDatacenter import IDataCenter
 
 
@@ -27,9 +27,9 @@ class AchievementAccountItemCriterion(ItemCriterion, IDataCenter):
    @property
    def text(self) -> str:
       readableValue = " \'" + Achievement.getAchievementById(_criterionValue).name + "\'"
-      readableCriterion:str = i18n.getUiText("ui.tooltip.unlockAchievement",[readableValue])
+      readableCriterion:str = I18n.getUiText("ui.tooltip.unlockAchievement",[readableValue])
       if _operator.text == ItemCriterionOperator.DIFFERENT:
-         readableCriterion = i18n.getUiText("ui.tooltip.dontUnlockAchievement",[readableValue])
+         readableCriterion = I18n.getUiText("ui.tooltip.dontUnlockAchievement",[readableValue])
       return readableCriterion
    
    def clone(self) -> IItemCriterion:

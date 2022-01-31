@@ -2,7 +2,7 @@ import logging
 from com.ankamagames.dofus.datacenter.spells.SpellState import SpellState
 from com.ankamagames.dofus.logic.game.fight.types.FighterStatus import FighterStatus
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 
 class FightersStateManager(metaclass=Singleton):

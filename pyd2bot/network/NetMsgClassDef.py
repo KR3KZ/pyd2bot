@@ -4,7 +4,7 @@ import sys
 from com.ankamagames.jerakine.network.customDataWrapper import ByteArray
 import pyd2bot.network.NetMsgDataField as nmdf
 from pyd2bot.network.protocolSpec import ProtocolSpec
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 class NetMsgClassDef:
    

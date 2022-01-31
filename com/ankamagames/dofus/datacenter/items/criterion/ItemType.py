@@ -3,7 +3,7 @@
       
       MODULE:str = "ItemTypes"
       
-      logger = logging.getLogger("bot")
+      logger = Logger(__name__)
       
       idAccessors:IdAccessors = IdAccessors(getItemTypeById,getItemTypes)
        

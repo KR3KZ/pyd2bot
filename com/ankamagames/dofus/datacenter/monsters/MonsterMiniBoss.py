@@ -1,6 +1,6 @@
             
 from com.ankamagames.dofus.types.idAccessors import IdAccessors
-from com.ankamagames.jerakine.data.gameData import GameData
+from ankamagames.jerakine.data.GameData import GameData
 
 
 class MonsterMiniBoss:

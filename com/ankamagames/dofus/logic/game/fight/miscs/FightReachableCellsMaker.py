@@ -15,7 +15,7 @@ from damageCalculation.tools.StatIds import StatIds
 from com.ankamagames.atouin.data.map.CellData import CellData
 from com.ankamagames.jerakine.types.positions.mapPoint import MapPoint
 import ankamagames.dofus.logic.game.fight.miscs.TackleUtil as TackleUtil
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 
 class _ReachableCellData:

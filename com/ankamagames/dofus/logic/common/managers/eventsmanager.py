@@ -3,7 +3,7 @@ from ast import FunctionType
 import logging
 import threading
 from pyd2bot.network.message import Message
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 
 class KillSig(threading.Event):

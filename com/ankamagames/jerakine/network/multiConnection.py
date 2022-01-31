@@ -10,7 +10,7 @@ from com.ankamagames.jerakine.network.events.basicEvent import BasicEvent
 from com.ankamagames.jerakine.network.events.iOErrorEvent import IOErrorEvent
 from com.ankamagames.jerakine.network.events.securityErrorEvent import SecurityErrorEvent
 from com.ankamagames.jerakine.network.iMessagerouter import IMessageRouter
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 
 class MultiConnection(EventDispatcher):

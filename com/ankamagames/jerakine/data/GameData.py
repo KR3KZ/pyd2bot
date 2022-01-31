@@ -1,59 +1,62 @@
                         
-import logging
-from com.ankamagames.jerakine.data.abstractDataManager import AbstractDataManager
-from com.ankamagames.jerakine.data.gameDataFileAccessor import GameDataFileAccessor
+from ankamagames.jerakine.logger.Logger import Logger
+from ankamagames.jerakine.data.AbstractDataManager import AbstractDataManager
+from ankamagames.jerakine.data.GameDataFileAccessor import GameDataFileAccessor
 from com.ankamagames.jerakine.newCache.LruGarbageCollector import LruGarbageCollector
 from com.ankamagames.jerakine.newCache.impl.cache import Cache
 from com.ankamagames.jerakine.utils.memory.SoftReference import SoftReference
 from com.ankamagames.jerakine.utils.memory.WeakReference import WeakReference
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 
 class GameData(AbstractDataManager):
    
    CACHE_SIZE_RATIO:float = 0.1
+   _directObjectCaches:dict = dict()
+   _objectCaches:dict = dict()
+   _objectsCaches:dict = dict()
+   _overrides:dict = dict()
       
    def __init__(self):
       super().__init__()
-      self._directObjectCaches:dict = dict()
-      self._objectCaches:dict = dict()
-      self._objectsCaches:dict = dict()
-      self._overrides:dict = dict()
 
-   def addOverride(self, moduleId:str, keyId:int, newKeyId:int) -> None:
-      if not self._overrides[moduleId]:
-         self._overrides[moduleId] = []
-      self._overrides[moduleId][keyId] = newKeyId
+   @classmethod
+   def addOverride(cls, moduleId:str, keyId:int, newKeyId:int) -> None:
+      if not cls._overrides.get(moduleId):
+         cls._overrides[moduleId] = []
+      cls._overrides[moduleId][keyId] = newKeyId
    
-   def getObject(self, moduleId:str, keyId:int) -> object:
+   @classmethod
+   def getObject(cls, moduleId:str, keyId:int) -> object:
       wr:WeakReference = None
-      if self._overrides[moduleId] and self._overrides[moduleId][keyId]:
-         keyId = self._overrides[moduleId][keyId]
-      if not self._directObjectCaches[moduleId]:
-         self._directObjectCaches[moduleId] = dict()
+      if cls._overrides.get(moduleId) and cls._overrides[moduleId].get(keyId):
+         keyId = cls._overrides[moduleId][keyId]
+      if not cls._directObjectCaches.get(moduleId):
+         cls._directObjectCaches[moduleId] = dict()
       else:
-         wr = self._directObjectCaches[moduleId][keyId]
+         wr = cls._directObjectCaches[moduleId][keyId]
          if wr:
             o = wr.object
             if o:
                return o
-      if not self._objectCaches[moduleId]:
-         self._objectCaches[moduleId] = Cache(GameDataFileAccessor().getCount(moduleId) * self.CACHE_SIZE_RATIO, LruGarbageCollector())
+      if not cls._objectCaches.get(moduleId):
+         cls._objectCaches[moduleId] = Cache(GameDataFileAccessor().getCount(moduleId) * cls.CACHE_SIZE_RATIO, LruGarbageCollector())
       else:
-         o = self._objectCaches[moduleId]
+         o = cls._objectCaches[moduleId]
          if o:
             return o
-      o = GameDataFileAccessor().getObject(moduleId,keyId)
-      self._directObjectCaches[moduleId][keyId] = WeakReference(o)
-      self._objectCaches[moduleId]
+      o = GameDataFileAccessor().getObject(moduleId, keyId)
+      cls._directObjectCaches[moduleId][keyId] = WeakReference(o)
+      cls._objectCaches[moduleId]
       return o
    
-   def getObjects(self, moduleId:str) -> list:
+   @classmethod
+   def getObjects(cls, moduleId:str) -> list:
       objects:list = None
-      if self._objectsCaches[moduleId]:
-         objects = self._objectsCaches[moduleId].object
+      if cls._objectsCaches.get(moduleId):
+         objects = cls._objectsCaches[moduleId].object
          if objects:
             return objects
       objects = GameDataFileAccessor().getObjects(moduleId)
-      self._objectsCaches[moduleId] = SoftReference(objects)
+      cls._objectsCaches[moduleId] = SoftReference(objects)
       return objects

@@ -1,19 +1,18 @@
 from ast import FunctionType
-from com.ankamagames.jerakine.data.i18nFileAccessor import I18nFileAccessor
+from ankamagames.jerakine.data.I18nFileAccessor import I18nFileAccessor
 from com.ankamagames.jerakine.enum.gameDataTypeEnum import GameDataTypeEnum
-from com.ankamagames.jerakine.data.binaryStream import BinaryStream
+from ankamagames.jerakine.data.BinaryStream import BinaryStream
 
 
 class GameDataProcess:
 
    def __init__(self, stream:BinaryStream):
       self._stream = stream
-      self._sort_index = dict()
+      self._sortIndex = dict()
       self._queryable_field = list()
-      self._search_field_index = dict()
+      self._searchFieldIndex = dict()
       self._search_field_type = dict()
-      self._search_field_count = dict()
-      
+      self._searchFieldCount = dict()
       self._queryableField = list()
       self._searchFieldType = dict()
       self.parseStream()
@@ -25,9 +24,9 @@ class GameDataProcess:
          available = self._stream.remaining()
          string = self._stream.readUTF()
          self._queryable_field.append(string)
-         self._search_field_index[string] = self._stream.readInt() + off
+         self._searchFieldIndex[string] = self._stream.readInt() + off
          self._search_field_type[string] = self._stream.readInt()
-         self._search_field_count[string] = self._stream.readInt()
+         self._searchFieldCount[string] = self._stream.readInt()
          length = length - (available - self._stream.remaining())
 
    def getQueryableField(self) -> list[str]:

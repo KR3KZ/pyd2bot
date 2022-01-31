@@ -6,7 +6,7 @@ from com.ankamagames.dofus.internalDatacenter.stats.detailedStats import Detaile
 from com.ankamagames.dofus.internalDatacenter.stats.stat import Stat
 from com.ankamagames.dofus.internalDatacenter.stats.usableStat import UsableStat
 from damageCalculation.tools import StatIds
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 
 

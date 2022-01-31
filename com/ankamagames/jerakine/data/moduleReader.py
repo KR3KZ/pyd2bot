@@ -1,11 +1,11 @@
 from collections import OrderedDict
 import logging
 from typing import Any
-from com.ankamagames.jerakine.data.gameDataProcess import GameDataProcess
+from ankamagames.jerakine.data.GameDataProcess import GameDataProcess
 from com.hurlan.crypto.signature import Signature
-from com.ankamagames.jerakine.data.binaryStream import BinaryStream
-from com.ankamagames.jerakine.data.gameDataClassDefinition import GameDataClassDefinition
-logger = logging.getLogger("bot")
+from ankamagames.jerakine.data.BinaryStream import BinaryStream
+from ankamagames.jerakine.data.GameDataClassDefinition import GameDataClassDefinition
+logger = Logger(__name__)
 
 
 class InvalidD2OFile(Exception):

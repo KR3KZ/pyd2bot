@@ -3,7 +3,7 @@ from time import sleep, perf_counter
 from com.ankamagames.jerakine.types.positions.mapPoint import MapPoint
 from .walker import Walker
 import logging
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 class Fighter(Walker):
 

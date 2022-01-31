@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import zlib, tempfile, io
 from com.ankamagames.atouin.data.map.map import Map
-from com.ankamagames.jerakine.data.binaryStream import BinaryStream
+from ankamagames.jerakine.data.BinaryStream import BinaryStream
 
 
 class InvalidDLMFile(Exception):

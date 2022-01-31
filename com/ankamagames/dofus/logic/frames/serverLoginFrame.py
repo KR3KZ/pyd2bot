@@ -6,7 +6,7 @@ from pyd2bot.utils.binaryIO import ByteArray
 from pyd2bot.logic.frames import IFrame
 from com.ankamagames.dofus.network.enums.ServerStatusEnum import ServerStatusEnum
 import logging
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 
 class ServerLoginFrame(IFrame):

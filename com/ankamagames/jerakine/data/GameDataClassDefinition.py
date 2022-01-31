@@ -2,10 +2,11 @@ import importlib
 import sys
 from typing import Any, TYPE_CHECKING
 if TYPE_CHECKING:
-   from com.ankamagames.jerakine.data.moduleReader import ModuleReader
-from com.ankamagames.jerakine.data.iposInit import IPostInit
-from com.ankamagames.jerakine.data.binaryStream import BinaryStream
-from com.ankamagames.jerakine.data.gameDataField import GameDataField
+   from ankamagames.jerakine.data.ModuleReader import ModuleReader
+from ankamagames.jerakine.data.IposInit import IPostInit
+from ankamagames.jerakine.data.BinaryStream import BinaryStream
+from ankamagames.jerakine.data.GameDataField import GameDataField
+
 
 class GameDataClassDefinition:
    

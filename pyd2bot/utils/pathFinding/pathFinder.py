@@ -1,6 +1,6 @@
 from pyd2bot.utils.pathFinding.path import Path, PathNode
 import logging
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 
 class Pathfinder:

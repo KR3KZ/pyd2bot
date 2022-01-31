@@ -1,7 +1,7 @@
 
 from pyd2bot.logic.frames import IFrame
 import logging
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
 
 
 class FightStartingFrame(IFrame):

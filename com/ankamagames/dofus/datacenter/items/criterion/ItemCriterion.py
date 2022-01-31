@@ -3,10 +3,10 @@ from com.ankamagames.dofus.datacenter.items.criterion.IItemCriterion import IIte
 from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterionOperator import ItemCriterionOperator
 from com.ankamagames.dofus.internalDatacenter.stats.entityStats import EntityStats                              
 from com.ankamagames.dofus.logic.common.managers.statsManager import StatsManager
-from com.ankamagames.jerakine.data import i18n
+from ankamagames.jerakine.data import I18n
 from damageCalculation.tools import StatIds
 
-logger = logging.getLogger("bot")
+logger = Logger(__name__)
       
 
 class ItemCriterion(IItemCriterion):
@@ -72,22 +72,22 @@ class ItemCriterion(IItemCriterion):
       index:int = 0
 
       if self._criterionRef == "CM":
-         readableCriterionRef = i18n.getUiText("ui.stats.movementPoints")
+         readableCriterionRef = I18n.getUiText("ui.stats.movementPoints")
          
       elif self._criterionRef == "CP":
-         readableCriterionRef = i18n.getUiText("ui.stats.actionPoints")
+         readableCriterionRef = I18n.getUiText("ui.stats.actionPoints")
          
       elif self._criterionRef == "CH":
-         readableCriterionRef = i18n.getUiText("ui.pvp.honourPoints")
+         readableCriterionRef = I18n.getUiText("ui.pvp.honourPoints")
          
       elif self._criterionRef == "CD":
-         readableCriterionRef = i18n.getUiText("ui.pvp.disgracePoints")
+         readableCriterionRef = I18n.getUiText("ui.pvp.disgracePoints")
          
       elif self._criterionRef == "CT":
-         readableCriterionRef = i18n.getUiText("ui.stats.takleBlock")
+         readableCriterionRef = I18n.getUiText("ui.stats.takleBlock")
          
       elif self._criterionRef == "Ct":
-         readableCriterionRef = i18n.getUiText("ui.stats.takleEvade")
+         readableCriterionRef = I18n.getUiText("ui.stats.takleEvade")
          
       else:
          knownCriteriaList = ["CS","Cs","CV","Cv","CA","Ca","CI","Ci","CW","Cw","CC","Cc","PG","PJ","Pj","PM","PA","PN","PE","<NO>","PS","PR","PL","PK","Pg","Pr","Ps","Pa","PP","PZ","CM","Qa","CP","ca","cc","ci","cs","cv","cw","Pl"]
