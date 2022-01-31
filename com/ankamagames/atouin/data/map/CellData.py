@@ -42,11 +42,13 @@ class CellData:
             self.red = (tmp_bytes & 32) != 0
             self.visible = (tmp_bytes & 64) != 0
             self.farmCell = (tmp_bytes & 128) != 0
+
             if self.map.version == 9:
                 self.top_arrow = (tmp_bytes & 256) != 0
                 self.bottom_arrow = (tmp_bytes & 512) != 0
                 self.right_arrow = (tmp_bytes & 1024) != 0
                 self.left_arrow = (tmp_bytes & 2048) != 0
+                
             else:
                 self.havenbagCell = (tmp_bytes & 256) != 0
                 self.top_arrow = (tmp_bytes & 512) != 0

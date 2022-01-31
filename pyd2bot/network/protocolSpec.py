@@ -67,7 +67,7 @@ class ProtocolSpec:
             raw = ByteArray()
             
         if msgName is False:
-            msg_type = self.getFieldTypeId[json["__type__"]]
+            msg_type = self.getTypeSpecById[json["type"]]
             raw.writeUnsignedShort(msg_type["protocolId"])
             
         elif isinstance(msgName, str):

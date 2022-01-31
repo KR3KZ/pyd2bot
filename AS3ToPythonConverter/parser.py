@@ -108,4 +108,4 @@ def parseFile(file_p, out_p):
         fp.write(code)
 
 # parseFolderFiles("AS3ToPythonConverter/scripts", "AS3ToPythonConverter/connectionType")
-parseFile("AS3ToPythonConverter/target.as", "AS3ToPythonConverter/iServerConnection.py")
+parseFile("AS3ToPythonConverter/target.as", "AS3ToPythonConverter/BenchmarkTimer.py")

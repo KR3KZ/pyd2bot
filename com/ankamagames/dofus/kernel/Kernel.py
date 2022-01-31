@@ -19,7 +19,7 @@ class Kernel(metaclass=Singleton):
 
    def __init__(self):
       self._worker:Worker = Worker()
-      self.beingInReconection:bool = None
+      self.beingInReconection:bool = False
 
    def getWorker(self) -> Worker:
       return self._worker
@@ -41,10 +41,10 @@ class Kernel(metaclass=Singleton):
    def reset(self, messagesToDispatchAfter:list = None, autoRetry:bool = False, reloadData:bool = False) -> None:
       StatsManager.clear()
       if not autoRetry:
-         AuthentificationManager().destroy()
+         AuthentificationManager.clear()
       FightersStateManager().endFight()
       CurrentPlayedFighterManager().endFight()
-      PlayedCharacterManager().destroy()
+      PlayedCharacterManager.clear()
       self._worker.clear()
       self.addInitialFrames(reloadData)
       self.beingInReconection = False

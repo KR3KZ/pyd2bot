@@ -1,2 +1,8 @@
+
+from com.ankamagames.jerakine.messages.message import Message
+
+
 class MessageHandler:
-    pass
+
+    def process(param1:Message) -> bool:
+        pass

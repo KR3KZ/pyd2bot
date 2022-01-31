@@ -3,3 +3,5 @@ wdom
 tqdm
 pycryptodomex
 whistle
+marshmallow-dataclass
+

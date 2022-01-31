@@ -1,13 +1,24 @@
+from com.ankamagames.dofus.network.messages.common.basic.BasicPongMessage import BasicPongMessage
+from com.ankamagames.jerakine.network.NetworkSentEvent import NetworkSentEvent
+from com.ankamagames.jerakine.network.events.basicEvent import BasicEvent
 from com.ankamagames.jerakine.network.events.iOErrorEvent import IOErrorEvent
 from whistle import EventDispatcher, Event
 
 
 
-dispatcher = EventDispatcher()
-#Add a listener to react to events
-def on_spectacle_starts(event):
-    print('Please turn down your phones!')
 
-dispatcher.add_listener(IOErrorEvent.IO_ERROR, on_spectacle_starts)
-#Dispatch it!
-dispatcher.dispatch(IOErrorEvent.IO_ERROR)
+dispatcher = EventDispatcher()
+def handler(event:NetworkSentEvent):
+    if event.name == BasicEvent.CONNECT:
+        print("Connected to the server")
+    elif event.name == BasicEvent.CLOSE:
+        print("Disconnected from the server")
+    elif event.name == NetworkSentEvent.EVENT_SENT:
+        print("Message sent: {}".format(event.message))
+
+
+msg = BasicPongMessage()
+dispatcher.add_listener(NetworkSentEvent.EVENT_SENT, handler)
+dispatcher.add_listener(BasicEvent.CONNECT, handler)
+dispatcher.dispatch(NetworkSentEvent.EVENT_SENT, NetworkSentEvent(msg))
+dispatcher.dispatch(BasicEvent.CONNECT)

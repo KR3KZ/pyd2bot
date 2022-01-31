@@ -1,16 +1,16 @@
 import logging
 from types import FunctionType
 from whistle import Event, EventDispatcher
-from AS3ToPythonConverter.iServerConnection import IServerConnection
+from com.ankamagames.jerakine.network.iServerConnection import IServerConnection
+from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
 from com.ankamagames.jerakine.messages.message import Message
 from com.ankamagames.jerakine.messages.messageHandler import MessageHandler
+from com.ankamagames.jerakine.network.NetworkSentEvent import NetworkSentEvent
 from com.ankamagames.jerakine.network.events.basicEvent import BasicEvent
 from com.ankamagames.jerakine.network.events.iOErrorEvent import IOErrorEvent
 from com.ankamagames.jerakine.network.events.securityErrorEvent import SecurityErrorEvent
 from com.ankamagames.jerakine.network.iMessagerouter import IMessageRouter
-from com.ankamagames.tubul.interfaces.iEventDispatcher import IEventDispatcher
 logger = logging.getLogger("bot")
-
 
 
 class MultiConnection(EventDispatcher):
@@ -33,11 +33,11 @@ class MultiConnection(EventDispatcher):
    _connectionConnectedCount:int
    
    def __init__(self):
-      self._connectionByMsg = dict(True)
-      self._connectionByEvent = dict(True)
+      self._connectionByMsg = dict()
+      self._connectionByEvent = dict()
       self._connectionById = dict()
       self._idByConnection = dict()
-      super().__init__(self)
+      super().__init__()
    
    @property
    def mainConnection(self) -> IServerConnection:
@@ -45,7 +45,7 @@ class MultiConnection(EventDispatcher):
    
    @mainConnection.setter
    def mainConnection(self, conn:IServerConnection) -> None:
-      if not self._idByConnection[conn]:
+      if not self._idByConnection.get(conn):
          raise Exception("Connection must be added before setted to be the main connection")
       self._mainConnection = conn
    
@@ -108,7 +108,7 @@ class MultiConnection(EventDispatcher):
       return True
    
    def getSubConnection(self, idOrMessageOrEvent = None) -> IServerConnection:
-      if idOrMessageOrEvent is str:
+      if isinstance(idOrMessageOrEvent, str):
          return self._connectionById[idOrMessageOrEvent]
       if isinstance(idOrMessageOrEvent, Message):
          return self._connectionByMsg[idOrMessageOrEvent]
@@ -123,7 +123,7 @@ class MultiConnection(EventDispatcher):
    def getPauseBuffer(self, id:str = None) -> list:
       mergedPauseBuffer:list = None
       conn:IServerConnection = None
-      if id and self._connectionById[id]:
+      if id and self._connectionById.get(id):
          return IServerConnection(self._connectionById[id]).pauseBuffer
       if not id:
          mergedPauseBuffer = []
@@ -133,34 +133,33 @@ class MultiConnection(EventDispatcher):
       return None
    
    def close(self, id:str = None) -> None:
-      connection:IServerConnection = None
       if id:
          logger.warn("Connection " + id + " will be closed...")
-         if self._connectionById[id]:
-            IServerConnection(self._connectionById[id]).close()
+         if self._connectionById.get(id):
+            self._connectionById[id].close()
             if self._connectionCount > 1:
                self.removeConnection(id)
          return
       logger.warn("All connections will be closed...")
-      for connection in self._connectionById:
+      for connection in self._connectionById.values():
          connection.close()
    
    def pause(self, id:str = None) -> None:
       connection:IServerConnection = None
       if id:
-         if self._connectionById[id]:
+         if self._connectionById.get(id):
             IServerConnection(self._connectionById[id]).pause()
          return
-      for connection in self._connectionById:
+      for connection in self._connectionById.values():
          connection.pause()
    
    def resume(self, id:str = None) -> None:
       connection:IServerConnection = None
       if id:
-         if self._connectionById[id]:
+         if self._connectionById.get(id):
             IServerConnection(self._connectionById[id]).resume()
          return
-      for connection in self._connectionById:
+      for connection in self._connectionById.values():
          connection.resume()
    
    def send(self, msg:INetworkMessage, connectionId:str = "") -> None:
@@ -172,27 +171,27 @@ class MultiConnection(EventDispatcher):
             logger.error(msg + " sending impossible : no connection id")
             return
          if connectionId == "all":
-            for conn in self._connectionById:
+            for conn in self._connectionById.values():
                if conn.connected:
                   conn.send(msg)
          else:
             self.getSubConnection(connectionId).send(msg)
       elif self._mainConnection:
          self._mainConnection.send(msg)
-      if hasEventListener(NetworkSentEvent.EVENT_SENT):
-         dispatchEvent(NetworkSentEvent(NetworkSentEvent.EVENT_SENT,msg))
+      if self.has_listeners(NetworkSentEvent.EVENT_SENT):
+         self.dispatch(NetworkSentEvent.EVENT_SENT, NetworkSentEvent(msg))
    
    def proccessMsg(self, msg:Message, conn:IServerConnection) -> None:
       self._connectionByMsg[msg] = conn
    
    def onSubConnectionEvent(self, e:Event) -> None:
-      if e.type == Event.CONNECT:
+      if e.name == BasicEvent.CONNECT:
          self._connectionConnectedCount+=1
-      elif e.type == Event.CLOSE:
+      elif e.name == BasicEvent.CLOSE:
          self._connectionConnectedCount-=1
-      self._connectionByEvent[e] = e.target
-      if hasEventListener(e.type):
-         dispatchEvent(e)
+      self._connectionByEvent[e] = e.dispatcher
+      if self.has_listeners(e.name):
+         self.dispatch(e.name, e)
 
 
 

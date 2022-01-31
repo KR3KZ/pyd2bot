@@ -71,8 +71,8 @@ def getCellsIdBetween(param1:int, param2:int) -> list:
     return _loc32_
 
 def isValidCellId(param1:int) -> bool:
-    if not isInit:
-        raise  Exception("MapTools must be initiliazed with method .initForDofus2 or .initForDofus3")
+    # if not isInit:
+    #     raise  Exception("MapTools must be initiliazed with method .initForDofus2 or .initForDofus3")
     if param1 >= 0:
         return param1 < mapCountCell
     return False

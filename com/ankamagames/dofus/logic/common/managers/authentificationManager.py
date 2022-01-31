@@ -1,6 +1,7 @@
 from argparse import ArgumentError
 import os
 import logging
+from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 from com.ankamagames.jerakine.network.customDataWrapper import ByteArray
 from com.hurlan.crypto.symmetric.aESKey import AESKey
 from com.hurlan.crypto.symmetric.cBCMode import CBCMode
@@ -9,7 +10,6 @@ from com.hurlan.crypto.symmetric.pKCS1 import PKCS1
 from com.hurlan.crypto.symmetric.rSAKey import RSACipher
 from com.hurlan.crypto.symmetric.simpleIVMode import SimpleIVMode
 from Cryptodome.PublicKey import RSA
-
 logger = logging.getLogger("bot")
 ROOTDIR = os.path.dirname(__file__)
 
@@ -23,7 +23,7 @@ if not os.path.exists(CLIENT_PUBLIC_KEY_P):
     raise ClientPubKeyNotFoundError(f"{CLIENT_PUBLIC_KEY_P} file not found")
 
     
-class AuthentificationManager:
+class AuthentificationManager(metaclass=Singleton):
     with open(CLIENT_PUBLIC_KEY_P, 'r') as fp:
         CLIENT_PUB_KEY = RSA.import_key(fp.read())
     AES_KEY_LENGTH = 32
@@ -35,41 +35,32 @@ class AuthentificationManager:
     tokenMode:bool = None
     username = None
     
-    @staticmethod
-    def initAESKey():
-        AuthentificationManager._AESKey = AESKey.generateRandomAESKey(AuthentificationManager.AES_KEY_LENGTH)
+    def initAESKey(self):
+        self._AESKey = AESKey.generateRandomAESKey(self.AES_KEY_LENGTH)
     
-    
-    @staticmethod
-    def setSalt(salt:str) -> None:
+    def setSalt(self, salt:str) -> None:
         if len(salt) < 32:
             logger.warn("Authentification salt size is lower than 32 ")
         while len(salt) < 32:
             salt += " "
-        AuthentificationManager._salt = salt
-    
+        self._salt = salt
 
-    @staticmethod    
-    def setPublicKey(enc_publicKey:list[int]):
+    def setPublicKey(self, enc_publicKey:list[int]):
         baSignedKey = ByteArray.from_int8Arr(enc_publicKey)
-        rsacipher = RSACipher(AuthentificationManager.CLIENT_PUB_KEY, PKCS1())
+        rsacipher = RSACipher(self.CLIENT_PUB_KEY, PKCS1())
         ba_pubKey = ByteArray()
         if not rsacipher.verify(baSignedKey, ba_pubKey):
             raise Exception("Pubkey Sign validation failed!")
-        AuthentificationManager._publicKey = "-----BEGIN PUBLIC KEY-----\n" + str(ba_pubKey) + "\n-----END PUBLIC KEY-----"
-    
+        self._publicKey = "-----BEGIN PUBLIC KEY-----\n" + str(ba_pubKey) + "\n-----END PUBLIC KEY-----"
 
-    @staticmethod
-    def getCanAutoConnectWithToken() -> bool:
-        return AuthentificationManager.nextToken != None
+    def getCanAutoConnectWithToken(self) -> bool:
+        return self.nextToken != None
 
-
-    @staticmethod
-    def getIdentificationMessage(login, pwd):
+    def getIdentificationMessage(self, login, pwd):
         imsg = {
             '__type__': 'IdentificationMessage',
             'autoconnect': False,
-            'credentials': AuthentificationManager.getAuthCredentials(login, pwd),
+            'credentials': self.getAuthCredentials(login, pwd),
             'failedAttempts': [],
             'lang': 'fr',
             'serverId': 0,
@@ -87,26 +78,22 @@ class AuthentificationManager:
         }
         return imsg
     
-
-    @staticmethod
-    def getAuthCredentials(login:str, pwd:str) -> list[int]:
+    def getAuthCredentials(self, login:str, pwd:str) -> list[int]:
         baIn = bytearray()
-        baIn += bytes(AuthentificationManager._salt, 'utf')
-        baIn += AuthentificationManager._AESKey
+        baIn += bytes(self._salt, 'utf')
+        baIn += self._AESKey
         baIn += len(login).to_bytes(1, "big")
         baIn += bytes(login, 'utf')
         baIn += bytes(pwd, 'utf')
-        rsa_key = RSA.importKey(bytes(AuthentificationManager._publicKey, 'utf'))
+        rsa_key = RSA.importKey(bytes(self._publicKey, 'utf'))
         rsacipher = RSACipher(rsa_key, PKCS1())
         baOut = rsacipher.encrypt(baIn)
         return baOut.to_int8Arr()
 
-
-    @staticmethod
-    def decodeWithAES(byteArrayOrVector) -> ByteArray:
-        aescipher = SimpleIVMode(CBCMode(AESKey(AuthentificationManager._AESKey), NullPad()))
+    def decodeWithAES(self, byteArrayOrVector) -> ByteArray:
+        aescipher = SimpleIVMode(CBCMode(AESKey(self._AESKey), NullPad()))
         result = ByteArray()
-        result.writeBytes(AuthentificationManager._AESKey, 0, 16)
+        result.writeBytes(self._AESKey, 0, 16)
         
         if type(byteArrayOrVector) == list:
             for i in byteArrayOrVector:

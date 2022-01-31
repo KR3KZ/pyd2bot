@@ -1,9 +1,6 @@
 from com.ankamagames.atouin.data.map.fixture import Fixture
-from pyd2bot.gameData.enums.playerTypeEnum import PlayerTypeEnum
 from com.ankamagames.atouin.data.map.CellData import CellData
 from com.ankamagames.atouin.data.map.layer import Layer
-from pyd2bot.gameData.world.mapPosition import MapPosition
-from pyd2bot.gameData.world.mapZones import MapZones
 from com.ankamagames.jerakine.data.binaryStream import BinaryStream
 import logging
 logger = logging.getLogger("bot")

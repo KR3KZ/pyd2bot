@@ -1,6 +1,6 @@
 from ctypes import ArgumentError
 import logging
-from AS3ToPythonConverter.iServerConnection import IServerConnection
+from com.ankamagames.jerakine.network.iServerConnection import IServerConnection
 from com.ankamagames.dofus.kernel.kernel import Kernel
 from com.ankamagames.dofus.kernel.net.connectionType import ConnectionType
 from com.ankamagames.dofus.kernel.net.disconnectionReason import DisconnectionReason
@@ -10,158 +10,179 @@ from com.ankamagames.dofus.network.messages.common.basic.BasicPingMessage import
 from com.ankamagames.jerakine.network.multiConnection import MultiConnection
 logger = logging.getLogger("bot")
 
-   
-GAME_SERVER:str = "game_server"
 
-KOLI_SERVER:str = "koli_server"
+class ConnectionHander:
 
-_useSniffer:bool
+   GAME_SERVER:str = "game_server"
 
-_currentConnection:MultiConnection = None
+   KOLI_SERVER:str = "koli_server"
 
-_currentConnectionType:str= None
+   _useSniffer:bool
 
-_wantedSocketLost:bool = False
+   _currentConnection:MultiConnection = None
 
-_wantedSocketLostReason:int = 0
+   _currentConnectionType:str= None
 
-_hasReceivedMsg:bool = False
+   _wantedSocketLost:bool = False
 
-_hasReceivedNetworkMsg:bool = False
+   _wantedSocketLostReason:int = 0
 
-_connectionTimeout = None
-   
+   _hasReceivedMsg:bool = False
 
-@property
-def useSniffer(self) -> bool:
-   return _useSniffer
+   _hasReceivedNetworkMsg:bool = False
 
-@useSniffer.setter
-def useSniffer(sniffer:bool) -> None:
-   _useSniffer = sniffer
+   _connectionTimeout = None
+      
 
-@property
-def connectionType(self) -> str:
-   return _currentConnectionType
+   @classmethod
+   @property
+   def useSniffer(cls) -> bool:
+      return cls._useSniffer
 
-@property
-def hasReceivedMsg(self) -> bool:
-   return _hasReceivedMsg
+   @classmethod
+   @useSniffer.setter
+   def useSniffer(cls, sniffer:bool) -> None:
+      cls._useSniffer = sniffer
 
-@hasReceivedMsg.setter
-def hasReceivedMsg(value:bool) -> None:
-   _hasReceivedMsg = value
+   @classmethod
+   @property
+   def connectionType(cls) -> str:
+      return cls._currentConnectionType
 
-@property
-def hasReceivedNetworkMsg(self) -> bool:
-   return _hasReceivedNetworkMsg
+   @property
+   def hasReceivedMsg(cls) -> bool:
+      return _hasReceivedMsg
 
-@hasReceivedNetworkMsg.setter
-def hasReceivedNetworkMsg(value:bool) -> None:
-   _hasReceivedNetworkMsg = value
+   @hasReceivedMsg.setter
+   def hasReceivedMsg(value:bool) -> None:
+      _hasReceivedMsg = value
 
-def getConnection(self) -> MultiConnection:
-   if not _currentConnection:
-      createConnection()
-   return _currentConnection
+   @property
+   def hasReceivedNetworkMsg(cls) -> bool:
+      return cls._hasReceivedNetworkMsg
 
-def connectToLoginServer(host:str, port:int) -> None:
-   if _currentConnection != None:
-      closeConnection()
-   etablishConnection(host,port,ConnectionType.TO_LOGIN_SERVER,_useSniffer)
-   _currentConnectionType = ConnectionType.TO_LOGIN_SERVER
+   @classmethod
+   @hasReceivedNetworkMsg.setter
+   def hasReceivedNetworkMsg(cls, value:bool) -> None:
+      cls._hasReceivedNetworkMsg = value
 
-def connectToGameServer(gameServerHost:str, gameServerPort:int) -> None:
-   startConnectionTimer()
-   if _currentConnection != None:
-      closeConnection()
-   etablishConnection(gameServerHost,gameServerPort,ConnectionType.TO_GAME_SERVER,_useSniffer)
-   _currentConnectionType = ConnectionType.TO_GAME_SERVER
-   PlayerManager().gameServerPort = gameServerPort
+   @classmethod
+   def getConnection(cls) -> MultiConnection:
+      if not cls._currentConnection:
+         cls.createConnection()
+      return cls._currentConnection
 
-def connectToKoliServer(gameServerHost:str, gameServerPort:int) -> None:
-   startConnectionTimer()
-   if _currentConnection != None and _currentConnection.getSubConnection(ConnectionType.TO_KOLI_SERVER):
-      _currentConnection.close(ConnectionType.TO_KOLI_SERVER)
-   etablishConnection(gameServerHost,gameServerPort,ConnectionType.TO_KOLI_SERVER,_useSniffer)
-   _currentConnectionType = ConnectionType.TO_KOLI_SERVER
-   PlayerManager().kisServerPort = gameServerPort
+   @classmethod
+   def connectToLoginServer(cls, host:str, port:int) -> None:
+      if cls._currentConnection != None:
+         cls.closeConnection()
+      cls.etablishConnection(host, port, ConnectionType.TO_LOGIN_SERVER, cls._useSniffer)
+      cls._currentConnectionType = ConnectionType.TO_LOGIN_SERVER
 
-def confirmGameServerConnection(self) -> None:
-   stopConnectionTimer()
+   classmethod
+   def connectToGameServer(cls, gameServerHost:str, gameServerPort:int) -> None:
+      cls.startConnectionTimer()
+      if cls._currentConnection != None:
+         cls.closeConnection()
+      cls.etablishConnection(gameServerHost,gameServerPort, ConnectionType.TO_GAME_SERVER, cls._seSniffer)
+      cls._currentConnectionType = ConnectionType.TO_GAME_SERVER
+      PlayerManager().gameServerPort = gameServerPort
 
-def onConnectionTimeout() -> None:
-   msg:BasicPingMessage = None
-   if _currentConnection and _currentConnection.connected:
-      msg = BasicPingMessage()
-      msg.initBasicPingMessage(True)
-      logger.warn("La connection au serveur de jeu semble longue. On envoit un BasicPingMessage pour essayer de débloquer la situation.")
-      _currentConnection.send(msg, _currentConnectionType)
-      stopConnectionTimer()
+   @classmethod
+   def connectToKoliServer(cls, gameServerHost:str, gameServerPort:int) -> None:
+      cls.startConnectionTimer()
+      if cls._currentConnection != None and cls._currentConnection.getSubConnection(ConnectionType.TO_KOLI_SERVER):
+         cls._currentConnection.close(ConnectionType.TO_KOLI_SERVER)
+      cls.etablishConnection(gameServerHost,gameServerPort, ConnectionType.TO_KOLI_SERVER, cls._seSniffer)
+      cls._currentConnectionType = ConnectionType.TO_KOLI_SERVER
+      PlayerManager().kisServerPort = gameServerPort
 
-def closeConnection(self) -> None:
-   if Kernel().getWorker().contains(HandshakeFrame):
-      Kernel().getWorker().removeFrame(Kernel().getWorker().getFrame(HandshakeFrame))
-   if _currentConnection and _currentConnection.connected:
-      _currentConnection.close()
-   _currentConnection = None
-   _currentConnectionType = ConnectionType.DISCONNECTED
+   @classmethod
+   def confirmGameServerConnection(cls) -> None:
+      cls.stopConnectionTimer()
 
-def handleDisconnection(self) -> DisconnectionReason:
-   closeConnection()
-   reason:DisconnectionReason = DisconnectionReason(_wantedSocketLost,_wantedSocketLostReason)
-   _wantedSocketLost = False
-   _wantedSocketLostReason = DisconnectionReasonEnum.UNEXPECTED
-   if not reason.expected:
-      ChatServiceManager.destroy()
-   return reason
+   @classmethod
+   def onConnectionTimeout(cls) -> None:
+      msg:BasicPingMessage = None
+      if cls._currentConnection and cls._currentConnection.connected:
+         msg = BasicPingMessage()
+         msg.initBasicPingMessage(True)
+         logger.warn("La connection au serveur de jeu semble longue. On envoit un BasicPingMessage pour essayer de débloquer la situation.")
+         cls._currentConnection.send(msg, cls._currentConnectionType)
+         cls.stopConnectionTimer()
 
-def connectionGonnaBeClosed(expectedReason:int) -> None:
-   _wantedSocketLostReason = expectedReason
-   _wantedSocketLost = True
+   @classmethod
+   def closeConnection(cls) -> None:
+      if Kernel().getWorker().contains(HandshakeFrame):
+         Kernel().getWorker().removeFrame(Kernel().getWorker().getFrame(HandshakeFrame))
+      if cls._currentConnection and cls._currentConnection.connected:
+         cls._currentConnection.close()
+      cls._currentConnection = None
+      cls._currentConnectionType = ConnectionType.DISCONNECTED
 
-def pause(self) -> None:
-   logger.info("Pause connection")
-   _currentConnection.pause()
+   @classmethod
+   def handleDisconnection(cls) -> DisconnectionReason:
+      cls.closeConnection()
+      reason:DisconnectionReason = DisconnectionReason(cls._antedSocketLost, cls._antedSocketLostReason)
+      cls._antedSocketLost = False
+      cls._antedSocketLostReason = DisconnectionReasonEnum.UNEXPECTED
+      if not reason.expected:
+         ChatServiceManager.destroy()
+      return reason
 
-def resume(self) -> None:
-   logger.info("Resume connection")
-   if _currentConnection:
-      _currentConnection.resume()
-   Kernel().getWorker().process(ConnectionResumedMessage())
+   @classmethod
+   def connectionGonnaBeClosed(cls, expectedReason:int) -> None:
+      cls._antedSocketLostReason = expectedReason
+      cls._antedSocketLost = True
 
-def startConnectionTimer(self) -> None:
-   if not _connectionTimeout:
-      _connectionTimeout = BenchmarkTimer(4000, 1, "ConnectionsHandler._connectionTimeout (connectToKoliServer)")
-      _connectionTimeout.addEventListener(TimerEvent.TIMER,onConnectionTimeout)
-   else:
-      _connectionTimeout.reset()
-   _connectionTimeout.start()
+   @classmethod
+   def pause(cls) -> None:
+      logger.info("Pause connection")
+      cls._currentConnection.pause()
 
-def stopConnectionTimer(self) -> None:
-   if _connectionTimeout:
-      _connectionTimeout.stop()
-      _connectionTimeout.removeEventListener(TimerEvent.TIMER,onConnectionTimeout)
+   @classmethod
+   def resume(cls) -> None:
+      logger.info("Resume connection")
+      if cls._currentConnection:
+         cls._currentConnection.resume()
+      Kernel().getWorker().process(cls.ConnectionResumedMessage())
 
-def etablishConnection(host:str, port:int, id:str, useSniffer:bool = False, proxy:IConnectionProxy = None) -> None:
-   conn:IServerConnection = None
-   if useSniffer:
-      if proxy != None:
-         raise ArgumentError("Can\'t etablish a connection using a proxy and the sniffer.")
-      conn = SnifferServerConnection(None,0,id)
-   elif proxy != None:
-      conn = ProxyedServerConnection(proxy,None,0,id)
-   else:
-      conn = ServerConnection(None,0,id)
-   if not _currentConnection:
-      createConnection()
-   conn.lagometer = LagometerAck()
-   conn.handler = Kernel().getWorker()
-   conn.rawParser = MessageReceiver()
-   _currentConnection.addConnection(conn,id)
-   _currentConnection.mainConnection = conn
-   Kernel().getWorker().addFrame(HandshakeFrame())
-   conn.connect(host,port)
+   @classmethod
+   def startConnectionTimer(cls) -> None:
+      if not cls._onnectionTimeout:
+         cls._onnectionTimeout = BenchmarkTimer(4000, 1, "ConnectionsHandler._connectionTimeout (connectToKoliServer)")
+         cls._onnectionTimeout.add_listener(TimerEvent.TIMER, onConnectionTimeout)
+      else:
+         cls._onnectionTimeout.reset()
+      cls._onnectionTimeout.start()
 
-def createConnection(self) -> None:
-   _currentConnection = MultiConnection()
+   @classmethod
+   def stopConnectionTimer(cls) -> None:
+      if cls._onnectionTimeout:
+         cls._onnectionTimeout.stop()
+         cls._onnectionTimeout.removeEventListener(TimerEvent.TIMER, cls.onConnectionTimeout)
+
+   @classmethod
+   def etablishConnection(cls, host:str, port:int, id:str, useSniffer:bool = False, proxy:IConnectionProxy = None) -> None:
+      conn:IServerConnection = None
+      if useSniffer:
+         if proxy != None:
+            raise ArgumentError("Can\'t etablish a connection using a proxy and the sniffer.")
+         conn = SnifferServerConnection(None,0,id)
+      elif proxy != None:
+         conn = ProxyedServerConnection(proxy,None,0,id)
+      else:
+         conn = ServerConnection(None,0,id)
+      if not cls._currentConnection:
+         cls.createConnection()
+      conn.lagometer = LagometerAck()
+      conn.handler = Kernel().getWorker()
+      conn.rawParser = MessageReceiver()
+      cls._currentConnection.addConnection(conn,id)
+      cls._currentConnection.mainConnection = conn
+      Kernel().getWorker().addFrame(HandshakeFrame())
+      conn.connect(host,port)
+
+   @classmethod
+   def createConnection(cls) -> None:
+      cls._currentConnection = MultiConnection()

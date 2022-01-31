@@ -24,6 +24,7 @@ class NetMsgClassDef:
    def deserialize(self, childInstance:object=None) -> object:
       if childInstance is None:
          inst = self._cls()
+         
       else:
          inst = childInstance
 
