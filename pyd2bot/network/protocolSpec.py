@@ -1,7 +1,7 @@
 from functools import reduce
 from importlib import import_module
 import random
-from com.ankamagames.jerakine.network.customDataWrapper import ByteArray
+from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
 import json
 import os
 from protocolBuilder.typeEnum import TypeEnum

@@ -1,7 +1,7 @@
 import socket
 from time import sleep
 from scapy.all import AsyncSniffer, Packet
-from com.ankamagames.jerakine.network.customDataWrapper import Buffer
+from com.ankamagames.jerakine.network.CustomDataWrapper import Buffer
 from pyd2bot.network.message import Message
 import signal
 class DofusSniffer(AsyncSniffer):

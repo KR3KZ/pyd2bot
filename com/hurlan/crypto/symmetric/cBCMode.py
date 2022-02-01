@@ -1,7 +1,7 @@
 
 
 
-from com.ankamagames.jerakine.network.customDataWrapper import ByteArray
+from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
 from com.hurlan.crypto.symmetric.iPad import IPad
 from com.hurlan.crypto.symmetric.iSymetricKey import ISymmetricKey
 from com.hurlan.crypto.symmetric.iVmode import IVMode

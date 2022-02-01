@@ -2,13 +2,13 @@ from com.ankamagames.jerakine.logger.Logger import Logger
 from types import FunctionType
 from whistle import Event, EventDispatcher
 from com.ankamagames.jerakine.network.IServerConnection import IServerConnection
-from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
-from com.ankamagames.jerakine.messages.message import Message
-from com.ankamagames.jerakine.messages.messageHandler import MessageHandler
+from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.messages.Message import Message
+from com.ankamagames.jerakine.messages.MessageHandler import MessageHandler
 from com.ankamagames.jerakine.network.NetworkSentEvent import NetworkSentEvent
-from com.ankamagames.jerakine.network.events.basicEvent import BasicEvent
-from com.ankamagames.jerakine.network.events.iOErrorEvent import IOErrorEvent
-from com.ankamagames.jerakine.network.events.securityErrorEvent import SecurityErrorEvent
+from com.ankamagames.jerakine.events.BasicEvent import BasicEvent
+from com.ankamagames.jerakine.events.IOErrorEvent import IOErrorEvent
+from com.ankamagames.jerakine.events.SecurityErrorEvent import SecurityErrorEvent
 from com.ankamagames.jerakine.network.IMessagerouter import IMessageRouter
 logger = Logger(__name__)
 

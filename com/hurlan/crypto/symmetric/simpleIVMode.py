@@ -1,7 +1,7 @@
 
 
    
-from com.ankamagames.jerakine.network.customDataWrapper import ByteArray
+from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
 from com.hurlan.crypto.symmetric import iMode
 from com.hurlan.crypto.symmetric.iCipher import ICipher
 from com.hurlan.crypto.symmetric.iMode import IMode

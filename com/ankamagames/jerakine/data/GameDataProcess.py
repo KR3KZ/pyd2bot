@@ -1,6 +1,6 @@
 from ast import FunctionType
 from com.ankamagames.jerakine.data.I18nFileAccessor import I18nFileAccessor
-from com.ankamagames.jerakine.enum.gameDataTypeEnum import GameDataTypeEnum
+from com.ankamagames.jerakine.enum.GameDataTypeEnum import GameDataTypeEnum
 from com.ankamagames.jerakine.data.BinaryStream import BinaryStream
 
 

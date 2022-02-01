@@ -16,7 +16,7 @@ class EnterFrameDispatcher(metaclass=Singleton):
         self._postWorkerTime:int = None
         self._diff:int = 0 
         self._noWorkerFrameCount:int = 0
-        self._controledListeners:dict = dict(True)
+        self._controledListeners = dict[FunctionType, ControledEnterFrameListener]()
         self._worker:Worker = None
     
     
@@ -33,11 +33,7 @@ class EnterFrameDispatcher(metaclass=Singleton):
         
     @property
     def enterFrameListenerCount(self) -> int:
-        key = None
-        count:int = 0
-        for key in self._controledListeners:
-            count += 1
-        return count
+        return len(self._controledListeners)
     
     @property
     def controledEnterFrameListeners(self) -> dict:
@@ -47,9 +43,9 @@ class EnterFrameDispatcher(metaclass=Singleton):
     def worker(self) -> Worker:
         return self._worker
         
-    def addEventListener(self, listener:FunctionType, name:str, frameRate:int = 4.294967295E9) -> None:
+    def addEventListener(self, listener:FunctionType, name:str, frameRate:int = 0.004294967295E9) -> None:
         if not self._controledListeners.get(listener):
-            exp1 = 0 if frameRate == float("inf") else int(1000 / frameRate)
+            exp1 = 0 if frameRate == float("inf") else int(1 / frameRate)
             self._controledListeners[listener] = ControledEnterFrameListener(name, listener, frameRate <= 0 or exp1, int(self._currentTime) if not self._listenerUp else int(perf_counter()))
             if not self._listenerUp:
                 self._listenerUp = True
@@ -72,9 +68,8 @@ class EnterFrameDispatcher(metaclass=Singleton):
                 self._listenerUp = False
     
     def handleEnterFrameEvents(self, e:Event) -> None:
-        cefl:ControledEnterFrameListener = None
         self._currentTime = perf_counter()
-        for cefl in self._controledListeners:
+        for cefl in self._controledListeners.values():
             diff = self._currentTime - cefl.latestChange
             if diff > cefl.wantedGap - cefl.overhead:
                 cefl.listener(e)
@@ -97,7 +92,6 @@ class EnterFrameDispatcher(metaclass=Singleton):
 
 
 class ControledEnterFrameListener:
-
     name:str
     listener:FunctionType
     wantedGap:int
@@ -105,7 +99,6 @@ class ControledEnterFrameListener:
     latestChange:int
 
     def __init__(self, name:str, listener:FunctionType, wantedGap:int, latestChange:int):
-        super().__init__()
         self.name = name
         self.listener = listener
         self.wantedGap = wantedGap

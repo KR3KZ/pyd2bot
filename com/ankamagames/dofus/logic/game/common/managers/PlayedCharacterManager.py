@@ -18,7 +18,7 @@ from com.ankamagames.dofus.network.types.game.havenbag.HavenBagRoomPreviewInform
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.dofus.internalDatacenter.dataEnum import DataEnum
 from com.ankamagames.dofus.internalDatacenter.stats.entityStats import EntityStats
-from com.ankamagames.dofus.logic.common.managers.statsManager import StatsManager
+from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManager
 from com.ankamagames.dofus.network.protocolConstantsEnum import ProtocolConstantsEnum
 from com.ankamagames.dofus.network.types.game.character.choice.characterBaseInformations import CharacterBaseInformations
 from com.ankamagames.dofus.network.types.game.look.EntityLook import EntityLook

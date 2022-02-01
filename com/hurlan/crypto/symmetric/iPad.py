@@ -1,5 +1,5 @@
 from abc import ABC
-from com.ankamagames.jerakine.network.customDataWrapper import ByteArray;
+from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray;
 
 
 class IPad(ABC):

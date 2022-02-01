@@ -1,4 +1,4 @@
-from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.character.alignment.ActorExtendedAlignmentInformations import ActorExtendedAlignmentInformations
 from com.ankamagames.dofus.network.types.game.character.characteristic.CharacterCharacteristic import CharacterCharacteristic
 from com.ankamagames.dofus.network.types.game.character.characteristic.CharacterSpellModification import CharacterSpellModification

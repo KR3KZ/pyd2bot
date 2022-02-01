@@ -1,4 +1,4 @@
-from com.ankamagames.jerakine.messages.messageHandler import MessageHandler
+from com.ankamagames.jerakine.messages.MessageHandler import MessageHandler
 from com.ankamagames.jerakine.utils.misc.Priotizable import Prioritizable
 
 

@@ -1,4 +1,4 @@
-from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.house.HouseInformations import HouseInformations
 from com.ankamagames.dofus.network.types.game.context.roleplay.GameRolePlayActorInformations import GameRolePlayActorInformations
 from com.ankamagames.dofus.network.types.game.interactive.InteractiveElement import InteractiveElement

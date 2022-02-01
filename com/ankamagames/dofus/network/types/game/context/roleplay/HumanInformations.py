@@ -1,4 +1,4 @@
-from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.types.game.character.restriction.ActorRestrictionsInformations import ActorRestrictionsInformations
 from com.ankamagames.dofus.network.types.game.context.roleplay.HumanOption import HumanOption
 

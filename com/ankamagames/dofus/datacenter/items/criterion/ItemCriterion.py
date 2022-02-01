@@ -2,7 +2,7 @@ from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.dofus.datacenter.items.criterion.IItemCriterion import IItemCriterion
 from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterionOperator import ItemCriterionOperator
 from com.ankamagames.dofus.internalDatacenter.stats.entityStats import EntityStats                              
-from com.ankamagames.dofus.logic.common.managers.statsManager import StatsManager
+from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManager
 from com.ankamagames.jerakine.data import I18n
 from damageCalculation.tools import StatIds
 

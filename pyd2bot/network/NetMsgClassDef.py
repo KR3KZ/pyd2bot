@@ -1,7 +1,7 @@
 import importlib
 from com.ankamagames.jerakine.logger.Logger import Logger
 import sys
-from com.ankamagames.jerakine.network.customDataWrapper import ByteArray
+from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
 import pyd2bot.network.NetMsgDataField as nmdf
 from pyd2bot.network.protocolSpec import ProtocolSpec
 logger = Logger(__name__)

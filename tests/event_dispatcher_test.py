@@ -1,7 +1,7 @@
 from com.ankamagames.dofus.network.messages.common.basic.BasicPongMessage import BasicPongMessage
 from com.ankamagames.jerakine.network.NetworkSentEvent import NetworkSentEvent
-from com.ankamagames.jerakine.network.events.basicEvent import BasicEvent
-from com.ankamagames.jerakine.network.events.iOErrorEvent import IOErrorEvent
+from com.ankamagames.jerakine.events.BasicEvent import BasicEvent
+from com.ankamagames.jerakine.events.IOErrorEvent import IOErrorEvent
 from whistle import EventDispatcher, Event
 
 

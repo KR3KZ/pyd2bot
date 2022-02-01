@@ -2,12 +2,12 @@ from ctypes import ArgumentError
 from com.ankamagames.dofus.kernel.Kernel import Kernel
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.network.IServerConnection import IServerConnection
-from com.ankamagames.dofus.kernel.net.connectionType import ConnectionType
-from com.ankamagames.dofus.kernel.net.disconnectionReason import DisconnectionReason
-from com.ankamagames.dofus.kernel.net.disconnectionReasonEnum import DisconnectionReasonEnum
+from com.ankamagames.dofus.kernel.net.ConnectionType import ConnectionType
+from com.ankamagames.dofus.kernel.net.DisconnectionReason import DisconnectionReason
+from com.ankamagames.dofus.kernel.net.DisconnectionReasonEnum import DisconnectionReasonEnum
 from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerManager
 from com.ankamagames.dofus.network.messages.common.basic.BasicPingMessage import BasicPingMessage
-from com.ankamagames.jerakine.network.multiConnection import MultiConnection
+from com.ankamagames.jerakine.network.MultiConnection import MultiConnection
 logger = Logger(__name__)
 
 
@@ -51,12 +51,14 @@ class ConnectionHander:
 
    @property
    def hasReceivedMsg(cls) -> bool:
-      return _hasReceivedMsg
+      return cls._hasReceivedMsg
 
+   @classmethod
    @hasReceivedMsg.setter
-   def hasReceivedMsg(value:bool) -> None:
-      _hasReceivedMsg = value
+   def hasReceivedMsg(cls, value:bool) -> None:
+      cls._hasReceivedMsg = value
 
+   @classmethod
    @property
    def hasReceivedNetworkMsg(cls) -> bool:
       return cls._hasReceivedNetworkMsg

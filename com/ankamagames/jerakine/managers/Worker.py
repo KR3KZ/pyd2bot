@@ -9,10 +9,10 @@ from com.ankamagames.jerakine.messages.ForeachTreatment import ForeachTreatment
 from com.ankamagames.jerakine.messages.Frame import Frame
 from com.ankamagames.jerakine.messages.Treatment import Treatment
 from com.ankamagames.jerakine.messages.WhileTreatment import WhileTreatment
-from com.ankamagames.jerakine.messages.cancelableMessages import CancelableMessage
-from com.ankamagames.jerakine.messages.discardableMessage import DiscardableMessage
-from com.ankamagames.jerakine.messages.messageHandler import MessageHandler
-from com.ankamagames.jerakine.messages.queueableMessage import QueueableMessage
+from com.ankamagames.jerakine.messages.CancelableMessages import CancelableMessage
+from com.ankamagames.jerakine.messages.DiscardableMessage import DiscardableMessage
+from com.ankamagames.jerakine.messages.MessageHandler import MessageHandler
+from com.ankamagames.jerakine.messages.QueueableMessage import QueueableMessage
 from com.ankamagames.jerakine.pools.genericPool import GenericPool
 from com.ankamagames.jerakine.pools.poolable import Poolable
 import com.ankamagames.jerakine.utils.displays.EnterFrameDispatcher as efd

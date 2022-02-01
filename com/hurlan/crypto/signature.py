@@ -1,7 +1,7 @@
 
 import hashlib
 import traceback
-from com.ankamagames.jerakine.network.customDataWrapper import ByteArray
+from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
 from com.hurlan.crypto.signatureKey import SignatureKey
 from Cryptodome.PublicKey import RSA
 from com.hurlan.crypto.symmetric.pKCS1 import PKCS1

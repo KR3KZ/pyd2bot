@@ -3,7 +3,7 @@ import re
 from pathlib import Path
 from tqdm import tqdm
 
-from com.ankamagames.jerakine.enum.gameDataTypeEnum import GameDataTypeEnum
+from com.ankamagames.jerakine.enum.GameDataTypeEnum import GameDataTypeEnum
 from protocolBuilder.typeEnum import TypeEnum
 
 TO_PTYPE = {

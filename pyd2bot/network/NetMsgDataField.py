@@ -1,6 +1,6 @@
 from com.ankamagames.jerakine.logger.Logger import Logger
 from tkinter import N
-from com.ankamagames.jerakine.network.customDataWrapper import ByteArray
+from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
 from protocolBuilder.typeEnum import TypeEnum
 from pyd2bot.network.protocolSpec import ProtocolSpec
 import pyd2bot.network.NetMsgClassDef as nmcd

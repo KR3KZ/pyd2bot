@@ -1,6 +1,6 @@
 import math
 import random
-from com.ankamagames.jerakine.network.customDataWrapper import ByteArray
+from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
 
 
 class AESKey:

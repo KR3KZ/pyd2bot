@@ -58,7 +58,7 @@ patterns = {
     "function (\S+)\((.*)\) : (\S+)": r"def \1(self, \2) -> \3:",
     "function (\S+)\((.*)\) :": r"def \1(self, \2):",
     "if !(.*)": r"if not \1",
-    "(\S+)\.length": r"len(\1)",
+    "([_a-zA-Z][_a-zA-Z0-9]{0,30})\.length": r"len(\1)",
     "throw Error(.*)": r"raise Exception\1",
     r'^(.*)function get (\S+)\((.*)\) : (\S+)$': r"\1@property\n\1def \2(self, \3) -> \4:",
     r'^(.*)function set (\S+)\((.*)\) : (\S+)$': r"\1@\2.setter\n\1def \2(self, \3) -> \4:",
@@ -86,23 +86,25 @@ patterns = {
     "super\((.*)\)": r"super().__init__(\1)",
     "super\.": r"super().",
     "(\S+).__str__\(\)": r"str(\1)",
-    "for (\S+):(\S+) = (\S+) (\S+) (.*) (\S+) (\S+) (\S+) (\S+):": r"for \1 in range(\3, \6, \9):",
+    "for (\S+):(\S+)\s*=\s*(\S+)\s+(\S+)\s+(.*)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+):": r"for \1 in range(\3, \6, \9):",
     "Function" : "FunctionType",
     "StringUtils.replace\((.*),(.*),(.*)\)": r"str.replace(\1, \2, \3)",
     ".indexOf": ".find",
     "\.substring\((.*?),(.*?)\)": r"[\1:\2]",
     "\.substring\((.*)\)": r"[:\1]",
-    "catch\(e\:Error\)": "except Exception as e:",
-    "catch\(e\:(\S+)\)": r"except \1 as e:",
+    "catch\(e:Error\)": "except Exception as e:",
+    "catch\(e:(\S+)\)": r"except \1 as e:",
     "try": "try:",
     "_log": "logger",
     "throw ([A-Z]+\S+)": r"raise \1",
-    "IDataInput": "BinaryStream",
-    "Object": "object",
+    "IDataInput": "ByteArray",
+    "/s*:/s*Object": ":object",
     "-> \*": "-> Any",
-    "Class": "object",
+    "([_a-zA-Z][_a-zA-Z0-9]{0,30})/s?:/s?Class": r"\1:object",
     ".concat": ".extend",
-    "^(\s*\S+):String = ": r"\1:str = ",
+    "^([_a-zA-Z][_a-zA-Z0-9]{0,30}):String = ": r"\1:str = ",
+    "getTimer()": "perf_counter()",
+    "\.shift()": ".pop(0)",
 
 }
 SWITCH_CASE_PATTERN = r"\s*(switch\(.*\)\s*\n?\{\s*(?:.|\n)+break;\s*\n\s*(?:default:)?(?:[^}]|\n)*\})"
@@ -179,7 +181,7 @@ def processCompressedIfELse(line):
 
 def processCompressedIfELseInAllCode(code):
     codeLines = code.split("\n")
-    regex = r"(.*) ? (.*) : (.*)"
+    regex = r"(.*) \? (.*) : (.*)"
     r = []
     for line in codeLines:
         m = re.match(regex, line)
@@ -188,6 +190,7 @@ def processCompressedIfELseInAllCode(code):
         else:
             r.append(line)
     return "\n".join(r)
+
 
 def deleteFirstTwoSpaces(code):
     lines = code.split("\n")
@@ -209,16 +212,21 @@ def handleIndent(code):
             reg = r"(?P<left>.*)class\s*(?P<name>\S+).*"
             inClass = re.match(reg, line)
             if inClass:
-                indentSize = 0
-                print(lines[i + 1])
-                for c in lines[i + 2]:
-                    if c == " ":
-                        indentSize += 1
-                print("detected indent size:", indentSize)
+                if not indentSize:
+                    indentSize = 0
+                    for c in lines[i + 2]:
+                        if c == " ":
+                            indentSize += 1
+                        elif c == "\n":
+                            indentSize = 0
+                            break
+                        else:
+                            break
+                    print("detected indent size:", indentSize)
                 inClass = True
         else:
             spaceCount = sum(1 for _ in itertools.takewhile(str.isspace, line))
-            line = (spaceCount // indentSize) * 4 * ' ' + line[spaceCount:]
+            line = (spaceCount // indentSize) * 3 * ' ' + line[spaceCount:]
         r.append(line)
     return "\n".join(r)
 
@@ -227,12 +235,13 @@ def handleClassHeader(code):
     lines = code.split("\n")
     r = []
     for line in lines:
-        reg = r"(?P<left>.*)class\s*(?P<name>\S+)\s*(?P<parents>.*)"
+        reg = r"(?P<left>.*)class (?P<name>\S+)(?P<parents>.*)"
         m = re.match(reg, line)
         if m:
-            parents = m.group("parents").split(" ")
+            parents = m.group("parents").split(",")
             parents = [p.replace(" ", "") for p in parents if p != "" and p.replace(" ", "") not in ["extends", "implements"]]
-            line = f"{m.group('left')}class {m.group('name')}({', '.join(parents)}):"
+            parents = ({', '.join(parents)}) if len(parents) > 0 else ""
+            line = f"{m.group('left')}class {m.group('name')}:"
         r.append(line)
     return "\n".join(r)
 
@@ -259,5 +268,5 @@ def parseFile(file_p, out_p):
 
 # parseFolderFiles("AS3ToPythonConverter/scripts", "AS3ToPythonConverter/connectionType")
 t = perf_counter()
-parseFile("scripts/AS3ToPythonConverter/target.as", "scripts/AS3ToPythonConverter/PresetWrapper.py")
+parseFile("scripts/AS3ToPythonConverter/target.as", "scripts/AS3ToPythonConverter/FuncTree.py")
 print("parsin took:", perf_counter() - t)

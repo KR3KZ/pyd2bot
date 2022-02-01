@@ -1,6 +1,6 @@
 from whistle import EventDispatcher
-from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
-from com.ankamagames.jerakine.messages.messageHandler import MessageHandler
+from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.messages.MessageHandler import MessageHandler
 from com.ankamagames.jerakine.network.ILagometer import ILagometer
 from com.ankamagames.jerakine.network.RawDataParser import RawDataParser
 

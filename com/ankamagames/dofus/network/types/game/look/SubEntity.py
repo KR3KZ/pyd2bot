@@ -1,4 +1,4 @@
-from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from com.ankamagames.dofus.network.types.game.look.EntityLook import EntityLook

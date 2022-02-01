@@ -1,4 +1,4 @@
-from com.ankamagames.jerakine.messages.message import Message
+from com.ankamagames.jerakine.messages.Message import Message
 
 
 class DiscardableMessage(Message):

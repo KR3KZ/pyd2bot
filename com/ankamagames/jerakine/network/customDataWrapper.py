@@ -4,10 +4,17 @@ import struct
 
 
 class ByteArray(bytearray):
+
     def __init__(self, *args, **kwrgs):
         super().__init__(*args, **kwrgs)
         self.position = 0
         
+    def __getitem__(self, b) -> 'ByteArray':
+        return ByteArray(super().__getitem__(b))
+    
+    def __add__(self, b) -> 'ByteArray':
+        return ByteArray(super().__add__(b))
+
     @property
     def length(self):
         return len(self)
@@ -37,7 +44,7 @@ class ByteArray(bytearray):
         self.verif(l)
         pos = self.position
         self.position += l
-        return self[pos : pos + l]
+        return ByteArray(self[pos : pos + l])
 
     def write(self, l):
         self += l

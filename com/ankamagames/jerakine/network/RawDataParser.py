@@ -1,10 +1,9 @@
 from types import FunctionType
-from com.ankamagames.dofus.network.messages.INetworkMessage import INetworkMessage
-from com.ankamagames.jerakine.network.customDataWrapper import ByteArray
+from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
 
 
 class RawDataParser:
-      
    
    def parse(self, param1:ByteArray, param2:int, param3:int) -> INetworkMessage:
       pass
