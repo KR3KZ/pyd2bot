@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class NotificationListMessage(INetworkMessage):
-    protocolId = 7026
-    flags:int
+class NotificationListMessage(NetworkMessage):
+    flags:list[int]
     
     

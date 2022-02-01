@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeCra
 
 
 class ExchangeCraftResultMagicWithObjectDescMessage(ExchangeCraftResultWithObjectDescMessage):
-    protocolId = 6242
     magicPoolStatus:int
     
     

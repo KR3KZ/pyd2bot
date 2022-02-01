@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.GameRolePlayHuman
 
 
 class GameRolePlayMutantInformations(GameRolePlayHumanoidInformations):
-    protocolId = 4120
     monsterId:int
     powerLevel:int
     

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class TeleportToBuddyAnswerMessage(INetworkMessage):
-    protocolId = 5687
+class TeleportToBuddyAnswerMessage(NetworkMessage):
     dungeonId:int
     buddyId:int
     accept:bool

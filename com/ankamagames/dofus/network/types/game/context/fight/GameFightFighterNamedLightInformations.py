@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.context.fight.GameFightFighterLigh
 
 
 class GameFightFighterNamedLightInformations(GameFightFighterLightInformations):
-    protocolId = 2754
     name:str
     
     

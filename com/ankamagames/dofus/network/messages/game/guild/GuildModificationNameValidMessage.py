@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GuildModificationNameValidMessage(INetworkMessage):
-    protocolId = 5982
+class GuildModificationNameValidMessage(NetworkMessage):
     guildName:str
     
     

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GuestModeMessage(INetworkMessage):
-    protocolId = 9430
+class GuestModeMessage(NetworkMessage):
     active:bool
     
     

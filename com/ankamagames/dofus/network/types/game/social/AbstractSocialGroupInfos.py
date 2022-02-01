@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AbstractSocialGroupInfos(INetworkMessage):
-    protocolId = 6359
+class AbstractSocialGroupInfos(NetworkMessage):
     
     

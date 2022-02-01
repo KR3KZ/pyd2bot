@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.interactive.zaap.TeleportDestination import TeleportDestination
 
 
-class TeleportDestinationsMessage(INetworkMessage):
-    protocolId = 5651
+class TeleportDestinationsMessage(NetworkMessage):
     type:int
-    destinations:TeleportDestination
+    destinations:list[TeleportDestination]
     
     

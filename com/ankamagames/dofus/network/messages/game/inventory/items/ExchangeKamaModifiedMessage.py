@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeObj
 
 
 class ExchangeKamaModifiedMessage(ExchangeObjectMessage):
-    protocolId = 1705
     quantity:int
     
     

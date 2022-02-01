@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeCraftPaymentModifiedMessage(INetworkMessage):
-    protocolId = 8641
+class ExchangeCraftPaymentModifiedMessage(NetworkMessage):
     goldSum:int
     
     

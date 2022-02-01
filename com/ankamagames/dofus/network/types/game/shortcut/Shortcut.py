@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class Shortcut(INetworkMessage):
-    protocolId = 5511
+class Shortcut(NetworkMessage):
     slot:int
     
     

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class SkillActionDescription(INetworkMessage):
-    protocolId = 2262
+class SkillActionDescription(NetworkMessage):
     skillId:int
     
     

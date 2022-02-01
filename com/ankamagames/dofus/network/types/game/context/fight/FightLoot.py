@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class FightLoot(INetworkMessage):
-    protocolId = 7224
-    objects:int
+class FightLoot(NetworkMessage):
+    objects:list[int]
     kamas:int
     
     

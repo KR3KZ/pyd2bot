@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class QuestListRequestMessage(INetworkMessage):
-    protocolId = 6533
+class QuestListRequestMessage(NetworkMessage):
     
     

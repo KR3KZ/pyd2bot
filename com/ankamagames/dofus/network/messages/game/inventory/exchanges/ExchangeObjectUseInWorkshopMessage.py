@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeObjectUseInWorkshopMessage(INetworkMessage):
-    protocolId = 5412
+class ExchangeObjectUseInWorkshopMessage(NetworkMessage):
     objectUID:int
     quantity:int
     

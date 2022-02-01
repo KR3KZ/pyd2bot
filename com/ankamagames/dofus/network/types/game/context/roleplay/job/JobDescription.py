@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.interactive.skill.SkillActionDescription import SkillActionDescription
 
 
-class JobDescription(INetworkMessage):
-    protocolId = 2005
+class JobDescription(NetworkMessage):
     jobId:int
-    skills:SkillActionDescription
+    skills:list[SkillActionDescription]
     
     

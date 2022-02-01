@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.look.EntityLook import EntityLook
 
 
 class GameActionFightChangeLookMessage(AbstractGameActionMessage):
-    protocolId = 4039
     targetId:int
     entityLook:EntityLook
     

@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class TitlesAndOrnamentsListMessage(INetworkMessage):
-    protocolId = 6204
-    titles:int
-    ornaments:int
+class TitlesAndOrnamentsListMessage(NetworkMessage):
+    titles:list[int]
+    ornaments:list[int]
     activeTitle:int
     activeOrnament:int
     

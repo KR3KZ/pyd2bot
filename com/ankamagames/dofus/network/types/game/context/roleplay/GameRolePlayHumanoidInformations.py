@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.HumanInformations
 
 
 class GameRolePlayHumanoidInformations(GameRolePlayNamedActorInformations):
-    protocolId = 345
     humanoidInfo:HumanInformations
     accountId:int
     

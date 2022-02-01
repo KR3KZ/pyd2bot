@@ -1,4 +1,4 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.house.HouseInformations import HouseInformations
 from com.ankamagames.dofus.network.types.game.context.roleplay.GameRolePlayActorInformations import GameRolePlayActorInformations
 from com.ankamagames.dofus.network.types.game.interactive.InteractiveElement import InteractiveElement
@@ -8,16 +8,15 @@ from com.ankamagames.dofus.network.types.game.context.fight.FightCommonInformati
 from com.ankamagames.dofus.network.types.game.context.fight.FightStartingPositions import FightStartingPositions
 
 
-class MapComplementaryInformationsDataMessage(INetworkMessage):
-    protocolId = 1182
+class MapComplementaryInformationsDataMessage(NetworkMessage):
     subAreaId:int
     mapId:int
-    houses:HouseInformations
-    actors:GameRolePlayActorInformations
-    interactiveElements:InteractiveElement
-    statedElements:StatedElement
-    obstacles:MapObstacle
-    fights:FightCommonInformations
+    houses:list[HouseInformations]
+    actors:list[GameRolePlayActorInformations]
+    interactiveElements:list[InteractiveElement]
+    statedElements:list[StatedElement]
+    obstacles:list[MapObstacle]
+    fights:list[FightCommonInformations]
     hasAggressiveMonsters:bool
     fightStartPositions:FightStartingPositions
     

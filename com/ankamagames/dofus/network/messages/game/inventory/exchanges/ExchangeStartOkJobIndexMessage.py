@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeStartOkJobIndexMessage(INetworkMessage):
-    protocolId = 1146
-    jobs:int
+class ExchangeStartOkJobIndexMessage(NetworkMessage):
+    jobs:list[int]
     
     

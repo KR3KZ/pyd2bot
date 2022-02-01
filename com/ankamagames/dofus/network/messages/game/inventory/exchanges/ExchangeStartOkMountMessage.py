@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.mount.MountClientData import Mount
 
 
 class ExchangeStartOkMountMessage(ExchangeStartOkMountWithOutPaddockMessage):
-    protocolId = 9690
-    paddockedMountsDescription:MountClientData
+    paddockedMountsDescription:list[MountClientData]
     
     

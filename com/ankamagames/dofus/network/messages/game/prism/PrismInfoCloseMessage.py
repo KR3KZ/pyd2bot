@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class PrismInfoCloseMessage(INetworkMessage):
-    protocolId = 2031
+class PrismInfoCloseMessage(NetworkMessage):
     
     

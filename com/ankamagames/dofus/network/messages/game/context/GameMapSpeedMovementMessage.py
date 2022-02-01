@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameMapSpeedMovementMessage(INetworkMessage):
-    protocolId = 8414
+class GameMapSpeedMovementMessage(NetworkMessage):
     speedMultiplier:int
     
     

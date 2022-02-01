@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.character.CharacterMinimalInformations import CharacterMinimalInformations
 
 
-class BreachKickResponseMessage(INetworkMessage):
-    protocolId = 5114
+class BreachKickResponseMessage(NetworkMessage):
     target:CharacterMinimalInformations
     kicked:bool
     

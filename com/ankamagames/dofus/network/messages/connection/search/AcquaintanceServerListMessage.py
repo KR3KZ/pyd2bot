@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AcquaintanceServerListMessage(INetworkMessage):
-    protocolId = 8752
-    servers:int
+class AcquaintanceServerListMessage(NetworkMessage):
+    servers:list[int]
     
     

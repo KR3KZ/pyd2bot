@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameFightTurnStartMessage(INetworkMessage):
-    protocolId = 3772
+class GameFightTurnStartMessage(NetworkMessage):
     id:int
     waitTime:int
     

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeMoneyMovementInformationMessage(INetworkMessage):
-    protocolId = 6336
+class ExchangeMoneyMovementInformationMessage(NetworkMessage):
     limit:int
     
     

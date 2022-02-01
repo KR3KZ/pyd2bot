@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.idol.PartyIdol import PartyIdol
 
 
-class IdolPartyRefreshMessage(INetworkMessage):
-    protocolId = 7517
+class IdolPartyRefreshMessage(NetworkMessage):
     partyIdol:PartyIdol
     
     

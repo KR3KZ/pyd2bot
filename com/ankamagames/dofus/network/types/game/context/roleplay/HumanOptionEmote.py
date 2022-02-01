@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.HumanOption impor
 
 
 class HumanOptionEmote(HumanOption):
-    protocolId = 3456
     emoteId:int
     emoteStartTime:int
     

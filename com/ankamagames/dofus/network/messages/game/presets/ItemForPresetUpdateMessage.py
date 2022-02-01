@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.presets.ItemForPreset import ItemForPreset
 
 
-class ItemForPresetUpdateMessage(INetworkMessage):
-    protocolId = 2377
+class ItemForPresetUpdateMessage(NetworkMessage):
     presetId:int
     presetItem:ItemForPreset
     

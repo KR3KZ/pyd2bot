@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.guild.application.ApplicationPlayerInformation import ApplicationPlayerInformation
 
 
-class GuildApplicationInformation(INetworkMessage):
-    protocolId = 7662
+class GuildApplicationInformation(NetworkMessage):
     playerInfo:ApplicationPlayerInformation
     applyText:str
     creationDate:int

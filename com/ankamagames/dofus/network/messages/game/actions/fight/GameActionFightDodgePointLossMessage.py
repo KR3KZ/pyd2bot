@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessa
 
 
 class GameActionFightDodgePointLossMessage(AbstractGameActionMessage):
-    protocolId = 7629
     targetId:int
     amount:int
     

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ActorAlignmentInformations(INetworkMessage):
-    protocolId = 3635
+class ActorAlignmentInformations(NetworkMessage):
     alignmentSide:int
     alignmentValue:int
     alignmentGrade:int

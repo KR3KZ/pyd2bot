@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class HouseKickIndoorMerchantRequestMessage(INetworkMessage):
-    protocolId = 8862
+class HouseKickIndoorMerchantRequestMessage(NetworkMessage):
     cellId:int
     
     

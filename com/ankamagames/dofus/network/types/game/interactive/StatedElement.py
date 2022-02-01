@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class StatedElement(INetworkMessage):
-    protocolId = 7058
+class StatedElement(NetworkMessage):
     elementId:int
     elementCellId:int
     elementState:int

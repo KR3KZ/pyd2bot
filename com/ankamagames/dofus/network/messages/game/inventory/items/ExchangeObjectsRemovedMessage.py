@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeObj
 
 
 class ExchangeObjectsRemovedMessage(ExchangeObjectMessage):
-    protocolId = 4841
-    objectUID:int
+    objectUID:list[int]
     
     

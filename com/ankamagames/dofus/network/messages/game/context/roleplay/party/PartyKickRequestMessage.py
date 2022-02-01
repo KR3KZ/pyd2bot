@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.party.Abstract
 
 
 class PartyKickRequestMessage(AbstractPartyMessage):
-    protocolId = 6075
     playerId:int
     
     

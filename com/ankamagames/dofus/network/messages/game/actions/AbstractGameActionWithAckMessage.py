@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessa
 
 
 class AbstractGameActionWithAckMessage(AbstractGameActionMessage):
-    protocolId = 3549
     waitAckId:int
     
     

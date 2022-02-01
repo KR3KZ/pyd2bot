@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.guild.GuildEmblem import GuildEmbl
 
 
 class GuildInformations(BasicGuildInformations):
-    protocolId = 1201
     guildEmblem:GuildEmblem
     
     

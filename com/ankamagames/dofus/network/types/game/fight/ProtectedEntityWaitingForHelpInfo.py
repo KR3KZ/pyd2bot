@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ProtectedEntityWaitingForHelpInfo(INetworkMessage):
-    protocolId = 2847
+class ProtectedEntityWaitingForHelpInfo(NetworkMessage):
     timeLeftBeforeFight:int
     waitTimeForPlacement:int
     nbPositionForDefensors:int

@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.context.ShowCellMessage import 
 
 
 class ShowCellSpectatorMessage(ShowCellMessage):
-    protocolId = 6320
     playerName:str
     
     

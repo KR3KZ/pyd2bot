@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class LockableChangeCodeMessage(INetworkMessage):
-    protocolId = 768
+class LockableChangeCodeMessage(NetworkMessage):
     code:str
     
     

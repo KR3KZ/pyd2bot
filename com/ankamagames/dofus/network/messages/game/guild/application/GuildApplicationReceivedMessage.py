@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GuildApplicationReceivedMessage(INetworkMessage):
-    protocolId = 3891
+class GuildApplicationReceivedMessage(NetworkMessage):
     playerName:str
     playerId:int
     

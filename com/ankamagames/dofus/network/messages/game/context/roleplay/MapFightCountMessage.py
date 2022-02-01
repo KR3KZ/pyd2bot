@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class MapFightCountMessage(INetworkMessage):
-    protocolId = 9018
+class MapFightCountMessage(NetworkMessage):
     fightCount:int
     
     

@@ -3,8 +3,7 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.HumanOption impor
 
 
 class GameRolePlayMerchantInformations(GameRolePlayNamedActorInformations):
-    protocolId = 3425
     sellType:int
-    options:HumanOption
+    options:list[HumanOption]
     
     

@@ -2,6 +2,5 @@ from com.ankamagames.dofus.network.messages.game.inventory.items.SymbioticObject
 
 
 class WrapperObjectErrorMessage(SymbioticObjectErrorMessage):
-    protocolId = 1930
     
     

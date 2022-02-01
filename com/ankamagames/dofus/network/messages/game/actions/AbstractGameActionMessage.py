@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AbstractGameActionMessage(INetworkMessage):
-    protocolId = 5037
+class AbstractGameActionMessage(NetworkMessage):
     actionId:int
     sourceId:int
     

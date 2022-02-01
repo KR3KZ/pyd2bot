@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class MountSetXpRatioRequestMessage(INetworkMessage):
-    protocolId = 9275
+class MountSetXpRatioRequestMessage(NetworkMessage):
     xpRatio:int
     
     

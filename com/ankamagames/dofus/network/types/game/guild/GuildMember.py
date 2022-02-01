@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.character.status.PlayerStatus impo
 
 
 class GuildMember(CharacterMinimalInformations):
-    protocolId = 5491
     breed:int
     rank:int
     givenExperience:int

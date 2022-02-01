@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class TeleportBuddiesMessage(INetworkMessage):
-    protocolId = 9150
+class TeleportBuddiesMessage(NetworkMessage):
     dungeonId:int
     
     

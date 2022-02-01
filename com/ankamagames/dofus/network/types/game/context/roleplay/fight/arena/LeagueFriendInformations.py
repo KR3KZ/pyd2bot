@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.friend.AbstractContactInformations
 
 
 class LeagueFriendInformations(AbstractContactInformations):
-    protocolId = 107
     playerId:int
     playerName:str
     breed:int

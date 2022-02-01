@@ -78,6 +78,7 @@ class ProtocolParser:
                 "name": name,
                 "type": typename,
                 "typeId": TypeEnum.fromString(typename).value,
+                "lengthTypeId": None,
                 "typename": TO_PTYPE.get(typename),
                 "optional": False,
                 "length": None,
@@ -120,6 +121,7 @@ class ProtocolParser:
             "type": var_type,
             "dynamicType": dynamicType,
             "typeId": TypeEnum.fromString(var_type).value,
+            "lengthTypeId": None,
             "typename": TO_PTYPE.get(typename, typename),
             "optional": optional
         }

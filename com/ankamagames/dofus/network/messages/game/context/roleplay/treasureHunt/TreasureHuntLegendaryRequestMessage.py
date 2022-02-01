@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class TreasureHuntLegendaryRequestMessage(INetworkMessage):
-    protocolId = 6283
+class TreasureHuntLegendaryRequestMessage(NetworkMessage):
     legendaryId:int
     
     

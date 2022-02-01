@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class HouseToSellListRequestMessage(INetworkMessage):
-    protocolId = 1679
+class HouseToSellListRequestMessage(NetworkMessage):
     pageIndex:int
     
     

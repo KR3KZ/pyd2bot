@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GuildFightJoinRequestMessage(INetworkMessage):
-    protocolId = 9050
+class GuildFightJoinRequestMessage(NetworkMessage):
     taxCollectorId:int
     
     

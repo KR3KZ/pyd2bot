@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class UpdateMapPlayersAgressableStatusMessage(INetworkMessage):
-    protocolId = 3658
-    playerIds:int
-    enable:int
+class UpdateMapPlayersAgressableStatusMessage(NetworkMessage):
+    playerIds:list[int]
+    enable:list[int]
     
     

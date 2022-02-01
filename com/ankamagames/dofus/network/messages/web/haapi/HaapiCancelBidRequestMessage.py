@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class HaapiCancelBidRequestMessage(INetworkMessage):
-    protocolId = 3479
+class HaapiCancelBidRequestMessage(NetworkMessage):
     id:int
     type:int
     

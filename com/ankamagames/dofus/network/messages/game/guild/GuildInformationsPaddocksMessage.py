@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.paddock.PaddockContentInformations import PaddockContentInformations
 
 
-class GuildInformationsPaddocksMessage(INetworkMessage):
-    protocolId = 178
+class GuildInformationsPaddocksMessage(NetworkMessage):
     nbPaddockMax:int
-    paddocksInformations:PaddockContentInformations
+    paddocksInformations:list[PaddockContentInformations]
     
     

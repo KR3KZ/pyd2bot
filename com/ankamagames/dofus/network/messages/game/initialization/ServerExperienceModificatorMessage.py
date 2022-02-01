@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ServerExperienceModificatorMessage(INetworkMessage):
-    protocolId = 7180
+class ServerExperienceModificatorMessage(NetworkMessage):
     experiencePercent:int
     
     

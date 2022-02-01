@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.context.fight.GameFightEndMessa
 
 
 class BreachGameFightEndMessage(GameFightEndMessage):
-    protocolId = 7323
     budget:int
     
     

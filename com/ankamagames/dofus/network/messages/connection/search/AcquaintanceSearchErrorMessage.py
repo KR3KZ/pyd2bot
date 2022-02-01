@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AcquaintanceSearchErrorMessage(INetworkMessage):
-    protocolId = 6994
+class AcquaintanceSearchErrorMessage(NetworkMessage):
     reason:int
     
     

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class OrnamentSelectErrorMessage(INetworkMessage):
-    protocolId = 4098
+class OrnamentSelectErrorMessage(NetworkMessage):
     reason:int
     
     

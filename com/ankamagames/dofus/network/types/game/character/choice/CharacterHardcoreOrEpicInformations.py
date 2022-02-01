@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.character.choice.CharacterBaseInfo
 
 
 class CharacterHardcoreOrEpicInformations(CharacterBaseInformations):
-    protocolId = 7850
     deathState:int
     deathCount:int
     deathMaxLevel:int

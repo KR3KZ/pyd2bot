@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class EmoteListMessage(INetworkMessage):
-    protocolId = 9032
-    emoteIds:int
+class EmoteListMessage(NetworkMessage):
+    emoteIds:list[int]
     
     

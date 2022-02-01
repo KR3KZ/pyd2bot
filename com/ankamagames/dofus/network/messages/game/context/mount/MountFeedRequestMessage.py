@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class MountFeedRequestMessage(INetworkMessage):
-    protocolId = 8131
+class MountFeedRequestMessage(NetworkMessage):
     mountUid:int
     mountLocation:int
     mountFoodUid:int

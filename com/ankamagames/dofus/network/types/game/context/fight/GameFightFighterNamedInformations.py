@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.character.status.PlayerStatus impo
 
 
 class GameFightFighterNamedInformations(GameFightFighterInformations):
-    protocolId = 7293
     name:str
     status:PlayerStatus
     leagueId:int

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class UpdateLifePointsMessage(INetworkMessage):
-    protocolId = 1857
+class UpdateLifePointsMessage(NetworkMessage):
     lifePoints:int
     maxLifePoints:int
     

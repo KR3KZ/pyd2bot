@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeRequestOnMountStockMessage(INetworkMessage):
-    protocolId = 8145
+class ExchangeRequestOnMountStockMessage(NetworkMessage):
     
     

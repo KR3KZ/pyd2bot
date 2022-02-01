@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class TreasureHuntFinishedMessage(INetworkMessage):
-    protocolId = 5016
+class TreasureHuntFinishedMessage(NetworkMessage):
     questType:int
     
     

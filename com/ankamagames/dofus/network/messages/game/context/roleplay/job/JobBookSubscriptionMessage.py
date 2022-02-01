@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.context.roleplay.job.JobBookSubscription import JobBookSubscription
 
 
-class JobBookSubscriptionMessage(INetworkMessage):
-    protocolId = 8266
-    subscriptions:JobBookSubscription
+class JobBookSubscriptionMessage(NetworkMessage):
+    subscriptions:list[JobBookSubscription]
     
     

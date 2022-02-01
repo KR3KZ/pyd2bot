@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.BasicGuildInforma
 
 
 class TaxCollectorGuildInformations(TaxCollectorComplementaryInformations):
-    protocolId = 2529
     guild:BasicGuildInformations
     
     

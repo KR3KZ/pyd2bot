@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GuildFightPlayersEnemyRemoveMessage(INetworkMessage):
-    protocolId = 4301
+class GuildFightPlayersEnemyRemoveMessage(NetworkMessage):
     fightId:int
     playerId:int
     

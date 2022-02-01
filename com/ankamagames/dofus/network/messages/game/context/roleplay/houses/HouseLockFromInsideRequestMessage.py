@@ -2,6 +2,5 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.lockable.Locka
 
 
 class HouseLockFromInsideRequestMessage(LockableChangeCodeMessage):
-    protocolId = 3448
     
     

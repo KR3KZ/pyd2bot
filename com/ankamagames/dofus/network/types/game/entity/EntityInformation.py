@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class EntityInformation(INetworkMessage):
-    protocolId = 6041
+class EntityInformation(NetworkMessage):
     id:int
     experience:int
     status:bool

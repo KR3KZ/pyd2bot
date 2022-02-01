@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameDataPlayFarmObjectAnimationMessage(INetworkMessage):
-    protocolId = 7212
-    cellId:int
+class GameDataPlayFarmObjectAnimationMessage(NetworkMessage):
+    cellId:list[int]
     
     

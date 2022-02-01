@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.common.basic.StatisticData import Stati
 
 
 class StatisticDataBoolean(StatisticData):
-    protocolId = 8397
     value:bool
     
     

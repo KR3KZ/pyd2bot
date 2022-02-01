@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class FriendSpouseFollowWithCompassRequestMessage(INetworkMessage):
-    protocolId = 8825
+class FriendSpouseFollowWithCompassRequestMessage(NetworkMessage):
     enable:bool
     
     

@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeStartOkRunesTradeMessage(INetworkMessage):
-    protocolId = 1847
+class ExchangeStartOkRunesTradeMessage(NetworkMessage):
     
     

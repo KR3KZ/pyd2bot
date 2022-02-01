@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameRolePlayFightRequestCanceledMessage(INetworkMessage):
-    protocolId = 4478
+class GameRolePlayFightRequestCanceledMessage(NetworkMessage):
     fightId:int
     sourceId:int
     targetId:int

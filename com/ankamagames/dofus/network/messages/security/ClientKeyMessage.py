@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ClientKeyMessage(INetworkMessage):
-    protocolId = 7137
+class ClientKeyMessage(NetworkMessage):
     key:str
     
     

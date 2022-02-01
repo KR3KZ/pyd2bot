@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameFightHumanReadyStateMessage(INetworkMessage):
-    protocolId = 4318
+class GameFightHumanReadyStateMessage(NetworkMessage):
     characterId:int
     isReady:bool
     

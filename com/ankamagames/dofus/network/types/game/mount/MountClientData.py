@@ -1,13 +1,12 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.data.items.effects.ObjectEffectInteger import ObjectEffectInteger
 
 
-class MountClientData(INetworkMessage):
-    protocolId = 9874
+class MountClientData(NetworkMessage):
     id:int
     model:int
-    ancestor:int
-    behaviors:int
+    ancestor:list[int]
+    behaviors:list[int]
     name:str
     ownerId:int
     experience:int
@@ -32,7 +31,7 @@ class MountClientData(INetworkMessage):
     reproductionCount:int
     reproductionCountMax:int
     harnessGID:int
-    effectList:ObjectEffectInteger
+    effectList:list[ObjectEffectInteger]
     sex:bool
     isRideable:bool
     isWild:bool

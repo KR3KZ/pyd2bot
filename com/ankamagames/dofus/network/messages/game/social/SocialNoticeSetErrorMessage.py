@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class SocialNoticeSetErrorMessage(INetworkMessage):
-    protocolId = 3378
+class SocialNoticeSetErrorMessage(NetworkMessage):
     reason:int
     
     

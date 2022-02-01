@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class CharacterSelectedErrorMessage(INetworkMessage):
-    protocolId = 9221
+class CharacterSelectedErrorMessage(NetworkMessage):
     
     

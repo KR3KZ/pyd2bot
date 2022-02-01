@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class FinishMoveSetRequestMessage(INetworkMessage):
-    protocolId = 2738
+class FinishMoveSetRequestMessage(NetworkMessage):
     finishMoveId:int
     finishMoveState:bool
     

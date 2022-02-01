@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.actions.fight.AbstractGameActio
 
 
 class GameActionFightCloseCombatMessage(AbstractGameActionFightTargetedAbilityMessage):
-    protocolId = 9973
     weaponGenericId:int
     
     

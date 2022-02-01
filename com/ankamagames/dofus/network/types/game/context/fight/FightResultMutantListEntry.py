@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.context.fight.FightResultFighterLi
 
 
 class FightResultMutantListEntry(FightResultFighterListEntry):
-    protocolId = 815
     level:int
     
     

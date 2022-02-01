@@ -2,6 +2,5 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.party.Abstract
 
 
 class PartyRefuseInvitationMessage(AbstractPartyMessage):
-    protocolId = 1520
     
     

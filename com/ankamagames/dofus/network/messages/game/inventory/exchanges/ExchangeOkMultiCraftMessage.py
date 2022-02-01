@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeOkMultiCraftMessage(INetworkMessage):
-    protocolId = 2595
+class ExchangeOkMultiCraftMessage(NetworkMessage):
     initiatorId:int
     otherId:int
     role:int

@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.context.fight.GameFightResumeSlave
 
 
 class GameFightResumeWithSlavesMessage(GameFightResumeMessage):
-    protocolId = 6205
-    slavesInfo:GameFightResumeSlaveInfo
+    slavesInfo:list[GameFightResumeSlaveInfo]
     
     

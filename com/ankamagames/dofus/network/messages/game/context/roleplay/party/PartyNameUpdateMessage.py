@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.party.Abstract
 
 
 class PartyNameUpdateMessage(AbstractPartyMessage):
-    protocolId = 4910
     partyName:str
     
     

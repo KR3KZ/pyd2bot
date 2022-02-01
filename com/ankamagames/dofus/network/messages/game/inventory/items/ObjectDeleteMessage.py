@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ObjectDeleteMessage(INetworkMessage):
-    protocolId = 8147
+class ObjectDeleteMessage(NetworkMessage):
     objectUID:int
     quantity:int
     

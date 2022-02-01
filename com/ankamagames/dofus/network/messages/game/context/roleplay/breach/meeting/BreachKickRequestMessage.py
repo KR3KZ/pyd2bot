@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class BreachKickRequestMessage(INetworkMessage):
-    protocolId = 2909
+class BreachKickRequestMessage(NetworkMessage):
     target:int
     
     

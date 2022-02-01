@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.context.GameContextRemoveElemen
 
 
 class GameContextRemoveElementWithEventMessage(GameContextRemoveElementMessage):
-    protocolId = 9473
     elementEventId:int
     
     

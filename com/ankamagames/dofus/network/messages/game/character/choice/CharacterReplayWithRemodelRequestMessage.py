@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.character.choice.RemodelingInforma
 
 
 class CharacterReplayWithRemodelRequestMessage(CharacterReplayRequestMessage):
-    protocolId = 3832
     remodel:RemodelingInformation
     
     

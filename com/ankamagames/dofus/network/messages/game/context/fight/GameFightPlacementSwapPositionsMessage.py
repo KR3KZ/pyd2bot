@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.context.IdentifiedEntityDispositionInformations import IdentifiedEntityDispositionInformations
 
 
-class GameFightPlacementSwapPositionsMessage(INetworkMessage):
-    protocolId = 995
+class GameFightPlacementSwapPositionsMessage(NetworkMessage):
     dispositions:list[IdentifiedEntityDispositionInformations]
     
     

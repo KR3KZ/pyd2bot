@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.chat.smiley.ChatSmileyMessage i
 
 
 class LocalizedChatSmileyMessage(ChatSmileyMessage):
-    protocolId = 5134
     cellId:int
     
     

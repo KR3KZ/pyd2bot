@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeShopStockMovementRemovedMessage(INetworkMessage):
-    protocolId = 7025
+class ExchangeShopStockMovementRemovedMessage(NetworkMessage):
     objectId:int
     
     

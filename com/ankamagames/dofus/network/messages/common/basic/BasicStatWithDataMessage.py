@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.common.basic.StatisticData import Stati
 
 
 class BasicStatWithDataMessage(BasicStatMessage):
-    protocolId = 1144
-    datas:StatisticData
+    datas:list[StatisticData]
     
     

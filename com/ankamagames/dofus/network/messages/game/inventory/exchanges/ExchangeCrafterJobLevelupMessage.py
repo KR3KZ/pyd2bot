@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeCrafterJobLevelupMessage(INetworkMessage):
-    protocolId = 6591
+class ExchangeCrafterJobLevelupMessage(NetworkMessage):
     crafterJobLevel:int
     
     

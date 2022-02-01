@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class TextInformationMessage(INetworkMessage):
-    protocolId = 3712
+class TextInformationMessage(NetworkMessage):
     msgType:int
     msgId:int
-    parameters:str
+    parameters:list[str]
     
     

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameActionSpamMessage(INetworkMessage):
-    protocolId = 6276
-    cells:int
+class GameActionSpamMessage(NetworkMessage):
+    cells:list[int]
     
     

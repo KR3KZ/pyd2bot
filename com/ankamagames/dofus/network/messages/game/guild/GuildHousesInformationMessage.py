@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.house.HouseInformationsForGuild import HouseInformationsForGuild
 
 
-class GuildHousesInformationMessage(INetworkMessage):
-    protocolId = 9308
-    housesInformations:HouseInformationsForGuild
+class GuildHousesInformationMessage(NetworkMessage):
+    housesInformations:list[HouseInformationsForGuild]
     
     

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class PartyMemberGeoPosition(INetworkMessage):
-    protocolId = 6723
+class PartyMemberGeoPosition(NetworkMessage):
     memberId:int
     worldX:int
     worldY:int

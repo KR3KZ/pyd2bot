@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.data.items.BidExchangerObjectInfo import BidExchangerObjectInfo
 
 
-class ExchangeTypesItemsExchangerDescriptionForUserMessage(INetworkMessage):
-    protocolId = 6681
+class ExchangeTypesItemsExchangerDescriptionForUserMessage(NetworkMessage):
     objectType:int
-    itemTypeDescriptions:BidExchangerObjectInfo
+    itemTypeDescriptions:list[BidExchangerObjectInfo]
     
     

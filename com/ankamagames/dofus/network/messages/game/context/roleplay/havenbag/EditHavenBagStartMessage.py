@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class EditHavenBagStartMessage(INetworkMessage):
-    protocolId = 7113
+class EditHavenBagStartMessage(NetworkMessage):
     
     

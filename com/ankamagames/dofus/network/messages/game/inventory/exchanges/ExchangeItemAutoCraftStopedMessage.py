@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeItemAutoCraftStopedMessage(INetworkMessage):
-    protocolId = 470
+class ExchangeItemAutoCraftStopedMessage(NetworkMessage):
     reason:int
     
     

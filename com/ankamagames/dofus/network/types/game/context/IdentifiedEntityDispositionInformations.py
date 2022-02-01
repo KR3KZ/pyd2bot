@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.context.EntityDispositionInformati
 
 
 class IdentifiedEntityDispositionInformations(EntityDispositionInformations):
-    protocolId = 8490
     id:int
     
     

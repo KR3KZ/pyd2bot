@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class FriendWarnOnLevelGainStateMessage(INetworkMessage):
-    protocolId = 7352
+class FriendWarnOnLevelGainStateMessage(NetworkMessage):
     enable:bool
     
     

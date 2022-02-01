@@ -1,14 +1,13 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GuildRecruitmentInformation(INetworkMessage):
-    protocolId = 4584
+class GuildRecruitmentInformation(NetworkMessage):
     guildId:int
     recruitmentType:int
     recruitmentTitle:str
     recruitmentText:str
-    selectedLanguages:int
-    selectedCriterion:int
+    selectedLanguages:list[int]
+    selectedCriterion:list[int]
     minLevel:int
     minSuccess:int
     lastEditPlayerName:str

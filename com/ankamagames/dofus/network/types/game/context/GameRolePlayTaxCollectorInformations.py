@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.context.TaxCollectorStaticInformat
 
 
 class GameRolePlayTaxCollectorInformations(GameRolePlayActorInformations):
-    protocolId = 5071
     identification:TaxCollectorStaticInformations
     guildLevel:int
     taxCollectorAttack:int

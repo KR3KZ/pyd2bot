@@ -2,6 +2,5 @@ from com.ankamagames.dofus.network.messages.authorized.AdminCommandMessage impor
 
 
 class AdminQuietCommandMessage(AdminCommandMessage):
-    protocolId = 400
     
     

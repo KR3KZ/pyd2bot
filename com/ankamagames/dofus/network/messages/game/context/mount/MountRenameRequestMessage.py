@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class MountRenameRequestMessage(INetworkMessage):
-    protocolId = 8042
+class MountRenameRequestMessage(NetworkMessage):
     name:str
     mountId:int
     

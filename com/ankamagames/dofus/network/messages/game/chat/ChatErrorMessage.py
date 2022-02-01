@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ChatErrorMessage(INetworkMessage):
-    protocolId = 5479
+class ChatErrorMessage(NetworkMessage):
     reason:int
     
     

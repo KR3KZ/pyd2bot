@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GuidedModeReturnRequestMessage(INetworkMessage):
-    protocolId = 2230
+class GuidedModeReturnRequestMessage(NetworkMessage):
     
     

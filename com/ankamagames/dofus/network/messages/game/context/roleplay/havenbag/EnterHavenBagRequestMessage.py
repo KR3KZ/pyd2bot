@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class EnterHavenBagRequestMessage(INetworkMessage):
-    protocolId = 8214
+class EnterHavenBagRequestMessage(NetworkMessage):
     havenBagOwner:int
     
     

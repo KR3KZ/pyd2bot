@@ -1,11 +1,10 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.character.alignment.ActorExtendedAlignmentInformations import ActorExtendedAlignmentInformations
 from com.ankamagames.dofus.network.types.game.character.characteristic.CharacterCharacteristic import CharacterCharacteristic
 from com.ankamagames.dofus.network.types.game.character.characteristic.CharacterSpellModification import CharacterSpellModification
 
 
-class CharacterCharacteristicsInformations(INetworkMessage):
-    protocolId = 1918
+class CharacterCharacteristicsInformations(NetworkMessage):
     experience:int
     experienceLevelFloor:int
     experienceNextLevelFloor:int
@@ -13,8 +12,8 @@ class CharacterCharacteristicsInformations(INetworkMessage):
     kamas:int
     alignmentInfos:ActorExtendedAlignmentInformations
     criticalHitWeapon:int
-    characteristics:CharacterCharacteristic
-    spellModifications:CharacterSpellModification
+    characteristics:list[CharacterCharacteristic]
+    spellModifications:list[CharacterSpellModification]
     probationTime:int
     
     

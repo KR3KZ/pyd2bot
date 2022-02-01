@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class PaddockInformations(INetworkMessage):
-    protocolId = 1965
+class PaddockInformations(NetworkMessage):
     maxOutdoorMount:int
     maxItems:int
     

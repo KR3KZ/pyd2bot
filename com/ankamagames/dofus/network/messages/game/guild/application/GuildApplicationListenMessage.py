@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GuildApplicationListenMessage(INetworkMessage):
-    protocolId = 9375
+class GuildApplicationListenMessage(NetworkMessage):
     listen:bool
     
     

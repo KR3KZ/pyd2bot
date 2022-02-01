@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeStartOkMulticraftCustomerMessage(INetworkMessage):
-    protocolId = 3514
+class ExchangeStartOkMulticraftCustomerMessage(NetworkMessage):
     skillId:int
     crafterJobLevel:int
     

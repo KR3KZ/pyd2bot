@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AlignmentWarEffortDonationResultMessage(INetworkMessage):
-    protocolId = 6010
+class AlignmentWarEffortDonationResultMessage(NetworkMessage):
     result:int
     
     

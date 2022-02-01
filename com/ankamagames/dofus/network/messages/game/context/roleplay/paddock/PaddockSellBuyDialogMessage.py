@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class PaddockSellBuyDialogMessage(INetworkMessage):
-    protocolId = 7880
+class PaddockSellBuyDialogMessage(NetworkMessage):
     bsell:bool
     ownerId:int
     price:int

@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.achievement.AchievementAchievedRewardable import AchievementAchievedRewardable
 
 
-class AchievementFinishedMessage(INetworkMessage):
-    protocolId = 8970
+class AchievementFinishedMessage(NetworkMessage):
     achievement:AchievementAchievedRewardable
     
     

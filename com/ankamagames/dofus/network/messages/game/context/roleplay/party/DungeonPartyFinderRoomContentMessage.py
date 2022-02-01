@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.context.roleplay.party.DungeonPartyFinderPlayer import DungeonPartyFinderPlayer
 
 
-class DungeonPartyFinderRoomContentMessage(INetworkMessage):
-    protocolId = 5100
+class DungeonPartyFinderRoomContentMessage(NetworkMessage):
     dungeonId:int
-    players:DungeonPartyFinderPlayer
+    players:list[DungeonPartyFinderPlayer]
     
     

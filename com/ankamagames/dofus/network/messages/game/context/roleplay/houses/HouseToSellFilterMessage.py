@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class HouseToSellFilterMessage(INetworkMessage):
-    protocolId = 3571
+class HouseToSellFilterMessage(NetworkMessage):
     areaId:int
     atLeastNbRoom:int
     atLeastNbChest:int

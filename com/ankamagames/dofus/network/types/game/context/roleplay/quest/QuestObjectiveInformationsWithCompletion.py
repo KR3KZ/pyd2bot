@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.quest.QuestObject
 
 
 class QuestObjectiveInformationsWithCompletion(QuestObjectiveInformations):
-    protocolId = 5115
     curCompletion:int
     maxCompletion:int
     

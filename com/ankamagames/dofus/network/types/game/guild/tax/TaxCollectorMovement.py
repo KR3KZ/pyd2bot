@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.guild.tax.TaxCollectorBasicInformations import TaxCollectorBasicInformations
 
 
-class TaxCollectorMovement(INetworkMessage):
-    protocolId = 6775
+class TaxCollectorMovement(NetworkMessage):
     movementType:int
     basicInfos:TaxCollectorBasicInformations
     playerId:int

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class FriendStatusShareStateMessage(INetworkMessage):
-    protocolId = 433
+class FriendStatusShareStateMessage(NetworkMessage):
     share:bool
     
     

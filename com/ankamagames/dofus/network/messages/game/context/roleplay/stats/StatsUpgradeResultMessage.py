@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class StatsUpgradeResultMessage(INetworkMessage):
-    protocolId = 4083
+class StatsUpgradeResultMessage(NetworkMessage):
     result:int
     nbCharacBoost:int
     

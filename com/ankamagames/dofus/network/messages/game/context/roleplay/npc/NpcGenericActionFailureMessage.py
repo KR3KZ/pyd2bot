@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class NpcGenericActionFailureMessage(INetworkMessage):
-    protocolId = 1901
+class NpcGenericActionFailureMessage(NetworkMessage):
     
     

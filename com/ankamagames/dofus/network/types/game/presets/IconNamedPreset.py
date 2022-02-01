@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.presets.PresetsContainerPreset imp
 
 
 class IconNamedPreset(PresetsContainerPreset):
-    protocolId = 876
     iconId:int
     name:str
     

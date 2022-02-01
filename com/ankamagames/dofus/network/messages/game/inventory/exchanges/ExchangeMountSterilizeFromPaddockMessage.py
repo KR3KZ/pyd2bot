@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeMountSterilizeFromPaddockMessage(INetworkMessage):
-    protocolId = 2234
+class ExchangeMountSterilizeFromPaddockMessage(NetworkMessage):
     name:str
     worldX:int
     worldY:int

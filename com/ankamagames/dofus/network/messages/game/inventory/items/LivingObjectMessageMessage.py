@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class LivingObjectMessageMessage(INetworkMessage):
-    protocolId = 2593
+class LivingObjectMessageMessage(NetworkMessage):
     msgId:int
     timeStamp:int
     owner:str

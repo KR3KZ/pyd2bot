@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class TeleportRequestMessage(INetworkMessage):
-    protocolId = 1539
+class TeleportRequestMessage(NetworkMessage):
     sourceType:int
     destinationType:int
     mapId:int

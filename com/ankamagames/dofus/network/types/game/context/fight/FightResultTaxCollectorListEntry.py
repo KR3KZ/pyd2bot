@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.BasicGuildInforma
 
 
 class FightResultTaxCollectorListEntry(FightResultFighterListEntry):
-    protocolId = 1517
     level:int
     guildInfo:BasicGuildInformations
     experienceForGuild:int

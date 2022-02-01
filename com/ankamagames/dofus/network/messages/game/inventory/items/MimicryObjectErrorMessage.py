@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.inventory.items.SymbioticObject
 
 
 class MimicryObjectErrorMessage(SymbioticObjectErrorMessage):
-    protocolId = 5767
     preview:bool
     
     

@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.presets.SimpleCharacterCharacteris
 
 
 class CharacterCharacteristicForPreset(SimpleCharacterCharacteristicForPreset):
-    protocolId = 4303
     stuff:int
     
     

@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.mount.UpdateMountCharacteristic im
 
 
 class UpdateMountBooleanCharacteristic(UpdateMountCharacteristic):
-    protocolId = 1756
     value:bool
     
     

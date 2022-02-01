@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.party.PartyMem
 
 
 class PartyMemberEjectedMessage(PartyMemberRemoveMessage):
-    protocolId = 7777
     kickerId:int
     
     

@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.BasicAllianceInfo
 
 
 class BasicNamedAllianceInformations(BasicAllianceInformations):
-    protocolId = 949
     allianceName:str
     
     

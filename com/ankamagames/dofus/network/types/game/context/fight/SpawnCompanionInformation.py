@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.context.fight.SpawnInformation imp
 
 
 class SpawnCompanionInformation(SpawnInformation):
-    protocolId = 8892
     modelId:int
     level:int
     summonerId:int

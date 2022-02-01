@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class BreachEnterMessage(INetworkMessage):
-    protocolId = 6485
+class BreachEnterMessage(NetworkMessage):
     owner:int
     
     

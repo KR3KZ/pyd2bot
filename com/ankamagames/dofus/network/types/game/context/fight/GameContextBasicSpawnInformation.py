@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.context.GameContextActorPositionInformations import GameContextActorPositionInformations
 
 
-class GameContextBasicSpawnInformation(INetworkMessage):
-    protocolId = 2015
+class GameContextBasicSpawnInformation(NetworkMessage):
     teamId:int
     alive:bool
     informations:GameContextActorPositionInformations

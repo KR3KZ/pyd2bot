@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.character.alignment.ActorAlignment
 
 
 class GameFightCharacterInformations(GameFightFighterNamedInformations):
-    protocolId = 2405
     level:int
     alignmentInfos:ActorAlignmentInformations
     breed:int

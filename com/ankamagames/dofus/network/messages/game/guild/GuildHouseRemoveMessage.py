@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GuildHouseRemoveMessage(INetworkMessage):
-    protocolId = 1802
+class GuildHouseRemoveMessage(NetworkMessage):
     houseId:int
     instanceId:int
     secondHand:bool

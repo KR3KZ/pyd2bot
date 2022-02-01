@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.party.Abstract
 
 
 class PartyCannotJoinErrorMessage(AbstractPartyMessage):
-    protocolId = 8807
     reason:int
     
     

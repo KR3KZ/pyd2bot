@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class FriendGuildSetWarnOnAchievementCompleteMessage(INetworkMessage):
-    protocolId = 2644
+class FriendGuildSetWarnOnAchievementCompleteMessage(NetworkMessage):
     enable:bool
     
     

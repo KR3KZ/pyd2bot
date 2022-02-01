@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class TrustCertificate(INetworkMessage):
-    protocolId = 8866
+class TrustCertificate(NetworkMessage):
     id:int
     hash:str
     

@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.BasicAllianceInfo
 
 
 class FightTeamMemberWithAllianceCharacterInformations(FightTeamMemberCharacterInformations):
-    protocolId = 2689
     allianceInfos:BasicAllianceInformations
     
     

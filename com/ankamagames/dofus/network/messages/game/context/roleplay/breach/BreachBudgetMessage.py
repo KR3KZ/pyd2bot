@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class BreachBudgetMessage(INetworkMessage):
-    protocolId = 1903
+class BreachBudgetMessage(NetworkMessage):
     bugdet:int
     
     

@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeRea
 
 
 class FocusedExchangeReadyMessage(ExchangeReadyMessage):
-    protocolId = 2904
     focusActionId:int
     
     

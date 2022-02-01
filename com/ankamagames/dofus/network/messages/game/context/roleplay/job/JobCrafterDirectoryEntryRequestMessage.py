@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class JobCrafterDirectoryEntryRequestMessage(INetworkMessage):
-    protocolId = 3858
+class JobCrafterDirectoryEntryRequestMessage(NetworkMessage):
     playerId:int
     
     

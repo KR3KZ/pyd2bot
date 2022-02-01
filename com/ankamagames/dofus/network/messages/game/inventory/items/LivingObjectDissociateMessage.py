@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class LivingObjectDissociateMessage(INetworkMessage):
-    protocolId = 9254
+class LivingObjectDissociateMessage(NetworkMessage):
     livingUID:int
     livingPosition:int
     

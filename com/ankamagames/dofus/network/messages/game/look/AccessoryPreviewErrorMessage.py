@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AccessoryPreviewErrorMessage(INetworkMessage):
-    protocolId = 2038
+class AccessoryPreviewErrorMessage(NetworkMessage):
     error:int
     
     

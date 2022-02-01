@@ -3,9 +3,8 @@ from com.ankamagames.dofus.network.types.game.data.items.effects.ObjectEffect im
 
 
 class ObjectItemToSellInHumanVendorShop(Item):
-    protocolId = 3057
     objectGID:int
-    effects:ObjectEffect
+    effects:list[ObjectEffect]
     objectUID:int
     quantity:int
     objectPrice:int

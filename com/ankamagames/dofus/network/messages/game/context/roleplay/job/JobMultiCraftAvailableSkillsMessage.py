@@ -2,8 +2,7 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.job.JobAllowMu
 
 
 class JobMultiCraftAvailableSkillsMessage(JobAllowMultiCraftRequestMessage):
-    protocolId = 1246
     playerId:int
-    skills:int
+    skills:list[int]
     
     

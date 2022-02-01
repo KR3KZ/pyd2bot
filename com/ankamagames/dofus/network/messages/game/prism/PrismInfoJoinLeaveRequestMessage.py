@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class PrismInfoJoinLeaveRequestMessage(INetworkMessage):
-    protocolId = 6247
+class PrismInfoJoinLeaveRequestMessage(NetworkMessage):
     join:bool
     
     

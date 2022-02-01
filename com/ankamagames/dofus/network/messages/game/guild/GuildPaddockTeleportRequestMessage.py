@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GuildPaddockTeleportRequestMessage(INetworkMessage):
-    protocolId = 7914
+class GuildPaddockTeleportRequestMessage(NetworkMessage):
     paddockId:int
     
     

@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.character.characteristic.Character
 
 
 class CharacterCharacteristicDetailed(CharacterCharacteristic):
-    protocolId = 9089
     base:int
     additional:int
     objectsAndMountBonus:int

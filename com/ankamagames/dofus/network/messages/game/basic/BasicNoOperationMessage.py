@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class BasicNoOperationMessage(INetworkMessage):
-    protocolId = 2522
+class BasicNoOperationMessage(NetworkMessage):
     
     

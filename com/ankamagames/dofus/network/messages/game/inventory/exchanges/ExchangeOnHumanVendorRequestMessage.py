@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeOnHumanVendorRequestMessage(INetworkMessage):
-    protocolId = 4359
+class ExchangeOnHumanVendorRequestMessage(NetworkMessage):
     humanVendorId:int
     humanVendorCell:int
     

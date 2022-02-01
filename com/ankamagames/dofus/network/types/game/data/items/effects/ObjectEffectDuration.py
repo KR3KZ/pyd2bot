@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.data.items.effects.ObjectEffect im
 
 
 class ObjectEffectDuration(ObjectEffect):
-    protocolId = 5502
     days:int
     hours:int
     minutes:int

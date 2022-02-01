@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class DocumentReadingBeginMessage(INetworkMessage):
-    protocolId = 3768
+class DocumentReadingBeginMessage(NetworkMessage):
     documentId:int
     
     

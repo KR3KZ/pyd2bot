@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.data.items.effects.ObjectEffectInteger import ObjectEffectInteger
 
 
-class BreachBonusMessage(INetworkMessage):
-    protocolId = 1689
+class BreachBonusMessage(NetworkMessage):
     bonus:ObjectEffectInteger
     
     

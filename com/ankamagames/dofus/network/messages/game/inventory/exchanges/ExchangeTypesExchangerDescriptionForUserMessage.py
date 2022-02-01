@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeTypesExchangerDescriptionForUserMessage(INetworkMessage):
-    protocolId = 8522
+class ExchangeTypesExchangerDescriptionForUserMessage(NetworkMessage):
     objectType:int
-    typeDescription:int
+    typeDescription:list[int]
     
     

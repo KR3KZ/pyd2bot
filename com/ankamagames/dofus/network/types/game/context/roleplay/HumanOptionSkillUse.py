@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.HumanOption impor
 
 
 class HumanOptionSkillUse(HumanOption):
-    protocolId = 2427
     elementId:int
     skillId:int
     skillEndTime:int

@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessa
 
 
 class GameActionFightSpellImmunityMessage(AbstractGameActionMessage):
-    protocolId = 7640
     targetId:int
     spellId:int
     

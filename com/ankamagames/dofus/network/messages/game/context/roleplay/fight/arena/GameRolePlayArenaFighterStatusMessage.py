@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameRolePlayArenaFighterStatusMessage(INetworkMessage):
-    protocolId = 5125
+class GameRolePlayArenaFighterStatusMessage(NetworkMessage):
     fightId:int
     playerId:int
     accepted:bool

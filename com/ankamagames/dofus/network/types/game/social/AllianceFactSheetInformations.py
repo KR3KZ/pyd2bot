@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.AllianceInformati
 
 
 class AllianceFactSheetInformations(AllianceInformations):
-    protocolId = 9654
     creationDate:int
     
     

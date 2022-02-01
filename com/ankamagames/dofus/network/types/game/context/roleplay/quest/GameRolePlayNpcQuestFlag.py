@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameRolePlayNpcQuestFlag(INetworkMessage):
-    protocolId = 3944
-    questsToValidId:int
-    questsToStartId:int
+class GameRolePlayNpcQuestFlag(NetworkMessage):
+    questsToValidId:list[int]
+    questsToStartId:list[int]
     
     

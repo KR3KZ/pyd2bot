@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class PrismSetSabotagedRefusedMessage(INetworkMessage):
-    protocolId = 5200
+class PrismSetSabotagedRefusedMessage(NetworkMessage):
     subAreaId:int
     reason:int
     

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class LivingObjectChangeSkinRequestMessage(INetworkMessage):
-    protocolId = 7679
+class LivingObjectChangeSkinRequestMessage(NetworkMessage):
     livingUID:int
     livingPosition:int
     skinId:int

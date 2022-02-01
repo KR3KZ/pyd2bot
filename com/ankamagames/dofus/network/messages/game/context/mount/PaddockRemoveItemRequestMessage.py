@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class PaddockRemoveItemRequestMessage(INetworkMessage):
-    protocolId = 9863
+class PaddockRemoveItemRequestMessage(NetworkMessage):
     cellId:int
     
     

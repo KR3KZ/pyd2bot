@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class HouseGuildNoneMessage(INetworkMessage):
-    protocolId = 9562
+class HouseGuildNoneMessage(NetworkMessage):
     houseId:int
     instanceId:int
     secondHand:bool

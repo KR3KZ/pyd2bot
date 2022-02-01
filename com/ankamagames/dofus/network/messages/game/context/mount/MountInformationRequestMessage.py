@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class MountInformationRequestMessage(INetworkMessage):
-    protocolId = 2112
+class MountInformationRequestMessage(NetworkMessage):
     id:int
     time:int
     

@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.context.fight.FightTeamMemberInfor
 
 
 class FightTeamMemberMonsterInformations(FightTeamMemberInformations):
-    protocolId = 6386
     monsterId:int
     grade:int
     

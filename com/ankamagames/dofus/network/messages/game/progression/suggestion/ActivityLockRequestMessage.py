@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ActivityLockRequestMessage(INetworkMessage):
-    protocolId = 579
+class ActivityLockRequestMessage(NetworkMessage):
     activityId:int
     lock:bool
     

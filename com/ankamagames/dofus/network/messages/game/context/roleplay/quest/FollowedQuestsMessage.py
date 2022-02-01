@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.context.roleplay.quest.QuestActiveDetailedInformations import QuestActiveDetailedInformations
 
 
-class FollowedQuestsMessage(INetworkMessage):
-    protocolId = 414
-    quests:QuestActiveDetailedInformations
+class FollowedQuestsMessage(NetworkMessage):
+    quests:list[QuestActiveDetailedInformations]
     
     

@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.context.fight.FightResultAdditiona
 
 
 class FightResultExperienceData(FightResultAdditionalData):
-    protocolId = 9530
     experience:int
     experienceLevelFloor:int
     experienceNextLevelFloor:int

@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeStartOkEvolutiveObjectRecycleTradeMessage(INetworkMessage):
-    protocolId = 7744
+class ExchangeStartOkEvolutiveObjectRecycleTradeMessage(NetworkMessage):
     
     

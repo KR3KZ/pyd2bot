@@ -4,8 +4,7 @@ from com.ankamagames.dofus.network.types.game.presets.SpellForPreset import Spel
 
 
 class ForgettableSpellsPreset(Preset):
-    protocolId = 8231
     baseSpellsPreset:SpellsPreset
-    forgettableSpells:SpellForPreset
+    forgettableSpells:list[SpellForPreset]
     
     

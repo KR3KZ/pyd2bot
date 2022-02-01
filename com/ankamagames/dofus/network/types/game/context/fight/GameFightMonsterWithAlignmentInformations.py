@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.character.alignment.ActorAlignment
 
 
 class GameFightMonsterWithAlignmentInformations(GameFightMonsterInformations):
-    protocolId = 108
     alignmentInfos:ActorAlignmentInformations
     
     

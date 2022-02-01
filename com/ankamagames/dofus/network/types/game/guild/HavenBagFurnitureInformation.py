@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class HavenBagFurnitureInformation(INetworkMessage):
-    protocolId = 3647
+class HavenBagFurnitureInformation(NetworkMessage):
     cellId:int
     funitureId:int
     orientation:int

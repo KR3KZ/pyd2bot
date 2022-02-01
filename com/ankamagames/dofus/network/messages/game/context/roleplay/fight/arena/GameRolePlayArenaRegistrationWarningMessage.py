@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameRolePlayArenaRegistrationWarningMessage(INetworkMessage):
-    protocolId = 1528
+class GameRolePlayArenaRegistrationWarningMessage(NetworkMessage):
     battleMode:int
     
     

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class TaxCollectorMovementRemoveMessage(INetworkMessage):
-    protocolId = 5927
+class TaxCollectorMovementRemoveMessage(NetworkMessage):
     collectorId:int
     
     

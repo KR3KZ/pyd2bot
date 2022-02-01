@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.atlas.compass.CompassUpdateMess
 
 
 class CompassUpdatePvpSeekMessage(CompassUpdateMessage):
-    protocolId = 5714
     memberId:int
     memberName:str
     

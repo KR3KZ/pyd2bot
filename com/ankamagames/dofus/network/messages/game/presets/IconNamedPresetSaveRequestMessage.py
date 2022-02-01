@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.presets.IconPresetSaveRequestMe
 
 
 class IconNamedPresetSaveRequestMessage(IconPresetSaveRequestMessage):
-    protocolId = 8129
     name:str
     type:int
     

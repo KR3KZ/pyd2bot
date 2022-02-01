@@ -2,6 +2,5 @@ from com.ankamagames.dofus.network.messages.game.prism.PrismsListMessage import 
 
 
 class PrismsListUpdateMessage(PrismsListMessage):
-    protocolId = 2634
     
     

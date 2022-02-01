@@ -2,9 +2,8 @@ from com.ankamagames.dofus.network.messages.game.actions.fight.AbstractGameActio
 
 
 class GameActionFightSpellCastMessage(AbstractGameActionFightTargetedAbilityMessage):
-    protocolId = 2648
     spellId:int
     spellLevel:int
-    portalsIds:int
+    portalsIds:list[int]
     
     

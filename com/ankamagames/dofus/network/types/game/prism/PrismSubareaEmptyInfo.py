@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class PrismSubareaEmptyInfo(INetworkMessage):
-    protocolId = 6884
+class PrismSubareaEmptyInfo(NetworkMessage):
     subAreaId:int
     allianceId:int
     

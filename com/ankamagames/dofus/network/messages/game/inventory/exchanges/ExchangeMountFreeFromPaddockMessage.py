@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeMountFreeFromPaddockMessage(INetworkMessage):
-    protocolId = 4810
+class ExchangeMountFreeFromPaddockMessage(NetworkMessage):
     name:str
     worldX:int
     worldY:int

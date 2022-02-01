@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ChangeThemeRequestMessage(INetworkMessage):
-    protocolId = 8958
+class ChangeThemeRequestMessage(NetworkMessage):
     theme:int
     
     

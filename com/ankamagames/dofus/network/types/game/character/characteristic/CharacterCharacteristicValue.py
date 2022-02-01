@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.character.characteristic.Character
 
 
 class CharacterCharacteristicValue(CharacterCharacteristic):
-    protocolId = 1995
     total:int
     
     

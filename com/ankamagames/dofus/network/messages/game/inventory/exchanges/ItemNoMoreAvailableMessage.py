@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ItemNoMoreAvailableMessage(INetworkMessage):
-    protocolId = 3384
+class ItemNoMoreAvailableMessage(NetworkMessage):
     
     

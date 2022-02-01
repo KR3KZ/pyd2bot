@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AlignmentRankUpdateMessage(INetworkMessage):
-    protocolId = 7764
+class AlignmentRankUpdateMessage(NetworkMessage):
     alignmentRank:int
     verbose:bool
     

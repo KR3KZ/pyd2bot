@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ForgettableSpellDeleteMessage(INetworkMessage):
-    protocolId = 9143
+class ForgettableSpellDeleteMessage(NetworkMessage):
     reason:int
-    spells:int
+    spells:list[int]
     
     

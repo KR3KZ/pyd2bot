@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class PresetDeleteRequestMessage(INetworkMessage):
-    protocolId = 3688
+class PresetDeleteRequestMessage(NetworkMessage):
     presetId:int
     
     

@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.data.items.ObjectItemMinimalInform
 
 
 class ObjectItemInformationWithQuantity(ObjectItemMinimalInformation):
-    protocolId = 4715
     quantity:int
     
     

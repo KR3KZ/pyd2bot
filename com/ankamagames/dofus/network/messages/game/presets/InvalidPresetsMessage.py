@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class InvalidPresetsMessage(INetworkMessage):
-    protocolId = 5030
-    presetIds:int
+class InvalidPresetsMessage(NetworkMessage):
+    presetIds:list[int]
     
     

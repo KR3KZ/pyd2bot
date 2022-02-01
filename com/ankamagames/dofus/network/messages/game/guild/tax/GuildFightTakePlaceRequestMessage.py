@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.guild.tax.GuildFightJoinRequest
 
 
 class GuildFightTakePlaceRequestMessage(GuildFightJoinRequestMessage):
-    protocolId = 1932
     replacedCharacterId:int
     
     

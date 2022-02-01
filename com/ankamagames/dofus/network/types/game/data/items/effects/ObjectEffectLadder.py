@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.data.items.effects.ObjectEffectCre
 
 
 class ObjectEffectLadder(ObjectEffectCreature):
-    protocolId = 7384
     monsterCount:int
     
     

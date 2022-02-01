@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.common.AccountTagInformation import AccountTagInformation
 from com.ankamagames.dofus.network.types.game.social.AbstractSocialGroupInfos import AbstractSocialGroupInfos
 
 
-class BasicWhoIsMessage(INetworkMessage):
-    protocolId = 7169
+class BasicWhoIsMessage(NetworkMessage):
     position:int
     accountTag:AccountTagInformation
     accountId:int
@@ -13,7 +12,7 @@ class BasicWhoIsMessage(INetworkMessage):
     areaId:int
     serverId:int
     originServerId:int
-    socialGroups:AbstractSocialGroupInfos
+    socialGroups:list[AbstractSocialGroupInfos]
     playerState:int
     self:bool
     verbose:bool

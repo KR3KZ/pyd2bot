@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.BasicNamedAllianc
 
 
 class AllianceTaxCollectorDialogQuestionExtendedMessage(TaxCollectorDialogQuestionExtendedMessage):
-    protocolId = 7917
     alliance:BasicNamedAllianceInformations
     
     

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class MountInformationsForPaddock(INetworkMessage):
-    protocolId = 1513
+class MountInformationsForPaddock(NetworkMessage):
     modelId:int
     name:str
     ownerName:str

@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.look.EntityLook import EntityLook
 
 
-class IndexedEntityLook(INetworkMessage):
-    protocolId = 1904
+class IndexedEntityLook(NetworkMessage):
     look:EntityLook
     index:int
     

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class SlaveNoLongerControledMessage(INetworkMessage):
-    protocolId = 4540
+class SlaveNoLongerControledMessage(NetworkMessage):
     masterId:int
     slaveId:int
     

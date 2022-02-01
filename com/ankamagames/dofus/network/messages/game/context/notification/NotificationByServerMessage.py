@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class NotificationByServerMessage(INetworkMessage):
-    protocolId = 2613
+class NotificationByServerMessage(NetworkMessage):
     id:int
-    parameters:str
+    parameters:list[str]
     forceOpen:bool
     
     

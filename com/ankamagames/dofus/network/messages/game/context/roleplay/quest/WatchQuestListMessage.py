@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.quest.QuestLis
 
 
 class WatchQuestListMessage(QuestListMessage):
-    protocolId = 9128
     playerId:int
     
     

@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessa
 
 
 class GameActionFightReflectDamagesMessage(AbstractGameActionMessage):
-    protocolId = 140
     targetId:int
     
     

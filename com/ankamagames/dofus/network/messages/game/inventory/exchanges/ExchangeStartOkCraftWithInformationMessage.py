@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeSta
 
 
 class ExchangeStartOkCraftWithInformationMessage(ExchangeStartOkCraftMessage):
-    protocolId = 9154
     skillId:int
     
     

@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.delay.GameRole
 
 
 class GameRolePlayDelayedObjectUseMessage(GameRolePlayDelayedActionMessage):
-    protocolId = 1157
     objectGID:int
     
     

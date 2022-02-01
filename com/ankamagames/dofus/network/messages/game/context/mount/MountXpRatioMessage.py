@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class MountXpRatioMessage(INetworkMessage):
-    protocolId = 1527
+class MountXpRatioMessage(NetworkMessage):
     ratio:int
     
     

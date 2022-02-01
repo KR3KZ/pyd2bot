@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.context.fight.BaseSpawnMonsterInfo
 
 
 class SpawnMonsterInformation(BaseSpawnMonsterInformation):
-    protocolId = 3120
     creatureGrade:int
     
     

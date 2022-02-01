@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.party.Abstract
 
 
 class PartyInvitationMessage(AbstractPartyMessage):
-    protocolId = 1660
     partyType:int
     partyName:str
     maxParticipants:int

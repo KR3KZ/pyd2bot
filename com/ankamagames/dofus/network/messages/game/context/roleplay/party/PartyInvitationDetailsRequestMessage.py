@@ -2,6 +2,5 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.party.Abstract
 
 
 class PartyInvitationDetailsRequestMessage(AbstractPartyMessage):
-    protocolId = 474
     
     

@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AchievementAlmostFinishedDetailedListRequestMessage(INetworkMessage):
-    protocolId = 3810
+class AchievementAlmostFinishedDetailedListRequestMessage(NetworkMessage):
     
     

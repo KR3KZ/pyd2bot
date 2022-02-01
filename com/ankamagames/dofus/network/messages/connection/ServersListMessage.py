@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.connection.GameServerInformations import GameServerInformations
 
 
-class ServersListMessage(INetworkMessage):
-    protocolId = 786
-    servers:GameServerInformations
+class ServersListMessage(NetworkMessage):
+    servers:list[GameServerInformations]
     alreadyConnectedToServerId:int
     canCreateNewCharacter:bool
     

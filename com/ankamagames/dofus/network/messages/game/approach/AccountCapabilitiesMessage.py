@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AccountCapabilitiesMessage(INetworkMessage):
-    protocolId = 8644
+class AccountCapabilitiesMessage(NetworkMessage):
     accountId:int
     breedsVisible:int
     breedsAvailable:int

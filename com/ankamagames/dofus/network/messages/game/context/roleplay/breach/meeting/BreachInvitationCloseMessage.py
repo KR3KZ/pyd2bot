@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.character.CharacterMinimalInformations import CharacterMinimalInformations
 
 
-class BreachInvitationCloseMessage(INetworkMessage):
-    protocolId = 3262
+class BreachInvitationCloseMessage(NetworkMessage):
     host:CharacterMinimalInformations
     
     

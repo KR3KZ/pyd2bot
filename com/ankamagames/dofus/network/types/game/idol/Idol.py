@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class Idol(INetworkMessage):
-    protocolId = 960
+class Idol(NetworkMessage):
     id:int
     xpBonusPercent:int
     dropBonusPercent:int

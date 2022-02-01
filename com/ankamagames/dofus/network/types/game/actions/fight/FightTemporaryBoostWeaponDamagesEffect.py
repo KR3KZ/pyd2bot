@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.actions.fight.FightTemporaryBoostE
 
 
 class FightTemporaryBoostWeaponDamagesEffect(FightTemporaryBoostEffect):
-    protocolId = 15
     weaponTypeId:int
     
     

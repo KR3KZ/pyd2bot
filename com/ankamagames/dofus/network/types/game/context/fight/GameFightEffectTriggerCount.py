@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameFightEffectTriggerCount(INetworkMessage):
-    protocolId = 3026
+class GameFightEffectTriggerCount(NetworkMessage):
     effectId:int
     targetId:int
     count:int

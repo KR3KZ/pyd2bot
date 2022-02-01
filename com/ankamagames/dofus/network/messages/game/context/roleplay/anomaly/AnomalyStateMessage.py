@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AnomalyStateMessage(INetworkMessage):
-    protocolId = 4879
+class AnomalyStateMessage(NetworkMessage):
     subAreaId:int
     open:bool
     closingTime:int

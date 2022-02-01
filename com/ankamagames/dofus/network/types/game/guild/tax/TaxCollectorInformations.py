@@ -1,11 +1,10 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.guild.tax.AdditionalTaxCollectorInformations import AdditionalTaxCollectorInformations
 from com.ankamagames.dofus.network.types.game.look.EntityLook import EntityLook
 from com.ankamagames.dofus.network.types.game.guild.tax.TaxCollectorComplementaryInformations import TaxCollectorComplementaryInformations
 
 
-class TaxCollectorInformations(INetworkMessage):
-    protocolId = 3820
+class TaxCollectorInformations(NetworkMessage):
     uniqueId:int
     firtNameId:int
     lastNameId:int
@@ -15,6 +14,6 @@ class TaxCollectorInformations(INetworkMessage):
     subAreaId:int
     state:int
     look:EntityLook
-    complements:TaxCollectorComplementaryInformations
+    complements:list[TaxCollectorComplementaryInformations]
     
     

@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.party.PartyMember
 
 
 class PartyUpdateMessage(AbstractPartyEventMessage):
-    protocolId = 1769
     memberInformations:PartyMemberInformations
     
     

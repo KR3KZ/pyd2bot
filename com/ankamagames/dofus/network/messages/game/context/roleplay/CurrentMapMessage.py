@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class CurrentMapMessage(INetworkMessage):
-    protocolId = 9325
+class CurrentMapMessage(NetworkMessage):
     mapId:int
     mapKey:str
     

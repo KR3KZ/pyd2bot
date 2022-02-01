@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class SocialNoticeMessage(INetworkMessage):
-    protocolId = 8560
+class SocialNoticeMessage(NetworkMessage):
     content:str
     timestamp:int
     memberId:int

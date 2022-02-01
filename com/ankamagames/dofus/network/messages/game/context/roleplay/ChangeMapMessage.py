@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ChangeMapMessage(INetworkMessage):
-    protocolId = 3431
+class ChangeMapMessage(NetworkMessage):
     mapId:int
     autopilot:bool
     

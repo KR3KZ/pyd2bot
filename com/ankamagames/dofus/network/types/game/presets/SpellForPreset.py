@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class SpellForPreset(INetworkMessage):
-    protocolId = 7500
+class SpellForPreset(NetworkMessage):
     spellId:int
-    shortcuts:int
+    shortcuts:list[int]
     
     

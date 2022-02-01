@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.context.fight.FightStartingPositions import FightStartingPositions
 
 
-class MapFightStartPositionsUpdateMessage(INetworkMessage):
-    protocolId = 5408
+class MapFightStartPositionsUpdateMessage(NetworkMessage):
     mapId:int
     fightStartPositions:FightStartingPositions
     

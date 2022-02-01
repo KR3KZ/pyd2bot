@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.social.SocialNoticeMessage impo
 
 
 class BulletinMessage(SocialNoticeMessage):
-    protocolId = 9541
     lastNotifiedTimestamp:int
     
     

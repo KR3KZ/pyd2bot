@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ReloginTokenStatusMessage(INetworkMessage):
-    protocolId = 3172
+class ReloginTokenStatusMessage(NetworkMessage):
     validToken:bool
-    ticket:int
+    ticket:list[int]
     
     

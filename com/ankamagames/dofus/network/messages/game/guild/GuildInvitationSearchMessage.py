@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.common.AbstractPlayerSearchInformation import AbstractPlayerSearchInformation
 
 
-class GuildInvitationSearchMessage(INetworkMessage):
-    protocolId = 5666
+class GuildInvitationSearchMessage(NetworkMessage):
     target:AbstractPlayerSearchInformation
     
     

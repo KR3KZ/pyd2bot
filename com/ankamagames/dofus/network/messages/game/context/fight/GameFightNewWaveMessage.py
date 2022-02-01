@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameFightNewWaveMessage(INetworkMessage):
-    protocolId = 1312
+class GameFightNewWaveMessage(NetworkMessage):
     id:int
     teamId:int
     nbTurnBeforeNextWave:int

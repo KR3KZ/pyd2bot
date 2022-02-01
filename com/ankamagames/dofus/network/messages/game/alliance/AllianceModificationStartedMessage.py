@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AllianceModificationStartedMessage(INetworkMessage):
-    protocolId = 6240
+class AllianceModificationStartedMessage(NetworkMessage):
     canChangeName:bool
     canChangeTag:bool
     canChangeEmblem:bool

@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.GuildInformations
 
 
 class PaddockGuildedInformations(PaddockBuyableInformations):
-    protocolId = 6908
     deserted:bool
     guildInfo:GuildInformations
     

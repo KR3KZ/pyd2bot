@@ -2,6 +2,5 @@ from com.ankamagames.dofus.network.types.game.context.fight.GameFightFighterInfo
 
 
 class GameFightAIInformations(GameFightFighterInformations):
-    protocolId = 858
     
     

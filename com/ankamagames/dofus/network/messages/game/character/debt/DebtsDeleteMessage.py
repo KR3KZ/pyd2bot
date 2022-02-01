@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class DebtsDeleteMessage(INetworkMessage):
-    protocolId = 5619
+class DebtsDeleteMessage(NetworkMessage):
     reason:int
-    debts:int
+    debts:list[int]
     
     

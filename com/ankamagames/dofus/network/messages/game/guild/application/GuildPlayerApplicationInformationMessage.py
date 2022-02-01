@@ -4,7 +4,6 @@ from com.ankamagames.dofus.network.types.game.guild.application.GuildApplication
 
 
 class GuildPlayerApplicationInformationMessage(GuildPlayerApplicationAbstractMessage):
-    protocolId = 9380
     guildInformation:GuildInformations
     apply:GuildApplicationInformation
     

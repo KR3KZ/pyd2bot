@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class UpdateSelfAgressableStatusMessage(INetworkMessage):
-    protocolId = 4140
+class UpdateSelfAgressableStatusMessage(NetworkMessage):
     status:int
     probationTime:int
     

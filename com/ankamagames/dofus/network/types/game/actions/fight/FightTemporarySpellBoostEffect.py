@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.actions.fight.FightTemporaryBoostE
 
 
 class FightTemporarySpellBoostEffect(FightTemporaryBoostEffect):
-    protocolId = 540
     boostedSpellId:int
     
     

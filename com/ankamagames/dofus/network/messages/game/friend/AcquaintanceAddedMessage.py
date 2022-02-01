@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.friend.AcquaintanceInformation import AcquaintanceInformation
 
 
-class AcquaintanceAddedMessage(INetworkMessage):
-    protocolId = 6756
+class AcquaintanceAddedMessage(NetworkMessage):
     acquaintanceAdded:AcquaintanceInformation
     
     

@@ -3,8 +3,7 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.GroupMonsterStati
 
 
 class GameRolePlayGroupMonsterWaveInformations(GameRolePlayGroupMonsterInformations):
-    protocolId = 5382
     nbWaves:int
-    alternatives:GroupMonsterStaticInformations
+    alternatives:list[GroupMonsterStaticInformations]
     
     

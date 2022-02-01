@@ -1,11 +1,10 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.house.HouseInstanceInformations import HouseInstanceInformations
 
 
-class HousePropertiesMessage(INetworkMessage):
-    protocolId = 3830
+class HousePropertiesMessage(NetworkMessage):
     houseId:int
-    doorsOnMap:int
+    doorsOnMap:list[int]
     properties:HouseInstanceInformations
     
     

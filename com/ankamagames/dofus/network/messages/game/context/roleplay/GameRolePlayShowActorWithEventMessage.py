@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.GameRolePlaySh
 
 
 class GameRolePlayShowActorWithEventMessage(GameRolePlayShowActorMessage):
-    protocolId = 2684
     actorEventId:int
     
     

@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.actions.fight.GameActionMarkedCell import GameActionMarkedCell
 
 
-class GameActionMark(INetworkMessage):
-    protocolId = 158
+class GameActionMark(NetworkMessage):
     markAuthorId:int
     markTeamId:int
     markSpellId:int
@@ -11,7 +10,7 @@ class GameActionMark(INetworkMessage):
     markId:int
     markType:int
     markimpactCell:int
-    cells:GameActionMarkedCell
+    cells:list[GameActionMarkedCell]
     active:bool
     
     

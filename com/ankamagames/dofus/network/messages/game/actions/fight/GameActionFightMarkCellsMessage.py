@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.actions.fight.GameActionMark impor
 
 
 class GameActionFightMarkCellsMessage(AbstractGameActionMessage):
-    protocolId = 1180
     mark:GameActionMark
     
     

@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ActivitySuggestionsMessage(INetworkMessage):
-    protocolId = 5931
-    lockedActivitiesIds:int
-    unlockedActivitiesIds:int
+class ActivitySuggestionsMessage(NetworkMessage):
+    lockedActivitiesIds:list[int]
+    unlockedActivitiesIds:list[int]
     
     

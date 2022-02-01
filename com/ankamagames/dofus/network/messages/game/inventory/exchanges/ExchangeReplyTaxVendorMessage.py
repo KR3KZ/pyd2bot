@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeReplyTaxVendorMessage(INetworkMessage):
-    protocolId = 7870
+class ExchangeReplyTaxVendorMessage(NetworkMessage):
     objectValue:int
     totalTaxValue:int
     

@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class EnabledChannelsMessage(INetworkMessage):
-    protocolId = 9261
-    channels:int
-    disallowed:int
+class EnabledChannelsMessage(NetworkMessage):
+    channels:list[int]
+    disallowed:list[int]
     
     

@@ -4,7 +4,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.party.entity.Part
 
 
 class PartyMemberInformations(CharacterBaseInformations):
-    protocolId = 8492
     lifePoints:int
     maxLifePoints:int
     prospecting:int
@@ -16,6 +15,6 @@ class PartyMemberInformations(CharacterBaseInformations):
     mapId:int
     subAreaId:int
     status:PlayerStatus
-    entities:PartyEntityBaseInformation
+    entities:list[PartyEntityBaseInformation]
     
     

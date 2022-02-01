@@ -4,10 +4,9 @@ from com.ankamagames.dofus.network.types.game.context.fight.GameFightCharacteris
 
 
 class GameFightFighterInformations(GameContextActorInformations):
-    protocolId = 5068
     spawnInfo:GameContextBasicSpawnInformation
     wave:int
     stats:GameFightCharacteristics
-    previousPositions:int
+    previousPositions:list[int]
     
     

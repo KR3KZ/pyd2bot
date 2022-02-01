@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameFightJoinMessage(INetworkMessage):
-    protocolId = 1185
+class GameFightJoinMessage(NetworkMessage):
     timeMaxBeforeFightStart:int
     fightType:int
     isTeamPhase:bool

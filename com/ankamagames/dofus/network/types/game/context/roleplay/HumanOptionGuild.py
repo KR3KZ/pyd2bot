@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.GuildInformations
 
 
 class HumanOptionGuild(HumanOption):
-    protocolId = 1437
     guildInformations:GuildInformations
     
     

@@ -2,6 +2,5 @@ from com.ankamagames.dofus.network.messages.game.social.SocialNoticeMessage impo
 
 
 class GuildMotdMessage(SocialNoticeMessage):
-    protocolId = 4202
     
     

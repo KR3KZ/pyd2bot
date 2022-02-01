@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ReloginTokenRequestMessage(INetworkMessage):
-    protocolId = 2403
+class ReloginTokenRequestMessage(NetworkMessage):
     
     

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class IdolSelectedMessage(INetworkMessage):
-    protocolId = 7348
+class IdolSelectedMessage(NetworkMessage):
     idolId:int
     activate:bool
     party:bool

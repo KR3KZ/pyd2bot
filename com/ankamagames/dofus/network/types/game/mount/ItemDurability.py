@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ItemDurability(INetworkMessage):
-    protocolId = 2055
+class ItemDurability(NetworkMessage):
     durability:int
     durabilityMax:int
     

@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ConsoleCommandsListMessage(INetworkMessage):
-    protocolId = 5611
-    aliases:str
-    args:str
-    descriptions:str
+class ConsoleCommandsListMessage(NetworkMessage):
+    aliases:list[str]
+    args:list[str]
+    descriptions:list[str]
     
     

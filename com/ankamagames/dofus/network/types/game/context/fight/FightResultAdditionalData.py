@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class FightResultAdditionalData(INetworkMessage):
-    protocolId = 6654
+class FightResultAdditionalData(NetworkMessage):
     
     

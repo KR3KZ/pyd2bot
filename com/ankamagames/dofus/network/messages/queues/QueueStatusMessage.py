@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class QueueStatusMessage(INetworkMessage):
-    protocolId = 2197
+class QueueStatusMessage(NetworkMessage):
     position:int
     total:int
     

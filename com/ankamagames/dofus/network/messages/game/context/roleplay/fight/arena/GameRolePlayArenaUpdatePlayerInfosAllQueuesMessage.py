@@ -4,7 +4,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.fight.arena.Arena
 
 
 class GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage(GameRolePlayArenaUpdatePlayerInfosMessage):
-    protocolId = 6540
     team:ArenaRankInfos
     duel:ArenaRankInfos
     

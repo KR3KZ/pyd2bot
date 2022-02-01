@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class QuestObjectiveValidatedMessage(INetworkMessage):
-    protocolId = 5565
+class QuestObjectiveValidatedMessage(NetworkMessage):
     questId:int
     objectiveId:int
     

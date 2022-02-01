@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameFightTurnEndMessage(INetworkMessage):
-    protocolId = 4443
+class GameFightTurnEndMessage(NetworkMessage):
     id:int
     
     

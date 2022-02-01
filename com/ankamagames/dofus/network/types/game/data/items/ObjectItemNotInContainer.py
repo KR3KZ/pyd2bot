@@ -3,9 +3,8 @@ from com.ankamagames.dofus.network.types.game.data.items.effects.ObjectEffect im
 
 
 class ObjectItemNotInContainer(Item):
-    protocolId = 8362
     objectGID:int
-    effects:ObjectEffect
+    effects:list[ObjectEffect]
     objectUID:int
     quantity:int
     

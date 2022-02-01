@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AbstractFightTeamInformations(INetworkMessage):
-    protocolId = 3071
+class AbstractFightTeamInformations(NetworkMessage):
     teamId:int
     leaderId:int
     teamSide:int

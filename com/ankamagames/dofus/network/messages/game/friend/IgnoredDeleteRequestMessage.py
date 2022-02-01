@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class IgnoredDeleteRequestMessage(INetworkMessage):
-    protocolId = 2264
+class IgnoredDeleteRequestMessage(NetworkMessage):
     accountId:int
     session:bool
     

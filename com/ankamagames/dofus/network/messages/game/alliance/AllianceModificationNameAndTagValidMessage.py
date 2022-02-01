@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AllianceModificationNameAndTagValidMessage(INetworkMessage):
-    protocolId = 8950
+class AllianceModificationNameAndTagValidMessage(NetworkMessage):
     allianceName:str
     allianceTag:str
     

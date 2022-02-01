@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class NicknameRefusedMessage(INetworkMessage):
-    protocolId = 2705
+class NicknameRefusedMessage(NetworkMessage):
     reason:int
     
     

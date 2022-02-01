@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class QuestStepValidatedMessage(INetworkMessage):
-    protocolId = 6173
+class QuestStepValidatedMessage(NetworkMessage):
     questId:int
     stepId:int
     

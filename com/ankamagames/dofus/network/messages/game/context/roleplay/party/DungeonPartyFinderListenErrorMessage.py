@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class DungeonPartyFinderListenErrorMessage(INetworkMessage):
-    protocolId = 7331
+class DungeonPartyFinderListenErrorMessage(NetworkMessage):
     dungeonId:int
     
     

@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.guild.tax.TaxCollectorComplementar
 
 
 class TaxCollectorLootInformations(TaxCollectorComplementaryInformations):
-    protocolId = 8142
     kamas:int
     experience:int
     pods:int

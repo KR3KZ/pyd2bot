@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameFightRemoveTeamMemberMessage(INetworkMessage):
-    protocolId = 6697
+class GameFightRemoveTeamMemberMessage(NetworkMessage):
     fightId:int
     teamId:int
     charId:int

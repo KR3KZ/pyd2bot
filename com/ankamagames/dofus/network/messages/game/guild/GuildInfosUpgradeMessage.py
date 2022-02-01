@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GuildInfosUpgradeMessage(INetworkMessage):
-    protocolId = 2887
+class GuildInfosUpgradeMessage(NetworkMessage):
     maxTaxCollectorsCount:int
     taxCollectorsCount:int
     taxCollectorLifePoints:int
@@ -11,7 +10,7 @@ class GuildInfosUpgradeMessage(INetworkMessage):
     taxCollectorProspecting:int
     taxCollectorWisdom:int
     boostPoints:int
-    spellId:int
-    spellLevel:int
+    spellId:list[int]
+    spellLevel:list[int]
     
     

@@ -1,13 +1,10 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
-from typing import TYPE_CHECKING
-if TYPE_CHECKING:
-    from com.ankamagames.dofus.network.types.game.look.EntityLook import EntityLook
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
+from com.ankamagames.dofus.network.types.game.look.EntityLook import EntityLook
 
 
-class SubEntity(INetworkMessage):
-    protocolId = 8670
+class SubEntity(NetworkMessage):
     bindingPointCategory:int
     bindingPointIndex:int
-    subEntityLook:'EntityLook'
+    subEntityLook:EntityLook
     
     

@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.context.MapCoordinatesExtended import MapCoordinatesExtended
 
 
-class AtlasPointsInformations(INetworkMessage):
-    protocolId = 4410
+class AtlasPointsInformations(NetworkMessage):
     type:int
-    coords:MapCoordinatesExtended
+    coords:list[MapCoordinatesExtended]
     
     

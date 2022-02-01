@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AbstractPlayerSearchInformation(INetworkMessage):
-    protocolId = 1294
+class AbstractPlayerSearchInformation(NetworkMessage):
     
     

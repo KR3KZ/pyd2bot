@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeObj
 
 
 class ExchangePodsModifiedMessage(ExchangeObjectMessage):
-    protocolId = 7130
     currentWeight:int
     maxWeight:int
     

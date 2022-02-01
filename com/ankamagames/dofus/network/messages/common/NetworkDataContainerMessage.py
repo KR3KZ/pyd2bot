@@ -1,9 +1,6 @@
-from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class NetworkDataContainerMessage(INetworkMessage):
-    protocolId = 2
-    content:ByteArray
+class NetworkDataContainerMessage(NetworkMessage):
     
     

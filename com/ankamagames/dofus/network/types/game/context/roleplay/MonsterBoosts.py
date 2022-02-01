@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class MonsterBoosts(INetworkMessage):
-    protocolId = 7719
+class MonsterBoosts(NetworkMessage):
     id:int
     xpBoost:int
     dropBoost:int

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GuildInformationsGeneralMessage(INetworkMessage):
-    protocolId = 8015
+class GuildInformationsGeneralMessage(NetworkMessage):
     abandonnedPaddock:bool
     level:int
     expLevelFloor:int

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class WrapperObjectDissociateRequestMessage(INetworkMessage):
-    protocolId = 9634
+class WrapperObjectDissociateRequestMessage(NetworkMessage):
     hostUID:int
     hostPos:int
     

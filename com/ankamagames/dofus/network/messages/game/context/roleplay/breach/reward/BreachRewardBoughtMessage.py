@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class BreachRewardBoughtMessage(INetworkMessage):
-    protocolId = 3950
+class BreachRewardBoughtMessage(NetworkMessage):
     id:int
     bought:bool
     

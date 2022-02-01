@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameFightOptionToggleMessage(INetworkMessage):
-    protocolId = 2382
+class GameFightOptionToggleMessage(NetworkMessage):
     option:int
     
     

@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.inventory.items.ObtainedItemMes
 
 
 class ObtainedItemWithBonusMessage(ObtainedItemMessage):
-    protocolId = 7390
     bonusQuantity:int
     
     

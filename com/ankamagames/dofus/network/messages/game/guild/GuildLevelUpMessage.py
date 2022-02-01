@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GuildLevelUpMessage(INetworkMessage):
-    protocolId = 7669
+class GuildLevelUpMessage(NetworkMessage):
     newLevel:int
     
     

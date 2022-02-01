@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.common.AccountTagInformation import Acc
 
 
 class HouseInformationsForGuild(HouseInformations):
-    protocolId = 3219
     instanceId:int
     secondHand:bool
     ownerTag:AccountTagInformation
@@ -11,7 +10,7 @@ class HouseInformationsForGuild(HouseInformations):
     worldY:int
     mapId:int
     subAreaId:int
-    skillListIds:int
+    skillListIds:list[int]
     guildshareParams:int
     
     

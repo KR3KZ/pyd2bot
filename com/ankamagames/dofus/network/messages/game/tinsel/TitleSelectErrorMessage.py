@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class TitleSelectErrorMessage(INetworkMessage):
-    protocolId = 2014
+class TitleSelectErrorMessage(NetworkMessage):
     reason:int
     
     

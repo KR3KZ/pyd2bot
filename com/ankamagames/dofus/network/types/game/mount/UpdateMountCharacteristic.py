@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class UpdateMountCharacteristic(INetworkMessage):
-    protocolId = 826
+class UpdateMountCharacteristic(NetworkMessage):
     type:int
     
     

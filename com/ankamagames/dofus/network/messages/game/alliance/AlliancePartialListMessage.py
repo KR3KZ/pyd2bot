@@ -2,6 +2,5 @@ from com.ankamagames.dofus.network.messages.game.alliance.AllianceListMessage im
 
 
 class AlliancePartialListMessage(AllianceListMessage):
-    protocolId = 2592
     
     

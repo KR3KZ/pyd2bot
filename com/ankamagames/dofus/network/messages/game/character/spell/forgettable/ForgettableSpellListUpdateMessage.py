@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.data.items.ForgettableSpellItem import ForgettableSpellItem
 
 
-class ForgettableSpellListUpdateMessage(INetworkMessage):
-    protocolId = 9946
+class ForgettableSpellListUpdateMessage(NetworkMessage):
     action:int
-    spells:ForgettableSpellItem
+    spells:list[ForgettableSpellItem]
     
     

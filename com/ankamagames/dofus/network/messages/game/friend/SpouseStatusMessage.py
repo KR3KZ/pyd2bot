@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class SpouseStatusMessage(INetworkMessage):
-    protocolId = 5406
+class SpouseStatusMessage(NetworkMessage):
     hasSpouse:bool
     
     

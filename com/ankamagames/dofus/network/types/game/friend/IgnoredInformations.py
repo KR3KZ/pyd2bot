@@ -2,6 +2,5 @@ from com.ankamagames.dofus.network.types.game.friend.AbstractContactInformations
 
 
 class IgnoredInformations(AbstractContactInformations):
-    protocolId = 1909
     
     

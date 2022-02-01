@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.common.AccountTagInformation import AccountTagInformation
 
 
-class IdentificationSuccessMessage(INetworkMessage):
-    protocolId = 331
+class IdentificationSuccessMessage(NetworkMessage):
     login:str
     accountTag:AccountTagInformation
     accountId:int

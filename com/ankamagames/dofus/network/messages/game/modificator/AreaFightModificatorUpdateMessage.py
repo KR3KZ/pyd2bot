@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AreaFightModificatorUpdateMessage(INetworkMessage):
-    protocolId = 4779
+class AreaFightModificatorUpdateMessage(NetworkMessage):
     spellPairId:int
     
     

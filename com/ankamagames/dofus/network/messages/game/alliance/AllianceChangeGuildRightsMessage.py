@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AllianceChangeGuildRightsMessage(INetworkMessage):
-    protocolId = 8453
+class AllianceChangeGuildRightsMessage(NetworkMessage):
     guildId:int
     rights:int
     

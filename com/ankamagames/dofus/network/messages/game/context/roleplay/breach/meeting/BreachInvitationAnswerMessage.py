@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class BreachInvitationAnswerMessage(INetworkMessage):
-    protocolId = 5975
+class BreachInvitationAnswerMessage(NetworkMessage):
     accept:bool
     
     

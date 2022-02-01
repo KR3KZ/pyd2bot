@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class PortalInformation(INetworkMessage):
-    protocolId = 2145
+class PortalInformation(NetworkMessage):
     portalId:int
     areaId:int
     

@@ -1,12 +1,11 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.character.CharacterMinimalPlusLookInformations import CharacterMinimalPlusLookInformations
 from com.ankamagames.dofus.network.types.game.character.CharacterMinimalPlusLookInformations import CharacterMinimalPlusLookInformations
 
 
-class TaxCollectorFightersInformation(INetworkMessage):
-    protocolId = 9650
+class TaxCollectorFightersInformation(NetworkMessage):
     collectorId:int
-    allyCharactersInformations:CharacterMinimalPlusLookInformations
-    enemyCharactersInformations:CharacterMinimalPlusLookInformations
+    allyCharactersInformations:list[CharacterMinimalPlusLookInformations]
+    enemyCharactersInformations:list[CharacterMinimalPlusLookInformations]
     
     

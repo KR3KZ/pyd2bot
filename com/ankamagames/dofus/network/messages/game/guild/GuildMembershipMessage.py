@@ -2,6 +2,5 @@ from com.ankamagames.dofus.network.messages.game.guild.GuildJoinedMessage import
 
 
 class GuildMembershipMessage(GuildJoinedMessage):
-    protocolId = 6499
     
     

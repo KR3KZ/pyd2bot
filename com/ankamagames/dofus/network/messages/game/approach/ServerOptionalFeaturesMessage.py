@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ServerOptionalFeaturesMessage(INetworkMessage):
-    protocolId = 189
-    features:int
+class ServerOptionalFeaturesMessage(NetworkMessage):
+    features:list[int]
     
     

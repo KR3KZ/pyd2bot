@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.presets.Preset import Preset
 
 
 class PresetsContainerPreset(Preset):
-    protocolId = 4853
-    presets:Preset
+    presets:list[Preset]
     
     

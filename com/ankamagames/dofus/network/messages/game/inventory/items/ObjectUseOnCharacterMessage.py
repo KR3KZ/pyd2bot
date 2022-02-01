@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.inventory.items.ObjectUseMessag
 
 
 class ObjectUseOnCharacterMessage(ObjectUseMessage):
-    protocolId = 8768
     characterId:int
     
     

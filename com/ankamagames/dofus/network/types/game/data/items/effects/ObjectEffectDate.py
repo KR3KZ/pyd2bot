@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.data.items.effects.ObjectEffect im
 
 
 class ObjectEffectDate(ObjectEffect):
-    protocolId = 5415
     year:int
     month:int
     day:int

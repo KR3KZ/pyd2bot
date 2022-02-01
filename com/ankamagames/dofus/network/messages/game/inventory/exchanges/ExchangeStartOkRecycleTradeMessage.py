@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeStartOkRecycleTradeMessage(INetworkMessage):
-    protocolId = 9169
+class ExchangeStartOkRecycleTradeMessage(NetworkMessage):
     percentToPrism:int
     percentToPlayer:int
     

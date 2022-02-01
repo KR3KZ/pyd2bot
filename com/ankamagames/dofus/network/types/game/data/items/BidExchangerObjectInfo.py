@@ -1,13 +1,12 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.data.items.effects.ObjectEffect import ObjectEffect
 
 
-class BidExchangerObjectInfo(INetworkMessage):
-    protocolId = 461
+class BidExchangerObjectInfo(NetworkMessage):
     objectUID:int
     objectGID:int
     objectType:int
-    effects:ObjectEffect
-    prices:int
+    effects:list[ObjectEffect]
+    prices:list[int]
     
     

@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.party.Abstract
 
 
 class PartyModifiableStatusMessage(AbstractPartyMessage):
-    protocolId = 4439
     enabled:bool
     
     

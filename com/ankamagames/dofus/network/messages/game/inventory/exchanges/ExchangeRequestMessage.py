@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeRequestMessage(INetworkMessage):
-    protocolId = 289
+class ExchangeRequestMessage(NetworkMessage):
     exchangeType:int
     
     

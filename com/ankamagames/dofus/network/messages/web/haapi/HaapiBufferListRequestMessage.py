@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class HaapiBufferListRequestMessage(INetworkMessage):
-    protocolId = 9520
+class HaapiBufferListRequestMessage(NetworkMessage):
     
     

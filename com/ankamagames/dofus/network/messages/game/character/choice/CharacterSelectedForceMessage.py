@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class CharacterSelectedForceMessage(INetworkMessage):
-    protocolId = 6158
+class CharacterSelectedForceMessage(NetworkMessage):
     id:int
     
     

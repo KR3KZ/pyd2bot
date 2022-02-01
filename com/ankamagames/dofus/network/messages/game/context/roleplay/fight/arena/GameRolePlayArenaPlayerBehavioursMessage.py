@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameRolePlayArenaPlayerBehavioursMessage(INetworkMessage):
-    protocolId = 92
-    flags:str
-    sanctions:str
+class GameRolePlayArenaPlayerBehavioursMessage(NetworkMessage):
+    flags:list[str]
+    sanctions:list[str]
     banDuration:int
     
     

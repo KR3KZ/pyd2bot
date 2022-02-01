@@ -2,6 +2,5 @@ from com.ankamagames.dofus.network.messages.game.guild.application.GuildPlayerAp
 
 
 class GuildPlayerNoApplicationInformationMessage(GuildPlayerApplicationAbstractMessage):
-    protocolId = 5345
     
     

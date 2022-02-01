@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class HavenBagRoomPreviewInformation(INetworkMessage):
-    protocolId = 8913
+class HavenBagRoomPreviewInformation(NetworkMessage):
     roomId:int
     themeId:int
     

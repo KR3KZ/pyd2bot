@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class KickHavenBagRequestMessage(INetworkMessage):
-    protocolId = 188
+class KickHavenBagRequestMessage(NetworkMessage):
     guestId:int
     
     

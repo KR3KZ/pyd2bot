@@ -1,11 +1,10 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.house.HouseInformationsForSell import HouseInformationsForSell
 
 
-class HouseToSellListMessage(INetworkMessage):
-    protocolId = 4515
+class HouseToSellListMessage(NetworkMessage):
     pageIndex:int
     totalPage:int
-    houseList:HouseInformationsForSell
+    houseList:list[HouseInformationsForSell]
     
     

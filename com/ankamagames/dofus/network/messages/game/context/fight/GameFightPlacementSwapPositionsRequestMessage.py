@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.context.fight.GameFightPlacemen
 
 
 class GameFightPlacementSwapPositionsRequestMessage(GameFightPlacementPositionRequestMessage):
-    protocolId = 7699
     requestedId:int
     
     

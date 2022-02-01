@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class CredentialsAcknowledgementMessage(INetworkMessage):
-    protocolId = 4834
+class CredentialsAcknowledgementMessage(NetworkMessage):
     
     

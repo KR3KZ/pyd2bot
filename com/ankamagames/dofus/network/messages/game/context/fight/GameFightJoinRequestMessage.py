@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameFightJoinRequestMessage(INetworkMessage):
-    protocolId = 6519
+class GameFightJoinRequestMessage(NetworkMessage):
     fighterId:int
     fightId:int
     

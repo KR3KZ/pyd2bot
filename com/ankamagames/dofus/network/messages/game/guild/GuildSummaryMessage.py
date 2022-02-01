@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.social.GuildFactSheetInformations 
 
 
 class GuildSummaryMessage(PaginationAnswerAbstractMessage):
-    protocolId = 4399
-    guilds:GuildFactSheetInformations
+    guilds:list[GuildFactSheetInformations]
     
     

@@ -2,7 +2,7 @@
 {% if parent != None -%}
 from {{parent.package}} import {{parent.name}}
 {%- else -%}
-from com.ankamagames.dofus.network.messages.NetworkMessage import NetworkMessage{% endif %}
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage{% endif %}
 {%- for field in cls.fields -%}
 {%- if field.typename not in primitives %}
 from {{types[field.typename].package}} import {{field.typename}}{% endif %}
@@ -10,9 +10,8 @@ from {{types[field.typename].package}} import {{field.typename}}{% endif %}
 
 
 class {{cls.name}}({% if parent != None %}{{parent.name}}{% else %}NetworkMessage{% endif %}):
-    protocolId = {{cls.protocolId}}
     {% for field in cls.fields -%}
-    {{field.name}}:{%if field.length != None%}list[{{field.typename}}]{% else %}{{field.typename}}{% endif %}
+    {{field.name}}:{%if field.length != None or field.lengthTypeId != None%}list[{{field.typename}}]{% else %}{{field.typename}}{% endif %}{%if field.optional %} = None{% endif %}
     {% endfor %}
     {%- for field in cls.boolfields -%}
     {{field.name}}:{{field.typename}}

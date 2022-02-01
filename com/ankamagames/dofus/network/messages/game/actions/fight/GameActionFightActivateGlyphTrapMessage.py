@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessa
 
 
 class GameActionFightActivateGlyphTrapMessage(AbstractGameActionMessage):
-    protocolId = 9234
     markId:int
     active:bool
     

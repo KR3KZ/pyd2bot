@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.character.choice.BasicCharacter
 
 
 class CharactersListMessage(BasicCharactersListMessage):
-    protocolId = 269
     hasStartupActions:bool
     
     

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class IconPresetSaveRequestMessage(INetworkMessage):
-    protocolId = 4898
+class IconPresetSaveRequestMessage(NetworkMessage):
     presetId:int
     symbolId:int
     updateData:bool

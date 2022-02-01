@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.chat.ChatAbstractClientMessage 
 
 
 class ChatClientMultiMessage(ChatAbstractClientMessage):
-    protocolId = 1382
     channel:int
     
     

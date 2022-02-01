@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.character.choice.CharacterRemodeli
 
 
 class CharacterToRemodelInformations(CharacterRemodelingInformation):
-    protocolId = 2646
     possibleChangeMask:int
     mandatoryChangeMask:int
     

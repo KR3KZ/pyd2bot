@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.character.CharacterMinimalInformat
 
 
 class CharacterMinimalGuildPublicInformations(CharacterMinimalInformations):
-    protocolId = 393
     rank:int
     
     

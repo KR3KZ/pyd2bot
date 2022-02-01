@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.data.items.ObjectItem import Objec
 
 
 class ChatClientPrivateWithObjectMessage(ChatClientPrivateMessage):
-    protocolId = 1043
-    objects:ObjectItem
+    objects:list[ObjectItem]
     
     

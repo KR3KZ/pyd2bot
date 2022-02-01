@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ObjectQuantityMessage(INetworkMessage):
-    protocolId = 80
+class ObjectQuantityMessage(NetworkMessage):
     objectUID:int
     quantity:int
     origin:int

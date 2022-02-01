@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class MountUnSetMessage(INetworkMessage):
-    protocolId = 5361
+class MountUnSetMessage(NetworkMessage):
     
     

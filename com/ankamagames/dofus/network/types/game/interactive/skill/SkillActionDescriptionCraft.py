@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.interactive.skill.SkillActionDescr
 
 
 class SkillActionDescriptionCraft(SkillActionDescription):
-    protocolId = 6151
     probability:int
     
     

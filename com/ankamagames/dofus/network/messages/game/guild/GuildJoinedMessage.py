@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.context.roleplay.GuildInformations import GuildInformations
 
 
-class GuildJoinedMessage(INetworkMessage):
-    protocolId = 1218
+class GuildJoinedMessage(NetworkMessage):
     guildInfo:GuildInformations
     memberRights:int
     

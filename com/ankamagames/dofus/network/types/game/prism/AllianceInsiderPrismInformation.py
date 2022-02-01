@@ -3,11 +3,10 @@ from com.ankamagames.dofus.network.types.game.data.items.ObjectItem import Objec
 
 
 class AllianceInsiderPrismInformation(PrismInformation):
-    protocolId = 8201
     lastTimeSlotModificationDate:int
     lastTimeSlotModificationAuthorGuildId:int
     lastTimeSlotModificationAuthorId:int
     lastTimeSlotModificationAuthorName:str
-    modulesObjects:ObjectItem
+    modulesObjects:list[ObjectItem]
     
     

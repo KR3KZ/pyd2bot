@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameFightTurnListMessage(INetworkMessage):
-    protocolId = 7238
-    ids:int
-    deadsIds:int
+class GameFightTurnListMessage(NetworkMessage):
+    ids:list[int]
+    deadsIds:list[int]
     
     

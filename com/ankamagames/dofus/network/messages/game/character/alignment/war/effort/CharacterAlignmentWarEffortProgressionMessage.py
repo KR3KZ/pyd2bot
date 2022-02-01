@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class CharacterAlignmentWarEffortProgressionMessage(INetworkMessage):
-    protocolId = 7324
+class CharacterAlignmentWarEffortProgressionMessage(NetworkMessage):
     alignmentWarEffortDailyLimit:int
     alignmentWarEffortDailyDonation:int
     alignmentWarEffortPersonalDonation:int

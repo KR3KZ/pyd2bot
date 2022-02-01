@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class CharacterDeletionRequestMessage(INetworkMessage):
-    protocolId = 8394
+class CharacterDeletionRequestMessage(NetworkMessage):
     characterId:int
     secretAnswerHash:str
     

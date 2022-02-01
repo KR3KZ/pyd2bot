@@ -1,11 +1,10 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.context.roleplay.quest.GameRolePlayNpcQuestFlag import GameRolePlayNpcQuestFlag
 
 
-class MapNpcQuestInfo(INetworkMessage):
-    protocolId = 7429
+class MapNpcQuestInfo(NetworkMessage):
     mapId:int
-    npcsIdsWithQuest:int
-    questFlags:GameRolePlayNpcQuestFlag
+    npcsIdsWithQuest:list[int]
+    questFlags:list[GameRolePlayNpcQuestFlag]
     
     

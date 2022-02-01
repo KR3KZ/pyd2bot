@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class PrismInformation(INetworkMessage):
-    protocolId = 6060
+class PrismInformation(NetworkMessage):
     typeId:int
     state:int
     nextVulnerabilityDate:int

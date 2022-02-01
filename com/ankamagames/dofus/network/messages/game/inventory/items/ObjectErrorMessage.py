@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ObjectErrorMessage(INetworkMessage):
-    protocolId = 9603
+class ObjectErrorMessage(NetworkMessage):
     reason:int
     
     

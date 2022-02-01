@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class PaddockBuyableInformations(INetworkMessage):
-    protocolId = 3536
+class PaddockBuyableInformations(NetworkMessage):
     price:int
     locked:bool
     

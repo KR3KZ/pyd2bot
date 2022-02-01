@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class PresetUseResultMessage(INetworkMessage):
-    protocolId = 8808
+class PresetUseResultMessage(NetworkMessage):
     presetId:int
     code:int
     

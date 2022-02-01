@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class PrismFightStateUpdateMessage(INetworkMessage):
-    protocolId = 7379
+class PrismFightStateUpdateMessage(NetworkMessage):
     state:int
     
     

@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.ui.ClientUIOpenedMessage import
 
 
 class ClientUIOpenedByObjectMessage(ClientUIOpenedMessage):
-    protocolId = 8823
     uid:int
     
     

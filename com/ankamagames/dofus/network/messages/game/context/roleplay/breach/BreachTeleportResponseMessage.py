@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class BreachTeleportResponseMessage(INetworkMessage):
-    protocolId = 4766
+class BreachTeleportResponseMessage(NetworkMessage):
     teleported:bool
     
     

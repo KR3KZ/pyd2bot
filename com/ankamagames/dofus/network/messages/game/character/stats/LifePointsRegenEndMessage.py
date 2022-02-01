@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.character.stats.UpdateLifePoint
 
 
 class LifePointsRegenEndMessage(UpdateLifePointsMessage):
-    protocolId = 5501
     lifePointsGained:int
     
     

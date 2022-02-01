@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.BasicNamedAllianc
 
 
 class GuildInAllianceFactsMessage(GuildFactsMessage):
-    protocolId = 6925
     allianceInfos:BasicNamedAllianceInformations
     
     

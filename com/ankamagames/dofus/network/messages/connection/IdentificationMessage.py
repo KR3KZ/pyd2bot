@@ -1,15 +1,14 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.version.Version import Version
 
 
-class IdentificationMessage(INetworkMessage):
-    protocolId = 4337
+class IdentificationMessage(NetworkMessage):
     version:Version
     lang:str
-    credentials:int
+    credentials:list[int]
     serverId:int
     sessionOptionalSalt:int
-    failedAttempts:int
+    failedAttempts:list[int]
     autoconnect:bool
     useCertificate:bool
     useLoginToken:bool

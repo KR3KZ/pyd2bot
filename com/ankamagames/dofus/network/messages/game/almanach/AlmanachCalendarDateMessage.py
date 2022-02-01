@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AlmanachCalendarDateMessage(INetworkMessage):
-    protocolId = 2577
+class AlmanachCalendarDateMessage(NetworkMessage):
     date:int
     
     

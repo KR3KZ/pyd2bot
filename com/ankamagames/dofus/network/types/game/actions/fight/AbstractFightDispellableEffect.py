@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AbstractFightDispellableEffect(INetworkMessage):
-    protocolId = 1657
+class AbstractFightDispellableEffect(NetworkMessage):
     uid:int
     targetId:int
     turnDuration:int

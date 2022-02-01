@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.actions.fight.GameActionFightLi
 
 
 class GameActionFightLifeAndShieldPointsLostMessage(GameActionFightLifePointsLostMessage):
-    protocolId = 6816
     shieldLoss:int
     
     

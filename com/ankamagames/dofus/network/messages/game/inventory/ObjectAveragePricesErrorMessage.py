@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ObjectAveragePricesErrorMessage(INetworkMessage):
-    protocolId = 9392
+class ObjectAveragePricesErrorMessage(NetworkMessage):
     
     

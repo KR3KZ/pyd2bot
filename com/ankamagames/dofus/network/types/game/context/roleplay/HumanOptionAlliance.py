@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.AllianceInformati
 
 
 class HumanOptionAlliance(HumanOption):
-    protocolId = 3939
     allianceInformations:AllianceInformations
     aggressable:int
     

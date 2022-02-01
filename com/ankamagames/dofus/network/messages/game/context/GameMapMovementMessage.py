@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameMapMovementMessage(INetworkMessage):
-    protocolId = 1972
-    keyMovements:int
+class GameMapMovementMessage(NetworkMessage):
+    keyMovements:list[int]
     forcedDirection:int
     actorId:int
     

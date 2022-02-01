@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class BasicPingMessage(INetworkMessage):
-    protocolId = 8161
+class BasicPingMessage(NetworkMessage):
     quiet:bool
     
     

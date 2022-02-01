@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class EntityMovementInformations(INetworkMessage):
-    protocolId = 7283
+class EntityMovementInformations(NetworkMessage):
     id:int
-    steps:int
+    steps:list[int]
     
     

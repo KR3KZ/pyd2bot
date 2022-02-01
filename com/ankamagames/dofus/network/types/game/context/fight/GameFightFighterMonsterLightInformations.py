@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.context.fight.GameFightFighterLigh
 
 
 class GameFightFighterMonsterLightInformations(GameFightFighterLightInformations):
-    protocolId = 4254
     creatureGenericId:int
     
     

@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.common.AbstractPlayerSearchInformation 
 
 
 class ChatClientPrivateMessage(ChatAbstractClientMessage):
-    protocolId = 1814
     receiver:AbstractPlayerSearchInformation
     
     

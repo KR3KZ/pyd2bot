@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class HouseGuildShareRequestMessage(INetworkMessage):
-    protocolId = 5595
+class HouseGuildShareRequestMessage(NetworkMessage):
     houseId:int
     instanceId:int
     enable:bool

@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeReplayStopMessage(INetworkMessage):
-    protocolId = 6235
+class ExchangeReplayStopMessage(NetworkMessage):
     
     

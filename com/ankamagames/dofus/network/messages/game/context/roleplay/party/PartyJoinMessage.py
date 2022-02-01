@@ -4,12 +4,11 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.party.PartyGuestI
 
 
 class PartyJoinMessage(AbstractPartyMessage):
-    protocolId = 2536
     partyType:int
     partyLeaderId:int
     maxParticipants:int
-    members:PartyMemberInformations
-    guests:PartyGuestInformations
+    members:list[PartyMemberInformations]
+    guests:list[PartyGuestInformations]
     restricted:bool
     partyName:str
     

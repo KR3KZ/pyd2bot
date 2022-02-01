@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameMapMovementConfirmMessage(INetworkMessage):
-    protocolId = 8420
+class GameMapMovementConfirmMessage(NetworkMessage):
     
     

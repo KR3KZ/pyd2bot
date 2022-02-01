@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class JobAllowMultiCraftRequestMessage(INetworkMessage):
-    protocolId = 5111
+class JobAllowMultiCraftRequestMessage(NetworkMessage):
     enabled:bool
     
     

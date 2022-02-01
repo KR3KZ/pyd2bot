@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class PrismFightSwapRequestMessage(INetworkMessage):
-    protocolId = 4070
+class PrismFightSwapRequestMessage(NetworkMessage):
     subAreaId:int
     targetId:int
     

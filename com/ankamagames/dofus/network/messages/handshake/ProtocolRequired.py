@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ProtocolRequired(INetworkMessage):
-    protocolId = 5716
+class ProtocolRequired(NetworkMessage):
     version:str
     
     

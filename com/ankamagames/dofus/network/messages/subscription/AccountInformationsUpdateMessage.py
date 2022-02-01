@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AccountInformationsUpdateMessage(INetworkMessage):
-    protocolId = 3664
+class AccountInformationsUpdateMessage(NetworkMessage):
     subscriptionEndDate:int
     
     

@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.data.items.effects.ObjectEffect im
 
 
 class ObjectEffectMinMax(ObjectEffect):
-    protocolId = 5720
     min:int
     max:int
     

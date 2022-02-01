@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.actions.fight.AbstractFightDispell
 
 
 class FightTemporarySpellImmunityEffect(AbstractFightDispellableEffect):
-    protocolId = 4141
     immuneSpellId:int
     
     

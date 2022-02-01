@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessa
 
 
 class GameActionFightTackledMessage(AbstractGameActionMessage):
-    protocolId = 4448
-    tacklersIds:int
+    tacklersIds:list[int]
     
     

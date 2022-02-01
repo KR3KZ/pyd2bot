@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.character.status.PlayerStatus import PlayerStatus
 
 
-class JobCrafterDirectoryEntryPlayerInfo(INetworkMessage):
-    protocolId = 4905
+class JobCrafterDirectoryEntryPlayerInfo(NetworkMessage):
     playerId:int
     playerName:str
     alignmentSide:int

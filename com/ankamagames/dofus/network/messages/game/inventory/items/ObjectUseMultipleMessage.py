@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.inventory.items.ObjectUseMessag
 
 
 class ObjectUseMultipleMessage(ObjectUseMessage):
-    protocolId = 1126
     quantity:int
     
     

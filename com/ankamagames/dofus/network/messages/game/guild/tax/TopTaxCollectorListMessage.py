@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.guild.tax.AbstractTaxCollectorL
 
 
 class TopTaxCollectorListMessage(AbstractTaxCollectorListMessage):
-    protocolId = 3617
     isDungeon:bool
     
     

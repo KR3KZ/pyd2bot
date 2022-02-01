@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.party.PartyInv
 
 
 class PartyInvitationDungeonMessage(PartyInvitationMessage):
-    protocolId = 9837
     dungeonId:int
     
     

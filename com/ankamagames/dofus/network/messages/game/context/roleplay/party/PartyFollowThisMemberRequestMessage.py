@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.party.PartyFol
 
 
 class PartyFollowThisMemberRequestMessage(PartyFollowMemberRequestMessage):
-    protocolId = 4755
     enabled:bool
     
     

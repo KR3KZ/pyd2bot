@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GuildInvitationAnswerMessage(INetworkMessage):
-    protocolId = 8895
+class GuildInvitationAnswerMessage(NetworkMessage):
     accept:bool
     
     

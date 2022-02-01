@@ -3,8 +3,7 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.breach.BreachRewa
 
 
 class ExtendedBreachBranch(BreachBranch):
-    protocolId = 9376
-    rewards:BreachReward
+    rewards:list[BreachReward]
     modifier:int
     prize:int
     

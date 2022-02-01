@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GuildApplicationDeletedMessage(INetworkMessage):
-    protocolId = 5546
+class GuildApplicationDeletedMessage(NetworkMessage):
     deleted:bool
     
     

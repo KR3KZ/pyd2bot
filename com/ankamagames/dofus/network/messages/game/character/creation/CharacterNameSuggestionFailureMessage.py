@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class CharacterNameSuggestionFailureMessage(INetworkMessage):
-    protocolId = 3074
+class CharacterNameSuggestionFailureMessage(NetworkMessage):
     reason:int
     
     

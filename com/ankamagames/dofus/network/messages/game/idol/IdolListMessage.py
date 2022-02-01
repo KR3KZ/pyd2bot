@@ -1,11 +1,10 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.idol.PartyIdol import PartyIdol
 
 
-class IdolListMessage(INetworkMessage):
-    protocolId = 9410
-    chosenIdols:int
-    partyChosenIdols:int
-    partyIdols:PartyIdol
+class IdolListMessage(NetworkMessage):
+    chosenIdols:list[int]
+    partyChosenIdols:list[int]
+    partyIdols:list[PartyIdol]
     
     

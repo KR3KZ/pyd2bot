@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class PrismFightDefenderLeaveMessage(INetworkMessage):
-    protocolId = 9481
+class PrismFightDefenderLeaveMessage(NetworkMessage):
     subAreaId:int
     fightId:int
     fighterToRemoveId:int

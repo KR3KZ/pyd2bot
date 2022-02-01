@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class CharacterReplayRequestMessage(INetworkMessage):
-    protocolId = 9614
+class CharacterReplayRequestMessage(NetworkMessage):
     characterId:int
     
     

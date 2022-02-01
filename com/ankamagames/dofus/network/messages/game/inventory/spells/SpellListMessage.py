@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.data.items.SpellItem import SpellItem
 
 
-class SpellListMessage(INetworkMessage):
-    protocolId = 4091
+class SpellListMessage(NetworkMessage):
     spellPrevisualization:bool
-    spells:SpellItem
+    spells:list[SpellItem]
     
     

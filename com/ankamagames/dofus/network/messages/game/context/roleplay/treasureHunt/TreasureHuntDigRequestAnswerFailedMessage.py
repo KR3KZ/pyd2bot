@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.treasureHunt.T
 
 
 class TreasureHuntDigRequestAnswerFailedMessage(TreasureHuntDigRequestAnswerMessage):
-    protocolId = 862
     wrongFlagCount:int
     
     

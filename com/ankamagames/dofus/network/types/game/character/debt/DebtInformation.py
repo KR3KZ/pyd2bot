@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class DebtInformation(INetworkMessage):
-    protocolId = 9735
+class DebtInformation(NetworkMessage):
     id:int
     timestamp:int
     

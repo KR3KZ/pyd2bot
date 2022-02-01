@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.character.choice.RemodelingInforma
 
 
 class CharacterSelectionWithRemodelMessage(CharacterSelectionMessage):
-    protocolId = 2652
     remodel:RemodelingInformation
     
     

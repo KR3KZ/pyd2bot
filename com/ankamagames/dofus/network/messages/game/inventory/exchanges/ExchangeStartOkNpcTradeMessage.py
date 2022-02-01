@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeStartOkNpcTradeMessage(INetworkMessage):
-    protocolId = 4055
+class ExchangeStartOkNpcTradeMessage(NetworkMessage):
     npcId:int
     
     

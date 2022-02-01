@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.context.fight.FightLoot import FightLoot
 
 
-class FightResultListEntry(INetworkMessage):
-    protocolId = 6627
+class FightResultListEntry(NetworkMessage):
     outcome:int
     wave:int
     rewards:FightLoot

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GuildPaddockRemovedMessage(INetworkMessage):
-    protocolId = 9960
+class GuildPaddockRemovedMessage(NetworkMessage):
     paddockId:int
     
     

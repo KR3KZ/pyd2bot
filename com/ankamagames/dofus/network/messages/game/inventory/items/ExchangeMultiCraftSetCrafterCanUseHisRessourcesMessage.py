@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeMultiCraftSetCrafterCanUseHisRessourcesMessage(INetworkMessage):
-    protocolId = 4258
+class ExchangeMultiCraftSetCrafterCanUseHisRessourcesMessage(NetworkMessage):
     allow:bool
     
     

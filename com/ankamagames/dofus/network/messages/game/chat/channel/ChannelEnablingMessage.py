@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ChannelEnablingMessage(INetworkMessage):
-    protocolId = 499
+class ChannelEnablingMessage(NetworkMessage):
     channel:int
     enable:bool
     

@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.data.items.effects.ObjectEffect im
 
 
 class ObjectEffectDice(ObjectEffect):
-    protocolId = 1048
     diceNum:int
     diceSide:int
     diceConst:int

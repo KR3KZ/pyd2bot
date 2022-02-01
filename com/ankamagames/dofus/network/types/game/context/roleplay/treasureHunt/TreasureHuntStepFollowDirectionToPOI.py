@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.treasureHunt.Trea
 
 
 class TreasureHuntStepFollowDirectionToPOI(TreasureHuntStep):
-    protocolId = 2093
     direction:int
     poiLabelId:int
     

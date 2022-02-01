@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeHandleMountsMessage(INetworkMessage):
-    protocolId = 9421
+class ExchangeHandleMountsMessage(NetworkMessage):
     actionType:int
-    ridesId:int
+    ridesId:list[int]
     
     

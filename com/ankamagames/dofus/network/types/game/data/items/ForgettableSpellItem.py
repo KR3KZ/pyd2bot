@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.data.items.SpellItem import SpellI
 
 
 class ForgettableSpellItem(SpellItem):
-    protocolId = 2497
     available:bool
     
     

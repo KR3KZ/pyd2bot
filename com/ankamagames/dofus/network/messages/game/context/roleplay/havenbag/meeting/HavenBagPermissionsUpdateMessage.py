@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class HavenBagPermissionsUpdateMessage(INetworkMessage):
-    protocolId = 3186
+class HavenBagPermissionsUpdateMessage(NetworkMessage):
     permissions:int
     
     

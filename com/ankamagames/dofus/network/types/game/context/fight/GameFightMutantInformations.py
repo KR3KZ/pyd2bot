@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.context.fight.GameFightFighterName
 
 
 class GameFightMutantInformations(GameFightFighterNamedInformations):
-    protocolId = 2861
     powerLevel:int
     
     

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ChatSmileyRequestMessage(INetworkMessage):
-    protocolId = 9062
+class ChatSmileyRequestMessage(NetworkMessage):
     smileyId:int
     
     

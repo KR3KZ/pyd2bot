@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class RecycledItem(INetworkMessage):
-    protocolId = 161
+class RecycledItem(NetworkMessage):
     id:int
     qty:int
     

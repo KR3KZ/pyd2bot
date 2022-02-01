@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ObjectSetPositionMessage(INetworkMessage):
-    protocolId = 5107
+class ObjectSetPositionMessage(NetworkMessage):
     objectUID:int
     position:int
     quantity:int

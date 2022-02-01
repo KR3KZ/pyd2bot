@@ -1,5 +1,6 @@
 from argparse import ArgumentError
 import os
+from com.ankamagames.dofus.network.messages.connection.IdentificationMessage import IdentificationMessage
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
@@ -56,7 +57,7 @@ class AuthentificationManager(metaclass=Singleton):
     def getCanAutoConnectWithToken(self) -> bool:
         return self.nextToken != None
 
-    def getIdentificationMessage(self, login, pwd):
+    def getIdentificationMessage(self, login, pwd) -> IdentificationMessage:
         imsg = {
             '__type__': 'IdentificationMessage',
             'autoconnect': False,

@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.actions.fight.GameActionFightDi
 
 
 class GameActionFightDispellEffectMessage(GameActionFightDispellMessage):
-    protocolId = 1560
     boostUID:int
     
     

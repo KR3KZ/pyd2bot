@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class TeleportHavenBagRequestMessage(INetworkMessage):
-    protocolId = 5838
+class TeleportHavenBagRequestMessage(NetworkMessage):
     guestId:int
     
     

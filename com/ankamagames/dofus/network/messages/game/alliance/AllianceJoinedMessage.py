@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.context.roleplay.AllianceInformations import AllianceInformations
 
 
-class AllianceJoinedMessage(INetworkMessage):
-    protocolId = 1981
+class AllianceJoinedMessage(NetworkMessage):
     allianceInfo:AllianceInformations
     enabled:bool
     leadingGuildId:int

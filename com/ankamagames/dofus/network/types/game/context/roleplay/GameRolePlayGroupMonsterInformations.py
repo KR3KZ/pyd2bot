@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.GroupMonsterStati
 
 
 class GameRolePlayGroupMonsterInformations(GameRolePlayActorInformations):
-    protocolId = 3148
     staticInfos:GroupMonsterStaticInformations
     lootShare:int
     alignmentSide:int

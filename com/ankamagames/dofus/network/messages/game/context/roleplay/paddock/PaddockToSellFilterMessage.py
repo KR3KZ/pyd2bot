@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class PaddockToSellFilterMessage(INetworkMessage):
-    protocolId = 8388
+class PaddockToSellFilterMessage(NetworkMessage):
     areaId:int
     atLeastNbMount:int
     atLeastNbMachine:int

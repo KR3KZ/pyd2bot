@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.house.HouseInformationsInside impo
 
 
 class MapComplementaryInformationsDataInHouseMessage(MapComplementaryInformationsDataMessage):
-    protocolId = 2024
     currentHouse:HouseInformationsInside
     
     

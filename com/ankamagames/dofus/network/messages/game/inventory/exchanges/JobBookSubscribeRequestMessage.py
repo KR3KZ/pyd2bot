@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class JobBookSubscribeRequestMessage(INetworkMessage):
-    protocolId = 4809
-    jobIds:int
+class JobBookSubscribeRequestMessage(NetworkMessage):
+    jobIds:list[int]
     
     

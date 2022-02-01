@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class DungeonPartyFinderAvailableDungeonsRequestMessage(INetworkMessage):
-    protocolId = 9701
+class DungeonPartyFinderAvailableDungeonsRequestMessage(NetworkMessage):
     
     

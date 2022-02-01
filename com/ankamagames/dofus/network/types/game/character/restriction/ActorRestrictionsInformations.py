@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ActorRestrictionsInformations(INetworkMessage):
-    protocolId = 8982
+class ActorRestrictionsInformations(NetworkMessage):
     cantBeAggressed:bool
     cantBeChallenged:bool
     cantTrade:bool

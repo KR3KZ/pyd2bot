@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.npc.NpcDialogC
 
 
 class PortalDialogCreationMessage(NpcDialogCreationMessage):
-    protocolId = 2919
     type:int
     
     

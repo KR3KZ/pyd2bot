@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeBidHouseTypeMessage(INetworkMessage):
-    protocolId = 4445
+class ExchangeBidHouseTypeMessage(NetworkMessage):
     type:int
     follow:bool
     

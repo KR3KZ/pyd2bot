@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class MountDataErrorMessage(INetworkMessage):
-    protocolId = 24
+class MountDataErrorMessage(NetworkMessage):
     reason:int
     
     

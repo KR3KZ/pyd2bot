@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class LockableShowCodeDialogMessage(INetworkMessage):
-    protocolId = 3045
+class LockableShowCodeDialogMessage(NetworkMessage):
     changeOrUse:bool
     codeSize:int
     

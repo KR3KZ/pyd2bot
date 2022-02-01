@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ChatAbstractClientMessage(INetworkMessage):
-    protocolId = 1037
+class ChatAbstractClientMessage(NetworkMessage):
     content:str
     
     

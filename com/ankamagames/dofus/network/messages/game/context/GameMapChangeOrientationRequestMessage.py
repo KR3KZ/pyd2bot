@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameMapChangeOrientationRequestMessage(INetworkMessage):
-    protocolId = 4770
+class GameMapChangeOrientationRequestMessage(NetworkMessage):
     direction:int
     
     

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class PaginationRequestAbstractMessage(INetworkMessage):
-    protocolId = 789
+class PaginationRequestAbstractMessage(NetworkMessage):
     offset:int
     count:int
     

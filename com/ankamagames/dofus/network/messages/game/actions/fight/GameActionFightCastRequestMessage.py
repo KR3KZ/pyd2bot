@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameActionFightCastRequestMessage(INetworkMessage):
-    protocolId = 4946
+class GameActionFightCastRequestMessage(NetworkMessage):
     spellId:int
     cellId:int
     

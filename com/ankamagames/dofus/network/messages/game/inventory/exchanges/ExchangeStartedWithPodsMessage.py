@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeSta
 
 
 class ExchangeStartedWithPodsMessage(ExchangeStartedMessage):
-    protocolId = 2123
     firstCharacterId:int
     firstCharacterCurrentWeight:int
     firstCharacterMaxWeight:int

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class CheckFileRequestMessage(INetworkMessage):
-    protocolId = 7075
+class CheckFileRequestMessage(NetworkMessage):
     filename:str
     type:int
     

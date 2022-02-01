@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.data.items.ObjectItemNotInContaine
 
 
 class ExchangeCraftResultWithObjectDescMessage(ExchangeCraftResultMessage):
-    protocolId = 118
     objectInfo:ObjectItemNotInContainer
     
     

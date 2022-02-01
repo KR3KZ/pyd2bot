@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class MountSterilizedMessage(INetworkMessage):
-    protocolId = 3777
+class MountSterilizedMessage(NetworkMessage):
     mountId:int
     
     

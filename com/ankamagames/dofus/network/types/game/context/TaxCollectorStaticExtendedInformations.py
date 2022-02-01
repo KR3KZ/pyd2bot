@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.AllianceInformati
 
 
 class TaxCollectorStaticExtendedInformations(TaxCollectorStaticInformations):
-    protocolId = 6505
     allianceIdentity:AllianceInformations
     
     

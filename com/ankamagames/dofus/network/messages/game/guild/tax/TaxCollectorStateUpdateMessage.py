@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class TaxCollectorStateUpdateMessage(INetworkMessage):
-    protocolId = 7095
+class TaxCollectorStateUpdateMessage(NetworkMessage):
     uniqueId:int
     state:int
     

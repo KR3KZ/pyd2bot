@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeSellMessage(INetworkMessage):
-    protocolId = 5196
+class ExchangeSellMessage(NetworkMessage):
     objectToSellId:int
     quantity:int
     

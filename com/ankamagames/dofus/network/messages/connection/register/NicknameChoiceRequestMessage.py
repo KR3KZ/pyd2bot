@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class NicknameChoiceRequestMessage(INetworkMessage):
-    protocolId = 3297
+class NicknameChoiceRequestMessage(NetworkMessage):
     nickname:str
     
     

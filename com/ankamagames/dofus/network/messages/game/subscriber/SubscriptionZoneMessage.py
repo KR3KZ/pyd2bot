@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class SubscriptionZoneMessage(INetworkMessage):
-    protocolId = 3082
+class SubscriptionZoneMessage(NetworkMessage):
     active:bool
     
     

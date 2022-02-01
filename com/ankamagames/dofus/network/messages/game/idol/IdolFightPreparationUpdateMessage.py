@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.idol.Idol import Idol
 
 
-class IdolFightPreparationUpdateMessage(INetworkMessage):
-    protocolId = 7338
+class IdolFightPreparationUpdateMessage(NetworkMessage):
     idolSource:int
-    idols:Idol
+    idols:list[Idol]
     
     

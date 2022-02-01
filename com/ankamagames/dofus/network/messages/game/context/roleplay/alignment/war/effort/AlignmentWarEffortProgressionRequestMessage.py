@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AlignmentWarEffortProgressionRequestMessage(INetworkMessage):
-    protocolId = 5727
+class AlignmentWarEffortProgressionRequestMessage(NetworkMessage):
     
     

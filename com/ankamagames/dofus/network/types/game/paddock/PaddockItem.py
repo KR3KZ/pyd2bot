@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.mount.ItemDurability import ItemDu
 
 
 class PaddockItem(ObjectItemInRolePlay):
-    protocolId = 5575
     durability:ItemDurability
     
     

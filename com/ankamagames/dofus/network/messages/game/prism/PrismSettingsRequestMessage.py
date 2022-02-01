@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class PrismSettingsRequestMessage(INetworkMessage):
-    protocolId = 8342
+class PrismSettingsRequestMessage(NetworkMessage):
     subAreaId:int
     startDefenseTime:int
     

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class CharacterExperienceGainMessage(INetworkMessage):
-    protocolId = 4524
+class CharacterExperienceGainMessage(NetworkMessage):
     experienceCharacter:int
     experienceMount:int
     experienceGuild:int

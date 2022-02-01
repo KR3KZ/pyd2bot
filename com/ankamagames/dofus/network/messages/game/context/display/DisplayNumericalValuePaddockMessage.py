@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class DisplayNumericalValuePaddockMessage(INetworkMessage):
-    protocolId = 5348
+class DisplayNumericalValuePaddockMessage(NetworkMessage):
     rideId:int
     value:int
     type:int

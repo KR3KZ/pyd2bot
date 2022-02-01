@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.party.PartyMember
 
 
 class PartyMemberArenaInformations(PartyMemberInformations):
-    protocolId = 2694
     rank:int
     
     

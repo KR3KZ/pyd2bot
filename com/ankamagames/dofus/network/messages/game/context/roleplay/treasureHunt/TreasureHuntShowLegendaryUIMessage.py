@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class TreasureHuntShowLegendaryUIMessage(INetworkMessage):
-    protocolId = 117
-    availableLegendaryIds:int
+class TreasureHuntShowLegendaryUIMessage(NetworkMessage):
+    availableLegendaryIds:list[int]
     
     

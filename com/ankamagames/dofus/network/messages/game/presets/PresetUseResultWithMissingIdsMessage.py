@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.presets.PresetUseResultMessage 
 
 
 class PresetUseResultWithMissingIdsMessage(PresetUseResultMessage):
-    protocolId = 2217
-    missingIds:int
+    missingIds:list[int]
     
     

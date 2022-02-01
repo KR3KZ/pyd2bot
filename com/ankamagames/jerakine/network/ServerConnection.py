@@ -22,11 +22,12 @@ from com.ankamagames.jerakine.events.IOErrorEvent import IOErrorEvent
 from com.ankamagames.jerakine.events.SecurityErrorEvent import SecurityErrorEvent
 from com.ankamagames.jerakine.network.ServerConnectionClosedMessage import ServerConnectionClosedMessage
 from com.ankamagames.jerakine.network.UnpackMode import UnpackMode
+from com.ankamagames.jerakine.network.messages.ServerConnectionFailedMessage import ServerConnectionFailedMessage
 from com.ankamagames.jerakine.network.utils.FuncTree import FuncTree
 from com.ankamagames.jerakine.utils.displays.EnterFrameConst import EnterFrameConst
 from com.ankamagames.jerakine.utils.displays.EnterFrameDispatcher import EnterFrameDispatcher
 from mx.CustomSocket.Socket import Socket
-from com.ankamagames.jerakine.messages.NetworkMessage import NetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 logger = Logger(__name__)
 
 
@@ -121,11 +122,11 @@ class ServerConnection(IServerConnection):
    def close(self) -> None:
       if self._socket.connected:
          logger.debug("[" + self._id + "] Closing socket for connection! ")
-         EnterFrameDispatcher.removeEventListener(self.onEnterFrame)
+         EnterFrameDispatcher().removeEventListener(self.onEnterFrame)
          self._socket.close()
       elif not self.checkClosed():
          logger.warn("[" + self._id + "] Tried to close a socket while it had already been disconnected.")
-         EnterFrameDispatcher.removeEventListener(self.onEnterFrame)
+         EnterFrameDispatcher().removeEventListener(self.onEnterFrame)
    
    @property
    def rawParser(self) -> RawDataParser:
@@ -290,11 +291,10 @@ class ServerConnection(IServerConnection):
       self.connect(self._remoteSrvHost, port)
    
    def addListeners(self) -> None:
-      self._socket.addEventListener(ProgressEvent.SOCKET_DATA, self.onSocketData, False, 0, True)
-      self._socket.addEventListener(BasicEvent.CONNECT,self.onConnect, False, 0, True)
-      self._socket.addEventListener(BasicEvent.CLOSE, self.onClose, False, int.MAX_VALUE, True)
-      self._socket.addEventListener(IOErrorEvent.IO_ERROR, self.onSocketError, False, 0, True)
-      self._socket.addEventListener(SecurityErrorEvent.SECURITY_ERROR, self.onSecurityError, False, 0, True)
+      self._socket.addEventListener(ProgressEvent.SOCKET_DATA, self.onSocketData, 0)
+      self._socket.addEventListener(BasicEvent.CONNECT, self.onConnect, 0)
+      self._socket.addEventListener(BasicEvent.CLOSE, self.onClose, int.MAX_VALUE)
+      self._socket.addEventListener(IOErrorEvent.IO_ERROR, self.onSocketError, 0)
       EnterFrameDispatcher().addEventListener(self.onEnterFrame, EnterFrameConst.SERVER_CONNECTION)
    
    def removeListeners(self) -> None:
@@ -305,8 +305,7 @@ class ServerConnection(IServerConnection):
       self._socket.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, self.onSecurityError)
       EnterFrameDispatcher().removeEventListener(self.onEnterFrame)
    
-   def receive(self, fromEnterFrame:bool = False) -> None:
-      input = self._socket.receive()
+   def receive(self, input:ByteArray, fromEnterFrame:bool = False) -> None:
       try:
          if input.remaining() > 0:
             if self.DEBUG_LOW_LEVEL_VERBOSE:
@@ -314,7 +313,7 @@ class ServerConnection(IServerConnection):
                   logger.info("[" + self._id + "] Handling data, byte available : " + input.remaining() + "  trigger by a timer")
                else:
                   logger.info("[" + self._id + "] Handling data, byte available : " + input.remaining())
-            msg = self.lowReceive(input)
+            msg:NetworkMessage = self.lowReceive(input)
             while msg:
                if self._lagometer:
                   self._lagometer.pong(msg)
@@ -383,6 +382,7 @@ class ServerConnection(IServerConnection):
          self._lagometer.ping(msg)
    
    def lowReceive(self, src:ByteArray) -> INetworkMessage:
+      messageLength = 0
       if not self._splittedPacket:
 
          if src.remaining() < 2:
@@ -479,7 +479,7 @@ class ServerConnection(IServerConnection):
    def onEnterFrame(self, e:Event) -> None:
       start = perf_counter()
       if self._socket.connected:
-         self.receive(True)
+         self.receive(self._socket.buff, True)
       if len(self._asyncMessages) and len(self._asyncTrees):
          while True:
             if not self._asyncTrees[0].next():
@@ -537,9 +537,9 @@ class ServerConnection(IServerConnection):
       self._staticHeader = -1
    
    def onSocketData(self, pe:ProgressEvent) -> None:
-      if DEBUG_LOW_LEVEL_VERBOSE:
+      if self.DEBUG_LOW_LEVEL_VERBOSE:
          logger.info("[" + self._id + "] Receive Event, byte available : " + self._socket.remaining())
-      self.receive(self._socket)
+      self.receive(self._socket.buff)
    
    def onSocketError(self, e:IOErrorEvent) -> None:
       if self._lagometer:
@@ -558,13 +558,5 @@ class ServerConnection(IServerConnection):
          self._firstConnectionTry = False
       else:
          logger.error("[" + self._id + "] Failure while opening socket, timeout.")
-         self._handler.process(ServerConnectionFailedMessage(self,"timeout���"))
+         self._handler.process(ServerConnectionFailedMessage(self, "timeout"))
    
-   def onSecurityError(self, see:SecurityErrorEvent) -> None:
-      if self._lagometer:
-         self._lagometer.stop()
-      if self._socket.connected:
-         logger.error("[" + self._id + "] Security error while connected : " + see.text)
-         self._handler.process(ServerConnectionFailedMessage(self,see.text))
-      else:
-         logger.error("[" + self._id + "] Security error while disconnected : " + see.text)

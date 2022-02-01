@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ObtainedItemMessage(INetworkMessage):
-    protocolId = 4201
+class ObtainedItemMessage(NetworkMessage):
     genericId:int
     baseQuantity:int
     

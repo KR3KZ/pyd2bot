@@ -1,11 +1,10 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.context.fight.GameFightSpellCooldown import GameFightSpellCooldown
 
 
-class GameFightResumeSlaveInfo(INetworkMessage):
-    protocolId = 8117
+class GameFightResumeSlaveInfo(NetworkMessage):
     slaveId:int
-    spellCooldowns:GameFightSpellCooldown
+    spellCooldowns:list[GameFightSpellCooldown]
     summonCount:int
     bombCount:int
     

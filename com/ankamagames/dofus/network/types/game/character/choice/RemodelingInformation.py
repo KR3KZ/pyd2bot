@@ -1,12 +1,11 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class RemodelingInformation(INetworkMessage):
-    protocolId = 8002
+class RemodelingInformation(NetworkMessage):
     name:str
     breed:int
     sex:bool
     cosmeticId:int
-    colors:int
+    colors:list[int]
     
     

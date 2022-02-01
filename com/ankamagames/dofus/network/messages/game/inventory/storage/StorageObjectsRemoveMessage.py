@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class StorageObjectsRemoveMessage(INetworkMessage):
-    protocolId = 7044
-    objectUIDList:int
+class StorageObjectsRemoveMessage(NetworkMessage):
+    objectUIDList:list[int]
     
     

@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.npc.TaxCollect
 
 
 class TaxCollectorDialogQuestionExtendedMessage(TaxCollectorDialogQuestionBasicMessage):
-    protocolId = 625
     maxPods:int
     prospecting:int
     wisdom:int

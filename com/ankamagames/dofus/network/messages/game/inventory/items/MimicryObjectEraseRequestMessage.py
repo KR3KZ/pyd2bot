@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class MimicryObjectEraseRequestMessage(INetworkMessage):
-    protocolId = 3575
+class MimicryObjectEraseRequestMessage(NetworkMessage):
     hostUID:int
     hostPos:int
     

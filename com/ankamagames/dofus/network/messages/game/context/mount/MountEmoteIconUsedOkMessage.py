@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class MountEmoteIconUsedOkMessage(INetworkMessage):
-    protocolId = 1654
+class MountEmoteIconUsedOkMessage(NetworkMessage):
     mountId:int
     reactionType:int
     

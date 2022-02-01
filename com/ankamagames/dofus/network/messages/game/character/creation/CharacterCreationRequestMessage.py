@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class CharacterCreationRequestMessage(INetworkMessage):
-    protocolId = 5026
+class CharacterCreationRequestMessage(NetworkMessage):
     name:str
     breed:int
     sex:bool

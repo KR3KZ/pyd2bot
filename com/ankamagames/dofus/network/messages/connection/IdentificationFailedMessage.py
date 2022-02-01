@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class IdentificationFailedMessage(INetworkMessage):
-    protocolId = 7135
+class IdentificationFailedMessage(NetworkMessage):
     reason:int
     
     

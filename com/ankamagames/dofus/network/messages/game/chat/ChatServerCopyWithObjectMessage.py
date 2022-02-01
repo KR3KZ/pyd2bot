@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.data.items.ObjectItem import Objec
 
 
 class ChatServerCopyWithObjectMessage(ChatServerCopyMessage):
-    protocolId = 9930
-    objects:ObjectItem
+    objects:list[ObjectItem]
     
     

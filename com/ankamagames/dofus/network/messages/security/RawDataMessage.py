@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class RawDataMessage(INetworkMessage):
-    protocolId = 6253
+class RawDataMessage(NetworkMessage):
     content:bytearray
     
     

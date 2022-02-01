@@ -1,12 +1,11 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.achievement.AchievementObjective import AchievementObjective
 from com.ankamagames.dofus.network.types.game.achievement.AchievementStartedObjective import AchievementStartedObjective
 
 
-class Achievement(INetworkMessage):
-    protocolId = 8621
+class Achievement(NetworkMessage):
     id:int
-    finishedObjective:AchievementObjective
-    startedObjectives:AchievementStartedObjective
+    finishedObjective:list[AchievementObjective]
+    startedObjectives:list[AchievementStartedObjective]
     
     

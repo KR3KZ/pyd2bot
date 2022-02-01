@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.breach.ExtendedBr
 
 
 class ExtendedLockedBreachBranch(ExtendedBreachBranch):
-    protocolId = 169
     unlockPrice:int
     
     

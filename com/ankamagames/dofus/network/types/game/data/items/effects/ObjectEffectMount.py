@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.data.items.effects.ObjectEffectInt
 
 
 class ObjectEffectMount(ObjectEffect):
-    protocolId = 4916
     id:int
     expirationDate:int
     model:int
@@ -12,8 +11,8 @@ class ObjectEffectMount(ObjectEffect):
     level:int
     reproductionCount:int
     reproductionCountMax:int
-    effects:ObjectEffectInteger
-    capacities:int
+    effects:list[ObjectEffectInteger]
+    capacities:list[int]
     sex:bool
     isRideable:bool
     isFeconded:bool

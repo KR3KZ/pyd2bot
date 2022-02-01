@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.actions.fight.AbstractFightDispell
 
 
 class GameActionFightDispellableEffectMessage(AbstractGameActionMessage):
-    protocolId = 9416
     effect:AbstractFightDispellableEffect
     
     

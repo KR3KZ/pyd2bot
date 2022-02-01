@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class CharacterLevelUpMessage(INetworkMessage):
-    protocolId = 6501
+class CharacterLevelUpMessage(NetworkMessage):
     newLevel:int
     
     

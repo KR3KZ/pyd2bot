@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.context.fight.FightTeamLightInformations import FightTeamLightInformations
 from com.ankamagames.dofus.network.types.game.context.fight.FightOptionsInformations import FightOptionsInformations
 
 
-class FightExternalInformations(INetworkMessage):
-    protocolId = 7149
+class FightExternalInformations(NetworkMessage):
     fightId:int
     fightType:int
     fightStart:int

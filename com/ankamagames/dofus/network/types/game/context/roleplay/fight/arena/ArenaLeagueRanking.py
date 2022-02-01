@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ArenaLeagueRanking(INetworkMessage):
-    protocolId = 2820
+class ArenaLeagueRanking(NetworkMessage):
     rank:int
     leagueId:int
     leaguePoints:int

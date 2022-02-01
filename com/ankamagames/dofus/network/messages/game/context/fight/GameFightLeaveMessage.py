@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameFightLeaveMessage(INetworkMessage):
-    protocolId = 4663
+class GameFightLeaveMessage(NetworkMessage):
     charId:int
     
     

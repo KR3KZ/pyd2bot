@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class PopupWarningMessage(INetworkMessage):
-    protocolId = 941
+class PopupWarningMessage(NetworkMessage):
     lockDuration:int
     author:str
     content:str

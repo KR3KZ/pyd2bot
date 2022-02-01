@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class SpawnInformation(INetworkMessage):
-    protocolId = 5149
+class SpawnInformation(NetworkMessage):
     
     

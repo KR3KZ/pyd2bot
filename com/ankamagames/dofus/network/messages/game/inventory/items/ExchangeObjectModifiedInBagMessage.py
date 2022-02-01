@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.data.items.ObjectItem import Objec
 
 
 class ExchangeObjectModifiedInBagMessage(ExchangeObjectMessage):
-    protocolId = 1456
     object:ObjectItem
     
     

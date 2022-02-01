@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ContactLookRequestMessage(INetworkMessage):
-    protocolId = 9165
+class ContactLookRequestMessage(NetworkMessage):
     requestId:int
     contactType:int
     

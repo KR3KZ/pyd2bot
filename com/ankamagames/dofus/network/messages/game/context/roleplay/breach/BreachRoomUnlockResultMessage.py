@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class BreachRoomUnlockResultMessage(INetworkMessage):
-    protocolId = 3212
+class BreachRoomUnlockResultMessage(NetworkMessage):
     roomId:int
     result:int
     

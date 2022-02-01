@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.character.characteristic.Character
 
 
 class CharacterUsableCharacteristicDetailed(CharacterCharacteristicDetailed):
-    protocolId = 9575
     used:int
     
     

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AccountTagInformation(INetworkMessage):
-    protocolId = 7636
+class AccountTagInformation(NetworkMessage):
     nickname:str
     tagNumber:str
     

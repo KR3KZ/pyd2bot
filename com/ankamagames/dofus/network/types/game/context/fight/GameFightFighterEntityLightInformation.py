@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.context.fight.GameFightFighterLigh
 
 
 class GameFightFighterEntityLightInformation(GameFightFighterLightInformations):
-    protocolId = 4268
     entityModelId:int
     masterId:int
     

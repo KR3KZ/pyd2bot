@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class PauseDialogMessage(INetworkMessage):
-    protocolId = 8906
+class PauseDialogMessage(NetworkMessage):
     dialogType:int
     
     

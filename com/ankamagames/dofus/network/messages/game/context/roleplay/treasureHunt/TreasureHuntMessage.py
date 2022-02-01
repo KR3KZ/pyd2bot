@@ -1,17 +1,16 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.context.roleplay.treasureHunt.TreasureHuntStep import TreasureHuntStep
 from com.ankamagames.dofus.network.types.game.context.roleplay.treasureHunt.TreasureHuntFlag import TreasureHuntFlag
 
 
-class TreasureHuntMessage(INetworkMessage):
-    protocolId = 4513
+class TreasureHuntMessage(NetworkMessage):
     questType:int
     startMapId:int
-    knownStepsList:TreasureHuntStep
+    knownStepsList:list[TreasureHuntStep]
     totalStepCount:int
     checkPointCurrent:int
     checkPointTotal:int
     availableRetryCount:int
-    flags:TreasureHuntFlag
+    flags:list[TreasureHuntFlag]
     
     

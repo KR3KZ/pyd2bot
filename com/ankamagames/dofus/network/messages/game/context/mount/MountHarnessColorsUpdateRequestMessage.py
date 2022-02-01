@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class MountHarnessColorsUpdateRequestMessage(INetworkMessage):
-    protocolId = 7947
+class MountHarnessColorsUpdateRequestMessage(NetworkMessage):
     useHarnessColors:bool
     
     

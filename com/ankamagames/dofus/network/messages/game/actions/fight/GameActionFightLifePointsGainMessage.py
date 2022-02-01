@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessa
 
 
 class GameActionFightLifePointsGainMessage(AbstractGameActionMessage):
-    protocolId = 6777
     targetId:int
     delta:int
     

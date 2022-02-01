@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.social.SocialNoticeSetRequestMe
 
 
 class AllianceBulletinSetRequestMessage(SocialNoticeSetRequestMessage):
-    protocolId = 645
     content:str
     notifyMembers:bool
     

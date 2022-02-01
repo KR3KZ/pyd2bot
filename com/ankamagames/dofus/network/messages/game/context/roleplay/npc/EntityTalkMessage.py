@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class EntityTalkMessage(INetworkMessage):
-    protocolId = 4321
+class EntityTalkMessage(NetworkMessage):
     entityId:int
     textId:int
-    parameters:str
+    parameters:list[str]
     
     

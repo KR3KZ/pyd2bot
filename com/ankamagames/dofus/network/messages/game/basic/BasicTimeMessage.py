@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class BasicTimeMessage(INetworkMessage):
-    protocolId = 7278
+class BasicTimeMessage(NetworkMessage):
     timestamp:int
     timezoneOffset:int
     

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AllianceVersatileInformations(INetworkMessage):
-    protocolId = 1207
+class AllianceVersatileInformations(NetworkMessage):
     allianceId:int
     nbGuilds:int
     nbMembers:int

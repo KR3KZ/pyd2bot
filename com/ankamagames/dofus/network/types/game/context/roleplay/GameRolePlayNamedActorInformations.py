@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.GameRolePlayActor
 
 
 class GameRolePlayNamedActorInformations(GameRolePlayActorInformations):
-    protocolId = 6660
     name:str
     
     

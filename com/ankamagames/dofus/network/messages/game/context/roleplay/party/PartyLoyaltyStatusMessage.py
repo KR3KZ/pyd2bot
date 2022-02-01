@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.party.Abstract
 
 
 class PartyLoyaltyStatusMessage(AbstractPartyMessage):
-    protocolId = 5410
     loyal:bool
     
     

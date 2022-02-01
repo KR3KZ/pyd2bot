@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.party.Abstract
 
 
 class PartyCancelInvitationMessage(AbstractPartyMessage):
-    protocolId = 7066
     guestId:int
     
     

@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessa
 
 
 class GameActionFightCarryCharacterMessage(AbstractGameActionMessage):
-    protocolId = 5643
     targetId:int
     cellId:int
     

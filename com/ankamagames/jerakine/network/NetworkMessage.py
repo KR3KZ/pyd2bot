@@ -1,6 +1,7 @@
 from types import FunctionType
 from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
 from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.utils.FuncTree import FuncTree
 
 
 class NetworkMessage(INetworkMessage):
@@ -12,19 +13,13 @@ class NetworkMessage(INetworkMessage):
    BIT_MASK:int = 3
    
    HASH_FUNCTION:FunctionType
-    
-   _instance_id:int
-   
-
-   
-   
    
    def __init__(self):
       NetworkMessage.GLOBAL_INSTANCE_ID += 1
       self._instance_id = NetworkMessage.GLOBAL_INSTANCE_ID
       self._unpacked:bool = False
-      receptionTime:int = None
-      sourceConnection:str = None
+      self.receptionTime:int = None
+      self.sourceConnection:str = None
       super().__init__()
    
    def computeTypeLen(self, length:int) -> int:
@@ -80,8 +75,8 @@ class NetworkMessage(INetworkMessage):
    def unpack(self, input:ByteArray, length:int) -> None:
       raise NotImplemented()
    
-   # def unpackAsync(self, input:ByteArray, length:int) -> FuncTree:
-   #    raise NotImplemented()
+   def unpackAsync(self, input:ByteArray, length:int) -> FuncTree:
+      raise NotImplemented()
    
    def readExternal(self, input:ByteArray) -> None:
       raise NotImplemented()

@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.character.CharacterMinimalPlusLook
 
 
 class CharacterBaseInformations(CharacterMinimalPlusLookInformations):
-    protocolId = 8097
     sex:bool
     
     

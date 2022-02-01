@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.entity.EntityInformation import EntityInformation
 
 
-class EntityInformationMessage(INetworkMessage):
-    protocolId = 7474
+class EntityInformationMessage(NetworkMessage):
     entity:EntityInformation
     
     

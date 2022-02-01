@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.interactive.InteractiveElementSkil
 
 
 class InteractiveElementNamedSkill(InteractiveElementSkill):
-    protocolId = 3340
     nameId:int
     
     

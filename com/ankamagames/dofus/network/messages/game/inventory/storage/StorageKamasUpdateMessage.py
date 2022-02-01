@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class StorageKamasUpdateMessage(INetworkMessage):
-    protocolId = 4689
+class StorageKamasUpdateMessage(NetworkMessage):
     kamasTotal:int
     
     

@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.context.fight.GameFightCharacteristics import GameFightCharacteristics
 
 
-class RefreshCharacterStatsMessage(INetworkMessage):
-    protocolId = 154
+class RefreshCharacterStatsMessage(NetworkMessage):
     fighterId:int
     stats:GameFightCharacteristics
     

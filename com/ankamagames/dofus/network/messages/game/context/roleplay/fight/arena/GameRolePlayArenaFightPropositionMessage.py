@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameRolePlayArenaFightPropositionMessage(INetworkMessage):
-    protocolId = 2533
+class GameRolePlayArenaFightPropositionMessage(NetworkMessage):
     fightId:int
-    alliesId:int
+    alliesId:list[int]
     duration:int
     
     

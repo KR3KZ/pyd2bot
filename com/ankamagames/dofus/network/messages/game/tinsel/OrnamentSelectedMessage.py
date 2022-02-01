@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class OrnamentSelectedMessage(INetworkMessage):
-    protocolId = 7637
+class OrnamentSelectedMessage(NetworkMessage):
     ornamentId:int
     
     

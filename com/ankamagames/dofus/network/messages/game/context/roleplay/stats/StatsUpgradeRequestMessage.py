@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class StatsUpgradeRequestMessage(INetworkMessage):
-    protocolId = 327
+class StatsUpgradeRequestMessage(NetworkMessage):
     useAdditionnal:bool
     statId:int
     boostPoint:int

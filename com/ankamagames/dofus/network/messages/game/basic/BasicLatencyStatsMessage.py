@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class BasicLatencyStatsMessage(INetworkMessage):
-    protocolId = 3831
+class BasicLatencyStatsMessage(NetworkMessage):
     latency:int
     sampleCount:int
     max:int

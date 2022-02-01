@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class HaapiConfirmationMessage(INetworkMessage):
-    protocolId = 5733
+class HaapiConfirmationMessage(NetworkMessage):
     kamas:int
     amount:int
     rate:int

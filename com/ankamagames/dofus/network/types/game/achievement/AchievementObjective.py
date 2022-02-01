@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AchievementObjective(INetworkMessage):
-    protocolId = 8917
+class AchievementObjective(NetworkMessage):
     id:int
     maxValue:int
     

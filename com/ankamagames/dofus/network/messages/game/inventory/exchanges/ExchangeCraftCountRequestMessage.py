@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeCraftCountRequestMessage(INetworkMessage):
-    protocolId = 7316
+class ExchangeCraftCountRequestMessage(NetworkMessage):
     count:int
     
     

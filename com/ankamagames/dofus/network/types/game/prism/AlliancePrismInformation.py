@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.AllianceInformati
 
 
 class AlliancePrismInformation(PrismInformation):
-    protocolId = 1469
     alliance:AllianceInformations
     
     

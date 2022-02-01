@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.character.characteristic.CharacterCharacteristicDetailed import CharacterCharacteristicDetailed
 
 
-class CharacterSpellModification(INetworkMessage):
-    protocolId = 4425
+class CharacterSpellModification(NetworkMessage):
     modificationType:int
     spellId:int
     value:CharacterCharacteristicDetailed

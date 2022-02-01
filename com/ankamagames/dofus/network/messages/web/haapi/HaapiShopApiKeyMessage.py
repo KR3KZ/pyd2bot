@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class HaapiShopApiKeyMessage(INetworkMessage):
-    protocolId = 6787
+class HaapiShopApiKeyMessage(NetworkMessage):
     token:str
     
     

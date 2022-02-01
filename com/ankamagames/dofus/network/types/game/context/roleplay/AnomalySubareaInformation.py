@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AnomalySubareaInformation(INetworkMessage):
-    protocolId = 8338
+class AnomalySubareaInformation(NetworkMessage):
     subAreaId:int
     rewardRate:int
     hasAnomaly:bool

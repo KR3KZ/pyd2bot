@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameRolePlaySpellAnimMessage(INetworkMessage):
-    protocolId = 8430
+class GameRolePlaySpellAnimMessage(NetworkMessage):
     casterId:int
     targetCellId:int
     spellId:int

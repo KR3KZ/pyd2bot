@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.havenbag.HavenBagRoomPreviewInformation import HavenBagRoomPreviewInformation
 
 
-class HavenBagRoomUpdateMessage(INetworkMessage):
-    protocolId = 1606
+class HavenBagRoomUpdateMessage(NetworkMessage):
     action:int
-    roomsPreview:HavenBagRoomPreviewInformation
+    roomsPreview:list[HavenBagRoomPreviewInformation]
     
     

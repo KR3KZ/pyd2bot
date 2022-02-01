@@ -3,13 +3,12 @@ from com.ankamagames.dofus.network.types.game.paddock.MountInformationsForPaddoc
 
 
 class PaddockContentInformations(PaddockInformations):
-    protocolId = 8051
     paddockId:int
     worldX:int
     worldY:int
     mapId:int
     subAreaId:int
     abandonned:bool
-    mountsInformations:MountInformationsForPaddock
+    mountsInformations:list[MountInformationsForPaddock]
     
     

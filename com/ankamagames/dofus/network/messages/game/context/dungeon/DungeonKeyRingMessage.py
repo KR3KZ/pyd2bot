@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class DungeonKeyRingMessage(INetworkMessage):
-    protocolId = 6497
-    availables:int
-    unavailables:int
+class DungeonKeyRingMessage(NetworkMessage):
+    availables:list[int]
+    unavailables:list[int]
     
     

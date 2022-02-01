@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ItemForPreset(INetworkMessage):
-    protocolId = 4107
+class ItemForPreset(NetworkMessage):
     position:int
     objGid:int
     objUid:int

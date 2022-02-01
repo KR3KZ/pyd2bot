@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.GuildInformations
 
 
 class HouseGuildedInformations(HouseInstanceInformations):
-    protocolId = 856
     guildInfo:GuildInformations
     
     

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ChallengeFightJoinRefusedMessage(INetworkMessage):
-    protocolId = 2066
+class ChallengeFightJoinRefusedMessage(NetworkMessage):
     playerId:int
     reason:int
     

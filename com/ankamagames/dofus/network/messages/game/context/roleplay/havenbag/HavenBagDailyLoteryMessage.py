@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class HavenBagDailyLoteryMessage(INetworkMessage):
-    protocolId = 2198
+class HavenBagDailyLoteryMessage(NetworkMessage):
     returnType:int
     gameActionId:str
     

@@ -1,12 +1,11 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class SelectedServerDataMessage(INetworkMessage):
-    protocolId = 3966
+class SelectedServerDataMessage(NetworkMessage):
     serverId:int
     address:str
-    ports:int
+    ports:list[int]
     canCreateNewCharacter:bool
-    ticket:int
+    ticket:list[int]
     
     

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AuthenticationTicketMessage(INetworkMessage):
-    protocolId = 9517
+class AuthenticationTicketMessage(NetworkMessage):
     lang:str
     ticket:str
     

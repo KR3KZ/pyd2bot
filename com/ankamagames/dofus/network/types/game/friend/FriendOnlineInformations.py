@@ -4,7 +4,6 @@ from com.ankamagames.dofus.network.types.game.character.status.PlayerStatus impo
 
 
 class FriendOnlineInformations(FriendInformations):
-    protocolId = 3896
     playerId:int
     playerName:str
     level:int

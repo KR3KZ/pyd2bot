@@ -3,11 +3,10 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.party.entity.Part
 
 
 class PartyInvitationMemberInformations(CharacterBaseInformations):
-    protocolId = 436
     worldX:int
     worldY:int
     mapId:int
     subAreaId:int
-    entities:PartyEntityBaseInformation
+    entities:list[PartyEntityBaseInformation]
     
     

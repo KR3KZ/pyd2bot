@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.context.fight.AbstractFightTeamInf
 
 
 class FightTeamLightInformations(AbstractFightTeamInformations):
-    protocolId = 68
     teamMembersCount:int
     meanLevel:int
     hasFriend:bool

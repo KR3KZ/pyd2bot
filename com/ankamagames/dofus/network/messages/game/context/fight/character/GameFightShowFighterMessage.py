@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.context.fight.GameFightFighterInformations import GameFightFighterInformations
 
 
-class GameFightShowFighterMessage(INetworkMessage):
-    protocolId = 2781
+class GameFightShowFighterMessage(NetworkMessage):
     informations:GameFightFighterInformations
     
     

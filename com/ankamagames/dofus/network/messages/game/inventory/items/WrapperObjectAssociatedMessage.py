@@ -2,6 +2,5 @@ from com.ankamagames.dofus.network.messages.game.inventory.items.SymbioticObject
 
 
 class WrapperObjectAssociatedMessage(SymbioticObjectAssociatedMessage):
-    protocolId = 3987
     
     

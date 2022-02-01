@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.house.HouseInstanceInformations im
 
 
 class AccountHouseInformations(HouseInformations):
-    protocolId = 3170
     houseInfos:HouseInstanceInformations
     worldX:int
     worldY:int

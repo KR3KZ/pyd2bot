@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ObjectsDeletedMessage(INetworkMessage):
-    protocolId = 9871
-    objectUID:int
+class ObjectsDeletedMessage(NetworkMessage):
+    objectUID:list[int]
     
     

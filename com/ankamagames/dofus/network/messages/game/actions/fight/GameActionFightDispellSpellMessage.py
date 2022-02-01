@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.actions.fight.GameActionFightDi
 
 
 class GameActionFightDispellSpellMessage(GameActionFightDispellMessage):
-    protocolId = 6878
     spellId:int
     
     

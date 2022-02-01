@@ -2,6 +2,5 @@ from com.ankamagames.dofus.network.messages.game.actions.fight.GameActionFightDi
 
 
 class GameActionFightTriggerEffectMessage(GameActionFightDispellEffectMessage):
-    protocolId = 6409
     
     

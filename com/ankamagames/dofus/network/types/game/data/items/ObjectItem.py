@@ -3,10 +3,9 @@ from com.ankamagames.dofus.network.types.game.data.items.effects.ObjectEffect im
 
 
 class ObjectItem(Item):
-    protocolId = 2916
     position:int
     objectGID:int
-    effects:ObjectEffect
+    effects:list[ObjectEffect]
     objectUID:int
     quantity:int
     

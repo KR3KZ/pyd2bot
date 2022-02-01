@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class BreachInvitationRequestMessage(INetworkMessage):
-    protocolId = 7544
-    guests:int
+class BreachInvitationRequestMessage(NetworkMessage):
+    guests:list[int]
     
     

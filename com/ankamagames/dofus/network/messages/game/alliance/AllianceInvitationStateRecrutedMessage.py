@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AllianceInvitationStateRecrutedMessage(INetworkMessage):
-    protocolId = 7918
+class AllianceInvitationStateRecrutedMessage(NetworkMessage):
     invitationState:int
     
     

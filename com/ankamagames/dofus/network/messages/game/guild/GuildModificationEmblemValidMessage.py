@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.guild.GuildEmblem import GuildEmblem
 
 
-class GuildModificationEmblemValidMessage(INetworkMessage):
-    protocolId = 3249
+class GuildModificationEmblemValidMessage(NetworkMessage):
     guildEmblem:GuildEmblem
     
     

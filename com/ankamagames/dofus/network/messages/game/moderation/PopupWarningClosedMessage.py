@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class PopupWarningClosedMessage(INetworkMessage):
-    protocolId = 863
+class PopupWarningClosedMessage(NetworkMessage):
     
     

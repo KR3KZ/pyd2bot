@@ -2,6 +2,5 @@ from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeObj
 
 
 class ExchangeObjectModifyPricedMessage(ExchangeObjectMovePricedMessage):
-    protocolId = 3929
     
     

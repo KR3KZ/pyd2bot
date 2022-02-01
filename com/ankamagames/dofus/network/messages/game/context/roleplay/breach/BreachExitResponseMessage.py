@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class BreachExitResponseMessage(INetworkMessage):
-    protocolId = 7143
+class BreachExitResponseMessage(NetworkMessage):
     exited:bool
     
     

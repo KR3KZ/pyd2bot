@@ -2,6 +2,5 @@ from com.ankamagames.dofus.network.messages.game.social.SocialNoticeSetErrorMess
 
 
 class GuildBulletinSetErrorMessage(SocialNoticeSetErrorMessage):
-    protocolId = 1255
     
     

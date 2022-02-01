@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.character.AbstractCharacterInforma
 
 
 class CharacterBasicMinimalInformations(AbstractCharacterInformation):
-    protocolId = 4480
     name:str
     
     

@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class SellerBuyerDescriptor(INetworkMessage):
-    protocolId = 5475
-    quantities:int
-    types:int
+class SellerBuyerDescriptor(NetworkMessage):
+    quantities:list[int]
+    types:list[int]
     taxPercentage:int
     taxModificationPercentage:int
     maxItemLevel:int

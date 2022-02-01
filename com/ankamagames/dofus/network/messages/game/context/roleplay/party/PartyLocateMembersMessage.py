@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.party.PartyMember
 
 
 class PartyLocateMembersMessage(AbstractPartyMessage):
-    protocolId = 3205
-    geopositions:PartyMemberGeoPosition
+    geopositions:list[PartyMemberGeoPosition]
     
     

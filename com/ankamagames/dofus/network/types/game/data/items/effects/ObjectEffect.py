@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ObjectEffect(INetworkMessage):
-    protocolId = 5685
+class ObjectEffect(NetworkMessage):
     actionId:int
     
     

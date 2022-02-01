@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeBidHouseBuyResultMessage(INetworkMessage):
-    protocolId = 3743
+class ExchangeBidHouseBuyResultMessage(NetworkMessage):
     uid:int
     bought:bool
     

@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.character.status.PlayerStatus impo
 
 
 class PlayerStatusExtended(PlayerStatus):
-    protocolId = 1176
     message:str
     
     

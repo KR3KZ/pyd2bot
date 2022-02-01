@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.dialog.LeaveDialogMessage impor
 
 
 class ExchangeLeaveMessage(LeaveDialogMessage):
-    protocolId = 8813
     success:bool
     
     

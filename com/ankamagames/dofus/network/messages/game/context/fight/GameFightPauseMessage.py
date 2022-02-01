@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameFightPauseMessage(INetworkMessage):
-    protocolId = 8818
+class GameFightPauseMessage(NetworkMessage):
     isPaused:bool
     
     

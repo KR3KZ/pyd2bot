@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeMountsPaddockRemoveMessage(INetworkMessage):
-    protocolId = 2113
-    mountsId:int
+class ExchangeMountsPaddockRemoveMessage(NetworkMessage):
+    mountsId:list[int]
     
     

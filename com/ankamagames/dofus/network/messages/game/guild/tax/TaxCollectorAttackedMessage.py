@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.context.roleplay.BasicGuildInformations import BasicGuildInformations
 
 
-class TaxCollectorAttackedMessage(INetworkMessage):
-    protocolId = 4728
+class TaxCollectorAttackedMessage(NetworkMessage):
     firstNameId:int
     lastNameId:int
     worldX:int

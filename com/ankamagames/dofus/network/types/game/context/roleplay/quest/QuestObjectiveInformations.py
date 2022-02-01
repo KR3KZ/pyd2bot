@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class QuestObjectiveInformations(INetworkMessage):
-    protocolId = 4677
+class QuestObjectiveInformations(NetworkMessage):
     objectiveId:int
     objectiveStatus:bool
-    dialogParams:str
+    dialogParams:list[str]
     
     

@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.data.items.effects.ObjectEffect im
 
 
 class ObjectEffectCreature(ObjectEffect):
-    protocolId = 8829
     monsterFamilyId:int
     
     

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ShortcutBarRemoveRequestMessage(INetworkMessage):
-    protocolId = 906
+class ShortcutBarRemoveRequestMessage(NetworkMessage):
     barType:int
     slot:int
     

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class BasicDateMessage(INetworkMessage):
-    protocolId = 4911
+class BasicDateMessage(NetworkMessage):
     day:int
     month:int
     year:int

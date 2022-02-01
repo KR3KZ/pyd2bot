@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class RecycleResultMessage(INetworkMessage):
-    protocolId = 2853
+class RecycleResultMessage(NetworkMessage):
     nuggetsForPrism:int
     nuggetsForPlayer:int
     

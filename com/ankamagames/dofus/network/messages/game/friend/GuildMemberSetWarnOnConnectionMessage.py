@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GuildMemberSetWarnOnConnectionMessage(INetworkMessage):
-    protocolId = 4147
+class GuildMemberSetWarnOnConnectionMessage(NetworkMessage):
     enable:bool
     
     

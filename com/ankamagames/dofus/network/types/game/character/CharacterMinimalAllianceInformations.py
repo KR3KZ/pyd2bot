@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.BasicAllianceInfo
 
 
 class CharacterMinimalAllianceInformations(CharacterMinimalGuildInformations):
-    protocolId = 4354
     alliance:BasicAllianceInformations
     
     

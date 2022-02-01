@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class LeaveDialogMessage(INetworkMessage):
-    protocolId = 2209
+class LeaveDialogMessage(NetworkMessage):
     dialogType:int
     
     

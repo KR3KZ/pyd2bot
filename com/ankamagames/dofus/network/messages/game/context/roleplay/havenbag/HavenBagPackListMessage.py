@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class HavenBagPackListMessage(INetworkMessage):
-    protocolId = 268
-    packIds:int
+class HavenBagPackListMessage(NetworkMessage):
+    packIds:list[int]
     
     

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameRolePlayDelayedActionMessage(INetworkMessage):
-    protocolId = 1161
+class GameRolePlayDelayedActionMessage(NetworkMessage):
     delayedCharacterId:int
     delayTypeId:int
     delayEndTime:int

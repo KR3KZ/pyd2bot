@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.fight.ProtectedEntityWaitingForHel
 
 
 class TaxCollectorWaitingForHelpInformations(TaxCollectorComplementaryInformations):
-    protocolId = 3199
     waitingForHelpInfo:ProtectedEntityWaitingForHelpInfo
     
     

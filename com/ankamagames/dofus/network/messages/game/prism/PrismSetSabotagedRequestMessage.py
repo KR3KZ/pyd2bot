@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class PrismSetSabotagedRequestMessage(INetworkMessage):
-    protocolId = 1746
+class PrismSetSabotagedRequestMessage(NetworkMessage):
     subAreaId:int
     
     

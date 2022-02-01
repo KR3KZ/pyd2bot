@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.context.fight.FightResultAdditiona
 
 
 class FightResultPvpData(FightResultAdditionalData):
-    protocolId = 9919
     grade:int
     minHonorForGrade:int
     maxHonorForGrade:int

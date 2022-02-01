@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class PurchasableDialogMessage(INetworkMessage):
-    protocolId = 582
+class PurchasableDialogMessage(NetworkMessage):
     purchasableId:int
     purchasableInstanceId:int
     price:int

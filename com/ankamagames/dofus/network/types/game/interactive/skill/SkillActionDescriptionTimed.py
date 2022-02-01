@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.interactive.skill.SkillActionDescr
 
 
 class SkillActionDescriptionTimed(SkillActionDescription):
-    protocolId = 9286
     time:int
     
     

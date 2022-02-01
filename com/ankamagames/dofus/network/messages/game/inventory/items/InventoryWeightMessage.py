@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class InventoryWeightMessage(INetworkMessage):
-    protocolId = 3751
+class InventoryWeightMessage(NetworkMessage):
     inventoryWeight:int
     shopWeight:int
     weightMax:int

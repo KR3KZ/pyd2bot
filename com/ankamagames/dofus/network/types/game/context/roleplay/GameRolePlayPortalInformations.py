@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.treasureHunt.Port
 
 
 class GameRolePlayPortalInformations(GameRolePlayActorInformations):
-    protocolId = 8125
     portal:PortalInformation
     
     

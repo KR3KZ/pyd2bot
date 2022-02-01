@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AllianceFactsErrorMessage(INetworkMessage):
-    protocolId = 8954
+class AllianceFactsErrorMessage(NetworkMessage):
     allianceId:int
     
     

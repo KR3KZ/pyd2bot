@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class IdolPartyLostMessage(INetworkMessage):
-    protocolId = 7502
+class IdolPartyLostMessage(NetworkMessage):
     idolId:int
     
     

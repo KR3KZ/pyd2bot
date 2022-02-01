@@ -11,7 +11,7 @@ from com.ankamagames.jerakine.network.MultiConnection import MultiConnection
 logger = Logger(__name__)
 
 
-class ConnectionHander:
+class ConnectionsHandler:
 
    GAME_SERVER:str = "game_server"
 
@@ -174,7 +174,7 @@ class ConnectionHander:
       elif proxy != None:
          conn = ProxyedServerConnection(proxy,None,0,id)
       else:
-         conn = ServerConnection(None,0,id)
+         conn = ServerConnection(None, 0, id)
       if not cls._currentConnection:
          cls.createConnection()
       conn.lagometer = LagometerAck()

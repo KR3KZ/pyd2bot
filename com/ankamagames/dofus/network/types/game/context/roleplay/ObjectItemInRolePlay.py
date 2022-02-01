@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ObjectItemInRolePlay(INetworkMessage):
-    protocolId = 4848
+class ObjectItemInRolePlay(NetworkMessage):
     cellId:int
     objectGID:int
     

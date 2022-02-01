@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.character.alignment.ActorAlignment
 
 
 class GameRolePlayCharacterInformations(GameRolePlayHumanoidInformations):
-    protocolId = 9532
     alignmentInfos:ActorAlignmentInformations
     
     

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeBidHousePriceMessage(INetworkMessage):
-    protocolId = 8992
+class ExchangeBidHousePriceMessage(NetworkMessage):
     genId:int
     
     

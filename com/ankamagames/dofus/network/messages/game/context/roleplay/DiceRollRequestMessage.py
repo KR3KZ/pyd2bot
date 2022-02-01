@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class DiceRollRequestMessage(INetworkMessage):
-    protocolId = 932
+class DiceRollRequestMessage(NetworkMessage):
     dice:int
     faces:int
     channel:int

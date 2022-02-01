@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.character.CharacterMinimalPlusLookInformations import CharacterMinimalPlusLookInformations
 
 
-class GuildFightPlayersEnemiesListMessage(INetworkMessage):
-    protocolId = 9360
+class GuildFightPlayersEnemiesListMessage(NetworkMessage):
     fightId:int
-    playerInfo:CharacterMinimalPlusLookInformations
+    playerInfo:list[CharacterMinimalPlusLookInformations]
     
     

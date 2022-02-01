@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.paddock.PaddockBuyableInformations
 
 
 class PaddockInstancesInformations(PaddockInformations):
-    protocolId = 3435
-    paddocks:PaddockBuyableInformations
+    paddocks:list[PaddockBuyableInformations]
     
     

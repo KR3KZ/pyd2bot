@@ -1,12 +1,11 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class DecraftedItemStackInfo(INetworkMessage):
-    protocolId = 8215
+class DecraftedItemStackInfo(NetworkMessage):
     objectUID:int
     bonusMin:int
     bonusMax:int
-    runesId:int
-    runesQty:int
+    runesId:list[int]
+    runesQty:list[int]
     
     

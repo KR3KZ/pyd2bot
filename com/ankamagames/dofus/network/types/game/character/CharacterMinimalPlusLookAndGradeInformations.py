@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.character.CharacterMinimalPlusLook
 
 
 class CharacterMinimalPlusLookAndGradeInformations(CharacterMinimalPlusLookInformations):
-    protocolId = 7522
     grade:int
     
     

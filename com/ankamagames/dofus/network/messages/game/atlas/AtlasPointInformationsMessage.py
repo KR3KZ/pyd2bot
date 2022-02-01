@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.context.roleplay.AtlasPointsInformations import AtlasPointsInformations
 
 
-class AtlasPointInformationsMessage(INetworkMessage):
-    protocolId = 6676
+class AtlasPointInformationsMessage(NetworkMessage):
     type:AtlasPointsInformations
     
     

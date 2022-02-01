@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.context.fight.FightResultListEntry
 
 
 class FightResultFighterListEntry(FightResultListEntry):
-    protocolId = 4819
     id:int
     alive:bool
     

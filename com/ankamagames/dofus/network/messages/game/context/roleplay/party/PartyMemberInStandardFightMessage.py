@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.context.MapCoordinatesExtended imp
 
 
 class PartyMemberInStandardFightMessage(AbstractPartyMemberInFightMessage):
-    protocolId = 6653
     fightMap:MapCoordinatesExtended
     
     

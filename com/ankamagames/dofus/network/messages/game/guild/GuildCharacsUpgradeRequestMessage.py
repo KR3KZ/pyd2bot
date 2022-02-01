@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GuildCharacsUpgradeRequestMessage(INetworkMessage):
-    protocolId = 3240
+class GuildCharacsUpgradeRequestMessage(NetworkMessage):
     charaTypeTarget:int
     
     

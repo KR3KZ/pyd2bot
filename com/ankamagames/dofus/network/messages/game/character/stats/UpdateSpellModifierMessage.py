@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.character.characteristic.CharacterSpellModification import CharacterSpellModification
 
 
-class UpdateSpellModifierMessage(INetworkMessage):
-    protocolId = 1672
+class UpdateSpellModifierMessage(NetworkMessage):
     actorId:int
     spellModifier:CharacterSpellModification
     

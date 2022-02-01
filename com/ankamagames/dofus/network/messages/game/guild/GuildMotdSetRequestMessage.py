@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.social.SocialNoticeSetRequestMe
 
 
 class GuildMotdSetRequestMessage(SocialNoticeSetRequestMessage):
-    protocolId = 3391
     content:str
     
     

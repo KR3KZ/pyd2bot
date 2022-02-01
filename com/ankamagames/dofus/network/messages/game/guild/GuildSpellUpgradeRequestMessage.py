@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GuildSpellUpgradeRequestMessage(INetworkMessage):
-    protocolId = 8207
+class GuildSpellUpgradeRequestMessage(NetworkMessage):
     spellId:int
     
     

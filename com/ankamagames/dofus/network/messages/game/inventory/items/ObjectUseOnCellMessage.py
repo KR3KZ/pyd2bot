@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.inventory.items.ObjectUseMessag
 
 
 class ObjectUseOnCellMessage(ObjectUseMessage):
-    protocolId = 5623
     cells:int
     
     

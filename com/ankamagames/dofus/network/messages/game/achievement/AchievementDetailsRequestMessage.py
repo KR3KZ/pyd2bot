@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AchievementDetailsRequestMessage(INetworkMessage):
-    protocolId = 5136
+class AchievementDetailsRequestMessage(NetworkMessage):
     achievementId:int
     
     

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class CompassResetMessage(INetworkMessage):
-    protocolId = 4432
+class CompassResetMessage(NetworkMessage):
     type:int
     
     

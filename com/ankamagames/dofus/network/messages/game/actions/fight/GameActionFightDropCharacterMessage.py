@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessa
 
 
 class GameActionFightDropCharacterMessage(AbstractGameActionMessage):
-    protocolId = 2160
     targetId:int
     cellId:int
     

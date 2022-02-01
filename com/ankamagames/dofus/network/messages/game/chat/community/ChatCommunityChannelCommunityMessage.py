@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ChatCommunityChannelCommunityMessage(INetworkMessage):
-    protocolId = 9671
+class ChatCommunityChannelCommunityMessage(NetworkMessage):
     communityId:int
     
     

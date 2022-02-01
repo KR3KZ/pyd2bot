@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class OpenHavenBagFurnitureSequenceRequestMessage(INetworkMessage):
-    protocolId = 3811
+class OpenHavenBagFurnitureSequenceRequestMessage(NetworkMessage):
     
     

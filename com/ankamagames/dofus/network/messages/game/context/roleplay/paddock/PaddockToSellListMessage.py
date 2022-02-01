@@ -1,11 +1,10 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.paddock.PaddockInformationsForSell import PaddockInformationsForSell
 
 
-class PaddockToSellListMessage(INetworkMessage):
-    protocolId = 3451
+class PaddockToSellListMessage(NetworkMessage):
     pageIndex:int
     totalPage:int
-    paddockList:PaddockInformationsForSell
+    paddockList:list[PaddockInformationsForSell]
     
     

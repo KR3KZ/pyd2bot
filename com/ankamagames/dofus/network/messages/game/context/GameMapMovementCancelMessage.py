@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameMapMovementCancelMessage(INetworkMessage):
-    protocolId = 4409
+class GameMapMovementCancelMessage(NetworkMessage):
     cellId:int
     
     

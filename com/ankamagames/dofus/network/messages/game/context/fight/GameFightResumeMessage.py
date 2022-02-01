@@ -3,8 +3,7 @@ from com.ankamagames.dofus.network.types.game.context.fight.GameFightSpellCooldo
 
 
 class GameFightResumeMessage(GameFightSpectateMessage):
-    protocolId = 4566
-    spellCooldowns:GameFightSpellCooldown
+    spellCooldowns:list[GameFightSpellCooldown]
     summonCount:int
     bombCount:int
     

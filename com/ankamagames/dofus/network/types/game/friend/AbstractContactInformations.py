@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.common.AccountTagInformation import AccountTagInformation
 
 
-class AbstractContactInformations(INetworkMessage):
-    protocolId = 6684
+class AbstractContactInformations(NetworkMessage):
     accountId:int
     accountTag:AccountTagInformation
     

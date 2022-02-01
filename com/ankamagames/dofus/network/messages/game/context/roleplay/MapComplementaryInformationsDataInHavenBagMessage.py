@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.character.CharacterMinimalInformat
 
 
 class MapComplementaryInformationsDataInHavenBagMessage(MapComplementaryInformationsDataMessage):
-    protocolId = 3738
     ownerInformations:CharacterMinimalInformations
     theme:int
     roomId:int

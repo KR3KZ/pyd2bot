@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class HaapiSessionMessage(INetworkMessage):
-    protocolId = 5486
+class HaapiSessionMessage(NetworkMessage):
     key:str
     type:int
     

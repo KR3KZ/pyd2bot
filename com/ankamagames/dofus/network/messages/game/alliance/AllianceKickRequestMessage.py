@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AllianceKickRequestMessage(INetworkMessage):
-    protocolId = 1648
+class AllianceKickRequestMessage(NetworkMessage):
     kickedId:int
     
     

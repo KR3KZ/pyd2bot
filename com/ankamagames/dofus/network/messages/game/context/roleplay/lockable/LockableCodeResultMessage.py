@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class LockableCodeResultMessage(INetworkMessage):
-    protocolId = 3222
+class LockableCodeResultMessage(NetworkMessage):
     result:int
     
     

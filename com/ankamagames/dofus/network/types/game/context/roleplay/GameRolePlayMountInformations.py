@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.GameRolePlayNamed
 
 
 class GameRolePlayMountInformations(GameRolePlayNamedActorInformations):
-    protocolId = 9304
     ownerName:str
     level:int
     

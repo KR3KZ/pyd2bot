@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.data.items.ObjectEffects import Ob
 
 
 class ObjectItemQuantityPriceDateEffects(ObjectItemGenericQuantity):
-    protocolId = 7217
     price:int
     effects:ObjectEffects
     date:int

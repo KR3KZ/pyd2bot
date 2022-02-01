@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class TreasureHuntAvailableRetryCountUpdateMessage(INetworkMessage):
-    protocolId = 3416
+class TreasureHuntAvailableRetryCountUpdateMessage(NetworkMessage):
     questType:int
     availableRetryCount:int
     

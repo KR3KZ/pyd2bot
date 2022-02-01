@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.context.fight.GameFightTurnStar
 
 
 class GameFightTurnResumeMessage(GameFightTurnStartMessage):
-    protocolId = 9827
     remainingTime:int
     
     

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GuildChangeMemberParametersMessage(INetworkMessage):
-    protocolId = 3633
+class GuildChangeMemberParametersMessage(NetworkMessage):
     memberId:int
     rank:int
     experienceGivenPercent:int

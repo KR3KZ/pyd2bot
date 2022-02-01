@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameMapNoMovementMessage(INetworkMessage):
-    protocolId = 8791
+class GameMapNoMovementMessage(NetworkMessage):
     cellX:int
     cellY:int
     

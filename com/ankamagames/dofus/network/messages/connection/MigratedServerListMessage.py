@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class MigratedServerListMessage(INetworkMessage):
-    protocolId = 970
-    migratedServerIds:int
+class MigratedServerListMessage(NetworkMessage):
+    migratedServerIds:list[int]
     
     

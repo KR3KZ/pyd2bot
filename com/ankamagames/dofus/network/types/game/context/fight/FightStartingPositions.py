@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class FightStartingPositions(INetworkMessage):
-    protocolId = 9707
-    positionsForChallengers:int
-    positionsForDefenders:int
+class FightStartingPositions(NetworkMessage):
+    positionsForChallengers:list[int]
+    positionsForDefenders:list[int]
     
     

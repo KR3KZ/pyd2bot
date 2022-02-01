@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.prism.PrismInformation import Pris
 
 
 class GameRolePlayPrismInformations(GameRolePlayActorInformations):
-    protocolId = 6265
     prism:PrismInformation
     
     

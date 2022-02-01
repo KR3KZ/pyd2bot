@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AllianceLeftMessage(INetworkMessage):
-    protocolId = 1278
+class AllianceLeftMessage(NetworkMessage):
     
     

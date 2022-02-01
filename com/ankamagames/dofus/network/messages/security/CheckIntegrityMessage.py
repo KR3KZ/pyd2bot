@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class CheckIntegrityMessage(INetworkMessage):
-    protocolId = 1296
-    data:int
+class CheckIntegrityMessage(NetworkMessage):
+    data:list[int]
     
     

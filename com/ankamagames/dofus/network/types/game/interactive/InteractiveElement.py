@@ -1,14 +1,13 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.interactive.InteractiveElementSkill import InteractiveElementSkill
 from com.ankamagames.dofus.network.types.game.interactive.InteractiveElementSkill import InteractiveElementSkill
 
 
-class InteractiveElement(INetworkMessage):
-    protocolId = 4768
+class InteractiveElement(NetworkMessage):
     elementId:int
     elementTypeId:int
-    enabledSkills:InteractiveElementSkill
-    disabledSkills:InteractiveElementSkill
+    enabledSkills:list[InteractiveElementSkill]
+    disabledSkills:list[InteractiveElementSkill]
     onCurrentMap:bool
     
     

@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class BasicAckMessage(INetworkMessage):
-    protocolId = 45
+class BasicAckMessage(NetworkMessage):
     seq:int
     lastPacketId:int
     

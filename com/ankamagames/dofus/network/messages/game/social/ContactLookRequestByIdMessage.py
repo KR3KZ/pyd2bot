@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.social.ContactLookRequestMessag
 
 
 class ContactLookRequestByIdMessage(ContactLookRequestMessage):
-    protocolId = 7749
     playerId:int
     
     

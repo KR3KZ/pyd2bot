@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class TeleportToBuddyOfferMessage(INetworkMessage):
-    protocolId = 4009
+class TeleportToBuddyOfferMessage(NetworkMessage):
     dungeonId:int
     buddyId:int
     timeLeft:int

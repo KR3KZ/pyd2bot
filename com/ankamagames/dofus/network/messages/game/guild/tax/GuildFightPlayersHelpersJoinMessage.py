@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.character.CharacterMinimalPlusLookInformations import CharacterMinimalPlusLookInformations
 
 
-class GuildFightPlayersHelpersJoinMessage(INetworkMessage):
-    protocolId = 4751
+class GuildFightPlayersHelpersJoinMessage(NetworkMessage):
     fightId:int
     playerInfo:CharacterMinimalPlusLookInformations
     

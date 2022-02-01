@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.party.Abstract
 
 
 class PartyLeaderUpdateMessage(AbstractPartyEventMessage):
-    protocolId = 4003
     partyLeaderId:int
     
     

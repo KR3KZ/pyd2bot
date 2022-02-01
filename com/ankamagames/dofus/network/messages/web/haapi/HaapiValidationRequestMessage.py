@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class HaapiValidationRequestMessage(INetworkMessage):
-    protocolId = 3931
+class HaapiValidationRequestMessage(NetworkMessage):
     transaction:str
     
     

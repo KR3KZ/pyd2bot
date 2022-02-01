@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.social.GuildFactSheetInformations 
 
 
 class GuildInsiderFactSheetInformations(GuildFactSheetInformations):
-    protocolId = 8132
     leaderName:str
     nbConnectedMembers:int
     nbTaxCollectors:int

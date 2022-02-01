@@ -3,10 +3,9 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.breach.BreachBran
 
 
 class MapComplementaryInformationsBreachMessage(MapComplementaryInformationsDataMessage):
-    protocolId = 6429
     floor:int
     room:int
     infinityMode:int
-    branches:BreachBranch
+    branches:list[BreachBranch]
     
     

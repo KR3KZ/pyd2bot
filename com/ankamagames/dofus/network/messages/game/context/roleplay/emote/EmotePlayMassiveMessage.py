@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.emote.EmotePla
 
 
 class EmotePlayMassiveMessage(EmotePlayAbstractMessage):
-    protocolId = 7780
-    actorIds:int
+    actorIds:list[int]
     
     

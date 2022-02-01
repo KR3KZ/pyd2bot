@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ClientUIOpenedMessage(INetworkMessage):
-    protocolId = 7354
+class ClientUIOpenedMessage(NetworkMessage):
     type:int
     
     

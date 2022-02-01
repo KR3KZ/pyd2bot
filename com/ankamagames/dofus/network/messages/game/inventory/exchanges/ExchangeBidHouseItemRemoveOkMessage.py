@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeBidHouseItemRemoveOkMessage(INetworkMessage):
-    protocolId = 5455
+class ExchangeBidHouseItemRemoveOkMessage(NetworkMessage):
     sellerId:int
     
     

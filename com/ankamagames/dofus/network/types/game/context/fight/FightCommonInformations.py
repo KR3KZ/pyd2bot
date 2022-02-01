@@ -1,14 +1,13 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.context.fight.FightTeamInformations import FightTeamInformations
 from com.ankamagames.dofus.network.types.game.context.fight.FightOptionsInformations import FightOptionsInformations
 
 
-class FightCommonInformations(INetworkMessage):
-    protocolId = 5008
+class FightCommonInformations(NetworkMessage):
     fightId:int
     fightType:int
-    fightTeams:FightTeamInformations
-    fightTeamsPositions:int
-    fightTeamsOptions:FightOptionsInformations
+    fightTeams:list[FightTeamInformations]
+    fightTeamsPositions:list[int]
+    fightTeamsOptions:list[FightOptionsInformations]
     
     

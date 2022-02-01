@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class BasicWhoAmIRequestMessage(INetworkMessage):
-    protocolId = 1281
+class BasicWhoAmIRequestMessage(NetworkMessage):
     verbose:bool
     
     

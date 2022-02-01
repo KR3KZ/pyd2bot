@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ContactAddFailureMessage(INetworkMessage):
-    protocolId = 7999
+class ContactAddFailureMessage(NetworkMessage):
     reason:int
     
     

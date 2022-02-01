@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class PrismUseRequestMessage(INetworkMessage):
-    protocolId = 8164
+class PrismUseRequestMessage(NetworkMessage):
     moduleToUse:int
     
     

@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameFightPlacementPossiblePositionsMessage(INetworkMessage):
-    protocolId = 3019
-    positionsForChallengers:int
-    positionsForDefenders:int
+class GameFightPlacementPossiblePositionsMessage(NetworkMessage):
+    positionsForChallengers:list[int]
+    positionsForDefenders:list[int]
     teamNumber:int
     
     

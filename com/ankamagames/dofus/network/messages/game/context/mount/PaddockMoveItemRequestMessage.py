@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class PaddockMoveItemRequestMessage(INetworkMessage):
-    protocolId = 8484
+class PaddockMoveItemRequestMessage(NetworkMessage):
     oldCellId:int
     newCellId:int
     

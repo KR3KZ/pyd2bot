@@ -1,11 +1,10 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.look.EntityLook import EntityLook
 from com.ankamagames.dofus.network.types.game.character.status.PlayerStatus import PlayerStatus
 from com.ankamagames.dofus.network.types.game.context.roleplay.party.entity.PartyEntityBaseInformation import PartyEntityBaseInformation
 
 
-class PartyGuestInformations(INetworkMessage):
-    protocolId = 1057
+class PartyGuestInformations(NetworkMessage):
     guestId:int
     hostId:int
     name:str
@@ -13,6 +12,6 @@ class PartyGuestInformations(INetworkMessage):
     breed:int
     sex:bool
     status:PlayerStatus
-    entities:PartyEntityBaseInformation
+    entities:list[PartyEntityBaseInformation]
     
     

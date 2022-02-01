@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ObjectGroundRemovedMultipleMessage(INetworkMessage):
-    protocolId = 6993
-    cells:int
+class ObjectGroundRemovedMultipleMessage(NetworkMessage):
+    cells:list[int]
     
     

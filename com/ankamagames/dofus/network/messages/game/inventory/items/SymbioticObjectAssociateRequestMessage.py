@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class SymbioticObjectAssociateRequestMessage(INetworkMessage):
-    protocolId = 7604
+class SymbioticObjectAssociateRequestMessage(NetworkMessage):
     symbioteUID:int
     symbiotePos:int
     hostUID:int

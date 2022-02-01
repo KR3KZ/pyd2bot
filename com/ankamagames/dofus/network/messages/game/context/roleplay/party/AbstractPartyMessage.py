@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AbstractPartyMessage(INetworkMessage):
-    protocolId = 3299
+class AbstractPartyMessage(NetworkMessage):
     partyId:int
     
     

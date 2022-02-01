@@ -11,8 +11,8 @@ class INetworkMessage(IdentifiedMessage, QueueableMessage):
     def unpack(self, param1:ByteArray, param2:int) -> None:
         pass
 
-    # def unpackAsync(self, param1:ByteArray, param2:int) -> FuncTree:
-    #     pass
+    def unpackAsync(self, param1:ByteArray, param2:int) -> FuncTree:
+        pass
 
     @property
     def isInitialized(self) -> bool:

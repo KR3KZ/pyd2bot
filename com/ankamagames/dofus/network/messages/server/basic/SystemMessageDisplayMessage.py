@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class SystemMessageDisplayMessage(INetworkMessage):
-    protocolId = 4698
+class SystemMessageDisplayMessage(NetworkMessage):
     hangUp:bool
     msgId:int
-    parameters:str
+    parameters:list[str]
     
     

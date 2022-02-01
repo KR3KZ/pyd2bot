@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class StatisticData(INetworkMessage):
-    protocolId = 9162
+class StatisticData(NetworkMessage):
     
     

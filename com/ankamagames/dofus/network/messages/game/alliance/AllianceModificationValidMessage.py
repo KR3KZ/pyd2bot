@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.guild.GuildEmblem import GuildEmblem
 
 
-class AllianceModificationValidMessage(INetworkMessage):
-    protocolId = 4144
+class AllianceModificationValidMessage(NetworkMessage):
     allianceName:str
     allianceTag:str
     Alliancemblem:GuildEmblem

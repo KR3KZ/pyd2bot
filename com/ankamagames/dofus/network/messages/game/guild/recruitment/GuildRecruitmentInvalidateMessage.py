@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GuildRecruitmentInvalidateMessage(INetworkMessage):
-    protocolId = 5759
+class GuildRecruitmentInvalidateMessage(NetworkMessage):
     
     

@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameActionNoopMessage(INetworkMessage):
-    protocolId = 8877
+class GameActionNoopMessage(NetworkMessage):
     
     

@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.friend.IgnoredInformations import 
 
 
 class IgnoredOnlineInformations(IgnoredInformations):
-    protocolId = 7223
     playerId:int
     playerName:str
     breed:int

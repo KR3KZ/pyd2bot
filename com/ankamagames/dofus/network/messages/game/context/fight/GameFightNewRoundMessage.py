@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameFightNewRoundMessage(INetworkMessage):
-    protocolId = 1656
+class GameFightNewRoundMessage(NetworkMessage):
     roundNumber:int
     
     

@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.BasicGuildInforma
 
 
 class CharacterMinimalGuildInformations(CharacterMinimalPlusLookInformations):
-    protocolId = 4548
     guild:BasicGuildInformations
     
     

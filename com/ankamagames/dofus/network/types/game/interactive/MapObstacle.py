@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class MapObstacle(INetworkMessage):
-    protocolId = 5512
+class MapObstacle(NetworkMessage):
     obstacleCellId:int
     state:int
     

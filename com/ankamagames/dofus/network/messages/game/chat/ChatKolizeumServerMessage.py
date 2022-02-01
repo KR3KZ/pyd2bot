@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.chat.ChatServerMessage import C
 
 
 class ChatKolizeumServerMessage(ChatServerMessage):
-    protocolId = 4380
     originServerId:int
     
     

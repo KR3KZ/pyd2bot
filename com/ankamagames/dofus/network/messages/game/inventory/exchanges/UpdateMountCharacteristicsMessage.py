@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.mount.UpdateMountCharacteristic import UpdateMountCharacteristic
 
 
-class UpdateMountCharacteristicsMessage(INetworkMessage):
-    protocolId = 9937
+class UpdateMountCharacteristicsMessage(NetworkMessage):
     rideId:int
-    boostToUpdateList:UpdateMountCharacteristic
+    boostToUpdateList:list[UpdateMountCharacteristic]
     
     

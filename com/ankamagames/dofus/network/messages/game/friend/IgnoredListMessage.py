@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.friend.IgnoredInformations import IgnoredInformations
 
 
-class IgnoredListMessage(INetworkMessage):
-    protocolId = 1938
-    ignoredList:IgnoredInformations
+class IgnoredListMessage(NetworkMessage):
+    ignoredList:list[IgnoredInformations]
     
     

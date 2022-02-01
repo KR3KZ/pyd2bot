@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ShortcutBarSwapErrorMessage(INetworkMessage):
-    protocolId = 3330
+class ShortcutBarSwapErrorMessage(NetworkMessage):
     error:int
     
     

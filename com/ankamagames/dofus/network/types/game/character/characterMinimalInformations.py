@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.character.CharacterBasicMinimalInf
 
 
 class CharacterMinimalInformations(CharacterBasicMinimalInformations):
-    protocolId = 6674
     level:int
     
     

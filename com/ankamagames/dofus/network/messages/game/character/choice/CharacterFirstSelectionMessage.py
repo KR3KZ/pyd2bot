@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.character.choice.CharacterSelec
 
 
 class CharacterFirstSelectionMessage(CharacterSelectionMessage):
-    protocolId = 3196
     doTutorial:bool
     
     

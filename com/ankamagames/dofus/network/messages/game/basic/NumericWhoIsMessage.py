@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class NumericWhoIsMessage(INetworkMessage):
-    protocolId = 7592
+class NumericWhoIsMessage(NetworkMessage):
     playerId:int
     accountId:int
     

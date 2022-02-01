@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameRolePlayArenaSwitchToGameServerMessage(INetworkMessage):
-    protocolId = 651
+class GameRolePlayArenaSwitchToGameServerMessage(NetworkMessage):
     validToken:bool
-    ticket:int
+    ticket:list[int]
     homeServerId:int
     
     

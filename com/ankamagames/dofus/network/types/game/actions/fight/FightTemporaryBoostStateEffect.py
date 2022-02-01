@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.actions.fight.FightTemporaryBoostE
 
 
 class FightTemporaryBoostStateEffect(FightTemporaryBoostEffect):
-    protocolId = 8281
     stateId:int
     
     

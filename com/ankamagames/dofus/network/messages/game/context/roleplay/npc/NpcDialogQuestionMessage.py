@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class NpcDialogQuestionMessage(INetworkMessage):
-    protocolId = 8384
+class NpcDialogQuestionMessage(NetworkMessage):
     messageId:int
-    dialogParams:str
-    visibleReplies:int
+    dialogParams:list[str]
+    visibleReplies:list[int]
     
     

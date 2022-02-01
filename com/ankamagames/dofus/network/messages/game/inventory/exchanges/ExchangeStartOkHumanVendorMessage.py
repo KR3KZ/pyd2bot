@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.data.items.ObjectItemToSellInHumanVendorShop import ObjectItemToSellInHumanVendorShop
 
 
-class ExchangeStartOkHumanVendorMessage(INetworkMessage):
-    protocolId = 9011
+class ExchangeStartOkHumanVendorMessage(NetworkMessage):
     sellerId:int
-    objectsInfos:ObjectItemToSellInHumanVendorShop
+    objectsInfos:list[ObjectItemToSellInHumanVendorShop]
     
     

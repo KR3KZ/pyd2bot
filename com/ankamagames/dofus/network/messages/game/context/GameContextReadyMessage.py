@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameContextReadyMessage(INetworkMessage):
-    protocolId = 912
+class GameContextReadyMessage(NetworkMessage):
     mapId:int
     
     

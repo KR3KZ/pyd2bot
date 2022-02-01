@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class SetEnableAVARequestMessage(INetworkMessage):
-    protocolId = 3626
+class SetEnableAVARequestMessage(NetworkMessage):
     enable:bool
     
     

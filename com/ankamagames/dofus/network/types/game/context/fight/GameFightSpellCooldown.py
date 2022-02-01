@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameFightSpellCooldown(INetworkMessage):
-    protocolId = 5389
+class GameFightSpellCooldown(NetworkMessage):
     spellId:int
     cooldown:int
     

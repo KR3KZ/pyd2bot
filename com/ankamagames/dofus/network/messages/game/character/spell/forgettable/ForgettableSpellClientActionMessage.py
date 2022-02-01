@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ForgettableSpellClientActionMessage(INetworkMessage):
-    protocolId = 6523
+class ForgettableSpellClientActionMessage(NetworkMessage):
     spellId:int
     action:int
     

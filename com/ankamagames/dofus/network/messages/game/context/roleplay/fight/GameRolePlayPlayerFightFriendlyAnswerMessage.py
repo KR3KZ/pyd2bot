@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameRolePlayPlayerFightFriendlyAnswerMessage(INetworkMessage):
-    protocolId = 9468
+class GameRolePlayPlayerFightFriendlyAnswerMessage(NetworkMessage):
     fightId:int
     accept:bool
     

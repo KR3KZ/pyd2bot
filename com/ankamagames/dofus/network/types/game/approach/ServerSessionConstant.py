@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ServerSessionConstant(INetworkMessage):
-    protocolId = 7504
+class ServerSessionConstant(NetworkMessage):
     id:int
     
     

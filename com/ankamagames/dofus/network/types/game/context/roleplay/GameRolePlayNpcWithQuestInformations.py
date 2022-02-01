@@ -3,7 +3,6 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.quest.GameRolePla
 
 
 class GameRolePlayNpcWithQuestInformations(GameRolePlayNpcInformations):
-    protocolId = 3824
     questFlag:GameRolePlayNpcQuestFlag
     
     

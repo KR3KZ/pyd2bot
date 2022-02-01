@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.context.fight.SpawnInformation imp
 
 
 class SpawnCharacterInformation(SpawnInformation):
-    protocolId = 457
     name:str
     level:int
     

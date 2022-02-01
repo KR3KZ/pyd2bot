@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class SequenceNumberMessage(INetworkMessage):
-    protocolId = 1059
+class SequenceNumberMessage(NetworkMessage):
     number:int
     
     

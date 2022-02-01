@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.data.items.effects.ObjectEffect im
 
 
 class ObjectEffectString(ObjectEffect):
-    protocolId = 576
     value:str
     
     

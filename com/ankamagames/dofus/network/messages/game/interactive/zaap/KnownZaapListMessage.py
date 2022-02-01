@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class KnownZaapListMessage(INetworkMessage):
-    protocolId = 4096
-    destinations:int
+class KnownZaapListMessage(NetworkMessage):
+    destinations:list[int]
     
     

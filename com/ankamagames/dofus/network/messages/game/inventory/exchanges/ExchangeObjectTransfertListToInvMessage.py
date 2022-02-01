@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeObjectTransfertListToInvMessage(INetworkMessage):
-    protocolId = 1721
-    ids:int
+class ExchangeObjectTransfertListToInvMessage(NetworkMessage):
+    ids:list[int]
     
     

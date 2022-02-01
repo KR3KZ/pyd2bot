@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class SelectedServerRefusedMessage(INetworkMessage):
-    protocolId = 8116
+class SelectedServerRefusedMessage(NetworkMessage):
     serverId:int
     error:int
     serverStatus:int

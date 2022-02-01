@@ -2,6 +2,5 @@ from com.ankamagames.dofus.network.messages.game.social.BulletinMessage import B
 
 
 class GuildBulletinMessage(BulletinMessage):
-    protocolId = 981
     
     

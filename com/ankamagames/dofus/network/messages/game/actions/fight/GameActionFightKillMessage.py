@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessa
 
 
 class GameActionFightKillMessage(AbstractGameActionMessage):
-    protocolId = 8091
     targetId:int
     
     

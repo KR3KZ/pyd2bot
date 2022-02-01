@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.achievement.Achievement import Achievement
 
 
-class AchievementDetailsMessage(INetworkMessage):
-    protocolId = 5303
+class AchievementDetailsMessage(NetworkMessage):
     achievement:Achievement
     
     

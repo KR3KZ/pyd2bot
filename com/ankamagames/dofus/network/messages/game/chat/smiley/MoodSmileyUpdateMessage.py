@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class MoodSmileyUpdateMessage(INetworkMessage):
-    protocolId = 8249
+class MoodSmileyUpdateMessage(NetworkMessage):
     accountId:int
     playerId:int
     smileyId:int

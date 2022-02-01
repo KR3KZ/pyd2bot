@@ -1,15 +1,14 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.context.roleplay.AllianceInformations import AllianceInformations
 from com.ankamagames.dofus.network.types.game.context.roleplay.BasicAllianceInformations import BasicAllianceInformations
 
 
-class KohUpdateMessage(INetworkMessage):
-    protocolId = 6530
-    alliances:AllianceInformations
-    allianceNbMembers:int
-    allianceRoundWeigth:int
-    allianceMatchScore:int
-    allianceMapWinners:BasicAllianceInformations
+class KohUpdateMessage(NetworkMessage):
+    alliances:list[AllianceInformations]
+    allianceNbMembers:list[int]
+    allianceRoundWeigth:list[int]
+    allianceMatchScore:list[int]
+    allianceMapWinners:list[BasicAllianceInformations]
     allianceMapWinnerScore:int
     allianceMapMyAllianceScore:int
     nextTickTime:int

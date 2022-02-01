@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameRolePlayArenaLeagueRewardsMessage(INetworkMessage):
-    protocolId = 2090
+class GameRolePlayArenaLeagueRewardsMessage(NetworkMessage):
     seasonId:int
     leagueId:int
     ladderPosition:int

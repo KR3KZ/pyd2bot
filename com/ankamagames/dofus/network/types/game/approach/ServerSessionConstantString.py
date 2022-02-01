@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.approach.ServerSessionConstant imp
 
 
 class ServerSessionConstantString(ServerSessionConstant):
-    protocolId = 8535
     value:str
     
     

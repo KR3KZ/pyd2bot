@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class PaddockInformationsForSell(INetworkMessage):
-    protocolId = 1249
+class PaddockInformationsForSell(NetworkMessage):
     guildOwner:str
     worldX:int
     worldY:int

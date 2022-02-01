@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GuildEmblem(INetworkMessage):
-    protocolId = 2994
+class GuildEmblem(NetworkMessage):
     symbolShape:int
     symbolColor:int
     backgroundShape:int

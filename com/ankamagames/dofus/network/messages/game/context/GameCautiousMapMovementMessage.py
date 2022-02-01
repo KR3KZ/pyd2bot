@@ -2,6 +2,5 @@ from com.ankamagames.dofus.network.messages.game.context.GameMapMovementMessage 
 
 
 class GameCautiousMapMovementMessage(GameMapMovementMessage):
-    protocolId = 431
     
     

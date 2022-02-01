@@ -102,7 +102,7 @@ patterns = {
     "-> \*": "-> Any",
     "([_a-zA-Z][_a-zA-Z0-9]{0,30})/s?:/s?Class": r"\1:object",
     ".concat": ".extend",
-    "^([_a-zA-Z][_a-zA-Z0-9]{0,30}):String = ": r"\1:str = ",
+    "([_a-zA-Z][_a-zA-Z0-9]{0,30}):String": r"\1:str",
     "getTimer()": "perf_counter()",
     "\.shift()": ".pop(0)",
 
@@ -238,10 +238,10 @@ def handleClassHeader(code):
         reg = r"(?P<left>.*)class (?P<name>\S+)(?P<parents>.*)"
         m = re.match(reg, line)
         if m:
-            parents = m.group("parents").split(",")
-            parents = [p.replace(" ", "") for p in parents if p != "" and p.replace(" ", "") not in ["extends", "implements"]]
-            parents = ({', '.join(parents)}) if len(parents) > 0 else ""
-            line = f"{m.group('left')}class {m.group('name')}:"
+            parents = m.group("parents").split(" ")
+            parents = [p for p in parents if p != "" and p not in ["extends", "implements"]]
+            parents = f"({', '.join(parents)})" if len(parents) > 0 else ""
+            line = f"{m.group('left')}class {m.group('name')}{parents}:"
         r.append(line)
     return "\n".join(r)
 
@@ -268,5 +268,5 @@ def parseFile(file_p, out_p):
 
 # parseFolderFiles("AS3ToPythonConverter/scripts", "AS3ToPythonConverter/connectionType")
 t = perf_counter()
-parseFile("scripts/AS3ToPythonConverter/target.as", "scripts/AS3ToPythonConverter/FuncTree.py")
+parseFile("scripts/AS3ToPythonConverter/target.as", "scripts/AS3ToPythonConverter/AuthentificationFrame.py")
 print("parsin took:", perf_counter() - t)

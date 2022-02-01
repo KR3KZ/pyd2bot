@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class HelloConnectMessage(INetworkMessage):
-    protocolId = 6739
+class HelloConnectMessage(NetworkMessage):
     salt:str
-    key:int
+    key:list[int]
     
     

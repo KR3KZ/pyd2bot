@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ChallengeTargetUpdateMessage(INetworkMessage):
-    protocolId = 1613
+class ChallengeTargetUpdateMessage(NetworkMessage):
     challengeId:int
     targetId:int
     

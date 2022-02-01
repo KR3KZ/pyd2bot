@@ -2,8 +2,7 @@ from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeBid
 
 
 class ExchangeBidPriceForSellerMessage(ExchangeBidPriceMessage):
-    protocolId = 8645
     allIdentical:bool
-    minimalPrices:int
+    minimalPrices:list[int]
     
     

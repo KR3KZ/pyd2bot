@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.shortcut.Shortcut import Shortcut
 
 
-class ShortcutBarContentMessage(INetworkMessage):
-    protocolId = 7910
+class ShortcutBarContentMessage(NetworkMessage):
     barType:int
-    shortcuts:Shortcut
+    shortcuts:list[Shortcut]
     
     

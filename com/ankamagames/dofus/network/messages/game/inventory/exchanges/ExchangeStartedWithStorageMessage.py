@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeSta
 
 
 class ExchangeStartedWithStorageMessage(ExchangeStartedMessage):
-    protocolId = 7302
     storageMaxSlot:int
     
     

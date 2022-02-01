@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.party.Abstract
 
 
 class PartyKickedByMessage(AbstractPartyMessage):
-    protocolId = 8439
     kickerId:int
     
     

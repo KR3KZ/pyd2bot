@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class FriendSetWarnOnConnectionMessage(INetworkMessage):
-    protocolId = 6228
+class FriendSetWarnOnConnectionMessage(NetworkMessage):
     enable:bool
     
     

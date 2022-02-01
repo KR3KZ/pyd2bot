@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class RefreshFollowedQuestsOrderRequestMessage(INetworkMessage):
-    protocolId = 1088
-    quests:int
+class RefreshFollowedQuestsOrderRequestMessage(NetworkMessage):
+    quests:list[int]
     
     

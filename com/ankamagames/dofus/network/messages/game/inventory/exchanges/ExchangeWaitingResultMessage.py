@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class ExchangeWaitingResultMessage(INetworkMessage):
-    protocolId = 4369
+class ExchangeWaitingResultMessage(NetworkMessage):
     bwait:bool
     
     

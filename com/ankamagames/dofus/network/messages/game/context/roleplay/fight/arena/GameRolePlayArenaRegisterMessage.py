@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameRolePlayArenaRegisterMessage(INetworkMessage):
-    protocolId = 5010
+class GameRolePlayArenaRegisterMessage(NetworkMessage):
     battleMode:int
     
     

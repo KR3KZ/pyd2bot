@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessa
 
 
 class GameActionFightInvisibilityMessage(AbstractGameActionMessage):
-    protocolId = 7441
     targetId:int
     state:int
     

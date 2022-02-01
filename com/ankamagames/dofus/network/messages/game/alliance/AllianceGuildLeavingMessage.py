@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AllianceGuildLeavingMessage(INetworkMessage):
-    protocolId = 129
+class AllianceGuildLeavingMessage(NetworkMessage):
     kicked:bool
     guildId:int
     

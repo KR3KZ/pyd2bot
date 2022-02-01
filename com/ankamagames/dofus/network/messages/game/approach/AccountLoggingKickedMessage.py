@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class AccountLoggingKickedMessage(INetworkMessage):
-    protocolId = 7661
+class AccountLoggingKickedMessage(NetworkMessage):
     days:int
     hours:int
     minutes:int

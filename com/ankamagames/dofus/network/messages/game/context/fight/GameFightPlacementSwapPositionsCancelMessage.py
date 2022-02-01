@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameFightPlacementSwapPositionsCancelMessage(INetworkMessage):
-    protocolId = 7054
+class GameFightPlacementSwapPositionsCancelMessage(NetworkMessage):
     requestId:int
     
     

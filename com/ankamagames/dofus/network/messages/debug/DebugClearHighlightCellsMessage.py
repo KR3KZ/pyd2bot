@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class DebugClearHighlightCellsMessage(INetworkMessage):
-    protocolId = 1639
+class DebugClearHighlightCellsMessage(NetworkMessage):
     
     

@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameRolePlayArenaSwitchToFightServerMessage(INetworkMessage):
-    protocolId = 3316
+class GameRolePlayArenaSwitchToFightServerMessage(NetworkMessage):
     address:str
-    ports:int
-    ticket:int
+    ports:list[int]
+    ticket:list[int]
     
     

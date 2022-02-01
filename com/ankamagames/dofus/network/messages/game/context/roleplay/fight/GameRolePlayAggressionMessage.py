@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameRolePlayAggressionMessage(INetworkMessage):
-    protocolId = 2660
+class GameRolePlayAggressionMessage(NetworkMessage):
     attackerId:int
     defenderId:int
     

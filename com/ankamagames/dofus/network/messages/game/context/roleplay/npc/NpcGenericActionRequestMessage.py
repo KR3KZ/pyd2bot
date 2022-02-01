@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class NpcGenericActionRequestMessage(INetworkMessage):
-    protocolId = 1598
+class NpcGenericActionRequestMessage(NetworkMessage):
     npcId:int
     npcActionId:int
     npcMapId:int

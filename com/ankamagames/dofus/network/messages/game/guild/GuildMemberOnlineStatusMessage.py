@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GuildMemberOnlineStatusMessage(INetworkMessage):
-    protocolId = 4570
+class GuildMemberOnlineStatusMessage(NetworkMessage):
     memberId:int
     online:bool
     

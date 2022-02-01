@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class CharacterLoadingCompleteMessage(INetworkMessage):
-    protocolId = 9063
+class CharacterLoadingCompleteMessage(NetworkMessage):
     
     

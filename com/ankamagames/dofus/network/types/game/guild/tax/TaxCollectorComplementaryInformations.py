@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class TaxCollectorComplementaryInformations(INetworkMessage):
-    protocolId = 9875
+class TaxCollectorComplementaryInformations(NetworkMessage):
     
     

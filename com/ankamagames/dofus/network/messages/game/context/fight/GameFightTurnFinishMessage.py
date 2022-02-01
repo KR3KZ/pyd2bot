@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class GameFightTurnFinishMessage(INetworkMessage):
-    protocolId = 6692
+class GameFightTurnFinishMessage(NetworkMessage):
     isAfk:bool
     
     

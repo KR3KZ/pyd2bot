@@ -2,6 +2,5 @@ from com.ankamagames.dofus.network.messages.game.context.fight.character.GameFig
 
 
 class GameFightShowFighterRandomStaticPoseMessage(GameFightShowFighterMessage):
-    protocolId = 7534
     
     

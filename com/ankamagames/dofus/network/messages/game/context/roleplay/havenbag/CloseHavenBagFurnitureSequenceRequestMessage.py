@@ -1,7 +1,6 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class CloseHavenBagFurnitureSequenceRequestMessage(INetworkMessage):
-    protocolId = 3890
+class CloseHavenBagFurnitureSequenceRequestMessage(NetworkMessage):
     
     

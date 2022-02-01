@@ -1,10 +1,9 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.context.roleplay.MonsterInGroupLightInformations import MonsterInGroupLightInformations
 
 
-class AlternativeMonstersInGroupLightInformations(INetworkMessage):
-    protocolId = 1183
+class AlternativeMonstersInGroupLightInformations(NetworkMessage):
     playerCount:int
-    monsters:MonsterInGroupLightInformations
+    monsters:list[MonsterInGroupLightInformations]
     
     

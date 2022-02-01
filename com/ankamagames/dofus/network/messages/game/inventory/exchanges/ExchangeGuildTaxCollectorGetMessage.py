@@ -1,9 +1,8 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.data.items.ObjectItemGenericQuantity import ObjectItemGenericQuantity
 
 
-class ExchangeGuildTaxCollectorGetMessage(INetworkMessage):
-    protocolId = 962
+class ExchangeGuildTaxCollectorGetMessage(NetworkMessage):
     collectorName:str
     worldX:int
     worldY:int
@@ -14,6 +13,6 @@ class ExchangeGuildTaxCollectorGetMessage(INetworkMessage):
     callerName:str
     experience:int
     pods:int
-    objectsInfos:ObjectItemGenericQuantity
+    objectsInfos:list[ObjectItemGenericQuantity]
     
     

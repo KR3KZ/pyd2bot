@@ -1,8 +1,7 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-class DungeonPartyFinderPlayer(INetworkMessage):
-    protocolId = 5806
+class DungeonPartyFinderPlayer(NetworkMessage):
     playerId:int
     playerName:str
     breed:int

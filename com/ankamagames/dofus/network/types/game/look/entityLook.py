@@ -1,13 +1,12 @@
-from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.look.SubEntity import SubEntity
 
 
-class EntityLook(INetworkMessage):
-    protocolId = 9546
+class EntityLook(NetworkMessage):
     bonesId:int
-    skins:int
-    indexedColors:int
-    scales:int
-    subentities:SubEntity
+    skins:list[int]
+    indexedColors:list[int]
+    scales:list[int]
+    subentities:list[SubEntity]
     
     

@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.character.debt.DebtInformation imp
 
 
 class KamaDebtInformation(DebtInformation):
-    protocolId = 2979
     kamas:int
     
     

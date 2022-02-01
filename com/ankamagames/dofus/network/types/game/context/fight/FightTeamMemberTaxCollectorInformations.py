@@ -2,7 +2,6 @@ from com.ankamagames.dofus.network.types.game.context.fight.FightTeamMemberInfor
 
 
 class FightTeamMemberTaxCollectorInformations(FightTeamMemberInformations):
-    protocolId = 9850
     firstNameId:int
     lastNameId:int
     level:int
