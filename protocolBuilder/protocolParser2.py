@@ -4,7 +4,7 @@ from pathlib import Path
 from tqdm import tqdm
 
 from com.ankamagames.jerakine.enum.GameDataTypeEnum import GameDataTypeEnum
-from protocolBuilder.typeEnum import TypeEnum
+from com.ankamagames.jerakine.network.parser.TypeEnum import TypeEnum
 
 TO_PTYPE = {
     "Array": "list",

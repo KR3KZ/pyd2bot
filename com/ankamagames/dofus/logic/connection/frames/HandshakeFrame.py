@@ -42,7 +42,7 @@ class HandshakeFrame(Frame):
          logger.fatal("The server protocol version is malformed: " + serverVersion)
          Kernel().panic(PanicMessages.MALFORMED_PROTOCOL,[Metadata.PROTOCOL_BUILD,serverVersion])
          return
-      if clientHash is not serverHash:
+      if clientHash != serverHash:
          logger.fatal("Protocol mismatch between the client and the server.")
          Kernel().panic(PanicMessages.PROTOCOL_MISMATCH,[Metadata.PROTOCOL_BUILD,serverVersion])
    
@@ -58,26 +58,29 @@ class HandshakeFrame(Frame):
    def priority(self) -> int:
       return Priority.HIGHEST
    
-   def appended(self) -> bool: 
+   def pushed(self) -> bool: 
       connh.ConnectionsHandler.hasReceivedNetworkMsg = False
       return True
    
    def process(self, msg:Message) -> bool:
-      prmsg:ProtocolRequired = None
       connh.ConnectionsHandler.hasReceivedMsg = True
+
       if isinstance(msg, INetworkMessage):
          connh.ConnectionsHandler.hasReceivedNetworkMsg = True
          if self._timeoutTimer is not None:
-            self._timeoutTimer.stop()
+            self._timeoutTimer.cancel()
+
       if isinstance(msg, ProtocolRequired):
          prmsg = msg
          self.checkProtocolVersions(prmsg.version)
-         Kernel.getWorker().removeFrame(self)
+         Kernel().getWorker().removeFrame(self)
          return True
+
       elif isinstance(msg, ConnectedMessage):
          self._timeoutTimer = Timer(self.TIMEOUT_DELAY, self.onTimeout)
          self._timeoutTimer.start()
          return True
+
       else:
          return False
    

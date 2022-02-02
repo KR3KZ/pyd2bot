@@ -192,6 +192,8 @@ class ConnectionsHandler:
       conn.rawParser = MessageReceiver()
       cls._currentConnection.addConnection(conn, id)
       cls._currentConnection.mainConnection = conn
+      if not krnl.Kernel().getWorker().framesList:
+         raise Exception("Must at leaste have authentification frame in the singleton at this stage")
       krnl.Kernel().getWorker().addFrame(HandshakeFrame())
       conn.connect(host,port)
 

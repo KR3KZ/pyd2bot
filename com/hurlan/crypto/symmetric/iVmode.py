@@ -48,21 +48,21 @@ class IVMode:
     def IV(self, value:ByteArray) : 
         self.iv = value
         self.lastIV.length = 0
-        self.lastIV.writeBytes(self.iv)
+        self.lastIV.writeByteArray(self.iv)
     
     def getIV4e(self) -> ByteArray: 
         vec:ByteArray = ByteArray()
         if self.iv:
-            vec.writeBytes(self.iv)
+            vec.writeByteArray(self.iv)
         else:
             vec = ByteArray(self.prng.getrandbits(8 * self.blockSize).to_bytes(self.blockSize, "big"))
         self.lastIV.length = 0
-        self.lastIV.writeBytes(vec)
+        self.lastIV.writeByteArray(vec)
         return vec
     
     def getIV4d(self) -> ByteArray: 
         vec:ByteArray = ByteArray()
         if self.iv:
-            vec.writeBytes(self.iv)
+            vec.writeByteArray(self.iv)
             return vec
         raise Exception("an IV must be set before calling decrypt()")

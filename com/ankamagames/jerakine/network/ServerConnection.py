@@ -66,7 +66,7 @@ class ServerConnection(IServerConnection):
       self._splittedPacketLength:int = -1
       self._inputBuffer = ByteArray()
       self._pauseBuffer = list()
-      self._pause:bool = None
+      self._pause:bool = False
       self._latencyBuffer:list = None
       self._latestSent:int = 0
       self._lastSent:int = None
@@ -83,11 +83,11 @@ class ServerConnection(IServerConnection):
 
    def close(self) -> None:
       if self._socket.connected:
-         logger.debug("[" + str(self._id) + "] Closing socket for connection! ")
+         logger.debug(f"[{self._id}] Closing socket for connection! ")
          EnterFrameDispatcher().removeEventListener(self.onEnterFrame)
          self._socket.close()
       elif not self.checkClosed():
-         logger.warn("[" + str(self._id) + "] Tried to close a socket while it had already been disconnected.")
+         logger.warn(f"[{self._id}] Tried to close a socket while it had already been disconnected.")
          EnterFrameDispatcher().removeEventListener(self.onEnterFrame)
    
    @property
@@ -164,7 +164,7 @@ class ServerConnection(IServerConnection):
       self._remoteSrvHost = host
       self._remoteSrvPort = port
       self.addListeners()
-      logger.info("[" + str(self._id) + "] Connecting to " + host + ":" + str(port) + "...")
+      logger.info(f"[{self._id}] Connecting to {host}:{port}...")
       self._timeoutTimer = Timer(interval=7, function=self.onSocketTimeOut)
       self._timeoutTimer.start()
       try:
@@ -307,7 +307,6 @@ class ServerConnection(IServerConnection):
          elif not self._pause:
             if self.DEBUG_DATA and msg.getMessageId() != 176 and msg.getMessageId() != 6362:
                logger.debug(f"[{self._id}] [RCV] " + msg.__class__.__name__)
-            # logger.logDirectly(NetworkLogEvent(msg,True))
             if not self.disabledIn:
                self._handler.process(msg)
          else:
@@ -348,7 +347,7 @@ class ServerConnection(IServerConnection):
 
          if src.remaining() < 2:
             if self.DEBUG_LOW_LEVEL_VERBOSE:
-               logger.info("[" + str(self._id) + "] Not enough data to read the header, byte available : " + src.remaining() + " (needed : 2)")
+               logger.info(f"[{self._id}] Not enough data to read the header, byte available : {src.remaining()} (needed : 2)")
             return None
 
          staticHeader = src.readUnsignedShort()
@@ -365,12 +364,12 @@ class ServerConnection(IServerConnection):
                   self._input = src.read(messageLength)
                   msg = self._rawParser.parseAsync(self._input, messageId, messageLength, self.computeMessage)
                   if self.DEBUG_LOW_LEVEL_VERBOSE and msg != None:
-                     logger.info("[" + str(self._id) + "] Async " + self.getType(msg) + " parsing, message length : " + messageLength + ")")
+                     logger.info(f"[{self._id}] Async {self.getType(msg)} parsing, message length : {messageLength})")
 
                else:
                   msg = self._rawParser.parse(src, messageId, messageLength)
                   if self.DEBUG_LOW_LEVEL_VERBOSE:
-                     logger.info("[" + str(self._id) + "] Full parsing done")
+                     logger.info(f"[{self._id}] Full parsing done")
 
                return msg
 
@@ -437,7 +436,7 @@ class ServerConnection(IServerConnection):
       self._asyncTrees.append(tree)
       EnterFrameDispatcher().addEventListener(self.onEnterFrame, EnterFrameConst.SERVER_CONNECTION)
    
-   def onEnterFrame(self, e:Event) -> None:
+   def onEnterFrame(self) -> None:
       start = perf_counter()
       if self._socket.connected:
          self.receive(self._socket.buff, True)

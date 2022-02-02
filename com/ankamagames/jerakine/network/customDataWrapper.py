@@ -52,7 +52,7 @@ class ByteArray(bytearray):
     def uncompress(self):
         self = bytearray(decompress(self))
 
-    def readbool(self):
+    def readBoolean(self):
         ans = self.read(1)
         assert ans[0] in [0, 1], f"Invalid bool {ans[0]}"
         return bool(ans[0])
@@ -211,7 +211,7 @@ class ByteArray(bytearray):
             res += nbr.to_bytes(1, "big", signed=True)
         return res
     
-    def writeBytes(self, ba, offset=0, size=None):
+    def writeByteArray(self, ba, offset=0, size=None):
         if not size:
             size = len(ba)
         if self.position + size < len(self):

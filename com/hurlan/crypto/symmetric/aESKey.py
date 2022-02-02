@@ -85,7 +85,7 @@ class AESKey:
     def encrypt(self, block:ByteArray, index = 0) -> None: 
         round = 0
         self.state.position = 0
-        self.state.writeBytes(block, index, self.Nb * 4)
+        self.state.writeByteArray(block, index, self.Nb * 4)
         self.addRoundKey(self.key, 0)
         for round in range(1, self.Nr + 1):
             if round < self.Nr:
@@ -94,12 +94,12 @@ class AESKey:
                 self.shiftRows()
             self.addRoundKey(self.key, round * self.Nb * 4)
         block.position = index
-        block.writeBytes(self.state)
+        block.writeByteArray(self.state)
         
     def decrypt(self, block:ByteArray, index = 0) -> None: 
         round = 0
         self.state.position = 0
-        self.state.writeBytes(block,index, self.Nb * 4)
+        self.state.writeByteArray(block,index, self.Nb * 4)
         self.addRoundKey(self.key, self.Nr * self.Nb * 4)
         self.invShiftRows()
         round = self.Nr
@@ -110,7 +110,7 @@ class AESKey:
                 self.invMixSubColumns()
         
         block.position = index
-        block.writeBytes(self.state)
+        block.writeByteArray(self.state)
 
     def mixSubColumns(self):
         self.tmp = ByteArray([0] * 16)
@@ -131,7 +131,7 @@ class AESKey:
         self.tmp[14] = self.Sbox[self.state[12]] ^ self.Sbox[self.state[1]] ^ self.Xtime2Sbox[self.state[6]] ^ self.Xtime3Sbox[self.state[11]]
         self.tmp[15] = self.Xtime3Sbox[self.state[12]] ^ self.Sbox[self.state[1]] ^ self.Sbox[self.state[6]] ^ self.Xtime2Sbox[self.state[11]]
         self.state.position = 0
-        self.state.writeBytes(self.tmp, 0, self.Nb * 4)
+        self.state.writeByteArray(self.tmp, 0, self.Nb * 4)
          
     def shiftRows(self) -> None:
         tmp = 0

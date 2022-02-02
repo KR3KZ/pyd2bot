@@ -24,7 +24,7 @@ class RSACipher:
          if not plain_text_block:
             logger.error("Decrypt error - padding function returned None!")
             return False
-         out.writeBytes(plain_text_block)
+         out.writeByteArray(plain_text_block)
       out.position = 0
       return True
 
@@ -34,6 +34,6 @@ class RSACipher:
          block = int.from_bytes(self.padding.pad(src[i:i+self.blockSize]), "big", signed=False)
          cypher_chunk_base10 = pow(block, self.key.e, self.key.n)
          cypher_chunk_bytes = cypher_chunk_base10.to_bytes(self.blockSize, "big", signed=False)
-         out.writeBytes(cypher_chunk_bytes)
+         out.writeByteArray(cypher_chunk_bytes)
       out.position = 0
       return out

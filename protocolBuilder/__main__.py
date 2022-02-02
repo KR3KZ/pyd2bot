@@ -4,7 +4,7 @@ import json
 import subprocess
 import os
 import com.ankamagames.dofus.Constants as Constants
-from protocolBuilder.protocolParser import ProtocolParser
+from protocolBuilder.protocolParser2 import ProtocolParser
 work_dir = Path(os.path.dirname(__file__))
 
 if __name__ == "__main__":

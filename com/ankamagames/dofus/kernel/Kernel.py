@@ -18,11 +18,8 @@ logger = Logger('kernel')
 
 
 class Kernel(metaclass=Singleton):
-   
-
-   def __init__(self):
-      self._worker:Worker = Worker()
-      self.beingInReconection:bool = False
+   _worker:Worker = Worker()
+   beingInReconection:bool = False
 
    def getWorker(self) -> Worker:
       return self._worker
@@ -59,8 +56,8 @@ class Kernel(metaclass=Singleton):
    
    def addInitialFrames(self, firstLaunch:bool = False) -> None:
       self.getWorker().addFrame(auth.AuthentificationFrame())
-      # Kernel.getWorker().addFrame(QueueFrame())
-      # Kernel.getWorker().addFrame(GameStartingFrame())
+      #Kernel().getWorker().addFrame(QueueFrame())
+      #Kernel().getWorker().addFrame(GameStartingFrame())
 
       # if not self._worker.contains(LatencyFrame):
       #    self._worker.addFrame(LatencyFrame())
@@ -72,8 +69,12 @@ class Kernel(metaclass=Singleton):
  
 
 if __name__ == '__main__':
-   Kernel().init()
+   import com.ankamagames.dofus.kernel.Kernel as krnl
+   import com.ankamagames.dofus.logic.common.managers.AuthentificationManager as auth
+
+   krnl.Kernel().init()
    PORT = 5555
    AUTH_SERVER = "54.76.16.121" 
+   auth.AuthentificationManager().setCredentials("kmajdoub", "rMrTXHA4*")
    connh.ConnectionsHandler.connectToLoginServer(AUTH_SERVER, PORT)
    sleep(20)

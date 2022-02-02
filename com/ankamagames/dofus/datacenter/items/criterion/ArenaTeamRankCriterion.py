@@ -18,7 +18,7 @@
          return ArenaTeamRankCriterion(self.basicText)
       
       def getCriterion(self) -> int:
-         frame:PartyManagementFrame = Kernel.getWorker().getFrame(PartyManagementFrame)
+         frame:PartyManagementFrame =Kernel().getWorker().getFrame(PartyManagementFrame)
          rank:int = 0
          if frame.arenaRankGroupInfos and frame.arenaRankGroupInfos.rank > rank:
             rank = frame.arenaRankGroupInfos.rank

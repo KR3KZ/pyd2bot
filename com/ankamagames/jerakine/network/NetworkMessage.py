@@ -1,7 +1,11 @@
+from time import perf_counter
 from types import FunctionType
+import marshmallow_dataclass
 from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
 from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.parser.NetworkMessageParser import NetworkMessageParser
 from com.ankamagames.jerakine.network.utils.FuncTree import FuncTree
+
 
 
 class NetworkMessage(INetworkMessage):
@@ -14,11 +18,13 @@ class NetworkMessage(INetworkMessage):
    
    HASH_FUNCTION:FunctionType
 
+   _spec = None
+
+   _schema = None
 
    def __init__(self):
       NetworkMessage.GLOBAL_INSTANCE_ID += 1
       self._instance_id = NetworkMessage.GLOBAL_INSTANCE_ID
-      self._unpacked:bool = False
       self.receptionTime:int = None
       self.sourceConnection:str = None
       super().__init__()
@@ -62,20 +68,40 @@ class NetworkMessage(INetworkMessage):
          low = len(data) & 65535
          output.writeByte(high)
          output.writeShort(low)
-      output.writeBytes(data, 0, len(data))
+      output.writeByteArray(data, 0, len(data))
    
    def getMessageId(self) -> int:
-      raise Exception("Not implemented")
+      if not self._spec:
+         self._spec = NetworkMessageParser.getSpecByName(self.__class__.__name__)
+      return self._spec["protocolId"]
    
    def reset(self) -> None:
       raise Exception("Not implemented")
    
-   def pack(self, output:ByteArray) -> None:
-      raise Exception("Not implemented")
+   @classmethod
+   def unpack(cls, data:ByteArray, length:int) -> 'NetworkMessage':
+      instba = data.read(length)
+      if not cls._spec:
+         cls._spec = NetworkMessageParser.getSpecByName(cls.__name__)
+      if not cls._schema:
+         cls._schema = marshmallow_dataclass.class_schema(cls)()
+      mjson = NetworkMessageParser.to_json(cls._spec, instba)
+      inst = cls._schema.load(mjson)     
+      return inst
    
-   def unpack(self, input:ByteArray, length:int) -> None:
-      raise Exception("Not implemented")
+   def pack(self) -> None:
+      if not self._spec:
+         self._spec = NetworkMessageParser.getSpecByName(self.__class__.__name__)
+      if not self.__class__._schema:
+         self.__class__._schema = marshmallow_dataclass.class_schema(self.__class__)()
+      return NetworkMessageParser.from_json(self._spec, self._schema.dump(self))
    
+   @classmethod
+   def from_json(cls, mjson:dict):
+      if not cls._schema:
+         cls._schema = marshmallow_dataclass.class_schema(cls)()
+      return cls._schema.load(mjson)
+        
    def unpackAsync(self, input:ByteArray, length:int) -> FuncTree:
       raise Exception("Not implemented")
    
@@ -84,6 +110,15 @@ class NetworkMessage(INetworkMessage):
    
    def writeExternal(self, output:ByteArray) -> None:
       raise Exception("Not implemented")
+   
+   def __eq__(self, __o: object) -> bool:
+       return self._instance_id == __o._instance_id
+
+   def __ne__(self, __o: object) -> bool:
+         return not self.__eq__(__o)
+
+   def __hash__(self) -> int:
+       return self._instance_id
    
    def __str__(self) -> str:
       className:str = self.__class__.__name__

@@ -18,7 +18,7 @@
          return ArenaMaxDuelRankCriterion(self.basicText)
       
       def getCriterion(self) -> int:
-         frame:PartyManagementFrame = Kernel.getWorker().getFrame(PartyManagementFrame)
+         frame:PartyManagementFrame =Kernel().getWorker().getFrame(PartyManagementFrame)
          maxRank:int = 0
          if frame.arenaRankDuelInfos and frame.arenaRankDuelInfos.maxRank > maxRank:
             maxRank = frame.arenaRankDuelInfos.maxRank

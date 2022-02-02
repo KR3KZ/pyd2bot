@@ -2,7 +2,6 @@ from time import perf_counter
 from com.ankamagames.dofus import Constants
 import com.ankamagames.dofus.kernel.Kernel as krnl
 import com.ankamagames.dofus.kernel.net.ConnectionsHandler as connh
-from com.ankamagames.dofus.kernel.net.DisconnectionReasonEnum import DisconnectionReasonEnum
 from com.ankamagames.dofus.logic.common.managers.AuthentificationManager import AuthentificationManager
 from com.ankamagames.dofus.logic.common.managers.InterClientManager import InterClientManager
 from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerManager
@@ -20,7 +19,6 @@ from com.ankamagames.jerakine.messages.Frame import Frame
 from com.ankamagames.jerakine.messages.Message import Message
 from com.ankamagames.jerakine.network.messages.ServerConnectionFailedMessage import ServerConnectionFailedMessage
 from com.ankamagames.jerakine.types.DataStoreType import DataStoreType
-from com.ankamagames.jerakine.types.enums.DataStoreEnum import DataStoreEnum
 from com.ankamagames.jerakine.types.enums.Priority import Priority
 logger = Logger(__name__)
 
@@ -69,13 +67,13 @@ class AuthentificationFrame(Frame):
             return True
 
          elif isinstance(msg, HelloConnectMessage):
-            hcmsg = HelloConnectMessage(msg)
+            hcmsg = msg
             AuthentificationManager().setPublicKey(hcmsg.key)
             AuthentificationManager().setSalt(hcmsg.salt)
             AuthentificationManager().initAESKey()
             iMsg:IdentificationMessage = AuthentificationManager().getIdentificationMessage()
             self._currentLogIsForced = isinstance(iMsg, IdentificationAccountForceMessage)
-            logger.info("Current version : " + iMsg.version.major + "." + iMsg.version.minor + "." + iMsg.version.code + "." + iMsg.version.build)
+            logger.info(f"Current version : {iMsg.version.major}.{iMsg.version.minor}.{iMsg.version.code}.{iMsg.version.build}")
             dhf = krnl.Kernel().getWorker().getFrame(DisconnectionHandlerFrame)
             time = perf_counter()
             elapsedTimesSinceConnectionFail = list[int]()
@@ -123,7 +121,7 @@ class AuthentificationFrame(Frame):
             connh.ConnectionsHandler.closeConnection()
             if not self._dispatchModuleHook:
                self._dispatchModuleHook = True
-               self.appended()
+               self.pushed()
             return True
    
    def pushed(self) -> bool :

@@ -25,5 +25,5 @@ class ArenaSoloRankCriterion(ItemCriterion, IDataCenter):
          return ArenaSoloRankCriterion(self.basicText)
       
       def getCriterion(self) -> int:
-         frame:PartyManagementFrame = Kernel.getWorker().getFrame(PartyManagementFrame)
+         frame:PartyManagementFrame =Kernel().getWorker().getFrame(PartyManagementFrame)
          return frame and int(frame.arenaRankSoloInfos) ? int(frame.arenaRankSoloInfos.rank) : 0

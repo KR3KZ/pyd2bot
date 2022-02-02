@@ -35,7 +35,7 @@
          quest:Quest = Quest.getQuestById(self._questId)
          if not quest:
             return False
-         questFrame = Kernel.getWorker().getFrame(QuestFrame)
+         questFrame =Kernel().getWorker().getFrame(QuestFrame)
          s:str = _serverCriterionForm.slice(0,2)
          switch(s)
             case "Qa":

@@ -15,7 +15,7 @@ class IdentificationMessage(NetworkMessage):
     useCertificate:bool
     useLoginToken:bool
     
-    
     def __post_init__(self):
         super().__init__()
-    
+
+   

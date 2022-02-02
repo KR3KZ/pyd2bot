@@ -1,7 +1,7 @@
 from whistle import EventDispatcher
+from com.ankamagames.jerakine.events.FramePulledEvent import FramePulledEvent
 from com.ankamagames.jerakine.logger.Logger import Logger
 from mailbox import Message
-from threading import Event
 from time import perf_counter
 from types import FunctionType
 from com.ankamagames.jerakine.messages.ForTreatment import ForTreatment
@@ -18,7 +18,6 @@ from com.ankamagames.jerakine.pools.GenericPool import GenericPool
 from com.ankamagames.jerakine.pools.Poolable import Poolable
 import com.ankamagames.jerakine.utils.displays.EnterFrameDispatcher as efd
 from com.ankamagames.jerakine.utils.displays.FrameIdManager import FrameIdManager
-from com.ankamagames.jerakine.utils.misc.PriorityComparer import PriorityComparer
 logger = Logger(__name__)
 
 
@@ -45,7 +44,6 @@ class Worker(EventDispatcher, MessageHandler):
       self._terminated:bool = False
       self._terminating:bool = False
       self._unstoppableMsgobjectList = list()
-      self._framesBeingDeleted = dict()
       self._currentFrameTypesCache = dict()
       super().__init__()
    
@@ -180,7 +178,7 @@ class Worker(EventDispatcher, MessageHandler):
          return
 
       if self.DEBUG_FRAMES:
-         logger.info("Removing frame: " + frame)
+         logger.info(f"Removing frame: {frame.__class__.__name__}")
 
       if self._processingMessage or len(self._framesToRemove) > 0:
          self._framesToRemove.append(frame)
@@ -267,16 +265,17 @@ class Worker(EventDispatcher, MessageHandler):
       efd.EnterFrameDispatcher().removeWorker()
       self._paused = False
    
-   def onEnterFrame(self, e:Event) -> None:
+   def onEnterFrame(self) -> None:
       self.processQueues()
    
    def run(self) -> None:
       efd.EnterFrameDispatcher().addWorker(self)
    
    def pushFrame(self, frame:Frame) -> None:
-      if frame.appended():
+      if frame.pushed():
          self._framesList.append(frame)
-         self._framesList.sort(key=lambda x: x.priority)
+         logger.debug("framelist size: " + str(len(self._framesList)))
+         self._framesList.sort(key=lambda x: x.priority.value)
          self._currentFrameTypesCache[type(frame)] = frame
          if self.has_listeners(FramePushedEvent.EVENT_FRAME_PUSHED):
             self.dispatch(FramePushedEvent.EVENT_FRAME_PUSHED, FramePushedEvent(frame))
@@ -286,20 +285,23 @@ class Worker(EventDispatcher, MessageHandler):
    def pullFrame(self, frame:Frame) -> None:
       index:int = 0
       if frame.pulled():
-         index = self._framesList.find(frame)
+         try:
+            index = self._framesList.index(frame)
+         except:
+            index = -1
          if index > -1:
-            self._framesList.splice(index, 1)
+            del self._framesList[index]
             del self._currentFrameTypesCache[type(frame)]
-            del self._framesBeingDeleted[frame]
+            if frame in self._framesBeingDeleted:
+               del self._framesBeingDeleted[frame]
          if self.has_listeners(FramePulledEvent.EVENT_FRAME_PULLED):
             self.dispatch(FramePulledEvent.EVENT_FRAME_PULLED, FramePulledEvent(frame))
       else:
          logger.warn("Frame " + frame + " refused to be pulled.")
    
    def processQueues(self, maxTime:int = 40) -> None:
-      msg:Message = None
       startTime:int = perf_counter()
-      while perf_counter() - startTime < maxTime and len((self._messagesQueue) > 0 or len(self._treatmentsQueue) > 0):
+      while perf_counter() - startTime < maxTime and (len(self._messagesQueue) > 0 or len(self._treatmentsQueue) > 0):
          if len(self._treatmentsQueue) > 0:
             self.processTreatments(startTime, maxTime)
             if len(self._treatmentsQueue) == 0:
@@ -341,21 +343,24 @@ class Worker(EventDispatcher, MessageHandler):
       return False
    
    def processMessage(self, msg:Message) -> None:
+      processed:bool = False
       self._processingMessage = True
+      logger.debug("Got frames count: " + str(len(self._framesList)) + "; treatments count: " + str(len(self._treatmentsQueue)) + "; messages count: " + str(len(self._messagesQueue)))
       for frame in self._framesList:
+         logger.debug("Processing frame: " + frame.__class__.__name__.split(".")[-1])
          if frame.process(msg):
             processed = True
             break
       self._processingMessage = False
       if not processed and not isinstance(msg, DiscardableMessage):
-         logger.debug("Discarded message: " + msg + " (at frame " + FrameIdManager().frameId + ")")
+         logger.debug(f"Discarded message: {msg} (at frame {FrameIdManager().frameId})")
    
    def processFramesInAndOut(self) -> None:
       if len(self._framesToRemove) > 0:
          for frameToRemove in self._framesToRemove:
             self.pullFrame(frameToRemove)
-         len(self._framesToRemove[0:self._framesToRemove])
+         del self._framesToRemove[0:len(self._framesToRemove)]
       if len(self._framesToAdd) > 0:
          for frameToAdd in self._framesToAdd:
             self.pushFrame(frameToAdd)
-         len(self._framesToAdd[0:self._framesToAdd])
+         del self._framesToAdd[0:len(self._framesToAdd)]

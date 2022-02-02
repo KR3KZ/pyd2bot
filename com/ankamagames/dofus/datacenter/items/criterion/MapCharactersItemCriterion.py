@@ -28,7 +28,7 @@
          nbCharacters:int = 0
          entitiesInfos:dict = None
          actorInfo:GameContextActorInformations = None
-         entitiesFrame:RoleplayEntitiesFrame = Kernel.getWorker().getFrame(RoleplayEntitiesFrame)
+         entitiesFrame:RoleplayEntitiesFrame =Kernel().getWorker().getFrame(RoleplayEntitiesFrame)
          if entitiesFrame:
             entitiesInfos = entitiesFrame.entities
             for actorInfo in entitiesInfos:

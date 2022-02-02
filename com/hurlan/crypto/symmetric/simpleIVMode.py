@@ -24,20 +24,20 @@ class SimpleIVMode(IMode, ICipher):
     def encrypt(self, src:ByteArray):
         self.cipher.encrypt(src)
         tmp:ByteArray = ByteArray()
-        tmp.writeBytes(self.mode.IV)
-        tmp.writeBytes(src)
+        tmp.writeByteArray(self.mode.IV)
+        tmp.writeByteArray(src)
         src.position = 0
-        src.writeBytes(tmp)
+        src.writeByteArray(tmp)
     
     def decrypt(self, src:ByteArray):
         tmp:ByteArray = ByteArray()
-        tmp.writeBytes(src, 0, self.getBlockSize())
+        tmp.writeByteArray(src, 0, self.getBlockSize())
         self.mode.iv = tmp
         tmp = ByteArray()
-        tmp.writeBytes(src, self.getBlockSize())
+        tmp.writeByteArray(src, self.getBlockSize())
         self.cipher.decrypt(tmp)
         src.__init__()
-        src.writeBytes(tmp)
+        src.writeByteArray(tmp)
     
     def toString(self):
         return "simple-" + self.cipher.toString()

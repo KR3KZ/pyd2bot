@@ -192,7 +192,7 @@ class MultiConnection(EventDispatcher):
 class MessageWatcher(MessageHandler):
    
 
-   watchFunctionType:FunctionType
+   watchFunction:FunctionType
 
    handler:MessageHandler
 
@@ -200,10 +200,10 @@ class MessageWatcher(MessageHandler):
 
    def __init__(self, watchFunctionType:FunctionType, handler:MessageHandler, conn:IServerConnection):
       super().__init__()
-      self.watchFunctionType = watchFunctionType
+      self.watchFunction = watchFunctionType
       self.handler = handler
       self.conn = conn
 
    def process(self, msg:Message) -> bool:
-      self.watchFunctionType(msg, self.conn)
+      self.watchFunction(msg, self.conn)
       return self.handler.process(msg)

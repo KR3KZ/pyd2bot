@@ -16,5 +16,5 @@ class FrameIdManager(metaclass=Singleton):
     def frameId(self) -> int:
         return self._frameId
     
-    def onEnterFrame(self, e:Event) -> None:
+    def onEnterFrame(self) -> None:
         self._frameId += 1

@@ -37,7 +37,7 @@ class AchievementAccountItemCriterion(ItemCriterion, IDataCenter):
    
    def getCriterion(self) -> int:
       ach:AchievementAchieved = None
-      achievementFinishedList:list[AchievementAchieved] = Kernel.getWorker().getFrame(QuestFrame)
+      achievementFinishedList:list[AchievementAchieved] = Kernel().getWorker().getFrame(QuestFrame)
       characterId:float = PlayedCharacterManager().id
       for ach in achievementFinishedList:
          if ach.id == _criterionValue and ach.achievedBy != characterId:

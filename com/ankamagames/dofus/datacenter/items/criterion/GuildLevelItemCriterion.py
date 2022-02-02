@@ -15,7 +15,7 @@
          return GuildLevelItemCriterion(self.basicText)
       
       def getCriterion(self) -> int:
-         guild:GuildWrapper = Kernel.getWorker().getFrame(SocialFrame)
+         guild:GuildWrapper =Kernel().getWorker().getFrame(SocialFrame)
          if guild:
             return guild.level
          return 0

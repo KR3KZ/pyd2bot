@@ -761,6 +761,7 @@ from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.managers.storeDataManager import StoreDataManager
 from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
 from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.jerakine.network.RawDataParser import RawDataParser
 from com.ankamagames.jerakine.network.UnpackMode import UnpackMode
 logger = Logger(__name__)
@@ -2297,13 +2298,13 @@ class MessageReceiver(RawDataParser):
       StoreDataManager().registerClass(ActivitySuggestionsMessage(),True,True)
    
    def parse(self, input:ByteArray, messageId:int, messageLength:int) -> INetworkMessage:
-      messageType = self._messagesTypes[messageId]
+      messageType:NetworkMessage = self._messagesTypes[messageId]
       if not messageType:
          logger.warn("Unknown packet received (ID " + messageId + ", length " + messageLength + ")")
          return None
-      message:INetworkMessage = messageType()
-      message.unpack(input, messageLength)
+      message = messageType.unpack(input, messageLength)
       message.unpacked = True
+      message.__post_init__()
       return message
    
    def parseAsync(self, input:ByteArray, messageId:int, messageLength:int, callback:FunctionType) -> INetworkMessage:

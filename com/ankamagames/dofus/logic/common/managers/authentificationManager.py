@@ -1,7 +1,5 @@
 from argparse import ArgumentError
 import os
-
-from pymarshaler import Marshal
 from com.ankamagames.dofus.network.messages.connection.IdentificationMessage import IdentificationMessage
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
@@ -36,7 +34,8 @@ class AuthentificationManager(metaclass=Singleton):
     _AESKey:str = None
     nextToken:str = None
     tokenMode:bool = None
-    username = None
+    _username = None
+    _password = None
     
     def initAESKey(self):
         self._AESKey = AESKey.generateRandomAESKey(self.AES_KEY_LENGTH)
@@ -59,10 +58,14 @@ class AuthentificationManager(metaclass=Singleton):
     def getCanAutoConnectWithToken(self) -> bool:
         return self.nextToken != None
 
-    def getIdentificationMessage(self, login, pwd) -> IdentificationMessage:
+    def setCredentials(self, username, password):
+        self._username = username
+        self._password = password
+
+    def getIdentificationMessage(self) -> IdentificationMessage:
         imsg = {
             'autoconnect': False,
-            'credentials': self.getAuthCredentials(login, pwd),
+            'credentials': self.getAuthCredentials(),
             'failedAttempts': [],
             'lang': 'fr',
             'serverId': 0,
@@ -70,7 +73,6 @@ class AuthentificationManager(metaclass=Singleton):
             'useCertificate': False,
             'useLoginToken': False,
             'version': {
-                '__type__': 'Version',
                 'build': 11,
                 'buildType': 0,
                 'code': 5,
@@ -78,17 +80,15 @@ class AuthentificationManager(metaclass=Singleton):
                 'minor': 62
             }
         }
-        marshal = Marshal()
-        imsg:IdentificationMessage = marshal.unmarshal(IdentificationMessage, imsg)
-        return imsg
+        return IdentificationMessage.from_json(imsg)
     
-    def getAuthCredentials(self, login:str, pwd:str) -> list[int]:
+    def getAuthCredentials(self) -> list[int]:
         baIn = bytearray()
         baIn += bytes(self._salt, 'utf')
         baIn += self._AESKey
-        baIn += len(login).to_bytes(1, "big")
-        baIn += bytes(login, 'utf')
-        baIn += bytes(pwd, 'utf')
+        baIn += len(self._username).to_bytes(1, "big")
+        baIn += bytes(self._username, 'utf')
+        baIn += bytes(self._password, 'utf')
         rsa_key = RSA.importKey(bytes(self._publicKey, 'utf'))
         rsacipher = RSACipher(rsa_key, PKCS1())
         baOut = rsacipher.encrypt(baIn)
@@ -97,7 +97,7 @@ class AuthentificationManager(metaclass=Singleton):
     def decodeWithAES(self, byteArrayOrVector) -> ByteArray:
         aescipher = SimpleIVMode(CBCMode(AESKey(self._AESKey), NullPad()))
         result = ByteArray()
-        result.writeBytes(self._AESKey, 0, 16)
+        result.writeByteArray(self._AESKey, 0, 16)
         
         if type(byteArrayOrVector) == list:
             for i in byteArrayOrVector:
@@ -106,7 +106,7 @@ class AuthentificationManager(metaclass=Singleton):
         else:     
             if not isinstance(byteArrayOrVector, ByteArray):
                 raise ArgumentError("Argument must be a bytearray or a vector of int/uint")
-            result.writeBytes(byteArrayOrVector)
+            result.writeByteArray(byteArrayOrVector)
             
         aescipher.decrypt(result)
         return result

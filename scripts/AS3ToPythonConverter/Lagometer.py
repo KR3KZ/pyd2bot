@@ -15,7 +15,7 @@ class Lagometer(ILagometer):
    
    def __init__(self):
       super().__init__()
-      self._timer = BenchmarkTimer(SHOW_LAG_DELAY,1,"Lagometer._timer")
+      self._timer = BenchmarkTimer(self.SHOW_LAG_DELAY,1,"Lagometer._timer")
       self._timer.addEventListener(TimerEvent.TIMER_COMPLETE,self.onTimerComplete)
    
    def ping(self, msg:INetworkMessage = None) -> None:

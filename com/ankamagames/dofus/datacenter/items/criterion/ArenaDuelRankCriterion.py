@@ -18,7 +18,7 @@
          return ArenaDuelRankCriterion(self.basicText)
       
       def getCriterion(self) -> int:
-         frame:PartyManagementFrame = Kernel.getWorker().getFrame(PartyManagementFrame)
+         frame:PartyManagementFrame =Kernel().getWorker().getFrame(PartyManagementFrame)
          rank:int = 0
          if frame.arenaRankDuelInfos and frame.arenaRankDuelInfos.rank > rank:
             rank = frame.arenaRankDuelInfos.rank

@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
+@dataclass(eq=False)
 class HelloConnectMessage(NetworkMessage):
     salt:str
     key:list[int]

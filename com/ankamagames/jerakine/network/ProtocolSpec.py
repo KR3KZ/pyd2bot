@@ -4,7 +4,7 @@ import random
 from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
 import json
 import os
-from protocolBuilder.typeEnum import TypeEnum
+from com.ankamagames.jerakine.network.parser.TypeEnum import TypeEnum
 
 class UnknownMsgIdError(Exception):
     pass

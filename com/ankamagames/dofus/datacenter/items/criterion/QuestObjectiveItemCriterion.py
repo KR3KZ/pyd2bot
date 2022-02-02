@@ -17,7 +17,7 @@
          obj:QuestObjective = QuestObjective.getQuestObjectiveById(self._objId)
          if not obj:
             return False
-         questFrame:QuestFrame = Kernel.getWorker().getFrame(QuestFrame)
+         questFrame:QuestFrame =Kernel().getWorker().getFrame(QuestFrame)
          activeObjs:list[int] = questFrame.getActiveObjectives()
          completedObjs:list[int] = questFrame.getCompletedObjectives()
          s:str = _serverCriterionForm.slice(0,2)

@@ -18,5 +18,5 @@
          return ArenaMaxSoloRankCriterion(self.basicText)
       
       def getCriterion(self) -> int:
-         frame:PartyManagementFrame = Kernel.getWorker().getFrame(PartyManagementFrame)
+         frame:PartyManagementFrame =Kernel().getWorker().getFrame(PartyManagementFrame)
          return int(frame.arenaRankSoloInfos.maxRank)

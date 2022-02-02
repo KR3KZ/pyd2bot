@@ -6,7 +6,7 @@
          super().__init__(pCriterion)
       
       def getEmotesList(self) -> list:
-         emoticonFrame:EmoticonFrame = Kernel.getWorker().getFrame(EmoticonFrame)
+         emoticonFrame:EmoticonFrame =Kernel().getWorker().getFrame(EmoticonFrame)
          if emoticonFrame:
             return emoticonFrame.emotesList
          return None

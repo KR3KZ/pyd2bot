@@ -20,7 +20,7 @@
       @property
       def isRespected(self) -> bool:
          rgI:int = 0
-         rank:int = Kernel.getWorker().getFrame(AlignmentFrame)
+         rank:int =Kernel().getWorker().getFrame(AlignmentFrame)
          rankGift:AlignmentRankJntGift = AlignmentRankJntGift.getAlignmentRankJntGiftById(rank)
          if rankGift and rankGift.gifts:
             for rgI = 0 rgI < len(rankGift.gifts) rgI += 1:

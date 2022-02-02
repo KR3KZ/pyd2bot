@@ -25,7 +25,7 @@ class AchievementItemCriterion(ItemCriterion, IDataCenter):
    
    # def getCriterion(self) -> int:
    #    id:int = 0
-   #    achievementFinishedList:list = Kernel.getWorker().getFrame(QuestFrame)
+   #    achievementFinishedList:list =Kernel().getWorker().getFrame(QuestFrame)
    #    for id in achievementFinishedList:
    #       if id == _criterionValue:
    #          return 1

@@ -17,4 +17,4 @@
          return FriendlistItemCriterion(self.basicText)
       
       def getCriterion(self) -> int:
-         return Kernel.getWorker().getFrame(SocialFrame)
+         returnKernel().getWorker().getFrame(SocialFrame)

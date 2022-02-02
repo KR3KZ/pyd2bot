@@ -1,5 +1,4 @@
 from com.ankamagames.jerakine.logger.Logger import Logger
-from threading import Event
 from time import perf_counter
 from types import FunctionType
 from com.ankamagames.jerakine.managers import Worker
@@ -13,7 +12,7 @@ class EnterFrameDispatcher(metaclass=Singleton):
         self._listenerUp:bool = False
         self._workerListenerUp:bool = False
         self._currentTime:int = perf_counter()
-        self._postWorkerTime:int = None
+        self._postWorkerTime:int = 0
         self._diff:int = 0 
         self._noWorkerFrameCount:int = 0
         self._controledListeners = dict[FunctionType, ControledEnterFrameListener]()
@@ -22,10 +21,8 @@ class EnterFrameDispatcher(metaclass=Singleton):
     
     def addWorker(self, w:Worker) -> None:
         self._worker = w
-        if not self._listenerUp:
-            self._listenerUp = True
-        if not self._workerListenerUp:
-            self._workerListenerUp = True
+        self.handleEnterFrameEvents()
+        self.handleWorkers()
     
     def removeWorker(self) -> None:
         if self._workerListenerUp:
@@ -67,19 +64,20 @@ class EnterFrameDispatcher(metaclass=Singleton):
             if len(self._controledListeners) == 0 and not self._workerListenerUp:
                 self._listenerUp = False
     
-    def handleEnterFrameEvents(self, e:Event) -> None:
+    def handleEnterFrameEvents(self) -> None:
         self._currentTime = perf_counter()
         for cefl in self._controledListeners.values():
             diff = self._currentTime - cefl.latestChange
             if diff > cefl.wantedGap - cefl.overhead:
-                cefl.listener(e)
+                cefl.listener()
                 cefl.latestChange = self._currentTime
                 cefl.overhead = diff - cefl.wantedGap + cefl.overhead
     
     def remainsTime(self) -> bool:
         return perf_counter() - self._postWorkerTime < self._maxAllowedTime
     
-    def handleWorkers(self, e:Event) -> None:
+    def handleWorkers(self) -> None:
+        print("will handle workers")
         _diff = perf_counter() - self._postWorkerTime
         if _diff < self._maxAllowedTime:
             self._worker.processQueues(self._maxAllowedTime - _diff)
@@ -103,3 +101,4 @@ class ControledEnterFrameListener:
         self.listener = listener
         self.wantedGap = wantedGap
         self.latestChange = latestChange
+        self.overhead = 0
