@@ -1,10 +1,9 @@
 from com.ankamagames.jerakine.logger.Logger import Logger
-from tkinter import N
 from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
 from protocolBuilder.typeEnum import TypeEnum
-from pyd2bot.network.protocolSpec import ProtocolSpec
-import pyd2bot.network.NetMsgClassDef as nmcd
-from pyd2bot.network.protocolSpec import UnknownTypeIdError
+from com.ankamagames.jerakine.network.ProtocolSpec import ProtocolSpec
+import com.ankamagames.jerakine.network.NetworkMessageClassDefinition as nmcd
+from com.ankamagames.jerakine.network.ProtocolSpec import UnknownTypeIdError
 
 logger = Logger(__name__)
 
@@ -72,7 +71,7 @@ class NetMsgDataField:
          typeId = self._raw.readUnsignedShort()
          classSpec = ProtocolSpec.getTypeSpecById(typeId)
          className = classSpec["name"]
-      obj = nmcd.NetMsgClassDef(className, self._raw).deserialize()
+      obj = nmcd.NetworkMessageClassDefinition(className, self._raw).deserialize()
       return obj
 
    def readVector(self):

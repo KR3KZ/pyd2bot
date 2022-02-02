@@ -18,6 +18,7 @@ class Socket(threading.Thread):
         self.port = port
         self._kill = threading.Event()
         self.buff = ByteArray()
+        super().__init__()
 
 
     def run(self):
@@ -37,6 +38,7 @@ class Socket(threading.Thread):
     def connect(self, host, port):
         self._sock.connect((host, port))
         self.connected = True
+        self.start()
         self.dispatcher.dispatch(BasicEvent.CONNECT)
  
     def close(self):

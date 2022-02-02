@@ -1,6 +1,6 @@
-from enum import Enum
+from whistle import Event
 
-class ProgressEvent(Enum):
+class ProgressEvent(Event):
     SOCKET_DATA = "socketData"
     
     def __init__(self, data):

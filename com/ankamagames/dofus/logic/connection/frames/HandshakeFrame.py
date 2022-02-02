@@ -17,12 +17,9 @@ logger = Logger(__name__)
 
 class HandshakeFrame(Frame):
    
-   
-   
    TIMEOUT_DELAY:int = 3000
    
    TIMEOUT_REPEAT_COUNT:int = 1
-   
    
    _timeoutTimer:BenchmarkTimer
    

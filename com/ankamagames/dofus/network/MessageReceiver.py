@@ -2302,7 +2302,7 @@ class MessageReceiver(RawDataParser):
          logger.warn("Unknown packet received (ID " + messageId + ", length " + messageLength + ")")
          return None
       message:INetworkMessage = messageType()
-      message.unpack(input,messageLength)
+      message.unpack(input, messageLength)
       message.unpacked = True
       return message
    
@@ -2317,4 +2317,4 @@ class MessageReceiver(RawDataParser):
       return message
    
    def getUnpackMode(self, messageId:int) -> int:
-      return int(self._unpackModes[messageId]) if messageId in self._unpackModes else int(UnpackMode.DEFAULT)
+      return self._unpackModes[messageId] if messageId in self._unpackModes else UnpackMode.DEFAULT

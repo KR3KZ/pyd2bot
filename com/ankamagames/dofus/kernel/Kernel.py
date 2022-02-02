@@ -1,3 +1,4 @@
+from time import sleep
 from com.ankamagames.atouin.utils.DataMapProvider import DataMapProvider
 import com.ankamagames.dofus.kernel.net.ConnectionsHandler as connh
 from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManager
@@ -75,3 +76,4 @@ if __name__ == '__main__':
    PORT = 5555
    AUTH_SERVER = "54.76.16.121" 
    connh.ConnectionsHandler.connectToLoginServer(AUTH_SERVER, PORT)
+   sleep(20)
