@@ -13,7 +13,8 @@ class NetworkMessage(INetworkMessage):
    BIT_MASK:int = 3
    
    HASH_FUNCTION:FunctionType
-   
+
+
    def __init__(self):
       NetworkMessage.GLOBAL_INSTANCE_ID += 1
       self._instance_id = NetworkMessage.GLOBAL_INSTANCE_ID
@@ -36,7 +37,7 @@ class NetworkMessage(INetworkMessage):
    
    @property
    def isInitialized(self) -> bool:
-      raise NotImplemented()
+      raise Exception("Not implemented")
    
    @property
    def unpacked(self) -> bool:
@@ -64,26 +65,26 @@ class NetworkMessage(INetworkMessage):
       output.writeBytes(data, 0, len(data))
    
    def getMessageId(self) -> int:
-      raise NotImplemented()
+      raise Exception("Not implemented")
    
    def reset(self) -> None:
-      raise NotImplemented()
+      raise Exception("Not implemented")
    
    def pack(self, output:ByteArray) -> None:
-      raise NotImplemented()
+      raise Exception("Not implemented")
    
    def unpack(self, input:ByteArray, length:int) -> None:
-      raise NotImplemented()
+      raise Exception("Not implemented")
    
    def unpackAsync(self, input:ByteArray, length:int) -> FuncTree:
-      raise NotImplemented()
+      raise Exception("Not implemented")
    
    def readExternal(self, input:ByteArray) -> None:
-      raise NotImplemented()
+      raise Exception("Not implemented")
    
    def writeExternal(self, output:ByteArray) -> None:
-      raise NotImplemented()
+      raise Exception("Not implemented")
    
    def __str__(self) -> str:
       className:str = self.__class__.__name__
-      return className.split(".")[-1] + " @" + self._instance_id
+      return className.split(".")[-1] + " @" + str(self._instance_id)

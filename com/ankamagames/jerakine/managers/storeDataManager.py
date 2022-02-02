@@ -4,8 +4,8 @@ import sys
 from typing import Any
 from com.ankamagames.jerakine import JerakineConstants
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
-from com.ankamagames.jerakine.types.customSharedObject import CustomSharedObject
-from com.ankamagames.jerakine.types.dataStoreType import DataStoreType
+from com.ankamagames.jerakine.types.CustomSharedObject import CustomSharedObject
+from com.ankamagames.jerakine.types.DataStoreType import DataStoreType
 from com.ankamagames.jerakine.types.enums.DataStoreEnum import DataStoreEnum
 logger = Logger(__name__)
 

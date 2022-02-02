@@ -1,5 +1,7 @@
 from argparse import ArgumentError
 import os
+
+from pymarshaler import Marshal
 from com.ankamagames.dofus.network.messages.connection.IdentificationMessage import IdentificationMessage
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
@@ -59,7 +61,6 @@ class AuthentificationManager(metaclass=Singleton):
 
     def getIdentificationMessage(self, login, pwd) -> IdentificationMessage:
         imsg = {
-            '__type__': 'IdentificationMessage',
             'autoconnect': False,
             'credentials': self.getAuthCredentials(login, pwd),
             'failedAttempts': [],
@@ -77,6 +78,8 @@ class AuthentificationManager(metaclass=Singleton):
                 'minor': 62
             }
         }
+        marshal = Marshal()
+        imsg:IdentificationMessage = marshal.unmarshal(IdentificationMessage, imsg)
         return imsg
     
     def getAuthCredentials(self, login:str, pwd:str) -> list[int]:

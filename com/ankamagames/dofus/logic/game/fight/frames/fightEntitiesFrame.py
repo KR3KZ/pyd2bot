@@ -1,6 +1,6 @@
 
 
-from com.ankamagames.dofus.logic.frames.iFrame import IFrame
+from com.ankamagames.dofus.logic.frames.IFrame import IFrame
 
 
 class FightEntitiesFrame(IFrame):

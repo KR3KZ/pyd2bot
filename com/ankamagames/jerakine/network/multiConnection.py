@@ -16,27 +16,21 @@ logger = Logger(__name__)
 class MultiConnection(EventDispatcher):
       
    
-   _connectionByMsg:dict
-   
-   _connectionByEvent:dict
-   
-   _connectionById:dict
-   
-   _idByConnection:dict
-   
-   _connectionCount:int
-   
-   _mainConnection:IServerConnection
 
-   _messageRouter:IMessageRouter
-   
-   _connectionConnectedCount:int
    
    def __init__(self):
       self._connectionByMsg = dict()
       self._connectionByEvent = dict()
       self._connectionById = dict()
       self._idByConnection = dict()
+      self._connectionByMsg = dict()
+      self._connectionByEvent = dict()
+      self._connectionById = dict()
+      self._idByConnection = dict()
+      self._connectionCount = 0
+      self._mainConnection:IServerConnection = None
+      self._messageRouter:IMessageRouter = None
+      self._connectionConnectedCount:int = 0
       super().__init__()
    
    @property
@@ -73,7 +67,7 @@ class MultiConnection(EventDispatcher):
       self._connectionById[id] = conn
       self._idByConnection[conn] = id
       self._connectionCount += 1
-      logger.warn("Adding connection " + id)
+      logger.warn("Adding connection " + str(id))
       conn.handler = MessageWatcher(self.proccessMsg, conn.handler, conn)
       conn.add_listener(BasicEvent.CONNECT, self.onSubConnectionEvent)
       conn.add_listener(BasicEvent.CLOSE, self.onSubConnectionEvent)

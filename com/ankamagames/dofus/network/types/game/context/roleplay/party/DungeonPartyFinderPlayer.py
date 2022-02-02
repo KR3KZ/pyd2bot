@@ -1,6 +1,8 @@
+from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
+@dataclass
 class DungeonPartyFinderPlayer(NetworkMessage):
     playerId:int
     playerName:str
@@ -8,4 +10,7 @@ class DungeonPartyFinderPlayer(NetworkMessage):
     sex:bool
     level:int
     
+    
+    def __post_init__(self):
+        super().__init__()
     

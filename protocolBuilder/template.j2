@@ -1,4 +1,5 @@
-{%- set parent = types[cls.parent] if cls.parent else None -%}
+from dataclasses import dataclass
+{% set parent = types[cls.parent] if cls.parent else None -%}
 {% if parent != None -%}
 from {{parent.package}} import {{parent.name}}
 {%- else -%}
@@ -9,6 +10,7 @@ from {{types[field.typename].package}} import {{field.typename}}{% endif %}
 {%- endfor %}
 
 
+@dataclass
 class {{cls.name}}({% if parent != None %}{{parent.name}}{% else %}NetworkMessage{% endif %}):
     {% for field in cls.fields -%}
     {{field.name}}:{%if field.length != None or field.lengthTypeId != None%}list[{{field.typename}}]{% else %}{{field.typename}}{% endif %}{%if field.optional %} = None{% endif %}
@@ -17,4 +19,6 @@ class {{cls.name}}({% if parent != None %}{{parent.name}}{% else %}NetworkMessag
     {{field.name}}:{{field.typename}}
     {% endfor %}
     
-
+    def __post_init__(self):
+        super().__init__()
+    

@@ -95,5 +95,3 @@ class WorldPathFinder:
         AStar.search(self.worldGraph, self.src, dstV, self.onAStarComplete)
 
 
-if __name__ == "__main__":
-    WorldPathFinder().init()

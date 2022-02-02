@@ -5,7 +5,7 @@ from com.ankamagames.jerakine.utils.misc.Priotizable import Prioritizable
 class Frame(MessageHandler, Prioritizable):
       
    
-   def appended() -> bool:
+   def appended(self) -> bool:
       pass
    
    def pulled(self) -> bool:

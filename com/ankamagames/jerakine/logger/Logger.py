@@ -28,7 +28,5 @@ class Logger(logging.Logger):
         self.addHandler(fileHandler)
         self.addHandler(streamHandler)
 
-        print("Generate new instance")
-
     def get_logger(self):
         return self

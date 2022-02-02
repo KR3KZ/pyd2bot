@@ -1,6 +1,10 @@
 import math
 from multiprocessing.managers import Server
 import time
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+   from com.ankamagames.dofus.internalDatacenter.connection.basicCharacterWrapper import BasicCharacterWrapper
+from com.ankamagames.dofus.network.types.game.havenbag.HavenBagRoomPreviewInformation import HavenBagRoomPreviewInformation
 from com.ankamagames.jerakine.interfaces.IDestroyable import IDestroyable
 from com.ankamagames.jerakine.utils.errors.SingletonError import SingletonError
 
@@ -55,7 +59,7 @@ class PlayerManager(IDestroyable):
    
    serversList:list[int]
    
-   charactersList:list[BasicCharacterWrapper]
+   charactersList:list['BasicCharacterWrapper']
    
    allowAutoConnectCharacter:bool = False
    

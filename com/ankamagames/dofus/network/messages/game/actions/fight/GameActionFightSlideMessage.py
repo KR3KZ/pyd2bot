@@ -1,9 +1,14 @@
+from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessage import AbstractGameActionMessage
 
 
+@dataclass
 class GameActionFightSlideMessage(AbstractGameActionMessage):
     targetId:int
     startCellId:int
     endCellId:int
     
+    
+    def __post_init__(self):
+        super().__init__()
     

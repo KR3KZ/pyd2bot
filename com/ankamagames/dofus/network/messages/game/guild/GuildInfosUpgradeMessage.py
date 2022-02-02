@@ -1,6 +1,8 @@
+from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
+@dataclass
 class GuildInfosUpgradeMessage(NetworkMessage):
     maxTaxCollectorsCount:int
     taxCollectorsCount:int
@@ -13,4 +15,7 @@ class GuildInfosUpgradeMessage(NetworkMessage):
     spellId:list[int]
     spellLevel:list[int]
     
+    
+    def __post_init__(self):
+        super().__init__()
     

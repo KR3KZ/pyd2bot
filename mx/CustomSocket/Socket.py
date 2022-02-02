@@ -28,10 +28,9 @@ class Socket(threading.Thread):
                 self.buff += rdata
                 self.dispatcher.dispatch(ProgressEvent.SOCKET_DATA, ProgressEvent(rdata))
             except OSError as e:
-                self.dispatcher.dispatch(IOErrorEvent.IO_ERROR)
-            except Exception as e:
-                logger.error("Fatal error in socket: ", exc_info=True)
-                break
+                print(e)
+                pass
+                
         self.close()
         logger.info("Socket thread ended")
 

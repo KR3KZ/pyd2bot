@@ -20,7 +20,9 @@ from com.ankamagames.dofus.internalDatacenter.dataEnum import DataEnum
 from com.ankamagames.dofus.internalDatacenter.stats.entityStats import EntityStats
 from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManager
 from com.ankamagames.dofus.network.protocolConstantsEnum import ProtocolConstantsEnum
-from com.ankamagames.dofus.network.types.game.character.choice.characterBaseInformations import CharacterBaseInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+   from com.ankamagames.dofus.network.types.game.character.choice.CharacterBaseInformations import CharacterBaseInformations
 from com.ankamagames.dofus.network.types.game.look.EntityLook import EntityLook
 from com.ankamagames.jerakine.interfaces.IDestroyable import IDestroyable
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
@@ -47,7 +49,7 @@ class PlayedCharacterManager(IDestroyable):
    
    _knownZaapMapIds:list[float]
    
-   _infos:CharacterBaseInformations
+   _infos:'CharacterBaseInformations'
    
    restrictions:ActorRestrictionsInformations
    
@@ -167,11 +169,11 @@ class PlayedCharacterManager(IDestroyable):
          self.infos.id = id
    
    @property
-   def infos(self) -> CharacterBaseInformations:
+   def infos(self) -> 'CharacterBaseInformations':
       return self._infos
    
    @infos.setter
-   def infos(self, pInfos:CharacterBaseInformations) -> None:
+   def infos(self, pInfos:'CharacterBaseInformations') -> None:
       callback:Callback = None
       self._infos = pInfos
       for callback in self._infosAvailableCallbacks:

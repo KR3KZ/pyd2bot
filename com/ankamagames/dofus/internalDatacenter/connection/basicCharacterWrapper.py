@@ -10,9 +10,7 @@ class BasicCharacterWrapper(IDataCenter):
    name:str
    
    level:int
-   
-   entityLook:TiphonEntityLook
-   
+      
    breedId:int
    
    sex:bool
@@ -27,7 +25,7 @@ class BasicCharacterWrapper(IDataCenter):
    
    unusable:bool
    
-   _breed:Breed
+   # _breed:Breed
    
    def __init__(self):
       super().__init__()
@@ -37,9 +35,8 @@ class BasicCharacterWrapper(IDataCenter):
       obj.id = id
       obj.name = name
       obj.level = level
-      obj.entityLook = EntityLookAdapter.fromNetwork(entityLook)
       obj.breedId = breed
-      obj._breed = Breed.getBreedById(obj.breedId)
+      # obj._breed = Breed.getBreedById(obj.breedId)
       obj.sex = sex
       obj.deathState = deathState
       obj.deathCount = deathCount
@@ -48,11 +45,11 @@ class BasicCharacterWrapper(IDataCenter):
       obj.unusable = unusable
       return obj
    
-   @property
-   def breed(self) -> Breed:
-      if not self._breed:
-         self._breed = Breed.getBreedById(self.breedId)
-      return self._breed
+   # @property
+   # def breed(self) -> Breed:
+   #    if not self._breed:
+   #       self._breed = Breed.getBreedById(self.breedId)
+   #    return self._breed
    
    def __str__(self) -> str:
       return "[BasicCharacterWrapper#" + self.id + "_" + self.name + "]"

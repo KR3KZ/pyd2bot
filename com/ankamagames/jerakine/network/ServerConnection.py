@@ -1,7 +1,6 @@
 import base64
-from ctypes.wintypes import MSG
 from threading import Timer
-from time import perf_counter
+from time import perf_counter, sleep
 import traceback
 from types import FunctionType
 from whistle import Event
@@ -9,7 +8,6 @@ from com.ankamagames.jerakine.messages.ConnectedMessage import ConnectedMessage
 from com.ankamagames.jerakine.network.INetworkDataContainerMessage import INetworkDataContainerMessage
 from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
 from com.ankamagames.dofus.network.messages.common.NetworkDataContainerMessage import NetworkDataContainerMessage
-from com.ankamagames.jerakine.benchmark.BenchmarkTimer import BenchmarkTimer
 from com.ankamagames.jerakine.events.ProgressEvent import ProgressEvent
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.messages.MessageHandler import MessageHandler
@@ -20,7 +18,6 @@ from com.ankamagames.jerakine.network.RawDataParser import RawDataParser
 from com.ankamagames.jerakine.events.BasicEvent import BasicEvent
 from com.ankamagames.jerakine.events.IOErrorEvent import IOErrorEvent
 from com.ankamagames.jerakine.events.SecurityErrorEvent import SecurityErrorEvent
-from com.ankamagames.jerakine.network.ServerConnectionClosedMessage import ServerConnectionClosedMessage
 from com.ankamagames.jerakine.network.UnpackMode import UnpackMode
 from com.ankamagames.jerakine.network.messages.ServerConnectionFailedMessage import ServerConnectionFailedMessage
 from com.ankamagames.jerakine.network.utils.FuncTree import FuncTree
@@ -33,12 +30,6 @@ logger = Logger(__name__)
 
 class ServerConnection(IServerConnection):
    
-   disabled:bool
-   
-   disabledIn:bool
-   
-   disabledOut:bool
-   
    DEBUG_VERBOSE:bool = False
    
    LOG_ENCODED_CLIENT_MESSAGES:bool = False
@@ -50,82 +41,53 @@ class ServerConnection(IServerConnection):
    LATENCY_AVG_BUFFER_SIZE:int = 50
    
    MESSAGE_SIZE_ASYNC_THRESHOLD:int = 300 * 1024
-   
-   _socket:Socket
-   
-   _id:str
-   
-   _rawParser:RawDataParser
-   
-   _handler:MessageHandler
-   
-   _remoteSrvHost:str
-   
-   _remoteSrvPort:int
-   
-   _connecting:bool
-   
-   _outputBuffer:list[INetworkMessage]
-   
-   _splittedPacket:bool
-   
-   _staticHeader:int
-   
-   _splittedPacketId:int
-   
-   _splittedPacketLength:int
-   
-   _inputBuffer:ByteArray
-   
-   _pauseBuffer:list
-   
-   _pause:bool
-   
-   _latencyBuffer:list
-   
-   _latestSent:int
-   
-   _lastSent:int
-   
-   _timeoutTimer:BenchmarkTimer
-   
-   _lagometer:ILagometer
-   
-   _sendSequenceId:int = 0
-   
-   _asyncMessages:list[INetworkMessage]
-   
-   _asyncTrees:list[FuncTree]
-   
-   _asyncNetworkDataContainerMessage:NetworkDataContainerMessage
-   
-   _willClose:bool
-   
-   _input:ByteArray
-   
-   _maxUnpackTime:int = float("inf")
-   
-   _firstConnectionTry:bool = True
-   
+ 
    def __init__(self, host:str = None, port:int = 0, id:str = "", secure:bool = False):
       self._pauseBuffer = []
       self._latencyBuffer = []
       self._asyncMessages = list[INetworkMessage]()
       self._asyncTrees = list[FuncTree]()
       self._input = ByteArray()
-      super().__init__()
       self._socket = Socket(host, port)
       self._remoteSrvHost = host
       self._remoteSrvPort = port
       self._id = id
-   
+      self._connecting = False
+      self.disabled = False
+      self.disabledIn = False
+      self._id:str = None
+      self._rawParser:RawDataParser = None
+      self._handler:MessageHandler = None
+      self._connecting = False
+      self._outputBuffer = list[INetworkMessage]()
+      self._splittedPacket = False
+      self._staticHeader:int = -1
+      self._splittedPacketId:int = -1
+      self._splittedPacketLength:int = -1
+      self._inputBuffer = ByteArray()
+      self._pauseBuffer:list = None
+      self._pause:bool = None
+      self._latencyBuffer:list = None
+      self._latestSent:int = None
+      self._lastSent:int = None
+      self._lagometer:ILagometer = None
+      self._sendSequenceId:int = 0
+      self._asyncMessages:list[INetworkMessage] = None
+      self._asyncTrees:list[FuncTree] = None
+      self._asyncNetworkDataContainerMessage:NetworkDataContainerMessage = None
+      self._willClose:bool = None
+      self._input:ByteArray = None
+      self._maxUnpackTime:int = float("inf")
+      self._firstConnectionTry:bool = True
+      super().__init__()
+
    def close(self) -> None:
       if self._socket.connected:
-         logger.debug("[" + self._id + "] Closing socket for connection! ")
+         logger.debug("[" + str(self._id) + "] Closing socket for connection! ")
          EnterFrameDispatcher().removeEventListener(self.onEnterFrame)
          self._socket.close()
       elif not self.checkClosed():
-         logger.warn("[" + self._id + "] Tried to close a socket while it had already been disconnected.")
+         logger.warn("[" + str(self._id) + "] Tried to close a socket while it had already been disconnected.")
          EnterFrameDispatcher().removeEventListener(self.onEnterFrame)
    
    @property
@@ -202,19 +164,19 @@ class ServerConnection(IServerConnection):
       self._remoteSrvHost = host
       self._remoteSrvPort = port
       self.addListeners()
-      logger.info("[" + self._id + "] Connecting to " + host + ":" + port + "...")
+      logger.info("[" + str(self._id) + "] Connecting to " + host + ":" + str(port) + "...")
+      self._timeoutTimer = Timer(interval=7, function=self.onSocketTimeOut)
+      self._timeoutTimer.start()
       try:
          self._socket.connect(host, port)
       except Exception as e:
-         logger.error("[" + str(self._id) + "] Could not establish connection to the serveur!\n", exec_info=True)
-      self._timeoutTimer = Timer(interval=7, function=self.onSocketTimeOut)
-      self._timeoutTimer.start()
+         logger.error("[" + str(self._id) + "] Could not establish connection to the serveur!\n", exc_info=True)
 
    def getType(self, v) -> str:
       className:str = v.__class__.__name__
       if className.find("list") != -1:
-            className = className.split("list[").join("list{");
-            className = className.split("]").join("}");
+            className = className.split("list[").join("list{")
+            className = className.split("]").join("}")
       else:
          className = className.split(".").pop()
       if isinstance(v, INetworkMessage):
@@ -223,7 +185,7 @@ class ServerConnection(IServerConnection):
    
    def send(self, msg:INetworkMessage, connectionId:str = "") -> None:
       if self.DEBUG_DATA:
-         logger.debug("[" + self._id + "] [SND] > " + (msg.__class__.__name__ if self.DEBUG_VERBOSE else msg))
+         logger.debug("[" + str(self._id) + "] [SND] > " + (msg.__class__.__name__ if self.DEBUG_VERBOSE else msg))
       if self.disabled or self.disabledOut:
          return
       if not self._socket.connected:
@@ -263,13 +225,13 @@ class ServerConnection(IServerConnection):
       while len(self._pauseBuffer) and not self._pause:
          msg = self._pauseBuffer.pop(0)
          if self.DEBUG_DATA:
-            logger.debug("[" + self._id + "] [RCV] (after Resume) " + msg.__class__.__name__)
+            logger.debug("[" + str(self._id) + "] [RCV] (after Resume) " + msg.__class__.__name__)
          self._handler.process(msg)
       self._pauseBuffer = []
    
    def stopConnectionTimeout(self) -> None:
       if self._timeoutTimer:
-         self._timeoutTimer.stop()
+         self._timeoutTimer.cancel()
          self._timeoutTimer = None
    
    def addEventListener(self, type:str, listener:FunctionType, useCapture:bool = False, priority:int = 0, useWeakReference:bool = False) -> None:
@@ -293,7 +255,7 @@ class ServerConnection(IServerConnection):
    def addListeners(self) -> None:
       self._socket.addEventListener(ProgressEvent.SOCKET_DATA, self.onSocketData, 0)
       self._socket.addEventListener(BasicEvent.CONNECT, self.onConnect, 0)
-      self._socket.addEventListener(BasicEvent.CLOSE, self.onClose, int.MAX_VALUE)
+      self._socket.addEventListener(BasicEvent.CLOSE, self.onClose, float("inf"))
       self._socket.addEventListener(IOErrorEvent.IO_ERROR, self.onSocketError, 0)
       EnterFrameDispatcher().addEventListener(self.onEnterFrame, EnterFrameConst.SERVER_CONNECTION)
    
@@ -310,9 +272,9 @@ class ServerConnection(IServerConnection):
          if input.remaining() > 0:
             if self.DEBUG_LOW_LEVEL_VERBOSE:
                if fromEnterFrame:
-                  logger.info("[" + self._id + "] Handling data, byte available : " + input.remaining() + "  trigger by a timer")
+                  logger.info("[" + str(self._id) + "] Handling data, byte available : " + input.remaining() + "  trigger by a timer")
                else:
-                  logger.info("[" + self._id + "] Handling data, byte available : " + input.remaining())
+                  logger.info("[" + str(self._id) + "] Handling data, byte available : " + input.remaining())
             msg:NetworkMessage = self.lowReceive(input)
             while msg:
                if self._lagometer:
@@ -328,7 +290,7 @@ class ServerConnection(IServerConnection):
                   msg = self.lowReceive(input)
       except Exception as e:
          trace = "".join(traceback.TracebackException.from_exception(e).format())
-         logger.error("[" + self._id + "] Error while reading socket. \n" + trace)
+         logger.error("[" + str(self._id) + "] Error while reading socket. \n" + trace)
          self.close()
    
    def checkClosed(self) -> bool:
@@ -345,7 +307,7 @@ class ServerConnection(IServerConnection):
             self._asyncNetworkDataContainerMessage = msg
          elif not self._pause:
             if self.DEBUG_DATA and msg.getMessageId() != 176 and msg.getMessageId() != 6362:
-               logger.debug("[" + self._id + "] [RCV] " + msg.__class__.__name__)
+               logger.debug("[" + str(self._id) + "] [RCV] " + msg.__class__.__name__)
             # logger.logDirectly(NetworkLogEvent(msg,True))
             if not self.disabledIn:
                self._handler.process(msg)
@@ -373,7 +335,7 @@ class ServerConnection(IServerConnection):
    def lowSend(self, msg:INetworkMessage) -> None:
       if self.LOG_ENCODED_CLIENT_MESSAGES and msg.getMessageId() not in [5607, 6372, 6156, 6609, 4, 6119, 110, 6540, 6648, 6608]:
          data = msg.pack()
-         logger.debug("[" + self._id + "] [SND] > " + msg + " ---" + base64.encodebytes(data) + "---")
+         logger.debug("[" + str(self._id) + "] [SND] > " + msg + " ---" + base64.encodebytes(data) + "---")
       self._socket.send(msg.pack())
       self._latestSent = perf_counter()
       self._lastSent = perf_counter()
@@ -387,7 +349,7 @@ class ServerConnection(IServerConnection):
 
          if src.remaining() < 2:
             if self.DEBUG_LOW_LEVEL_VERBOSE:
-               logger.info("[" + self._id + "] Not enough data to read the header, byte available : " + src.remaining() + " (needed : 2)")
+               logger.info("[" + str(self._id) + "] Not enough data to read the header, byte available : " + src.remaining() + " (needed : 2)")
             return None
 
          staticHeader = src.readUnsignedShort()
@@ -404,17 +366,17 @@ class ServerConnection(IServerConnection):
                   self._input = src.read(messageLength)
                   msg = self._rawParser.parseAsync(self._input, messageId, messageLength, self.computeMessage)
                   if self.DEBUG_LOW_LEVEL_VERBOSE and msg != None:
-                     logger.info("[" + self._id + "] Async " + self.getType(msg) + " parsing, message length : " + messageLength + ")")
+                     logger.info("[" + str(self._id) + "] Async " + self.getType(msg) + " parsing, message length : " + messageLength + ")")
 
                else:
                   msg = self._rawParser.parse(src, messageId, messageLength)
                   if self.DEBUG_LOW_LEVEL_VERBOSE:
-                     logger.info("[" + self._id + "] Full parsing done")
+                     logger.info("[" + str(self._id) + "] Full parsing done")
 
                return msg
 
             if self.DEBUG_LOW_LEVEL_VERBOSE:
-               logger.info("[" + self._id + "] Not enough data to read msg content, byte available : " + src.remaining() + " (needed : " + messageLength + ")")
+               logger.info("[" + str(self._id) + "] Not enough data to read msg content, byte available : " + src.remaining() + " (needed : " + messageLength + ")")
 
             self._staticHeader = -1
             self._splittedPacketLength = messageLength
@@ -424,7 +386,7 @@ class ServerConnection(IServerConnection):
             return None
 
          if self.DEBUG_LOW_LEVEL_VERBOSE:
-            logger.info("[" + self._id + "] Not enough data to read message ID, byte available : " + src.remaining() + " (needed : " + (staticHeader & NetworkMessage.BIT_MASK) + ")")
+            logger.info("[" + str(self._id) + "] Not enough data to read message ID, byte available : " + src.remaining() + " (needed : " + (staticHeader & NetworkMessage.BIT_MASK) + ")")
         
          self._staticHeader = staticHeader
          self._splittedPacketLength = messageLength
@@ -443,11 +405,11 @@ class ServerConnection(IServerConnection):
          if self.getUnpackMode(self._splittedPacketId, self._splittedPacketLength) == UnpackMode.ASYNC:
             msg = self._rawParser.parseAsync(self._inputBuffer, self._splittedPacketId, self._splittedPacketLength, self.computeMessage)
             if self.DEBUG_LOW_LEVEL_VERBOSE and msg != None:
-               logger.info("[" + self._id + "] Async splitted " + self.getType(msg) + " parsing, message length : " + self._splittedPacketLength + ")")
+               logger.info("[" + str(self._id) + "] Async splitted " + self.getType(msg) + " parsing, message length : " + self._splittedPacketLength + ")")
          else:
             msg = self._rawParser.parse(self._inputBuffer, self._splittedPacketId, self._splittedPacketLength)
             if self.DEBUG_LOW_LEVEL_VERBOSE:
-               logger.info("[" + self._id + "] Full parsing done")
+               logger.info("[" + str(self._id) + "] Full parsing done")
          self._splittedPacket = False
          self._inputBuffer = ByteArray()
          return msg
@@ -484,7 +446,7 @@ class ServerConnection(IServerConnection):
          while True:
             if not self._asyncTrees[0].next():
                if self.DEBUG_LOW_LEVEL_VERBOSE:
-                  logger.info("[" + self._id + "] Async " + self.getType(self._asyncMessages[0]) + " parsing complete")
+                  logger.info("[" + str(self._id) + "] Async " + self.getType(self._asyncMessages[0]) + " parsing complete")
                self._asyncTrees.pop(0)
                self._asyncMessages[0].unpacked = True
                self.process(self._asyncMessages.pop(0))
@@ -507,7 +469,7 @@ class ServerConnection(IServerConnection):
       self._connecting = False
       self.stopConnectionTimeout()
       if self.DEBUG_DATA:
-         logger.trace("[" + self._id + "] Connection opened.")
+         logger.debug("[" + str(self._id) + "] Connection opened.")
       for msg in self._outputBuffer:
          self.lowSend(msg)
       self._inputBuffer = ByteArray()
@@ -521,10 +483,11 @@ class ServerConnection(IServerConnection):
          self._willClose = True
          return
       if self.DEBUG_DATA:
-         logger.trace("[" + self._id + "] Connection closed.")
+         logger.trace("[" + str(self._id) + "] Connection closed.")
       self.setTimeout(self.removeListeners, 30000)
       if self._lagometer:
          self._lagometer.stop()
+      from com.ankamagames.jerakine.network.ServerConnectionClosedMessage import ServerConnectionClosedMessage
       self._handler.process(ServerConnectionClosedMessage(self))
       self._connecting = False
       self._outputBuffer = []
@@ -538,25 +501,25 @@ class ServerConnection(IServerConnection):
    
    def onSocketData(self, pe:ProgressEvent) -> None:
       if self.DEBUG_LOW_LEVEL_VERBOSE:
-         logger.info("[" + self._id + "] Receive Event, byte available : " + self._socket.remaining())
+         logger.info("[" + str(self._id) + "] Receive Event, byte available : " + self._socket.remaining())
       self.receive(self._socket.buff)
    
    def onSocketError(self, e:IOErrorEvent) -> None:
       if self._lagometer:
          self._lagometer.stop()
-      logger.error("[" + self._id + "] Failure while opening socket.")
+      logger.error("[" + str(self._id) + "] Failure while opening socket.")
       self._connecting = False
-      self._handler.process(ServerConnectionFailedMessage(self,e.text))
+      self._handler.process(ServerConnectionFailedMessage(self, e.text))
    
-   def onSocketTimeOut(self, e:Event) -> None:
+   def onSocketTimeOut(self) -> None:
       if self._lagometer:
          self._lagometer.stop()
       self._connecting = False
       if self._firstConnectionTry:
-         logger.error("[" + self._id + "] Failure while opening socket, timeout, but WWJD ? Give a second chance !")
+         logger.error("[" + str(self._id) + "] Failure while opening socket, timeout, but WWJD ? Give a second chance !")
          self.connect(self._remoteSrvHost,self._remoteSrvPort)
          self._firstConnectionTry = False
       else:
-         logger.error("[" + self._id + "] Failure while opening socket, timeout.")
+         logger.error("[" + str(self._id) + "] Failure while opening socket, timeout.")
          self._handler.process(ServerConnectionFailedMessage(self, "timeout"))
    

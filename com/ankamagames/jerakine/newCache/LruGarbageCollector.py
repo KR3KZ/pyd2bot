@@ -1,8 +1,8 @@
 from com.ankamagames.jerakine.interfaces.IDestroyable import IDestroyable
 from com.ankamagames.jerakine.newCache.iCache import ICache
 from com.ankamagames.jerakine.newCache.iCacheGarbageCollector import ICacheGarbageCollector
-from com.ankamagames.jerakine.pools.pool import Pool
-from com.ankamagames.jerakine.pools.poolable import Poolable
+from com.ankamagames.jerakine.pools.Pool import Pool
+from com.ankamagames.jerakine.pools.Poolable import Poolable
 
 
 class UsageCountHelper(Poolable):

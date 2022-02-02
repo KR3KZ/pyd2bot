@@ -1,6 +1,8 @@
+from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
+@dataclass
 class GuildInformationsGeneralMessage(NetworkMessage):
     abandonnedPaddock:bool
     level:int
@@ -11,4 +13,7 @@ class GuildInformationsGeneralMessage(NetworkMessage):
     nbTotalMembers:int
     nbConnectedMembers:int
     
+    
+    def __post_init__(self):
+        super().__init__()
     

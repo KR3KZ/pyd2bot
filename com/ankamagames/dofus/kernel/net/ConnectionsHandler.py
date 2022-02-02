@@ -1,6 +1,9 @@
 from ctypes import ArgumentError
-from com.ankamagames.dofus.kernel.Kernel import Kernel
+import com.ankamagames.dofus.kernel.Kernel as krnl
+from com.ankamagames.dofus.logic.common.utils.LagometerAck import LagometerAck
+from com.ankamagames.dofus.logic.connection.frames.HandshakeFrame import HandshakeFrame
 from com.ankamagames.jerakine.logger.Logger import Logger
+from com.ankamagames.jerakine.network.IConnectionProxy import IConnectionProxy
 from com.ankamagames.jerakine.network.IServerConnection import IServerConnection
 from com.ankamagames.dofus.kernel.net.ConnectionType import ConnectionType
 from com.ankamagames.dofus.kernel.net.DisconnectionReason import DisconnectionReason
@@ -8,6 +11,8 @@ from com.ankamagames.dofus.kernel.net.DisconnectionReasonEnum import Disconnecti
 from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerManager
 from com.ankamagames.dofus.network.messages.common.basic.BasicPingMessage import BasicPingMessage
 from com.ankamagames.jerakine.network.MultiConnection import MultiConnection
+from com.ankamagames.jerakine.network.ServerConnection import ServerConnection
+from com.ankamagames.dofus.network.MessageReceiver import MessageReceiver
 logger = Logger(__name__)
 
 
@@ -17,7 +22,7 @@ class ConnectionsHandler:
 
    KOLI_SERVER:str = "koli_server"
 
-   _useSniffer:bool
+   _useSniffer:bool = False
 
    _currentConnection:MultiConnection = None
 
@@ -34,13 +39,15 @@ class ConnectionsHandler:
    _connectionTimeout = None
       
 
-   @classmethod
+   
    @property
+   @classmethod
    def useSniffer(cls) -> bool:
       return cls._useSniffer
 
-   @classmethod
+   
    @useSniffer.setter
+   @classmethod
    def useSniffer(cls, sniffer:bool) -> None:
       cls._useSniffer = sniffer
 
@@ -53,18 +60,21 @@ class ConnectionsHandler:
    def hasReceivedMsg(cls) -> bool:
       return cls._hasReceivedMsg
 
-   @classmethod
+   
    @hasReceivedMsg.setter
+   @classmethod
    def hasReceivedMsg(cls, value:bool) -> None:
       cls._hasReceivedMsg = value
 
-   @classmethod
+   
    @property
+   @classmethod
    def hasReceivedNetworkMsg(cls) -> bool:
       return cls._hasReceivedNetworkMsg
 
-   @classmethod
+   
    @hasReceivedNetworkMsg.setter
+   @classmethod
    def hasReceivedNetworkMsg(cls, value:bool) -> None:
       cls._hasReceivedNetworkMsg = value
 
@@ -115,8 +125,8 @@ class ConnectionsHandler:
 
    @classmethod
    def closeConnection(cls) -> None:
-      if Kernel().getWorker().contains(HandshakeFrame):
-         Kernel().getWorker().removeFrame(Kernel().getWorker().getFrame(HandshakeFrame))
+      if krnl.Kernel().getWorker().contains(HandshakeFrame):
+         krnl.Kernel().getWorker().removeFrame(krnl.Kernel().getWorker().getFrame(HandshakeFrame))
       if cls._currentConnection and cls._currentConnection.connected:
          cls._currentConnection.close()
       cls._currentConnection = None
@@ -147,7 +157,7 @@ class ConnectionsHandler:
       logger.info("Resume connection")
       if cls._currentConnection:
          cls._currentConnection.resume()
-      Kernel().getWorker().process(cls.ConnectionResumedMessage())
+      krnl.Kernel().getWorker().process(cls.ConnectionResumedMessage())
 
    @classmethod
    def startConnectionTimer(cls) -> None:
@@ -178,11 +188,11 @@ class ConnectionsHandler:
       if not cls._currentConnection:
          cls.createConnection()
       conn.lagometer = LagometerAck()
-      conn.handler = Kernel().getWorker()
+      conn.handler = krnl.Kernel().getWorker()
       conn.rawParser = MessageReceiver()
-      cls._currentConnection.addConnection(conn,id)
+      cls._currentConnection.addConnection(conn, id)
       cls._currentConnection.mainConnection = conn
-      Kernel().getWorker().addFrame(HandshakeFrame())
+      krnl.Kernel().getWorker().addFrame(HandshakeFrame())
       conn.connect(host,port)
 
    @classmethod

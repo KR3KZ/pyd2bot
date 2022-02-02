@@ -1,6 +1,8 @@
+from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.PaginationRequestAbstractMessage import PaginationRequestAbstractMessage
 
 
+@dataclass
 class GuildSummaryRequestMessage(PaginationRequestAbstractMessage):
     nameFilter:str
     criterionFilter:list[int]
@@ -16,4 +18,7 @@ class GuildSummaryRequestMessage(PaginationRequestAbstractMessage):
     hideFullFilter:bool
     sortDescending:bool
     
+    
+    def __post_init__(self):
+        super().__init__()
     

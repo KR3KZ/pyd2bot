@@ -12,7 +12,3 @@ class ConnectionType(Enum):
    TO_KOLI_SERVER:str = "server_koli"
    
    TO_ALL_SERVERS:str = "all"
-      
-   
-   def __init__(self):
-      super().__init__()

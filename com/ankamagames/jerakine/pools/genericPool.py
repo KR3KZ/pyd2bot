@@ -1,6 +1,6 @@
 from typing import Any
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
-from com.ankamagames.jerakine.pools.poolable import Poolable
+from com.ankamagames.jerakine.pools.Poolable import Poolable
 
 
 class GenericPool(metaclass=Singleton):

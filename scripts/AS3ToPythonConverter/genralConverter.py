@@ -57,7 +57,7 @@ patterns = {
     "Vector\.<(\S+)>": r"list[\1]",
     "function (\S+)\((.*)\) : (\S+)": r"def \1(self, \2) -> \3:",
     "function (\S+)\((.*)\) :": r"def \1(self, \2):",
-    "if !(.*)": r"if not \1",
+    # "if !(.*)": r"if not \1",
     "([_a-zA-Z][_a-zA-Z0-9]{0,30})\.length": r"len(\1)",
     "throw Error(.*)": r"raise Exception\1",
     r'^(.*)function get (\S+)\((.*)\) : (\S+)$': r"\1@property\n\1def \2(self, \3) -> \4:",
@@ -82,29 +82,31 @@ patterns = {
     "Math.sqrt": "math.sqrt",
     "Math.PI": "math.pi",
     "Math.min": "min",
-    "(elif|if) (\S+) is ([A-Z]+\S+):": r"\1 isinstance(\2, \3):",
-    "super\((.*)\)": r"super().__init__(\1)",
-    "super\.": r"super().",
-    "(\S+).__str__\(\)": r"str(\1)",
-    "for (\S+):(\S+)\s*=\s*(\S+)\s+(\S+)\s+(.*)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+):": r"for \1 in range(\3, \6, \9):",
-    "Function" : "FunctionType",
-    "StringUtils.replace\((.*),(.*),(.*)\)": r"str.replace(\1, \2, \3)",
-    ".indexOf": ".find",
-    "\.substring\((.*?),(.*?)\)": r"[\1:\2]",
-    "\.substring\((.*)\)": r"[:\1]",
-    "catch\(e:Error\)": "except Exception as e:",
-    "catch\(e:(\S+)\)": r"except \1 as e:",
-    "try": "try:",
-    "_log": "logger",
-    "throw ([A-Z]+\S+)": r"raise \1",
-    "IDataInput": "ByteArray",
-    "/s*:/s*Object": ":object",
-    "-> \*": "-> Any",
-    "([_a-zA-Z][_a-zA-Z0-9]{0,30})/s?:/s?Class": r"\1:object",
-    ".concat": ".extend",
-    "([_a-zA-Z][_a-zA-Z0-9]{0,30}):String": r"\1:str",
-    "getTimer()": "perf_counter()",
-    "\.shift()": ".pop(0)",
+
+    r"(elif|if) (\S+) is ([A-Z]+\S+)\:": r"\1 isinstance(\2, \3):",
+
+    r"super\((.*)\)": r"super().__init__(\1)",
+    r"super\.": r"super().",
+    r"(\S+).__str__\(\)": r"str(\1)",
+    r"for (\S+):(\S+)\s*=\s*(\S+)\s+(\S+)\s+(.*)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\:": r"for \1 in range(\3, \6, \9):",
+    r"Function" : "FunctionType",
+    r"StringUtils\.replace\((.*),(.*),(.*)\)": r"str.replace(\1, \2, \3)",
+    r"\.indexOf": ".find",
+    r"\.substring\((.*?),(.*?)\)": r"[\1:\2]",
+    r"\.substring\((.*)\)": r"[:\1]",
+    r"catch\(e\:Error\)": "except Exception as e:",
+    r"catch\(e\:(\S+)\)": r"except \1 as e:",
+    r"try": "try:",
+    r"_log": "logger",
+    r"throw ([A-Z]+\S+)": r"raise \1",
+    r"IDataInput": "ByteArray",
+    r"/s*\:/s*Object": ":object",
+    r"-> \*": "-> Any",
+    r"([_a-zA-Z][_a-zA-Z0-9]{0,30})/s?:/s?Class": r"\1:object",
+    r".concat": ".extend",
+    r"([_a-zA-Z][_a-zA-Z0-9]{0,30}):String": r"\1:str",
+    r"getTimer\(\)": "perf_counter()",
+    r"\.shift\(\)": ".pop(0)",
 
 }
 SWITCH_CASE_PATTERN = r"\s*(switch\(.*\)\s*\n?\{\s*(?:.|\n)+break;\s*\n\s*(?:default:)?(?:[^}]|\n)*\})"
@@ -255,7 +257,7 @@ def parseFile(file_p, out_p):
     with open(file_p, "r", encoding="utf8") as fp:
         code = fp.read()
         code = handleClassHeader(code)
-        code = processCompressedIfELseInAllCode(code)
+        # code = processCompressedIfELseInAllCode(code)
         code = processSwitchCases(code)
         for pattern, repl in patterns.items():
             code = re.sub(pattern, repl, code, flags=re.M)
@@ -268,5 +270,5 @@ def parseFile(file_p, out_p):
 
 # parseFolderFiles("AS3ToPythonConverter/scripts", "AS3ToPythonConverter/connectionType")
 t = perf_counter()
-parseFile("scripts/AS3ToPythonConverter/target.as", "scripts/AS3ToPythonConverter/AuthentificationFrame.py")
+parseFile("scripts/AS3ToPythonConverter/target.as", "scripts/AS3ToPythonConverter/Metadata.py")
 print("parsin took:", perf_counter() - t)

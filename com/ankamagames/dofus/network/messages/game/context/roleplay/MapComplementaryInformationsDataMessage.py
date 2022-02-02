@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.dofus.network.types.game.house.HouseInformations import HouseInformations
 from com.ankamagames.dofus.network.types.game.context.roleplay.GameRolePlayActorInformations import GameRolePlayActorInformations
@@ -8,6 +9,7 @@ from com.ankamagames.dofus.network.types.game.context.fight.FightCommonInformati
 from com.ankamagames.dofus.network.types.game.context.fight.FightStartingPositions import FightStartingPositions
 
 
+@dataclass
 class MapComplementaryInformationsDataMessage(NetworkMessage):
     subAreaId:int
     mapId:int
@@ -20,4 +22,7 @@ class MapComplementaryInformationsDataMessage(NetworkMessage):
     hasAggressiveMonsters:bool
     fightStartPositions:FightStartingPositions
     
+    
+    def __post_init__(self):
+        super().__init__()
     

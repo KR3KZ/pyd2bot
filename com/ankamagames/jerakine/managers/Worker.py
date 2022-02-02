@@ -13,8 +13,9 @@ from com.ankamagames.jerakine.messages.CancelableMessages import CancelableMessa
 from com.ankamagames.jerakine.messages.DiscardableMessage import DiscardableMessage
 from com.ankamagames.jerakine.messages.MessageHandler import MessageHandler
 from com.ankamagames.jerakine.messages.QueueableMessage import QueueableMessage
-from com.ankamagames.jerakine.pools.genericPool import GenericPool
-from com.ankamagames.jerakine.pools.poolable import Poolable
+from com.ankamagames.jerakine.messages.events.FramePushedEvent import FramePushedEvent
+from com.ankamagames.jerakine.pools.GenericPool import GenericPool
+from com.ankamagames.jerakine.pools.Poolable import Poolable
 import com.ankamagames.jerakine.utils.displays.EnterFrameDispatcher as efd
 from com.ankamagames.jerakine.utils.displays.FrameIdManager import FrameIdManager
 from com.ankamagames.jerakine.utils.misc.PriorityComparer import PriorityComparer
@@ -28,23 +29,24 @@ class Worker(EventDispatcher, MessageHandler):
    DEBUG_MESSAGES:bool = True
    LONG_MESSAGE_QUEUE:int = 100
    MAX_TIME_FRAME:int = 40
-   _messagesQueue:list[Message]
-   _treatmentsQueue:list[Treatment]
-   _framesList:list[Frame]
-   _processingMessage:bool
-   _framesToAdd:list[Frame]
-   _framesToRemove:list[Frame]
-   _paused:bool
-   _pausedQueue:list[Message]
-   _terminated:bool = False
-   _terminating:bool = False
-   _unstoppableMsgobjectList:list
-   _framesBeingDeleted:dict
-   _currentFrameTypesCache:dict
+
    
    def __init__(self):
       self._unstoppableMsgobjectList = list()
-      self._framesBeingDeleted = dict(True)
+      self._framesBeingDeleted = dict()   
+      self._messagesQueue = list[Message]()
+      self._treatmentsQueue = list[Treatment]()
+      self._framesList = list[Frame]()
+      self._processingMessage = False
+      self._framesToAdd = list[Frame]()
+      self._framesToRemove = list[Frame]()
+      self._paused = False
+      self._pausedQueue = list[Message]()
+      self._terminated:bool = False
+      self._terminating:bool = False
+      self._unstoppableMsgobjectList = list()
+      self._framesBeingDeleted = dict()
+      self._currentFrameTypesCache = dict()
       super().__init__()
    
    @property
@@ -134,13 +136,9 @@ class Worker(EventDispatcher, MessageHandler):
       return True
    
    def addFrame(self, frame:Frame) -> None:
-      f:Frame = None
-      frameRemoving:bool = False
-      frameAdding:bool = False
-      isAlreadyIn:bool = False
       if self._terminated:
          return
-      if self._currentFrameTypesCache[type(frame)]:
+      if self._currentFrameTypesCache.get(type(frame)):
          frameRemoving = False
          frameAdding = False
          if self._processingMessage:
@@ -161,7 +159,7 @@ class Worker(EventDispatcher, MessageHandler):
          return
 
       if self.DEBUG_FRAMES:
-         logger.info("Adding frame: " + frame)
+         logger.info("Adding frame: " + frame.__class__.__name__)
 
       if self._processingMessage or len(self._framesToRemove) > 0 or len(self._framesToAdd) > 0:
          isAlreadyIn = False
@@ -170,8 +168,9 @@ class Worker(EventDispatcher, MessageHandler):
                isAlreadyIn = True
          if not isAlreadyIn:
             self._framesToAdd.append(frame)
+
       else:
-         self.appendFrame(frame)
+         self.pushFrame(frame)
    
    def removeFrame(self, frame:Frame) -> None:
       if self._terminated:
@@ -264,7 +263,7 @@ class Worker(EventDispatcher, MessageHandler):
       self._pausedQueue = list[Message]()
       self._currentFrameTypesCache = dict()
       for frame in nonPulledFrameList:
-         self.appendFrame(frame)
+         self.pushFrame(frame)
       efd.EnterFrameDispatcher().removeWorker()
       self._paused = False
    
@@ -274,15 +273,15 @@ class Worker(EventDispatcher, MessageHandler):
    def run(self) -> None:
       efd.EnterFrameDispatcher().addWorker(self)
    
-   def appendFrame(self, frame:Frame) -> None:
+   def pushFrame(self, frame:Frame) -> None:
       if frame.appended():
          self._framesList.append(frame)
-         self._framesList.sort(PriorityComparer.compare)
+         self._framesList.sort(key=lambda x: x.priority)
          self._currentFrameTypesCache[type(frame)] = frame
          if self.has_listeners(FramePushedEvent.EVENT_FRAME_PUSHED):
             self.dispatch(FramePushedEvent.EVENT_FRAME_PUSHED, FramePushedEvent(frame))
       else:
-         logger.warn("Frame " + frame + " refused to be.appended.")
+         logger.warn("Frame " + frame.__class__.__name__ + " refused to be.appended.")
    
    def pullFrame(self, frame:Frame) -> None:
       index:int = 0
@@ -358,5 +357,5 @@ class Worker(EventDispatcher, MessageHandler):
          len(self._framesToRemove[0:self._framesToRemove])
       if len(self._framesToAdd) > 0:
          for frameToAdd in self._framesToAdd:
-            self.appendFrame(frameToAdd)
+            self.pushFrame(frameToAdd)
          len(self._framesToAdd[0:self._framesToAdd])

@@ -1,6 +1,7 @@
 from com.ankamagames.jerakine.messages.QueueableMessage import QueueableMessage
 from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
 from com.ankamagames.jerakine.network.IdentifiedMessage import IdentifiedMessage
+from com.ankamagames.jerakine.network.utils.FuncTree import FuncTree
 
 
 class INetworkMessage(IdentifiedMessage, QueueableMessage):
