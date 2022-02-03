@@ -1,15 +1,21 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.character.CharacterMinimalPlusLookInformations import CharacterMinimalPlusLookInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.character.CharacterMinimalPlusLookInformations import CharacterMinimalPlusLookInformations
+    
 
 
-@dataclass
 class PrismFightDefenderAddMessage(NetworkMessage):
     subAreaId:int
     fightId:int
-    defender:CharacterMinimalPlusLookInformations
+    defender:'CharacterMinimalPlusLookInformations'
     
-    
-    def __post_init__(self):
+
+    def init(self, subAreaId:int, fightId:int, defender:'CharacterMinimalPlusLookInformations'):
+        self.subAreaId = subAreaId
+        self.fightId = fightId
+        self.defender = defender
+        
         super().__init__()
+    
     

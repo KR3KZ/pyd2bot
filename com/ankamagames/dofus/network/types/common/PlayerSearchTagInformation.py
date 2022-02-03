@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.common.AbstractPlayerSearchInformation import AbstractPlayerSearchInformation
-from com.ankamagames.dofus.network.types.common.AccountTagInformation import AccountTagInformation
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.common.AccountTagInformation import AccountTagInformation
+    
 
 
-@dataclass
 class PlayerSearchTagInformation(AbstractPlayerSearchInformation):
-    tag:AccountTagInformation
+    tag:'AccountTagInformation'
     
-    
-    def __post_init__(self):
+
+    def init(self, tag:'AccountTagInformation'):
+        self.tag = tag
+        
         super().__init__()
+    
     

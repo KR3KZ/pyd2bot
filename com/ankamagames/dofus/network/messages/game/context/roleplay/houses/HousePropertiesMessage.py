@@ -1,15 +1,21 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.house.HouseInstanceInformations import HouseInstanceInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.house.HouseInstanceInformations import HouseInstanceInformations
+    
 
 
-@dataclass
 class HousePropertiesMessage(NetworkMessage):
     houseId:int
     doorsOnMap:list[int]
-    properties:HouseInstanceInformations
+    properties:'HouseInstanceInformations'
     
-    
-    def __post_init__(self):
+
+    def init(self, houseId:int, doorsOnMap:list[int], properties:'HouseInstanceInformations'):
+        self.houseId = houseId
+        self.doorsOnMap = doorsOnMap
+        self.properties = properties
+        
         super().__init__()
+    
     

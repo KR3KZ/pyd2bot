@@ -1,9 +1,7 @@
-from time import perf_counter
 from types import FunctionType
-import marshmallow_dataclass
 from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
 from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
-from com.ankamagames.jerakine.network.parser.NetworkMessageParser import NetworkMessageParser
+from com.ankamagames.jerakine.network.parser.ProtocolSpec import ProtocolSpec
 from com.ankamagames.jerakine.network.utils.FuncTree import FuncTree
 
 
@@ -72,7 +70,7 @@ class NetworkMessage(INetworkMessage):
    
    def getMessageId(self) -> int:
       if not self._spec:
-         self._spec = NetworkMessageParser.getSpecByName(self.__class__.__name__)
+         self._spec = ProtocolSpec.getClassSpecByName(self.__class__.__name__)
       return self._spec["protocolId"]
    
    def reset(self) -> None:
@@ -80,27 +78,14 @@ class NetworkMessage(INetworkMessage):
    
    @classmethod
    def unpack(cls, data:ByteArray, length:int) -> 'NetworkMessage':
-      instba = data.read(length)
-      if not cls._spec:
-         cls._spec = NetworkMessageParser.getSpecByName(cls.__name__)
-      if not cls._schema:
-         cls._schema = marshmallow_dataclass.class_schema(cls)()
-      mjson = NetworkMessageParser.to_json(cls._spec, instba)
-      inst = cls._schema.load(mjson)     
-      return inst
+      raise Exception("Not implemented")
    
    def pack(self) -> None:
-      if not self._spec:
-         self._spec = NetworkMessageParser.getSpecByName(self.__class__.__name__)
-      if not self.__class__._schema:
-         self.__class__._schema = marshmallow_dataclass.class_schema(self.__class__)()
-      return NetworkMessageParser.from_json(self._spec, self._schema.dump(self))
+      raise Exception("Not implemented")
    
    @classmethod
    def from_json(cls, mjson:dict):
-      if not cls._schema:
-         cls._schema = marshmallow_dataclass.class_schema(cls)()
-      return cls._schema.load(mjson)
+      raise Exception("Not implemented")
         
    def unpackAsync(self, input:ByteArray, length:int) -> FuncTree:
       raise Exception("Not implemented")

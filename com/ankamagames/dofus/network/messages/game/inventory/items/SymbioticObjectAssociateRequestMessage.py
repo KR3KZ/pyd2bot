@@ -1,15 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class SymbioticObjectAssociateRequestMessage(NetworkMessage):
     symbioteUID:int
     symbiotePos:int
     hostUID:int
     hostPos:int
     
-    
-    def __post_init__(self):
+
+    def init(self, symbioteUID:int, symbiotePos:int, hostUID:int, hostPos:int):
+        self.symbioteUID = symbioteUID
+        self.symbiotePos = symbiotePos
+        self.hostUID = hostUID
+        self.hostPos = hostPos
+        
         super().__init__()
+    
     

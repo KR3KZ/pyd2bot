@@ -1,24 +1,29 @@
-from dataclasses import dataclass
 {% set parent = types[cls.parent] if cls.parent else None -%}
 {% if parent != None -%}
 from {{parent.package}} import {{parent.name}}
 {%- else -%}
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage{% endif %}
-{%- for field in cls.fields -%}
-{%- if field.typename not in primitives %}
-from {{types[field.typename].package}} import {{field.typename}}{% endif %}
-{%- endfor %}
+{%- if nonPrimitives %}
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    {% for type in nonPrimitives -%}
+    from {{types[type].package}} import {{type}}
+    {% endfor %}
+{%- endif %}
 
 
-@dataclass
 class {{cls.name}}({% if parent != None %}{{parent.name}}{% else %}NetworkMessage{% endif %}):
-    {% for field in cls.fields -%}
-    {{field.name}}:{%if field.length != None or field.lengthTypeId != None%}list[{{field.typename}}]{% else %}{{field.typename}}{% endif %}{%if field.optional %} = None{% endif %}
+    {% for arg in init_args -%}
+    {{arg.name}}:{{arg.type}}
     {% endfor %}
     {%- for field in cls.boolfields -%}
     {{field.name}}:{{field.typename}}
     {% endfor %}
+
+    def init(self{%for arg in init_args %}, {{arg.name}}:{{arg.type}}{% endfor %}{%for arg in super_args%}, {{arg.name}}:{{arg.type}}{% endfor %}):
+        {% for arg in init_args -%}
+        self.{{arg.name}} = {{arg.name}}
+        {% endfor %}
+        super().__init__({%for arg in super_args%}{{arg.name}}{% if not loop.last %}, {% endif %}{% endfor %})
     
-    def __post_init__(self):
-        super().__init__()
     

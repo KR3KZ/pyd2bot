@@ -1,15 +1,20 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.data.items.SellerBuyerDescriptor import SellerBuyerDescriptor
-from com.ankamagames.dofus.network.types.game.data.items.ObjectItemToSellInBid import ObjectItemToSellInBid
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.data.items.SellerBuyerDescriptor import SellerBuyerDescriptor
+    from com.ankamagames.dofus.network.types.game.data.items.ObjectItemToSellInBid import ObjectItemToSellInBid
+    
 
 
-@dataclass
 class ExchangeStartedBidSellerMessage(NetworkMessage):
-    sellerDescriptor:SellerBuyerDescriptor
-    objectsInfos:list[ObjectItemToSellInBid]
+    sellerDescriptor:'SellerBuyerDescriptor'
+    objectsInfos:list['ObjectItemToSellInBid']
     
-    
-    def __post_init__(self):
+
+    def init(self, sellerDescriptor:'SellerBuyerDescriptor', objectsInfos:list['ObjectItemToSellInBid']):
+        self.sellerDescriptor = sellerDescriptor
+        self.objectsInfos = objectsInfos
+        
         super().__init__()
+    
     

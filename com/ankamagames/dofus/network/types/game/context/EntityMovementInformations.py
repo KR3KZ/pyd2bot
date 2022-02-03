@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class EntityMovementInformations(NetworkMessage):
     id:int
     steps:list[int]
     
-    
-    def __post_init__(self):
+
+    def init(self, id:int, steps:list[int]):
+        self.id = id
+        self.steps = steps
+        
         super().__init__()
+    
     

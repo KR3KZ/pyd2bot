@@ -1,18 +1,15 @@
 
 
 from logging import Logger
-import math
-from threading import Timer
 from time import perf_counter, perf_counter_ns
-from tkinter import Frame
 from com.ankamagames.dofus import Constants
 import com.ankamagames.dofus.kernel.Kernel as krnl
 import com.ankamagames.dofus.kernel.net.ConnectionsHandler as connh
-from com.ankamagames.dofus.kernel.net.DisconnectionReason import DisconnectionReason
 from com.ankamagames.dofus.kernel.net.DisconnectionReasonEnum import DisconnectionReasonEnum
 from com.ankamagames.dofus.logic.common.managers.AuthentificationManager import AuthentificationManager
 from com.ankamagames.jerakine.benchmark.BenchmarkTimer import BenchmarkTimer
 from com.ankamagames.jerakine.managers.storeDataManager import StoreDataManager
+from com.ankamagames.jerakine.messages.Frame import Frame
 from com.ankamagames.jerakine.messages.Message import Message
 from com.ankamagames.jerakine.messages.WrongSocketClosureReasonMessage import WrongSocketClosureReasonMessage
 from com.ankamagames.jerakine.network.ServerConnectionClosedMessage import ServerConnectionClosedMessage
@@ -49,14 +46,14 @@ class DisconnectionHandlerFrame(Frame):
       StoreDataManager().setData(Constants.DATASTORE_MODULE_DEBUG,"connection_fail_times",None)
       self._numberOfAttemptsAlreadyDone = 0
    
-   def appended() -> bool:
+   def pushed(self) -> bool:
       return True
    
    def process(self, msg:Message) -> bool:
 
       if isinstance(msg, ServerConnectionClosedMessage):
             sccmsg:ServerConnectionClosedMessage = msg
-            if connh.ConnectionsHandler.getConnection() and connh.ConnectionsHandler.getConnection().mainConnection and (connh.ConnectionsHandler.getConnection().mainConnection.connected() or connh.ConnectionsHandler.getConnection().mainConnection.connecting()):
+            if connh.ConnectionsHandler.getConnection() and connh.ConnectionsHandler.getConnection().mainConnection and (connh.ConnectionsHandler.getConnection().mainConnection.connected or connh.ConnectionsHandler.getConnection().mainConnection.connecting):
                return False
             if sccmsg.closedConnection == connh.ConnectionsHandler.getConnection().getSubConnection(sccmsg):
                logger.debug("The connection was closed. Checking reasons.")

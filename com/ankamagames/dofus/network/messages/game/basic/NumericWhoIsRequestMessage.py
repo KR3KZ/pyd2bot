@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class NumericWhoIsRequestMessage(NetworkMessage):
     playerId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, playerId:int):
+        self.playerId = playerId
+        
         super().__init__()
+    
     

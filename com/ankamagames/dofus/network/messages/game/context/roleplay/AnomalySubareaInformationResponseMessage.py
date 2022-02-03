@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.roleplay.AnomalySubareaInformation import AnomalySubareaInformation
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.roleplay.AnomalySubareaInformation import AnomalySubareaInformation
+    
 
 
-@dataclass
 class AnomalySubareaInformationResponseMessage(NetworkMessage):
-    subareas:list[AnomalySubareaInformation]
+    subareas:list['AnomalySubareaInformation']
     
-    
-    def __post_init__(self):
+
+    def init(self, subareas:list['AnomalySubareaInformation']):
+        self.subareas = subareas
+        
         super().__init__()
+    
     

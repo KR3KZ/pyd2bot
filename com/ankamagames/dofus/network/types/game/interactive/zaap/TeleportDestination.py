@@ -1,8 +1,6 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class TeleportDestination(NetworkMessage):
     type:int
     mapId:int
@@ -10,7 +8,14 @@ class TeleportDestination(NetworkMessage):
     level:int
     cost:int
     
-    
-    def __post_init__(self):
+
+    def init(self, type:int, mapId:int, subAreaId:int, level:int, cost:int):
+        self.type = type
+        self.mapId = mapId
+        self.subAreaId = subAreaId
+        self.level = level
+        self.cost = cost
+        
         super().__init__()
+    
     

@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class BreachExitResponseMessage(NetworkMessage):
     exited:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, exited:bool):
+        self.exited = exited
+        
         super().__init__()
+    
     

@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GameActionFightCastRequestMessage(NetworkMessage):
     spellId:int
     cellId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, spellId:int, cellId:int):
+        self.spellId = spellId
+        self.cellId = cellId
+        
         super().__init__()
+    
     

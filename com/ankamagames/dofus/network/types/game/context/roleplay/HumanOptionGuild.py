@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.context.roleplay.HumanOption import HumanOption
-from com.ankamagames.dofus.network.types.game.context.roleplay.GuildInformations import GuildInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.roleplay.GuildInformations import GuildInformations
+    
 
 
-@dataclass
 class HumanOptionGuild(HumanOption):
-    guildInformations:GuildInformations
+    guildInformations:'GuildInformations'
     
-    
-    def __post_init__(self):
+
+    def init(self, guildInformations:'GuildInformations'):
+        self.guildInformations = guildInformations
+        
         super().__init__()
+    
     

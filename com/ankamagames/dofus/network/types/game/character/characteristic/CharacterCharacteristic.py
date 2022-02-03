@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class CharacterCharacteristic(NetworkMessage):
     characteristicId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, characteristicId:int):
+        self.characteristicId = characteristicId
+        
         super().__init__()
+    
     

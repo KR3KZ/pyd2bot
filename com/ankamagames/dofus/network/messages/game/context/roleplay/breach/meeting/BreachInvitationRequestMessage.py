@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class BreachInvitationRequestMessage(NetworkMessage):
     guests:list[int]
     
-    
-    def __post_init__(self):
+
+    def init(self, guests:list[int]):
+        self.guests = guests
+        
         super().__init__()
+    
     

@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ExchangeObjectMessage(NetworkMessage):
     remote:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, remote:bool):
+        self.remote = remote
+        
         super().__init__()
+    
     

@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ExchangeShopStockMultiMovementRemovedMessage(NetworkMessage):
     objectIdList:list[int]
     
-    
-    def __post_init__(self):
+
+    def init(self, objectIdList:list[int]):
+        self.objectIdList = objectIdList
+        
         super().__init__()
+    
     

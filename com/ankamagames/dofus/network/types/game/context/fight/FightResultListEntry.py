@@ -1,15 +1,21 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.fight.FightLoot import FightLoot
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.fight.FightLoot import FightLoot
+    
 
 
-@dataclass
 class FightResultListEntry(NetworkMessage):
     outcome:int
     wave:int
-    rewards:FightLoot
+    rewards:'FightLoot'
     
-    
-    def __post_init__(self):
+
+    def init(self, outcome:int, wave:int, rewards:'FightLoot'):
+        self.outcome = outcome
+        self.wave = wave
+        self.rewards = rewards
+        
         super().__init__()
+    
     

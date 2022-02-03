@@ -1,8 +1,6 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class AccountCapabilitiesMessage(NetworkMessage):
     accountId:int
     breedsVisible:int
@@ -11,7 +9,13 @@ class AccountCapabilitiesMessage(NetworkMessage):
     tutorialAvailable:bool
     canCreateNewCharacter:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, accountId:int, breedsVisible:int, breedsAvailable:int, status:int):
+        self.accountId = accountId
+        self.breedsVisible = breedsVisible
+        self.breedsAvailable = breedsAvailable
+        self.status = status
+        
         super().__init__()
+    
     

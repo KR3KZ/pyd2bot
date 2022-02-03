@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class AchievementObjective(NetworkMessage):
     id:int
     maxValue:int
     
-    
-    def __post_init__(self):
+
+    def init(self, id:int, maxValue:int):
+        self.id = id
+        self.maxValue = maxValue
+        
         super().__init__()
+    
     

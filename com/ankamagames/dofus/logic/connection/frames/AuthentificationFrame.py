@@ -5,7 +5,7 @@ import com.ankamagames.dofus.kernel.net.ConnectionsHandler as connh
 from com.ankamagames.dofus.logic.common.managers.AuthentificationManager import AuthentificationManager
 from com.ankamagames.dofus.logic.common.managers.InterClientManager import InterClientManager
 from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerManager
-from com.ankamagames.dofus.logic.frames import DisconnectionHandlerFrame
+from com.ankamagames.dofus.logic.frames.DisconnectionHandlerFrame import DisconnectionHandlerFrame
 from com.ankamagames.dofus.network.messages.connection.HelloConnectMessage import HelloConnectMessage
 from com.ankamagames.dofus.network.messages.connection.IdentificationAccountForceMessage import IdentificationAccountForceMessage
 from com.ankamagames.dofus.network.messages.connection.IdentificationFailedMessage import IdentificationFailedMessage
@@ -71,7 +71,7 @@ class AuthentificationFrame(Frame):
             AuthentificationManager().setPublicKey(hcmsg.key)
             AuthentificationManager().setSalt(hcmsg.salt)
             AuthentificationManager().initAESKey()
-            iMsg:IdentificationMessage = AuthentificationManager().getIdentificationMessage()
+            iMsg = AuthentificationManager().getIdentificationMessage()
             self._currentLogIsForced = isinstance(iMsg, IdentificationAccountForceMessage)
             logger.info(f"Current version : {iMsg.version.major}.{iMsg.version.minor}.{iMsg.version.code}.{iMsg.version.build}")
             dhf = krnl.Kernel().getWorker().getFrame(DisconnectionHandlerFrame)

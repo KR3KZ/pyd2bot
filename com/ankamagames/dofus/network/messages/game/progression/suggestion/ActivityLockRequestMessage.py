@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ActivityLockRequestMessage(NetworkMessage):
     activityId:int
     lock:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, activityId:int, lock:bool):
+        self.activityId = activityId
+        self.lock = lock
+        
         super().__init__()
+    
     

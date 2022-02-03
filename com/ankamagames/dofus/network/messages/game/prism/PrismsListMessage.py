@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.prism.PrismSubareaEmptyInfo import PrismSubareaEmptyInfo
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.prism.PrismSubareaEmptyInfo import PrismSubareaEmptyInfo
+    
 
 
-@dataclass
 class PrismsListMessage(NetworkMessage):
-    prisms:list[PrismSubareaEmptyInfo]
+    prisms:list['PrismSubareaEmptyInfo']
     
-    
-    def __post_init__(self):
+
+    def init(self, prisms:list['PrismSubareaEmptyInfo']):
+        self.prisms = prisms
+        
         super().__init__()
+    
     

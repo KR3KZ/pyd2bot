@@ -1,11 +1,11 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.authorized.AdminCommandMessage import AdminCommandMessage
 
 
-@dataclass
 class AdminQuietCommandMessage(AdminCommandMessage):
     
+
+    def init(self, content:str):
+        
+        super().__init__(content)
     
-    def __post_init__(self):
-        super().__init__()
     

@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GameFightEffectTriggerCount(NetworkMessage):
     effectId:int
     targetId:int
     count:int
     
-    
-    def __post_init__(self):
+
+    def init(self, effectId:int, targetId:int, count:int):
+        self.effectId = effectId
+        self.targetId = targetId
+        self.count = count
+        
         super().__init__()
+    
     

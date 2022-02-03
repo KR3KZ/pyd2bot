@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class TreasureHuntFinishedMessage(NetworkMessage):
     questType:int
     
-    
-    def __post_init__(self):
+
+    def init(self, questType:int):
+        self.questType = questType
+        
         super().__init__()
+    
     

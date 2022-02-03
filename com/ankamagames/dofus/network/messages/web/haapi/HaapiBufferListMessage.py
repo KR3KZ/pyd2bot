@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.web.haapi.BufferInformation import BufferInformation
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.web.haapi.BufferInformation import BufferInformation
+    
 
 
-@dataclass
 class HaapiBufferListMessage(NetworkMessage):
-    buffers:list[BufferInformation]
+    buffers:list['BufferInformation']
     
-    
-    def __post_init__(self):
+
+    def init(self, buffers:list['BufferInformation']):
+        self.buffers = buffers
+        
         super().__init__()
+    
     

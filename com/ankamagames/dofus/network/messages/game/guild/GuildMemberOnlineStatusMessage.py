@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GuildMemberOnlineStatusMessage(NetworkMessage):
     memberId:int
     online:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, memberId:int, online:bool):
+        self.memberId = memberId
+        self.online = online
+        
         super().__init__()
+    
     

@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.interactive.InteractiveElement import InteractiveElement
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.interactive.InteractiveElement import InteractiveElement
+    
 
 
-@dataclass
 class InteractiveMapUpdateMessage(NetworkMessage):
-    interactiveElements:list[InteractiveElement]
+    interactiveElements:list['InteractiveElement']
     
-    
-    def __post_init__(self):
+
+    def init(self, interactiveElements:list['InteractiveElement']):
+        self.interactiveElements = interactiveElements
+        
         super().__init__()
+    
     

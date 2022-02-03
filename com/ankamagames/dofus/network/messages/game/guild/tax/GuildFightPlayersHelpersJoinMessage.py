@@ -1,14 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.character.CharacterMinimalPlusLookInformations import CharacterMinimalPlusLookInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.character.CharacterMinimalPlusLookInformations import CharacterMinimalPlusLookInformations
+    
 
 
-@dataclass
 class GuildFightPlayersHelpersJoinMessage(NetworkMessage):
     fightId:int
-    playerInfo:CharacterMinimalPlusLookInformations
+    playerInfo:'CharacterMinimalPlusLookInformations'
     
-    
-    def __post_init__(self):
+
+    def init(self, fightId:int, playerInfo:'CharacterMinimalPlusLookInformations'):
+        self.fightId = fightId
+        self.playerInfo = playerInfo
+        
         super().__init__()
+    
     

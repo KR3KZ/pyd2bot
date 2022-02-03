@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GuildMemberSetWarnOnConnectionMessage(NetworkMessage):
     enable:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, enable:bool):
+        self.enable = enable
+        
         super().__init__()
+    
     

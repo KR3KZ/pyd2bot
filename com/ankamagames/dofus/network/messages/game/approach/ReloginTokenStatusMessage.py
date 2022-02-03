@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ReloginTokenStatusMessage(NetworkMessage):
     validToken:bool
     ticket:list[int]
     
-    
-    def __post_init__(self):
+
+    def init(self, validToken:bool, ticket:list[int]):
+        self.validToken = validToken
+        self.ticket = ticket
+        
         super().__init__()
+    
     

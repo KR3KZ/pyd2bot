@@ -1,14 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.context.roleplay.HumanOption import HumanOption
-from com.ankamagames.dofus.network.types.game.context.roleplay.AllianceInformations import AllianceInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.roleplay.AllianceInformations import AllianceInformations
+    
 
 
-@dataclass
 class HumanOptionAlliance(HumanOption):
-    allianceInformations:AllianceInformations
+    allianceInformations:'AllianceInformations'
     aggressable:int
     
-    
-    def __post_init__(self):
+
+    def init(self, allianceInformations:'AllianceInformations', aggressable:int):
+        self.allianceInformations = allianceInformations
+        self.aggressable = aggressable
+        
         super().__init__()
+    
     

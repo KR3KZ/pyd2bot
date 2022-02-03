@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.common.basic.BasicStatMessage import BasicStatMessage
-from com.ankamagames.dofus.network.types.common.basic.StatisticData import StatisticData
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.common.basic.StatisticData import StatisticData
+    
 
 
-@dataclass
 class BasicStatWithDataMessage(BasicStatMessage):
-    datas:list[StatisticData]
+    datas:list['StatisticData']
     
+
+    def init(self, datas:list['StatisticData'], timeSpent:int, statId:int):
+        self.datas = datas
+        
+        super().__init__(timeSpent, statId)
     
-    def __post_init__(self):
-        super().__init__()
     

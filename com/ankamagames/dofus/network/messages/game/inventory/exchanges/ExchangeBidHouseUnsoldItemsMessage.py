@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.data.items.ObjectItemGenericQuantity import ObjectItemGenericQuantity
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.data.items.ObjectItemGenericQuantity import ObjectItemGenericQuantity
+    
 
 
-@dataclass
 class ExchangeBidHouseUnsoldItemsMessage(NetworkMessage):
-    items:list[ObjectItemGenericQuantity]
+    items:list['ObjectItemGenericQuantity']
     
-    
-    def __post_init__(self):
+
+    def init(self, items:list['ObjectItemGenericQuantity']):
+        self.items = items
+        
         super().__init__()
+    
     

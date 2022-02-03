@@ -1,11 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeMountsStableAddMessage import ExchangeMountsStableAddMessage
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.mount.MountClientData import MountClientData
+    
 
 
-@dataclass
 class ExchangeMountsStableBornAddMessage(ExchangeMountsStableAddMessage):
     
+
+    def init(self, mountDescription:list['MountClientData']):
+        
+        super().__init__(mountDescription)
     
-    def __post_init__(self):
-        super().__init__()
     

@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.dialog.LeaveDialogMessage import LeaveDialogMessage
 
 
-@dataclass
 class ExchangeLeaveMessage(LeaveDialogMessage):
     success:bool
     
+
+    def init(self, success:bool, dialogType:int):
+        self.success = success
+        
+        super().__init__(dialogType)
     
-    def __post_init__(self):
-        super().__init__()
     

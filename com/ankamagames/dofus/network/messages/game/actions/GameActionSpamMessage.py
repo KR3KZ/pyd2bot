@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GameActionSpamMessage(NetworkMessage):
     cells:list[int]
     
-    
-    def __post_init__(self):
+
+    def init(self, cells:list[int]):
+        self.cells = cells
+        
         super().__init__()
+    
     

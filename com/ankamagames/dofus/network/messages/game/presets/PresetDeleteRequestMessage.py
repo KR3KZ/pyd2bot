@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class PresetDeleteRequestMessage(NetworkMessage):
     presetId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, presetId:int):
+        self.presetId = presetId
+        
         super().__init__()
+    
     

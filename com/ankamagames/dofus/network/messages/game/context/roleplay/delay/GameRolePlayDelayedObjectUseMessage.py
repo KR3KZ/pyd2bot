@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.context.roleplay.delay.GameRolePlayDelayedActionMessage import GameRolePlayDelayedActionMessage
 
 
-@dataclass
 class GameRolePlayDelayedObjectUseMessage(GameRolePlayDelayedActionMessage):
     objectGID:int
     
+
+    def init(self, objectGID:int, delayedCharacterId:int, delayTypeId:int, delayEndTime:int):
+        self.objectGID = objectGID
+        
+        super().__init__(delayedCharacterId, delayTypeId, delayEndTime)
     
-    def __post_init__(self):
-        super().__init__()
     

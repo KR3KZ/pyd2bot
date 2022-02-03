@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class DisplayNumericalValuePaddockMessage(NetworkMessage):
     rideId:int
     value:int
     type:int
     
-    
-    def __post_init__(self):
+
+    def init(self, rideId:int, value:int, type:int):
+        self.rideId = rideId
+        self.value = value
+        self.type = type
+        
         super().__init__()
+    
     

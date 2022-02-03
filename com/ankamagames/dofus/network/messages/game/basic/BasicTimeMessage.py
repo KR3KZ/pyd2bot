@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class BasicTimeMessage(NetworkMessage):
     timestamp:int
     timezoneOffset:int
     
-    
-    def __post_init__(self):
+
+    def init(self, timestamp:int, timezoneOffset:int):
+        self.timestamp = timestamp
+        self.timezoneOffset = timezoneOffset
+        
         super().__init__()
+    
     

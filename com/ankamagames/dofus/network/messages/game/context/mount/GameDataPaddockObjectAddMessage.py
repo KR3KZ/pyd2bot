@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.paddock.PaddockItem import PaddockItem
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.paddock.PaddockItem import PaddockItem
+    
 
 
-@dataclass
 class GameDataPaddockObjectAddMessage(NetworkMessage):
-    paddockItemDescription:PaddockItem
+    paddockItemDescription:'PaddockItem'
     
-    
-    def __post_init__(self):
+
+    def init(self, paddockItemDescription:'PaddockItem'):
+        self.paddockItemDescription = paddockItemDescription
+        
         super().__init__()
+    
     

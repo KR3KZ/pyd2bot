@@ -1,8 +1,6 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ServerSettingsMessage(NetworkMessage):
     lang:str
     community:int
@@ -12,7 +10,14 @@ class ServerSettingsMessage(NetworkMessage):
     isMonoAccount:bool
     hasFreeAutopilot:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, lang:str, community:int, gameType:int, arenaLeaveBanTime:int, itemMaxLevel:int):
+        self.lang = lang
+        self.community = community
+        self.gameType = gameType
+        self.arenaLeaveBanTime = arenaLeaveBanTime
+        self.itemMaxLevel = itemMaxLevel
+        
         super().__init__()
+    
     

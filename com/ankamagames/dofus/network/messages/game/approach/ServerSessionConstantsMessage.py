@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.approach.ServerSessionConstant import ServerSessionConstant
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.approach.ServerSessionConstant import ServerSessionConstant
+    
 
 
-@dataclass
 class ServerSessionConstantsMessage(NetworkMessage):
-    variables:list[ServerSessionConstant]
+    variables:list['ServerSessionConstant']
     
-    
-    def __post_init__(self):
+
+    def init(self, variables:list['ServerSessionConstant']):
+        self.variables = variables
+        
         super().__init__()
+    
     

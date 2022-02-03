@@ -1,11 +1,11 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.presets.IconPresetSaveRequestMessage import IconPresetSaveRequestMessage
 
 
-@dataclass
 class IdolsPresetSaveRequestMessage(IconPresetSaveRequestMessage):
     
+
+    def init(self, presetId:int, symbolId:int, updateData:bool):
+        
+        super().__init__(presetId, symbolId, updateData)
     
-    def __post_init__(self):
-        super().__init__()
     

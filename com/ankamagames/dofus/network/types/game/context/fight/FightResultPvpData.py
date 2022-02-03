@@ -1,8 +1,6 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.context.fight.FightResultAdditionalData import FightResultAdditionalData
 
 
-@dataclass
 class FightResultPvpData(FightResultAdditionalData):
     grade:int
     minHonorForGrade:int
@@ -10,7 +8,14 @@ class FightResultPvpData(FightResultAdditionalData):
     honor:int
     honorDelta:int
     
-    
-    def __post_init__(self):
+
+    def init(self, grade:int, minHonorForGrade:int, maxHonorForGrade:int, honor:int, honorDelta:int):
+        self.grade = grade
+        self.minHonorForGrade = minHonorForGrade
+        self.maxHonorForGrade = maxHonorForGrade
+        self.honor = honor
+        self.honorDelta = honorDelta
+        
         super().__init__()
+    
     

@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.context.MapCoordinates import MapCoordinates
 
 
-@dataclass
 class MapCoordinatesAndId(MapCoordinates):
     mapId:int
     
+
+    def init(self, mapId:int, worldX:int, worldY:int):
+        self.mapId = mapId
+        
+        super().__init__(worldX, worldY)
     
-    def __post_init__(self):
-        super().__init__()
     

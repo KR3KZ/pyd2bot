@@ -1,8 +1,6 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class TaxCollectorBasicInformations(NetworkMessage):
     firstNameId:int
     lastNameId:int
@@ -11,7 +9,15 @@ class TaxCollectorBasicInformations(NetworkMessage):
     mapId:int
     subAreaId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, firstNameId:int, lastNameId:int, worldX:int, worldY:int, mapId:int, subAreaId:int):
+        self.firstNameId = firstNameId
+        self.lastNameId = lastNameId
+        self.worldX = worldX
+        self.worldY = worldY
+        self.mapId = mapId
+        self.subAreaId = subAreaId
+        
         super().__init__()
+    
     

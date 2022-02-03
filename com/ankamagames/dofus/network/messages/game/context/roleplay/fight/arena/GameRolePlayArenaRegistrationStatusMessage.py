@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GameRolePlayArenaRegistrationStatusMessage(NetworkMessage):
     registered:bool
     step:int
     battleMode:int
     
-    
-    def __post_init__(self):
+
+    def init(self, registered:bool, step:int, battleMode:int):
+        self.registered = registered
+        self.step = step
+        self.battleMode = battleMode
+        
         super().__init__()
+    
     

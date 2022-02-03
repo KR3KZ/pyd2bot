@@ -1,14 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.data.items.ObjectItemQuantity import ObjectItemQuantity
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.data.items.ObjectItemQuantity import ObjectItemQuantity
+    
 
 
-@dataclass
 class ObjectFeedMessage(NetworkMessage):
     objectUID:int
-    meal:list[ObjectItemQuantity]
+    meal:list['ObjectItemQuantity']
     
-    
-    def __post_init__(self):
+
+    def init(self, objectUID:int, meal:list['ObjectItemQuantity']):
+        self.objectUID = objectUID
+        self.meal = meal
+        
         super().__init__()
+    
     

@@ -1,14 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.common.AbstractPlayerSearchInformation import AbstractPlayerSearchInformation
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.common.AbstractPlayerSearchInformation import AbstractPlayerSearchInformation
+    
 
 
-@dataclass
 class BasicWhoIsRequestMessage(NetworkMessage):
     verbose:bool
-    target:AbstractPlayerSearchInformation
+    target:'AbstractPlayerSearchInformation'
     
-    
-    def __post_init__(self):
+
+    def init(self, verbose:bool, target:'AbstractPlayerSearchInformation'):
+        self.verbose = verbose
+        self.target = target
+        
         super().__init__()
+    
     

@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ObjectGroundAddedMessage(NetworkMessage):
     cellId:int
     objectGID:int
     
-    
-    def __post_init__(self):
+
+    def init(self, cellId:int, objectGID:int):
+        self.cellId = cellId
+        self.objectGID = objectGID
+        
         super().__init__()
+    
     

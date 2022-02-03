@@ -1,14 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.paddock.PaddockContentInformations import PaddockContentInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.paddock.PaddockContentInformations import PaddockContentInformations
+    
 
 
-@dataclass
 class GuildInformationsPaddocksMessage(NetworkMessage):
     nbPaddockMax:int
-    paddocksInformations:list[PaddockContentInformations]
+    paddocksInformations:list['PaddockContentInformations']
     
-    
-    def __post_init__(self):
+
+    def init(self, nbPaddockMax:int, paddocksInformations:list['PaddockContentInformations']):
+        self.nbPaddockMax = nbPaddockMax
+        self.paddocksInformations = paddocksInformations
+        
         super().__init__()
+    
     

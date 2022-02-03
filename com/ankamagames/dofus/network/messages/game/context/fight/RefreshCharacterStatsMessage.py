@@ -1,14 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.fight.GameFightCharacteristics import GameFightCharacteristics
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.fight.GameFightCharacteristics import GameFightCharacteristics
+    
 
 
-@dataclass
 class RefreshCharacterStatsMessage(NetworkMessage):
     fighterId:int
-    stats:GameFightCharacteristics
+    stats:'GameFightCharacteristics'
     
-    
-    def __post_init__(self):
+
+    def init(self, fighterId:int, stats:'GameFightCharacteristics'):
+        self.fighterId = fighterId
+        self.stats = stats
+        
         super().__init__()
+    
     

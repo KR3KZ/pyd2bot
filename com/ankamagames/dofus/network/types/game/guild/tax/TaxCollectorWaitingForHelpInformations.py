@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.guild.tax.TaxCollectorComplementaryInformations import TaxCollectorComplementaryInformations
-from com.ankamagames.dofus.network.types.game.fight.ProtectedEntityWaitingForHelpInfo import ProtectedEntityWaitingForHelpInfo
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.fight.ProtectedEntityWaitingForHelpInfo import ProtectedEntityWaitingForHelpInfo
+    
 
 
-@dataclass
 class TaxCollectorWaitingForHelpInformations(TaxCollectorComplementaryInformations):
-    waitingForHelpInfo:ProtectedEntityWaitingForHelpInfo
+    waitingForHelpInfo:'ProtectedEntityWaitingForHelpInfo'
     
-    
-    def __post_init__(self):
+
+    def init(self, waitingForHelpInfo:'ProtectedEntityWaitingForHelpInfo'):
+        self.waitingForHelpInfo = waitingForHelpInfo
+        
         super().__init__()
+    
     

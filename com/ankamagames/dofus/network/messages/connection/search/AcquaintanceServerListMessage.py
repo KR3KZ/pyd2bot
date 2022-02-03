@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class AcquaintanceServerListMessage(NetworkMessage):
     servers:list[int]
     
-    
-    def __post_init__(self):
+
+    def init(self, servers:list[int]):
+        self.servers = servers
+        
         super().__init__()
+    
     

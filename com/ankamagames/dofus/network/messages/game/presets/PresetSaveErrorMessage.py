@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class PresetSaveErrorMessage(NetworkMessage):
     presetId:int
     code:int
     
-    
-    def __post_init__(self):
+
+    def init(self, presetId:int, code:int):
+        self.presetId = presetId
+        self.code = code
+        
         super().__init__()
+    
     

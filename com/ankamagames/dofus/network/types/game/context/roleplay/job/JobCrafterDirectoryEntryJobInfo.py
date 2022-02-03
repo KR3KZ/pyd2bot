@@ -1,15 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class JobCrafterDirectoryEntryJobInfo(NetworkMessage):
     jobId:int
     jobLevel:int
     free:bool
     minLevel:int
     
-    
-    def __post_init__(self):
+
+    def init(self, jobId:int, jobLevel:int, free:bool, minLevel:int):
+        self.jobId = jobId
+        self.jobLevel = jobLevel
+        self.free = free
+        self.minLevel = minLevel
+        
         super().__init__()
+    
     

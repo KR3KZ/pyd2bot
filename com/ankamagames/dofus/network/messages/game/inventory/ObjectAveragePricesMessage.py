@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ObjectAveragePricesMessage(NetworkMessage):
     ids:list[int]
     avgPrices:list[int]
     
-    
-    def __post_init__(self):
+
+    def init(self, ids:list[int], avgPrices:list[int]):
+        self.ids = ids
+        self.avgPrices = avgPrices
+        
         super().__init__()
+    
     

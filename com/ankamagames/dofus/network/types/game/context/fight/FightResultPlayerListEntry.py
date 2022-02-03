@@ -1,14 +1,20 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.context.fight.FightResultFighterListEntry import FightResultFighterListEntry
-from com.ankamagames.dofus.network.types.game.context.fight.FightResultAdditionalData import FightResultAdditionalData
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.fight.FightResultAdditionalData import FightResultAdditionalData
+    from com.ankamagames.dofus.network.types.game.context.fight.FightLoot import FightLoot
+    
 
 
-@dataclass
 class FightResultPlayerListEntry(FightResultFighterListEntry):
     level:int
-    additional:list[FightResultAdditionalData]
+    additional:list['FightResultAdditionalData']
     
+
+    def init(self, level:int, additional:list['FightResultAdditionalData'], id:int, alive:bool, outcome:int, wave:int, rewards:'FightLoot'):
+        self.level = level
+        self.additional = additional
+        
+        super().__init__(id, alive, outcome, wave, rewards)
     
-    def __post_init__(self):
-        super().__init__()
     

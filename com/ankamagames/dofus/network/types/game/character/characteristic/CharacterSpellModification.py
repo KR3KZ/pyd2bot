@@ -1,15 +1,21 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.character.characteristic.CharacterCharacteristicDetailed import CharacterCharacteristicDetailed
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.character.characteristic.CharacterCharacteristicDetailed import CharacterCharacteristicDetailed
+    
 
 
-@dataclass
 class CharacterSpellModification(NetworkMessage):
     modificationType:int
     spellId:int
-    value:CharacterCharacteristicDetailed
+    value:'CharacterCharacteristicDetailed'
     
-    
-    def __post_init__(self):
+
+    def init(self, modificationType:int, spellId:int, value:'CharacterCharacteristicDetailed'):
+        self.modificationType = modificationType
+        self.spellId = spellId
+        self.value = value
+        
         super().__init__()
+    
     

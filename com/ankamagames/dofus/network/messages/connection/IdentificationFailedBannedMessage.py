@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.connection.IdentificationFailedMessage import IdentificationFailedMessage
 
 
-@dataclass
 class IdentificationFailedBannedMessage(IdentificationFailedMessage):
     banEndDate:int
     
+
+    def init(self, banEndDate:int, reason:int):
+        self.banEndDate = banEndDate
+        
+        super().__init__(reason)
     
-    def __post_init__(self):
-        super().__init__()
     

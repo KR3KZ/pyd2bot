@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.friend.AcquaintanceInformation import AcquaintanceInformation
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.friend.AcquaintanceInformation import AcquaintanceInformation
+    
 
 
-@dataclass
 class AcquaintancesListMessage(NetworkMessage):
-    acquaintanceList:list[AcquaintanceInformation]
+    acquaintanceList:list['AcquaintanceInformation']
     
-    
-    def __post_init__(self):
+
+    def init(self, acquaintanceList:list['AcquaintanceInformation']):
+        self.acquaintanceList = acquaintanceList
+        
         super().__init__()
+    
     

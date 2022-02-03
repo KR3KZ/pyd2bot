@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.achievement.AchievementAchieved import AchievementAchieved
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.achievement.AchievementAchieved import AchievementAchieved
+    
 
 
-@dataclass
 class AchievementListMessage(NetworkMessage):
-    finishedAchievements:list[AchievementAchieved]
+    finishedAchievements:list['AchievementAchieved']
     
-    
-    def __post_init__(self):
+
+    def init(self, finishedAchievements:list['AchievementAchieved']):
+        self.finishedAchievements = finishedAchievements
+        
         super().__init__()
+    
     

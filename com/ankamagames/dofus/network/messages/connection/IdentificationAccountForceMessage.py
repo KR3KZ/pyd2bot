@@ -1,12 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.connection.IdentificationMessage import IdentificationMessage
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.version.Version import Version
+    
 
 
-@dataclass
 class IdentificationAccountForceMessage(IdentificationMessage):
     forcedAccountLogin:str
     
+
+    def init(self, forcedAccountLogin:str, version:'Version', lang:str, credentials:list[int], serverId:int, sessionOptionalSalt:int, failedAttempts:list[int]):
+        self.forcedAccountLogin = forcedAccountLogin
+        
+        super().__init__(version, lang, credentials, serverId, sessionOptionalSalt, failedAttempts)
     
-    def __post_init__(self):
-        super().__init__()
     

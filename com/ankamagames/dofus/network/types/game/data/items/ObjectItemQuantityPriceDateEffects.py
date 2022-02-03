@@ -1,15 +1,21 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.data.items.ObjectItemGenericQuantity import ObjectItemGenericQuantity
-from com.ankamagames.dofus.network.types.game.data.items.ObjectEffects import ObjectEffects
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.data.items.ObjectEffects import ObjectEffects
+    
 
 
-@dataclass
 class ObjectItemQuantityPriceDateEffects(ObjectItemGenericQuantity):
     price:int
-    effects:ObjectEffects
+    effects:'ObjectEffects'
     date:int
     
+
+    def init(self, price:int, effects:'ObjectEffects', date:int, objectGID:int, quantity:int):
+        self.price = price
+        self.effects = effects
+        self.date = date
+        
+        super().__init__(objectGID, quantity)
     
-    def __post_init__(self):
-        super().__init__()
     

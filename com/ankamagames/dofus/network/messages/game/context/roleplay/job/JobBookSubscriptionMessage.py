@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.roleplay.job.JobBookSubscription import JobBookSubscription
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.roleplay.job.JobBookSubscription import JobBookSubscription
+    
 
 
-@dataclass
 class JobBookSubscriptionMessage(NetworkMessage):
-    subscriptions:list[JobBookSubscription]
+    subscriptions:list['JobBookSubscription']
     
-    
-    def __post_init__(self):
+
+    def init(self, subscriptions:list['JobBookSubscription']):
+        self.subscriptions = subscriptions
+        
         super().__init__()
+    
     

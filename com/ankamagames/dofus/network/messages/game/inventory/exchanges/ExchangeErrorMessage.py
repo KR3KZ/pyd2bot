@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ExchangeErrorMessage(NetworkMessage):
     errorType:int
     
-    
-    def __post_init__(self):
+
+    def init(self, errorType:int):
+        self.errorType = errorType
+        
         super().__init__()
+    
     

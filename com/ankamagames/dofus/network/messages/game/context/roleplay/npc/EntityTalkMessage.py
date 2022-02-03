@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class EntityTalkMessage(NetworkMessage):
     entityId:int
     textId:int
     parameters:list[str]
     
-    
-    def __post_init__(self):
+
+    def init(self, entityId:int, textId:int, parameters:list[str]):
+        self.entityId = entityId
+        self.textId = textId
+        self.parameters = parameters
+        
         super().__init__()
+    
     

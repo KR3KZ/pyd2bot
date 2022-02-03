@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class JobCrafterDirectoryRemoveMessage(NetworkMessage):
     jobId:int
     playerId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, jobId:int, playerId:int):
+        self.jobId = jobId
+        self.playerId = playerId
+        
         super().__init__()
+    
     

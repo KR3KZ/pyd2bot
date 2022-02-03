@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GameFightLeaveMessage(NetworkMessage):
     charId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, charId:int):
+        self.charId = charId
+        
         super().__init__()
+    
     

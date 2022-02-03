@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.interactive.skill.SkillActionDescription import SkillActionDescription
 
 
-@dataclass
 class SkillActionDescriptionCraft(SkillActionDescription):
     probability:int
     
+
+    def init(self, probability:int, skillId:int):
+        self.probability = probability
+        
+        super().__init__(skillId)
     
-    def __post_init__(self):
-        super().__init__()
     

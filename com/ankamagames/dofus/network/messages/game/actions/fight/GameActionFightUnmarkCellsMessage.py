@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessage import AbstractGameActionMessage
 
 
-@dataclass
 class GameActionFightUnmarkCellsMessage(AbstractGameActionMessage):
     markId:int
     
+
+    def init(self, markId:int, actionId:int, sourceId:int):
+        self.markId = markId
+        
+        super().__init__(actionId, sourceId)
     
-    def __post_init__(self):
-        super().__init__()
     

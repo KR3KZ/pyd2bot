@@ -1,8 +1,6 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ArenaLeagueRanking(NetworkMessage):
     rank:int
     leagueId:int
@@ -10,7 +8,14 @@ class ArenaLeagueRanking(NetworkMessage):
     totalLeaguePoints:int
     ladderPosition:int
     
-    
-    def __post_init__(self):
+
+    def init(self, rank:int, leagueId:int, leaguePoints:int, totalLeaguePoints:int, ladderPosition:int):
+        self.rank = rank
+        self.leagueId = leagueId
+        self.leaguePoints = leaguePoints
+        self.totalLeaguePoints = totalLeaguePoints
+        self.ladderPosition = ladderPosition
+        
         super().__init__()
+    
     

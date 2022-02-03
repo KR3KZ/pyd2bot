@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.GameContextActorInformations import GameContextActorInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.GameContextActorInformations import GameContextActorInformations
+    
 
 
-@dataclass
 class GameFightRefreshFighterMessage(NetworkMessage):
-    informations:GameContextActorInformations
+    informations:'GameContextActorInformations'
     
-    
-    def __post_init__(self):
+
+    def init(self, informations:'GameContextActorInformations'):
+        self.informations = informations
+        
         super().__init__()
+    
     

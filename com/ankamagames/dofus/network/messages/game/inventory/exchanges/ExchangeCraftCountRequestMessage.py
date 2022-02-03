@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ExchangeCraftCountRequestMessage(NetworkMessage):
     count:int
     
-    
-    def __post_init__(self):
+
+    def init(self, count:int):
+        self.count = count
+        
         super().__init__()
+    
     

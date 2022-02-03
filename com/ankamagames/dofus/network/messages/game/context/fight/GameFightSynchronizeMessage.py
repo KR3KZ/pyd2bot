@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.fight.GameFightFighterInformations import GameFightFighterInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.fight.GameFightFighterInformations import GameFightFighterInformations
+    
 
 
-@dataclass
 class GameFightSynchronizeMessage(NetworkMessage):
-    fighters:list[GameFightFighterInformations]
+    fighters:list['GameFightFighterInformations']
     
-    
-    def __post_init__(self):
+
+    def init(self, fighters:list['GameFightFighterInformations']):
+        self.fighters = fighters
+        
         super().__init__()
+    
     

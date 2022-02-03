@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.roleplay.npc.MapNpcQuestInfo import MapNpcQuestInfo
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.roleplay.npc.MapNpcQuestInfo import MapNpcQuestInfo
+    
 
 
-@dataclass
 class ListMapNpcsQuestStatusUpdateMessage(NetworkMessage):
-    mapInfo:list[MapNpcQuestInfo]
+    mapInfo:list['MapNpcQuestInfo']
     
-    
-    def __post_init__(self):
+
+    def init(self, mapInfo:list['MapNpcQuestInfo']):
+        self.mapInfo = mapInfo
+        
         super().__init__()
+    
     

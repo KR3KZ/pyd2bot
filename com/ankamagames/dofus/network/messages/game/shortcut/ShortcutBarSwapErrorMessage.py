@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ShortcutBarSwapErrorMessage(NetworkMessage):
     error:int
     
-    
-    def __post_init__(self):
+
+    def init(self, error:int):
+        self.error = error
+        
         super().__init__()
+    
     

@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.actions.fight.AbstractGameActionFightTargetedAbilityMessage import AbstractGameActionFightTargetedAbilityMessage
 
 
-@dataclass
 class GameActionFightCloseCombatMessage(AbstractGameActionFightTargetedAbilityMessage):
     weaponGenericId:int
     
+
+    def init(self, weaponGenericId:int, targetId:int, destinationCellId:int, critical:int, actionId:int, sourceId:int):
+        self.weaponGenericId = weaponGenericId
+        
+        super().__init__(targetId, destinationCellId, critical, actionId, sourceId)
     
-    def __post_init__(self):
-        super().__init__()
     

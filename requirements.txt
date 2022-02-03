@@ -3,4 +3,4 @@ wdom
 tqdm
 pycryptodomex
 whistle
-pymarshaler
+Py3AMF

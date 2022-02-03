@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.guild.HavenBagFurnitureInformation import HavenBagFurnitureInformation
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.guild.HavenBagFurnitureInformation import HavenBagFurnitureInformation
+    
 
 
-@dataclass
 class HavenBagFurnituresMessage(NetworkMessage):
-    furnituresInfos:list[HavenBagFurnitureInformation]
+    furnituresInfos:list['HavenBagFurnitureInformation']
     
-    
-    def __post_init__(self):
+
+    def init(self, furnituresInfos:list['HavenBagFurnitureInformation']):
+        self.furnituresInfos = furnituresInfos
+        
         super().__init__()
+    
     

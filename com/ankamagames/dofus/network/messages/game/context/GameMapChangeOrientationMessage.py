@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.ActorOrientation import ActorOrientation
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.ActorOrientation import ActorOrientation
+    
 
 
-@dataclass
 class GameMapChangeOrientationMessage(NetworkMessage):
-    orientation:ActorOrientation
+    orientation:'ActorOrientation'
     
-    
-    def __post_init__(self):
+
+    def init(self, orientation:'ActorOrientation'):
+        self.orientation = orientation
+        
         super().__init__()
+    
     

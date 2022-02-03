@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.presets.SimpleCharacterCharacteristicForPreset import SimpleCharacterCharacteristicForPreset
 
 
-@dataclass
 class CharacterCharacteristicForPreset(SimpleCharacterCharacteristicForPreset):
     stuff:int
     
+
+    def init(self, stuff:int, keyword:str, base:int, additionnal:int):
+        self.stuff = stuff
+        
+        super().__init__(keyword, base, additionnal)
     
-    def __post_init__(self):
-        super().__init__()
     

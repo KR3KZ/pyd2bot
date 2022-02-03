@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.guild.tax.TaxCollectorMovement import TaxCollectorMovement
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.guild.tax.TaxCollectorMovement import TaxCollectorMovement
+    
 
 
-@dataclass
 class TaxCollectorMovementsOfflineMessage(NetworkMessage):
-    movements:list[TaxCollectorMovement]
+    movements:list['TaxCollectorMovement']
     
-    
-    def __post_init__(self):
+
+    def init(self, movements:list['TaxCollectorMovement']):
+        self.movements = movements
+        
         super().__init__()
+    
     

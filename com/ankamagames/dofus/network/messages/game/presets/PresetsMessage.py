@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.presets.Preset import Preset
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.presets.Preset import Preset
+    
 
 
-@dataclass
 class PresetsMessage(NetworkMessage):
-    presets:list[Preset]
+    presets:list['Preset']
     
-    
-    def __post_init__(self):
+
+    def init(self, presets:list['Preset']):
+        self.presets = presets
+        
         super().__init__()
+    
     

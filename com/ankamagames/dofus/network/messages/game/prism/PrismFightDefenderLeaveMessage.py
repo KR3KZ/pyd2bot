@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class PrismFightDefenderLeaveMessage(NetworkMessage):
     subAreaId:int
     fightId:int
     fighterToRemoveId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, subAreaId:int, fightId:int, fighterToRemoveId:int):
+        self.subAreaId = subAreaId
+        self.fightId = fightId
+        self.fighterToRemoveId = fighterToRemoveId
+        
         super().__init__()
+    
     

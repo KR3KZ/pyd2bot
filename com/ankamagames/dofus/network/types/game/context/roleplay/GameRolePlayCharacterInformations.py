@@ -1,13 +1,20 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.context.roleplay.GameRolePlayHumanoidInformations import GameRolePlayHumanoidInformations
-from com.ankamagames.dofus.network.types.game.character.alignment.ActorAlignmentInformations import ActorAlignmentInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.character.alignment.ActorAlignmentInformations import ActorAlignmentInformations
+    from com.ankamagames.dofus.network.types.game.context.roleplay.HumanInformations import HumanInformations
+    from com.ankamagames.dofus.network.types.game.look.EntityLook import EntityLook
+    from com.ankamagames.dofus.network.types.game.context.EntityDispositionInformations import EntityDispositionInformations
+    
 
 
-@dataclass
 class GameRolePlayCharacterInformations(GameRolePlayHumanoidInformations):
-    alignmentInfos:ActorAlignmentInformations
+    alignmentInfos:'ActorAlignmentInformations'
     
+
+    def init(self, alignmentInfos:'ActorAlignmentInformations', humanoidInfo:'HumanInformations', accountId:int, name:str, look:'EntityLook', contextualId:int, disposition:'EntityDispositionInformations'):
+        self.alignmentInfos = alignmentInfos
+        
+        super().__init__(humanoidInfo, accountId, name, look, contextualId, disposition)
     
-    def __post_init__(self):
-        super().__init__()
     

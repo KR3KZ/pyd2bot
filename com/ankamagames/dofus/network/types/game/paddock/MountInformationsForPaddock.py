@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class MountInformationsForPaddock(NetworkMessage):
     modelId:int
     name:str
     ownerName:str
     
-    
-    def __post_init__(self):
+
+    def init(self, modelId:int, name:str, ownerName:str):
+        self.modelId = modelId
+        self.name = name
+        self.ownerName = ownerName
+        
         super().__init__()
+    
     

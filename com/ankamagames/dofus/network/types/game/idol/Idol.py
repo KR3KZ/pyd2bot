@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class Idol(NetworkMessage):
     id:int
     xpBonusPercent:int
     dropBonusPercent:int
     
-    
-    def __post_init__(self):
+
+    def init(self, id:int, xpBonusPercent:int, dropBonusPercent:int):
+        self.id = id
+        self.xpBonusPercent = xpBonusPercent
+        self.dropBonusPercent = dropBonusPercent
+        
         super().__init__()
+    
     

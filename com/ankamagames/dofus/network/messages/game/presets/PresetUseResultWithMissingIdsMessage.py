@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.presets.PresetUseResultMessage import PresetUseResultMessage
 
 
-@dataclass
 class PresetUseResultWithMissingIdsMessage(PresetUseResultMessage):
     missingIds:list[int]
     
+
+    def init(self, missingIds:list[int], presetId:int, code:int):
+        self.missingIds = missingIds
+        
+        super().__init__(presetId, code)
     
-    def __post_init__(self):
-        super().__init__()
     

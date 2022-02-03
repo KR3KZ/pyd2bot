@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.context.roleplay.HumanOption import HumanOption
 
 
-@dataclass
 class HumanOptionSkillUse(HumanOption):
     elementId:int
     skillId:int
     skillEndTime:int
     
-    
-    def __post_init__(self):
+
+    def init(self, elementId:int, skillId:int, skillEndTime:int):
+        self.elementId = elementId
+        self.skillId = skillId
+        self.skillEndTime = skillEndTime
+        
         super().__init__()
+    
     

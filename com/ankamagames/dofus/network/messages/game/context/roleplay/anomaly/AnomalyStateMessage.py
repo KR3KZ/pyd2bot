@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class AnomalyStateMessage(NetworkMessage):
     subAreaId:int
     open:bool
     closingTime:int
     
-    
-    def __post_init__(self):
+
+    def init(self, subAreaId:int, open:bool, closingTime:int):
+        self.subAreaId = subAreaId
+        self.open = open
+        self.closingTime = closingTime
+        
         super().__init__()
+    
     

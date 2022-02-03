@@ -23,21 +23,20 @@ class StoreDataManager(metaclass=Singleton):
       self._bStoreSequence:bool = False
       self._nCurrentSequenceNum:int = 0
       self._aStoreSequence:list = []
-      self._aSharedObjectCache:list = {}
+      self._aSharedObjectCache:dict = {}
       self._aRegisteredClassAlias:dict = {}
       self._bStoreSequence = False
       self._aData = []
-      self._aSharedObjectCache = []
       self._aRegisteredClassAlias = dict()
       self._self = None
       aClass = self.getData(JerakineConstants.DATASTORE_CLASS_ALIAS, "classAliasList")
       for s in aClass:
-         className = base64.decode(s)
+         className = base64.b64decode(s).decode()
          try:
             oClass = getattr(sys.modules[__package__], className)
             globals().update({aClass[s]: oClass})
          except Exception as e:
-            logger.warn("Impossible de trouver la classe " + className)
+            # logger.warn("Impossible de trouver la classe " + className)
             self._aRegisteredClassAlias[className] = True
          self._aRegisteredClassAlias[className] = True
 
@@ -53,7 +52,7 @@ class StoreDataManager(metaclass=Singleton):
          if dataType.location == DataStoreEnum.LOCATION_LOCAL:
             so = self.getSharedObject(dataType.category)
             if so.data:
-               return so.data[sKey]
+               return so.data.get(sKey)
          elif dataType.location == DataStoreEnum.LOCATION_SERVER:
             return None
       if dataType.category in self._aData:

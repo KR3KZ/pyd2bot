@@ -1,12 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.character.CharacterMinimalPlusLookInformations import CharacterMinimalPlusLookInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.look.EntityLook import EntityLook
+    
 
 
-@dataclass
 class CharacterBaseInformations(CharacterMinimalPlusLookInformations):
     sex:bool
     
+
+    def init(self, sex:bool, entityLook:'EntityLook', breed:int, level:int, name:str, id:int):
+        self.sex = sex
+        
+        super().__init__(entityLook, breed, level, name, id)
     
-    def __post_init__(self):
-        super().__init__()
     

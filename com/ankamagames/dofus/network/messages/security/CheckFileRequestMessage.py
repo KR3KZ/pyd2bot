@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class CheckFileRequestMessage(NetworkMessage):
     filename:str
     type:int
     
-    
-    def __post_init__(self):
+
+    def init(self, filename:str, type:int):
+        self.filename = filename
+        self.type = type
+        
         super().__init__()
+    
     

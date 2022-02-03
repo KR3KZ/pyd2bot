@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.chat.ChatServerMessage import ChatServerMessage
-from com.ankamagames.dofus.network.types.game.data.items.ObjectItem import ObjectItem
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.data.items.ObjectItem import ObjectItem
+    
 
 
-@dataclass
 class ChatServerWithObjectMessage(ChatServerMessage):
-    objects:list[ObjectItem]
+    objects:list['ObjectItem']
     
+
+    def init(self, objects:list['ObjectItem'], senderId:int, senderName:str, prefix:str, senderAccountId:int, channel:int, content:str, timestamp:int, fingerprint:str):
+        self.objects = objects
+        
+        super().__init__(senderId, senderName, prefix, senderAccountId, channel, content, timestamp, fingerprint)
     
-    def __post_init__(self):
-        super().__init__()
     

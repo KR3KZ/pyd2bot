@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class NotificationByServerMessage(NetworkMessage):
     id:int
     parameters:list[str]
     forceOpen:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, id:int, parameters:list[str], forceOpen:bool):
+        self.id = id
+        self.parameters = parameters
+        self.forceOpen = forceOpen
+        
         super().__init__()
+    
     

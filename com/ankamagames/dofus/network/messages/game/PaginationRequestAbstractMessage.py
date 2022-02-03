@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class PaginationRequestAbstractMessage(NetworkMessage):
     offset:int
     count:int
     
-    
-    def __post_init__(self):
+
+    def init(self, offset:int, count:int):
+        self.offset = offset
+        self.count = count
+        
         super().__init__()
+    
     

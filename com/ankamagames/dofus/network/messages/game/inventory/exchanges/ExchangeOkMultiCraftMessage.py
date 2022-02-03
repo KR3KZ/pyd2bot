@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ExchangeOkMultiCraftMessage(NetworkMessage):
     initiatorId:int
     otherId:int
     role:int
     
-    
-    def __post_init__(self):
+
+    def init(self, initiatorId:int, otherId:int, role:int):
+        self.initiatorId = initiatorId
+        self.otherId = otherId
+        self.role = role
+        
         super().__init__()
+    
     

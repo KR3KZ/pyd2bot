@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class CurrentMapMessage(NetworkMessage):
     mapId:int
     mapKey:str
     
-    
-    def __post_init__(self):
+
+    def init(self, mapId:int, mapKey:str):
+        self.mapId = mapId
+        self.mapKey = mapKey
+        
         super().__init__()
+    
     

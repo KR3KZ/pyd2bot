@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.context.fight.GameFightJoinMessage import GameFightJoinMessage
-from com.ankamagames.dofus.network.types.game.context.roleplay.party.NamedPartyTeam import NamedPartyTeam
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.roleplay.party.NamedPartyTeam import NamedPartyTeam
+    
 
 
-@dataclass
 class GameFightSpectatorJoinMessage(GameFightJoinMessage):
-    namedPartyTeams:list[NamedPartyTeam]
+    namedPartyTeams:list['NamedPartyTeam']
     
+
+    def init(self, namedPartyTeams:list['NamedPartyTeam'], timeMaxBeforeFightStart:int, fightType:int):
+        self.namedPartyTeams = namedPartyTeams
+        
+        super().__init__(timeMaxBeforeFightStart, fightType)
     
-    def __post_init__(self):
-        super().__init__()
     

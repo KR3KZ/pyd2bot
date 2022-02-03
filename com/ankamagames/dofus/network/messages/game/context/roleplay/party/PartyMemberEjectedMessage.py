@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.context.roleplay.party.PartyMemberRemoveMessage import PartyMemberRemoveMessage
 
 
-@dataclass
 class PartyMemberEjectedMessage(PartyMemberRemoveMessage):
     kickerId:int
     
+
+    def init(self, kickerId:int, leavingPlayerId:int, partyId:int):
+        self.kickerId = kickerId
+        
+        super().__init__(leavingPlayerId, partyId)
     
-    def __post_init__(self):
-        super().__init__()
     

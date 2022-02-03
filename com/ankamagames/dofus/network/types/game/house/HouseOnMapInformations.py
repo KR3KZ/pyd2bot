@@ -1,14 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.house.HouseInformations import HouseInformations
-from com.ankamagames.dofus.network.types.game.house.HouseInstanceInformations import HouseInstanceInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.house.HouseInstanceInformations import HouseInstanceInformations
+    
 
 
-@dataclass
 class HouseOnMapInformations(HouseInformations):
     doorsOnMap:list[int]
-    houseInstances:list[HouseInstanceInformations]
+    houseInstances:list['HouseInstanceInformations']
     
+
+    def init(self, doorsOnMap:list[int], houseInstances:list['HouseInstanceInformations'], houseId:int, modelId:int):
+        self.doorsOnMap = doorsOnMap
+        self.houseInstances = houseInstances
+        
+        super().__init__(houseId, modelId)
     
-    def __post_init__(self):
-        super().__init__()
     

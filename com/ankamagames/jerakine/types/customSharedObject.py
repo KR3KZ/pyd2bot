@@ -3,8 +3,7 @@ import io
 from com.ankamagames.jerakine.logger.Logger import Logger
 import os
 from com.ankamagames.dofus import Constants as Constants
-from com.ankamagames.jerakine.data.ModuleReader import \
-    ModuleReader
+import pyamf
 
 logger = Logger(__name__)
 
@@ -16,15 +15,15 @@ class CustomSharedObjectFileFormatError(Exception):
 class CustomSharedObject:
    
    DATAFILE_EXTENSION = "dat"
-   COMMON_FOLDER = Constants.DOFUS_COMMON_DIR
+   COMMON_FOLDER = Constants.DOFUS_LOCAL_DATA_STORE
    directory = "Dofus"
    useDefaultDirectory = False
    clearedCacheAndRebooting = False
    throwException = True
-   _cache = list['CustomSharedObject']()
+   _cache = dict[str, 'CustomSharedObject']()
    
    def __init__(self):   
-      self.data = object()
+      self.data = None
       self.objectEncoding:int = None
       self._name:str = None 
       self._fileStream:io.BytesIO = None
@@ -33,7 +32,7 @@ class CustomSharedObject:
    
    @classmethod
    def getLocal(cls, name:str) -> 'CustomSharedObject':
-      if cls._cache[name]:
+      if cls._cache.get(name):
          return cls._cache[name]
       if not cls.COMMON_FOLDER:
          cls.COMMON_FOLDER = cls.getCustomSharedObjectDirectory()
@@ -73,7 +72,7 @@ class CustomSharedObject:
    def writeData(self, data) -> bool:
       try:
          self._fileStream = open(self._file, "wb")
-         amfEncoded = miniamf.encode(data).getvalue()
+         amfEncoded = pyamf.encode(data)
          self._fileStream.write(amfEncoded)
          self._fileStream.close()
       except Exception as e:
@@ -86,13 +85,13 @@ class CustomSharedObject:
    def getDataFromFile(self) -> None:
       if not self._file:
          self._file = os.path.join(self.COMMON_FOLDER, self._name + "." + self.DATAFILE_EXTENSION)
+      logger.debug("Loading file : " + self._file)
       if os.path.exists(self._file):
          try:
             with open(self._file, "rb") as fp:
                self._fileStream = fp
-               fileAccessor = ModuleReader.getInstance()
-               fileAccessor.init(self._file)
-               self.data = fileAccessor.getObject()
+               c = pyamf.decode(fp.read())
+               self.data = next(c)
          except Exception as e:
             if self._fileStream:
                self._fileStream.close()
@@ -100,4 +99,4 @@ class CustomSharedObject:
             if self.throwException:
                raise CustomSharedObjectFileFormatError("Malformated file : " + self._file)
       if not self.data:
-         self.data = object()
+         self.data = dict()

@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class BasicStatMessage(NetworkMessage):
     timeSpent:int
     statId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, timeSpent:int, statId:int):
+        self.timeSpent = timeSpent
+        self.statId = statId
+        
         super().__init__()
+    
     

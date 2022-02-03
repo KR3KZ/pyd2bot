@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ChallengeResultMessage(NetworkMessage):
     challengeId:int
     success:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, challengeId:int, success:bool):
+        self.challengeId = challengeId
+        self.success = success
+        
         super().__init__()
+    
     

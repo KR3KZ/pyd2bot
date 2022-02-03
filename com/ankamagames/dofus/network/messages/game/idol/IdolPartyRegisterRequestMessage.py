@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class IdolPartyRegisterRequestMessage(NetworkMessage):
     register:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, register:bool):
+        self.register = register
+        
         super().__init__()
+    
     

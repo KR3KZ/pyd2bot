@@ -1,8 +1,6 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class PrismInformation(NetworkMessage):
     typeId:int
     state:int
@@ -10,7 +8,14 @@ class PrismInformation(NetworkMessage):
     placementDate:int
     rewardTokenCount:int
     
-    
-    def __post_init__(self):
+
+    def init(self, typeId:int, state:int, nextVulnerabilityDate:int, placementDate:int, rewardTokenCount:int):
+        self.typeId = typeId
+        self.state = state
+        self.nextVulnerabilityDate = nextVulnerabilityDate
+        self.placementDate = placementDate
+        self.rewardTokenCount = rewardTokenCount
+        
         super().__init__()
+    
     

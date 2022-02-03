@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.prism.PrismFightersInformation import PrismFightersInformation
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.prism.PrismFightersInformation import PrismFightersInformation
+    
 
 
-@dataclass
 class PrismFightAddedMessage(NetworkMessage):
-    fight:PrismFightersInformation
+    fight:'PrismFightersInformation'
     
-    
-    def __post_init__(self):
+
+    def init(self, fight:'PrismFightersInformation'):
+        self.fight = fight
+        
         super().__init__()
+    
     

@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.inventory.items.SymbioticObjectErrorMessage import SymbioticObjectErrorMessage
 
 
-@dataclass
 class MimicryObjectErrorMessage(SymbioticObjectErrorMessage):
     preview:bool
     
+
+    def init(self, preview:bool, errorCode:int, reason:int):
+        self.preview = preview
+        
+        super().__init__(errorCode, reason)
     
-    def __post_init__(self):
-        super().__init__()
     

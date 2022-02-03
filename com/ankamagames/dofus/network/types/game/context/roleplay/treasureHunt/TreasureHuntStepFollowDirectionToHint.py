@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.context.roleplay.treasureHunt.TreasureHuntStep import TreasureHuntStep
 
 
-@dataclass
 class TreasureHuntStepFollowDirectionToHint(TreasureHuntStep):
     direction:int
     npcId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, direction:int, npcId:int):
+        self.direction = direction
+        self.npcId = npcId
+        
         super().__init__()
+    
     

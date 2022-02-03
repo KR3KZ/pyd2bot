@@ -1,9 +1,10 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.data.items.ObjectItemGenericQuantity import ObjectItemGenericQuantity
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.data.items.ObjectItemGenericQuantity import ObjectItemGenericQuantity
+    
 
 
-@dataclass
 class ExchangeGuildTaxCollectorGetMessage(NetworkMessage):
     collectorName:str
     worldX:int
@@ -15,9 +16,22 @@ class ExchangeGuildTaxCollectorGetMessage(NetworkMessage):
     callerName:str
     experience:int
     pods:int
-    objectsInfos:list[ObjectItemGenericQuantity]
+    objectsInfos:list['ObjectItemGenericQuantity']
     
-    
-    def __post_init__(self):
+
+    def init(self, collectorName:str, worldX:int, worldY:int, mapId:int, subAreaId:int, userName:str, callerId:int, callerName:str, experience:int, pods:int, objectsInfos:list['ObjectItemGenericQuantity']):
+        self.collectorName = collectorName
+        self.worldX = worldX
+        self.worldY = worldY
+        self.mapId = mapId
+        self.subAreaId = subAreaId
+        self.userName = userName
+        self.callerId = callerId
+        self.callerName = callerName
+        self.experience = experience
+        self.pods = pods
+        self.objectsInfos = objectsInfos
+        
         super().__init__()
+    
     

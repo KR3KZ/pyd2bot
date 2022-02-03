@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class HaapiValidationMessage(NetworkMessage):
     action:int
     code:int
     
-    
-    def __post_init__(self):
+
+    def init(self, action:int, code:int):
+        self.action = action
+        self.code = code
+        
         super().__init__()
+    
     

@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ChannelEnablingMessage(NetworkMessage):
     channel:int
     enable:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, channel:int, enable:bool):
+        self.channel = channel
+        self.enable = enable
+        
         super().__init__()
+    
     

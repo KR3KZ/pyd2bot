@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.context.fight.SpawnInformation import SpawnInformation
 
 
-@dataclass
 class SpawnCharacterInformation(SpawnInformation):
     name:str
     level:int
     
-    
-    def __post_init__(self):
+
+    def init(self, name:str, level:int):
+        self.name = name
+        self.level = level
+        
         super().__init__()
+    
     

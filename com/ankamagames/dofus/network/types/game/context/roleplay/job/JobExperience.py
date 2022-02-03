@@ -1,8 +1,6 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class JobExperience(NetworkMessage):
     jobId:int
     jobLevel:int
@@ -10,7 +8,14 @@ class JobExperience(NetworkMessage):
     jobXpLevelFloor:int
     jobXpNextLevelFloor:int
     
-    
-    def __post_init__(self):
+
+    def init(self, jobId:int, jobLevel:int, jobXP:int, jobXpLevelFloor:int, jobXpNextLevelFloor:int):
+        self.jobId = jobId
+        self.jobLevel = jobLevel
+        self.jobXP = jobXP
+        self.jobXpLevelFloor = jobXpLevelFloor
+        self.jobXpNextLevelFloor = jobXpNextLevelFloor
+        
         super().__init__()
+    
     

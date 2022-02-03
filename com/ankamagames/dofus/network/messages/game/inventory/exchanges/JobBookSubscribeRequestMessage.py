@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class JobBookSubscribeRequestMessage(NetworkMessage):
     jobIds:list[int]
     
-    
-    def __post_init__(self):
+
+    def init(self, jobIds:list[int]):
+        self.jobIds = jobIds
+        
         super().__init__()
+    
     

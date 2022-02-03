@@ -1,17 +1,26 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.context.GameContextActorInformations import GameContextActorInformations
-from com.ankamagames.dofus.network.types.game.context.fight.GameContextBasicSpawnInformation import GameContextBasicSpawnInformation
-from com.ankamagames.dofus.network.types.game.context.fight.GameFightCharacteristics import GameFightCharacteristics
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.fight.GameContextBasicSpawnInformation import GameContextBasicSpawnInformation
+    from com.ankamagames.dofus.network.types.game.context.fight.GameFightCharacteristics import GameFightCharacteristics
+    from com.ankamagames.dofus.network.types.game.look.EntityLook import EntityLook
+    from com.ankamagames.dofus.network.types.game.context.EntityDispositionInformations import EntityDispositionInformations
+    
 
 
-@dataclass
 class GameFightFighterInformations(GameContextActorInformations):
-    spawnInfo:GameContextBasicSpawnInformation
+    spawnInfo:'GameContextBasicSpawnInformation'
     wave:int
-    stats:GameFightCharacteristics
+    stats:'GameFightCharacteristics'
     previousPositions:list[int]
     
+
+    def init(self, spawnInfo:'GameContextBasicSpawnInformation', wave:int, stats:'GameFightCharacteristics', previousPositions:list[int], look:'EntityLook', contextualId:int, disposition:'EntityDispositionInformations'):
+        self.spawnInfo = spawnInfo
+        self.wave = wave
+        self.stats = stats
+        self.previousPositions = previousPositions
+        
+        super().__init__(look, contextualId, disposition)
     
-    def __post_init__(self):
-        super().__init__()
     

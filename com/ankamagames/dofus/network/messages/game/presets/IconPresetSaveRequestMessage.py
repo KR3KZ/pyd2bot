@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class IconPresetSaveRequestMessage(NetworkMessage):
     presetId:int
     symbolId:int
     updateData:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, presetId:int, symbolId:int, updateData:bool):
+        self.presetId = presetId
+        self.symbolId = symbolId
+        self.updateData = updateData
+        
         super().__init__()
+    
     

@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class HouseGuildRightsViewMessage(NetworkMessage):
     houseId:int
     instanceId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, houseId:int, instanceId:int):
+        self.houseId = houseId
+        self.instanceId = instanceId
+        
         super().__init__()
+    
     

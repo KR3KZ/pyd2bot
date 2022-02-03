@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.chat.smiley.ChatSmileyMessage import ChatSmileyMessage
 
 
-@dataclass
 class LocalizedChatSmileyMessage(ChatSmileyMessage):
     cellId:int
     
+
+    def init(self, cellId:int, entityId:int, smileyId:int, accountId:int):
+        self.cellId = cellId
+        
+        super().__init__(entityId, smileyId, accountId)
     
-    def __post_init__(self):
-        super().__init__()
     

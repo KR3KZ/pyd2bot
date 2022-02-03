@@ -52,10 +52,10 @@ class ByteArray(bytearray):
     def uncompress(self):
         self = bytearray(decompress(self))
 
-    def readBoolean(self):
+    def readbool(self):
         ans = self.read(1)
-        assert ans[0] in [0, 1], f"Invalid bool {ans[0]}"
-        return bool(ans[0])
+        r = struct.unpack('?',ans)[0]
+        return r
 
     def writeBoolean(self, b):
         if b:

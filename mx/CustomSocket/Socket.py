@@ -26,10 +26,10 @@ class Socket(threading.Thread):
         while not self._kill.is_set():
             try:
                 rdata = self._sock.recv(8192)
-                self.buff += rdata
-                self.dispatcher.dispatch(ProgressEvent.SOCKET_DATA, ProgressEvent(rdata))
+                if rdata:
+                    self.buff += rdata
+                    self.dispatcher.dispatch(ProgressEvent.SOCKET_DATA, ProgressEvent(rdata))
             except OSError as e:
-                print(e)
                 pass
                 
         self.close()

@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class DiceRollRequestMessage(NetworkMessage):
     dice:int
     faces:int
     channel:int
     
-    
-    def __post_init__(self):
+
+    def init(self, dice:int, faces:int, channel:int):
+        self.dice = dice
+        self.faces = faces
+        self.channel = channel
+        
         super().__init__()
+    
     

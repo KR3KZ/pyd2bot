@@ -1,14 +1,21 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.context.roleplay.GameRolePlayNamedActorInformations import GameRolePlayNamedActorInformations
-from com.ankamagames.dofus.network.types.game.context.roleplay.HumanInformations import HumanInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.roleplay.HumanInformations import HumanInformations
+    from com.ankamagames.dofus.network.types.game.look.EntityLook import EntityLook
+    from com.ankamagames.dofus.network.types.game.context.EntityDispositionInformations import EntityDispositionInformations
+    
 
 
-@dataclass
 class GameRolePlayHumanoidInformations(GameRolePlayNamedActorInformations):
-    humanoidInfo:HumanInformations
+    humanoidInfo:'HumanInformations'
     accountId:int
     
+
+    def init(self, humanoidInfo:'HumanInformations', accountId:int, name:str, look:'EntityLook', contextualId:int, disposition:'EntityDispositionInformations'):
+        self.humanoidInfo = humanoidInfo
+        self.accountId = accountId
+        
+        super().__init__(name, look, contextualId, disposition)
     
-    def __post_init__(self):
-        super().__init__()
     

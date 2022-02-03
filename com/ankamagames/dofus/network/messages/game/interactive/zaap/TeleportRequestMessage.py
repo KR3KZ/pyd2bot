@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class TeleportRequestMessage(NetworkMessage):
     sourceType:int
     destinationType:int
     mapId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, sourceType:int, destinationType:int, mapId:int):
+        self.sourceType = sourceType
+        self.destinationType = destinationType
+        self.mapId = mapId
+        
         super().__init__()
+    
     

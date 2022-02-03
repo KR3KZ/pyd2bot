@@ -1,11 +1,11 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.context.roleplay.houses.HouseSellRequestMessage import HouseSellRequestMessage
 
 
-@dataclass
 class HouseSellFromInsideRequestMessage(HouseSellRequestMessage):
     
+
+    def init(self, instanceId:int, amount:int, forSale:bool):
+        
+        super().__init__(instanceId, amount, forSale)
     
-    def __post_init__(self):
-        super().__init__()
     

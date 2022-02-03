@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class PaddockSellBuyDialogMessage(NetworkMessage):
     bsell:bool
     ownerId:int
     price:int
     
-    
-    def __post_init__(self):
+
+    def init(self, bsell:bool, ownerId:int, price:int):
+        self.bsell = bsell
+        self.ownerId = ownerId
+        self.price = price
+        
         super().__init__()
+    
     

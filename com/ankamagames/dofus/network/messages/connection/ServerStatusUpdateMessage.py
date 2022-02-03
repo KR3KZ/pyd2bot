@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.connection.GameServerInformations import GameServerInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.connection.GameServerInformations import GameServerInformations
+    
 
 
-@dataclass
 class ServerStatusUpdateMessage(NetworkMessage):
-    server:GameServerInformations
+    server:'GameServerInformations'
     
-    
-    def __post_init__(self):
+
+    def init(self, server:'GameServerInformations'):
+        self.server = server
+        
         super().__init__()
+    
     

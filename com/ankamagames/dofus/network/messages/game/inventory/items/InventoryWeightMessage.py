@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class InventoryWeightMessage(NetworkMessage):
     inventoryWeight:int
     shopWeight:int
     weightMax:int
     
-    
-    def __post_init__(self):
+
+    def init(self, inventoryWeight:int, shopWeight:int, weightMax:int):
+        self.inventoryWeight = inventoryWeight
+        self.shopWeight = shopWeight
+        self.weightMax = weightMax
+        
         super().__init__()
+    
     

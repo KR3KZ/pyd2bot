@@ -3,6 +3,7 @@ from com.ankamagames.atouin.utils.DataMapProvider import DataMapProvider
 import com.ankamagames.dofus.kernel.net.ConnectionsHandler as connh
 from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManager
 from com.ankamagames.dofus.logic.common.managers.AuthentificationManager import AuthentificationManager
+from com.ankamagames.dofus.logic.frames.DisconnectionHandlerFrame import DisconnectionHandlerFrame
 from com.ankamagames.dofus.logic.game.fight.managers.FightersStateManager import FightersStateManager
 import com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager as pc
 from com.ankamagames.dofus.modules.utils.pathFinding.world.WorldPathFinder import WorldPathFinder
@@ -58,14 +59,13 @@ class Kernel(metaclass=Singleton):
       self.getWorker().addFrame(auth.AuthentificationFrame())
       #Kernel().getWorker().addFrame(QueueFrame())
       #Kernel().getWorker().addFrame(GameStartingFrame())
-
       # if not self._worker.contains(LatencyFrame):
       #    self._worker.addFrame(LatencyFrame())
       # if not self._worker.contains(ServerControlFrame):
       #    self._worker.addFrame(ServerControlFrame())
       # if not self._worker.contains(AuthorizedFrame):
       #    self._worker.addFrame(AuthorizedFrame())
-      # self._worker.addFrame(DisconnectionHandlerFrame())
+      self._worker.addFrame(DisconnectionHandlerFrame())
  
 
 if __name__ == '__main__':

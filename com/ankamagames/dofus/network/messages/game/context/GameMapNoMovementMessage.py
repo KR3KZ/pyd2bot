@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GameMapNoMovementMessage(NetworkMessage):
     cellX:int
     cellY:int
     
-    
-    def __post_init__(self):
+
+    def init(self, cellX:int, cellY:int):
+        self.cellX = cellX
+        self.cellY = cellY
+        
         super().__init__()
+    
     

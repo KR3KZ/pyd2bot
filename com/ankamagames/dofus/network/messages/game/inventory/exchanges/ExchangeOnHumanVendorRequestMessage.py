@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ExchangeOnHumanVendorRequestMessage(NetworkMessage):
     humanVendorId:int
     humanVendorCell:int
     
-    
-    def __post_init__(self):
+
+    def init(self, humanVendorId:int, humanVendorCell:int):
+        self.humanVendorId = humanVendorId
+        self.humanVendorCell = humanVendorCell
+        
         super().__init__()
+    
     

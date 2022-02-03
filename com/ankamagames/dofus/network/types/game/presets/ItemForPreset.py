@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ItemForPreset(NetworkMessage):
     position:int
     objGid:int
     objUid:int
     
-    
-    def __post_init__(self):
+
+    def init(self, position:int, objGid:int, objUid:int):
+        self.position = position
+        self.objGid = objGid
+        self.objUid = objUid
+        
         super().__init__()
+    
     

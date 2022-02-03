@@ -1,11 +1,11 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.PaginationRequestAbstractMessage import PaginationRequestAbstractMessage
 
 
-@dataclass
 class GuildListApplicationRequestMessage(PaginationRequestAbstractMessage):
     
+
+    def init(self, offset:int, count:int):
+        
+        super().__init__(offset, count)
     
-    def __post_init__(self):
-        super().__init__()
     

@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ExchangeIsReadyMessage(NetworkMessage):
     id:int
     ready:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, id:int, ready:bool):
+        self.id = id
+        self.ready = ready
+        
         super().__init__()
+    
     

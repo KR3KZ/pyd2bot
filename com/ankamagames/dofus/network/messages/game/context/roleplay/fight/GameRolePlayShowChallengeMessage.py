@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.fight.FightCommonInformations import FightCommonInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.fight.FightCommonInformations import FightCommonInformations
+    
 
 
-@dataclass
 class GameRolePlayShowChallengeMessage(NetworkMessage):
-    commonsInfos:FightCommonInformations
+    commonsInfos:'FightCommonInformations'
     
-    
-    def __post_init__(self):
+
+    def init(self, commonsInfos:'FightCommonInformations'):
+        self.commonsInfos = commonsInfos
+        
         super().__init__()
+    
     

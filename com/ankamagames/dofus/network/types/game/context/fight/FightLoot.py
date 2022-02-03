@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class FightLoot(NetworkMessage):
     objects:list[int]
     kamas:int
     
-    
-    def __post_init__(self):
+
+    def init(self, objects:list[int], kamas:int):
+        self.objects = objects
+        self.kamas = kamas
+        
         super().__init__()
+    
     

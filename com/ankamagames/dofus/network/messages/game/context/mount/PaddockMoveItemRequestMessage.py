@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class PaddockMoveItemRequestMessage(NetworkMessage):
     oldCellId:int
     newCellId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, oldCellId:int, newCellId:int):
+        self.oldCellId = oldCellId
+        self.newCellId = newCellId
+        
         super().__init__()
+    
     

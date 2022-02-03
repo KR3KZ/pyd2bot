@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GameFightHumanReadyStateMessage(NetworkMessage):
     characterId:int
     isReady:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, characterId:int, isReady:bool):
+        self.characterId = characterId
+        self.isReady = isReady
+        
         super().__init__()
+    
     

@@ -1,18 +1,26 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.roleplay.fight.arena.ArenaRanking import ArenaRanking
-from com.ankamagames.dofus.network.types.game.context.roleplay.fight.arena.ArenaLeagueRanking import ArenaLeagueRanking
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.roleplay.fight.arena.ArenaRanking import ArenaRanking
+    from com.ankamagames.dofus.network.types.game.context.roleplay.fight.arena.ArenaLeagueRanking import ArenaLeagueRanking
+    
 
 
-@dataclass
 class ArenaRankInfos(NetworkMessage):
+    ranking:'ArenaRanking'
+    leagueRanking:'ArenaLeagueRanking'
     victoryCount:int
     fightcount:int
     numFightNeededForLadder:int
-    ranking:ArenaRanking = None
-    leagueRanking:ArenaLeagueRanking = None
     
-    
-    def __post_init__(self):
+
+    def init(self, ranking:'ArenaRanking', leagueRanking:'ArenaLeagueRanking', victoryCount:int, fightcount:int, numFightNeededForLadder:int):
+        self.ranking = ranking
+        self.leagueRanking = leagueRanking
+        self.victoryCount = victoryCount
+        self.fightcount = fightcount
+        self.numFightNeededForLadder = numFightNeededForLadder
+        
         super().__init__()
+    
     

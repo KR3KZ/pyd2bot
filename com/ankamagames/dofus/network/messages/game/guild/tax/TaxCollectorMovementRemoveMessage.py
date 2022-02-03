@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class TaxCollectorMovementRemoveMessage(NetworkMessage):
     collectorId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, collectorId:int):
+        self.collectorId = collectorId
+        
         super().__init__()
+    
     

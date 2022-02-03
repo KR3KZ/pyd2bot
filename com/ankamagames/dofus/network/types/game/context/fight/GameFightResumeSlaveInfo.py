@@ -1,16 +1,23 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.fight.GameFightSpellCooldown import GameFightSpellCooldown
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.fight.GameFightSpellCooldown import GameFightSpellCooldown
+    
 
 
-@dataclass
 class GameFightResumeSlaveInfo(NetworkMessage):
     slaveId:int
-    spellCooldowns:list[GameFightSpellCooldown]
+    spellCooldowns:list['GameFightSpellCooldown']
     summonCount:int
     bombCount:int
     
-    
-    def __post_init__(self):
+
+    def init(self, slaveId:int, spellCooldowns:list['GameFightSpellCooldown'], summonCount:int, bombCount:int):
+        self.slaveId = slaveId
+        self.spellCooldowns = spellCooldowns
+        self.summonCount = summonCount
+        self.bombCount = bombCount
+        
         super().__init__()
+    
     

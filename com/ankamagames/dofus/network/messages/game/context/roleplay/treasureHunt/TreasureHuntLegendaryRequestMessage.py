@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class TreasureHuntLegendaryRequestMessage(NetworkMessage):
     legendaryId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, legendaryId:int):
+        self.legendaryId = legendaryId
+        
         super().__init__()
+    
     

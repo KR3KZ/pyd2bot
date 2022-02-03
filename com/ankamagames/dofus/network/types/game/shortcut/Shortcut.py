@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class Shortcut(NetworkMessage):
     slot:int
     
-    
-    def __post_init__(self):
+
+    def init(self, slot:int):
+        self.slot = slot
+        
         super().__init__()
+    
     

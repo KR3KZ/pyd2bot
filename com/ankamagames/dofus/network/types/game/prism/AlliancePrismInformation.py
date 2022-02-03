@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.prism.PrismInformation import PrismInformation
-from com.ankamagames.dofus.network.types.game.context.roleplay.AllianceInformations import AllianceInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.roleplay.AllianceInformations import AllianceInformations
+    
 
 
-@dataclass
 class AlliancePrismInformation(PrismInformation):
-    alliance:AllianceInformations
+    alliance:'AllianceInformations'
     
+
+    def init(self, alliance:'AllianceInformations', typeId:int, state:int, nextVulnerabilityDate:int, placementDate:int, rewardTokenCount:int):
+        self.alliance = alliance
+        
+        super().__init__(typeId, state, nextVulnerabilityDate, placementDate, rewardTokenCount)
     
-    def __post_init__(self):
-        super().__init__()
     

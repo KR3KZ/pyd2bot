@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ObjectMovementMessage(NetworkMessage):
     objectUID:int
     position:int
     
-    
-    def __post_init__(self):
+
+    def init(self, objectUID:int, position:int):
+        self.objectUID = objectUID
+        self.position = position
+        
         super().__init__()
+    
     

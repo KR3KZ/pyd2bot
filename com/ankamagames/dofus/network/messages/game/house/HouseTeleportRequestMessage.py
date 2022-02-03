@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class HouseTeleportRequestMessage(NetworkMessage):
     houseId:int
     houseInstanceId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, houseId:int, houseInstanceId:int):
+        self.houseId = houseId
+        self.houseInstanceId = houseInstanceId
+        
         super().__init__()
+    
     

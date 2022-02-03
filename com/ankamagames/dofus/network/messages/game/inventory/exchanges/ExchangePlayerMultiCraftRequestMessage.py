@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeRequestMessage import ExchangeRequestMessage
 
 
-@dataclass
 class ExchangePlayerMultiCraftRequestMessage(ExchangeRequestMessage):
     target:int
     skillId:int
     
+
+    def init(self, target:int, skillId:int, exchangeType:int):
+        self.target = target
+        self.skillId = skillId
+        
+        super().__init__(exchangeType)
     
-    def __post_init__(self):
-        super().__init__()
     

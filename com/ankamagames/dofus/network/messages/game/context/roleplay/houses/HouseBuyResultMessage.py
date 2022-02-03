@@ -1,8 +1,6 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class HouseBuyResultMessage(NetworkMessage):
     houseId:int
     instanceId:int
@@ -10,7 +8,12 @@ class HouseBuyResultMessage(NetworkMessage):
     secondHand:bool
     bought:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, houseId:int, instanceId:int, realPrice:int):
+        self.houseId = houseId
+        self.instanceId = instanceId
+        self.realPrice = realPrice
+        
         super().__init__()
+    
     

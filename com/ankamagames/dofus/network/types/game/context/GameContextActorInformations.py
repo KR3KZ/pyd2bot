@@ -1,13 +1,18 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.context.GameContextActorPositionInformations import GameContextActorPositionInformations
-from com.ankamagames.dofus.network.types.game.look.EntityLook import EntityLook
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.look.EntityLook import EntityLook
+    from com.ankamagames.dofus.network.types.game.context.EntityDispositionInformations import EntityDispositionInformations
+    
 
 
-@dataclass
 class GameContextActorInformations(GameContextActorPositionInformations):
-    look:EntityLook
+    look:'EntityLook'
     
+
+    def init(self, look:'EntityLook', contextualId:int, disposition:'EntityDispositionInformations'):
+        self.look = look
+        
+        super().__init__(contextualId, disposition)
     
-    def __post_init__(self):
-        super().__init__()
     

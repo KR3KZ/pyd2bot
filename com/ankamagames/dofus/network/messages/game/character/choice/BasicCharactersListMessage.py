@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.character.choice.CharacterBaseInformations import CharacterBaseInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.character.choice.CharacterBaseInformations import CharacterBaseInformations
+    
 
 
-@dataclass
 class BasicCharactersListMessage(NetworkMessage):
-    characters:list[CharacterBaseInformations]
+    characters:list['CharacterBaseInformations']
     
-    
-    def __post_init__(self):
+
+    def init(self, characters:list['CharacterBaseInformations']):
+        self.characters = characters
+        
         super().__init__()
+    
     

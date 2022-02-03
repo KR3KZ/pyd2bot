@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessage import AbstractGameActionMessage
 
 
-@dataclass
 class GameActionFightActivateGlyphTrapMessage(AbstractGameActionMessage):
     markId:int
     active:bool
     
+
+    def init(self, markId:int, active:bool, actionId:int, sourceId:int):
+        self.markId = markId
+        self.active = active
+        
+        super().__init__(actionId, sourceId)
     
-    def __post_init__(self):
-        super().__init__()
     

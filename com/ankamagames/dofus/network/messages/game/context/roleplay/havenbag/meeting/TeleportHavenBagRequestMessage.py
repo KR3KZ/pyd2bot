@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class TeleportHavenBagRequestMessage(NetworkMessage):
     guestId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, guestId:int):
+        self.guestId = guestId
+        
         super().__init__()
+    
     

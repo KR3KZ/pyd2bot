@@ -43,7 +43,6 @@ class ServerConnection(IServerConnection):
    MESSAGE_SIZE_ASYNC_THRESHOLD:int = 300 * 1024
  
    def __init__(self, host:str = None, port:int = 0, id:str = "", secure:bool = False):
-      self._pauseBuffer = []
       self._latencyBuffer = []
       self._asyncMessages = list[INetworkMessage]()
       self._asyncTrees = list[FuncTree]()
@@ -55,10 +54,9 @@ class ServerConnection(IServerConnection):
       self._connecting = False
       self.disabled = False
       self.disabledIn = False
-      self._id:str = None
+      self.disabledOut = False
       self._rawParser:RawDataParser = None
       self._handler:MessageHandler = None
-      self._connecting = False
       self._outputBuffer = list[INetworkMessage]()
       self._splittedPacket = False
       self._staticHeader:int = -1
@@ -67,16 +65,12 @@ class ServerConnection(IServerConnection):
       self._inputBuffer = ByteArray()
       self._pauseBuffer = list()
       self._pause:bool = False
-      self._latencyBuffer:list = None
       self._latestSent:int = 0
       self._lastSent:int = None
       self._lagometer:ILagometer = None
       self._sendSequenceId:int = 0
-      self._asyncMessages = list[INetworkMessage]()
-      self._asyncTrees = list[FuncTree]()
       self._asyncNetworkDataContainerMessage:NetworkDataContainerMessage = None
       self._willClose:bool = None
-      self._input:ByteArray = None
       self._maxUnpackTime:int = float("inf")
       self._firstConnectionTry:bool = True
       super().__init__()
@@ -185,7 +179,7 @@ class ServerConnection(IServerConnection):
    
    def send(self, msg:INetworkMessage, connectionId:str = "") -> None:
       if self.DEBUG_DATA:
-         logger.debug("[" + str(self._id) + "] [SND] > " + (msg.__class__.__name__ if self.DEBUG_VERBOSE else msg))
+         logger.debug(f"[{self._id}] [SND] > {msg.__class__.__name__ if self.DEBUG_VERBOSE else msg}")
       if self.disabled or self.disabledOut:
          return
       if not self._socket.connected:
@@ -400,6 +394,7 @@ class ServerConnection(IServerConnection):
          self._inputBuffer = self._inputBuffer + src.read(self._splittedPacketLength - len(self._inputBuffer))
          self._inputBuffer.position = 0
          self.updateLatency()
+
          if self.getUnpackMode(self._splittedPacketId, self._splittedPacketLength) == UnpackMode.ASYNC:
             msg = self._rawParser.parseAsync(self._inputBuffer, self._splittedPacketId, self._splittedPacketLength, self.computeMessage)
             if self.DEBUG_LOW_LEVEL_VERBOSE and msg != None:
@@ -408,6 +403,7 @@ class ServerConnection(IServerConnection):
             msg = self._rawParser.parse(self._inputBuffer, self._splittedPacketId, self._splittedPacketLength)
             if self.DEBUG_LOW_LEVEL_VERBOSE:
                logger.info("[" + str(self._id) + "] Full parsing done")
+               
          self._splittedPacket = False
          self._inputBuffer = ByteArray()
          return msg

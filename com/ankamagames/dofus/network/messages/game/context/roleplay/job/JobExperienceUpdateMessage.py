@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.roleplay.job.JobExperience import JobExperience
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.roleplay.job.JobExperience import JobExperience
+    
 
 
-@dataclass
 class JobExperienceUpdateMessage(NetworkMessage):
-    experiencesUpdate:JobExperience
+    experiencesUpdate:'JobExperience'
     
-    
-    def __post_init__(self):
+
+    def init(self, experiencesUpdate:'JobExperience'):
+        self.experiencesUpdate = experiencesUpdate
+        
         super().__init__()
+    
     

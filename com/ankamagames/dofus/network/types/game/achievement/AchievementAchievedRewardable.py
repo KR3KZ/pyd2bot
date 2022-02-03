@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.achievement.AchievementAchieved import AchievementAchieved
 
 
-@dataclass
 class AchievementAchievedRewardable(AchievementAchieved):
     finishedlevel:int
     
+
+    def init(self, finishedlevel:int, id:int, achievedBy:int):
+        self.finishedlevel = finishedlevel
+        
+        super().__init__(id, achievedBy)
     
-    def __post_init__(self):
-        super().__init__()
     

@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class LockableCodeResultMessage(NetworkMessage):
     result:int
     
-    
-    def __post_init__(self):
+
+    def init(self, result:int):
+        self.result = result
+        
         super().__init__()
+    
     

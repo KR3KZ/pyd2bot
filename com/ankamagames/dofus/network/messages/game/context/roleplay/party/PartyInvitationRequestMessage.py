@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.common.AbstractPlayerSearchInformation import AbstractPlayerSearchInformation
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.common.AbstractPlayerSearchInformation import AbstractPlayerSearchInformation
+    
 
 
-@dataclass
 class PartyInvitationRequestMessage(NetworkMessage):
-    target:AbstractPlayerSearchInformation
+    target:'AbstractPlayerSearchInformation'
     
-    
-    def __post_init__(self):
+
+    def init(self, target:'AbstractPlayerSearchInformation'):
+        self.target = target
+        
         super().__init__()
+    
     

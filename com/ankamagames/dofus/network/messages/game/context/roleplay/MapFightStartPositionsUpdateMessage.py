@@ -1,14 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.fight.FightStartingPositions import FightStartingPositions
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.fight.FightStartingPositions import FightStartingPositions
+    
 
 
-@dataclass
 class MapFightStartPositionsUpdateMessage(NetworkMessage):
     mapId:int
-    fightStartPositions:FightStartingPositions
+    fightStartPositions:'FightStartingPositions'
     
-    
-    def __post_init__(self):
+
+    def init(self, mapId:int, fightStartPositions:'FightStartingPositions'):
+        self.mapId = mapId
+        self.fightStartPositions = fightStartPositions
+        
         super().__init__()
+    
     

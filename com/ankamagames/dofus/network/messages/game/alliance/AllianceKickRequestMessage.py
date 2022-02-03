@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class AllianceKickRequestMessage(NetworkMessage):
     kickedId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, kickedId:int):
+        self.kickedId = kickedId
+        
         super().__init__()
+    
     

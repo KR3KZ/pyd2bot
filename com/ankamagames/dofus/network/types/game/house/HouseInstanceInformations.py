@@ -1,19 +1,25 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.common.AccountTagInformation import AccountTagInformation
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.common.AccountTagInformation import AccountTagInformation
+    
 
 
-@dataclass
 class HouseInstanceInformations(NetworkMessage):
     instanceId:int
-    ownerTag:AccountTagInformation
+    ownerTag:'AccountTagInformation'
     price:int
     secondHand:bool
     isLocked:bool
     hasOwner:bool
     isSaleLocked:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, instanceId:int, ownerTag:'AccountTagInformation', price:int):
+        self.instanceId = instanceId
+        self.ownerTag = ownerTag
+        self.price = price
+        
         super().__init__()
+    
     

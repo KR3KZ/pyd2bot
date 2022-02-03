@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.context.roleplay.BasicGuildInformations import BasicGuildInformations
-from com.ankamagames.dofus.network.types.game.guild.GuildEmblem import GuildEmblem
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.guild.GuildEmblem import GuildEmblem
+    
 
 
-@dataclass
 class GuildInformations(BasicGuildInformations):
-    guildEmblem:GuildEmblem
+    guildEmblem:'GuildEmblem'
     
+
+    def init(self, guildEmblem:'GuildEmblem', guildId:int, guildName:str, guildLevel:int):
+        self.guildEmblem = guildEmblem
+        
+        super().__init__(guildId, guildName, guildLevel)
     
-    def __post_init__(self):
-        super().__init__()
     

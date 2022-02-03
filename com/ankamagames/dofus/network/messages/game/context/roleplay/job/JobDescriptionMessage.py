@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.roleplay.job.JobDescription import JobDescription
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.roleplay.job.JobDescription import JobDescription
+    
 
 
-@dataclass
 class JobDescriptionMessage(NetworkMessage):
-    jobsDescription:list[JobDescription]
+    jobsDescription:list['JobDescription']
     
-    
-    def __post_init__(self):
+
+    def init(self, jobsDescription:list['JobDescription']):
+        self.jobsDescription = jobsDescription
+        
         super().__init__()
+    
     

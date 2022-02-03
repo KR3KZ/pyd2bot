@@ -60,4 +60,3 @@ if __name__  == "__main__":
     mySniffer.start()
     signal.signal(signal.SIGINT, mySniffer.stop)
     mySniffer.join()
-        

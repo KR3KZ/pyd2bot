@@ -1,11 +1,9 @@
 from com.ankamagames.jerakine.logger.Logger import Logger
-
 from com.ankamagames.jerakine.network.CustomDataWrapper import Buffer, ByteArray
-from pyd2bot.network.NetMsgClassDef import NetMsgClassDef
-from ...com.ankamagames.jerakine.network.ProtocolSpec import ProtocolSpec
+from com.ankamagames.jerakine.network.parser.NetworkMessageClassDefinition import NetMsgClassDef
+from com.ankamagames.jerakine.network.parser.ProtocolSpec import ProtocolSpec
 from . import msgReceiver
-
-logger = logging.getLogger("labot")
+logger = Logger(__name__)
 
 
 class Message:

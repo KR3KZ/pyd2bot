@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GuildFightJoinRequestMessage(NetworkMessage):
     taxCollectorId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, taxCollectorId:int):
+        self.taxCollectorId = taxCollectorId
+        
         super().__init__()
+    
     

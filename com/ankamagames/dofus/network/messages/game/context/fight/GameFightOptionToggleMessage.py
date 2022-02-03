@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GameFightOptionToggleMessage(NetworkMessage):
     option:int
     
-    
-    def __post_init__(self):
+
+    def init(self, option:int):
+        self.option = option
+        
         super().__init__()
+    
     

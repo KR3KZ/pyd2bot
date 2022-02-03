@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class AccountLoggingKickedMessage(NetworkMessage):
     days:int
     hours:int
     minutes:int
     
-    
-    def __post_init__(self):
+
+    def init(self, days:int, hours:int, minutes:int):
+        self.days = days
+        self.hours = hours
+        self.minutes = minutes
+        
         super().__init__()
+    
     

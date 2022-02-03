@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.roleplay.breach.BreachReward import BreachReward
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.roleplay.breach.BreachReward import BreachReward
+    
 
 
-@dataclass
 class BreachRewardsMessage(NetworkMessage):
-    rewards:list[BreachReward]
+    rewards:list['BreachReward']
     
-    
-    def __post_init__(self):
+
+    def init(self, rewards:list['BreachReward']):
+        self.rewards = rewards
+        
         super().__init__()
+    
     

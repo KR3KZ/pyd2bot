@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class AllianceChangeGuildRightsMessage(NetworkMessage):
     guildId:int
     rights:int
     
-    
-    def __post_init__(self):
+
+    def init(self, guildId:int, rights:int):
+        self.guildId = guildId
+        self.rights = rights
+        
         super().__init__()
+    
     

@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.roleplay.GameRolePlayActorInformations import GameRolePlayActorInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.roleplay.GameRolePlayActorInformations import GameRolePlayActorInformations
+    
 
 
-@dataclass
 class GameRolePlayShowMultipleActorsMessage(NetworkMessage):
-    informationsList:list[GameRolePlayActorInformations]
+    informationsList:list['GameRolePlayActorInformations']
     
-    
-    def __post_init__(self):
+
+    def init(self, informationsList:list['GameRolePlayActorInformations']):
+        self.informationsList = informationsList
+        
         super().__init__()
+    
     

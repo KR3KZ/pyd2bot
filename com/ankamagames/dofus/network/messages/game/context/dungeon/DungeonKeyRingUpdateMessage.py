@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class DungeonKeyRingUpdateMessage(NetworkMessage):
     dungeonId:int
     available:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, dungeonId:int, available:bool):
+        self.dungeonId = dungeonId
+        self.available = available
+        
         super().__init__()
+    
     

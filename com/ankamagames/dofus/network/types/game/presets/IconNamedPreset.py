@@ -1,13 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.presets.PresetsContainerPreset import PresetsContainerPreset
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.presets.Preset import Preset
+    
 
 
-@dataclass
 class IconNamedPreset(PresetsContainerPreset):
     iconId:int
     name:str
     
+
+    def init(self, iconId:int, name:str, presets:list['Preset'], id:int):
+        self.iconId = iconId
+        self.name = name
+        
+        super().__init__(presets, id)
     
-    def __post_init__(self):
-        super().__init__()
     

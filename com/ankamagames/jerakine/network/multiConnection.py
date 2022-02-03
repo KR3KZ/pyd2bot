@@ -157,7 +157,6 @@ class MultiConnection(EventDispatcher):
          connection.resume()
    
    def send(self, msg:INetworkMessage, connectionId:str = "") -> None:
-      conn:IServerConnection = None
       if self._messageRouter:
          if connectionId == "":
             connectionId = self._messageRouter.getConnectionId(msg)

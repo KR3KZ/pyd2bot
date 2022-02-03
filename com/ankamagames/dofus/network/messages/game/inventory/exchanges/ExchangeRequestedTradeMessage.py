@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeRequestedMessage import ExchangeRequestedMessage
 
 
-@dataclass
 class ExchangeRequestedTradeMessage(ExchangeRequestedMessage):
     source:int
     target:int
     
+
+    def init(self, source:int, target:int, exchangeType:int):
+        self.source = source
+        self.target = target
+        
+        super().__init__(exchangeType)
     
-    def __post_init__(self):
-        super().__init__()
     

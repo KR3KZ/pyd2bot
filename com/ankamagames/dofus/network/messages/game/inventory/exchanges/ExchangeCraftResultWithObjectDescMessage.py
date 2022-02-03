@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeCraftResultMessage import ExchangeCraftResultMessage
-from com.ankamagames.dofus.network.types.game.data.items.ObjectItemNotInContainer import ObjectItemNotInContainer
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.data.items.ObjectItemNotInContainer import ObjectItemNotInContainer
+    
 
 
-@dataclass
 class ExchangeCraftResultWithObjectDescMessage(ExchangeCraftResultMessage):
-    objectInfo:ObjectItemNotInContainer
+    objectInfo:'ObjectItemNotInContainer'
     
+
+    def init(self, objectInfo:'ObjectItemNotInContainer', craftResult:int):
+        self.objectInfo = objectInfo
+        
+        super().__init__(craftResult)
     
-    def __post_init__(self):
-        super().__init__()
     

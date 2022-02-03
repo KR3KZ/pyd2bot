@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.roleplay.job.JobCrafterDirectoryListEntry import JobCrafterDirectoryListEntry
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.roleplay.job.JobCrafterDirectoryListEntry import JobCrafterDirectoryListEntry
+    
 
 
-@dataclass
 class JobCrafterDirectoryListMessage(NetworkMessage):
-    listEntries:list[JobCrafterDirectoryListEntry]
+    listEntries:list['JobCrafterDirectoryListEntry']
     
-    
-    def __post_init__(self):
+
+    def init(self, listEntries:list['JobCrafterDirectoryListEntry']):
+        self.listEntries = listEntries
+        
         super().__init__()
+    
     

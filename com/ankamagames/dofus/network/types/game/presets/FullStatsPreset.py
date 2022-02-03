@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.presets.Preset import Preset
-from com.ankamagames.dofus.network.types.game.presets.CharacterCharacteristicForPreset import CharacterCharacteristicForPreset
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.presets.CharacterCharacteristicForPreset import CharacterCharacteristicForPreset
+    
 
 
-@dataclass
 class FullStatsPreset(Preset):
-    stats:list[CharacterCharacteristicForPreset]
+    stats:list['CharacterCharacteristicForPreset']
     
+
+    def init(self, stats:list['CharacterCharacteristicForPreset'], id:int):
+        self.stats = stats
+        
+        super().__init__(id)
     
-    def __post_init__(self):
-        super().__init__()
     

@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.character.CharacterMinimalInformations import CharacterMinimalInformations
 
 
-@dataclass
 class CharacterMinimalGuildPublicInformations(CharacterMinimalInformations):
     rank:int
     
+
+    def init(self, rank:int, level:int, name:str, id:int):
+        self.rank = rank
+        
+        super().__init__(level, name, id)
     
-    def __post_init__(self):
-        super().__init__()
     

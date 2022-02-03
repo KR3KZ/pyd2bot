@@ -1,15 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.context.fight.SpawnInformation import SpawnInformation
 
 
-@dataclass
 class SpawnCompanionInformation(SpawnInformation):
     modelId:int
     level:int
     summonerId:int
     ownerId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, modelId:int, level:int, summonerId:int, ownerId:int):
+        self.modelId = modelId
+        self.level = level
+        self.summonerId = summonerId
+        self.ownerId = ownerId
+        
         super().__init__()
+    
     

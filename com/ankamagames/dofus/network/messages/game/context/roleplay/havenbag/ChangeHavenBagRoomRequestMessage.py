@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ChangeHavenBagRoomRequestMessage(NetworkMessage):
     roomId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, roomId:int):
+        self.roomId = roomId
+        
         super().__init__()
+    
     

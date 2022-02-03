@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.character.characteristic.CharacterCharacteristic import CharacterCharacteristic
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.character.characteristic.CharacterCharacteristic import CharacterCharacteristic
+    
 
 
-@dataclass
 class CharacterCharacteristics(NetworkMessage):
-    characteristics:list[CharacterCharacteristic]
+    characteristics:list['CharacterCharacteristic']
     
-    
-    def __post_init__(self):
+
+    def init(self, characteristics:list['CharacterCharacteristic']):
+        self.characteristics = characteristics
+        
         super().__init__()
+    
     

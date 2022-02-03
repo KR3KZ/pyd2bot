@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ProtectedEntityWaitingForHelpInfo(NetworkMessage):
     timeLeftBeforeFight:int
     waitTimeForPlacement:int
     nbPositionForDefensors:int
     
-    
-    def __post_init__(self):
+
+    def init(self, timeLeftBeforeFight:int, waitTimeForPlacement:int, nbPositionForDefensors:int):
+        self.timeLeftBeforeFight = timeLeftBeforeFight
+        self.waitTimeForPlacement = waitTimeForPlacement
+        self.nbPositionForDefensors = nbPositionForDefensors
+        
         super().__init__()
+    
     

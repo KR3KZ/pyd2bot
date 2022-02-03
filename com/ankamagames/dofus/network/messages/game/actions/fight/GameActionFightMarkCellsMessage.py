@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessage import AbstractGameActionMessage
-from com.ankamagames.dofus.network.types.game.actions.fight.GameActionMark import GameActionMark
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.actions.fight.GameActionMark import GameActionMark
+    
 
 
-@dataclass
 class GameActionFightMarkCellsMessage(AbstractGameActionMessage):
-    mark:GameActionMark
+    mark:'GameActionMark'
     
+
+    def init(self, mark:'GameActionMark', actionId:int, sourceId:int):
+        self.mark = mark
+        
+        super().__init__(actionId, sourceId)
     
-    def __post_init__(self):
-        super().__init__()
     

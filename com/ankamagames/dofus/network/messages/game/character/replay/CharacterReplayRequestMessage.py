@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class CharacterReplayRequestMessage(NetworkMessage):
     characterId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, characterId:int):
+        self.characterId = characterId
+        
         super().__init__()
+    
     

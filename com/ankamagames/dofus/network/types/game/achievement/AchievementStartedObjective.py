@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.achievement.AchievementObjective import AchievementObjective
 
 
-@dataclass
 class AchievementStartedObjective(AchievementObjective):
     value:int
     
+
+    def init(self, value:int, id:int, maxValue:int):
+        self.value = value
+        
+        super().__init__(id, maxValue)
     
-    def __post_init__(self):
-        super().__init__()
     

@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.idol.Idol import Idol
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.idol.Idol import Idol
+    
 
 
-@dataclass
 class GameFightStartMessage(NetworkMessage):
-    idols:list[Idol]
+    idols:list['Idol']
     
-    
-    def __post_init__(self):
+
+    def init(self, idols:list['Idol']):
+        self.idols = idols
+        
         super().__init__()
+    
     

@@ -1,11 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.alliance.AllianceListMessage import AllianceListMessage
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.social.AllianceFactSheetInformations import AllianceFactSheetInformations
+    
 
 
-@dataclass
 class AlliancePartialListMessage(AllianceListMessage):
     
+
+    def init(self, alliances:list['AllianceFactSheetInformations']):
+        
+        super().__init__(alliances)
     
-    def __post_init__(self):
-        super().__init__()
     

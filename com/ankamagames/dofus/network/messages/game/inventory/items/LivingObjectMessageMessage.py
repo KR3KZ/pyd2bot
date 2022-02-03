@@ -1,15 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class LivingObjectMessageMessage(NetworkMessage):
     msgId:int
     timeStamp:int
     owner:str
     objectGenericId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, msgId:int, timeStamp:int, owner:str, objectGenericId:int):
+        self.msgId = msgId
+        self.timeStamp = timeStamp
+        self.owner = owner
+        self.objectGenericId = objectGenericId
+        
         super().__init__()
+    
     

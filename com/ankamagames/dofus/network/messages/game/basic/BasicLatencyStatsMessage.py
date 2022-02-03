@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class BasicLatencyStatsMessage(NetworkMessage):
     latency:int
     sampleCount:int
     max:int
     
-    
-    def __post_init__(self):
+
+    def init(self, latency:int, sampleCount:int, max:int):
+        self.latency = latency
+        self.sampleCount = sampleCount
+        self.max = max
+        
         super().__init__()
+    
     

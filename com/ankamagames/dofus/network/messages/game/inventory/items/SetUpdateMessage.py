@@ -1,15 +1,21 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.data.items.effects.ObjectEffect import ObjectEffect
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.data.items.effects.ObjectEffect import ObjectEffect
+    
 
 
-@dataclass
 class SetUpdateMessage(NetworkMessage):
     setId:int
     setObjects:list[int]
-    setEffects:list[ObjectEffect]
+    setEffects:list['ObjectEffect']
     
-    
-    def __post_init__(self):
+
+    def init(self, setId:int, setObjects:list[int], setEffects:list['ObjectEffect']):
+        self.setId = setId
+        self.setObjects = setObjects
+        self.setEffects = setEffects
+        
         super().__init__()
+    
     

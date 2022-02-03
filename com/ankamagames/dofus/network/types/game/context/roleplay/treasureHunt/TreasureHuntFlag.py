@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class TreasureHuntFlag(NetworkMessage):
     mapId:int
     state:int
     
-    
-    def __post_init__(self):
+
+    def init(self, mapId:int, state:int):
+        self.mapId = mapId
+        self.state = state
+        
         super().__init__()
+    
     

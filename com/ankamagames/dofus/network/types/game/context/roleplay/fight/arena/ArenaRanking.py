@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ArenaRanking(NetworkMessage):
     rank:int
     bestRank:int
     
-    
-    def __post_init__(self):
+
+    def init(self, rank:int, bestRank:int):
+        self.rank = rank
+        self.bestRank = bestRank
+        
         super().__init__()
+    
     

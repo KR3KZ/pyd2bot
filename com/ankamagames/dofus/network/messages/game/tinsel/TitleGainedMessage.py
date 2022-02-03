@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class TitleGainedMessage(NetworkMessage):
     titleId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, titleId:int):
+        self.titleId = titleId
+        
         super().__init__()
+    
     

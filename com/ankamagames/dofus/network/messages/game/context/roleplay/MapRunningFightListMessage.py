@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.fight.FightExternalInformations import FightExternalInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.fight.FightExternalInformations import FightExternalInformations
+    
 
 
-@dataclass
 class MapRunningFightListMessage(NetworkMessage):
-    fights:list[FightExternalInformations]
+    fights:list['FightExternalInformations']
     
-    
-    def __post_init__(self):
+
+    def init(self, fights:list['FightExternalInformations']):
+        self.fights = fights
+        
         super().__init__()
+    
     

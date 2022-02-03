@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.entity.EntityInformation import EntityInformation
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.entity.EntityInformation import EntityInformation
+    
 
 
-@dataclass
 class EntityInformationMessage(NetworkMessage):
-    entity:EntityInformation
+    entity:'EntityInformation'
     
-    
-    def __post_init__(self):
+
+    def init(self, entity:'EntityInformation'):
+        self.entity = entity
+        
         super().__init__()
+    
     

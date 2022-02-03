@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.data.items.GoldItem import GoldItem
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.data.items.GoldItem import GoldItem
+    
 
 
-@dataclass
 class GoldAddedMessage(NetworkMessage):
-    gold:GoldItem
+    gold:'GoldItem'
     
-    
-    def __post_init__(self):
+
+    def init(self, gold:'GoldItem'):
+        self.gold = gold
+        
         super().__init__()
+    
     

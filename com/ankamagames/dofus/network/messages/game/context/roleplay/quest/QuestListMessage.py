@@ -1,16 +1,23 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.roleplay.quest.QuestActiveInformations import QuestActiveInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.roleplay.quest.QuestActiveInformations import QuestActiveInformations
+    
 
 
-@dataclass
 class QuestListMessage(NetworkMessage):
     finishedQuestsIds:list[int]
     finishedQuestsCounts:list[int]
-    activeQuests:list[QuestActiveInformations]
+    activeQuests:list['QuestActiveInformations']
     reinitDoneQuestsIds:list[int]
     
-    
-    def __post_init__(self):
+
+    def init(self, finishedQuestsIds:list[int], finishedQuestsCounts:list[int], activeQuests:list['QuestActiveInformations'], reinitDoneQuestsIds:list[int]):
+        self.finishedQuestsIds = finishedQuestsIds
+        self.finishedQuestsCounts = finishedQuestsCounts
+        self.activeQuests = activeQuests
+        self.reinitDoneQuestsIds = reinitDoneQuestsIds
+        
         super().__init__()
+    
     

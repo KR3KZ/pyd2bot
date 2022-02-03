@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ConsoleCommandsListMessage(NetworkMessage):
     aliases:list[str]
     args:list[str]
     descriptions:list[str]
     
-    
-    def __post_init__(self):
+
+    def init(self, aliases:list[str], args:list[str], descriptions:list[str]):
+        self.aliases = aliases
+        self.args = args
+        self.descriptions = descriptions
+        
         super().__init__()
+    
     

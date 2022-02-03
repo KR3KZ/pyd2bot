@@ -1,7 +1,4 @@
-from enum import Enum
-
-
-class ConnectionType(Enum):
+class ConnectionType:
    
    DISCONNECTED:str = "disconnected"
    

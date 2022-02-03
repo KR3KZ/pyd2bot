@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.paddock.PaddockInformations import PaddockInformations
-from com.ankamagames.dofus.network.types.game.paddock.PaddockBuyableInformations import PaddockBuyableInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.paddock.PaddockBuyableInformations import PaddockBuyableInformations
+    
 
 
-@dataclass
 class PaddockInstancesInformations(PaddockInformations):
-    paddocks:list[PaddockBuyableInformations]
+    paddocks:list['PaddockBuyableInformations']
     
+
+    def init(self, paddocks:list['PaddockBuyableInformations'], maxOutdoorMount:int, maxItems:int):
+        self.paddocks = paddocks
+        
+        super().__init__(maxOutdoorMount, maxItems)
     
-    def __post_init__(self):
-        super().__init__()
     

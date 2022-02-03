@@ -1,15 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GameRolePlayPlayerFightFriendlyAnsweredMessage(NetworkMessage):
     fightId:int
     sourceId:int
     targetId:int
     accept:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, fightId:int, sourceId:int, targetId:int, accept:bool):
+        self.fightId = fightId
+        self.sourceId = sourceId
+        self.targetId = targetId
+        self.accept = accept
+        
         super().__init__()
+    
     

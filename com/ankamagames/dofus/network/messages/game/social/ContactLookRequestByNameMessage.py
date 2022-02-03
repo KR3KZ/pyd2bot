@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.social.ContactLookRequestMessage import ContactLookRequestMessage
 
 
-@dataclass
 class ContactLookRequestByNameMessage(ContactLookRequestMessage):
     playerName:str
     
+
+    def init(self, playerName:str, requestId:int, contactType:int):
+        self.playerName = playerName
+        
+        super().__init__(requestId, contactType)
     
-    def __post_init__(self):
-        super().__init__()
     

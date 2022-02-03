@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.data.items.effects.ObjectEffectInteger import ObjectEffectInteger
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.data.items.effects.ObjectEffectInteger import ObjectEffectInteger
+    
 
 
-@dataclass
 class BreachBonusMessage(NetworkMessage):
-    bonus:ObjectEffectInteger
+    bonus:'ObjectEffectInteger'
     
-    
-    def __post_init__(self):
+
+    def init(self, bonus:'ObjectEffectInteger'):
+        self.bonus = bonus
+        
         super().__init__()
+    
     

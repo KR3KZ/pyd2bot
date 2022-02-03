@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GuildApplicationListenMessage(NetworkMessage):
     listen:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, listen:bool):
+        self.listen = listen
+        
         super().__init__()
+    
     

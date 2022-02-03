@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.character.stats.CharacterLevelUpMessage import CharacterLevelUpMessage
 
 
-@dataclass
 class CharacterLevelUpInformationMessage(CharacterLevelUpMessage):
     name:str
     id:int
     
+
+    def init(self, name:str, id:int, newLevel:int):
+        self.name = name
+        self.id = id
+        
+        super().__init__(newLevel)
     
-    def __post_init__(self):
-        super().__init__()
     

@@ -1,8 +1,6 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class PurchasableDialogMessage(NetworkMessage):
     purchasableId:int
     purchasableInstanceId:int
@@ -10,7 +8,12 @@ class PurchasableDialogMessage(NetworkMessage):
     buyOrSell:bool
     secondHand:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, purchasableId:int, purchasableInstanceId:int, price:int):
+        self.purchasableId = purchasableId
+        self.purchasableInstanceId = purchasableInstanceId
+        self.price = price
+        
         super().__init__()
+    
     

@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GameMapMovementMessage(NetworkMessage):
     keyMovements:list[int]
     forcedDirection:int
     actorId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, keyMovements:list[int], forcedDirection:int, actorId:int):
+        self.keyMovements = keyMovements
+        self.forcedDirection = forcedDirection
+        self.actorId = actorId
+        
         super().__init__()
+    
     

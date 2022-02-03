@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.actions.fight.GameActionFightDispellMessage import GameActionFightDispellMessage
 
 
-@dataclass
 class GameActionFightDispellEffectMessage(GameActionFightDispellMessage):
     boostUID:int
     
+
+    def init(self, boostUID:int, targetId:int, verboseCast:bool, actionId:int, sourceId:int):
+        self.boostUID = boostUID
+        
+        super().__init__(targetId, verboseCast, actionId, sourceId)
     
-    def __post_init__(self):
-        super().__init__()
     

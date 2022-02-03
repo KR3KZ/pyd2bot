@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.data.items.ObjectItemToSell import ObjectItemToSell
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.data.items.ObjectItemToSell import ObjectItemToSell
+    
 
 
-@dataclass
 class ExchangeShopStockStartedMessage(NetworkMessage):
-    objectsInfos:list[ObjectItemToSell]
+    objectsInfos:list['ObjectItemToSell']
     
-    
-    def __post_init__(self):
+
+    def init(self, objectsInfos:list['ObjectItemToSell']):
+        self.objectsInfos = objectsInfos
+        
         super().__init__()
+    
     

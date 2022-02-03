@@ -1,8 +1,6 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class InteractiveUsedMessage(NetworkMessage):
     entityId:int
     elemId:int
@@ -10,7 +8,14 @@ class InteractiveUsedMessage(NetworkMessage):
     duration:int
     canMove:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, entityId:int, elemId:int, skillId:int, duration:int, canMove:bool):
+        self.entityId = entityId
+        self.elemId = elemId
+        self.skillId = skillId
+        self.duration = duration
+        self.canMove = canMove
+        
         super().__init__()
+    
     

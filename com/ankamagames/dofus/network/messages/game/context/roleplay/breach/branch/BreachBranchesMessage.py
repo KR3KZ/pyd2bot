@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.roleplay.breach.ExtendedBreachBranch import ExtendedBreachBranch
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.roleplay.breach.ExtendedBreachBranch import ExtendedBreachBranch
+    
 
 
-@dataclass
 class BreachBranchesMessage(NetworkMessage):
-    branches:list[ExtendedBreachBranch]
+    branches:list['ExtendedBreachBranch']
     
-    
-    def __post_init__(self):
+
+    def init(self, branches:list['ExtendedBreachBranch']):
+        self.branches = branches
+        
         super().__init__()
+    
     

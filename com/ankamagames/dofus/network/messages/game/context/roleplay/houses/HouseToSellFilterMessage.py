@@ -1,8 +1,6 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class HouseToSellFilterMessage(NetworkMessage):
     areaId:int
     atLeastNbRoom:int
@@ -11,7 +9,15 @@ class HouseToSellFilterMessage(NetworkMessage):
     maxPrice:int
     orderBy:int
     
-    
-    def __post_init__(self):
+
+    def init(self, areaId:int, atLeastNbRoom:int, atLeastNbChest:int, skillRequested:int, maxPrice:int, orderBy:int):
+        self.areaId = areaId
+        self.atLeastNbRoom = atLeastNbRoom
+        self.atLeastNbChest = atLeastNbChest
+        self.skillRequested = skillRequested
+        self.maxPrice = maxPrice
+        self.orderBy = orderBy
+        
         super().__init__()
+    
     

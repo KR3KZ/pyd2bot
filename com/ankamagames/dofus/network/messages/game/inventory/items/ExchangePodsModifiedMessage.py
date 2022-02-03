@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeObjectMessage import ExchangeObjectMessage
 
 
-@dataclass
 class ExchangePodsModifiedMessage(ExchangeObjectMessage):
     currentWeight:int
     maxWeight:int
     
+
+    def init(self, currentWeight:int, maxWeight:int, remote:bool):
+        self.currentWeight = currentWeight
+        self.maxWeight = maxWeight
+        
+        super().__init__(remote)
     
-    def __post_init__(self):
-        super().__init__()
     

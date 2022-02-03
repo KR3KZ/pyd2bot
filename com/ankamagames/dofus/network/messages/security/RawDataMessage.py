@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class RawDataMessage(NetworkMessage):
     content:bytearray
     
-    
-    def __post_init__(self):
+
+    def init(self, content:bytearray):
+        self.content = content
+        
         super().__init__()
+    
     

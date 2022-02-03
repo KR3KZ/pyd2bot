@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ForgettableSpellClientActionMessage(NetworkMessage):
     spellId:int
     action:int
     
-    
-    def __post_init__(self):
+
+    def init(self, spellId:int, action:int):
+        self.spellId = spellId
+        self.action = action
+        
         super().__init__()
+    
     

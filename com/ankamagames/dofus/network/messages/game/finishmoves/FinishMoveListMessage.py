@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.finishmoves.FinishMoveInformations import FinishMoveInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.finishmoves.FinishMoveInformations import FinishMoveInformations
+    
 
 
-@dataclass
 class FinishMoveListMessage(NetworkMessage):
-    finishMoves:list[FinishMoveInformations]
+    finishMoves:list['FinishMoveInformations']
     
-    
-    def __post_init__(self):
+
+    def init(self, finishMoves:list['FinishMoveInformations']):
+        self.finishMoves = finishMoves
+        
         super().__init__()
+    
     

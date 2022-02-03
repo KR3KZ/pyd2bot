@@ -1,15 +1,21 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.GameContextActorPositionInformations import GameContextActorPositionInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.GameContextActorPositionInformations import GameContextActorPositionInformations
+    
 
 
-@dataclass
 class GameContextBasicSpawnInformation(NetworkMessage):
     teamId:int
     alive:bool
-    informations:GameContextActorPositionInformations
+    informations:'GameContextActorPositionInformations'
     
-    
-    def __post_init__(self):
+
+    def init(self, teamId:int, alive:bool, informations:'GameContextActorPositionInformations'):
+        self.teamId = teamId
+        self.alive = alive
+        self.informations = informations
+        
         super().__init__()
+    
     

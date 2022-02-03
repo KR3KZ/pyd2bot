@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class BasicDateMessage(NetworkMessage):
     day:int
     month:int
     year:int
     
-    
-    def __post_init__(self):
+
+    def init(self, day:int, month:int, year:int):
+        self.day = day
+        self.month = month
+        self.year = year
+        
         super().__init__()
+    
     

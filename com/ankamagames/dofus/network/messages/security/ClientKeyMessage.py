@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ClientKeyMessage(NetworkMessage):
     key:str
     
-    
-    def __post_init__(self):
+
+    def init(self, key:str):
+        self.key = key
+        
         super().__init__()
+    
     

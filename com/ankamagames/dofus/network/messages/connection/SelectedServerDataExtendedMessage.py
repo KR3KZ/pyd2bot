@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.connection.SelectedServerDataMessage import SelectedServerDataMessage
-from com.ankamagames.dofus.network.types.connection.GameServerInformations import GameServerInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.connection.GameServerInformations import GameServerInformations
+    
 
 
-@dataclass
 class SelectedServerDataExtendedMessage(SelectedServerDataMessage):
-    servers:list[GameServerInformations]
+    servers:list['GameServerInformations']
     
+
+    def init(self, servers:list['GameServerInformations'], serverId:int, address:str, ports:list[int], canCreateNewCharacter:bool, ticket:list[int]):
+        self.servers = servers
+        
+        super().__init__(serverId, address, ports, canCreateNewCharacter, ticket)
     
-    def __post_init__(self):
-        super().__init__()
     

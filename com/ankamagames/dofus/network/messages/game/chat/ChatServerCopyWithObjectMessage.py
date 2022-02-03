@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.chat.ChatServerCopyMessage import ChatServerCopyMessage
-from com.ankamagames.dofus.network.types.game.data.items.ObjectItem import ObjectItem
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.data.items.ObjectItem import ObjectItem
+    
 
 
-@dataclass
 class ChatServerCopyWithObjectMessage(ChatServerCopyMessage):
-    objects:list[ObjectItem]
+    objects:list['ObjectItem']
     
+
+    def init(self, objects:list['ObjectItem'], receiverId:int, receiverName:str, channel:int, content:str, timestamp:int, fingerprint:str):
+        self.objects = objects
+        
+        super().__init__(receiverId, receiverName, channel, content, timestamp, fingerprint)
     
-    def __post_init__(self):
-        super().__init__()
     

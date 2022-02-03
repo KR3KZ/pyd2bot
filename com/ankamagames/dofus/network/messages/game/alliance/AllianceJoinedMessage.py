@@ -1,15 +1,21 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.roleplay.AllianceInformations import AllianceInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.roleplay.AllianceInformations import AllianceInformations
+    
 
 
-@dataclass
 class AllianceJoinedMessage(NetworkMessage):
-    allianceInfo:AllianceInformations
+    allianceInfo:'AllianceInformations'
     enabled:bool
     leadingGuildId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, allianceInfo:'AllianceInformations', enabled:bool, leadingGuildId:int):
+        self.allianceInfo = allianceInfo
+        self.enabled = enabled
+        self.leadingGuildId = leadingGuildId
+        
         super().__init__()
+    
     

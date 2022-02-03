@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class DebugHighlightCellsMessage(NetworkMessage):
     color:int
     cells:list[int]
     
-    
-    def __post_init__(self):
+
+    def init(self, color:int, cells:list[int]):
+        self.color = color
+        self.cells = cells
+        
         super().__init__()
+    
     

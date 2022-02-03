@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class MigratedServerListMessage(NetworkMessage):
     migratedServerIds:list[int]
     
-    
-    def __post_init__(self):
+
+    def init(self, migratedServerIds:list[int]):
+        self.migratedServerIds = migratedServerIds
+        
         super().__init__()
+    
     

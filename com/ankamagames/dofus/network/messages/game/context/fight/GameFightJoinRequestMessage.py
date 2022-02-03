@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GameFightJoinRequestMessage(NetworkMessage):
     fighterId:int
     fightId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, fighterId:int, fightId:int):
+        self.fighterId = fighterId
+        self.fightId = fightId
+        
         super().__init__()
+    
     

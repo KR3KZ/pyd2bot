@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.shortcut.Shortcut import Shortcut
 
 
-@dataclass
 class ShortcutEntitiesPreset(Shortcut):
     presetId:int
     
+
+    def init(self, presetId:int, slot:int):
+        self.presetId = presetId
+        
+        super().__init__(slot)
     
-    def __post_init__(self):
-        super().__init__()
     

@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.roleplay.alignment.war.effort.AlignmentWarEffortInformation import AlignmentWarEffortInformation
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.roleplay.alignment.war.effort.AlignmentWarEffortInformation import AlignmentWarEffortInformation
+    
 
 
-@dataclass
 class AlignmentWarEffortProgressionMessage(NetworkMessage):
-    effortProgressions:list[AlignmentWarEffortInformation]
+    effortProgressions:list['AlignmentWarEffortInformation']
     
-    
-    def __post_init__(self):
+
+    def init(self, effortProgressions:list['AlignmentWarEffortInformation']):
+        self.effortProgressions = effortProgressions
+        
         super().__init__()
+    
     

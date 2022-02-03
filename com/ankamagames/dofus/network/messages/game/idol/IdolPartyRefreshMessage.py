@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.idol.PartyIdol import PartyIdol
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.idol.PartyIdol import PartyIdol
+    
 
 
-@dataclass
 class IdolPartyRefreshMessage(NetworkMessage):
-    partyIdol:PartyIdol
+    partyIdol:'PartyIdol'
     
-    
-    def __post_init__(self):
+
+    def init(self, partyIdol:'PartyIdol'):
+        self.partyIdol = partyIdol
+        
         super().__init__()
+    
     

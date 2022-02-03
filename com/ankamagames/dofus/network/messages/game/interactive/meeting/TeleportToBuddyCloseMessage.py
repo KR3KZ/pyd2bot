@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class TeleportToBuddyCloseMessage(NetworkMessage):
     dungeonId:int
     buddyId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, dungeonId:int, buddyId:int):
+        self.dungeonId = dungeonId
+        self.buddyId = buddyId
+        
         super().__init__()
+    
     

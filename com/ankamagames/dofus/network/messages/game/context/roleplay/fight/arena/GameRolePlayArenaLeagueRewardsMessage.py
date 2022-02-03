@@ -1,15 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GameRolePlayArenaLeagueRewardsMessage(NetworkMessage):
     seasonId:int
     leagueId:int
     ladderPosition:int
     endSeasonReward:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, seasonId:int, leagueId:int, ladderPosition:int, endSeasonReward:bool):
+        self.seasonId = seasonId
+        self.leagueId = leagueId
+        self.ladderPosition = ladderPosition
+        self.endSeasonReward = endSeasonReward
+        
         super().__init__()
+    
     

@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.context.roleplay.quest.QuestStepInfoRequestMessage import QuestStepInfoRequestMessage
 
 
-@dataclass
 class WatchQuestStepInfoRequestMessage(QuestStepInfoRequestMessage):
     playerId:int
     
+
+    def init(self, playerId:int, questId:int):
+        self.playerId = playerId
+        
+        super().__init__(questId)
     
-    def __post_init__(self):
-        super().__init__()
     

@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ExchangeMoneyMovementInformationMessage(NetworkMessage):
     limit:int
     
-    
-    def __post_init__(self):
+
+    def init(self, limit:int):
+        self.limit = limit
+        
         super().__init__()
+    
     

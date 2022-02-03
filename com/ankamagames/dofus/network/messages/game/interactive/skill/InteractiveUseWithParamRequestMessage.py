@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.interactive.InteractiveUseRequestMessage import InteractiveUseRequestMessage
 
 
-@dataclass
 class InteractiveUseWithParamRequestMessage(InteractiveUseRequestMessage):
     id:int
     
+
+    def init(self, id:int, elemId:int, skillInstanceUid:int):
+        self.id = id
+        
+        super().__init__(elemId, skillInstanceUid)
     
-    def __post_init__(self):
-        super().__init__()
     

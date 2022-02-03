@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.roleplay.fight.arena.ArenaRankInfos import ArenaRankInfos
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.roleplay.fight.arena.ArenaRankInfos import ArenaRankInfos
+    
 
 
-@dataclass
 class GameRolePlayArenaUpdatePlayerInfosMessage(NetworkMessage):
-    solo:ArenaRankInfos
+    solo:'ArenaRankInfos'
     
-    
-    def __post_init__(self):
+
+    def init(self, solo:'ArenaRankInfos'):
+        self.solo = solo
+        
         super().__init__()
+    
     

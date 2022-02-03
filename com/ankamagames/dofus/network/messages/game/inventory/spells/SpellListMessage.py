@@ -1,14 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.data.items.SpellItem import SpellItem
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.data.items.SpellItem import SpellItem
+    
 
 
-@dataclass
 class SpellListMessage(NetworkMessage):
     spellPrevisualization:bool
-    spells:list[SpellItem]
+    spells:list['SpellItem']
     
-    
-    def __post_init__(self):
+
+    def init(self, spellPrevisualization:bool, spells:list['SpellItem']):
+        self.spellPrevisualization = spellPrevisualization
+        self.spells = spells
+        
         super().__init__()
+    
     

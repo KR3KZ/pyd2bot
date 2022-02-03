@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.context.roleplay.party.AbstractPartyEventMessage import AbstractPartyEventMessage
 
 
-@dataclass
 class PartyCancelInvitationNotificationMessage(AbstractPartyEventMessage):
     cancelerId:int
     guestId:int
     
+
+    def init(self, cancelerId:int, guestId:int, partyId:int):
+        self.cancelerId = cancelerId
+        self.guestId = guestId
+        
+        super().__init__(partyId)
     
-    def __post_init__(self):
-        super().__init__()
     

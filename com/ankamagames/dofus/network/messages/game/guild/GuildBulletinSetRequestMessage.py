@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.social.SocialNoticeSetRequestMessage import SocialNoticeSetRequestMessage
 
 
-@dataclass
 class GuildBulletinSetRequestMessage(SocialNoticeSetRequestMessage):
     content:str
     notifyMembers:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, content:str, notifyMembers:bool):
+        self.content = content
+        self.notifyMembers = notifyMembers
+        
         super().__init__()
+    
     

@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GuestModeMessage(NetworkMessage):
     active:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, active:bool):
+        self.active = active
+        
         super().__init__()
+    
     

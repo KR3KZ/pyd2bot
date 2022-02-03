@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GameRolePlayNpcQuestFlag(NetworkMessage):
     questsToValidId:list[int]
     questsToStartId:list[int]
     
-    
-    def __post_init__(self):
+
+    def init(self, questsToValidId:list[int], questsToStartId:list[int]):
+        self.questsToValidId = questsToValidId
+        self.questsToStartId = questsToStartId
+        
         super().__init__()
+    
     

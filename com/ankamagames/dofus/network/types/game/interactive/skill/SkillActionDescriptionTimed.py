@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.interactive.skill.SkillActionDescription import SkillActionDescription
 
 
-@dataclass
 class SkillActionDescriptionTimed(SkillActionDescription):
     time:int
     
+
+    def init(self, time:int, skillId:int):
+        self.time = time
+        
+        super().__init__(skillId)
     
-    def __post_init__(self):
-        super().__init__()
     

@@ -1,8 +1,6 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class SelectedServerDataMessage(NetworkMessage):
     serverId:int
     address:str
@@ -10,7 +8,14 @@ class SelectedServerDataMessage(NetworkMessage):
     canCreateNewCharacter:bool
     ticket:list[int]
     
-    
-    def __post_init__(self):
+
+    def init(self, serverId:int, address:str, ports:list[int], canCreateNewCharacter:bool, ticket:list[int]):
+        self.serverId = serverId
+        self.address = address
+        self.ports = ports
+        self.canCreateNewCharacter = canCreateNewCharacter
+        self.ticket = ticket
+        
         super().__init__()
+    
     

@@ -1,8 +1,6 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class AbstractFightTeamInformations(NetworkMessage):
     teamId:int
     leaderId:int
@@ -10,7 +8,14 @@ class AbstractFightTeamInformations(NetworkMessage):
     teamTypeId:int
     nbWaves:int
     
-    
-    def __post_init__(self):
+
+    def init(self, teamId:int, leaderId:int, teamSide:int, teamTypeId:int, nbWaves:int):
+        self.teamId = teamId
+        self.leaderId = leaderId
+        self.teamSide = teamSide
+        self.teamTypeId = teamTypeId
+        self.nbWaves = nbWaves
+        
         super().__init__()
+    
     

@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeCraftResultMessage import ExchangeCraftResultMessage
 
 
-@dataclass
 class ExchangeCraftResultWithObjectIdMessage(ExchangeCraftResultMessage):
     objectGenericId:int
     
+
+    def init(self, objectGenericId:int, craftResult:int):
+        self.objectGenericId = objectGenericId
+        
+        super().__init__(craftResult)
     
-    def __post_init__(self):
-        super().__init__()
     

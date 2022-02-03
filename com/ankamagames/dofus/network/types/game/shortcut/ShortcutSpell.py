@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.shortcut.Shortcut import Shortcut
 
 
-@dataclass
 class ShortcutSpell(Shortcut):
     spellId:int
     
+
+    def init(self, spellId:int, slot:int):
+        self.spellId = spellId
+        
+        super().__init__(slot)
     
-    def __post_init__(self):
-        super().__init__()
     

@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class DebtInformation(NetworkMessage):
     id:int
     timestamp:int
     
-    
-    def __post_init__(self):
+
+    def init(self, id:int, timestamp:int):
+        self.id = id
+        self.timestamp = timestamp
+        
         super().__init__()
+    
     

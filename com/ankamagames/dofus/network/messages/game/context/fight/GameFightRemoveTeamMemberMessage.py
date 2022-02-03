@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GameFightRemoveTeamMemberMessage(NetworkMessage):
     fightId:int
     teamId:int
     charId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, fightId:int, teamId:int, charId:int):
+        self.fightId = fightId
+        self.teamId = teamId
+        self.charId = charId
+        
         super().__init__()
+    
     

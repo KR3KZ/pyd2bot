@@ -1,15 +1,21 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.look.EntityLook import EntityLook
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.look.EntityLook import EntityLook
+    
 
 
-@dataclass
 class PartyEntityBaseInformation(NetworkMessage):
     indexId:int
     entityModelId:int
-    entityLook:EntityLook
+    entityLook:'EntityLook'
     
-    
-    def __post_init__(self):
+
+    def init(self, indexId:int, entityModelId:int, entityLook:'EntityLook'):
+        self.indexId = indexId
+        self.entityModelId = entityModelId
+        self.entityLook = entityLook
+        
         super().__init__()
+    
     

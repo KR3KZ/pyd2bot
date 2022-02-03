@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ExchangeReplyTaxVendorMessage(NetworkMessage):
     objectValue:int
     totalTaxValue:int
     
-    
-    def __post_init__(self):
+
+    def init(self, objectValue:int, totalTaxValue:int):
+        self.objectValue = objectValue
+        self.totalTaxValue = totalTaxValue
+        
         super().__init__()
+    
     

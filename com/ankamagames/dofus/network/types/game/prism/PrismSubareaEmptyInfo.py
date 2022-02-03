@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class PrismSubareaEmptyInfo(NetworkMessage):
     subAreaId:int
     allianceId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, subAreaId:int, allianceId:int):
+        self.subAreaId = subAreaId
+        self.allianceId = allianceId
+        
         super().__init__()
+    
     

@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.roleplay.AtlasPointsInformations import AtlasPointsInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.roleplay.AtlasPointsInformations import AtlasPointsInformations
+    
 
 
-@dataclass
 class AtlasPointInformationsMessage(NetworkMessage):
-    type:AtlasPointsInformations
+    type:'AtlasPointsInformations'
     
-    
-    def __post_init__(self):
+
+    def init(self, type:'AtlasPointsInformations'):
+        self.type = type
+        
         super().__init__()
+    
     

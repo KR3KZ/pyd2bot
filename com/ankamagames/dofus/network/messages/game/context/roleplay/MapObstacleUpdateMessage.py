@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.interactive.MapObstacle import MapObstacle
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.interactive.MapObstacle import MapObstacle
+    
 
 
-@dataclass
 class MapObstacleUpdateMessage(NetworkMessage):
-    obstacles:list[MapObstacle]
+    obstacles:list['MapObstacle']
     
-    
-    def __post_init__(self):
+
+    def init(self, obstacles:list['MapObstacle']):
+        self.obstacles = obstacles
+        
         super().__init__()
+    
     

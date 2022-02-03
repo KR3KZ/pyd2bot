@@ -1,14 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.fight.FightTeamInformations import FightTeamInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.fight.FightTeamInformations import FightTeamInformations
+    
 
 
-@dataclass
 class GameFightUpdateTeamMessage(NetworkMessage):
     fightId:int
-    team:FightTeamInformations
+    team:'FightTeamInformations'
     
-    
-    def __post_init__(self):
+
+    def init(self, fightId:int, team:'FightTeamInformations'):
+        self.fightId = fightId
+        self.team = team
+        
         super().__init__()
+    
     

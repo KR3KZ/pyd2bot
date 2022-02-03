@@ -1,11 +1,11 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.context.GameMapMovementRequestMessage import GameMapMovementRequestMessage
 
 
-@dataclass
 class GameCautiousMapMovementRequestMessage(GameMapMovementRequestMessage):
     
+
+    def init(self, keyMovements:list[int], mapId:int):
+        
+        super().__init__(keyMovements, mapId)
     
-    def __post_init__(self):
-        super().__init__()
     

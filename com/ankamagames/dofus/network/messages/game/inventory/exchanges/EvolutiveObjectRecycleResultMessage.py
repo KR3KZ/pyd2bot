@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.inventory.exchanges.RecycledItem import RecycledItem
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.inventory.exchanges.RecycledItem import RecycledItem
+    
 
 
-@dataclass
 class EvolutiveObjectRecycleResultMessage(NetworkMessage):
-    recycledItems:list[RecycledItem]
+    recycledItems:list['RecycledItem']
     
-    
-    def __post_init__(self):
+
+    def init(self, recycledItems:list['RecycledItem']):
+        self.recycledItems = recycledItems
+        
         super().__init__()
+    
     

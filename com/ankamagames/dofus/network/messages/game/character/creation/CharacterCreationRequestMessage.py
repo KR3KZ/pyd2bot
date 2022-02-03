@@ -1,8 +1,6 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class CharacterCreationRequestMessage(NetworkMessage):
     name:str
     breed:int
@@ -10,7 +8,14 @@ class CharacterCreationRequestMessage(NetworkMessage):
     colors:list[int]
     cosmeticId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, name:str, breed:int, sex:bool, colors:list[int], cosmeticId:int):
+        self.name = name
+        self.breed = breed
+        self.sex = sex
+        self.colors = colors
+        self.cosmeticId = cosmeticId
+        
         super().__init__()
+    
     

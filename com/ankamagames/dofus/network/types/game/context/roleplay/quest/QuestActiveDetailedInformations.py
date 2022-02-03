@@ -1,14 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.context.roleplay.quest.QuestActiveInformations import QuestActiveInformations
-from com.ankamagames.dofus.network.types.game.context.roleplay.quest.QuestObjectiveInformations import QuestObjectiveInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.roleplay.quest.QuestObjectiveInformations import QuestObjectiveInformations
+    
 
 
-@dataclass
 class QuestActiveDetailedInformations(QuestActiveInformations):
     stepId:int
-    objectives:list[QuestObjectiveInformations]
+    objectives:list['QuestObjectiveInformations']
     
+
+    def init(self, stepId:int, objectives:list['QuestObjectiveInformations'], questId:int):
+        self.stepId = stepId
+        self.objectives = objectives
+        
+        super().__init__(questId)
     
-    def __post_init__(self):
-        super().__init__()
     

@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.context.fight.AbstractFightTeamInformations import AbstractFightTeamInformations
-from com.ankamagames.dofus.network.types.game.context.fight.FightTeamMemberInformations import FightTeamMemberInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.fight.FightTeamMemberInformations import FightTeamMemberInformations
+    
 
 
-@dataclass
 class FightTeamInformations(AbstractFightTeamInformations):
-    teamMembers:list[FightTeamMemberInformations]
+    teamMembers:list['FightTeamMemberInformations']
     
+
+    def init(self, teamMembers:list['FightTeamMemberInformations'], teamId:int, leaderId:int, teamSide:int, teamTypeId:int, nbWaves:int):
+        self.teamMembers = teamMembers
+        
+        super().__init__(teamId, leaderId, teamSide, teamTypeId, nbWaves)
     
-    def __post_init__(self):
-        super().__init__()
     

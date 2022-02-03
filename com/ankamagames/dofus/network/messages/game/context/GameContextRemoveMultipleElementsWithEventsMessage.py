@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.context.GameContextRemoveMultipleElementsMessage import GameContextRemoveMultipleElementsMessage
 
 
-@dataclass
 class GameContextRemoveMultipleElementsWithEventsMessage(GameContextRemoveMultipleElementsMessage):
     elementEventIds:list[int]
     
+
+    def init(self, elementEventIds:list[int], elementsIds:list[int]):
+        self.elementEventIds = elementEventIds
+        
+        super().__init__(elementsIds)
     
-    def __post_init__(self):
-        super().__init__()
     

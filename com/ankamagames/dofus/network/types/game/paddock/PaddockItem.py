@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.context.roleplay.ObjectItemInRolePlay import ObjectItemInRolePlay
-from com.ankamagames.dofus.network.types.game.mount.ItemDurability import ItemDurability
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.mount.ItemDurability import ItemDurability
+    
 
 
-@dataclass
 class PaddockItem(ObjectItemInRolePlay):
-    durability:ItemDurability
+    durability:'ItemDurability'
     
+
+    def init(self, durability:'ItemDurability', cellId:int, objectGID:int):
+        self.durability = durability
+        
+        super().__init__(cellId, objectGID)
     
-    def __post_init__(self):
-        super().__init__()
     

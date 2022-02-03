@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class MountReleasedMessage(NetworkMessage):
     mountId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, mountId:int):
+        self.mountId = mountId
+        
         super().__init__()
+    
     

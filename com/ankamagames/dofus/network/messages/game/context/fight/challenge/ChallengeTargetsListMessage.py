@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ChallengeTargetsListMessage(NetworkMessage):
     targetIds:list[int]
     targetCells:list[int]
     
-    
-    def __post_init__(self):
+
+    def init(self, targetIds:list[int], targetCells:list[int]):
+        self.targetIds = targetIds
+        self.targetCells = targetCells
+        
         super().__init__()
+    
     

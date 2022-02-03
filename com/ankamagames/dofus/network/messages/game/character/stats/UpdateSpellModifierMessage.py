@@ -1,14 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.character.characteristic.CharacterSpellModification import CharacterSpellModification
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.character.characteristic.CharacterSpellModification import CharacterSpellModification
+    
 
 
-@dataclass
 class UpdateSpellModifierMessage(NetworkMessage):
     actorId:int
-    spellModifier:CharacterSpellModification
+    spellModifier:'CharacterSpellModification'
     
-    
-    def __post_init__(self):
+
+    def init(self, actorId:int, spellModifier:'CharacterSpellModification'):
+        self.actorId = actorId
+        self.spellModifier = spellModifier
+        
         super().__init__()
+    
     

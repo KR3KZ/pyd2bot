@@ -1,15 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class IdolSelectErrorMessage(NetworkMessage):
     reason:int
     idolId:int
     activate:bool
     party:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, reason:int, idolId:int):
+        self.reason = reason
+        self.idolId = idolId
+        
         super().__init__()
+    
     

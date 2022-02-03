@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ShortcutBarRemoveRequestMessage(NetworkMessage):
     barType:int
     slot:int
     
-    
-    def __post_init__(self):
+
+    def init(self, barType:int, slot:int):
+        self.barType = barType
+        self.slot = slot
+        
         super().__init__()
+    
     

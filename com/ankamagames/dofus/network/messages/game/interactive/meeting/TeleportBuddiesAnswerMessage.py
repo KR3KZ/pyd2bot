@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class TeleportBuddiesAnswerMessage(NetworkMessage):
     accept:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, accept:bool):
+        self.accept = accept
+        
         super().__init__()
+    
     

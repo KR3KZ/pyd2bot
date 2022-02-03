@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.roleplay.quest.QuestActiveDetailedInformations import QuestActiveDetailedInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.roleplay.quest.QuestActiveDetailedInformations import QuestActiveDetailedInformations
+    
 
 
-@dataclass
 class FollowedQuestsMessage(NetworkMessage):
-    quests:list[QuestActiveDetailedInformations]
+    quests:list['QuestActiveDetailedInformations']
     
-    
-    def __post_init__(self):
+
+    def init(self, quests:list['QuestActiveDetailedInformations']):
+        self.quests = quests
+        
         super().__init__()
+    
     

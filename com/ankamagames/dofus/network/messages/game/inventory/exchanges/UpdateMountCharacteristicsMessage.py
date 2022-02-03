@@ -1,14 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.mount.UpdateMountCharacteristic import UpdateMountCharacteristic
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.mount.UpdateMountCharacteristic import UpdateMountCharacteristic
+    
 
 
-@dataclass
 class UpdateMountCharacteristicsMessage(NetworkMessage):
     rideId:int
-    boostToUpdateList:list[UpdateMountCharacteristic]
+    boostToUpdateList:list['UpdateMountCharacteristic']
     
-    
-    def __post_init__(self):
+
+    def init(self, rideId:int, boostToUpdateList:list['UpdateMountCharacteristic']):
+        self.rideId = rideId
+        self.boostToUpdateList = boostToUpdateList
+        
         super().__init__()
+    
     

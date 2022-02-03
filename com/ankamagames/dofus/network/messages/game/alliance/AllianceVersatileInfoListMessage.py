@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.social.AllianceVersatileInformations import AllianceVersatileInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.social.AllianceVersatileInformations import AllianceVersatileInformations
+    
 
 
-@dataclass
 class AllianceVersatileInfoListMessage(NetworkMessage):
-    alliances:list[AllianceVersatileInformations]
+    alliances:list['AllianceVersatileInformations']
     
-    
-    def __post_init__(self):
+
+    def init(self, alliances:list['AllianceVersatileInformations']):
+        self.alliances = alliances
+        
         super().__init__()
+    
     

@@ -1,8 +1,6 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.context.roleplay.party.AbstractPartyEventMessage import AbstractPartyEventMessage
 
 
-@dataclass
 class PartyUpdateLightMessage(AbstractPartyEventMessage):
     id:int
     lifePoints:int
@@ -10,7 +8,14 @@ class PartyUpdateLightMessage(AbstractPartyEventMessage):
     prospecting:int
     regenRate:int
     
+
+    def init(self, id:int, lifePoints:int, maxLifePoints:int, prospecting:int, regenRate:int, partyId:int):
+        self.id = id
+        self.lifePoints = lifePoints
+        self.maxLifePoints = maxLifePoints
+        self.prospecting = prospecting
+        self.regenRate = regenRate
+        
+        super().__init__(partyId)
     
-    def __post_init__(self):
-        super().__init__()
     

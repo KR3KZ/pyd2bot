@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class SpellVariantActivationMessage(NetworkMessage):
     spellId:int
     result:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, spellId:int, result:bool):
+        self.spellId = spellId
+        self.result = result
+        
         super().__init__()
+    
     

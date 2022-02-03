@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.data.items.ObjectItem import ObjectItem
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.data.items.ObjectItem import ObjectItem
+    
 
 
-@dataclass
 class ExchangeStartedMountStockMessage(NetworkMessage):
-    objectsInfos:list[ObjectItem]
+    objectsInfos:list['ObjectItem']
     
-    
-    def __post_init__(self):
+
+    def init(self, objectsInfos:list['ObjectItem']):
+        self.objectsInfos = objectsInfos
+        
         super().__init__()
+    
     

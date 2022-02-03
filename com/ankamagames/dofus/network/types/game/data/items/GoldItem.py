@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.data.items.Item import Item
 
 
-@dataclass
 class GoldItem(Item):
     sum:int
     
-    
-    def __post_init__(self):
+
+    def init(self, sum:int):
+        self.sum = sum
+        
         super().__init__()
+    
     

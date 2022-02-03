@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class AdditionalTaxCollectorInformations(NetworkMessage):
     collectorCallerName:str
     date:int
     
-    
-    def __post_init__(self):
+
+    def init(self, collectorCallerName:str, date:int):
+        self.collectorCallerName = collectorCallerName
+        self.date = date
+        
         super().__init__()
+    
     

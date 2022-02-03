@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class UpdateMapPlayersAgressableStatusMessage(NetworkMessage):
     playerIds:list[int]
     enable:list[int]
     
-    
-    def __post_init__(self):
+
+    def init(self, playerIds:list[int], enable:list[int]):
+        self.playerIds = playerIds
+        self.enable = enable
+        
         super().__init__()
+    
     

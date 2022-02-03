@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ObjectEffect(NetworkMessage):
     actionId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, actionId:int):
+        self.actionId = actionId
+        
         super().__init__()
+    
     

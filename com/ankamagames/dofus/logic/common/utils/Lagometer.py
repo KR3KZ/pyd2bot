@@ -19,6 +19,7 @@ class Lagometer(ILagometer):
       self._timer = Timer(self.SHOW_LAG_DELAY, self.onTimerComplete)
    
    def ping(self, msg:INetworkMessage = None) -> None:
+      self._timer = Timer(self.SHOW_LAG_DELAY, self.onTimerComplete)
       self._timer.start()
    
    def pong(self, msg:INetworkMessage = None) -> None:
@@ -27,7 +28,7 @@ class Lagometer(ILagometer):
       self.stop()
    
    def stop(self) -> None:
-      self._timer.stop()
+      self._timer.cancel()
    
    def onTimerComplete(self) -> None:
       self.stop()

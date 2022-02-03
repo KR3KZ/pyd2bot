@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class NpcDialogCreationMessage(NetworkMessage):
     mapId:int
     npcId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, mapId:int, npcId:int):
+        self.mapId = mapId
+        self.npcId = npcId
+        
         super().__init__()
+    
     

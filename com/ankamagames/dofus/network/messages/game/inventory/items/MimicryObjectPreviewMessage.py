@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.data.items.ObjectItem import ObjectItem
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.data.items.ObjectItem import ObjectItem
+    
 
 
-@dataclass
 class MimicryObjectPreviewMessage(NetworkMessage):
-    result:ObjectItem
+    result:'ObjectItem'
     
-    
-    def __post_init__(self):
+
+    def init(self, result:'ObjectItem'):
+        self.result = result
+        
         super().__init__()
+    
     

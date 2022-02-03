@@ -1,15 +1,21 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.actions.fight.AbstractFightDispellableEffect import AbstractFightDispellableEffect
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.actions.fight.AbstractFightDispellableEffect import AbstractFightDispellableEffect
+    
 
 
-@dataclass
 class FightDispellableEffectExtendedInformations(NetworkMessage):
     actionId:int
     sourceId:int
-    effect:AbstractFightDispellableEffect
+    effect:'AbstractFightDispellableEffect'
     
-    
-    def __post_init__(self):
+
+    def init(self, actionId:int, sourceId:int, effect:'AbstractFightDispellableEffect'):
+        self.actionId = actionId
+        self.sourceId = sourceId
+        self.effect = effect
+        
         super().__init__()
+    
     

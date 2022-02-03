@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.PaginationAnswerAbstractMessage import PaginationAnswerAbstractMessage
-from com.ankamagames.dofus.network.types.game.guild.application.GuildApplicationInformation import GuildApplicationInformation
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.guild.application.GuildApplicationInformation import GuildApplicationInformation
+    
 
 
-@dataclass
 class GuildListApplicationAnswerMessage(PaginationAnswerAbstractMessage):
-    applies:list[GuildApplicationInformation]
+    applies:list['GuildApplicationInformation']
     
+
+    def init(self, applies:list['GuildApplicationInformation'], offset:int, count:int, total:int):
+        self.applies = applies
+        
+        super().__init__(offset, count, total)
     
-    def __post_init__(self):
-        super().__init__()
     

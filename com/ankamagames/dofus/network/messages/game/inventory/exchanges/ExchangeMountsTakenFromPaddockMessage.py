@@ -1,15 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ExchangeMountsTakenFromPaddockMessage(NetworkMessage):
     name:str
     worldX:int
     worldY:int
     ownername:str
     
-    
-    def __post_init__(self):
+
+    def init(self, name:str, worldX:int, worldY:int, ownername:str):
+        self.name = name
+        self.worldX = worldX
+        self.worldY = worldY
+        self.ownername = ownername
+        
         super().__init__()
+    
     

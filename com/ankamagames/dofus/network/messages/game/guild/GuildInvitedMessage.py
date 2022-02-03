@@ -1,15 +1,21 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.roleplay.BasicGuildInformations import BasicGuildInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.roleplay.BasicGuildInformations import BasicGuildInformations
+    
 
 
-@dataclass
 class GuildInvitedMessage(NetworkMessage):
     recruterId:int
     recruterName:str
-    guildInfo:BasicGuildInformations
+    guildInfo:'BasicGuildInformations'
     
-    
-    def __post_init__(self):
+
+    def init(self, recruterId:int, recruterName:str, guildInfo:'BasicGuildInformations'):
+        self.recruterId = recruterId
+        self.recruterName = recruterName
+        self.guildInfo = guildInfo
+        
         super().__init__()
+    
     

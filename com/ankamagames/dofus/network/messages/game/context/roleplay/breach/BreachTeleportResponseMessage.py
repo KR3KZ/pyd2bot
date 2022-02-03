@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class BreachTeleportResponseMessage(NetworkMessage):
     teleported:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, teleported:bool):
+        self.teleported = teleported
+        
         super().__init__()
+    
     

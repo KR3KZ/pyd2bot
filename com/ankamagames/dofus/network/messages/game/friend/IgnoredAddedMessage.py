@@ -1,14 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.friend.IgnoredInformations import IgnoredInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.friend.IgnoredInformations import IgnoredInformations
+    
 
 
-@dataclass
 class IgnoredAddedMessage(NetworkMessage):
-    ignoreAdded:IgnoredInformations
+    ignoreAdded:'IgnoredInformations'
     session:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, ignoreAdded:'IgnoredInformations', session:bool):
+        self.ignoreAdded = ignoreAdded
+        self.session = session
+        
         super().__init__()
+    
     

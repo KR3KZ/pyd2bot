@@ -1,8 +1,6 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessage import AbstractGameActionMessage
 
 
-@dataclass
 class AbstractGameActionFightTargetedAbilityMessage(AbstractGameActionMessage):
     targetId:int
     destinationCellId:int
@@ -10,7 +8,12 @@ class AbstractGameActionFightTargetedAbilityMessage(AbstractGameActionMessage):
     silentCast:bool
     verboseCast:bool
     
+
+    def init(self, targetId:int, destinationCellId:int, critical:int, actionId:int, sourceId:int):
+        self.targetId = targetId
+        self.destinationCellId = destinationCellId
+        self.critical = critical
+        
+        super().__init__(actionId, sourceId)
     
-    def __post_init__(self):
-        super().__init__()
     

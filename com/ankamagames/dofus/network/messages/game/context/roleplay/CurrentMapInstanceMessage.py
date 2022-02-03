@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.context.roleplay.CurrentMapMessage import CurrentMapMessage
 
 
-@dataclass
 class CurrentMapInstanceMessage(CurrentMapMessage):
     instantiatedMapId:int
     
+
+    def init(self, instantiatedMapId:int, mapId:int, mapKey:str):
+        self.instantiatedMapId = instantiatedMapId
+        
+        super().__init__(mapId, mapKey)
     
-    def __post_init__(self):
-        super().__init__()
     

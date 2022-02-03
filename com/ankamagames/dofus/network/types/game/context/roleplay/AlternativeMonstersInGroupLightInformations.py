@@ -1,14 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.roleplay.MonsterInGroupLightInformations import MonsterInGroupLightInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.roleplay.MonsterInGroupLightInformations import MonsterInGroupLightInformations
+    
 
 
-@dataclass
 class AlternativeMonstersInGroupLightInformations(NetworkMessage):
     playerCount:int
-    monsters:list[MonsterInGroupLightInformations]
+    monsters:list['MonsterInGroupLightInformations']
     
-    
-    def __post_init__(self):
+
+    def init(self, playerCount:int, monsters:list['MonsterInGroupLightInformations']):
+        self.playerCount = playerCount
+        self.monsters = monsters
+        
         super().__init__()
+    
     

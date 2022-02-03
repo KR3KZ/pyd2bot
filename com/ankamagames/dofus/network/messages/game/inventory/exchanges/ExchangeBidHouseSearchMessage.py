@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ExchangeBidHouseSearchMessage(NetworkMessage):
     genId:int
     follow:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, genId:int, follow:bool):
+        self.genId = genId
+        self.follow = follow
+        
         super().__init__()
+    
     

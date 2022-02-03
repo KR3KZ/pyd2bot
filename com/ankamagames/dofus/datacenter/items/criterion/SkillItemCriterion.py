@@ -1,16 +1,16 @@
+   
+class SkillItemCriterion(ItemCriterion, IDataCenter):
       
-   class SkillItemCriterion(ItemCriterion implements IDataCenter):
-       
-      
-      def __init__(self, pCriterion:str):
-         super().__init__(pCriterion)
-      
-      @property
-      def text(self) -> str:
-         return _criterionRef + " " + _operator.text + " " + _criterionValue
-      
-      def clone(self) -> IItemCriterion:
-         return SkillItemCriterion(self.basicText)
-      
-      def getCriterion(self) -> int:
-         return 0
+   
+   def __init__(self, pCriterion:str):
+      super().__init__(pCriterion)
+   
+   @property
+   def text(self) -> str:
+      return _criterionRef + " " + _operator.text + " " + _criterionValue
+   
+   def clone(self) -> IItemCriterion:
+      return SkillItemCriterion(self.basicText)
+   
+   def getCriterion(self) -> int:
+      return 0

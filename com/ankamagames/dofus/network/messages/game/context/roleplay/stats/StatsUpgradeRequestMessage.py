@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class StatsUpgradeRequestMessage(NetworkMessage):
     useAdditionnal:bool
     statId:int
     boostPoint:int
     
-    
-    def __post_init__(self):
+
+    def init(self, useAdditionnal:bool, statId:int, boostPoint:int):
+        self.useAdditionnal = useAdditionnal
+        self.statId = statId
+        self.boostPoint = boostPoint
+        
         super().__init__()
+    
     

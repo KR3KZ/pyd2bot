@@ -1,14 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.character.CharacterMinimalInformations import CharacterMinimalInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.character.CharacterMinimalInformations import CharacterMinimalInformations
+    
 
 
-@dataclass
 class BreachKickResponseMessage(NetworkMessage):
-    target:CharacterMinimalInformations
+    target:'CharacterMinimalInformations'
     kicked:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, target:'CharacterMinimalInformations', kicked:bool):
+        self.target = target
+        self.kicked = kicked
+        
         super().__init__()
+    
     

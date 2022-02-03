@@ -1,14 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.interactive.zaap.TeleportDestination import TeleportDestination
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.interactive.zaap.TeleportDestination import TeleportDestination
+    
 
 
-@dataclass
 class TeleportDestinationsMessage(NetworkMessage):
     type:int
-    destinations:list[TeleportDestination]
+    destinations:list['TeleportDestination']
     
-    
-    def __post_init__(self):
+
+    def init(self, type:int, destinations:list['TeleportDestination']):
+        self.type = type
+        self.destinations = destinations
+        
         super().__init__()
+    
     

@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.house.HouseInformationsForGuild import HouseInformationsForGuild
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.house.HouseInformationsForGuild import HouseInformationsForGuild
+    
 
 
-@dataclass
 class GuildHousesInformationMessage(NetworkMessage):
-    housesInformations:list[HouseInformationsForGuild]
+    housesInformations:list['HouseInformationsForGuild']
     
-    
-    def __post_init__(self):
+
+    def init(self, housesInformations:list['HouseInformationsForGuild']):
+        self.housesInformations = housesInformations
+        
         super().__init__()
+    
     

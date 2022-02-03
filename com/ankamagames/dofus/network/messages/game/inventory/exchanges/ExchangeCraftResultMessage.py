@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ExchangeCraftResultMessage(NetworkMessage):
     craftResult:int
     
-    
-    def __post_init__(self):
+
+    def init(self, craftResult:int):
+        self.craftResult = craftResult
+        
         super().__init__()
+    
     

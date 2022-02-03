@@ -1,5 +1,5 @@
             
-   class LevelItemCriterion(ItemCriterion implements IDataCenter):
+   class LevelItemCriterion(ItemCriterion, IDataCenter):
        
       
       def __init__(self, pCriterion:str):

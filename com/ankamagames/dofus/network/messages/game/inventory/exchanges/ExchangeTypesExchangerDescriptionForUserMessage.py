@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ExchangeTypesExchangerDescriptionForUserMessage(NetworkMessage):
     objectType:int
     typeDescription:list[int]
     
-    
-    def __post_init__(self):
+
+    def init(self, objectType:int, typeDescription:list[int]):
+        self.objectType = objectType
+        self.typeDescription = typeDescription
+        
         super().__init__()
+    
     

@@ -1,8 +1,6 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GuildRecruitmentInformation(NetworkMessage):
     guildId:int
     recruitmentType:int
@@ -19,7 +17,19 @@ class GuildRecruitmentInformation(NetworkMessage):
     invalidatedByModeration:bool
     recruitmentAutoLocked:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, guildId:int, recruitmentType:int, recruitmentTitle:str, recruitmentText:str, selectedLanguages:list[int], selectedCriterion:list[int], minLevel:int, minSuccess:int, lastEditPlayerName:str, lastEditDate:int):
+        self.guildId = guildId
+        self.recruitmentType = recruitmentType
+        self.recruitmentTitle = recruitmentTitle
+        self.recruitmentText = recruitmentText
+        self.selectedLanguages = selectedLanguages
+        self.selectedCriterion = selectedCriterion
+        self.minLevel = minLevel
+        self.minSuccess = minSuccess
+        self.lastEditPlayerName = lastEditPlayerName
+        self.lastEditDate = lastEditDate
+        
         super().__init__()
+    
     

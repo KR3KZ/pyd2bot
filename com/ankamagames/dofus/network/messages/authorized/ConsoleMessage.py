@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ConsoleMessage(NetworkMessage):
     type:int
     content:str
     
-    
-    def __post_init__(self):
+
+    def init(self, type:int, content:str):
+        self.type = type
+        self.content = content
+        
         super().__init__()
+    
     

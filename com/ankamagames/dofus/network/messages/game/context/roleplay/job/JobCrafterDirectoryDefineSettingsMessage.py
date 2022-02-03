@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.roleplay.job.JobCrafterDirectorySettings import JobCrafterDirectorySettings
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.roleplay.job.JobCrafterDirectorySettings import JobCrafterDirectorySettings
+    
 
 
-@dataclass
 class JobCrafterDirectoryDefineSettingsMessage(NetworkMessage):
-    settings:JobCrafterDirectorySettings
+    settings:'JobCrafterDirectorySettings'
     
-    
-    def __post_init__(self):
+
+    def init(self, settings:'JobCrafterDirectorySettings'):
+        self.settings = settings
+        
         super().__init__()
+    
     

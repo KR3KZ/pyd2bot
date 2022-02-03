@@ -1,8 +1,6 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GameFightJoinMessage(NetworkMessage):
     timeMaxBeforeFightStart:int
     fightType:int
@@ -11,7 +9,11 @@ class GameFightJoinMessage(NetworkMessage):
     canSayReady:bool
     isFightStarted:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, timeMaxBeforeFightStart:int, fightType:int):
+        self.timeMaxBeforeFightStart = timeMaxBeforeFightStart
+        self.fightType = fightType
+        
         super().__init__()
+    
     

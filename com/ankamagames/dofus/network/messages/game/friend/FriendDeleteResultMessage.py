@@ -1,14 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.common.AccountTagInformation import AccountTagInformation
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.common.AccountTagInformation import AccountTagInformation
+    
 
 
-@dataclass
 class FriendDeleteResultMessage(NetworkMessage):
     success:bool
-    tag:AccountTagInformation
+    tag:'AccountTagInformation'
     
-    
-    def __post_init__(self):
+
+    def init(self, success:bool, tag:'AccountTagInformation'):
+        self.success = success
+        self.tag = tag
+        
         super().__init__()
+    
     

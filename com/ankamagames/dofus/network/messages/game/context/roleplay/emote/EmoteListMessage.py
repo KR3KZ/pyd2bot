@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class EmoteListMessage(NetworkMessage):
     emoteIds:list[int]
     
-    
-    def __post_init__(self):
+
+    def init(self, emoteIds:list[int]):
+        self.emoteIds = emoteIds
+        
         super().__init__()
+    
     

@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.guild.recruitment.GuildRecruitmentInformation import GuildRecruitmentInformation
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.guild.recruitment.GuildRecruitmentInformation import GuildRecruitmentInformation
+    
 
 
-@dataclass
 class RecruitmentInformationMessage(NetworkMessage):
-    recruitmentData:GuildRecruitmentInformation
+    recruitmentData:'GuildRecruitmentInformation'
     
-    
-    def __post_init__(self):
+
+    def init(self, recruitmentData:'GuildRecruitmentInformation'):
+        self.recruitmentData = recruitmentData
+        
         super().__init__()
+    
     

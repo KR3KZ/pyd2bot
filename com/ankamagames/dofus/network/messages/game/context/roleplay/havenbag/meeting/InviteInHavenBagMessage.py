@@ -1,14 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.character.CharacterMinimalInformations import CharacterMinimalInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.character.CharacterMinimalInformations import CharacterMinimalInformations
+    
 
 
-@dataclass
 class InviteInHavenBagMessage(NetworkMessage):
-    guestInformations:CharacterMinimalInformations
+    guestInformations:'CharacterMinimalInformations'
     accept:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, guestInformations:'CharacterMinimalInformations', accept:bool):
+        self.guestInformations = guestInformations
+        self.accept = accept
+        
         super().__init__()
+    
     

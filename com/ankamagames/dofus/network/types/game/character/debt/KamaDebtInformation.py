@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.character.debt.DebtInformation import DebtInformation
 
 
-@dataclass
 class KamaDebtInformation(DebtInformation):
     kamas:int
     
+
+    def init(self, kamas:int, id:int, timestamp:int):
+        self.kamas = kamas
+        
+        super().__init__(id, timestamp)
     
-    def __post_init__(self):
-        super().__init__()
     

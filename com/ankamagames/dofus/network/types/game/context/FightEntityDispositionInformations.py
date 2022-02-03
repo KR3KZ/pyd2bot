@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.context.EntityDispositionInformations import EntityDispositionInformations
 
 
-@dataclass
 class FightEntityDispositionInformations(EntityDispositionInformations):
     carryingCharacterId:int
     
+
+    def init(self, carryingCharacterId:int, cellId:int, direction:int):
+        self.carryingCharacterId = carryingCharacterId
+        
+        super().__init__(cellId, direction)
     
-    def __post_init__(self):
-        super().__init__()
     

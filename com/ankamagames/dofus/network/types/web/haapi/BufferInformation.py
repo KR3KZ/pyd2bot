@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class BufferInformation(NetworkMessage):
     id:int
     amount:int
     
-    
-    def __post_init__(self):
+
+    def init(self, id:int, amount:int):
+        self.id = id
+        self.amount = amount
+        
         super().__init__()
+    
     

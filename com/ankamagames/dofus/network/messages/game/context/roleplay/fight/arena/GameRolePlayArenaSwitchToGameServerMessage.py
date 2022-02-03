@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GameRolePlayArenaSwitchToGameServerMessage(NetworkMessage):
     validToken:bool
     ticket:list[int]
     homeServerId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, validToken:bool, ticket:list[int], homeServerId:int):
+        self.validToken = validToken
+        self.ticket = ticket
+        self.homeServerId = homeServerId
+        
         super().__init__()
+    
     

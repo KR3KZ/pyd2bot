@@ -1,14 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.MapCoordinates import MapCoordinates
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.MapCoordinates import MapCoordinates
+    
 
 
-@dataclass
 class CompassUpdateMessage(NetworkMessage):
     type:int
-    coords:MapCoordinates
+    coords:'MapCoordinates'
     
-    
-    def __post_init__(self):
+
+    def init(self, type:int, coords:'MapCoordinates'):
+        self.type = type
+        self.coords = coords
+        
         super().__init__()
+    
     

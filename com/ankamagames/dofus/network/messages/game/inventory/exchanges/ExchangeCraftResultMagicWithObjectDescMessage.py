@@ -1,12 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeCraftResultWithObjectDescMessage import ExchangeCraftResultWithObjectDescMessage
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.data.items.ObjectItemNotInContainer import ObjectItemNotInContainer
+    
 
 
-@dataclass
 class ExchangeCraftResultMagicWithObjectDescMessage(ExchangeCraftResultWithObjectDescMessage):
     magicPoolStatus:int
     
+
+    def init(self, magicPoolStatus:int, objectInfo:'ObjectItemNotInContainer', craftResult:int):
+        self.magicPoolStatus = magicPoolStatus
+        
+        super().__init__(objectInfo, craftResult)
     
-    def __post_init__(self):
-        super().__init__()
     

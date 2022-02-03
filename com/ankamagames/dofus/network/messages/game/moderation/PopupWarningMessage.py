@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class PopupWarningMessage(NetworkMessage):
     lockDuration:int
     author:str
     content:str
     
-    
-    def __post_init__(self):
+
+    def init(self, lockDuration:int, author:str, content:str):
+        self.lockDuration = lockDuration
+        self.author = author
+        self.content = content
+        
         super().__init__()
+    
     

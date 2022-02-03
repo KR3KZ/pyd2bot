@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class PortalUseRequestMessage(NetworkMessage):
     portalId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, portalId:int):
+        self.portalId = portalId
+        
         super().__init__()
+    
     

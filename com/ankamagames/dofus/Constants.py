@@ -3,6 +3,9 @@
 import os
 from pathlib import Path
 
+from com.ankamagames.jerakine.types.DataStoreType import DataStoreType
+from com.ankamagames.jerakine.types.enums.DataStoreEnum import DataStoreEnum
+
 
 LOG_UPLOAD_MODE = False
 
@@ -20,7 +23,7 @@ ADMIN_MODULE = ["Ankama_Admin"]
 
 DETERMINIST_TACKLE = True
 
-DATASTORE_MODULE_DEBUG = False
+DATASTORE_MODULE_DEBUG:DataStoreType = DataStoreType("Dofus_ModuleDebug", True, DataStoreEnum.LOCATION_LOCAL, DataStoreEnum.BIND_COMPUTER)
 
 MAX_LOGIN_ATTEMPTS = 3
 
@@ -33,6 +36,8 @@ DOFUS_ROOTDIR = Path(r"C:\Users\majdoub\AppData\Local\Ankama\Dofus")
 DOFUS_DATA_DIR = DOFUS_ROOTDIR / "data"
 
 DOFUS_COMMON_DIR = DOFUS_DATA_DIR / "common"
+
+DOFUS_LOCAL_DATA_STORE = Path(r"C:\Users\majdoub\AppData\Roaming\Dofus")
 
 DOFUS_CONTENT_DIR = DOFUS_ROOTDIR / "content"
 

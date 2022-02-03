@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.presets.Preset import Preset
-from com.ankamagames.dofus.network.types.game.presets.SpellForPreset import SpellForPreset
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.presets.SpellForPreset import SpellForPreset
+    
 
 
-@dataclass
 class SpellsPreset(Preset):
-    spells:list[SpellForPreset]
+    spells:list['SpellForPreset']
     
+
+    def init(self, spells:list['SpellForPreset'], id:int):
+        self.spells = spells
+        
+        super().__init__(id)
     
-    def __post_init__(self):
-        super().__init__()
     

@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessage import AbstractGameActionMessage
 
 
-@dataclass
 class GameActionFightDeathMessage(AbstractGameActionMessage):
     targetId:int
     
+
+    def init(self, targetId:int, actionId:int, sourceId:int):
+        self.targetId = targetId
+        
+        super().__init__(actionId, sourceId)
     
-    def __post_init__(self):
-        super().__init__()
     

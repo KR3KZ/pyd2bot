@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessage import AbstractGameActionMessage
 
 
-@dataclass
 class GameActionFightInvisibilityMessage(AbstractGameActionMessage):
     targetId:int
     state:int
     
+
+    def init(self, targetId:int, state:int, actionId:int, sourceId:int):
+        self.targetId = targetId
+        self.state = state
+        
+        super().__init__(actionId, sourceId)
     
-    def __post_init__(self):
-        super().__init__()
     

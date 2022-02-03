@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeObjectMessage import ExchangeObjectMessage
 
 
-@dataclass
 class ExchangeObjectsRemovedMessage(ExchangeObjectMessage):
     objectUID:list[int]
     
+
+    def init(self, objectUID:list[int], remote:bool):
+        self.objectUID = objectUID
+        
+        super().__init__(remote)
     
-    def __post_init__(self):
-        super().__init__()
     

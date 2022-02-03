@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.mount.MountClientData import MountClientData
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.mount.MountClientData import MountClientData
+    
 
 
-@dataclass
 class ExchangeMountsPaddockAddMessage(NetworkMessage):
-    mountDescription:list[MountClientData]
+    mountDescription:list['MountClientData']
     
-    
-    def __post_init__(self):
+
+    def init(self, mountDescription:list['MountClientData']):
+        self.mountDescription = mountDescription
+        
         super().__init__()
+    
     

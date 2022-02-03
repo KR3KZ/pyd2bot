@@ -1,14 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.character.debt.DebtInformation import DebtInformation
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.character.debt.DebtInformation import DebtInformation
+    
 
 
-@dataclass
 class DebtsUpdateMessage(NetworkMessage):
     action:int
-    debts:list[DebtInformation]
+    debts:list['DebtInformation']
     
-    
-    def __post_init__(self):
+
+    def init(self, action:int, debts:list['DebtInformation']):
+        self.action = action
+        self.debts = debts
+        
         super().__init__()
+    
     

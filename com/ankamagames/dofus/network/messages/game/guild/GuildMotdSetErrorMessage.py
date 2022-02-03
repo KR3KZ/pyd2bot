@@ -1,11 +1,11 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.social.SocialNoticeSetErrorMessage import SocialNoticeSetErrorMessage
 
 
-@dataclass
 class GuildMotdSetErrorMessage(SocialNoticeSetErrorMessage):
     
+
+    def init(self, reason:int):
+        
+        super().__init__(reason)
     
-    def __post_init__(self):
-        super().__init__()
     

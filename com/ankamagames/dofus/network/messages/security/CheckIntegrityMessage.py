@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class CheckIntegrityMessage(NetworkMessage):
     data:list[int]
     
-    
-    def __post_init__(self):
+
+    def init(self, data:list[int]):
+        self.data = data
+        
         super().__init__()
+    
     

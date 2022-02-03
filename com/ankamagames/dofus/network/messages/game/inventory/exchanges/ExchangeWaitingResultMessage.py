@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ExchangeWaitingResultMessage(NetworkMessage):
     bwait:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, bwait:bool):
+        self.bwait = bwait
+        
         super().__init__()
+    
     

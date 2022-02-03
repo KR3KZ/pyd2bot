@@ -1,8 +1,6 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class PartyMemberGeoPosition(NetworkMessage):
     memberId:int
     worldX:int
@@ -10,7 +8,14 @@ class PartyMemberGeoPosition(NetworkMessage):
     mapId:int
     subAreaId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, memberId:int, worldX:int, worldY:int, mapId:int, subAreaId:int):
+        self.memberId = memberId
+        self.worldX = worldX
+        self.worldY = worldY
+        self.mapId = mapId
+        self.subAreaId = subAreaId
+        
         super().__init__()
+    
     

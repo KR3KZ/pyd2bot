@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.context.fight.FightTeamMemberInformations import FightTeamMemberInformations
 
 
-@dataclass
 class FightTeamMemberMonsterInformations(FightTeamMemberInformations):
     monsterId:int
     grade:int
     
+
+    def init(self, monsterId:int, grade:int, id:int):
+        self.monsterId = monsterId
+        self.grade = grade
+        
+        super().__init__(id)
     
-    def __post_init__(self):
-        super().__init__()
     

@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.interactive.StatedElement import StatedElement
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.interactive.StatedElement import StatedElement
+    
 
 
-@dataclass
 class StatedMapUpdateMessage(NetworkMessage):
-    statedElements:list[StatedElement]
+    statedElements:list['StatedElement']
     
-    
-    def __post_init__(self):
+
+    def init(self, statedElements:list['StatedElement']):
+        self.statedElements = statedElements
+        
         super().__init__()
+    
     

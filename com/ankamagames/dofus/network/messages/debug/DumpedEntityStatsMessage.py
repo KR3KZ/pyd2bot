@@ -1,14 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.character.characteristic.CharacterCharacteristics import CharacterCharacteristics
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.character.characteristic.CharacterCharacteristics import CharacterCharacteristics
+    
 
 
-@dataclass
 class DumpedEntityStatsMessage(NetworkMessage):
     actorId:int
-    stats:CharacterCharacteristics
+    stats:'CharacterCharacteristics'
     
-    
-    def __post_init__(self):
+
+    def init(self, actorId:int, stats:'CharacterCharacteristics'):
+        self.actorId = actorId
+        self.stats = stats
+        
         super().__init__()
+    
     

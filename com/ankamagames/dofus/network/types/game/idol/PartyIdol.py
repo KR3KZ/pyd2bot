@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.idol.Idol import Idol
 
 
-@dataclass
 class PartyIdol(Idol):
     ownersIds:list[int]
     
+
+    def init(self, ownersIds:list[int], id:int, xpBonusPercent:int, dropBonusPercent:int):
+        self.ownersIds = ownersIds
+        
+        super().__init__(id, xpBonusPercent, dropBonusPercent)
     
-    def __post_init__(self):
-        super().__init__()
     

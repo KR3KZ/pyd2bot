@@ -1,15 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GuildEmblem(NetworkMessage):
     symbolShape:int
     symbolColor:int
     backgroundShape:int
     backgroundColor:int
     
-    
-    def __post_init__(self):
+
+    def init(self, symbolShape:int, symbolColor:int, backgroundShape:int, backgroundColor:int):
+        self.symbolShape = symbolShape
+        self.symbolColor = symbolColor
+        self.backgroundShape = backgroundShape
+        self.backgroundColor = backgroundColor
+        
         super().__init__()
+    
     

@@ -1,11 +1,11 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.debug.DebugInClientMessage import DebugInClientMessage
 
 
-@dataclass
 class ClientYouAreDrunkMessage(DebugInClientMessage):
     
+
+    def init(self, level:int, message:str):
+        
+        super().__init__(level, message)
     
-    def __post_init__(self):
-        super().__init__()
     

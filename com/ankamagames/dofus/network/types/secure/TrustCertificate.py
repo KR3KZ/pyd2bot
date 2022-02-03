@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class TrustCertificate(NetworkMessage):
     id:int
     hash:str
     
-    
-    def __post_init__(self):
+
+    def init(self, id:int, hash:str):
+        self.id = id
+        self.hash = hash
+        
         super().__init__()
+    
     

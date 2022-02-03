@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ObjectSetPositionMessage(NetworkMessage):
     objectUID:int
     position:int
     quantity:int
     
-    
-    def __post_init__(self):
+
+    def init(self, objectUID:int, position:int, quantity:int):
+        self.objectUID = objectUID
+        self.position = position
+        self.quantity = quantity
+        
         super().__init__()
+    
     

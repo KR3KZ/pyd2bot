@@ -1,15 +1,21 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.guild.application.GuildApplicationInformation import GuildApplicationInformation
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.guild.application.GuildApplicationInformation import GuildApplicationInformation
+    
 
 
-@dataclass
 class GuildListApplicationModifiedMessage(NetworkMessage):
-    apply:GuildApplicationInformation
+    apply:'GuildApplicationInformation'
     state:int
     playerId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, apply:'GuildApplicationInformation', state:int, playerId:int):
+        self.apply = apply
+        self.state = state
+        self.playerId = playerId
+        
         super().__init__()
+    
     

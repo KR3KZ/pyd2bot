@@ -1,8 +1,6 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class BreachReward(NetworkMessage):
     id:int
     buyLocks:list[int]
@@ -10,7 +8,14 @@ class BreachReward(NetworkMessage):
     remainingQty:int
     price:int
     
-    
-    def __post_init__(self):
+
+    def init(self, id:int, buyLocks:list[int], buyCriterion:str, remainingQty:int, price:int):
+        self.id = id
+        self.buyLocks = buyLocks
+        self.buyCriterion = buyCriterion
+        self.remainingQty = remainingQty
+        self.price = price
+        
         super().__init__()
+    
     

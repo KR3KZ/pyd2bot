@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.context.roleplay.HumanOption import HumanOption
-from com.ankamagames.dofus.network.types.game.look.IndexedEntityLook import IndexedEntityLook
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.look.IndexedEntityLook import IndexedEntityLook
+    
 
 
-@dataclass
 class HumanOptionFollowers(HumanOption):
-    followingCharactersLook:list[IndexedEntityLook]
+    followingCharactersLook:list['IndexedEntityLook']
     
-    
-    def __post_init__(self):
+
+    def init(self, followingCharactersLook:list['IndexedEntityLook']):
+        self.followingCharactersLook = followingCharactersLook
+        
         super().__init__()
+    
     

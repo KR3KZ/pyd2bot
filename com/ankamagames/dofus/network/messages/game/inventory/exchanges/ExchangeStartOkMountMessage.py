@@ -1,13 +1,18 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeStartOkMountWithOutPaddockMessage import ExchangeStartOkMountWithOutPaddockMessage
-from com.ankamagames.dofus.network.types.game.mount.MountClientData import MountClientData
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.mount.MountClientData import MountClientData
+    from com.ankamagames.dofus.network.types.game.mount.MountClientData import MountClientData
+    
 
 
-@dataclass
 class ExchangeStartOkMountMessage(ExchangeStartOkMountWithOutPaddockMessage):
-    paddockedMountsDescription:list[MountClientData]
+    paddockedMountsDescription:list['MountClientData']
     
+
+    def init(self, paddockedMountsDescription:list['MountClientData'], stabledMountsDescription:list['MountClientData']):
+        self.paddockedMountsDescription = paddockedMountsDescription
+        
+        super().__init__(stabledMountsDescription)
     
-    def __post_init__(self):
-        super().__init__()
     

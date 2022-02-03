@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ExchangeStoppedMessage(NetworkMessage):
     id:int
     
-    
-    def __post_init__(self):
+
+    def init(self, id:int):
+        self.id = id
+        
         super().__init__()
+    
     

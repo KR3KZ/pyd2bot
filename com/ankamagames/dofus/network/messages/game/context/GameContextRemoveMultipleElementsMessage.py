@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GameContextRemoveMultipleElementsMessage(NetworkMessage):
     elementsIds:list[int]
     
-    
-    def __post_init__(self):
+
+    def init(self, elementsIds:list[int]):
+        self.elementsIds = elementsIds
+        
         super().__init__()
+    
     

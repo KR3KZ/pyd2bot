@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class QuestObjectiveInformations(NetworkMessage):
     objectiveId:int
     objectiveStatus:bool
     dialogParams:list[str]
     
-    
-    def __post_init__(self):
+
+    def init(self, objectiveId:int, objectiveStatus:bool, dialogParams:list[str]):
+        self.objectiveId = objectiveId
+        self.objectiveStatus = objectiveStatus
+        self.dialogParams = dialogParams
+        
         super().__init__()
+    
     

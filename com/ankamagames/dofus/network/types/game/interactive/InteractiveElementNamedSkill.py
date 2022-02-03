@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.interactive.InteractiveElementSkill import InteractiveElementSkill
 
 
-@dataclass
 class InteractiveElementNamedSkill(InteractiveElementSkill):
     nameId:int
     
+
+    def init(self, nameId:int, skillId:int, skillInstanceUid:int):
+        self.nameId = nameId
+        
+        super().__init__(skillId, skillInstanceUid)
     
-    def __post_init__(self):
-        super().__init__()
     

@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GameFightPlacementPossiblePositionsMessage(NetworkMessage):
     positionsForChallengers:list[int]
     positionsForDefenders:list[int]
     teamNumber:int
     
-    
-    def __post_init__(self):
+
+    def init(self, positionsForChallengers:list[int], positionsForDefenders:list[int], teamNumber:int):
+        self.positionsForChallengers = positionsForChallengers
+        self.positionsForDefenders = positionsForDefenders
+        self.teamNumber = teamNumber
+        
         super().__init__()
+    
     

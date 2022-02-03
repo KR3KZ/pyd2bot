@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class QuestStepValidatedMessage(NetworkMessage):
     questId:int
     stepId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, questId:int, stepId:int):
+        self.questId = questId
+        self.stepId = stepId
+        
         super().__init__()
+    
     

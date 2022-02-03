@@ -1,14 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.data.items.BidExchangerObjectInfo import BidExchangerObjectInfo
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.data.items.BidExchangerObjectInfo import BidExchangerObjectInfo
+    
 
 
-@dataclass
 class ExchangeTypesItemsExchangerDescriptionForUserMessage(NetworkMessage):
     objectType:int
-    itemTypeDescriptions:list[BidExchangerObjectInfo]
+    itemTypeDescriptions:list['BidExchangerObjectInfo']
     
-    
-    def __post_init__(self):
+
+    def init(self, objectType:int, itemTypeDescriptions:list['BidExchangerObjectInfo']):
+        self.objectType = objectType
+        self.itemTypeDescriptions = itemTypeDescriptions
+        
         super().__init__()
+    
     

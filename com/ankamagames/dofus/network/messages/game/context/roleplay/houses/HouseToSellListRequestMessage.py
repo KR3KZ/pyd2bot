@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class HouseToSellListRequestMessage(NetworkMessage):
     pageIndex:int
     
-    
-    def __post_init__(self):
+
+    def init(self, pageIndex:int):
+        self.pageIndex = pageIndex
+        
         super().__init__()
+    
     

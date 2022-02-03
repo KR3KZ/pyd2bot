@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class HaapiTokenMessage(NetworkMessage):
     token:str
     
-    
-    def __post_init__(self):
+
+    def init(self, token:str):
+        self.token = token
+        
         super().__init__()
+    
     

@@ -1,11 +1,11 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.context.roleplay.lockable.LockableChangeCodeMessage import LockableChangeCodeMessage
 
 
-@dataclass
 class HouseLockFromInsideRequestMessage(LockableChangeCodeMessage):
     
+
+    def init(self, code:str):
+        
+        super().__init__(code)
     
-    def __post_init__(self):
-        super().__init__()
     

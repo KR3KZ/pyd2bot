@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.character.CharacterBasicMinimalInformations import CharacterBasicMinimalInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.character.CharacterBasicMinimalInformations import CharacterBasicMinimalInformations
+    
 
 
-@dataclass
 class ArenaFighterLeaveMessage(NetworkMessage):
-    leaver:CharacterBasicMinimalInformations
+    leaver:'CharacterBasicMinimalInformations'
     
-    
-    def __post_init__(self):
+
+    def init(self, leaver:'CharacterBasicMinimalInformations'):
+        self.leaver = leaver
+        
         super().__init__()
+    
     

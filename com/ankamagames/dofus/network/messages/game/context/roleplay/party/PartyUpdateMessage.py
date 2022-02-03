@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.context.roleplay.party.AbstractPartyEventMessage import AbstractPartyEventMessage
-from com.ankamagames.dofus.network.types.game.context.roleplay.party.PartyMemberInformations import PartyMemberInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.roleplay.party.PartyMemberInformations import PartyMemberInformations
+    
 
 
-@dataclass
 class PartyUpdateMessage(AbstractPartyEventMessage):
-    memberInformations:PartyMemberInformations
+    memberInformations:'PartyMemberInformations'
     
+
+    def init(self, memberInformations:'PartyMemberInformations', partyId:int):
+        self.memberInformations = memberInformations
+        
+        super().__init__(partyId)
     
-    def __post_init__(self):
-        super().__init__()
     

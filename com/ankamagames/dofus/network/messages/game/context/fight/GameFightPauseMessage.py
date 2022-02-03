@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GameFightPauseMessage(NetworkMessage):
     isPaused:bool
     
-    
-    def __post_init__(self):
+
+    def init(self, isPaused:bool):
+        self.isPaused = isPaused
+        
         super().__init__()
+    
     

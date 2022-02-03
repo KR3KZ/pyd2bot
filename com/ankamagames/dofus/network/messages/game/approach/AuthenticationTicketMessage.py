@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class AuthenticationTicketMessage(NetworkMessage):
     lang:str
     ticket:str
     
-    
-    def __post_init__(self):
+
+    def init(self, lang:str, ticket:str):
+        self.lang = lang
+        self.ticket = ticket
+        
         super().__init__()
+    
     

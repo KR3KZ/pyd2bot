@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class CharacterDeletionRequestMessage(NetworkMessage):
     characterId:int
     secretAnswerHash:str
     
-    
-    def __post_init__(self):
+
+    def init(self, characterId:int, secretAnswerHash:str):
+        self.characterId = characterId
+        self.secretAnswerHash = secretAnswerHash
+        
         super().__init__()
+    
     

@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class InvalidPresetsMessage(NetworkMessage):
     presetIds:list[int]
     
-    
-    def __post_init__(self):
+
+    def init(self, presetIds:list[int]):
+        self.presetIds = presetIds
+        
         super().__init__()
+    
     

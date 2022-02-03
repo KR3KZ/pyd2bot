@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GameFightTurnStartMessage(NetworkMessage):
     id:int
     waitTime:int
     
-    
-    def __post_init__(self):
+
+    def init(self, id:int, waitTime:int):
+        self.id = id
+        self.waitTime = waitTime
+        
         super().__init__()
+    
     

@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ServerSelectionMessage(NetworkMessage):
     serverId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, serverId:int):
+        self.serverId = serverId
+        
         super().__init__()
+    
     

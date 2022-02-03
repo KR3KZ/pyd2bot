@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GuildCharacsUpgradeRequestMessage(NetworkMessage):
     charaTypeTarget:int
     
-    
-    def __post_init__(self):
+
+    def init(self, charaTypeTarget:int):
+        self.charaTypeTarget = charaTypeTarget
+        
         super().__init__()
+    
     

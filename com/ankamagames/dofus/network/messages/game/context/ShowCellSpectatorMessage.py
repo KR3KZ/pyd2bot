@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.context.ShowCellMessage import ShowCellMessage
 
 
-@dataclass
 class ShowCellSpectatorMessage(ShowCellMessage):
     playerName:str
     
+
+    def init(self, playerName:str, sourceId:int, cellId:int):
+        self.playerName = playerName
+        
+        super().__init__(sourceId, cellId)
     
-    def __post_init__(self):
-        super().__init__()
     

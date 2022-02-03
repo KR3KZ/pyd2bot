@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class DebugInClientMessage(NetworkMessage):
     level:int
     message:str
     
-    
-    def __post_init__(self):
+
+    def init(self, level:int, message:str):
+        self.level = level
+        self.message = message
+        
         super().__init__()
+    
     

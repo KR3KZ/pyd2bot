@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class StorageObjectsRemoveMessage(NetworkMessage):
     objectUIDList:list[int]
     
-    
-    def __post_init__(self):
+
+    def init(self, objectUIDList:list[int]):
+        self.objectUIDList = objectUIDList
+        
         super().__init__()
+    
     

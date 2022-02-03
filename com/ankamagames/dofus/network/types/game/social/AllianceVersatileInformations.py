@@ -1,15 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class AllianceVersatileInformations(NetworkMessage):
     allianceId:int
     nbGuilds:int
     nbMembers:int
     nbSubarea:int
     
-    
-    def __post_init__(self):
+
+    def init(self, allianceId:int, nbGuilds:int, nbMembers:int, nbSubarea:int):
+        self.allianceId = allianceId
+        self.nbGuilds = nbGuilds
+        self.nbMembers = nbMembers
+        self.nbSubarea = nbSubarea
+        
         super().__init__()
+    
     

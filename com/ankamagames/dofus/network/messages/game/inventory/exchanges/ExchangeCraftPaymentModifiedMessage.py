@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ExchangeCraftPaymentModifiedMessage(NetworkMessage):
     goldSum:int
     
-    
-    def __post_init__(self):
+
+    def init(self, goldSum:int):
+        self.goldSum = goldSum
+        
         super().__init__()
+    
     

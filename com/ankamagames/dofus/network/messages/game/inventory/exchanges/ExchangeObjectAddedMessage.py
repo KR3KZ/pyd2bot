@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeObjectMessage import ExchangeObjectMessage
-from com.ankamagames.dofus.network.types.game.data.items.ObjectItem import ObjectItem
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.data.items.ObjectItem import ObjectItem
+    
 
 
-@dataclass
 class ExchangeObjectAddedMessage(ExchangeObjectMessage):
-    object:ObjectItem
+    object:'ObjectItem'
     
+
+    def init(self, object:'ObjectItem', remote:bool):
+        self.object = object
+        
+        super().__init__(remote)
     
-    def __post_init__(self):
-        super().__init__()
     

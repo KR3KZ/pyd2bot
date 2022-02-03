@@ -1,14 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GameRolePlayPlayerFightFriendlyRequestedMessage(NetworkMessage):
     fightId:int
     sourceId:int
     targetId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, fightId:int, sourceId:int, targetId:int):
+        self.fightId = fightId
+        self.sourceId = sourceId
+        self.targetId = targetId
+        
         super().__init__()
+    
     

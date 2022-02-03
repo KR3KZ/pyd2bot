@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.guild.tax.TaxCollectorComplementaryInformations import TaxCollectorComplementaryInformations
-from com.ankamagames.dofus.network.types.game.context.roleplay.BasicGuildInformations import BasicGuildInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.roleplay.BasicGuildInformations import BasicGuildInformations
+    
 
 
-@dataclass
 class TaxCollectorGuildInformations(TaxCollectorComplementaryInformations):
-    guild:BasicGuildInformations
+    guild:'BasicGuildInformations'
     
-    
-    def __post_init__(self):
+
+    def init(self, guild:'BasicGuildInformations'):
+        self.guild = guild
+        
         super().__init__()
+    
     

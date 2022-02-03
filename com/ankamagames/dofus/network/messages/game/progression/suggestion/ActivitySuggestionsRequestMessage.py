@@ -1,8 +1,6 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ActivitySuggestionsRequestMessage(NetworkMessage):
     minLevel:int
     maxLevel:int
@@ -10,7 +8,14 @@ class ActivitySuggestionsRequestMessage(NetworkMessage):
     activityCategoryId:int
     nbCards:int
     
-    
-    def __post_init__(self):
+
+    def init(self, minLevel:int, maxLevel:int, areaId:int, activityCategoryId:int, nbCards:int):
+        self.minLevel = minLevel
+        self.maxLevel = maxLevel
+        self.areaId = areaId
+        self.activityCategoryId = activityCategoryId
+        self.nbCards = nbCards
+        
         super().__init__()
+    
     

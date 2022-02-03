@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class MoodSmileyResultMessage(NetworkMessage):
     resultCode:int
     smileyId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, resultCode:int, smileyId:int):
+        self.resultCode = resultCode
+        self.smileyId = smileyId
+        
         super().__init__()
+    
     

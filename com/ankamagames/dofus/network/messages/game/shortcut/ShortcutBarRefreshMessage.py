@@ -1,14 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.shortcut.Shortcut import Shortcut
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.shortcut.Shortcut import Shortcut
+    
 
 
-@dataclass
 class ShortcutBarRefreshMessage(NetworkMessage):
     barType:int
-    shortcut:Shortcut
+    shortcut:'Shortcut'
     
-    
-    def __post_init__(self):
+
+    def init(self, barType:int, shortcut:'Shortcut'):
+        self.barType = barType
+        self.shortcut = shortcut
+        
         super().__init__()
+    
     

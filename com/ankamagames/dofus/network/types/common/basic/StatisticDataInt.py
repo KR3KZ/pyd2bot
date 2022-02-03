@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.common.basic.StatisticData import StatisticData
 
 
-@dataclass
 class StatisticDataInt(StatisticData):
     value:int
     
-    
-    def __post_init__(self):
+
+    def init(self, value:int):
+        self.value = value
+        
         super().__init__()
+    
     

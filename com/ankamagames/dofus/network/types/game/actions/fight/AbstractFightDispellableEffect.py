@@ -1,8 +1,6 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class AbstractFightDispellableEffect(NetworkMessage):
     uid:int
     targetId:int
@@ -12,7 +10,16 @@ class AbstractFightDispellableEffect(NetworkMessage):
     effectId:int
     parentBoostUid:int
     
-    
-    def __post_init__(self):
+
+    def init(self, uid:int, targetId:int, turnDuration:int, dispelable:int, spellId:int, effectId:int, parentBoostUid:int):
+        self.uid = uid
+        self.targetId = targetId
+        self.turnDuration = turnDuration
+        self.dispelable = dispelable
+        self.spellId = spellId
+        self.effectId = effectId
+        self.parentBoostUid = parentBoostUid
+        
         super().__init__()
+    
     

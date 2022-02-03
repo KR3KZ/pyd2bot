@@ -1,10 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass(eq=False)
 class ProtocolRequired(NetworkMessage):
     version:str
     
-    def __post_init__(self):
+
+    def init(self, version:str):
+        self.version = version
+        
         super().__init__()
+    
+    

@@ -1,8 +1,6 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class HaapiConfirmationMessage(NetworkMessage):
     kamas:int
     amount:int
@@ -10,7 +8,14 @@ class HaapiConfirmationMessage(NetworkMessage):
     action:int
     transaction:str
     
-    
-    def __post_init__(self):
+
+    def init(self, kamas:int, amount:int, rate:int, action:int, transaction:str):
+        self.kamas = kamas
+        self.amount = amount
+        self.rate = rate
+        self.action = action
+        self.transaction = transaction
+        
         super().__init__()
+    
     

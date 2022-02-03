@@ -1,12 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.context.roleplay.job.JobExperienceUpdateMessage import JobExperienceUpdateMessage
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.roleplay.job.JobExperience import JobExperience
+    
 
 
-@dataclass
 class JobExperienceOtherPlayerUpdateMessage(JobExperienceUpdateMessage):
     playerId:int
     
+
+    def init(self, playerId:int, experiencesUpdate:'JobExperience'):
+        self.playerId = playerId
+        
+        super().__init__(experiencesUpdate)
     
-    def __post_init__(self):
-        super().__init__()
     

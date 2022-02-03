@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class GuildModificationNameValidMessage(NetworkMessage):
     guildName:str
     
-    
-    def __post_init__(self):
+
+    def init(self, guildName:str):
+        self.guildName = guildName
+        
         super().__init__()
+    
     

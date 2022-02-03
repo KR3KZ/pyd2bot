@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.character.choice.CharacterSelectionMessage import CharacterSelectionMessage
-from com.ankamagames.dofus.network.types.game.character.choice.RemodelingInformation import RemodelingInformation
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.character.choice.RemodelingInformation import RemodelingInformation
+    
 
 
-@dataclass
 class CharacterSelectionWithRemodelMessage(CharacterSelectionMessage):
-    remodel:RemodelingInformation
+    remodel:'RemodelingInformation'
     
+
+    def init(self, remodel:'RemodelingInformation', id:int):
+        self.remodel = remodel
+        
+        super().__init__(id)
     
-    def __post_init__(self):
-        super().__init__()
     

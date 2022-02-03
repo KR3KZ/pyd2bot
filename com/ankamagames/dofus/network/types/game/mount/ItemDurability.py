@@ -1,13 +1,15 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ItemDurability(NetworkMessage):
     durability:int
     durabilityMax:int
     
-    
-    def __post_init__(self):
+
+    def init(self, durability:int, durabilityMax:int):
+        self.durability = durability
+        self.durabilityMax = durabilityMax
+        
         super().__init__()
+    
     

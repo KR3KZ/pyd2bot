@@ -1,15 +1,21 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.house.HouseInformationsForSell import HouseInformationsForSell
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.house.HouseInformationsForSell import HouseInformationsForSell
+    
 
 
-@dataclass
 class HouseToSellListMessage(NetworkMessage):
     pageIndex:int
     totalPage:int
-    houseList:list[HouseInformationsForSell]
+    houseList:list['HouseInformationsForSell']
     
-    
-    def __post_init__(self):
+
+    def init(self, pageIndex:int, totalPage:int, houseList:list['HouseInformationsForSell']):
+        self.pageIndex = pageIndex
+        self.totalPage = totalPage
+        self.houseList = houseList
+        
         super().__init__()
+    
     

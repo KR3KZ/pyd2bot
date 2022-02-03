@@ -1,8 +1,6 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.context.fight.FightTeamMemberInformations import FightTeamMemberInformations
 
 
-@dataclass
 class FightTeamMemberTaxCollectorInformations(FightTeamMemberInformations):
     firstNameId:int
     lastNameId:int
@@ -10,7 +8,14 @@ class FightTeamMemberTaxCollectorInformations(FightTeamMemberInformations):
     guildId:int
     uid:int
     
+
+    def init(self, firstNameId:int, lastNameId:int, level:int, guildId:int, uid:int, id:int):
+        self.firstNameId = firstNameId
+        self.lastNameId = lastNameId
+        self.level = level
+        self.guildId = guildId
+        self.uid = uid
+        
+        super().__init__(id)
     
-    def __post_init__(self):
-        super().__init__()
     

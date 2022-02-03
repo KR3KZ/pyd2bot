@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.shortcut.Shortcut import Shortcut
 
 
-@dataclass
 class ShortcutSmiley(Shortcut):
     smileyId:int
     
+
+    def init(self, smileyId:int, slot:int):
+        self.smileyId = smileyId
+        
+        super().__init__(slot)
     
-    def __post_init__(self):
-        super().__init__()
     

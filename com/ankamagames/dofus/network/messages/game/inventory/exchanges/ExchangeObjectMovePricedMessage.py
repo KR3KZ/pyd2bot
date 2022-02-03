@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeObjectMoveMessage import ExchangeObjectMoveMessage
 
 
-@dataclass
 class ExchangeObjectMovePricedMessage(ExchangeObjectMoveMessage):
     price:int
     
+
+    def init(self, price:int, objectUID:int, quantity:int):
+        self.price = price
+        
+        super().__init__(objectUID, quantity)
     
-    def __post_init__(self):
-        super().__init__()
     

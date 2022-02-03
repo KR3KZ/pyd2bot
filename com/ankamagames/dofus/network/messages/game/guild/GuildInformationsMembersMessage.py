@@ -1,13 +1,17 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.guild.GuildMember import GuildMember
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.guild.GuildMember import GuildMember
+    
 
 
-@dataclass
 class GuildInformationsMembersMessage(NetworkMessage):
-    members:list[GuildMember]
+    members:list['GuildMember']
     
-    
-    def __post_init__(self):
+
+    def init(self, members:list['GuildMember']):
+        self.members = members
+        
         super().__init__()
+    
     

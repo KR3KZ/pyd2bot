@@ -1,18 +1,25 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.fight.ProtectedEntityWaitingForHelpInfo import ProtectedEntityWaitingForHelpInfo
-from com.ankamagames.dofus.network.types.game.character.CharacterMinimalPlusLookInformations import CharacterMinimalPlusLookInformations
-from com.ankamagames.dofus.network.types.game.character.CharacterMinimalPlusLookInformations import CharacterMinimalPlusLookInformations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.fight.ProtectedEntityWaitingForHelpInfo import ProtectedEntityWaitingForHelpInfo
+    from com.ankamagames.dofus.network.types.game.character.CharacterMinimalPlusLookInformations import CharacterMinimalPlusLookInformations
+    from com.ankamagames.dofus.network.types.game.character.CharacterMinimalPlusLookInformations import CharacterMinimalPlusLookInformations
+    
 
 
-@dataclass
 class PrismFightersInformation(NetworkMessage):
     subAreaId:int
-    waitingForHelpInfo:ProtectedEntityWaitingForHelpInfo
-    allyCharactersInformations:list[CharacterMinimalPlusLookInformations]
-    enemyCharactersInformations:list[CharacterMinimalPlusLookInformations]
+    waitingForHelpInfo:'ProtectedEntityWaitingForHelpInfo'
+    allyCharactersInformations:list['CharacterMinimalPlusLookInformations']
+    enemyCharactersInformations:list['CharacterMinimalPlusLookInformations']
     
-    
-    def __post_init__(self):
+
+    def init(self, subAreaId:int, waitingForHelpInfo:'ProtectedEntityWaitingForHelpInfo', allyCharactersInformations:list['CharacterMinimalPlusLookInformations'], enemyCharactersInformations:list['CharacterMinimalPlusLookInformations']):
+        self.subAreaId = subAreaId
+        self.waitingForHelpInfo = waitingForHelpInfo
+        self.allyCharactersInformations = allyCharactersInformations
+        self.enemyCharactersInformations = enemyCharactersInformations
+        
         super().__init__()
+    
     

@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.messages.game.context.roleplay.party.AbstractPartyMessage import AbstractPartyMessage
 
 
-@dataclass
 class PartyCannotJoinErrorMessage(AbstractPartyMessage):
     reason:int
     
+
+    def init(self, reason:int, partyId:int):
+        self.reason = reason
+        
+        super().__init__(partyId)
     
-    def __post_init__(self):
-        super().__init__()
     

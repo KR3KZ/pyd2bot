@@ -1,11 +1,12 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.version.Version import Version
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.version.Version import Version
+    
 
 
-@dataclass
 class IdentificationMessage(NetworkMessage):
-    version:Version
+    version:'Version'
     lang:str
     credentials:list[int]
     serverId:int
@@ -15,7 +16,15 @@ class IdentificationMessage(NetworkMessage):
     useCertificate:bool
     useLoginToken:bool
     
-    def __post_init__(self):
-        super().__init__()
 
-   
+    def init(self, version:'Version', lang:str, credentials:list[int], serverId:int, sessionOptionalSalt:int, failedAttempts:list[int]):
+        self.version = version
+        self.lang = lang
+        self.credentials = credentials
+        self.serverId = serverId
+        self.sessionOptionalSalt = sessionOptionalSalt
+        self.failedAttempts = failedAttempts
+        
+        super().__init__()
+    
+    

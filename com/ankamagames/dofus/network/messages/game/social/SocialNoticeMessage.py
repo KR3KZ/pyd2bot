@@ -1,15 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class SocialNoticeMessage(NetworkMessage):
     content:str
     timestamp:int
     memberId:int
     memberName:str
     
-    
-    def __post_init__(self):
+
+    def init(self, content:str, timestamp:int, memberId:int, memberName:str):
+        self.content = content
+        self.timestamp = timestamp
+        self.memberId = memberId
+        self.memberName = memberName
+        
         super().__init__()
+    
     

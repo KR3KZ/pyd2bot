@@ -1,15 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class ActorAlignmentInformations(NetworkMessage):
     alignmentSide:int
     alignmentValue:int
     alignmentGrade:int
     characterPower:int
     
-    
-    def __post_init__(self):
+
+    def init(self, alignmentSide:int, alignmentValue:int, alignmentGrade:int, characterPower:int):
+        self.alignmentSide = alignmentSide
+        self.alignmentValue = alignmentValue
+        self.alignmentGrade = alignmentGrade
+        self.characterPower = characterPower
+        
         super().__init__()
+    
     

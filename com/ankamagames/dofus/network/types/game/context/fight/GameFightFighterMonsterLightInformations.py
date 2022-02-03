@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.dofus.network.types.game.context.fight.GameFightFighterLightInformations import GameFightFighterLightInformations
 
 
-@dataclass
 class GameFightFighterMonsterLightInformations(GameFightFighterLightInformations):
     creatureGenericId:int
     
+
+    def init(self, creatureGenericId:int, id:int, wave:int, level:int, breed:int):
+        self.creatureGenericId = creatureGenericId
+        
+        super().__init__(id, wave, level, breed)
     
-    def __post_init__(self):
-        super().__init__()
     

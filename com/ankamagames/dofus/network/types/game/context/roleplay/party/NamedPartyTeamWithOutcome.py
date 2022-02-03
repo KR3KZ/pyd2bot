@@ -1,14 +1,19 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.ankamagames.dofus.network.types.game.context.roleplay.party.NamedPartyTeam import NamedPartyTeam
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.network.types.game.context.roleplay.party.NamedPartyTeam import NamedPartyTeam
+    
 
 
-@dataclass
 class NamedPartyTeamWithOutcome(NetworkMessage):
-    team:NamedPartyTeam
+    team:'NamedPartyTeam'
     outcome:int
     
-    
-    def __post_init__(self):
+
+    def init(self, team:'NamedPartyTeam', outcome:int):
+        self.team = team
+        self.outcome = outcome
+        
         super().__init__()
+    
     

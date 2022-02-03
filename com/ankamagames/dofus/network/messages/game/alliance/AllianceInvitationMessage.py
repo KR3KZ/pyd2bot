@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
-@dataclass
 class AllianceInvitationMessage(NetworkMessage):
     targetId:int
     
-    
-    def __post_init__(self):
+
+    def init(self, targetId:int):
+        self.targetId = targetId
+        
         super().__init__()
+    
     
