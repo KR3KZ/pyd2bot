@@ -24,7 +24,7 @@ ADMIN_MODULE = ["Ankama_Admin"]
 DETERMINIST_TACKLE = True
 
 DATASTORE_MODULE_DEBUG:DataStoreType = DataStoreType("Dofus_ModuleDebug", True, DataStoreEnum.LOCATION_LOCAL, DataStoreEnum.BIND_COMPUTER)
-
+DATASTORE_COMPUTER_OPTIONS:DataStoreType = DataStoreType("Dofus_ComputerOptions", True, DataStoreEnum.LOCATION_LOCAL, DataStoreEnum.BIND_ACCOUNT)
 MAX_LOGIN_ATTEMPTS = 3
 
 ROOTDIR = Path(os.path.dirname(__file__))

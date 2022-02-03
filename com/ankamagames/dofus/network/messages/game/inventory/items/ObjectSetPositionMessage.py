@@ -7,10 +7,10 @@ class ObjectSetPositionMessage(NetworkMessage):
     quantity:int
     
 
-    def init(self, objectUID:int, position:int, quantity:int):
-        self.objectUID = objectUID
-        self.position = position
-        self.quantity = quantity
+    def init(self, objectUID_:int, position_:int, quantity_:int):
+        self.objectUID = objectUID_
+        self.position = position_
+        self.quantity = quantity_
         
         super().__init__()
     

@@ -6,9 +6,9 @@ class SequenceStartMessage(NetworkMessage):
     authorId:int
     
 
-    def init(self, sequenceType:int, authorId:int):
-        self.sequenceType = sequenceType
-        self.authorId = authorId
+    def init(self, sequenceType_:int, authorId_:int):
+        self.sequenceType = sequenceType_
+        self.authorId = authorId_
         
         super().__init__()
     

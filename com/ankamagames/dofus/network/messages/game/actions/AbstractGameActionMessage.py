@@ -6,9 +6,9 @@ class AbstractGameActionMessage(NetworkMessage):
     sourceId:int
     
 
-    def init(self, actionId:int, sourceId:int):
-        self.actionId = actionId
-        self.sourceId = sourceId
+    def init(self, actionId_:int, sourceId_:int):
+        self.actionId = actionId_
+        self.sourceId = sourceId_
         
         super().__init__()
     

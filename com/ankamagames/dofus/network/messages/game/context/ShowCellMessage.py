@@ -6,9 +6,9 @@ class ShowCellMessage(NetworkMessage):
     cellId:int
     
 
-    def init(self, sourceId:int, cellId:int):
-        self.sourceId = sourceId
-        self.cellId = cellId
+    def init(self, sourceId_:int, cellId_:int):
+        self.sourceId = sourceId_
+        self.cellId = cellId_
         
         super().__init__()
     

@@ -14,11 +14,11 @@ class GameFightEntityInformation(GameFightFighterInformations):
     masterId:int
     
 
-    def init(self, entityModelId:int, level:int, masterId:int, spawnInfo:'GameContextBasicSpawnInformation', wave:int, stats:'GameFightCharacteristics', previousPositions:list[int], look:'EntityLook', contextualId:int, disposition:'EntityDispositionInformations'):
-        self.entityModelId = entityModelId
-        self.level = level
-        self.masterId = masterId
+    def init(self, entityModelId_:int, level_:int, masterId_:int, spawnInfo_:'GameContextBasicSpawnInformation', wave_:int, stats_:'GameFightCharacteristics', previousPositions_:list[int], look_:'EntityLook', contextualId_:int, disposition_:'EntityDispositionInformations'):
+        self.entityModelId = entityModelId_
+        self.level = level_
+        self.masterId = masterId_
         
-        super().__init__(spawnInfo, wave, stats, previousPositions, look, contextualId, disposition)
+        super().__init__(spawnInfo_, wave_, stats_, previousPositions_, look_, contextualId_, disposition_)
     
     

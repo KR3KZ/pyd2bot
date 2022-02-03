@@ -9,8 +9,8 @@ class TaxCollectorGuildInformations(TaxCollectorComplementaryInformations):
     guild:'BasicGuildInformations'
     
 
-    def init(self, guild:'BasicGuildInformations'):
-        self.guild = guild
+    def init(self, guild_:'BasicGuildInformations'):
+        self.guild = guild_
         
         super().__init__()
     

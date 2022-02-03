@@ -1,7 +1,7 @@
 from com.ankamagames.jerakine.logger.Logger import Logger
 from time import perf_counter
 from types import FunctionType
-from com.ankamagames.jerakine.managers import Worker
+from com.ankamagames.jerakine.network.messages import Worker
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 logger = Logger(__name__)
 
@@ -77,7 +77,6 @@ class EnterFrameDispatcher(metaclass=Singleton):
         return perf_counter() - self._postWorkerTime < self._maxAllowedTime
     
     def handleWorkers(self) -> None:
-        print("will handle workers")
         _diff = perf_counter() - self._postWorkerTime
         if _diff < self._maxAllowedTime:
             self._worker.processQueues(self._maxAllowedTime - _diff)

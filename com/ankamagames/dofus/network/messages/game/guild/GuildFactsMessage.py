@@ -13,11 +13,11 @@ class GuildFactsMessage(NetworkMessage):
     members:list['CharacterMinimalGuildPublicInformations']
     
 
-    def init(self, infos:'GuildFactSheetInformations', creationDate:int, nbTaxCollectors:int, members:list['CharacterMinimalGuildPublicInformations']):
-        self.infos = infos
-        self.creationDate = creationDate
-        self.nbTaxCollectors = nbTaxCollectors
-        self.members = members
+    def init(self, infos_:'GuildFactSheetInformations', creationDate_:int, nbTaxCollectors_:int, members_:list['CharacterMinimalGuildPublicInformations']):
+        self.infos = infos_
+        self.creationDate = creationDate_
+        self.nbTaxCollectors = nbTaxCollectors_
+        self.members = members_
         
         super().__init__()
     

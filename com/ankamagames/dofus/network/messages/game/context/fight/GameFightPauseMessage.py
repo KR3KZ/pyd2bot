@@ -5,8 +5,8 @@ class GameFightPauseMessage(NetworkMessage):
     isPaused:bool
     
 
-    def init(self, isPaused:bool):
-        self.isPaused = isPaused
+    def init(self, isPaused_:bool):
+        self.isPaused = isPaused_
         
         super().__init__()
     

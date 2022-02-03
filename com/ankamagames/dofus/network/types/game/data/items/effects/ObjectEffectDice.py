@@ -7,11 +7,11 @@ class ObjectEffectDice(ObjectEffect):
     diceConst:int
     
 
-    def init(self, diceNum:int, diceSide:int, diceConst:int, actionId:int):
-        self.diceNum = diceNum
-        self.diceSide = diceSide
-        self.diceConst = diceConst
+    def init(self, diceNum_:int, diceSide_:int, diceConst_:int, actionId_:int):
+        self.diceNum = diceNum_
+        self.diceSide = diceSide_
+        self.diceConst = diceConst_
         
-        super().__init__(actionId)
+        super().__init__(actionId_)
     
     

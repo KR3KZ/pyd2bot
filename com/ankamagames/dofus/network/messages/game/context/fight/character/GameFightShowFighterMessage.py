@@ -9,8 +9,8 @@ class GameFightShowFighterMessage(NetworkMessage):
     informations:'GameFightFighterInformations'
     
 
-    def init(self, informations:'GameFightFighterInformations'):
-        self.informations = informations
+    def init(self, informations_:'GameFightFighterInformations'):
+        self.informations = informations_
         
         super().__init__()
     

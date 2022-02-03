@@ -5,8 +5,8 @@ class GuildInvitationStateRecrutedMessage(NetworkMessage):
     invitationState:int
     
 
-    def init(self, invitationState:int):
-        self.invitationState = invitationState
+    def init(self, invitationState_:int):
+        self.invitationState = invitationState_
         
         super().__init__()
     

@@ -6,9 +6,9 @@ class GameMapMovementRequestMessage(NetworkMessage):
     mapId:int
     
 
-    def init(self, keyMovements:list[int], mapId:int):
-        self.keyMovements = keyMovements
-        self.mapId = mapId
+    def init(self, keyMovements_:list[int], mapId_:int):
+        self.keyMovements = keyMovements_
+        self.mapId = mapId_
         
         super().__init__()
     

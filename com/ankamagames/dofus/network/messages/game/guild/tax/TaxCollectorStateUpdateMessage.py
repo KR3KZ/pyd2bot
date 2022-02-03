@@ -6,9 +6,9 @@ class TaxCollectorStateUpdateMessage(NetworkMessage):
     state:int
     
 
-    def init(self, uniqueId:int, state:int):
-        self.uniqueId = uniqueId
-        self.state = state
+    def init(self, uniqueId_:int, state_:int):
+        self.uniqueId = uniqueId_
+        self.state = state_
         
         super().__init__()
     

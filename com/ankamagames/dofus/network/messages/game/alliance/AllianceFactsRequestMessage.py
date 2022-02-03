@@ -5,8 +5,8 @@ class AllianceFactsRequestMessage(NetworkMessage):
     allianceId:int
     
 
-    def init(self, allianceId:int):
-        self.allianceId = allianceId
+    def init(self, allianceId_:int):
+        self.allianceId = allianceId_
         
         super().__init__()
     

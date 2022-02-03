@@ -5,8 +5,8 @@ class ExchangeStartOkJobIndexMessage(NetworkMessage):
     jobs:list[int]
     
 
-    def init(self, jobs:list[int]):
-        self.jobs = jobs
+    def init(self, jobs_:list[int]):
+        self.jobs = jobs_
         
         super().__init__()
     

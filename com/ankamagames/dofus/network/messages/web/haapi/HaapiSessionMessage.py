@@ -6,9 +6,9 @@ class HaapiSessionMessage(NetworkMessage):
     type:int
     
 
-    def init(self, key:str, type:int):
-        self.key = key
-        self.type = type
+    def init(self, key_:str, type_:int):
+        self.key = key_
+        self.type = type_
         
         super().__init__()
     

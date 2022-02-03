@@ -12,11 +12,11 @@ class GameFightResumeSlaveInfo(NetworkMessage):
     bombCount:int
     
 
-    def init(self, slaveId:int, spellCooldowns:list['GameFightSpellCooldown'], summonCount:int, bombCount:int):
-        self.slaveId = slaveId
-        self.spellCooldowns = spellCooldowns
-        self.summonCount = summonCount
-        self.bombCount = bombCount
+    def init(self, slaveId_:int, spellCooldowns_:list['GameFightSpellCooldown'], summonCount_:int, bombCount_:int):
+        self.slaveId = slaveId_
+        self.spellCooldowns = spellCooldowns_
+        self.summonCount = summonCount_
+        self.bombCount = bombCount_
         
         super().__init__()
     

@@ -2,14 +2,14 @@ from time import sleep
 from com.ankamagames.atouin.utils.DataMapProvider import DataMapProvider
 import com.ankamagames.dofus.kernel.net.ConnectionsHandler as connh
 from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManager
-from com.ankamagames.dofus.logic.common.managers.AuthentificationManager import AuthentificationManager
+from com.ankamagames.dofus.logic.connection.managers.AuthentificationManager import AuthentificationManager
 from com.ankamagames.dofus.logic.frames.DisconnectionHandlerFrame import DisconnectionHandlerFrame
 from com.ankamagames.dofus.logic.game.fight.managers.FightersStateManager import FightersStateManager
 import com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager as pc
 from com.ankamagames.dofus.modules.utils.pathFinding.world.WorldPathFinder import WorldPathFinder
 from com.ankamagames.dofus.network.Metadata import Metadata
 from com.ankamagames.dofus.types.entities.animatedCharacter import AnimatedCharacter
-from com.ankamagames.jerakine.managers.Worker import Worker
+from com.ankamagames.jerakine.network.messages.Worker import Worker
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 from com.ankamagames.jerakine.utils.displays.FrameIdManager import FrameIdManager
 from com.ankamagames.jerakine.logger.Logger import Logger
@@ -70,7 +70,7 @@ class Kernel(metaclass=Singleton):
 
 if __name__ == '__main__':
    import com.ankamagames.dofus.kernel.Kernel as krnl
-   import com.ankamagames.dofus.logic.common.managers.AuthentificationManager as auth
+   import com.ankamagames.dofus.logic.connection.managers.AuthentificationManager as auth
 
    krnl.Kernel().init()
    PORT = 5555

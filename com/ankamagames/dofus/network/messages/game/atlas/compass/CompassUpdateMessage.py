@@ -10,9 +10,9 @@ class CompassUpdateMessage(NetworkMessage):
     coords:'MapCoordinates'
     
 
-    def init(self, type:int, coords:'MapCoordinates'):
-        self.type = type
-        self.coords = coords
+    def init(self, type_:int, coords_:'MapCoordinates'):
+        self.type = type_
+        self.coords = coords_
         
         super().__init__()
     

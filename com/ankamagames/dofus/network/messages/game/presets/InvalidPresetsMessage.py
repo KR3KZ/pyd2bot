@@ -5,8 +5,8 @@ class InvalidPresetsMessage(NetworkMessage):
     presetIds:list[int]
     
 
-    def init(self, presetIds:list[int]):
-        self.presetIds = presetIds
+    def init(self, presetIds_:list[int]):
+        self.presetIds = presetIds_
         
         super().__init__()
     

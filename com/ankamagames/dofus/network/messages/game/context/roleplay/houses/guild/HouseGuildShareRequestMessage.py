@@ -8,11 +8,11 @@ class HouseGuildShareRequestMessage(NetworkMessage):
     rights:int
     
 
-    def init(self, houseId:int, instanceId:int, enable:bool, rights:int):
-        self.houseId = houseId
-        self.instanceId = instanceId
-        self.enable = enable
-        self.rights = rights
+    def init(self, houseId_:int, instanceId_:int, enable_:bool, rights_:int):
+        self.houseId = houseId_
+        self.instanceId = instanceId_
+        self.enable = enable_
+        self.rights = rights_
         
         super().__init__()
     

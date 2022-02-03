@@ -11,10 +11,10 @@ class ServersListMessage(NetworkMessage):
     canCreateNewCharacter:bool
     
 
-    def init(self, servers:list['GameServerInformations'], alreadyConnectedToServerId:int, canCreateNewCharacter:bool):
-        self.servers = servers
-        self.alreadyConnectedToServerId = alreadyConnectedToServerId
-        self.canCreateNewCharacter = canCreateNewCharacter
+    def init(self, servers_:list['GameServerInformations'], alreadyConnectedToServerId_:int, canCreateNewCharacter_:bool):
+        self.servers = servers_
+        self.alreadyConnectedToServerId = alreadyConnectedToServerId_
+        self.canCreateNewCharacter = canCreateNewCharacter_
         
         super().__init__()
     

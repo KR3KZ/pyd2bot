@@ -9,9 +9,9 @@ class PartyLocateMembersMessage(AbstractPartyMessage):
     geopositions:list['PartyMemberGeoPosition']
     
 
-    def init(self, geopositions:list['PartyMemberGeoPosition'], partyId:int):
-        self.geopositions = geopositions
+    def init(self, geopositions_:list['PartyMemberGeoPosition'], partyId_:int):
+        self.geopositions = geopositions_
         
-        super().__init__(partyId)
+        super().__init__(partyId_)
     
     

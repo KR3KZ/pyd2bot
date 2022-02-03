@@ -5,9 +5,9 @@ class FightEntityDispositionInformations(EntityDispositionInformations):
     carryingCharacterId:int
     
 
-    def init(self, carryingCharacterId:int, cellId:int, direction:int):
-        self.carryingCharacterId = carryingCharacterId
+    def init(self, carryingCharacterId_:int, cellId_:int, direction_:int):
+        self.carryingCharacterId = carryingCharacterId_
         
-        super().__init__(cellId, direction)
+        super().__init__(cellId_, direction_)
     
     

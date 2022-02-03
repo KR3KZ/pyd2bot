@@ -6,10 +6,10 @@ class GameFightFighterEntityLightInformation(GameFightFighterLightInformations):
     masterId:int
     
 
-    def init(self, entityModelId:int, masterId:int, id:int, wave:int, level:int, breed:int):
-        self.entityModelId = entityModelId
-        self.masterId = masterId
+    def init(self, entityModelId_:int, masterId_:int, id_:int, wave_:int, level_:int, breed_:int, sex_:bool, alive_:bool):
+        self.entityModelId = entityModelId_
+        self.masterId = masterId_
         
-        super().__init__(id, wave, level, breed)
+        super().__init__(id_, wave_, level_, breed_, sex_, alive_)
     
     

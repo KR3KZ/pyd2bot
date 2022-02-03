@@ -52,7 +52,7 @@ class ByteArray(bytearray):
     def uncompress(self):
         self = bytearray(decompress(self))
 
-    def readbool(self):
+    def readBoolean(self):
         ans = self.read(1)
         r = struct.unpack('?',ans)[0]
         return r

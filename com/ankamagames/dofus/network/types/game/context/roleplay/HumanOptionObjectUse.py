@@ -7,10 +7,10 @@ class HumanOptionObjectUse(HumanOption):
     objectGID:int
     
 
-    def init(self, delayTypeId:int, delayEndTime:int, objectGID:int):
-        self.delayTypeId = delayTypeId
-        self.delayEndTime = delayEndTime
-        self.objectGID = objectGID
+    def init(self, delayTypeId_:int, delayEndTime_:int, objectGID_:int):
+        self.delayTypeId = delayTypeId_
+        self.delayEndTime = delayEndTime_
+        self.objectGID = objectGID_
         
         super().__init__()
     

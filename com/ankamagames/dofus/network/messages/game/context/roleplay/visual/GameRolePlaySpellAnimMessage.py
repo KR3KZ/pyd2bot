@@ -8,11 +8,11 @@ class GameRolePlaySpellAnimMessage(NetworkMessage):
     spellLevel:int
     
 
-    def init(self, casterId:int, targetCellId:int, spellId:int, spellLevel:int):
-        self.casterId = casterId
-        self.targetCellId = targetCellId
-        self.spellId = spellId
-        self.spellLevel = spellLevel
+    def init(self, casterId_:int, targetCellId_:int, spellId_:int, spellLevel_:int):
+        self.casterId = casterId_
+        self.targetCellId = targetCellId_
+        self.spellId = spellId_
+        self.spellLevel = spellLevel_
         
         super().__init__()
     

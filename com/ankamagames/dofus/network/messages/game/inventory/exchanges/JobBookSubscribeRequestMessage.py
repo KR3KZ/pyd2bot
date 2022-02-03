@@ -5,8 +5,8 @@ class JobBookSubscribeRequestMessage(NetworkMessage):
     jobIds:list[int]
     
 
-    def init(self, jobIds:list[int]):
-        self.jobIds = jobIds
+    def init(self, jobIds_:list[int]):
+        self.jobIds = jobIds_
         
         super().__init__()
     

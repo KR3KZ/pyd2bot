@@ -6,6 +6,7 @@ from com.ankamagames.jerakine.events.IOErrorEvent import IOErrorEvent
 from com.ankamagames.jerakine.events.ProgressEvent import ProgressEvent
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 logger = Logger(__name__)
 
 class Socket(threading.Thread):

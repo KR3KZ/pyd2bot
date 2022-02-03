@@ -6,10 +6,10 @@ class GameActionFightActivateGlyphTrapMessage(AbstractGameActionMessage):
     active:bool
     
 
-    def init(self, markId:int, active:bool, actionId:int, sourceId:int):
-        self.markId = markId
-        self.active = active
+    def init(self, markId_:int, active_:bool, actionId_:int, sourceId_:int):
+        self.markId = markId_
+        self.active = active_
         
-        super().__init__(actionId, sourceId)
+        super().__init__(actionId_, sourceId_)
     
     

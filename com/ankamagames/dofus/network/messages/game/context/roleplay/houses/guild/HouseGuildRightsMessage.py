@@ -13,12 +13,12 @@ class HouseGuildRightsMessage(NetworkMessage):
     rights:int
     
 
-    def init(self, houseId:int, instanceId:int, secondHand:bool, guildInfo:'GuildInformations', rights:int):
-        self.houseId = houseId
-        self.instanceId = instanceId
-        self.secondHand = secondHand
-        self.guildInfo = guildInfo
-        self.rights = rights
+    def init(self, houseId_:int, instanceId_:int, secondHand_:bool, guildInfo_:'GuildInformations', rights_:int):
+        self.houseId = houseId_
+        self.instanceId = instanceId_
+        self.secondHand = secondHand_
+        self.guildInfo = guildInfo_
+        self.rights = rights_
         
         super().__init__()
     

@@ -19,12 +19,12 @@ class MapComplementaryInformationsDataInHavenBagMessage(MapComplementaryInformat
     maxRoomId:int
     
 
-    def init(self, ownerInformations:'CharacterMinimalInformations', theme:int, roomId:int, maxRoomId:int, subAreaId:int, mapId:int, houses:list['HouseInformations'], actors:list['GameRolePlayActorInformations'], interactiveElements:list['InteractiveElement'], statedElements:list['StatedElement'], obstacles:list['MapObstacle'], fights:list['FightCommonInformations'], hasAggressiveMonsters:bool, fightStartPositions:'FightStartingPositions'):
-        self.ownerInformations = ownerInformations
-        self.theme = theme
-        self.roomId = roomId
-        self.maxRoomId = maxRoomId
+    def init(self, ownerInformations_:'CharacterMinimalInformations', theme_:int, roomId_:int, maxRoomId_:int, subAreaId_:int, mapId_:int, houses_:list['HouseInformations'], actors_:list['GameRolePlayActorInformations'], interactiveElements_:list['InteractiveElement'], statedElements_:list['StatedElement'], obstacles_:list['MapObstacle'], fights_:list['FightCommonInformations'], hasAggressiveMonsters_:bool, fightStartPositions_:'FightStartingPositions'):
+        self.ownerInformations = ownerInformations_
+        self.theme = theme_
+        self.roomId = roomId_
+        self.maxRoomId = maxRoomId_
         
-        super().__init__(subAreaId, mapId, houses, actors, interactiveElements, statedElements, obstacles, fights, hasAggressiveMonsters, fightStartPositions)
+        super().__init__(subAreaId_, mapId_, houses_, actors_, interactiveElements_, statedElements_, obstacles_, fights_, hasAggressiveMonsters_, fightStartPositions_)
     
     

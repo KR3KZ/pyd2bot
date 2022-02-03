@@ -5,8 +5,8 @@ class NicknameChoiceRequestMessage(NetworkMessage):
     nickname:str
     
 
-    def init(self, nickname:str):
-        self.nickname = nickname
+    def init(self, nickname_:str):
+        self.nickname = nickname_
         
         super().__init__()
     

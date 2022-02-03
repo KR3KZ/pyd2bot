@@ -9,8 +9,8 @@ class AnomalySubareaInformationResponseMessage(NetworkMessage):
     subareas:list['AnomalySubareaInformation']
     
 
-    def init(self, subareas:list['AnomalySubareaInformation']):
-        self.subareas = subareas
+    def init(self, subareas_:list['AnomalySubareaInformation']):
+        self.subareas = subareas_
         
         super().__init__()
     

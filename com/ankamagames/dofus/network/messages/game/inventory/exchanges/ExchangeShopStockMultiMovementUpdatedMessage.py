@@ -9,8 +9,8 @@ class ExchangeShopStockMultiMovementUpdatedMessage(NetworkMessage):
     objectInfoList:list['ObjectItemToSell']
     
 
-    def init(self, objectInfoList:list['ObjectItemToSell']):
-        self.objectInfoList = objectInfoList
+    def init(self, objectInfoList_:list['ObjectItemToSell']):
+        self.objectInfoList = objectInfoList_
         
         super().__init__()
     

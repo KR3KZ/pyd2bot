@@ -6,9 +6,9 @@ class ArenaRanking(NetworkMessage):
     bestRank:int
     
 
-    def init(self, rank:int, bestRank:int):
-        self.rank = rank
-        self.bestRank = bestRank
+    def init(self, rank_:int, bestRank_:int):
+        self.rank = rank_
+        self.bestRank = bestRank_
         
         super().__init__()
     

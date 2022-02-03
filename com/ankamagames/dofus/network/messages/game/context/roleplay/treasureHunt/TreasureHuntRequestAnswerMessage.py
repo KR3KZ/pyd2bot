@@ -6,9 +6,9 @@ class TreasureHuntRequestAnswerMessage(NetworkMessage):
     result:int
     
 
-    def init(self, questType:int, result:int):
-        self.questType = questType
-        self.result = result
+    def init(self, questType_:int, result_:int):
+        self.questType = questType_
+        self.result = result_
         
         super().__init__()
     

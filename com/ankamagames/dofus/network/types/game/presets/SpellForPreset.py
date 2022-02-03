@@ -6,9 +6,9 @@ class SpellForPreset(NetworkMessage):
     shortcuts:list[int]
     
 
-    def init(self, spellId:int, shortcuts:list[int]):
-        self.spellId = spellId
-        self.shortcuts = shortcuts
+    def init(self, spellId_:int, shortcuts_:list[int]):
+        self.spellId = spellId_
+        self.shortcuts = shortcuts_
         
         super().__init__()
     

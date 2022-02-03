@@ -5,9 +5,9 @@ class ForgettableSpellItem(SpellItem):
     available:bool
     
 
-    def init(self, available:bool, spellId:int, spellLevel:int):
-        self.available = available
+    def init(self, available_:bool, spellId_:int, spellLevel_:int):
+        self.available = available_
         
-        super().__init__(spellId, spellLevel)
+        super().__init__(spellId_, spellLevel_)
     
     

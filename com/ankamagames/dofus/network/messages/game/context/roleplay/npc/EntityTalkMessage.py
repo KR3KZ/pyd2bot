@@ -7,10 +7,10 @@ class EntityTalkMessage(NetworkMessage):
     parameters:list[str]
     
 
-    def init(self, entityId:int, textId:int, parameters:list[str]):
-        self.entityId = entityId
-        self.textId = textId
-        self.parameters = parameters
+    def init(self, entityId_:int, textId_:int, parameters_:list[str]):
+        self.entityId = entityId_
+        self.textId = textId_
+        self.parameters = parameters_
         
         super().__init__()
     

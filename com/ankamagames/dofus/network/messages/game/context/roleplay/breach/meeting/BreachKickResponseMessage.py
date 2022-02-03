@@ -10,9 +10,9 @@ class BreachKickResponseMessage(NetworkMessage):
     kicked:bool
     
 
-    def init(self, target:'CharacterMinimalInformations', kicked:bool):
-        self.target = target
-        self.kicked = kicked
+    def init(self, target_:'CharacterMinimalInformations', kicked_:bool):
+        self.target = target_
+        self.kicked = kicked_
         
         super().__init__()
     

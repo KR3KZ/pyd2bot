@@ -10,9 +10,9 @@ class CharactersListWithRemodelingMessage(CharactersListMessage):
     charactersToRemodel:list['CharacterToRemodelInformations']
     
 
-    def init(self, charactersToRemodel:list['CharacterToRemodelInformations'], hasStartupActions:bool, characters:list['CharacterBaseInformations']):
-        self.charactersToRemodel = charactersToRemodel
+    def init(self, charactersToRemodel_:list['CharacterToRemodelInformations'], hasStartupActions_:bool, characters_:list['CharacterBaseInformations']):
+        self.charactersToRemodel = charactersToRemodel_
         
-        super().__init__(hasStartupActions, characters)
+        super().__init__(hasStartupActions_, characters_)
     
     

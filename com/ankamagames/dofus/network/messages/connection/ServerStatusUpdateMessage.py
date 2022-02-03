@@ -9,8 +9,8 @@ class ServerStatusUpdateMessage(NetworkMessage):
     server:'GameServerInformations'
     
 
-    def init(self, server:'GameServerInformations'):
-        self.server = server
+    def init(self, server_:'GameServerInformations'):
+        self.server = server_
         
         super().__init__()
     

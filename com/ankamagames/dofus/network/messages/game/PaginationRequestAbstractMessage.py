@@ -6,9 +6,9 @@ class PaginationRequestAbstractMessage(NetworkMessage):
     count:int
     
 
-    def init(self, offset:int, count:int):
-        self.offset = offset
-        self.count = count
+    def init(self, offset_:int, count_:int):
+        self.offset = offset_
+        self.count = count_
         
         super().__init__()
     

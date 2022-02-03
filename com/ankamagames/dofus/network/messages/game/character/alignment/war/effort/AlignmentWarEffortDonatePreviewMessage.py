@@ -5,8 +5,8 @@ class AlignmentWarEffortDonatePreviewMessage(NetworkMessage):
     xp:int
     
 
-    def init(self, xp:int):
-        self.xp = xp
+    def init(self, xp_:int):
+        self.xp = xp_
         
         super().__init__()
     

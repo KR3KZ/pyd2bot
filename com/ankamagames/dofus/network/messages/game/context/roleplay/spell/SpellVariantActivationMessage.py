@@ -6,9 +6,9 @@ class SpellVariantActivationMessage(NetworkMessage):
     result:bool
     
 
-    def init(self, spellId:int, result:bool):
-        self.spellId = spellId
-        self.result = result
+    def init(self, spellId_:int, result_:bool):
+        self.spellId = spellId_
+        self.result = result_
         
         super().__init__()
     

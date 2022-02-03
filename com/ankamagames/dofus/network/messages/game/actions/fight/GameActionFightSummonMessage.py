@@ -9,9 +9,9 @@ class GameActionFightSummonMessage(AbstractGameActionMessage):
     summons:list['GameFightFighterInformations']
     
 
-    def init(self, summons:list['GameFightFighterInformations'], actionId:int, sourceId:int):
-        self.summons = summons
+    def init(self, summons_:list['GameFightFighterInformations'], actionId_:int, sourceId_:int):
+        self.summons = summons_
         
-        super().__init__(actionId, sourceId)
+        super().__init__(actionId_, sourceId_)
     
     

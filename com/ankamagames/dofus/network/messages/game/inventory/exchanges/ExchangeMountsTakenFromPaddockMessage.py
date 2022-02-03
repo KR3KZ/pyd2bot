@@ -8,11 +8,11 @@ class ExchangeMountsTakenFromPaddockMessage(NetworkMessage):
     ownername:str
     
 
-    def init(self, name:str, worldX:int, worldY:int, ownername:str):
-        self.name = name
-        self.worldX = worldX
-        self.worldY = worldY
-        self.ownername = ownername
+    def init(self, name_:str, worldX_:int, worldY_:int, ownername_:str):
+        self.name = name_
+        self.worldX = worldX_
+        self.worldY = worldY_
+        self.ownername = ownername_
         
         super().__init__()
     

@@ -8,8 +8,8 @@ if TYPE_CHECKING:
 class GameFightShowFighterRandomStaticPoseMessage(GameFightShowFighterMessage):
     
 
-    def init(self, informations:'GameFightFighterInformations'):
+    def init(self, informations_:'GameFightFighterInformations'):
         
-        super().__init__(informations)
+        super().__init__(informations_)
     
     

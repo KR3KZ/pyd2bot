@@ -5,8 +5,8 @@ class GuildPaddockRemovedMessage(NetworkMessage):
     paddockId:int
     
 
-    def init(self, paddockId:int):
-        self.paddockId = paddockId
+    def init(self, paddockId_:int):
+        self.paddockId = paddockId_
         
         super().__init__()
     

@@ -7,11 +7,11 @@ class GameActionFightExchangePositionsMessage(AbstractGameActionMessage):
     targetCellId:int
     
 
-    def init(self, targetId:int, casterCellId:int, targetCellId:int, actionId:int, sourceId:int):
-        self.targetId = targetId
-        self.casterCellId = casterCellId
-        self.targetCellId = targetCellId
+    def init(self, targetId_:int, casterCellId_:int, targetCellId_:int, actionId_:int, sourceId_:int):
+        self.targetId = targetId_
+        self.casterCellId = casterCellId_
+        self.targetCellId = targetCellId_
         
-        super().__init__(actionId, sourceId)
+        super().__init__(actionId_, sourceId_)
     
     

@@ -11,10 +11,10 @@ class CharacterSpellModification(NetworkMessage):
     value:'CharacterCharacteristicDetailed'
     
 
-    def init(self, modificationType:int, spellId:int, value:'CharacterCharacteristicDetailed'):
-        self.modificationType = modificationType
-        self.spellId = spellId
-        self.value = value
+    def init(self, modificationType_:int, spellId_:int, value_:'CharacterCharacteristicDetailed'):
+        self.modificationType = modificationType_
+        self.spellId = spellId_
+        self.value = value_
         
         super().__init__()
     

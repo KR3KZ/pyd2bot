@@ -6,10 +6,10 @@ class SkillActionDescriptionCollect(SkillActionDescriptionTimed):
     max:int
     
 
-    def init(self, min:int, max:int, time:int, skillId:int):
-        self.min = min
-        self.max = max
+    def init(self, min_:int, max_:int, time_:int, skillId_:int):
+        self.min = min_
+        self.max = max_
         
-        super().__init__(time, skillId)
+        super().__init__(time_, skillId_)
     
     

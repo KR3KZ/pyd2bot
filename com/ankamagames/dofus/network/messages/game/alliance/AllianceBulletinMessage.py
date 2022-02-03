@@ -4,8 +4,8 @@ from com.ankamagames.dofus.network.messages.game.social.BulletinMessage import B
 class AllianceBulletinMessage(BulletinMessage):
     
 
-    def init(self, lastNotifiedTimestamp:int, content:str, timestamp:int, memberId:int, memberName:str):
+    def init(self, lastNotifiedTimestamp_:int, content_:str, timestamp_:int, memberId_:int, memberName_:str):
         
-        super().__init__(lastNotifiedTimestamp, content, timestamp, memberId, memberName)
+        super().__init__(lastNotifiedTimestamp_, content_, timestamp_, memberId_, memberName_)
     
     

@@ -9,8 +9,8 @@ class ExchangeBidHouseUnsoldItemsMessage(NetworkMessage):
     items:list['ObjectItemGenericQuantity']
     
 
-    def init(self, items:list['ObjectItemGenericQuantity']):
-        self.items = items
+    def init(self, items_:list['ObjectItemGenericQuantity']):
+        self.items = items_
         
         super().__init__()
     

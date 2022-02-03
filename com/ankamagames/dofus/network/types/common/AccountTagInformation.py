@@ -6,9 +6,9 @@ class AccountTagInformation(NetworkMessage):
     tagNumber:str
     
 
-    def init(self, nickname:str, tagNumber:str):
-        self.nickname = nickname
-        self.tagNumber = tagNumber
+    def init(self, nickname_:str, tagNumber_:str):
+        self.nickname = nickname_
+        self.tagNumber = tagNumber_
         
         super().__init__()
     

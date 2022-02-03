@@ -9,8 +9,8 @@ class MountDataMessage(NetworkMessage):
     mountData:'MountClientData'
     
 
-    def init(self, mountData:'MountClientData'):
-        self.mountData = mountData
+    def init(self, mountData_:'MountClientData'):
+        self.mountData = mountData_
         
         super().__init__()
     

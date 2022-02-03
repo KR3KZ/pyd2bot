@@ -20,20 +20,28 @@ class ObjectEffectMount(ObjectEffect):
     isRideable:bool
     isFeconded:bool
     isFecondationReady:bool
+    sex:bool
+    isRideable:bool
+    isFeconded:bool
+    isFecondationReady:bool
     
 
-    def init(self, id:int, expirationDate:int, model:int, name:str, owner:str, level:int, reproductionCount:int, reproductionCountMax:int, effects:list['ObjectEffectInteger'], capacities:list[int], actionId:int):
-        self.id = id
-        self.expirationDate = expirationDate
-        self.model = model
-        self.name = name
-        self.owner = owner
-        self.level = level
-        self.reproductionCount = reproductionCount
-        self.reproductionCountMax = reproductionCountMax
-        self.effects = effects
-        self.capacities = capacities
+    def init(self, id_:int, expirationDate_:int, model_:int, name_:str, owner_:str, level_:int, reproductionCount_:int, reproductionCountMax_:int, effects_:list['ObjectEffectInteger'], capacities_:list[int], sex_:bool, isRideable_:bool, isFeconded_:bool, isFecondationReady_:bool, actionId_:int):
+        self.id = id_
+        self.expirationDate = expirationDate_
+        self.model = model_
+        self.name = name_
+        self.owner = owner_
+        self.level = level_
+        self.reproductionCount = reproductionCount_
+        self.reproductionCountMax = reproductionCountMax_
+        self.effects = effects_
+        self.capacities = capacities_
+        self.sex = sex_
+        self.isRideable = isRideable_
+        self.isFeconded = isFeconded_
+        self.isFecondationReady = isFecondationReady_
         
-        super().__init__(actionId)
+        super().__init__(actionId_)
     
     

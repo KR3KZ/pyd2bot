@@ -5,9 +5,9 @@ class GameContextRemoveMultipleElementsWithEventsMessage(GameContextRemoveMultip
     elementEventIds:list[int]
     
 
-    def init(self, elementEventIds:list[int], elementsIds:list[int]):
-        self.elementEventIds = elementEventIds
+    def init(self, elementEventIds_:list[int], elementsIds_:list[int]):
+        self.elementEventIds = elementEventIds_
         
-        super().__init__(elementsIds)
+        super().__init__(elementsIds_)
     
     

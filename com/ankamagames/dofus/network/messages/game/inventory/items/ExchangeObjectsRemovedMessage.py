@@ -5,9 +5,9 @@ class ExchangeObjectsRemovedMessage(ExchangeObjectMessage):
     objectUID:list[int]
     
 
-    def init(self, objectUID:list[int], remote:bool):
-        self.objectUID = objectUID
+    def init(self, objectUID_:list[int], remote_:bool):
+        self.objectUID = objectUID_
         
-        super().__init__(remote)
+        super().__init__(remote_)
     
     

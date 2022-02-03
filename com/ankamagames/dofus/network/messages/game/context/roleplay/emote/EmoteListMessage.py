@@ -5,8 +5,8 @@ class EmoteListMessage(NetworkMessage):
     emoteIds:list[int]
     
 
-    def init(self, emoteIds:list[int]):
-        self.emoteIds = emoteIds
+    def init(self, emoteIds_:list[int]):
+        self.emoteIds = emoteIds_
         
         super().__init__()
     

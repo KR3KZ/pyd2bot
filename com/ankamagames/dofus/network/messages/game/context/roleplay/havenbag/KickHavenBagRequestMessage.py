@@ -5,8 +5,8 @@ class KickHavenBagRequestMessage(NetworkMessage):
     guestId:int
     
 
-    def init(self, guestId:int):
-        self.guestId = guestId
+    def init(self, guestId_:int):
+        self.guestId = guestId_
         
         super().__init__()
     

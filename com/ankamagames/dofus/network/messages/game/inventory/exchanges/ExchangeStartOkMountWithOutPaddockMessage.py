@@ -9,8 +9,8 @@ class ExchangeStartOkMountWithOutPaddockMessage(NetworkMessage):
     stabledMountsDescription:list['MountClientData']
     
 
-    def init(self, stabledMountsDescription:list['MountClientData']):
-        self.stabledMountsDescription = stabledMountsDescription
+    def init(self, stabledMountsDescription_:list['MountClientData']):
+        self.stabledMountsDescription = stabledMountsDescription_
         
         super().__init__()
     

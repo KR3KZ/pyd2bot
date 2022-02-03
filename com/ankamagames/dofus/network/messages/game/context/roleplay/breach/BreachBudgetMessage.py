@@ -5,8 +5,8 @@ class BreachBudgetMessage(NetworkMessage):
     bugdet:int
     
 
-    def init(self, bugdet:int):
-        self.bugdet = bugdet
+    def init(self, bugdet_:int):
+        self.bugdet = bugdet_
         
         super().__init__()
     

@@ -10,9 +10,9 @@ class InviteInHavenBagOfferMessage(NetworkMessage):
     timeLeftBeforeCancel:int
     
 
-    def init(self, hostInformations:'CharacterMinimalInformations', timeLeftBeforeCancel:int):
-        self.hostInformations = hostInformations
-        self.timeLeftBeforeCancel = timeLeftBeforeCancel
+    def init(self, hostInformations_:'CharacterMinimalInformations', timeLeftBeforeCancel_:int):
+        self.hostInformations = hostInformations_
+        self.timeLeftBeforeCancel = timeLeftBeforeCancel_
         
         super().__init__()
     

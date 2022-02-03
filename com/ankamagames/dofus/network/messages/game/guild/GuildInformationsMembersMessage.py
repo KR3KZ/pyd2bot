@@ -9,8 +9,8 @@ class GuildInformationsMembersMessage(NetworkMessage):
     members:list['GuildMember']
     
 
-    def init(self, members:list['GuildMember']):
-        self.members = members
+    def init(self, members_:list['GuildMember']):
+        self.members = members_
         
         super().__init__()
     

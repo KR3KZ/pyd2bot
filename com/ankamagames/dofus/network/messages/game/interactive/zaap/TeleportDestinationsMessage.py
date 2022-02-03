@@ -10,9 +10,9 @@ class TeleportDestinationsMessage(NetworkMessage):
     destinations:list['TeleportDestination']
     
 
-    def init(self, type:int, destinations:list['TeleportDestination']):
-        self.type = type
-        self.destinations = destinations
+    def init(self, type_:int, destinations_:list['TeleportDestination']):
+        self.type = type_
+        self.destinations = destinations_
         
         super().__init__()
     

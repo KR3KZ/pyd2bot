@@ -9,8 +9,8 @@ class QuestStepInfoMessage(NetworkMessage):
     infos:'QuestActiveInformations'
     
 
-    def init(self, infos:'QuestActiveInformations'):
-        self.infos = infos
+    def init(self, infos_:'QuestActiveInformations'):
+        self.infos = infos_
         
         super().__init__()
     

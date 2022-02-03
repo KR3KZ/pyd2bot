@@ -6,9 +6,9 @@ class PrismSubareaEmptyInfo(NetworkMessage):
     allianceId:int
     
 
-    def init(self, subAreaId:int, allianceId:int):
-        self.subAreaId = subAreaId
-        self.allianceId = allianceId
+    def init(self, subAreaId_:int, allianceId_:int):
+        self.subAreaId = subAreaId_
+        self.allianceId = allianceId_
         
         super().__init__()
     

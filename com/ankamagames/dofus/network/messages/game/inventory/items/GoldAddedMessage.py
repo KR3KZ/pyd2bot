@@ -9,8 +9,8 @@ class GoldAddedMessage(NetworkMessage):
     gold:'GoldItem'
     
 
-    def init(self, gold:'GoldItem'):
-        self.gold = gold
+    def init(self, gold_:'GoldItem'):
+        self.gold = gold_
         
         super().__init__()
     

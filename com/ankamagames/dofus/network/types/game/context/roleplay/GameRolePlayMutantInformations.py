@@ -12,10 +12,10 @@ class GameRolePlayMutantInformations(GameRolePlayHumanoidInformations):
     powerLevel:int
     
 
-    def init(self, monsterId:int, powerLevel:int, humanoidInfo:'HumanInformations', accountId:int, name:str, look:'EntityLook', contextualId:int, disposition:'EntityDispositionInformations'):
-        self.monsterId = monsterId
-        self.powerLevel = powerLevel
+    def init(self, monsterId_:int, powerLevel_:int, humanoidInfo_:'HumanInformations', accountId_:int, name_:str, look_:'EntityLook', contextualId_:int, disposition_:'EntityDispositionInformations'):
+        self.monsterId = monsterId_
+        self.powerLevel = powerLevel_
         
-        super().__init__(humanoidInfo, accountId, name, look, contextualId, disposition)
+        super().__init__(humanoidInfo_, accountId_, name_, look_, contextualId_, disposition_)
     
     

@@ -6,9 +6,9 @@ class BasicAllianceInformations(AbstractSocialGroupInfos):
     allianceTag:str
     
 
-    def init(self, allianceId:int, allianceTag:str):
-        self.allianceId = allianceId
-        self.allianceTag = allianceTag
+    def init(self, allianceId_:int, allianceTag_:str):
+        self.allianceId = allianceId_
+        self.allianceTag = allianceTag_
         
         super().__init__()
     

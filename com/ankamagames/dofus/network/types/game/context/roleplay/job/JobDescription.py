@@ -10,9 +10,9 @@ class JobDescription(NetworkMessage):
     skills:list['SkillActionDescription']
     
 
-    def init(self, jobId:int, skills:list['SkillActionDescription']):
-        self.jobId = jobId
-        self.skills = skills
+    def init(self, jobId_:int, skills_:list['SkillActionDescription']):
+        self.jobId = jobId_
+        self.skills = skills_
         
         super().__init__()
     

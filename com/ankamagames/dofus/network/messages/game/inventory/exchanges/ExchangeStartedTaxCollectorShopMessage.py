@@ -10,9 +10,9 @@ class ExchangeStartedTaxCollectorShopMessage(NetworkMessage):
     kamas:int
     
 
-    def init(self, objects:list['ObjectItem'], kamas:int):
-        self.objects = objects
-        self.kamas = kamas
+    def init(self, objects_:list['ObjectItem'], kamas_:int):
+        self.objects = objects_
+        self.kamas = kamas_
         
         super().__init__()
     

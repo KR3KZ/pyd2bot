@@ -6,10 +6,10 @@ class LockableStateUpdateStorageMessage(LockableStateUpdateAbstractMessage):
     elementId:int
     
 
-    def init(self, mapId:int, elementId:int, locked:bool):
-        self.mapId = mapId
-        self.elementId = elementId
+    def init(self, mapId_:int, elementId_:int, locked_:bool):
+        self.mapId = mapId_
+        self.elementId = elementId_
         
-        super().__init__(locked)
+        super().__init__(locked_)
     
     

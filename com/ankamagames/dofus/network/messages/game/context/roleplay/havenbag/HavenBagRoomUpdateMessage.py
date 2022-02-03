@@ -10,9 +10,9 @@ class HavenBagRoomUpdateMessage(NetworkMessage):
     roomsPreview:list['HavenBagRoomPreviewInformation']
     
 
-    def init(self, action:int, roomsPreview:list['HavenBagRoomPreviewInformation']):
-        self.action = action
-        self.roomsPreview = roomsPreview
+    def init(self, action_:int, roomsPreview_:list['HavenBagRoomPreviewInformation']):
+        self.action = action_
+        self.roomsPreview = roomsPreview_
         
         super().__init__()
     

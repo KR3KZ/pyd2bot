@@ -5,8 +5,8 @@ class ObjectEffect(NetworkMessage):
     actionId:int
     
 
-    def init(self, actionId:int):
-        self.actionId = actionId
+    def init(self, actionId_:int):
+        self.actionId = actionId_
         
         super().__init__()
     

@@ -12,10 +12,10 @@ class MapRunningFightDetailsMessage(NetworkMessage):
     defenders:list['GameFightFighterLightInformations']
     
 
-    def init(self, fightId:int, attackers:list['GameFightFighterLightInformations'], defenders:list['GameFightFighterLightInformations']):
-        self.fightId = fightId
-        self.attackers = attackers
-        self.defenders = defenders
+    def init(self, fightId_:int, attackers_:list['GameFightFighterLightInformations'], defenders_:list['GameFightFighterLightInformations']):
+        self.fightId = fightId_
+        self.attackers = attackers_
+        self.defenders = defenders_
         
         super().__init__()
     

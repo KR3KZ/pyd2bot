@@ -13,11 +13,11 @@ class BreachStateMessage(NetworkMessage):
     saved:bool
     
 
-    def init(self, owner:'CharacterMinimalInformations', bonuses:list['ObjectEffectInteger'], bugdet:int, saved:bool):
-        self.owner = owner
-        self.bonuses = bonuses
-        self.bugdet = bugdet
-        self.saved = saved
+    def init(self, owner_:'CharacterMinimalInformations', bonuses_:list['ObjectEffectInteger'], bugdet_:int, saved_:bool):
+        self.owner = owner_
+        self.bonuses = bonuses_
+        self.bugdet = bugdet_
+        self.saved = saved_
         
         super().__init__()
     

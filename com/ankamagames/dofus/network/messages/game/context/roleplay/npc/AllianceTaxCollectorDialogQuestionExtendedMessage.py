@@ -10,9 +10,9 @@ class AllianceTaxCollectorDialogQuestionExtendedMessage(TaxCollectorDialogQuesti
     alliance:'BasicNamedAllianceInformations'
     
 
-    def init(self, alliance:'BasicNamedAllianceInformations', maxPods:int, prospecting:int, wisdom:int, taxCollectorsCount:int, taxCollectorAttack:int, kamas:int, experience:int, pods:int, itemsValue:int, guildInfo:'BasicGuildInformations'):
-        self.alliance = alliance
+    def init(self, alliance_:'BasicNamedAllianceInformations', maxPods_:int, prospecting_:int, wisdom_:int, taxCollectorsCount_:int, taxCollectorAttack_:int, kamas_:int, experience_:int, pods_:int, itemsValue_:int, guildInfo_:'BasicGuildInformations'):
+        self.alliance = alliance_
         
-        super().__init__(maxPods, prospecting, wisdom, taxCollectorsCount, taxCollectorAttack, kamas, experience, pods, itemsValue, guildInfo)
+        super().__init__(maxPods_, prospecting_, wisdom_, taxCollectorsCount_, taxCollectorAttack_, kamas_, experience_, pods_, itemsValue_, guildInfo_)
     
     

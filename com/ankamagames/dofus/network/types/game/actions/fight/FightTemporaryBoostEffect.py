@@ -5,9 +5,9 @@ class FightTemporaryBoostEffect(AbstractFightDispellableEffect):
     delta:int
     
 
-    def init(self, delta:int, uid:int, targetId:int, turnDuration:int, dispelable:int, spellId:int, effectId:int, parentBoostUid:int):
-        self.delta = delta
+    def init(self, delta_:int, uid_:int, targetId_:int, turnDuration_:int, dispelable_:int, spellId_:int, effectId_:int, parentBoostUid_:int):
+        self.delta = delta_
         
-        super().__init__(uid, targetId, turnDuration, dispelable, spellId, effectId, parentBoostUid)
+        super().__init__(uid_, targetId_, turnDuration_, dispelable_, spellId_, effectId_, parentBoostUid_)
     
     

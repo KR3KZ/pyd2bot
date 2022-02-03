@@ -5,8 +5,8 @@ class BreachRoomUnlockRequestMessage(NetworkMessage):
     roomId:int
     
 
-    def init(self, roomId:int):
-        self.roomId = roomId
+    def init(self, roomId_:int):
+        self.roomId = roomId_
         
         super().__init__()
     

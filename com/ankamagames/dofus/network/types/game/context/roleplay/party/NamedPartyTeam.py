@@ -6,9 +6,9 @@ class NamedPartyTeam(NetworkMessage):
     partyName:str
     
 
-    def init(self, teamId:int, partyName:str):
-        self.teamId = teamId
-        self.partyName = partyName
+    def init(self, teamId_:int, partyName_:str):
+        self.teamId = teamId_
+        self.partyName = partyName_
         
         super().__init__()
     

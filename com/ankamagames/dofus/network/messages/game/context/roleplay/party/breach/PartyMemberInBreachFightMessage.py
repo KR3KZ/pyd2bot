@@ -6,10 +6,10 @@ class PartyMemberInBreachFightMessage(AbstractPartyMemberInFightMessage):
     room:int
     
 
-    def init(self, floor:int, room:int, reason:int, memberId:int, memberAccountId:int, memberName:str, fightId:int, timeBeforeFightStart:int, partyId:int):
-        self.floor = floor
-        self.room = room
+    def init(self, floor_:int, room_:int, reason_:int, memberId_:int, memberAccountId_:int, memberName_:str, fightId_:int, timeBeforeFightStart_:int, partyId_:int):
+        self.floor = floor_
+        self.room = room_
         
-        super().__init__(reason, memberId, memberAccountId, memberName, fightId, timeBeforeFightStart, partyId)
+        super().__init__(reason_, memberId_, memberAccountId_, memberName_, fightId_, timeBeforeFightStart_, partyId_)
     
     

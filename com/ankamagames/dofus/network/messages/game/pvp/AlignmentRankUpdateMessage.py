@@ -6,9 +6,9 @@ class AlignmentRankUpdateMessage(NetworkMessage):
     verbose:bool
     
 
-    def init(self, alignmentRank:int, verbose:bool):
-        self.alignmentRank = alignmentRank
-        self.verbose = verbose
+    def init(self, alignmentRank_:int, verbose_:bool):
+        self.alignmentRank = alignmentRank_
+        self.verbose = verbose_
         
         super().__init__()
     

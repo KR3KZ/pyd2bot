@@ -6,10 +6,10 @@ class HaapiBuyValidationMessage(HaapiValidationMessage):
     email:str
     
 
-    def init(self, amount:int, email:str, action:int, code:int):
-        self.amount = amount
-        self.email = email
+    def init(self, amount_:int, email_:str, action_:int, code_:int):
+        self.amount = amount_
+        self.email = email_
         
-        super().__init__(action, code)
+        super().__init__(action_, code_)
     
     

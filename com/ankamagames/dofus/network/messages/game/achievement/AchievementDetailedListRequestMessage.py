@@ -5,8 +5,8 @@ class AchievementDetailedListRequestMessage(NetworkMessage):
     categoryId:int
     
 
-    def init(self, categoryId:int):
-        self.categoryId = categoryId
+    def init(self, categoryId_:int):
+        self.categoryId = categoryId_
         
         super().__init__()
     

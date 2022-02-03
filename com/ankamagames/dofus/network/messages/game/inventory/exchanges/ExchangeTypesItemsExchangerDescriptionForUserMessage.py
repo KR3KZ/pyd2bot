@@ -10,9 +10,9 @@ class ExchangeTypesItemsExchangerDescriptionForUserMessage(NetworkMessage):
     itemTypeDescriptions:list['BidExchangerObjectInfo']
     
 
-    def init(self, objectType:int, itemTypeDescriptions:list['BidExchangerObjectInfo']):
-        self.objectType = objectType
-        self.itemTypeDescriptions = itemTypeDescriptions
+    def init(self, objectType_:int, itemTypeDescriptions_:list['BidExchangerObjectInfo']):
+        self.objectType = objectType_
+        self.itemTypeDescriptions = itemTypeDescriptions_
         
         super().__init__()
     

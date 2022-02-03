@@ -7,10 +7,10 @@ class MountInformationsForPaddock(NetworkMessage):
     ownerName:str
     
 
-    def init(self, modelId:int, name:str, ownerName:str):
-        self.modelId = modelId
-        self.name = name
-        self.ownerName = ownerName
+    def init(self, modelId_:int, name_:str, ownerName_:str):
+        self.modelId = modelId_
+        self.name = name_
+        self.ownerName = ownerName_
         
         super().__init__()
     

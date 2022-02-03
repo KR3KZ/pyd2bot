@@ -5,8 +5,8 @@ class PortalUseRequestMessage(NetworkMessage):
     portalId:int
     
 
-    def init(self, portalId:int):
-        self.portalId = portalId
+    def init(self, portalId_:int):
+        self.portalId = portalId_
         
         super().__init__()
     

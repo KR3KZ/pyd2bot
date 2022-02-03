@@ -7,10 +7,10 @@ class SequenceEndMessage(NetworkMessage):
     sequenceType:int
     
 
-    def init(self, actionId:int, authorId:int, sequenceType:int):
-        self.actionId = actionId
-        self.authorId = authorId
-        self.sequenceType = sequenceType
+    def init(self, actionId_:int, authorId_:int, sequenceType_:int):
+        self.actionId = actionId_
+        self.authorId = authorId_
+        self.sequenceType = sequenceType_
         
         super().__init__()
     

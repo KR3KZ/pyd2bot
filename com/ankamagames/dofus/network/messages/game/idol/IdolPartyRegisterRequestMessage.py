@@ -5,8 +5,8 @@ class IdolPartyRegisterRequestMessage(NetworkMessage):
     register:bool
     
 
-    def init(self, register:bool):
-        self.register = register
+    def init(self, register_:bool):
+        self.register = register_
         
         super().__init__()
     

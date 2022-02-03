@@ -5,9 +5,9 @@ class GameActionFightUnmarkCellsMessage(AbstractGameActionMessage):
     markId:int
     
 
-    def init(self, markId:int, actionId:int, sourceId:int):
-        self.markId = markId
+    def init(self, markId_:int, actionId_:int, sourceId_:int):
+        self.markId = markId_
         
-        super().__init__(actionId, sourceId)
+        super().__init__(actionId_, sourceId_)
     
     

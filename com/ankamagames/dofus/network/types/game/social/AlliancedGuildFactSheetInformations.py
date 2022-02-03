@@ -10,9 +10,9 @@ class AlliancedGuildFactSheetInformations(GuildInformations):
     allianceInfos:'BasicNamedAllianceInformations'
     
 
-    def init(self, allianceInfos:'BasicNamedAllianceInformations', guildEmblem:'GuildEmblem', guildId:int, guildName:str, guildLevel:int):
-        self.allianceInfos = allianceInfos
+    def init(self, allianceInfos_:'BasicNamedAllianceInformations', guildEmblem_:'GuildEmblem', guildId_:int, guildName_:str, guildLevel_:int):
+        self.allianceInfos = allianceInfos_
         
-        super().__init__(guildEmblem, guildId, guildName, guildLevel)
+        super().__init__(guildEmblem_, guildId_, guildName_, guildLevel_)
     
     

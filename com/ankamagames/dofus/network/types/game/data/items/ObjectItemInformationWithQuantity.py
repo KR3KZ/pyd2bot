@@ -9,9 +9,9 @@ class ObjectItemInformationWithQuantity(ObjectItemMinimalInformation):
     quantity:int
     
 
-    def init(self, quantity:int, objectGID:int, effects:list['ObjectEffect']):
-        self.quantity = quantity
+    def init(self, quantity_:int, objectGID_:int, effects_:list['ObjectEffect']):
+        self.quantity = quantity_
         
-        super().__init__(objectGID, effects)
+        super().__init__(objectGID_, effects_)
     
     

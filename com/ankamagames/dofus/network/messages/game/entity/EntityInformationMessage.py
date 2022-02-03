@@ -9,8 +9,8 @@ class EntityInformationMessage(NetworkMessage):
     entity:'EntityInformation'
     
 
-    def init(self, entity:'EntityInformation'):
-        self.entity = entity
+    def init(self, entity_:'EntityInformation'):
+        self.entity = entity_
         
         super().__init__()
     

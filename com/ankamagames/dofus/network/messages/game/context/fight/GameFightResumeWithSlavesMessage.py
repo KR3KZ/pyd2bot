@@ -14,9 +14,9 @@ class GameFightResumeWithSlavesMessage(GameFightResumeMessage):
     slavesInfo:list['GameFightResumeSlaveInfo']
     
 
-    def init(self, slavesInfo:list['GameFightResumeSlaveInfo'], spellCooldowns:list['GameFightSpellCooldown'], summonCount:int, bombCount:int, effects:list['FightDispellableEffectExtendedInformations'], marks:list['GameActionMark'], gameTurn:int, fightStart:int, idols:list['Idol'], fxTriggerCounts:list['GameFightEffectTriggerCount']):
-        self.slavesInfo = slavesInfo
+    def init(self, slavesInfo_:list['GameFightResumeSlaveInfo'], spellCooldowns_:list['GameFightSpellCooldown'], summonCount_:int, bombCount_:int, effects_:list['FightDispellableEffectExtendedInformations'], marks_:list['GameActionMark'], gameTurn_:int, fightStart_:int, idols_:list['Idol'], fxTriggerCounts_:list['GameFightEffectTriggerCount']):
+        self.slavesInfo = slavesInfo_
         
-        super().__init__(spellCooldowns, summonCount, bombCount, effects, marks, gameTurn, fightStart, idols, fxTriggerCounts)
+        super().__init__(spellCooldowns_, summonCount_, bombCount_, effects_, marks_, gameTurn_, fightStart_, idols_, fxTriggerCounts_)
     
     

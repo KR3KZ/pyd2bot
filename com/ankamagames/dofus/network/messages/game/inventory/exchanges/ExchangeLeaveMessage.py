@@ -5,9 +5,9 @@ class ExchangeLeaveMessage(LeaveDialogMessage):
     success:bool
     
 
-    def init(self, success:bool, dialogType:int):
-        self.success = success
+    def init(self, success_:bool, dialogType_:int):
+        self.success = success_
         
-        super().__init__(dialogType)
+        super().__init__(dialogType_)
     
     

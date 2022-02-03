@@ -5,8 +5,8 @@ class PrismUseRequestMessage(NetworkMessage):
     moduleToUse:int
     
 
-    def init(self, moduleToUse:int):
-        self.moduleToUse = moduleToUse
+    def init(self, moduleToUse_:int):
+        self.moduleToUse = moduleToUse_
         
         super().__init__()
     

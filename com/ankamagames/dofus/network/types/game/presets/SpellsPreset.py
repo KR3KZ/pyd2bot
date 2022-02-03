@@ -9,9 +9,9 @@ class SpellsPreset(Preset):
     spells:list['SpellForPreset']
     
 
-    def init(self, spells:list['SpellForPreset'], id:int):
-        self.spells = spells
+    def init(self, spells_:list['SpellForPreset'], id_:int):
+        self.spells = spells_
         
-        super().__init__(id)
+        super().__init__(id_)
     
     

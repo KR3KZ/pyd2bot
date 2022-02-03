@@ -9,9 +9,9 @@ class TopTaxCollectorListMessage(AbstractTaxCollectorListMessage):
     isDungeon:bool
     
 
-    def init(self, isDungeon:bool, informations:list['TaxCollectorInformations']):
-        self.isDungeon = isDungeon
+    def init(self, isDungeon_:bool, informations_:list['TaxCollectorInformations']):
+        self.isDungeon = isDungeon_
         
-        super().__init__(informations)
+        super().__init__(informations_)
     
     

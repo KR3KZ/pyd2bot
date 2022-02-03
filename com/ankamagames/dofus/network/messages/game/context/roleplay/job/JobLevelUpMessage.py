@@ -10,9 +10,9 @@ class JobLevelUpMessage(NetworkMessage):
     jobsDescription:'JobDescription'
     
 
-    def init(self, newLevel:int, jobsDescription:'JobDescription'):
-        self.newLevel = newLevel
-        self.jobsDescription = jobsDescription
+    def init(self, newLevel_:int, jobsDescription_:'JobDescription'):
+        self.newLevel = newLevel_
+        self.jobsDescription = jobsDescription_
         
         super().__init__()
     

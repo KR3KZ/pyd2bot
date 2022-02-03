@@ -6,9 +6,9 @@ class GameRolePlayPlayerLifeStatusMessage(NetworkMessage):
     phenixMapId:int
     
 
-    def init(self, state:int, phenixMapId:int):
-        self.state = state
-        self.phenixMapId = phenixMapId
+    def init(self, state_:int, phenixMapId_:int):
+        self.state = state_
+        self.phenixMapId = phenixMapId_
         
         super().__init__()
     

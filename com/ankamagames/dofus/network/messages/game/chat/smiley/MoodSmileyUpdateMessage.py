@@ -7,10 +7,10 @@ class MoodSmileyUpdateMessage(NetworkMessage):
     smileyId:int
     
 
-    def init(self, accountId:int, playerId:int, smileyId:int):
-        self.accountId = accountId
-        self.playerId = playerId
-        self.smileyId = smileyId
+    def init(self, accountId_:int, playerId_:int, smileyId_:int):
+        self.accountId = accountId_
+        self.playerId = playerId_
+        self.smileyId = smileyId_
         
         super().__init__()
     

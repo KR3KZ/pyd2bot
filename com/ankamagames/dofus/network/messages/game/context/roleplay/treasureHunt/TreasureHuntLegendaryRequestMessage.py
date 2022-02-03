@@ -5,8 +5,8 @@ class TreasureHuntLegendaryRequestMessage(NetworkMessage):
     legendaryId:int
     
 
-    def init(self, legendaryId:int):
-        self.legendaryId = legendaryId
+    def init(self, legendaryId_:int):
+        self.legendaryId = legendaryId_
         
         super().__init__()
     

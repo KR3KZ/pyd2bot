@@ -6,9 +6,9 @@ class GameRolePlayAggressionMessage(NetworkMessage):
     defenderId:int
     
 
-    def init(self, attackerId:int, defenderId:int):
-        self.attackerId = attackerId
-        self.defenderId = defenderId
+    def init(self, attackerId_:int, defenderId_:int):
+        self.attackerId = attackerId_
+        self.defenderId = defenderId_
         
         super().__init__()
     

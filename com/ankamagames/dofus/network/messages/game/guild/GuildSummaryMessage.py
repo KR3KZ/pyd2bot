@@ -9,9 +9,9 @@ class GuildSummaryMessage(PaginationAnswerAbstractMessage):
     guilds:list['GuildFactSheetInformations']
     
 
-    def init(self, guilds:list['GuildFactSheetInformations'], offset:int, count:int, total:int):
-        self.guilds = guilds
+    def init(self, guilds_:list['GuildFactSheetInformations'], offset_:int, count_:int, total_:int):
+        self.guilds = guilds_
         
-        super().__init__(offset, count, total)
+        super().__init__(offset_, count_, total_)
     
     

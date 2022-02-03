@@ -5,8 +5,8 @@ class ExchangeStartOkNpcTradeMessage(NetworkMessage):
     npcId:int
     
 
-    def init(self, npcId:int):
-        self.npcId = npcId
+    def init(self, npcId_:int):
+        self.npcId = npcId_
         
         super().__init__()
     

@@ -11,9 +11,9 @@ class GroupMonsterStaticInformations(NetworkMessage):
     underlings:list['MonsterInGroupInformations']
     
 
-    def init(self, mainCreatureLightInfos:'MonsterInGroupLightInformations', underlings:list['MonsterInGroupInformations']):
-        self.mainCreatureLightInfos = mainCreatureLightInfos
-        self.underlings = underlings
+    def init(self, mainCreatureLightInfos_:'MonsterInGroupLightInformations', underlings_:list['MonsterInGroupInformations']):
+        self.mainCreatureLightInfos = mainCreatureLightInfos_
+        self.underlings = underlings_
         
         super().__init__()
     

@@ -8,11 +8,11 @@ class CharacterExperienceGainMessage(NetworkMessage):
     experienceIncarnation:int
     
 
-    def init(self, experienceCharacter:int, experienceMount:int, experienceGuild:int, experienceIncarnation:int):
-        self.experienceCharacter = experienceCharacter
-        self.experienceMount = experienceMount
-        self.experienceGuild = experienceGuild
-        self.experienceIncarnation = experienceIncarnation
+    def init(self, experienceCharacter_:int, experienceMount_:int, experienceGuild_:int, experienceIncarnation_:int):
+        self.experienceCharacter = experienceCharacter_
+        self.experienceMount = experienceMount_
+        self.experienceGuild = experienceGuild_
+        self.experienceIncarnation = experienceIncarnation_
         
         super().__init__()
     

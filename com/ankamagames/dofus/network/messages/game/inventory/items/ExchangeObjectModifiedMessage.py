@@ -9,9 +9,9 @@ class ExchangeObjectModifiedMessage(ExchangeObjectMessage):
     object:'ObjectItem'
     
 
-    def init(self, object:'ObjectItem', remote:bool):
-        self.object = object
+    def init(self, object_:'ObjectItem', remote_:bool):
+        self.object = object_
         
-        super().__init__(remote)
+        super().__init__(remote_)
     
     

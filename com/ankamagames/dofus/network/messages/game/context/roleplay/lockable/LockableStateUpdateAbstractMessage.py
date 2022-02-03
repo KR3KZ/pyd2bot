@@ -5,8 +5,8 @@ class LockableStateUpdateAbstractMessage(NetworkMessage):
     locked:bool
     
 
-    def init(self, locked:bool):
-        self.locked = locked
+    def init(self, locked_:bool):
+        self.locked = locked_
         
         super().__init__()
     

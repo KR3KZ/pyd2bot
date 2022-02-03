@@ -9,12 +9,12 @@ class GameFightStartingMessage(NetworkMessage):
     containsBoss:bool
     
 
-    def init(self, fightType:int, fightId:int, attackerId:int, defenderId:int, containsBoss:bool):
-        self.fightType = fightType
-        self.fightId = fightId
-        self.attackerId = attackerId
-        self.defenderId = defenderId
-        self.containsBoss = containsBoss
+    def init(self, fightType_:int, fightId_:int, attackerId_:int, defenderId_:int, containsBoss_:bool):
+        self.fightType = fightType_
+        self.fightId = fightId_
+        self.attackerId = attackerId_
+        self.defenderId = defenderId_
+        self.containsBoss = containsBoss_
         
         super().__init__()
     

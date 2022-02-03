@@ -10,9 +10,9 @@ class RefreshCharacterStatsMessage(NetworkMessage):
     stats:'GameFightCharacteristics'
     
 
-    def init(self, fighterId:int, stats:'GameFightCharacteristics'):
-        self.fighterId = fighterId
-        self.stats = stats
+    def init(self, fighterId_:int, stats_:'GameFightCharacteristics'):
+        self.fighterId = fighterId_
+        self.stats = stats_
         
         super().__init__()
     

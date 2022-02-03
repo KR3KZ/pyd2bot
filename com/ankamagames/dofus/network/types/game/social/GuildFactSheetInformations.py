@@ -14,13 +14,13 @@ class GuildFactSheetInformations(GuildInformations):
     nbPendingApply:int
     
 
-    def init(self, leaderId:int, nbMembers:int, lastActivityDay:int, recruitment:'GuildRecruitmentInformation', nbPendingApply:int, guildEmblem:'GuildEmblem', guildId:int, guildName:str, guildLevel:int):
-        self.leaderId = leaderId
-        self.nbMembers = nbMembers
-        self.lastActivityDay = lastActivityDay
-        self.recruitment = recruitment
-        self.nbPendingApply = nbPendingApply
+    def init(self, leaderId_:int, nbMembers_:int, lastActivityDay_:int, recruitment_:'GuildRecruitmentInformation', nbPendingApply_:int, guildEmblem_:'GuildEmblem', guildId_:int, guildName_:str, guildLevel_:int):
+        self.leaderId = leaderId_
+        self.nbMembers = nbMembers_
+        self.lastActivityDay = lastActivityDay_
+        self.recruitment = recruitment_
+        self.nbPendingApply = nbPendingApply_
         
-        super().__init__(guildEmblem, guildId, guildName, guildLevel)
+        super().__init__(guildEmblem_, guildId_, guildName_, guildLevel_)
     
     

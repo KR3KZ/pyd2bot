@@ -12,11 +12,11 @@ class ObjectItemNotInContainer(Item):
     quantity:int
     
 
-    def init(self, objectGID:int, effects:list['ObjectEffect'], objectUID:int, quantity:int):
-        self.objectGID = objectGID
-        self.effects = effects
-        self.objectUID = objectUID
-        self.quantity = quantity
+    def init(self, objectGID_:int, effects_:list['ObjectEffect'], objectUID_:int, quantity_:int):
+        self.objectGID = objectGID_
+        self.effects = effects_
+        self.objectUID = objectUID_
+        self.quantity = quantity_
         
         super().__init__()
     

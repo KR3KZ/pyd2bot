@@ -12,11 +12,11 @@ class TaxCollectorListMessage(AbstractTaxCollectorListMessage):
     infoType:int
     
 
-    def init(self, nbcollectorMax:int, fightersInformations:list['TaxCollectorFightersInformation'], infoType:int, informations:list['TaxCollectorInformations']):
-        self.nbcollectorMax = nbcollectorMax
-        self.fightersInformations = fightersInformations
-        self.infoType = infoType
+    def init(self, nbcollectorMax_:int, fightersInformations_:list['TaxCollectorFightersInformation'], infoType_:int, informations_:list['TaxCollectorInformations']):
+        self.nbcollectorMax = nbcollectorMax_
+        self.fightersInformations = fightersInformations_
+        self.infoType = infoType_
         
-        super().__init__(informations)
+        super().__init__(informations_)
     
     

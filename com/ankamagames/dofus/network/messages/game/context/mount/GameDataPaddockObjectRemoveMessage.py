@@ -5,8 +5,8 @@ class GameDataPaddockObjectRemoveMessage(NetworkMessage):
     cellId:int
     
 
-    def init(self, cellId:int):
-        self.cellId = cellId
+    def init(self, cellId_:int):
+        self.cellId = cellId_
         
         super().__init__()
     

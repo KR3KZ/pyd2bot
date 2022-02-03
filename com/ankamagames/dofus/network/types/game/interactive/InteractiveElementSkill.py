@@ -6,9 +6,9 @@ class InteractiveElementSkill(NetworkMessage):
     skillInstanceUid:int
     
 
-    def init(self, skillId:int, skillInstanceUid:int):
-        self.skillId = skillId
-        self.skillInstanceUid = skillInstanceUid
+    def init(self, skillId_:int, skillInstanceUid_:int):
+        self.skillId = skillId_
+        self.skillInstanceUid = skillInstanceUid_
         
         super().__init__()
     

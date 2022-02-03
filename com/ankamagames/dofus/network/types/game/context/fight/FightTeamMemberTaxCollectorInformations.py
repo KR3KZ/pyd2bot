@@ -9,13 +9,13 @@ class FightTeamMemberTaxCollectorInformations(FightTeamMemberInformations):
     uid:int
     
 
-    def init(self, firstNameId:int, lastNameId:int, level:int, guildId:int, uid:int, id:int):
-        self.firstNameId = firstNameId
-        self.lastNameId = lastNameId
-        self.level = level
-        self.guildId = guildId
-        self.uid = uid
+    def init(self, firstNameId_:int, lastNameId_:int, level_:int, guildId_:int, uid_:int, id_:int):
+        self.firstNameId = firstNameId_
+        self.lastNameId = lastNameId_
+        self.level = level_
+        self.guildId = guildId_
+        self.uid = uid_
         
-        super().__init__(id)
+        super().__init__(id_)
     
     

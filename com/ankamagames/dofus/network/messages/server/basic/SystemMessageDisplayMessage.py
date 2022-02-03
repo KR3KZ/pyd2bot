@@ -7,10 +7,10 @@ class SystemMessageDisplayMessage(NetworkMessage):
     parameters:list[str]
     
 
-    def init(self, hangUp:bool, msgId:int, parameters:list[str]):
-        self.hangUp = hangUp
-        self.msgId = msgId
-        self.parameters = parameters
+    def init(self, hangUp_:bool, msgId_:int, parameters_:list[str]):
+        self.hangUp = hangUp_
+        self.msgId = msgId_
+        self.parameters = parameters_
         
         super().__init__()
     

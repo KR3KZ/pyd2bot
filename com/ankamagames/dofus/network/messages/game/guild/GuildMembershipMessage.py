@@ -8,8 +8,8 @@ if TYPE_CHECKING:
 class GuildMembershipMessage(GuildJoinedMessage):
     
 
-    def init(self, guildInfo:'GuildInformations', memberRights:int):
+    def init(self, guildInfo_:'GuildInformations', memberRights_:int):
         
-        super().__init__(guildInfo, memberRights)
+        super().__init__(guildInfo_, memberRights_)
     
     

@@ -6,9 +6,9 @@ class FightStartingPositions(NetworkMessage):
     positionsForDefenders:list[int]
     
 
-    def init(self, positionsForChallengers:list[int], positionsForDefenders:list[int]):
-        self.positionsForChallengers = positionsForChallengers
-        self.positionsForDefenders = positionsForDefenders
+    def init(self, positionsForChallengers_:list[int], positionsForDefenders_:list[int]):
+        self.positionsForChallengers = positionsForChallengers_
+        self.positionsForDefenders = positionsForDefenders_
         
         super().__init__()
     

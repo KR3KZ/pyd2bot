@@ -17,17 +17,17 @@ class HouseInformationsForGuild(HouseInformations):
     guildshareParams:int
     
 
-    def init(self, instanceId:int, secondHand:bool, ownerTag:'AccountTagInformation', worldX:int, worldY:int, mapId:int, subAreaId:int, skillListIds:list[int], guildshareParams:int, houseId:int, modelId:int):
-        self.instanceId = instanceId
-        self.secondHand = secondHand
-        self.ownerTag = ownerTag
-        self.worldX = worldX
-        self.worldY = worldY
-        self.mapId = mapId
-        self.subAreaId = subAreaId
-        self.skillListIds = skillListIds
-        self.guildshareParams = guildshareParams
+    def init(self, instanceId_:int, secondHand_:bool, ownerTag_:'AccountTagInformation', worldX_:int, worldY_:int, mapId_:int, subAreaId_:int, skillListIds_:list[int], guildshareParams_:int, houseId_:int, modelId_:int):
+        self.instanceId = instanceId_
+        self.secondHand = secondHand_
+        self.ownerTag = ownerTag_
+        self.worldX = worldX_
+        self.worldY = worldY_
+        self.mapId = mapId_
+        self.subAreaId = subAreaId_
+        self.skillListIds = skillListIds_
+        self.guildshareParams = guildshareParams_
         
-        super().__init__(houseId, modelId)
+        super().__init__(houseId_, modelId_)
     
     

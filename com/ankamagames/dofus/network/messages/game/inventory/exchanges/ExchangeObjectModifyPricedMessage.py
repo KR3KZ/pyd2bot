@@ -4,8 +4,8 @@ from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeObj
 class ExchangeObjectModifyPricedMessage(ExchangeObjectMovePricedMessage):
     
 
-    def init(self, price:int, objectUID:int, quantity:int):
+    def init(self, price_:int, objectUID_:int, quantity_:int):
         
-        super().__init__(price, objectUID, quantity)
+        super().__init__(price_, objectUID_, quantity_)
     
     

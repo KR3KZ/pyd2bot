@@ -6,10 +6,10 @@ class GameActionFightSpellImmunityMessage(AbstractGameActionMessage):
     spellId:int
     
 
-    def init(self, targetId:int, spellId:int, actionId:int, sourceId:int):
-        self.targetId = targetId
-        self.spellId = spellId
+    def init(self, targetId_:int, spellId_:int, actionId_:int, sourceId_:int):
+        self.targetId = targetId_
+        self.spellId = spellId_
         
-        super().__init__(actionId, sourceId)
+        super().__init__(actionId_, sourceId_)
     
     

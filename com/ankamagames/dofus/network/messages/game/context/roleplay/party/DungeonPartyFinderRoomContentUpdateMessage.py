@@ -11,10 +11,10 @@ class DungeonPartyFinderRoomContentUpdateMessage(NetworkMessage):
     removedPlayersIds:list[int]
     
 
-    def init(self, dungeonId:int, addedPlayers:list['DungeonPartyFinderPlayer'], removedPlayersIds:list[int]):
-        self.dungeonId = dungeonId
-        self.addedPlayers = addedPlayers
-        self.removedPlayersIds = removedPlayersIds
+    def init(self, dungeonId_:int, addedPlayers_:list['DungeonPartyFinderPlayer'], removedPlayersIds_:list[int]):
+        self.dungeonId = dungeonId_
+        self.addedPlayers = addedPlayers_
+        self.removedPlayersIds = removedPlayersIds_
         
         super().__init__()
     

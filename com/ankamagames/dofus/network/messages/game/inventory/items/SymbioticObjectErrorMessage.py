@@ -5,9 +5,9 @@ class SymbioticObjectErrorMessage(ObjectErrorMessage):
     errorCode:int
     
 
-    def init(self, errorCode:int, reason:int):
-        self.errorCode = errorCode
+    def init(self, errorCode_:int, reason_:int):
+        self.errorCode = errorCode_
         
-        super().__init__(reason)
+        super().__init__(reason_)
     
     

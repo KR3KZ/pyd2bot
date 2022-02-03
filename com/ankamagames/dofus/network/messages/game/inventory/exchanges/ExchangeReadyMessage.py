@@ -6,9 +6,9 @@ class ExchangeReadyMessage(NetworkMessage):
     step:int
     
 
-    def init(self, ready:bool, step:int):
-        self.ready = ready
-        self.step = step
+    def init(self, ready_:bool, step_:int):
+        self.ready = ready_
+        self.step = step_
         
         super().__init__()
     

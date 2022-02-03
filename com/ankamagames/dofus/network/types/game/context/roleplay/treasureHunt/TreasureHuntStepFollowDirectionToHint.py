@@ -6,9 +6,9 @@ class TreasureHuntStepFollowDirectionToHint(TreasureHuntStep):
     npcId:int
     
 
-    def init(self, direction:int, npcId:int):
-        self.direction = direction
-        self.npcId = npcId
+    def init(self, direction_:int, npcId_:int):
+        self.direction = direction_
+        self.npcId = npcId_
         
         super().__init__()
     

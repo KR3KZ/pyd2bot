@@ -6,9 +6,9 @@ class AuthenticationTicketMessage(NetworkMessage):
     ticket:str
     
 
-    def init(self, lang:str, ticket:str):
-        self.lang = lang
-        self.ticket = ticket
+    def init(self, lang_:str, ticket_:str):
+        self.lang = lang_
+        self.ticket = ticket_
         
         super().__init__()
     

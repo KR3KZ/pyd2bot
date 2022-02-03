@@ -10,9 +10,9 @@ class AbstractContactInformations(NetworkMessage):
     accountTag:'AccountTagInformation'
     
 
-    def init(self, accountId:int, accountTag:'AccountTagInformation'):
-        self.accountId = accountId
-        self.accountTag = accountTag
+    def init(self, accountId_:int, accountTag_:'AccountTagInformation'):
+        self.accountId = accountId_
+        self.accountTag = accountTag_
         
         super().__init__()
     

@@ -6,9 +6,9 @@ class ForgettableSpellClientActionMessage(NetworkMessage):
     action:int
     
 
-    def init(self, spellId:int, action:int):
-        self.spellId = spellId
-        self.action = action
+    def init(self, spellId_:int, action_:int):
+        self.spellId = spellId_
+        self.action = action_
         
         super().__init__()
     

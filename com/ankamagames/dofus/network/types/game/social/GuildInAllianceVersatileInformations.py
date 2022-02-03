@@ -5,9 +5,9 @@ class GuildInAllianceVersatileInformations(GuildVersatileInformations):
     allianceId:int
     
 
-    def init(self, allianceId:int, guildId:int, leaderId:int, guildLevel:int, nbMembers:int):
-        self.allianceId = allianceId
+    def init(self, allianceId_:int, guildId_:int, leaderId_:int, guildLevel_:int, nbMembers_:int):
+        self.allianceId = allianceId_
         
-        super().__init__(guildId, leaderId, guildLevel, nbMembers)
+        super().__init__(guildId_, leaderId_, guildLevel_, nbMembers_)
     
     

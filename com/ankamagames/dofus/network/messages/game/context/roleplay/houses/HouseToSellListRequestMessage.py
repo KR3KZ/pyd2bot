@@ -5,8 +5,8 @@ class HouseToSellListRequestMessage(NetworkMessage):
     pageIndex:int
     
 
-    def init(self, pageIndex:int):
-        self.pageIndex = pageIndex
+    def init(self, pageIndex_:int):
+        self.pageIndex = pageIndex_
         
         super().__init__()
     

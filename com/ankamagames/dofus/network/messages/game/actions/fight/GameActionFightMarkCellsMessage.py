@@ -9,9 +9,9 @@ class GameActionFightMarkCellsMessage(AbstractGameActionMessage):
     mark:'GameActionMark'
     
 
-    def init(self, mark:'GameActionMark', actionId:int, sourceId:int):
-        self.mark = mark
+    def init(self, mark_:'GameActionMark', actionId_:int, sourceId_:int):
+        self.mark = mark_
         
-        super().__init__(actionId, sourceId)
+        super().__init__(actionId_, sourceId_)
     
     

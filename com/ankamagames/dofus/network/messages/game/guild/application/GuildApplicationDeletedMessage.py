@@ -5,8 +5,8 @@ class GuildApplicationDeletedMessage(NetworkMessage):
     deleted:bool
     
 
-    def init(self, deleted:bool):
-        self.deleted = deleted
+    def init(self, deleted_:bool):
+        self.deleted = deleted_
         
         super().__init__()
     

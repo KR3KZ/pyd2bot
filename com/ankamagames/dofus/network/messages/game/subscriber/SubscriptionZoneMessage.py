@@ -5,8 +5,8 @@ class SubscriptionZoneMessage(NetworkMessage):
     active:bool
     
 
-    def init(self, active:bool):
-        self.active = active
+    def init(self, active_:bool):
+        self.active = active_
         
         super().__init__()
     

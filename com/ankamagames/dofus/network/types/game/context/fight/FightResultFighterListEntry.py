@@ -10,10 +10,10 @@ class FightResultFighterListEntry(FightResultListEntry):
     alive:bool
     
 
-    def init(self, id:int, alive:bool, outcome:int, wave:int, rewards:'FightLoot'):
-        self.id = id
-        self.alive = alive
+    def init(self, id_:int, alive_:bool, outcome_:int, wave_:int, rewards_:'FightLoot'):
+        self.id = id_
+        self.alive = alive_
         
-        super().__init__(outcome, wave, rewards)
+        super().__init__(outcome_, wave_, rewards_)
     
     

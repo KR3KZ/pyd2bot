@@ -9,8 +9,8 @@ class HumanOptionGuild(HumanOption):
     guildInformations:'GuildInformations'
     
 
-    def init(self, guildInformations:'GuildInformations'):
-        self.guildInformations = guildInformations
+    def init(self, guildInformations_:'GuildInformations'):
+        self.guildInformations = guildInformations_
         
         super().__init__()
     

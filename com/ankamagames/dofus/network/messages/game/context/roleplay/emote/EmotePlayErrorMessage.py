@@ -5,8 +5,8 @@ class EmotePlayErrorMessage(NetworkMessage):
     emoteId:int
     
 
-    def init(self, emoteId:int):
-        self.emoteId = emoteId
+    def init(self, emoteId_:int):
+        self.emoteId = emoteId_
         
         super().__init__()
     

@@ -6,9 +6,9 @@ class PresetSaveErrorMessage(NetworkMessage):
     code:int
     
 
-    def init(self, presetId:int, code:int):
-        self.presetId = presetId
-        self.code = code
+    def init(self, presetId_:int, code_:int):
+        self.presetId = presetId_
+        self.code = code_
         
         super().__init__()
     

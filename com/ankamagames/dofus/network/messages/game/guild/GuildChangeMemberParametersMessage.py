@@ -8,11 +8,11 @@ class GuildChangeMemberParametersMessage(NetworkMessage):
     rights:int
     
 
-    def init(self, memberId:int, rank:int, experienceGivenPercent:int, rights:int):
-        self.memberId = memberId
-        self.rank = rank
-        self.experienceGivenPercent = experienceGivenPercent
-        self.rights = rights
+    def init(self, memberId_:int, rank_:int, experienceGivenPercent_:int, rights_:int):
+        self.memberId = memberId_
+        self.rank = rank_
+        self.experienceGivenPercent = experienceGivenPercent_
+        self.rights = rights_
         
         super().__init__()
     

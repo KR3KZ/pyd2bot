@@ -10,9 +10,9 @@ class InviteInHavenBagMessage(NetworkMessage):
     accept:bool
     
 
-    def init(self, guestInformations:'CharacterMinimalInformations', accept:bool):
-        self.guestInformations = guestInformations
-        self.accept = accept
+    def init(self, guestInformations_:'CharacterMinimalInformations', accept_:bool):
+        self.guestInformations = guestInformations_
+        self.accept = accept_
         
         super().__init__()
     

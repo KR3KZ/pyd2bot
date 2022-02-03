@@ -9,12 +9,12 @@ class AbstractFightTeamInformations(NetworkMessage):
     nbWaves:int
     
 
-    def init(self, teamId:int, leaderId:int, teamSide:int, teamTypeId:int, nbWaves:int):
-        self.teamId = teamId
-        self.leaderId = leaderId
-        self.teamSide = teamSide
-        self.teamTypeId = teamTypeId
-        self.nbWaves = nbWaves
+    def init(self, teamId_:int, leaderId_:int, teamSide_:int, teamTypeId_:int, nbWaves_:int):
+        self.teamId = teamId_
+        self.leaderId = leaderId_
+        self.teamSide = teamSide_
+        self.teamTypeId = teamTypeId_
+        self.nbWaves = nbWaves_
         
         super().__init__()
     

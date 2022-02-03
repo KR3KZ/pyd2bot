@@ -6,9 +6,9 @@ class StatsUpgradeResultMessage(NetworkMessage):
     nbCharacBoost:int
     
 
-    def init(self, result:int, nbCharacBoost:int):
-        self.result = result
-        self.nbCharacBoost = nbCharacBoost
+    def init(self, result_:int, nbCharacBoost_:int):
+        self.result = result_
+        self.nbCharacBoost = nbCharacBoost_
         
         super().__init__()
     

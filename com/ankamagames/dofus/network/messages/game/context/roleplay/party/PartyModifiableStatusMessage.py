@@ -5,9 +5,9 @@ class PartyModifiableStatusMessage(AbstractPartyMessage):
     enabled:bool
     
 
-    def init(self, enabled:bool, partyId:int):
-        self.enabled = enabled
+    def init(self, enabled_:bool, partyId_:int):
+        self.enabled = enabled_
         
-        super().__init__(partyId)
+        super().__init__(partyId_)
     
     

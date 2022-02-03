@@ -9,8 +9,8 @@ class MapRunningFightListMessage(NetworkMessage):
     fights:list['FightExternalInformations']
     
 
-    def init(self, fights:list['FightExternalInformations']):
-        self.fights = fights
+    def init(self, fights_:list['FightExternalInformations']):
+        self.fights = fights_
         
         super().__init__()
     

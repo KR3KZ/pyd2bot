@@ -9,9 +9,9 @@ class IdentificationAccountForceMessage(IdentificationMessage):
     forcedAccountLogin:str
     
 
-    def init(self, forcedAccountLogin:str, version:'Version', lang:str, credentials:list[int], serverId:int, sessionOptionalSalt:int, failedAttempts:list[int]):
-        self.forcedAccountLogin = forcedAccountLogin
+    def init(self, forcedAccountLogin_:str, version_:'Version', lang_:str, credentials_:list[int], serverId_:int, sessionOptionalSalt_:int, failedAttempts_:list[int], autoconnect_:bool, useCertificate_:bool, useLoginToken_:bool):
+        self.forcedAccountLogin = forcedAccountLogin_
         
-        super().__init__(version, lang, credentials, serverId, sessionOptionalSalt, failedAttempts)
+        super().__init__(version_, lang_, credentials_, serverId_, sessionOptionalSalt_, failedAttempts_, autoconnect_, useCertificate_, useLoginToken_)
     
     

@@ -10,9 +10,9 @@ class ShortcutBarContentMessage(NetworkMessage):
     shortcuts:list['Shortcut']
     
 
-    def init(self, barType:int, shortcuts:list['Shortcut']):
-        self.barType = barType
-        self.shortcuts = shortcuts
+    def init(self, barType_:int, shortcuts_:list['Shortcut']):
+        self.barType = barType_
+        self.shortcuts = shortcuts_
         
         super().__init__()
     

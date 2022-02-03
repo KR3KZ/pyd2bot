@@ -5,8 +5,8 @@ class ServerOptionalFeaturesMessage(NetworkMessage):
     features:list[int]
     
 
-    def init(self, features:list[int]):
-        self.features = features
+    def init(self, features_:list[int]):
+        self.features = features_
         
         super().__init__()
     

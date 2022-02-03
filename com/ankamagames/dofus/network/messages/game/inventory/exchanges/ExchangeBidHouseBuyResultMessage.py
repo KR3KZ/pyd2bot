@@ -6,9 +6,9 @@ class ExchangeBidHouseBuyResultMessage(NetworkMessage):
     bought:bool
     
 
-    def init(self, uid:int, bought:bool):
-        self.uid = uid
-        self.bought = bought
+    def init(self, uid_:int, bought_:bool):
+        self.uid = uid_
+        self.bought = bought_
         
         super().__init__()
     

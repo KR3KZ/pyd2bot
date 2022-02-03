@@ -6,9 +6,9 @@ class TeleportOnSameMapMessage(NetworkMessage):
     cellId:int
     
 
-    def init(self, targetId:int, cellId:int):
-        self.targetId = targetId
-        self.cellId = cellId
+    def init(self, targetId_:int, cellId_:int):
+        self.targetId = targetId_
+        self.cellId = cellId_
         
         super().__init__()
     

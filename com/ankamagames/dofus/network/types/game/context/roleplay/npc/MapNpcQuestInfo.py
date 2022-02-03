@@ -11,10 +11,10 @@ class MapNpcQuestInfo(NetworkMessage):
     questFlags:list['GameRolePlayNpcQuestFlag']
     
 
-    def init(self, mapId:int, npcsIdsWithQuest:list[int], questFlags:list['GameRolePlayNpcQuestFlag']):
-        self.mapId = mapId
-        self.npcsIdsWithQuest = npcsIdsWithQuest
-        self.questFlags = questFlags
+    def init(self, mapId_:int, npcsIdsWithQuest_:list[int], questFlags_:list['GameRolePlayNpcQuestFlag']):
+        self.mapId = mapId_
+        self.npcsIdsWithQuest = npcsIdsWithQuest_
+        self.questFlags = questFlags_
         
         super().__init__()
     

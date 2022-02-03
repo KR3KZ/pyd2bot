@@ -6,9 +6,9 @@ class GameFightTurnListMessage(NetworkMessage):
     deadsIds:list[int]
     
 
-    def init(self, ids:list[int], deadsIds:list[int]):
-        self.ids = ids
-        self.deadsIds = deadsIds
+    def init(self, ids_:list[int], deadsIds_:list[int]):
+        self.ids = ids_
+        self.deadsIds = deadsIds_
         
         super().__init__()
     

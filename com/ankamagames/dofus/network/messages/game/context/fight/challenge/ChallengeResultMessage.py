@@ -6,9 +6,9 @@ class ChallengeResultMessage(NetworkMessage):
     success:bool
     
 
-    def init(self, challengeId:int, success:bool):
-        self.challengeId = challengeId
-        self.success = success
+    def init(self, challengeId_:int, success_:bool):
+        self.challengeId = challengeId_
+        self.success = success_
         
         super().__init__()
     

@@ -6,9 +6,9 @@ class AchievementObjective(NetworkMessage):
     maxValue:int
     
 
-    def init(self, id:int, maxValue:int):
-        self.id = id
-        self.maxValue = maxValue
+    def init(self, id_:int, maxValue_:int):
+        self.id = id_
+        self.maxValue = maxValue_
         
         super().__init__()
     

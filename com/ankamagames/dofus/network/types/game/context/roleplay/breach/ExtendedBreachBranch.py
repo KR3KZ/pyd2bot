@@ -13,11 +13,11 @@ class ExtendedBreachBranch(BreachBranch):
     prize:int
     
 
-    def init(self, rewards:list['BreachReward'], modifier:int, prize:int, room:int, element:int, bosses:list['MonsterInGroupLightInformations'], map:int, score:int, relativeScore:int, monsters:list['MonsterInGroupLightInformations']):
-        self.rewards = rewards
-        self.modifier = modifier
-        self.prize = prize
+    def init(self, rewards_:list['BreachReward'], modifier_:int, prize_:int, room_:int, element_:int, bosses_:list['MonsterInGroupLightInformations'], map_:int, score_:int, relativeScore_:int, monsters_:list['MonsterInGroupLightInformations']):
+        self.rewards = rewards_
+        self.modifier = modifier_
+        self.prize = prize_
         
-        super().__init__(room, element, bosses, map, score, relativeScore, monsters)
+        super().__init__(room_, element_, bosses_, map_, score_, relativeScore_, monsters_)
     
     

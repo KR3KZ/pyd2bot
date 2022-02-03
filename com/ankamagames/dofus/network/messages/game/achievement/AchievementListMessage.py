@@ -9,8 +9,8 @@ class AchievementListMessage(NetworkMessage):
     finishedAchievements:list['AchievementAchieved']
     
 
-    def init(self, finishedAchievements:list['AchievementAchieved']):
-        self.finishedAchievements = finishedAchievements
+    def init(self, finishedAchievements_:list['AchievementAchieved']):
+        self.finishedAchievements = finishedAchievements_
         
         super().__init__()
     

@@ -6,9 +6,9 @@ class ObtainedItemMessage(NetworkMessage):
     baseQuantity:int
     
 
-    def init(self, genericId:int, baseQuantity:int):
-        self.genericId = genericId
-        self.baseQuantity = baseQuantity
+    def init(self, genericId_:int, baseQuantity_:int):
+        self.genericId = genericId_
+        self.baseQuantity = baseQuantity_
         
         super().__init__()
     

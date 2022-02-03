@@ -10,9 +10,9 @@ class GameContextActorPositionInformations(NetworkMessage):
     disposition:'EntityDispositionInformations'
     
 
-    def init(self, contextualId:int, disposition:'EntityDispositionInformations'):
-        self.contextualId = contextualId
-        self.disposition = disposition
+    def init(self, contextualId_:int, disposition_:'EntityDispositionInformations'):
+        self.contextualId = contextualId_
+        self.disposition = disposition_
         
         super().__init__()
     

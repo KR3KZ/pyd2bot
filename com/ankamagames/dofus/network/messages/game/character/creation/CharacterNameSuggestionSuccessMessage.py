@@ -5,8 +5,8 @@ class CharacterNameSuggestionSuccessMessage(NetworkMessage):
     suggestion:str
     
 
-    def init(self, suggestion:str):
-        self.suggestion = suggestion
+    def init(self, suggestion_:str):
+        self.suggestion = suggestion_
         
         super().__init__()
     

@@ -5,8 +5,8 @@ class Shortcut(NetworkMessage):
     slot:int
     
 
-    def init(self, slot:int):
-        self.slot = slot
+    def init(self, slot_:int):
+        self.slot = slot_
         
         super().__init__()
     

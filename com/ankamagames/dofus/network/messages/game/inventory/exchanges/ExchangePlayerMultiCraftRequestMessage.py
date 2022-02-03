@@ -6,10 +6,10 @@ class ExchangePlayerMultiCraftRequestMessage(ExchangeRequestMessage):
     skillId:int
     
 
-    def init(self, target:int, skillId:int, exchangeType:int):
-        self.target = target
-        self.skillId = skillId
+    def init(self, target_:int, skillId_:int, exchangeType_:int):
+        self.target = target_
+        self.skillId = skillId_
         
-        super().__init__(exchangeType)
+        super().__init__(exchangeType_)
     
     

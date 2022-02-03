@@ -6,9 +6,9 @@ class UpdateMapPlayersAgressableStatusMessage(NetworkMessage):
     enable:list[int]
     
 
-    def init(self, playerIds:list[int], enable:list[int]):
-        self.playerIds = playerIds
-        self.enable = enable
+    def init(self, playerIds_:list[int], enable_:list[int]):
+        self.playerIds = playerIds_
+        self.enable = enable_
         
         super().__init__()
     

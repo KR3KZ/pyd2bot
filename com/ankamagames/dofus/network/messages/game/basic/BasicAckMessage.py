@@ -6,9 +6,9 @@ class BasicAckMessage(NetworkMessage):
     lastPacketId:int
     
 
-    def init(self, seq:int, lastPacketId:int):
-        self.seq = seq
-        self.lastPacketId = lastPacketId
+    def init(self, seq_:int, lastPacketId_:int):
+        self.seq = seq_
+        self.lastPacketId = lastPacketId_
         
         super().__init__()
     

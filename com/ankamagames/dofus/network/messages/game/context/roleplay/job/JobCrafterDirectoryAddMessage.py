@@ -9,8 +9,8 @@ class JobCrafterDirectoryAddMessage(NetworkMessage):
     listEntry:'JobCrafterDirectoryListEntry'
     
 
-    def init(self, listEntry:'JobCrafterDirectoryListEntry'):
-        self.listEntry = listEntry
+    def init(self, listEntry_:'JobCrafterDirectoryListEntry'):
+        self.listEntry = listEntry_
         
         super().__init__()
     

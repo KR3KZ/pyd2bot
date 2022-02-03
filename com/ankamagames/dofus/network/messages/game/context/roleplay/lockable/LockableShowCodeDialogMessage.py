@@ -6,9 +6,9 @@ class LockableShowCodeDialogMessage(NetworkMessage):
     codeSize:int
     
 
-    def init(self, changeOrUse:bool, codeSize:int):
-        self.changeOrUse = changeOrUse
-        self.codeSize = codeSize
+    def init(self, changeOrUse_:bool, codeSize_:int):
+        self.changeOrUse = changeOrUse_
+        self.codeSize = codeSize_
         
         super().__init__()
     

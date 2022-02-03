@@ -6,9 +6,9 @@ class DebugHighlightCellsMessage(NetworkMessage):
     cells:list[int]
     
 
-    def init(self, color:int, cells:list[int]):
-        self.color = color
-        self.cells = cells
+    def init(self, color_:int, cells_:list[int]):
+        self.color = color_
+        self.cells = cells_
         
         super().__init__()
     

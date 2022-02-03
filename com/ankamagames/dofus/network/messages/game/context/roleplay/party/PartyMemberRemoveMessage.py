@@ -5,9 +5,9 @@ class PartyMemberRemoveMessage(AbstractPartyEventMessage):
     leavingPlayerId:int
     
 
-    def init(self, leavingPlayerId:int, partyId:int):
-        self.leavingPlayerId = leavingPlayerId
+    def init(self, leavingPlayerId_:int, partyId_:int):
+        self.leavingPlayerId = leavingPlayerId_
         
-        super().__init__(partyId)
+        super().__init__(partyId_)
     
     

@@ -5,8 +5,8 @@ class ExchangeShopStockMultiMovementRemovedMessage(NetworkMessage):
     objectIdList:list[int]
     
 
-    def init(self, objectIdList:list[int]):
-        self.objectIdList = objectIdList
+    def init(self, objectIdList_:list[int]):
+        self.objectIdList = objectIdList_
         
         super().__init__()
     

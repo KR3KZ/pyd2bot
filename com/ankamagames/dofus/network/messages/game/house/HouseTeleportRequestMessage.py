@@ -6,9 +6,9 @@ class HouseTeleportRequestMessage(NetworkMessage):
     houseInstanceId:int
     
 
-    def init(self, houseId:int, houseInstanceId:int):
-        self.houseId = houseId
-        self.houseInstanceId = houseInstanceId
+    def init(self, houseId_:int, houseInstanceId_:int):
+        self.houseId = houseId_
+        self.houseInstanceId = houseInstanceId_
         
         super().__init__()
     

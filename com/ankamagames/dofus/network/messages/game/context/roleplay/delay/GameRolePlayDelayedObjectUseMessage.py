@@ -5,9 +5,9 @@ class GameRolePlayDelayedObjectUseMessage(GameRolePlayDelayedActionMessage):
     objectGID:int
     
 
-    def init(self, objectGID:int, delayedCharacterId:int, delayTypeId:int, delayEndTime:int):
-        self.objectGID = objectGID
+    def init(self, objectGID_:int, delayedCharacterId_:int, delayTypeId_:int, delayEndTime_:int):
+        self.objectGID = objectGID_
         
-        super().__init__(delayedCharacterId, delayTypeId, delayEndTime)
+        super().__init__(delayedCharacterId_, delayTypeId_, delayEndTime_)
     
     

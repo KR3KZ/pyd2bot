@@ -9,9 +9,9 @@ class PartyMemberInStandardFightMessage(AbstractPartyMemberInFightMessage):
     fightMap:'MapCoordinatesExtended'
     
 
-    def init(self, fightMap:'MapCoordinatesExtended', reason:int, memberId:int, memberAccountId:int, memberName:str, fightId:int, timeBeforeFightStart:int, partyId:int):
-        self.fightMap = fightMap
+    def init(self, fightMap_:'MapCoordinatesExtended', reason_:int, memberId_:int, memberAccountId_:int, memberName_:str, fightId_:int, timeBeforeFightStart_:int, partyId_:int):
+        self.fightMap = fightMap_
         
-        super().__init__(reason, memberId, memberAccountId, memberName, fightId, timeBeforeFightStart, partyId)
+        super().__init__(reason_, memberId_, memberAccountId_, memberName_, fightId_, timeBeforeFightStart_, partyId_)
     
     

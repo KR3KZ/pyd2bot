@@ -9,8 +9,8 @@ class AtlasPointInformationsMessage(NetworkMessage):
     type:'AtlasPointsInformations'
     
 
-    def init(self, type:'AtlasPointsInformations'):
-        self.type = type
+    def init(self, type_:'AtlasPointsInformations'):
+        self.type = type_
         
         super().__init__()
     

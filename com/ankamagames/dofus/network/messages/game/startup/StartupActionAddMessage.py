@@ -9,8 +9,8 @@ class StartupActionAddMessage(NetworkMessage):
     newAction:'StartupActionAddObject'
     
 
-    def init(self, newAction:'StartupActionAddObject'):
-        self.newAction = newAction
+    def init(self, newAction_:'StartupActionAddObject'):
+        self.newAction = newAction_
         
         super().__init__()
     

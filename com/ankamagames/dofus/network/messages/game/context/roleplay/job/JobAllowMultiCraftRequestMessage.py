@@ -5,8 +5,8 @@ class JobAllowMultiCraftRequestMessage(NetworkMessage):
     enabled:bool
     
 
-    def init(self, enabled:bool):
-        self.enabled = enabled
+    def init(self, enabled_:bool):
+        self.enabled = enabled_
         
         super().__init__()
     

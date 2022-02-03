@@ -6,9 +6,9 @@ class CurrentMapMessage(NetworkMessage):
     mapKey:str
     
 
-    def init(self, mapId:int, mapKey:str):
-        self.mapId = mapId
-        self.mapKey = mapKey
+    def init(self, mapId_:int, mapKey_:str):
+        self.mapId = mapId_
+        self.mapKey = mapKey_
         
         super().__init__()
     

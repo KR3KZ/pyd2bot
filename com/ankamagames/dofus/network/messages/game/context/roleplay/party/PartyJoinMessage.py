@@ -16,15 +16,15 @@ class PartyJoinMessage(AbstractPartyMessage):
     partyName:str
     
 
-    def init(self, partyType:int, partyLeaderId:int, maxParticipants:int, members:list['PartyMemberInformations'], guests:list['PartyGuestInformations'], restricted:bool, partyName:str, partyId:int):
-        self.partyType = partyType
-        self.partyLeaderId = partyLeaderId
-        self.maxParticipants = maxParticipants
-        self.members = members
-        self.guests = guests
-        self.restricted = restricted
-        self.partyName = partyName
+    def init(self, partyType_:int, partyLeaderId_:int, maxParticipants_:int, members_:list['PartyMemberInformations'], guests_:list['PartyGuestInformations'], restricted_:bool, partyName_:str, partyId_:int):
+        self.partyType = partyType_
+        self.partyLeaderId = partyLeaderId_
+        self.maxParticipants = maxParticipants_
+        self.members = members_
+        self.guests = guests_
+        self.restricted = restricted_
+        self.partyName = partyName_
         
-        super().__init__(partyId)
+        super().__init__(partyId_)
     
     

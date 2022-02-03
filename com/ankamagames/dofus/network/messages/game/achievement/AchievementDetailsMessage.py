@@ -9,8 +9,8 @@ class AchievementDetailsMessage(NetworkMessage):
     achievement:'Achievement'
     
 
-    def init(self, achievement:'Achievement'):
-        self.achievement = achievement
+    def init(self, achievement_:'Achievement'):
+        self.achievement = achievement_
         
         super().__init__()
     

@@ -9,12 +9,12 @@ class ArenaLeagueRanking(NetworkMessage):
     ladderPosition:int
     
 
-    def init(self, rank:int, leagueId:int, leaguePoints:int, totalLeaguePoints:int, ladderPosition:int):
-        self.rank = rank
-        self.leagueId = leagueId
-        self.leaguePoints = leaguePoints
-        self.totalLeaguePoints = totalLeaguePoints
-        self.ladderPosition = ladderPosition
+    def init(self, rank_:int, leagueId_:int, leaguePoints_:int, totalLeaguePoints_:int, ladderPosition_:int):
+        self.rank = rank_
+        self.leagueId = leagueId_
+        self.leaguePoints = leaguePoints_
+        self.totalLeaguePoints = totalLeaguePoints_
+        self.ladderPosition = ladderPosition_
         
         super().__init__()
     

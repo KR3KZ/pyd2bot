@@ -8,8 +8,8 @@ if TYPE_CHECKING:
 class ExchangeBidHouseInListUpdatedMessage(ExchangeBidHouseInListAddedMessage):
     
 
-    def init(self, itemUID:int, objectGID:int, objectType:int, effects:list['ObjectEffect'], prices:list[int]):
+    def init(self, itemUID_:int, objectGID_:int, objectType_:int, effects_:list['ObjectEffect'], prices_:list[int]):
         
-        super().__init__(itemUID, objectGID, objectType, effects, prices)
+        super().__init__(itemUID_, objectGID_, objectType_, effects_, prices_)
     
     

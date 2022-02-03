@@ -5,8 +5,8 @@ class MountHarnessColorsUpdateRequestMessage(NetworkMessage):
     useHarnessColors:bool
     
 
-    def init(self, useHarnessColors:bool):
-        self.useHarnessColors = useHarnessColors
+    def init(self, useHarnessColors_:bool):
+        self.useHarnessColors = useHarnessColors_
         
         super().__init__()
     

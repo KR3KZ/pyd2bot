@@ -9,8 +9,8 @@ class ExchangeShopStockMovementUpdatedMessage(NetworkMessage):
     objectInfo:'ObjectItemToSell'
     
 
-    def init(self, objectInfo:'ObjectItemToSell'):
-        self.objectInfo = objectInfo
+    def init(self, objectInfo_:'ObjectItemToSell'):
+        self.objectInfo = objectInfo_
         
         super().__init__()
     

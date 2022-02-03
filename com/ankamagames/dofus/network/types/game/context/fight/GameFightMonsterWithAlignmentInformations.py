@@ -13,9 +13,9 @@ class GameFightMonsterWithAlignmentInformations(GameFightMonsterInformations):
     alignmentInfos:'ActorAlignmentInformations'
     
 
-    def init(self, alignmentInfos:'ActorAlignmentInformations', creatureGenericId:int, creatureGrade:int, creatureLevel:int, spawnInfo:'GameContextBasicSpawnInformation', wave:int, stats:'GameFightCharacteristics', previousPositions:list[int], look:'EntityLook', contextualId:int, disposition:'EntityDispositionInformations'):
-        self.alignmentInfos = alignmentInfos
+    def init(self, alignmentInfos_:'ActorAlignmentInformations', creatureGenericId_:int, creatureGrade_:int, creatureLevel_:int, spawnInfo_:'GameContextBasicSpawnInformation', wave_:int, stats_:'GameFightCharacteristics', previousPositions_:list[int], look_:'EntityLook', contextualId_:int, disposition_:'EntityDispositionInformations'):
+        self.alignmentInfos = alignmentInfos_
         
-        super().__init__(creatureGenericId, creatureGrade, creatureLevel, spawnInfo, wave, stats, previousPositions, look, contextualId, disposition)
+        super().__init__(creatureGenericId_, creatureGrade_, creatureLevel_, spawnInfo_, wave_, stats_, previousPositions_, look_, contextualId_, disposition_)
     
     

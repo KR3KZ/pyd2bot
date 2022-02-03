@@ -11,9 +11,9 @@ class CharacterMinimalAllianceInformations(CharacterMinimalGuildInformations):
     alliance:'BasicAllianceInformations'
     
 
-    def init(self, alliance:'BasicAllianceInformations', guild:'BasicGuildInformations', entityLook:'EntityLook', breed:int, level:int, name:str, id:int):
-        self.alliance = alliance
+    def init(self, alliance_:'BasicAllianceInformations', guild_:'BasicGuildInformations', entityLook_:'EntityLook', breed_:int, level_:int, name_:str, id_:int):
+        self.alliance = alliance_
         
-        super().__init__(guild, entityLook, breed, level, name, id)
+        super().__init__(guild_, entityLook_, breed_, level_, name_, id_)
     
     

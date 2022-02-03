@@ -5,8 +5,8 @@ class AbstractPartyMessage(NetworkMessage):
     partyId:int
     
 
-    def init(self, partyId:int):
-        self.partyId = partyId
+    def init(self, partyId_:int):
+        self.partyId = partyId_
         
         super().__init__()
     

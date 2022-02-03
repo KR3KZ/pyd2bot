@@ -9,8 +9,8 @@ class GameFightPlacementSwapPositionsMessage(NetworkMessage):
     dispositions:list['IdentifiedEntityDispositionInformations']
     
 
-    def init(self, dispositions:list['IdentifiedEntityDispositionInformations']):
-        self.dispositions = dispositions
+    def init(self, dispositions_:list['IdentifiedEntityDispositionInformations']):
+        self.dispositions = dispositions_
         
         super().__init__()
     

@@ -9,8 +9,8 @@ class GameRolePlayShowMultipleActorsMessage(NetworkMessage):
     informationsList:list['GameRolePlayActorInformations']
     
 
-    def init(self, informationsList:list['GameRolePlayActorInformations']):
-        self.informationsList = informationsList
+    def init(self, informationsList_:list['GameRolePlayActorInformations']):
+        self.informationsList = informationsList_
         
         super().__init__()
     

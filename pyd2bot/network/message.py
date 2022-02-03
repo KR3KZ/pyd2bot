@@ -1,6 +1,6 @@
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.network.CustomDataWrapper import Buffer, ByteArray
-from com.ankamagames.jerakine.network.parser.NetworkMessageClassDefinition import NetMsgClassDef
+from com.ankamagames.jerakine.network.parser.NetworkMessageClassDefinition import NetworkMessageClassDefinition
 from com.ankamagames.jerakine.network.parser.ProtocolSpec import ProtocolSpec
 from . import msgReceiver
 logger = Logger(__name__)
@@ -57,8 +57,6 @@ class Message:
             data = ByteArray(buf.read(lenData))
         except IndexError:
             buf.position = 0
-            name = ProtocolSpec.getClassSpecById(id)["name"]
-            print(f"Received {100 * len(buf)/lenData:2f} of {name} from {src} to {dst}")
             return None
 
         if id == 2:
@@ -114,10 +112,10 @@ class Message:
     @staticmethod
     def from_json(json, count=None, random_hash=True):
         type_name: str = json["__type__"]
-        msg_type: dict = ProtocolSpec.getFieldTypeId(type_name)
+        msg_type: dict = ProtocolSpec.getClassSpecByName(type_name)
         type_id: int = msg_type["protocolId"]
         raw = ProtocolSpec.write(type_name, json, random_hash=random_hash)
         return Message(type_id, raw, count)
 
     def deserialize(self):
-        return NetMsgClassDef(self.name, self.raw).deserialize()
+        return NetworkMessageClassDefinition(self.name, self.raw).deserialize()

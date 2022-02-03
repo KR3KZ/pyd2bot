@@ -10,9 +10,9 @@ class UpdateMountCharacteristicsMessage(NetworkMessage):
     boostToUpdateList:list['UpdateMountCharacteristic']
     
 
-    def init(self, rideId:int, boostToUpdateList:list['UpdateMountCharacteristic']):
-        self.rideId = rideId
-        self.boostToUpdateList = boostToUpdateList
+    def init(self, rideId_:int, boostToUpdateList_:list['UpdateMountCharacteristic']):
+        self.rideId = rideId_
+        self.boostToUpdateList = boostToUpdateList_
         
         super().__init__()
     

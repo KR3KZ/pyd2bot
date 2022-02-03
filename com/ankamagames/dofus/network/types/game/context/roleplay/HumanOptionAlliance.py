@@ -10,9 +10,9 @@ class HumanOptionAlliance(HumanOption):
     aggressable:int
     
 
-    def init(self, allianceInformations:'AllianceInformations', aggressable:int):
-        self.allianceInformations = allianceInformations
-        self.aggressable = aggressable
+    def init(self, allianceInformations_:'AllianceInformations', aggressable_:int):
+        self.allianceInformations = allianceInformations_
+        self.aggressable = aggressable_
         
         super().__init__()
     

@@ -9,8 +9,8 @@ class GameFightSynchronizeMessage(NetworkMessage):
     fighters:list['GameFightFighterInformations']
     
 
-    def init(self, fighters:list['GameFightFighterInformations']):
-        self.fighters = fighters
+    def init(self, fighters_:list['GameFightFighterInformations']):
+        self.fighters = fighters_
         
         super().__init__()
     

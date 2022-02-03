@@ -5,8 +5,8 @@ class EnterHavenBagRequestMessage(NetworkMessage):
     havenBagOwner:int
     
 
-    def init(self, havenBagOwner:int):
-        self.havenBagOwner = havenBagOwner
+    def init(self, havenBagOwner_:int):
+        self.havenBagOwner = havenBagOwner_
         
         super().__init__()
     

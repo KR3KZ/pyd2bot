@@ -5,8 +5,8 @@ class StartupActionsAllAttributionMessage(NetworkMessage):
     characterId:int
     
 
-    def init(self, characterId:int):
-        self.characterId = characterId
+    def init(self, characterId_:int):
+        self.characterId = characterId_
         
         super().__init__()
     

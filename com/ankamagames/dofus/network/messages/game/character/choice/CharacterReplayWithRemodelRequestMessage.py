@@ -9,9 +9,9 @@ class CharacterReplayWithRemodelRequestMessage(CharacterReplayRequestMessage):
     remodel:'RemodelingInformation'
     
 
-    def init(self, remodel:'RemodelingInformation', characterId:int):
-        self.remodel = remodel
+    def init(self, remodel_:'RemodelingInformation', characterId_:int):
+        self.remodel = remodel_
         
-        super().__init__(characterId)
+        super().__init__(characterId_)
     
     

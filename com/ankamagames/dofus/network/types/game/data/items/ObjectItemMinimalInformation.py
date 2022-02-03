@@ -10,9 +10,9 @@ class ObjectItemMinimalInformation(Item):
     effects:list['ObjectEffect']
     
 
-    def init(self, objectGID:int, effects:list['ObjectEffect']):
-        self.objectGID = objectGID
-        self.effects = effects
+    def init(self, objectGID_:int, effects_:list['ObjectEffect']):
+        self.objectGID = objectGID_
+        self.effects = effects_
         
         super().__init__()
     

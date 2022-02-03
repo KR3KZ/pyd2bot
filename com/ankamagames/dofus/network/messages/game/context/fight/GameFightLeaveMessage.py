@@ -5,8 +5,8 @@ class GameFightLeaveMessage(NetworkMessage):
     charId:int
     
 
-    def init(self, charId:int):
-        self.charId = charId
+    def init(self, charId_:int):
+        self.charId = charId_
         
         super().__init__()
     

@@ -6,9 +6,9 @@ class SpellItem(Item):
     spellLevel:int
     
 
-    def init(self, spellId:int, spellLevel:int):
-        self.spellId = spellId
-        self.spellLevel = spellLevel
+    def init(self, spellId_:int, spellLevel_:int):
+        self.spellId = spellId_
+        self.spellLevel = spellLevel_
         
         super().__init__()
     

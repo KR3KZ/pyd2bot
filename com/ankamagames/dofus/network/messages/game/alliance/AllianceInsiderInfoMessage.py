@@ -13,10 +13,10 @@ class AllianceInsiderInfoMessage(NetworkMessage):
     prisms:list['PrismSubareaEmptyInfo']
     
 
-    def init(self, allianceInfos:'AllianceFactSheetInformations', guilds:list['GuildInsiderFactSheetInformations'], prisms:list['PrismSubareaEmptyInfo']):
-        self.allianceInfos = allianceInfos
-        self.guilds = guilds
-        self.prisms = prisms
+    def init(self, allianceInfos_:'AllianceFactSheetInformations', guilds_:list['GuildInsiderFactSheetInformations'], prisms_:list['PrismSubareaEmptyInfo']):
+        self.allianceInfos = allianceInfos_
+        self.guilds = guilds_
+        self.prisms = prisms_
         
         super().__init__()
     

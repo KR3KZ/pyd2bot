@@ -11,9 +11,9 @@ class JobCrafterDirectoryListEntry(NetworkMessage):
     jobInfo:'JobCrafterDirectoryEntryJobInfo'
     
 
-    def init(self, playerInfo:'JobCrafterDirectoryEntryPlayerInfo', jobInfo:'JobCrafterDirectoryEntryJobInfo'):
-        self.playerInfo = playerInfo
-        self.jobInfo = jobInfo
+    def init(self, playerInfo_:'JobCrafterDirectoryEntryPlayerInfo', jobInfo_:'JobCrafterDirectoryEntryJobInfo'):
+        self.playerInfo = playerInfo_
+        self.jobInfo = jobInfo_
         
         super().__init__()
     

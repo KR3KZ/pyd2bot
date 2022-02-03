@@ -5,9 +5,9 @@ class GameFightFighterMonsterLightInformations(GameFightFighterLightInformations
     creatureGenericId:int
     
 
-    def init(self, creatureGenericId:int, id:int, wave:int, level:int, breed:int):
-        self.creatureGenericId = creatureGenericId
+    def init(self, creatureGenericId_:int, id_:int, wave_:int, level_:int, breed_:int, sex_:bool, alive_:bool):
+        self.creatureGenericId = creatureGenericId_
         
-        super().__init__(id, wave, level, breed)
+        super().__init__(id_, wave_, level_, breed_, sex_, alive_)
     
     

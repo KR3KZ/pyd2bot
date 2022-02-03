@@ -10,9 +10,9 @@ class HouseGuildedInformations(HouseInstanceInformations):
     guildInfo:'GuildInformations'
     
 
-    def init(self, guildInfo:'GuildInformations', instanceId:int, ownerTag:'AccountTagInformation', price:int):
-        self.guildInfo = guildInfo
+    def init(self, guildInfo_:'GuildInformations', instanceId_:int, ownerTag_:'AccountTagInformation', price_:int, secondHand_:bool, isLocked_:bool, hasOwner_:bool, isSaleLocked_:bool):
+        self.guildInfo = guildInfo_
         
-        super().__init__(instanceId, ownerTag, price)
+        super().__init__(instanceId_, ownerTag_, price_, secondHand_, isLocked_, hasOwner_, isSaleLocked_)
     
     

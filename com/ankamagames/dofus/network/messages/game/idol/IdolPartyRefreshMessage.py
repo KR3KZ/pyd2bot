@@ -9,8 +9,8 @@ class IdolPartyRefreshMessage(NetworkMessage):
     partyIdol:'PartyIdol'
     
 
-    def init(self, partyIdol:'PartyIdol'):
-        self.partyIdol = partyIdol
+    def init(self, partyIdol_:'PartyIdol'):
+        self.partyIdol = partyIdol_
         
         super().__init__()
     

@@ -6,10 +6,10 @@ class ChatServerCopyMessage(ChatAbstractServerMessage):
     receiverName:str
     
 
-    def init(self, receiverId:int, receiverName:str, channel:int, content:str, timestamp:int, fingerprint:str):
-        self.receiverId = receiverId
-        self.receiverName = receiverName
+    def init(self, receiverId_:int, receiverName_:str, channel_:int, content_:str, timestamp_:int, fingerprint_:str):
+        self.receiverId = receiverId_
+        self.receiverName = receiverName_
         
-        super().__init__(channel, content, timestamp, fingerprint)
+        super().__init__(channel_, content_, timestamp_, fingerprint_)
     
     

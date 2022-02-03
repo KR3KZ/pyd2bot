@@ -6,9 +6,9 @@ class ExchangeStartOkRecycleTradeMessage(NetworkMessage):
     percentToPlayer:int
     
 
-    def init(self, percentToPrism:int, percentToPlayer:int):
-        self.percentToPrism = percentToPrism
-        self.percentToPlayer = percentToPlayer
+    def init(self, percentToPrism_:int, percentToPlayer_:int):
+        self.percentToPrism = percentToPrism_
+        self.percentToPlayer = percentToPlayer_
         
         super().__init__()
     

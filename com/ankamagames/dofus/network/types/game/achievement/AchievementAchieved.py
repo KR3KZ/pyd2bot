@@ -6,9 +6,9 @@ class AchievementAchieved(NetworkMessage):
     achievedBy:int
     
 
-    def init(self, id:int, achievedBy:int):
-        self.id = id
-        self.achievedBy = achievedBy
+    def init(self, id_:int, achievedBy_:int):
+        self.id = id_
+        self.achievedBy = achievedBy_
         
         super().__init__()
     

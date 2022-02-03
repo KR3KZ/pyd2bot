@@ -10,9 +10,9 @@ class BreachGameFightEndMessage(GameFightEndMessage):
     budget:int
     
 
-    def init(self, budget:int, duration:int, rewardRate:int, lootShareLimitMalus:int, results:list['FightResultListEntry'], namedPartyTeamsOutcomes:list['NamedPartyTeamWithOutcome']):
-        self.budget = budget
+    def init(self, budget_:int, duration_:int, rewardRate_:int, lootShareLimitMalus_:int, results_:list['FightResultListEntry'], namedPartyTeamsOutcomes_:list['NamedPartyTeamWithOutcome']):
+        self.budget = budget_
         
-        super().__init__(duration, rewardRate, lootShareLimitMalus, results, namedPartyTeamsOutcomes)
+        super().__init__(duration_, rewardRate_, lootShareLimitMalus_, results_, namedPartyTeamsOutcomes_)
     
     

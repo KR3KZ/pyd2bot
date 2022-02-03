@@ -7,10 +7,10 @@ class EntityInformation(NetworkMessage):
     status:bool
     
 
-    def init(self, id:int, experience:int, status:bool):
-        self.id = id
-        self.experience = experience
-        self.status = status
+    def init(self, id_:int, experience_:int, status_:bool):
+        self.id = id_
+        self.experience = experience_
+        self.status = status_
         
         super().__init__()
     

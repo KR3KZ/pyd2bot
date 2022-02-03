@@ -9,8 +9,8 @@ class AccountHouseMessage(NetworkMessage):
     houses:list['AccountHouseInformations']
     
 
-    def init(self, houses:list['AccountHouseInformations']):
-        self.houses = houses
+    def init(self, houses_:list['AccountHouseInformations']):
+        self.houses = houses_
         
         super().__init__()
     

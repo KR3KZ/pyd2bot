@@ -16,14 +16,14 @@ class BreachBranch(NetworkMessage):
     monsters:list['MonsterInGroupLightInformations']
     
 
-    def init(self, room:int, element:int, bosses:list['MonsterInGroupLightInformations'], map:int, score:int, relativeScore:int, monsters:list['MonsterInGroupLightInformations']):
-        self.room = room
-        self.element = element
-        self.bosses = bosses
-        self.map = map
-        self.score = score
-        self.relativeScore = relativeScore
-        self.monsters = monsters
+    def init(self, room_:int, element_:int, bosses_:list['MonsterInGroupLightInformations'], map_:int, score_:int, relativeScore_:int, monsters_:list['MonsterInGroupLightInformations']):
+        self.room = room_
+        self.element = element_
+        self.bosses = bosses_
+        self.map = map_
+        self.score = score_
+        self.relativeScore = relativeScore_
+        self.monsters = monsters_
         
         super().__init__()
     

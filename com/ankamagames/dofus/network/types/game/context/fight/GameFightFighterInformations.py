@@ -15,12 +15,12 @@ class GameFightFighterInformations(GameContextActorInformations):
     previousPositions:list[int]
     
 
-    def init(self, spawnInfo:'GameContextBasicSpawnInformation', wave:int, stats:'GameFightCharacteristics', previousPositions:list[int], look:'EntityLook', contextualId:int, disposition:'EntityDispositionInformations'):
-        self.spawnInfo = spawnInfo
-        self.wave = wave
-        self.stats = stats
-        self.previousPositions = previousPositions
+    def init(self, spawnInfo_:'GameContextBasicSpawnInformation', wave_:int, stats_:'GameFightCharacteristics', previousPositions_:list[int], look_:'EntityLook', contextualId_:int, disposition_:'EntityDispositionInformations'):
+        self.spawnInfo = spawnInfo_
+        self.wave = wave_
+        self.stats = stats_
+        self.previousPositions = previousPositions_
         
-        super().__init__(look, contextualId, disposition)
+        super().__init__(look_, contextualId_, disposition_)
     
     

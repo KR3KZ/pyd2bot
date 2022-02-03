@@ -6,9 +6,9 @@ class BasicStatMessage(NetworkMessage):
     statId:int
     
 
-    def init(self, timeSpent:int, statId:int):
-        self.timeSpent = timeSpent
-        self.statId = statId
+    def init(self, timeSpent_:int, statId_:int):
+        self.timeSpent = timeSpent_
+        self.statId = statId_
         
         super().__init__()
     

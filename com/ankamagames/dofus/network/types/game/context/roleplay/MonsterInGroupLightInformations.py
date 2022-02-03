@@ -7,10 +7,10 @@ class MonsterInGroupLightInformations(NetworkMessage):
     level:int
     
 
-    def init(self, genericId:int, grade:int, level:int):
-        self.genericId = genericId
-        self.grade = grade
-        self.level = level
+    def init(self, genericId_:int, grade_:int, level_:int):
+        self.genericId = genericId_
+        self.grade = grade_
+        self.level = level_
         
         super().__init__()
     

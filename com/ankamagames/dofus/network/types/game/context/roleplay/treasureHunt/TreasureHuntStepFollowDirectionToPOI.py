@@ -6,9 +6,9 @@ class TreasureHuntStepFollowDirectionToPOI(TreasureHuntStep):
     poiLabelId:int
     
 
-    def init(self, direction:int, poiLabelId:int):
-        self.direction = direction
-        self.poiLabelId = poiLabelId
+    def init(self, direction_:int, poiLabelId_:int):
+        self.direction = direction_
+        self.poiLabelId = poiLabelId_
         
         super().__init__()
     

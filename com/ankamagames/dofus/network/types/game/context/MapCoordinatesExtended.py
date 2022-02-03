@@ -5,9 +5,9 @@ class MapCoordinatesExtended(MapCoordinatesAndId):
     subAreaId:int
     
 
-    def init(self, subAreaId:int, mapId:int, worldX:int, worldY:int):
-        self.subAreaId = subAreaId
+    def init(self, subAreaId_:int, mapId_:int, worldX_:int, worldY_:int):
+        self.subAreaId = subAreaId_
         
-        super().__init__(mapId, worldX, worldY)
+        super().__init__(mapId_, worldX_, worldY_)
     
     

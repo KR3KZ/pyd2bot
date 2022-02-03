@@ -5,8 +5,8 @@ class OnConnectionEventMessage(NetworkMessage):
     eventType:int
     
 
-    def init(self, eventType:int):
-        self.eventType = eventType
+    def init(self, eventType_:int):
+        self.eventType = eventType_
         
         super().__init__()
     

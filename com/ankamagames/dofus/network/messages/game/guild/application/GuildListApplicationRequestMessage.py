@@ -4,8 +4,8 @@ from com.ankamagames.dofus.network.messages.game.PaginationRequestAbstractMessag
 class GuildListApplicationRequestMessage(PaginationRequestAbstractMessage):
     
 
-    def init(self, offset:int, count:int):
+    def init(self, offset_:int, count_:int):
         
-        super().__init__(offset, count)
+        super().__init__(offset_, count_)
     
     

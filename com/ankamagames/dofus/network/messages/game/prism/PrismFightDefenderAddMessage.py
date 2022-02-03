@@ -11,10 +11,10 @@ class PrismFightDefenderAddMessage(NetworkMessage):
     defender:'CharacterMinimalPlusLookInformations'
     
 
-    def init(self, subAreaId:int, fightId:int, defender:'CharacterMinimalPlusLookInformations'):
-        self.subAreaId = subAreaId
-        self.fightId = fightId
-        self.defender = defender
+    def init(self, subAreaId_:int, fightId_:int, defender_:'CharacterMinimalPlusLookInformations'):
+        self.subAreaId = subAreaId_
+        self.fightId = fightId_
+        self.defender = defender_
         
         super().__init__()
     

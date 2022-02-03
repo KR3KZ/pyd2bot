@@ -5,8 +5,8 @@ class GameFightTurnFinishMessage(NetworkMessage):
     isAfk:bool
     
 
-    def init(self, isAfk:bool):
-        self.isAfk = isAfk
+    def init(self, isAfk_:bool):
+        self.isAfk = isAfk_
         
         super().__init__()
     

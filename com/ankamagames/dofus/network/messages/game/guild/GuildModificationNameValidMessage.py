@@ -5,8 +5,8 @@ class GuildModificationNameValidMessage(NetworkMessage):
     guildName:str
     
 
-    def init(self, guildName:str):
-        self.guildName = guildName
+    def init(self, guildName_:str):
+        self.guildName = guildName_
         
         super().__init__()
     

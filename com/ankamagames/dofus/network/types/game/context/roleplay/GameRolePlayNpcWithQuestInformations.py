@@ -11,9 +11,9 @@ class GameRolePlayNpcWithQuestInformations(GameRolePlayNpcInformations):
     questFlag:'GameRolePlayNpcQuestFlag'
     
 
-    def init(self, questFlag:'GameRolePlayNpcQuestFlag', npcId:int, sex:bool, specialArtworkId:int, look:'EntityLook', contextualId:int, disposition:'EntityDispositionInformations'):
-        self.questFlag = questFlag
+    def init(self, questFlag_:'GameRolePlayNpcQuestFlag', npcId_:int, sex_:bool, specialArtworkId_:int, look_:'EntityLook', contextualId_:int, disposition_:'EntityDispositionInformations'):
+        self.questFlag = questFlag_
         
-        super().__init__(npcId, sex, specialArtworkId, look, contextualId, disposition)
+        super().__init__(npcId_, sex_, specialArtworkId_, look_, contextualId_, disposition_)
     
     

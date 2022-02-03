@@ -6,9 +6,9 @@ class PaddockInformations(NetworkMessage):
     maxItems:int
     
 
-    def init(self, maxOutdoorMount:int, maxItems:int):
-        self.maxOutdoorMount = maxOutdoorMount
-        self.maxItems = maxItems
+    def init(self, maxOutdoorMount_:int, maxItems_:int):
+        self.maxOutdoorMount = maxOutdoorMount_
+        self.maxItems = maxItems_
         
         super().__init__()
     

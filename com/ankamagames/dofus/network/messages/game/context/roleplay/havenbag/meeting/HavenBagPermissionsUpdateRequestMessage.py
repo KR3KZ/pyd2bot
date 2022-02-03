@@ -5,8 +5,8 @@ class HavenBagPermissionsUpdateRequestMessage(NetworkMessage):
     permissions:int
     
 
-    def init(self, permissions:int):
-        self.permissions = permissions
+    def init(self, permissions_:int):
+        self.permissions = permissions_
         
         super().__init__()
     

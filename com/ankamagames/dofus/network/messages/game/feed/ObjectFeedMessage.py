@@ -10,9 +10,9 @@ class ObjectFeedMessage(NetworkMessage):
     meal:list['ObjectItemQuantity']
     
 
-    def init(self, objectUID:int, meal:list['ObjectItemQuantity']):
-        self.objectUID = objectUID
-        self.meal = meal
+    def init(self, objectUID_:int, meal_:list['ObjectItemQuantity']):
+        self.objectUID = objectUID_
+        self.meal = meal_
         
         super().__init__()
     

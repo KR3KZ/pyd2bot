@@ -9,9 +9,9 @@ class FightTeamInformations(AbstractFightTeamInformations):
     teamMembers:list['FightTeamMemberInformations']
     
 
-    def init(self, teamMembers:list['FightTeamMemberInformations'], teamId:int, leaderId:int, teamSide:int, teamTypeId:int, nbWaves:int):
-        self.teamMembers = teamMembers
+    def init(self, teamMembers_:list['FightTeamMemberInformations'], teamId_:int, leaderId_:int, teamSide_:int, teamTypeId_:int, nbWaves_:int):
+        self.teamMembers = teamMembers_
         
-        super().__init__(teamId, leaderId, teamSide, teamTypeId, nbWaves)
+        super().__init__(teamId_, leaderId_, teamSide_, teamTypeId_, nbWaves_)
     
     

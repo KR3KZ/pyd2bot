@@ -8,12 +8,12 @@ class GameActionFightLifePointsLostMessage(AbstractGameActionMessage):
     elementId:int
     
 
-    def init(self, targetId:int, loss:int, permanentDamages:int, elementId:int, actionId:int, sourceId:int):
-        self.targetId = targetId
-        self.loss = loss
-        self.permanentDamages = permanentDamages
-        self.elementId = elementId
+    def init(self, targetId_:int, loss_:int, permanentDamages_:int, elementId_:int, actionId_:int, sourceId_:int):
+        self.targetId = targetId_
+        self.loss = loss_
+        self.permanentDamages = permanentDamages_
+        self.elementId = elementId_
         
-        super().__init__(actionId, sourceId)
+        super().__init__(actionId_, sourceId_)
     
     

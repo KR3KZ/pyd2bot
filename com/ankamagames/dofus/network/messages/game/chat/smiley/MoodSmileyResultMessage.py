@@ -6,9 +6,9 @@ class MoodSmileyResultMessage(NetworkMessage):
     smileyId:int
     
 
-    def init(self, resultCode:int, smileyId:int):
-        self.resultCode = resultCode
-        self.smileyId = smileyId
+    def init(self, resultCode_:int, smileyId_:int):
+        self.resultCode = resultCode_
+        self.smileyId = smileyId_
         
         super().__init__()
     

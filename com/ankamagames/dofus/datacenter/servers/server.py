@@ -1,7 +1,10 @@
+from com.ankamagames.dofus.datacenter.servers.ServerCommunity import ServerCommunity
+from com.ankamagames.dofus.datacenter.servers.ServerGameType import ServerGameType
+from com.ankamagames.dofus.datacenter.servers.ServerPopulation import ServerPopulation
 from com.ankamagames.jerakine.logger.Logger import Logger
-from com.ankamagames.jerakine.data import I18n
+from com.ankamagames.jerakine.data.I18n import I18n
 from com.ankamagames.dofus.types.IdAccessors import IdAccessors
-from com.ankamagames.jerakine.data import GameData
+from com.ankamagames.jerakine.data.GameData import GameData
 from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
 
 logger = Logger(__name__)
@@ -10,8 +13,6 @@ class Server(IDataCenter):
    
    
    MODULE:str = "Servers"
-   
-   idAccessors:IdAccessors = IdAccessors(getServerById,getServers)
    
    id:int
    
@@ -53,6 +54,8 @@ class Server(IDataCenter):
    @staticmethod
    def getServers(self) -> list:
       return GameData.getobjects(Server.MODULE)
+   
+   idAccessors:IdAccessors = IdAccessors(getServerById,getServers)
    
    @property
    def name(self) -> str:

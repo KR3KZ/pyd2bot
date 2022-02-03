@@ -9,8 +9,8 @@ class AbstractTaxCollectorListMessage(NetworkMessage):
     informations:list['TaxCollectorInformations']
     
 
-    def init(self, informations:list['TaxCollectorInformations']):
-        self.informations = informations
+    def init(self, informations_:list['TaxCollectorInformations']):
+        self.informations = informations_
         
         super().__init__()
     

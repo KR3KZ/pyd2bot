@@ -5,8 +5,8 @@ class MapRunningFightDetailsRequestMessage(NetworkMessage):
     fightId:int
     
 
-    def init(self, fightId:int):
-        self.fightId = fightId
+    def init(self, fightId_:int):
+        self.fightId = fightId_
         
         super().__init__()
     

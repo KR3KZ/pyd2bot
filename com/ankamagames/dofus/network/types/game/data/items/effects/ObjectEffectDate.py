@@ -9,13 +9,13 @@ class ObjectEffectDate(ObjectEffect):
     minute:int
     
 
-    def init(self, year:int, month:int, day:int, hour:int, minute:int, actionId:int):
-        self.year = year
-        self.month = month
-        self.day = day
-        self.hour = hour
-        self.minute = minute
+    def init(self, year_:int, month_:int, day_:int, hour_:int, minute_:int, actionId_:int):
+        self.year = year_
+        self.month = month_
+        self.day = day_
+        self.hour = hour_
+        self.minute = minute_
         
-        super().__init__(actionId)
+        super().__init__(actionId_)
     
     

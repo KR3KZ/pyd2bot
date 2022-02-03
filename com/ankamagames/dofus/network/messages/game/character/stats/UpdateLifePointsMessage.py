@@ -6,9 +6,9 @@ class UpdateLifePointsMessage(NetworkMessage):
     maxLifePoints:int
     
 
-    def init(self, lifePoints:int, maxLifePoints:int):
-        self.lifePoints = lifePoints
-        self.maxLifePoints = maxLifePoints
+    def init(self, lifePoints_:int, maxLifePoints_:int):
+        self.lifePoints = lifePoints_
+        self.maxLifePoints = maxLifePoints_
         
         super().__init__()
     

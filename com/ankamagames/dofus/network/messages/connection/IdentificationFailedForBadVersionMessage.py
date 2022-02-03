@@ -9,9 +9,9 @@ class IdentificationFailedForBadVersionMessage(IdentificationFailedMessage):
     requiredVersion:'Version'
     
 
-    def init(self, requiredVersion:'Version', reason:int):
-        self.requiredVersion = requiredVersion
+    def init(self, requiredVersion_:'Version', reason_:int):
+        self.requiredVersion = requiredVersion_
         
-        super().__init__(reason)
+        super().__init__(reason_)
     
     

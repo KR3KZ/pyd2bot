@@ -5,9 +5,9 @@ class ObjectUseOnCharacterMessage(ObjectUseMessage):
     characterId:int
     
 
-    def init(self, characterId:int, objectUID:int):
-        self.characterId = characterId
+    def init(self, characterId_:int, objectUID_:int):
+        self.characterId = characterId_
         
-        super().__init__(objectUID)
+        super().__init__(objectUID_)
     
     

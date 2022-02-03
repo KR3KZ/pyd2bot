@@ -10,9 +10,9 @@ class ShortcutBarReplacedMessage(NetworkMessage):
     shortcut:'Shortcut'
     
 
-    def init(self, barType:int, shortcut:'Shortcut'):
-        self.barType = barType
-        self.shortcut = shortcut
+    def init(self, barType_:int, shortcut_:'Shortcut'):
+        self.barType = barType_
+        self.shortcut = shortcut_
         
         super().__init__()
     

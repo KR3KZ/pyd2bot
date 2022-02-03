@@ -8,11 +8,11 @@ class HumanOptionOrnament(HumanOption):
     ladderPosition:int
     
 
-    def init(self, ornamentId:int, level:int, leagueId:int, ladderPosition:int):
-        self.ornamentId = ornamentId
-        self.level = level
-        self.leagueId = leagueId
-        self.ladderPosition = ladderPosition
+    def init(self, ornamentId_:int, level_:int, leagueId_:int, ladderPosition_:int):
+        self.ornamentId = ornamentId_
+        self.level = level_
+        self.leagueId = leagueId_
+        self.ladderPosition = ladderPosition_
         
         super().__init__()
     

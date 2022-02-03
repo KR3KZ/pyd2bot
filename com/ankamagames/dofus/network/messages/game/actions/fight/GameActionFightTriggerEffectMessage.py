@@ -4,8 +4,8 @@ from com.ankamagames.dofus.network.messages.game.actions.fight.GameActionFightDi
 class GameActionFightTriggerEffectMessage(GameActionFightDispellEffectMessage):
     
 
-    def init(self, boostUID:int, targetId:int, verboseCast:bool, actionId:int, sourceId:int):
+    def init(self, boostUID_:int, targetId_:int, verboseCast_:bool, actionId_:int, sourceId_:int):
         
-        super().__init__(boostUID, targetId, verboseCast, actionId, sourceId)
+        super().__init__(boostUID_, targetId_, verboseCast_, actionId_, sourceId_)
     
     

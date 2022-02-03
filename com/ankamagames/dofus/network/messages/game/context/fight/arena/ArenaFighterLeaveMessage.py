@@ -9,8 +9,8 @@ class ArenaFighterLeaveMessage(NetworkMessage):
     leaver:'CharacterBasicMinimalInformations'
     
 
-    def init(self, leaver:'CharacterBasicMinimalInformations'):
-        self.leaver = leaver
+    def init(self, leaver_:'CharacterBasicMinimalInformations'):
+        self.leaver = leaver_
         
         super().__init__()
     

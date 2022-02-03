@@ -5,8 +5,8 @@ class StorageKamasUpdateMessage(NetworkMessage):
     kamasTotal:int
     
 
-    def init(self, kamasTotal:int):
-        self.kamasTotal = kamasTotal
+    def init(self, kamasTotal_:int):
+        self.kamasTotal = kamasTotal_
         
         super().__init__()
     

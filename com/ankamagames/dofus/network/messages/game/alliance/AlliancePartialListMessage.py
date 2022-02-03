@@ -8,8 +8,8 @@ if TYPE_CHECKING:
 class AlliancePartialListMessage(AllianceListMessage):
     
 
-    def init(self, alliances:list['AllianceFactSheetInformations']):
+    def init(self, alliances_:list['AllianceFactSheetInformations']):
         
-        super().__init__(alliances)
+        super().__init__(alliances_)
     
     

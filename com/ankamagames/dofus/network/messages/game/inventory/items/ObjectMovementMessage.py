@@ -6,9 +6,9 @@ class ObjectMovementMessage(NetworkMessage):
     position:int
     
 
-    def init(self, objectUID:int, position:int):
-        self.objectUID = objectUID
-        self.position = position
+    def init(self, objectUID_:int, position_:int):
+        self.objectUID = objectUID_
+        self.position = position_
         
         super().__init__()
     

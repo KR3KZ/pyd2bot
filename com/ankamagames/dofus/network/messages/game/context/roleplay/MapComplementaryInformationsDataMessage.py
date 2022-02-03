@@ -24,17 +24,17 @@ class MapComplementaryInformationsDataMessage(NetworkMessage):
     fightStartPositions:'FightStartingPositions'
     
 
-    def init(self, subAreaId:int, mapId:int, houses:list['HouseInformations'], actors:list['GameRolePlayActorInformations'], interactiveElements:list['InteractiveElement'], statedElements:list['StatedElement'], obstacles:list['MapObstacle'], fights:list['FightCommonInformations'], hasAggressiveMonsters:bool, fightStartPositions:'FightStartingPositions'):
-        self.subAreaId = subAreaId
-        self.mapId = mapId
-        self.houses = houses
-        self.actors = actors
-        self.interactiveElements = interactiveElements
-        self.statedElements = statedElements
-        self.obstacles = obstacles
-        self.fights = fights
-        self.hasAggressiveMonsters = hasAggressiveMonsters
-        self.fightStartPositions = fightStartPositions
+    def init(self, subAreaId_:int, mapId_:int, houses_:list['HouseInformations'], actors_:list['GameRolePlayActorInformations'], interactiveElements_:list['InteractiveElement'], statedElements_:list['StatedElement'], obstacles_:list['MapObstacle'], fights_:list['FightCommonInformations'], hasAggressiveMonsters_:bool, fightStartPositions_:'FightStartingPositions'):
+        self.subAreaId = subAreaId_
+        self.mapId = mapId_
+        self.houses = houses_
+        self.actors = actors_
+        self.interactiveElements = interactiveElements_
+        self.statedElements = statedElements_
+        self.obstacles = obstacles_
+        self.fights = fights_
+        self.hasAggressiveMonsters = hasAggressiveMonsters_
+        self.fightStartPositions = fightStartPositions_
         
         super().__init__()
     

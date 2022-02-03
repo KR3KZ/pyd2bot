@@ -8,6 +8,7 @@ from wdom.document import get_document, set_app
 from wdom.server import start_server, start
 from wdom.themes import bootstrap3
 from wdom.themes.bootstrap3 import *
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from pyd2bot.network.message import Message
 from pyd2bot.network.sniffer import DofusSniffer
 logger = logging.getLogger("labot")
@@ -87,27 +88,27 @@ class MsgTable(Table):
 class MsgView(Tr):
     
     def __init__(self, msg: Message, *args, **kwargs):
-        logger.debug("Initializing UI Msg: {}".format(msg.name))
-        self.msg = msg
-        if msg.count is not None:
+        if msg.from_client is not None:
             super().__init__(class_="success", *args, **kwargs)
         else:
             super().__init__(class_="info", *args, **kwargs)
+        msg = msg.deserialize()
+        logger.debug("Initializing UI Msg: {}".format(msg.__class__.__name__))
+        self.msg = msg
         self.addEventListener("click", self.switch_view)
-
         self.contents = Td("", style="white-space: pre;")
         self.append(
-            Td(str(msg.count)),
-            Td(msg.name),
-            Td(str(msg.id)),
-            Td(str(len(msg.raw))),
+            Td(str(msg._instance_id)),
+            Td(msg.__class__.__name__),
+            Td(str(msg.getMessageId())),
+            Td(str("")),
             self.contents,
         )
 
     def switch_view(self, event):
         logger.debug("Changing view for message.")
         if not self.contents.textContent:
-            self.contents.textContent = pformat(self.msg.json())
+            self.contents.textContent = pformat(self.msg.to_json())
         else:
             self.contents.textContent = ""
 

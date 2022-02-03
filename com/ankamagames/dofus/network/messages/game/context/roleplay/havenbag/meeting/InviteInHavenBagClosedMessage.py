@@ -9,8 +9,8 @@ class InviteInHavenBagClosedMessage(NetworkMessage):
     hostInformations:'CharacterMinimalInformations'
     
 
-    def init(self, hostInformations:'CharacterMinimalInformations'):
-        self.hostInformations = hostInformations
+    def init(self, hostInformations_:'CharacterMinimalInformations'):
+        self.hostInformations = hostInformations_
         
         super().__init__()
     

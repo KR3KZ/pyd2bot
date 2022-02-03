@@ -9,12 +9,12 @@ class RemodelingInformation(NetworkMessage):
     colors:list[int]
     
 
-    def init(self, name:str, breed:int, sex:bool, cosmeticId:int, colors:list[int]):
-        self.name = name
-        self.breed = breed
-        self.sex = sex
-        self.cosmeticId = cosmeticId
-        self.colors = colors
+    def init(self, name_:str, breed_:int, sex_:bool, cosmeticId_:int, colors_:list[int]):
+        self.name = name_
+        self.breed = breed_
+        self.sex = sex_
+        self.cosmeticId = cosmeticId_
+        self.colors = colors_
         
         super().__init__()
     

@@ -6,9 +6,9 @@ class PrismFightSwapRequestMessage(NetworkMessage):
     targetId:int
     
 
-    def init(self, subAreaId:int, targetId:int):
-        self.subAreaId = subAreaId
-        self.targetId = targetId
+    def init(self, subAreaId_:int, targetId_:int):
+        self.subAreaId = subAreaId_
+        self.targetId = targetId_
         
         super().__init__()
     

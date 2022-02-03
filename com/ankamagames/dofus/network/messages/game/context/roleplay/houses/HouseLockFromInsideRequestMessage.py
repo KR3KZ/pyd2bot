@@ -4,8 +4,8 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.lockable.Locka
 class HouseLockFromInsideRequestMessage(LockableChangeCodeMessage):
     
 
-    def init(self, code:str):
+    def init(self, code_:str):
         
-        super().__init__(code)
+        super().__init__(code_)
     
     

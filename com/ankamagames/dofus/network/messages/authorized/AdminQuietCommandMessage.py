@@ -4,8 +4,8 @@ from com.ankamagames.dofus.network.messages.authorized.AdminCommandMessage impor
 class AdminQuietCommandMessage(AdminCommandMessage):
     
 
-    def init(self, content:str):
+    def init(self, content_:str):
         
-        super().__init__(content)
+        super().__init__(content_)
     
     

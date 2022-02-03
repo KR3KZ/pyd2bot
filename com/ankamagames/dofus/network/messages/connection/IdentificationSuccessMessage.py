@@ -18,18 +18,24 @@ class IdentificationSuccessMessage(NetworkMessage):
     hasRights:bool
     hasConsoleRight:bool
     wasAlreadyConnected:bool
+    hasRights:bool
+    hasConsoleRight:bool
+    wasAlreadyConnected:bool
     
 
-    def init(self, login:str, accountTag:'AccountTagInformation', accountId:int, communityId:int, secretQuestion:str, accountCreation:int, subscriptionElapsedDuration:int, subscriptionEndDate:int, havenbagAvailableRoom:int):
-        self.login = login
-        self.accountTag = accountTag
-        self.accountId = accountId
-        self.communityId = communityId
-        self.secretQuestion = secretQuestion
-        self.accountCreation = accountCreation
-        self.subscriptionElapsedDuration = subscriptionElapsedDuration
-        self.subscriptionEndDate = subscriptionEndDate
-        self.havenbagAvailableRoom = havenbagAvailableRoom
+    def init(self, login_:str, accountTag_:'AccountTagInformation', accountId_:int, communityId_:int, secretQuestion_:str, accountCreation_:int, subscriptionElapsedDuration_:int, subscriptionEndDate_:int, havenbagAvailableRoom_:int, hasRights_:bool, hasConsoleRight_:bool, wasAlreadyConnected_:bool):
+        self.login = login_
+        self.accountTag = accountTag_
+        self.accountId = accountId_
+        self.communityId = communityId_
+        self.secretQuestion = secretQuestion_
+        self.accountCreation = accountCreation_
+        self.subscriptionElapsedDuration = subscriptionElapsedDuration_
+        self.subscriptionEndDate = subscriptionEndDate_
+        self.havenbagAvailableRoom = havenbagAvailableRoom_
+        self.hasRights = hasRights_
+        self.hasConsoleRight = hasConsoleRight_
+        self.wasAlreadyConnected = wasAlreadyConnected_
         
         super().__init__()
     

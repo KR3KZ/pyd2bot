@@ -5,9 +5,9 @@ class IdentifiedEntityDispositionInformations(EntityDispositionInformations):
     id:int
     
 
-    def init(self, id:int, cellId:int, direction:int):
-        self.id = id
+    def init(self, id_:int, cellId_:int, direction_:int):
+        self.id = id_
         
-        super().__init__(cellId, direction)
+        super().__init__(cellId_, direction_)
     
     

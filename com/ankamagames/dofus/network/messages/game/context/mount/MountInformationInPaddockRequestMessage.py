@@ -5,8 +5,8 @@ class MountInformationInPaddockRequestMessage(NetworkMessage):
     mapRideId:int
     
 
-    def init(self, mapRideId:int):
-        self.mapRideId = mapRideId
+    def init(self, mapRideId_:int):
+        self.mapRideId = mapRideId_
         
         super().__init__()
     

@@ -5,9 +5,9 @@ class PartyKickedByMessage(AbstractPartyMessage):
     kickerId:int
     
 
-    def init(self, kickerId:int, partyId:int):
-        self.kickerId = kickerId
+    def init(self, kickerId_:int, partyId_:int):
+        self.kickerId = kickerId_
         
-        super().__init__(partyId)
+        super().__init__(partyId_)
     
     

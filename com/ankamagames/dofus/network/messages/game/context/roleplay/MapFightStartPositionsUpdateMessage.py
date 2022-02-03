@@ -10,9 +10,9 @@ class MapFightStartPositionsUpdateMessage(NetworkMessage):
     fightStartPositions:'FightStartingPositions'
     
 
-    def init(self, mapId:int, fightStartPositions:'FightStartingPositions'):
-        self.mapId = mapId
-        self.fightStartPositions = fightStartPositions
+    def init(self, mapId_:int, fightStartPositions_:'FightStartingPositions'):
+        self.mapId = mapId_
+        self.fightStartPositions = fightStartPositions_
         
         super().__init__()
     

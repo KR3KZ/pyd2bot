@@ -5,8 +5,8 @@ class PrismFightStateUpdateMessage(NetworkMessage):
     state:int
     
 
-    def init(self, state:int):
-        self.state = state
+    def init(self, state_:int):
+        self.state = state_
         
         super().__init__()
     

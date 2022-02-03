@@ -6,9 +6,9 @@ class CheckFileRequestMessage(NetworkMessage):
     type:int
     
 
-    def init(self, filename:str, type:int):
-        self.filename = filename
-        self.type = type
+    def init(self, filename_:str, type_:int):
+        self.filename = filename_
+        self.type = type_
         
         super().__init__()
     

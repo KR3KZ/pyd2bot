@@ -9,9 +9,9 @@ class BasicStatWithDataMessage(BasicStatMessage):
     datas:list['StatisticData']
     
 
-    def init(self, datas:list['StatisticData'], timeSpent:int, statId:int):
-        self.datas = datas
+    def init(self, datas_:list['StatisticData'], timeSpent_:int, statId_:int):
+        self.datas = datas_
         
-        super().__init__(timeSpent, statId)
+        super().__init__(timeSpent_, statId_)
     
     

@@ -11,12 +11,16 @@ class FriendSpouseOnlineInformations(FriendSpouseInformations):
     subAreaId:int
     inFight:bool
     followSpouse:bool
+    inFight:bool
+    followSpouse:bool
     
 
-    def init(self, mapId:int, subAreaId:int, spouseAccountId:int, spouseId:int, spouseName:str, spouseLevel:int, breed:int, sex:int, spouseEntityLook:'EntityLook', guildInfo:'GuildInformations', alignmentSide:int):
-        self.mapId = mapId
-        self.subAreaId = subAreaId
+    def init(self, mapId_:int, subAreaId_:int, inFight_:bool, followSpouse_:bool, spouseAccountId_:int, spouseId_:int, spouseName_:str, spouseLevel_:int, breed_:int, sex_:int, spouseEntityLook_:'EntityLook', guildInfo_:'GuildInformations', alignmentSide_:int):
+        self.mapId = mapId_
+        self.subAreaId = subAreaId_
+        self.inFight = inFight_
+        self.followSpouse = followSpouse_
         
-        super().__init__(spouseAccountId, spouseId, spouseName, spouseLevel, breed, sex, spouseEntityLook, guildInfo, alignmentSide)
+        super().__init__(spouseAccountId_, spouseId_, spouseName_, spouseLevel_, breed_, sex_, spouseEntityLook_, guildInfo_, alignmentSide_)
     
     

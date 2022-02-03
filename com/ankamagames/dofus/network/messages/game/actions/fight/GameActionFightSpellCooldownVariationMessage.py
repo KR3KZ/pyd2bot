@@ -7,11 +7,11 @@ class GameActionFightSpellCooldownVariationMessage(AbstractGameActionMessage):
     value:int
     
 
-    def init(self, targetId:int, spellId:int, value:int, actionId:int, sourceId:int):
-        self.targetId = targetId
-        self.spellId = spellId
-        self.value = value
+    def init(self, targetId_:int, spellId_:int, value_:int, actionId_:int, sourceId_:int):
+        self.targetId = targetId_
+        self.spellId = spellId_
+        self.value = value_
         
-        super().__init__(actionId, sourceId)
+        super().__init__(actionId_, sourceId_)
     
     

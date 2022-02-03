@@ -17,17 +17,17 @@ class TaxCollectorDialogQuestionExtendedMessage(TaxCollectorDialogQuestionBasicM
     itemsValue:int
     
 
-    def init(self, maxPods:int, prospecting:int, wisdom:int, taxCollectorsCount:int, taxCollectorAttack:int, kamas:int, experience:int, pods:int, itemsValue:int, guildInfo:'BasicGuildInformations'):
-        self.maxPods = maxPods
-        self.prospecting = prospecting
-        self.wisdom = wisdom
-        self.taxCollectorsCount = taxCollectorsCount
-        self.taxCollectorAttack = taxCollectorAttack
-        self.kamas = kamas
-        self.experience = experience
-        self.pods = pods
-        self.itemsValue = itemsValue
+    def init(self, maxPods_:int, prospecting_:int, wisdom_:int, taxCollectorsCount_:int, taxCollectorAttack_:int, kamas_:int, experience_:int, pods_:int, itemsValue_:int, guildInfo_:'BasicGuildInformations'):
+        self.maxPods = maxPods_
+        self.prospecting = prospecting_
+        self.wisdom = wisdom_
+        self.taxCollectorsCount = taxCollectorsCount_
+        self.taxCollectorAttack = taxCollectorAttack_
+        self.kamas = kamas_
+        self.experience = experience_
+        self.pods = pods_
+        self.itemsValue = itemsValue_
         
-        super().__init__(guildInfo)
+        super().__init__(guildInfo_)
     
     

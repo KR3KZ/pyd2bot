@@ -8,8 +8,8 @@ if TYPE_CHECKING:
 class ExchangeMountsStableBornAddMessage(ExchangeMountsStableAddMessage):
     
 
-    def init(self, mountDescription:list['MountClientData']):
+    def init(self, mountDescription_:list['MountClientData']):
         
-        super().__init__(mountDescription)
+        super().__init__(mountDescription_)
     
     

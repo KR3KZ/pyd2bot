@@ -19,12 +19,12 @@ class MapComplementaryInformationsBreachMessage(MapComplementaryInformationsData
     branches:list['BreachBranch']
     
 
-    def init(self, floor:int, room:int, infinityMode:int, branches:list['BreachBranch'], subAreaId:int, mapId:int, houses:list['HouseInformations'], actors:list['GameRolePlayActorInformations'], interactiveElements:list['InteractiveElement'], statedElements:list['StatedElement'], obstacles:list['MapObstacle'], fights:list['FightCommonInformations'], hasAggressiveMonsters:bool, fightStartPositions:'FightStartingPositions'):
-        self.floor = floor
-        self.room = room
-        self.infinityMode = infinityMode
-        self.branches = branches
+    def init(self, floor_:int, room_:int, infinityMode_:int, branches_:list['BreachBranch'], subAreaId_:int, mapId_:int, houses_:list['HouseInformations'], actors_:list['GameRolePlayActorInformations'], interactiveElements_:list['InteractiveElement'], statedElements_:list['StatedElement'], obstacles_:list['MapObstacle'], fights_:list['FightCommonInformations'], hasAggressiveMonsters_:bool, fightStartPositions_:'FightStartingPositions'):
+        self.floor = floor_
+        self.room = room_
+        self.infinityMode = infinityMode_
+        self.branches = branches_
         
-        super().__init__(subAreaId, mapId, houses, actors, interactiveElements, statedElements, obstacles, fights, hasAggressiveMonsters, fightStartPositions)
+        super().__init__(subAreaId_, mapId_, houses_, actors_, interactiveElements_, statedElements_, obstacles_, fights_, hasAggressiveMonsters_, fightStartPositions_)
     
     

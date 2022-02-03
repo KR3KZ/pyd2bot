@@ -5,8 +5,8 @@ class BaseSpawnMonsterInformation(SpawnInformation):
     creatureGenericId:int
     
 
-    def init(self, creatureGenericId:int):
-        self.creatureGenericId = creatureGenericId
+    def init(self, creatureGenericId_:int):
+        self.creatureGenericId = creatureGenericId_
         
         super().__init__()
     

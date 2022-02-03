@@ -8,11 +8,11 @@ class GuildEmblem(NetworkMessage):
     backgroundColor:int
     
 
-    def init(self, symbolShape:int, symbolColor:int, backgroundShape:int, backgroundColor:int):
-        self.symbolShape = symbolShape
-        self.symbolColor = symbolColor
-        self.backgroundShape = backgroundShape
-        self.backgroundColor = backgroundColor
+    def init(self, symbolShape_:int, symbolColor_:int, backgroundShape_:int, backgroundColor_:int):
+        self.symbolShape = symbolShape_
+        self.symbolColor = symbolColor_
+        self.backgroundShape = backgroundShape_
+        self.backgroundColor = backgroundColor_
         
         super().__init__()
     

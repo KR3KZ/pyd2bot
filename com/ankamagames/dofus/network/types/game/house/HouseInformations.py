@@ -6,9 +6,9 @@ class HouseInformations(NetworkMessage):
     modelId:int
     
 
-    def init(self, houseId:int, modelId:int):
-        self.houseId = houseId
-        self.modelId = modelId
+    def init(self, houseId_:int, modelId_:int):
+        self.houseId = houseId_
+        self.modelId = modelId_
         
         super().__init__()
     

@@ -5,8 +5,8 @@ class ExchangeMountsPaddockRemoveMessage(NetworkMessage):
     mountsId:list[int]
     
 
-    def init(self, mountsId:list[int]):
-        self.mountsId = mountsId
+    def init(self, mountsId_:list[int]):
+        self.mountsId = mountsId_
         
         super().__init__()
     

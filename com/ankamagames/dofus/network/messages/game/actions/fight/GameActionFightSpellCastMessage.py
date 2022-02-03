@@ -7,11 +7,11 @@ class GameActionFightSpellCastMessage(AbstractGameActionFightTargetedAbilityMess
     portalsIds:list[int]
     
 
-    def init(self, spellId:int, spellLevel:int, portalsIds:list[int], targetId:int, destinationCellId:int, critical:int, actionId:int, sourceId:int):
-        self.spellId = spellId
-        self.spellLevel = spellLevel
-        self.portalsIds = portalsIds
+    def init(self, spellId_:int, spellLevel_:int, portalsIds_:list[int], targetId_:int, destinationCellId_:int, critical_:int, silentCast_:bool, verboseCast_:bool, actionId_:int, sourceId_:int):
+        self.spellId = spellId_
+        self.spellLevel = spellLevel_
+        self.portalsIds = portalsIds_
         
-        super().__init__(targetId, destinationCellId, critical, actionId, sourceId)
+        super().__init__(targetId_, destinationCellId_, critical_, silentCast_, verboseCast_, actionId_, sourceId_)
     
     

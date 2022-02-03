@@ -9,9 +9,9 @@ class FullStatsPreset(Preset):
     stats:list['CharacterCharacteristicForPreset']
     
 
-    def init(self, stats:list['CharacterCharacteristicForPreset'], id:int):
-        self.stats = stats
+    def init(self, stats_:list['CharacterCharacteristicForPreset'], id_:int):
+        self.stats = stats_
         
-        super().__init__(id)
+        super().__init__(id_)
     
     

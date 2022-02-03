@@ -7,10 +7,10 @@ class AnomalyStateMessage(NetworkMessage):
     closingTime:int
     
 
-    def init(self, subAreaId:int, open:bool, closingTime:int):
-        self.subAreaId = subAreaId
-        self.open = open
-        self.closingTime = closingTime
+    def init(self, subAreaId_:int, open_:bool, closingTime_:int):
+        self.subAreaId = subAreaId_
+        self.open = open_
+        self.closingTime = closingTime_
         
         super().__init__()
     

@@ -4,8 +4,8 @@ from com.ankamagames.dofus.network.messages.debug.DebugInClientMessage import De
 class ClientYouAreDrunkMessage(DebugInClientMessage):
     
 
-    def init(self, level:int, message:str):
+    def init(self, level_:int, message_:str):
         
-        super().__init__(level, message)
+        super().__init__(level_, message_)
     
     

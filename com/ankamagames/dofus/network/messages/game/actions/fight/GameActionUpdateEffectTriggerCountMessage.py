@@ -9,8 +9,8 @@ class GameActionUpdateEffectTriggerCountMessage(NetworkMessage):
     targetIds:list['GameFightEffectTriggerCount']
     
 
-    def init(self, targetIds:list['GameFightEffectTriggerCount']):
-        self.targetIds = targetIds
+    def init(self, targetIds_:list['GameFightEffectTriggerCount']):
+        self.targetIds = targetIds_
         
         super().__init__()
     

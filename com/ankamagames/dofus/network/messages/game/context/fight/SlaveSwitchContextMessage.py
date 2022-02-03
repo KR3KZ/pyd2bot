@@ -16,13 +16,13 @@ class SlaveSwitchContextMessage(NetworkMessage):
     shortcuts:list['Shortcut']
     
 
-    def init(self, masterId:int, slaveId:int, slaveTurn:int, slaveSpells:list['SpellItem'], slaveStats:'CharacterCharacteristicsInformations', shortcuts:list['Shortcut']):
-        self.masterId = masterId
-        self.slaveId = slaveId
-        self.slaveTurn = slaveTurn
-        self.slaveSpells = slaveSpells
-        self.slaveStats = slaveStats
-        self.shortcuts = shortcuts
+    def init(self, masterId_:int, slaveId_:int, slaveTurn_:int, slaveSpells_:list['SpellItem'], slaveStats_:'CharacterCharacteristicsInformations', shortcuts_:list['Shortcut']):
+        self.masterId = masterId_
+        self.slaveId = slaveId_
+        self.slaveTurn = slaveTurn_
+        self.slaveSpells = slaveSpells_
+        self.slaveStats = slaveStats_
+        self.shortcuts = shortcuts_
         
         super().__init__()
     

@@ -9,9 +9,9 @@ class AcquaintanceInformation(AbstractContactInformations):
     playerState:int
     
 
-    def init(self, playerState:int, accountId:int, accountTag:'AccountTagInformation'):
-        self.playerState = playerState
+    def init(self, playerState_:int, accountId_:int, accountTag_:'AccountTagInformation'):
+        self.playerState = playerState_
         
-        super().__init__(accountId, accountTag)
+        super().__init__(accountId_, accountTag_)
     
     

@@ -5,8 +5,8 @@ class BasicPongMessage(NetworkMessage):
     quiet:bool
     
 
-    def init(self, quiet:bool):
-        self.quiet = quiet
+    def init(self, quiet_:bool):
+        self.quiet = quiet_
         
         super().__init__()
     

@@ -10,9 +10,9 @@ class GameContextRefreshEntityLookMessage(NetworkMessage):
     look:'EntityLook'
     
 
-    def init(self, id:int, look:'EntityLook'):
-        self.id = id
-        self.look = look
+    def init(self, id_:int, look_:'EntityLook'):
+        self.id = id_
+        self.look = look_
         
         super().__init__()
     

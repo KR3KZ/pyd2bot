@@ -10,9 +10,9 @@ class ForgettableSpellListUpdateMessage(NetworkMessage):
     spells:list['ForgettableSpellItem']
     
 
-    def init(self, action:int, spells:list['ForgettableSpellItem']):
-        self.action = action
-        self.spells = spells
+    def init(self, action_:int, spells_:list['ForgettableSpellItem']):
+        self.action = action_
+        self.spells = spells_
         
         super().__init__()
     

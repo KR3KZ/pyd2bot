@@ -5,8 +5,8 @@ class ExchangeMultiCraftCrafterCanUseHisRessourcesMessage(NetworkMessage):
     allowed:bool
     
 
-    def init(self, allowed:bool):
-        self.allowed = allowed
+    def init(self, allowed_:bool):
+        self.allowed = allowed_
         
         super().__init__()
     

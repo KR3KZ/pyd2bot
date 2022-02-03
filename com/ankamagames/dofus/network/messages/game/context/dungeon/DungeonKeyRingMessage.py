@@ -6,9 +6,9 @@ class DungeonKeyRingMessage(NetworkMessage):
     unavailables:list[int]
     
 
-    def init(self, availables:list[int], unavailables:list[int]):
-        self.availables = availables
-        self.unavailables = unavailables
+    def init(self, availables_:list[int], unavailables_:list[int]):
+        self.availables = availables_
+        self.unavailables = unavailables_
         
         super().__init__()
     

@@ -10,9 +10,9 @@ class UpdateSpellModifierMessage(NetworkMessage):
     spellModifier:'CharacterSpellModification'
     
 
-    def init(self, actorId:int, spellModifier:'CharacterSpellModification'):
-        self.actorId = actorId
-        self.spellModifier = spellModifier
+    def init(self, actorId_:int, spellModifier_:'CharacterSpellModification'):
+        self.actorId = actorId_
+        self.spellModifier = spellModifier_
         
         super().__init__()
     

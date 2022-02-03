@@ -6,9 +6,9 @@ class FinishMoveSetRequestMessage(NetworkMessage):
     finishMoveState:bool
     
 
-    def init(self, finishMoveId:int, finishMoveState:bool):
-        self.finishMoveId = finishMoveId
-        self.finishMoveState = finishMoveState
+    def init(self, finishMoveId_:int, finishMoveState_:bool):
+        self.finishMoveId = finishMoveId_
+        self.finishMoveState = finishMoveState_
         
         super().__init__()
     

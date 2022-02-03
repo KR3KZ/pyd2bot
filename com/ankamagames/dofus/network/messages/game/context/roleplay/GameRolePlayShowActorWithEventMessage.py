@@ -9,9 +9,9 @@ class GameRolePlayShowActorWithEventMessage(GameRolePlayShowActorMessage):
     actorEventId:int
     
 
-    def init(self, actorEventId:int, informations:'GameRolePlayActorInformations'):
-        self.actorEventId = actorEventId
+    def init(self, actorEventId_:int, informations_:'GameRolePlayActorInformations'):
+        self.actorEventId = actorEventId_
         
-        super().__init__(informations)
+        super().__init__(informations_)
     
     

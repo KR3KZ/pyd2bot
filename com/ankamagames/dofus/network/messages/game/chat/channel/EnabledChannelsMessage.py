@@ -6,9 +6,9 @@ class EnabledChannelsMessage(NetworkMessage):
     disallowed:list[int]
     
 
-    def init(self, channels:list[int], disallowed:list[int]):
-        self.channels = channels
-        self.disallowed = disallowed
+    def init(self, channels_:list[int], disallowed_:list[int]):
+        self.channels = channels_
+        self.disallowed = disallowed_
         
         super().__init__()
     

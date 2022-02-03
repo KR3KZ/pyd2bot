@@ -6,9 +6,9 @@ class ExchangeBidHouseTypeMessage(NetworkMessage):
     follow:bool
     
 
-    def init(self, type:int, follow:bool):
-        self.type = type
-        self.follow = follow
+    def init(self, type_:int, follow_:bool):
+        self.type = type_
+        self.follow = follow_
         
         super().__init__()
     

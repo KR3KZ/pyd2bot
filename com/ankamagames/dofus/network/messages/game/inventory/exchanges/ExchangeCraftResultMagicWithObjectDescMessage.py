@@ -9,9 +9,9 @@ class ExchangeCraftResultMagicWithObjectDescMessage(ExchangeCraftResultWithObjec
     magicPoolStatus:int
     
 
-    def init(self, magicPoolStatus:int, objectInfo:'ObjectItemNotInContainer', craftResult:int):
-        self.magicPoolStatus = magicPoolStatus
+    def init(self, magicPoolStatus_:int, objectInfo_:'ObjectItemNotInContainer', craftResult_:int):
+        self.magicPoolStatus = magicPoolStatus_
         
-        super().__init__(objectInfo, craftResult)
+        super().__init__(objectInfo_, craftResult_)
     
     

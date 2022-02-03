@@ -5,9 +5,9 @@ class PresetUseResultWithMissingIdsMessage(PresetUseResultMessage):
     missingIds:list[int]
     
 
-    def init(self, missingIds:list[int], presetId:int, code:int):
-        self.missingIds = missingIds
+    def init(self, missingIds_:list[int], presetId_:int, code_:int):
+        self.missingIds = missingIds_
         
-        super().__init__(presetId, code)
+        super().__init__(presetId_, code_)
     
     

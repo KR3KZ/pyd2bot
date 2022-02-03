@@ -9,8 +9,8 @@ class PartyInvitationRequestMessage(NetworkMessage):
     target:'AbstractPlayerSearchInformation'
     
 
-    def init(self, target:'AbstractPlayerSearchInformation'):
-        self.target = target
+    def init(self, target_:'AbstractPlayerSearchInformation'):
+        self.target = target_
         
         super().__init__()
     

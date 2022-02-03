@@ -9,8 +9,8 @@ class PrismsListMessage(NetworkMessage):
     prisms:list['PrismSubareaEmptyInfo']
     
 
-    def init(self, prisms:list['PrismSubareaEmptyInfo']):
-        self.prisms = prisms
+    def init(self, prisms_:list['PrismSubareaEmptyInfo']):
+        self.prisms = prisms_
         
         super().__init__()
     

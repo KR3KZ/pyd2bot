@@ -8,8 +8,8 @@ if TYPE_CHECKING:
 class WatchInventoryContentMessage(InventoryContentMessage):
     
 
-    def init(self, objects:list['ObjectItem'], kamas:int):
+    def init(self, objects_:list['ObjectItem'], kamas_:int):
         
-        super().__init__(objects, kamas)
+        super().__init__(objects_, kamas_)
     
     

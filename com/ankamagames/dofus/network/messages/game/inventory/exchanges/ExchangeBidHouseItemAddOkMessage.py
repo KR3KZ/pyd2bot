@@ -9,8 +9,8 @@ class ExchangeBidHouseItemAddOkMessage(NetworkMessage):
     itemInfo:'ObjectItemToSellInBid'
     
 
-    def init(self, itemInfo:'ObjectItemToSellInBid'):
-        self.itemInfo = itemInfo
+    def init(self, itemInfo_:'ObjectItemToSellInBid'):
+        self.itemInfo = itemInfo_
         
         super().__init__()
     

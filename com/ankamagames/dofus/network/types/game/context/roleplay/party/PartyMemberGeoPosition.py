@@ -9,12 +9,12 @@ class PartyMemberGeoPosition(NetworkMessage):
     subAreaId:int
     
 
-    def init(self, memberId:int, worldX:int, worldY:int, mapId:int, subAreaId:int):
-        self.memberId = memberId
-        self.worldX = worldX
-        self.worldY = worldY
-        self.mapId = mapId
-        self.subAreaId = subAreaId
+    def init(self, memberId_:int, worldX_:int, worldY_:int, mapId_:int, subAreaId_:int):
+        self.memberId = memberId_
+        self.worldX = worldX_
+        self.worldY = worldY_
+        self.mapId = mapId_
+        self.subAreaId = subAreaId_
         
         super().__init__()
     

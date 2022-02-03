@@ -6,9 +6,9 @@ class ExchangeBidPriceMessage(NetworkMessage):
     averagePrice:int
     
 
-    def init(self, genericId:int, averagePrice:int):
-        self.genericId = genericId
-        self.averagePrice = averagePrice
+    def init(self, genericId_:int, averagePrice_:int):
+        self.genericId = genericId_
+        self.averagePrice = averagePrice_
         
         super().__init__()
     

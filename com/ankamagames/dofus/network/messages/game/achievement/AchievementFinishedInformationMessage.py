@@ -10,10 +10,10 @@ class AchievementFinishedInformationMessage(AchievementFinishedMessage):
     playerId:int
     
 
-    def init(self, name:str, playerId:int, achievement:'AchievementAchievedRewardable'):
-        self.name = name
-        self.playerId = playerId
+    def init(self, name_:str, playerId_:int, achievement_:'AchievementAchievedRewardable'):
+        self.name = name_
+        self.playerId = playerId_
         
-        super().__init__(achievement)
+        super().__init__(achievement_)
     
     

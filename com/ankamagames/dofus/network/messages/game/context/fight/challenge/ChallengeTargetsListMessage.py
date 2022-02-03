@@ -6,9 +6,9 @@ class ChallengeTargetsListMessage(NetworkMessage):
     targetCells:list[int]
     
 
-    def init(self, targetIds:list[int], targetCells:list[int]):
-        self.targetIds = targetIds
-        self.targetCells = targetCells
+    def init(self, targetIds_:list[int], targetCells_:list[int]):
+        self.targetIds = targetIds_
+        self.targetCells = targetCells_
         
         super().__init__()
     

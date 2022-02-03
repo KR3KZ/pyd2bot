@@ -10,9 +10,9 @@ class GuildApplicationIsAnsweredMessage(NetworkMessage):
     guildInformation:'GuildInformations'
     
 
-    def init(self, accepted:bool, guildInformation:'GuildInformations'):
-        self.accepted = accepted
-        self.guildInformation = guildInformation
+    def init(self, accepted_:bool, guildInformation_:'GuildInformations'):
+        self.accepted = accepted_
+        self.guildInformation = guildInformation_
         
         super().__init__()
     

@@ -14,13 +14,13 @@ class StartupActionAddObject(NetworkMessage):
     items:list['ObjectItemInformationWithQuantity']
     
 
-    def init(self, uid:int, title:str, text:str, descUrl:str, pictureUrl:str, items:list['ObjectItemInformationWithQuantity']):
-        self.uid = uid
-        self.title = title
-        self.text = text
-        self.descUrl = descUrl
-        self.pictureUrl = pictureUrl
-        self.items = items
+    def init(self, uid_:int, title_:str, text_:str, descUrl_:str, pictureUrl_:str, items_:list['ObjectItemInformationWithQuantity']):
+        self.uid = uid_
+        self.title = title_
+        self.text = text_
+        self.descUrl = descUrl_
+        self.pictureUrl = pictureUrl_
+        self.items = items_
         
         super().__init__()
     

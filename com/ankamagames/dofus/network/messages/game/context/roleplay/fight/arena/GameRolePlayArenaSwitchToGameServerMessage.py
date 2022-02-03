@@ -7,10 +7,10 @@ class GameRolePlayArenaSwitchToGameServerMessage(NetworkMessage):
     homeServerId:int
     
 
-    def init(self, validToken:bool, ticket:list[int], homeServerId:int):
-        self.validToken = validToken
-        self.ticket = ticket
-        self.homeServerId = homeServerId
+    def init(self, validToken_:bool, ticket_:list[int], homeServerId_:int):
+        self.validToken = validToken_
+        self.ticket = ticket_
+        self.homeServerId = homeServerId_
         
         super().__init__()
     

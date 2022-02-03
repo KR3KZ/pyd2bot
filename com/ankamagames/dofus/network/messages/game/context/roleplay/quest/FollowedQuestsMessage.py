@@ -9,8 +9,8 @@ class FollowedQuestsMessage(NetworkMessage):
     quests:list['QuestActiveDetailedInformations']
     
 
-    def init(self, quests:list['QuestActiveDetailedInformations']):
-        self.quests = quests
+    def init(self, quests_:list['QuestActiveDetailedInformations']):
+        self.quests = quests_
         
         super().__init__()
     

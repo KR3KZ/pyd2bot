@@ -6,9 +6,9 @@ class MapObstacle(NetworkMessage):
     state:int
     
 
-    def init(self, obstacleCellId:int, state:int):
-        self.obstacleCellId = obstacleCellId
-        self.state = state
+    def init(self, obstacleCellId_:int, state_:int):
+        self.obstacleCellId = obstacleCellId_
+        self.state = state_
         
         super().__init__()
     

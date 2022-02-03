@@ -7,10 +7,10 @@ class TeleportRequestMessage(NetworkMessage):
     mapId:int
     
 
-    def init(self, sourceType:int, destinationType:int, mapId:int):
-        self.sourceType = sourceType
-        self.destinationType = destinationType
-        self.mapId = mapId
+    def init(self, sourceType_:int, destinationType_:int, mapId_:int):
+        self.sourceType = sourceType_
+        self.destinationType = destinationType_
+        self.mapId = mapId_
         
         super().__init__()
     

@@ -9,8 +9,8 @@ class PaddockPropertiesMessage(NetworkMessage):
     properties:'PaddockInstancesInformations'
     
 
-    def init(self, properties:'PaddockInstancesInformations'):
-        self.properties = properties
+    def init(self, properties_:'PaddockInstancesInformations'):
+        self.properties = properties_
         
         super().__init__()
     

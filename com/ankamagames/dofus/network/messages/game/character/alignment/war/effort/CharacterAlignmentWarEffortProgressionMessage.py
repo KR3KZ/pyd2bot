@@ -7,10 +7,10 @@ class CharacterAlignmentWarEffortProgressionMessage(NetworkMessage):
     alignmentWarEffortPersonalDonation:int
     
 
-    def init(self, alignmentWarEffortDailyLimit:int, alignmentWarEffortDailyDonation:int, alignmentWarEffortPersonalDonation:int):
-        self.alignmentWarEffortDailyLimit = alignmentWarEffortDailyLimit
-        self.alignmentWarEffortDailyDonation = alignmentWarEffortDailyDonation
-        self.alignmentWarEffortPersonalDonation = alignmentWarEffortPersonalDonation
+    def init(self, alignmentWarEffortDailyLimit_:int, alignmentWarEffortDailyDonation_:int, alignmentWarEffortPersonalDonation_:int):
+        self.alignmentWarEffortDailyLimit = alignmentWarEffortDailyLimit_
+        self.alignmentWarEffortDailyDonation = alignmentWarEffortDailyDonation_
+        self.alignmentWarEffortPersonalDonation = alignmentWarEffortPersonalDonation_
         
         super().__init__()
     

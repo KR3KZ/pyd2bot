@@ -9,12 +9,12 @@ class InteractiveUsedMessage(NetworkMessage):
     canMove:bool
     
 
-    def init(self, entityId:int, elemId:int, skillId:int, duration:int, canMove:bool):
-        self.entityId = entityId
-        self.elemId = elemId
-        self.skillId = skillId
-        self.duration = duration
-        self.canMove = canMove
+    def init(self, entityId_:int, elemId_:int, skillId_:int, duration_:int, canMove_:bool):
+        self.entityId = entityId_
+        self.elemId = elemId_
+        self.skillId = skillId_
+        self.duration = duration_
+        self.canMove = canMove_
         
         super().__init__()
     

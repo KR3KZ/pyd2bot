@@ -5,9 +5,9 @@ class InteractiveElementNamedSkill(InteractiveElementSkill):
     nameId:int
     
 
-    def init(self, nameId:int, skillId:int, skillInstanceUid:int):
-        self.nameId = nameId
+    def init(self, nameId_:int, skillId_:int, skillInstanceUid_:int):
+        self.nameId = nameId_
         
-        super().__init__(skillId, skillInstanceUid)
+        super().__init__(skillId_, skillInstanceUid_)
     
     

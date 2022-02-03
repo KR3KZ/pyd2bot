@@ -12,10 +12,10 @@ class GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage(GameRolePlayArenaUpdate
     duel:'ArenaRankInfos'
     
 
-    def init(self, team:'ArenaRankInfos', duel:'ArenaRankInfos', solo:'ArenaRankInfos'):
-        self.team = team
-        self.duel = duel
+    def init(self, team_:'ArenaRankInfos', duel_:'ArenaRankInfos', solo_:'ArenaRankInfos'):
+        self.team = team_
+        self.duel = duel_
         
-        super().__init__(solo)
+        super().__init__(solo_)
     
     

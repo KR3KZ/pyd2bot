@@ -9,8 +9,8 @@ class HumanOptionFollowers(HumanOption):
     followingCharactersLook:list['IndexedEntityLook']
     
 
-    def init(self, followingCharactersLook:list['IndexedEntityLook']):
-        self.followingCharactersLook = followingCharactersLook
+    def init(self, followingCharactersLook_:list['IndexedEntityLook']):
+        self.followingCharactersLook = followingCharactersLook_
         
         super().__init__()
     

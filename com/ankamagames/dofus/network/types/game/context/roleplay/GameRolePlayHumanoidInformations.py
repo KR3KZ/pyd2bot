@@ -12,10 +12,10 @@ class GameRolePlayHumanoidInformations(GameRolePlayNamedActorInformations):
     accountId:int
     
 
-    def init(self, humanoidInfo:'HumanInformations', accountId:int, name:str, look:'EntityLook', contextualId:int, disposition:'EntityDispositionInformations'):
-        self.humanoidInfo = humanoidInfo
-        self.accountId = accountId
+    def init(self, humanoidInfo_:'HumanInformations', accountId_:int, name_:str, look_:'EntityLook', contextualId_:int, disposition_:'EntityDispositionInformations'):
+        self.humanoidInfo = humanoidInfo_
+        self.accountId = accountId_
         
-        super().__init__(name, look, contextualId, disposition)
+        super().__init__(name_, look_, contextualId_, disposition_)
     
     

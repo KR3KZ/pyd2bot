@@ -6,9 +6,9 @@ class QuestStepValidatedMessage(NetworkMessage):
     stepId:int
     
 
-    def init(self, questId:int, stepId:int):
-        self.questId = questId
-        self.stepId = stepId
+    def init(self, questId_:int, stepId_:int):
+        self.questId = questId_
+        self.stepId = stepId_
         
         super().__init__()
     

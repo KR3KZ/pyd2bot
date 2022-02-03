@@ -6,9 +6,9 @@ class TeleportToBuddyCloseMessage(NetworkMessage):
     buddyId:int
     
 
-    def init(self, dungeonId:int, buddyId:int):
-        self.dungeonId = dungeonId
-        self.buddyId = buddyId
+    def init(self, dungeonId_:int, buddyId_:int):
+        self.dungeonId = dungeonId_
+        self.buddyId = buddyId_
         
         super().__init__()
     

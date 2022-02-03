@@ -9,8 +9,8 @@ class HavenBagFurnituresMessage(NetworkMessage):
     furnituresInfos:list['HavenBagFurnitureInformation']
     
 
-    def init(self, furnituresInfos:list['HavenBagFurnitureInformation']):
-        self.furnituresInfos = furnituresInfos
+    def init(self, furnituresInfos_:list['HavenBagFurnitureInformation']):
+        self.furnituresInfos = furnituresInfos_
         
         super().__init__()
     

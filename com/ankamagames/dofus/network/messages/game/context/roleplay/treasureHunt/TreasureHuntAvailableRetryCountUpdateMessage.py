@@ -6,9 +6,9 @@ class TreasureHuntAvailableRetryCountUpdateMessage(NetworkMessage):
     availableRetryCount:int
     
 
-    def init(self, questType:int, availableRetryCount:int):
-        self.questType = questType
-        self.availableRetryCount = availableRetryCount
+    def init(self, questType_:int, availableRetryCount_:int):
+        self.questType = questType_
+        self.availableRetryCount = availableRetryCount_
         
         super().__init__()
     

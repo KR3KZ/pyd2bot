@@ -5,8 +5,8 @@ class ExchangeCraftCountRequestMessage(NetworkMessage):
     count:int
     
 
-    def init(self, count:int):
-        self.count = count
+    def init(self, count_:int):
+        self.count = count_
         
         super().__init__()
     

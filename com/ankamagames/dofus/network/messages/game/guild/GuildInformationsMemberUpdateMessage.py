@@ -9,8 +9,8 @@ class GuildInformationsMemberUpdateMessage(NetworkMessage):
     member:'GuildMember'
     
 
-    def init(self, member:'GuildMember'):
-        self.member = member
+    def init(self, member_:'GuildMember'):
+        self.member = member_
         
         super().__init__()
     

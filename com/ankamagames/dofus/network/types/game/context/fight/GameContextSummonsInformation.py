@@ -16,12 +16,12 @@ class GameContextSummonsInformation(NetworkMessage):
     summons:list['GameContextBasicSpawnInformation']
     
 
-    def init(self, spawnInformation:'SpawnInformation', wave:int, look:'EntityLook', stats:'GameFightCharacteristics', summons:list['GameContextBasicSpawnInformation']):
-        self.spawnInformation = spawnInformation
-        self.wave = wave
-        self.look = look
-        self.stats = stats
-        self.summons = summons
+    def init(self, spawnInformation_:'SpawnInformation', wave_:int, look_:'EntityLook', stats_:'GameFightCharacteristics', summons_:list['GameContextBasicSpawnInformation']):
+        self.spawnInformation = spawnInformation_
+        self.wave = wave_
+        self.look = look_
+        self.stats = stats_
+        self.summons = summons_
         
         super().__init__()
     

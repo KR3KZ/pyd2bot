@@ -282,8 +282,7 @@ class ServerConnection(IServerConnection):
                      break
                   msg = self.lowReceive(input)
       except Exception as e:
-         trace = "".join(traceback.TracebackException.from_exception(e).format())
-         logger.error("[" + str(self._id) + "] Error while reading socket. \n" + trace)
+         logger.error("[" + str(self._id) + "] Error while reading socket. \n", exc_info=True)
          self.close()
    
    def checkClosed(self) -> bool:
@@ -324,7 +323,7 @@ class ServerConnection(IServerConnection):
          
       return messageLength
    
-   def lowSend(self, msg:INetworkMessage) -> None:
+   def lowSend(self, msg:NetworkMessage) -> None:
       if self.LOG_ENCODED_CLIENT_MESSAGES and msg.getMessageId() not in [5607, 6372, 6156, 6609, 4, 6119, 110, 6540, 6648, 6608]:
          data = msg.pack()
          logger.debug("[{self._id}] [SND] > {msg} ---" + base64.encodebytes(data) + "---")
@@ -335,7 +334,7 @@ class ServerConnection(IServerConnection):
       if self._lagometer:
          self._lagometer.ping(msg)
    
-   def lowReceive(self, src:ByteArray) -> INetworkMessage:
+   def lowReceive(self, src:ByteArray) -> NetworkMessage:
       messageLength = 0
       if not self._splittedPacket:
 

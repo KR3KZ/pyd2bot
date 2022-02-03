@@ -10,9 +10,9 @@ class BasicWhoIsRequestMessage(NetworkMessage):
     target:'AbstractPlayerSearchInformation'
     
 
-    def init(self, verbose:bool, target:'AbstractPlayerSearchInformation'):
-        self.verbose = verbose
-        self.target = target
+    def init(self, verbose_:bool, target_:'AbstractPlayerSearchInformation'):
+        self.verbose = verbose_
+        self.target = target_
         
         super().__init__()
     

@@ -6,9 +6,9 @@ class DebugInClientMessage(NetworkMessage):
     message:str
     
 
-    def init(self, level:int, message:str):
-        self.level = level
-        self.message = message
+    def init(self, level_:int, message_:str):
+        self.level = level_
+        self.message = message_
         
         super().__init__()
     

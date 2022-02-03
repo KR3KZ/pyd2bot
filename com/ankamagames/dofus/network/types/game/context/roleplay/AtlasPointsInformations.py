@@ -10,9 +10,9 @@ class AtlasPointsInformations(NetworkMessage):
     coords:list['MapCoordinatesExtended']
     
 
-    def init(self, type:int, coords:list['MapCoordinatesExtended']):
-        self.type = type
-        self.coords = coords
+    def init(self, type_:int, coords_:list['MapCoordinatesExtended']):
+        self.type = type_
+        self.coords = coords_
         
         super().__init__()
     

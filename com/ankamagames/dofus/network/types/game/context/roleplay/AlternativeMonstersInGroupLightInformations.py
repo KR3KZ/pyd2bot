@@ -10,9 +10,9 @@ class AlternativeMonstersInGroupLightInformations(NetworkMessage):
     monsters:list['MonsterInGroupLightInformations']
     
 
-    def init(self, playerCount:int, monsters:list['MonsterInGroupLightInformations']):
-        self.playerCount = playerCount
-        self.monsters = monsters
+    def init(self, playerCount_:int, monsters_:list['MonsterInGroupLightInformations']):
+        self.playerCount = playerCount_
+        self.monsters = monsters_
         
         super().__init__()
     

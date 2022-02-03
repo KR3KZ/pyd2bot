@@ -9,8 +9,8 @@ class GameContextMoveMultipleElementsMessage(NetworkMessage):
     movements:list['EntityMovementInformations']
     
 
-    def init(self, movements:list['EntityMovementInformations']):
-        self.movements = movements
+    def init(self, movements_:list['EntityMovementInformations']):
+        self.movements = movements_
         
         super().__init__()
     

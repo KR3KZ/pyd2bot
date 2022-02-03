@@ -6,9 +6,9 @@ class GameRolePlayArenaFightAnswerMessage(NetworkMessage):
     accept:bool
     
 
-    def init(self, fightId:int, accept:bool):
-        self.fightId = fightId
-        self.accept = accept
+    def init(self, fightId_:int, accept_:bool):
+        self.fightId = fightId_
+        self.accept = accept_
         
         super().__init__()
     

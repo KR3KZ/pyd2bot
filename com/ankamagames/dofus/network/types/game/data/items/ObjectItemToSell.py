@@ -13,12 +13,12 @@ class ObjectItemToSell(Item):
     objectPrice:int
     
 
-    def init(self, objectGID:int, effects:list['ObjectEffect'], objectUID:int, quantity:int, objectPrice:int):
-        self.objectGID = objectGID
-        self.effects = effects
-        self.objectUID = objectUID
-        self.quantity = quantity
-        self.objectPrice = objectPrice
+    def init(self, objectGID_:int, effects_:list['ObjectEffect'], objectUID_:int, quantity_:int, objectPrice_:int):
+        self.objectGID = objectGID_
+        self.effects = effects_
+        self.objectUID = objectUID_
+        self.quantity = quantity_
+        self.objectPrice = objectPrice_
         
         super().__init__()
     

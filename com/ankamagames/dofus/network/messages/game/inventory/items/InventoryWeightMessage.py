@@ -7,10 +7,10 @@ class InventoryWeightMessage(NetworkMessage):
     weightMax:int
     
 
-    def init(self, inventoryWeight:int, shopWeight:int, weightMax:int):
-        self.inventoryWeight = inventoryWeight
-        self.shopWeight = shopWeight
-        self.weightMax = weightMax
+    def init(self, inventoryWeight_:int, shopWeight_:int, weightMax_:int):
+        self.inventoryWeight = inventoryWeight_
+        self.shopWeight = shopWeight_
+        self.weightMax = weightMax_
         
         super().__init__()
     

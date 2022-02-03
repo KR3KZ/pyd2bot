@@ -5,8 +5,8 @@ class SpellVariantActivationRequestMessage(NetworkMessage):
     spellId:int
     
 
-    def init(self, spellId:int):
-        self.spellId = spellId
+    def init(self, spellId_:int):
+        self.spellId = spellId_
         
         super().__init__()
     

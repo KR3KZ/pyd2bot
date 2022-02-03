@@ -9,8 +9,8 @@ class GameRolePlayArenaUpdatePlayerInfosMessage(NetworkMessage):
     solo:'ArenaRankInfos'
     
 
-    def init(self, solo:'ArenaRankInfos'):
-        self.solo = solo
+    def init(self, solo_:'ArenaRankInfos'):
+        self.solo = solo_
         
         super().__init__()
     

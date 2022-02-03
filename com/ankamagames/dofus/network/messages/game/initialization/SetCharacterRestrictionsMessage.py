@@ -10,9 +10,9 @@ class SetCharacterRestrictionsMessage(NetworkMessage):
     restrictions:'ActorRestrictionsInformations'
     
 
-    def init(self, actorId:int, restrictions:'ActorRestrictionsInformations'):
-        self.actorId = actorId
-        self.restrictions = restrictions
+    def init(self, actorId_:int, restrictions_:'ActorRestrictionsInformations'):
+        self.actorId = actorId_
+        self.restrictions = restrictions_
         
         super().__init__()
     

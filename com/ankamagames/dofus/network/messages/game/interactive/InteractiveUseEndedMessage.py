@@ -6,9 +6,9 @@ class InteractiveUseEndedMessage(NetworkMessage):
     skillId:int
     
 
-    def init(self, elemId:int, skillId:int):
-        self.elemId = elemId
-        self.skillId = skillId
+    def init(self, elemId_:int, skillId_:int):
+        self.elemId = elemId_
+        self.skillId = skillId_
         
         super().__init__()
     

@@ -9,8 +9,8 @@ class JobCrafterDirectoryDefineSettingsMessage(NetworkMessage):
     settings:'JobCrafterDirectorySettings'
     
 
-    def init(self, settings:'JobCrafterDirectorySettings'):
-        self.settings = settings
+    def init(self, settings_:'JobCrafterDirectorySettings'):
+        self.settings = settings_
         
         super().__init__()
     

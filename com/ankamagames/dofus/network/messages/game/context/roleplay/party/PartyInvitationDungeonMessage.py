@@ -5,9 +5,9 @@ class PartyInvitationDungeonMessage(PartyInvitationMessage):
     dungeonId:int
     
 
-    def init(self, dungeonId:int, partyType:int, partyName:str, maxParticipants:int, fromId:int, fromName:str, toId:int, partyId:int):
-        self.dungeonId = dungeonId
+    def init(self, dungeonId_:int, partyType_:int, partyName_:str, maxParticipants_:int, fromId_:int, fromName_:str, toId_:int, partyId_:int):
+        self.dungeonId = dungeonId_
         
-        super().__init__(partyType, partyName, maxParticipants, fromId, fromName, toId, partyId)
+        super().__init__(partyType_, partyName_, maxParticipants_, fromId_, fromName_, toId_, partyId_)
     
     

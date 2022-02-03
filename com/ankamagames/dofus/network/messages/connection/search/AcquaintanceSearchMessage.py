@@ -9,8 +9,8 @@ class AcquaintanceSearchMessage(NetworkMessage):
     tag:'AccountTagInformation'
     
 
-    def init(self, tag:'AccountTagInformation'):
-        self.tag = tag
+    def init(self, tag_:'AccountTagInformation'):
+        self.tag = tag_
         
         super().__init__()
     

@@ -6,9 +6,9 @@ class EntityMovementInformations(NetworkMessage):
     steps:list[int]
     
 
-    def init(self, id:int, steps:list[int]):
-        self.id = id
-        self.steps = steps
+    def init(self, id_:int, steps_:list[int]):
+        self.id = id_
+        self.steps = steps_
         
         super().__init__()
     

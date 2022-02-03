@@ -11,10 +11,10 @@ class FightResultListEntry(NetworkMessage):
     rewards:'FightLoot'
     
 
-    def init(self, outcome:int, wave:int, rewards:'FightLoot'):
-        self.outcome = outcome
-        self.wave = wave
-        self.rewards = rewards
+    def init(self, outcome_:int, wave_:int, rewards_:'FightLoot'):
+        self.outcome = outcome_
+        self.wave = wave_
+        self.rewards = rewards_
         
         super().__init__()
     

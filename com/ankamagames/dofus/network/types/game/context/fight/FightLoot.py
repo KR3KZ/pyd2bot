@@ -6,9 +6,9 @@ class FightLoot(NetworkMessage):
     kamas:int
     
 
-    def init(self, objects:list[int], kamas:int):
-        self.objects = objects
-        self.kamas = kamas
+    def init(self, objects_:list[int], kamas_:int):
+        self.objects = objects_
+        self.kamas = kamas_
         
         super().__init__()
     

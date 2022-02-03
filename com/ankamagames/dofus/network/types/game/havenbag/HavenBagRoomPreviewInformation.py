@@ -6,9 +6,9 @@ class HavenBagRoomPreviewInformation(NetworkMessage):
     themeId:int
     
 
-    def init(self, roomId:int, themeId:int):
-        self.roomId = roomId
-        self.themeId = themeId
+    def init(self, roomId_:int, themeId_:int):
+        self.roomId = roomId_
+        self.themeId = themeId_
         
         super().__init__()
     

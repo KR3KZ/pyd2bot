@@ -5,8 +5,8 @@ class BreachInvitationAnswerMessage(NetworkMessage):
     accept:bool
     
 
-    def init(self, accept:bool):
-        self.accept = accept
+    def init(self, accept_:bool):
+        self.accept = accept_
         
         super().__init__()
     

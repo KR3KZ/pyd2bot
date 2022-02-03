@@ -11,10 +11,10 @@ class FightDispellableEffectExtendedInformations(NetworkMessage):
     effect:'AbstractFightDispellableEffect'
     
 
-    def init(self, actionId:int, sourceId:int, effect:'AbstractFightDispellableEffect'):
-        self.actionId = actionId
-        self.sourceId = sourceId
-        self.effect = effect
+    def init(self, actionId_:int, sourceId_:int, effect_:'AbstractFightDispellableEffect'):
+        self.actionId = actionId_
+        self.sourceId = sourceId_
+        self.effect = effect_
         
         super().__init__()
     

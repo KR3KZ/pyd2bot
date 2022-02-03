@@ -6,9 +6,9 @@ class IgnoredDeleteRequestMessage(NetworkMessage):
     session:bool
     
 
-    def init(self, accountId:int, session:bool):
-        self.accountId = accountId
-        self.session = session
+    def init(self, accountId_:int, session_:bool):
+        self.accountId = accountId_
+        self.session = session_
         
         super().__init__()
     

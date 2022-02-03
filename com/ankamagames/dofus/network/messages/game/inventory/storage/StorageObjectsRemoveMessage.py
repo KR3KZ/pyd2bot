@@ -5,8 +5,8 @@ class StorageObjectsRemoveMessage(NetworkMessage):
     objectUIDList:list[int]
     
 
-    def init(self, objectUIDList:list[int]):
-        self.objectUIDList = objectUIDList
+    def init(self, objectUIDList_:list[int]):
+        self.objectUIDList = objectUIDList_
         
         super().__init__()
     

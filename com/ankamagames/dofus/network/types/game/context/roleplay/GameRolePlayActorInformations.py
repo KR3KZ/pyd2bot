@@ -9,8 +9,8 @@ if TYPE_CHECKING:
 class GameRolePlayActorInformations(GameContextActorInformations):
     
 
-    def init(self, look:'EntityLook', contextualId:int, disposition:'EntityDispositionInformations'):
+    def init(self, look_:'EntityLook', contextualId_:int, disposition_:'EntityDispositionInformations'):
         
-        super().__init__(look, contextualId, disposition)
+        super().__init__(look_, contextualId_, disposition_)
     
     

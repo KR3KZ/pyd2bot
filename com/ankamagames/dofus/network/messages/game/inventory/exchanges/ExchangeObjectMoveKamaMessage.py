@@ -5,8 +5,8 @@ class ExchangeObjectMoveKamaMessage(NetworkMessage):
     quantity:int
     
 
-    def init(self, quantity:int):
-        self.quantity = quantity
+    def init(self, quantity_:int):
+        self.quantity = quantity_
         
         super().__init__()
     

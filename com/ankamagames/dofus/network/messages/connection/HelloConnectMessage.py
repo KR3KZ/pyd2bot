@@ -6,9 +6,9 @@ class HelloConnectMessage(NetworkMessage):
     key:list[int]
     
 
-    def init(self, salt:str, key:list[int]):
-        self.salt = salt
-        self.key = key
+    def init(self, salt_:str, key_:list[int]):
+        self.salt = salt_
+        self.key = key_
         
         super().__init__()
     

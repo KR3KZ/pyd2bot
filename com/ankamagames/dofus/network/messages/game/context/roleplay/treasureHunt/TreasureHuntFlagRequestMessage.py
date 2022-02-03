@@ -6,9 +6,9 @@ class TreasureHuntFlagRequestMessage(NetworkMessage):
     index:int
     
 
-    def init(self, questType:int, index:int):
-        self.questType = questType
-        self.index = index
+    def init(self, questType_:int, index_:int):
+        self.questType = questType_
+        self.index = index_
         
         super().__init__()
     

@@ -7,10 +7,10 @@ class NpcGenericActionRequestMessage(NetworkMessage):
     npcMapId:int
     
 
-    def init(self, npcId:int, npcActionId:int, npcMapId:int):
-        self.npcId = npcId
-        self.npcActionId = npcActionId
-        self.npcMapId = npcMapId
+    def init(self, npcId_:int, npcActionId_:int, npcMapId_:int):
+        self.npcId = npcId_
+        self.npcActionId = npcActionId_
+        self.npcMapId = npcMapId_
         
         super().__init__()
     

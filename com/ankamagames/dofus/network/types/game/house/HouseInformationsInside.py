@@ -11,11 +11,11 @@ class HouseInformationsInside(HouseInformations):
     worldY:int
     
 
-    def init(self, houseInfos:'HouseInstanceInformations', worldX:int, worldY:int, houseId:int, modelId:int):
-        self.houseInfos = houseInfos
-        self.worldX = worldX
-        self.worldY = worldY
+    def init(self, houseInfos_:'HouseInstanceInformations', worldX_:int, worldY_:int, houseId_:int, modelId_:int):
+        self.houseInfos = houseInfos_
+        self.worldX = worldX_
+        self.worldY = worldY_
         
-        super().__init__(houseId, modelId)
+        super().__init__(houseId_, modelId_)
     
     

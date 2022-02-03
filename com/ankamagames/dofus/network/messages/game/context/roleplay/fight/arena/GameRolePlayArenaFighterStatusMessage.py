@@ -7,10 +7,10 @@ class GameRolePlayArenaFighterStatusMessage(NetworkMessage):
     accepted:bool
     
 
-    def init(self, fightId:int, playerId:int, accepted:bool):
-        self.fightId = fightId
-        self.playerId = playerId
-        self.accepted = accepted
+    def init(self, fightId_:int, playerId_:int, accepted_:bool):
+        self.fightId = fightId_
+        self.playerId = playerId_
+        self.accepted = accepted_
         
         super().__init__()
     

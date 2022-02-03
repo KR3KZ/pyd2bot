@@ -11,10 +11,10 @@ class SetUpdateMessage(NetworkMessage):
     setEffects:list['ObjectEffect']
     
 
-    def init(self, setId:int, setObjects:list[int], setEffects:list['ObjectEffect']):
-        self.setId = setId
-        self.setObjects = setObjects
-        self.setEffects = setEffects
+    def init(self, setId_:int, setObjects_:list[int], setEffects_:list['ObjectEffect']):
+        self.setId = setId_
+        self.setObjects = setObjects_
+        self.setEffects = setEffects_
         
         super().__init__()
     

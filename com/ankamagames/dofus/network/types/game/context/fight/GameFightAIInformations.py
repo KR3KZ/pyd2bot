@@ -11,8 +11,8 @@ if TYPE_CHECKING:
 class GameFightAIInformations(GameFightFighterInformations):
     
 
-    def init(self, spawnInfo:'GameContextBasicSpawnInformation', wave:int, stats:'GameFightCharacteristics', previousPositions:list[int], look:'EntityLook', contextualId:int, disposition:'EntityDispositionInformations'):
+    def init(self, spawnInfo_:'GameContextBasicSpawnInformation', wave_:int, stats_:'GameFightCharacteristics', previousPositions_:list[int], look_:'EntityLook', contextualId_:int, disposition_:'EntityDispositionInformations'):
         
-        super().__init__(spawnInfo, wave, stats, previousPositions, look, contextualId, disposition)
+        super().__init__(spawnInfo_, wave_, stats_, previousPositions_, look_, contextualId_, disposition_)
     
     

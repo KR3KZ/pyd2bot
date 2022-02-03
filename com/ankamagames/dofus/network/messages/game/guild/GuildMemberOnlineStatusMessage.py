@@ -6,9 +6,9 @@ class GuildMemberOnlineStatusMessage(NetworkMessage):
     online:bool
     
 
-    def init(self, memberId:int, online:bool):
-        self.memberId = memberId
-        self.online = online
+    def init(self, memberId_:int, online_:bool):
+        self.memberId = memberId_
+        self.online = online_
         
         super().__init__()
     

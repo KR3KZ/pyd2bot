@@ -297,7 +297,7 @@ class Worker(EventDispatcher, MessageHandler):
          if self.has_listeners(FramePulledEvent.EVENT_FRAME_PULLED):
             self.dispatch(FramePulledEvent.EVENT_FRAME_PULLED, FramePulledEvent(frame))
       else:
-         logger.warn("Frame " + frame + " refused to be pulled.")
+         logger.warn(f"Frame {frame.__class__.__name__} refused to be pulled.")
    
    def processQueues(self, maxTime:int = 40) -> None:
       startTime:int = perf_counter()

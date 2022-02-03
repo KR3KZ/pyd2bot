@@ -19,14 +19,13 @@ class Secure:
 class StoreDataManager(metaclass=Singleton):
 
    def __init__(self) -> None:
-      self._aData:list = []
+      self._aData = dict()
       self._bStoreSequence:bool = False
       self._nCurrentSequenceNum:int = 0
       self._aStoreSequence:list = []
       self._aSharedObjectCache:dict = {}
       self._aRegisteredClassAlias:dict = {}
       self._bStoreSequence = False
-      self._aData = []
       self._aRegisteredClassAlias = dict()
       self._self = None
       aClass = self.getData(JerakineConstants.DATASTORE_CLASS_ALIAS, "classAliasList")
@@ -59,7 +58,7 @@ class StoreDataManager(metaclass=Singleton):
          return self._aData[dataType.category][sKey]
       return None
 
-   def isComplexType(o) -> bool:
+   def isComplexType(self, o) -> bool:
       if type(o) in [int, float, bool, list, str, None.__class__]:
          return False
       else:
@@ -106,8 +105,8 @@ class StoreDataManager(metaclass=Singleton):
 
    def setData(self, dataType:DataStoreType, sKey:str, oValue, deepClassScan:bool = False) -> bool:
       so:CustomSharedObject = None
-      if self._aData[dataType.category] == None:
-         self._aData[dataType.category] = dict(True)
+      if self._aData.get(dataType.category) == None:
+         self._aData[dataType.category] = dict()
       self._aData[dataType.category][sKey] = oValue
       if dataType.persistant:
          if dataType.location == DataStoreEnum.LOCATION_LOCAL:

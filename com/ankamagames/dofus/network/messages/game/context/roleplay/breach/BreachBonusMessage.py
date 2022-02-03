@@ -9,8 +9,8 @@ class BreachBonusMessage(NetworkMessage):
     bonus:'ObjectEffectInteger'
     
 
-    def init(self, bonus:'ObjectEffectInteger'):
-        self.bonus = bonus
+    def init(self, bonus_:'ObjectEffectInteger'):
+        self.bonus = bonus_
         
         super().__init__()
     

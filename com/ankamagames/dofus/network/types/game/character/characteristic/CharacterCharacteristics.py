@@ -9,8 +9,8 @@ class CharacterCharacteristics(NetworkMessage):
     characteristics:list['CharacterCharacteristic']
     
 
-    def init(self, characteristics:list['CharacterCharacteristic']):
-        self.characteristics = characteristics
+    def init(self, characteristics_:list['CharacterCharacteristic']):
+        self.characteristics = characteristics_
         
         super().__init__()
     

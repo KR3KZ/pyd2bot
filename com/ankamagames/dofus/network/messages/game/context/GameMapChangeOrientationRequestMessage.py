@@ -5,8 +5,8 @@ class GameMapChangeOrientationRequestMessage(NetworkMessage):
     direction:int
     
 
-    def init(self, direction:int):
-        self.direction = direction
+    def init(self, direction_:int):
+        self.direction = direction_
         
         super().__init__()
     

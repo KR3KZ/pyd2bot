@@ -15,13 +15,13 @@ class FightExternalInformations(NetworkMessage):
     fightTeamsOptions:list['FightOptionsInformations']
     
 
-    def init(self, fightId:int, fightType:int, fightStart:int, fightSpectatorLocked:bool, fightTeams:list['FightTeamLightInformations'], fightTeamsOptions:list['FightOptionsInformations']):
-        self.fightId = fightId
-        self.fightType = fightType
-        self.fightStart = fightStart
-        self.fightSpectatorLocked = fightSpectatorLocked
-        self.fightTeams = fightTeams
-        self.fightTeamsOptions = fightTeamsOptions
+    def init(self, fightId_:int, fightType_:int, fightStart_:int, fightSpectatorLocked_:bool, fightTeams_:list['FightTeamLightInformations'], fightTeamsOptions_:list['FightOptionsInformations']):
+        self.fightId = fightId_
+        self.fightType = fightType_
+        self.fightStart = fightStart_
+        self.fightSpectatorLocked = fightSpectatorLocked_
+        self.fightTeams = fightTeams_
+        self.fightTeamsOptions = fightTeamsOptions_
         
         super().__init__()
     

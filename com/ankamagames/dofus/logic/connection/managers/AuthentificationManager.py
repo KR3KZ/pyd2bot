@@ -1,9 +1,11 @@
 from argparse import ArgumentError
 import os
 from com.ankamagames.dofus.network.messages.connection.IdentificationMessage import IdentificationMessage
+from com.ankamagames.dofus.network.types.version.Version import Version
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.hurlan.crypto.symmetric.aESKey import AESKey
 from com.hurlan.crypto.symmetric.cBCMode import CBCMode
 from com.hurlan.crypto.symmetric.nullPAd import NullPad
@@ -63,8 +65,19 @@ class AuthentificationManager(metaclass=Singleton):
         self._password = password
 
     def getIdentificationMessage(self) -> IdentificationMessage:
-        imsg = {
-            'autoconnect': False,
+
+
+        version = Version()
+        version.init(
+            build_=11,
+            buildType_=0,
+            code_=5,
+            major_=2,
+            minor_=62
+        )
+        imsg = NetworkMessage.from_json({
+            '__type__': 'IdentificationMessage',
+            'autoconnect': True,
             'credentials': self.getAuthCredentials(),
             'failedAttempts': [],
             'lang': 'fr',
@@ -73,14 +86,15 @@ class AuthentificationManager(metaclass=Singleton):
             'useCertificate': False,
             'useLoginToken': False,
             'version': {
-                'build': 11,
+                '__type__': 'Version',
+                'build': 13,
                 'buildType': 0,
                 'code': 5,
                 'major': 2,
                 'minor': 62
             }
-        }
-        return IdentificationMessage.from_json(imsg)
+        })
+        return imsg
     
     def getAuthCredentials(self) -> list[int]:
         baIn = bytearray()

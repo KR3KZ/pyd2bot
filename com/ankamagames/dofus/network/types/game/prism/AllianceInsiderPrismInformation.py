@@ -13,13 +13,13 @@ class AllianceInsiderPrismInformation(PrismInformation):
     modulesObjects:list['ObjectItem']
     
 
-    def init(self, lastTimeSlotModificationDate:int, lastTimeSlotModificationAuthorGuildId:int, lastTimeSlotModificationAuthorId:int, lastTimeSlotModificationAuthorName:str, modulesObjects:list['ObjectItem'], typeId:int, state:int, nextVulnerabilityDate:int, placementDate:int, rewardTokenCount:int):
-        self.lastTimeSlotModificationDate = lastTimeSlotModificationDate
-        self.lastTimeSlotModificationAuthorGuildId = lastTimeSlotModificationAuthorGuildId
-        self.lastTimeSlotModificationAuthorId = lastTimeSlotModificationAuthorId
-        self.lastTimeSlotModificationAuthorName = lastTimeSlotModificationAuthorName
-        self.modulesObjects = modulesObjects
+    def init(self, lastTimeSlotModificationDate_:int, lastTimeSlotModificationAuthorGuildId_:int, lastTimeSlotModificationAuthorId_:int, lastTimeSlotModificationAuthorName_:str, modulesObjects_:list['ObjectItem'], typeId_:int, state_:int, nextVulnerabilityDate_:int, placementDate_:int, rewardTokenCount_:int):
+        self.lastTimeSlotModificationDate = lastTimeSlotModificationDate_
+        self.lastTimeSlotModificationAuthorGuildId = lastTimeSlotModificationAuthorGuildId_
+        self.lastTimeSlotModificationAuthorId = lastTimeSlotModificationAuthorId_
+        self.lastTimeSlotModificationAuthorName = lastTimeSlotModificationAuthorName_
+        self.modulesObjects = modulesObjects_
         
-        super().__init__(typeId, state, nextVulnerabilityDate, placementDate, rewardTokenCount)
+        super().__init__(typeId_, state_, nextVulnerabilityDate_, placementDate_, rewardTokenCount_)
     
     

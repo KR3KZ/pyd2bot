@@ -5,8 +5,8 @@ class CharacterCapabilitiesMessage(NetworkMessage):
     guildEmblemSymbolCategories:int
     
 
-    def init(self, guildEmblemSymbolCategories:int):
-        self.guildEmblemSymbolCategories = guildEmblemSymbolCategories
+    def init(self, guildEmblemSymbolCategories_:int):
+        self.guildEmblemSymbolCategories = guildEmblemSymbolCategories_
         
         super().__init__()
     

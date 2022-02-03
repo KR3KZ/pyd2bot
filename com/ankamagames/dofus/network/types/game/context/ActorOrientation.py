@@ -6,9 +6,9 @@ class ActorOrientation(NetworkMessage):
     direction:int
     
 
-    def init(self, id:int, direction:int):
-        self.id = id
-        self.direction = direction
+    def init(self, id_:int, direction_:int):
+        self.id = id_
+        self.direction = direction_
         
         super().__init__()
     

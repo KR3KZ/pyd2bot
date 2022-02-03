@@ -11,11 +11,11 @@ class ObjectItemQuantityPriceDateEffects(ObjectItemGenericQuantity):
     date:int
     
 
-    def init(self, price:int, effects:'ObjectEffects', date:int, objectGID:int, quantity:int):
-        self.price = price
-        self.effects = effects
-        self.date = date
+    def init(self, price_:int, effects_:'ObjectEffects', date_:int, objectGID_:int, quantity_:int):
+        self.price = price_
+        self.effects = effects_
+        self.date = date_
         
-        super().__init__(objectGID, quantity)
+        super().__init__(objectGID_, quantity_)
     
     

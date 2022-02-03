@@ -5,9 +5,9 @@ class UpdateMountBooleanCharacteristic(UpdateMountCharacteristic):
     value:bool
     
 
-    def init(self, value:bool, type:int):
-        self.value = value
+    def init(self, value_:bool, type_:int):
+        self.value = value_
         
-        super().__init__(type)
+        super().__init__(type_)
     
     

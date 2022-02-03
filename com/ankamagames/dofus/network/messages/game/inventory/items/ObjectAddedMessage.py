@@ -10,9 +10,9 @@ class ObjectAddedMessage(NetworkMessage):
     origin:int
     
 
-    def init(self, object:'ObjectItem', origin:int):
-        self.object = object
-        self.origin = origin
+    def init(self, object_:'ObjectItem', origin_:int):
+        self.object = object_
+        self.origin = origin_
         
         super().__init__()
     

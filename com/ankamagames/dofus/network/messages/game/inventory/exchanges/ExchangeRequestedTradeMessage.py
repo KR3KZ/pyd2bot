@@ -6,10 +6,10 @@ class ExchangeRequestedTradeMessage(ExchangeRequestedMessage):
     target:int
     
 
-    def init(self, source:int, target:int, exchangeType:int):
-        self.source = source
-        self.target = target
+    def init(self, source_:int, target_:int, exchangeType_:int):
+        self.source = source_
+        self.target = target_
         
-        super().__init__(exchangeType)
+        super().__init__(exchangeType_)
     
     

@@ -6,9 +6,9 @@ class PaddockBuyableInformations(NetworkMessage):
     locked:bool
     
 
-    def init(self, price:int, locked:bool):
-        self.price = price
-        self.locked = locked
+    def init(self, price_:int, locked_:bool):
+        self.price = price_
+        self.locked = locked_
         
         super().__init__()
     

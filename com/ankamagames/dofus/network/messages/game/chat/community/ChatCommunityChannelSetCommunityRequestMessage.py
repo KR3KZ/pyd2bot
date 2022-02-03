@@ -5,8 +5,8 @@ class ChatCommunityChannelSetCommunityRequestMessage(NetworkMessage):
     communityId:int
     
 
-    def init(self, communityId:int):
-        self.communityId = communityId
+    def init(self, communityId_:int):
+        self.communityId = communityId_
         
         super().__init__()
     

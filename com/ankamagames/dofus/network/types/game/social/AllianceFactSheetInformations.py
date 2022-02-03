@@ -9,9 +9,9 @@ class AllianceFactSheetInformations(AllianceInformations):
     creationDate:int
     
 
-    def init(self, creationDate:int, allianceEmblem:'GuildEmblem', allianceName:str, allianceId:int, allianceTag:str):
-        self.creationDate = creationDate
+    def init(self, creationDate_:int, allianceEmblem_:'GuildEmblem', allianceName_:str, allianceId_:int, allianceTag_:str):
+        self.creationDate = creationDate_
         
-        super().__init__(allianceEmblem, allianceName, allianceId, allianceTag)
+        super().__init__(allianceEmblem_, allianceName_, allianceId_, allianceTag_)
     
     

@@ -5,8 +5,8 @@ class ServerSelectionMessage(NetworkMessage):
     serverId:int
     
 
-    def init(self, serverId:int):
-        self.serverId = serverId
+    def init(self, serverId_:int):
+        self.serverId = serverId_
         
         super().__init__()
     

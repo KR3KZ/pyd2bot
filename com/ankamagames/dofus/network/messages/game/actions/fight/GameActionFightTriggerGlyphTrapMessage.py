@@ -8,12 +8,12 @@ class GameActionFightTriggerGlyphTrapMessage(AbstractGameActionMessage):
     triggeredSpellId:int
     
 
-    def init(self, markId:int, markImpactCell:int, triggeringCharacterId:int, triggeredSpellId:int, actionId:int, sourceId:int):
-        self.markId = markId
-        self.markImpactCell = markImpactCell
-        self.triggeringCharacterId = triggeringCharacterId
-        self.triggeredSpellId = triggeredSpellId
+    def init(self, markId_:int, markImpactCell_:int, triggeringCharacterId_:int, triggeredSpellId_:int, actionId_:int, sourceId_:int):
+        self.markId = markId_
+        self.markImpactCell = markImpactCell_
+        self.triggeringCharacterId = triggeringCharacterId_
+        self.triggeredSpellId = triggeredSpellId_
         
-        super().__init__(actionId, sourceId)
+        super().__init__(actionId_, sourceId_)
     
     

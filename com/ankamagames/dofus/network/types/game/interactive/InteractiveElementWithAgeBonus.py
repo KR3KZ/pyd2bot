@@ -10,9 +10,9 @@ class InteractiveElementWithAgeBonus(InteractiveElement):
     ageBonus:int
     
 
-    def init(self, ageBonus:int, elementId:int, elementTypeId:int, enabledSkills:list['InteractiveElementSkill'], disabledSkills:list['InteractiveElementSkill'], onCurrentMap:bool):
-        self.ageBonus = ageBonus
+    def init(self, ageBonus_:int, elementId_:int, elementTypeId_:int, enabledSkills_:list['InteractiveElementSkill'], disabledSkills_:list['InteractiveElementSkill'], onCurrentMap_:bool):
+        self.ageBonus = ageBonus_
         
-        super().__init__(elementId, elementTypeId, enabledSkills, disabledSkills, onCurrentMap)
+        super().__init__(elementId_, elementTypeId_, enabledSkills_, disabledSkills_, onCurrentMap_)
     
     

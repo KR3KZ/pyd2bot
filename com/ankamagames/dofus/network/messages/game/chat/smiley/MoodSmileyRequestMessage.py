@@ -5,8 +5,8 @@ class MoodSmileyRequestMessage(NetworkMessage):
     smileyId:int
     
 
-    def init(self, smileyId:int):
-        self.smileyId = smileyId
+    def init(self, smileyId_:int):
+        self.smileyId = smileyId_
         
         super().__init__()
     

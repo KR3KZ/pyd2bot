@@ -5,9 +5,9 @@ class PartyPledgeLoyaltyRequestMessage(AbstractPartyMessage):
     loyal:bool
     
 
-    def init(self, loyal:bool, partyId:int):
-        self.loyal = loyal
+    def init(self, loyal_:bool, partyId_:int):
+        self.loyal = loyal_
         
-        super().__init__(partyId)
+        super().__init__(partyId_)
     
     

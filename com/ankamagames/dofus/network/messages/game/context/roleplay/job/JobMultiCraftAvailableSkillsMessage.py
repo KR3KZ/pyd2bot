@@ -6,10 +6,10 @@ class JobMultiCraftAvailableSkillsMessage(JobAllowMultiCraftRequestMessage):
     skills:list[int]
     
 
-    def init(self, playerId:int, skills:list[int], enabled:bool):
-        self.playerId = playerId
-        self.skills = skills
+    def init(self, playerId_:int, skills_:list[int], enabled_:bool):
+        self.playerId = playerId_
+        self.skills = skills_
         
-        super().__init__(enabled)
+        super().__init__(enabled_)
     
     

@@ -9,8 +9,8 @@ class BreachBranchesMessage(NetworkMessage):
     branches:list['ExtendedBreachBranch']
     
 
-    def init(self, branches:list['ExtendedBreachBranch']):
-        self.branches = branches
+    def init(self, branches_:list['ExtendedBreachBranch']):
+        self.branches = branches_
         
         super().__init__()
     

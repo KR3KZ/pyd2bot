@@ -9,9 +9,9 @@ class JobExperienceOtherPlayerUpdateMessage(JobExperienceUpdateMessage):
     playerId:int
     
 
-    def init(self, playerId:int, experiencesUpdate:'JobExperience'):
-        self.playerId = playerId
+    def init(self, playerId_:int, experiencesUpdate_:'JobExperience'):
+        self.playerId = playerId_
         
-        super().__init__(experiencesUpdate)
+        super().__init__(experiencesUpdate_)
     
     

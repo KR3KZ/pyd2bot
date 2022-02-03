@@ -9,9 +9,9 @@ class PartyUpdateMessage(AbstractPartyEventMessage):
     memberInformations:'PartyMemberInformations'
     
 
-    def init(self, memberInformations:'PartyMemberInformations', partyId:int):
-        self.memberInformations = memberInformations
+    def init(self, memberInformations_:'PartyMemberInformations', partyId_:int):
+        self.memberInformations = memberInformations_
         
-        super().__init__(partyId)
+        super().__init__(partyId_)
     
     

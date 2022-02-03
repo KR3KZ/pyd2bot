@@ -1,4 +1,4 @@
-from com.ankamagames.dofus.logic.common.managers.AuthentificationManager import AuthentificationManager
+from com.ankamagames.dofus.logic.connection.managers.AuthentificationManager import AuthentificationManager
 
 key = 
 AuthentificationManager().setPublicKey(hcmsg.key)

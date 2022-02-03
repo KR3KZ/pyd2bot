@@ -5,9 +5,9 @@ class ObjectEffectInteger(ObjectEffect):
     value:int
     
 
-    def init(self, value:int, actionId:int):
-        self.value = value
+    def init(self, value_:int, actionId_:int):
+        self.value = value_
         
-        super().__init__(actionId)
+        super().__init__(actionId_)
     
     

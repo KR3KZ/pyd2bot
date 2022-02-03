@@ -9,8 +9,8 @@ class AllianceListMessage(NetworkMessage):
     alliances:list['AllianceFactSheetInformations']
     
 
-    def init(self, alliances:list['AllianceFactSheetInformations']):
-        self.alliances = alliances
+    def init(self, alliances_:list['AllianceFactSheetInformations']):
+        self.alliances = alliances_
         
         super().__init__()
     

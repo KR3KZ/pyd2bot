@@ -5,8 +5,8 @@ class CurrentServerStatusUpdateMessage(NetworkMessage):
     status:int
     
 
-    def init(self, status:int):
-        self.status = status
+    def init(self, status_:int):
+        self.status = status_
         
         super().__init__()
     

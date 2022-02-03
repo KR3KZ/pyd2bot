@@ -6,9 +6,9 @@ class DebtsDeleteMessage(NetworkMessage):
     debts:list[int]
     
 
-    def init(self, reason:int, debts:list[int]):
-        self.reason = reason
-        self.debts = debts
+    def init(self, reason_:int, debts_:list[int]):
+        self.reason = reason_
+        self.debts = debts_
         
         super().__init__()
     

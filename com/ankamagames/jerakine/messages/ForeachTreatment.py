@@ -1,7 +1,7 @@
 from types import FunctionType
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-   from com.ankamagames.jerakine.managers.Worker import Worker
+   from com.ankamagames.jerakine.network.messages.Worker import Worker
 from com.ankamagames.jerakine.messages.Treatment import Treatment
 
 

@@ -6,10 +6,10 @@ class GameActionFightThrowCharacterMessage(AbstractGameActionMessage):
     cellId:int
     
 
-    def init(self, targetId:int, cellId:int, actionId:int, sourceId:int):
-        self.targetId = targetId
-        self.cellId = cellId
+    def init(self, targetId_:int, cellId_:int, actionId_:int, sourceId_:int):
+        self.targetId = targetId_
+        self.cellId = cellId_
         
-        super().__init__(actionId, sourceId)
+        super().__init__(actionId_, sourceId_)
     
     

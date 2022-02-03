@@ -6,9 +6,9 @@ class AllianceInvitationStateRecruterMessage(NetworkMessage):
     invitationState:int
     
 
-    def init(self, recrutedName:str, invitationState:int):
-        self.recrutedName = recrutedName
-        self.invitationState = invitationState
+    def init(self, recrutedName_:str, invitationState_:int):
+        self.recrutedName = recrutedName_
+        self.invitationState = invitationState_
         
         super().__init__()
     

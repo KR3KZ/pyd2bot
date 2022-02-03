@@ -5,8 +5,8 @@ class GameFightReadyMessage(NetworkMessage):
     isReady:bool
     
 
-    def init(self, isReady:bool):
-        self.isReady = isReady
+    def init(self, isReady_:bool):
+        self.isReady = isReady_
         
         super().__init__()
     

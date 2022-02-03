@@ -9,9 +9,9 @@ class SelectedServerDataExtendedMessage(SelectedServerDataMessage):
     servers:list['GameServerInformations']
     
 
-    def init(self, servers:list['GameServerInformations'], serverId:int, address:str, ports:list[int], canCreateNewCharacter:bool, ticket:list[int]):
-        self.servers = servers
+    def init(self, servers_:list['GameServerInformations'], serverId_:int, address_:str, ports_:list[int], canCreateNewCharacter_:bool, ticket_:list[int]):
+        self.servers = servers_
         
-        super().__init__(serverId, address, ports, canCreateNewCharacter, ticket)
+        super().__init__(serverId_, address_, ports_, canCreateNewCharacter_, ticket_)
     
     

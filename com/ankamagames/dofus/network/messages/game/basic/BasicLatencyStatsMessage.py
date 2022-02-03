@@ -7,10 +7,10 @@ class BasicLatencyStatsMessage(NetworkMessage):
     max:int
     
 
-    def init(self, latency:int, sampleCount:int, max:int):
-        self.latency = latency
-        self.sampleCount = sampleCount
-        self.max = max
+    def init(self, latency_:int, sampleCount_:int, max_:int):
+        self.latency = latency_
+        self.sampleCount = sampleCount_
+        self.max = max_
         
         super().__init__()
     

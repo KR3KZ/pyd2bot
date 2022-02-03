@@ -9,8 +9,8 @@ class BasicCharactersListMessage(NetworkMessage):
     characters:list['CharacterBaseInformations']
     
 
-    def init(self, characters:list['CharacterBaseInformations']):
-        self.characters = characters
+    def init(self, characters_:list['CharacterBaseInformations']):
+        self.characters = characters_
         
         super().__init__()
     

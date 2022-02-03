@@ -20,19 +20,19 @@ class JobCrafterDirectoryEntryPlayerInfo(NetworkMessage):
     status:'PlayerStatus'
     
 
-    def init(self, playerId:int, playerName:str, alignmentSide:int, breed:int, sex:bool, isInWorkshop:bool, worldX:int, worldY:int, mapId:int, subAreaId:int, canCraftLegendary:bool, status:'PlayerStatus'):
-        self.playerId = playerId
-        self.playerName = playerName
-        self.alignmentSide = alignmentSide
-        self.breed = breed
-        self.sex = sex
-        self.isInWorkshop = isInWorkshop
-        self.worldX = worldX
-        self.worldY = worldY
-        self.mapId = mapId
-        self.subAreaId = subAreaId
-        self.canCraftLegendary = canCraftLegendary
-        self.status = status
+    def init(self, playerId_:int, playerName_:str, alignmentSide_:int, breed_:int, sex_:bool, isInWorkshop_:bool, worldX_:int, worldY_:int, mapId_:int, subAreaId_:int, canCraftLegendary_:bool, status_:'PlayerStatus'):
+        self.playerId = playerId_
+        self.playerName = playerName_
+        self.alignmentSide = alignmentSide_
+        self.breed = breed_
+        self.sex = sex_
+        self.isInWorkshop = isInWorkshop_
+        self.worldX = worldX_
+        self.worldY = worldY_
+        self.mapId = mapId_
+        self.subAreaId = subAreaId_
+        self.canCraftLegendary = canCraftLegendary_
+        self.status = status_
         
         super().__init__()
     

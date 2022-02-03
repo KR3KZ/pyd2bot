@@ -5,8 +5,8 @@ class SpouseStatusMessage(NetworkMessage):
     hasSpouse:bool
     
 
-    def init(self, hasSpouse:bool):
-        self.hasSpouse = hasSpouse
+    def init(self, hasSpouse_:bool):
+        self.hasSpouse = hasSpouse_
         
         super().__init__()
     

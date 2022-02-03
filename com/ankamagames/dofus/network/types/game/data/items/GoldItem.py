@@ -5,8 +5,8 @@ class GoldItem(Item):
     sum:int
     
 
-    def init(self, sum:int):
-        self.sum = sum
+    def init(self, sum_:int):
+        self.sum = sum_
         
         super().__init__()
     

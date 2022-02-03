@@ -7,10 +7,10 @@ class GameRolePlayArenaFightPropositionMessage(NetworkMessage):
     duration:int
     
 
-    def init(self, fightId:int, alliesId:list[int], duration:int):
-        self.fightId = fightId
-        self.alliesId = alliesId
-        self.duration = duration
+    def init(self, fightId_:int, alliesId_:list[int], duration_:int):
+        self.fightId = fightId_
+        self.alliesId = alliesId_
+        self.duration = duration_
         
         super().__init__()
     

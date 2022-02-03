@@ -18,18 +18,22 @@ class FriendOnlineInformations(FriendInformations):
     status:'PlayerStatus'
     sex:bool
     havenBagShared:bool
+    sex:bool
+    havenBagShared:bool
     
 
-    def init(self, playerId:int, playerName:str, level:int, alignmentSide:int, breed:int, guildInfo:'GuildInformations', moodSmileyId:int, status:'PlayerStatus', playerState:int, lastConnection:int, achievementPoints:int, leagueId:int, ladderPosition:int, accountId:int, accountTag:'AccountTagInformation'):
-        self.playerId = playerId
-        self.playerName = playerName
-        self.level = level
-        self.alignmentSide = alignmentSide
-        self.breed = breed
-        self.guildInfo = guildInfo
-        self.moodSmileyId = moodSmileyId
-        self.status = status
+    def init(self, playerId_:int, playerName_:str, level_:int, alignmentSide_:int, breed_:int, guildInfo_:'GuildInformations', moodSmileyId_:int, status_:'PlayerStatus', sex_:bool, havenBagShared_:bool, playerState_:int, lastConnection_:int, achievementPoints_:int, leagueId_:int, ladderPosition_:int, accountId_:int, accountTag_:'AccountTagInformation'):
+        self.playerId = playerId_
+        self.playerName = playerName_
+        self.level = level_
+        self.alignmentSide = alignmentSide_
+        self.breed = breed_
+        self.guildInfo = guildInfo_
+        self.moodSmileyId = moodSmileyId_
+        self.status = status_
+        self.sex = sex_
+        self.havenBagShared = havenBagShared_
         
-        super().__init__(playerState, lastConnection, achievementPoints, leagueId, ladderPosition, accountId, accountTag)
+        super().__init__(playerState_, lastConnection_, achievementPoints_, leagueId_, ladderPosition_, accountId_, accountTag_)
     
     

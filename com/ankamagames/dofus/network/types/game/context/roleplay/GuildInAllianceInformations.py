@@ -10,10 +10,10 @@ class GuildInAllianceInformations(GuildInformations):
     joinDate:int
     
 
-    def init(self, nbMembers:int, joinDate:int, guildEmblem:'GuildEmblem', guildId:int, guildName:str, guildLevel:int):
-        self.nbMembers = nbMembers
-        self.joinDate = joinDate
+    def init(self, nbMembers_:int, joinDate_:int, guildEmblem_:'GuildEmblem', guildId_:int, guildName_:str, guildLevel_:int):
+        self.nbMembers = nbMembers_
+        self.joinDate = joinDate_
         
-        super().__init__(guildEmblem, guildId, guildName, guildLevel)
+        super().__init__(guildEmblem_, guildId_, guildName_, guildLevel_)
     
     

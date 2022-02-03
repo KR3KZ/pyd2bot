@@ -5,8 +5,8 @@ class PlayerSearchCharacterNameInformation(AbstractPlayerSearchInformation):
     name:str
     
 
-    def init(self, name:str):
-        self.name = name
+    def init(self, name_:str):
+        self.name = name_
         
         super().__init__()
     

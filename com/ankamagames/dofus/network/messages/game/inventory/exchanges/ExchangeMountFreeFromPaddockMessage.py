@@ -8,11 +8,11 @@ class ExchangeMountFreeFromPaddockMessage(NetworkMessage):
     liberator:str
     
 
-    def init(self, name:str, worldX:int, worldY:int, liberator:str):
-        self.name = name
-        self.worldX = worldX
-        self.worldY = worldY
-        self.liberator = liberator
+    def init(self, name_:str, worldX_:int, worldY_:int, liberator_:str):
+        self.name = name_
+        self.worldX = worldX_
+        self.worldY = worldY_
+        self.liberator = liberator_
         
         super().__init__()
     

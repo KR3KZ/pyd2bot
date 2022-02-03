@@ -6,9 +6,9 @@ class AllianceModificationNameAndTagValidMessage(NetworkMessage):
     allianceTag:str
     
 
-    def init(self, allianceName:str, allianceTag:str):
-        self.allianceName = allianceName
-        self.allianceTag = allianceTag
+    def init(self, allianceName_:str, allianceTag_:str):
+        self.allianceName = allianceName_
+        self.allianceTag = allianceTag_
         
         super().__init__()
     

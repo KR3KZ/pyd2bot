@@ -7,10 +7,10 @@ class GameRolePlayPlayerFightRequestMessage(NetworkMessage):
     friendly:bool
     
 
-    def init(self, targetId:int, targetCellId:int, friendly:bool):
-        self.targetId = targetId
-        self.targetCellId = targetCellId
-        self.friendly = friendly
+    def init(self, targetId_:int, targetCellId_:int, friendly_:bool):
+        self.targetId = targetId_
+        self.targetCellId = targetCellId_
+        self.friendly = friendly_
         
         super().__init__()
     

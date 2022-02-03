@@ -6,9 +6,9 @@ class LivingObjectDissociateMessage(NetworkMessage):
     livingPosition:int
     
 
-    def init(self, livingUID:int, livingPosition:int):
-        self.livingUID = livingUID
-        self.livingPosition = livingPosition
+    def init(self, livingUID_:int, livingPosition_:int):
+        self.livingUID = livingUID_
+        self.livingPosition = livingPosition_
         
         super().__init__()
     

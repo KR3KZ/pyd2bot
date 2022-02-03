@@ -9,8 +9,8 @@ class GameFightStartMessage(NetworkMessage):
     idols:list['Idol']
     
 
-    def init(self, idols:list['Idol']):
-        self.idols = idols
+    def init(self, idols_:list['Idol']):
+        self.idols = idols_
         
         super().__init__()
     

@@ -5,8 +5,8 @@ class StatisticDataByte(StatisticData):
     value:int
     
 
-    def init(self, value:int):
-        self.value = value
+    def init(self, value_:int):
+        self.value = value_
         
         super().__init__()
     

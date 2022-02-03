@@ -10,10 +10,10 @@ class GameActionFightChangeLookMessage(AbstractGameActionMessage):
     entityLook:'EntityLook'
     
 
-    def init(self, targetId:int, entityLook:'EntityLook', actionId:int, sourceId:int):
-        self.targetId = targetId
-        self.entityLook = entityLook
+    def init(self, targetId_:int, entityLook_:'EntityLook', actionId_:int, sourceId_:int):
+        self.targetId = targetId_
+        self.entityLook = entityLook_
         
-        super().__init__(actionId, sourceId)
+        super().__init__(actionId_, sourceId_)
     
     

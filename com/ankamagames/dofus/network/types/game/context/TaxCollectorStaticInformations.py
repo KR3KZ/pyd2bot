@@ -12,11 +12,11 @@ class TaxCollectorStaticInformations(NetworkMessage):
     callerId:int
     
 
-    def init(self, firstNameId:int, lastNameId:int, guildIdentity:'GuildInformations', callerId:int):
-        self.firstNameId = firstNameId
-        self.lastNameId = lastNameId
-        self.guildIdentity = guildIdentity
-        self.callerId = callerId
+    def init(self, firstNameId_:int, lastNameId_:int, guildIdentity_:'GuildInformations', callerId_:int):
+        self.firstNameId = firstNameId_
+        self.lastNameId = lastNameId_
+        self.guildIdentity = guildIdentity_
+        self.callerId = callerId_
         
         super().__init__()
     

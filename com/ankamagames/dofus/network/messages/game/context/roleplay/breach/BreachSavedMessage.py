@@ -5,8 +5,8 @@ class BreachSavedMessage(NetworkMessage):
     saved:bool
     
 
-    def init(self, saved:bool):
-        self.saved = saved
+    def init(self, saved_:bool):
+        self.saved = saved_
         
         super().__init__()
     

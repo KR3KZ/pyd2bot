@@ -1,6 +1,8 @@
 from types import FunctionType
 from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
 from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+import com.ankamagames.jerakine.network.parser.NetworkMessageClassDefinition as nmcd
+import com.ankamagames.jerakine.network.parser.NetworkMessageEncoder as nmencoder
 from com.ankamagames.jerakine.network.parser.ProtocolSpec import ProtocolSpec
 from com.ankamagames.jerakine.network.utils.FuncTree import FuncTree
 
@@ -16,9 +18,7 @@ class NetworkMessage(INetworkMessage):
    
    HASH_FUNCTION:FunctionType
 
-   _spec = None
-
-   _schema = None
+   _name = None
 
    def __init__(self):
       NetworkMessage.GLOBAL_INSTANCE_ID += 1
@@ -69,23 +69,39 @@ class NetworkMessage(INetworkMessage):
       output.writeByteArray(data, 0, len(data))
    
    def getMessageId(self) -> int:
-      if not self._spec:
-         self._spec = ProtocolSpec.getClassSpecByName(self.__class__.__name__)
-      return self._spec["protocolId"]
+      spec = ProtocolSpec.getClassSpecByName(self.__class__.__name__)
+      return spec["protocolId"]
    
+   def getSpec(self) -> dict:
+      spec = ProtocolSpec.getClassSpecByName(self.__class__.__name__)
+      return spec
+      
    def reset(self) -> None:
       raise Exception("Not implemented")
    
    @classmethod
-   def unpack(cls, data:ByteArray, length:int) -> 'NetworkMessage':
-      raise Exception("Not implemented")
+   def unpack(cls, data:ByteArray, length:int=None) -> 'NetworkMessage':
+      if length is None:
+         length = data.remaining()
+      return nmcd.NetworkMessageClassDefinition(cls.__name__, data.read(length)).deserialize()
    
-   def pack(self) -> None:
-      raise Exception("Not implemented")
+   def pack(self) -> ByteArray:
+      data = nmencoder.NetworkMessageEncoder.encode(self)
+      typelen = self.computeTypeLen(len(data))
+      header = 4 * self.getMessageId() + typelen
+      packed = ByteArray()
+      packed.writeUnsignedShort(header)
+      packed.writeUnsignedInt(self._instance_id)
+      packed += len(data).to_bytes(typelen, "big")
+      packed += data
+      return packed
    
+   def to_json(self) -> dict:
+      return nmencoder.NetworkMessageEncoder.jsonEncode(self)
+
    @classmethod
    def from_json(cls, mjson:dict):
-      raise Exception("Not implemented")
+      return nmencoder.NetworkMessageEncoder.decodeFromJson(mjson)
         
    def unpackAsync(self, input:ByteArray, length:int) -> FuncTree:
       raise Exception("Not implemented")
@@ -96,7 +112,7 @@ class NetworkMessage(INetworkMessage):
    def writeExternal(self, output:ByteArray) -> None:
       raise Exception("Not implemented")
    
-   def __eq__(self, __o: object) -> bool:
+   def __eq__(self, __o: 'NetworkMessage') -> bool:
        return self._instance_id == __o._instance_id
 
    def __ne__(self, __o: object) -> bool:

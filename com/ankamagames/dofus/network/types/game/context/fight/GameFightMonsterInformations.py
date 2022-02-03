@@ -14,11 +14,11 @@ class GameFightMonsterInformations(GameFightAIInformations):
     creatureLevel:int
     
 
-    def init(self, creatureGenericId:int, creatureGrade:int, creatureLevel:int, spawnInfo:'GameContextBasicSpawnInformation', wave:int, stats:'GameFightCharacteristics', previousPositions:list[int], look:'EntityLook', contextualId:int, disposition:'EntityDispositionInformations'):
-        self.creatureGenericId = creatureGenericId
-        self.creatureGrade = creatureGrade
-        self.creatureLevel = creatureLevel
+    def init(self, creatureGenericId_:int, creatureGrade_:int, creatureLevel_:int, spawnInfo_:'GameContextBasicSpawnInformation', wave_:int, stats_:'GameFightCharacteristics', previousPositions_:list[int], look_:'EntityLook', contextualId_:int, disposition_:'EntityDispositionInformations'):
+        self.creatureGenericId = creatureGenericId_
+        self.creatureGrade = creatureGrade_
+        self.creatureLevel = creatureLevel_
         
-        super().__init__(spawnInfo, wave, stats, previousPositions, look, contextualId, disposition)
+        super().__init__(spawnInfo_, wave_, stats_, previousPositions_, look_, contextualId_, disposition_)
     
     

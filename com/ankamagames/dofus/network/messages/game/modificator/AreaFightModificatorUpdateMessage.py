@@ -5,8 +5,8 @@ class AreaFightModificatorUpdateMessage(NetworkMessage):
     spellPairId:int
     
 
-    def init(self, spellPairId:int):
-        self.spellPairId = spellPairId
+    def init(self, spellPairId_:int):
+        self.spellPairId = spellPairId_
         
         super().__init__()
     

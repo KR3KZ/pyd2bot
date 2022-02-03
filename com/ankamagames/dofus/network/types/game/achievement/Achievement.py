@@ -12,10 +12,10 @@ class Achievement(NetworkMessage):
     startedObjectives:list['AchievementStartedObjective']
     
 
-    def init(self, id:int, finishedObjective:list['AchievementObjective'], startedObjectives:list['AchievementStartedObjective']):
-        self.id = id
-        self.finishedObjective = finishedObjective
-        self.startedObjectives = startedObjectives
+    def init(self, id_:int, finishedObjective_:list['AchievementObjective'], startedObjectives_:list['AchievementStartedObjective']):
+        self.id = id_
+        self.finishedObjective = finishedObjective_
+        self.startedObjectives = startedObjectives_
         
         super().__init__()
     

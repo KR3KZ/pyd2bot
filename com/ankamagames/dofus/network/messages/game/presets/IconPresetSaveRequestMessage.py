@@ -7,10 +7,10 @@ class IconPresetSaveRequestMessage(NetworkMessage):
     updateData:bool
     
 
-    def init(self, presetId:int, symbolId:int, updateData:bool):
-        self.presetId = presetId
-        self.symbolId = symbolId
-        self.updateData = updateData
+    def init(self, presetId_:int, symbolId_:int, updateData_:bool):
+        self.presetId = presetId_
+        self.symbolId = symbolId_
+        self.updateData = updateData_
         
         super().__init__()
     

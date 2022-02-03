@@ -9,8 +9,8 @@ class ObjectModifiedMessage(NetworkMessage):
     object:'ObjectItem'
     
 
-    def init(self, object:'ObjectItem'):
-        self.object = object
+    def init(self, object_:'ObjectItem'):
+        self.object = object_
         
         super().__init__()
     

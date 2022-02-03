@@ -5,8 +5,8 @@ class MountXpRatioMessage(NetworkMessage):
     ratio:int
     
 
-    def init(self, ratio:int):
-        self.ratio = ratio
+    def init(self, ratio_:int):
+        self.ratio = ratio_
         
         super().__init__()
     

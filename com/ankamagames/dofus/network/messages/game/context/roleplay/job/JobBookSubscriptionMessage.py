@@ -9,8 +9,8 @@ class JobBookSubscriptionMessage(NetworkMessage):
     subscriptions:list['JobBookSubscription']
     
 
-    def init(self, subscriptions:list['JobBookSubscription']):
-        self.subscriptions = subscriptions
+    def init(self, subscriptions_:list['JobBookSubscription']):
+        self.subscriptions = subscriptions_
         
         super().__init__()
     

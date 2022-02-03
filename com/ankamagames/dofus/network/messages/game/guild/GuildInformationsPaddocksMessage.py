@@ -10,9 +10,9 @@ class GuildInformationsPaddocksMessage(NetworkMessage):
     paddocksInformations:list['PaddockContentInformations']
     
 
-    def init(self, nbPaddockMax:int, paddocksInformations:list['PaddockContentInformations']):
-        self.nbPaddockMax = nbPaddockMax
-        self.paddocksInformations = paddocksInformations
+    def init(self, nbPaddockMax_:int, paddocksInformations_:list['PaddockContentInformations']):
+        self.nbPaddockMax = nbPaddockMax_
+        self.paddocksInformations = paddocksInformations_
         
         super().__init__()
     

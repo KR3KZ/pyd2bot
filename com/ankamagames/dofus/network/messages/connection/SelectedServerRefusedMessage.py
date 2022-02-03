@@ -7,10 +7,10 @@ class SelectedServerRefusedMessage(NetworkMessage):
     serverStatus:int
     
 
-    def init(self, serverId:int, error:int, serverStatus:int):
-        self.serverId = serverId
-        self.error = error
-        self.serverStatus = serverStatus
+    def init(self, serverId_:int, error_:int, serverStatus_:int):
+        self.serverId = serverId_
+        self.error = error_
+        self.serverStatus = serverStatus_
         
         super().__init__()
     

@@ -5,8 +5,8 @@ class OrnamentSelectedMessage(NetworkMessage):
     ornamentId:int
     
 
-    def init(self, ornamentId:int):
-        self.ornamentId = ornamentId
+    def init(self, ornamentId_:int):
+        self.ornamentId = ornamentId_
         
         super().__init__()
     

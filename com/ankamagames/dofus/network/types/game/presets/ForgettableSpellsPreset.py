@@ -11,10 +11,10 @@ class ForgettableSpellsPreset(Preset):
     forgettableSpells:list['SpellForPreset']
     
 
-    def init(self, baseSpellsPreset:'SpellsPreset', forgettableSpells:list['SpellForPreset'], id:int):
-        self.baseSpellsPreset = baseSpellsPreset
-        self.forgettableSpells = forgettableSpells
+    def init(self, baseSpellsPreset_:'SpellsPreset', forgettableSpells_:list['SpellForPreset'], id_:int):
+        self.baseSpellsPreset = baseSpellsPreset_
+        self.forgettableSpells = forgettableSpells_
         
-        super().__init__(id)
+        super().__init__(id_)
     
     

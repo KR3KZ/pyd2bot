@@ -20,10 +20,10 @@ class {{cls.name}}({% if parent != None %}{{parent.name}}{% else %}NetworkMessag
     {{field.name}}:{{field.typename}}
     {% endfor %}
 
-    def init(self{%for arg in init_args %}, {{arg.name}}:{{arg.type}}{% endfor %}{%for arg in super_args%}, {{arg.name}}:{{arg.type}}{% endfor %}):
+    def init(self{%for arg in init_args %}, {{arg.name}}_:{{arg.type}}{% endfor %}{%for arg in super_args%}, {{arg.name}}_:{{arg.type}}{% endfor %}):
         {% for arg in init_args -%}
-        self.{{arg.name}} = {{arg.name}}
+        self.{{arg.name}} = {{arg.name}}_
         {% endfor %}
-        super().__init__({%for arg in super_args%}{{arg.name}}{% if not loop.last %}, {% endif %}{% endfor %})
+        super().__init__({%for arg in super_args%}{{arg.name}}_{% if not loop.last %}, {% endif %}{% endfor %})
     
     

@@ -9,8 +9,8 @@ class GameRolePlayShowActorMessage(NetworkMessage):
     informations:'GameRolePlayActorInformations'
     
 
-    def init(self, informations:'GameRolePlayActorInformations'):
-        self.informations = informations
+    def init(self, informations_:'GameRolePlayActorInformations'):
+        self.informations = informations_
         
         super().__init__()
     

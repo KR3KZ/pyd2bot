@@ -9,8 +9,8 @@ class GameFightRefreshFighterMessage(NetworkMessage):
     informations:'GameContextActorInformations'
     
 
-    def init(self, informations:'GameContextActorInformations'):
-        self.informations = informations
+    def init(self, informations_:'GameContextActorInformations'):
+        self.informations = informations_
         
         super().__init__()
     

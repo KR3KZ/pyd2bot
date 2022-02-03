@@ -11,10 +11,10 @@ class AllianceInvitedMessage(NetworkMessage):
     allianceInfo:'BasicNamedAllianceInformations'
     
 
-    def init(self, recruterId:int, recruterName:str, allianceInfo:'BasicNamedAllianceInformations'):
-        self.recruterId = recruterId
-        self.recruterName = recruterName
-        self.allianceInfo = allianceInfo
+    def init(self, recruterId_:int, recruterName_:str, allianceInfo_:'BasicNamedAllianceInformations'):
+        self.recruterId = recruterId_
+        self.recruterName = recruterName_
+        self.allianceInfo = allianceInfo_
         
         super().__init__()
     

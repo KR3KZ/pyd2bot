@@ -5,8 +5,8 @@ class ExchangeStartOkMulticraftCrafterMessage(NetworkMessage):
     skillId:int
     
 
-    def init(self, skillId:int):
-        self.skillId = skillId
+    def init(self, skillId_:int):
+        self.skillId = skillId_
         
         super().__init__()
     

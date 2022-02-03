@@ -10,10 +10,10 @@ class QuestActiveDetailedInformations(QuestActiveInformations):
     objectives:list['QuestObjectiveInformations']
     
 
-    def init(self, stepId:int, objectives:list['QuestObjectiveInformations'], questId:int):
-        self.stepId = stepId
-        self.objectives = objectives
+    def init(self, stepId_:int, objectives_:list['QuestObjectiveInformations'], questId_:int):
+        self.stepId = stepId_
+        self.objectives = objectives_
         
-        super().__init__(questId)
+        super().__init__(questId_)
     
     

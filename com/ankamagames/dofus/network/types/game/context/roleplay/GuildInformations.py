@@ -9,9 +9,9 @@ class GuildInformations(BasicGuildInformations):
     guildEmblem:'GuildEmblem'
     
 
-    def init(self, guildEmblem:'GuildEmblem', guildId:int, guildName:str, guildLevel:int):
-        self.guildEmblem = guildEmblem
+    def init(self, guildEmblem_:'GuildEmblem', guildId_:int, guildName_:str, guildLevel_:int):
+        self.guildEmblem = guildEmblem_
         
-        super().__init__(guildId, guildName, guildLevel)
+        super().__init__(guildId_, guildName_, guildLevel_)
     
     

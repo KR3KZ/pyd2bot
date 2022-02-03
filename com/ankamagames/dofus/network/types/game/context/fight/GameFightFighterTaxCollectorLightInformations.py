@@ -6,10 +6,10 @@ class GameFightFighterTaxCollectorLightInformations(GameFightFighterLightInforma
     lastNameId:int
     
 
-    def init(self, firstNameId:int, lastNameId:int, id:int, wave:int, level:int, breed:int):
-        self.firstNameId = firstNameId
-        self.lastNameId = lastNameId
+    def init(self, firstNameId_:int, lastNameId_:int, id_:int, wave_:int, level_:int, breed_:int, sex_:bool, alive_:bool):
+        self.firstNameId = firstNameId_
+        self.lastNameId = lastNameId_
         
-        super().__init__(id, wave, level, breed)
+        super().__init__(id_, wave_, level_, breed_, sex_, alive_)
     
     

@@ -5,8 +5,8 @@ class ClientKeyMessage(NetworkMessage):
     key:str
     
 
-    def init(self, key:str):
-        self.key = key
+    def init(self, key_:str):
+        self.key = key_
         
         super().__init__()
     

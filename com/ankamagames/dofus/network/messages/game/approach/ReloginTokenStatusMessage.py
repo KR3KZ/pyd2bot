@@ -6,9 +6,9 @@ class ReloginTokenStatusMessage(NetworkMessage):
     ticket:list[int]
     
 
-    def init(self, validToken:bool, ticket:list[int]):
-        self.validToken = validToken
-        self.ticket = ticket
+    def init(self, validToken_:bool, ticket_:list[int]):
+        self.validToken = validToken_
+        self.ticket = ticket_
         
         super().__init__()
     

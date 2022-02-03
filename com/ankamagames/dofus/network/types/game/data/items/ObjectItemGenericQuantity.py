@@ -6,9 +6,9 @@ class ObjectItemGenericQuantity(Item):
     quantity:int
     
 
-    def init(self, objectGID:int, quantity:int):
-        self.objectGID = objectGID
-        self.quantity = quantity
+    def init(self, objectGID_:int, quantity_:int):
+        self.objectGID = objectGID_
+        self.quantity = quantity_
         
         super().__init__()
     

@@ -5,8 +5,8 @@ class GuildInvitationMessage(NetworkMessage):
     targetId:int
     
 
-    def init(self, targetId:int):
-        self.targetId = targetId
+    def init(self, targetId_:int):
+        self.targetId = targetId_
         
         super().__init__()
     

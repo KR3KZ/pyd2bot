@@ -20,17 +20,17 @@ class CharacterCharacteristicsInformations(NetworkMessage):
     probationTime:int
     
 
-    def init(self, experience:int, experienceLevelFloor:int, experienceNextLevelFloor:int, experienceBonusLimit:int, kamas:int, alignmentInfos:'ActorExtendedAlignmentInformations', criticalHitWeapon:int, characteristics:list['CharacterCharacteristic'], spellModifications:list['CharacterSpellModification'], probationTime:int):
-        self.experience = experience
-        self.experienceLevelFloor = experienceLevelFloor
-        self.experienceNextLevelFloor = experienceNextLevelFloor
-        self.experienceBonusLimit = experienceBonusLimit
-        self.kamas = kamas
-        self.alignmentInfos = alignmentInfos
-        self.criticalHitWeapon = criticalHitWeapon
-        self.characteristics = characteristics
-        self.spellModifications = spellModifications
-        self.probationTime = probationTime
+    def init(self, experience_:int, experienceLevelFloor_:int, experienceNextLevelFloor_:int, experienceBonusLimit_:int, kamas_:int, alignmentInfos_:'ActorExtendedAlignmentInformations', criticalHitWeapon_:int, characteristics_:list['CharacterCharacteristic'], spellModifications_:list['CharacterSpellModification'], probationTime_:int):
+        self.experience = experience_
+        self.experienceLevelFloor = experienceLevelFloor_
+        self.experienceNextLevelFloor = experienceNextLevelFloor_
+        self.experienceBonusLimit = experienceBonusLimit_
+        self.kamas = kamas_
+        self.alignmentInfos = alignmentInfos_
+        self.criticalHitWeapon = criticalHitWeapon_
+        self.characteristics = characteristics_
+        self.spellModifications = spellModifications_
+        self.probationTime = probationTime_
         
         super().__init__()
     

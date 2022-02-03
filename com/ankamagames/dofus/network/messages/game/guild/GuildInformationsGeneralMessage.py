@@ -12,15 +12,15 @@ class GuildInformationsGeneralMessage(NetworkMessage):
     nbConnectedMembers:int
     
 
-    def init(self, abandonnedPaddock:bool, level:int, expLevelFloor:int, experience:int, expNextLevelFloor:int, creationDate:int, nbTotalMembers:int, nbConnectedMembers:int):
-        self.abandonnedPaddock = abandonnedPaddock
-        self.level = level
-        self.expLevelFloor = expLevelFloor
-        self.experience = experience
-        self.expNextLevelFloor = expNextLevelFloor
-        self.creationDate = creationDate
-        self.nbTotalMembers = nbTotalMembers
-        self.nbConnectedMembers = nbConnectedMembers
+    def init(self, abandonnedPaddock_:bool, level_:int, expLevelFloor_:int, experience_:int, expNextLevelFloor_:int, creationDate_:int, nbTotalMembers_:int, nbConnectedMembers_:int):
+        self.abandonnedPaddock = abandonnedPaddock_
+        self.level = level_
+        self.expLevelFloor = expLevelFloor_
+        self.experience = experience_
+        self.expNextLevelFloor = expNextLevelFloor_
+        self.creationDate = creationDate_
+        self.nbTotalMembers = nbTotalMembers_
+        self.nbConnectedMembers = nbConnectedMembers_
         
         super().__init__()
     

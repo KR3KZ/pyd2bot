@@ -5,8 +5,8 @@ class NpcDialogReplyMessage(NetworkMessage):
     replyId:int
     
 
-    def init(self, replyId:int):
-        self.replyId = replyId
+    def init(self, replyId_:int):
+        self.replyId = replyId_
         
         super().__init__()
     

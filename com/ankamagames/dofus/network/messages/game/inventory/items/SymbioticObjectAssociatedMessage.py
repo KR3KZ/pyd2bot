@@ -5,8 +5,8 @@ class SymbioticObjectAssociatedMessage(NetworkMessage):
     hostUID:int
     
 
-    def init(self, hostUID:int):
-        self.hostUID = hostUID
+    def init(self, hostUID_:int):
+        self.hostUID = hostUID_
         
         super().__init__()
     

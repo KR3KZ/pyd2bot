@@ -5,8 +5,8 @@ class QuestStartRequestMessage(NetworkMessage):
     questId:int
     
 
-    def init(self, questId:int):
-        self.questId = questId
+    def init(self, questId_:int):
+        self.questId = questId_
         
         super().__init__()
     

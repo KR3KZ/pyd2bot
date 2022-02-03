@@ -5,8 +5,8 @@ class GuildGetInformationsMessage(NetworkMessage):
     infoType:int
     
 
-    def init(self, infoType:int):
-        self.infoType = infoType
+    def init(self, infoType_:int):
+        self.infoType = infoType_
         
         super().__init__()
     

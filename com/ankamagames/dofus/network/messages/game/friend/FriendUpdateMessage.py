@@ -9,8 +9,8 @@ class FriendUpdateMessage(NetworkMessage):
     friendUpdated:'FriendInformations'
     
 
-    def init(self, friendUpdated:'FriendInformations'):
-        self.friendUpdated = friendUpdated
+    def init(self, friendUpdated_:'FriendInformations'):
+        self.friendUpdated = friendUpdated_
         
         super().__init__()
     

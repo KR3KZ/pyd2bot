@@ -7,10 +7,10 @@ class LivingObjectMessageRequestMessage(NetworkMessage):
     livingObject:int
     
 
-    def init(self, msgId:int, parameters:list[str], livingObject:int):
-        self.msgId = msgId
-        self.parameters = parameters
-        self.livingObject = livingObject
+    def init(self, msgId_:int, parameters_:list[str], livingObject_:int):
+        self.msgId = msgId_
+        self.parameters = parameters_
+        self.livingObject = livingObject_
         
         super().__init__()
     

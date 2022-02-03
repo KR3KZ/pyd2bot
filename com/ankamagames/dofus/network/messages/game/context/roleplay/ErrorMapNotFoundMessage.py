@@ -5,8 +5,8 @@ class ErrorMapNotFoundMessage(NetworkMessage):
     mapId:int
     
 
-    def init(self, mapId:int):
-        self.mapId = mapId
+    def init(self, mapId_:int):
+        self.mapId = mapId_
         
         super().__init__()
     

@@ -9,8 +9,8 @@ class GameEntityDispositionMessage(NetworkMessage):
     disposition:'IdentifiedEntityDispositionInformations'
     
 
-    def init(self, disposition:'IdentifiedEntityDispositionInformations'):
-        self.disposition = disposition
+    def init(self, disposition_:'IdentifiedEntityDispositionInformations'):
+        self.disposition = disposition_
         
         super().__init__()
     

@@ -5,8 +5,8 @@ class AlignmentWarEffortDonateRequestMessage(NetworkMessage):
     donation:int
     
 
-    def init(self, donation:int):
-        self.donation = donation
+    def init(self, donation_:int):
+        self.donation = donation_
         
         super().__init__()
     

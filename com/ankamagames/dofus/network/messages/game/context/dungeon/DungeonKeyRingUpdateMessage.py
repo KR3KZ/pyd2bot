@@ -6,9 +6,9 @@ class DungeonKeyRingUpdateMessage(NetworkMessage):
     available:bool
     
 
-    def init(self, dungeonId:int, available:bool):
-        self.dungeonId = dungeonId
-        self.available = available
+    def init(self, dungeonId_:int, available_:bool):
+        self.dungeonId = dungeonId_
+        self.available = available_
         
         super().__init__()
     

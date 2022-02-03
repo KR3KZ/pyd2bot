@@ -9,9 +9,9 @@ class MonsterInGroupInformations(MonsterInGroupLightInformations):
     look:'EntityLook'
     
 
-    def init(self, look:'EntityLook', genericId:int, grade:int, level:int):
-        self.look = look
+    def init(self, look_:'EntityLook', genericId_:int, grade_:int, level_:int):
+        self.look = look_
         
-        super().__init__(genericId, grade, level)
+        super().__init__(genericId_, grade_, level_)
     
     

@@ -9,8 +9,8 @@ class AccessoryPreviewMessage(NetworkMessage):
     look:'EntityLook'
     
 
-    def init(self, look:'EntityLook'):
-        self.look = look
+    def init(self, look_:'EntityLook'):
+        self.look = look_
         
         super().__init__()
     

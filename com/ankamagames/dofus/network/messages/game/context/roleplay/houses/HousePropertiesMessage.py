@@ -11,10 +11,10 @@ class HousePropertiesMessage(NetworkMessage):
     properties:'HouseInstanceInformations'
     
 
-    def init(self, houseId:int, doorsOnMap:list[int], properties:'HouseInstanceInformations'):
-        self.houseId = houseId
-        self.doorsOnMap = doorsOnMap
-        self.properties = properties
+    def init(self, houseId_:int, doorsOnMap_:list[int], properties_:'HouseInstanceInformations'):
+        self.houseId = houseId_
+        self.doorsOnMap = doorsOnMap_
+        self.properties = properties_
         
         super().__init__()
     

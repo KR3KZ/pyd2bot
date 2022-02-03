@@ -13,12 +13,12 @@ class ObjectItem(Item):
     quantity:int
     
 
-    def init(self, position:int, objectGID:int, effects:list['ObjectEffect'], objectUID:int, quantity:int):
-        self.position = position
-        self.objectGID = objectGID
-        self.effects = effects
-        self.objectUID = objectUID
-        self.quantity = quantity
+    def init(self, position_:int, objectGID_:int, effects_:list['ObjectEffect'], objectUID_:int, quantity_:int):
+        self.position = position_
+        self.objectGID = objectGID_
+        self.effects = effects_
+        self.objectUID = objectUID_
+        self.quantity = quantity_
         
         super().__init__()
     

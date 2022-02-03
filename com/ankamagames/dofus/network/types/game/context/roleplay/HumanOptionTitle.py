@@ -6,9 +6,9 @@ class HumanOptionTitle(HumanOption):
     titleParam:str
     
 
-    def init(self, titleId:int, titleParam:str):
-        self.titleId = titleId
-        self.titleParam = titleParam
+    def init(self, titleId_:int, titleParam_:str):
+        self.titleId = titleId_
+        self.titleParam = titleParam_
         
         super().__init__()
     

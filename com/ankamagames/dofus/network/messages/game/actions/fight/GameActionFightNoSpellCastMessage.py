@@ -5,8 +5,8 @@ class GameActionFightNoSpellCastMessage(NetworkMessage):
     spellLevelId:int
     
 
-    def init(self, spellLevelId:int):
-        self.spellLevelId = spellLevelId
+    def init(self, spellLevelId_:int):
+        self.spellLevelId = spellLevelId_
         
         super().__init__()
     

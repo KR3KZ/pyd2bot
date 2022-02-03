@@ -11,10 +11,10 @@ class AllianceJoinedMessage(NetworkMessage):
     leadingGuildId:int
     
 
-    def init(self, allianceInfo:'AllianceInformations', enabled:bool, leadingGuildId:int):
-        self.allianceInfo = allianceInfo
-        self.enabled = enabled
-        self.leadingGuildId = leadingGuildId
+    def init(self, allianceInfo_:'AllianceInformations', enabled_:bool, leadingGuildId_:int):
+        self.allianceInfo = allianceInfo_
+        self.enabled = enabled_
+        self.leadingGuildId = leadingGuildId_
         
         super().__init__()
     

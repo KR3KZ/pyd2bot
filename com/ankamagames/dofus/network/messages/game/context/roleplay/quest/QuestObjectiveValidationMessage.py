@@ -6,9 +6,9 @@ class QuestObjectiveValidationMessage(NetworkMessage):
     objectiveId:int
     
 
-    def init(self, questId:int, objectiveId:int):
-        self.questId = questId
-        self.objectiveId = objectiveId
+    def init(self, questId_:int, objectiveId_:int):
+        self.questId = questId_
+        self.objectiveId = objectiveId_
         
         super().__init__()
     

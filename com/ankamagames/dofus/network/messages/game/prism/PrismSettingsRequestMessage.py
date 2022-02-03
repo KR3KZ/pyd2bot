@@ -6,9 +6,9 @@ class PrismSettingsRequestMessage(NetworkMessage):
     startDefenseTime:int
     
 
-    def init(self, subAreaId:int, startDefenseTime:int):
-        self.subAreaId = subAreaId
-        self.startDefenseTime = startDefenseTime
+    def init(self, subAreaId_:int, startDefenseTime_:int):
+        self.subAreaId = subAreaId_
+        self.startDefenseTime = startDefenseTime_
         
         super().__init__()
     

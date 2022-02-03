@@ -1,6 +1,7 @@
 from threading import Timer
 from com.ankamagames.dofus.kernel.Kernel import Kernel
 import com.ankamagames.dofus.kernel.net.ConnectionsHandler as connh
+from com.ankamagames.dofus.network.Metadata import Metadata
 from com.ankamagames.dofus.network.messages.common.basic.BasicPingMessage import BasicPingMessage
 from com.ankamagames.dofus.network.messages.handshake.ProtocolRequired import ProtocolRequired
 from com.ankamagames.jerakine.benchmark.BenchmarkTimer import BenchmarkTimer
@@ -10,7 +11,6 @@ from com.ankamagames.jerakine.messages.Frame import Frame
 from com.ankamagames.jerakine.messages.Message import Message
 from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
 from com.ankamagames.jerakine.types.enums.Priority import Priority
-from scripts.AS3ToPythonConverter.Metadata import Metadata
 from com.ankamagames.dofus.kernel.PanicMessages import PanicMessages
 logger = Logger(__name__)
 
@@ -21,7 +21,7 @@ class HandshakeFrame(Frame):
    
    TIMEOUT_REPEAT_COUNT:int = 1
    
-   _timeoutTimer:BenchmarkTimer
+   _timeoutTimer:Timer
    
    def __init__(self):
       super().__init__()
@@ -85,7 +85,7 @@ class HandshakeFrame(Frame):
          return False
    
    def onTimeout(self) -> None:
-      pingMsg:BasicPingMessage = BasicPingMessage(quiet=True)
+      pingMsg:BasicPingMessage = BasicPingMessage(quiet_=True)
       connh.ConnectionsHandler.getConnection().send(pingMsg)
    
    def pulled(self) -> bool:

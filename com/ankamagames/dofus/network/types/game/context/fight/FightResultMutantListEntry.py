@@ -9,9 +9,9 @@ class FightResultMutantListEntry(FightResultFighterListEntry):
     level:int
     
 
-    def init(self, level:int, id:int, alive:bool, outcome:int, wave:int, rewards:'FightLoot'):
-        self.level = level
+    def init(self, level_:int, id_:int, alive_:bool, outcome_:int, wave_:int, rewards_:'FightLoot'):
+        self.level = level_
         
-        super().__init__(id, alive, outcome, wave, rewards)
+        super().__init__(id_, alive_, outcome_, wave_, rewards_)
     
     

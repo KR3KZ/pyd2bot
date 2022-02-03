@@ -9,9 +9,9 @@ class GameActionFightDispellableEffectMessage(AbstractGameActionMessage):
     effect:'AbstractFightDispellableEffect'
     
 
-    def init(self, effect:'AbstractFightDispellableEffect', actionId:int, sourceId:int):
-        self.effect = effect
+    def init(self, effect_:'AbstractFightDispellableEffect', actionId_:int, sourceId_:int):
+        self.effect = effect_
         
-        super().__init__(actionId, sourceId)
+        super().__init__(actionId_, sourceId_)
     
     

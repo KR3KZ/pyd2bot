@@ -91,7 +91,11 @@ class CustomSharedObject:
             with open(self._file, "rb") as fp:
                self._fileStream = fp
                c = pyamf.decode(fp.read())
-               self.data = next(c)
+               c = list(c)
+               if c:
+                  self.data = c[0]
+               else:
+                  self.data = {}
          except Exception as e:
             if self._fileStream:
                self._fileStream.close()

@@ -6,10 +6,10 @@ class ShortcutObjectItem(ShortcutObject):
     itemGID:int
     
 
-    def init(self, itemUID:int, itemGID:int, slot:int):
-        self.itemUID = itemUID
-        self.itemGID = itemGID
+    def init(self, itemUID_:int, itemGID_:int, slot_:int):
+        self.itemUID = itemUID_
+        self.itemGID = itemGID_
         
-        super().__init__(slot)
+        super().__init__(slot_)
     
     

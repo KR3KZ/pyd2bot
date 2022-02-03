@@ -6,9 +6,9 @@ class GameMapNoMovementMessage(NetworkMessage):
     cellY:int
     
 
-    def init(self, cellX:int, cellY:int):
-        self.cellX = cellX
-        self.cellY = cellY
+    def init(self, cellX_:int, cellY_:int):
+        self.cellX = cellX_
+        self.cellY = cellY_
         
         super().__init__()
     

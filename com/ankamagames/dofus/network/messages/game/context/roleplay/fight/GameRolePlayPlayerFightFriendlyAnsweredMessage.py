@@ -8,11 +8,11 @@ class GameRolePlayPlayerFightFriendlyAnsweredMessage(NetworkMessage):
     accept:bool
     
 
-    def init(self, fightId:int, sourceId:int, targetId:int, accept:bool):
-        self.fightId = fightId
-        self.sourceId = sourceId
-        self.targetId = targetId
-        self.accept = accept
+    def init(self, fightId_:int, sourceId_:int, targetId_:int, accept_:bool):
+        self.fightId = fightId_
+        self.sourceId = sourceId_
+        self.targetId = targetId_
+        self.accept = accept_
         
         super().__init__()
     

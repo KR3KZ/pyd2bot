@@ -13,13 +13,13 @@ class AccountHouseInformations(HouseInformations):
     subAreaId:int
     
 
-    def init(self, houseInfos:'HouseInstanceInformations', worldX:int, worldY:int, mapId:int, subAreaId:int, houseId:int, modelId:int):
-        self.houseInfos = houseInfos
-        self.worldX = worldX
-        self.worldY = worldY
-        self.mapId = mapId
-        self.subAreaId = subAreaId
+    def init(self, houseInfos_:'HouseInstanceInformations', worldX_:int, worldY_:int, mapId_:int, subAreaId_:int, houseId_:int, modelId_:int):
+        self.houseInfos = houseInfos_
+        self.worldX = worldX_
+        self.worldY = worldY_
+        self.mapId = mapId_
+        self.subAreaId = subAreaId_
         
-        super().__init__(houseId, modelId)
+        super().__init__(houseId_, modelId_)
     
     

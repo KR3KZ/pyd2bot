@@ -6,9 +6,9 @@ class StartupActionsObjetAttributionMessage(NetworkMessage):
     characterId:int
     
 
-    def init(self, actionId:int, characterId:int):
-        self.actionId = actionId
-        self.characterId = characterId
+    def init(self, actionId_:int, characterId_:int):
+        self.actionId = actionId_
+        self.characterId = characterId_
         
         super().__init__()
     

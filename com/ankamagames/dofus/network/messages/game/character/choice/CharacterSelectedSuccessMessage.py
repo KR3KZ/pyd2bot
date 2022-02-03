@@ -10,9 +10,9 @@ class CharacterSelectedSuccessMessage(NetworkMessage):
     isCollectingStats:bool
     
 
-    def init(self, infos:'CharacterBaseInformations', isCollectingStats:bool):
-        self.infos = infos
-        self.isCollectingStats = isCollectingStats
+    def init(self, infos_:'CharacterBaseInformations', isCollectingStats_:bool):
+        self.infos = infos_
+        self.isCollectingStats = isCollectingStats_
         
         super().__init__()
     

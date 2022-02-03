@@ -9,8 +9,8 @@ class StatedMapUpdateMessage(NetworkMessage):
     statedElements:list['StatedElement']
     
 
-    def init(self, statedElements:list['StatedElement']):
-        self.statedElements = statedElements
+    def init(self, statedElements_:list['StatedElement']):
+        self.statedElements = statedElements_
         
         super().__init__()
     

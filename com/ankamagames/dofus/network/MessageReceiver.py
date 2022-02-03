@@ -2302,10 +2302,9 @@ class MessageReceiver(RawDataParser):
       if not messageType:
          logger.warn(f"Unknown packet received (ID {messageId}  , length {messageLength}")
          return None
-      logger.debug(f"Message {messageType} received")
+      logger.debug(f"Message {messageType.__class__.__name__} received")
       message = messageType.unpack(input, messageLength)
       message.unpacked = True
-      message.__post_init__()
       return message
    
    def parseAsync(self, input:ByteArray, messageId:int, messageLength:int, callback:FunctionType) -> INetworkMessage:

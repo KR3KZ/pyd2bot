@@ -14,11 +14,11 @@ class PrismFightersInformation(NetworkMessage):
     enemyCharactersInformations:list['CharacterMinimalPlusLookInformations']
     
 
-    def init(self, subAreaId:int, waitingForHelpInfo:'ProtectedEntityWaitingForHelpInfo', allyCharactersInformations:list['CharacterMinimalPlusLookInformations'], enemyCharactersInformations:list['CharacterMinimalPlusLookInformations']):
-        self.subAreaId = subAreaId
-        self.waitingForHelpInfo = waitingForHelpInfo
-        self.allyCharactersInformations = allyCharactersInformations
-        self.enemyCharactersInformations = enemyCharactersInformations
+    def init(self, subAreaId_:int, waitingForHelpInfo_:'ProtectedEntityWaitingForHelpInfo', allyCharactersInformations_:list['CharacterMinimalPlusLookInformations'], enemyCharactersInformations_:list['CharacterMinimalPlusLookInformations']):
+        self.subAreaId = subAreaId_
+        self.waitingForHelpInfo = waitingForHelpInfo_
+        self.allyCharactersInformations = allyCharactersInformations_
+        self.enemyCharactersInformations = enemyCharactersInformations_
         
         super().__init__()
     

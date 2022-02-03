@@ -5,9 +5,9 @@ class PartyLeaderUpdateMessage(AbstractPartyEventMessage):
     partyLeaderId:int
     
 
-    def init(self, partyLeaderId:int, partyId:int):
-        self.partyLeaderId = partyLeaderId
+    def init(self, partyLeaderId_:int, partyId_:int):
+        self.partyLeaderId = partyLeaderId_
         
-        super().__init__(partyId)
+        super().__init__(partyId_)
     
     

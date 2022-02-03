@@ -5,9 +5,9 @@ class PartyInvitationCancelledForGuestMessage(AbstractPartyMessage):
     cancelerId:int
     
 
-    def init(self, cancelerId:int, partyId:int):
-        self.cancelerId = cancelerId
+    def init(self, cancelerId_:int, partyId_:int):
+        self.cancelerId = cancelerId_
         
-        super().__init__(partyId)
+        super().__init__(partyId_)
     
     

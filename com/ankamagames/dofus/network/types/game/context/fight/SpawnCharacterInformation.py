@@ -6,9 +6,9 @@ class SpawnCharacterInformation(SpawnInformation):
     level:int
     
 
-    def init(self, name:str, level:int):
-        self.name = name
-        self.level = level
+    def init(self, name_:str, level_:int):
+        self.name = name_
+        self.level = level_
         
         super().__init__()
     

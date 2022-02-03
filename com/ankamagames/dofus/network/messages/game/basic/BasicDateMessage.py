@@ -7,10 +7,10 @@ class BasicDateMessage(NetworkMessage):
     year:int
     
 
-    def init(self, day:int, month:int, year:int):
-        self.day = day
-        self.month = month
-        self.year = year
+    def init(self, day_:int, month_:int, year_:int):
+        self.day = day_
+        self.month = month_
+        self.year = year_
         
         super().__init__()
     

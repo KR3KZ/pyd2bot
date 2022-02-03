@@ -10,9 +10,9 @@ class BreachInvitationResponseMessage(NetworkMessage):
     accept:bool
     
 
-    def init(self, guest:'CharacterMinimalInformations', accept:bool):
-        self.guest = guest
-        self.accept = accept
+    def init(self, guest_:'CharacterMinimalInformations', accept_:bool):
+        self.guest = guest_
+        self.accept = accept_
         
         super().__init__()
     

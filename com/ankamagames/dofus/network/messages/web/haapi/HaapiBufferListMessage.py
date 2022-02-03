@@ -9,8 +9,8 @@ class HaapiBufferListMessage(NetworkMessage):
     buffers:list['BufferInformation']
     
 
-    def init(self, buffers:list['BufferInformation']):
-        self.buffers = buffers
+    def init(self, buffers_:list['BufferInformation']):
+        self.buffers = buffers_
         
         super().__init__()
     

@@ -12,12 +12,12 @@ class IgnoredOnlineInformations(IgnoredInformations):
     sex:bool
     
 
-    def init(self, playerId:int, playerName:str, breed:int, sex:bool, accountId:int, accountTag:'AccountTagInformation'):
-        self.playerId = playerId
-        self.playerName = playerName
-        self.breed = breed
-        self.sex = sex
+    def init(self, playerId_:int, playerName_:str, breed_:int, sex_:bool, accountId_:int, accountTag_:'AccountTagInformation'):
+        self.playerId = playerId_
+        self.playerName = playerName_
+        self.breed = breed_
+        self.sex = sex_
         
-        super().__init__(accountId, accountTag)
+        super().__init__(accountId_, accountTag_)
     
     

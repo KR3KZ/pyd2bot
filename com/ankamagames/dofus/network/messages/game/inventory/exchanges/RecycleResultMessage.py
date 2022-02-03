@@ -6,9 +6,9 @@ class RecycleResultMessage(NetworkMessage):
     nuggetsForPlayer:int
     
 
-    def init(self, nuggetsForPrism:int, nuggetsForPlayer:int):
-        self.nuggetsForPrism = nuggetsForPrism
-        self.nuggetsForPlayer = nuggetsForPlayer
+    def init(self, nuggetsForPrism_:int, nuggetsForPlayer_:int):
+        self.nuggetsForPrism = nuggetsForPrism_
+        self.nuggetsForPlayer = nuggetsForPlayer_
         
         super().__init__()
     

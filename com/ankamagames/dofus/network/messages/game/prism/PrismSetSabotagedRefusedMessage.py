@@ -6,9 +6,9 @@ class PrismSetSabotagedRefusedMessage(NetworkMessage):
     reason:int
     
 
-    def init(self, subAreaId:int, reason:int):
-        self.subAreaId = subAreaId
-        self.reason = reason
+    def init(self, subAreaId_:int, reason_:int):
+        self.subAreaId = subAreaId_
+        self.reason = reason_
         
         super().__init__()
     

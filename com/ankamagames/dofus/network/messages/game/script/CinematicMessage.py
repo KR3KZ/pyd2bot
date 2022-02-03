@@ -5,8 +5,8 @@ class CinematicMessage(NetworkMessage):
     cinematicId:int
     
 
-    def init(self, cinematicId:int):
-        self.cinematicId = cinematicId
+    def init(self, cinematicId_:int):
+        self.cinematicId = cinematicId_
         
         super().__init__()
     

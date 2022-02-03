@@ -7,10 +7,10 @@ class ExchangeBidHouseBuyMessage(NetworkMessage):
     price:int
     
 
-    def init(self, uid:int, qty:int, price:int):
-        self.uid = uid
-        self.qty = qty
-        self.price = price
+    def init(self, uid_:int, qty_:int, price_:int):
+        self.uid = uid_
+        self.qty = qty_
+        self.price = price_
         
         super().__init__()
     

@@ -10,9 +10,9 @@ class GuildFightPlayersEnemiesListMessage(NetworkMessage):
     playerInfo:list['CharacterMinimalPlusLookInformations']
     
 
-    def init(self, fightId:int, playerInfo:list['CharacterMinimalPlusLookInformations']):
-        self.fightId = fightId
-        self.playerInfo = playerInfo
+    def init(self, fightId_:int, playerInfo_:list['CharacterMinimalPlusLookInformations']):
+        self.fightId = fightId_
+        self.playerInfo = playerInfo_
         
         super().__init__()
     

@@ -6,9 +6,9 @@ class HouseGuildRightsViewMessage(NetworkMessage):
     instanceId:int
     
 
-    def init(self, houseId:int, instanceId:int):
-        self.houseId = houseId
-        self.instanceId = instanceId
+    def init(self, houseId_:int, instanceId_:int):
+        self.houseId = houseId_
+        self.instanceId = instanceId_
         
         super().__init__()
     

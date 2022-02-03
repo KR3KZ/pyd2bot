@@ -7,10 +7,10 @@ class QuestObjectiveInformations(NetworkMessage):
     dialogParams:list[str]
     
 
-    def init(self, objectiveId:int, objectiveStatus:bool, dialogParams:list[str]):
-        self.objectiveId = objectiveId
-        self.objectiveStatus = objectiveStatus
-        self.dialogParams = dialogParams
+    def init(self, objectiveId_:int, objectiveStatus_:bool, dialogParams_:list[str]):
+        self.objectiveId = objectiveId_
+        self.objectiveStatus = objectiveStatus_
+        self.dialogParams = dialogParams_
         
         super().__init__()
     

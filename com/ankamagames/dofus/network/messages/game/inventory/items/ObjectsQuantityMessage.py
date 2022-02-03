@@ -9,8 +9,8 @@ class ObjectsQuantityMessage(NetworkMessage):
     objectsUIDAndQty:list['ObjectItemQuantity']
     
 
-    def init(self, objectsUIDAndQty:list['ObjectItemQuantity']):
-        self.objectsUIDAndQty = objectsUIDAndQty
+    def init(self, objectsUIDAndQty_:list['ObjectItemQuantity']):
+        self.objectsUIDAndQty = objectsUIDAndQty_
         
         super().__init__()
     

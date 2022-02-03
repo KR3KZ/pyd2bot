@@ -6,9 +6,9 @@ class ItemDurability(NetworkMessage):
     durabilityMax:int
     
 
-    def init(self, durability:int, durabilityMax:int):
-        self.durability = durability
-        self.durabilityMax = durabilityMax
+    def init(self, durability_:int, durabilityMax_:int):
+        self.durability = durability_
+        self.durabilityMax = durabilityMax_
         
         super().__init__()
     

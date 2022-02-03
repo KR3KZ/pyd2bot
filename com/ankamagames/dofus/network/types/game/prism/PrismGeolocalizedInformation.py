@@ -12,12 +12,12 @@ class PrismGeolocalizedInformation(PrismSubareaEmptyInfo):
     prism:'PrismInformation'
     
 
-    def init(self, worldX:int, worldY:int, mapId:int, prism:'PrismInformation', subAreaId:int, allianceId:int):
-        self.worldX = worldX
-        self.worldY = worldY
-        self.mapId = mapId
-        self.prism = prism
+    def init(self, worldX_:int, worldY_:int, mapId_:int, prism_:'PrismInformation', subAreaId_:int, allianceId_:int):
+        self.worldX = worldX_
+        self.worldY = worldY_
+        self.mapId = mapId_
+        self.prism = prism_
         
-        super().__init__(subAreaId, allianceId)
+        super().__init__(subAreaId_, allianceId_)
     
     

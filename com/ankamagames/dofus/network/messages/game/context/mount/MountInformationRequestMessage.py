@@ -6,9 +6,9 @@ class MountInformationRequestMessage(NetworkMessage):
     time:int
     
 
-    def init(self, id:int, time:int):
-        self.id = id
-        self.time = time
+    def init(self, id_:int, time_:int):
+        self.id = id_
+        self.time = time_
         
         super().__init__()
     

@@ -6,9 +6,9 @@ class NumericWhoIsMessage(NetworkMessage):
     accountId:int
     
 
-    def init(self, playerId:int, accountId:int):
-        self.playerId = playerId
-        self.accountId = accountId
+    def init(self, playerId_:int, accountId_:int):
+        self.playerId = playerId_
+        self.accountId = accountId_
         
         super().__init__()
     

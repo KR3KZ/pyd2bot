@@ -9,10 +9,14 @@ class IgnoredDeleteResultMessage(NetworkMessage):
     tag:'AccountTagInformation'
     success:bool
     session:bool
+    success:bool
+    session:bool
     
 
-    def init(self, tag:'AccountTagInformation'):
-        self.tag = tag
+    def init(self, tag_:'AccountTagInformation', success_:bool, session_:bool):
+        self.tag = tag_
+        self.success = success_
+        self.session = session_
         
         super().__init__()
     

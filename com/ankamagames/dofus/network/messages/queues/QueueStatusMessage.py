@@ -6,9 +6,9 @@ class QueueStatusMessage(NetworkMessage):
     total:int
     
 
-    def init(self, position:int, total:int):
-        self.position = position
-        self.total = total
+    def init(self, position_:int, total_:int):
+        self.position = position_
+        self.total = total_
         
         super().__init__()
     

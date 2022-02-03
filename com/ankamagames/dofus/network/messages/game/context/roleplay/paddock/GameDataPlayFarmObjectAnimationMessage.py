@@ -5,8 +5,8 @@ class GameDataPlayFarmObjectAnimationMessage(NetworkMessage):
     cellId:list[int]
     
 
-    def init(self, cellId:list[int]):
-        self.cellId = cellId
+    def init(self, cellId_:list[int]):
+        self.cellId = cellId_
         
         super().__init__()
     

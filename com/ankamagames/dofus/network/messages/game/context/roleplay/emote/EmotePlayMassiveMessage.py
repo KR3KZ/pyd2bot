@@ -5,9 +5,9 @@ class EmotePlayMassiveMessage(EmotePlayAbstractMessage):
     actorIds:list[int]
     
 
-    def init(self, actorIds:list[int], emoteId:int, emoteStartTime:int):
-        self.actorIds = actorIds
+    def init(self, actorIds_:list[int], emoteId_:int, emoteStartTime_:int):
+        self.actorIds = actorIds_
         
-        super().__init__(emoteId, emoteStartTime)
+        super().__init__(emoteId_, emoteStartTime_)
     
     

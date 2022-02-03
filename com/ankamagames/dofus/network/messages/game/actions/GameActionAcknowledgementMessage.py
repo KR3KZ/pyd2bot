@@ -6,9 +6,9 @@ class GameActionAcknowledgementMessage(NetworkMessage):
     actionId:int
     
 
-    def init(self, valid:bool, actionId:int):
-        self.valid = valid
-        self.actionId = actionId
+    def init(self, valid_:bool, actionId_:int):
+        self.valid = valid_
+        self.actionId = actionId_
         
         super().__init__()
     

@@ -9,8 +9,8 @@ class ExchangeStartedBidBuyerMessage(NetworkMessage):
     buyerDescriptor:'SellerBuyerDescriptor'
     
 
-    def init(self, buyerDescriptor:'SellerBuyerDescriptor'):
-        self.buyerDescriptor = buyerDescriptor
+    def init(self, buyerDescriptor_:'SellerBuyerDescriptor'):
+        self.buyerDescriptor = buyerDescriptor_
         
         super().__init__()
     

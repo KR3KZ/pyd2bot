@@ -7,10 +7,10 @@ class ProtectedEntityWaitingForHelpInfo(NetworkMessage):
     nbPositionForDefensors:int
     
 
-    def init(self, timeLeftBeforeFight:int, waitTimeForPlacement:int, nbPositionForDefensors:int):
-        self.timeLeftBeforeFight = timeLeftBeforeFight
-        self.waitTimeForPlacement = waitTimeForPlacement
-        self.nbPositionForDefensors = nbPositionForDefensors
+    def init(self, timeLeftBeforeFight_:int, waitTimeForPlacement_:int, nbPositionForDefensors_:int):
+        self.timeLeftBeforeFight = timeLeftBeforeFight_
+        self.waitTimeForPlacement = waitTimeForPlacement_
+        self.nbPositionForDefensors = nbPositionForDefensors_
         
         super().__init__()
     

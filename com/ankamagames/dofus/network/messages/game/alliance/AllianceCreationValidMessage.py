@@ -11,10 +11,10 @@ class AllianceCreationValidMessage(NetworkMessage):
     allianceEmblem:'GuildEmblem'
     
 
-    def init(self, allianceName:str, allianceTag:str, allianceEmblem:'GuildEmblem'):
-        self.allianceName = allianceName
-        self.allianceTag = allianceTag
-        self.allianceEmblem = allianceEmblem
+    def init(self, allianceName_:str, allianceTag_:str, allianceEmblem_:'GuildEmblem'):
+        self.allianceName = allianceName_
+        self.allianceTag = allianceTag_
+        self.allianceEmblem = allianceEmblem_
         
         super().__init__()
     

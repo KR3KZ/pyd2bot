@@ -14,12 +14,12 @@ class FightCommonInformations(NetworkMessage):
     fightTeamsOptions:list['FightOptionsInformations']
     
 
-    def init(self, fightId:int, fightType:int, fightTeams:list['FightTeamInformations'], fightTeamsPositions:list[int], fightTeamsOptions:list['FightOptionsInformations']):
-        self.fightId = fightId
-        self.fightType = fightType
-        self.fightTeams = fightTeams
-        self.fightTeamsPositions = fightTeamsPositions
-        self.fightTeamsOptions = fightTeamsOptions
+    def init(self, fightId_:int, fightType_:int, fightTeams_:list['FightTeamInformations'], fightTeamsPositions_:list[int], fightTeamsOptions_:list['FightOptionsInformations']):
+        self.fightId = fightId_
+        self.fightType = fightType_
+        self.fightTeams = fightTeams_
+        self.fightTeamsPositions = fightTeamsPositions_
+        self.fightTeamsOptions = fightTeamsOptions_
         
         super().__init__()
     

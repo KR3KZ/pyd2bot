@@ -6,9 +6,9 @@ class GameRolePlayMonsterNotAngryAtPlayerMessage(NetworkMessage):
     monsterGroupId:int
     
 
-    def init(self, playerId:int, monsterGroupId:int):
-        self.playerId = playerId
-        self.monsterGroupId = monsterGroupId
+    def init(self, playerId_:int, monsterGroupId_:int):
+        self.playerId = playerId_
+        self.monsterGroupId = monsterGroupId_
         
         super().__init__()
     

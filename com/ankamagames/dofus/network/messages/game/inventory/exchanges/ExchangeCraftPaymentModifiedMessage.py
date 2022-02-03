@@ -5,8 +5,8 @@ class ExchangeCraftPaymentModifiedMessage(NetworkMessage):
     goldSum:int
     
 
-    def init(self, goldSum:int):
-        self.goldSum = goldSum
+    def init(self, goldSum_:int):
+        self.goldSum = goldSum_
         
         super().__init__()
     

@@ -5,9 +5,9 @@ class ChatClientMultiMessage(ChatAbstractClientMessage):
     channel:int
     
 
-    def init(self, channel:int, content:str):
-        self.channel = channel
+    def init(self, channel_:int, content_:str):
+        self.channel = channel_
         
-        super().__init__(content)
+        super().__init__(content_)
     
     

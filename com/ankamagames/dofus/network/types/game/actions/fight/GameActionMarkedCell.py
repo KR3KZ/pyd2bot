@@ -8,11 +8,11 @@ class GameActionMarkedCell(NetworkMessage):
     cellsType:int
     
 
-    def init(self, cellId:int, zoneSize:int, cellColor:int, cellsType:int):
-        self.cellId = cellId
-        self.zoneSize = zoneSize
-        self.cellColor = cellColor
-        self.cellsType = cellsType
+    def init(self, cellId_:int, zoneSize_:int, cellColor_:int, cellsType_:int):
+        self.cellId = cellId_
+        self.zoneSize = zoneSize_
+        self.cellColor = cellColor_
+        self.cellsType = cellsType_
         
         super().__init__()
     

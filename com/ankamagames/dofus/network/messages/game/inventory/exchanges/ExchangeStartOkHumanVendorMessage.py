@@ -10,9 +10,9 @@ class ExchangeStartOkHumanVendorMessage(NetworkMessage):
     objectsInfos:list['ObjectItemToSellInHumanVendorShop']
     
 
-    def init(self, sellerId:int, objectsInfos:list['ObjectItemToSellInHumanVendorShop']):
-        self.sellerId = sellerId
-        self.objectsInfos = objectsInfos
+    def init(self, sellerId_:int, objectsInfos_:list['ObjectItemToSellInHumanVendorShop']):
+        self.sellerId = sellerId_
+        self.objectsInfos = objectsInfos_
         
         super().__init__()
     

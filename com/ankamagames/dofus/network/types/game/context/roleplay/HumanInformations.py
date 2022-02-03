@@ -12,10 +12,10 @@ class HumanInformations(NetworkMessage):
     options:list['HumanOption']
     
 
-    def init(self, restrictions:'ActorRestrictionsInformations', sex:bool, options:list['HumanOption']):
-        self.restrictions = restrictions
-        self.sex = sex
-        self.options = options
+    def init(self, restrictions_:'ActorRestrictionsInformations', sex_:bool, options_:list['HumanOption']):
+        self.restrictions = restrictions_
+        self.sex = sex_
+        self.options = options_
         
         super().__init__()
     

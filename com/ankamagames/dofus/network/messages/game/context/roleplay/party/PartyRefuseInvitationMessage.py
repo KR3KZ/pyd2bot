@@ -4,8 +4,8 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.party.Abstract
 class PartyRefuseInvitationMessage(AbstractPartyMessage):
     
 
-    def init(self, partyId:int):
+    def init(self, partyId_:int):
         
-        super().__init__(partyId)
+        super().__init__(partyId_)
     
     

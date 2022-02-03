@@ -9,8 +9,8 @@ class InteractiveMapUpdateMessage(NetworkMessage):
     interactiveElements:list['InteractiveElement']
     
 
-    def init(self, interactiveElements:list['InteractiveElement']):
-        self.interactiveElements = interactiveElements
+    def init(self, interactiveElements_:list['InteractiveElement']):
+        self.interactiveElements = interactiveElements_
         
         super().__init__()
     

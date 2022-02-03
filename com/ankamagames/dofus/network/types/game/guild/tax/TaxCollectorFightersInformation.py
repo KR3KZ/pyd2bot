@@ -12,10 +12,10 @@ class TaxCollectorFightersInformation(NetworkMessage):
     enemyCharactersInformations:list['CharacterMinimalPlusLookInformations']
     
 
-    def init(self, collectorId:int, allyCharactersInformations:list['CharacterMinimalPlusLookInformations'], enemyCharactersInformations:list['CharacterMinimalPlusLookInformations']):
-        self.collectorId = collectorId
-        self.allyCharactersInformations = allyCharactersInformations
-        self.enemyCharactersInformations = enemyCharactersInformations
+    def init(self, collectorId_:int, allyCharactersInformations_:list['CharacterMinimalPlusLookInformations'], enemyCharactersInformations_:list['CharacterMinimalPlusLookInformations']):
+        self.collectorId = collectorId_
+        self.allyCharactersInformations = allyCharactersInformations_
+        self.enemyCharactersInformations = enemyCharactersInformations_
         
         super().__init__()
     

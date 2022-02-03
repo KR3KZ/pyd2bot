@@ -5,9 +5,9 @@ class ExchangePlayerRequestMessage(ExchangeRequestMessage):
     target:int
     
 
-    def init(self, target:int, exchangeType:int):
-        self.target = target
+    def init(self, target_:int, exchangeType_:int):
+        self.target = target_
         
-        super().__init__(exchangeType)
+        super().__init__(exchangeType_)
     
     

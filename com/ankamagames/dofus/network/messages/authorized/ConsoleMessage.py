@@ -6,9 +6,9 @@ class ConsoleMessage(NetworkMessage):
     content:str
     
 
-    def init(self, type:int, content:str):
-        self.type = type
-        self.content = content
+    def init(self, type_:int, content_:str):
+        self.type = type_
+        self.content = content_
         
         super().__init__()
     

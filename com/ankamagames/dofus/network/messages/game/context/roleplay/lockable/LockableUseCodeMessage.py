@@ -5,8 +5,8 @@ class LockableUseCodeMessage(NetworkMessage):
     code:str
     
 
-    def init(self, code:str):
-        self.code = code
+    def init(self, code_:str):
+        self.code = code_
         
         super().__init__()
     

@@ -5,8 +5,8 @@ class SequenceNumberMessage(NetworkMessage):
     number:int
     
 
-    def init(self, number:int):
-        self.number = number
+    def init(self, number_:int):
+        self.number = number_
         
         super().__init__()
     

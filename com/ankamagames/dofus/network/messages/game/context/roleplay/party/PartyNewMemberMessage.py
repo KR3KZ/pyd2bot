@@ -8,8 +8,8 @@ if TYPE_CHECKING:
 class PartyNewMemberMessage(PartyUpdateMessage):
     
 
-    def init(self, memberInformations:'PartyMemberInformations', partyId:int):
+    def init(self, memberInformations_:'PartyMemberInformations', partyId_:int):
         
-        super().__init__(memberInformations, partyId)
+        super().__init__(memberInformations_, partyId_)
     
     

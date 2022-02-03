@@ -9,12 +9,12 @@ class DecraftedItemStackInfo(NetworkMessage):
     runesQty:list[int]
     
 
-    def init(self, objectUID:int, bonusMin:int, bonusMax:int, runesId:list[int], runesQty:list[int]):
-        self.objectUID = objectUID
-        self.bonusMin = bonusMin
-        self.bonusMax = bonusMax
-        self.runesId = runesId
-        self.runesQty = runesQty
+    def init(self, objectUID_:int, bonusMin_:int, bonusMax_:int, runesId_:list[int], runesQty_:list[int]):
+        self.objectUID = objectUID_
+        self.bonusMin = bonusMin_
+        self.bonusMax = bonusMax_
+        self.runesId = runesId_
+        self.runesQty = runesQty_
         
         super().__init__()
     

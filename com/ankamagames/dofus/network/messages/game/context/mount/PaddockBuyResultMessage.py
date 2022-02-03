@@ -7,10 +7,10 @@ class PaddockBuyResultMessage(NetworkMessage):
     realPrice:int
     
 
-    def init(self, paddockId:int, bought:bool, realPrice:int):
-        self.paddockId = paddockId
-        self.bought = bought
-        self.realPrice = realPrice
+    def init(self, paddockId_:int, bought_:bool, realPrice_:int):
+        self.paddockId = paddockId_
+        self.bought = bought_
+        self.realPrice = realPrice_
         
         super().__init__()
     

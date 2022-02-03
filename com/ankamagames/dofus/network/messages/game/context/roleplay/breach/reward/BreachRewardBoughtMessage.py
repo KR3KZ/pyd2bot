@@ -6,9 +6,9 @@ class BreachRewardBoughtMessage(NetworkMessage):
     bought:bool
     
 
-    def init(self, id:int, bought:bool):
-        self.id = id
-        self.bought = bought
+    def init(self, id_:int, bought_:bool):
+        self.id = id_
+        self.bought = bought_
         
         super().__init__()
     

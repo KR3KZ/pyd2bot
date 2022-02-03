@@ -5,8 +5,8 @@ class MigratedServerListMessage(NetworkMessage):
     migratedServerIds:list[int]
     
 
-    def init(self, migratedServerIds:list[int]):
-        self.migratedServerIds = migratedServerIds
+    def init(self, migratedServerIds_:list[int]):
+        self.migratedServerIds = migratedServerIds_
         
         super().__init__()
     

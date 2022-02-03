@@ -6,10 +6,10 @@ class GameActionFightModifyEffectsDurationMessage(AbstractGameActionMessage):
     delta:int
     
 
-    def init(self, targetId:int, delta:int, actionId:int, sourceId:int):
-        self.targetId = targetId
-        self.delta = delta
+    def init(self, targetId_:int, delta_:int, actionId_:int, sourceId_:int):
+        self.targetId = targetId_
+        self.delta = delta_
         
-        super().__init__(actionId, sourceId)
+        super().__init__(actionId_, sourceId_)
     
     

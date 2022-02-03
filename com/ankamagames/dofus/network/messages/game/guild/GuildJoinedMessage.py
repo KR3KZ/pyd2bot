@@ -10,9 +10,9 @@ class GuildJoinedMessage(NetworkMessage):
     memberRights:int
     
 
-    def init(self, guildInfo:'GuildInformations', memberRights:int):
-        self.guildInfo = guildInfo
-        self.memberRights = memberRights
+    def init(self, guildInfo_:'GuildInformations', memberRights_:int):
+        self.guildInfo = guildInfo_
+        self.memberRights = memberRights_
         
         super().__init__()
     

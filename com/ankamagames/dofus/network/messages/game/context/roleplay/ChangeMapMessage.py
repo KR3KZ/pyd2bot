@@ -6,9 +6,9 @@ class ChangeMapMessage(NetworkMessage):
     autopilot:bool
     
 
-    def init(self, mapId:int, autopilot:bool):
-        self.mapId = mapId
-        self.autopilot = autopilot
+    def init(self, mapId_:int, autopilot_:bool):
+        self.mapId = mapId_
+        self.autopilot = autopilot_
         
         super().__init__()
     

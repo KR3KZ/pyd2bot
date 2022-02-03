@@ -5,8 +5,8 @@ class AccessoryPreviewErrorMessage(NetworkMessage):
     error:int
     
 
-    def init(self, error:int):
-        self.error = error
+    def init(self, error_:int):
+        self.error = error_
         
         super().__init__()
     

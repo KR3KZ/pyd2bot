@@ -11,9 +11,9 @@ class PartyMemberArenaInformations(PartyMemberInformations):
     rank:int
     
 
-    def init(self, rank:int, lifePoints:int, maxLifePoints:int, prospecting:int, regenRate:int, initiative:int, alignmentSide:int, worldX:int, worldY:int, mapId:int, subAreaId:int, status:'PlayerStatus', entities:list['PartyEntityBaseInformation'], sex:bool, entityLook:'EntityLook', breed:int, level:int, name:str, id:int):
-        self.rank = rank
+    def init(self, rank_:int, lifePoints_:int, maxLifePoints_:int, prospecting_:int, regenRate_:int, initiative_:int, alignmentSide_:int, worldX_:int, worldY_:int, mapId_:int, subAreaId_:int, status_:'PlayerStatus', entities_:list['PartyEntityBaseInformation'], sex_:bool, entityLook_:'EntityLook', breed_:int, level_:int, name_:str, id_:int):
+        self.rank = rank_
         
-        super().__init__(lifePoints, maxLifePoints, prospecting, regenRate, initiative, alignmentSide, worldX, worldY, mapId, subAreaId, status, entities, sex, entityLook, breed, level, name, id)
+        super().__init__(lifePoints_, maxLifePoints_, prospecting_, regenRate_, initiative_, alignmentSide_, worldX_, worldY_, mapId_, subAreaId_, status_, entities_, sex_, entityLook_, breed_, level_, name_, id_)
     
     

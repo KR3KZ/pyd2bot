@@ -6,9 +6,9 @@ class GameActionFightCastRequestMessage(NetworkMessage):
     cellId:int
     
 
-    def init(self, spellId:int, cellId:int):
-        self.spellId = spellId
-        self.cellId = cellId
+    def init(self, spellId_:int, cellId_:int):
+        self.spellId = spellId_
+        self.cellId = cellId_
         
         super().__init__()
     

@@ -9,12 +9,12 @@ class Version(NetworkMessage):
     buildType:int
     
 
-    def init(self, major:int, minor:int, code:int, build:int, buildType:int):
-        self.major = major
-        self.minor = minor
-        self.code = code
-        self.build = build
-        self.buildType = buildType
+    def init(self, major_:int, minor_:int, code_:int, build_:int, buildType_:int):
+        self.major = major_
+        self.minor = minor_
+        self.code = code_
+        self.build = build_
+        self.buildType = buildType_
         
         super().__init__()
     

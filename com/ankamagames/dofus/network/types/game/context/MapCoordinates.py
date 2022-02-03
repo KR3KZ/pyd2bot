@@ -6,9 +6,9 @@ class MapCoordinates(NetworkMessage):
     worldY:int
     
 
-    def init(self, worldX:int, worldY:int):
-        self.worldX = worldX
-        self.worldY = worldY
+    def init(self, worldX_:int, worldY_:int):
+        self.worldX = worldX_
+        self.worldY = worldY_
         
         super().__init__()
     

@@ -9,9 +9,9 @@ class ChatServerCopyWithObjectMessage(ChatServerCopyMessage):
     objects:list['ObjectItem']
     
 
-    def init(self, objects:list['ObjectItem'], receiverId:int, receiverName:str, channel:int, content:str, timestamp:int, fingerprint:str):
-        self.objects = objects
+    def init(self, objects_:list['ObjectItem'], receiverId_:int, receiverName_:str, channel_:int, content_:str, timestamp_:int, fingerprint_:str):
+        self.objects = objects_
         
-        super().__init__(receiverId, receiverName, channel, content, timestamp, fingerprint)
+        super().__init__(receiverId_, receiverName_, channel_, content_, timestamp_, fingerprint_)
     
     

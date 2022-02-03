@@ -9,8 +9,8 @@ class UpdateRecruitmentInformationMessage(NetworkMessage):
     recruitmentData:'GuildRecruitmentInformation'
     
 
-    def init(self, recruitmentData:'GuildRecruitmentInformation'):
-        self.recruitmentData = recruitmentData
+    def init(self, recruitmentData_:'GuildRecruitmentInformation'):
+        self.recruitmentData = recruitmentData_
         
         super().__init__()
     

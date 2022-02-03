@@ -5,9 +5,9 @@ class ObjectEffectString(ObjectEffect):
     value:str
     
 
-    def init(self, value:str, actionId:int):
-        self.value = value
+    def init(self, value_:str, actionId_:int):
+        self.value = value_
         
-        super().__init__(actionId)
+        super().__init__(actionId_)
     
     

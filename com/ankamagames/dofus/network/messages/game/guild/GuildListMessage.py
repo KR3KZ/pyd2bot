@@ -9,8 +9,8 @@ class GuildListMessage(NetworkMessage):
     guilds:list['GuildInformations']
     
 
-    def init(self, guilds:list['GuildInformations']):
-        self.guilds = guilds
+    def init(self, guilds_:list['GuildInformations']):
+        self.guilds = guilds_
         
         super().__init__()
     

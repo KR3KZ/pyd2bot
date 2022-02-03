@@ -5,9 +5,9 @@ class TreasureHuntDigRequestAnswerFailedMessage(TreasureHuntDigRequestAnswerMess
     wrongFlagCount:int
     
 
-    def init(self, wrongFlagCount:int, questType:int, result:int):
-        self.wrongFlagCount = wrongFlagCount
+    def init(self, wrongFlagCount_:int, questType_:int, result_:int):
+        self.wrongFlagCount = wrongFlagCount_
         
-        super().__init__(questType, result)
+        super().__init__(questType_, result_)
     
     

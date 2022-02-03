@@ -5,8 +5,8 @@ class BreachInvitationRequestMessage(NetworkMessage):
     guests:list[int]
     
 
-    def init(self, guests:list[int]):
-        self.guests = guests
+    def init(self, guests_:list[int]):
+        self.guests = guests_
         
         super().__init__()
     

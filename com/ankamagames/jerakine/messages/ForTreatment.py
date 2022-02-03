@@ -1,5 +1,5 @@
 from types import FunctionType
-from com.ankamagames.jerakine.managers import Worker
+from com.ankamagames.jerakine.network.messages import Worker
 from com.ankamagames.jerakine.messages.Treatment import Treatment
 
 

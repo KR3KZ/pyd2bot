@@ -5,8 +5,8 @@ class ProtocolRequired(NetworkMessage):
     version:str
     
 
-    def init(self, version:str):
-        self.version = version
+    def init(self, version_:str):
+        self.version = version_
         
         super().__init__()
     

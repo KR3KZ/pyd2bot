@@ -4,8 +4,8 @@ from com.ankamagames.dofus.network.messages.game.context.GameMapMovementRequestM
 class GameCautiousMapMovementRequestMessage(GameMapMovementRequestMessage):
     
 
-    def init(self, keyMovements:list[int], mapId:int):
+    def init(self, keyMovements_:list[int], mapId_:int):
         
-        super().__init__(keyMovements, mapId)
+        super().__init__(keyMovements_, mapId_)
     
     

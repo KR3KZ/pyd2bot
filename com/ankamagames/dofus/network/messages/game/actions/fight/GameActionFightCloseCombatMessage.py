@@ -5,9 +5,9 @@ class GameActionFightCloseCombatMessage(AbstractGameActionFightTargetedAbilityMe
     weaponGenericId:int
     
 
-    def init(self, weaponGenericId:int, targetId:int, destinationCellId:int, critical:int, actionId:int, sourceId:int):
-        self.weaponGenericId = weaponGenericId
+    def init(self, weaponGenericId_:int, targetId_:int, destinationCellId_:int, critical_:int, silentCast_:bool, verboseCast_:bool, actionId_:int, sourceId_:int):
+        self.weaponGenericId = weaponGenericId_
         
-        super().__init__(targetId, destinationCellId, critical, actionId, sourceId)
+        super().__init__(targetId_, destinationCellId_, critical_, silentCast_, verboseCast_, actionId_, sourceId_)
     
     

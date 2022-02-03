@@ -13,13 +13,13 @@ class FriendInformations(AbstractContactInformations):
     ladderPosition:int
     
 
-    def init(self, playerState:int, lastConnection:int, achievementPoints:int, leagueId:int, ladderPosition:int, accountId:int, accountTag:'AccountTagInformation'):
-        self.playerState = playerState
-        self.lastConnection = lastConnection
-        self.achievementPoints = achievementPoints
-        self.leagueId = leagueId
-        self.ladderPosition = ladderPosition
+    def init(self, playerState_:int, lastConnection_:int, achievementPoints_:int, leagueId_:int, ladderPosition_:int, accountId_:int, accountTag_:'AccountTagInformation'):
+        self.playerState = playerState_
+        self.lastConnection = lastConnection_
+        self.achievementPoints = achievementPoints_
+        self.leagueId = leagueId_
+        self.ladderPosition = ladderPosition_
         
-        super().__init__(accountId, accountTag)
+        super().__init__(accountId_, accountTag_)
     
     

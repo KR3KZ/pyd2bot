@@ -5,8 +5,8 @@ class DocumentReadingBeginMessage(NetworkMessage):
     documentId:int
     
 
-    def init(self, documentId:int):
-        self.documentId = documentId
+    def init(self, documentId_:int):
+        self.documentId = documentId_
         
         super().__init__()
     

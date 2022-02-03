@@ -5,8 +5,8 @@ class TreasureHuntDigRequestMessage(NetworkMessage):
     questType:int
     
 
-    def init(self, questType:int):
-        self.questType = questType
+    def init(self, questType_:int):
+        self.questType = questType_
         
         super().__init__()
     

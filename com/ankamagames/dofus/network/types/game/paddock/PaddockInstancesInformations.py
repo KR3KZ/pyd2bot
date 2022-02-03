@@ -9,9 +9,9 @@ class PaddockInstancesInformations(PaddockInformations):
     paddocks:list['PaddockBuyableInformations']
     
 
-    def init(self, paddocks:list['PaddockBuyableInformations'], maxOutdoorMount:int, maxItems:int):
-        self.paddocks = paddocks
+    def init(self, paddocks_:list['PaddockBuyableInformations'], maxOutdoorMount_:int, maxItems_:int):
+        self.paddocks = paddocks_
         
-        super().__init__(maxOutdoorMount, maxItems)
+        super().__init__(maxOutdoorMount_, maxItems_)
     
     

@@ -5,8 +5,8 @@ class CharacterCharacteristic(NetworkMessage):
     characteristicId:int
     
 
-    def init(self, characteristicId:int):
-        self.characteristicId = characteristicId
+    def init(self, characteristicId_:int):
+        self.characteristicId = characteristicId_
         
         super().__init__()
     

@@ -9,8 +9,8 @@ class IgnoredListMessage(NetworkMessage):
     ignoredList:list['IgnoredInformations']
     
 
-    def init(self, ignoredList:list['IgnoredInformations']):
-        self.ignoredList = ignoredList
+    def init(self, ignoredList_:list['IgnoredInformations']):
+        self.ignoredList = ignoredList_
         
         super().__init__()
     

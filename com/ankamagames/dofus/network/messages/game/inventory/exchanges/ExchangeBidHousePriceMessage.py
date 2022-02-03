@@ -5,8 +5,8 @@ class ExchangeBidHousePriceMessage(NetworkMessage):
     genId:int
     
 
-    def init(self, genId:int):
-        self.genId = genId
+    def init(self, genId_:int):
+        self.genId = genId_
         
         super().__init__()
     

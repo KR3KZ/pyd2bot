@@ -11,9 +11,9 @@ class ExchangeOfflineSoldItemsMessage(NetworkMessage):
     merchantItems:list['ObjectItemQuantityPriceDateEffects']
     
 
-    def init(self, bidHouseItems:list['ObjectItemQuantityPriceDateEffects'], merchantItems:list['ObjectItemQuantityPriceDateEffects']):
-        self.bidHouseItems = bidHouseItems
-        self.merchantItems = merchantItems
+    def init(self, bidHouseItems_:list['ObjectItemQuantityPriceDateEffects'], merchantItems_:list['ObjectItemQuantityPriceDateEffects']):
+        self.bidHouseItems = bidHouseItems_
+        self.merchantItems = merchantItems_
         
         super().__init__()
     

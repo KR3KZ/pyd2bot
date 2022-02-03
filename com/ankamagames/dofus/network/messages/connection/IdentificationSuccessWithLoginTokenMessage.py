@@ -9,9 +9,9 @@ class IdentificationSuccessWithLoginTokenMessage(IdentificationSuccessMessage):
     loginToken:str
     
 
-    def init(self, loginToken:str, login:str, accountTag:'AccountTagInformation', accountId:int, communityId:int, secretQuestion:str, accountCreation:int, subscriptionElapsedDuration:int, subscriptionEndDate:int, havenbagAvailableRoom:int):
-        self.loginToken = loginToken
+    def init(self, loginToken_:str, login_:str, accountTag_:'AccountTagInformation', accountId_:int, communityId_:int, secretQuestion_:str, accountCreation_:int, subscriptionElapsedDuration_:int, subscriptionEndDate_:int, havenbagAvailableRoom_:int, hasRights_:bool, hasConsoleRight_:bool, wasAlreadyConnected_:bool):
+        self.loginToken = loginToken_
         
-        super().__init__(login, accountTag, accountId, communityId, secretQuestion, accountCreation, subscriptionElapsedDuration, subscriptionEndDate, havenbagAvailableRoom)
+        super().__init__(login_, accountTag_, accountId_, communityId_, secretQuestion_, accountCreation_, subscriptionElapsedDuration_, subscriptionEndDate_, havenbagAvailableRoom_, hasRights_, hasConsoleRight_, wasAlreadyConnected_)
     
     

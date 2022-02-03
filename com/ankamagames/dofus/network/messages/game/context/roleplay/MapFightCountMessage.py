@@ -5,8 +5,8 @@ class MapFightCountMessage(NetworkMessage):
     fightCount:int
     
 
-    def init(self, fightCount:int):
-        self.fightCount = fightCount
+    def init(self, fightCount_:int):
+        self.fightCount = fightCount_
         
         super().__init__()
     

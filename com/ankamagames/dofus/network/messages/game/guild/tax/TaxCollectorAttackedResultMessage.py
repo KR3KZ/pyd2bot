@@ -12,10 +12,10 @@ class TaxCollectorAttackedResultMessage(NetworkMessage):
     guild:'BasicGuildInformations'
     
 
-    def init(self, deadOrAlive:bool, basicInfos:'TaxCollectorBasicInformations', guild:'BasicGuildInformations'):
-        self.deadOrAlive = deadOrAlive
-        self.basicInfos = basicInfos
-        self.guild = guild
+    def init(self, deadOrAlive_:bool, basicInfos_:'TaxCollectorBasicInformations', guild_:'BasicGuildInformations'):
+        self.deadOrAlive = deadOrAlive_
+        self.basicInfos = basicInfos_
+        self.guild = guild_
         
         super().__init__()
     

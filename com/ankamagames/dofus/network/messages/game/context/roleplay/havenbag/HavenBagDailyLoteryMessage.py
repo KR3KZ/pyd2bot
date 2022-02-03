@@ -6,9 +6,9 @@ class HavenBagDailyLoteryMessage(NetworkMessage):
     gameActionId:str
     
 
-    def init(self, returnType:int, gameActionId:str):
-        self.returnType = returnType
-        self.gameActionId = gameActionId
+    def init(self, returnType_:int, gameActionId_:str):
+        self.returnType = returnType_
+        self.gameActionId = gameActionId_
         
         super().__init__()
     

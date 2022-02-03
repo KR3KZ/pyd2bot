@@ -11,10 +11,10 @@ class GameContextBasicSpawnInformation(NetworkMessage):
     informations:'GameContextActorPositionInformations'
     
 
-    def init(self, teamId:int, alive:bool, informations:'GameContextActorPositionInformations'):
-        self.teamId = teamId
-        self.alive = alive
-        self.informations = informations
+    def init(self, teamId_:int, alive_:bool, informations_:'GameContextActorPositionInformations'):
+        self.teamId = teamId_
+        self.alive = alive_
+        self.informations = informations_
         
         super().__init__()
     

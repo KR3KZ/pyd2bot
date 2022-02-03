@@ -6,10 +6,10 @@ class GameActionFightStealKamaMessage(AbstractGameActionMessage):
     amount:int
     
 
-    def init(self, targetId:int, amount:int, actionId:int, sourceId:int):
-        self.targetId = targetId
-        self.amount = amount
+    def init(self, targetId_:int, amount_:int, actionId_:int, sourceId_:int):
+        self.targetId = targetId_
+        self.amount = amount_
         
-        super().__init__(actionId, sourceId)
+        super().__init__(actionId_, sourceId_)
     
     

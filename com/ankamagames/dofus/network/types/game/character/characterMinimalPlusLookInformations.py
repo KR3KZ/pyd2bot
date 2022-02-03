@@ -10,10 +10,10 @@ class CharacterMinimalPlusLookInformations(CharacterMinimalInformations):
     breed:int
     
 
-    def init(self, entityLook:'EntityLook', breed:int, level:int, name:str, id:int):
-        self.entityLook = entityLook
-        self.breed = breed
+    def init(self, entityLook_:'EntityLook', breed_:int, level_:int, name_:str, id_:int):
+        self.entityLook = entityLook_
+        self.breed = breed_
         
-        super().__init__(level, name, id)
+        super().__init__(level_, name_, id_)
     
     

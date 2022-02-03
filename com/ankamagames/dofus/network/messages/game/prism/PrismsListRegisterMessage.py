@@ -5,8 +5,8 @@ class PrismsListRegisterMessage(NetworkMessage):
     listen:int
     
 
-    def init(self, listen:int):
-        self.listen = listen
+    def init(self, listen_:int):
+        self.listen = listen_
         
         super().__init__()
     

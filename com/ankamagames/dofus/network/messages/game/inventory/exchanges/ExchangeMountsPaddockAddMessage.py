@@ -9,8 +9,8 @@ class ExchangeMountsPaddockAddMessage(NetworkMessage):
     mountDescription:list['MountClientData']
     
 
-    def init(self, mountDescription:list['MountClientData']):
-        self.mountDescription = mountDescription
+    def init(self, mountDescription_:list['MountClientData']):
+        self.mountDescription = mountDescription_
         
         super().__init__()
     

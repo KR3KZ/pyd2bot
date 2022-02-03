@@ -6,9 +6,9 @@ class GameFightSpellCooldown(NetworkMessage):
     cooldown:int
     
 
-    def init(self, spellId:int, cooldown:int):
-        self.spellId = spellId
-        self.cooldown = cooldown
+    def init(self, spellId_:int, cooldown_:int):
+        self.spellId = spellId_
+        self.cooldown = cooldown_
         
         super().__init__()
     

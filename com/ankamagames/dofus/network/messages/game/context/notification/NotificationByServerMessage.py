@@ -7,10 +7,10 @@ class NotificationByServerMessage(NetworkMessage):
     forceOpen:bool
     
 
-    def init(self, id:int, parameters:list[str], forceOpen:bool):
-        self.id = id
-        self.parameters = parameters
-        self.forceOpen = forceOpen
+    def init(self, id_:int, parameters_:list[str], forceOpen_:bool):
+        self.id = id_
+        self.parameters = parameters_
+        self.forceOpen = forceOpen_
         
         super().__init__()
     

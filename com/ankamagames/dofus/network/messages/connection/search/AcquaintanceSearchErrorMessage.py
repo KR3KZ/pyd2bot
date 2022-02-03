@@ -5,8 +5,8 @@ class AcquaintanceSearchErrorMessage(NetworkMessage):
     reason:int
     
 
-    def init(self, reason:int):
-        self.reason = reason
+    def init(self, reason_:int):
+        self.reason = reason_
         
         super().__init__()
     

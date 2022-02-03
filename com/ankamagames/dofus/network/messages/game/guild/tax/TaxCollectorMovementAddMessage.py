@@ -9,8 +9,8 @@ class TaxCollectorMovementAddMessage(NetworkMessage):
     informations:'TaxCollectorInformations'
     
 
-    def init(self, informations:'TaxCollectorInformations'):
-        self.informations = informations
+    def init(self, informations_:'TaxCollectorInformations'):
+        self.informations = informations_
         
         super().__init__()
     

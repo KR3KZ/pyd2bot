@@ -8,8 +8,8 @@ if TYPE_CHECKING:
 class PrismsListUpdateMessage(PrismsListMessage):
     
 
-    def init(self, prisms:list['PrismSubareaEmptyInfo']):
+    def init(self, prisms_:list['PrismSubareaEmptyInfo']):
         
-        super().__init__(prisms)
+        super().__init__(prisms_)
     
     

@@ -9,8 +9,8 @@ class JobDescriptionMessage(NetworkMessage):
     jobsDescription:list['JobDescription']
     
 
-    def init(self, jobsDescription:list['JobDescription']):
-        self.jobsDescription = jobsDescription
+    def init(self, jobsDescription_:list['JobDescription']):
+        self.jobsDescription = jobsDescription_
         
         super().__init__()
     

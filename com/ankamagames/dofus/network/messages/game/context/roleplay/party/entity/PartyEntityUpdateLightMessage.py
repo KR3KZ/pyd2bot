@@ -5,9 +5,9 @@ class PartyEntityUpdateLightMessage(PartyUpdateLightMessage):
     indexId:int
     
 
-    def init(self, indexId:int, id:int, lifePoints:int, maxLifePoints:int, prospecting:int, regenRate:int, partyId:int):
-        self.indexId = indexId
+    def init(self, indexId_:int, id_:int, lifePoints_:int, maxLifePoints_:int, prospecting_:int, regenRate_:int, partyId_:int):
+        self.indexId = indexId_
         
-        super().__init__(id, lifePoints, maxLifePoints, prospecting, regenRate, partyId)
+        super().__init__(id_, lifePoints_, maxLifePoints_, prospecting_, regenRate_, partyId_)
     
     

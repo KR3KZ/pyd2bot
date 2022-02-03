@@ -6,9 +6,9 @@ class GuildUpdateApplicationMessage(NetworkMessage):
     guildId:int
     
 
-    def init(self, applyText:str, guildId:int):
-        self.applyText = applyText
-        self.guildId = guildId
+    def init(self, applyText_:str, guildId_:int):
+        self.applyText = applyText_
+        self.guildId = guildId_
         
         super().__init__()
     

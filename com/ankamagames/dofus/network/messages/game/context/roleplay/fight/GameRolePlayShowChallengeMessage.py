@@ -9,8 +9,8 @@ class GameRolePlayShowChallengeMessage(NetworkMessage):
     commonsInfos:'FightCommonInformations'
     
 
-    def init(self, commonsInfos:'FightCommonInformations'):
-        self.commonsInfos = commonsInfos
+    def init(self, commonsInfos_:'FightCommonInformations'):
+        self.commonsInfos = commonsInfos_
         
         super().__init__()
     

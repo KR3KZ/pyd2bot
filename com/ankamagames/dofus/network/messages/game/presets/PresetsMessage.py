@@ -9,8 +9,8 @@ class PresetsMessage(NetworkMessage):
     presets:list['Preset']
     
 
-    def init(self, presets:list['Preset']):
-        self.presets = presets
+    def init(self, presets_:list['Preset']):
+        self.presets = presets_
         
         super().__init__()
     

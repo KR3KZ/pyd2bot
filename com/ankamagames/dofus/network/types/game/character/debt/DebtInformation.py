@@ -6,9 +6,9 @@ class DebtInformation(NetworkMessage):
     timestamp:int
     
 
-    def init(self, id:int, timestamp:int):
-        self.id = id
-        self.timestamp = timestamp
+    def init(self, id_:int, timestamp_:int):
+        self.id = id_
+        self.timestamp = timestamp_
         
         super().__init__()
     

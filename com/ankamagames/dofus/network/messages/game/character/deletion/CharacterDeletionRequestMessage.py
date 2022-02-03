@@ -6,9 +6,9 @@ class CharacterDeletionRequestMessage(NetworkMessage):
     secretAnswerHash:str
     
 
-    def init(self, characterId:int, secretAnswerHash:str):
-        self.characterId = characterId
-        self.secretAnswerHash = secretAnswerHash
+    def init(self, characterId_:int, secretAnswerHash_:str):
+        self.characterId = characterId_
+        self.secretAnswerHash = secretAnswerHash_
         
         super().__init__()
     

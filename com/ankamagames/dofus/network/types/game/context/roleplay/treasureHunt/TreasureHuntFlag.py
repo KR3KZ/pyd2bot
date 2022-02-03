@@ -6,9 +6,9 @@ class TreasureHuntFlag(NetworkMessage):
     state:int
     
 
-    def init(self, mapId:int, state:int):
-        self.mapId = mapId
-        self.state = state
+    def init(self, mapId_:int, state_:int):
+        self.mapId = mapId_
+        self.state = state_
         
         super().__init__()
     

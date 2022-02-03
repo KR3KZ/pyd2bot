@@ -5,8 +5,8 @@ class GameContextCreateMessage(NetworkMessage):
     context:int
     
 
-    def init(self, context:int):
-        self.context = context
+    def init(self, context_:int):
+        self.context = context_
         
         super().__init__()
     

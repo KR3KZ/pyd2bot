@@ -10,9 +10,9 @@ class ChatClientPrivateWithObjectMessage(ChatClientPrivateMessage):
     objects:list['ObjectItem']
     
 
-    def init(self, objects:list['ObjectItem'], receiver:'AbstractPlayerSearchInformation', content:str):
-        self.objects = objects
+    def init(self, objects_:list['ObjectItem'], receiver_:'AbstractPlayerSearchInformation', content_:str):
+        self.objects = objects_
         
-        super().__init__(receiver, content)
+        super().__init__(receiver_, content_)
     
     

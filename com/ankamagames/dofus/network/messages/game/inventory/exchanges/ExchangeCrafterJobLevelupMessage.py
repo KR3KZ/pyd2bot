@@ -5,8 +5,8 @@ class ExchangeCrafterJobLevelupMessage(NetworkMessage):
     crafterJobLevel:int
     
 
-    def init(self, crafterJobLevel:int):
-        self.crafterJobLevel = crafterJobLevel
+    def init(self, crafterJobLevel_:int):
+        self.crafterJobLevel = crafterJobLevel_
         
         super().__init__()
     

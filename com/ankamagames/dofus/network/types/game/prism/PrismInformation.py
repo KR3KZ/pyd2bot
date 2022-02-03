@@ -9,12 +9,12 @@ class PrismInformation(NetworkMessage):
     rewardTokenCount:int
     
 
-    def init(self, typeId:int, state:int, nextVulnerabilityDate:int, placementDate:int, rewardTokenCount:int):
-        self.typeId = typeId
-        self.state = state
-        self.nextVulnerabilityDate = nextVulnerabilityDate
-        self.placementDate = placementDate
-        self.rewardTokenCount = rewardTokenCount
+    def init(self, typeId_:int, state_:int, nextVulnerabilityDate_:int, placementDate_:int, rewardTokenCount_:int):
+        self.typeId = typeId_
+        self.state = state_
+        self.nextVulnerabilityDate = nextVulnerabilityDate_
+        self.placementDate = placementDate_
+        self.rewardTokenCount = rewardTokenCount_
         
         super().__init__()
     

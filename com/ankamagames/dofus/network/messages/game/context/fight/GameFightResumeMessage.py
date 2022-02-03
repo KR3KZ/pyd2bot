@@ -15,11 +15,11 @@ class GameFightResumeMessage(GameFightSpectateMessage):
     bombCount:int
     
 
-    def init(self, spellCooldowns:list['GameFightSpellCooldown'], summonCount:int, bombCount:int, effects:list['FightDispellableEffectExtendedInformations'], marks:list['GameActionMark'], gameTurn:int, fightStart:int, idols:list['Idol'], fxTriggerCounts:list['GameFightEffectTriggerCount']):
-        self.spellCooldowns = spellCooldowns
-        self.summonCount = summonCount
-        self.bombCount = bombCount
+    def init(self, spellCooldowns_:list['GameFightSpellCooldown'], summonCount_:int, bombCount_:int, effects_:list['FightDispellableEffectExtendedInformations'], marks_:list['GameActionMark'], gameTurn_:int, fightStart_:int, idols_:list['Idol'], fxTriggerCounts_:list['GameFightEffectTriggerCount']):
+        self.spellCooldowns = spellCooldowns_
+        self.summonCount = summonCount_
+        self.bombCount = bombCount_
         
-        super().__init__(effects, marks, gameTurn, fightStart, idols, fxTriggerCounts)
+        super().__init__(effects_, marks_, gameTurn_, fightStart_, idols_, fxTriggerCounts_)
     
     

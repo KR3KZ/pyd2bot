@@ -11,10 +11,10 @@ class PartyEntityBaseInformation(NetworkMessage):
     entityLook:'EntityLook'
     
 
-    def init(self, indexId:int, entityModelId:int, entityLook:'EntityLook'):
-        self.indexId = indexId
-        self.entityModelId = entityModelId
-        self.entityLook = entityLook
+    def init(self, indexId_:int, entityModelId_:int, entityLook_:'EntityLook'):
+        self.indexId = indexId_
+        self.entityModelId = entityModelId_
+        self.entityLook = entityLook_
         
         super().__init__()
     

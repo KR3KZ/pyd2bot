@@ -12,11 +12,11 @@ class GameFightCharacteristics(NetworkMessage):
     invisibilityState:int
     
 
-    def init(self, characteristics:'CharacterCharacteristics', summoner:int, summoned:bool, invisibilityState:int):
-        self.characteristics = characteristics
-        self.summoner = summoner
-        self.summoned = summoned
-        self.invisibilityState = invisibilityState
+    def init(self, characteristics_:'CharacterCharacteristics', summoner_:int, summoned_:bool, invisibilityState_:int):
+        self.characteristics = characteristics_
+        self.summoner = summoner_
+        self.summoned = summoned_
+        self.invisibilityState = invisibilityState_
         
         super().__init__()
     

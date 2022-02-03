@@ -6,9 +6,9 @@ class GameRolePlayDelayedActionFinishedMessage(NetworkMessage):
     delayTypeId:int
     
 
-    def init(self, delayedCharacterId:int, delayTypeId:int):
-        self.delayedCharacterId = delayedCharacterId
-        self.delayTypeId = delayTypeId
+    def init(self, delayedCharacterId_:int, delayTypeId_:int):
+        self.delayedCharacterId = delayedCharacterId_
+        self.delayTypeId = delayTypeId_
         
         super().__init__()
     

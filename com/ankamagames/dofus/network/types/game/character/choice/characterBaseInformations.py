@@ -9,9 +9,9 @@ class CharacterBaseInformations(CharacterMinimalPlusLookInformations):
     sex:bool
     
 
-    def init(self, sex:bool, entityLook:'EntityLook', breed:int, level:int, name:str, id:int):
-        self.sex = sex
+    def init(self, sex_:bool, entityLook_:'EntityLook', breed_:int, level_:int, name_:str, id_:int):
+        self.sex = sex_
         
-        super().__init__(entityLook, breed, level, name, id)
+        super().__init__(entityLook_, breed_, level_, name_, id_)
     
     

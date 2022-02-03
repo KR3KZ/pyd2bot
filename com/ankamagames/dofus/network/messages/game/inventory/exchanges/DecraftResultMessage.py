@@ -9,8 +9,8 @@ class DecraftResultMessage(NetworkMessage):
     results:list['DecraftedItemStackInfo']
     
 
-    def init(self, results:list['DecraftedItemStackInfo']):
-        self.results = results
+    def init(self, results_:list['DecraftedItemStackInfo']):
+        self.results = results_
         
         super().__init__()
     

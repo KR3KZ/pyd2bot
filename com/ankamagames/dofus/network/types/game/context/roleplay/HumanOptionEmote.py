@@ -6,9 +6,9 @@ class HumanOptionEmote(HumanOption):
     emoteStartTime:int
     
 
-    def init(self, emoteId:int, emoteStartTime:int):
-        self.emoteId = emoteId
-        self.emoteStartTime = emoteStartTime
+    def init(self, emoteId_:int, emoteStartTime_:int):
+        self.emoteId = emoteId_
+        self.emoteStartTime = emoteStartTime_
         
         super().__init__()
     

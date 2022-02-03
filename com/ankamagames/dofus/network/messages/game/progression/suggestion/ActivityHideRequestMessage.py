@@ -5,8 +5,8 @@ class ActivityHideRequestMessage(NetworkMessage):
     activityId:int
     
 
-    def init(self, activityId:int):
-        self.activityId = activityId
+    def init(self, activityId_:int):
+        self.activityId = activityId_
         
         super().__init__()
     

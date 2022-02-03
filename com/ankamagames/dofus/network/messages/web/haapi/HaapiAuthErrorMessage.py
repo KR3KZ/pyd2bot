@@ -5,8 +5,8 @@ class HaapiAuthErrorMessage(NetworkMessage):
     type:int
     
 
-    def init(self, type:int):
-        self.type = type
+    def init(self, type_:int):
+        self.type = type_
         
         super().__init__()
     

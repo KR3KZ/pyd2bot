@@ -7,10 +7,10 @@ class TextInformationMessage(NetworkMessage):
     parameters:list[str]
     
 
-    def init(self, msgType:int, msgId:int, parameters:list[str]):
-        self.msgType = msgType
-        self.msgId = msgId
-        self.parameters = parameters
+    def init(self, msgType_:int, msgId_:int, parameters_:list[str]):
+        self.msgType = msgType_
+        self.msgId = msgId_
+        self.parameters = parameters_
         
         super().__init__()
     

@@ -5,9 +5,9 @@ class CharacterCharacteristicValue(CharacterCharacteristic):
     total:int
     
 
-    def init(self, total:int, characteristicId:int):
-        self.total = total
+    def init(self, total_:int, characteristicId_:int):
+        self.total = total_
         
-        super().__init__(characteristicId)
+        super().__init__(characteristicId_)
     
     

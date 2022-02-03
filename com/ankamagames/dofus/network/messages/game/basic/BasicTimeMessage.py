@@ -6,9 +6,9 @@ class BasicTimeMessage(NetworkMessage):
     timezoneOffset:int
     
 
-    def init(self, timestamp:int, timezoneOffset:int):
-        self.timestamp = timestamp
-        self.timezoneOffset = timezoneOffset
+    def init(self, timestamp_:int, timezoneOffset_:int):
+        self.timestamp = timestamp_
+        self.timezoneOffset = timezoneOffset_
         
         super().__init__()
     

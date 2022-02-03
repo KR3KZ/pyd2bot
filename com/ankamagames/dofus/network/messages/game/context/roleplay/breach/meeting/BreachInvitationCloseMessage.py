@@ -9,8 +9,8 @@ class BreachInvitationCloseMessage(NetworkMessage):
     host:'CharacterMinimalInformations'
     
 
-    def init(self, host:'CharacterMinimalInformations'):
-        self.host = host
+    def init(self, host_:'CharacterMinimalInformations'):
+        self.host = host_
         
         super().__init__()
     

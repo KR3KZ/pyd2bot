@@ -6,9 +6,9 @@ class GuildMemberLeavingMessage(NetworkMessage):
     memberId:int
     
 
-    def init(self, kicked:bool, memberId:int):
-        self.kicked = kicked
-        self.memberId = memberId
+    def init(self, kicked_:bool, memberId_:int):
+        self.kicked = kicked_
+        self.memberId = memberId_
         
         super().__init__()
     

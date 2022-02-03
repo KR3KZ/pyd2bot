@@ -10,9 +10,9 @@ class GameFightUpdateTeamMessage(NetworkMessage):
     team:'FightTeamInformations'
     
 
-    def init(self, fightId:int, team:'FightTeamInformations'):
-        self.fightId = fightId
-        self.team = team
+    def init(self, fightId_:int, team_:'FightTeamInformations'):
+        self.fightId = fightId_
+        self.team = team_
         
         super().__init__()
     

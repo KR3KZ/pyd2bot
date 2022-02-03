@@ -6,10 +6,10 @@ class IconNamedPresetSaveRequestMessage(IconPresetSaveRequestMessage):
     type:int
     
 
-    def init(self, name:str, type:int, presetId:int, symbolId:int, updateData:bool):
-        self.name = name
-        self.type = type
+    def init(self, name_:str, type_:int, presetId_:int, symbolId_:int, updateData_:bool):
+        self.name = name_
+        self.type = type_
         
-        super().__init__(presetId, symbolId, updateData)
+        super().__init__(presetId_, symbolId_, updateData_)
     
     

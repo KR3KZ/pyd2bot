@@ -2,14 +2,14 @@ from time import perf_counter
 from com.ankamagames.dofus import Constants
 import com.ankamagames.dofus.kernel.Kernel as krnl
 import com.ankamagames.dofus.kernel.net.ConnectionsHandler as connh
-from com.ankamagames.dofus.logic.common.managers.AuthentificationManager import AuthentificationManager
+from com.ankamagames.dofus.logic.connection.frames.ServerSelectionFrame import ServerSelectionFrame
+from com.ankamagames.dofus.logic.connection.managers.AuthentificationManager import AuthentificationManager
 from com.ankamagames.dofus.logic.common.managers.InterClientManager import InterClientManager
 from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerManager
 from com.ankamagames.dofus.logic.frames.DisconnectionHandlerFrame import DisconnectionHandlerFrame
 from com.ankamagames.dofus.network.messages.connection.HelloConnectMessage import HelloConnectMessage
 from com.ankamagames.dofus.network.messages.connection.IdentificationAccountForceMessage import IdentificationAccountForceMessage
 from com.ankamagames.dofus.network.messages.connection.IdentificationFailedMessage import IdentificationFailedMessage
-from com.ankamagames.dofus.network.messages.connection.IdentificationMessage import IdentificationMessage
 from com.ankamagames.dofus.network.messages.connection.IdentificationSuccessMessage import IdentificationSuccessMessage
 from com.ankamagames.dofus.network.messages.connection.IdentificationSuccessWithLoginTokenMessage import IdentificationSuccessWithLoginTokenMessage
 from com.ankamagames.dofus.network.messages.security.ClientKeyMessage import ClientKeyMessage
@@ -87,16 +87,17 @@ class AuthentificationFrame(Frame):
             iMsg.failedAttempts = elapsedTimesSinceConnectionFail
             connh.ConnectionsHandler.getConnection().send(iMsg)
             if InterClientManager().flashKey:
-               flashKeyMsg = ClientKeyMessage(key=InterClientManager().flashKey)
+               flashKeyMsg = ClientKeyMessage()
+               flashKeyMsg.key = InterClientManager().flashKey
                connh.ConnectionsHandler.getConnection().send(flashKeyMsg)
             return True
 
          if isinstance(msg, IdentificationSuccessMessage):
-            ismsg = IdentificationSuccessMessage(msg)
+            ismsg = msg
             if isinstance(ismsg, IdentificationSuccessWithLoginTokenMessage):
                AuthentificationManager().nextToken = IdentificationSuccessWithLoginTokenMessage(ismsg).loginToken
             if ismsg.login:
-               AuthentificationManager().username = ismsg.login
+               AuthentificationManager()._username = ismsg.login
             PlayerManager().accountId = ismsg.accountId
             PlayerManager().communityId = ismsg.communityId
             PlayerManager().hasRights = ismsg.hasRights
@@ -110,10 +111,8 @@ class AuthentificationFrame(Frame):
             PlayerManager().wasAlreadyConnected = ismsg.wasAlreadyConnected
             DataStoreType.ACCOUNT_ID = str(ismsg.accountId)
             StoreDataManager().setData(Constants.DATASTORE_COMPUTER_OPTIONS, "lastAccountId", ismsg.accountId)
-            krnl.Kernel().getWorker().getFrame(AuthorizedFrame).hasRights = ismsg.hasRights
             krnl.Kernel().getWorker().removeFrame(self)
-            krnl.Kernel().getWorker().addFrame(ChangeCharacterFrame)
-            krnl.Kernel().getWorker().addFrame(ServerSelectionFrame)
+            krnl.Kernel().getWorker().addFrame(ServerSelectionFrame())
             return True
 
          elif isinstance(msg, IdentificationFailedMessage):
@@ -125,5 +124,8 @@ class AuthentificationFrame(Frame):
             return True
    
    def pushed(self) -> bool :
+      return True
+   
+   def pulled(self) -> bool :
       return True
       

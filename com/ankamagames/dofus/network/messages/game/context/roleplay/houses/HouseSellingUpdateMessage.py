@@ -13,12 +13,12 @@ class HouseSellingUpdateMessage(NetworkMessage):
     buyerTag:'AccountTagInformation'
     
 
-    def init(self, houseId:int, instanceId:int, secondHand:bool, realPrice:int, buyerTag:'AccountTagInformation'):
-        self.houseId = houseId
-        self.instanceId = instanceId
-        self.secondHand = secondHand
-        self.realPrice = realPrice
-        self.buyerTag = buyerTag
+    def init(self, houseId_:int, instanceId_:int, secondHand_:bool, realPrice_:int, buyerTag_:'AccountTagInformation'):
+        self.houseId = houseId_
+        self.instanceId = instanceId_
+        self.secondHand = secondHand_
+        self.realPrice = realPrice_
+        self.buyerTag = buyerTag_
         
         super().__init__()
     

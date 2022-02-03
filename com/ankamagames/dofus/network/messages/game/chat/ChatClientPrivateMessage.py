@@ -9,9 +9,9 @@ class ChatClientPrivateMessage(ChatAbstractClientMessage):
     receiver:'AbstractPlayerSearchInformation'
     
 
-    def init(self, receiver:'AbstractPlayerSearchInformation', content:str):
-        self.receiver = receiver
+    def init(self, receiver_:'AbstractPlayerSearchInformation', content_:str):
+        self.receiver = receiver_
         
-        super().__init__(content)
+        super().__init__(content_)
     
     

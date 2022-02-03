@@ -11,9 +11,9 @@ class MapRunningFightDetailsExtendedMessage(MapRunningFightDetailsMessage):
     namedPartyTeams:list['NamedPartyTeam']
     
 
-    def init(self, namedPartyTeams:list['NamedPartyTeam'], fightId:int, attackers:list['GameFightFighterLightInformations'], defenders:list['GameFightFighterLightInformations']):
-        self.namedPartyTeams = namedPartyTeams
+    def init(self, namedPartyTeams_:list['NamedPartyTeam'], fightId_:int, attackers_:list['GameFightFighterLightInformations'], defenders_:list['GameFightFighterLightInformations']):
+        self.namedPartyTeams = namedPartyTeams_
         
-        super().__init__(fightId, attackers, defenders)
+        super().__init__(fightId_, attackers_, defenders_)
     
     

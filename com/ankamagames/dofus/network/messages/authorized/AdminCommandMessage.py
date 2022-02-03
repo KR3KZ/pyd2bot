@@ -5,8 +5,8 @@ class AdminCommandMessage(NetworkMessage):
     content:str
     
 
-    def init(self, content:str):
-        self.content = content
+    def init(self, content_:str):
+        self.content = content_
         
         super().__init__()
     

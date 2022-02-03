@@ -14,12 +14,12 @@ class InteractiveElement(NetworkMessage):
     onCurrentMap:bool
     
 
-    def init(self, elementId:int, elementTypeId:int, enabledSkills:list['InteractiveElementSkill'], disabledSkills:list['InteractiveElementSkill'], onCurrentMap:bool):
-        self.elementId = elementId
-        self.elementTypeId = elementTypeId
-        self.enabledSkills = enabledSkills
-        self.disabledSkills = disabledSkills
-        self.onCurrentMap = onCurrentMap
+    def init(self, elementId_:int, elementTypeId_:int, enabledSkills_:list['InteractiveElementSkill'], disabledSkills_:list['InteractiveElementSkill'], onCurrentMap_:bool):
+        self.elementId = elementId_
+        self.elementTypeId = elementTypeId_
+        self.enabledSkills = enabledSkills_
+        self.disabledSkills = disabledSkills_
+        self.onCurrentMap = onCurrentMap_
         
         super().__init__()
     

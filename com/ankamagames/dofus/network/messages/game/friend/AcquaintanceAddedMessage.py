@@ -9,8 +9,8 @@ class AcquaintanceAddedMessage(NetworkMessage):
     acquaintanceAdded:'AcquaintanceInformation'
     
 
-    def init(self, acquaintanceAdded:'AcquaintanceInformation'):
-        self.acquaintanceAdded = acquaintanceAdded
+    def init(self, acquaintanceAdded_:'AcquaintanceInformation'):
+        self.acquaintanceAdded = acquaintanceAdded_
         
         super().__init__()
     

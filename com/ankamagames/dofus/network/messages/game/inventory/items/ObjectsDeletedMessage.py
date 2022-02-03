@@ -5,8 +5,8 @@ class ObjectsDeletedMessage(NetworkMessage):
     objectUID:list[int]
     
 
-    def init(self, objectUID:list[int]):
-        self.objectUID = objectUID
+    def init(self, objectUID_:list[int]):
+        self.objectUID = objectUID_
         
         super().__init__()
     

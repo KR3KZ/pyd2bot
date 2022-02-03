@@ -9,8 +9,8 @@ class ObjectsAddedMessage(NetworkMessage):
     object:list['ObjectItem']
     
 
-    def init(self, object:list['ObjectItem']):
-        self.object = object
+    def init(self, object_:list['ObjectItem']):
+        self.object = object_
         
         super().__init__()
     

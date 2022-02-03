@@ -6,10 +6,10 @@ class ExchangePodsModifiedMessage(ExchangeObjectMessage):
     maxWeight:int
     
 
-    def init(self, currentWeight:int, maxWeight:int, remote:bool):
-        self.currentWeight = currentWeight
-        self.maxWeight = maxWeight
+    def init(self, currentWeight_:int, maxWeight_:int, remote_:bool):
+        self.currentWeight = currentWeight_
+        self.maxWeight = maxWeight_
         
-        super().__init__(remote)
+        super().__init__(remote_)
     
     

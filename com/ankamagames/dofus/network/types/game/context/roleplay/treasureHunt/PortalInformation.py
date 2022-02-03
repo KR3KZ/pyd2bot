@@ -6,9 +6,9 @@ class PortalInformation(NetworkMessage):
     areaId:int
     
 
-    def init(self, portalId:int, areaId:int):
-        self.portalId = portalId
-        self.areaId = areaId
+    def init(self, portalId_:int, areaId_:int):
+        self.portalId = portalId_
+        self.areaId = areaId_
         
         super().__init__()
     

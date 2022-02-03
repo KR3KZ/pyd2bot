@@ -6,9 +6,9 @@ class AllianceChangeGuildRightsMessage(NetworkMessage):
     rights:int
     
 
-    def init(self, guildId:int, rights:int):
-        self.guildId = guildId
-        self.rights = rights
+    def init(self, guildId_:int, rights_:int):
+        self.guildId = guildId_
+        self.rights = rights_
         
         super().__init__()
     

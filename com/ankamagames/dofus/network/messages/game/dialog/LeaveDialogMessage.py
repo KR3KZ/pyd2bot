@@ -5,8 +5,8 @@ class LeaveDialogMessage(NetworkMessage):
     dialogType:int
     
 
-    def init(self, dialogType:int):
-        self.dialogType = dialogType
+    def init(self, dialogType_:int):
+        self.dialogType = dialogType_
         
         super().__init__()
     

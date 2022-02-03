@@ -10,10 +10,10 @@ class PaddockGuildedInformations(PaddockBuyableInformations):
     guildInfo:'GuildInformations'
     
 
-    def init(self, deserted:bool, guildInfo:'GuildInformations', price:int, locked:bool):
-        self.deserted = deserted
-        self.guildInfo = guildInfo
+    def init(self, deserted_:bool, guildInfo_:'GuildInformations', price_:int, locked_:bool):
+        self.deserted = deserted_
+        self.guildInfo = guildInfo_
         
-        super().__init__(price, locked)
+        super().__init__(price_, locked_)
     
     

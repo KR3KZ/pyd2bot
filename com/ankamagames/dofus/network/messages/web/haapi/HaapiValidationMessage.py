@@ -6,9 +6,9 @@ class HaapiValidationMessage(NetworkMessage):
     code:int
     
 
-    def init(self, action:int, code:int):
-        self.action = action
-        self.code = code
+    def init(self, action_:int, code_:int):
+        self.action = action_
+        self.code = code_
         
         super().__init__()
     

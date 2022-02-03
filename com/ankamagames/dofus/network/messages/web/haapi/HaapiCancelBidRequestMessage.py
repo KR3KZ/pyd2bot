@@ -6,9 +6,9 @@ class HaapiCancelBidRequestMessage(NetworkMessage):
     type:int
     
 
-    def init(self, id:int, type:int):
-        self.id = id
-        self.type = type
+    def init(self, id_:int, type_:int):
+        self.id = id_
+        self.type = type_
         
         super().__init__()
     

@@ -9,8 +9,8 @@ class ObjectEffects(NetworkMessage):
     effects:list['ObjectEffect']
     
 
-    def init(self, effects:list['ObjectEffect']):
-        self.effects = effects
+    def init(self, effects_:list['ObjectEffect']):
+        self.effects = effects_
         
         super().__init__()
     

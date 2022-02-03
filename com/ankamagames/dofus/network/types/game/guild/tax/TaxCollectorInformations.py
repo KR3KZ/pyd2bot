@@ -20,17 +20,17 @@ class TaxCollectorInformations(NetworkMessage):
     complements:list['TaxCollectorComplementaryInformations']
     
 
-    def init(self, uniqueId:int, firtNameId:int, lastNameId:int, additionalInfos:'AdditionalTaxCollectorInformations', worldX:int, worldY:int, subAreaId:int, state:int, look:'EntityLook', complements:list['TaxCollectorComplementaryInformations']):
-        self.uniqueId = uniqueId
-        self.firtNameId = firtNameId
-        self.lastNameId = lastNameId
-        self.additionalInfos = additionalInfos
-        self.worldX = worldX
-        self.worldY = worldY
-        self.subAreaId = subAreaId
-        self.state = state
-        self.look = look
-        self.complements = complements
+    def init(self, uniqueId_:int, firtNameId_:int, lastNameId_:int, additionalInfos_:'AdditionalTaxCollectorInformations', worldX_:int, worldY_:int, subAreaId_:int, state_:int, look_:'EntityLook', complements_:list['TaxCollectorComplementaryInformations']):
+        self.uniqueId = uniqueId_
+        self.firtNameId = firtNameId_
+        self.lastNameId = lastNameId_
+        self.additionalInfos = additionalInfos_
+        self.worldX = worldX_
+        self.worldY = worldY_
+        self.subAreaId = subAreaId_
+        self.state = state_
+        self.look = look_
+        self.complements = complements_
         
         super().__init__()
     

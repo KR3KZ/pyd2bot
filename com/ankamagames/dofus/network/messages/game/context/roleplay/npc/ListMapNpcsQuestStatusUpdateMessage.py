@@ -9,8 +9,8 @@ class ListMapNpcsQuestStatusUpdateMessage(NetworkMessage):
     mapInfo:list['MapNpcQuestInfo']
     
 
-    def init(self, mapInfo:list['MapNpcQuestInfo']):
-        self.mapInfo = mapInfo
+    def init(self, mapInfo_:list['MapNpcQuestInfo']):
+        self.mapInfo = mapInfo_
         
         super().__init__()
     

@@ -9,8 +9,8 @@ class ExchangeStartedMountStockMessage(NetworkMessage):
     objectsInfos:list['ObjectItem']
     
 
-    def init(self, objectsInfos:list['ObjectItem']):
-        self.objectsInfos = objectsInfos
+    def init(self, objectsInfos_:list['ObjectItem']):
+        self.objectsInfos = objectsInfos_
         
         super().__init__()
     

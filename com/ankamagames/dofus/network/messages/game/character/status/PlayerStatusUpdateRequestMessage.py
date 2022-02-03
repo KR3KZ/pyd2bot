@@ -9,8 +9,8 @@ class PlayerStatusUpdateRequestMessage(NetworkMessage):
     status:'PlayerStatus'
     
 
-    def init(self, status:'PlayerStatus'):
-        self.status = status
+    def init(self, status_:'PlayerStatus'):
+        self.status = status_
         
         super().__init__()
     

@@ -5,8 +5,8 @@ class CharacterCanBeCreatedResultMessage(NetworkMessage):
     yesYouCan:bool
     
 
-    def init(self, yesYouCan:bool):
-        self.yesYouCan = yesYouCan
+    def init(self, yesYouCan_:bool):
+        self.yesYouCan = yesYouCan_
         
         super().__init__()
     

@@ -5,8 +5,8 @@ class ChangeThemeRequestMessage(NetworkMessage):
     theme:int
     
 
-    def init(self, theme:int):
-        self.theme = theme
+    def init(self, theme_:int):
+        self.theme = theme_
         
         super().__init__()
     

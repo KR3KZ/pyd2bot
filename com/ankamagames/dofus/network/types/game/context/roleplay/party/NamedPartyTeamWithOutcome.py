@@ -10,9 +10,9 @@ class NamedPartyTeamWithOutcome(NetworkMessage):
     outcome:int
     
 
-    def init(self, team:'NamedPartyTeam', outcome:int):
-        self.team = team
-        self.outcome = outcome
+    def init(self, team_:'NamedPartyTeam', outcome_:int):
+        self.team = team_
+        self.outcome = outcome_
         
         super().__init__()
     

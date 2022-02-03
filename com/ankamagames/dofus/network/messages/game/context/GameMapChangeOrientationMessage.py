@@ -9,8 +9,8 @@ class GameMapChangeOrientationMessage(NetworkMessage):
     orientation:'ActorOrientation'
     
 
-    def init(self, orientation:'ActorOrientation'):
-        self.orientation = orientation
+    def init(self, orientation_:'ActorOrientation'):
+        self.orientation = orientation_
         
         super().__init__()
     

@@ -11,10 +11,10 @@ class GuildApplicationInformation(NetworkMessage):
     creationDate:int
     
 
-    def init(self, playerInfo:'ApplicationPlayerInformation', applyText:str, creationDate:int):
-        self.playerInfo = playerInfo
-        self.applyText = applyText
-        self.creationDate = creationDate
+    def init(self, playerInfo_:'ApplicationPlayerInformation', applyText_:str, creationDate_:int):
+        self.playerInfo = playerInfo_
+        self.applyText = applyText_
+        self.creationDate = creationDate_
         
         super().__init__()
     

@@ -6,9 +6,9 @@ class MountRenamedMessage(NetworkMessage):
     name:str
     
 
-    def init(self, mountId:int, name:str):
-        self.mountId = mountId
-        self.name = name
+    def init(self, mountId_:int, name_:str):
+        self.mountId = mountId_
+        self.name = name_
         
         super().__init__()
     

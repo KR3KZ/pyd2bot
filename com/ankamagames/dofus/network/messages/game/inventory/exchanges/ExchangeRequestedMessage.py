@@ -5,8 +5,8 @@ class ExchangeRequestedMessage(NetworkMessage):
     exchangeType:int
     
 
-    def init(self, exchangeType:int):
-        self.exchangeType = exchangeType
+    def init(self, exchangeType_:int):
+        self.exchangeType = exchangeType_
         
         super().__init__()
     

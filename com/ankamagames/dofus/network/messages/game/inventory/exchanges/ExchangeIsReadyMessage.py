@@ -6,9 +6,9 @@ class ExchangeIsReadyMessage(NetworkMessage):
     ready:bool
     
 
-    def init(self, id:int, ready:bool):
-        self.id = id
-        self.ready = ready
+    def init(self, id_:int, ready_:bool):
+        self.id = id_
+        self.ready = ready_
         
         super().__init__()
     

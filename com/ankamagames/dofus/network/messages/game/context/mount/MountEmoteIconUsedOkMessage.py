@@ -6,9 +6,9 @@ class MountEmoteIconUsedOkMessage(NetworkMessage):
     reactionType:int
     
 
-    def init(self, mountId:int, reactionType:int):
-        self.mountId = mountId
-        self.reactionType = reactionType
+    def init(self, mountId_:int, reactionType_:int):
+        self.mountId = mountId_
+        self.reactionType = reactionType_
         
         super().__init__()
     

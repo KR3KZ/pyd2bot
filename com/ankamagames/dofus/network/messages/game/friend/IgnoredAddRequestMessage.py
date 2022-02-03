@@ -10,9 +10,9 @@ class IgnoredAddRequestMessage(NetworkMessage):
     session:bool
     
 
-    def init(self, target:'AbstractPlayerSearchInformation', session:bool):
-        self.target = target
-        self.session = session
+    def init(self, target_:'AbstractPlayerSearchInformation', session_:bool):
+        self.target = target_
+        self.session = session_
         
         super().__init__()
     

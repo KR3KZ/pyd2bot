@@ -9,9 +9,9 @@ class ExchangeCraftResultWithObjectDescMessage(ExchangeCraftResultMessage):
     objectInfo:'ObjectItemNotInContainer'
     
 
-    def init(self, objectInfo:'ObjectItemNotInContainer', craftResult:int):
-        self.objectInfo = objectInfo
+    def init(self, objectInfo_:'ObjectItemNotInContainer', craftResult_:int):
+        self.objectInfo = objectInfo_
         
-        super().__init__(craftResult)
+        super().__init__(craftResult_)
     
     

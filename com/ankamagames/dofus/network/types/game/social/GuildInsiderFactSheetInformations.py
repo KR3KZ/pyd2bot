@@ -12,11 +12,11 @@ class GuildInsiderFactSheetInformations(GuildFactSheetInformations):
     nbTaxCollectors:int
     
 
-    def init(self, leaderName:str, nbConnectedMembers:int, nbTaxCollectors:int, leaderId:int, nbMembers:int, lastActivityDay:int, recruitment:'GuildRecruitmentInformation', nbPendingApply:int, guildEmblem:'GuildEmblem', guildId:int, guildName:str, guildLevel:int):
-        self.leaderName = leaderName
-        self.nbConnectedMembers = nbConnectedMembers
-        self.nbTaxCollectors = nbTaxCollectors
+    def init(self, leaderName_:str, nbConnectedMembers_:int, nbTaxCollectors_:int, leaderId_:int, nbMembers_:int, lastActivityDay_:int, recruitment_:'GuildRecruitmentInformation', nbPendingApply_:int, guildEmblem_:'GuildEmblem', guildId_:int, guildName_:str, guildLevel_:int):
+        self.leaderName = leaderName_
+        self.nbConnectedMembers = nbConnectedMembers_
+        self.nbTaxCollectors = nbTaxCollectors_
         
-        super().__init__(leaderId, nbMembers, lastActivityDay, recruitment, nbPendingApply, guildEmblem, guildId, guildName, guildLevel)
+        super().__init__(leaderId_, nbMembers_, lastActivityDay_, recruitment_, nbPendingApply_, guildEmblem_, guildId_, guildName_, guildLevel_)
     
     

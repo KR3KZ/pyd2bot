@@ -17,12 +17,12 @@ class GameFightCharacterInformations(GameFightFighterNamedInformations):
     sex:bool
     
 
-    def init(self, level:int, alignmentInfos:'ActorAlignmentInformations', breed:int, sex:bool, name:str, status:'PlayerStatus', leagueId:int, ladderPosition:int, hiddenInPrefight:bool, spawnInfo:'GameContextBasicSpawnInformation', wave:int, stats:'GameFightCharacteristics', previousPositions:list[int], look:'EntityLook', contextualId:int, disposition:'EntityDispositionInformations'):
-        self.level = level
-        self.alignmentInfos = alignmentInfos
-        self.breed = breed
-        self.sex = sex
+    def init(self, level_:int, alignmentInfos_:'ActorAlignmentInformations', breed_:int, sex_:bool, name_:str, status_:'PlayerStatus', leagueId_:int, ladderPosition_:int, hiddenInPrefight_:bool, spawnInfo_:'GameContextBasicSpawnInformation', wave_:int, stats_:'GameFightCharacteristics', previousPositions_:list[int], look_:'EntityLook', contextualId_:int, disposition_:'EntityDispositionInformations'):
+        self.level = level_
+        self.alignmentInfos = alignmentInfos_
+        self.breed = breed_
+        self.sex = sex_
         
-        super().__init__(name, status, leagueId, ladderPosition, hiddenInPrefight, spawnInfo, wave, stats, previousPositions, look, contextualId, disposition)
+        super().__init__(name_, status_, leagueId_, ladderPosition_, hiddenInPrefight_, spawnInfo_, wave_, stats_, previousPositions_, look_, contextualId_, disposition_)
     
     

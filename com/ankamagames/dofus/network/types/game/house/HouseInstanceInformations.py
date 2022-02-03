@@ -13,12 +13,20 @@ class HouseInstanceInformations(NetworkMessage):
     isLocked:bool
     hasOwner:bool
     isSaleLocked:bool
+    secondHand:bool
+    isLocked:bool
+    hasOwner:bool
+    isSaleLocked:bool
     
 
-    def init(self, instanceId:int, ownerTag:'AccountTagInformation', price:int):
-        self.instanceId = instanceId
-        self.ownerTag = ownerTag
-        self.price = price
+    def init(self, instanceId_:int, ownerTag_:'AccountTagInformation', price_:int, secondHand_:bool, isLocked_:bool, hasOwner_:bool, isSaleLocked_:bool):
+        self.instanceId = instanceId_
+        self.ownerTag = ownerTag_
+        self.price = price_
+        self.secondHand = secondHand_
+        self.isLocked = isLocked_
+        self.hasOwner = hasOwner_
+        self.isSaleLocked = isSaleLocked_
         
         super().__init__()
     

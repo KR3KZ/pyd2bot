@@ -8,8 +8,8 @@ if TYPE_CHECKING:
 class PartyInvitationArenaRequestMessage(PartyInvitationRequestMessage):
     
 
-    def init(self, target:'AbstractPlayerSearchInformation'):
+    def init(self, target_:'AbstractPlayerSearchInformation'):
         
-        super().__init__(target)
+        super().__init__(target_)
     
     

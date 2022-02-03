@@ -9,8 +9,8 @@ class JobCrafterDirectorySettingsMessage(NetworkMessage):
     craftersSettings:list['JobCrafterDirectorySettings']
     
 
-    def init(self, craftersSettings:list['JobCrafterDirectorySettings']):
-        self.craftersSettings = craftersSettings
+    def init(self, craftersSettings_:list['JobCrafterDirectorySettings']):
+        self.craftersSettings = craftersSettings_
         
         super().__init__()
     

@@ -12,11 +12,11 @@ class QuestListMessage(NetworkMessage):
     reinitDoneQuestsIds:list[int]
     
 
-    def init(self, finishedQuestsIds:list[int], finishedQuestsCounts:list[int], activeQuests:list['QuestActiveInformations'], reinitDoneQuestsIds:list[int]):
-        self.finishedQuestsIds = finishedQuestsIds
-        self.finishedQuestsCounts = finishedQuestsCounts
-        self.activeQuests = activeQuests
-        self.reinitDoneQuestsIds = reinitDoneQuestsIds
+    def init(self, finishedQuestsIds_:list[int], finishedQuestsCounts_:list[int], activeQuests_:list['QuestActiveInformations'], reinitDoneQuestsIds_:list[int]):
+        self.finishedQuestsIds = finishedQuestsIds_
+        self.finishedQuestsCounts = finishedQuestsCounts_
+        self.activeQuests = activeQuests_
+        self.reinitDoneQuestsIds = reinitDoneQuestsIds_
         
         super().__init__()
     

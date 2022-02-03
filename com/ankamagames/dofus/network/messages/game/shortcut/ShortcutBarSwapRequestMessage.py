@@ -7,10 +7,10 @@ class ShortcutBarSwapRequestMessage(NetworkMessage):
     secondSlot:int
     
 
-    def init(self, barType:int, firstSlot:int, secondSlot:int):
-        self.barType = barType
-        self.firstSlot = firstSlot
-        self.secondSlot = secondSlot
+    def init(self, barType_:int, firstSlot_:int, secondSlot_:int):
+        self.barType = barType_
+        self.firstSlot = firstSlot_
+        self.secondSlot = secondSlot_
         
         super().__init__()
     

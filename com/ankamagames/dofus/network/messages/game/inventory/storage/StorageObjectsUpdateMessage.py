@@ -9,8 +9,8 @@ class StorageObjectsUpdateMessage(NetworkMessage):
     objectList:list['ObjectItem']
     
 
-    def init(self, objectList:list['ObjectItem']):
-        self.objectList = objectList
+    def init(self, objectList_:list['ObjectItem']):
+        self.objectList = objectList_
         
         super().__init__()
     

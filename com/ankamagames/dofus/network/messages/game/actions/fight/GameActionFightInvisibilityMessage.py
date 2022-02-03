@@ -6,10 +6,10 @@ class GameActionFightInvisibilityMessage(AbstractGameActionMessage):
     state:int
     
 
-    def init(self, targetId:int, state:int, actionId:int, sourceId:int):
-        self.targetId = targetId
-        self.state = state
+    def init(self, targetId_:int, state_:int, actionId_:int, sourceId_:int):
+        self.targetId = targetId_
+        self.state = state_
         
-        super().__init__(actionId, sourceId)
+        super().__init__(actionId_, sourceId_)
     
     

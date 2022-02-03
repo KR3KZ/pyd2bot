@@ -5,8 +5,8 @@ class NotificationUpdateFlagMessage(NetworkMessage):
     index:int
     
 
-    def init(self, index:int):
-        self.index = index
+    def init(self, index_:int):
+        self.index = index_
         
         super().__init__()
     

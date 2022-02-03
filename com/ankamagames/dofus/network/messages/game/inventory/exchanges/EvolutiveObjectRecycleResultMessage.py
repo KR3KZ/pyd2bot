@@ -9,8 +9,8 @@ class EvolutiveObjectRecycleResultMessage(NetworkMessage):
     recycledItems:list['RecycledItem']
     
 
-    def init(self, recycledItems:list['RecycledItem']):
-        self.recycledItems = recycledItems
+    def init(self, recycledItems_:list['RecycledItem']):
+        self.recycledItems = recycledItems_
         
         super().__init__()
     

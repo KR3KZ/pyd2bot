@@ -7,10 +7,10 @@ class TeleportToBuddyOfferMessage(NetworkMessage):
     timeLeft:int
     
 
-    def init(self, dungeonId:int, buddyId:int, timeLeft:int):
-        self.dungeonId = dungeonId
-        self.buddyId = buddyId
-        self.timeLeft = timeLeft
+    def init(self, dungeonId_:int, buddyId_:int, timeLeft_:int):
+        self.dungeonId = dungeonId_
+        self.buddyId = buddyId_
+        self.timeLeft = timeLeft_
         
         super().__init__()
     

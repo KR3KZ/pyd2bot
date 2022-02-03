@@ -8,12 +8,12 @@ class ActorExtendedAlignmentInformations(ActorAlignmentInformations):
     aggressable:int
     
 
-    def init(self, honor:int, honorGradeFloor:int, honorNextGradeFloor:int, aggressable:int, alignmentSide:int, alignmentValue:int, alignmentGrade:int, characterPower:int):
-        self.honor = honor
-        self.honorGradeFloor = honorGradeFloor
-        self.honorNextGradeFloor = honorNextGradeFloor
-        self.aggressable = aggressable
+    def init(self, honor_:int, honorGradeFloor_:int, honorNextGradeFloor_:int, aggressable_:int, alignmentSide_:int, alignmentValue_:int, alignmentGrade_:int, characterPower_:int):
+        self.honor = honor_
+        self.honorGradeFloor = honorGradeFloor_
+        self.honorNextGradeFloor = honorNextGradeFloor_
+        self.aggressable = aggressable_
         
-        super().__init__(alignmentSide, alignmentValue, alignmentGrade, characterPower)
+        super().__init__(alignmentSide_, alignmentValue_, alignmentGrade_, characterPower_)
     
     

@@ -6,10 +6,10 @@ class FightTeamMemberMonsterInformations(FightTeamMemberInformations):
     grade:int
     
 
-    def init(self, monsterId:int, grade:int, id:int):
-        self.monsterId = monsterId
-        self.grade = grade
+    def init(self, monsterId_:int, grade_:int, id_:int):
+        self.monsterId = monsterId_
+        self.grade = grade_
         
-        super().__init__(id)
+        super().__init__(id_)
     
     

@@ -7,10 +7,10 @@ class LivingObjectChangeSkinRequestMessage(NetworkMessage):
     skinId:int
     
 
-    def init(self, livingUID:int, livingPosition:int, skinId:int):
-        self.livingUID = livingUID
-        self.livingPosition = livingPosition
-        self.skinId = skinId
+    def init(self, livingUID_:int, livingPosition_:int, skinId_:int):
+        self.livingUID = livingUID_
+        self.livingPosition = livingPosition_
+        self.skinId = skinId_
         
         super().__init__()
     

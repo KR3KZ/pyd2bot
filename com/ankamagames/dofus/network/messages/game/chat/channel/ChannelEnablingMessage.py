@@ -6,9 +6,9 @@ class ChannelEnablingMessage(NetworkMessage):
     enable:bool
     
 
-    def init(self, channel:int, enable:bool):
-        self.channel = channel
-        self.enable = enable
+    def init(self, channel_:int, enable_:bool):
+        self.channel = channel_
+        self.enable = enable_
         
         super().__init__()
     

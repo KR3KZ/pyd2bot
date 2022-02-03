@@ -10,9 +10,9 @@ class BreachInvitationOfferMessage(NetworkMessage):
     timeLeftBeforeCancel:int
     
 
-    def init(self, host:'CharacterMinimalInformations', timeLeftBeforeCancel:int):
-        self.host = host
-        self.timeLeftBeforeCancel = timeLeftBeforeCancel
+    def init(self, host_:'CharacterMinimalInformations', timeLeftBeforeCancel_:int):
+        self.host = host_
+        self.timeLeftBeforeCancel = timeLeftBeforeCancel_
         
         super().__init__()
     

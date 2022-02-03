@@ -9,8 +9,8 @@ class MimicryObjectPreviewMessage(NetworkMessage):
     result:'ObjectItem'
     
 
-    def init(self, result:'ObjectItem'):
-        self.result = result
+    def init(self, result_:'ObjectItem'):
+        self.result = result_
         
         super().__init__()
     

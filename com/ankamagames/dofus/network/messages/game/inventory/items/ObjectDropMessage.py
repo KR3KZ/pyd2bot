@@ -6,9 +6,9 @@ class ObjectDropMessage(NetworkMessage):
     quantity:int
     
 
-    def init(self, objectUID:int, quantity:int):
-        self.objectUID = objectUID
-        self.quantity = quantity
+    def init(self, objectUID_:int, quantity_:int):
+        self.objectUID = objectUID_
+        self.quantity = quantity_
         
         super().__init__()
     

@@ -15,15 +15,21 @@ class IdentificationMessage(NetworkMessage):
     autoconnect:bool
     useCertificate:bool
     useLoginToken:bool
+    autoconnect:bool
+    useCertificate:bool
+    useLoginToken:bool
     
 
-    def init(self, version:'Version', lang:str, credentials:list[int], serverId:int, sessionOptionalSalt:int, failedAttempts:list[int]):
-        self.version = version
-        self.lang = lang
-        self.credentials = credentials
-        self.serverId = serverId
-        self.sessionOptionalSalt = sessionOptionalSalt
-        self.failedAttempts = failedAttempts
+    def init(self, version_:'Version', lang_:str, credentials_:list[int], serverId_:int, sessionOptionalSalt_:int, failedAttempts_:list[int], autoconnect_:bool, useCertificate_:bool, useLoginToken_:bool):
+        self.version = version_
+        self.lang = lang_
+        self.credentials = credentials_
+        self.serverId = serverId_
+        self.sessionOptionalSalt = sessionOptionalSalt_
+        self.failedAttempts = failedAttempts_
+        self.autoconnect = autoconnect_
+        self.useCertificate = useCertificate_
+        self.useLoginToken = useLoginToken_
         
         super().__init__()
     

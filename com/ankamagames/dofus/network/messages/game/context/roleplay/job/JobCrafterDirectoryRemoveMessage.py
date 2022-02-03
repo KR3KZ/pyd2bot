@@ -6,9 +6,9 @@ class JobCrafterDirectoryRemoveMessage(NetworkMessage):
     playerId:int
     
 
-    def init(self, jobId:int, playerId:int):
-        self.jobId = jobId
-        self.playerId = playerId
+    def init(self, jobId_:int, playerId_:int):
+        self.jobId = jobId_
+        self.playerId = playerId_
         
         super().__init__()
     

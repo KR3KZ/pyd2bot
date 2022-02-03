@@ -17,13 +17,13 @@ class GameFightSpectateMessage(NetworkMessage):
     fxTriggerCounts:list['GameFightEffectTriggerCount']
     
 
-    def init(self, effects:list['FightDispellableEffectExtendedInformations'], marks:list['GameActionMark'], gameTurn:int, fightStart:int, idols:list['Idol'], fxTriggerCounts:list['GameFightEffectTriggerCount']):
-        self.effects = effects
-        self.marks = marks
-        self.gameTurn = gameTurn
-        self.fightStart = fightStart
-        self.idols = idols
-        self.fxTriggerCounts = fxTriggerCounts
+    def init(self, effects_:list['FightDispellableEffectExtendedInformations'], marks_:list['GameActionMark'], gameTurn_:int, fightStart_:int, idols_:list['Idol'], fxTriggerCounts_:list['GameFightEffectTriggerCount']):
+        self.effects = effects_
+        self.marks = marks_
+        self.gameTurn = gameTurn_
+        self.fightStart = fightStart_
+        self.idols = idols_
+        self.fxTriggerCounts = fxTriggerCounts_
         
         super().__init__()
     

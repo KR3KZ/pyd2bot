@@ -4,8 +4,8 @@ from com.ankamagames.dofus.network.messages.game.presets.IconPresetSaveRequestMe
 class IdolsPresetSaveRequestMessage(IconPresetSaveRequestMessage):
     
 
-    def init(self, presetId:int, symbolId:int, updateData:bool):
+    def init(self, presetId_:int, symbolId_:int, updateData_:bool):
         
-        super().__init__(presetId, symbolId, updateData)
+        super().__init__(presetId_, symbolId_, updateData_)
     
     

@@ -6,9 +6,9 @@ class PaddockSellRequestMessage(NetworkMessage):
     forSale:bool
     
 
-    def init(self, price:int, forSale:bool):
-        self.price = price
-        self.forSale = forSale
+    def init(self, price_:int, forSale_:bool):
+        self.price = price_
+        self.forSale = forSale_
         
         super().__init__()
     

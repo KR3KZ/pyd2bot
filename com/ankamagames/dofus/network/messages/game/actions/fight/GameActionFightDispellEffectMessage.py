@@ -5,9 +5,9 @@ class GameActionFightDispellEffectMessage(GameActionFightDispellMessage):
     boostUID:int
     
 
-    def init(self, boostUID:int, targetId:int, verboseCast:bool, actionId:int, sourceId:int):
-        self.boostUID = boostUID
+    def init(self, boostUID_:int, targetId_:int, verboseCast_:bool, actionId_:int, sourceId_:int):
+        self.boostUID = boostUID_
         
-        super().__init__(targetId, verboseCast, actionId, sourceId)
+        super().__init__(targetId_, verboseCast_, actionId_, sourceId_)
     
     

@@ -7,10 +7,10 @@ class ChatSmileyMessage(NetworkMessage):
     accountId:int
     
 
-    def init(self, entityId:int, smileyId:int, accountId:int):
-        self.entityId = entityId
-        self.smileyId = smileyId
-        self.accountId = accountId
+    def init(self, entityId_:int, smileyId_:int, accountId_:int):
+        self.entityId = entityId_
+        self.smileyId = smileyId_
+        self.accountId = accountId_
         
         super().__init__()
     

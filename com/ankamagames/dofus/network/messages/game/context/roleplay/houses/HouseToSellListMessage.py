@@ -11,10 +11,10 @@ class HouseToSellListMessage(NetworkMessage):
     houseList:list['HouseInformationsForSell']
     
 
-    def init(self, pageIndex:int, totalPage:int, houseList:list['HouseInformationsForSell']):
-        self.pageIndex = pageIndex
-        self.totalPage = totalPage
-        self.houseList = houseList
+    def init(self, pageIndex_:int, totalPage_:int, houseList_:list['HouseInformationsForSell']):
+        self.pageIndex = pageIndex_
+        self.totalPage = totalPage_
+        self.houseList = houseList_
         
         super().__init__()
     

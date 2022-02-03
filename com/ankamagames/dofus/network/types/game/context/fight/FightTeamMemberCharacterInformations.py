@@ -6,10 +6,10 @@ class FightTeamMemberCharacterInformations(FightTeamMemberInformations):
     level:int
     
 
-    def init(self, name:str, level:int, id:int):
-        self.name = name
-        self.level = level
+    def init(self, name_:str, level_:int, id_:int):
+        self.name = name_
+        self.level = level_
         
-        super().__init__(id)
+        super().__init__(id_)
     
     

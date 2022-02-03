@@ -11,9 +11,9 @@ class AchievementDetailedListMessage(NetworkMessage):
     finishedAchievements:list['Achievement']
     
 
-    def init(self, startedAchievements:list['Achievement'], finishedAchievements:list['Achievement']):
-        self.startedAchievements = startedAchievements
-        self.finishedAchievements = finishedAchievements
+    def init(self, startedAchievements_:list['Achievement'], finishedAchievements_:list['Achievement']):
+        self.startedAchievements = startedAchievements_
+        self.finishedAchievements = finishedAchievements_
         
         super().__init__()
     

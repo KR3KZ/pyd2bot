@@ -9,12 +9,12 @@ class HaapiConfirmationMessage(NetworkMessage):
     transaction:str
     
 
-    def init(self, kamas:int, amount:int, rate:int, action:int, transaction:str):
-        self.kamas = kamas
-        self.amount = amount
-        self.rate = rate
-        self.action = action
-        self.transaction = transaction
+    def init(self, kamas_:int, amount_:int, rate_:int, action_:int, transaction_:str):
+        self.kamas = kamas_
+        self.amount = amount_
+        self.rate = rate_
+        self.action = action_
+        self.transaction = transaction_
         
         super().__init__()
     

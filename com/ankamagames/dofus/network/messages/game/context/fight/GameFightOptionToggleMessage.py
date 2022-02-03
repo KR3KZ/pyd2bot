@@ -5,8 +5,8 @@ class GameFightOptionToggleMessage(NetworkMessage):
     option:int
     
 
-    def init(self, option:int):
-        self.option = option
+    def init(self, option_:int):
+        self.option = option_
         
         super().__init__()
     

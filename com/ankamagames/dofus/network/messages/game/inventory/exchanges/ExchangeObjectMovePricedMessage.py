@@ -5,9 +5,9 @@ class ExchangeObjectMovePricedMessage(ExchangeObjectMoveMessage):
     price:int
     
 
-    def init(self, price:int, objectUID:int, quantity:int):
-        self.price = price
+    def init(self, price_:int, objectUID_:int, quantity_:int):
+        self.price = price_
         
-        super().__init__(objectUID, quantity)
+        super().__init__(objectUID_, quantity_)
     
     

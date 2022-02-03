@@ -5,9 +5,9 @@ class MapCoordinatesAndId(MapCoordinates):
     mapId:int
     
 
-    def init(self, mapId:int, worldX:int, worldY:int):
-        self.mapId = mapId
+    def init(self, mapId_:int, worldX_:int, worldY_:int):
+        self.mapId = mapId_
         
-        super().__init__(worldX, worldY)
+        super().__init__(worldX_, worldY_)
     
     

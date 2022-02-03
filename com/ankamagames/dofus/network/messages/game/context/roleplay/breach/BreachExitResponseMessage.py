@@ -5,8 +5,8 @@ class BreachExitResponseMessage(NetworkMessage):
     exited:bool
     
 
-    def init(self, exited:bool):
-        self.exited = exited
+    def init(self, exited_:bool):
+        self.exited = exited_
         
         super().__init__()
     

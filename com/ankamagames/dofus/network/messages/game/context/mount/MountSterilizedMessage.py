@@ -5,8 +5,8 @@ class MountSterilizedMessage(NetworkMessage):
     mountId:int
     
 
-    def init(self, mountId:int):
-        self.mountId = mountId
+    def init(self, mountId_:int):
+        self.mountId = mountId_
         
         super().__init__()
     

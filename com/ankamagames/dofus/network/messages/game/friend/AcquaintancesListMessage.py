@@ -9,8 +9,8 @@ class AcquaintancesListMessage(NetworkMessage):
     acquaintanceList:list['AcquaintanceInformation']
     
 
-    def init(self, acquaintanceList:list['AcquaintanceInformation']):
-        self.acquaintanceList = acquaintanceList
+    def init(self, acquaintanceList_:list['AcquaintanceInformation']):
+        self.acquaintanceList = acquaintanceList_
         
         super().__init__()
     

@@ -8,11 +8,11 @@ class TaxCollectorLootInformations(TaxCollectorComplementaryInformations):
     itemsValue:int
     
 
-    def init(self, kamas:int, experience:int, pods:int, itemsValue:int):
-        self.kamas = kamas
-        self.experience = experience
-        self.pods = pods
-        self.itemsValue = itemsValue
+    def init(self, kamas_:int, experience_:int, pods_:int, itemsValue_:int):
+        self.kamas = kamas_
+        self.experience = experience_
+        self.pods = pods_
+        self.itemsValue = itemsValue_
         
         super().__init__()
     

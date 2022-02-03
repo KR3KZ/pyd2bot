@@ -5,8 +5,8 @@ class HavenBagPackListMessage(NetworkMessage):
     packIds:list[int]
     
 
-    def init(self, packIds:list[int]):
-        self.packIds = packIds
+    def init(self, packIds_:list[int]):
+        self.packIds = packIds_
         
         super().__init__()
     

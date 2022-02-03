@@ -9,8 +9,8 @@ class JobExperienceUpdateMessage(NetworkMessage):
     experiencesUpdate:'JobExperience'
     
 
-    def init(self, experiencesUpdate:'JobExperience'):
-        self.experiencesUpdate = experiencesUpdate
+    def init(self, experiencesUpdate_:'JobExperience'):
+        self.experiencesUpdate = experiencesUpdate_
         
         super().__init__()
     

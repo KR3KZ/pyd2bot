@@ -9,8 +9,8 @@ class GuildPaddockBoughtMessage(NetworkMessage):
     paddockInfo:'PaddockContentInformations'
     
 
-    def init(self, paddockInfo:'PaddockContentInformations'):
-        self.paddockInfo = paddockInfo
+    def init(self, paddockInfo_:'PaddockContentInformations'):
+        self.paddockInfo = paddockInfo_
         
         super().__init__()
     

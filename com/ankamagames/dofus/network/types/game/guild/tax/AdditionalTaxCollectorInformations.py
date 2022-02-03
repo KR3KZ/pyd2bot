@@ -6,9 +6,9 @@ class AdditionalTaxCollectorInformations(NetworkMessage):
     date:int
     
 
-    def init(self, collectorCallerName:str, date:int):
-        self.collectorCallerName = collectorCallerName
-        self.date = date
+    def init(self, collectorCallerName_:str, date_:int):
+        self.collectorCallerName = collectorCallerName_
+        self.date = date_
         
         super().__init__()
     

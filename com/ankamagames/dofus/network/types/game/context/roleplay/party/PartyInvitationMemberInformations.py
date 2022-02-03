@@ -14,13 +14,13 @@ class PartyInvitationMemberInformations(CharacterBaseInformations):
     entities:list['PartyEntityBaseInformation']
     
 
-    def init(self, worldX:int, worldY:int, mapId:int, subAreaId:int, entities:list['PartyEntityBaseInformation'], sex:bool, entityLook:'EntityLook', breed:int, level:int, name:str, id:int):
-        self.worldX = worldX
-        self.worldY = worldY
-        self.mapId = mapId
-        self.subAreaId = subAreaId
-        self.entities = entities
+    def init(self, worldX_:int, worldY_:int, mapId_:int, subAreaId_:int, entities_:list['PartyEntityBaseInformation'], sex_:bool, entityLook_:'EntityLook', breed_:int, level_:int, name_:str, id_:int):
+        self.worldX = worldX_
+        self.worldY = worldY_
+        self.mapId = mapId_
+        self.subAreaId = subAreaId_
+        self.entities = entities_
         
-        super().__init__(sex, entityLook, breed, level, name, id)
+        super().__init__(sex_, entityLook_, breed_, level_, name_, id_)
     
     

@@ -7,10 +7,10 @@ class BasicGuildInformations(AbstractSocialGroupInfos):
     guildLevel:int
     
 
-    def init(self, guildId:int, guildName:str, guildLevel:int):
-        self.guildId = guildId
-        self.guildName = guildName
-        self.guildLevel = guildLevel
+    def init(self, guildId_:int, guildName_:str, guildLevel_:int):
+        self.guildId = guildId_
+        self.guildName = guildName_
+        self.guildLevel = guildLevel_
         
         super().__init__()
     

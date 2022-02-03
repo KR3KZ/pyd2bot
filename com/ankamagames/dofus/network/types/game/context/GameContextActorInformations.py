@@ -10,9 +10,9 @@ class GameContextActorInformations(GameContextActorPositionInformations):
     look:'EntityLook'
     
 
-    def init(self, look:'EntityLook', contextualId:int, disposition:'EntityDispositionInformations'):
-        self.look = look
+    def init(self, look_:'EntityLook', contextualId_:int, disposition_:'EntityDispositionInformations'):
+        self.look = look_
         
-        super().__init__(contextualId, disposition)
+        super().__init__(contextualId_, disposition_)
     
     

@@ -22,20 +22,20 @@ class PartyMemberInformations(CharacterBaseInformations):
     entities:list['PartyEntityBaseInformation']
     
 
-    def init(self, lifePoints:int, maxLifePoints:int, prospecting:int, regenRate:int, initiative:int, alignmentSide:int, worldX:int, worldY:int, mapId:int, subAreaId:int, status:'PlayerStatus', entities:list['PartyEntityBaseInformation'], sex:bool, entityLook:'EntityLook', breed:int, level:int, name:str, id:int):
-        self.lifePoints = lifePoints
-        self.maxLifePoints = maxLifePoints
-        self.prospecting = prospecting
-        self.regenRate = regenRate
-        self.initiative = initiative
-        self.alignmentSide = alignmentSide
-        self.worldX = worldX
-        self.worldY = worldY
-        self.mapId = mapId
-        self.subAreaId = subAreaId
-        self.status = status
-        self.entities = entities
+    def init(self, lifePoints_:int, maxLifePoints_:int, prospecting_:int, regenRate_:int, initiative_:int, alignmentSide_:int, worldX_:int, worldY_:int, mapId_:int, subAreaId_:int, status_:'PlayerStatus', entities_:list['PartyEntityBaseInformation'], sex_:bool, entityLook_:'EntityLook', breed_:int, level_:int, name_:str, id_:int):
+        self.lifePoints = lifePoints_
+        self.maxLifePoints = maxLifePoints_
+        self.prospecting = prospecting_
+        self.regenRate = regenRate_
+        self.initiative = initiative_
+        self.alignmentSide = alignmentSide_
+        self.worldX = worldX_
+        self.worldY = worldY_
+        self.mapId = mapId_
+        self.subAreaId = subAreaId_
+        self.status = status_
+        self.entities = entities_
         
-        super().__init__(sex, entityLook, breed, level, name, id)
+        super().__init__(sex_, entityLook_, breed_, level_, name_, id_)
     
     

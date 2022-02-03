@@ -10,9 +10,9 @@ class IndexedEntityLook(NetworkMessage):
     index:int
     
 
-    def init(self, look:'EntityLook', index:int):
-        self.look = look
-        self.index = index
+    def init(self, look_:'EntityLook', index_:int):
+        self.look = look_
+        self.index = index_
         
         super().__init__()
     

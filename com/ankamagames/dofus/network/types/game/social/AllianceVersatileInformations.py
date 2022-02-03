@@ -8,11 +8,11 @@ class AllianceVersatileInformations(NetworkMessage):
     nbSubarea:int
     
 
-    def init(self, allianceId:int, nbGuilds:int, nbMembers:int, nbSubarea:int):
-        self.allianceId = allianceId
-        self.nbGuilds = nbGuilds
-        self.nbMembers = nbMembers
-        self.nbSubarea = nbSubarea
+    def init(self, allianceId_:int, nbGuilds_:int, nbMembers_:int, nbSubarea_:int):
+        self.allianceId = allianceId_
+        self.nbGuilds = nbGuilds_
+        self.nbMembers = nbMembers_
+        self.nbSubarea = nbSubarea_
         
         super().__init__()
     

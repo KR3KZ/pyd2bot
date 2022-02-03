@@ -9,9 +9,9 @@ class CharacterMinimalPlusLookAndGradeInformations(CharacterMinimalPlusLookInfor
     grade:int
     
 
-    def init(self, grade:int, entityLook:'EntityLook', breed:int, level:int, name:str, id:int):
-        self.grade = grade
+    def init(self, grade_:int, entityLook_:'EntityLook', breed_:int, level_:int, name_:str, id_:int):
+        self.grade = grade_
         
-        super().__init__(entityLook, breed, level, name, id)
+        super().__init__(entityLook_, breed_, level_, name_, id_)
     
     

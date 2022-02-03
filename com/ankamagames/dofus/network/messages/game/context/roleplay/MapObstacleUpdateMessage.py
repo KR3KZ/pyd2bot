@@ -9,8 +9,8 @@ class MapObstacleUpdateMessage(NetworkMessage):
     obstacles:list['MapObstacle']
     
 
-    def init(self, obstacles:list['MapObstacle']):
-        self.obstacles = obstacles
+    def init(self, obstacles_:list['MapObstacle']):
+        self.obstacles = obstacles_
         
         super().__init__()
     

@@ -9,8 +9,8 @@ class GameRolePlayArenaInvitationCandidatesAnswerMessage(NetworkMessage):
     candidates:list['LeagueFriendInformations']
     
 
-    def init(self, candidates:list['LeagueFriendInformations']):
-        self.candidates = candidates
+    def init(self, candidates_:list['LeagueFriendInformations']):
+        self.candidates = candidates_
         
         super().__init__()
     

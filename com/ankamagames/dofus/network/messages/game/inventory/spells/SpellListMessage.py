@@ -10,9 +10,9 @@ class SpellListMessage(NetworkMessage):
     spells:list['SpellItem']
     
 
-    def init(self, spellPrevisualization:bool, spells:list['SpellItem']):
-        self.spellPrevisualization = spellPrevisualization
-        self.spells = spells
+    def init(self, spellPrevisualization_:bool, spells_:list['SpellItem']):
+        self.spellPrevisualization = spellPrevisualization_
+        self.spells = spells_
         
         super().__init__()
     

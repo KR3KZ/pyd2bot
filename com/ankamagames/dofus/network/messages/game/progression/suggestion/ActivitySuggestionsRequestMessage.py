@@ -9,12 +9,12 @@ class ActivitySuggestionsRequestMessage(NetworkMessage):
     nbCards:int
     
 
-    def init(self, minLevel:int, maxLevel:int, areaId:int, activityCategoryId:int, nbCards:int):
-        self.minLevel = minLevel
-        self.maxLevel = maxLevel
-        self.areaId = areaId
-        self.activityCategoryId = activityCategoryId
-        self.nbCards = nbCards
+    def init(self, minLevel_:int, maxLevel_:int, areaId_:int, activityCategoryId_:int, nbCards_:int):
+        self.minLevel = minLevel_
+        self.maxLevel = maxLevel_
+        self.areaId = areaId_
+        self.activityCategoryId = activityCategoryId_
+        self.nbCards = nbCards_
         
         super().__init__()
     

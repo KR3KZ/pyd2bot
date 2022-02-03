@@ -6,9 +6,9 @@ class ExchangeReplyTaxVendorMessage(NetworkMessage):
     totalTaxValue:int
     
 
-    def init(self, objectValue:int, totalTaxValue:int):
-        self.objectValue = objectValue
-        self.totalTaxValue = totalTaxValue
+    def init(self, objectValue_:int, totalTaxValue_:int):
+        self.objectValue = objectValue_
+        self.totalTaxValue = totalTaxValue_
         
         super().__init__()
     

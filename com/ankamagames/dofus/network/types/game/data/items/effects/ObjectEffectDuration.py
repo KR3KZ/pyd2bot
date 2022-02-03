@@ -7,11 +7,11 @@ class ObjectEffectDuration(ObjectEffect):
     minutes:int
     
 
-    def init(self, days:int, hours:int, minutes:int, actionId:int):
-        self.days = days
-        self.hours = hours
-        self.minutes = minutes
+    def init(self, days_:int, hours_:int, minutes_:int, actionId_:int):
+        self.days = days_
+        self.hours = hours_
+        self.minutes = minutes_
         
-        super().__init__(actionId)
+        super().__init__(actionId_)
     
     

@@ -9,8 +9,8 @@ class GuildModificationEmblemValidMessage(NetworkMessage):
     guildEmblem:'GuildEmblem'
     
 
-    def init(self, guildEmblem:'GuildEmblem'):
-        self.guildEmblem = guildEmblem
+    def init(self, guildEmblem_:'GuildEmblem'):
+        self.guildEmblem = guildEmblem_
         
         super().__init__()
     

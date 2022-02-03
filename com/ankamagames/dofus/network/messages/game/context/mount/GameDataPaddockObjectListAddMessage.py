@@ -9,8 +9,8 @@ class GameDataPaddockObjectListAddMessage(NetworkMessage):
     paddockItemDescription:list['PaddockItem']
     
 
-    def init(self, paddockItemDescription:list['PaddockItem']):
-        self.paddockItemDescription = paddockItemDescription
+    def init(self, paddockItemDescription_:list['PaddockItem']):
+        self.paddockItemDescription = paddockItemDescription_
         
         super().__init__()
     

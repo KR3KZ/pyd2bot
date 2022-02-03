@@ -14,13 +14,13 @@ class ObjectItemToSellInHumanVendorShop(Item):
     publicPrice:int
     
 
-    def init(self, objectGID:int, effects:list['ObjectEffect'], objectUID:int, quantity:int, objectPrice:int, publicPrice:int):
-        self.objectGID = objectGID
-        self.effects = effects
-        self.objectUID = objectUID
-        self.quantity = quantity
-        self.objectPrice = objectPrice
-        self.publicPrice = publicPrice
+    def init(self, objectGID_:int, effects_:list['ObjectEffect'], objectUID_:int, quantity_:int, objectPrice_:int, publicPrice_:int):
+        self.objectGID = objectGID_
+        self.effects = effects_
+        self.objectUID = objectUID_
+        self.quantity = quantity_
+        self.objectPrice = objectPrice_
+        self.publicPrice = publicPrice_
         
         super().__init__()
     

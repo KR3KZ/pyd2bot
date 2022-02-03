@@ -10,10 +10,10 @@ class ObjectItemToSellInNpcShop(ObjectItemMinimalInformation):
     buyCriterion:str
     
 
-    def init(self, objectPrice:int, buyCriterion:str, objectGID:int, effects:list['ObjectEffect']):
-        self.objectPrice = objectPrice
-        self.buyCriterion = buyCriterion
+    def init(self, objectPrice_:int, buyCriterion_:str, objectGID_:int, effects_:list['ObjectEffect']):
+        self.objectPrice = objectPrice_
+        self.buyCriterion = buyCriterion_
         
-        super().__init__(objectGID, effects)
+        super().__init__(objectGID_, effects_)
     
     

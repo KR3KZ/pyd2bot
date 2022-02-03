@@ -6,9 +6,9 @@ class AlignmentWarEffortInformation(NetworkMessage):
     alignmentWarEffort:int
     
 
-    def init(self, alignmentSide:int, alignmentWarEffort:int):
-        self.alignmentSide = alignmentSide
-        self.alignmentWarEffort = alignmentWarEffort
+    def init(self, alignmentSide_:int, alignmentWarEffort_:int):
+        self.alignmentSide = alignmentSide_
+        self.alignmentWarEffort = alignmentWarEffort_
         
         super().__init__()
     

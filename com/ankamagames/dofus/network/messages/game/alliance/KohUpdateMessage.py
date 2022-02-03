@@ -17,15 +17,15 @@ class KohUpdateMessage(NetworkMessage):
     nextTickTime:int
     
 
-    def init(self, alliances:list['AllianceInformations'], allianceNbMembers:list[int], allianceRoundWeigth:list[int], allianceMatchScore:list[int], allianceMapWinners:list['BasicAllianceInformations'], allianceMapWinnerScore:int, allianceMapMyAllianceScore:int, nextTickTime:int):
-        self.alliances = alliances
-        self.allianceNbMembers = allianceNbMembers
-        self.allianceRoundWeigth = allianceRoundWeigth
-        self.allianceMatchScore = allianceMatchScore
-        self.allianceMapWinners = allianceMapWinners
-        self.allianceMapWinnerScore = allianceMapWinnerScore
-        self.allianceMapMyAllianceScore = allianceMapMyAllianceScore
-        self.nextTickTime = nextTickTime
+    def init(self, alliances_:list['AllianceInformations'], allianceNbMembers_:list[int], allianceRoundWeigth_:list[int], allianceMatchScore_:list[int], allianceMapWinners_:list['BasicAllianceInformations'], allianceMapWinnerScore_:int, allianceMapMyAllianceScore_:int, nextTickTime_:int):
+        self.alliances = alliances_
+        self.allianceNbMembers = allianceNbMembers_
+        self.allianceRoundWeigth = allianceRoundWeigth_
+        self.allianceMatchScore = allianceMatchScore_
+        self.allianceMapWinners = allianceMapWinners_
+        self.allianceMapWinnerScore = allianceMapWinnerScore_
+        self.allianceMapMyAllianceScore = allianceMapMyAllianceScore_
+        self.nextTickTime = nextTickTime_
         
         super().__init__()
     

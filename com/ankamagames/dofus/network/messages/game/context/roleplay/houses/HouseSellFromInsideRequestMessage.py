@@ -4,8 +4,8 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.houses.HouseSe
 class HouseSellFromInsideRequestMessage(HouseSellRequestMessage):
     
 
-    def init(self, instanceId:int, amount:int, forSale:bool):
+    def init(self, instanceId_:int, amount_:int, forSale_:bool):
         
-        super().__init__(instanceId, amount, forSale)
+        super().__init__(instanceId_, amount_, forSale_)
     
     

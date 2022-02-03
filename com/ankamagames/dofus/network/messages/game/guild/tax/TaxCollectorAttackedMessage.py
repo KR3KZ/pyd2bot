@@ -15,14 +15,14 @@ class TaxCollectorAttackedMessage(NetworkMessage):
     guild:'BasicGuildInformations'
     
 
-    def init(self, firstNameId:int, lastNameId:int, worldX:int, worldY:int, mapId:int, subAreaId:int, guild:'BasicGuildInformations'):
-        self.firstNameId = firstNameId
-        self.lastNameId = lastNameId
-        self.worldX = worldX
-        self.worldY = worldY
-        self.mapId = mapId
-        self.subAreaId = subAreaId
-        self.guild = guild
+    def init(self, firstNameId_:int, lastNameId_:int, worldX_:int, worldY_:int, mapId_:int, subAreaId_:int, guild_:'BasicGuildInformations'):
+        self.firstNameId = firstNameId_
+        self.lastNameId = lastNameId_
+        self.worldX = worldX_
+        self.worldY = worldY_
+        self.mapId = mapId_
+        self.subAreaId = subAreaId_
+        self.guild = guild_
         
         super().__init__()
     

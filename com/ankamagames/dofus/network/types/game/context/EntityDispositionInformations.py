@@ -6,9 +6,9 @@ class EntityDispositionInformations(NetworkMessage):
     direction:int
     
 
-    def init(self, cellId:int, direction:int):
-        self.cellId = cellId
-        self.direction = direction
+    def init(self, cellId_:int, direction_:int):
+        self.cellId = cellId_
+        self.direction = direction_
         
         super().__init__()
     

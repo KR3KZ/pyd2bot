@@ -6,9 +6,9 @@ class ObjectGroundListAddedMessage(NetworkMessage):
     referenceIds:list[int]
     
 
-    def init(self, cells:list[int], referenceIds:list[int]):
-        self.cells = cells
-        self.referenceIds = referenceIds
+    def init(self, cells_:list[int], referenceIds_:list[int]):
+        self.cells = cells_
+        self.referenceIds = referenceIds_
         
         super().__init__()
     

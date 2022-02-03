@@ -11,9 +11,9 @@ class GameRefreshMonsterBoostsMessage(NetworkMessage):
     familyBoosts:list['MonsterBoosts']
     
 
-    def init(self, monsterBoosts:list['MonsterBoosts'], familyBoosts:list['MonsterBoosts']):
-        self.monsterBoosts = monsterBoosts
-        self.familyBoosts = familyBoosts
+    def init(self, monsterBoosts_:list['MonsterBoosts'], familyBoosts_:list['MonsterBoosts']):
+        self.monsterBoosts = monsterBoosts_
+        self.familyBoosts = familyBoosts_
         
         super().__init__()
     

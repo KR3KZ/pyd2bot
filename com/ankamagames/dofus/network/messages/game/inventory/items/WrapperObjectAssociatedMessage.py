@@ -4,8 +4,8 @@ from com.ankamagames.dofus.network.messages.game.inventory.items.SymbioticObject
 class WrapperObjectAssociatedMessage(SymbioticObjectAssociatedMessage):
     
 
-    def init(self, hostUID:int):
+    def init(self, hostUID_:int):
         
-        super().__init__(hostUID)
+        super().__init__(hostUID_)
     
     

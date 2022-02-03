@@ -5,8 +5,8 @@ class BasicWhoAmIRequestMessage(NetworkMessage):
     verbose:bool
     
 
-    def init(self, verbose:bool):
-        self.verbose = verbose
+    def init(self, verbose_:bool):
+        self.verbose = verbose_
         
         super().__init__()
     

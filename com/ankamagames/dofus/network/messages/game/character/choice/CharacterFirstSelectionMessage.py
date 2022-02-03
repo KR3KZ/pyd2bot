@@ -5,9 +5,9 @@ class CharacterFirstSelectionMessage(CharacterSelectionMessage):
     doTutorial:bool
     
 
-    def init(self, doTutorial:bool, id:int):
-        self.doTutorial = doTutorial
+    def init(self, doTutorial_:bool, id_:int):
+        self.doTutorial = doTutorial_
         
-        super().__init__(id)
+        super().__init__(id_)
     
     

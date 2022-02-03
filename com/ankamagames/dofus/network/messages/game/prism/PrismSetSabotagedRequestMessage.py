@@ -5,8 +5,8 @@ class PrismSetSabotagedRequestMessage(NetworkMessage):
     subAreaId:int
     
 
-    def init(self, subAreaId:int):
-        self.subAreaId = subAreaId
+    def init(self, subAreaId_:int):
+        self.subAreaId = subAreaId_
         
         super().__init__()
     

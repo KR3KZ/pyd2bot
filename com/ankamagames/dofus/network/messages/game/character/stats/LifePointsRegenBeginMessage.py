@@ -5,8 +5,8 @@ class LifePointsRegenBeginMessage(NetworkMessage):
     regenRate:int
     
 
-    def init(self, regenRate:int):
-        self.regenRate = regenRate
+    def init(self, regenRate_:int):
+        self.regenRate = regenRate_
         
         super().__init__()
     

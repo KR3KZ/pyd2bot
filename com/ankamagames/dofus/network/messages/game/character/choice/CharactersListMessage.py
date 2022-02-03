@@ -9,9 +9,9 @@ class CharactersListMessage(BasicCharactersListMessage):
     hasStartupActions:bool
     
 
-    def init(self, hasStartupActions:bool, characters:list['CharacterBaseInformations']):
-        self.hasStartupActions = hasStartupActions
+    def init(self, hasStartupActions_:bool, characters_:list['CharacterBaseInformations']):
+        self.hasStartupActions = hasStartupActions_
         
-        super().__init__(characters)
+        super().__init__(characters_)
     
     

@@ -9,9 +9,9 @@ class PresetsContainerPreset(Preset):
     presets:list['Preset']
     
 
-    def init(self, presets:list['Preset'], id:int):
-        self.presets = presets
+    def init(self, presets_:list['Preset'], id_:int):
+        self.presets = presets_
         
-        super().__init__(id)
+        super().__init__(id_)
     
     

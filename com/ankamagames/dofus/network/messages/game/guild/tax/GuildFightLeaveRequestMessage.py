@@ -6,9 +6,9 @@ class GuildFightLeaveRequestMessage(NetworkMessage):
     characterId:int
     
 
-    def init(self, taxCollectorId:int, characterId:int):
-        self.taxCollectorId = taxCollectorId
-        self.characterId = characterId
+    def init(self, taxCollectorId_:int, characterId_:int):
+        self.taxCollectorId = taxCollectorId_
+        self.characterId = characterId_
         
         super().__init__()
     

@@ -6,9 +6,9 @@ class InteractiveUseRequestMessage(NetworkMessage):
     skillInstanceUid:int
     
 
-    def init(self, elemId:int, skillInstanceUid:int):
-        self.elemId = elemId
-        self.skillInstanceUid = skillInstanceUid
+    def init(self, elemId_:int, skillInstanceUid_:int):
+        self.elemId = elemId_
+        self.skillInstanceUid = skillInstanceUid_
         
         super().__init__()
     

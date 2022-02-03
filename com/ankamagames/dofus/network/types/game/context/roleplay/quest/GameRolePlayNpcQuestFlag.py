@@ -6,9 +6,9 @@ class GameRolePlayNpcQuestFlag(NetworkMessage):
     questsToStartId:list[int]
     
 
-    def init(self, questsToValidId:list[int], questsToStartId:list[int]):
-        self.questsToValidId = questsToValidId
-        self.questsToStartId = questsToStartId
+    def init(self, questsToValidId_:list[int], questsToStartId_:list[int]):
+        self.questsToValidId = questsToValidId_
+        self.questsToStartId = questsToStartId_
         
         super().__init__()
     

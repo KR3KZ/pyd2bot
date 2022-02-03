@@ -13,12 +13,12 @@ class ExchangeBidHouseInListAddedMessage(NetworkMessage):
     prices:list[int]
     
 
-    def init(self, itemUID:int, objectGID:int, objectType:int, effects:list['ObjectEffect'], prices:list[int]):
-        self.itemUID = itemUID
-        self.objectGID = objectGID
-        self.objectType = objectType
-        self.effects = effects
-        self.prices = prices
+    def init(self, itemUID_:int, objectGID_:int, objectType_:int, effects_:list['ObjectEffect'], prices_:list[int]):
+        self.itemUID = itemUID_
+        self.objectGID = objectGID_
+        self.objectType = objectType_
+        self.effects = effects_
+        self.prices = prices_
         
         super().__init__()
     

@@ -11,10 +11,10 @@ class GuildInvitedMessage(NetworkMessage):
     guildInfo:'BasicGuildInformations'
     
 
-    def init(self, recruterId:int, recruterName:str, guildInfo:'BasicGuildInformations'):
-        self.recruterId = recruterId
-        self.recruterName = recruterName
-        self.guildInfo = guildInfo
+    def init(self, recruterId_:int, recruterName_:str, guildInfo_:'BasicGuildInformations'):
+        self.recruterId = recruterId_
+        self.recruterName = recruterName_
+        self.guildInfo = guildInfo_
         
         super().__init__()
     

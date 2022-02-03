@@ -6,9 +6,9 @@ class RecycledItem(NetworkMessage):
     qty:int
     
 
-    def init(self, id:int, qty:int):
-        self.id = id
-        self.qty = qty
+    def init(self, id_:int, qty_:int):
+        self.id = id_
+        self.qty = qty_
         
         super().__init__()
     

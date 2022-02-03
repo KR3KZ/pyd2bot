@@ -16,15 +16,15 @@ class PartyInvitationDetailsMessage(AbstractPartyMessage):
     guests:list['PartyGuestInformations']
     
 
-    def init(self, partyType:int, partyName:str, fromId:int, fromName:str, leaderId:int, members:list['PartyInvitationMemberInformations'], guests:list['PartyGuestInformations'], partyId:int):
-        self.partyType = partyType
-        self.partyName = partyName
-        self.fromId = fromId
-        self.fromName = fromName
-        self.leaderId = leaderId
-        self.members = members
-        self.guests = guests
+    def init(self, partyType_:int, partyName_:str, fromId_:int, fromName_:str, leaderId_:int, members_:list['PartyInvitationMemberInformations'], guests_:list['PartyGuestInformations'], partyId_:int):
+        self.partyType = partyType_
+        self.partyName = partyName_
+        self.fromId = fromId_
+        self.fromName = fromName_
+        self.leaderId = leaderId_
+        self.members = members_
+        self.guests = guests_
         
-        super().__init__(partyId)
+        super().__init__(partyId_)
     
     

@@ -6,9 +6,9 @@ class ExchangeObjectTransfertListWithQuantityToInvMessage(NetworkMessage):
     qtys:list[int]
     
 
-    def init(self, ids:list[int], qtys:list[int]):
-        self.ids = ids
-        self.qtys = qtys
+    def init(self, ids_:list[int], qtys_:list[int]):
+        self.ids = ids_
+        self.qtys = qtys_
         
         super().__init__()
     

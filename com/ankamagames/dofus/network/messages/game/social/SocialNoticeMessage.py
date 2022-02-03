@@ -8,11 +8,11 @@ class SocialNoticeMessage(NetworkMessage):
     memberName:str
     
 
-    def init(self, content:str, timestamp:int, memberId:int, memberName:str):
-        self.content = content
-        self.timestamp = timestamp
-        self.memberId = memberId
-        self.memberName = memberName
+    def init(self, content_:str, timestamp_:int, memberId_:int, memberName_:str):
+        self.content = content_
+        self.timestamp = timestamp_
+        self.memberId = memberId_
+        self.memberName = memberName_
         
         super().__init__()
     

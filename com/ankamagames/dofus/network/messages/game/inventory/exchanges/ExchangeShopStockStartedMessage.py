@@ -9,8 +9,8 @@ class ExchangeShopStockStartedMessage(NetworkMessage):
     objectsInfos:list['ObjectItemToSell']
     
 
-    def init(self, objectsInfos:list['ObjectItemToSell']):
-        self.objectsInfos = objectsInfos
+    def init(self, objectsInfos_:list['ObjectItemToSell']):
+        self.objectsInfos = objectsInfos_
         
         super().__init__()
     

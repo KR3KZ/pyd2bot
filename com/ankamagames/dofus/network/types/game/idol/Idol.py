@@ -7,10 +7,10 @@ class Idol(NetworkMessage):
     dropBonusPercent:int
     
 
-    def init(self, id:int, xpBonusPercent:int, dropBonusPercent:int):
-        self.id = id
-        self.xpBonusPercent = xpBonusPercent
-        self.dropBonusPercent = dropBonusPercent
+    def init(self, id_:int, xpBonusPercent_:int, dropBonusPercent_:int):
+        self.id = id_
+        self.xpBonusPercent = xpBonusPercent_
+        self.dropBonusPercent = dropBonusPercent_
         
         super().__init__()
     

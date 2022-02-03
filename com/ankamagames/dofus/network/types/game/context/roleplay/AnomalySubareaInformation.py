@@ -8,11 +8,11 @@ class AnomalySubareaInformation(NetworkMessage):
     anomalyClosingTime:int
     
 
-    def init(self, subAreaId:int, rewardRate:int, hasAnomaly:bool, anomalyClosingTime:int):
-        self.subAreaId = subAreaId
-        self.rewardRate = rewardRate
-        self.hasAnomaly = hasAnomaly
-        self.anomalyClosingTime = anomalyClosingTime
+    def init(self, subAreaId_:int, rewardRate_:int, hasAnomaly_:bool, anomalyClosingTime_:int):
+        self.subAreaId = subAreaId_
+        self.rewardRate = rewardRate_
+        self.hasAnomaly = hasAnomaly_
+        self.anomalyClosingTime = anomalyClosingTime_
         
         super().__init__()
     

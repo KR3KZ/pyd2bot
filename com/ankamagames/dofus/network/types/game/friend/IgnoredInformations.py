@@ -8,8 +8,8 @@ if TYPE_CHECKING:
 class IgnoredInformations(AbstractContactInformations):
     
 
-    def init(self, accountId:int, accountTag:'AccountTagInformation'):
+    def init(self, accountId_:int, accountTag_:'AccountTagInformation'):
         
-        super().__init__(accountId, accountTag)
+        super().__init__(accountId_, accountTag_)
     
     

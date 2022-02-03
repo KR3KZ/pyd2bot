@@ -14,12 +14,12 @@ class AllianceFactsMessage(NetworkMessage):
     leaderCharacterName:str
     
 
-    def init(self, infos:'AllianceFactSheetInformations', guilds:list['GuildInAllianceInformations'], controlledSubareaIds:list[int], leaderCharacterId:int, leaderCharacterName:str):
-        self.infos = infos
-        self.guilds = guilds
-        self.controlledSubareaIds = controlledSubareaIds
-        self.leaderCharacterId = leaderCharacterId
-        self.leaderCharacterName = leaderCharacterName
+    def init(self, infos_:'AllianceFactSheetInformations', guilds_:list['GuildInAllianceInformations'], controlledSubareaIds_:list[int], leaderCharacterId_:int, leaderCharacterName_:str):
+        self.infos = infos_
+        self.guilds = guilds_
+        self.controlledSubareaIds = controlledSubareaIds_
+        self.leaderCharacterId = leaderCharacterId_
+        self.leaderCharacterName = leaderCharacterName_
         
         super().__init__()
     

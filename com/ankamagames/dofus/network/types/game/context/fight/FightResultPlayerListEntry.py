@@ -11,10 +11,10 @@ class FightResultPlayerListEntry(FightResultFighterListEntry):
     additional:list['FightResultAdditionalData']
     
 
-    def init(self, level:int, additional:list['FightResultAdditionalData'], id:int, alive:bool, outcome:int, wave:int, rewards:'FightLoot'):
-        self.level = level
-        self.additional = additional
+    def init(self, level_:int, additional_:list['FightResultAdditionalData'], id_:int, alive_:bool, outcome_:int, wave_:int, rewards_:'FightLoot'):
+        self.level = level_
+        self.additional = additional_
         
-        super().__init__(id, alive, outcome, wave, rewards)
+        super().__init__(id_, alive_, outcome_, wave_, rewards_)
     
     

@@ -6,10 +6,10 @@ class ExchangeBidPriceForSellerMessage(ExchangeBidPriceMessage):
     minimalPrices:list[int]
     
 
-    def init(self, allIdentical:bool, minimalPrices:list[int], genericId:int, averagePrice:int):
-        self.allIdentical = allIdentical
-        self.minimalPrices = minimalPrices
+    def init(self, allIdentical_:bool, minimalPrices_:list[int], genericId_:int, averagePrice_:int):
+        self.allIdentical = allIdentical_
+        self.minimalPrices = minimalPrices_
         
-        super().__init__(genericId, averagePrice)
+        super().__init__(genericId_, averagePrice_)
     
     

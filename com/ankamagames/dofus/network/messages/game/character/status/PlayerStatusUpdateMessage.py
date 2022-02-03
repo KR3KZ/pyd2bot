@@ -11,10 +11,10 @@ class PlayerStatusUpdateMessage(NetworkMessage):
     status:'PlayerStatus'
     
 
-    def init(self, accountId:int, playerId:int, status:'PlayerStatus'):
-        self.accountId = accountId
-        self.playerId = playerId
-        self.status = status
+    def init(self, accountId_:int, playerId_:int, status_:'PlayerStatus'):
+        self.accountId = accountId_
+        self.playerId = playerId_
+        self.status = status_
         
         super().__init__()
     

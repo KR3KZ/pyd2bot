@@ -13,11 +13,11 @@ class GameRolePlayTaxCollectorInformations(GameRolePlayActorInformations):
     taxCollectorAttack:int
     
 
-    def init(self, identification:'TaxCollectorStaticInformations', guildLevel:int, taxCollectorAttack:int, look:'EntityLook', contextualId:int, disposition:'EntityDispositionInformations'):
-        self.identification = identification
-        self.guildLevel = guildLevel
-        self.taxCollectorAttack = taxCollectorAttack
+    def init(self, identification_:'TaxCollectorStaticInformations', guildLevel_:int, taxCollectorAttack_:int, look_:'EntityLook', contextualId_:int, disposition_:'EntityDispositionInformations'):
+        self.identification = identification_
+        self.guildLevel = guildLevel_
+        self.taxCollectorAttack = taxCollectorAttack_
         
-        super().__init__(look, contextualId, disposition)
+        super().__init__(look_, contextualId_, disposition_)
     
     

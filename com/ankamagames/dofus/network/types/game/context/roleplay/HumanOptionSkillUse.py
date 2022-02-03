@@ -7,10 +7,10 @@ class HumanOptionSkillUse(HumanOption):
     skillEndTime:int
     
 
-    def init(self, elementId:int, skillId:int, skillEndTime:int):
-        self.elementId = elementId
-        self.skillId = skillId
-        self.skillEndTime = skillEndTime
+    def init(self, elementId_:int, skillId_:int, skillEndTime_:int):
+        self.elementId = elementId_
+        self.skillId = skillId_
+        self.skillEndTime = skillEndTime_
         
         super().__init__()
     

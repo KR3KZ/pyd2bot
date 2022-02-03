@@ -6,10 +6,10 @@ class ObjectEffectMinMax(ObjectEffect):
     max:int
     
 
-    def init(self, min:int, max:int, actionId:int):
-        self.min = min
-        self.max = max
+    def init(self, min_:int, max_:int, actionId_:int):
+        self.min = min_
+        self.max = max_
         
-        super().__init__(actionId)
+        super().__init__(actionId_)
     
     

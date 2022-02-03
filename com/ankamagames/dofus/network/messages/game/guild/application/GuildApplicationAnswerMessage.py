@@ -6,9 +6,9 @@ class GuildApplicationAnswerMessage(NetworkMessage):
     playerId:int
     
 
-    def init(self, accepted:bool, playerId:int):
-        self.accepted = accepted
-        self.playerId = playerId
+    def init(self, accepted_:bool, playerId_:int):
+        self.accepted = accepted_
+        self.playerId = playerId_
         
         super().__init__()
     

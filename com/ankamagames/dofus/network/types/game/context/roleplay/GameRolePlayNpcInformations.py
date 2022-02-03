@@ -12,11 +12,11 @@ class GameRolePlayNpcInformations(GameRolePlayActorInformations):
     specialArtworkId:int
     
 
-    def init(self, npcId:int, sex:bool, specialArtworkId:int, look:'EntityLook', contextualId:int, disposition:'EntityDispositionInformations'):
-        self.npcId = npcId
-        self.sex = sex
-        self.specialArtworkId = specialArtworkId
+    def init(self, npcId_:int, sex_:bool, specialArtworkId_:int, look_:'EntityLook', contextualId_:int, disposition_:'EntityDispositionInformations'):
+        self.npcId = npcId_
+        self.sex = sex_
+        self.specialArtworkId = specialArtworkId_
         
-        super().__init__(look, contextualId, disposition)
+        super().__init__(look_, contextualId_, disposition_)
     
     

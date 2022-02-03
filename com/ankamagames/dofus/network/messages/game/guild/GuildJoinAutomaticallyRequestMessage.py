@@ -5,8 +5,8 @@ class GuildJoinAutomaticallyRequestMessage(NetworkMessage):
     guildId:int
     
 
-    def init(self, guildId:int):
-        self.guildId = guildId
+    def init(self, guildId_:int):
+        self.guildId = guildId_
         
         super().__init__()
     

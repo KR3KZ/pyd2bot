@@ -11,9 +11,9 @@ class GameRolePlayPrismInformations(GameRolePlayActorInformations):
     prism:'PrismInformation'
     
 
-    def init(self, prism:'PrismInformation', look:'EntityLook', contextualId:int, disposition:'EntityDispositionInformations'):
-        self.prism = prism
+    def init(self, prism_:'PrismInformation', look_:'EntityLook', contextualId_:int, disposition_:'EntityDispositionInformations'):
+        self.prism = prism_
         
-        super().__init__(look, contextualId, disposition)
+        super().__init__(look_, contextualId_, disposition_)
     
     

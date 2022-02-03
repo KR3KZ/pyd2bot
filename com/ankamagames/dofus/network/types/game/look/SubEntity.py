@@ -11,10 +11,10 @@ class SubEntity(NetworkMessage):
     subEntityLook:'EntityLook'
     
 
-    def init(self, bindingPointCategory:int, bindingPointIndex:int, subEntityLook:'EntityLook'):
-        self.bindingPointCategory = bindingPointCategory
-        self.bindingPointIndex = bindingPointIndex
-        self.subEntityLook = subEntityLook
+    def init(self, bindingPointCategory_:int, bindingPointIndex_:int, subEntityLook_:'EntityLook'):
+        self.bindingPointCategory = bindingPointCategory_
+        self.bindingPointIndex = bindingPointIndex_
+        self.subEntityLook = subEntityLook_
         
         super().__init__()
     

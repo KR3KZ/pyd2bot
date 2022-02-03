@@ -9,8 +9,8 @@ class SpouseInformationsMessage(NetworkMessage):
     spouse:'FriendSpouseInformations'
     
 
-    def init(self, spouse:'FriendSpouseInformations'):
-        self.spouse = spouse
+    def init(self, spouse_:'FriendSpouseInformations'):
+        self.spouse = spouse_
         
         super().__init__()
     

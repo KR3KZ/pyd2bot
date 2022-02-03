@@ -6,9 +6,9 @@ class JobBookSubscription(NetworkMessage):
     subscribed:bool
     
 
-    def init(self, jobId:int, subscribed:bool):
-        self.jobId = jobId
-        self.subscribed = subscribed
+    def init(self, jobId_:int, subscribed_:bool):
+        self.jobId = jobId_
+        self.subscribed = subscribed_
         
         super().__init__()
     

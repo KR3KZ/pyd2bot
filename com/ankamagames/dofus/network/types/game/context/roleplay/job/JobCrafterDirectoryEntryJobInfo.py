@@ -8,11 +8,11 @@ class JobCrafterDirectoryEntryJobInfo(NetworkMessage):
     minLevel:int
     
 
-    def init(self, jobId:int, jobLevel:int, free:bool, minLevel:int):
-        self.jobId = jobId
-        self.jobLevel = jobLevel
-        self.free = free
-        self.minLevel = minLevel
+    def init(self, jobId_:int, jobLevel_:int, free_:bool, minLevel_:int):
+        self.jobId = jobId_
+        self.jobLevel = jobLevel_
+        self.free = free_
+        self.minLevel = minLevel_
         
         super().__init__()
     

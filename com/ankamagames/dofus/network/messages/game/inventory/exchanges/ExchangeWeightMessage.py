@@ -6,9 +6,9 @@ class ExchangeWeightMessage(NetworkMessage):
     maxWeight:int
     
 
-    def init(self, currentWeight:int, maxWeight:int):
-        self.currentWeight = currentWeight
-        self.maxWeight = maxWeight
+    def init(self, currentWeight_:int, maxWeight_:int):
+        self.currentWeight = currentWeight_
+        self.maxWeight = maxWeight_
         
         super().__init__()
     

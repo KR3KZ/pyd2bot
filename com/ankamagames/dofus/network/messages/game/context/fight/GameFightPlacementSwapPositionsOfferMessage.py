@@ -9,12 +9,12 @@ class GameFightPlacementSwapPositionsOfferMessage(NetworkMessage):
     requestedCellId:int
     
 
-    def init(self, requestId:int, requesterId:int, requesterCellId:int, requestedId:int, requestedCellId:int):
-        self.requestId = requestId
-        self.requesterId = requesterId
-        self.requesterCellId = requesterCellId
-        self.requestedId = requestedId
-        self.requestedCellId = requestedCellId
+    def init(self, requestId_:int, requesterId_:int, requesterCellId_:int, requestedId_:int, requestedCellId_:int):
+        self.requestId = requestId_
+        self.requesterId = requesterId_
+        self.requesterCellId = requesterCellId_
+        self.requestedId = requestedId_
+        self.requestedCellId = requestedCellId_
         
         super().__init__()
     

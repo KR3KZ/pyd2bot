@@ -7,10 +7,10 @@ class ExchangeBidHouseInListRemovedMessage(NetworkMessage):
     objectType:int
     
 
-    def init(self, itemUID:int, objectGID:int, objectType:int):
-        self.itemUID = itemUID
-        self.objectGID = objectGID
-        self.objectType = objectType
+    def init(self, itemUID_:int, objectGID_:int, objectType_:int):
+        self.itemUID = itemUID_
+        self.objectGID = objectGID_
+        self.objectType = objectType_
         
         super().__init__()
     

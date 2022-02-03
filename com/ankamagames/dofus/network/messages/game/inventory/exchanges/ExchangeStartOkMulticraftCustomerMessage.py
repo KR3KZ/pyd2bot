@@ -6,9 +6,9 @@ class ExchangeStartOkMulticraftCustomerMessage(NetworkMessage):
     crafterJobLevel:int
     
 
-    def init(self, skillId:int, crafterJobLevel:int):
-        self.skillId = skillId
-        self.crafterJobLevel = crafterJobLevel
+    def init(self, skillId_:int, crafterJobLevel_:int):
+        self.skillId = skillId_
+        self.crafterJobLevel = crafterJobLevel_
         
         super().__init__()
     

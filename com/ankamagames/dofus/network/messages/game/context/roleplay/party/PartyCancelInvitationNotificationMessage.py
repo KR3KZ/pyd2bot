@@ -6,10 +6,10 @@ class PartyCancelInvitationNotificationMessage(AbstractPartyEventMessage):
     guestId:int
     
 
-    def init(self, cancelerId:int, guestId:int, partyId:int):
-        self.cancelerId = cancelerId
-        self.guestId = guestId
+    def init(self, cancelerId_:int, guestId_:int, partyId_:int):
+        self.cancelerId = cancelerId_
+        self.guestId = guestId_
         
-        super().__init__(partyId)
+        super().__init__(partyId_)
     
     

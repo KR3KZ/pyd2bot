@@ -10,9 +10,9 @@ class DumpedEntityStatsMessage(NetworkMessage):
     stats:'CharacterCharacteristics'
     
 
-    def init(self, actorId:int, stats:'CharacterCharacteristics'):
-        self.actorId = actorId
-        self.stats = stats
+    def init(self, actorId_:int, stats_:'CharacterCharacteristics'):
+        self.actorId = actorId_
+        self.stats = stats_
         
         super().__init__()
     

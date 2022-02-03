@@ -6,7 +6,7 @@ from com.ankamagames.dofus.internalDatacenter.connection.basicCharacterWrapper i
 # from com.ankamagames.dofus.internalDatacenter.items.ItemWrapper import ItemWrapper
 import com.ankamagames.dofus.kernel.Kernel as krnl
 import com.ankamagames.dofus.kernel.net.ConnectionsHandler as connh
-from com.ankamagames.dofus.logic.common.managers.AuthentificationManager import AuthentificationManager
+from com.ankamagames.dofus.logic.connection.managers.AuthentificationManager import AuthentificationManager
 from com.ankamagames.dofus.logic.common.managers.InterClientManager import InterClientManager
 from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerManager
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager

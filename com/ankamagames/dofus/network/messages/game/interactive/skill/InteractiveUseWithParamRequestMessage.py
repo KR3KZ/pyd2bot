@@ -5,9 +5,9 @@ class InteractiveUseWithParamRequestMessage(InteractiveUseRequestMessage):
     id:int
     
 
-    def init(self, id:int, elemId:int, skillInstanceUid:int):
-        self.id = id
+    def init(self, id_:int, elemId_:int, skillInstanceUid_:int):
+        self.id = id_
         
-        super().__init__(elemId, skillInstanceUid)
+        super().__init__(elemId_, skillInstanceUid_)
     
     

@@ -7,10 +7,10 @@ class GameFightNewWaveMessage(NetworkMessage):
     nbTurnBeforeNextWave:int
     
 
-    def init(self, id:int, teamId:int, nbTurnBeforeNextWave:int):
-        self.id = id
-        self.teamId = teamId
-        self.nbTurnBeforeNextWave = nbTurnBeforeNextWave
+    def init(self, id_:int, teamId_:int, nbTurnBeforeNextWave_:int):
+        self.id = id_
+        self.teamId = teamId_
+        self.nbTurnBeforeNextWave = nbTurnBeforeNextWave_
         
         super().__init__()
     

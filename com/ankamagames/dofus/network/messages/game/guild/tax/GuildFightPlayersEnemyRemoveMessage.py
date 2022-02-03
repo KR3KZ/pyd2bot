@@ -6,9 +6,9 @@ class GuildFightPlayersEnemyRemoveMessage(NetworkMessage):
     playerId:int
     
 
-    def init(self, fightId:int, playerId:int):
-        self.fightId = fightId
-        self.playerId = playerId
+    def init(self, fightId_:int, playerId_:int):
+        self.fightId = fightId_
+        self.playerId = playerId_
         
         super().__init__()
     

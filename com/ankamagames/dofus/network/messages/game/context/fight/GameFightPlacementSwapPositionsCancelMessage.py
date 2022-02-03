@@ -5,8 +5,8 @@ class GameFightPlacementSwapPositionsCancelMessage(NetworkMessage):
     requestId:int
     
 
-    def init(self, requestId:int):
-        self.requestId = requestId
+    def init(self, requestId_:int):
+        self.requestId = requestId_
         
         super().__init__()
     

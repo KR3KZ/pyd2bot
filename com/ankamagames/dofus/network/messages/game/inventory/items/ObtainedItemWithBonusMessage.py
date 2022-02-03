@@ -5,9 +5,9 @@ class ObtainedItemWithBonusMessage(ObtainedItemMessage):
     bonusQuantity:int
     
 
-    def init(self, bonusQuantity:int, genericId:int, baseQuantity:int):
-        self.bonusQuantity = bonusQuantity
+    def init(self, bonusQuantity_:int, genericId_:int, baseQuantity_:int):
+        self.bonusQuantity = bonusQuantity_
         
-        super().__init__(genericId, baseQuantity)
+        super().__init__(genericId_, baseQuantity_)
     
     

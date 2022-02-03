@@ -5,9 +5,9 @@ class CharacterMinimalGuildPublicInformations(CharacterMinimalInformations):
     rank:int
     
 
-    def init(self, rank:int, level:int, name:str, id:int):
-        self.rank = rank
+    def init(self, rank_:int, level_:int, name_:str, id_:int):
+        self.rank = rank_
         
-        super().__init__(level, name, id)
+        super().__init__(level_, name_, id_)
     
     

@@ -5,8 +5,8 @@ class GuildApplicationListenMessage(NetworkMessage):
     listen:bool
     
 
-    def init(self, listen:bool):
-        self.listen = listen
+    def init(self, listen_:bool):
+        self.listen = listen_
         
         super().__init__()
     

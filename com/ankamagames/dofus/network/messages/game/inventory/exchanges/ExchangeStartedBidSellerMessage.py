@@ -11,9 +11,9 @@ class ExchangeStartedBidSellerMessage(NetworkMessage):
     objectsInfos:list['ObjectItemToSellInBid']
     
 
-    def init(self, sellerDescriptor:'SellerBuyerDescriptor', objectsInfos:list['ObjectItemToSellInBid']):
-        self.sellerDescriptor = sellerDescriptor
-        self.objectsInfos = objectsInfos
+    def init(self, sellerDescriptor_:'SellerBuyerDescriptor', objectsInfos_:list['ObjectItemToSellInBid']):
+        self.sellerDescriptor = sellerDescriptor_
+        self.objectsInfos = objectsInfos_
         
         super().__init__()
     

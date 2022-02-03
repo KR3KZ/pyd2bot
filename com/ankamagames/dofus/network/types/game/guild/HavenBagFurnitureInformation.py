@@ -7,10 +7,10 @@ class HavenBagFurnitureInformation(NetworkMessage):
     orientation:int
     
 
-    def init(self, cellId:int, funitureId:int, orientation:int):
-        self.cellId = cellId
-        self.funitureId = funitureId
-        self.orientation = orientation
+    def init(self, cellId_:int, funitureId_:int, orientation_:int):
+        self.cellId = cellId_
+        self.funitureId = funitureId_
+        self.orientation = orientation_
         
         super().__init__()
     

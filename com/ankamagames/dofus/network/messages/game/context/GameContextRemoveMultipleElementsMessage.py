@@ -5,8 +5,8 @@ class GameContextRemoveMultipleElementsMessage(NetworkMessage):
     elementsIds:list[int]
     
 
-    def init(self, elementsIds:list[int]):
-        self.elementsIds = elementsIds
+    def init(self, elementsIds_:list[int]):
+        self.elementsIds = elementsIds_
         
         super().__init__()
     

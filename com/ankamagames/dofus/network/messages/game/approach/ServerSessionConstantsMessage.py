@@ -9,8 +9,8 @@ class ServerSessionConstantsMessage(NetworkMessage):
     variables:list['ServerSessionConstant']
     
 
-    def init(self, variables:list['ServerSessionConstant']):
-        self.variables = variables
+    def init(self, variables_:list['ServerSessionConstant']):
+        self.variables = variables_
         
         super().__init__()
     

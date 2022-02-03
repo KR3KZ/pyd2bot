@@ -7,10 +7,10 @@ class DiceRollRequestMessage(NetworkMessage):
     channel:int
     
 
-    def init(self, dice:int, faces:int, channel:int):
-        self.dice = dice
-        self.faces = faces
-        self.channel = channel
+    def init(self, dice_:int, faces_:int, channel_:int):
+        self.dice = dice_
+        self.faces = faces_
+        self.channel = channel_
         
         super().__init__()
     

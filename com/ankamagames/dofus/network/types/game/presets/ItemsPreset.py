@@ -12,11 +12,11 @@ class ItemsPreset(Preset):
     look:'EntityLook'
     
 
-    def init(self, items:list['ItemForPreset'], mountEquipped:bool, look:'EntityLook', id:int):
-        self.items = items
-        self.mountEquipped = mountEquipped
-        self.look = look
+    def init(self, items_:list['ItemForPreset'], mountEquipped_:bool, look_:'EntityLook', id_:int):
+        self.items = items_
+        self.mountEquipped = mountEquipped_
+        self.look = look_
         
-        super().__init__(id)
+        super().__init__(id_)
     
     

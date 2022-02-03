@@ -13,9 +13,9 @@ class GameFightMutantInformations(GameFightFighterNamedInformations):
     powerLevel:int
     
 
-    def init(self, powerLevel:int, name:str, status:'PlayerStatus', leagueId:int, ladderPosition:int, hiddenInPrefight:bool, spawnInfo:'GameContextBasicSpawnInformation', wave:int, stats:'GameFightCharacteristics', previousPositions:list[int], look:'EntityLook', contextualId:int, disposition:'EntityDispositionInformations'):
-        self.powerLevel = powerLevel
+    def init(self, powerLevel_:int, name_:str, status_:'PlayerStatus', leagueId_:int, ladderPosition_:int, hiddenInPrefight_:bool, spawnInfo_:'GameContextBasicSpawnInformation', wave_:int, stats_:'GameFightCharacteristics', previousPositions_:list[int], look_:'EntityLook', contextualId_:int, disposition_:'EntityDispositionInformations'):
+        self.powerLevel = powerLevel_
         
-        super().__init__(name, status, leagueId, ladderPosition, hiddenInPrefight, spawnInfo, wave, stats, previousPositions, look, contextualId, disposition)
+        super().__init__(name_, status_, leagueId_, ladderPosition_, hiddenInPrefight_, spawnInfo_, wave_, stats_, previousPositions_, look_, contextualId_, disposition_)
     
     

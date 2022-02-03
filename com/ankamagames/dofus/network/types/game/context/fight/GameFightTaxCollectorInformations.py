@@ -14,11 +14,11 @@ class GameFightTaxCollectorInformations(GameFightAIInformations):
     level:int
     
 
-    def init(self, firstNameId:int, lastNameId:int, level:int, spawnInfo:'GameContextBasicSpawnInformation', wave:int, stats:'GameFightCharacteristics', previousPositions:list[int], look:'EntityLook', contextualId:int, disposition:'EntityDispositionInformations'):
-        self.firstNameId = firstNameId
-        self.lastNameId = lastNameId
-        self.level = level
+    def init(self, firstNameId_:int, lastNameId_:int, level_:int, spawnInfo_:'GameContextBasicSpawnInformation', wave_:int, stats_:'GameFightCharacteristics', previousPositions_:list[int], look_:'EntityLook', contextualId_:int, disposition_:'EntityDispositionInformations'):
+        self.firstNameId = firstNameId_
+        self.lastNameId = lastNameId_
+        self.level = level_
         
-        super().__init__(spawnInfo, wave, stats, previousPositions, look, contextualId, disposition)
+        super().__init__(spawnInfo_, wave_, stats_, previousPositions_, look_, contextualId_, disposition_)
     
     

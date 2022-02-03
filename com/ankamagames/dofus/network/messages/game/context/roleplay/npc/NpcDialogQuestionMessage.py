@@ -7,10 +7,10 @@ class NpcDialogQuestionMessage(NetworkMessage):
     visibleReplies:list[int]
     
 
-    def init(self, messageId:int, dialogParams:list[str], visibleReplies:list[int]):
-        self.messageId = messageId
-        self.dialogParams = dialogParams
-        self.visibleReplies = visibleReplies
+    def init(self, messageId_:int, dialogParams_:list[str], visibleReplies_:list[int]):
+        self.messageId = messageId_
+        self.dialogParams = dialogParams_
+        self.visibleReplies = visibleReplies_
         
         super().__init__()
     

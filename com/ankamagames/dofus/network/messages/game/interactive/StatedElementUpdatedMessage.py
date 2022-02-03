@@ -9,8 +9,8 @@ class StatedElementUpdatedMessage(NetworkMessage):
     statedElement:'StatedElement'
     
 
-    def init(self, statedElement:'StatedElement'):
-        self.statedElement = statedElement
+    def init(self, statedElement_:'StatedElement'):
+        self.statedElement = statedElement_
         
         super().__init__()
     

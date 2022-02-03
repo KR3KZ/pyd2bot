@@ -7,11 +7,11 @@ class GameActionFightSlideMessage(AbstractGameActionMessage):
     endCellId:int
     
 
-    def init(self, targetId:int, startCellId:int, endCellId:int, actionId:int, sourceId:int):
-        self.targetId = targetId
-        self.startCellId = startCellId
-        self.endCellId = endCellId
+    def init(self, targetId_:int, startCellId_:int, endCellId_:int, actionId_:int, sourceId_:int):
+        self.targetId = targetId_
+        self.startCellId = startCellId_
+        self.endCellId = endCellId_
         
-        super().__init__(actionId, sourceId)
+        super().__init__(actionId_, sourceId_)
     
     

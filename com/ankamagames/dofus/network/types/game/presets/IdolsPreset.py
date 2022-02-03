@@ -6,10 +6,10 @@ class IdolsPreset(Preset):
     idolIds:list[int]
     
 
-    def init(self, iconId:int, idolIds:list[int], id:int):
-        self.iconId = iconId
-        self.idolIds = idolIds
+    def init(self, iconId_:int, idolIds_:list[int], id_:int):
+        self.iconId = iconId_
+        self.idolIds = idolIds_
         
-        super().__init__(id)
+        super().__init__(id_)
     
     

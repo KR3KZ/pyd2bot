@@ -17,13 +17,13 @@ class GameFightFighterNamedInformations(GameFightFighterInformations):
     hiddenInPrefight:bool
     
 
-    def init(self, name:str, status:'PlayerStatus', leagueId:int, ladderPosition:int, hiddenInPrefight:bool, spawnInfo:'GameContextBasicSpawnInformation', wave:int, stats:'GameFightCharacteristics', previousPositions:list[int], look:'EntityLook', contextualId:int, disposition:'EntityDispositionInformations'):
-        self.name = name
-        self.status = status
-        self.leagueId = leagueId
-        self.ladderPosition = ladderPosition
-        self.hiddenInPrefight = hiddenInPrefight
+    def init(self, name_:str, status_:'PlayerStatus', leagueId_:int, ladderPosition_:int, hiddenInPrefight_:bool, spawnInfo_:'GameContextBasicSpawnInformation', wave_:int, stats_:'GameFightCharacteristics', previousPositions_:list[int], look_:'EntityLook', contextualId_:int, disposition_:'EntityDispositionInformations'):
+        self.name = name_
+        self.status = status_
+        self.leagueId = leagueId_
+        self.ladderPosition = ladderPosition_
+        self.hiddenInPrefight = hiddenInPrefight_
         
-        super().__init__(spawnInfo, wave, stats, previousPositions, look, contextualId, disposition)
+        super().__init__(spawnInfo_, wave_, stats_, previousPositions_, look_, contextualId_, disposition_)
     
     

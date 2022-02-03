@@ -5,8 +5,8 @@ class DungeonPartyFinderListenRequestMessage(NetworkMessage):
     dungeonId:int
     
 
-    def init(self, dungeonId:int):
-        self.dungeonId = dungeonId
+    def init(self, dungeonId_:int):
+        self.dungeonId = dungeonId_
         
         super().__init__()
     

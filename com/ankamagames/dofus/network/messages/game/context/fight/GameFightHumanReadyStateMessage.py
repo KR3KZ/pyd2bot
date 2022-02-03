@@ -6,9 +6,9 @@ class GameFightHumanReadyStateMessage(NetworkMessage):
     isReady:bool
     
 
-    def init(self, characterId:int, isReady:bool):
-        self.characterId = characterId
-        self.isReady = isReady
+    def init(self, characterId_:int, isReady_:bool):
+        self.characterId = characterId_
+        self.isReady = isReady_
         
         super().__init__()
     

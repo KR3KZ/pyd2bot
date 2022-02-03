@@ -5,8 +5,8 @@ class CharacterCreationResultMessage(NetworkMessage):
     result:int
     
 
-    def init(self, result:int):
-        self.result = result
+    def init(self, result_:int):
+        self.result = result_
         
         super().__init__()
     

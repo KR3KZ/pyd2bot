@@ -5,9 +5,9 @@ class GameFightPlacementSwapPositionsRequestMessage(GameFightPlacementPositionRe
     requestedId:int
     
 
-    def init(self, requestedId:int, cellId:int):
-        self.requestedId = requestedId
+    def init(self, requestedId_:int, cellId_:int):
+        self.requestedId = requestedId_
         
-        super().__init__(cellId)
+        super().__init__(cellId_)
     
     

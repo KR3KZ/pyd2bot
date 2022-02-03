@@ -6,9 +6,9 @@ class ExchangeBuyMessage(NetworkMessage):
     quantity:int
     
 
-    def init(self, objectToBuyId:int, quantity:int):
-        self.objectToBuyId = objectToBuyId
-        self.quantity = quantity
+    def init(self, objectToBuyId_:int, quantity_:int):
+        self.objectToBuyId = objectToBuyId_
+        self.quantity = quantity_
         
         super().__init__()
     

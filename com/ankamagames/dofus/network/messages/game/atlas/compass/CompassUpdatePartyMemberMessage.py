@@ -10,10 +10,10 @@ class CompassUpdatePartyMemberMessage(CompassUpdateMessage):
     active:bool
     
 
-    def init(self, memberId:int, active:bool, type:int, coords:'MapCoordinates'):
-        self.memberId = memberId
-        self.active = active
+    def init(self, memberId_:int, active_:bool, type_:int, coords_:'MapCoordinates'):
+        self.memberId = memberId_
+        self.active = active_
         
-        super().__init__(type, coords)
+        super().__init__(type_, coords_)
     
     

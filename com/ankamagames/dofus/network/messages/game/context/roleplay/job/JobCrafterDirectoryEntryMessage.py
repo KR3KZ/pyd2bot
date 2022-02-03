@@ -13,10 +13,10 @@ class JobCrafterDirectoryEntryMessage(NetworkMessage):
     playerLook:'EntityLook'
     
 
-    def init(self, playerInfo:'JobCrafterDirectoryEntryPlayerInfo', jobInfoList:list['JobCrafterDirectoryEntryJobInfo'], playerLook:'EntityLook'):
-        self.playerInfo = playerInfo
-        self.jobInfoList = jobInfoList
-        self.playerLook = playerLook
+    def init(self, playerInfo_:'JobCrafterDirectoryEntryPlayerInfo', jobInfoList_:list['JobCrafterDirectoryEntryJobInfo'], playerLook_:'EntityLook'):
+        self.playerInfo = playerInfo_
+        self.jobInfoList = jobInfoList_
+        self.playerLook = playerLook_
         
         super().__init__()
     

@@ -11,10 +11,10 @@ class PartyInvitationDungeonDetailsMessage(PartyInvitationDetailsMessage):
     playersDungeonReady:list[bool]
     
 
-    def init(self, dungeonId:int, playersDungeonReady:list[bool], partyType:int, partyName:str, fromId:int, fromName:str, leaderId:int, members:list['PartyInvitationMemberInformations'], guests:list['PartyGuestInformations'], partyId:int):
-        self.dungeonId = dungeonId
-        self.playersDungeonReady = playersDungeonReady
+    def init(self, dungeonId_:int, playersDungeonReady_:list[bool], partyType_:int, partyName_:str, fromId_:int, fromName_:str, leaderId_:int, members_:list['PartyInvitationMemberInformations'], guests_:list['PartyGuestInformations'], partyId_:int):
+        self.dungeonId = dungeonId_
+        self.playersDungeonReady = playersDungeonReady_
         
-        super().__init__(partyType, partyName, fromId, fromName, leaderId, members, guests, partyId)
+        super().__init__(partyType_, partyName_, fromId_, fromName_, leaderId_, members_, guests_, partyId_)
     
     

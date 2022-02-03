@@ -6,9 +6,9 @@ class ActivityLockRequestMessage(NetworkMessage):
     lock:bool
     
 
-    def init(self, activityId:int, lock:bool):
-        self.activityId = activityId
-        self.lock = lock
+    def init(self, activityId_:int, lock_:bool):
+        self.activityId = activityId_
+        self.lock = lock_
         
         super().__init__()
     

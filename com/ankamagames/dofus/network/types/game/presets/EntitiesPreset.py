@@ -6,10 +6,10 @@ class EntitiesPreset(Preset):
     entityIds:list[int]
     
 
-    def init(self, iconId:int, entityIds:list[int], id:int):
-        self.iconId = iconId
-        self.entityIds = entityIds
+    def init(self, iconId_:int, entityIds_:list[int], id_:int):
+        self.iconId = iconId_
+        self.entityIds = entityIds_
         
-        super().__init__(id)
+        super().__init__(id_)
     
     

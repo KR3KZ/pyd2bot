@@ -11,10 +11,10 @@ class GuildListApplicationModifiedMessage(NetworkMessage):
     playerId:int
     
 
-    def init(self, apply:'GuildApplicationInformation', state:int, playerId:int):
-        self.apply = apply
-        self.state = state
-        self.playerId = playerId
+    def init(self, apply_:'GuildApplicationInformation', state_:int, playerId_:int):
+        self.apply = apply_
+        self.state = state_
+        self.playerId = playerId_
         
         super().__init__()
     

@@ -7,10 +7,10 @@ class ItemForPreset(NetworkMessage):
     objUid:int
     
 
-    def init(self, position:int, objGid:int, objUid:int):
-        self.position = position
-        self.objGid = objGid
-        self.objUid = objUid
+    def init(self, position_:int, objGid_:int, objUid_:int):
+        self.position = position_
+        self.objGid = objGid_
+        self.objUid = objUid_
         
         super().__init__()
     

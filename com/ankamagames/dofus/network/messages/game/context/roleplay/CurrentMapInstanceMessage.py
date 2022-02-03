@@ -5,9 +5,9 @@ class CurrentMapInstanceMessage(CurrentMapMessage):
     instantiatedMapId:int
     
 
-    def init(self, instantiatedMapId:int, mapId:int, mapKey:str):
-        self.instantiatedMapId = instantiatedMapId
+    def init(self, instantiatedMapId_:int, mapId_:int, mapKey_:str):
+        self.instantiatedMapId = instantiatedMapId_
         
-        super().__init__(mapId, mapKey)
+        super().__init__(mapId_, mapKey_)
     
     

@@ -9,12 +9,12 @@ class DungeonPartyFinderPlayer(NetworkMessage):
     level:int
     
 
-    def init(self, playerId:int, playerName:str, breed:int, sex:bool, level:int):
-        self.playerId = playerId
-        self.playerName = playerName
-        self.breed = breed
-        self.sex = sex
-        self.level = level
+    def init(self, playerId_:int, playerName_:str, breed_:int, sex_:bool, level_:int):
+        self.playerId = playerId_
+        self.playerName = playerName_
+        self.breed = breed_
+        self.sex = sex_
+        self.level = level_
         
         super().__init__()
     

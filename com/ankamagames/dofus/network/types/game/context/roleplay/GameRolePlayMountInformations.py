@@ -11,10 +11,10 @@ class GameRolePlayMountInformations(GameRolePlayNamedActorInformations):
     level:int
     
 
-    def init(self, ownerName:str, level:int, name:str, look:'EntityLook', contextualId:int, disposition:'EntityDispositionInformations'):
-        self.ownerName = ownerName
-        self.level = level
+    def init(self, ownerName_:str, level_:int, name_:str, look_:'EntityLook', contextualId_:int, disposition_:'EntityDispositionInformations'):
+        self.ownerName = ownerName_
+        self.level = level_
         
-        super().__init__(name, look, contextualId, disposition)
+        super().__init__(name_, look_, contextualId_, disposition_)
     
     

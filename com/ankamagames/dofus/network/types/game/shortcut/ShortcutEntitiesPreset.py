@@ -5,9 +5,9 @@ class ShortcutEntitiesPreset(Shortcut):
     presetId:int
     
 
-    def init(self, presetId:int, slot:int):
-        self.presetId = presetId
+    def init(self, presetId_:int, slot_:int):
+        self.presetId = presetId_
         
-        super().__init__(slot)
+        super().__init__(slot_)
     
     

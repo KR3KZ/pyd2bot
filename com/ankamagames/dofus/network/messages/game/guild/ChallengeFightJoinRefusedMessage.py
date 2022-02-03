@@ -6,9 +6,9 @@ class ChallengeFightJoinRefusedMessage(NetworkMessage):
     reason:int
     
 
-    def init(self, playerId:int, reason:int):
-        self.playerId = playerId
-        self.reason = reason
+    def init(self, playerId_:int, reason_:int):
+        self.playerId = playerId_
+        self.reason = reason_
         
         super().__init__()
     

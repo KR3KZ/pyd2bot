@@ -5,8 +5,8 @@ class ObjectGroundRemovedMessage(NetworkMessage):
     cell:int
     
 
-    def init(self, cell:int):
-        self.cell = cell
+    def init(self, cell_:int):
+        self.cell = cell_
         
         super().__init__()
     

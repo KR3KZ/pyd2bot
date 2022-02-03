@@ -9,8 +9,8 @@ class PrismsInfoValidMessage(NetworkMessage):
     fights:list['PrismFightersInformation']
     
 
-    def init(self, fights:list['PrismFightersInformation']):
-        self.fights = fights
+    def init(self, fights_:list['PrismFightersInformation']):
+        self.fights = fights_
         
         super().__init__()
     

@@ -9,9 +9,9 @@ class WatchQuestListMessage(QuestListMessage):
     playerId:int
     
 
-    def init(self, playerId:int, finishedQuestsIds:list[int], finishedQuestsCounts:list[int], activeQuests:list['QuestActiveInformations'], reinitDoneQuestsIds:list[int]):
-        self.playerId = playerId
+    def init(self, playerId_:int, finishedQuestsIds_:list[int], finishedQuestsCounts_:list[int], activeQuests_:list['QuestActiveInformations'], reinitDoneQuestsIds_:list[int]):
+        self.playerId = playerId_
         
-        super().__init__(finishedQuestsIds, finishedQuestsCounts, activeQuests, reinitDoneQuestsIds)
+        super().__init__(finishedQuestsIds_, finishedQuestsCounts_, activeQuests_, reinitDoneQuestsIds_)
     
     

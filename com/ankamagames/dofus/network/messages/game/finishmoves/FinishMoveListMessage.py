@@ -9,8 +9,8 @@ class FinishMoveListMessage(NetworkMessage):
     finishMoves:list['FinishMoveInformations']
     
 
-    def init(self, finishMoves:list['FinishMoveInformations']):
-        self.finishMoves = finishMoves
+    def init(self, finishMoves_:list['FinishMoveInformations']):
+        self.finishMoves = finishMoves_
         
         super().__init__()
     

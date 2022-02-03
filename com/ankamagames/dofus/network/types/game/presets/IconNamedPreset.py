@@ -10,10 +10,10 @@ class IconNamedPreset(PresetsContainerPreset):
     name:str
     
 
-    def init(self, iconId:int, name:str, presets:list['Preset'], id:int):
-        self.iconId = iconId
-        self.name = name
+    def init(self, iconId_:int, name_:str, presets_:list['Preset'], id_:int):
+        self.iconId = iconId_
+        self.name = name_
         
-        super().__init__(presets, id)
+        super().__init__(presets_, id_)
     
     

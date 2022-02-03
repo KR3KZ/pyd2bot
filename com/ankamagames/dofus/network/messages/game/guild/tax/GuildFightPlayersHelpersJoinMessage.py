@@ -10,9 +10,9 @@ class GuildFightPlayersHelpersJoinMessage(NetworkMessage):
     playerInfo:'CharacterMinimalPlusLookInformations'
     
 
-    def init(self, fightId:int, playerInfo:'CharacterMinimalPlusLookInformations'):
-        self.fightId = fightId
-        self.playerInfo = playerInfo
+    def init(self, fightId_:int, playerInfo_:'CharacterMinimalPlusLookInformations'):
+        self.fightId = fightId_
+        self.playerInfo = playerInfo_
         
         super().__init__()
     

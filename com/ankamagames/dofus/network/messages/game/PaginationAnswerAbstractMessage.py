@@ -7,10 +7,10 @@ class PaginationAnswerAbstractMessage(NetworkMessage):
     total:int
     
 
-    def init(self, offset:int, count:int, total:int):
-        self.offset = offset
-        self.count = count
-        self.total = total
+    def init(self, offset_:int, count_:int, total_:int):
+        self.offset = offset_
+        self.count = count_
+        self.total = total_
         
         super().__init__()
     

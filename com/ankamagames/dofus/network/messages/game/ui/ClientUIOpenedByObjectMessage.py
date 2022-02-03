@@ -5,9 +5,9 @@ class ClientUIOpenedByObjectMessage(ClientUIOpenedMessage):
     uid:int
     
 
-    def init(self, uid:int, type:int):
-        self.uid = uid
+    def init(self, uid_:int, type_:int):
+        self.uid = uid_
         
-        super().__init__(type)
+        super().__init__(type_)
     
     

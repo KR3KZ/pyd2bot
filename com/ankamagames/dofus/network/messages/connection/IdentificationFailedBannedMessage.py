@@ -5,9 +5,9 @@ class IdentificationFailedBannedMessage(IdentificationFailedMessage):
     banEndDate:int
     
 
-    def init(self, banEndDate:int, reason:int):
-        self.banEndDate = banEndDate
+    def init(self, banEndDate_:int, reason_:int):
+        self.banEndDate = banEndDate_
         
-        super().__init__(reason)
+        super().__init__(reason_)
     
     

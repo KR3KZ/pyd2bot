@@ -9,8 +9,8 @@ class CharacterStatsListMessage(NetworkMessage):
     stats:'CharacterCharacteristicsInformations'
     
 
-    def init(self, stats:'CharacterCharacteristicsInformations'):
-        self.stats = stats
+    def init(self, stats_:'CharacterCharacteristicsInformations'):
+        self.stats = stats_
         
         super().__init__()
     

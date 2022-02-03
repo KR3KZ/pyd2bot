@@ -6,9 +6,9 @@ class BufferInformation(NetworkMessage):
     amount:int
     
 
-    def init(self, id:int, amount:int):
-        self.id = id
-        self.amount = amount
+    def init(self, id_:int, amount_:int):
+        self.id = id_
+        self.amount = amount_
         
         super().__init__()
     

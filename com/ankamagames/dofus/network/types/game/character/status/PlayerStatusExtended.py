@@ -5,9 +5,9 @@ class PlayerStatusExtended(PlayerStatus):
     message:str
     
 
-    def init(self, message:str, statusId:int):
-        self.message = message
+    def init(self, message_:str, statusId_:int):
+        self.message = message_
         
-        super().__init__(statusId)
+        super().__init__(statusId_)
     
     

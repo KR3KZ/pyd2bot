@@ -2,6 +2,7 @@ import math
 from multiprocessing.managers import Server
 import time
 from typing import TYPE_CHECKING
+from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 if TYPE_CHECKING:
    from com.ankamagames.dofus.internalDatacenter.connection.basicCharacterWrapper import BasicCharacterWrapper
 from com.ankamagames.dofus.network.types.game.havenbag.HavenBagRoomPreviewInformation import HavenBagRoomPreviewInformation
@@ -10,6 +11,7 @@ from com.ankamagames.jerakine.utils.errors.SingletonError import SingletonError
 
 
 class PlayerManager(IDestroyable):
+   __metaclasse__ = Singleton
    
    _self:'PlayerManager'
    
@@ -75,22 +77,15 @@ class PlayerManager(IDestroyable):
    
    hasFreeAutopilot:bool
    
-   _subscriptionDurationElapsed:float
-   
-   _subscriptionEndDateUpdateTime:float
    
    def __init__(self):
       self.havenbagAvailableThemes = list[int]()
       super().__init__()
+      self._subscriptionEndDateUpdateTime:float = 0
+      self._subscriptionDurationElapsed:float = 0
+      self.serversList:list[int] = list[int]()
       if not self._subscriptionEndDateUpdateTime:
          self.refreshSubscriptionEndDateUpdateTime()
-      if self._self != None:
-         raise SingletonError("PlayerManager is a singleton and should not be instanciated directly.")
-   
-   def getInstance(self) -> 'PlayerManager':
-      if self._self == None:
-         self._self = PlayerManager()
-      return self._self
 
    @property
    def server(self) -> Server:

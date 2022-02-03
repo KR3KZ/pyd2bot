@@ -9,8 +9,8 @@ class AlignmentWarEffortProgressionMessage(NetworkMessage):
     effortProgressions:list['AlignmentWarEffortInformation']
     
 
-    def init(self, effortProgressions:list['AlignmentWarEffortInformation']):
-        self.effortProgressions = effortProgressions
+    def init(self, effortProgressions_:list['AlignmentWarEffortInformation']):
+        self.effortProgressions = effortProgressions_
         
         super().__init__()
     

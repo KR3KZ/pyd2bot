@@ -12,10 +12,10 @@ class GameRolePlayMerchantInformations(GameRolePlayNamedActorInformations):
     options:list['HumanOption']
     
 
-    def init(self, sellType:int, options:list['HumanOption'], name:str, look:'EntityLook', contextualId:int, disposition:'EntityDispositionInformations'):
-        self.sellType = sellType
-        self.options = options
+    def init(self, sellType_:int, options_:list['HumanOption'], name_:str, look_:'EntityLook', contextualId_:int, disposition_:'EntityDispositionInformations'):
+        self.sellType = sellType_
+        self.options = options_
         
-        super().__init__(name, look, contextualId, disposition)
+        super().__init__(name_, look_, contextualId_, disposition_)
     
     

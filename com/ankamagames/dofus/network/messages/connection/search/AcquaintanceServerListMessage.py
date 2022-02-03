@@ -5,8 +5,8 @@ class AcquaintanceServerListMessage(NetworkMessage):
     servers:list[int]
     
 
-    def init(self, servers:list[int]):
-        self.servers = servers
+    def init(self, servers_:list[int]):
+        self.servers = servers_
         
         super().__init__()
     

@@ -9,8 +9,8 @@ class PrismFightAddedMessage(NetworkMessage):
     fight:'PrismFightersInformation'
     
 
-    def init(self, fight:'PrismFightersInformation'):
-        self.fight = fight
+    def init(self, fight_:'PrismFightersInformation'):
+        self.fight = fight_
         
         super().__init__()
     

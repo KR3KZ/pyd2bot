@@ -9,13 +9,13 @@ class CharacterCharacteristicDetailed(CharacterCharacteristic):
     contextModif:int
     
 
-    def init(self, base:int, additional:int, objectsAndMountBonus:int, alignGiftBonus:int, contextModif:int, characteristicId:int):
-        self.base = base
-        self.additional = additional
-        self.objectsAndMountBonus = objectsAndMountBonus
-        self.alignGiftBonus = alignGiftBonus
-        self.contextModif = contextModif
+    def init(self, base_:int, additional_:int, objectsAndMountBonus_:int, alignGiftBonus_:int, contextModif_:int, characteristicId_:int):
+        self.base = base_
+        self.additional = additional_
+        self.objectsAndMountBonus = objectsAndMountBonus_
+        self.alignGiftBonus = alignGiftBonus_
+        self.contextModif = contextModif_
         
-        super().__init__(characteristicId)
+        super().__init__(characteristicId_)
     
     

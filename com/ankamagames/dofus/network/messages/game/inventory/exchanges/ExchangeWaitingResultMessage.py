@@ -5,8 +5,8 @@ class ExchangeWaitingResultMessage(NetworkMessage):
     bwait:bool
     
 
-    def init(self, bwait:bool):
-        self.bwait = bwait
+    def init(self, bwait_:bool):
+        self.bwait = bwait_
         
         super().__init__()
     

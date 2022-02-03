@@ -5,8 +5,8 @@ class PlayerStatus(NetworkMessage):
     statusId:int
     
 
-    def init(self, statusId:int):
-        self.statusId = statusId
+    def init(self, statusId_:int):
+        self.statusId = statusId_
         
         super().__init__()
     

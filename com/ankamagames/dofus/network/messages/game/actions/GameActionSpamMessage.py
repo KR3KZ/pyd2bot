@@ -5,8 +5,8 @@ class GameActionSpamMessage(NetworkMessage):
     cells:list[int]
     
 
-    def init(self, cells:list[int]):
-        self.cells = cells
+    def init(self, cells_:list[int]):
+        self.cells = cells_
         
         super().__init__()
     

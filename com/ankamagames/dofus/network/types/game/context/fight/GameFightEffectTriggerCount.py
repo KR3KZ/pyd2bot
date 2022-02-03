@@ -7,10 +7,10 @@ class GameFightEffectTriggerCount(NetworkMessage):
     count:int
     
 
-    def init(self, effectId:int, targetId:int, count:int):
-        self.effectId = effectId
-        self.targetId = targetId
-        self.count = count
+    def init(self, effectId_:int, targetId_:int, count_:int):
+        self.effectId = effectId_
+        self.targetId = targetId_
+        self.count = count_
         
         super().__init__()
     

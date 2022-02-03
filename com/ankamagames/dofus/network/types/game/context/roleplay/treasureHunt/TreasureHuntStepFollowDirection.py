@@ -6,9 +6,9 @@ class TreasureHuntStepFollowDirection(TreasureHuntStep):
     mapCount:int
     
 
-    def init(self, direction:int, mapCount:int):
-        self.direction = direction
-        self.mapCount = mapCount
+    def init(self, direction_:int, mapCount_:int):
+        self.direction = direction_
+        self.mapCount = mapCount_
         
         super().__init__()
     

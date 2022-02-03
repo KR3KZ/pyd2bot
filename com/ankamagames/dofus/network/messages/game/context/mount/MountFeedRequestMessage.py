@@ -8,11 +8,11 @@ class MountFeedRequestMessage(NetworkMessage):
     quantity:int
     
 
-    def init(self, mountUid:int, mountLocation:int, mountFoodUid:int, quantity:int):
-        self.mountUid = mountUid
-        self.mountLocation = mountLocation
-        self.mountFoodUid = mountFoodUid
-        self.quantity = quantity
+    def init(self, mountUid_:int, mountLocation_:int, mountFoodUid_:int, quantity_:int):
+        self.mountUid = mountUid_
+        self.mountLocation = mountLocation_
+        self.mountFoodUid = mountFoodUid_
+        self.quantity = quantity_
         
         super().__init__()
     

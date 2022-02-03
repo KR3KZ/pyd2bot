@@ -10,9 +10,9 @@ class DebtsUpdateMessage(NetworkMessage):
     debts:list['DebtInformation']
     
 
-    def init(self, action:int, debts:list['DebtInformation']):
-        self.action = action
-        self.debts = debts
+    def init(self, action_:int, debts_:list['DebtInformation']):
+        self.action = action_
+        self.debts = debts_
         
         super().__init__()
     

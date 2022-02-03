@@ -7,10 +7,10 @@ class SimpleCharacterCharacteristicForPreset(NetworkMessage):
     additionnal:int
     
 
-    def init(self, keyword:str, base:int, additionnal:int):
-        self.keyword = keyword
-        self.base = base
-        self.additionnal = additionnal
+    def init(self, keyword_:str, base_:int, additionnal_:int):
+        self.keyword = keyword_
+        self.base = base_
+        self.additionnal = additionnal_
         
         super().__init__()
     

@@ -10,9 +10,9 @@ class IgnoredAddedMessage(NetworkMessage):
     session:bool
     
 
-    def init(self, ignoreAdded:'IgnoredInformations', session:bool):
-        self.ignoreAdded = ignoreAdded
-        self.session = session
+    def init(self, ignoreAdded_:'IgnoredInformations', session_:bool):
+        self.ignoreAdded = ignoreAdded_
+        self.session = session_
         
         super().__init__()
     

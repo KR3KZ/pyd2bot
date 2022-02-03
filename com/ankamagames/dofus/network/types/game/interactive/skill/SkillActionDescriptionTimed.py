@@ -5,9 +5,9 @@ class SkillActionDescriptionTimed(SkillActionDescription):
     time:int
     
 
-    def init(self, time:int, skillId:int):
-        self.time = time
+    def init(self, time_:int, skillId_:int):
+        self.time = time_
         
-        super().__init__(skillId)
+        super().__init__(skillId_)
     
     

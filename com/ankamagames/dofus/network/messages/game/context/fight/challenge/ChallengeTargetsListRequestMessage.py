@@ -5,8 +5,8 @@ class ChallengeTargetsListRequestMessage(NetworkMessage):
     challengeId:int
     
 
-    def init(self, challengeId:int):
-        self.challengeId = challengeId
+    def init(self, challengeId_:int):
+        self.challengeId = challengeId_
         
         super().__init__()
     

@@ -5,9 +5,9 @@ class ServerSessionConstantLong(ServerSessionConstant):
     value:int
     
 
-    def init(self, value:int, id:int):
-        self.value = value
+    def init(self, value_:int, id_:int):
+        self.value = value_
         
-        super().__init__(id)
+        super().__init__(id_)
     
     

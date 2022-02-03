@@ -9,8 +9,8 @@ class BreachRewardsMessage(NetworkMessage):
     rewards:list['BreachReward']
     
 
-    def init(self, rewards:list['BreachReward']):
-        self.rewards = rewards
+    def init(self, rewards_:list['BreachReward']):
+        self.rewards = rewards_
         
         super().__init__()
     

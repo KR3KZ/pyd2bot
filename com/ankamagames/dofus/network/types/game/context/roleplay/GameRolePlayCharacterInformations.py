@@ -12,9 +12,9 @@ class GameRolePlayCharacterInformations(GameRolePlayHumanoidInformations):
     alignmentInfos:'ActorAlignmentInformations'
     
 
-    def init(self, alignmentInfos:'ActorAlignmentInformations', humanoidInfo:'HumanInformations', accountId:int, name:str, look:'EntityLook', contextualId:int, disposition:'EntityDispositionInformations'):
-        self.alignmentInfos = alignmentInfos
+    def init(self, alignmentInfos_:'ActorAlignmentInformations', humanoidInfo_:'HumanInformations', accountId_:int, name_:str, look_:'EntityLook', contextualId_:int, disposition_:'EntityDispositionInformations'):
+        self.alignmentInfos = alignmentInfos_
         
-        super().__init__(humanoidInfo, accountId, name, look, contextualId, disposition)
+        super().__init__(humanoidInfo_, accountId_, name_, look_, contextualId_, disposition_)
     
     

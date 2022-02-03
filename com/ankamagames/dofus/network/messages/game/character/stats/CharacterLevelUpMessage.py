@@ -5,8 +5,8 @@ class CharacterLevelUpMessage(NetworkMessage):
     newLevel:int
     
 
-    def init(self, newLevel:int):
-        self.newLevel = newLevel
+    def init(self, newLevel_:int):
+        self.newLevel = newLevel_
         
         super().__init__()
     

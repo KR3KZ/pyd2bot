@@ -5,8 +5,8 @@ class RawDataMessage(NetworkMessage):
     content:bytearray
     
 
-    def init(self, content:bytearray):
-        self.content = content
+    def init(self, content_:bytearray):
+        self.content = content_
         
         super().__init__()
     

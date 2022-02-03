@@ -9,8 +9,8 @@ class TaxCollectorWaitingForHelpInformations(TaxCollectorComplementaryInformatio
     waitingForHelpInfo:'ProtectedEntityWaitingForHelpInfo'
     
 
-    def init(self, waitingForHelpInfo:'ProtectedEntityWaitingForHelpInfo'):
-        self.waitingForHelpInfo = waitingForHelpInfo
+    def init(self, waitingForHelpInfo_:'ProtectedEntityWaitingForHelpInfo'):
+        self.waitingForHelpInfo = waitingForHelpInfo_
         
         super().__init__()
     

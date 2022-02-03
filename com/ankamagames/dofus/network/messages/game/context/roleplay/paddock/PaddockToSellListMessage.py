@@ -11,10 +11,10 @@ class PaddockToSellListMessage(NetworkMessage):
     paddockList:list['PaddockInformationsForSell']
     
 
-    def init(self, pageIndex:int, totalPage:int, paddockList:list['PaddockInformationsForSell']):
-        self.pageIndex = pageIndex
-        self.totalPage = totalPage
-        self.paddockList = paddockList
+    def init(self, pageIndex_:int, totalPage_:int, paddockList_:list['PaddockInformationsForSell']):
+        self.pageIndex = pageIndex_
+        self.totalPage = totalPage_
+        self.paddockList = paddockList_
         
         super().__init__()
     

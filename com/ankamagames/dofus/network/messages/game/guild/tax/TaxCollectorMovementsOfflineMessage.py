@@ -9,8 +9,8 @@ class TaxCollectorMovementsOfflineMessage(NetworkMessage):
     movements:list['TaxCollectorMovement']
     
 
-    def init(self, movements:list['TaxCollectorMovement']):
-        self.movements = movements
+    def init(self, movements_:list['TaxCollectorMovement']):
+        self.movements = movements_
         
         super().__init__()
     

@@ -4,8 +4,8 @@ from com.ankamagames.dofus.network.messages.game.inventory.items.SymbioticObject
 class WrapperObjectErrorMessage(SymbioticObjectErrorMessage):
     
 
-    def init(self, errorCode:int, reason:int):
+    def init(self, errorCode_:int, reason_:int):
         
-        super().__init__(errorCode, reason)
+        super().__init__(errorCode_, reason_)
     
     

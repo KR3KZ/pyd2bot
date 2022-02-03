@@ -6,10 +6,10 @@ class GameActionFightDispellMessage(AbstractGameActionMessage):
     verboseCast:bool
     
 
-    def init(self, targetId:int, verboseCast:bool, actionId:int, sourceId:int):
-        self.targetId = targetId
-        self.verboseCast = verboseCast
+    def init(self, targetId_:int, verboseCast_:bool, actionId_:int, sourceId_:int):
+        self.targetId = targetId_
+        self.verboseCast = verboseCast_
         
-        super().__init__(actionId, sourceId)
+        super().__init__(actionId_, sourceId_)
     
     

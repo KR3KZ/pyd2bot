@@ -6,9 +6,9 @@ class PaddockMoveItemRequestMessage(NetworkMessage):
     newCellId:int
     
 
-    def init(self, oldCellId:int, newCellId:int):
-        self.oldCellId = oldCellId
-        self.newCellId = newCellId
+    def init(self, oldCellId_:int, newCellId_:int):
+        self.oldCellId = oldCellId_
+        self.newCellId = newCellId_
         
         super().__init__()
     

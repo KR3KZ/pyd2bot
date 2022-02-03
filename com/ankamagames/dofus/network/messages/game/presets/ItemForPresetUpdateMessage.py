@@ -10,9 +10,9 @@ class ItemForPresetUpdateMessage(NetworkMessage):
     presetItem:'ItemForPreset'
     
 
-    def init(self, presetId:int, presetItem:'ItemForPreset'):
-        self.presetId = presetId
-        self.presetItem = presetItem
+    def init(self, presetId_:int, presetItem_:'ItemForPreset'):
+        self.presetId = presetId_
+        self.presetItem = presetItem_
         
         super().__init__()
     

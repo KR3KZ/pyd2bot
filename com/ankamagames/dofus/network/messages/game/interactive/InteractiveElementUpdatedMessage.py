@@ -9,8 +9,8 @@ class InteractiveElementUpdatedMessage(NetworkMessage):
     interactiveElement:'InteractiveElement'
     
 
-    def init(self, interactiveElement:'InteractiveElement'):
-        self.interactiveElement = interactiveElement
+    def init(self, interactiveElement_:'InteractiveElement'):
+        self.interactiveElement = interactiveElement_
         
         super().__init__()
     

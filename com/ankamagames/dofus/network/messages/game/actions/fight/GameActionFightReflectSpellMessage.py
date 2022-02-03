@@ -5,9 +5,9 @@ class GameActionFightReflectSpellMessage(AbstractGameActionMessage):
     targetId:int
     
 
-    def init(self, targetId:int, actionId:int, sourceId:int):
-        self.targetId = targetId
+    def init(self, targetId_:int, actionId_:int, sourceId_:int):
+        self.targetId = targetId_
         
-        super().__init__(actionId, sourceId)
+        super().__init__(actionId_, sourceId_)
     
     

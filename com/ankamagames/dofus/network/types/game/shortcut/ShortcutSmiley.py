@@ -5,9 +5,9 @@ class ShortcutSmiley(Shortcut):
     smileyId:int
     
 
-    def init(self, smileyId:int, slot:int):
-        self.smileyId = smileyId
+    def init(self, smileyId_:int, slot_:int):
+        self.smileyId = smileyId_
         
-        super().__init__(slot)
+        super().__init__(slot_)
     
     

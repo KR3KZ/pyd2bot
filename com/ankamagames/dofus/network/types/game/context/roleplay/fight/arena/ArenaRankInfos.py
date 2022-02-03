@@ -14,12 +14,12 @@ class ArenaRankInfos(NetworkMessage):
     numFightNeededForLadder:int
     
 
-    def init(self, ranking:'ArenaRanking', leagueRanking:'ArenaLeagueRanking', victoryCount:int, fightcount:int, numFightNeededForLadder:int):
-        self.ranking = ranking
-        self.leagueRanking = leagueRanking
-        self.victoryCount = victoryCount
-        self.fightcount = fightcount
-        self.numFightNeededForLadder = numFightNeededForLadder
+    def init(self, ranking_:'ArenaRanking', leagueRanking_:'ArenaLeagueRanking', victoryCount_:int, fightcount_:int, numFightNeededForLadder_:int):
+        self.ranking = ranking_
+        self.leagueRanking = leagueRanking_
+        self.victoryCount = victoryCount_
+        self.fightcount = fightcount_
+        self.numFightNeededForLadder = numFightNeededForLadder_
         
         super().__init__()
     

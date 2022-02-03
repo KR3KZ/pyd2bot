@@ -13,12 +13,12 @@ class BidExchangerObjectInfo(NetworkMessage):
     prices:list[int]
     
 
-    def init(self, objectUID:int, objectGID:int, objectType:int, effects:list['ObjectEffect'], prices:list[int]):
-        self.objectUID = objectUID
-        self.objectGID = objectGID
-        self.objectType = objectType
-        self.effects = effects
-        self.prices = prices
+    def init(self, objectUID_:int, objectGID_:int, objectType_:int, effects_:list['ObjectEffect'], prices_:list[int]):
+        self.objectUID = objectUID_
+        self.objectGID = objectGID_
+        self.objectType = objectType_
+        self.effects = effects_
+        self.prices = prices_
         
         super().__init__()
     

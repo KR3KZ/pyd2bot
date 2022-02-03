@@ -9,9 +9,9 @@ class ChatClientMultiWithObjectMessage(ChatClientMultiMessage):
     objects:list['ObjectItem']
     
 
-    def init(self, objects:list['ObjectItem'], channel:int, content:str):
-        self.objects = objects
+    def init(self, objects_:list['ObjectItem'], channel_:int, content_:str):
+        self.objects = objects_
         
-        super().__init__(channel, content)
+        super().__init__(channel_, content_)
     
     

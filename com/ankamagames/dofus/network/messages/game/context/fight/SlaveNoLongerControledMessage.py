@@ -6,9 +6,9 @@ class SlaveNoLongerControledMessage(NetworkMessage):
     slaveId:int
     
 
-    def init(self, masterId:int, slaveId:int):
-        self.masterId = masterId
-        self.slaveId = slaveId
+    def init(self, masterId_:int, slaveId_:int):
+        self.masterId = masterId_
+        self.slaveId = slaveId_
         
         super().__init__()
     

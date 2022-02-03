@@ -10,9 +10,9 @@ class PresetSavedMessage(NetworkMessage):
     preset:'Preset'
     
 
-    def init(self, presetId:int, preset:'Preset'):
-        self.presetId = presetId
-        self.preset = preset
+    def init(self, presetId_:int, preset_:'Preset'):
+        self.presetId = presetId_
+        self.preset = preset_
         
         super().__init__()
     

@@ -6,10 +6,10 @@ class QuestObjectiveInformationsWithCompletion(QuestObjectiveInformations):
     maxCompletion:int
     
 
-    def init(self, curCompletion:int, maxCompletion:int, objectiveId:int, objectiveStatus:bool, dialogParams:list[str]):
-        self.curCompletion = curCompletion
-        self.maxCompletion = maxCompletion
+    def init(self, curCompletion_:int, maxCompletion_:int, objectiveId_:int, objectiveStatus_:bool, dialogParams_:list[str]):
+        self.curCompletion = curCompletion_
+        self.maxCompletion = maxCompletion_
         
-        super().__init__(objectiveId, objectiveStatus, dialogParams)
+        super().__init__(objectiveId_, objectiveStatus_, dialogParams_)
     
     

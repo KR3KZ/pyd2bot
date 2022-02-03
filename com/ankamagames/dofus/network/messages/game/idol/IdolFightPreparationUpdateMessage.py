@@ -10,9 +10,9 @@ class IdolFightPreparationUpdateMessage(NetworkMessage):
     idols:list['Idol']
     
 
-    def init(self, idolSource:int, idols:list['Idol']):
-        self.idolSource = idolSource
-        self.idols = idols
+    def init(self, idolSource_:int, idols_:list['Idol']):
+        self.idolSource = idolSource_
+        self.idols = idols_
         
         super().__init__()
     

@@ -12,11 +12,11 @@ class TaxCollectorMovement(NetworkMessage):
     playerName:str
     
 
-    def init(self, movementType:int, basicInfos:'TaxCollectorBasicInformations', playerId:int, playerName:str):
-        self.movementType = movementType
-        self.basicInfos = basicInfos
-        self.playerId = playerId
-        self.playerName = playerName
+    def init(self, movementType_:int, basicInfos_:'TaxCollectorBasicInformations', playerId_:int, playerName_:str):
+        self.movementType = movementType_
+        self.basicInfos = basicInfos_
+        self.playerId = playerId_
+        self.playerName = playerName_
         
         super().__init__()
     

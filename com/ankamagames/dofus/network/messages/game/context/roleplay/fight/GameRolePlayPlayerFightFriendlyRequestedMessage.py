@@ -7,10 +7,10 @@ class GameRolePlayPlayerFightFriendlyRequestedMessage(NetworkMessage):
     targetId:int
     
 
-    def init(self, fightId:int, sourceId:int, targetId:int):
-        self.fightId = fightId
-        self.sourceId = sourceId
-        self.targetId = targetId
+    def init(self, fightId_:int, sourceId_:int, targetId_:int):
+        self.fightId = fightId_
+        self.sourceId = sourceId_
+        self.targetId = targetId_
         
         super().__init__()
     

@@ -11,10 +11,10 @@ class ExchangeStartOkNpcShopMessage(NetworkMessage):
     objectsInfos:list['ObjectItemToSellInNpcShop']
     
 
-    def init(self, npcSellerId:int, tokenId:int, objectsInfos:list['ObjectItemToSellInNpcShop']):
-        self.npcSellerId = npcSellerId
-        self.tokenId = tokenId
-        self.objectsInfos = objectsInfos
+    def init(self, npcSellerId_:int, tokenId_:int, objectsInfos_:list['ObjectItemToSellInNpcShop']):
+        self.npcSellerId = npcSellerId_
+        self.tokenId = tokenId_
+        self.objectsInfos = objectsInfos_
         
         super().__init__()
     

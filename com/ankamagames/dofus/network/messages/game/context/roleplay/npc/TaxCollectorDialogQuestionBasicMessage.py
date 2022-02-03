@@ -9,8 +9,8 @@ class TaxCollectorDialogQuestionBasicMessage(NetworkMessage):
     guildInfo:'BasicGuildInformations'
     
 
-    def init(self, guildInfo:'BasicGuildInformations'):
-        self.guildInfo = guildInfo
+    def init(self, guildInfo_:'BasicGuildInformations'):
+        self.guildInfo = guildInfo_
         
         super().__init__()
     

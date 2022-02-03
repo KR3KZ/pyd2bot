@@ -5,8 +5,8 @@ class AccessoryPreviewRequestMessage(NetworkMessage):
     genericId:list[int]
     
 
-    def init(self, genericId:list[int]):
-        self.genericId = genericId
+    def init(self, genericId_:list[int]):
+        self.genericId = genericId_
         
         super().__init__()
     

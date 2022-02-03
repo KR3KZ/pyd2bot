@@ -5,9 +5,9 @@ class PartyAbdicateThroneMessage(AbstractPartyMessage):
     playerId:int
     
 
-    def init(self, playerId:int, partyId:int):
-        self.playerId = playerId
+    def init(self, playerId_:int, partyId_:int):
+        self.playerId = playerId_
         
-        super().__init__(partyId)
+        super().__init__(partyId_)
     
     

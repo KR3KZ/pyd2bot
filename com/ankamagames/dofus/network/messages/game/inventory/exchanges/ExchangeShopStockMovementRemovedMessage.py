@@ -5,8 +5,8 @@ class ExchangeShopStockMovementRemovedMessage(NetworkMessage):
     objectId:int
     
 
-    def init(self, objectId:int):
-        self.objectId = objectId
+    def init(self, objectId_:int):
+        self.objectId = objectId_
         
         super().__init__()
     

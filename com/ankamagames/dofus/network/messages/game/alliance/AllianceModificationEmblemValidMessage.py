@@ -9,8 +9,8 @@ class AllianceModificationEmblemValidMessage(NetworkMessage):
     Alliancemblem:'GuildEmblem'
     
 
-    def init(self, Alliancemblem:'GuildEmblem'):
-        self.Alliancemblem = Alliancemblem
+    def init(self, Alliancemblem_:'GuildEmblem'):
+        self.Alliancemblem = Alliancemblem_
         
         super().__init__()
     

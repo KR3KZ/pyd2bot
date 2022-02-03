@@ -5,8 +5,8 @@ class GameFightNewRoundMessage(NetworkMessage):
     roundNumber:int
     
 
-    def init(self, roundNumber:int):
-        self.roundNumber = roundNumber
+    def init(self, roundNumber_:int):
+        self.roundNumber = roundNumber_
         
         super().__init__()
     

@@ -9,13 +9,13 @@ class PartyUpdateLightMessage(AbstractPartyEventMessage):
     regenRate:int
     
 
-    def init(self, id:int, lifePoints:int, maxLifePoints:int, prospecting:int, regenRate:int, partyId:int):
-        self.id = id
-        self.lifePoints = lifePoints
-        self.maxLifePoints = maxLifePoints
-        self.prospecting = prospecting
-        self.regenRate = regenRate
+    def init(self, id_:int, lifePoints_:int, maxLifePoints_:int, prospecting_:int, regenRate_:int, partyId_:int):
+        self.id = id_
+        self.lifePoints = lifePoints_
+        self.maxLifePoints = maxLifePoints_
+        self.prospecting = prospecting_
+        self.regenRate = regenRate_
         
-        super().__init__(partyId)
+        super().__init__(partyId_)
     
     

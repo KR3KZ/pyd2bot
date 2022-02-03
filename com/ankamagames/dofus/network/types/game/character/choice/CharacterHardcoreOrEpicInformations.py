@@ -11,11 +11,11 @@ class CharacterHardcoreOrEpicInformations(CharacterBaseInformations):
     deathMaxLevel:int
     
 
-    def init(self, deathState:int, deathCount:int, deathMaxLevel:int, sex:bool, entityLook:'EntityLook', breed:int, level:int, name:str, id:int):
-        self.deathState = deathState
-        self.deathCount = deathCount
-        self.deathMaxLevel = deathMaxLevel
+    def init(self, deathState_:int, deathCount_:int, deathMaxLevel_:int, sex_:bool, entityLook_:'EntityLook', breed_:int, level_:int, name_:str, id_:int):
+        self.deathState = deathState_
+        self.deathCount = deathCount_
+        self.deathMaxLevel = deathMaxLevel_
         
-        super().__init__(sex, entityLook, breed, level, name, id)
+        super().__init__(sex_, entityLook_, breed_, level_, name_, id_)
     
     

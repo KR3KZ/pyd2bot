@@ -10,10 +10,10 @@ class HouseOnMapInformations(HouseInformations):
     houseInstances:list['HouseInstanceInformations']
     
 
-    def init(self, doorsOnMap:list[int], houseInstances:list['HouseInstanceInformations'], houseId:int, modelId:int):
-        self.doorsOnMap = doorsOnMap
-        self.houseInstances = houseInstances
+    def init(self, doorsOnMap_:list[int], houseInstances_:list['HouseInstanceInformations'], houseId_:int, modelId_:int):
+        self.doorsOnMap = doorsOnMap_
+        self.houseInstances = houseInstances_
         
-        super().__init__(houseId, modelId)
+        super().__init__(houseId_, modelId_)
     
     

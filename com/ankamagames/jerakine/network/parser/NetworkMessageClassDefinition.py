@@ -1,16 +1,21 @@
+from functools import reduce
 import importlib
 import sys
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
+import com.ankamagames.jerakine.network.NetworkMessage as bnm
 from com.ankamagames.jerakine.network.parser.ProtocolSpec import ProtocolSpec
 import com.ankamagames.jerakine.network.parser.NetworkMessageDataField as nmdf
 
-logger = Logger("bot")
+logger = Logger(__name__)
 
-class NetMsgClassDef:
+class NetworkMessageClassDefinition:
    
+   TRACE = False
+
    def __init__(self, className:str, raw:ByteArray) -> None:
-      logger.debug("Getting spec for {}".format(className))
+      if self.TRACE:
+         logger.debug("Getting spec for {}".format(className))
       classSpec = ProtocolSpec.getClassSpecByName(className)
       self._parent = classSpec["parent"]
       self._fields = classSpec["fields"]
@@ -29,16 +34,20 @@ class NetMsgClassDef:
       else:
          inst = childInstance
 
-      logger.debug("------------------ Deserializing {} STARTED-----------------".format(self._cls.__name__))
+      if self.TRACE:
+         logger.debug("------------------ Deserializing {} STARTED-----------------".format(self._cls.__name__))
 
       if self._parent is not None:
-         logger.debug("Class has parent {}".format(self._parent))
-         inst = NetMsgClassDef(self._parent, self.raw).deserialize(inst)
-         logger.debug("End of parent deserialization")
-         logger.debug("BytesArray positon: {}".format(self.raw.position))
+         if self.TRACE:
+            logger.debug("Class has parent {}".format(self._parent))
+         inst = NetworkMessageClassDefinition(self._parent, self.raw).deserialize(inst)
+         if self.TRACE:
+            logger.debug("End of parent deserialization")
+            logger.debug("BytesArray positon: {}".format(self.raw.position))
          
       for field, value in self.readBooleans(self._boolfields, self.raw).items():
-         logger.debug("{} = {}".format(field, value))
+         if self.TRACE:
+            logger.debug("{} = {}".format(field, value))
          setattr(inst, field, value)
 
       for field in self._fields:
@@ -46,19 +55,30 @@ class NetMsgClassDef:
          if field["optional"]:
             if not self.raw.readByte():
                 continue
-         logger.debug("deserializing field {}".format(attrib))
+         if self.TRACE:
+            logger.debug("deserializing field {}".format(attrib))
          try:
             value = nmdf.NetMsgDataField(field, self.raw).deserialize()
          except Exception as e:
-            logger.debug(inst.__class__.__name__)
-            logger.debug(self._fields)
-            logger.error(exec_info=True)
+            if self.TRACE:
+               logger.debug(inst.__class__.__name__)
+               logger.debug(self._fields)
+               logger.error(exec_info=True)
             raise KeyboardInterrupt
          setattr(inst, attrib, value)
-      logger.debug("------------------ Deserializing {} ENDED---------------------".format(self._cls.__name__))
+      if self.TRACE:
+         logger.debug("------------------ Deserializing {} ENDED---------------------".format(self._cls.__name__))
+
+      if inst.__class__.__base__ == bnm.NetworkMessage:
+         bnm.NetworkMessage.__init__(inst)
+
       return inst
 
-   def readBooleans(self, boolfields, raw: ByteArray):
+   def to_json(self):
+      pass
+
+   @classmethod
+   def readBooleans(cls, boolfields, raw: ByteArray):
       ans = {}
       bfields = iter(boolfields)
       for _ in range(0, len(boolfields), 8):
@@ -66,3 +86,4 @@ class NetMsgClassDef:
          for val, var in zip(bits, bfields):
                ans[var["name"]] = val == "1"
       return ans
+

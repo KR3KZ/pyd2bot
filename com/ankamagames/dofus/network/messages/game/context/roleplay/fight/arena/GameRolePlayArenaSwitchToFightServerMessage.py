@@ -7,10 +7,10 @@ class GameRolePlayArenaSwitchToFightServerMessage(NetworkMessage):
     ticket:list[int]
     
 
-    def init(self, address:str, ports:list[int], ticket:list[int]):
-        self.address = address
-        self.ports = ports
-        self.ticket = ticket
+    def init(self, address_:str, ports_:list[int], ticket_:list[int]):
+        self.address = address_
+        self.ports = ports_
+        self.ticket = ticket_
         
         super().__init__()
     
