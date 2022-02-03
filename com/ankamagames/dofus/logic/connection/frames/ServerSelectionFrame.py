@@ -79,15 +79,15 @@ class ServerSelectionFrame(Frame):
    def process(self, msg:Message) -> bool:
 
       if isinstance(msg, ServersListMessage):
-            slmsg = msg
-            PlayerManager().server = None
-            self._serversList = slmsg.servers
-            self._serversList.sort(key=lambda x: x.date)
-            self._alreadyConnectedToServerId = slmsg.alreadyConnectedToServerId
-            self.broadcastServersListUpdate()
-            connh.ConnectionsHandler.getConnection().dispatch(PlayerEvents.SERVER_SELECTION)
+         slmsg = msg
+         PlayerManager().server = None
+         self._serversList = slmsg.servers
+         self._serversList.sort(key=lambda x: x.date)
+         self._alreadyConnectedToServerId = slmsg.alreadyConnectedToServerId
+         self.broadcastServersListUpdate()
+         connh.ConnectionsHandler.getConnection().dispatch(PlayerEvents.SERVER_SELECTION)
 
-            return True
+         return True
 
       elif isinstance(msg, ServerStatusUpdateMessage):
          ssumsg = msg
@@ -131,6 +131,7 @@ class ServerSelectionFrame(Frame):
          self._serversList = ssdemsg.servers
          self._serversList.sort(key = lambda x : x.date)
          self.broadcastServersListUpdate(True)
+         return True
 
       elif isinstance(msg, SelectedServerDataMessage):
          pass
@@ -156,6 +157,18 @@ class ServerSelectionFrame(Frame):
             self._connexionPorts.append(port)
          logger.debug("Connection to game server using ports : " + self._connexionPorts)
          return True
+
+      ssdmsg = msg 
+      connh.ConnectionsHandler.connectionGonnaBeClosed(DisconnectionReasonEnum.SWITCHING_TO_GAME_SERVER)
+      self._selectedServer = ssdmsg
+      AuthentificationManager().gameServerTicket = AuthentificationManager().decodeWithAES(ssdmsg.ticket).decode("utf-8")
+      PlayerManager().server = Server.getServerById(ssdmsg.serverId)
+      PlayerManager().kisServerPort = 0
+      self._connexionPorts = []
+      for port in ssdmsg.ports:
+         self._connexionPorts.append(port)
+      logger.debug(f"Connection to game server using ports : {self._connexionPorts}")
+      return True
    
    def pulled(self) -> bool:
       self._serversList = None

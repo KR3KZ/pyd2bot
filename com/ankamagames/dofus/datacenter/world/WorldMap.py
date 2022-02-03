@@ -1,5 +1,5 @@
 from com.ankamagames.dofus.types.IdAccessors import IdAccessors
-from com.ankamagames.jerakine.data.GameData import GameData
+import com.ankamagames.jerakine.data.GameData as gdata
 from com.ankamagames.jerakine.data.I18n import I18n
 from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
 
@@ -44,11 +44,11 @@ class WorldMap(IDataCenter):
       
       @staticmethod
       def getWorldMapById(id:int) -> 'WorldMap':
-         return GameData.getobject(WorldMap.MODULE,id)
+         return gdata.GameData.getobject(WorldMap.MODULE,id)
       
       @staticmethod
       def getAllWorldMaps() -> list:
-         return GameData.getobjects(WorldMap.MODULE)
+         return gdata.GameData.getobjects(WorldMap.MODULE)
       
       idAccessors:IdAccessors = IdAccessors(getWorldMapById,getAllWorldMaps)
       

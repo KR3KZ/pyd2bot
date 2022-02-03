@@ -1,7 +1,7 @@
 from com.ankamagames.jerakine.interfaces.IDestroyable import IDestroyable
 from com.ankamagames.jerakine.newCache.iCache import ICache
 from com.ankamagames.jerakine.newCache.iCacheGarbageCollector import ICacheGarbageCollector
-from com.ankamagames.jerakine.pools.Pool import Pool
+import com.ankamagames.jerakine.pools.Pool as pool
 from com.ankamagames.jerakine.pools.Poolable import Poolable
 
 
@@ -24,15 +24,15 @@ class UsageCountHelper(Poolable):
 
 class LruGarbageCollector(ICacheGarbageCollector):
    
-   _pool:Pool = None
-   _usageCount:dict = None
-   _cache:ICache = None
    
    def __init__(self):
-      self._usageCount = dict(True)
+      self._usageCount = dict()
+      self._pool:pool.Pool = None
+      self._usageCount:dict = None
+      self._cache:ICache = None
       super().__init__()
       if not self._pool:
-         _pool = Pool(UsageCountHelper,500,50)
+         self._pool = pool.Pool(UsageCountHelper, 500, 50)
    
    @property
    def cache(self) -> ICache:

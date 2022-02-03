@@ -3,7 +3,6 @@ import math
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine import JerakineConstants
 from com.ankamagames.jerakine.managers.storeDataManager import StoreDataManager
-from com.ankamagames.jerakine.newCache.LruGarbageCollector import LruGarbageCollector
 from com.ankamagames.jerakine.newCache.iCache import ICache
 from com.ankamagames.jerakine.newCache.impl.cache import Cache
 from com.ankamagames.jerakine.newCache.impl.infiniteCache import InfiniteCache
@@ -56,6 +55,8 @@ class AbstractDataManager:
    
    @classmethod
    def init(cls, soCacheSize:int, keyCacheSize:int, soPrefix:str = "") -> None:
+      from com.ankamagames.jerakine.newCache.LruGarbageCollector import LruGarbageCollector
+
       if keyCacheSize == float("inf"):
          cls._cacheKey = InfiniteCache()
       else:

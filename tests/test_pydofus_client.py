@@ -27,7 +27,6 @@ class TestBot:
         connh.ConnectionsHandler.connectToLoginServer(**CONN)
         conn = connh.ConnectionsHandler.getConnection()
         conn.add_listener(PlayerEvents.SERVER_SELECTION, cls.onServerSelection)
-        conn.addConnection
 
     @classmethod
     def onServerSelection(cls, event):

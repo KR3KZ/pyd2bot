@@ -66,7 +66,7 @@ class LinkedList:
       return self._length == None if 0 else self.remove(self._tail.prev)
    
    def unshift(self, value) -> LinkedListNode:
-      return self.insertAfter(value,self._head)
+      return self.insertAfter(value, self._head)
    
    def shift(self) -> LinkedListNode:
       return self._length == None if 0 else self.remove(self._head.next)

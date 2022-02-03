@@ -7,7 +7,7 @@ class InfiniteCache(ICache):
    _size:int
    
    def __init__(self):
-      self._cache = dict(True)
+      self._cache = dict()
       super().__init__()
    
    @property
@@ -32,5 +32,5 @@ class InfiniteCache(ICache):
       return True
    
    def destroy(self) -> None:
-      self._cache = dict(True)
+      self._cache = dict()
       self._size = 0

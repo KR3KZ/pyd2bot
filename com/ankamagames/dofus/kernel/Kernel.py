@@ -2,7 +2,6 @@ from time import sleep
 from com.ankamagames.atouin.utils.DataMapProvider import DataMapProvider
 from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManager
 from com.ankamagames.dofus.logic.connection.managers.AuthentificationManager import AuthentificationManager
-from com.ankamagames.dofus.logic.frames.DisconnectionHandlerFrame import DisconnectionHandlerFrame
 from com.ankamagames.dofus.logic.game.fight.managers.FightersStateManager import FightersStateManager
 import com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager as pc
 from com.ankamagames.dofus.modules.utils.pathFinding.world.WorldPathFinder import WorldPathFinder
@@ -55,6 +54,8 @@ class Kernel(metaclass=Singleton):
             self._worker.process(msg)
    
    def addInitialFrames(self, firstLaunch:bool = False) -> None:
+      from com.ankamagames.dofus.logic.frames.DisconnectionHandlerFrame import DisconnectionHandlerFrame
+
       self.getWorker().addFrame(auth.AuthentificationFrame())
       #Kernel().getWorker().addFrame(QueueFrame())
       #Kernel().getWorker().addFrame(GameStartingFrame())

@@ -1,5 +1,6 @@
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
+from com.ankamagames.dofus import Constants
 if TYPE_CHECKING:
     from ankamagames.jerakine.data.GameDataProcess import GameDataProcess
     from ankamagames.jerakine.data.GameDataClassDefinition import GameDataClassDefinition
@@ -28,7 +29,10 @@ class GameDataFileAccessor(metaclass=Singleton):
         return self._modules[moduleName]._classes[classId]
     
     def getCount(self, moduleName:str) -> int:
-        return self._modules[moduleName]._counter[moduleName]
+        if moduleName not in self._modules:
+            modle_file_path = Constants.DOFUS_COMMON_DIR / f"{moduleName}.d2o"
+            self.init(modle_file_path)
+        return self._modules[moduleName]._counter
     
     def getObject(self, moduleName:str, objectId) -> Any:
         return self._modules[moduleName].getObject(objectId)

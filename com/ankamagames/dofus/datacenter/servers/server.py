@@ -49,11 +49,11 @@ class Server(IDataCenter):
    
    @staticmethod
    def getServerById(id:int) -> 'Server':
-      return GameData.getobject(Server.MODULE,id)
+      return GameData.getObject(Server.MODULE, id)
    
    @staticmethod
    def getServers(self) -> list:
-      return GameData.getobjects(Server.MODULE)
+      return GameData.getObjects(Server.MODULE)
    
    idAccessors:IdAccessors = IdAccessors(getServerById,getServers)
    

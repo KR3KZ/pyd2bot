@@ -1,5 +1,6 @@
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.pools.Poolable import Poolable
+from com.ankamagames.jerakine.pools.PoolableLinkedListNode import PoolableLinkedListNode
 from mx.utils.LinkedList import LinkedList
 from mx.utils.LinkedListNode import LinkedListNode 
 logger = Logger(__name__)
@@ -17,13 +18,14 @@ class Pool:
    def __init__(self, pooledClass:object, initialSize:int, growSize:int, warnLimit:int = 0):
       super().__init__()
       self._pooledClass = pooledClass
-      if self._pooledClass == PoolableLinkedListNode:
+      if self._pooledClass is PoolableLinkedListNode:
          self._pool = LinkedList()
       else:
-         self._pool = PoolLinkedList()
+         import com.ankamagames.jerakine.pools.PoolLinkedList as poolLinkedList
+         self._pool = poolLinkedList.PoolLinkedList()
       self._growSize = growSize
       self._warnLimit = warnLimit
-      for i in range(0, initialSize, 1):
+      for _ in range(initialSize):
          self._pool.unshift(self._pooledClass())
       self._totalSize = initialSize
    
@@ -44,19 +46,18 @@ class Pool:
       return self._warnLimit
    
    def checkOut(self) -> Poolable:
-      o:Poolable = None
-      i:int = 0
-      if len(self._pool) == 0:
+      if self._pool.length == 0:
          for i in range(self._growSize):
             self._pool.append(self._pooledClass())
          self._totalSize += self._growSize
          if self._warnLimit > 0 and self._totalSize > self._warnLimit:
             logger.warn("Pool of " + self._pooledClass + " size beyond the warning limit. Size: " + self._totalSize + ", limit: " + self._warnLimit + ".")
       node:LinkedListNode = self._pool.shift()
-      if self._pooledClass == PoolableLinkedListNode:
+      if self._pooledClass is PoolableLinkedListNode:
          o = node
       else:
          o = node.value
+         from com.ankamagames.jerakine.pools.PoolsManager import PoolsManager
          PoolsManager().getLinkedListNodePool().checkIn(node)
       return o
    

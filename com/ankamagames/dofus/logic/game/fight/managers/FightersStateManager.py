@@ -1,5 +1,4 @@
 from com.ankamagames.jerakine.logger.Logger import Logger
-from com.ankamagames.dofus.datacenter.spells.SpellState import SpellState
 from com.ankamagames.dofus.logic.game.fight.types.FighterStatus import FighterStatus
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 logger = Logger(__name__)
@@ -49,8 +48,8 @@ class FightersStateManager(metaclass=Singleton):
       return states
 
    def getStatus(self, targetId:float) -> FighterStatus:
+      from com.ankamagames.dofus.datacenter.spells.SpellState import SpellState
       stateId = None
-      state:SpellState = None
       fighterstatus:FighterStatus = FighterStatus()
       for stateId in self._entityStates[targetId]:
 

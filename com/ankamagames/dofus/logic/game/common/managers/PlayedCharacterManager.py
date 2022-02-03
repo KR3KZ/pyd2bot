@@ -1,9 +1,8 @@
 from typing import TYPE_CHECKING
-from com.ankamagames.dofus.internalDatacenter.mount.MountData import MountData
 if TYPE_CHECKING:
    from com.ankamagames.dofus.internalDatacenter.items.ItemWrapper import ItemWrapper
    from com.ankamagames.dofus.internalDatacenter.items.WeaponWrapper import WeaponWrapper
-
+   from com.ankamagames.dofus.internalDatacenter.mount.MountData import MountData
 from com.ankamagames.dofus.datacenter.world.SubArea import SubArea
 from com.ankamagames.dofus.datacenter.world.WorldMap import WorldMap
 from com.ankamagames.dofus.internalDatacenter.jobs.KnownJobWrapper import KnownJobWrapper
@@ -123,7 +122,7 @@ class PlayedCharacterManager(IDestroyable):
    
    hasCompanion:bool = False
    
-   mount:MountData
+   mount:'MountData'
    
    isFighting:bool = False
    

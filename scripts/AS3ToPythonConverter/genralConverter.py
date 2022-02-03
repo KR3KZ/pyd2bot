@@ -270,5 +270,5 @@ def parseFile(file_p, out_p):
 
 # parseFolderFiles("AS3ToPythonConverter/scripts", "AS3ToPythonConverter/connectionType")
 t = perf_counter()
-parseFile("scripts/AS3ToPythonConverter/target.as", "scripts/AS3ToPythonConverter/ServerPopulation.py")
+parseFile("scripts/AS3ToPythonConverter/target.as", "scripts/AS3ToPythonConverter/PoolsManager.py")
 print("parsin took:", perf_counter() - t)
