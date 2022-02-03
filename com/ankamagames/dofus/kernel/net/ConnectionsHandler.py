@@ -180,7 +180,7 @@ class ConnectionsHandler:
       if useSniffer:
          if proxy != None:
             raise ArgumentError("Can\'t etablish a connection using a proxy and the sniffer.")
-         conn = SnifferServerConnection(None,0,id)
+         conn = SnifferServerConnection(None, 0, id)
       elif proxy != None:
          conn = ProxyedServerConnection(proxy,None,0,id)
       else:

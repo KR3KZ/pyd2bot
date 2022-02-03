@@ -34,7 +34,7 @@ class ServerConnection(IServerConnection):
    
    LOG_ENCODED_CLIENT_MESSAGES:bool = False
    
-   DEBUG_LOW_LEVEL_VERBOSE:bool = True
+   DEBUG_LOW_LEVEL_VERBOSE:bool = False
    
    DEBUG_DATA:bool = True
    

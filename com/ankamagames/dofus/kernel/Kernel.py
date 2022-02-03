@@ -1,6 +1,5 @@
 from time import sleep
 from com.ankamagames.atouin.utils.DataMapProvider import DataMapProvider
-import com.ankamagames.dofus.kernel.net.ConnectionsHandler as connh
 from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManager
 from com.ankamagames.dofus.logic.connection.managers.AuthentificationManager import AuthentificationManager
 from com.ankamagames.dofus.logic.frames.DisconnectionHandlerFrame import DisconnectionHandlerFrame
@@ -67,14 +66,3 @@ class Kernel(metaclass=Singleton):
       #    self._worker.addFrame(AuthorizedFrame())
       self._worker.addFrame(DisconnectionHandlerFrame())
  
-
-if __name__ == '__main__':
-   import com.ankamagames.dofus.kernel.Kernel as krnl
-   import com.ankamagames.dofus.logic.connection.managers.AuthentificationManager as auth
-
-   krnl.Kernel().init()
-   PORT = 5555
-   AUTH_SERVER = "54.76.16.121" 
-   auth.AuthentificationManager().setCredentials("kmajdoub", "rMrTXHA4*")
-   connh.ConnectionsHandler.connectToLoginServer(AUTH_SERVER, PORT)
-   sleep(20)

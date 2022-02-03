@@ -32,7 +32,6 @@ class Socket(threading.Thread):
                     self.dispatcher.dispatch(ProgressEvent.SOCKET_DATA, ProgressEvent(rdata))
             except OSError as e:
                 pass
-                
         self.close()
         logger.info("Socket thread ended")
 

@@ -13,3 +13,4 @@ unpacked_raw_msg
 *.as
 .venv
 .vscode
+creds.json

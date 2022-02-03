@@ -25,10 +25,12 @@ from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.messages.Frame import Frame
 from com.ankamagames.jerakine.messages.Message import Message
 from com.ankamagames.jerakine.messages.WrongSocketClosureReasonMessage import WrongSocketClosureReasonMessage
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.jerakine.network.messages.ExpectedSocketClosureMessage import ExpectedSocketClosureMessage
 from com.ankamagames.jerakine.network.messages.ServerConnectionFailedMessage import ServerConnectionFailedMessage
 from com.ankamagames.jerakine.network.messages.Worker import Worker
 from com.ankamagames.jerakine.types.enums.Priority import Priority
+from tests.test_pydofus_client import PlayerEvents
 logger = Logger(__name__)
 
 
@@ -83,6 +85,8 @@ class ServerSelectionFrame(Frame):
             self._serversList.sort(key=lambda x: x.date)
             self._alreadyConnectedToServerId = slmsg.alreadyConnectedToServerId
             self.broadcastServersListUpdate()
+            connh.ConnectionsHandler.getConnection().dispatch(PlayerEvents.SERVER_SELECTION)
+
             return True
 
       elif isinstance(msg, ServerStatusUpdateMessage):
@@ -104,15 +108,17 @@ class ServerSelectionFrame(Frame):
 
       elif isinstance(msg, ServerSelectionAction):
          ssaction = msg
+
          if self._alreadyConnectedToServerId > 0 and ssaction.serverId != self._alreadyConnectedToServerId:
             self._serverSelectionAction = ssaction
             serverAlreadyInName = Server.getServerById(self._alreadyConnectedToServerId).name
             serverSelectedName = Server.getServerById(ssaction.serverId).name
             return True
+
          for server in self._serversList:
             if server.id == ssaction.serverId:
-               if server.status == ServerStatusEnum.ONLINE or server.status == ServerStatusEnum.NOJOIN:
-                  ssmsg = ServerSelectionMessage(serverId_=ssaction.serverId)
+               if ServerStatusEnum(server.status) == ServerStatusEnum.ONLINE or ServerStatusEnum(server.status) == ServerStatusEnum.NOJOIN:
+                  ssmsg = NetworkMessage.from_json({"__type__": "ServerSelectionMessage", "serverId": ssaction.serverId})
                   connh.ConnectionsHandler.getConnection().send(ssmsg)
                else:
                   errorText = "Status " + ServerStatusEnum(server.status).name

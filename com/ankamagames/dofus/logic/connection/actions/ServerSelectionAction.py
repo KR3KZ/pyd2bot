@@ -10,7 +10,8 @@ class ServerSelectionAction(AbstractAction, Action):
    def __init__(self, *params):
       super().__init__(*params)
    
-   def create(self, serverId:int) -> 'ServerSelectionAction':
-      a = ServerSelectionAction(argv)
+   @classmethod
+   def create(cls, serverId:int) -> 'ServerSelectionAction':
+      a = cls(argv)
       a.serverId = serverId
       return a

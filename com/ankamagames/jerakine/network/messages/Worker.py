@@ -343,11 +343,10 @@ class Worker(EventDispatcher, MessageHandler):
       return False
    
    def processMessage(self, msg:Message) -> None:
+      logger.debug("Processing message: " + msg.__class__.__name__)
       processed:bool = False
       self._processingMessage = True
-      logger.debug("Got frames count: " + str(len(self._framesList)) + "; treatments count: " + str(len(self._treatmentsQueue)) + "; messages count: " + str(len(self._messagesQueue)))
       for frame in self._framesList:
-         logger.debug("Processing frame: " + frame.__class__.__name__.split(".")[-1])
          if frame.process(msg):
             processed = True
             break

@@ -77,7 +77,7 @@ class AuthentificationManager(metaclass=Singleton):
         )
         imsg = NetworkMessage.from_json({
             '__type__': 'IdentificationMessage',
-            'autoconnect': True,
+            'autoconnect': False,
             'credentials': self.getAuthCredentials(),
             'failedAttempts': [],
             'lang': 'fr',

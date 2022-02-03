@@ -1,5 +1,5 @@
 from threading import Timer
-from com.ankamagames.dofus.kernel.Kernel import Kernel
+import com.ankamagames.dofus.kernel.Kernel as krnl
 import com.ankamagames.dofus.kernel.net.ConnectionsHandler as connh
 from com.ankamagames.dofus.network.Metadata import Metadata
 from com.ankamagames.dofus.network.messages.common.basic.BasicPingMessage import BasicPingMessage
@@ -30,21 +30,21 @@ class HandshakeFrame(Frame):
       logger.info("Server version is " + serverVersion + ". Client version is " + Metadata.PROTOCOL_BUILD + ".")
       if not serverVersion or not Metadata.PROTOCOL_BUILD:
          logger.fatal("A protocol version is empty or None. What happened?")
-         Kernel().panic(PanicMessages.MALFORMED_PROTOCOL,[Metadata.PROTOCOL_BUILD,serverVersion])
+         krnl.Kernel().panic(PanicMessages.MALFORMED_PROTOCOL,[Metadata.PROTOCOL_BUILD,serverVersion])
          return
       clientHash:str = self.extractHashFromProtocolVersion(Metadata.PROTOCOL_BUILD)
       if not clientHash:
          logger.fatal("The client protocol version is malformed: " + Metadata.PROTOCOL_BUILD)
-         Kernel().panic(PanicMessages.MALFORMED_PROTOCOL,[Metadata.PROTOCOL_BUILD,serverVersion])
+         krnl.Kernel().panic(PanicMessages.MALFORMED_PROTOCOL,[Metadata.PROTOCOL_BUILD,serverVersion])
          return
       serverHash:str = self.extractHashFromProtocolVersion(serverVersion)
       if not serverHash:
          logger.fatal("The server protocol version is malformed: " + serverVersion)
-         Kernel().panic(PanicMessages.MALFORMED_PROTOCOL,[Metadata.PROTOCOL_BUILD,serverVersion])
+         krnl.Kernel().panic(PanicMessages.MALFORMED_PROTOCOL,[Metadata.PROTOCOL_BUILD,serverVersion])
          return
       if clientHash != serverHash:
          logger.fatal("Protocol mismatch between the client and the server.")
-         Kernel().panic(PanicMessages.PROTOCOL_MISMATCH,[Metadata.PROTOCOL_BUILD,serverVersion])
+         krnl.Kernel().panic(PanicMessages.PROTOCOL_MISMATCH,[Metadata.PROTOCOL_BUILD,serverVersion])
    
    def extractHashFromProtocolVersion(self, protocolVersion:str) -> str:
       if not protocolVersion:
@@ -73,7 +73,7 @@ class HandshakeFrame(Frame):
       if isinstance(msg, ProtocolRequired):
          prmsg = msg
          self.checkProtocolVersions(prmsg.version)
-         Kernel().getWorker().removeFrame(self)
+         krnl.Kernel().getWorker().removeFrame(self)
          return True
 
       elif isinstance(msg, ConnectedMessage):
