@@ -2,6 +2,7 @@
 from datetime import datetime
 from threading import Timer
 import time
+from com.ankamagames.berilia.types.messages.AllModulesLoadedMessage import AllModulesLoadedMessage
 from com.ankamagames.dofus.internalDatacenter.connection.basicCharacterWrapper import BasicCharacterWrapper
 # from com.ankamagames.dofus.internalDatacenter.items.ItemWrapper import ItemWrapper
 import com.ankamagames.dofus.kernel.Kernel as krnl
@@ -11,7 +12,9 @@ from com.ankamagames.dofus.logic.connection.managers.AuthentificationManager imp
 from com.ankamagames.dofus.logic.common.managers.InterClientManager import InterClientManager
 from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerManager
 from com.ankamagames.dofus.logic.game.approach.actions.CharacterSelectionAction import CharacterSelectionAction
+from com.ankamagames.dofus.logic.game.common.actions.chat.PopupWarningCloseRequestAction import PopupWarningCloseRequestAction
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
+from com.ankamagames.dofus.logic.game.common.managers.TimerManager import TimeManager
 from com.ankamagames.dofus.network.messages.connection.ServerSelectionMessage import ServerSelectionMessage
 from com.ankamagames.dofus.network.messages.game.approach.AccountCapabilitiesMessage import AccountCapabilitiesMessage
 from com.ankamagames.dofus.network.messages.game.approach.AlreadyConnectedMessage import AlreadyConnectedMessage
@@ -28,6 +31,8 @@ from com.ankamagames.dofus.network.messages.game.character.choice.CharactersList
 from com.ankamagames.dofus.network.messages.game.character.choice.CharactersListMessage import CharactersListMessage
 from com.ankamagames.dofus.network.messages.game.character.choice.CharactersListRequestMessage import CharactersListRequestMessage
 from com.ankamagames.dofus.network.messages.game.context.GameContextCreateErrorMessage import GameContextCreateErrorMessage
+from com.ankamagames.dofus.network.messages.game.context.GameContextCreateRequestMessage import GameContextCreateRequestMessage
+from com.ankamagames.dofus.network.messages.game.initialization.CharacterLoadingCompleteMessage import CharacterLoadingCompleteMessage
 from com.ankamagames.dofus.network.messages.game.moderation.PopupWarningCloseRequestMessage import PopupWarningCloseRequestMessage
 from com.ankamagames.dofus.network.messages.game.moderation.PopupWarningClosedMessage import PopupWarningClosedMessage
 from com.ankamagames.dofus.network.messages.game.startup.StartupActionsListMessage import StartupActionsListMessage
@@ -81,6 +86,7 @@ class GameServerApproachFrame(Frame):
       self._charactersToRemodelList = []
       self._giftList = []
       self._charaListMinusDeadPeople = []
+      self._cssmsg = None
       super().__init__()
    
    @property
@@ -113,7 +119,11 @@ class GameServerApproachFrame(Frame):
       if isinstance(msg, HelloGameMessage):
          connh.ConnectionsHandler.confirmGameServerConnection()
          self.authenticationTicketAccepted = False
-         atmsg = AuthenticationTicketMessage(lang="fr", ticket=AuthentificationManager().gameServerTicket)
+         atmsg = AuthenticationTicketMessage.from_json({
+            '__type__': 'AuthenticationTicketMessage',
+            'lang': 'fr',
+            'ticket': AuthentificationManager().gameServerTicket
+         })
          connh.ConnectionsHandler.getConnection().send(atmsg)
          return True
 
@@ -130,7 +140,7 @@ class GameServerApproachFrame(Frame):
          clmsg = msg
          self._charactersList = list[BasicCharacterWrapper]()
          for chi in clmsg.characters:
-            self._charactersList.append(BasicCharacterWrapper(chi))
+            self._charactersList.append(chi)
          PlayerManager().charactersList = self._charactersList
          BotEventsManager().dispatch(PlayerEvents.CHARACTER_SELECTION)
          return True
@@ -157,67 +167,40 @@ class GameServerApproachFrame(Frame):
 
       elif isinstance(msg, CharacterSelectedSuccessMessage):
          cssmsg = msg
-         self._loadingStart = time.time()
-         connh.ConnectionsHandler.pause()
-         if krnl.Kernel().getWorker().getFrame(ServerSelectionMessage):
+         self._loadingStart = time.perf_counter()
+         if krnl.Kernel().getWorker().getFrame(ssfrm.ServerSelectionFrame):
             krnl.Kernel().getWorker().removeFrame(krnl.Kernel().getWorker().getFrame(ssfrm.ServerSelectionFrame))
          PlayedCharacterManager().infos = cssmsg.infos
          DataStoreType.CHARACTER_ID = str(cssmsg.infos.id)
-         krnl.Kernel().getWorker().pause()
-         self._cssmsg = cssmsg
-         if cssmsg.infos.id == self._requestedToRemodelCharacterId:
-            for j in range(self.len(self._charactersList)):
-               bchar = self._charactersList[j]
-               if bchar.id == cssmsg.infos.id:
-                  self._charactersList[j] = BasicCharacterWrapper.create(
-                     bchar.id,
-                     cssmsg.infos.name,
-                     cssmsg.infos.level,
-                     cssmsg.infos.entityLook,
-                     cssmsg.infos.breed,
-                     cssmsg.infos.sex,
-                     0,
-                     0,
-                     bchar.bonusXp
-                  )
-         return True
-
-      elif isinstance(msg, AllModulesLoadedMessage):
-         logger.warn("GameServerApproachFrame AllModulesLoaded")
-         self._gmaf = None
-         krnl.Kernel().getWorker().addFrame(WorldFrame())
-         krnl.Kernel().getWorker().addFrame(SynchronisationFrame())
-         krnl.Kernel().getWorker().addFrame(PlayedCharacterUpdatesFrame())
-         krnl.Kernel().getWorker().addFrame(SpellInventoryManagementFrame())
-         krnl.Kernel().getWorker().addFrame(InventoryManagementFrame())
-         krnl.Kernel().getWorker().addFrame(ContextChangeFrame())
-         krnl.Kernel().getWorker().addFrame(ProgressionFrame())
-         krnl.Kernel().getWorker().addFrame(ChatFrame())
-         krnl.Kernel().getWorker().addFrame(JobsFrame())
-         krnl.Kernel().getWorker().addFrame(QuestFrame())
-         krnl.Kernel().getWorker().addFrame(PartyManagementFrame())
-         krnl.Kernel().getWorker().addFrame(AveragePricesFrame())
-         krnl.Kernel().getWorker().removeFrame(krnl.Kernel().getWorker().getFrame(GameStartingFrame))
-         krnl.Kernel().getWorker().resume()
-         connh.ConnectionsHandler.resume()
+         # krnl.Kernel().getWorker().addFrame(WorldFrame())
+         # krnl.Kernel().getWorker().addFrame(SynchronisationFrame())
+         # krnl.Kernel().getWorker().addFrame(PlayedCharacterUpdatesFrame())
+         # krnl.Kernel().getWorker().addFrame(SpellInventoryManagementFrame())
+         # krnl.Kernel().getWorker().addFrame(InventoryManagementFrame())
+         # krnl.Kernel().getWorker().addFrame(ContextChangeFrame())
+         # krnl.Kernel().getWorker().addFrame(ProgressionFrame())
+         # krnl.Kernel().getWorker().addFrame(ChatFrame())
+         # krnl.Kernel().getWorker().addFrame(JobsFrame())
+         # krnl.Kernel().getWorker().addFrame(QuestFrame())
+         # krnl.Kernel().getWorker().addFrame(PartyManagementFrame())
+         # krnl.Kernel().getWorker().addFrame(AveragePricesFrame())
          if krnl.Kernel().beingInReconection and not self._reconnectMsgSend:
             self._reconnectMsgSend = True
             connh.ConnectionsHandler.getConnection().send(CharacterSelectedForceReadyMessage())
          if InterClientManager.flashKey and (not PlayerManager() or PlayerManager().server.id != 129 and PlayerManager().server.id != 130): 
-            flashKeyMsg = ClientKeyMessage(key=InterClientManager().flashKey)
+            flashKeyMsg = ClientKeyMessage.from_json({"__type__": "ClientKeyMessage", "key" : InterClientManager().flashKey})
             connh.ConnectionsHandler.getConnection().send(flashKeyMsg)
-         if self._cssmsg != None:
+         if self._cssmsg is not None:
             PlayedCharacterManager().infos = self._cssmsg.infos
             DataStoreType.CHARACTER_ID = str(self._cssmsg.infos.id)
          krnl.Kernel().getWorker().removeFrame(self)
-         gccrmsg = GameContextCreateErrorMessage()
+         gccrmsg = GameContextCreateRequestMessage()
          connh.ConnectionsHandler.getConnection().send(gccrmsg)
-
-         now = time.time()
+         now = time.perf_counter()
          delta = now - self._loadingStart
          if delta > self.LOADING_TIMEOUT:
-            logger.warn("Client took too long to load (" + tag.duration + "s), reporting.")
-         ChatServiceManager().tryToConnect()
+            logger.warn(f"Client took too long to load ({delta}s).")
+         # ChatServiceManager().tryToConnect()
          return True
 
       elif isinstance(msg, ConnectionResumedMessage):
@@ -230,8 +213,8 @@ class GameServerApproachFrame(Frame):
 
       elif isinstance(msg, BasicTimeMessage):
          btmsg = msg
-         TimeManager().serverTimeLag = btmsg.timestamp + btmsg.timezoneOffset * 60 * 1000 - datetime.time()
-         TimeManager().serverUtcTimeLag = btmsg.timestamp - datetime.time()
+         TimeManager().serverTimeLag = btmsg.timestamp + btmsg.timezoneOffset * 60 * 1000 - datetime.now().timestamp()
+         TimeManager().serverUtcTimeLag = btmsg.timestamp - datetime.now().timestamp()
          TimeManager().timezoneOffset = btmsg.timezoneOffset * 60 * 1000
          TimeManager().dofusTimeYearLag = -1370
          return True
@@ -283,6 +266,9 @@ class GameServerApproachFrame(Frame):
    def pulled(self) -> bool:
       return True
 
+   def pushed(self) -> bool:
+      return True
+      
    def requestCharactersList(self) -> None:
       clrmsg:CharactersListRequestMessage = CharactersListRequestMessage()
       if connh.ConnectionsHandler.getConnection():

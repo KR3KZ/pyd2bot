@@ -1,5 +1,6 @@
 from time import sleep
 from com.ankamagames.atouin.utils.DataMapProvider import DataMapProvider
+from com.ankamagames.dofus.logic.common.frames.QueueFrame import QueueFrame
 from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManager
 from com.ankamagames.dofus.logic.connection.managers.AuthentificationManager import AuthentificationManager
 from com.ankamagames.dofus.logic.game.fight.managers.FightersStateManager import FightersStateManager
@@ -57,7 +58,7 @@ class Kernel(metaclass=Singleton):
       from com.ankamagames.dofus.logic.connection.frames.DisconnectionHandlerFrame import DisconnectionHandlerFrame
 
       self.getWorker().addFrame(auth.AuthentificationFrame())
-      #Kernel().getWorker().addFrame(QueueFrame())
+      self.getWorker().addFrame(QueueFrame())
       #Kernel().getWorker().addFrame(GameStartingFrame())
       # if not self._worker.contains(LatencyFrame):
       #    self._worker.addFrame(LatencyFrame())

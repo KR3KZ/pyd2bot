@@ -49,7 +49,7 @@ patterns = {
     "tostr": "__str__",
     "Dictionary": "dict",
     "undefined": "None",
-    ".push": ".append",
+    "\.push": ".append",
     " implements ": " ",
     " extends ": " ",    
 
@@ -270,5 +270,5 @@ def parseFile(file_p, out_p):
 
 # parseFolderFiles("AS3ToPythonConverter/scripts", "AS3ToPythonConverter/connectionType")
 t = perf_counter()
-parseFile("scripts/AS3ToPythonConverter/target.as", "scripts/AS3ToPythonConverter/getCharacterToConnect.py")
+parseFile("scripts/AS3ToPythonConverter/target.as", "scripts/AS3ToPythonConverter/BooleanByteWrapper.py")
 print("parsin took:", perf_counter() - t)

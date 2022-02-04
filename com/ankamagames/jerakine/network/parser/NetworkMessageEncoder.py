@@ -1,5 +1,6 @@
 from functools import reduce
 import importlib
+import json
 import random
 import sys
 from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
@@ -115,7 +116,7 @@ class NetworkMessageEncoder:
         return field.get("dynamicType")
     
     @classmethod
-    def _jsonEncode(cls, spec:dict, inst, random_hash=True):
+    def _jsonEncode(cls, spec:dict, inst, random_hash=True) -> dict:
         ans = {"__type__": inst.__class__.__name__}
         
         parent = spec.get("parent")
@@ -127,6 +128,8 @@ class NetworkMessageEncoder:
 
         for field in spec["fields"]:
             fname = field["name"]
+            if field["optional"] and not hasattr(inst, fname):
+                continue
             attr = getattr(inst, fname)
             if type(attr) is list:
                 if len(attr) == 0:

@@ -34,25 +34,27 @@ class TestBot:
         connh.ConnectionsHandler.connectToLoginServer(**CONN)
         BotEventsManager().add_listener(PlayerEvents.SERVER_SELECTION, cls.onServerSelection)
         BotEventsManager().add_listener(PlayerEvents.CHARACTER_SELECTION, cls.onCharacterSelection)
-        BotEventsManager().add_listener(PlayerEvents.SERVER_SELECTED, cls.onServerSelected)
+        BotEventsManager().add_listener(PlayerEvents.SERVER_SELECTED, cls.onServerSelectionSuccess)
+        BotEventsManager().add_listener(PlayerEvents.CHARACTER_SELECTED, cls.onCharacterSelectionSuccess)
 
     @classmethod
     def onServerSelection(cls, event):
-        logger.debug("called onServerSelection")
         BotEventsManager().remove_listener(PlayerEvents.SERVER_SELECTION, cls.onServerSelection)
         krnl.Kernel().getWorker().process(ServerSelectionAction.create(serverId=SERVER_ID))
 
     @classmethod
     def onCharacterSelection(cls, event):
-        logger.debug("called onCharacterSelection")
         BotEventsManager().remove_listener(PlayerEvents.CHARACTER_SELECTION, cls.onCharacterSelection)
-        krnl.Kernel().getWorker().process(CharacterSelectionAction.create(cgaracterId=CHARACTER_ID))
+        krnl.Kernel().getWorker().process(CharacterSelectionAction.create(characterId=CHARACTER_ID, btutoriel=False))
 
     @classmethod
-    def onServerSelected(cls, event):
-        logger.debug("called onServerSelected")
-        BotEventsManager().remove_listener(PlayerEvents.SERVER_SELECTED, cls.onServerSelected)
-        connh.ConnectionsHandler.getConnection().close(ConnectionType.TO_LOGIN_SERVER)
-
+    def onServerSelectionSuccess(cls, event):
+        BotEventsManager().remove_listener(PlayerEvents.SERVER_SELECTED, cls.onServerSelectionSuccess)
+    
+    @classmethod
+    def onCharacterSelectionSuccess(cls, event):
+        print("youpi")
+        BotEventsManager().remove_listener(PlayerEvents.CHARACTER_SELECTED, cls.onCharacterSelectionSuccess)
+        
 if __name__ == "__main__":
     TestBot.main()

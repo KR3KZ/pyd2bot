@@ -4,6 +4,7 @@ import sys
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
 import com.ankamagames.jerakine.network.NetworkMessage as bnm
+from com.ankamagames.jerakine.network.parser.BooleanByteWrapper import boolByteWrapper
 from com.ankamagames.jerakine.network.parser.ProtocolSpec import ProtocolSpec
 import com.ankamagames.jerakine.network.parser.NetworkMessageDataField as nmdf
 
@@ -44,27 +45,35 @@ class NetworkMessageClassDefinition:
          if self.TRACE:
             logger.debug("End of parent deserialization")
             logger.debug("BytesArray positon: {}".format(self.raw.position))
-         
-      for field, value in self.readBooleans(self._boolfields, self.raw).items():
-         if self.TRACE:
-            logger.debug("{} = {}".format(field, value))
-         setattr(inst, field, value)
+      
+      try:
+         for field, value in self.readBooleans(self._boolfields, self.raw).items():
+            if self.TRACE:
+               logger.debug("{} = {}".format(field, value))
+            setattr(inst, field, value)
+      except Exception as e:
+         logger.debug(f"Remaining bytes in raw: {self.raw.remaining()}")
+         logger.error(f"Error while reading boolean fields!")
+         raise e
 
       for field in self._fields:
          attrib = field["name"]
          if field["optional"]:
-            if not self.raw.readByte():
+            isProvided = self.raw.readByte()
+            if not isProvided:
                 continue
          if self.TRACE:
-            logger.debug("deserializing field {}".format(attrib))
+            logger.debug(f"deserializing field {attrib}")
          try:
             value = nmdf.NetMsgDataField(field, self.raw).deserialize()
          except Exception as e:
-            if self.TRACE:
-               logger.debug(inst.__class__.__name__)
-               logger.debug(self._fields)
-               logger.error(exec_info=True)
+            # if self.TRACE:
+            logger.debug(inst.__class__.__name__)
+            logger.debug(self._fields)
+            logger.error(str(e), exc_info=True)
             raise KeyboardInterrupt
+         if self.TRACE:
+            logger.debug(f"found value : {value}")
          setattr(inst, attrib, value)
       if self.TRACE:
          logger.debug("------------------ Deserializing {} ENDED---------------------".format(self._cls.__name__))
@@ -80,10 +89,20 @@ class NetworkMessageClassDefinition:
    @classmethod
    def readBooleans(cls, boolfields, raw: ByteArray):
       ans = {}
-      bfields = iter(boolfields)
-      for _ in range(0, len(boolfields), 8):
-         bits = format(raw.readByte(), "08b")[::-1]
-         for val, var in zip(bits, bfields):
-               ans[var["name"]] = val == "1"
+      n = len(boolfields)
+      if n > 0:
+         if cls.TRACE:
+            logger.debug("Reading {} booleans".format(n))
+            logger.debug(f"I need {n // 8} bytes")
+            logger.debug(f"Remaining bytes in raw: {raw.remaining()}")
+         if raw.remaining() < n // 8:
+            raise Exception("Not enough bytes to read booleans")
+         for i, var in enumerate(boolfields):
+            if i % 8 == 0:
+               _box:int = raw.readByte()
+            value = boolByteWrapper.getFlag(_box, i % 8)
+            if cls.TRACE:
+               logger.debug(f"{var['name']} = {value}")
+            ans[var["name"]] = value
       return ans
 

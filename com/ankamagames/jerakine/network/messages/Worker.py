@@ -26,6 +26,7 @@ class Worker(EventDispatcher, MessageHandler):
    
    DEBUG_FRAMES:bool = True
    DEBUG_MESSAGES:bool = True
+   DEBUG_FRAMES_PROCESSING:bool = False
    LONG_MESSAGE_QUEUE:int = 100
    MAX_TIME_FRAME:int = 40
 
@@ -311,7 +312,7 @@ class Worker(EventDispatcher, MessageHandler):
             if not isinstance(msg, CancelableMessage) or msg.cancel:
                if self._paused and isinstance(msg, QueueableMessage) and not self.msgIsUnstoppable(msg):
                   self._pausedQueue.append(msg)
-                  logger.warn("Queued message: " + msg)
+                  logger.warn("Queued message: " + msg.__class__.__name__)
                else:
                   self.processMessage(msg)
                   if isinstance(msg, Poolable):
@@ -346,7 +347,8 @@ class Worker(EventDispatcher, MessageHandler):
       processed:bool = False
       self._processingMessage = True
       for frame in self._framesList:
-         logger.debug("Processing message: " + msg.__class__.__name__ + " in frame: " + frame.__class__.__name__)
+         if self.DEBUG_FRAMES_PROCESSING:
+            logger.debug("Processing message: " + msg.__class__.__name__ + " in frame: " + frame.__class__.__name__)
          if frame.process(msg):
             processed = True
             break

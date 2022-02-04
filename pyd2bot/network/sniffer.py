@@ -53,9 +53,12 @@ class DofusSniffer(AsyncSniffer):
                     handle(msg)
                     
 if __name__  == "__main__":
-    def handle(msgBinary:Message):
-        msg = msgBinary.deserialize()
-        print(msg.__class__.__name__, msg.__dict__)
+    def handle(msgRaw:Message):
+        msg = msgRaw.deserialize()
+        if msgRaw.from_client:
+            print(">>>>>>>>>>>> " + str(msg))
+        else:
+            print("<<<<<<<<<<<< " + str(msg))
     mySniffer = DofusSniffer(handle)
     mySniffer.start()
     signal.signal(signal.SIGINT, mySniffer.stop)

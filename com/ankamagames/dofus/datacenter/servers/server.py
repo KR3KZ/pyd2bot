@@ -14,37 +14,39 @@ class Server(IDataCenter):
    
    MODULE:str = "Servers"
    
-   id:int
-   
-   nameId:int
-   
-   commentId:int
-   
-   openingDate:float
-   
-   language:str
-   
-   populationId:int
-   
-   gameTypeId:int
-   
-   communityId:int
-   
-   restrictedToLanguages:list[str]
-   
-   monoAccount:bool
-   
-   _name:str
-   
-   _comment:str
-   
-   _gameType:ServerGameType
-   
-   _community:ServerCommunity
-   
-   _population:ServerPopulation
+
    
    def __init__(self):
+      self.id:int = None
+      
+      self.nameId:int = None
+      
+      self.commentId:int = None
+      
+      self.openingDate:float = None
+      
+      self.language:str = None
+      
+      self.populationId:int = None
+      
+      self.gameTypeId:int = None
+      
+      self.communityId:int = None
+      
+      self.restrictedToLanguages = list[str]()
+      
+      self.monoAccount:bool = None
+      
+      self._name:str = None
+      
+      self._comment:str = None
+      
+      self._gameType:ServerGameType = None
+      
+      self._community:ServerCommunity = None
+      
+      self._population:ServerPopulation = None
+      
       super().__init__()
    
    @staticmethod

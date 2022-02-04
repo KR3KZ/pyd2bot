@@ -12,7 +12,8 @@ class CharacterSelectionAction(AbstractAction, Action):
    def __init__(self, params:list = None):
       super().__init__(params)
    
-   def create(self, characterId:float, btutoriel:bool) -> 'CharacterSelectionAction':
+   @classmethod
+   def create(cls, characterId:float, btutoriel:bool) -> 'CharacterSelectionAction':
       a:CharacterSelectionAction = CharacterSelectionAction(argv)
       a.characterId = characterId
       a.btutoriel = btutoriel

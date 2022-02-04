@@ -58,8 +58,6 @@ class DisconnectionHandlerFrame(Frame):
          
          logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
          if sccmsg.closedConnection == connh.ConnectionsHandler.getConnection().getSubConnection(sccmsg):
-            
-
             logger.debug("The connection was closed. Checking reasons.")
             GameServerApproachFrame.authenticationTicketAccepted = False
             if connh.ConnectionsHandler.hasReceivedMsg:

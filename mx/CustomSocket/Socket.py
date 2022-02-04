@@ -30,6 +30,8 @@ class Socket(threading.Thread):
                 if rdata:
                     self.buff += rdata
                     self.dispatcher.dispatch(ProgressEvent.SOCKET_DATA, ProgressEvent(rdata))
+                else:
+                    break
             except OSError as e:
                 pass
         self.close()

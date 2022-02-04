@@ -269,7 +269,7 @@ class ServerConnection(IServerConnection):
                else:
                   logger.info(f"[{self._id}] Handling data, byte available : {input.remaining()}")
             msg:NetworkMessage = self.lowReceive(input)
-            while msg:
+            while msg is not None:
                if self._lagometer:
                   self._lagometer.pong(msg)
                msg.receptionTime = perf_counter()
@@ -280,6 +280,8 @@ class ServerConnection(IServerConnection):
                else:
                   if self.checkClosed() and not self._socket.connected:
                      break
+                  if input.remaining() <= 0:
+                     break
                   msg = self.lowReceive(input)
       except Exception as e:
          logger.error("[" + str(self._id) + "] Error while reading socket. \n", exc_info=True)
@@ -289,7 +291,7 @@ class ServerConnection(IServerConnection):
       if self._willClose:
          if len(self._asyncTrees) == 0:
             self._willClose = False
-            self.dispatchEvent(Event.CLOSE)
+            self.dispatchEvent(BasicEvent.CLOSE)
          return True
       return False
    
@@ -310,17 +312,7 @@ class ServerConnection(IServerConnection):
    
    def readMessageLength(self, staticHeader:int, src:ByteArray) -> int:
       byteLenDynamicHeader:int = staticHeader & NetworkMessage.BIT_MASK
-      messageLength:int = 0
-      
-      if byteLenDynamicHeader == 1:
-         messageLength = src.readByte()
-
-      elif byteLenDynamicHeader == 2:
-         messageLength = src.readUnsignedShort()
-
-      elif byteLenDynamicHeader == 3:
-         messageLength = ((src.readByte() & 255) << 16) + ((src.readByte() & 255) << 8) + (src.readByte() & 255)
-         
+      messageLength:int = int.from_bytes(src.read(byteLenDynamicHeader), "big")
       return messageLength
    
    def lowSend(self, msg:NetworkMessage) -> None:
@@ -335,7 +327,11 @@ class ServerConnection(IServerConnection):
          self._lagometer.ping(msg)
    
    def lowReceive(self, src:ByteArray) -> NetworkMessage:
+      if self.DEBUG_LOW_LEVEL_VERBOSE and self._splittedPacket:
+         logger.debug(f"Gathering splited packet of length {self._splittedPacketLength},"\
+         f"already received {len(self._inputBuffer)}, remaining {self._splittedPacketLength - len(self._inputBuffer)}. I just received {src.remaining()}")
       messageLength = 0
+      
       if not self._splittedPacket:
 
          if src.remaining() < 2:
@@ -363,21 +359,21 @@ class ServerConnection(IServerConnection):
                   msg = self._rawParser.parse(src, messageId, messageLength)
                   if self.DEBUG_LOW_LEVEL_VERBOSE:
                      logger.info(f"[{self._id}] Full parsing done")
-
                return msg
 
             if self.DEBUG_LOW_LEVEL_VERBOSE:
-               logger.info("[" + str(self._id) + "] Not enough data to read msg content, byte available : " + src.remaining() + " (needed : " + messageLength + ")")
+               logger.info(f"[{self._id}] Not enough data to read msg content, byte available : {src.remaining()} (needed : {messageLength} bytes)")
 
             self._staticHeader = -1
             self._splittedPacketLength = messageLength
             self._splittedPacketId = messageId
             self._splittedPacket = True
             self._inputBuffer = src.read(src.remaining())
+            
             return None
 
          if self.DEBUG_LOW_LEVEL_VERBOSE:
-            logger.info("[" + str(self._id) + "] Not enough data to read message ID, byte available : " + src.remaining() + " (needed : " + (staticHeader & NetworkMessage.BIT_MASK) + ")")
+            logger.info(f"[{self._id}] Not enough data to read message ID, byte available : {src.remaining()}  (needed :  {staticHeader & NetworkMessage.BIT_MASK} )")
         
          self._staticHeader = staticHeader
          self._splittedPacketLength = messageLength
@@ -397,17 +393,17 @@ class ServerConnection(IServerConnection):
          if self.getUnpackMode(self._splittedPacketId, self._splittedPacketLength) == UnpackMode.ASYNC:
             msg = self._rawParser.parseAsync(self._inputBuffer, self._splittedPacketId, self._splittedPacketLength, self.computeMessage)
             if self.DEBUG_LOW_LEVEL_VERBOSE and msg != None:
-               logger.info("[" + str(self._id) + "] Async splitted " + self.getType(msg) + " parsing, message length : " + self._splittedPacketLength + ")")
+               logger.info(f"[{self._id}] Async splitted {self.getType(msg)} parsing, message length : {self._splittedPacketLength})")
          else:
             msg = self._rawParser.parse(self._inputBuffer, self._splittedPacketId, self._splittedPacketLength)
             if self.DEBUG_LOW_LEVEL_VERBOSE:
-               logger.info("[" + str(self._id) + "] Full parsing done")
+               logger.info(f"[{self._id}] Full parsing done")
                
          self._splittedPacket = False
          self._inputBuffer = ByteArray()
          return msg
 
-      self._inputBuffer = src.read(src.remaining())
+      self._inputBuffer += src.read(src.remaining())
       return None
    
    def getUnpackMode(self, messageId:int, messageLength:int) -> int:
@@ -418,7 +414,7 @@ class ServerConnection(IServerConnection):
          return result
       if messageLength > self.MESSAGE_SIZE_ASYNC_THRESHOLD:
          result = UnpackMode.ASYNC
-         logger.info("Handling too heavy message of id " + messageId + " asynchronously (size : " + messageLength + ")")
+         logger.info(f"Handling too heavy message of id {messageId} asynchronously (size : {messageLength})")
       else:
          result = UnpackMode.SYNC
       return result
@@ -439,7 +435,7 @@ class ServerConnection(IServerConnection):
          while True:
             if not self._asyncTrees[0].next():
                if self.DEBUG_LOW_LEVEL_VERBOSE:
-                  logger.info("[" + str(self._id) + "] Async " + self.getType(self._asyncMessages[0]) + " parsing complete")
+                  logger.info(f"[{self._id}] Async {self.getType(self._asyncMessages[0])} parsing complete")
                self._asyncTrees.pop(0)
                self._asyncMessages[0].unpacked = True
                self.process(self._asyncMessages.pop(0))
@@ -462,7 +458,7 @@ class ServerConnection(IServerConnection):
       self._connecting = False
       self.stopConnectionTimeout()
       if self.DEBUG_DATA:
-         logger.debug("[" + str(self._id) + "] Connection opened.")
+         logger.debug(f"[{self._id}] Connection opened.")
       for msg in self._outputBuffer:
          self.lowSend(msg)
       self._inputBuffer = ByteArray()
@@ -494,7 +490,7 @@ class ServerConnection(IServerConnection):
    
    def onSocketData(self, pe:ProgressEvent) -> None:
       if self.DEBUG_LOW_LEVEL_VERBOSE:
-         logger.info("[" + str(self._id) + "] Receive Event, byte available : " + str(self._socket.buff.remaining()))
+         logger.info(f"[{self._id}] Receive Event, byte available : {self._socket.buff.remaining()}")
       self.receive(self._socket.buff)
    
    def onSocketError(self, e:IOErrorEvent) -> None:

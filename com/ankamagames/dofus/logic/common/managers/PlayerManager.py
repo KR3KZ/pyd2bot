@@ -1,7 +1,7 @@
 import math
-from multiprocessing.managers import Server
 import time
 from typing import TYPE_CHECKING
+from com.ankamagames.dofus.datacenter.servers.Server import Server
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 if TYPE_CHECKING:
    from com.ankamagames.dofus.internalDatacenter.connection.basicCharacterWrapper import BasicCharacterWrapper
@@ -12,80 +12,84 @@ from com.ankamagames.jerakine.utils.errors.SingletonError import SingletonError
 
 class PlayerManager(IDestroyable):
    __metaclasse__ = Singleton
-   
-   _self:'PlayerManager'
-   
+      
    TAG_PREFIX:str = "#"
    
    TAG_ADMINS:str = "OFFI"
       
-   accountId:int
-   
-   communityId:int
-   
-   hasRights:bool
-   
-   hasConsoleRight:bool
-   
-   nickname:str
-   
-   tag:str
-   
-   subscriptionEndDate:float
-   
-   secretQuestion:str
-   
-   adminStatus:int
-   
-   passkey:str
-   
-   accountCreation:float
-   
-   isSafe:bool = False
-   
-   canCreateNewCharacter:bool = True
-   
-   _server:Server
-   
-   _gameServerPort:int
-   
-   _kisServerPort:int
-   
-   serverCommunityId:int = -1
-   
-   serverLang:str
-   
-   serverGameType:int = -1
-   
-   serverIsMonoAccount:bool
-   
-   serversList:list[int]
-   
-   charactersList:list['BasicCharacterWrapper']
-   
-   allowAutoConnectCharacter:bool = False
-   
-   autoConnectOfASpecificCharacterId:float = -1
-   
-   wasAlreadyConnected:bool = False
-   
-   havenbagAvailableRooms:list[HavenBagRoomPreviewInformation]
-   
-   havenbagAvailableThemes:list[int]
-   
-   arenaLeaveBanTime:int = -1
-   
-   hasFreeAutopilot:bool
-   
+
    
    def __init__(self):
       self.havenbagAvailableThemes = list[int]()
-      super().__init__()
+
       self._subscriptionEndDateUpdateTime:float = 0
+
       self._subscriptionDurationElapsed:float = 0
+
+      self._server:Server = Server()
+
       self.serversList:list[int] = list[int]()
+
+      self.accountId:int = None
+
+      self.communityId:int = None
+
+      self.hasRights:bool = None
+      
+      self.hasConsoleRight:bool = None
+      
+      self.nickname:str = None
+      
+      self.tag:str = None
+      
+      self.subscriptionEndDate:float = None
+      
+      self.secretQuestion:str = None
+      
+      self.adminStatus:int = None
+      
+      self.passkey:str = None
+      
+      self.accountCreation:float = None
+      
+      self.isSafe:bool = False
+      
+      self.canCreateNewCharacter:bool = True
+            
+      self._gameServerPort:int = None 
+      
+      self._kisServerPort:int = None 
+      
+      self.serverCommunityId:int = -1
+      
+      self.serverLang:str = None
+      
+      self.serverGameType:int = -1
+      
+      self.serverIsMonoAccount:bool = None
+      
+      self.serversList = list[int]()
+      
+      self.charactersList = list['BasicCharacterWrapper']()
+      
+      self.allowAutoConnectCharacter:bool = False
+      
+      self.autoConnectOfASpecificCharacterId:float = -1
+      
+      self.wasAlreadyConnected:bool = False
+      
+      self.havenbagAvailableRooms = list[HavenBagRoomPreviewInformation]()
+      
+      self.havenbagAvailableThemes = list[int]()
+      
+      self.arenaLeaveBanTime:int = -1
+      
+      self.hasFreeAutopilot:bool = False
+   
       if not self._subscriptionEndDateUpdateTime:
          self.refreshSubscriptionEndDateUpdateTime()
+      
+      super().__init__()
 
    @property
    def server(self) -> Server:

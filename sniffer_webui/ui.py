@@ -88,7 +88,7 @@ class MsgTable(Table):
 class MsgView(Tr):
     
     def __init__(self, msg: Message, *args, **kwargs):
-        if msg.from_client is not None:
+        if msg.from_client:
             super().__init__(class_="success", *args, **kwargs)
         else:
             super().__init__(class_="info", *args, **kwargs)
