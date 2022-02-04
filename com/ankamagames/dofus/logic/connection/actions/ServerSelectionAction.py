@@ -1,6 +1,6 @@
 from sys import argv
 from com.ankamagames.dofus.misc.utils.AbstractAction import AbstractAction
-from com.ankamagames.jerakine.handlers.Action import Action 
+from com.ankamagames.jerakine.handlers.messages.Action import Action 
 
 
 class ServerSelectionAction(AbstractAction, Action):

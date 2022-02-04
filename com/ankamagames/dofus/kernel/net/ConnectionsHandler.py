@@ -1,8 +1,10 @@
 from ctypes import ArgumentError
+from threading import Timer
 import com.ankamagames.dofus.kernel.Kernel as krnl
 from com.ankamagames.dofus.logic.common.utils.LagometerAck import LagometerAck
 from com.ankamagames.dofus.logic.connection.frames.HandshakeFrame import HandshakeFrame
 from com.ankamagames.jerakine.logger.Logger import Logger
+from com.ankamagames.jerakine.messages.ConnectionResumedMessage import ConnectionResumedMessage
 from com.ankamagames.jerakine.network.IConnectionProxy import IConnectionProxy
 from com.ankamagames.jerakine.network.IServerConnection import IServerConnection
 from com.ankamagames.dofus.kernel.net.ConnectionType import ConnectionType
@@ -37,8 +39,6 @@ class ConnectionsHandler:
    _hasReceivedNetworkMsg:bool = False
 
    _connectionTimeout = None
-      
-
    
    @property
    @classmethod
@@ -91,12 +91,12 @@ class ConnectionsHandler:
       cls.etablishConnection(host, port, ConnectionType.TO_LOGIN_SERVER, cls._useSniffer)
       cls._currentConnectionType = ConnectionType.TO_LOGIN_SERVER
 
-   classmethod
+   @classmethod
    def connectToGameServer(cls, gameServerHost:str, gameServerPort:int) -> None:
       cls.startConnectionTimer()
       if cls._currentConnection != None:
          cls.closeConnection()
-      cls.etablishConnection(gameServerHost,gameServerPort, ConnectionType.TO_GAME_SERVER, cls._seSniffer)
+      cls.etablishConnection(gameServerHost,gameServerPort, ConnectionType.TO_GAME_SERVER, cls._useSniffer)
       cls._currentConnectionType = ConnectionType.TO_GAME_SERVER
       PlayerManager().gameServerPort = gameServerPort
 
@@ -105,7 +105,7 @@ class ConnectionsHandler:
       cls.startConnectionTimer()
       if cls._currentConnection != None and cls._currentConnection.getSubConnection(ConnectionType.TO_KOLI_SERVER):
          cls._currentConnection.close(ConnectionType.TO_KOLI_SERVER)
-      cls.etablishConnection(gameServerHost,gameServerPort, ConnectionType.TO_KOLI_SERVER, cls._seSniffer)
+      cls.etablishConnection(gameServerHost,gameServerPort, ConnectionType.TO_KOLI_SERVER, cls._useSniffer)
       cls._currentConnectionType = ConnectionType.TO_KOLI_SERVER
       PlayerManager().kisServerPort = gameServerPort
 
@@ -135,17 +135,17 @@ class ConnectionsHandler:
    @classmethod
    def handleDisconnection(cls) -> DisconnectionReason:
       cls.closeConnection()
-      reason:DisconnectionReason = DisconnectionReason(cls._antedSocketLost, cls._antedSocketLostReason)
-      cls._antedSocketLost = False
-      cls._antedSocketLostReason = DisconnectionReasonEnum.UNEXPECTED
+      reason:DisconnectionReason = DisconnectionReason(cls._wantedSocketLost, cls._wantedSocketLostReason)
+      cls._wantedSocketLost = False
+      cls._wantedSocketLostReason = DisconnectionReasonEnum.UNEXPECTED
       if not reason.expected:
          ChatServiceManager.destroy()
       return reason
 
    @classmethod
    def connectionGonnaBeClosed(cls, expectedReason:int) -> None:
-      cls._antedSocketLostReason = expectedReason
-      cls._antedSocketLost = True
+      cls._wantedSocketLostReason = expectedReason
+      cls._wantedSocketLost = True
 
    @classmethod
    def pause(cls) -> None:
@@ -157,22 +157,20 @@ class ConnectionsHandler:
       logger.info("Resume connection")
       if cls._currentConnection:
          cls._currentConnection.resume()
-      krnl.Kernel().getWorker().process(cls.ConnectionResumedMessage())
+      krnl.Kernel().getWorker().process(ConnectionResumedMessage())
 
    @classmethod
    def startConnectionTimer(cls) -> None:
-      if not cls._onnectionTimeout:
-         cls._onnectionTimeout = BenchmarkTimer(4000, 1, "ConnectionsHandler._connectionTimeout (connectToKoliServer)")
-         cls._onnectionTimeout.add_listener(TimerEvent.TIMER, onConnectionTimeout)
+      if not cls._connectionTimeout:
+         cls._connectionTimeout = Timer(4, cls.onConnectionTimeout)
       else:
-         cls._onnectionTimeout.reset()
-      cls._onnectionTimeout.start()
+         cls._connectionTimeout.cancel()
+      cls._connectionTimeout.start()
 
    @classmethod
    def stopConnectionTimer(cls) -> None:
-      if cls._onnectionTimeout:
-         cls._onnectionTimeout.stop()
-         cls._onnectionTimeout.removeEventListener(TimerEvent.TIMER, cls.onConnectionTimeout)
+      if cls._connectionTimeout:
+         cls._connectionTimeout.cancel()
 
    @classmethod
    def etablishConnection(cls, host:str, port:int, id:str, useSniffer:bool = False, proxy:IConnectionProxy = None) -> None:
@@ -192,8 +190,6 @@ class ConnectionsHandler:
       conn.rawParser = MessageReceiver()
       cls._currentConnection.addConnection(conn, id)
       cls._currentConnection.mainConnection = conn
-      if not krnl.Kernel().getWorker().framesList:
-         raise Exception("Must at leaste have authentification frame in the singleton at this stage")
       krnl.Kernel().getWorker().addFrame(HandshakeFrame())
       conn.connect(host,port)
 

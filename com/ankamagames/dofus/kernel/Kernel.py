@@ -54,7 +54,7 @@ class Kernel(metaclass=Singleton):
             self._worker.process(msg)
    
    def addInitialFrames(self, firstLaunch:bool = False) -> None:
-      from com.ankamagames.dofus.logic.frames.DisconnectionHandlerFrame import DisconnectionHandlerFrame
+      from com.ankamagames.dofus.logic.connection.frames.DisconnectionHandlerFrame import DisconnectionHandlerFrame
 
       self.getWorker().addFrame(auth.AuthentificationFrame())
       #Kernel().getWorker().addFrame(QueueFrame())
@@ -65,5 +65,5 @@ class Kernel(metaclass=Singleton):
       #    self._worker.addFrame(ServerControlFrame())
       # if not self._worker.contains(AuthorizedFrame):
       #    self._worker.addFrame(AuthorizedFrame())
-      self._worker.addFrame(DisconnectionHandlerFrame())
+      self.getWorker().addFrame(DisconnectionHandlerFrame())
  

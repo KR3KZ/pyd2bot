@@ -8,28 +8,20 @@ from com.ankamagames.dofus.logic.connection.actions.ServerSelectionAction import
 from com.ankamagames.dofus.logic.connection.managers.AuthentificationManager import AuthentificationManager
 from com.ankamagames.dofus.logic.game.approach.frames.GameServerApproachFrame import GameServerApproachFrame
 from com.ankamagames.dofus.network.enums.ServerStatusEnum import ServerStatusEnum
-from com.ankamagames.dofus.network.messages.connection.MigratedServerListMessage import MigratedServerListMessage
 from com.ankamagames.dofus.network.messages.connection.SelectedServerDataExtendedMessage import SelectedServerDataExtendedMessage
 from com.ankamagames.dofus.network.messages.connection.SelectedServerDataMessage import SelectedServerDataMessage
-from com.ankamagames.dofus.network.messages.connection.SelectedServerRefusedMessage import SelectedServerRefusedMessage
-from com.ankamagames.dofus.network.messages.connection.ServerSelectionMessage import ServerSelectionMessage
 from com.ankamagames.dofus.network.messages.connection.ServerStatusUpdateMessage import ServerStatusUpdateMessage
 from com.ankamagames.dofus.network.messages.connection.ServersListMessage import ServersListMessage
-from com.ankamagames.dofus.network.messages.connection.search.AcquaintanceSearchErrorMessage import AcquaintanceSearchErrorMessage
-from com.ankamagames.dofus.network.messages.connection.search.AcquaintanceSearchMessage import AcquaintanceSearchMessage
-from com.ankamagames.dofus.network.messages.connection.search.AcquaintanceServerListMessage import AcquaintanceServerListMessage
-from com.ankamagames.dofus.network.types.common.AccountTagInformation import AccountTagInformation
 from com.ankamagames.dofus.network.types.connection.GameServerInformations import GameServerInformations
-from com.ankamagames.jerakine.data.I18n import I18n
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.messages.Frame import Frame
 from com.ankamagames.jerakine.messages.Message import Message
 from com.ankamagames.jerakine.messages.WrongSocketClosureReasonMessage import WrongSocketClosureReasonMessage
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.jerakine.network.messages.ExpectedSocketClosureMessage import ExpectedSocketClosureMessage
-from com.ankamagames.jerakine.network.messages.ServerConnectionFailedMessage import ServerConnectionFailedMessage
 from com.ankamagames.jerakine.network.messages.Worker import Worker
 from com.ankamagames.jerakine.types.enums.Priority import Priority
+from pyd2bot.events.BotEventsManager import BotEventsManager
 from tests.test_pydofus_client import PlayerEvents
 logger = Logger(__name__)
 
@@ -85,8 +77,7 @@ class ServerSelectionFrame(Frame):
          self._serversList.sort(key=lambda x: x.date)
          self._alreadyConnectedToServerId = slmsg.alreadyConnectedToServerId
          self.broadcastServersListUpdate()
-         connh.ConnectionsHandler.getConnection().dispatch(PlayerEvents.SERVER_SELECTION)
-
+         BotEventsManager().dispatch(PlayerEvents.SERVER_SELECTION)
          return True
 
       elif isinstance(msg, ServerStatusUpdateMessage):
@@ -111,8 +102,8 @@ class ServerSelectionFrame(Frame):
 
          if self._alreadyConnectedToServerId > 0 and ssaction.serverId != self._alreadyConnectedToServerId:
             self._serverSelectionAction = ssaction
-            serverAlreadyInName = Server.getServerById(self._alreadyConnectedToServerId).name
-            serverSelectedName = Server.getServerById(ssaction.serverId).name
+            self.serverAlreadyInName = Server.getServerById(self._alreadyConnectedToServerId).name
+            self.serverSelectedName = Server.getServerById(ssaction.serverId).name
             return True
 
          for server in self._serversList:
@@ -133,43 +124,31 @@ class ServerSelectionFrame(Frame):
          self.broadcastServersListUpdate(True)
          return True
 
-      elif isinstance(msg, SelectedServerDataMessage):
-         pass
-
       elif isinstance(msg, ExpectedSocketClosureMessage):
          escmsg = msg
          if escmsg.reason != DisconnectionReasonEnum.SWITCHING_TO_GAME_SERVER:
-            self._worker.process(WrongSocketClosureReasonMessage(DisconnectionReasonEnum.SWITCHING_TO_GAME_SERVER,escmsg.reason))
+            self._worker.process(WrongSocketClosureReasonMessage(DisconnectionReasonEnum.SWITCHING_TO_GAME_SERVER, escmsg.reason))
             return True
          self._worker.addFrame(GameServerApproachFrame())
-         connh.ConnectionsHandler.connectToGameServer(self._selectedServer.address,self._selectedServer.ports[0])
+         connh.ConnectionsHandler.connectToGameServer(self._selectedServer.address, self._selectedServer.ports[0])
          return True
 
       elif isinstance(msg, SelectedServerDataMessage):
          ssdmsg = msg 
          connh.ConnectionsHandler.connectionGonnaBeClosed(DisconnectionReasonEnum.SWITCHING_TO_GAME_SERVER)
          self._selectedServer = ssdmsg
-         AuthentificationManager().gameServerTicket = str(AuthentificationManager().decodeWithAES(ssdmsg.ticket))
+         AuthentificationManager().gameServerTicket = AuthentificationManager().decodeWithAES(ssdmsg.ticket).decode()
          PlayerManager().server = Server.getServerById(ssdmsg.serverId)
          PlayerManager().kisServerPort = 0
          self._connexionPorts = []
          for port in ssdmsg.ports:
             self._connexionPorts.append(port)
-         logger.debug("Connection to game server using ports : " + self._connexionPorts)
+         logger.debug(f"Connection to game server using ports : {self._connexionPorts}")
+         BotEventsManager().dispatch(PlayerEvents.SERVER_SELECTED)
          return True
 
-      ssdmsg = msg 
-      connh.ConnectionsHandler.connectionGonnaBeClosed(DisconnectionReasonEnum.SWITCHING_TO_GAME_SERVER)
-      self._selectedServer = ssdmsg
-      AuthentificationManager().gameServerTicket = AuthentificationManager().decodeWithAES(ssdmsg.ticket).decode("utf-8")
-      PlayerManager().server = Server.getServerById(ssdmsg.serverId)
-      PlayerManager().kisServerPort = 0
-      self._connexionPorts = []
-      for port in ssdmsg.ports:
-         self._connexionPorts.append(port)
-      logger.debug(f"Connection to game server using ports : {self._connexionPorts}")
-      return True
-   
+      return False
+
    def pulled(self) -> bool:
       self._serversList = None
       self._serversUsedList = None

@@ -205,7 +205,7 @@ class Worker(EventDispatcher, MessageHandler):
       return self.getFrame(frameobject) != None
    
    def getFrame(self, frameobject:object) -> Frame:
-      return self._currentFrameTypesCache[frameobject]
+      return self._currentFrameTypesCache.get(frameobject)
    
    def pause(self, targetobject:object = None, unstoppableMsgobjectList:list = None) -> None:
       logger.info("Worker is paused, all queueable messages will be queued : ")
@@ -343,16 +343,16 @@ class Worker(EventDispatcher, MessageHandler):
       return False
    
    def processMessage(self, msg:Message) -> None:
-      logger.debug("Processing message: " + msg.__class__.__name__)
       processed:bool = False
       self._processingMessage = True
       for frame in self._framesList:
+         logger.debug("Processing message: " + msg.__class__.__name__ + " in frame: " + frame.__class__.__name__)
          if frame.process(msg):
             processed = True
             break
       self._processingMessage = False
       if not processed and not isinstance(msg, DiscardableMessage):
-         logger.debug(f"Discarded message: {msg} (at frame {FrameIdManager().frameId})")
+         logger.debug(f"Discarded message: {msg.__class__.__name__} (at frame {FrameIdManager().frameId})")
    
    def processFramesInAndOut(self) -> None:
       if len(self._framesToRemove) > 0:

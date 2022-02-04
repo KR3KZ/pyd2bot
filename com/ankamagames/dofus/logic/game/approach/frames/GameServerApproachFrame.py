@@ -1,16 +1,17 @@
 
+from datetime import datetime
 from threading import Timer
 import time
-from com.ankamagames.dofus import BuildInfos
 from com.ankamagames.dofus.internalDatacenter.connection.basicCharacterWrapper import BasicCharacterWrapper
 # from com.ankamagames.dofus.internalDatacenter.items.ItemWrapper import ItemWrapper
 import com.ankamagames.dofus.kernel.Kernel as krnl
 import com.ankamagames.dofus.kernel.net.ConnectionsHandler as connh
+import com.ankamagames.dofus.logic.connection.frames.ServerSelectionFrame as ssfrm
 from com.ankamagames.dofus.logic.connection.managers.AuthentificationManager import AuthentificationManager
 from com.ankamagames.dofus.logic.common.managers.InterClientManager import InterClientManager
 from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerManager
+from com.ankamagames.dofus.logic.game.approach.actions.CharacterSelectionAction import CharacterSelectionAction
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
-from com.ankamagames.dofus.network.enums.CharacterDeletionErrorEnum import CharacterDeletionErrorEnum
 from com.ankamagames.dofus.network.messages.connection.ServerSelectionMessage import ServerSelectionMessage
 from com.ankamagames.dofus.network.messages.game.approach.AccountCapabilitiesMessage import AccountCapabilitiesMessage
 from com.ankamagames.dofus.network.messages.game.approach.AlreadyConnectedMessage import AlreadyConnectedMessage
@@ -19,28 +20,27 @@ from com.ankamagames.dofus.network.messages.game.approach.AuthenticationTicketMe
 from com.ankamagames.dofus.network.messages.game.approach.AuthenticationTicketRefusedMessage import AuthenticationTicketRefusedMessage
 from com.ankamagames.dofus.network.messages.game.approach.HelloGameMessage import HelloGameMessage
 from com.ankamagames.dofus.network.messages.game.basic.BasicTimeMessage import BasicTimeMessage
-from com.ankamagames.dofus.network.messages.game.character.choice.BasicCharactersListMessage import BasicCharactersListMessage
 from com.ankamagames.dofus.network.messages.game.character.choice.CharacterSelectedForceMessage import CharacterSelectedForceMessage
 from com.ankamagames.dofus.network.messages.game.character.choice.CharacterSelectedForceReadyMessage import CharacterSelectedForceReadyMessage
 from com.ankamagames.dofus.network.messages.game.character.choice.CharacterSelectedSuccessMessage import CharacterSelectedSuccessMessage
+from com.ankamagames.dofus.network.messages.game.character.choice.CharacterSelectionMessage import CharacterSelectionMessage
 from com.ankamagames.dofus.network.messages.game.character.choice.CharactersListErrorMessage import CharactersListErrorMessage
 from com.ankamagames.dofus.network.messages.game.character.choice.CharactersListMessage import CharactersListMessage
 from com.ankamagames.dofus.network.messages.game.character.choice.CharactersListRequestMessage import CharactersListRequestMessage
-from com.ankamagames.dofus.network.messages.game.character.creation.CharacterCanBeCreatedRequestMessage import CharacterCanBeCreatedRequestMessage
-from com.ankamagames.dofus.network.messages.game.character.creation.CharacterCanBeCreatedResultMessage import CharacterCanBeCreatedResultMessage
-from com.ankamagames.dofus.network.messages.game.character.creation.CharacterNameSuggestionFailureMessage import CharacterNameSuggestionFailureMessage
-from com.ankamagames.dofus.network.messages.game.character.deletion.CharacterDeletionErrorMessage import CharacterDeletionErrorMessage
 from com.ankamagames.dofus.network.messages.game.context.GameContextCreateErrorMessage import GameContextCreateErrorMessage
 from com.ankamagames.dofus.network.messages.game.moderation.PopupWarningCloseRequestMessage import PopupWarningCloseRequestMessage
 from com.ankamagames.dofus.network.messages.game.moderation.PopupWarningClosedMessage import PopupWarningClosedMessage
 from com.ankamagames.dofus.network.messages.game.startup.StartupActionsListMessage import StartupActionsListMessage
 from com.ankamagames.dofus.network.messages.security.ClientKeyMessage import ClientKeyMessage
 from com.ankamagames.jerakine.logger.Logger import Logger
+from com.ankamagames.jerakine.messages.ConnectionResumedMessage import ConnectionResumedMessage
 from com.ankamagames.jerakine.messages.Frame import Frame
 from com.ankamagames.jerakine.messages.Message import Message
 from com.ankamagames.jerakine.network.messages.ServerConnectionFailedMessage import ServerConnectionFailedMessage
 from com.ankamagames.jerakine.types.DataStoreType import DataStoreType
 from com.ankamagames.jerakine.types.enums.Priority import Priority
+from pyd2bot.events.BotEventsManager import BotEventsManager
+from pyd2bot.events.PlayerEvents import PlayerEvents
 logger = Logger(__name__)
 
 class GameServerApproachFrame(Frame):
@@ -104,7 +104,7 @@ class GameServerApproachFrame(Frame):
       self._requestedCharacterId = id
    
    def isCharacterWaitingForChange(self, id:float) -> bool:
-      if self._charactersToRemodelList[id]:
+      if self._charactersToRemodelList.get(id):
          return True
       return False
    
@@ -118,12 +118,21 @@ class GameServerApproachFrame(Frame):
          return True
 
       elif isinstance(msg, AuthenticationTicketAcceptedMessage):
-         Timer(0.5, self.requestCharactersList).start
+         Timer(0.5, self.requestCharactersList).start()
          self.authenticationTicketAccepted = True
          return True
 
       elif isinstance(msg, AuthenticationTicketRefusedMessage):
          self.authenticationTicketAccepted = False
+         return True
+
+      elif isinstance(msg, CharactersListMessage):
+         clmsg = msg
+         self._charactersList = list[BasicCharacterWrapper]()
+         for chi in clmsg.characters:
+            self._charactersList.append(BasicCharacterWrapper(chi))
+         PlayerManager().charactersList = self._charactersList
+         BotEventsManager().dispatch(PlayerEvents.CHARACTER_SELECTION)
          return True
 
       elif isinstance(msg, ServerConnectionFailedMessage):
@@ -151,7 +160,7 @@ class GameServerApproachFrame(Frame):
          self._loadingStart = time.time()
          connh.ConnectionsHandler.pause()
          if krnl.Kernel().getWorker().getFrame(ServerSelectionMessage):
-            krnl.Kernel().getWorker().removeFrame(krnl.Kernel().getWorker().getFrame(ServerSelectionFrame))
+            krnl.Kernel().getWorker().removeFrame(krnl.Kernel().getWorker().getFrame(ssfrm.ServerSelectionFrame))
          PlayedCharacterManager().infos = cssmsg.infos
          DataStoreType.CHARACTER_ID = str(cssmsg.infos.id)
          krnl.Kernel().getWorker().pause()
@@ -221,9 +230,8 @@ class GameServerApproachFrame(Frame):
 
       elif isinstance(msg, BasicTimeMessage):
          btmsg = msg
-         date = Date()
-         TimeManager().serverTimeLag = btmsg.timestamp + btmsg.timezoneOffset * 60 * 1000 - date.getTime()
-         TimeManager().serverUtcTimeLag = btmsg.timestamp - date.getTime()
+         TimeManager().serverTimeLag = btmsg.timestamp + btmsg.timezoneOffset * 60 * 1000 - datetime.time()
+         TimeManager().serverUtcTimeLag = btmsg.timestamp - datetime.time()
          TimeManager().timezoneOffset = btmsg.timezoneOffset * 60 * 1000
          TimeManager().dofusTimeYearLag = -1370
          return True
@@ -261,6 +269,15 @@ class GameServerApproachFrame(Frame):
          connh.ConnectionsHandler.getConnection().send(pwcrmsg)
          return True
 
+      elif isinstance(msg, CharacterSelectionAction):
+         characterId = msg.characterId
+         self._requestedCharacterId = characterId
+         self._requestedToRemodelCharacterId = 0
+         csmsg = CharacterSelectionMessage()
+         csmsg.init(id_=characterId)
+         connh.ConnectionsHandler.getConnection().send(csmsg)
+         return True
+         
       return False
 
    def pulled(self) -> bool:
@@ -270,4 +287,3 @@ class GameServerApproachFrame(Frame):
       clrmsg:CharactersListRequestMessage = CharactersListRequestMessage()
       if connh.ConnectionsHandler.getConnection():
          connh.ConnectionsHandler.getConnection().send(clrmsg)
-

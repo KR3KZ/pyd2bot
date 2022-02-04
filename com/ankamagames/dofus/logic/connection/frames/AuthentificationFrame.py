@@ -2,11 +2,11 @@ from time import perf_counter
 from com.ankamagames.dofus import Constants
 import com.ankamagames.dofus.kernel.Kernel as krnl
 import com.ankamagames.dofus.kernel.net.ConnectionsHandler as connh
-from com.ankamagames.dofus.logic.connection.frames.ServerSelectionFrame import ServerSelectionFrame
+import com.ankamagames.dofus.logic.connection.frames.ServerSelectionFrame as ssfrm
 from com.ankamagames.dofus.logic.connection.managers.AuthentificationManager import AuthentificationManager
 from com.ankamagames.dofus.logic.common.managers.InterClientManager import InterClientManager
 from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerManager
-from com.ankamagames.dofus.logic.frames.DisconnectionHandlerFrame import DisconnectionHandlerFrame
+from com.ankamagames.dofus.logic.connection.frames.DisconnectionHandlerFrame import DisconnectionHandlerFrame
 from com.ankamagames.dofus.network.messages.connection.HelloConnectMessage import HelloConnectMessage
 from com.ankamagames.dofus.network.messages.connection.IdentificationAccountForceMessage import IdentificationAccountForceMessage
 from com.ankamagames.dofus.network.messages.connection.IdentificationFailedMessage import IdentificationFailedMessage
@@ -92,7 +92,7 @@ class AuthentificationFrame(Frame):
                connh.ConnectionsHandler.getConnection().send(flashKeyMsg)
             return True
 
-         if isinstance(msg, IdentificationSuccessMessage):
+         elif isinstance(msg, IdentificationSuccessMessage):
             ismsg = msg
             if isinstance(ismsg, IdentificationSuccessWithLoginTokenMessage):
                AuthentificationManager().nextToken = IdentificationSuccessWithLoginTokenMessage(ismsg).loginToken
@@ -112,7 +112,7 @@ class AuthentificationFrame(Frame):
             DataStoreType.ACCOUNT_ID = str(ismsg.accountId)
             StoreDataManager().setData(Constants.DATASTORE_COMPUTER_OPTIONS, "lastAccountId", ismsg.accountId)
             krnl.Kernel().getWorker().removeFrame(self)
-            krnl.Kernel().getWorker().addFrame(ServerSelectionFrame())
+            krnl.Kernel().getWorker().addFrame(ssfrm.ServerSelectionFrame())
             return True
 
          elif isinstance(msg, IdentificationFailedMessage):

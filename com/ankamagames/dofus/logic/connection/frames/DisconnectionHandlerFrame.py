@@ -52,38 +52,42 @@ class DisconnectionHandlerFrame(Frame):
    def process(self, msg:Message) -> bool:
 
       if isinstance(msg, ServerConnectionClosedMessage):
-            sccmsg:ServerConnectionClosedMessage = msg
-            if connh.ConnectionsHandler.getConnection() and connh.ConnectionsHandler.getConnection().mainConnection and (connh.ConnectionsHandler.getConnection().mainConnection.connected or connh.ConnectionsHandler.getConnection().mainConnection.connecting):
-               return False
-            if sccmsg.closedConnection == connh.ConnectionsHandler.getConnection().getSubConnection(sccmsg):
-               logger.debug("The connection was closed. Checking reasons.")
-               GameServerApproachFrame.authenticationTicketAccepted = False
-               if connh.ConnectionsHandler.hasReceivedMsg:
-                  if not connh.ConnectionsHandler.hasReceivedNetworkMsg and self._numberOfAttemptsAlreadyDone < self.CONNECTION_ATTEMPTS_NUMBER:
-                     self._numberOfAttemptsAlreadyDone+=1
-                     logger.warn("The connection was closed unexpectedly. Reconnection attempt " + self._numberOfAttemptsAlreadyDone + "/" + self.CONNECTION_ATTEMPTS_NUMBER + " will start in 4s.")
-                     self._connectionUnexpectedFailureTimes.append(perf_counter_ns())
-                     StoreDataManager().setData(Constants.DATASTORE_MODULE_DEBUG, "connection_fail_times", self._connectionUnexpectedFailureTimes)
+         sccmsg = msg
+         if connh.ConnectionsHandler.getConnection() and connh.ConnectionsHandler.getConnection().mainConnection and (connh.ConnectionsHandler.getConnection().mainConnection.connected or connh.ConnectionsHandler.getConnection().mainConnection.connecting):
+            return False
+         
+         logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+         if sccmsg.closedConnection == connh.ConnectionsHandler.getConnection().getSubConnection(sccmsg):
+            
+
+            logger.debug("The connection was closed. Checking reasons.")
+            GameServerApproachFrame.authenticationTicketAccepted = False
+            if connh.ConnectionsHandler.hasReceivedMsg:
+               if not connh.ConnectionsHandler.hasReceivedNetworkMsg and self._numberOfAttemptsAlreadyDone < self.CONNECTION_ATTEMPTS_NUMBER:
+                  self._numberOfAttemptsAlreadyDone+=1
+                  logger.warn("The connection was closed unexpectedly. Reconnection attempt " + self._numberOfAttemptsAlreadyDone + "/" + self.CONNECTION_ATTEMPTS_NUMBER + " will start in 4s.")
+                  self._connectionUnexpectedFailureTimes.append(perf_counter())
+                  StoreDataManager().setData(Constants.DATASTORE_MODULE_DEBUG, "connection_fail_times", self._connectionUnexpectedFailureTimes)
+               else:
+                  reason = connh.ConnectionsHandler.handleDisconnection()
+                  if not reason.expected:
+                     logger.warn("The connection was closed unexpectedly. Reseting.")
+                     if self._numberOfAttemptsAlreadyDone == self.CONNECTION_ATTEMPTS_NUMBER:
+                        self._connectionUnexpectedFailureTimes.append(perf_counter())
+                        StoreDataManager().setData(Constants.DATASTORE_MODULE_DEBUG, "connection_fail_times",self._connectionUnexpectedFailureTimes)
+                     if len(self.messagesAfterReset) == 0:
+                        self.messagesAfterReset = [UnexpectedSocketClosureMessage()] + self.messagesAfterReset
+                     krnl.Kernel().reset()
                   else:
-                     reason = connh.ConnectionsHandler.handleDisconnection()
-                     if not reason.expected:
-                        logger.warn("The connection was closed unexpectedly. Reseting.")
-                        if self._numberOfAttemptsAlreadyDone == self.CONNECTION_ATTEMPTS_NUMBER:
-                           self._connectionUnexpectedFailureTimes.append(perf_counter())
-                           StoreDataManager().setData(Constants.DATASTORE_MODULE_DEBUG, "connection_fail_times",self._connectionUnexpectedFailureTimes)
-                        if len(self.messagesAfterReset) == 0:
-                           self.messagesAfterReset = [UnexpectedSocketClosureMessage()] + self.messagesAfterReset
+                     logger.debug(f"The connection closure was expected (reason: {reason.reason}). Dispatching the message.")
+                     if reason.reason == DisconnectionReasonEnum.DISCONNECTED_BY_POPUP or reason.reason == DisconnectionReasonEnum.SWITCHING_TO_HUMAN_VENDOR:
                         krnl.Kernel().reset()
                      else:
-                        logger.debug("The connection closure was expected (reason: " + reason.reason + "). Dispatching the message.")
-                        if reason.reason == DisconnectionReasonEnum.DISCONNECTED_BY_POPUP or reason.reason == DisconnectionReasonEnum.SWITCHING_TO_HUMAN_VENDOR:
-                           krnl.Kernel().reset()
-                        else:
-                           krnl.Kernel().getWorker().process(ExpectedSocketClosureMessage(reason.reason))
-               else:
-                  logger.warn("The connection hasn\'t even start.")
-            return True
-      
+                        krnl.Kernel().getWorker().process(ExpectedSocketClosureMessage(reason.reason))
+            else:
+               logger.warn("The connection hasn\'t even start.")
+         return True
+   
       elif isinstance(msg, WrongSocketClosureReasonMessage):
          wscrmsg = msg 
          GameServerApproachFrame.authenticationTicketAccepted = False

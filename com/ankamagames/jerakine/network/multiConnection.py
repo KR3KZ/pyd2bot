@@ -14,18 +14,14 @@ logger = Logger(__name__)
 
 
 class MultiConnection(EventDispatcher):
-      
-   
 
-   
    def __init__(self):
       self._connectionByMsg = dict()
       self._connectionByEvent = dict()
-      self._connectionById = dict()
+      self._connectionById = dict[str, IServerConnection]()
       self._idByConnection = dict()
       self._connectionByMsg = dict()
       self._connectionByEvent = dict()
-      self._connectionById = dict()
       self._idByConnection = dict()
       self._connectionCount = 0
       self._mainConnection:IServerConnection = None

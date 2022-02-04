@@ -20,10 +20,9 @@ class HandshakeFrame(Frame):
    TIMEOUT_DELAY:int = 3000
    
    TIMEOUT_REPEAT_COUNT:int = 1
-   
-   _timeoutTimer:Timer
-   
+      
    def __init__(self):
+      self._timeoutTimer = None
       super().__init__()
    
    def checkProtocolVersions(self, serverVersion:str) -> None:
