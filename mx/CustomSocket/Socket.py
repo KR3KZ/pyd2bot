@@ -21,7 +21,6 @@ class Socket(threading.Thread):
         self.buff = ByteArray()
         super().__init__()
 
-
     def run(self):
         logger.info("Socket thread started.")
         while not self._kill.is_set():

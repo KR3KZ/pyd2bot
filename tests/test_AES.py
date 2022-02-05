@@ -1,11 +1,16 @@
-from com.hurlan.crypto import signature
-from pyd2bot.utils.crypto import AESKey, CBCMode, SimpleIVMode, NullPad
-from pyd2bot.logic.managers import AuthentificationManager
-from pyd2bot.utils.binaryIO import ByteArray
+
+
+
+from com.ankamagames.dofus.logic.connection.managers.AuthentificationManager import AuthentificationManager
+from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
+from com.hurlan.crypto.symmetric.aESKey import AESKey
+from com.hurlan.crypto.symmetric.cBCMode import CBCMode
+from com.hurlan.crypto.symmetric.nullPAd import NullPad
+from com.hurlan.crypto.symmetric.simpleIVMode import SimpleIVMode
 
 
 am = AuthentificationManager()
-
+am.initAESKey()
 BLOCK_SIZE = 16
 pad = lambda s: s + (BLOCK_SIZE - len(s) % BLOCK_SIZE) * chr(BLOCK_SIZE - len(s) % BLOCK_SIZE)
 unpad = lambda s: s[:-ord(s[len(s) - 1:])]
@@ -29,18 +34,5 @@ def testCryptDecrypt(msg):
     decryped_msg = unpad(msgBytes.decode('utf-8'))
     assert decryped_msg == original_msg
 
-def encryptDecryptTicket(ticket):
-    ticket_str = ticket
-    # server side 
-    msgBytes = ByteArray(bytes(ticket_str, 'utf-8'))
-    aescipher = SimpleIVMode(CBCMode(AESKey(am._AESKey), NullPad()))
-    aescipher.encrypt(msgBytes)
-    encticket_integers = msgBytes.to_int8Arr()
-    # client side
-    aescipher = SimpleIVMode(CBCMode(AESKey(am._AESKey), NullPad()))
-    result = am.decodeWithAES(encticket_integers)
-    assert result.decode() == ticket_str
-
 testSignedIntToArr()
 testCryptDecrypt("Hello World!")
-encryptDecryptTicket('1d3ab614975022927febb53c66273374')

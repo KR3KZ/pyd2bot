@@ -26,3 +26,4 @@ class MapLoader(metaclass=Singleton):
     def getMapURI(mapId):
         return f"{int(mapId) % 10}/{int(mapId)}.dlm"
     
+    

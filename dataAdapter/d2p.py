@@ -82,8 +82,8 @@ class D2PReader:
 
         i = 0
         while i < self._number_properties:
-            property_type = (D2P_file_binary.readUTF()).decode()
-            property_value = (D2P_file_binary.readUTF()).decode()
+            property_type = D2P_file_binary.readUTF()
+            property_value = D2P_file_binary.readUTF()
             if property_type == b"" or property_value == b"":
                 raise InvalidD2PFile("The file appears to be corrupt.")
             self._properties[property_type] = property_value
