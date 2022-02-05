@@ -6,7 +6,6 @@ from com.ankamagames.dofus.kernel.net.DisconnectionReasonEnum import Disconnecti
 from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerManager
 from com.ankamagames.dofus.logic.connection.actions.ServerSelectionAction import ServerSelectionAction
 from com.ankamagames.dofus.logic.connection.managers.AuthentificationManager import AuthentificationManager
-from com.ankamagames.dofus.logic.game.approach.frames.GameServerApproachFrame import GameServerApproachFrame
 from com.ankamagames.dofus.network.enums.ServerStatusEnum import ServerStatusEnum
 from com.ankamagames.dofus.network.messages.connection.SelectedServerDataExtendedMessage import SelectedServerDataExtendedMessage
 from com.ankamagames.dofus.network.messages.connection.SelectedServerDataMessage import SelectedServerDataMessage
@@ -125,6 +124,7 @@ class ServerSelectionFrame(Frame):
          return True
 
       elif isinstance(msg, ExpectedSocketClosureMessage):
+         from com.ankamagames.dofus.logic.game.approach.frames.GameServerApproachFrame import GameServerApproachFrame
          escmsg = msg
          if escmsg.reason != DisconnectionReasonEnum.SWITCHING_TO_GAME_SERVER:
             self._worker.process(WrongSocketClosureReasonMessage(DisconnectionReasonEnum.SWITCHING_TO_GAME_SERVER, escmsg.reason))

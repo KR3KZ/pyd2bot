@@ -29,7 +29,7 @@ class SuperArea(IDataCenter):
    
    @staticmethod
    def getSuperAreaById(id:int) -> 'SuperArea':
-      superArea:SuperArea = GameData.getobject(SuperArea.MODULE,id)
+      superArea:SuperArea = GameData.getObject(SuperArea.MODULE,id)
       if not superArea:
          return None
       return superArea

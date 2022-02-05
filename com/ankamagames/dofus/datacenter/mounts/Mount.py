@@ -29,7 +29,7 @@ class Mount(IDataCenter):
       
       @classmethod
       def getMountById(cls, id:int) -> 'Mount':
-         return GameData.getobject(cls.MODULE,id)
+         return GameData.getObject(cls.MODULE,id)
       
       classmethod
       def getMounts(cls) -> list:

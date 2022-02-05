@@ -30,7 +30,7 @@ class MapScrollAction(IDataCenter):
       
       @staticmethod
       def getMapScrollActionById(self, id:float) -> 'MapScrollAction':
-         return GameData.getobject(MapScrollAction.MODULE,id)
+         return GameData.getObject(MapScrollAction.MODULE,id)
       
       @staticmethod
       def getMapScrollActions(self) -> list:

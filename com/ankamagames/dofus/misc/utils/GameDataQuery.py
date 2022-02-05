@@ -92,7 +92,7 @@ class GameDataQuery():
       result:list[object] = list[object]()
       module:str = target["MODULE"]
       for i in range(len(ids)):
-         instance = GameData.getobject(module,ids[i])
+         instance = GameData.getObject(module,ids[i])
          if instance != None:
             result.append(instance)
       return result

@@ -2,7 +2,6 @@
 from datetime import datetime
 from threading import Timer
 import time
-from com.ankamagames.berilia.types.messages.AllModulesLoadedMessage import AllModulesLoadedMessage
 from com.ankamagames.dofus.internalDatacenter.connection.basicCharacterWrapper import BasicCharacterWrapper
 # from com.ankamagames.dofus.internalDatacenter.items.ItemWrapper import ItemWrapper
 import com.ankamagames.dofus.kernel.Kernel as krnl
@@ -13,9 +12,12 @@ from com.ankamagames.dofus.logic.common.managers.InterClientManager import Inter
 from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerManager
 from com.ankamagames.dofus.logic.game.approach.actions.CharacterSelectionAction import CharacterSelectionAction
 from com.ankamagames.dofus.logic.game.common.actions.chat.PopupWarningCloseRequestAction import PopupWarningCloseRequestAction
+from com.ankamagames.dofus.logic.game.common.frames.ContextChangeFrame import ContextChangeFrame
+from com.ankamagames.dofus.logic.game.common.frames.PlayedCharacterUpdatesFrame import PlayedCharacterUpdatesFrame
+from com.ankamagames.dofus.logic.game.common.frames.SynchronisationFrame import SynchronisationFrame
+from com.ankamagames.dofus.logic.game.common.frames.WorldFrame import WorldFrame
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
 from com.ankamagames.dofus.logic.game.common.managers.TimerManager import TimeManager
-from com.ankamagames.dofus.network.messages.connection.ServerSelectionMessage import ServerSelectionMessage
 from com.ankamagames.dofus.network.messages.game.approach.AccountCapabilitiesMessage import AccountCapabilitiesMessage
 from com.ankamagames.dofus.network.messages.game.approach.AlreadyConnectedMessage import AlreadyConnectedMessage
 from com.ankamagames.dofus.network.messages.game.approach.AuthenticationTicketAcceptedMessage import AuthenticationTicketAcceptedMessage
@@ -30,7 +32,6 @@ from com.ankamagames.dofus.network.messages.game.character.choice.CharacterSelec
 from com.ankamagames.dofus.network.messages.game.character.choice.CharactersListErrorMessage import CharactersListErrorMessage
 from com.ankamagames.dofus.network.messages.game.character.choice.CharactersListMessage import CharactersListMessage
 from com.ankamagames.dofus.network.messages.game.character.choice.CharactersListRequestMessage import CharactersListRequestMessage
-from com.ankamagames.dofus.network.messages.game.context.GameContextCreateErrorMessage import GameContextCreateErrorMessage
 from com.ankamagames.dofus.network.messages.game.context.GameContextCreateRequestMessage import GameContextCreateRequestMessage
 from com.ankamagames.dofus.network.messages.game.initialization.CharacterLoadingCompleteMessage import CharacterLoadingCompleteMessage
 from com.ankamagames.dofus.network.messages.game.moderation.PopupWarningCloseRequestMessage import PopupWarningCloseRequestMessage
@@ -41,6 +42,7 @@ from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.messages.ConnectionResumedMessage import ConnectionResumedMessage
 from com.ankamagames.jerakine.messages.Frame import Frame
 from com.ankamagames.jerakine.messages.Message import Message
+from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.ankamagames.jerakine.network.messages.ServerConnectionFailedMessage import ServerConnectionFailedMessage
 from com.ankamagames.jerakine.types.DataStoreType import DataStoreType
 from com.ankamagames.jerakine.types.enums.Priority import Priority
@@ -49,44 +51,22 @@ from pyd2bot.events.PlayerEvents import PlayerEvents
 logger = Logger(__name__)
 
 class GameServerApproachFrame(Frame):
-   
-      
-   authenticationTicketAccepted:bool = False
-   
-   LOADING_TIMEOUT:int = 60000.0
-   
-   _charactersList:list[BasicCharacterWrapper]
-   
-   _charactersToRemodelList:list
-      
-   _loadingStart:float
-   
-   _waitingMessages:list[Message]
-   
-   _cssmsg:CharacterSelectedSuccessMessage
-   
-   _requestedCharacterId:float
-   
-   _requestedToRemodelCharacterId:float
-   
-   _waitingForListRefreshAfterDeletion:bool
-      
-   commonMod:object
-   
-   _giftList:list
-   
-   _charaListMinusDeadPeople:list
-   
-   _reconnectMsgSend:bool = False
-   
-   _openCharsList:bool = True
-   
+
+   LOADING_TIMEOUT:int = 60                  
+         
    def __init__(self):
       self._charactersList = list[BasicCharacterWrapper]()
-      self._charactersToRemodelList = []
       self._giftList = []
       self._charaListMinusDeadPeople = []
       self._cssmsg = None
+      self.authenticationTicketAccepted = False
+      self._charactersList = list[BasicCharacterWrapper]()
+      self._waitingMessages = list[NetworkMessage]()
+      self._requestedCharacterId = None
+      self._loadingStart = False
+      self._reconnectMsgSend = False
+
+
       super().__init__()
    
    @property
@@ -172,12 +152,12 @@ class GameServerApproachFrame(Frame):
             krnl.Kernel().getWorker().removeFrame(krnl.Kernel().getWorker().getFrame(ssfrm.ServerSelectionFrame))
          PlayedCharacterManager().infos = cssmsg.infos
          DataStoreType.CHARACTER_ID = str(cssmsg.infos.id)
-         # krnl.Kernel().getWorker().addFrame(WorldFrame())
-         # krnl.Kernel().getWorker().addFrame(SynchronisationFrame())
-         # krnl.Kernel().getWorker().addFrame(PlayedCharacterUpdatesFrame())
+         krnl.Kernel().getWorker().addFrame(WorldFrame())
+         krnl.Kernel().getWorker().addFrame(SynchronisationFrame())
+         krnl.Kernel().getWorker().addFrame(PlayedCharacterUpdatesFrame())
          # krnl.Kernel().getWorker().addFrame(SpellInventoryManagementFrame())
          # krnl.Kernel().getWorker().addFrame(InventoryManagementFrame())
-         # krnl.Kernel().getWorker().addFrame(ContextChangeFrame())
+         krnl.Kernel().getWorker().addFrame(ContextChangeFrame())
          # krnl.Kernel().getWorker().addFrame(ProgressionFrame())
          # krnl.Kernel().getWorker().addFrame(ChatFrame())
          # krnl.Kernel().getWorker().addFrame(JobsFrame())
@@ -200,7 +180,6 @@ class GameServerApproachFrame(Frame):
          delta = now - self._loadingStart
          if delta > self.LOADING_TIMEOUT:
             logger.warn(f"Client took too long to load ({delta}s).")
-         # ChatServiceManager().tryToConnect()
          return True
 
       elif isinstance(msg, ConnectionResumedMessage):
@@ -260,7 +239,8 @@ class GameServerApproachFrame(Frame):
          csmsg.init(id_=characterId)
          connh.ConnectionsHandler.getConnection().send(csmsg)
          return True
-         
+      
+
       return False
 
    def pulled(self) -> bool:

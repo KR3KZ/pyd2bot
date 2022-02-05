@@ -26,7 +26,7 @@ class MapCoordinates(IDataCenter):
       
       @classmethod
       def getMapCoordinatesByCompressedCoords(cls, compressedCoords:int) -> 'MapCoordinates':
-         return GameData.getobject(cls.MODULE, compressedCoords)
+         return GameData.getObject(cls.MODULE, compressedCoords)
       
       @classmethod
       def getMapCoordinatesByCoords(cls, x:int, y:int) -> 'MapCoordinates':

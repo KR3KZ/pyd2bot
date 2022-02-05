@@ -50,7 +50,7 @@ class Area(IDataCenter):
       super().__init__()
    
    def getAreaById(cls, id:int) -> 'Area':
-      area:Area = GameData.getobject(cls.MODULE,id)
+      area:Area = GameData.getObject(cls.MODULE,id)
       if not area or not area.superArea or not area.hasVisibleSubAreas:
          return None
       return area

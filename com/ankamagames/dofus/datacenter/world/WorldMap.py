@@ -44,7 +44,7 @@ class WorldMap(IDataCenter):
       
       @staticmethod
       def getWorldMapById(id:int) -> 'WorldMap':
-         return gdata.GameData.getobject(WorldMap.MODULE,id)
+         return gdata.GameData.getObject(WorldMap.MODULE,id)
       
       @staticmethod
       def getAllWorldMaps() -> list:

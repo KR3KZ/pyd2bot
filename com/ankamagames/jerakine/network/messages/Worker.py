@@ -23,17 +23,17 @@ logger = Logger(__name__)
 
 
 class Worker(EventDispatcher, MessageHandler):
-   
+
    DEBUG_FRAMES:bool = True
    DEBUG_MESSAGES:bool = True
    DEBUG_FRAMES_PROCESSING:bool = False
    LONG_MESSAGE_QUEUE:int = 100
    MAX_TIME_FRAME:int = 40
 
-   
+
    def __init__(self):
       self._unstoppableMsgobjectList = list()
-      self._framesBeingDeleted = dict()   
+      self._framesBeingDeleted = dict()
       self._messagesQueue = list[Message]()
       self._treatmentsQueue = list[Treatment]()
       self._framesList = list[Frame]()
@@ -47,74 +47,74 @@ class Worker(EventDispatcher, MessageHandler):
       self._unstoppableMsgobjectList = list()
       self._currentFrameTypesCache = dict()
       super().__init__()
-   
+
    @property
    def framesList(self) -> list[Frame]:
       return self._framesList
-   
+
    @property
    def isPaused(self) -> bool:
       return self._paused
-   
+
    @property
    def pausedQueue(self) -> list[Message]:
       return self._pausedQueue
-   
+
    @property
    def terminated(self) -> bool:
       return self._terminated
-   
+
    @property
    def terminating(self) -> bool:
       return self._terminating
-   
+
    def process(self, msg:Message) -> bool:
       if self._terminated:
          return False
       self._messagesQueue.append(msg)
       self.run()
       return True
-   
+
    def addSingleTreatmentAtPos(self, object, func:FunctionType, params:list, pos:int) -> None:
       if len(self._treatmentsQueue) == 0:
          efd.EnterFrameDispatcher().addWorker(self)
       self._treatmentsQueue.insert(pos,Treatment(object,func,params))
-   
+
    def addSingleTreatment(self, object, func:FunctionType, params:list) -> None:
       if len(self._treatmentsQueue) == 0:
          efd.EnterFrameDispatcher().addWorker(self)
       self._treatmentsQueue.append(Treatment(object,func,params))
-   
+
    def addUniqueSingleTreatment(self, object, func:FunctionType, params:list) -> None:
       if len(self._treatmentsQueue) == 0:
          efd.EnterFrameDispatcher().addWorker(self)
       if not self.hasSingleTreatment(object,func,params):
          self._treatmentsQueue.append(Treatment(object,func,params))
-   
+
    def addForTreatment(self, object, func:FunctionType, params:list, iterations:int) -> None:
       if iterations == 0:
          return
       if len(self._treatmentsQueue) == 0:
          efd.EnterFrameDispatcher().addWorker(self)
       self._treatmentsQueue.append(ForTreatment(object,func,params,iterations,self))
-   
+
    def addForeachTreatment(self, object, func:FunctionType, params:list, iterable) -> None:
       if len(self._treatmentsQueue) == 0:
          efd.EnterFrameDispatcher().addWorker(self)
       self._treatmentsQueue.append(ForeachTreatment(object,func,params,iterable,self))
-   
+
    def addWhileTreatment(self, object, func:FunctionType, params:list) -> None:
       if len(self._treatmentsQueue) == 0:
          efd.EnterFrameDispatcher().addWorker(self)
       self._treatmentsQueue.append(WhileTreatment(object,func,params))
-   
+
    def hasSingleTreatment(self, object, func:FunctionType, params:list) -> bool:
       treatment:Treatment = None
       for treatment in self._treatmentsQueue:
          if treatment.isSameTreatment(object,func,params):
             return True
       return False
-   
+
    def findTreatments(self, object, func:FunctionType, params:list) -> list:
       treatment:Treatment = None
       result:list = []
@@ -122,18 +122,18 @@ class Worker(EventDispatcher, MessageHandler):
          if treatment.isCloseTreatment(object,func,params):
             result.append(treatment)
       return result
-   
+
    def deleteTreatments(self, treatments:list) -> None:
       treatment:Treatment = None
       for treatment in treatments:
          del self._treatmentsQueue[self._treatmentsQueue.find(treatment)]
-   
+
    def processImmediately(self, msg:Message) -> bool:
       if self._terminated:
          return False
       self.processMessage(msg)
       return True
-   
+
    def addFrame(self, frame:Frame) -> None:
       if self._terminated:
          return
@@ -170,7 +170,7 @@ class Worker(EventDispatcher, MessageHandler):
 
       else:
          self.pushFrame(frame)
-   
+
    def removeFrame(self, frame:Frame) -> None:
       if self._terminated:
          return
@@ -187,43 +187,43 @@ class Worker(EventDispatcher, MessageHandler):
       elif not self.isBeingDeleted(frame):
          self._framesBeingDeleted[frame] = True
          self.pullFrame(frame)
-   
+
    def isBeingDeleted(self, frame:Frame) -> bool:
       fr = None
       for fr in self._framesBeingDeleted:
          if fr == frame:
             return True
       return False
-   
+
    def isBeingAdded(self, frame:object) -> bool:
       fr = None
       for fr in self._framesToAdd:
          if fr is frame:
             return True
       return False
-   
+
    def contains(self, frameobject:object) -> bool:
       return self.getFrame(frameobject) != None
-   
+
    def getFrame(self, frameobject:object) -> Frame:
       return self._currentFrameTypesCache.get(frameobject)
-   
+
    def pause(self, targetobject:object = None, unstoppableMsgobjectList:list = None) -> None:
       logger.info("Worker is paused, all queueable messages will be queued : ")
       self._paused = True
       if unstoppableMsgobjectList:
          self._unstoppableMsgobjectList = self._unstoppableMsgobjectList.extend(unstoppableMsgobjectList)
-   
+
    def clearUnstoppableMsgobjectList(self) -> None:
       self._unstoppableMsgobjectList = []
-   
+
    def msgIsUnstoppable(self, msg:Message) -> bool:
       msgobject:object = None
       for msgobject in self._unstoppableMsgobjectList:
          if msg is msgobject:
             return True
       return False
-   
+
    def resume(self) -> None:
       if self._terminated:
          return
@@ -235,25 +235,19 @@ class Worker(EventDispatcher, MessageHandler):
       self._pausedQueue = list[Message]()
       self.processFramesInAndOut()
       self.processQueues()
-   
+
    def terminate(self) -> None:
       self._terminating = True
       self.clear()
       self._terminating = False
       self._terminated = True
-   
+
    def clear(self) -> None:
       frameList:list[Frame] = None
       frame:Frame = None
       if self.DEBUG_FRAMES:
          logger.info("Clearing worker (no more frames or messages in queue)")
-      nonPulledFrameList:list[Frame] = list[Frame]()
-      if self._framesList:
-         frameList = self._framesList.extend()
-         for frame in frameList:
-            if self._framesList.find(frame) != -1:
-               if not frame.pulled():
-                  nonPulledFrameList.append(frame)
+      nonPulledFrameList = [f for f in self._framesList if not f.pulled()]
       self._framesList = list[Frame]()
       self._framesToAdd = list[Frame]()
       self._framesToRemove = list[Frame]()
@@ -265,24 +259,24 @@ class Worker(EventDispatcher, MessageHandler):
          self.pushFrame(frame)
       efd.EnterFrameDispatcher().removeWorker()
       self._paused = False
-   
+
    def onEnterFrame(self) -> None:
       self.processQueues()
-   
+
    def run(self) -> None:
       efd.EnterFrameDispatcher().addWorker(self)
-   
+
    def pushFrame(self, frame:Frame) -> None:
       if frame.pushed():
          self._framesList.append(frame)
          logger.debug("framelist size: " + str(len(self._framesList)))
-         self._framesList.sort(key=lambda x: x.priority.value)
+         self._framesList.sort(key=lambda x: x.priority.value, reverse=True)
          self._currentFrameTypesCache[type(frame)] = frame
          if self.has_listeners(FramePushedEvent.EVENT_FRAME_PUSHED):
             self.dispatch(FramePushedEvent.EVENT_FRAME_PUSHED, FramePushedEvent(frame))
       else:
          logger.warn("Frame " + frame.__class__.__name__ + " refused to be.appended.")
-   
+
    def pullFrame(self, frame:Frame) -> None:
       index:int = 0
       if frame.pulled():
@@ -299,7 +293,7 @@ class Worker(EventDispatcher, MessageHandler):
             self.dispatch(FramePulledEvent.EVENT_FRAME_PULLED, FramePulledEvent(frame))
       else:
          logger.warn(f"Frame {frame.__class__.__name__} refused to be pulled.")
-   
+
    def processQueues(self, maxTime:int = 40) -> None:
       startTime:int = perf_counter()
       while perf_counter() - startTime < maxTime and (len(self._messagesQueue) > 0 or len(self._treatmentsQueue) > 0):
@@ -321,14 +315,14 @@ class Worker(EventDispatcher, MessageHandler):
                      self.processFramesInAndOut()
       if len(self._messagesQueue) == 0 and len(self._treatmentsQueue) == 0:
          efd.EnterFrameDispatcher().removeWorker()
-   
+
    def processTreatments(self, startTime:int, maxTime:int) -> None:
       treatment:Treatment = None
       while perf_counter() - startTime < maxTime and len(self._treatmentsQueue) > 0:
          treatment = self._treatmentsQueue[0]
          if treatment.process():
             del self._treatmentsQueue[self._treatmentsQueue.find(treatment)]
-   
+
    def aNoneFlood(self, messageName:str) -> bool:
       if len(self._messagesQueue) > self.LONG_MESSAGE_QUEUE:
          count = 0
@@ -342,7 +336,7 @@ class Worker(EventDispatcher, MessageHandler):
                del self._messagesQueue[self._messagesQueue.find(toClean[i])]
             return True
       return False
-   
+
    def processMessage(self, msg:Message) -> None:
       processed:bool = False
       self._processingMessage = True
@@ -355,7 +349,7 @@ class Worker(EventDispatcher, MessageHandler):
       self._processingMessage = False
       if not processed and not isinstance(msg, DiscardableMessage):
          logger.debug(f"Discarded message: {msg.__class__.__name__} (at frame {FrameIdManager().frameId})")
-   
+
    def processFramesInAndOut(self) -> None:
       if len(self._framesToRemove) > 0:
          for frameToRemove in self._framesToRemove:

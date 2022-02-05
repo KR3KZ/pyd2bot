@@ -8,18 +8,18 @@ class ByteArray(bytearray):
     def __init__(self, *args, **kwrgs):
         super().__init__(*args, **kwrgs)
         self.position = 0
-    
+
     def __add__(self, b) -> 'ByteArray':
         return ByteArray(super().__add__(b))
 
     @property
     def length(self):
         return len(self)
-    
+
     @length.setter
-    def length(self, val):   
+    def length(self, val):
         del self[val:]
-           
+
     def __str__(self):
         return base64.b64encode(self).decode("utf")
 
@@ -49,7 +49,7 @@ class ByteArray(bytearray):
     def uncompress(self):
         self = bytearray(decompress(self))
 
-    def readBoolean(self):
+    def readBoolean(self) -> bool:
         ans = self.read(1)
         r = struct.unpack('?',ans)[0]
         return r
@@ -124,10 +124,10 @@ class ByteArray(bytearray):
     def readBytes(self, offset=0, len=None):
         self.position += offset
         return self.read(len)
-    
+
     def readUTFBytes(self, len):
         return self.read(len).decode()
-    
+
     def _writeVar(self, i):
         if not i:
             self.writeUnsignedByte(0)
@@ -194,7 +194,7 @@ class ByteArray(bytearray):
 
     def writeVarUhShort(self, i):
         self.writeVarShort(i)
-    
+
     def to_int8Arr(ba:bytearray) -> list[int]:
         ret = []
         for i in range(len(ba)):
@@ -207,7 +207,7 @@ class ByteArray(bytearray):
         for nbr in int_arr:
             res += nbr.to_bytes(1, "big", signed=True)
         return res
-    
+
     def writeByteArray(self, ba, offset=0, size=None):
         if not size:
             size = len(ba)
@@ -218,7 +218,7 @@ class ByteArray(bytearray):
             self[self.position :] = ba[offset : offset + chunck_size]
             self += ba[offset + chunck_size : offset + size]
         self.position += size
-        
+
 class Buffer(ByteArray):
     def end(self):
         del self[:self.position]

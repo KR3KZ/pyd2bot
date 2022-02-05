@@ -56,7 +56,7 @@ class Effect(IDataCenter):
          super().__init__()
       
       def getEffectById(id:int) -> 'Effect':
-         return GameData.getobject(Effect.MODULE,id)
+         return GameData.getObject(Effect.MODULE,id)
       
       idAccessors:IdAccessors = IdAccessors(getEffectById, None)
 

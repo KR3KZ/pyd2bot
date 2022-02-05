@@ -27,34 +27,41 @@ CONN = {
 
 class TestBot:
 
-    @classmethod
-    def main(cls):
+    def __init__(self):
+        pass
+
+    def main(self):
         krnl.Kernel().init()
         auth.AuthentificationManager().setCredentials(**CREDS)
         connh.ConnectionsHandler.connectToLoginServer(**CONN)
-        BotEventsManager().add_listener(PlayerEvents.SERVER_SELECTION, cls.onServerSelection)
-        BotEventsManager().add_listener(PlayerEvents.CHARACTER_SELECTION, cls.onCharacterSelection)
-        BotEventsManager().add_listener(PlayerEvents.SERVER_SELECTED, cls.onServerSelectionSuccess)
-        BotEventsManager().add_listener(PlayerEvents.CHARACTER_SELECTED, cls.onCharacterSelectionSuccess)
+        BotEventsManager().add_listener(PlayerEvents.SERVER_SELECTION, self.onServerSelection)
+        BotEventsManager().add_listener(PlayerEvents.CHARACTER_SELECTION, self.onCharacterSelection)
+        BotEventsManager().add_listener(PlayerEvents.SERVER_SELECTED, self.onServerSelectionSuccess)
+        BotEventsManager().add_listener(PlayerEvents.CHARACTER_SELECTED, self.onCharacterSelectionSuccess)
 
-    @classmethod
-    def onServerSelection(cls, event):
-        BotEventsManager().remove_listener(PlayerEvents.SERVER_SELECTION, cls.onServerSelection)
+        BotEventsManager().add_listener(PlayerEvents.SWITCH_TO_ROLEPLAY, self.onRolePlayContextEntred)
+        BotEventsManager().add_listener(PlayerEvents.SWITCH_TO_FIGHT, self.onRolePlayContextEntred)
+
+    def onServerSelection(self, event):
         krnl.Kernel().getWorker().process(ServerSelectionAction.create(serverId=SERVER_ID))
 
-    @classmethod
-    def onCharacterSelection(cls, event):
-        BotEventsManager().remove_listener(PlayerEvents.CHARACTER_SELECTION, cls.onCharacterSelection)
+    def onCharacterSelection(self, event):
         krnl.Kernel().getWorker().process(CharacterSelectionAction.create(characterId=CHARACTER_ID, btutoriel=False))
 
-    @classmethod
-    def onServerSelectionSuccess(cls, event):
-        BotEventsManager().remove_listener(PlayerEvents.SERVER_SELECTED, cls.onServerSelectionSuccess)
-    
-    @classmethod
-    def onCharacterSelectionSuccess(cls, event):
-        print("youpi")
-        BotEventsManager().remove_listener(PlayerEvents.CHARACTER_SELECTED, cls.onCharacterSelectionSuccess)
-        
+    def onServerSelectionSuccess(self, event):
+        pass
+
+    def onCharacterSelectionSuccess(self, event):
+        pass
+
+    def onRolePlayContextEntred(self, event):
+        # TODO: Treatement at the enter of tghe roleplay context
+        pass
+
+    def onGameFightContextEntered(self, event):
+        # TODO: Treatement at the enter of tghe game
+        pass
+
 if __name__ == "__main__":
-    TestBot.main()
+    bot = TestBot()
+    bot.main()

@@ -40,7 +40,7 @@ class GameData(AbstractDataManager):
             if o:
                return o
       if not cls._objectCaches.get(moduleId):
-         cls._objectCaches[moduleId] = Cache(GameDataFileAccessor().getCount(moduleId) * cls.CACHE_SIZE_RATIO, LruGarbageCollector())
+             cls._objectCaches[moduleId] = Cache(GameDataFileAccessor().getCount(moduleId) * cls.CACHE_SIZE_RATIO, LruGarbageCollector())
       else:
          o = cls._objectCaches[moduleId]
          if o:

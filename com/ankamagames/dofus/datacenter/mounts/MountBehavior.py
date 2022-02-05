@@ -23,7 +23,7 @@ class MountBehavior(IDataCenter):
       
       @classmethod      
       def getMountBehaviorById(cls, id:int) -> 'MountBehavior':      
-         return GameData.getobject(cls.MODULE, id)
+         return GameData.getObject(cls.MODULE, id)
 
       @classmethod      
       def getMountBehaviors(cls) -> list['MountBehavior']:      

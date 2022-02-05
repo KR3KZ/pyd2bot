@@ -82,7 +82,7 @@ class Breed(IDataCenter):
    
    @staticmethod
    def getBreedById(id:int) -> 'Breed':
-      return GameData.getobject(Breed.MODULE,id)
+      return GameData.getObject(Breed.MODULE,id)
    
    @staticmethod
    def getBreeds() -> list:
@@ -106,7 +106,7 @@ class Breed(IDataCenter):
       for skinKnown in self._skinsForBreed:
          if skinKnown == str(skin):
             id = self._skinsForBreed[skinKnown]
-      return GameData.getobject(self.MODULE,id)
+      return GameData.getObject(self.MODULE,id)
    
    @property
    def name(self) -> str:

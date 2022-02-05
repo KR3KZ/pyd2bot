@@ -22,7 +22,7 @@ class MountFamily(IDataCenter):
       
       @classmethod      
       def getMountFamilyById(cls, id:int) -> 'MountFamily':      
-         return GameData.getobject(cls.MODULE, id)
+         return GameData.getObject(cls.MODULE, id)
 
       
       @classmethod      

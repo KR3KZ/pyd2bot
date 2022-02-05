@@ -9,11 +9,11 @@ logger = Logger(__name__)
 class I18nFileAccessor(metaclass=Singleton):
 
 
-   def init(self, fileUri:str): 
+   def init(self, fileUri:str):
       nativeFile = pathlib.Path(fileUri)
       if not nativeFile or not nativeFile.exists():
          raise Exception("I18n file not readable.")
-      self.stream = BinaryStream(nativeFile.open("rb").read(), big_endian=True)
+      self.stream = BinaryStream(nativeFile.open("rb"), big_endian=True)
       self.indexes = dict()
       self.unDiacriticalIndex = dict()
       self.textIndexes = dict()
@@ -24,10 +24,12 @@ class I18nFileAccessor(metaclass=Singleton):
       keyCount:int = 0
       self.stream.position = indexesPointer
       indexesLength:int = self.stream.readInt()
-      for i in range(0, indexesLength, 9):
+      i = 0
+      while i < indexesLength:
          key = self.stream.readInt()
          diacriticalText = self.stream.readbool()
          pointer = self.stream.readInt()
+         i += 9
          self.indexes[key] = pointer
          keyCount += 1
          if diacriticalText:

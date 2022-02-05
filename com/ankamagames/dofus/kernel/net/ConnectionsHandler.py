@@ -39,13 +39,13 @@ class ConnectionsHandler:
    _hasReceivedNetworkMsg:bool = False
 
    _connectionTimeout = None
-   
+
    @property
    @classmethod
    def useSniffer(cls) -> bool:
       return cls._useSniffer
 
-   
+
    @useSniffer.setter
    @classmethod
    def useSniffer(cls, sniffer:bool) -> None:
@@ -60,19 +60,19 @@ class ConnectionsHandler:
    def hasReceivedMsg(cls) -> bool:
       return cls._hasReceivedMsg
 
-   
+
    @hasReceivedMsg.setter
    @classmethod
    def hasReceivedMsg(cls, value:bool) -> None:
       cls._hasReceivedMsg = value
 
-   
+
    @property
    @classmethod
    def hasReceivedNetworkMsg(cls) -> bool:
       return cls._hasReceivedNetworkMsg
 
-   
+
    @hasReceivedNetworkMsg.setter
    @classmethod
    def hasReceivedNetworkMsg(cls, value:bool) -> None:
@@ -138,8 +138,6 @@ class ConnectionsHandler:
       reason:DisconnectionReason = DisconnectionReason(cls._wantedSocketLost, cls._wantedSocketLostReason)
       cls._wantedSocketLost = False
       cls._wantedSocketLostReason = DisconnectionReasonEnum.UNEXPECTED
-      if not reason.expected:
-         ChatServiceManager.destroy()
       return reason
 
    @classmethod

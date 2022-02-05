@@ -53,7 +53,7 @@ patterns = {
     " implements ": " ",
     " extends ": " ",    
 
-    "(if|elif|else)\((.*?)\)": r"\1 \2:",
+    
     "Vector\.<(\S+)>": r"list[\1]",
     "function (\S+)\((.*)\) : (\S+)": r"def \1(self, \2) -> \3:",
     "function (\S+)\((.*)\) :": r"def \1(self, \2):",
@@ -69,7 +69,6 @@ patterns = {
     "!(\w+)": r"not \1",
     "delete ": r"del ",
     "_log.(info|error|debug)\((.*)\)": r"logger.\1(\2)",
-    "else$": r"else:",
     "else if": r"elif",
     "===": r"==",
     " (\S+).__str__\(\)$": r" str(\1)",
@@ -82,7 +81,7 @@ patterns = {
     "Math.sqrt": "math.sqrt",
     "Math.PI": "math.pi",
     "Math.min": "min",
-
+    r"(if|else\sif|else)\s*\((.*)\)\s*\n": r"\1 \2:\n",
     r"(elif|if) (\S+) is ([A-Z]+\S+)\:": r"\1 isinstance(\2, \3):",
 
     r"super\((.*)\)": r"super().__init__(\1)",
@@ -107,6 +106,7 @@ patterns = {
     r"([_a-zA-Z][_a-zA-Z0-9]{0,30}):String": r"\1:str",
     r"getTimer\(\)": "perf_counter()",
     r"\.shift\(\)": ".pop(0)",
+    r"msg as (\w+)": r"msg",
 
 }
 SWITCH_CASE_PATTERN = r"\s*(switch\(.*\)\s*\n?\{\s*(?:.|\n)+break;\s*\n\s*(?:default:)?(?:[^}]|\n)*\})"
@@ -119,8 +119,10 @@ def processCaseBlock(block, case_pattern, testvar=None):
     resLines = []
     tab_size = ""
     firstCase = True
+    switchFound = False
     for line in blockLines:
-        if "switch" in line:
+        if not switchFound and "switch" in line:
+            switchFound = True
             continue
         if "{" in line:
             continue
@@ -136,12 +138,15 @@ def processCaseBlock(block, case_pattern, testvar=None):
             if firstCase:
                 firstCase = False
             if case_pattern == CASE_PATTERN1:
-                resLines.append(tab_size + f"{op} isinstance({m.group('testvar')}, {m.group('testvalue')}):")
+                if firstCase:
+                    resLines.append(tab_size + f"{op} isinstance({m.group('testvar')}, {m.group('testvalue')}):")
+                else:
+                    resLines.append(tab_size[4:] + f"{op} isinstance({m.group('testvar')}, {m.group('testvalue')}):")
             elif case_pattern == CASE_PATTERN2:
                 if firstCase:
                     resLines.append(tab_size + f"{op} {testvar} == {m.group('testvalue')}:")
                 else:
-                    resLines.append(tab_size[3:] + f"{op} {testvar} == {m.group('testvalue')}:")
+                    resLines.append(tab_size[4:] + f"{op} {testvar} == {m.group('testvalue')}:")
             continue
         if "break;" in line:
             continue
@@ -154,14 +159,16 @@ def processCaseBlock(block, case_pattern, testvar=None):
 
 def processSwitchCases(code):
     switch_cases = re.findall(SWITCH_CASE_PATTERN, code, flags=re.M)
-    for switch_case in switch_cases:
-        m = re.match("switch\((?P<testvar>\S+)\)", switch_case)
-        testvar = m.group("testvar")
-        if testvar == "true":
-            processedSwitchCase = processCaseBlock(switch_case, CASE_PATTERN1)
-        else:
-            processedSwitchCase = processCaseBlock(switch_case, CASE_PATTERN2, testvar)
-        code = code.replace(switch_case, processedSwitchCase)
+    while switch_cases:
+        for switch_case in switch_cases:
+            m = re.match("switch\((?P<testvar>\S+)\)", switch_case)
+            testvar = m.group("testvar")
+            if testvar == "true":
+                processedSwitchCase = processCaseBlock(switch_case, CASE_PATTERN1)
+            else:
+                processedSwitchCase = processCaseBlock(switch_case, CASE_PATTERN2, testvar)
+            code = code.replace(switch_case, processedSwitchCase)
+        switch_cases = re.findall(SWITCH_CASE_PATTERN, code, flags=re.M)
     return code
 
 
@@ -199,7 +206,7 @@ def deleteFirstTwoSpaces(code):
     r = []
     for line in lines:
         if line.startswith("  "):
-            line = line[3:]
+            line = line[4:]
         r.append(line)
     return "\n".join(r)
 
@@ -228,7 +235,7 @@ def handleIndent(code):
                 inClass = True
         else:
             spaceCount = sum(1 for _ in itertools.takewhile(str.isspace, line))
-            line = (spaceCount // indentSize) * 3 * ' ' + line[spaceCount:]
+            line = (spaceCount // indentSize) * 4 * ' ' + line[spaceCount:]
         r.append(line)
     return "\n".join(r)
 
@@ -252,23 +259,84 @@ def parseFolderFiles(in_dir, out_dir):
     for f in tqdm(pathlib.Path(in_dir).glob("**/*.as")):
         parseFile(f, pathlib.Path(out_dir) / f.relative_to(in_dir).name.replace(".as", ".py"))
 
+def getLineIndent(line):
+    return sum(1 for _ in itertools.takewhile(str.isspace, line))
+
+def postSwitchCaseProcess(code):
+    codeLines = code.split("\n")
+    testvar  = None
+    res = []
+    inCaseBlock = False
+    blockIndent = None
+    for line in codeLines:
+        if inCaseBlock:
+            print("in case block")
+        else:
+            print("not case block")
+        if "case" in line:
+            matched = False
+            inCaseBlock = True
+            m = re.match('(\s*)case\s+(\S+)\s+is\s+(.*)\s*\:\s*\n?', line)
+            if m:
+                blockIndent = m.group(1)[4:]
+                line = f"{blockIndent}if isinstance({m.group(2)}, {m.group(3)}):\n"
+                matched = True
+                res.append(line)
+                continue
+            m = re.match("(\s*)case\s+(\S+)\s*:\s*\n?", line, flags=re.M)
+            if m:
+                blockIndent = m.group(1)[4:]
+                line = f"{blockIndent}if {testvar}  == {m.group(2)}:\n"
+                matched = True
+                res.append(line)
+                continue
+            if not matched:
+                raise Exception(f"unable to match line: {line}")
+            
+        if "switch(" in line:
+            m = re.match(r"\s*switch\((?P<testvar>\S+)\)", line)
+            if m:
+                testvar = m.group("testvar")
+                continue
+            else:
+                raise Exception(f"unable to match line: {line}")
+
+        if "break" in line:
+            continue
+
+        # if inCaseBlock:
+        #     xlineIndent = getLineIndent(line)
+        #     print(xlineIndent, len(blockIndent))
+        #     if "default" in line:
+        #         line = f"{blockIndent}else:\n"
+        #         inCaseBlock = False
+        #         continue
+        #     line = ' ' * (xlineIndent - 3) + line[xlineIndent:]
+        #     res.append(line)
+        #     continue
+        res.append(line)
+    return "\n".join(res)
+
 
 def parseFile(file_p, out_p):
     with open(file_p, "r", encoding="utf8") as fp:
         code = fp.read()
         code = handleClassHeader(code)
         # code = processCompressedIfELseInAllCode(code)
-        code = processSwitchCases(code)
+        # code = processSwitchCases(code)
         for pattern, repl in patterns.items():
-            code = re.sub(pattern, repl, code, flags=re.M)
+            code = re.sub(pattern, repl, code, flags=re.MULTILINE)
         code = deleteFirstTwoSpaces(code)
         code = handleIndent(code)
+        code = postSwitchCaseProcess(code)
     with open(out_p, "w") as fp:
         fp.write(code)
 
 
 
+
+ROOTDIR = pathlib.Path(os.path.dirname(__file__))
 # parseFolderFiles("AS3ToPythonConverter/scripts", "AS3ToPythonConverter/connectionType")
 t = perf_counter()
-parseFile("scripts/AS3ToPythonConverter/target.as", "scripts/AS3ToPythonConverter/BooleanByteWrapper.py")
-print("parsin took:", perf_counter() - t)
+parseFile(ROOTDIR / "target.as", ROOTDIR / "RoleplayContextFrame.py")
+print("parsing took:", perf_counter() - t)

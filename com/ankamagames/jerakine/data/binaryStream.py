@@ -15,13 +15,17 @@ class BinaryStream:
     @property
     def position(self):
         return self._stream.tell()
-    
+
+    @position.setter
+    def position(self, value):
+        self._stream.seek(value)
+
     def seek(self, value:int):
         self._stream.seek(value)
-    
+
     def close(self):
         self._stream.close()
-        
+
     def remaining(self):
         position = self._stream.tell()
         self._stream.seek(0, 2)
@@ -41,10 +45,10 @@ class BinaryStream:
 
     def readByte(self):
         return self._unpack('b')
-    
+
     def readUnsignedByte(self) -> int:
         return int.from_bytes(self.readBytes(1), "big")
-    
+
     def readUchar(self):
         return self._unpack('B')
 

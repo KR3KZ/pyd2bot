@@ -23,7 +23,7 @@ class Job(IDataCenter):
       
       @staticmethod
       def getJobById(id:int) -> 'Job':
-         return GameData.getobject(Job.MODULE,id)
+         return GameData.getObject(Job.MODULE,id)
       
       @staticmethod
       def getJobs() -> list['Job']:

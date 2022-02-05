@@ -1,6 +1,5 @@
-from abc import ABC
 
 
-class IDestroyable(ABC):
+class IDestroyable:
     def destroy() -> None:
         pass

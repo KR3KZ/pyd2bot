@@ -29,19 +29,19 @@ logger = Logger(__name__)
 
 
 class ServerConnection(IServerConnection):
-   
+
    DEBUG_VERBOSE:bool = False
-   
+
    LOG_ENCODED_CLIENT_MESSAGES:bool = False
-   
+
    DEBUG_LOW_LEVEL_VERBOSE:bool = False
-   
+
    DEBUG_DATA:bool = True
-   
+
    LATENCY_AVG_BUFFER_SIZE:int = 50
-   
+
    MESSAGE_SIZE_ASYNC_THRESHOLD:int = 300 * 1024
- 
+
    def __init__(self, host:str = None, port:int = 0, id:str = "", secure:bool = False):
       self._latencyBuffer = []
       self._asyncMessages = list[INetworkMessage]()
@@ -83,27 +83,27 @@ class ServerConnection(IServerConnection):
       elif not self.checkClosed():
          logger.warn(f"[{self._id}] Tried to close a socket while it had already been disconnected.")
          EnterFrameDispatcher().removeEventListener(self.onEnterFrame)
-   
+
    @property
    def rawParser(self) -> RawDataParser:
       return self._rawParser
-   
+
    @rawParser.setter
    def rawParser(self, value:RawDataParser) -> None:
       self._rawParser = value
-   
+
    @property
    def handler(self) -> MessageHandler:
       return self._handler
-   
+
    @handler.setter
    def handler(self, value:MessageHandler) -> None:
       self._handler = value
-   
+
    @property
    def pauseBuffer(self) -> list:
       return self._pauseBuffer
-   
+
    @property
    def latencyAvg(self) -> int:
       latency:int = 0
@@ -113,43 +113,43 @@ class ServerConnection(IServerConnection):
       for latency in self._latencyBuffer:
          total += latency
       return total / len(self._latencyBuffer)
-   
+
    @property
    def latencySamplesCount(self) -> int:
       return len(self._latencyBuffer)
-   
+
    @property
    def latencySamplesMax(self) -> int:
       return self.LATENCY_AVG_BUFFER_SIZE
-   
+
    @property
    def port(self) -> int:
       return self._remoteSrvPort
-   
+
    @property
    def lastSent(self) -> int:
       return self._lastSent
 
    @property
    def lagometer(self) -> ILagometer:
-      return self._lagometer 
+      return self._lagometer
 
    @lagometer.setter
    def lagometer(self, l:ILagometer) -> None:
       self._lagometer = l
-   
+
    @property
    def sendSequenceId(self) -> int:
       return self._sendSequenceId
-   
+
    @property
    def connected(self) -> bool:
       return self._socket.connected
-   
+
    @property
    def connecting(self) -> bool:
       return self._connecting
-   
+
    def connect(self, host:str, port:int) -> None:
       if self._connecting or self.disabled or self.disabledIn and self.disabledOut:
          return
@@ -176,7 +176,7 @@ class ServerConnection(IServerConnection):
       if isinstance(v, INetworkMessage):
          className += ", id: " + v.getMessageId()
       return className
-   
+
    def send(self, msg:INetworkMessage, connectionId:str = "") -> None:
       if self.DEBUG_DATA:
          logger.debug(f"[{self._id}] [SND] > {msg.__class__.__name__ if self.DEBUG_VERBOSE else msg}")
@@ -189,7 +189,7 @@ class ServerConnection(IServerConnection):
             self._outputBuffer.append(msg)
          return
       self.lowSend(msg)
-   
+
    def __str__(self) -> str:
       status = "Server connection status:\n"
       status += "  Connected:       " + ("Yes" if self._socket.connected else "No") + "\n"
@@ -210,10 +210,10 @@ class ServerConnection(IServerConnection):
          status += "    Message ID:      " + self._splittedPacketId + "\n"
          status += "    Awaited length:  " + self._splittedPacketLength + "\n"
       return status
-   
+
    def pause(self) -> None:
       self._pause = True
-   
+
    def resume(self) -> None:
       self._pause = False
       while len(self._pauseBuffer) and not self._pause:
@@ -222,44 +222,44 @@ class ServerConnection(IServerConnection):
             logger.debug("[" + str(self._id) + "] [RCV] (after Resume) " + msg.__class__.__name__)
          self._handler.process(msg)
       self._pauseBuffer = []
-   
+
    def stopConnectionTimeout(self) -> None:
       if self._timeoutTimer:
          self._timeoutTimer.cancel()
          self._timeoutTimer = None
-   
+
    def addEventListener(self, type:str, listener:FunctionType, useCapture:bool = False, priority:int = 0, useWeakReference:bool = False) -> None:
       self._socket.addEventListener(type, listener, useCapture, priority, useWeakReference)
-   
+
    def dispatchEvent(self, event:Event) -> bool:
       return self._socket.dispatchEvent(event)
-   
+
    def hasEventListener(self, type:str) -> bool:
       return self._socket.hasEventListener(type)
-   
+
    def removeEventListener(self, type:str, listener:FunctionType, useCapture:bool = False) -> None:
       self._socket.removeEventListener(type,listener,useCapture)
-   
+
    def willTrigger(self, type:str) -> bool:
       return self._socket.willTrigger(type)
-   
+
    def ConnectingOnAnotherPort(self, port:int) -> None:
       self.connect(self._remoteSrvHost, port)
-   
+
    def addListeners(self) -> None:
       self._socket.addEventListener(ProgressEvent.SOCKET_DATA, self.onSocketData, 0)
       self._socket.addEventListener(BasicEvent.CONNECT, self.onConnect, 0)
       self._socket.addEventListener(BasicEvent.CLOSE, self.onClose, float("inf"))
       self._socket.addEventListener(IOErrorEvent.IO_ERROR, self.onSocketError, 0)
       EnterFrameDispatcher().addEventListener(self.onEnterFrame, EnterFrameConst.SERVER_CONNECTION)
-   
+
    def removeListeners(self) -> None:
       self._socket.removeEventListener(ProgressEvent.SOCKET_DATA, self.onSocketData)
       self._socket.removeEventListener(BasicEvent.CONNECT, self.onConnect)
       self._socket.removeEventListener(BasicEvent.CLOSE, self.onClose)
       self._socket.removeEventListener(IOErrorEvent.IO_ERROR, self.onSocketError)
       EnterFrameDispatcher().removeEventListener(self.onEnterFrame)
-   
+
    def receive(self, input:ByteArray, fromEnterFrame:bool = False) -> None:
       try:
          if input.remaining() > 0:
@@ -286,7 +286,7 @@ class ServerConnection(IServerConnection):
       except Exception as e:
          logger.error("[" + str(self._id) + "] Error while reading socket. \n", exc_info=True)
          self.close()
-   
+
    def checkClosed(self) -> bool:
       if self._willClose:
          if len(self._asyncTrees) == 0:
@@ -294,7 +294,7 @@ class ServerConnection(IServerConnection):
             self.dispatchEvent(BasicEvent.CLOSE)
          return True
       return False
-   
+
    def process(self, msg:INetworkMessage) -> None:
       if msg.unpacked:
          if isinstance(msg, INetworkDataContainerMessage):
@@ -306,15 +306,15 @@ class ServerConnection(IServerConnection):
                self._handler.process(msg)
          else:
             self._pauseBuffer.append(msg)
-   
+
    def getMessageId(self, firstOctet:int) -> int:
       return firstOctet >> NetworkMessage.BIT_RIGHT_SHIFT_LEN_PACKET_ID
-   
+
    def readMessageLength(self, staticHeader:int, src:ByteArray) -> int:
       byteLenDynamicHeader:int = staticHeader & NetworkMessage.BIT_MASK
       messageLength:int = int.from_bytes(src.read(byteLenDynamicHeader), "big")
       return messageLength
-   
+
    def lowSend(self, msg:NetworkMessage) -> None:
       if self.LOG_ENCODED_CLIENT_MESSAGES and msg.getMessageId() not in [5607, 6372, 6156, 6609, 4, 6119, 110, 6540, 6648, 6608]:
          data = msg.pack()
@@ -325,13 +325,14 @@ class ServerConnection(IServerConnection):
       self._sendSequenceId += 1
       if self._lagometer:
          self._lagometer.ping(msg)
-   
+
    def lowReceive(self, src:ByteArray) -> NetworkMessage:
       if self.DEBUG_LOW_LEVEL_VERBOSE and self._splittedPacket:
          logger.debug(f"Gathering splited packet of length {self._splittedPacketLength},"\
          f"already received {len(self._inputBuffer)}, remaining {self._splittedPacketLength - len(self._inputBuffer)}. I just received {src.remaining()}")
       messageLength = 0
-      
+
+
       if not self._splittedPacket:
 
          if src.remaining() < 2:
@@ -369,12 +370,12 @@ class ServerConnection(IServerConnection):
             self._splittedPacketId = messageId
             self._splittedPacket = True
             self._inputBuffer = src.read(src.remaining())
-            
+
             return None
 
          if self.DEBUG_LOW_LEVEL_VERBOSE:
             logger.info(f"[{self._id}] Not enough data to read message ID, byte available : {src.remaining()}  (needed :  {staticHeader & NetworkMessage.BIT_MASK} )")
-        
+
          self._staticHeader = staticHeader
          self._splittedPacketLength = messageLength
          self._splittedPacketId = messageId
@@ -398,14 +399,14 @@ class ServerConnection(IServerConnection):
             msg = self._rawParser.parse(self._inputBuffer, self._splittedPacketId, self._splittedPacketLength)
             if self.DEBUG_LOW_LEVEL_VERBOSE:
                logger.info(f"[{self._id}] Full parsing done")
-               
+
          self._splittedPacket = False
          self._inputBuffer = ByteArray()
          return msg
 
       self._inputBuffer += src.read(src.remaining())
       return None
-   
+
    def getUnpackMode(self, messageId:int, messageLength:int) -> int:
       if messageLength == 0:
          return UnpackMode.SYNC
@@ -418,7 +419,7 @@ class ServerConnection(IServerConnection):
       else:
          result = UnpackMode.SYNC
       return result
-   
+
    def computeMessage(self, msg:INetworkMessage, tree:FuncTree) -> None:
       if not tree.goDown():
          msg.unpacked = True
@@ -426,7 +427,7 @@ class ServerConnection(IServerConnection):
       self._asyncMessages.append(msg)
       self._asyncTrees.append(tree)
       EnterFrameDispatcher().addEventListener(self.onEnterFrame, EnterFrameConst.SERVER_CONNECTION)
-   
+
    def onEnterFrame(self) -> None:
       start = perf_counter()
       if self._socket.connected:
@@ -443,7 +444,7 @@ class ServerConnection(IServerConnection):
                   EnterFrameDispatcher().removeEventListener(self.onEnterFrame)
                   return
             if perf_counter() - start < self._maxUnpackTime: break
-         
+
    def updateLatency(self) -> None:
       if self._pause or len(self._pauseBuffer) > 0 or self._latestSent == 0:
          return
@@ -453,7 +454,7 @@ class ServerConnection(IServerConnection):
       self._latencyBuffer.append(latency)
       if len(self._latencyBuffer) > self.LATENCY_AVG_BUFFER_SIZE:
          self._latencyBuffer.pop(0)
-   
+
    def onConnect(self, e:Event) -> None:
       self._connecting = False
       self.stopConnectionTimeout()
@@ -465,7 +466,7 @@ class ServerConnection(IServerConnection):
       self._outputBuffer = []
       if self._handler:
          self._handler.process(ConnectedMessage())
-   
+
    def onClose(self, e:Event) -> None:
       if len(self._asyncMessages) != 0:
          e.stopImmediatePropagation()
@@ -473,7 +474,7 @@ class ServerConnection(IServerConnection):
          return
       if self.DEBUG_DATA:
          logger.debug("[" + str(self._id) + "] Connection closed.")
-      Timer(30, self.removeListeners).start()
+      Timer(3, self.removeListeners).start()
       if self._lagometer:
          self._lagometer.stop()
       from com.ankamagames.jerakine.network.ServerConnectionClosedMessage import ServerConnectionClosedMessage
@@ -487,19 +488,19 @@ class ServerConnection(IServerConnection):
       self._input = ByteArray()
       self._splittedPacket = False
       self._staticHeader = -1
-   
+
    def onSocketData(self, pe:ProgressEvent) -> None:
       if self.DEBUG_LOW_LEVEL_VERBOSE:
          logger.info(f"[{self._id}] Receive Event, byte available : {self._socket.buff.remaining()}")
       self.receive(self._socket.buff)
-   
+
    def onSocketError(self, e:IOErrorEvent) -> None:
       if self._lagometer:
          self._lagometer.stop()
       logger.error("[" + str(self._id) + "] Failure while opening socket.")
       self._connecting = False
       self._handler.process(ServerConnectionFailedMessage(self, e.text))
-   
+
    def onSocketTimeOut(self) -> None:
       if self._lagometer:
          self._lagometer.stop()
@@ -511,4 +512,3 @@ class ServerConnection(IServerConnection):
       else:
          logger.error("[" + str(self._id) + "] Failure while opening socket, timeout.")
          self._handler.process(ServerConnectionFailedMessage(self, "timeout"))
-   
