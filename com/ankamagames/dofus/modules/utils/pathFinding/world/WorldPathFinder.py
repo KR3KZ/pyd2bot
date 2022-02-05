@@ -11,11 +11,12 @@ from com.ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEnti
 from com.ankamagames.dofus.modules.utils.pathFinding.tools.TimeDebug import TimeDebug
 from com.ankamagames.jerakine.entities.interfaces.IEntity import IEntity
 from com.ankamagames.jerakine.logger.Logger import Logger
+from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
 logger = Logger(__name__)
 
 
-class WorldPathFinder:
+class WorldPathFinder(metaclass=Singleton):
     
     playedCharacterManager:PlayedCharacterManager
     
@@ -61,7 +62,7 @@ class WorldPathFinder:
         playedEntityCellId:int = playedEntity.position.cellId
         playerCell:CellData = MapDisplayManager().dataMap.cells[playedEntityCellId]
         self.src = self.worldGraph.getVertex(playedCharacterManager.currentMap.mapId, playerCell.linkedZoneRP)
-        if self.src == None:
+        if self.src is None:
             callback(None)
             return
         self.linkedZone = 1
@@ -86,7 +87,7 @@ class WorldPathFinder:
         cb:FunctionType = None
         dstV:Vertex = self.worldGraph.getVertex(self.dst, self.linkedZone)
         self.linkedZone += 1
-        if dstV == None:
+        if dstV is None:
             logger.info("no path found to go to map " + str(self.dst))
             cb = self.callback
             self.callback = None

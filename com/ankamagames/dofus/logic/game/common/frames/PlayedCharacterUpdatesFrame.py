@@ -9,6 +9,7 @@ from com.ankamagames.dofus.kernel.Kernel import Kernel
 from com.ankamagames.dofus.kernel.net.ConnectionsHandler import ConnectionsHandler
 from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerManager
 from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManager
+from com.ankamagames.dofus.logic.game.common.managers.EntitiesManager import EntitiesManager
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
 from com.ankamagames.dofus.logic.game.common.managers.TimerManager import TimeManager
 from com.ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEntities
@@ -150,6 +151,7 @@ class PlayedCharacterUpdatesFrame(Frame):
                for opt in grpci.humanoidInfo.options:
                   if isinstance(opt, HumanOptionAlliance):
                      PlayedCharacterManager().characteristics.alignmentInfos.aggressable = opt.aggressable
+               EntitiesManager().addAnimatedEntity(grpci)
          if not (PlayedCharacterManager().characteristics.alignmentInfos.aggressable == AggressableStatusEnum.AvA_DISQUALIFIED or PlayedCharacterManager().characteristics.alignmentInfos.aggressable == AggressableStatusEnum.AvA_ENABLED_AGGRESSABLE or PlayedCharacterManager().characteristics.alignmentInfos.aggressable == AggressableStatusEnum.AvA_ENABLED_NON_AGGRESSABLE or PlayedCharacterManager().characteristics.alignmentInfos.aggressable == AggressableStatusEnum.AvA_PREQUALIFIED_AGGRESSABLE):
             return False
          newSubArea = SubArea.getSubAreaByMapId(mcidmsg.mapId)

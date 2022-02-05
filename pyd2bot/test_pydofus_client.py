@@ -9,6 +9,7 @@ import com.ankamagames.dofus.logic.connection.managers.AuthentificationManager a
 import com.ankamagames.dofus.kernel.net.ConnectionsHandler as connh
 from com.ankamagames.dofus.logic.game.approach.actions.CharacterSelectionAction import CharacterSelectionAction
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
+from com.ankamagames.dofus.modules.utils.pathFinding.world.WorldPathFinder import WorldPathFinder
 from com.ankamagames.jerakine.data.I18nFileAccessor import I18nFileAccessor
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.resources.events.ResourceLoadedEvent import ResourceLoadedEvent
@@ -32,6 +33,7 @@ class TestBot:
     def __init__(self):
         # Load language file to be able to translate ids to actual text
         I18nFileAccessor().init(Constants.LANG_FILE_PATH)
+        WorldPathFinder().init()
 
     def main(self):
         krnl.Kernel().init()
@@ -66,10 +68,10 @@ class TestBot:
         pass
 
     def onMapDataLoaded(self, e:ResourceLoadedEvent):
-        gmap:Map = e.resource
-        logger.info("Map data loaded: " + str(gmap.id))
         logger.info(f"Bot is currently in the map {PlayedCharacterManager().currentMap}")
-        pass
+    
+    def onPathFound(self, result):
+        logger.info("sheesh")
 
 
 if __name__ == "__main__":

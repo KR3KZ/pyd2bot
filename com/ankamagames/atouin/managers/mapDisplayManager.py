@@ -1,3 +1,5 @@
+from com.ankamagames.atouin.messages.MapLoadedMessage import MapLoadedMessage
+from com.ankamagames.dofus.kernel.Kernel import Kernel
 from com.ankamagames.jerakine.logger.Logger import Logger
 import sys
 from time import perf_counter
@@ -67,4 +69,6 @@ class MapDisplayManager(metaclass=Singleton):
       dmpm.DataMapProvider().resetSpecialEffects()
       self.currentDataMap = map
       self._currentMap = WorldPoint.fromMapId(map.id)
-      BotEventsManager().dispatch(BotEventsManager.MAP_DATA_LOADED, ResourceLoadedEvent(resource=map))
+      msg = MapLoadedMessage()
+      msg.id = self._currentMap.mapId
+      Kernel().getWorker().process(msg)

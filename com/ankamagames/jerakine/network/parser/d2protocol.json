@@ -9,7 +9,7 @@
             "boolfields": [],
             "hash_function": false
         },
-        "AccountTagInformation": {
+        "AccountTagInformation": { 
             "name": "AccountTagInformation",
             "package": "com.ankamagames.dofus.network.types.common.AccountTagInformation",
             "parent": null,

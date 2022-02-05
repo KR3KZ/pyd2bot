@@ -11,6 +11,7 @@ class DofusEntities:
    _localizers:list[IEntityLocalizer] = list[IEntityLocalizer]()
 
    
+   @classmethod
    def getEntity(cls, entityId:float) -> IEntity:
       localizer:IEntityLocalizer = None
       foundEntity:IEntity = None
@@ -20,6 +21,7 @@ class DofusEntities:
             return foundEntity
       return EntitiesManager().getEntity(entityId)
    
+   @classmethod
    def registerLocalizer(cls, localizer:IEntityLocalizer) -> None:
       currentLocalizer:IEntityLocalizer = None
       clazz:str = localizer.__class__.__name__
@@ -30,6 +32,7 @@ class DofusEntities:
             raise Exception("There\'s more than one " + currentClazz + " localizer added to DofusEntites. Nope, that won\'t work.")
       cls._localizers.append(localizer)
    
+   @classmethod
    def reset(cls) -> None:
       localizer:IEntityLocalizer = None
       for i in range(0, len(cls._localizers), 1):

@@ -65,7 +65,6 @@ class RoleplayContextFrame(Frame):
                 self._previousMapId = PlayedCharacterManager().currentMap.mapId
 
             PlayedCharacterManager().currentMap = wp
-            logger.info("Current map changed to " + str(PlayedCharacterManager().currentMap.mapId))
             MapDisplayManager().loadMap(int(mcmsg.mapId))
             return True
 

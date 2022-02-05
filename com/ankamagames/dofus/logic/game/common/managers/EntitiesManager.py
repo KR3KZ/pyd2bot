@@ -1,29 +1,28 @@
 from com.ankamagames.jerakine.logger.Logger import Logger
-from com.ankamagames.jerakine.entities.interfaces.IEntity import IEntity
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+   from com.ankamagames.jerakine.entities.interfaces.IEntity import IEntity
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 logger = Logger(__name__)  
 
 
 class EntitiesManager(metaclass=Singleton):
-
    RANDOM_ENTITIES_ID_START:float = -1000000
-   _entitiesScheduledForDestruction:list = []
-   _currentRandomEntity:float = -1000000
-   _entities = dict[IEntity]()
 
    def __init__(self):
-      self._entities = []
+      self._entities = dict[int, 'IEntity']()
       self._entitiesScheduledForDestruction = []
+      self._currentRandomEntity:float = self.RANDOM_ENTITIES_ID_START
 
-   def addAnimatedEntity(self, entityID:float, entity:IEntity, strata:int = 0) -> None:
+   def addAnimatedEntity(self, entityID:float, entity:'IEntity', strata:int = 0) -> None:
       if self._entities.get(entityID) != None:
          logger.warn("Entity overwriting! Entity " + entityID + " has been replaced.")
       self._entities[entityID] = entity
 
-   def getEntity(self, entityID:float) -> IEntity:
-      return self._entities[entityID]
+   def getEntity(self, entityID:float) -> 'IEntity':
+      return self._entities.get(entityID)
 
-   def getEntityID(self, entity:IEntity) -> float:
+   def getEntityID(self, entity:'IEntity') -> float:
       i = None
       for i in self._entities:
          if entity == self._entities[i]:
@@ -71,7 +70,7 @@ class EntitiesManager(metaclass=Singleton):
          self._currentRandomEntity -= 1
       return self._currentRandomEntity
 
-   def getEntityOnCell(self, cellId:int, oClass = None) -> IEntity:
+   def getEntityOnCell(self, cellId:int, oClass = None) -> 'IEntity':
       useFilter = oClass is not None
       isMultiFilter:bool = useFilter and isinstance(oClass, list)
       for e in self._entities:
