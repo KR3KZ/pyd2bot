@@ -51,7 +51,7 @@ class Pool:
             self._pool.append(self._pooledClass())
          self._totalSize += self._growSize
          if self._warnLimit > 0 and self._totalSize > self._warnLimit:
-            logger.warn(f"Pool of {self._pooledClass} size beyond the warning limit. Size: {self._totalSize} , limit: {self._warnLimit}.")
+            logger.warn(f"Pool of {self._pooledClass.__name__} size beyond the warning limit. Size: {self._totalSize} , limit: {self._warnLimit}.")
       node:LinkedListNode = self._pool.shift()
       if self._pooledClass is PoolableLinkedListNode:
          o = node

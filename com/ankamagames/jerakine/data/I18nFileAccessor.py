@@ -8,7 +8,7 @@ logger = Logger(__name__)
 
 class I18nFileAccessor(metaclass=Singleton):
 
-
+   directBuffer = None
    def init(self, fileUri:str):
       nativeFile = pathlib.Path(fileUri)
       if not nativeFile or not nativeFile.exists():
@@ -78,7 +78,7 @@ class I18nFileAccessor(metaclass=Singleton):
       pointer = self.indexes.get(key)
       if not pointer:
          return None
-      if self.directBuffer == None:
+      if self.directBuffer is None:
          self.stream.position = pointer
          return self.stream.readUTF()
       self.directBuffer.position = pointer

@@ -13,7 +13,6 @@ from com.ankamagames.jerakine.messages.Frame import Frame
 from com.ankamagames.jerakine.messages.Message import Message
 from com.ankamagames.jerakine.types.enums.Priority import Priority
 
-
 class RoleplayContextFrame(Frame):
 
     logger = Logger(__name__)
@@ -62,11 +61,11 @@ class RoleplayContextFrame(Frame):
             if PlayedCharacterManager().isInHouse:
                 wp = WorldPointWrapper(mcmsg.mapId, True, PlayedCharacterManager().currentMap.outdoorX, PlayedCharacterManager().currentMap.outdoorY)
             else:
-                wp = WorldPointWrapper(mcmsg.mapId)
+                wp = WorldPointWrapper(int(mcmsg.mapId))
             if PlayedCharacterManager().currentMap:
                 self._previousMapId = PlayedCharacterManager().currentMap.mapId
             PlayedCharacterManager().currentMap = wp
-            return False
+            return True
 
         elif isinstance(msg, GameContextDestroyMessage):
             Kernel().getWorker().removeFrame(self)

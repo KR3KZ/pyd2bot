@@ -79,8 +79,6 @@ class PlayedCharacterManager(IDestroyable):
 
    previousMap:WorldPointWrapper
 
-   _currentSubArea:SubArea
-
    previousSubArea:SubArea
 
    previousWorldMapId:int
@@ -154,6 +152,48 @@ class PlayedCharacterManager(IDestroyable):
       self.lastCoord = Point(0, 0)
       self.waitingGifts = list()
       self._infos = None
+      self._currentSubArea:SubArea = None
+      self._currentMap:WorldPointWrapper = None
+      self.previousMap:WorldPointWrapper = None
+      self.previousSubArea:SubArea = None
+      self.previousWorldMapId:int = 0
+      self.jobs = list()
+      self.isInExchange = False
+      self.isInHisHouse = False
+      self.isInHouse = False
+      self.isIndoor = False
+      self.isInHisHavenbag = False
+      self.isInHavenbag = False
+      self.currentHavenbagRooms = list[HavenBagRoomPreviewInformation]()
+      self.isInBreach = False
+      self.isInAnomaly = False
+      self.restrictions = ActorRestrictionsInformations()
+      self.realEntityLook = EntityLook()
+      self.characteristics = CharacterCharacteristicsInformations()
+      self.spellsInventory = list()
+      self.playerSpellList = list()
+      self.playerShortcutList = list()
+      self.inventory = list['ItemWrapper']()
+      self.currentWeapon = None
+      self.inventoryWeight = 0
+      self.shopWeight = 0
+      self.inventoryWeightMax = 0
+      self.state = 0
+      self.publicMode = False
+      self.isRidding = False
+      self.isPetsMounting = False
+      self.petsMount = None
+      self.hasCompanion = False
+      self.mount = None
+      self.isFighting = False
+      self.fightId = -1
+      self.teamId = 0
+      self.isSpectator = False
+      self.experiencePercent = 0
+      self.achievementPoints = 0
+      self.achievementPercent = 0
+      self.applicationInfo = GuildApplicationInformation()
+      self.guildApplicationInfo = GuildInformations()
       super().__init__()
 
    @property

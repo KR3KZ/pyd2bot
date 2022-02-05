@@ -269,7 +269,6 @@ class Worker(EventDispatcher, MessageHandler):
    def pushFrame(self, frame:Frame) -> None:
       if frame.pushed():
          self._framesList.append(frame)
-         logger.debug("framelist size: " + str(len(self._framesList)))
          self._framesList.sort(key=lambda x: x.priority.value, reverse=True)
          self._currentFrameTypesCache[type(frame)] = frame
          if self.has_listeners(FramePushedEvent.EVENT_FRAME_PUSHED):

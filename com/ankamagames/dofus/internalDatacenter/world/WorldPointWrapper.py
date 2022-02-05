@@ -7,25 +7,25 @@ logger = Logger(__name__)
 
 
 class WorldPointWrapper(WorldPoint):
-      
+
       outdoorMapId:float
-      
+
       _outdoorX:int
-      
+
       _outdoorY:int
-      
+
       _topNeighbourId:float = -1
-      
+
       _bottomNeighbourId:float = -1
-      
+
       _leftNeighbourId:float = -1
-      
+
       _rightNeighbourId:float = -1
-      
+
       def __init__(self, mapid:float, fixedOutdoor:bool = False, outdoorX:int = 0, outdoorY:int = 0):
          mapInfo:MapPosition = None
          super().__init__()
-         mapId = mapid
+         self._mapId = mapid
          self.setFromMapId()
          if fixedOutdoor:
             self._outdoorX = outdoorX
@@ -54,31 +54,31 @@ class WorldPointWrapper(WorldPoint):
                self._leftNeighbourId = mapScrollaction.leftMapId
             if mapScrollaction.rightExists:
                self._rightNeighbourId = mapScrollaction.rightMapId
-      
+
       @property
       def outdoorX(self) -> int:
          return self._outdoorX
-      
+
       @property
       def outdoorY(self) -> int:
          return self._outdoorY
-      
+
       @property
       def topNeighbourId(self) -> float:
          return self._topNeighbourId
-      
+
       @property
       def bottomNeighbourId(self) -> float:
          return self._bottomNeighbourId
-      
+
       @property
       def leftNeighbourId(self) -> float:
          return self._leftNeighbourId
-      
+
       @property
       def rightNeighbourId(self) -> float:
          return self._rightNeighbourId
-      
+
       def setOutdoorCoords(self, x:int, y:int) -> None:
          self._outdoorX = x
          self._outdoorY = y

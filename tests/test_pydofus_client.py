@@ -7,6 +7,7 @@ from com.ankamagames.dofus.logic.connection.actions.ServerSelectionAction import
 import com.ankamagames.dofus.logic.connection.managers.AuthentificationManager as auth
 import com.ankamagames.dofus.kernel.net.ConnectionsHandler as connh
 from com.ankamagames.dofus.logic.game.approach.actions.CharacterSelectionAction import CharacterSelectionAction
+from com.ankamagames.jerakine.data.I18nFileAccessor import I18nFileAccessor
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.network.ServerConnectionClosedMessage import ServerConnectionClosedMessage
 from pyd2bot.events.BotEventsManager import BotEventsManager
@@ -28,7 +29,7 @@ CONN = {
 class TestBot:
 
     def __init__(self):
-        pass
+        I18nFileAccessor().init(r"C:\Users\majdoub\AppData\Local\Ankama\Dofus\data\i18n\i18n_fr.d2i")
 
     def main(self):
         krnl.Kernel().init()

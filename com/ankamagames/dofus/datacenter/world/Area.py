@@ -7,54 +7,55 @@ from com.ankamagames.jerakine.data.I18n import I18n
 from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.utils.misc.StringUtils import StringUtils
+from flash.geom.Rectangle import Rectangle
 logger = Logger(__name__)
 
 class Area(IDataCenter):
-      
+
    MODULE:str = "Areas"
 
-   _allAreas:list
 
-   
-   id:int
-   
-   nameId:int
-   
-   superAreaId:int
-   
-   containHouses:bool
-   
-   containPaddocks:bool
-   
-   # bounds:Rectangle
-   
-   worldmapId:int
-   
-   hasWorldMap:bool
-   
-   hasSuggestion:bool
-   
-   _name:str
-   
-   _undiatricalName:str
-   
-   _superArea:SuperArea
-   
-   _hasVisibleSubAreas:bool
-   
-   _hasVisibleSubAreasInitialized:bool
-   
-   _worldMap:WorldMap
-   
    def __init__(self):
+      self._allAreas:list = None
+
+      self.id:int = None
+
+      self.nameId:int = None
+
+      self.superAreaId:int = None
+
+      self.containHouses:bool = None
+
+      self.containPaddocks:bool = None
+
+      self.bounds:Rectangle = None
+
+      self.worldmapId:int = None
+
+      self.hasWorldMap:bool = None
+
+      self.hasSuggestion:bool = None
+
+      self._name:str = None
+
+      self._undiatricalName:str = None
+
+      self._superArea:SuperArea = None
+
+      self._hasVisibleSubAreas:bool = None
+
+      self._hasVisibleSubAreasInitialized:bool = None
+
+      self._worldMap:WorldMap = None
       super().__init__()
-   
+
+   @classmethod
    def getAreaById(cls, id:int) -> 'Area':
-      area:Area = GameData.getObject(cls.MODULE,id)
+      area:Area = GameData.getObject(cls.MODULE, id)
       if not area or not area.superArea or not area.hasVisibleSubAreas:
          return None
       return area
-   
+
    @classmethod
    def getAllArea(cls) -> list:
       if cls._allAreas:
@@ -69,26 +70,26 @@ class Area(IDataCenter):
       if not self._name:
          self._name = I18n.getText(self.nameId)
       return self._name
-   
+
    @property
    def undiatricalName(self) -> str:
       if not self._undiatricalName:
          self._undiatricalName = StringUtils.noAccent(self.name).lower()
       return self._undiatricalName
-   
+
    @property
    def superArea(self) -> SuperArea:
       if not self._superArea:
          self._superArea = SuperArea.getSuperAreaById(self.superAreaId)
       return self._superArea
-   
+
    @property
    def hasVisibleSubAreas(self) -> bool:
       if not self._hasVisibleSubAreasInitialized:
          self._hasVisibleSubAreas = True
          self._hasVisibleSubAreasInitialized = True
       return self._hasVisibleSubAreas
-   
+
    @property
    def worldmap(self) -> WorldMap:
       if not self._worldMap:

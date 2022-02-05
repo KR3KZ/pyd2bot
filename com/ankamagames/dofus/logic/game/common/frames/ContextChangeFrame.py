@@ -30,22 +30,18 @@ class ContextChangeFrame(Frame):
       return True
 
    def process(self, msg:Message) -> bool:
-      gccmsg:GameContextCreateMessage = None
-      gcqmsg:GameContextQuitMessage = None
-      mcmsg:CurrentMapMessage = None
+
       if isinstance(msg, GameContextCreateMessage):
          context = GameContextEnum(msg.context)
          if context == GameContextEnum.ROLE_PLAY:
             Kernel().getWorker().addFrame(RoleplayContextFrame())
             BotEventsManager().dispatch(PlayerEvents.SWITCH_TO_ROLEPLAY)
-
          elif context ==  GameContextEnum.FIGHT:
             # Kernel().getWorker().addFrame(FightContextFrame())
             BotEventsManager().dispatch(PlayerEvents.SWITCH_TO_FIGHT)
-
          else:
-            Kernel().panic(PanicMessages.WRONG_CONTEXT_CREATED,[gccmsg.context])
-            return True
+            Kernel().panic(PanicMessages.WRONG_CONTEXT_CREATED,[msg.context])
+         return True
 
       if isinstance(msg, GameContextQuitAction):
          gcqmsg = GameContextQuitMessage()
