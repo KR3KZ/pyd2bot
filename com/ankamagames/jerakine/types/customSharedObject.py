@@ -73,12 +73,12 @@ class CustomSharedObject:
       try:
          self._fileStream = open(self._file, "wb")
          amfEncoded = pyamf.encode(data)
-         self._fileStream.write(amfEncoded)
+         self._fileStream.write(amfEncoded.read())
          self._fileStream.close()
       except Exception as e:
          if self._fileStream:
             self._fileStream.close()
-         logger.error("Unable to write file : " + self._file)
+         logger.error(f"Unable to write file : {self._file}", exc_info=True)
          return False
       return True
    

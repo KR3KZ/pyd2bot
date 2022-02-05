@@ -47,7 +47,6 @@ from com.ankamagames.jerakine.network.messages.ServerConnectionFailedMessage imp
 from com.ankamagames.jerakine.types.DataStoreType import DataStoreType
 from com.ankamagames.jerakine.types.enums.Priority import Priority
 from pyd2bot.events.BotEventsManager import BotEventsManager
-from pyd2bot.events.PlayerEvents import PlayerEvents
 logger = Logger(__name__)
 
 class GameServerApproachFrame(Frame):
@@ -122,7 +121,7 @@ class GameServerApproachFrame(Frame):
          for chi in clmsg.characters:
             self._charactersList.append(chi)
          PlayerManager().charactersList = self._charactersList
-         BotEventsManager().dispatch(PlayerEvents.CHARACTER_SELECTION)
+         BotEventsManager().dispatch(BotEventsManager.CHARACTER_SELECTION)
          return True
 
       elif isinstance(msg, ServerConnectionFailedMessage):

@@ -12,7 +12,6 @@ from com.ankamagames.jerakine.messages.Frame import Frame
 from com.ankamagames.jerakine.messages.Message import Message
 from com.ankamagames.jerakine.types.enums.Priority import Priority
 from pyd2bot.events.BotEventsManager import BotEventsManager
-from pyd2bot.events.PlayerEvents import PlayerEvents
 logger = Logger(__name__)
 
 
@@ -35,10 +34,10 @@ class ContextChangeFrame(Frame):
          context = GameContextEnum(msg.context)
          if context == GameContextEnum.ROLE_PLAY:
             Kernel().getWorker().addFrame(RoleplayContextFrame())
-            BotEventsManager().dispatch(PlayerEvents.SWITCH_TO_ROLEPLAY)
+            BotEventsManager().dispatch(BotEventsManager.SWITCH_TO_ROLEPLAY)
          elif context ==  GameContextEnum.FIGHT:
             # Kernel().getWorker().addFrame(FightContextFrame())
-            BotEventsManager().dispatch(PlayerEvents.SWITCH_TO_FIGHT)
+            BotEventsManager().dispatch(BotEventsManager.SWITCH_TO_FIGHT)
          else:
             Kernel().panic(PanicMessages.WRONG_CONTEXT_CREATED,[msg.context])
          return True

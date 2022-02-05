@@ -3,25 +3,22 @@ if TYPE_CHECKING:
    from com.ankamagames.dofus.internalDatacenter.items.ItemWrapper import ItemWrapper
    from com.ankamagames.dofus.internalDatacenter.items.WeaponWrapper import WeaponWrapper
    from com.ankamagames.dofus.internalDatacenter.mount.MountData import MountData
-from com.ankamagames.dofus.datacenter.world.SubArea import SubArea
-from com.ankamagames.dofus.datacenter.world.WorldMap import WorldMap
-from com.ankamagames.dofus.internalDatacenter.jobs.KnownJobWrapper import KnownJobWrapper
-from com.ankamagames.dofus.internalDatacenter.world.WorldPointWrapper import WorldPointWrapper
+   from com.ankamagames.dofus.network.types.game.character.choice.CharacterBaseInformations import CharacterBaseInformations
+   from com.ankamagames.dofus.internalDatacenter.stats.entityStats import EntityStats
+   from com.ankamagames.dofus.datacenter.world.SubArea import SubArea
+   from com.ankamagames.dofus.datacenter.world.WorldMap import WorldMap
+   from com.ankamagames.dofus.internalDatacenter.jobs.KnownJobWrapper import KnownJobWrapper
+   from com.ankamagames.dofus.internalDatacenter.world.WorldPointWrapper import WorldPointWrapper
+   from com.ankamagames.dofus.network.types.game.character.characteristic.CharacterCharacteristicsInformations import CharacterCharacteristicsInformations
+   from com.ankamagames.dofus.network.types.game.look.EntityLook import EntityLook
+   from com.ankamagames.dofus.network.types.game.character.restriction.ActorRestrictionsInformations import ActorRestrictionsInformations
 from com.ankamagames.dofus.network.enums.CharacterInventoryPositionEnum import CharacterInventoryPositionEnum
 from com.ankamagames.dofus.network.enums.PlayerLifeStatusEnum import PlayerLifeStatusEnum
-from com.ankamagames.dofus.network.types.game.character.characteristic.CharacterCharacteristicsInformations import CharacterCharacteristicsInformations
-from com.ankamagames.dofus.network.types.game.character.restriction.ActorRestrictionsInformations import ActorRestrictionsInformations
-from com.ankamagames.dofus.network.types.game.context.roleplay.GuildInformations import GuildInformations
-from com.ankamagames.dofus.network.types.game.guild.application.GuildApplicationInformation import GuildApplicationInformation
 from com.ankamagames.dofus.network.types.game.havenbag.HavenBagRoomPreviewInformation import HavenBagRoomPreviewInformation
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.dofus.internalDatacenter.dataEnum import DataEnum
-from com.ankamagames.dofus.internalDatacenter.stats.entityStats import EntityStats
 from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManager
 from com.ankamagames.dofus.network.protocolConstantsEnum import ProtocolConstantsEnum
-if TYPE_CHECKING:
-   from com.ankamagames.dofus.network.types.game.character.choice.CharacterBaseInformations import CharacterBaseInformations
-from com.ankamagames.dofus.network.types.game.look.EntityLook import EntityLook
 from com.ankamagames.jerakine.interfaces.IDestroyable import IDestroyable
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 from com.ankamagames.jerakine.types.Callback import Callback
@@ -29,119 +26,7 @@ from com.ankamagames.jerakine.types.positions.MapPoint import Point
 from damageCalculation.tools import StatIds
 logger = Logger(__name__)
 
-
-
-class PlayedCharacterManager(IDestroyable):
-
-   __metaclass__ = Singleton
-
-   _isPartyLeader:bool = False
-
-   _followingPlayerIds:list[float]
-
-   _soloIdols:list[int]
-
-   _partyIdols:list[int]
-
-   _infosAvailableCallbacks:list[Callback]
-
-   _knownZaapMapIds:list[float]
-
-   _infos:'CharacterBaseInformations'
-
-   restrictions:ActorRestrictionsInformations
-
-   realEntityLook:EntityLook
-
-   characteristics:CharacterCharacteristicsInformations
-
-   spellsInventory:list
-
-   playerSpellList:list
-
-   playerForgettableSpelldict:dict
-
-   playerMaxForgettableSpellsfloat:int = -1
-
-   playerShortcutList:list
-
-   inventory:list['ItemWrapper']
-
-   currentWeapon:'WeaponWrapper'
-
-   inventoryWeight:int
-
-   shopWeight:int
-
-   inventoryWeightMax:int
-
-   _currentMap:WorldPointWrapper
-
-   previousMap:WorldPointWrapper
-
-   previousSubArea:SubArea
-
-   previousWorldMapId:int
-
-   jobs:list
-
-   isInExchange:bool = False
-
-   isInHisHouse:bool = False
-
-   isInHouse:bool = False
-
-   isIndoor:bool = False
-
-   isInHisHavenbag:bool = False
-
-   isInHavenbag:bool = False
-
-   currentHavenbagRooms:list[HavenBagRoomPreviewInformation]
-
-   isInBreach:bool = False
-
-   isInAnomaly:bool = False
-
-   lastCoord:Point
-
-   isInParty:bool = False
-
-   state:int
-
-   publicMode:bool = False
-
-   isRidding:bool = False
-
-   isPetsMounting:bool = False
-
-   petsMount:'ItemWrapper'
-
-   hasCompanion:bool = False
-
-   mount:'MountData'
-
-   isFighting:bool = False
-
-   fightId:int = -1
-
-   teamId:int = 0
-
-   isSpectator:bool = False
-
-   experiencePercent:int = 0
-
-   achievementPoints:int = 0
-
-   achievementPercent:int = 0
-
-   waitingGifts:list
-
-   speedAjust:int = 0
-
-   applicationInfo:GuildApplicationInformation
-
-   guildApplicationInfo:GuildInformations
+class PlayedCharacterManager(IDestroyable, metaclass=Singleton):
 
    def __init__(self):
       self._followingPlayerIds = list[float]()
@@ -152,10 +37,10 @@ class PlayedCharacterManager(IDestroyable):
       self.lastCoord = Point(0, 0)
       self.waitingGifts = list()
       self._infos = None
-      self._currentSubArea:SubArea = None
-      self._currentMap:WorldPointWrapper = None
-      self.previousMap:WorldPointWrapper = None
-      self.previousSubArea:SubArea = None
+      self._currentSubArea:'SubArea' = None
+      self._currentMap:'WorldPointWrapper' = None
+      self.previousMap:'WorldPointWrapper' = None
+      self.previousSubArea:'SubArea' = None
       self.previousWorldMapId:int = 0
       self.jobs = list()
       self.isInExchange = False
@@ -167,9 +52,9 @@ class PlayedCharacterManager(IDestroyable):
       self.currentHavenbagRooms = list[HavenBagRoomPreviewInformation]()
       self.isInBreach = False
       self.isInAnomaly = False
-      self.restrictions = ActorRestrictionsInformations()
-      self.realEntityLook = EntityLook()
-      self.characteristics = CharacterCharacteristicsInformations()
+      self.restrictions:'ActorRestrictionsInformations' = None
+      self.realEntityLook:'EntityLook' = None
+      self.characteristics:'CharacterCharacteristicsInformations' = None
       self.spellsInventory = list()
       self.playerSpellList = list()
       self.playerShortcutList = list()
@@ -192,8 +77,13 @@ class PlayedCharacterManager(IDestroyable):
       self.experiencePercent = 0
       self.achievementPoints = 0
       self.achievementPercent = 0
-      self.applicationInfo = GuildApplicationInformation()
-      self.guildApplicationInfo = GuildInformations()
+      self.applicationInfo = None
+      self.guildApplicationInfo = None
+      self.speedAjust:int = 0
+      self.isInParty:bool = False
+      self.playerMaxForgettableSpellsfloat:int = -1
+      self._knownZaapMapIds:list[float] = list()
+      self._isPartyLeader:bool = False
       super().__init__()
 
    @property
@@ -313,17 +203,17 @@ class PlayedCharacterManager(IDestroyable):
       return 0
 
    @property
-   def currentWorldMap(self) -> WorldMap:
+   def currentWorldMap(self) -> 'WorldMap':
       if self.currentSubArea:
          return self.currentSubArea.worldmap
       return None
 
    @property
-   def currentMap(self) -> WorldPointWrapper:
+   def currentMap(self) -> 'WorldPointWrapper':
       return self._currentMap
 
    @property
-   def currentSubArea(self) -> SubArea:
+   def currentSubArea(self) -> 'SubArea':
       return self._currentSubArea
 
    @property
@@ -367,7 +257,7 @@ class PlayedCharacterManager(IDestroyable):
       return self._followingPlayerIds
 
    @currentMap.setter
-   def currentMap(self, map:WorldPointWrapper) -> None:
+   def currentMap(self, map:'WorldPointWrapper') -> None:
       if self._currentMap:
          if map.mapId != self._currentMap.mapId:
             self.previousMap = self._currentMap
@@ -380,7 +270,7 @@ class PlayedCharacterManager(IDestroyable):
          self._currentMap = map
 
    @currentSubArea.setter
-   def currentSubArea(self, area:SubArea) -> None:
+   def currentSubArea(self, area:'SubArea') -> None:
       if not self._currentSubArea or area != self._currentSubArea:
          if self.currentSubArea and self.currentSubArea.worldmap:
             self.previousWorldMapId = self._currentSubArea.worldmap.id
@@ -409,7 +299,7 @@ class PlayedCharacterManager(IDestroyable):
 
    @property
    def canBeAggressedByMonsters(self) -> bool:
-      stats:EntityStats = StatsManager().getStats(self.id)
+      stats:'EntityStats' = StatsManager().getStats(self.id)
       if stats == None:
          return True
       if stats.getStatTotalValue(StatIds.ENERGY_POINTS) == 0:
@@ -441,14 +331,14 @@ class PlayedCharacterManager(IDestroyable):
       self._infosAvailableCallbacks.append(pCallback)
 
    def jobsLevel(self) -> int:
-      job:KnownJobWrapper = None
+      job:'KnownJobWrapper' = None
       jobsLevel:int = 0
       for job in self.jobs:
          jobsLevel += job.jobLevel
       return jobsLevel
 
    def jobsfloat(self, onlyLevelOne:bool = False) -> int:
-      job:KnownJobWrapper = None
+      job:'KnownJobWrapper' = None
       length:int = 0
       for job in self.jobs:
          if not (job.jobLevel != 1 and onlyLevelOne):

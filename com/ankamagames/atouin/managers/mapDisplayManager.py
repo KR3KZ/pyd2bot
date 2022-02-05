@@ -4,8 +4,11 @@ from time import perf_counter
 from com.ankamagames.atouin.data.map.map import Map
 import com.ankamagames.atouin.utils.DataMapProvider as dmpm
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
+from com.ankamagames.jerakine.resources.events.ResourceLoadedEvent import ResourceLoadedEvent
 from com.ankamagames.jerakine.resources.loaders.MapLoader import MapLoader
 from com.ankamagames.jerakine.types.positions.worldPoint import WorldPoint
+from pyd2bot.events.BotEventsManager import BotEventsManager
+
 logger = Logger(__name__)
 
 
@@ -64,3 +67,4 @@ class MapDisplayManager(metaclass=Singleton):
       dmpm.DataMapProvider().resetSpecialEffects()
       self.currentDataMap = map
       self._currentMap = WorldPoint.fromMapId(map.id)
+      BotEventsManager().dispatch(BotEventsManager.MAP_DATA_LOADED, ResourceLoadedEvent(resource=map))

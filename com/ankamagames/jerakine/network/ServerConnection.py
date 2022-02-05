@@ -36,7 +36,7 @@ class ServerConnection(IServerConnection):
 
    DEBUG_LOW_LEVEL_VERBOSE:bool = False
 
-   DEBUG_DATA:bool = True
+   DEBUG_DATA:bool = False
 
    LATENCY_AVG_BUFFER_SIZE:int = 50
 

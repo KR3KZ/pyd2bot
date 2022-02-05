@@ -2,7 +2,7 @@ from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.network.CustomDataWrapper import Buffer, ByteArray
 from com.ankamagames.jerakine.network.parser.NetworkMessageClassDefinition import NetworkMessageClassDefinition
 from com.ankamagames.jerakine.network.parser.ProtocolSpec import ProtocolSpec
-from . import msgReceiver
+from .network import msgReceiver
 logger = Logger(__name__)
 
 

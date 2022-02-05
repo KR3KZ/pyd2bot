@@ -4,12 +4,12 @@ from com.ankamagames.jerakine.resources.loaders.MapLoader import MapLoader
 
 def test_cach():
     t = perf_counter()
-    map1 = MapLoader.load(193331716)
+    map1 = MapLoader().load(193331716)
     e1 = perf_counter() - t
     print(f"took {e1} seconds")
 
     t = perf_counter()
-    map2 = MapLoader.load(193331716)
+    map2 = MapLoader().load(193331716)
     e2 = perf_counter() - t
     print(f"took {e2} seconds")
 
@@ -19,11 +19,7 @@ def test_cach():
 
 def test_load_map():
     mapid = 193331716    
-    mapx = MapLoader.load(mapid)
-    with open(r"tests\193331716.pkl", "rb") as f:
-        mapy = pickle.load(f)
-    assert mapx.id == mapy.id
-    assert mapx.cells == mapy.cells
+    mapx = MapLoader().load(mapid)
 
 if __name__ == '__main__':
     test_load_map()

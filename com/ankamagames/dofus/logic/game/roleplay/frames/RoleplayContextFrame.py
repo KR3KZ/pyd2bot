@@ -1,5 +1,3 @@
-
-
 from com.ankamagames.atouin.managers.MapDisplayManager import MapDisplayManager
 from com.ankamagames.dofus.datacenter.world.SubArea import SubArea
 from com.ankamagames.dofus.internalDatacenter.world.WorldPointWrapper import WorldPointWrapper
@@ -12,10 +10,10 @@ from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.messages.Frame import Frame
 from com.ankamagames.jerakine.messages.Message import Message
 from com.ankamagames.jerakine.types.enums.Priority import Priority
-
+logger = Logger(__name__)
 class RoleplayContextFrame(Frame):
 
-    logger = Logger(__name__)
+    
 
     def __init__(self):
         self._newCurrentMapIsReceived = False
@@ -62,9 +60,13 @@ class RoleplayContextFrame(Frame):
                 wp = WorldPointWrapper(mcmsg.mapId, True, PlayedCharacterManager().currentMap.outdoorX, PlayedCharacterManager().currentMap.outdoorY)
             else:
                 wp = WorldPointWrapper(int(mcmsg.mapId))
+
             if PlayedCharacterManager().currentMap:
                 self._previousMapId = PlayedCharacterManager().currentMap.mapId
+
             PlayedCharacterManager().currentMap = wp
+            logger.info("Current map changed to " + str(PlayedCharacterManager().currentMap.mapId))
+            MapDisplayManager().loadMap(int(mcmsg.mapId))
             return True
 
         elif isinstance(msg, GameContextDestroyMessage):

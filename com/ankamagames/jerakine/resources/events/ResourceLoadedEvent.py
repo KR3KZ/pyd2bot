@@ -10,8 +10,11 @@ class ResourceLoadedEvent(Event):
       resourceType:int = 255
       uri:Path
       
-      def __init__(self, name:str):
+      def __init__(self, name:str="", resource:Any=None, resourceType:int=255, uri:Path=None):
          super().__init__()
+         self.resource = resource
+         self.resourceType = resourceType
+         self.uri = uri
          self.name = name
       
       def clone(self) -> 'ResourceLoadedEvent':

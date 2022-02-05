@@ -21,7 +21,6 @@ from com.ankamagames.jerakine.network.messages.ExpectedSocketClosureMessage impo
 from com.ankamagames.jerakine.network.messages.Worker import Worker
 from com.ankamagames.jerakine.types.enums.Priority import Priority
 from pyd2bot.events.BotEventsManager import BotEventsManager
-from tests.test_pydofus_client import PlayerEvents
 logger = Logger(__name__)
 
 
@@ -76,7 +75,7 @@ class ServerSelectionFrame(Frame):
          self._serversList.sort(key=lambda x: x.date)
          self._alreadyConnectedToServerId = slmsg.alreadyConnectedToServerId
          self.broadcastServersListUpdate()
-         BotEventsManager().dispatch(PlayerEvents.SERVER_SELECTION)
+         BotEventsManager().dispatch(BotEventsManager.SERVER_SELECTION)
          return True
 
       elif isinstance(msg, ServerStatusUpdateMessage):
@@ -144,7 +143,7 @@ class ServerSelectionFrame(Frame):
          for port in ssdmsg.ports:
             self._connexionPorts.append(port)
          logger.debug(f"Connection to game server using ports : {self._connexionPorts}")
-         BotEventsManager().dispatch(PlayerEvents.SERVER_SELECTED)
+         BotEventsManager().dispatch(BotEventsManager.SERVER_SELECTED)
          return True
 
       return False

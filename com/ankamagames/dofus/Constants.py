@@ -44,3 +44,5 @@ DOFUS_CONTENT_DIR = DOFUS_ROOTDIR / "content"
 PROTOCOL_SPEC_PATH = ROOTDIR / "network/spec.json"
 
 WORLDGRAPH_PATH = DOFUS_CONTENT_DIR / "maps" / "world-graph.binary"
+
+LANG_FILE_PATH = DOFUS_DATA_DIR / "i18n" / "i18n_fr.d2i"

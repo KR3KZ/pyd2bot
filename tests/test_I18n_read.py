@@ -9,7 +9,7 @@ print("Init:", perf_counter() - t)
 t = perf_counter()
 r = I18n.getText(752599)
 print("read:", perf_counter() - t)
-print(r)
+assert r == "Cimetière d'Astrub"
 t = perf_counter()
 r = I18n.getText(752598)
 print("read:", perf_counter() - t)

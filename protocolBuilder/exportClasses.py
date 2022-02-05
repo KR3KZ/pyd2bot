@@ -27,31 +27,32 @@ def getInitArgs(spec):
         init_args.append({"name": field['name'], "type": field["typename"]})
     return init_args, nonPrimitives
 
-with open("protocolBuilder/template.j2", "r") as f:
-    template = Template(f.read())
-    for name, msg in tqdm(json_spec["type"].items()):
-        init_args, nonPrimitives = getInitArgs(msg)
+def run():
+    with open("protocolBuilder/template.j2", "r") as f:
+        template = Template(f.read())
+        for name, msg in tqdm(json_spec["type"].items()):
+            init_args, nonPrimitives = getInitArgs(msg)
 
-        super_args = []
-        current = msg.get("parent")
-        while current:
-            current = json_spec["type"][current]
-            inArgs, nonPrim = getInitArgs(current)
-            nonPrimitives.extend(nonPrim)
-            super_args.extend(inArgs)
-            current = current.get("parent")
+            super_args = []
+            current = msg.get("parent")
+            while current:
+                current = json_spec["type"][current]
+                inArgs, nonPrim = getInitArgs(current)
+                nonPrimitives.extend(nonPrim)
+                super_args.extend(inArgs)
+                current = current.get("parent")
 
-        r = template.render(
-            cls=msg, 
-            types=json_spec["type"], 
-            super_args=super_args,
-            init_args=init_args,
-            nonPrimitives=nonPrimitives,
-            primitives=PRIMITIVES)
+            r = template.render(
+                cls=msg, 
+                types=json_spec["type"], 
+                super_args=super_args,
+                init_args=init_args,
+                nonPrimitives=nonPrimitives,
+                primitives=PRIMITIVES)
 
-        path_to = msg["package"].replace(".", "/")
-        path_to = "{}.py".format(path_to)
-        if not os.path.exists(Path(path_to).parent):
-            os.makedirs(Path(path_to).parent)
-        with open(path_to, "w") as f:
-            f.write(r)
+            path_to = msg["package"].replace(".", "/")
+            path_to = "{}.py".format(path_to)
+            if not os.path.exists(Path(path_to).parent):
+                os.makedirs(Path(path_to).parent)
+            with open(path_to, "w") as f:
+                f.write(r)

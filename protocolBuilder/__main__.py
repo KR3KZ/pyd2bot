@@ -5,6 +5,7 @@ import subprocess
 import os
 import com.ankamagames.dofus.Constants as Constants
 from protocolBuilder.protocolParser2 import ProtocolParser
+import protocolBuilder.exportClasses as exportClasses
 work_dir = Path(os.path.dirname(__file__))
 
 if __name__ == "__main__":
@@ -13,12 +14,12 @@ if __name__ == "__main__":
         settings = json.load(fp)
     
     # Decompile Dofus Invoker Sources
-    # selectclass = "com.ankamagames.dofus.BuildInfos,com.ankamagames.dofus.network.++,com.ankamagames.jerakine.network.++"
-    # invoker_p = settings['dofusInvoker_path']
-    # decoder_p = settings['ffdec_path']
-    # src_dir = work_dir / "sources"
-    # decompile_sources_cmd = f'"{decoder_p}" -config parallelSpeedUp=0 -selectclass {selectclass} -export script {src_dir} {invoker_p}'
-    # subprocess.call(decompile_sources_cmd, shell=True)
+    selectclass = "com.ankamagames.dofus.BuildInfos,com.ankamagames.dofus.network.++,com.ankamagames.jerakine.network.++"
+    invoker_p = settings['dofusInvoker_path']
+    decoder_p = settings['ffdec_path']
+    src_dir = work_dir / "sources"
+    decompile_sources_cmd = f'"{decoder_p}" -config parallelSpeedUp=0 -selectclass {selectclass} -export script {src_dir} {invoker_p}'
+    subprocess.call(decompile_sources_cmd, shell=True)
 
     # Parse protocol
     src_paths = [
@@ -27,9 +28,11 @@ if __name__ == "__main__":
     ]
     
     protocol_json = ProtocolParser().run(src_paths)
-    # Constants.PROTOCOL_SPEC_PATH
-    with open("protocolBuilder/spec.json", "w") as fp:
+    with open(Constants.PROTOCOL_SPEC_PATH, "w") as fp:
         json.dump(protocol_json, fp)
+
+    # Export classes
+    exportClasses.run()
         
     
 

@@ -24,8 +24,8 @@ logger = Logger(__name__)
 
 class Worker(EventDispatcher, MessageHandler):
 
-   DEBUG_FRAMES:bool = True
-   DEBUG_MESSAGES:bool = True
+   DEBUG_FRAMES:bool = False
+   DEBUG_MESSAGES:bool = False
    DEBUG_FRAMES_PROCESSING:bool = False
    LONG_MESSAGE_QUEUE:int = 100
    MAX_TIME_FRAME:int = 40
