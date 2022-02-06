@@ -26,7 +26,6 @@ from com.ankamagames.dofus.network.messages.game.context.roleplay.MapComplementa
 from com.ankamagames.dofus.network.messages.game.context.roleplay.MapInformationsRequestMessage import MapInformationsRequestMessage
 from com.ankamagames.dofus.network.messages.game.context.roleplay.breach.MapComplementaryInformationsBreachMessage import MapComplementaryInformationsBreachMessage
 from com.ankamagames.dofus.network.types.game.context.roleplay.GameRolePlayMerchantInformations import GameRolePlayMerchantInformations
-from com.ankamagames.dofus.network.types.game.context.roleplay.GameRolePlayNamedActorInformations import GameRolePlayNamedActorInformations
 from com.ankamagames.dofus.network.types.game.context.roleplay.HumanOptionObjectUse import HumanOptionObjectUse
 from com.ankamagames.dofus.network.types.game.context.roleplay.HumanOptionSkillUse import HumanOptionSkillUse
 from com.ankamagames.dofus.network.types.game.interactive.InteractiveElement import InteractiveElement
@@ -230,7 +229,6 @@ class RoleplayEntitiesFrame(AbstractEntitiesFrame, Frame):
                         # TODO: Here notify the bot that map contains monsters
                         
                 if isinstance(actor1, GameRolePlayCharacterInformations):
-                    # ChatAutocompleteNameManager().addEntry(actor1)
                     pass
 
                 elif isinstance(actor1, GameRolePlayMerchantInformations):
@@ -310,9 +308,6 @@ class RoleplayEntitiesFrame(AbstractEntitiesFrame, Frame):
             #         partyManagementFrame.playerShouldReceiveRewards = False
             #         partyManagementFrame.playerRewards = None
 
-            # TODO: Same thing for the StackManagementFrame
-            # stackFrame = Kernel().getWorker().getFrame(StackManagementFrame) as StackManagementFrame
-            # stackFrame.resumeStack()
             BotEventsManager().dispatch(BotEventsManager.MAP_DATA_LOADED)
             return False
 

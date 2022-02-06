@@ -12,6 +12,8 @@ class AnimatedCharacter(IEntity, IObstacle):
         self._canSeeThrough:bool = False
         self._canWalkThrough:bool = False
         self._canWalkTo:bool = False
+        self._isMoving = False
+        self._stop = False
         self.speedAdjust:float = 0.0
         self.cantWalk8Directions:bool = False
     
@@ -46,3 +48,20 @@ class AnimatedCharacter(IEntity, IObstacle):
     @canWalkTo.setter
     def canWalkTo(self, value:bool) -> None:
         self._canWalkTo = value
+    
+    @property
+    def isMoving(self) -> bool:
+        return self._isMoving
+    
+    @isMoving.setter
+    def isMoving(self, value:bool) -> None:
+        self._isMoving = value
+    
+    @property
+    def stop(self) -> bool:
+        return self._stop
+    
+    @stop.setter
+    def stop(self, value:bool) -> None:
+        self._stop = value
+    

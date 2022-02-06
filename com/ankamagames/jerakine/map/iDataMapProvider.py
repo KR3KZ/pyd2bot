@@ -1,7 +1,4 @@
-from abc import ABC
-
-
-class IDataMapProvider(ABC):
+class IDataMapProvider:
     
     
     @property

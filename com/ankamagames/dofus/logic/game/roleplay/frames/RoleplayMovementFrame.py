@@ -1,4 +1,5 @@
 
+from time import perf_counter
 from com.ankamagames.atouin.messages.EntityMovementCompleteMessage import EntityMovementCompleteMessage
 from com.ankamagames.atouin.messages.EntityMovementStoppedMessage import EntityMovementStoppedMessage
 from com.ankamagames.atouin.utils.DataMapProvider import DataMapProvider
@@ -7,6 +8,9 @@ from com.ankamagames.dofus.kernel.net.ConnectionsHandler import ConnectionsHandl
 from com.ankamagames.dofus.logic.game.common.managers.MapMovementAdapter import MapMovementAdapter
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
 from com.ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEntities
+from com.ankamagames.dofus.logic.game.roleplay.actions.PlayerFightRequestAction import PlayerFightRequestAction
+# from com.ankamagames.dofus.logic.game.roleplay.frames.RoleplayEntitiesFrame import RoleplayEntitiesFrame
+from com.ankamagames.dofus.logic.game.roleplay.messages.CharacterMovementStoppedMessage import CharacterMovementStoppedMessage
 from com.ankamagames.dofus.network.enums.PlayerLifeStatusEnum import PlayerLifeStatusEnum
 from com.ankamagames.dofus.network.messages.game.context.GameCautiousMapMovementMessage import GameCautiousMapMovementMessage
 from com.ankamagames.dofus.network.messages.game.context.GameCautiousMapMovementRequestMessage import GameCautiousMapMovementRequestMessage
@@ -32,24 +36,21 @@ from com.ankamagames.dofus.network.messages.game.interactive.skill.InteractiveUs
 from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeLeaveMessage import ExchangeLeaveMessage
 from com.ankamagames.dofus.network.messages.game.prism.PrismFightDefenderLeaveMessage import PrismFightDefenderLeaveMessage
 from com.ankamagames.dofus.network.types.game.interactive.InteractiveElement import InteractiveElement
-from com.ankamagames.dofus.types.entities.animatedCharacter import AnimatedCharacter
+from com.ankamagames.dofus.types.entities.AnimatedCharacter import AnimatedCharacter
 from com.ankamagames.jerakine.entities.interfaces.IEntity import IEntity
 from com.ankamagames.jerakine.handlers.messages.Action import Action
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.messages.Frame import Frame
 from com.ankamagames.jerakine.messages.Message import Message
 from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.pathfinding.Pathfinding import Pathfinding
 from com.ankamagames.jerakine.types.enums.Priority import Priority
 from com.ankamagames.jerakine.types.positions.MapPoint import MapPoint
-from com.ankamagames.jerakine.types.positions.MouvementPath import MovementPath
-
+from com.ankamagames.jerakine.types.positions.MovementPath import MovementPath
+logger = Logger(__name__)
 
 class RoleplayMovementFrame(Frame):
-   
-   logger = Logger(__name__)
-   
-   CONSECUTIVE_MOVEMENT_DELAY:int = 250
-   
+   CONSECUTIVE_MOVEMENT_DELAY:int = 0.25
    
    _wantToChangeMap:float = -1
    
@@ -61,7 +62,7 @@ class RoleplayMovementFrame(Frame):
    
    _followingMonsterGroup:object
    
-   _followingMessage
+   _followingMessage = None
    
    _isRequestingMovement:bool
    
@@ -113,135 +114,126 @@ class RoleplayMovementFrame(Frame):
          else:
             gmnmm = msg
             newPos = MapPoint.fromCoords(gmnmm.cellX,gmnmm.cellY)
-            player = AnimatedCharacter(DofusEntities.getEntity(PlayedCharacterManager().id))
+            player:AnimatedCharacter = DofusEntities.getEntity(PlayedCharacterManager().id)
             if not player:
                return True
             if player.isMoving:
-               player.stop(True)
-               player.setAnimation("AnimStatique")
+               player.stop = True
             player.position = newPos
-            player.jump(newPos)
          return True
 
       if isinstance(msg, GameMapMovementMessage):
          gmmmsg = msg
          if gmmmsg.actorId != PlayedCharacterManager().id:
-            self.applyGameMapMovement(gmmmsg.actorId, MapMovementAdapter.getClientMovement(gmmmsg.keyMovements), msg is GameCautiousMapMovementMessage)
+            self.applyGameMapMovement(gmmmsg.actorId, MapMovementAdapter.getClientMovement(gmmmsg.keyMovements), msg)
          else:
             self._lastPlayerValidatedPosition = MapMovementAdapter.getClientMovement(gmmmsg.keyMovements).end
             if self._lastMoveEndCellId != self._lastPlayerValidatedPosition.cellId:
-               playerEntity = DofusEntities.getEntity(PlayedCharacterManager().id) as AnimatedCharacter
-               requestedPath = Pathfinding.findPath(DataMapProvider(),playerEntity.position,self._lastPlayerValidatedPosition,not playerEntity.cantWalk8Directions,True)
-               self.applyGameMapMovement(gmmmsg.actorId,requestedPath,msg is GameCautiousMapMovementMessage)
+               playerEntity:AnimatedCharacter = DofusEntities.getEntity(PlayedCharacterManager().id)
+               requestedPath = Pathfinding.findPath(DataMapProvider(),playerEntity.position, self._lastPlayerValidatedPosition, not playerEntity.cantWalk8Directions,True)
+               self.applyGameMapMovement(gmmmsg.actorId, requestedPath, msg)
          return True
 
       if isinstance(msg, EntityMovementCompleteMessage):
          emcmsg = msg
          if emcmsg.entity.id == PlayedCharacterManager().id:
             gmmcmsg = GameMapMovementConfirmMessage()
-            gmmcmsg.initGameMapMovementConfirmMessage()
             ConnectionsHandler.getConnection().send(gmmcmsg)
             if self._wantToChangeMap >= 0 and emcmsg.entity.position.cellId == self._destinationPoint:
                self.askMapChange()
                self._isRequestingMovement = False
             if self._followingIe:
-               self.activateSkill(self._followingIe.skillInstanceId,self._followingIe.ie,self._followingIe.additionalParam)
+               self.activateSkill(self._followingIe.skillInstanceId, self._followingIe.ie, self._followingIe.additionalParam)
                self._followingIe = None
             if self._followingMonsterGroup:
                self.requestMonsterFight(self._followingMonsterGroup.id)
                self._followingMonsterGroup = None
-            Kernel.getWorker().processImmediately(CharacterMovementStoppedMessage())
+            Kernel().getWorker().processImmediately(CharacterMovementStoppedMessage())
          return True
 
       if isinstance(msg, EntityMovementStoppedMessage):
-
-            emsmsg = msg
-            if emsmsg.entity.id == PlayedCharacterManager().id:
-               canceledMoveMessage = GameMapMovementCancelMessage()
-               canceledMoveMessage.initGameMapMovementCancelMessage(emsmsg.entity.position.cellId)
-               ConnectionsHandler.getConnection().send(canceledMoveMessage)
-               self._isRequestingMovement = False
-               if self._followingMove and self._canMove:
-                  self.askMoveTo(self._followingMove)
-                  stackFrame = Kernel.getWorker().getFrame(StackManagementFrame) as StackManagementFrame
-                  if stackFrame.len(stackOutputMessage) > 0:
-                     moveBehavior = stackFrame.stackOutputMessage[0] as MoveBehavior
-                     if moveBehavior and moveBehavior.position.cellId != self._followingMove.cellId:
-                        Kernel.getWorker().process(EmptyStackAction.create())
-                  self._followingMove = None
-               if self._followingMessage:
-                  if isinstance(self._followingMessage, PlayerFightRequestAction):
-
-                        Kernel.getWorker().process(self._followingMessage)
-                     default:
-                        ConnectionsHandler.getConnection().send(self._followingMessage)
-                  self._followingMessage = None
-            return True
-      if isinstance(msg, TeleportOnSameMapMessage):
-
-            tosmmsg = msg
-            teleportedEntity = DofusEntities.getEntity(tosmmsg.targetId)
-            if teleportedEntity:
-               if isinstance(teleportedEntity, IMovable):
-                  if IMovable(teleportedEntity).isMoving:
-                     IMovable(teleportedEntity).stop(True)
-                  teleportedEntity
+         emsmsg = msg
+         if emsmsg.entity.id == PlayedCharacterManager().id:
+            canceledMoveMessage = GameMapMovementCancelMessage()
+            canceledMoveMessage.init(emsmsg.entity.position.cellId)
+            ConnectionsHandler.getConnection().send(canceledMoveMessage)
+            self._isRequestingMovement = False
+            if self._followingMove and self._canMove:
+               self.askMoveTo(self._followingMove)
+               self._followingMove = None
+            if self._followingMessage:
+               if isinstance(self._followingMessage, PlayerFightRequestAction):
+                  Kernel().getWorker().process(self._followingMessage)
                else:
-                  logger.warn("Cannot teleport a non IMovable entity. WTF ?")
+                  ConnectionsHandler.getConnection().send(self._followingMessage)
+               self._followingMessage = None
+         return True
+
+      if isinstance(msg, TeleportOnSameMapMessage):
+         tosmmsg = msg
+         teleportedEntity = DofusEntities.getEntity(tosmmsg.targetId)
+         if teleportedEntity:
+            if isinstance(teleportedEntity, IMovable):
+               if teleportedEntity.isMoving:
+                  teleportedEntity.stop(True)
+               teleportedEntity
             else:
-               logger.warn("Received a teleportation request for a non-existing entity. Aborting.")
-            return True
+               logger.warn("Cannot teleport a non IMovable entity. WTF ?")
+         else:
+            logger.warn("Received a teleportation request for a non-existing entity. Aborting.")
+         return True
+
       if isinstance(msg, InteractiveUsedMessage):
+         if msg.entityId == PlayedCharacterManager().id:
+            self._canMove = msg.canMove
+         return True
 
-            if InteractiveUsedMessage(msg).entityId == PlayedCharacterManager().id:
-               self._canMove = InteractiveUsedMessage(msg).canMove
-            return True
       if isinstance(msg, InteractiveUseEndedMessage):
+         self._canMove = True
+         return True
 
-            self._canMove = True
-            return True
       if isinstance(msg, InteractiveUseErrorMessage):
+         self._canMove = True
+         return True
 
-            self._canMove = True
-            return True
       if isinstance(msg, LeaveDialogMessage):
+         self._canMove = True
+         return False
 
-            self._canMove = True
-            return False
       if isinstance(msg, ExchangeLeaveMessage):
+         self._canMove = True
+         return False
 
-            self._canMove = True
-            return False
       if isinstance(msg, EditHavenBagFinishedMessage):
+         self._canMove = True
+         return False
 
-            self._canMove = True
-            return False
       if isinstance(msg, GameRolePlayDelayedActionFinishedMessage):
+         if msg.delayedCharacterId == PlayedCharacterManager().id:
+            self._canMove = True
+         return False
 
-            if GameRolePlayDelayedActionFinishedMessage(msg).delayedCharacterId == PlayedCharacterManager().id:
-               self._canMove = True
-            return False
       if isinstance(msg, GuildFightPlayersHelpersLeaveMessage):
+         if msg.playerId == PlayedCharacterManager().id:
+            self._canMove = True
+         return False
 
-            if GuildFightPlayersHelpersLeaveMessage(msg).playerId == PlayedCharacterManager().id:
-               self._canMove = True
-            return False
       if isinstance(msg, PrismFightDefenderLeaveMessage):
+         if msg.fighterToRemoveId == PlayedCharacterManager().id:
+            self._canMove = True
+         return False
 
-            if PrismFightDefenderLeaveMessage(msg).fighterToRemoveId == PlayedCharacterManager().id:
-               self._canMove = True
-            return False
       if isinstance(msg, GameRolePlayFightRequestCanceledMessage):
+         if msg.targetId == PlayedCharacterManager().id or msg.sourceId == PlayedCharacterManager().id:
+            self._canMove = True
+         return False
 
-            if GameRolePlayFightRequestCanceledMessage(msg).targetId == PlayedCharacterManager().id or GameRolePlayFightRequestCanceledMessage(msg).sourceId == PlayedCharacterManager().id:
-               self._canMove = True
-            return False
       if isinstance(msg, MapComplementaryInformationsDataMessage):
+         self._mapHasAggressiveMonsters = msg.hasAggressiveMonsters
+         return False
 
-            self._mapHasAggressiveMonsters = MapComplementaryInformationsDataMessage(msg).hasAggressiveMonsters
-            return False
-         default:
-            return False
+      else:
+         return False
    
    def pulled(self) -> bool:
       return True
@@ -254,14 +246,14 @@ class RoleplayMovementFrame(Frame):
       self._wantToChangeMap = -1
       self._changeMapByAutoTrip = False
    
-   def setFollowingInteraction(self, interaction:Object) -> None:
+   def setFollowingInteraction(self, interaction:object) -> None:
       self._followingIe = interaction
    
-   def setFollowingMonsterFight(self, monsterGroup:Object) -> None:
+   def setFollowingMonsterFight(self, monsterGroup:object) -> None:
       self._followingMonsterGroup = monsterGroup
    
    def setFollowingMessage(self, message) -> None:
-      if !(message is INetworkMessage or message is Action):
+      if not isinstance(message, (INetworkMessage, Action)):
          raise Exception("The message is neither INetworkMessage or Action")
       self._followingMessage = message
    
@@ -273,78 +265,59 @@ class RoleplayMovementFrame(Frame):
          return False
       if self._isRequestingMovement:
          return False
-      stackFrame:StackManagementFrame = Kernel.getWorker().getFrame(StackManagementFrame) as StackManagementFrame
-      stackMoveBehavior:MoveBehavior = stackFrame.len(stackOutputMessage) > 0 ? stackFrame.stackOutputMessage[0] as MoveBehavior : None
       now:int = perf_counter()
-      if self._latestMovementRequest + CONSECUTIVE_MOVEMENT_DELAY > now and (not stackMoveBehavior or not stackMoveBehavior.getMapPoint().equals(cell)):
+      if self._latestMovementRequest + self.CONSECUTIVE_MOVEMENT_DELAY > now:
          return False
       self._isRequestingMovement = True
-      playerEntity:AnimatedCharacter = DofusEntities.getEntity(PlayedCharacterManager().id) as AnimatedCharacter
+      playerEntity:AnimatedCharacter = DofusEntities.getEntity(PlayedCharacterManager().id)
       if not playerEntity:
          logger.warn("The player tried to move before its character was added to the scene. Aborting.")
          self._isRequestingMovement = False
          return False
       self._destinationPoint = cell.cellId
-      if IMovable(playerEntity).isMoving:
-         IMovable(playerEntity).stop()
+      if playerEntity.isMoving:
+         playerEntity.stop()
          self._followingMove = cell
          return False
       playerEntity.visibleAura = False
-      self.sendPath(Pathfinding.findPath(DataMapProvider(),playerEntity.position,cell,not playerEntity.cantWalk8Directions,True))
+      movePath = Pathfinding.findPath(DataMapProvider(), playerEntity.position, cell)
+      self.sendPath(movePath)
       return True
    
    def sendPath(self, path:MovementPath) -> None:
-      gcmmrmsg:GameCautiousMapMovementRequestMessage = None
-      gmmrmsg:GameMapMovementRequestMessage = None
       originalPath:MovementPath = path.clone()
       if path.start.cellId == path.end.cellId:
-         logger.warn("Discarding a movement path that begins and ends on the same cell (" + path.start.cellId + ").")
+         logger.warn(f"Discarding a movement path that begins and ends on the same cell ({path.start.cellId}).")
          self._isRequestingMovement = False
          if self._followingIe:
-            self.activateSkill(self._followingIe.skillInstanceId,self._followingIe.ie,self._followingIe.additionalParam)
+            self.activateSkill(self._followingIe.skillInstanceId, self._followingIe.ie, self._followingIe.additionalParam)
             self._followingIe = None
          if self._followingMonsterGroup:
             self.requestMonsterFight(self._followingMonsterGroup.id)
             self._followingMonsterGroup = None
          return
       forceWalk:bool = False
-      if OptionManager.getOptionManager("dofus").getOption("enableForceWalk") == True and (self._nextMovementBehavior == AtouinConstants.MOVEMENT_WALK or self._nextMovementBehavior == 0 and (ShortcutsFrame.ctrlKeyDown or SystemManager.getSingleton().os == OperatingSystem.MAC_OS and ShortcutsFrame.altKeyDown)) and not MountAutoTripManager().isTravelling:
-         gcmmrmsg = GameCautiousMapMovementRequestMessage()
-         gcmmrmsg.initGameCautiousMapMovementRequestMessage(MapMovementAdapter.getServerMovement(path),PlayedCharacterManager().currentMap.mapId)
-         ConnectionsHandler.getConnection().send(gcmmrmsg)
-         forceWalk = True
-      else:
-         gmmrmsg = GameMapMovementRequestMessage()
-         gmmrmsg.initGameMapMovementRequestMessage(MapMovementAdapter.getServerMovement(path),PlayedCharacterManager().currentMap.mapId)
-         ConnectionsHandler.getConnection().send(gmmrmsg)
-      self.applyGameMapMovement(PlayedCharacterManager().id,originalPath,forceWalk)
+      gmmrmsg = GameMapMovementRequestMessage()
+      keymoves = MapMovementAdapter.getServerMovement(path)
+      gmmrmsg.init(keymoves, PlayedCharacterManager().currentMap.mapId)
+      ConnectionsHandler.getConnection().send(gmmrmsg)
+      self.applyGameMapMovement(PlayedCharacterManager().id, originalPath, forceWalk)
       self._nextMovementBehavior = 0
       self._latestMovementRequest = perf_counter()
    
    def applyGameMapMovement(self, actorId:float, movement:MovementPath, forceWalking:bool = False) -> None:
-      SpeakingItemManager().triggerEvent(SpeakingItemManager.SPEAK_TRIGGER_MOVE)
       movedEntity:IEntity = DofusEntities.getEntity(actorId)
       if not movedEntity:
          logger.warn("The entity " + actorId + " moved before it was added to the scene. Aborting movement.")
          return
       self._lastMoveEndCellId = movement.end.cellId
-      rpEntitiesFrame:RoleplayEntitiesFrame = Kernel.getWorker().getFrame(RoleplayEntitiesFrame) as RoleplayEntitiesFrame
-      tiphonSpr:TiphonSprite = movedEntity as TiphonSprite
-      if tiphonSpr and not rpEntitiesFrame.isCreatureMode and tiphonSpr.getSubEntitySlot(SubEntityBindingPointCategoryEnum.HOOK_POINT_CATEGORY_MOUNT_DRIVER,0) and not tiphonSpr.getSubEntityBehavior(SubEntityBindingPointCategoryEnum.HOOK_POINT_CATEGORY_MOUNT_DRIVER):
-         tiphonSpr.setSubEntityBehaviour(SubEntityBindingPointCategoryEnum.HOOK_POINT_CATEGORY_MOUNT_DRIVER,RiderBehavior())
-      del rpEntitiesFrame.lastStaticAnimations[actorId]
-      TooltipManager.hide("smiley" + actorId)
-      TooltipManager.hide("msg" + actorId)
-      if movedEntity.id == PlayedCharacterManager().id:
-         self._isRequestingMovement = False
-         KernelEventsManager().processCallback(TriggerHookList.PlayerMove)
-      if OptionManager.getOptionManager("dofus").getOption("allowAnimsFun") == True:
-         AnimFunManager().cancelAnim(actorId)
-      movedEntity.move(movement,None,!not forceWalking ? WalkingMovementBehavior() : None)
+      # rpEntitiesFrame:RoleplayEntitiesFrame = Kernel().getWorker().getFrame(RoleplayEntitiesFrame)
+      # del rpEntitiesFrame.lastStaticAnimations[actorId]
+      
    
    def askMapChange(self) -> None:
       cmmsg:ChangeMapMessage = ChangeMapMessage()
-      cmmsg.initChangeMapMessage(self._wantToChangeMap,self._changeMapByAutoTrip)
+      cmmsg.init(self._wantToChangeMap, self._changeMapByAutoTrip)
       ConnectionsHandler.getConnection().send(cmmsg)
       self._wantToChangeMap = -1
       self._changeMapByAutoTrip = False
@@ -352,7 +325,7 @@ class RoleplayMovementFrame(Frame):
    def activateSkill(self, skillInstanceId:int, ie:InteractiveElement, additionalParam:int) -> None:
       iurmsg:InteractiveUseRequestMessage = None
       iuwprmsg:InteractiveUseWithParamRequestMessage = None
-      rpInteractivesFrame:RoleplayInteractivesFrame = Kernel.getWorker().getFrame(RoleplayInteractivesFrame) as RoleplayInteractivesFrame
+      rpInteractivesFrame:RoleplayInteractivesFrame = Kernel().getWorker().getFrame(RoleplayInteractivesFrame)
       if rpInteractivesFrame and rpInteractivesFrame.currentRequestedElementId != ie.elementId and not rpInteractivesFrame.usingInteractive and not rpInteractivesFrame.isElementChangingState(ie.elementId):
          rpInteractivesFrame.currentRequestedElementId = ie.elementId
          if additionalParam == 0:
@@ -367,5 +340,5 @@ class RoleplayMovementFrame(Frame):
    
    def requestMonsterFight(self, monsterGroupId:int) -> None:
       grpamrmsg:GameRolePlayAttackMonsterRequestMessage = GameRolePlayAttackMonsterRequestMessage()
-      grpamrmsg.initGameRolePlayAttackMonsterRequestMessage(monsterGroupId)
+      grpamrmsg.init(monsterGroupId)
       ConnectionsHandler.getConnection().send(grpamrmsg)

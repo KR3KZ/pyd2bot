@@ -33,6 +33,7 @@ class Pathfinding:
    def __init__(self):
       super().__init__()
    
+   @classmethod
    def findPath(cls, map:IDataMapProvider, start:MapPoint, end:MapPoint, allowDiag:bool = True, bAllowTroughEntity:bool = True, aNoneObstacles:bool = True) -> MovementPath:
       endCellId:int = end.cellId
       startCellId:int = start.cellId
@@ -42,7 +43,7 @@ class Pathfinding:
       distanceToEnd:int = MapTools.getDistance(startCellId, endCellId)
       if not cls._isInit:
          cls._costOfCell = MapTools.mapCountCell * [None]
-         cls._openListWeights = MapTools.mapCountCell * [None]
+         cls._openListWeights = MapTools.mapCountCell * [0]
          cls._parentOfCell = MapTools.mapCountCell * [None]
          cls._isCellClosed = MapTools.mapCountCell * [None]
          cls._isEntityOnCell = MapTools.mapCountCell * [None]

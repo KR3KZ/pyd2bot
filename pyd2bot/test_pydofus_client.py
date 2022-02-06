@@ -9,12 +9,16 @@ import com.ankamagames.dofus.logic.connection.managers.AuthentificationManager a
 import com.ankamagames.dofus.kernel.net.ConnectionsHandler as connh
 from com.ankamagames.dofus.logic.game.approach.actions.CharacterSelectionAction import CharacterSelectionAction
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
+from com.ankamagames.dofus.logic.game.roleplay.frames.RoleplayMovementFrame import RoleplayMovementFrame
 from com.ankamagames.dofus.modules.utils.pathFinding.world.Edge import Edge
 from com.ankamagames.dofus.modules.utils.pathFinding.world.WorldPathFinder import WorldPathFinder
+from com.ankamagames.dofus.types.entities.AnimatedCharacter import AnimatedCharacter
 from com.ankamagames.jerakine.data.I18nFileAccessor import I18nFileAccessor
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.resources.events.ResourceLoadedEvent import ResourceLoadedEvent
+from com.ankamagames.jerakine.types.positions.MapPoint import MapPoint
 from pyd2bot.events.BotEventsManager import BotEventsManager
+from com.ankamagames.atouin.utils.DataMapProvider import DataMapProvider
 logger = Logger(__name__)
 
 
@@ -34,6 +38,7 @@ class TestBot:
     def __init__(self):
         # Load language file to be able to translate ids to actual text
         I18nFileAccessor().init(Constants.LANG_FILE_PATH)
+        DataMapProvider().init(AnimatedCharacter)
         WorldPathFinder().init()
 
     def main(self):
@@ -70,7 +75,9 @@ class TestBot:
 
     def onMapComplementaryDataLoaded(self, e:ResourceLoadedEvent):
         logger.info(f"Bot is currently in the map {PlayedCharacterManager().currentMap.mapId}")
-        WorldPathFinder().findPath(190580737, self.onPathFound)
+        # WorldPathFinder().findPath(190580737, self.onPathFound)
+        rpmf:RoleplayMovementFrame = krnl.Kernel().getWorker().getFrame(RoleplayMovementFrame)
+        rpmf.askMoveTo(MapPoint.fromCellId(439))
     
     def onPathFound(self, path:list[Edge]):
         logger.info("sheesh")

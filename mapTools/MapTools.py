@@ -1,5 +1,6 @@
 import math
 from com.ankamagames.jerakine.types.positions.MapPoint import Point
+from mapTools.MapDirection import MapDirection
 MAP_GRID_WIDTH:int = 14
 MAP_GRID_HEIGHT:int = 20 
 MIN_X_COORD:int = 0
@@ -7,7 +8,7 @@ MAX_X_COORD:int = 33
 MIN_Y_COORD:int = -19
 MAX_Y_COORD:int = 13
 EVERY_CELL_ID:list
-mapCountCell:int = None
+mapCountCell:int = 560
 INVALID_CELL_ID:int = -1
 PSEUDO_INFINITE:int = 63
 COEFF_FOR_REBASE_ON_CLOSEST_8_DIRECTION:float = math.tan(math.pi / 8)
@@ -139,3 +140,56 @@ def getDistance(param1:int, param2:int) -> int:
     _loc19_ = param2 - _loc16_ * MAP_GRID_WIDTH
     _loc20_ = _loc19_ - _loc18_
     return math.floor(abs(_loc15_ - _loc6_) + abs(_loc20_ - _loc11_))
+
+def getLookDirection8Exact(param1:int, param2:int) -> int:
+    _loc3_:int = math.floor(param1 / MAP_GRID_WIDTH)
+    _loc4_:int = math.floor((_loc3_ + 1) / 2)
+    _loc5_ = param1 - _loc3_ * MAP_GRID_WIDTH
+    _loc6_:int = math.floor(param1 / MAP_GRID_WIDTH)
+    _loc7_:int = math.floor((_loc6_ + 1) / 2)
+    _loc8_ = _loc6_ - _loc7_
+    _loc9_ = param1 - _loc6_ * MAP_GRID_WIDTH
+    _loc10_:int = math.floor(param2 / MAP_GRID_WIDTH)
+    _loc11_:int = math.floor((_loc10_ + 1) / 2)
+    _loc12_ = param2 - _loc10_ * MAP_GRID_WIDTH
+    _loc13_:int = math.floor(param2 / MAP_GRID_WIDTH)
+    _loc14_:int = math.floor((_loc13_ + 1) / 2)
+    _loc15_ = _loc13_ - _loc14_
+    _loc16_ = param2 - _loc13_ * MAP_GRID_WIDTH
+    return int(getLookDirection8ExactByCoord(_loc4_ + _loc5_,_loc9_ - _loc8_,_loc11_ + _loc12_,_loc16_ - _loc15_))
+
+def getLookDirection8ExactByCoord(param1:int, param2:int, param3:int, param4:int) -> int:
+    _loc5_:int = getLookDirection4ExactByCoord(param1,param2,param3,param4)
+    if not MapDirection.isValidDirection(_loc5_):
+        _loc5_ = getLookDirection4DiagExactByCoord(param1,param2,param3,param4)
+    return _loc5_
+
+def getLookDirection4ExactByCoord(param1:int, param2:int, param3:int, param4:int) -> int:
+    if not isValidCoord(param1,param2) or not isValidCoord(param3,param4):
+        return -1
+    _loc5_ = param3 - param1
+    _loc6_ = param4 - param2
+    if _loc6_ == 0:
+        if _loc5_ < 0:
+            return 5
+        return 1
+    if _loc5_ == 0:
+        if _loc6_ < 0:
+            return 3
+        return 7
+    return -1
+
+def getLookDirection4DiagExactByCoord(param1:int, param2:int, param3:int, param4:int) -> int:
+    if not isValidCoord(param1,param2) or not isValidCoord(param3,param4):
+        return -1
+    _loc5_ = param3 - param1
+    _loc6_ = param4 - param2
+    if _loc5_ == -_loc6_:
+        if _loc5_ < 0:
+            return 6
+        return 2
+    if _loc5_ == _loc6_:
+        if _loc5_ < 0:
+            return 4
+        return 0
+    return -1

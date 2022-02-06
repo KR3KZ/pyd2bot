@@ -1,4 +1,5 @@
 
+from typing import Iterator
 from com.ankamagames.jerakine.types.enums.DirectionsEnum import DirectionsEnum
 from com.ankamagames.jerakine.types.positions.MapPoint import MapPoint
 from com.ankamagames.jerakine.types.positions.PathElement import PathElement
@@ -14,6 +15,12 @@ class MovementPath:
       self._oStart = MapPoint()
       self._aPath = list[PathElement]()
    
+   def __getitem__(self, index:int) -> PathElement:
+      return self._aPath[index]
+   
+   def __iter__(self) -> Iterator[PathElement]:
+      return self._aPath.__iter__()
+
    @property
    def start(self) -> MapPoint:
       return self._oStart
@@ -59,9 +66,9 @@ class MovementPath:
    
    def deletePoint(self, index:int, deleteCount:int = 1) -> None:
       if deleteCount == 0:
-         self._aPath.splice(index, len(self._aPath) - index)
+         del self._aPath[index:]
       else:
-         self._aPath.splice(index, deleteCount)
+         del self._aPath[index:index + deleteCount]
    
    def __str__(self) -> str:
       str = "\ndepart : [" + self._oStart.x + ", " + self._oStart.y + "]"
@@ -119,7 +126,7 @@ class MovementPath:
                if pe.orientation  == DirectionsEnum.UP_RIGHT:
                   pe.step = MapPoint.fromCoords(self._aPath[elem].step.x,self._aPath[elem].step.y + 1)
 
-               self._aPath.splice(elem + 1,0,pe)
+               self._aPath.insert(elem + 1, pe)
                elem += 1
             else:
                elem += 1

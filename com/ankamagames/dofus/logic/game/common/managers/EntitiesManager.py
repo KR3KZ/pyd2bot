@@ -1,7 +1,5 @@
 from com.ankamagames.jerakine.logger.Logger import Logger
-from typing import TYPE_CHECKING
-if TYPE_CHECKING:
-   from com.ankamagames.jerakine.entities.interfaces.IEntity import IEntity
+from com.ankamagames.jerakine.entities.interfaces.IEntity import IEntity
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 logger = Logger(__name__)  
 
@@ -15,6 +13,8 @@ class EntitiesManager(metaclass=Singleton):
       self._currentRandomEntity:float = self.RANDOM_ENTITIES_ID_START
 
    def addAnimatedEntity(self, entityID:float, entity:'IEntity', strata:int = 0) -> None:
+      if not isinstance(entity, IEntity):
+         raise Exception('entity must be an IEntity, not a ' + str(type(entity)))
       if self._entities.get(entityID) != None:
          logger.warn("Entity overwriting! Entity " + entityID + " has been replaced.")
       self._entities[entityID] = entity
@@ -73,10 +73,10 @@ class EntitiesManager(metaclass=Singleton):
    def getEntityOnCell(self, cellId:int, oClass = None) -> 'IEntity':
       useFilter = oClass is not None
       isMultiFilter:bool = useFilter and isinstance(oClass, list)
-      for e in self._entities:
+      for e in self._entities.values():
          if e and e.position and e.position.cellId == cellId:
             if not isMultiFilter:
-               if not useFilter or not isMultiFilter and isinstance(e, oClass):
+               if not useFilter or (useFilter and isinstance(e, oClass)):
                   return e
             else:
                for i in range(oClass):

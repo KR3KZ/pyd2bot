@@ -5,6 +5,7 @@ from com.ankamagames.dofus.internalDatacenter.world.WorldPointWrapper import Wor
 from com.ankamagames.dofus.kernel.Kernel import Kernel
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
 import com.ankamagames.dofus.logic.game.roleplay.frames.RoleplayEntitiesFrame as ref
+from com.ankamagames.dofus.logic.game.roleplay.frames.RoleplayMovementFrame import RoleplayMovementFrame
 from com.ankamagames.dofus.network.messages.game.context.GameContextDestroyMessage import GameContextDestroyMessage
 from com.ankamagames.dofus.network.messages.game.context.roleplay.CurrentMapInstanceMessage import CurrentMapInstanceMessage
 from com.ankamagames.dofus.network.messages.game.context.roleplay.CurrentMapMessage import CurrentMapMessage
@@ -42,6 +43,8 @@ class RoleplayContextFrame(Frame):
         self._newCurrentMapIsReceived = value
 
     def pushed(self) -> bool:
+        self._movementFrame = RoleplayMovementFrame()
+        self._roleplayEntitiesFrame = ref.RoleplayEntitiesFrame()
         return True
 
     def process(self, msg: Message) -> bool:
@@ -70,7 +73,9 @@ class RoleplayContextFrame(Frame):
 
         elif isinstance(msg, MapLoadedMessage):
             if not Kernel().getWorker().contains(ref.RoleplayEntitiesFrame):
-                Kernel().getWorker().addFrame(ref.RoleplayEntitiesFrame())
+                Kernel().getWorker().addFrame(self._roleplayEntitiesFrame)
+            if not Kernel().getWorker().contains(RoleplayMovementFrame):
+                Kernel().getWorker().addFrame(self._movementFrame)
             return True
 
         elif isinstance(msg, GameContextDestroyMessage):

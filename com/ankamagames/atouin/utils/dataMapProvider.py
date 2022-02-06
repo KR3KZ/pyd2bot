@@ -11,24 +11,19 @@ from com.ankamagames.jerakine.types.positions.MapPoint import MapPoint
 from mapTools import MapTools
 logger = Logger(__name__)
 
-class DataMapProvider(IDataMapProvider):
-    __metaclass__ = Singleton
+class DataMapProvider(IDataMapProvider, metaclass=Singleton):
     TOLERANCE_ELEVATION:int = 11
-    _playerobject:object
-    isInFight:bool
-    obstaclesCells:list[int]
-    _updatedCell:dict
-    _specialEffects:dict
-    
+
     def __init__(self):
         self.obstaclesCells = list[int]()
         self._updatedCell = dict()
         self._specialEffects = dict()
+        self._playerobject = None
+        self.isInFight = False
         super().__init__()
         
-    @classmethod
-    def init(cls, playerobject:object):
-        cls._playerobject = playerobject
+    def init(self, playerobject:object):
+        self._playerobject = playerobject
 
     def pointLos(self, x:int, y:int, bAllowTroughEntity:bool = True) -> bool:
         cellId:int = MapTools.getCellIdByCoord(x,y)

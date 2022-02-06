@@ -259,8 +259,10 @@ def parseFolderFiles(in_dir, out_dir):
     for f in tqdm(pathlib.Path(in_dir).glob("**/*.as")):
         parseFile(f, pathlib.Path(out_dir) / f.relative_to(in_dir).name.replace(".as", ".py"))
 
+
 def getLineIndent(line):
     return sum(1 for _ in itertools.takewhile(str.isspace, line))
+
 
 def postSwitchCaseProcess(code):
     codeLines = code.split("\n")
@@ -333,10 +335,8 @@ def parseFile(file_p, out_p):
         fp.write(code)
 
 
-
-
 ROOTDIR = pathlib.Path(os.path.dirname(__file__))
 # parseFolderFiles("AS3ToPythonConverter/scripts", "AS3ToPythonConverter/connectionType")
 t = perf_counter()
-parseFile(ROOTDIR / "target.as", ROOTDIR / "DirectionsEnum.py")
+parseFile(ROOTDIR / "target.as", ROOTDIR / "getLookDirection4DiagExactByCoord.py")
 print("parsing took:", perf_counter() - t)
