@@ -1,7 +1,9 @@
 from ast import FunctionType
+import functools
 from com.ankamagames.jerakine.data.I18nFileAccessor import I18nFileAccessor
 from com.ankamagames.jerakine.enum.GameDataTypeEnum import GameDataTypeEnum
 from com.ankamagames.jerakine.data.BinaryStream import BinaryStream
+from collections.abc import Iterable
 
 
 class GameDataProcess:
@@ -9,31 +11,29 @@ class GameDataProcess:
    def __init__(self, stream:BinaryStream):
       self._stream = stream
       self._sortIndex = dict()
-      self._queryable_field = list()
-      self._searchFieldIndex = dict()
-      self._search_field_type = dict()
-      self._searchFieldCount = dict()
       self._queryableField = list()
+      self._searchFieldIndex = dict()
+      self._searchFieldCount = dict()
       self._searchFieldType = dict()
       self.parseStream()
 
    def parseStream(self):
-      length = self._stream.readInt()
-      off = self._stream.position + length + 4
-      while length:
-         available = self._stream.remaining()
-         string = self._stream.readUTF()
-         self._queryable_field.append(string)
-         self._searchFieldIndex[string] = self._stream.readInt() + off
-         self._search_field_type[string] = self._stream.readInt()
-         self._searchFieldCount[string] = self._stream.readInt()
-         length = length - (available - self._stream.remaining())
+      fieldListSize = self._stream.readInt()
+      indexSearchOffset = self._stream.position + fieldListSize + 4
+      while fieldListSize:
+         size = self._stream.remaining()
+         fieldName = self._stream.readUTF()
+         self._queryableField.append(fieldName)
+         self._searchFieldIndex[fieldName] = self._stream.readInt() + indexSearchOffset
+         self._searchFieldType[fieldName] = self._stream.readInt()
+         self._searchFieldCount[fieldName] = self._stream.readInt()
+         fieldListSize = fieldListSize - (size - self._stream.remaining())
 
-   def getQueryableField(self) -> list[str]:
+   def getQueryableField(self) -> dict[str, int]:
       return self._queryableField
    
    def getFieldType(self, fieldName:str) -> int:
-      return self._searchFieldType[fieldName]
+      return self._searchFieldType.get(fieldName)
    
    def query(self, fieldName:str, match:FunctionType) -> list[int]:
       result = list[int]()
@@ -55,24 +55,24 @@ class GameDataProcess:
       return result
    
    def queryEquals(self, fieldName:str, value) -> list[int]:
-      result:list[int] = list[int]()
-      if not self._searchFieldIndex[fieldName]:
+      result = list[int]()
+      if not self._searchFieldIndex.get(fieldName):
          return None
-      iterable = value not in [int, float, str, bool or value == None]
+      iterable = isinstance(value, Iterable)
       if iterable and len(value) == 0:
          return result
       if not iterable:
          value = [value]
       itemCount:int = self._searchFieldCount[fieldName]
-      self._stream.position(self._searchFieldIndex[fieldName])
-      type:int = self._searchFieldType[fieldName]
-      readFct:FunctionType = self.getReadFunctionType(type)
+      self._stream.position = self._searchFieldIndex[fieldName]
+      ftype:int = self._searchFieldType[fieldName]
+      readFct:FunctionType = self.getReadFunctionType(ftype)
       if readFct == None:
          return None
       valueIndex:int = 0
       value.sort()
       currentValue = value[0]
-      for i in range(itemCount):
+      for _ in range(itemCount):
          readValue = readFct()
          while readValue > currentValue:
             valueIndex += 1
@@ -80,22 +80,21 @@ class GameDataProcess:
                return result
             currentValue = value[valueIndex]
          if readValue == currentValue:
-            idsCount = self._stream.readInt() * 0.25
-            for j in range(idsCount):
-               result.append(self._stream.readInt())
+            idsCount = int(self._stream.readInt() * 0.25)
+            result = [self._stream.readInt() for _ in range(idsCount)]
             valueIndex += 1
             if valueIndex == len(value):
                return result
             currentValue = value[valueIndex]
          else:
-            self._stream.position(self._stream.readInt() + self._stream.position())
+            self._stream.position += self._stream.readInt()
       return result
    
    def sort(self, fieldNames, ids:list[int], ascending = True) -> list[int]:
-      ids.sort(self.getSortFunctionType(fieldNames,ascending))
+      ids.sort(key=functools.cmp_to_key(self.getSortFunction(fieldNames, ascending)))
       return ids
    
-   def getSortFunctionType(self, fieldNames, ascending) -> FunctionType:
+   def getSortFunction(self, fieldNames, ascending) -> FunctionType:
       sortWay:list[float] = None
       indexes:list[dict] = None
       maxFieldIndex:int = 0
@@ -130,7 +129,7 @@ class GameDataProcess:
       if self._sortIndex[fieldName] or not self._searchFieldIndex[fieldName]:
          return
       itemCount:int = self._searchFieldCount[fieldName]
-      self._stream.position(self._searchFieldIndex[fieldName])
+      self._stream.position = self._searchFieldIndex[fieldName]
       ref:dict = dict()
       self._sortIndex[fieldName] = ref
       type:int = self._searchFieldType[fieldName]
@@ -151,7 +150,7 @@ class GameDataProcess:
       if self._sortIndex[fieldName] or not self._searchFieldIndex[fieldName]:
          return
       itemCount:int = self._searchFieldCount[fieldName]
-      self._stream.position(self._searchFieldIndex[fieldName])
+      self._stream.position = self._searchFieldIndex[fieldName]
       ref:dict = dict()
       self._sortIndex[fieldName] = ref
       for i in range(itemCount):
@@ -180,9 +179,9 @@ class GameDataProcess:
          if not isinstance(self._stream, BinaryStream):
             directBuffer = BinaryStream()
             # FIXME: Somethis is wrong here
-            self._stream.position(0)
+            self._stream.position = 0
             self._stream.readBytes(directBuffer)
-            directBuffer.position(0)
+            directBuffer.position = 0
             self._stream = directBuffer
             self._currentStream = self._stream
       elif GameDataTypeEnum.UINT:

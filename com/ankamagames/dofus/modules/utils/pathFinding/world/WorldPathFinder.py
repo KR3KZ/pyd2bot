@@ -75,10 +75,10 @@ class WorldPathFinder(metaclass=Singleton):
 
     def onAStarComplete(self, path:list[Edge]) -> None:
         cb:FunctionType = None
-        if path == None:
-            next()
+        if path is None:
+            self.next()
         else:
-            logger.info("path to map " + str(self.dst) + " found in " + str(TimeDebug.getElapsedTimeInSeconds()) + "s")
+            logger.info("path to map " + str(self.dst) + " found in " + str(TimeDebug.getElapsedTime()) + "s")
             cb = self.callback
             self.callback = None
             cb(path)

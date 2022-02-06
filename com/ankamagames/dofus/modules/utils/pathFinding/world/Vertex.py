@@ -1,6 +1,4 @@
 class Vertex:
-       
-      
    _mapId:float
    
    _zoneId:int
@@ -26,4 +24,4 @@ class Vertex:
       return self._uid
    
    def __str__(self) -> str:
-      pass
+      return f"Vertex(mapId={self._mapId}, zoneId={self._zoneId}, uid={self._uid})"

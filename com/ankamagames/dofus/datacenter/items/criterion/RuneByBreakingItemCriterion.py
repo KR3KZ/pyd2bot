@@ -1,4 +1,11 @@
       
+from com.ankamagames.dofus.datacenter.items.criterion.IItemCriterion import IItemCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterion import ItemCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.MonsterGroupChallengeCriterion import MonsterGroupChallengeCriterion
+from com.ankamagames.jerakine.data.I18n import I18n
+from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
+
+
 class RuneByBreakingItemCriterion(ItemCriterion, IDataCenter):
       
    
@@ -7,8 +14,8 @@ class RuneByBreakingItemCriterion(ItemCriterion, IDataCenter):
    
    @property
    def text(self) -> str:
-      readableCriterionValue:str = _criterionValueText
-      runeBybreakingItem:int = parseInt(readableCriterionValue.split(",")[1]) + 1
+      readableCriterionValue:str = self._criterionValueText
+      runeBybreakingItem:int = int(readableCriterionValue.split(",")[1]) + 1
       return I18n.getUiText("ui.smithmagic.runeByBreakingItemCriterion",[runeBybreakingItem])
    
    def clone(self) -> IItemCriterion:

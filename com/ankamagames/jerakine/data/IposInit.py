@@ -1,6 +1,5 @@
-from abc import ABC
 
-
-class IPostInit(ABC):
+class IPostInit():
+    
     def postInit(self) -> None:
         pass 

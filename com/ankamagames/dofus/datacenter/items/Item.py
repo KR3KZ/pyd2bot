@@ -135,9 +135,7 @@ class Item(IPostInit, IDataCenter):
    _weight:int
    
    _itemSet:ItemSet
-   
-   _appearance:TiphonEntityLook
-   
+      
    _conditions:GroupItemCriterion
    
    _conditionsTarget:GroupItemCriterion

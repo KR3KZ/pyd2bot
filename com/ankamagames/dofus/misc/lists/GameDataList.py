@@ -1,184 +1,70 @@
-from com.ankamagames.dofus.datacenter.abuse.AbuseReasons import AbuseReasons
-from com.ankamagames.dofus.datacenter.alignments.AlignmentGift import AlignmentGift
-from com.ankamagames.dofus.datacenter.alignments.AlignmentOrder import AlignmentOrder
-from com.ankamagames.dofus.datacenter.alignments.AlignmentRank import AlignmentRank
-from com.ankamagames.dofus.datacenter.alignments.AlignmentRankJntGift import AlignmentRankJntGift
-from com.ankamagames.dofus.datacenter.alignments.AlignmentSide import AlignmentSide
-from com.ankamagames.dofus.datacenter.alignments.AlignmentTitle import AlignmentTitle
-from com.ankamagames.dofus.datacenter.almanax.AlmanaxCalendar import AlmanaxCalendar
-from com.ankamagames.dofus.datacenter.ambientSounds.PlaylistSound import PlaylistSound
-from com.ankamagames.dofus.datacenter.appearance.Appearance import Appearance
-from com.ankamagames.dofus.datacenter.appearance.CreatureBoneOverride import CreatureBoneOverride
-from com.ankamagames.dofus.datacenter.appearance.CreatureBoneType import CreatureBoneType
-from com.ankamagames.dofus.datacenter.appearance.Ornament import Ornament
-from com.ankamagames.dofus.datacenter.appearance.SkinMapping import SkinMapping
-from com.ankamagames.dofus.datacenter.appearance.SkinPosition import SkinPosition
-from com.ankamagames.dofus.datacenter.appearance.Title import Title
-from com.ankamagames.dofus.datacenter.appearance.TitleCategory import TitleCategory
-from com.ankamagames.dofus.datacenter.arena.ArenaLeague import ArenaLeague
-from com.ankamagames.dofus.datacenter.arena.ArenaLeagueReward import ArenaLeagueReward
-from com.ankamagames.dofus.datacenter.arena.ArenaLeagueSeason import ArenaLeagueSeason
-from com.ankamagames.dofus.datacenter.bonus.Bonus import Bonus
-from com.ankamagames.dofus.datacenter.bonus.MonsterDropChanceBonus import MonsterDropChanceBonus
-from com.ankamagames.dofus.datacenter.bonus.MonsterStarRateBonus import MonsterStarRateBonus
-from com.ankamagames.dofus.datacenter.bonus.MonsterXPBonus import MonsterXPBonus
-from com.ankamagames.dofus.datacenter.bonus.MountBonus import MountBonus
-from com.ankamagames.dofus.datacenter.bonus.QuestKamasBonus import QuestKamasBonus
-from com.ankamagames.dofus.datacenter.bonus.QuestXPBonus import QuestXPBonus
-from com.ankamagames.dofus.datacenter.bonus.criterion.BonusAreaCriterion import BonusAreaCriterion
-from com.ankamagames.dofus.datacenter.bonus.criterion.BonusCriterion import BonusCriterion
-from com.ankamagames.dofus.datacenter.bonus.criterion.BonusEquippedItemCriterion import BonusEquippedItemCriterion
-from com.ankamagames.dofus.datacenter.bonus.criterion.BonusMonsterCriterion import BonusMonsterCriterion
-from com.ankamagames.dofus.datacenter.bonus.criterion.BonusMonsterFamilyCriterion import BonusMonsterFamilyCriterion
-from com.ankamagames.dofus.datacenter.bonus.criterion.BonusQuestCategoryCriterion import BonusQuestCategoryCriterion
-from com.ankamagames.dofus.datacenter.bonus.criterion.BonusSubAreaCriterion import BonusSubAreaCriterion
-from com.ankamagames.dofus.datacenter.breach.BreachDungeonModificator import BreachDungeonModificator
-from com.ankamagames.dofus.datacenter.breach.BreachInfinityLevel import BreachInfinityLevel
-from com.ankamagames.dofus.datacenter.breach.BreachWorldMapCoordinate import BreachWorldMapCoordinate
-from com.ankamagames.dofus.datacenter.breach.BreachWorldMapSector import BreachWorldMapSector
-from com.ankamagames.dofus.datacenter.breeds.Breed import Breed
-from com.ankamagames.dofus.datacenter.breeds.BreedRole import BreedRole
-from com.ankamagames.dofus.datacenter.breeds.BreedRoleByBreed import BreedRoleByBreed
-from com.ankamagames.dofus.datacenter.breeds.Head import Head
-from com.ankamagames.dofus.datacenter.challenges.Challenge import Challenge
-from com.ankamagames.dofus.datacenter.characteristics.Characteristic import Characteristic
-from com.ankamagames.dofus.datacenter.characteristics.CharacteristicCategory import CharacteristicCategory
-from com.ankamagames.dofus.datacenter.communication.CensoredWord import CensoredWord
-from com.ankamagames.dofus.datacenter.communication.ChatChannel import ChatChannel
-from com.ankamagames.dofus.datacenter.communication.Emoticon import Emoticon
-from com.ankamagames.dofus.datacenter.communication.InfoMessage import InfoMessage
-from com.ankamagames.dofus.datacenter.communication.NamingRule import NamingRule
-from com.ankamagames.dofus.datacenter.communication.Smiley import Smiley
-from com.ankamagames.dofus.datacenter.communication.SmileyCategory import SmileyCategory
-from com.ankamagames.dofus.datacenter.communication.SmileyPack import SmileyPack
-from com.ankamagames.dofus.datacenter.documents.Document import Document
-from com.ankamagames.dofus.datacenter.effects.Effect import Effect
-from com.ankamagames.dofus.datacenter.effects.EffectInstance import EffectInstance
-from com.ankamagames.dofus.datacenter.effects.EvolutiveEffect import EvolutiveEffect
-from com.ankamagames.dofus.datacenter.externalnotifications.ExternalNotification import ExternalNotification
-from com.ankamagames.dofus.datacenter.feature.OptionalFeature import OptionalFeature
-from com.ankamagames.dofus.datacenter.guild.EmblemBackground import EmblemBackground
-from com.ankamagames.dofus.datacenter.guild.EmblemSymbol import EmblemSymbol
-from com.ankamagames.dofus.datacenter.guild.EmblemSymbolCategory import EmblemSymbolCategory
-from com.ankamagames.dofus.datacenter.guild.GuildTag import GuildTag
-from com.ankamagames.dofus.datacenter.guild.GuildTagsType import GuildTagsType
-from com.ankamagames.dofus.datacenter.guild.RankName import RankName
-from com.ankamagames.dofus.datacenter.houses.HavenbagFurniture import HavenbagFurniture
-from com.ankamagames.dofus.datacenter.houses.HavenbagTheme import HavenbagTheme
-from com.ankamagames.dofus.datacenter.houses.House import House
-from com.ankamagames.dofus.datacenter.idols.Idol import Idol
-from com.ankamagames.dofus.datacenter.idols.IdolsPresetIcon import IdolsPresetIcon
-from com.ankamagames.dofus.datacenter.interactives.Interactive import Interactive
-from com.ankamagames.dofus.datacenter.interactives.Sign import Sign
-from com.ankamagames.dofus.datacenter.interactives.StealthBones import StealthBones
-from com.ankamagames.dofus.datacenter.items.EvolutiveItemType import EvolutiveItemType
-from com.ankamagames.dofus.datacenter.items.Item import Item
-from com.ankamagames.dofus.datacenter.items.ItemSet import ItemSet
-from com.ankamagames.dofus.datacenter.items.ItemType import ItemType
-from com.ankamagames.dofus.datacenter.items.LegendaryPowerCategory import LegendaryPowerCategory
-from com.ankamagames.dofus.datacenter.items.RandomDropGroup import RandomDropGroup
-from com.ankamagames.dofus.datacenter.items.RandomDropItem import RandomDropItem
-from com.ankamagames.dofus.datacenter.items.Weapon import Weapon
-from com.ankamagames.dofus.datacenter.jobs.Job import Job
-from com.ankamagames.dofus.datacenter.jobs.Recipe import Recipe
-from com.ankamagames.dofus.datacenter.jobs.Skill import Skill
-from com.ankamagames.dofus.datacenter.livingobjects.LivingobjectSkinJntMood import LivingobjectSkinJntMood
-from com.ankamagames.dofus.datacenter.livingobjects.SpeakingItemText import SpeakingItemText
-from com.ankamagames.dofus.datacenter.livingobjects.SpeakingItemsTrigger import SpeakingItemsTrigger
-from com.ankamagames.dofus.datacenter.misc.BreachBoss import BreachBoss
-from com.ankamagames.dofus.datacenter.misc.BreachPrize import BreachPrize
-from com.ankamagames.dofus.datacenter.misc.CharacterXPMapping import CharacterXPMapping
-from com.ankamagames.dofus.datacenter.misc.LuaFormula import LuaFormula
-from com.ankamagames.dofus.datacenter.misc.Month import Month
-from com.ankamagames.dofus.datacenter.misc.Pack import Pack
-from com.ankamagames.dofus.datacenter.misc.Subhint import Subhint
-from com.ankamagames.dofus.datacenter.misc.Tips import Tips
-from com.ankamagames.dofus.datacenter.monsters.Companion import Companion
-from com.ankamagames.dofus.datacenter.monsters.CompanionCharacteristic import CompanionCharacteristic
-from com.ankamagames.dofus.datacenter.monsters.CompanionSpell import CompanionSpell
-from com.ankamagames.dofus.datacenter.monsters.Monster import Monster
-from com.ankamagames.dofus.datacenter.monsters.MonsterDrop import MonsterDrop
-from com.ankamagames.dofus.datacenter.monsters.MonsterDropCoefficient import MonsterDropCoefficient
-from com.ankamagames.dofus.datacenter.monsters.MonsterGrade import MonsterGrade
-from com.ankamagames.dofus.datacenter.monsters.MonsterMiniBoss import MonsterMiniBoss
-from com.ankamagames.dofus.datacenter.monsters.MonsterRace import MonsterRace
-from com.ankamagames.dofus.datacenter.monsters.MonsterSuperRace import MonsterSuperRace
-from com.ankamagames.dofus.datacenter.mounts.Mount import Mount
-from com.ankamagames.dofus.datacenter.mounts.MountBehavior import MountBehavior
-from com.ankamagames.dofus.datacenter.mounts.MountBone import MountBone
-from com.ankamagames.dofus.datacenter.mounts.MountFamily import MountFamily
-from com.ankamagames.dofus.datacenter.mounts.RideFood import RideFood
-from com.ankamagames.dofus.datacenter.notifications.Notification import Notification
-from com.ankamagames.dofus.datacenter.npcs.Npc import Npc
-from com.ankamagames.dofus.datacenter.npcs.NpcAction import NpcAction
-from com.ankamagames.dofus.datacenter.npcs.NpcMessage import NpcMessage
-from com.ankamagames.dofus.datacenter.npcs.TaxCollectorFirstname import TaxCollectorFirstname
-from com.ankamagames.dofus.datacenter.npcs.TaxCollectorName import TaxCollectorName
-from com.ankamagames.dofus.datacenter.playlists.Playlist import Playlist
-from com.ankamagames.dofus.datacenter.popup.PopupButton import PopupButton
-from com.ankamagames.dofus.datacenter.popup.PopupInformation import PopupInformation
-from com.ankamagames.dofus.datacenter.progression.ActivitySuggestion import ActivitySuggestion
-from com.ankamagames.dofus.datacenter.progression.ActivitySuggestionsCategory import ActivitySuggestionsCategory
-from com.ankamagames.dofus.datacenter.progression.FeatureDescription import FeatureDescription
-from com.ankamagames.dofus.datacenter.quest.Achievement import Achievement
-from com.ankamagames.dofus.datacenter.quest.AchievementCategory import AchievementCategory
-from com.ankamagames.dofus.datacenter.quest.Achievementobjective import Achievementobjective
-from com.ankamagames.dofus.datacenter.quest.AchievementReward import AchievementReward
-from com.ankamagames.dofus.datacenter.quest.Quest import Quest
-from com.ankamagames.dofus.datacenter.quest.QuestCategory import QuestCategory
-from com.ankamagames.dofus.datacenter.quest.Questobjective import Questobjective
-from com.ankamagames.dofus.datacenter.quest.QuestobjectiveType import QuestobjectiveType
-from com.ankamagames.dofus.datacenter.quest.QuestStep import QuestStep
-from com.ankamagames.dofus.datacenter.quest.QuestStepRewards import QuestStepRewards
-from com.ankamagames.dofus.datacenter.quest.objectives.QuestobjectiveBringItemToNpc import QuestobjectiveBringItemToNpc
-from com.ankamagames.dofus.datacenter.quest.objectives.QuestobjectiveBringSoulToNpc import QuestobjectiveBringSoulToNpc
-from com.ankamagames.dofus.datacenter.quest.objectives.QuestobjectiveCraftItem import QuestobjectiveCraftItem
-from com.ankamagames.dofus.datacenter.quest.objectives.QuestobjectiveDiscoverMap import QuestobjectiveDiscoverMap
-from com.ankamagames.dofus.datacenter.quest.objectives.QuestobjectiveDiscoverSubArea import QuestobjectiveDiscoverSubArea
-from com.ankamagames.dofus.datacenter.quest.objectives.QuestobjectiveDuelSpecificPlayer import QuestobjectiveDuelSpecificPlayer
-from com.ankamagames.dofus.datacenter.quest.objectives.QuestobjectiveFightMonster import QuestobjectiveFightMonster
-from com.ankamagames.dofus.datacenter.quest.objectives.QuestobjectiveFightMonstersOnMap import QuestobjectiveFightMonstersOnMap
-from com.ankamagames.dofus.datacenter.quest.objectives.QuestobjectiveFreeForm import QuestobjectiveFreeForm
-from com.ankamagames.dofus.datacenter.quest.objectives.QuestobjectiveGoToNpc import QuestobjectiveGoToNpc
-from com.ankamagames.dofus.datacenter.quest.objectives.QuestobjectiveMultiFightMonster import QuestobjectiveMultiFightMonster
-from com.ankamagames.dofus.datacenter.quest.treasureHunt.LegendaryTreasureHunt import LegendaryTreasureHunt
-from com.ankamagames.dofus.datacenter.quest.treasureHunt.PointOfInterest import PointOfInterest
-from com.ankamagames.dofus.datacenter.quest.treasureHunt.PointOfInterestCategory import PointOfInterestCategory
-from com.ankamagames.dofus.datacenter.servers.Server import Server
-from com.ankamagames.dofus.datacenter.servers.ServerCommunity import ServerCommunity
-from com.ankamagames.dofus.datacenter.servers.ServerGameType import ServerGameType
-from com.ankamagames.dofus.datacenter.servers.ServerLang import ServerLang
-from com.ankamagames.dofus.datacenter.servers.ServerPopulation import ServerPopulation
-from com.ankamagames.dofus.datacenter.servers.ServerTemporisSeason import ServerTemporisSeason
-from com.ankamagames.dofus.datacenter.sounds.SoundAnimation import SoundAnimation
-from com.ankamagames.dofus.datacenter.sounds.SoundBones import SoundBones
-from com.ankamagames.dofus.datacenter.sounds.SoundUi import SoundUi
-from com.ankamagames.dofus.datacenter.sounds.SoundUiElement import SoundUiElement
-from com.ankamagames.dofus.datacenter.sounds.SoundUiHook import SoundUiHook
-from com.ankamagames.dofus.datacenter.spells.FinishMove import FinishMove
-from com.ankamagames.dofus.datacenter.spells.Spell import Spell
-from com.ankamagames.dofus.datacenter.spells.SpellConversion import SpellConversion
-from com.ankamagames.dofus.datacenter.spells.SpellLevel import SpellLevel
-from com.ankamagames.dofus.datacenter.spells.SpellState import SpellState
-from com.ankamagames.dofus.datacenter.spells.SpellType import SpellType
-from com.ankamagames.dofus.datacenter.world.Area import Area
-from com.ankamagames.dofus.datacenter.world.Dungeon import Dungeon
-from com.ankamagames.dofus.datacenter.world.Hint import Hint
-from com.ankamagames.dofus.datacenter.world.HintCategory import HintCategory
-from com.ankamagames.dofus.datacenter.world.MapPosition import MapPosition
-from com.ankamagames.dofus.datacenter.world.MapReference import MapReference
-from com.ankamagames.dofus.datacenter.world.MapScrollAction import MapScrollAction
-from com.ankamagames.dofus.datacenter.world.Phoenix import Phoenix
+# from com.ankamagames.dofus.datacenter.alignments.AlignmentGift import AlignmentGift
+# from com.ankamagames.dofus.datacenter.alignments.AlignmentOrder import AlignmentOrder
+# from com.ankamagames.dofus.datacenter.alignments.AlignmentRank import AlignmentRank
+# from com.ankamagames.dofus.datacenter.alignments.AlignmentRankJntGift import AlignmentRankJntGift
+# from com.ankamagames.dofus.datacenter.alignments.AlignmentSide import AlignmentSide
+# from com.ankamagames.dofus.datacenter.alignments.AlignmentTitle import AlignmentTitle
+# from com.ankamagames.dofus.datacenter.effects.Effect import Effect
+# from com.ankamagames.dofus.datacenter.effects.EffectInstance import EffectInstance
+# from com.ankamagames.dofus.datacenter.items.EvolutiveItemType import EvolutiveItemType
+# from com.ankamagames.dofus.datacenter.items.ItemSet import ItemSet
+# from com.ankamagames.dofus.datacenter.items.ItemType import ItemType
+# from com.ankamagames.dofus.datacenter.items.Weapon import Weapon
+# from com.ankamagames.dofus.datacenter.jobs.Job import Job
+# from com.ankamagames.dofus.datacenter.monsters.Monster import Monster
+# from com.ankamagames.dofus.datacenter.monsters.MonsterDrop import MonsterDrop
+# from com.ankamagames.dofus.datacenter.monsters.MonsterGrade import MonsterGrade
+# from com.ankamagames.dofus.datacenter.monsters.MonsterRace import MonsterRace
+# from com.ankamagames.dofus.datacenter.monsters.MonsterSuperRace import MonsterSuperRace
+# from com.ankamagames.dofus.datacenter.servers.Server import Server
+# from com.ankamagames.dofus.datacenter.servers.ServerCommunity import ServerCommunity
+# from com.ankamagames.dofus.datacenter.servers.ServerGameType import ServerGameType
+# from com.ankamagames.dofus.datacenter.servers.ServerPopulation import ServerPopulation
+# from com.ankamagames.dofus.datacenter.spells.SpellState import SpellState
+# from com.ankamagames.dofus.datacenter.world.Area import Area
+# from com.ankamagames.dofus.datacenter.world.MapPosition import MapPosition
+# from com.ankamagames.dofus.datacenter.world.MapScrollAction import MapScrollAction
 from com.ankamagames.dofus.datacenter.world.SubArea import SubArea
-from com.ankamagames.dofus.datacenter.world.SuperArea import SuperArea
-from com.ankamagames.dofus.datacenter.world.WorldMap import WorldMap
+# from com.ankamagames.dofus.datacenter.world.SuperArea import SuperArea
+# from com.ankamagames.dofus.datacenter.world.WorldMap import WorldMap
 
 
 
 class GameDataList:
    
-   CLASSES:list[object] = [Server,ServerCommunity,ServerGameType,ServerPopulation,ServerLang,Monster,MonsterGrade,MonsterRace,MonsterSuperRace,MonsterDrop,Notification,Spell,Effect,EvolutiveEffect,EffectInstance,SpellLevel,SpellType,SpellState,Breed,BreedRole,BreedRoleByBreed,Head,Characteristic,CharacteristicCategory,SuperArea,Area,WorldMap,SubArea,Hint,HintCategory,MapPosition,MapReference,MapScrollAction,Item,ChatChannel,Weapon,Job,Skill,Recipe,ItemSet,Month,Npc,NpcAction,NpcMessage,InfoMessage,TaxCollectorFirstname,TaxCollectorName,Challenge,AlignmentGift,AlignmentOrder,AlignmentRank,AlignmentRankJntGift,AlignmentSide,AlignmentTitle,House,RankName,EmblemBackground,EmblemSymbol,EmblemSymbolCategory,Interactive,Sign,ItemType,EvolutiveItemType,Emoticon,Smiley,SmileyPack,SmileyCategory,Quest,QuestCategory,QuestStep,QuestStepRewards,Questobjective,QuestobjectiveType,QuestobjectiveCraftItem,QuestobjectiveBringItemToNpc,QuestobjectiveBringSoulToNpc,QuestobjectiveDiscoverMap,QuestobjectiveDiscoverSubArea,QuestobjectiveDuelSpecificPlayer,QuestobjectiveFightMonster,QuestobjectiveFightMonstersOnMap,QuestobjectiveMultiFightMonster,QuestobjectiveFreeForm,QuestobjectiveGoToNpc,Achievement,AchievementCategory,Achievementobjective,AchievementReward,PointOfInterest,PointOfInterestCategory,LegendaryTreasureHunt,Mount,MountBone,MountBehavior,MountFamily,RideFood,Document,Appearance,SkinMapping,SpeakingItemsTrigger,SpeakingItemText,LivingobjectSkinJntMood,AbuseReasons,Tips,Pack,OptionalFeature,CensoredWord,NamingRule,Title,TitleCategory,Ornament,Dungeon,MonsterMiniBoss,SoundAnimation,SoundBones,StealthBones,ExternalNotification,AlmanaxCalendar,SoundUi,SoundUiElement,SoundUiHook,SkinPosition,Companion,CompanionCharacteristic,CompanionSpell,CreatureBoneOverride,CreatureBoneType,Phoenix,Playlist,PlaylistSound,Idol,IdolsPresetIcon,HavenbagFurniture,HavenbagTheme,Bonus,MonsterXPBonus,QuestXPBonus,QuestKamasBonus,MountBonus,MonsterStarRateBonus,MonsterDropChanceBonus,BonusCriterion,BonusMonsterCriterion,BonusMonsterFamilyCriterion,BonusSubAreaCriterion,BonusAreaCriterion,BonusQuestCategoryCriterion,BonusEquippedItemCriterion,FinishMove,Subhint,LuaFormula,ArenaLeague,ArenaLeagueReward,ArenaLeagueSeason,BreachPrize,BreachBoss,ServerTemporisSeason,MonsterDropCoefficient,LegendaryPowerCategory,CharacterXPMapping,SpellConversion,BreachWorldMapCoordinate,BreachDungeonModificator,BreachWorldMapSector,BreachInfinityLevel,RandomDropGroup,RandomDropItem,FeatureDescription,PopupInformation,PopupButton,ActivitySuggestion,ActivitySuggestionsCategory,GuildTag,GuildTagsType]
-    
+   CLASSES:list[object] = [
+      # Server,
+      # ServerCommunity,
+      # ServerGameType,
+      # ServerPopulation,
+      # Monster,
+      # MonsterGrade,
+      # MonsterRace,
+      # MonsterSuperRace,
+      # MonsterDrop,
+      # Effect,
+      # EffectInstance,
+      # SpellState,
+      # SuperArea,
+      # Area,
+      # WorldMap,
+      SubArea,
+      # MapPosition,
+      # MapScrollAction,
+      #Item,
+      # Weapon,
+      # Job,
+      # ItemSet,
+      # AlignmentGift,
+      # AlignmentOrder,
+      # AlignmentRank,
+      # AlignmentRankJntGift,
+      # AlignmentSide,
+      # AlignmentTitle,
+      # ItemType,
+      # EvolutiveItemType
+   ]
+      
    
    def __init__(self):
       super().__init__()

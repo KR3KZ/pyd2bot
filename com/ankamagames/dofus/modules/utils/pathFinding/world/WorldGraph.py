@@ -40,9 +40,9 @@ class WorldGraph:
       return vertex
       
    def getVertex(self, mapId:float, mapRpZone:int) -> Vertex:
-      if self._vertices.get(mapId) == None:
+      if self._vertices.get(mapId) is None:
          return None
-      return self._vertices[mapId][mapRpZone]
+      return self._vertices[mapId].get(mapRpZone)
    
    def getOutgoingEdgesFromVertex(self, src:Vertex) -> list[Edge]:
       return self._outgoingEdges[src.UID]

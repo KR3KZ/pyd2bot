@@ -73,16 +73,15 @@ class CurrentPlayedFighterManager(metaclass=Singleton):
 
    def resetPlayerSpellList(self) -> None:
       playerManager = pc.PlayedCharacterManager()
-      inventoryManager:InventoryManager = InventoryManager()
+      # inventoryManager:InventoryManager = InventoryManager()
       if playerManager.spellsInventory != playerManager.playerSpellList:
          logger.info("Remise à jour de la liste des sorts du joueur")
          playerManager.spellsInventory = playerManager.playerSpellList
-         KernelEventsManager().processCallback(HookList.SpellListUpdate,playerManager.playerSpellList)
-         if knl.Kernel.getWorker().contains(FightSpellCastFrame):
-            knl.Kernel.getWorker().removeFrame(knl.Kernel.getWorker().getFrame(FightSpellCastFrame))
-      if inventoryManager.shortcutBarSpells != playerManager.playerShortcutList:
-         inventoryManager.shortcutBarSpells = playerManager.playerShortcutList
-         KernelEventsManager().processCallback(InventoryHookList.ShortcutBarViewContent,ShortcutBarEnum.SPELL_SHORTCUT_BAR)
+         # if knl.Kernel.getWorker().contains(FightSpellCastFrame):
+         #    knl.Kernel.getWorker().removeFrame(knl.Kernel.getWorker().getFrame(FightSpellCastFrame))
+      # if inventoryManager.shortcutBarSpells != playerManager.playerShortcutList:
+      #    inventoryManager.shortcutBarSpells = playerManager.playerShortcutList
+      #    KernelEventsManager().processCallback(InventoryHookList.ShortcutBarViewContent,ShortcutBarEnum.SPELL_SHORTCUT_BAR)
 
    def setCharacteristicsInformations(self, id:float, characteristics:CharacterCharacteristicsInformations) -> None:
       self._characteristicsInformationsList[id] = characteristics
@@ -229,7 +228,7 @@ class CurrentPlayedFighterManager(metaclass=Singleton):
       if pc.PlayedCharacterManager().id != self._currentFighterId:
          self.currentFighterId = pc.PlayedCharacterManager().id
          self.resetPlayerSpellList()
-         self.updatePortrait(DofusEntities.getEntity(self._currentFighterId))
+         # self.updatePortrait(DofusEntities.getEntity(self._currentFighterId))
       self._currentFighterId = 0
       self._characteristicsInformationsList = dict()
       self._spellCastInFightManagerList = dict()

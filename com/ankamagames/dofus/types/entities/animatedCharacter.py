@@ -16,6 +16,14 @@ class AnimatedCharacter(IEntity, IObstacle):
         self.cantWalk8Directions:bool = False
     
     @property
+    def position(self) -> MapPoint:
+        return self._position
+    
+    @position.setter
+    def position(self, value:MapPoint):
+        self._position = value
+
+    @property
     def canSeeThrough(self) -> bool:
         return self._canSeeThrough 
     

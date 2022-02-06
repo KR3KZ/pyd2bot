@@ -3,7 +3,6 @@ from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterion import ItemC
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.dofus.datacenter.items.criterion.IItemCriterion import IItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterionFactory import ItemCriterionFactory
 from com.ankamagames.jerakine.utils.misc.StringUtils import StringUtils
 
 logger = Logger(__name__)
@@ -234,6 +233,7 @@ class GroupItemCriterion(IItemCriterion):
       else:
          ANDindex = pCriteria.index("&")
          ORindex = pCriteria.index("|")
+         from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterionFactory import ItemCriterionFactory
          if ANDindex == -1 and ORindex == -1:
             criterion = ItemCriterionFactory.create(pCriteria)
          elif (ANDindex < ORindex or ORindex == -1) and ANDindex != -1:

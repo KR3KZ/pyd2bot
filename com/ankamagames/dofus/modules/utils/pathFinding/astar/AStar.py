@@ -2,6 +2,8 @@ from time import perf_counter
 from types import FunctionType
 from whistle import Event
 from com.ankamagames.dofus.datacenter.world.MapPosition import MapPosition
+from com.ankamagames.dofus.datacenter.world.SubArea import SubArea
+from com.ankamagames.dofus.misc.utils.GameDataQuery import GameDataQuery
 from com.ankamagames.dofus.modules.utils.pathFinding.world.Edge import Edge
 from com.ankamagames.dofus.modules.utils.pathFinding.world.Node import Node
 from com.ankamagames.dofus.modules.utils.pathFinding.world.Vertex import Vertex
@@ -14,23 +16,23 @@ logger = Logger(__name__)
 
 class AStar:
    
-   dest:MapPosition
+   dest:MapPosition = None
    
-   closedDic:dict
+   closedDic = dict()
    
-   openList:list[Node]
+   openList = list[Node]()
    
-   openDic:dict
+   openDic = dict ()
    
-   iterations:int
+   iterations:int = 0
    
-   worldGraph:WorldGraph
+   worldGraph:WorldGraph = None
    
-   dst:Vertex
+   dst:Vertex = None
    
-   callback:FunctionType
+   callback:FunctionType = None
    
-   _forbiddenSubareaIds:list[int]
+   _forbiddenSubareaIds = list[int]()
    
    HEURISTIC_SCALE:int = 1
    
@@ -42,32 +44,36 @@ class AStar:
    def __init__(self):
       super().__init__()
    
-   def search(self, worldGraph:WorldGraph, src:Vertex, dst:Vertex, callback:FunctionType) -> None:
-      if AStar.callback != None:
+   @classmethod
+   def search(cls, worldGraph:WorldGraph, src:Vertex, dst:Vertex, callback:FunctionType) -> None:
+      if cls.callback != None:
          raise Exception("Pathfinding already in progress")
       if src == dst:
          callback(None)
          return
-      self.initForbiddenSubareaList()
-      AStar.worldGraph = worldGraph
-      AStar.dst = dst
-      AStar.callback = callback
-      self.dest = MapPosition.getMapPositionById(dst.mapId)
-      self.closedDic = dict()
-      self.openList = list[Node]()
-      self.openDic = dict()
-      self.iterations = 0
-      self.openList.append(Node(src, MapPosition.getMapPositionById(src.mapId)))
-      EnterFrameDispatcher.addEventListener(self.compute, EnterFrameConst.COMPUTE_ASTAR)
+      cls.initForbiddenSubareaList()
+      cls.worldGraph = worldGraph
+      cls.dst = dst
+      cls.callback = callback
+      cls.dest = MapPosition.getMapPositionById(dst.mapId)
+      cls.closedDic = dict()
+      cls.openList = list[Node]()
+      cls.openDic = dict()
+      cls.iterations = 0
+      cls.openList.append(Node(src, MapPosition.getMapPositionById(src.mapId)))
+      EnterFrameDispatcher().addEventListener(cls.compute, EnterFrameConst.COMPUTE_ASTAR)
    
-   def initForbiddenSubareaList(self) -> None:
-      self._forbiddenSubareaIds = GameDataQuery.queryEquals(SubArea, "mountAutoTripAllowed", False)
+   @classmethod
+   def initForbiddenSubareaList(cls) -> None:
+      cls._forbiddenSubareaIds = GameDataQuery.queryEquals(SubArea, "mountAutoTripAllowed", False)
    
-   def stopSearch(self) -> None:
-      if self.callback != None:
-         self.callbackWithResult(None)
+   @classmethod
+   def stopSearch(cls) -> None:
+      if cls.callback != None:
+         cls.callbackWithResult(None)
    
-   def compute(self, e:Event) -> None:
+   @classmethod
+   def compute(cls, e:Event=None) -> None:
       current:Node = None
       edges:list[Edge] = None
       oldLength:int = 0
@@ -78,40 +84,40 @@ class AStar:
       manhattanDistance:int = 0
       node:Node = None
       start:int = perf_counter()
-      while len(self.openList) > 0:
-         if self.iterations > self.MAX_ITERATION:
-            self.callbackWithResult(None)
+      while len(cls.openList) > 0:
+         if cls.iterations > cls.MAX_ITERATION:
+            cls.callbackWithResult(None)
             logger.error("Too many iterations, aborting A*")
             return
-         self.iterations += 1
-         current = self.openList.shift()
-         self.openDic[current.vertex] = None
-         if current.vertex == self.dst:
-            logger.debug("Goal reached with " + str(self.iterations) + " iterations")
-            self.callbackWithResult(self.buildResultPath(self.worldGraph, current))
+         cls.iterations += 1
+         current = cls.openList.pop(0)
+         cls.openDic[current.vertex] = None
+         if current.vertex == cls.dst:
+            logger.debug("Goal reached with " + str(cls.iterations) + " iterations")
+            cls.callbackWithResult(cls.buildResultPath(cls.worldGraph, current))
             return
-         edges = self.worldGraph.getOutgoingEdgesFromVertex(current.vertex)
-         oldLength = len(self.openList)
+         edges = cls.worldGraph.getOutgoingEdgesFromVertex(current.vertex)
+         oldLength = len(cls.openList)
          cost = current.cost + 1
          for edge in edges:
-            if self.hasValidTransition(edge):
-               if self.hasValidDestinationSubarea(edge):
-                  existing = self.closedDic[edge.dst]
+            if cls.hasValidTransition(edge):
+               if cls.hasValidDestinationSubarea(edge):
+                  existing = cls.closedDic.get(edge.dst)
                   if not (existing != None and cost >= existing.cost):
-                     existing = self.openDic[edge.dst]
+                     existing = cls.openDic.get(edge.dst)
                      if not (existing != None and cost >= existing.cost):
                         map = MapPosition.getMapPositionById(edge.dst.mapId)
                         if map == None:
                            logger.info("La map " + edge.dst.mapId + " ne semble pas exister")
                         else:
-                           manhattanDistance = abs(map.posX - self.dest.posX) + abs(map.posY - self.dest.posY)
-                           node = Node(edge.dst, map, cost, cost + self.HEURISTIC_SCALE * manhattanDistance + (self.INDOOR_WEIGHT if current.map.outdoor and not map.outdoor else 0), current)
-                           self.openList.append(node)
-                           self.openDic[node.vertex] = node
-         self.closedDic[current.vertex] = current
-         if oldLength < len(self.openList):
-            self.openList.sort(self.orderNodes)
-      self.callbackWithResult(None)
+                           manhattanDistance = abs(map.posX - cls.dest.posX) + abs(map.posY - cls.dest.posY)
+                           node = Node(edge.dst, map, cost, cost + cls.HEURISTIC_SCALE * manhattanDistance + (cls.INDOOR_WEIGHT if current.map.outdoor and not map.outdoor else 0), current)
+                           cls.openList.append(node)
+                           cls.openDic[node.vertex] = node
+         cls.closedDic[current.vertex] = current
+         if oldLength < len(cls.openList):
+            cls.openList.sort(key=lambda x: x.heuristic)
+      cls.callbackWithResult(None)
    
    @staticmethod
    def hasValidTransition(edge:Edge) -> bool:
@@ -127,28 +133,31 @@ class AStar:
          valid = True
       return valid
    
-   def hasValidDestinationSubarea(self, edge:Edge) -> bool:
+   @classmethod
+   def hasValidDestinationSubarea(cls, edge:Edge) -> bool:
       fromMapId:float = edge.src.mapId
       fromSubareaId:int = MapPosition.getMapPositionById(fromMapId).subAreaId
       toMapId:float = edge.dst.mapId
       toSubareaId:int = MapPosition.getMapPositionById(toMapId).subAreaId
       if fromSubareaId == toSubareaId:
          return True
-      if self._forbiddenSubareaIds.find(toSubareaId) != -1:
+      if cls._forbiddenSubareaIds.find(toSubareaId) != -1:
          return False
       return True
    
-   def callbackWithResult(self, result:list[Edge]) -> None:
-      cb:FunctionType = self.callback
-      self.callback = None
-      EnterFrameDispatcher.removeEventListener(self.compute)
+   @classmethod   
+   def callbackWithResult(cls, result:list[Edge]) -> None:
+      cb:FunctionType = cls.callback
+      cls.callback = None
+      EnterFrameDispatcher().removeEventListener(cls.compute)
       cb(result)
    
-   @staticmethod
-   def orderNodes(a:Node, b:Node) -> int:
+   @classmethod
+   def orderNodes(cls, a:Node, b:Node) -> int:
       return 0 if a.heuristic == b.heuristic else (1 if a.heuristic > b.heuristic else  -1)
    
-   def buildResultPath(self, worldGraph:WorldGraph, node:Node) -> list[Edge]:
+   @classmethod
+   def buildResultPath(cls, worldGraph:WorldGraph, node:Node) -> list[Edge]:
       result = list[Edge]()
       while node.parent != None:
          result.append(worldGraph.getEdge(node.parent.vertex, node.vertex))

@@ -12,12 +12,13 @@ class Edge:
    def __init__(self, src:Vertex, dst:Vertex):
       super().__init__()
       self._src = src
-      self._to = dst
+      self._dst = dst
       self._transitions = list[Transition]()
    
    @property
    def src(self) -> Vertex:
       return self._src
+
    @property
    def dst(self) -> Vertex:
       return self._dst
@@ -29,5 +30,3 @@ class Edge:
    def addTransition(self, dir:int, type:int, skill:int, criterion:str, transitionMapId:float, cell:int, id:int) -> None:
       self.transitions.append(Transition(type, dir, skill, criterion, transitionMapId, cell, id))
    
-   def __str__(self) -> str:
-      pass

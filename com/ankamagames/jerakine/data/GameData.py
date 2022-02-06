@@ -33,7 +33,7 @@ class GameData(AbstractDataManager):
       if not cls._directObjectCaches.get(moduleId):
          cls._directObjectCaches[moduleId] = dict()
       else:
-         wr = cls._directObjectCaches[moduleId][keyId]
+         wr = cls._directObjectCaches[moduleId].get(keyId)
          if wr:
             o = wr.object
             if o:

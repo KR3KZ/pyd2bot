@@ -9,14 +9,13 @@ logger = Logger(__name__)
 class GameDataField:
 
    NULL_IDENTIFIER:int = -1431655766
-
+   _classesByName = dict()
 
    def __init__(self, name:str, moduleReader:'ModuleReader'):
       self.name = name
       self._innerReadMethods = list()
       self._innerTypeNames = list()
       self.moduleReader = moduleReader
-      self._classesByName = dict()
 
    def readType(self, stream:BinaryStream):
       typeId = stream.readInt()
@@ -88,10 +87,11 @@ class GameDataField:
       classDefinition = self.moduleReader.getClassDefinition(classIdentifier)
       return classDefinition.getInstance(stream)
 
-   def getobjectByName(self, className:str) -> object:
-      c:object = self._classesByName[className]
-      if c == None:
+   @classmethod
+   def getobjectByName(cls, className:str) -> object:
+      c:object = cls._classesByName.get(className)
+      if c is None:
          c = globals()[className]
-         self._classesByName[className] = c
+         cls._classesByName[className] = c
       return c
    

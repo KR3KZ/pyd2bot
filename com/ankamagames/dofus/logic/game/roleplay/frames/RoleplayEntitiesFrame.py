@@ -33,6 +33,7 @@ from com.ankamagames.dofus.network.types.game.interactive.InteractiveElement imp
 from com.ankamagames.dofus.types.entities.animatedCharacter import AnimatedCharacter
 from com.ankamagames.jerakine.messages.Frame import Frame
 from com.ankamagames.jerakine.messages.Message import Message
+from pyd2bot.events.BotEventsManager import BotEventsManager
 
 
 class RoleplayEntitiesFrame(AbstractEntitiesFrame, Frame):
@@ -312,5 +313,6 @@ class RoleplayEntitiesFrame(AbstractEntitiesFrame, Frame):
             # TODO: Same thing for the StackManagementFrame
             # stackFrame = Kernel().getWorker().getFrame(StackManagementFrame) as StackManagementFrame
             # stackFrame.resumeStack()
+            BotEventsManager().dispatch(BotEventsManager.MAP_DATA_LOADED)
             return False
 

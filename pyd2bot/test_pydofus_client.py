@@ -9,6 +9,7 @@ import com.ankamagames.dofus.logic.connection.managers.AuthentificationManager a
 import com.ankamagames.dofus.kernel.net.ConnectionsHandler as connh
 from com.ankamagames.dofus.logic.game.approach.actions.CharacterSelectionAction import CharacterSelectionAction
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
+from com.ankamagames.dofus.modules.utils.pathFinding.world.Edge import Edge
 from com.ankamagames.dofus.modules.utils.pathFinding.world.WorldPathFinder import WorldPathFinder
 from com.ankamagames.jerakine.data.I18nFileAccessor import I18nFileAccessor
 from com.ankamagames.jerakine.logger.Logger import Logger
@@ -45,7 +46,7 @@ class TestBot:
         BotEventsManager().add_listener(BotEventsManager.CHARACTER_SELECTED, self.onCharacterSelectionSuccess)
         BotEventsManager().add_listener(BotEventsManager.SWITCH_TO_ROLEPLAY, self.onRolePlayContextEntred)
         BotEventsManager().add_listener(BotEventsManager.SWITCH_TO_FIGHT, self.onRolePlayContextEntred)
-        BotEventsManager().add_listener(BotEventsManager.MAP_DATA_LOADED, self.onMapDataLoaded)
+        BotEventsManager().add_listener(BotEventsManager.MAP_DATA_LOADED, self.onMapComplementaryDataLoaded)
 
     def onServerSelection(self, event):
         krnl.Kernel().getWorker().process(ServerSelectionAction.create(serverId=SERVER_ID))
@@ -67,11 +68,15 @@ class TestBot:
         logger.info("Fight context entered")
         pass
 
-    def onMapDataLoaded(self, e:ResourceLoadedEvent):
-        logger.info(f"Bot is currently in the map {PlayedCharacterManager().currentMap}")
+    def onMapComplementaryDataLoaded(self, e:ResourceLoadedEvent):
+        logger.info(f"Bot is currently in the map {PlayedCharacterManager().currentMap.mapId}")
+        WorldPathFinder().findPath(190580737, self.onPathFound)
     
-    def onPathFound(self, result):
+    def onPathFound(self, path:list[Edge]):
         logger.info("sheesh")
+        print("Path : ")
+        for edge in path:
+            print(f"{edge.src} -> {edge.dst}")
 
 
 if __name__ == "__main__":
