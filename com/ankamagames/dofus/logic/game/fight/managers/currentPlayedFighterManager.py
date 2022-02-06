@@ -51,14 +51,14 @@ class CurrentPlayedFighterManager(metaclass=Singleton):
       self._currentFighterIsRealPlayer = self._currentFighterId == playerManager.id
       lastFighterEntity:AnimatedCharacter = DofusEntities.getEntity(lastFighterId)
       if lastFighterEntity:
-         lastFighterEntity.setCanSeeThrough(False)
-         lastFighterEntity.setCanWalkThrough(False)
-         lastFighterEntity.setCanWalkTo(False)
+         lastFighterEntity.canSeeThrough = False
+         lastFighterEntity.canWalkThrough = False
+         lastFighterEntity.canWalkTo = False
       currentFighterEntity:AnimatedCharacter = DofusEntities.getEntity(self._currentFighterId)
       if currentFighterEntity:
-         currentFighterEntity.setCanSeeThrough(True)
-         currentFighterEntity.setCanWalkThrough(True)
-         currentFighterEntity.setCanWalkTo(True)
+         currentFighterEntity.canSeeThrough = True
+         currentFighterEntity.canWalkThrough = True
+         currentFighterEntity.canWalkTo = True
       if playerManager.isFighting:
          if playerManager.id != id or lastFighterId:
             pass

@@ -24,7 +24,7 @@ class InfiniteCache(ICache):
       return obj
    
    def peek(self, ref) -> Any:
-      return self._cache[ref]
+      return self._cache.get(ref)
    
    def store(self, ref, obj) -> bool:
       self._cache[ref] = obj

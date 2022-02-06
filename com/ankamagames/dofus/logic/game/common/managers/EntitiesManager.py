@@ -15,11 +15,13 @@ class EntitiesManager(metaclass=Singleton):
       self._currentRandomEntity:float = self.RANDOM_ENTITIES_ID_START
 
    def addAnimatedEntity(self, entityID:float, entity:'IEntity', strata:int = 0) -> None:
+      logger.warn(f"get {entityID} added {entity}")
       if self._entities.get(entityID) != None:
          logger.warn("Entity overwriting! Entity " + entityID + " has been replaced.")
       self._entities[entityID] = entity
 
    def getEntity(self, entityID:float) -> 'IEntity':
+      logger.warn(f"get {entityID} resulted in {self._entities.get(entityID)}")
       return self._entities.get(entityID)
 
    def getEntityID(self, entity:'IEntity') -> float:

@@ -152,7 +152,6 @@ class PlayedCharacterUpdatesFrame(Frame):
                for opt in grpci.humanoidInfo.options:
                   if isinstance(opt, HumanOptionAlliance):
                      PlayedCharacterManager().characteristics.alignmentInfos.aggressable = opt.aggressable
-               EntitiesManager().addAnimatedEntity(PlayedCharacterManager().id, grpci)
          # if not (PlayedCharacterManager().characteristics.alignmentInfos.aggressable == AggressableStatusEnum.AvA_DISQUALIFIED or\
          #     PlayedCharacterManager().characteristics.alignmentInfos.aggressable == AggressableStatusEnum.AvA_ENABLED_AGGRESSABLE or\
          #         PlayedCharacterManager().characteristics.alignmentInfos.aggressable == AggressableStatusEnum.AvA_ENABLED_NON_AGGRESSABLE or\

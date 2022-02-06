@@ -106,12 +106,12 @@ class AbstractEntitiesFrame(Frame):
         return self._entities is not None and self._entitiesTotal > 0 and entityId in self._entities
 
     def registerActor(self, infos:GameContextActorInformations) -> None:
-        self.registerActorWithId(infos,infos.contextualId)
+        self.registerActorWithId(infos, infos.contextualId)
 
     def registerActorWithId(self, infos:GameContextActorInformations, actorId:float) -> None:
         if self._entities == None:
             self._entities = dict()
-        if not self._entities[actorId]:
+        if not self._entities.get(actorId):
             self._entitiesTotal += 1
         self._entities[actorId] = infos
         if isinstance(infos, GameFightFighterInformations):
@@ -136,8 +136,7 @@ class AbstractEntitiesFrame(Frame):
             characterEntity = AnimatedCharacter(infos.contextualId)
             if isinstance(infos, GameFightMonsterInformations):
                 characterEntity.speedAdjust = Monster.getMonsterById(GameFightMonsterInformations(infos).creatureGenericId).speedAdjust
-            print(">>>>>>>>>>>>>>>>>>>>>> called" + str(characterEntity))
-            EntitiesManager().addEntity(infos.contextualId, characterEntity)
+            EntitiesManager().addAnimatedEntity(infos.contextualId, characterEntity)
         if isinstance(infos, GameRolePlayHumanoidInformations):
             humanoid = infos
             if infos.contextualId == PlayedCharacterManager().id:

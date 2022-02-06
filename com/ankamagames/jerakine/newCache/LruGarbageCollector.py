@@ -28,7 +28,7 @@ class LruGarbageCollector(ICacheGarbageCollector):
    def __init__(self):
       self._usageCount = dict()
       self._pool:pool.Pool = None
-      self._usageCount:dict = None
+      self._usageCount:dict = dict()
       self._cache:ICache = None
       super().__init__()
       if not self._pool:
@@ -43,7 +43,7 @@ class LruGarbageCollector(ICacheGarbageCollector):
       self._cache = cache
    
    def used(self, ref) -> None:
-      if self._usageCount[ref]:
+      if self._usageCount.get(ref):
          self._usageCount[ref]+=1
       else:
          self._usageCount[ref] = 1

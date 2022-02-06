@@ -28,7 +28,6 @@ class GameData(AbstractDataManager):
    
    @classmethod
    def getObject(cls, moduleId:str, keyId:int) -> object:
-      wr:WeakReference = None
       if cls._overrides.get(moduleId) and cls._overrides[moduleId].get(keyId):
          keyId = cls._overrides[moduleId][keyId]
       if not cls._directObjectCaches.get(moduleId):
@@ -40,9 +39,9 @@ class GameData(AbstractDataManager):
             if o:
                return o
       if not cls._objectCaches.get(moduleId):
-             cls._objectCaches[moduleId] = Cache(GameDataFileAccessor().getCount(moduleId) * cls.CACHE_SIZE_RATIO, LruGarbageCollector())
+         cls._objectCaches[moduleId] = Cache(GameDataFileAccessor().getCount(moduleId) * cls.CACHE_SIZE_RATIO, LruGarbageCollector())
       else:
-         o = cls._objectCaches[moduleId]
+         o = cls._objectCaches[moduleId].peek(keyId)
          if o:
             return o
       o = GameDataFileAccessor().getObject(moduleId, keyId)

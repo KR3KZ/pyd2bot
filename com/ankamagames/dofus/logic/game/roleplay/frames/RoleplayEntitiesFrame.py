@@ -98,7 +98,7 @@ class RoleplayEntitiesFrame(AbstractEntitiesFrame, Frame):
         self._playersId = list()
         self._merchantsList = list()
         self._monstersIds = list[float]()
-        self._entitiesVisiblefloat = 0
+        self._entitiesVisibleNumber = 0
         if self._waitForMap:
             ccFrame = Kernel().getWorker().getFrame(ctxcf.ContextChangeFrame)
             connexion = ""
@@ -179,7 +179,7 @@ class RoleplayEntitiesFrame(AbstractEntitiesFrame, Frame):
             if roleplayContextFrame.newCurrentMapIsReceived or previousMap.mapId != self._worldPoint.mapId or previousMap.outdoorX != self._worldPoint.outdoorX or previousMap.outdoorY != self._worldPoint.outdoorY:
                 currentMapHasChanged = True
                 PlayedCharacterManager().currentMap = self._worldPoint
-                self.initNewMap()
+                # TODO: self.initNewMap()
 
             roleplayContextFrame.newCurrentMapIsReceived = False
             if self._currentSubAreaId != mcidmsg.subAreaId or not PlayedCharacterManager().currentSubArea:
@@ -197,15 +197,15 @@ class RoleplayEntitiesFrame(AbstractEntitiesFrame, Frame):
                 elif isinstance(actor, GameRolePlayGroupMonsterInformations):
                     self._monstersIds.append(actor.contextualId)
 
-            self._entitiesVisiblefloat = len(self._playersId) + len(self._monstersIds)
+            self._entitiesVisibleNumber = len(self._playersId) + len(self._monstersIds)
             mapWithNoMonsters = True
             for actor1 in mcidmsg.actors:
                 ac = self.addOrUpdateActor(actor1)
                 if ac:
                     if ac.id == PlayedCharacterManager().id:
                         ac.speedAdjust = PlayedCharacterManager().speedAjust
-                    character:GameRolePlayNamedActorInformations = actor1
-                    if character:
+                    character = actor1
+                    if isinstance(character, GameRolePlayCharacterInformations):
                         for option in character.humanoidInfo.options:
                             if isinstance(option, HumanOptionObjectUse):
                                 dam = DelayedActionMessage(character.contextualId, option.objectGID, option.delayEndTime)
