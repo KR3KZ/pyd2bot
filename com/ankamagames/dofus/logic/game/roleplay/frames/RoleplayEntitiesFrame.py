@@ -9,7 +9,7 @@ from com.ankamagames.dofus.kernel.Kernel import Kernel
 from com.ankamagames.dofus.kernel.net.ConnectionsHandler import ConnectionsHandler
 from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerManager
 from com.ankamagames.dofus.logic.game.common.managers.TimerManager import TimeManager
-from com.ankamagames.dofus.logic.game.roleplay.frames.RoleplayContextFrame import RoleplayContextFrame
+import com.ankamagames.dofus.logic.game.roleplay.frames.RoleplayContextFrame as rcf
 from com.ankamagames.dofus.logic.game.roleplay.messages.DelayedActionMessage import DelayedActionMessage
 from com.ankamagames.dofus.network.enums.MapObstacleStateEnum import MapObstacleStateEnum
 from com.ankamagames.dofus.network.messages.game.context.roleplay.MapComplementaryInformationsDataInHavenBagMessage import MapComplementaryInformationsDataInHavenBagMessage
@@ -19,7 +19,7 @@ from com.ankamagames.dofus.network.messages.game.interactive.InteractiveUsedMess
 from com.ankamagames.dofus.network.types.game.context.roleplay.GameRolePlayCharacterInformations import GameRolePlayCharacterInformations
 from com.ankamagames.dofus.network.types.game.context.roleplay.GameRolePlayGroupMonsterInformations import GameRolePlayGroupMonsterInformations
 from com.ankamagames.dofus.logic.game.common.frames.AbstractEntitiesFrame import AbstractEntitiesFrame
-from com.ankamagames.dofus.logic.game.common.frames.ContextChangeFrame import ContextChangeFrame
+import com.ankamagames.dofus.logic.game.common.frames.ContextChangeFrame as ctxcf
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
 from com.ankamagames.dofus.network.messages.game.context.roleplay.MapComplementaryInformationsDataInHouseMessage import MapComplementaryInformationsDataInHouseMessage
 from com.ankamagames.dofus.network.messages.game.context.roleplay.MapComplementaryInformationsDataMessage import MapComplementaryInformationsDataMessage
@@ -93,13 +93,14 @@ class RoleplayEntitiesFrame(AbstractEntitiesFrame, Frame):
         super().__init__()
     
     def pushed(self) -> bool:
-        self.initNewMap()
+        # TODO: implement init new map here
+        # self.initNewMap()
         self._playersId = list()
         self._merchantsList = list()
         self._monstersIds = list[float]()
         self._entitiesVisiblefloat = 0
         if self._waitForMap:
-            ccFrame = Kernel().getWorker().getFrame(ContextChangeFrame)
+            ccFrame = Kernel().getWorker().getFrame(ctxcf.ContextChangeFrame)
             connexion = ""
             if ccFrame:
                 connexion = ccFrame.mapChangeConnexion
@@ -115,7 +116,7 @@ class RoleplayEntitiesFrame(AbstractEntitiesFrame, Frame):
 
         if isinstance(msg, MapLoadedMessage):
             if self._waitForMap:
-                ccFrame = Kernel().getWorker().getFrame(ContextChangeFrame)
+                ccFrame = Kernel().getWorker().getFrame(ctxcf.ContextChangeFrame)
                 connexion = ""
                 if ccFrame:
                     connexion = ccFrame.mapChangeConnexion
@@ -133,7 +134,7 @@ class RoleplayEntitiesFrame(AbstractEntitiesFrame, Frame):
             self._fightfloat = len(mcidmsg.fights)
             self._mapTotalRewardRate = 0
 
-            if isinstance(not isinstance(msg, MapComplementaryInformationsBreachMessage)):
+            if isinstance(msg, MapComplementaryInformationsBreachMessage):
                 mcidm = msg
                 if mcidm.subAreaId != DataEnum.SUBAREA_INFINITE_BREACH:
                     pass
@@ -164,7 +165,7 @@ class RoleplayEntitiesFrame(AbstractEntitiesFrame, Frame):
                 self._worldPoint = WorldPointWrapper(mcidihmsg.mapId,True,mcidihmsg.currentHouse.worldX,mcidihmsg.currentHouse.worldY)
 
             else:
-                self._worldPoint = WorldPointWrapper(mcidmsg.mapId)
+                self._worldPoint = WorldPointWrapper(int(mcidmsg.mapId))
 
             # TODO: Add handling of this message later
             # if isinstance(msg, MapComplementaryInformationsDataInHavenBagMessage):
@@ -173,7 +174,7 @@ class RoleplayEntitiesFrame(AbstractEntitiesFrame, Frame):
             # elif HavenbagTheme.isMapIdInHavenbag(mcidmsg.mapId):
             #     Atouin().showWorld(True)
 
-            roleplayContextFrame:RoleplayContextFrame = Kernel().getWorker().getFrame(RoleplayContextFrame)
+            roleplayContextFrame:rcf.RoleplayContextFrame = Kernel().getWorker().getFrame(rcf.RoleplayContextFrame)
             previousMap = PlayedCharacterManager().currentMap
             if roleplayContextFrame.newCurrentMapIsReceived or previousMap.mapId != self._worldPoint.mapId or previousMap.outdoorX != self._worldPoint.outdoorX or previousMap.outdoorY != self._worldPoint.outdoorY:
                 currentMapHasChanged = True

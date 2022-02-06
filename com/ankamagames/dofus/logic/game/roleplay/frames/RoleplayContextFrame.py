@@ -1,8 +1,10 @@
 from com.ankamagames.atouin.managers.MapDisplayManager import MapDisplayManager
+from com.ankamagames.atouin.messages.MapLoadedMessage import MapLoadedMessage
 from com.ankamagames.dofus.datacenter.world.SubArea import SubArea
 from com.ankamagames.dofus.internalDatacenter.world.WorldPointWrapper import WorldPointWrapper
 from com.ankamagames.dofus.kernel.Kernel import Kernel
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
+import com.ankamagames.dofus.logic.game.roleplay.frames.RoleplayEntitiesFrame as ref
 from com.ankamagames.dofus.network.messages.game.context.GameContextDestroyMessage import GameContextDestroyMessage
 from com.ankamagames.dofus.network.messages.game.context.roleplay.CurrentMapInstanceMessage import CurrentMapInstanceMessage
 from com.ankamagames.dofus.network.messages.game.context.roleplay.CurrentMapMessage import CurrentMapMessage
@@ -12,8 +14,6 @@ from com.ankamagames.jerakine.messages.Message import Message
 from com.ankamagames.jerakine.types.enums.Priority import Priority
 logger = Logger(__name__)
 class RoleplayContextFrame(Frame):
-
-    
 
     def __init__(self):
         self._newCurrentMapIsReceived = False
@@ -66,6 +66,11 @@ class RoleplayContextFrame(Frame):
 
             PlayedCharacterManager().currentMap = wp
             MapDisplayManager().loadMap(int(mcmsg.mapId))
+            return True
+
+        elif isinstance(msg, MapLoadedMessage):
+            if not Kernel().getWorker().contains(ref.RoleplayEntitiesFrame):
+                Kernel().getWorker().addFrame(ref.RoleplayEntitiesFrame())
             return True
 
         elif isinstance(msg, GameContextDestroyMessage):

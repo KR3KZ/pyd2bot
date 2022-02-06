@@ -1,4 +1,3 @@
-                        
 class MapCharactersItemCriterion(ItemCriterion, IDataCenter):
       
    

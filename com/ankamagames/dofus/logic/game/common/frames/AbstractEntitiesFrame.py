@@ -70,7 +70,7 @@ class AbstractEntitiesFrame(Frame):
 
         super().__init__()
 
-
+    @property
     def priority(self) -> int:
         return Priority.NORMAL
 
@@ -136,7 +136,8 @@ class AbstractEntitiesFrame(Frame):
             characterEntity = AnimatedCharacter(infos.contextualId)
             if isinstance(infos, GameFightMonsterInformations):
                 characterEntity.speedAdjust = Monster.getMonsterById(GameFightMonsterInformations(infos).creatureGenericId).speedAdjust
-            EntitiesManager().addEntity(characterEntity)
+            print(">>>>>>>>>>>>>>>>>>>>>> called" + str(characterEntity))
+            EntitiesManager().addEntity(infos.contextualId, characterEntity)
         if isinstance(infos, GameRolePlayHumanoidInformations):
             humanoid = infos
             if infos.contextualId == PlayedCharacterManager().id:

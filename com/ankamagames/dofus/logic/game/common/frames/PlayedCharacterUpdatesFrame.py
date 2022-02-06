@@ -15,6 +15,7 @@ from com.ankamagames.dofus.logic.game.common.managers.TimerManager import TimeMa
 from com.ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEntities
 from com.ankamagames.dofus.logic.game.fight.managers.CurrentPlayedFighterManager import CurrentPlayedFighterManager
 from com.ankamagames.dofus.logic.game.roleplay.frames.RoleplayContextFrame import RoleplayContextFrame
+from com.ankamagames.dofus.logic.game.roleplay.frames.RoleplayEntitiesFrame import RoleplayEntitiesFrame
 from com.ankamagames.dofus.network.enums.AggressableStatusEnum import AggressableStatusEnum
 from com.ankamagames.dofus.network.enums.CompassTypeEnum import CompassTypeEnum
 from com.ankamagames.dofus.network.enums.PlayerLifeStatusEnum import PlayerLifeStatusEnum
@@ -151,9 +152,12 @@ class PlayedCharacterUpdatesFrame(Frame):
                for opt in grpci.humanoidInfo.options:
                   if isinstance(opt, HumanOptionAlliance):
                      PlayedCharacterManager().characteristics.alignmentInfos.aggressable = opt.aggressable
-               EntitiesManager().addAnimatedEntity(grpci)
-         if not (PlayedCharacterManager().characteristics.alignmentInfos.aggressable == AggressableStatusEnum.AvA_DISQUALIFIED or PlayedCharacterManager().characteristics.alignmentInfos.aggressable == AggressableStatusEnum.AvA_ENABLED_AGGRESSABLE or PlayedCharacterManager().characteristics.alignmentInfos.aggressable == AggressableStatusEnum.AvA_ENABLED_NON_AGGRESSABLE or PlayedCharacterManager().characteristics.alignmentInfos.aggressable == AggressableStatusEnum.AvA_PREQUALIFIED_AGGRESSABLE):
-            return False
+               EntitiesManager().addAnimatedEntity(PlayedCharacterManager().id, grpci)
+         # if not (PlayedCharacterManager().characteristics.alignmentInfos.aggressable == AggressableStatusEnum.AvA_DISQUALIFIED or\
+         #     PlayedCharacterManager().characteristics.alignmentInfos.aggressable == AggressableStatusEnum.AvA_ENABLED_AGGRESSABLE or\
+         #         PlayedCharacterManager().characteristics.alignmentInfos.aggressable == AggressableStatusEnum.AvA_ENABLED_NON_AGGRESSABLE or\
+         #             PlayedCharacterManager().characteristics.alignmentInfos.aggressable == AggressableStatusEnum.AvA_PREQUALIFIED_AGGRESSABLE):
+         #    return False
          newSubArea = SubArea.getSubAreaByMapId(mcidmsg.mapId)
          # if PlayedCharacterManager().currentSubArea and newSubArea:
          #    if PrismSubAreaWrapper.prismList[newSubArea.id]:
