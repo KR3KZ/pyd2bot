@@ -5,7 +5,7 @@ from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterionOperator impo
 from com.ankamagames.dofus.kernel.Kernel import Kernel
 from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerManager
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
-from com.ankamagames.dofus.network.enums.gameServerTypeEnum import GameServerTypeEnum
+from com.ankamagames.dofus.network.enums.GameServerTypeEnum import GameServerTypeEnum
 from com.ankamagames.dofus.network.types.game.achievement.Achievement import Achievement
 from com.ankamagames.dofus.network.types.game.achievement.AchievementAchieved import AchievementAchieved
 from com.ankamagames.jerakine.data import I18n

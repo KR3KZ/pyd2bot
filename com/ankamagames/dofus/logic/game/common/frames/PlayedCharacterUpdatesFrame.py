@@ -21,7 +21,7 @@ from com.ankamagames.dofus.network.enums.CompassTypeEnum import CompassTypeEnum
 from com.ankamagames.dofus.network.enums.PlayerLifeStatusEnum import PlayerLifeStatusEnum
 from com.ankamagames.dofus.network.enums.ProtocolConstantsEnum import ProtocolConstantsEnum
 from com.ankamagames.dofus.network.enums.StatsUpgradeResultEnum import StatsUpgradeResultEnum
-from com.ankamagames.dofus.network.enums.gameServerTypeEnum import GameServerTypeEnum
+from com.ankamagames.dofus.network.enums.GameServerTypeEnum import GameServerTypeEnum
 from com.ankamagames.dofus.network.messages.game.almanach.AlmanachCalendarDateMessage import AlmanachCalendarDateMessage
 from com.ankamagames.dofus.network.messages.game.atlas.compass.CompassResetMessage import CompassResetMessage
 from com.ankamagames.dofus.network.messages.game.atlas.compass.CompassUpdateMessage import CompassUpdateMessage
@@ -152,18 +152,22 @@ class PlayedCharacterUpdatesFrame(Frame):
                for opt in grpci.humanoidInfo.options:
                   if isinstance(opt, HumanOptionAlliance):
                      PlayedCharacterManager().characteristics.alignmentInfos.aggressable = opt.aggressable
+
          # if not (PlayedCharacterManager().characteristics.alignmentInfos.aggressable == AggressableStatusEnum.AvA_DISQUALIFIED or\
          #     PlayedCharacterManager().characteristics.alignmentInfos.aggressable == AggressableStatusEnum.AvA_ENABLED_AGGRESSABLE or\
          #         PlayedCharacterManager().characteristics.alignmentInfos.aggressable == AggressableStatusEnum.AvA_ENABLED_NON_AGGRESSABLE or\
          #             PlayedCharacterManager().characteristics.alignmentInfos.aggressable == AggressableStatusEnum.AvA_PREQUALIFIED_AGGRESSABLE):
          #    return False
+
          newSubArea = SubArea.getSubAreaByMapId(mcidmsg.mapId)
+
          # if PlayedCharacterManager().currentSubArea and newSubArea:
          #    if PrismSubAreaWrapper.prismList[newSubArea.id]:
          #       prism = PrismSubAreaWrapper.prismList[newSubArea.id]
          #       if prism.state == PrismStateEnum.PRISM_STATE_VULNERABLE:
          #          if Kernel().getWorker().contains(AllianceFrame):
          #             allianceFrame = Kernel().getWorker().getFrame(AllianceFrame)
+         
          return False
 
       if isinstance(msg, CharacterCapabilitiesMessage):

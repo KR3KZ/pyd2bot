@@ -6,7 +6,7 @@ from com.ankamagames.dofus.logic.game.fight.managers.FightersStateManager import
 import com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager as pc
 from com.ankamagames.dofus.modules.utils.pathFinding.world.WorldPathFinder import WorldPathFinder
 from com.ankamagames.dofus.network.Metadata import Metadata
-from com.ankamagames.dofus.types.entities.animatedCharacter import AnimatedCharacter
+from com.ankamagames.dofus.types.entities.AnimatedCharacter import AnimatedCharacter
 from com.ankamagames.jerakine.network.messages.Worker import Worker
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 from com.ankamagames.jerakine.utils.displays.FrameIdManager import FrameIdManager

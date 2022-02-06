@@ -62,8 +62,8 @@ class I18nFileAccessor(metaclass=Singleton):
    def logInit() -> None:
       logger.debug("Initialized !")
 
-   def setEntries(textKey:str) -> None:
-      LangManager().setEntry(textKey, getNamedText(textKey))
+   def setEntries(self, textKey:str) -> None:
+      LangManager().setEntry(textKey, self.getNamedText(textKey))
 
    def overrideId(self, oldId:int, newId:int) -> None:
       self.indexes[oldId] = self.indexes[newId]

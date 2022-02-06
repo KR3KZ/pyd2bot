@@ -11,7 +11,7 @@ from com.ankamagames.dofus.network.types.game.context.fight.GameFightFighterInfo
 from com.ankamagames.dofus.network.types.game.context.fight.GameFightMonsterInformations import GameFightMonsterInformations
 from com.ankamagames.dofus.network.types.game.context.roleplay.GameRolePlayHumanoidInformations import GameRolePlayHumanoidInformations
 from com.ankamagames.dofus.network.types.game.interactive.InteractiveElement import InteractiveElement
-from com.ankamagames.dofus.types.entities.animatedCharacter import AnimatedCharacter
+from com.ankamagames.dofus.types.entities.AnimatedCharacter import AnimatedCharacter
 from com.ankamagames.jerakine.entities.interfaces.IEntity import IEntity
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.messages.Frame import Frame

@@ -45,8 +45,8 @@ class I18n(AbstractDataManager):
 
    @classmethod
    def replaceParams(cls, text:str, params:list, replace:str) -> str:
-      if not params or len(not params):
+      if not params or not len(params):
          return text
-      for i in range(1, len(params), 1):
-         text = text.replace(replace + i,params[i - 1])
+      for i in range(1, len(params) + 1):
+         text = text.replace(replace + str(i), params[i - 1])
       return text

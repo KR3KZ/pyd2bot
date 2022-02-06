@@ -95,19 +95,15 @@ class GameDataProcess:
       return ids
    
    def getSortFunction(self, fieldNames, ascending) -> FunctionType:
-      sortWay:list[float] = None
-      indexes:list[dict] = None
-      maxFieldIndex:int = 0
-      fieldName:str = None
-      if fieldNames is str:
+      if isinstance(fieldNames, str):
          fieldNames = [fieldNames]
-      if ascending is bool:
+      if isinstance(ascending, bool):
          ascending = [ascending]
       sortWay = list[float]()
       indexes = list[dict]()
-      for i in range(0, len(fieldNames), 1):
+      for i in fieldNames:
          fieldName = fieldNames[i]
-         if self._searchFieldType[fieldName] == GameDataTypeEnum.I18N:
+         if GameDataTypeEnum(self._searchFieldType[fieldName]) == GameDataTypeEnum.I18N:
             self.buildI18nSortIndex(fieldName)
          else:
             self.buildSortIndex(fieldName)
@@ -136,10 +132,10 @@ class GameDataProcess:
       readFct:FunctionType = self.getReadFunctionType(type)
       if readFct == None:
          return
-      for i in range(itemCount):
+      for _ in range(itemCount):
          v = readFct()
          idsCount = self._stream.readInt() * 0.25
-         for j in range(idsCount):
+         for _ in range(idsCount):
             ref[self._stream.readInt()] = v
    
    def buildI18nSortIndex(self, fieldName:str) -> None:
@@ -153,34 +149,32 @@ class GameDataProcess:
       self._stream.position = self._searchFieldIndex[fieldName]
       ref:dict = dict()
       self._sortIndex[fieldName] = ref
-      for i in range(itemCount):
+      for _ in range(itemCount):
          key = self._stream.readInt()
-         idsCount = self._stream.readInt() * 0.25
+         idsCount = int(self._stream.readInt() * 0.25)
          if idsCount:
-            i18nOrder = I18nFileAccessor.getInstance().getOrderIndex(key)
-            for j in range(idsCount):
+            i18nOrder = I18nFileAccessor().getOrderIndex(key)
+            for _ in range(idsCount):
                ref[self._stream.readInt()] = i18nOrder
    
    def readI18n(self) -> str:
       return I18nFileAccessor.getInstance().getUnDiacriticalText(self._currentStream.readInt())
    
-   def getReadFunctionType(self, type:int) -> FunctionType:
+   def getReadFunctionType(self, type:GameDataTypeEnum) -> FunctionType:
       if type == GameDataTypeEnum.INT:
-            readFct = self._stream.readInt
+         readFct = self._stream.readInt
       elif type == GameDataTypeEnum.BOOLEAN:
-            readFct = self._stream.readbool
+         readFct = self._stream.readbool
       elif type == GameDataTypeEnum.STRING:
-            readFct = self._stream.readUTF
+         readFct = self._stream.readUTF
       elif type ==  GameDataTypeEnum.NUMBER:
-            readFct = self._stream.readDouble
+         readFct = self._stream.readDouble
       elif GameDataTypeEnum.I18N:
-         I18nFileAccessor.getInstance().useDirectBuffer(True)
+         I18nFileAccessor().useDirectBuffer(True)
          readFct = self.readI18n
          if not isinstance(self._stream, BinaryStream):
             directBuffer = BinaryStream()
             # FIXME: Somethis is wrong here
-            self._stream.position = 0
-            self._stream.readBytes(directBuffer)
             directBuffer.position = 0
             self._stream = directBuffer
             self._currentStream = self._stream

@@ -10,7 +10,7 @@ from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManage
 from com.ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEntities
 from com.ankamagames.dofus.logic.game.fight.managers.FightersStateManager import FightersStateManager
 import com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager as pc
-from com.ankamagames.dofus.types.entities.animatedCharacter import AnimatedCharacter
+from com.ankamagames.dofus.types.entities.AnimatedCharacter import AnimatedCharacter
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 from damageCalculation.tools import StatIds
 logger = Logger(__name__)

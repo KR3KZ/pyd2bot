@@ -30,7 +30,7 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.GameRolePlayNamed
 from com.ankamagames.dofus.network.types.game.context.roleplay.HumanOptionObjectUse import HumanOptionObjectUse
 from com.ankamagames.dofus.network.types.game.context.roleplay.HumanOptionSkillUse import HumanOptionSkillUse
 from com.ankamagames.dofus.network.types.game.interactive.InteractiveElement import InteractiveElement
-from com.ankamagames.dofus.types.entities.animatedCharacter import AnimatedCharacter
+from com.ankamagames.dofus.types.entities.AnimatedCharacter import AnimatedCharacter
 from com.ankamagames.jerakine.messages.Frame import Frame
 from com.ankamagames.jerakine.messages.Message import Message
 from pyd2bot.events.BotEventsManager import BotEventsManager
