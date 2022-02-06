@@ -1,5 +1,9 @@
          
-   class PresetIcon(IDataCenter):
+from com.ankamagames.jerakine.data.GameData import GameData
+from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
+
+
+class PresetIcon(IDataCenter):
       
       MODULE:str = "PresetIcons"
        
@@ -11,8 +15,10 @@
       def __init__(self):
          super().__init__()
       
-      def getPresetIconById(self, id:int) -> PresetIcon:
-         return GameData.getObject(MODULE,id)
+      @classmethod
+      def getPresetIconById(cls, id:int) -> 'PresetIcon':
+         return GameData.getObject(cls.MODULE, id)
       
-      def getPresetIcons(self) -> list:
-         return GameData.getObjects(MODULE)
+      @classmethod
+      def getPresetIcons(cls) -> list:
+         return GameData.getObjects(cls.MODULE)

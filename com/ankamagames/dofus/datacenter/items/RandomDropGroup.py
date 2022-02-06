@@ -1,9 +1,13 @@
          
+from com.ankamagames.dofus.datacenter.items.RandomDropItem import RandomDropItem
+from com.ankamagames.jerakine.data.GameData import GameData
+from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
+
+
 class RandomDropGroup(IDataCenter):
    
    MODULE:str = "RandomDropGroups"
       
-   
    id:int
    
    name:str
@@ -21,11 +25,13 @@ class RandomDropGroup(IDataCenter):
    def __init__(self):
       super().__init__()
    
-   def getRandomDropGroupById(self, id:int) -> RandomDropGroup:
-      return GameData.getObject(MODULE,id)
+   @classmethod
+   def getRandomDropGroupById(cls, id:int) -> 'RandomDropGroup':
+      return GameData.getObject(cls.MODULE,id)
    
-   def getAllRandomDropGroup(self) -> list:
-      return GameData.getObjects(MODULE)
+   @classmethod
+   def getAllRandomDropGroup(cls) -> list:
+      return GameData.getObjects(cls.MODULE)
    
    @property
    def groupWeight(self) -> int:

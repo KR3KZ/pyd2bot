@@ -101,8 +101,7 @@ def getCellIdYCoord(param1:int) -> int:
 
 def isValidCoord(param1:int, param2:int) -> bool:
     if param2 >= -param1 and param2 <= param1 and param2 <= MAP_GRID_WIDTH + MAX_Y_COORD - param1:
-        return param2 >= param1 - (MAP_GRID_HEIGHT - MIN_Y_COORD)
-        
+        return param2 >= param1 - (MAP_GRID_HEIGHT - MIN_Y_COORD)  
     return False
 
 def getCellCoordById(param1:int) -> Point:

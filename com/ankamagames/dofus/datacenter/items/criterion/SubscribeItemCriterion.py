@@ -1,4 +1,12 @@
          
+from com.ankamagames.dofus.datacenter.items.criterion.IItemCriterion import IItemCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterion import ItemCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterionOperator import ItemCriterionOperator
+from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerManager
+from com.ankamagames.jerakine.data.I18n import I18n
+from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
+
+
 class SubscribeItemCriterion(ItemCriterion, IDataCenter):
       
    
@@ -7,7 +15,7 @@ class SubscribeItemCriterion(ItemCriterion, IDataCenter):
    
    @property
    def text(self) -> str:
-      if _criterionValue == 1 and _operator.text == ItemCriterionOperator.EQUAL or _criterionValue == 0 and _operator.text == ItemCriterionOperator.DIFFERENT:
+      if self._criterionValue == 1 and self._operator.text == ItemCriterionOperator.EQUAL or self._criterionValue == 0 and self._operator.text == ItemCriterionOperator.DIFFERENT:
          return I18n.getUiText("ui.tooltip.beSubscirber")
       return I18n.getUiText("ui.tooltip.dontBeSubscriber")
    

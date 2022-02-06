@@ -4,6 +4,7 @@ from com.ankamagames.dofus.datacenter.effects.EffectInstance import EffectInstan
 from com.ankamagames.dofus.datacenter.effects.instances.EffectInstanceDice import EffectInstanceDice
 from com.ankamagames.dofus.datacenter.effects.instances.EffectInstanceInteger import EffectInstanceInteger
 from com.ankamagames.dofus.datacenter.items.ItemType import ItemType
+from com.ankamagames.dofus.datacenter.items.LegendaryPowerCategory import LegendaryPowerCategory
 from com.ankamagames.dofus.datacenter.monsters.Monster import Monster
 from com.ankamagames.dofus.datacenter.monsters.MonsterGrade import MonsterGrade
 from com.ankamagames.dofus.enums.ActionIds import ActionIds
@@ -13,6 +14,7 @@ from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager imp
 from com.ankamagames.dofus.network.types.game.data.items.Item import Item
 from com.ankamagames.dofus.network.types.game.data.items.ObjectItem import ObjectItem
 from com.ankamagames.dofus.network.types.game.data.items.effects.ObjectEffect import ObjectEffect
+from com.ankamagames.dofus.types.enums.ItemCategoryEnum import ItemCategoryEnum
 from com.ankamagames.jerakine.data.I18n import I18n
 from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
 from com.ankamagames.jerakine.utils.misc.StringUtils import StringUtils
@@ -481,11 +483,11 @@ class ItemWrapper(Item, ISlotData, ICellZoneProvider, IDataCenter):
          self.updateEffects(newEffects)
          self._setCount += 1
 
-      def clone(self, baseobject:object = None) -> ItemWrapper:
+      def clone(self, baseobject:object = None) -> 'ItemWrapper':
          if baseobject == None:
             baseobject = ItemWrapper
          item:ItemWrapper = baseobject()
-         MEMORY_LOG[item] = 1
+         self.MEMORY_LOG[item] = 1
          item.copy(self,item)
          item.objectUID = self.objectUID
          item.position = self.position
@@ -627,7 +629,7 @@ class ItemWrapper(Item, ISlotData, ICellZoneProvider, IDataCenter):
                      return not cat.categoryOverridable
          return False
       
-      def canBeUsedForAutoPiloting(self, other:ItemWrapper) -> bool:
+      def canBeUsedForAutoPiloting(self, other:'ItemWrapper') -> bool:
          effect:EffectInstance = None
          if not self.itemHasAutoPilotingEffect or other == None:
             return False

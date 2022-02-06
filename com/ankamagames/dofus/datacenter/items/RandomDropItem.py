@@ -1,4 +1,8 @@
          
+from com.ankamagames.dofus.internalDatacenter.items.ItemWrapper import ItemWrapper
+from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
+
+
 class RandomDropItem(IDataCenter):
       
    
