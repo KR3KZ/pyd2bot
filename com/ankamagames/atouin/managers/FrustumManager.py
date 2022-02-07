@@ -55,7 +55,7 @@ class FrustumManager(metaclass=Singleton):
    def findNearestCell(self, direction:int, currentCellId) -> object:
       cellList = list[int]()
       currentMap:Map = MapDisplayManager().getDataMapContainer().dataMap
-
+      currp = Cell.cellPixelCoords(currentCellId)
       if direction  == DirectionsEnum.RIGHT:
          y = 1
          cellList = currentMap.rightArrowCell
@@ -78,10 +78,23 @@ class FrustumManager(metaclass=Singleton):
             "distance":float("inf")
          }
 
-      currentDist = 0
+      targetCellId = 0
+      currentDist = float("inf")
+      for cellId in cellList:
+         p = Cell.cellPixelCoords(cellId)
+         floor = currentMap.cells[cellId].floor
+         if y == 1:
+            d = abs(currp.x - (p.y - floor + AtouinConstants.CELL_HALF_HEIGHT))
+         
+         if x == 1:
+            d = abs(currp.x - (p.x + AtouinConstants.CELL_HALF_WIDTH))
+            
+         if d < currentDist:
+            currentDist = d
+            targetCellId = cellId
 
       return {
-         "cell":currentCellId,
+         "cell":targetCellId,
          "distance":currentDist
       }
    
@@ -166,6 +179,7 @@ class FrustumManager(metaclass=Singleton):
             "cell":CellIdConverter.coordToCellId(closestCellX,closestCellY),
             "custom":lastSmallestDistance == closestCustomCellData.distance
          }
+
       return {
          "cell":-1,
          "custom":False

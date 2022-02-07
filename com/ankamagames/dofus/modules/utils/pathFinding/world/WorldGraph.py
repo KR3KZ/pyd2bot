@@ -30,11 +30,11 @@ class WorldGraph:
       return self._edges
    
    def addVertex(self, mapId:float, zone:int) -> Vertex:
-      if self._vertices.get(mapId) == None:
+      if self._vertices.get(mapId) is None:
          self._vertices[mapId] = dict()
       vertex:Vertex = self._vertices[mapId].get(zone)
-      if vertex == None:
-         vertex = Vertex(mapId,zone,self._vertexUid)
+      if vertex is None:
+         vertex = Vertex(mapId, zone, self._vertexUid)
          self._vertexUid += 1
          self._vertices[mapId][zone] = vertex
       return vertex
