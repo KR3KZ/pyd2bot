@@ -1,7 +1,6 @@
 from asyncio.log import logger
 from com.ankamagames.jerakine.logger.Logger import Logger
-from com.ankamagames.jerakine.resources.loaders.MapLoader import MapLoader
-from com.ankamagames.atouin.data.map.map import CellData, Map
+from com.ankamagames.jerakine.resources.loaders.MapLoader import MapLoaderss
 from pyd2bot.gameData.world.mapPosition import MapPosition
 from pyd2bot.utils.pathFinding.cellsPathFinder import CellNode
 from pyd2bot.utils.pathFinding.lightMapNode import LightMapNode
@@ -15,7 +14,7 @@ class MapNode(LightMapNode):
     def __init__(self, map:Map or int, incomingDirection:int=-1, parent:'MapNode'=None, incomingCellId:int=None): 
         super().__init__(map=map, currentCellId=None, incomingDirection=incomingDirection, parent=parent)
         self.parent:'MapNode' = parent
-        self.outgoingPossibilities = list[CellData]()
+        self.outgoingPossibilities = list[Cell]()
         mp = MapPosition.getMapPositionById(map.id)
         self.x = mp.posX
         self.y = mp.posY
@@ -58,7 +57,7 @@ class MapNode(LightMapNode):
                 return cell.id
         raise Exception("Map without available cell ! Impossible !")
     
-    def getCellAfterMapChange(self, srcId:int, direction:int) -> CellData:
+    def getCellAfterMapChange(self, srcId:int, direction:int) -> Cell:
         """Detemine the cell after a map changement.
         """
         if direction == Map.RIGHT:

@@ -77,6 +77,7 @@ class TestBot:
         logger.info(f"Bot is currently in the map {PlayedCharacterManager().currentMap.mapId}")
         # WorldPathFinder().findPath(190580737, self.onPathFound)
         rpmf:RoleplayMovementFrame = krnl.Kernel().getWorker().getFrame(RoleplayMovementFrame)
+        
         rpmf.askMoveTo(MapPoint.fromCellId(439))
     
     def onPathFound(self, path:list[Edge]):

@@ -6,7 +6,6 @@ from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
 class PresetIcon(IDataCenter):
       
       MODULE:str = "PresetIcons"
-       
       
       id:int
       

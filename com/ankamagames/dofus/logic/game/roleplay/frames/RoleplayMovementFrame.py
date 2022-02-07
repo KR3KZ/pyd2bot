@@ -113,7 +113,7 @@ class RoleplayMovementFrame(Frame):
             self._followingMonsterGroup = None
          else:
             gmnmm = msg
-            newPos = MapPoint.fromCoords(gmnmm.cellX,gmnmm.cellY)
+            newPos = MapPoint.fromCoords(gmnmm.cellX, gmnmm.cellY)
             player:AnimatedCharacter = DofusEntities.getEntity(PlayedCharacterManager().id)
             if not player:
                return True
@@ -314,7 +314,6 @@ class RoleplayMovementFrame(Frame):
       # rpEntitiesFrame:RoleplayEntitiesFrame = Kernel().getWorker().getFrame(RoleplayEntitiesFrame)
       # del rpEntitiesFrame.lastStaticAnimations[actorId]
       
-   
    def askMapChange(self) -> None:
       cmmsg:ChangeMapMessage = ChangeMapMessage()
       cmmsg.init(self._wantToChangeMap, self._changeMapByAutoTrip)

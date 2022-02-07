@@ -1,4 +1,4 @@
-from com.ankamagames.atouin.data.map.map import Map, CellData
+from com.ankamagames.atouin.data.map.map import Map, Cell
 from com.ankamagames.jerakine.types.positions.MapPoint import MapPoint
 from com.ankamagames.jerakine.types.positions.MouvementPath import MovementPath
 from com.ankamagames.jerakine.types.positions.PathElement import PathElement
@@ -14,7 +14,7 @@ class CellNode(PathNode):
     VERTICAL_RUN_DURATION = 150
     DIAGONAL_RUN_DURATION = 170
     
-    def __init__(self, cell:CellData, lastDirection:int=-1, parent:'CellNode'=None):
+    def __init__(self, cell:Cell, lastDirection:int=-1, parent:'CellNode'=None):
         super().__init__(cell.id, lastDirection, parent)
         self.x = cell.x
         self.y = cell.y
@@ -25,7 +25,7 @@ class CellNode(PathNode):
         self.checkedCells = []
     
 
-    def checkCell(self, cell:CellData) -> bool: 
+    def checkCell(self, cell:Cell) -> bool: 
         for checkedCell in self.checkedCells:
             if checkedCell == cell:
                 return False

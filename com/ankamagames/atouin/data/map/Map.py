@@ -1,5 +1,5 @@
 from com.ankamagames.atouin.data.map.fixture import Fixture
-from com.ankamagames.atouin.data.map.CellData import CellData
+from com.ankamagames.atouin.data.map.Cell import Cell
 from com.ankamagames.atouin.data.map.layer import Layer
 from com.ankamagames.jerakine.data.BinaryStream import BinaryStream
 from com.ankamagames.jerakine.logger.Logger import Logger
@@ -26,7 +26,7 @@ class Map:
         self.bottomArrowCell = set[int]()
         self.leftArrowCell = set[int]()
         self.rightArrowCell = set[int]()
-        self.cells = dict[int, CellData]()
+        self.cells = dict[int, Cell]()
         self.oldMvtSystem = False
         self.isUsingNewMovementSystem = False
         self._parser = False
@@ -59,6 +59,7 @@ class Map:
             self.backgroundRed = raw.readByte()
             self.backgroundGreen = raw.readByte()
             self.backgroundBlue = raw.readByte()
+            
         self.backgroundColor = (self.backgroundAlpha & 255) << 32 | (self.backgroundRed & 255) << 16 | (self.backgroundGreen & 255) << 8 | self.backgroundBlue & 255
 
         if self.version >= 4:
@@ -84,7 +85,7 @@ class Map:
         self.layers = [Layer(raw, self.version) for _ in range(self.layersCount)]
         
         for cellid in range(self.CELLS_COUNT):
-            cell = CellData(raw, self, cellid)
+            cell = Cell(raw, self, cellid)
             self.cells[cellid] = cell
             
             if not self.oldMvtSystem:
@@ -94,10 +95,13 @@ class Map:
                 
             if cell.top_arrow:
                 self.topArrowCell.add(cellid)
+
             elif cell.bottom_arrow:
                 self.bottomArrowCell.add(cellid)
+
             elif cell.left_arrow:
                 self.leftArrowCell.add(cellid)
+                
             elif cell.right_arrow:
                 self.rightArrowCell.add(cellid)
         

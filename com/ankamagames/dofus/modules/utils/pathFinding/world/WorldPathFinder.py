@@ -4,7 +4,7 @@ from com.ankamagames.dofus.modules.utils.pathFinding.astar.AStar import AStar
 from com.ankamagames.dofus.modules.utils.pathFinding.world.Edge import Edge
 from com.ankamagames.dofus.modules.utils.pathFinding.world.Vertex import Vertex
 from com.ankamagames.dofus.modules.utils.pathFinding.world.WorldGraph import WorldGraph
-from com.ankamagames.atouin.data.map.CellData import CellData
+from com.ankamagames.atouin.data.map.Cell import Cell
 from com.ankamagames.atouin.managers.MapDisplayManager import MapDisplayManager
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
 from com.ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEntities
@@ -60,7 +60,7 @@ class WorldPathFinder(metaclass=Singleton):
             callback(None)
             return
         playedEntityCellId:int = playedEntity.position.cellId
-        playerCell:CellData = MapDisplayManager().dataMap.cells[playedEntityCellId]
+        playerCell:Cell = MapDisplayManager().dataMap.cells[playedEntityCellId]
         self.src = self.worldGraph.getVertex(playedCharacterManager.currentMap.mapId, playerCell.linkedZoneRP)
         if self.src is None:
             callback(None)

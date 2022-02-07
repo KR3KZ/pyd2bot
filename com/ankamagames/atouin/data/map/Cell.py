@@ -1,16 +1,18 @@
 from typing import TYPE_CHECKING
+from com.ankamagames.atouin.atouinConstants import AtouinConstants
 from com.ankamagames.jerakine.data.BinaryStream import BinaryStream
+from com.ankamagames.jerakine.types.positions.MapPoint import Point
 if TYPE_CHECKING:
     from .map import Map
 import math 
 
 
-class CellData:
+class Cell:
     
     def __init__(self, raw:BinaryStream, map:'Map', id:int):
         self.id = id
         self.map = map
-        self.x, self.y = self.getCoords(self.id)
+        self._coords = self.getCoords(self.id)
         self.top_arrow = None
         self.bottom_arrow = None
         self.left_arrow = None
@@ -20,12 +22,6 @@ class CellData:
     @staticmethod
     def getId(x:int, y:int) -> int:
         return x + y * 14
-
-    @staticmethod
-    def getCoords(cell_id):
-        x = cell_id % 14
-        y = cell_id // 14
-        return x, y
 
     def read(self, raw:BinaryStream):
         self.floor = raw.readByte() * 10
@@ -134,14 +130,28 @@ class CellData:
         return (self.linkedZone & 240) >> 4
 
     @staticmethod
-    def distanceBetween(cell1:'CellData', cell2:'CellData') -> float:
+    def distanceBetween(cell1:'Cell', cell2:'Cell') -> float:
         return math.sqrt((cell1.x - cell2.x)**2 + (cell1.y - cell2.y)**2)
+
+    @property
+    def cellCoords(self, cellId:int) -> Point:
+        if self._cellCoords is None:
+            self._cellCoords = Point()
+        self._cellCoords.x = cellId % AtouinConstants.MAP_WIDTH
+        self._cellCoords.y = math.floor(cellId / AtouinConstants.MAP_WIDTH)
+        return self._cellCoords
+
+    def cellPixelCoords(self, cellId:int) -> Point:
+        p:Point = self.cellCoords(cellId)
+        p.x = p.x * AtouinConstants.CELL_WIDTH + (AtouinConstants.CELL_HALF_WIDTH if p.y % 2 == 1 else 0)
+        p.y *= AtouinConstants.CELL_HALF_HEIGHT
+        return p
+
+    def __eq__(self, cell:'Cell'):
+        return self.map.id == cell.map.id and self.id == cell.id
     
-    def __eq__(self, cell:'CellData'):
-        return self.id == cell.id
-    
-    def __hash__(self) -> int:
-        return self.id
+    def __hash__(self) -> str:
+        return f"{self.map.id}-{self.id}"
 
     def __str__(self) -> str:
         return "map : " + self.map.id + " CellId : " + self.id + " mov : " + self.mov + " los : " + self.los + " nonWalkableDuringFight : " + self.nonWalkableDuringFight + " nonWalkableDuringRp : " + self.nonWalkableDuringRP + " farmCell : " + self.farmCell + " havenbagCell: " + self.havenbagCell + " visbile : " + self.visible + " speed: " + self.speed + " moveZone: " + self.moveZone + " linkedZoneId: " + self.linkedZone

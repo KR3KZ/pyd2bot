@@ -12,7 +12,7 @@ from com.ankamagames.dofus.network.types.game.context.fight.GameFightFighterInfo
 from com.ankamagames.dofus.network.types.game.context.fight.GameFightMonsterInformations import GameFightMonsterInformations
 from pyd2bot.bot import IBot
 from damageCalculation.tools.StatIds import StatIds
-from com.ankamagames.atouin.data.map.CellData import CellData
+from com.ankamagames.atouin.data.map.Cell import Cell
 from com.ankamagames.jerakine.types.positions.MapPoint import MapPoint
 import ankamagames.dofus.logic.game.fight.miscs.TackleUtil as TackleUtil
 logger = Logger(__name__)
@@ -43,7 +43,7 @@ class _ReachableCellData:
    
    def findState(self, dataMap:Map) -> None:
       neighbour:_ReachableCellData = None
-      cellData:CellData = dataMap.cells[self.mapPoint.cellId]
+      cellData:Cell = dataMap.cells[self.mapPoint.cellId]
       if not cellData.mov or cellData.nonWalkableDuringFight:
          self.state = self.STATE_UNREACHABLE
       

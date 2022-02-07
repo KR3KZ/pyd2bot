@@ -58,7 +58,7 @@ patterns = {
     "function (\S+)\((.*)\) : (\S+)": r"def \1(self, \2) -> \3:",
     "function (\S+)\((.*)\) :": r"def \1(self, \2):",
     # "if !(.*)": r"if not \1",
-    "([_a-zA-Z][_a-zA-Z0-9]{0,30})\.length": r"len(\1)",
+    "([_a-zA-Z][_a-zA-Z0-9.]{0,30})\.length": r"len(\1)",
     "throw Error(.*)": r"raise Exception\1",
     r'^(.*)function get (\S+)\((.*)\) : (\S+)$': r"\1@property\n\1def \2(self, \3) -> \4:",
     r'^(.*)function set (\S+)\((.*)\) : (\S+)$': r"\1@\2.setter\n\1def \2(self, \3) -> \4:",
@@ -338,5 +338,5 @@ def parseFile(file_p, out_p):
 ROOTDIR = pathlib.Path(os.path.dirname(__file__))
 # parseFolderFiles("AS3ToPythonConverter/scripts", "AS3ToPythonConverter/connectionType")
 t = perf_counter()
-parseFile(ROOTDIR / "target.as", ROOTDIR / "getLookDirection4DiagExactByCoord.py")
+parseFile(ROOTDIR / "target.as", ROOTDIR / "IInteractive.py")
 print("parsing took:", perf_counter() - t)

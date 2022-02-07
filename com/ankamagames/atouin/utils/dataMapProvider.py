@@ -1,6 +1,6 @@
 from com.ankamagames.jerakine.logger.Logger import Logger
-from com.ankamagames.atouin.atouinConstants import AtouinConstants
-from com.ankamagames.atouin.data.map.CellData import CellData
+from com.ankamagames.atouin.AtouinConstants import AtouinConstants
+from com.ankamagames.atouin.data.map.Cell import Cell
 from com.ankamagames.atouin.data.map.map import Map
 import com.ankamagames.atouin.managers.MapDisplayManager as mdmm
 from com.ankamagames.dofus.logic.game.common.managers.EntitiesManager import EntitiesManager
@@ -50,8 +50,8 @@ class DataMapProvider(IDataMapProvider, metaclass=Singleton):
         return mdmm.MapDisplayManager().currentDataMap.cells[cellId].havenbagCell
     
     def isChangeZone(self, cell1:int, cell2:int) -> bool:
-        cellData1:CellData = mdmm.MapDisplayManager().currentDataMap.cells[cell1]
-        cellData2:CellData = mdmm.MapDisplayManager().currentDataMap.cells[cell2]
+        cellData1:Cell = mdmm.MapDisplayManager().currentDataMap.cells[cell1]
+        cellData2:Cell = mdmm.MapDisplayManager().currentDataMap.cells[cell2]
         dif:int = abs(abs(cellData1.floor) - abs(cellData2.floor))
         return cellData1.moveZone != cellData2.moveZone and dif == 0
     
@@ -84,7 +84,7 @@ class DataMapProvider(IDataMapProvider, metaclass=Singleton):
     
     def pointCanStop(self, x:int, y:int, bAllowTroughEntity:bool = True) -> bool:
         cellId:int = MapTools.getCellIdByCoord(x,y)
-        cellData:CellData = mdmm.MapDisplayManager().currentDataMap.cells[cellId]
+        cellData:Cell = mdmm.MapDisplayManager().currentDataMap.cells[cellId]
         return self.pointMov(x, y, bAllowTroughEntity) and (self.isInFight or not cellData.nonWalkableDuringRP)
     
     def fillEntityOnCelllist(self, v:list[bool], allowThroughEntity:bool) -> list[bool]:

@@ -11,6 +11,7 @@ from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerMana
 from com.ankamagames.dofus.logic.game.common.managers.TimerManager import TimeManager
 import com.ankamagames.dofus.logic.game.roleplay.frames.RoleplayContextFrame as rcf
 from com.ankamagames.dofus.logic.game.roleplay.messages.DelayedActionMessage import DelayedActionMessage
+from com.ankamagames.dofus.logic.game.roleplay.types.FightTeam import FightTeam
 from com.ankamagames.dofus.network.enums.MapObstacleStateEnum import MapObstacleStateEnum
 from com.ankamagames.dofus.network.messages.game.context.roleplay.MapComplementaryInformationsDataInHavenBagMessage import MapComplementaryInformationsDataInHavenBagMessage
 from com.ankamagames.dofus.network.messages.game.context.roleplay.MapComplementaryInformationsWithCoordsMessage import MapComplementaryInformationsWithCoordsMessage
@@ -309,5 +310,21 @@ class RoleplayEntitiesFrame(AbstractEntitiesFrame, Frame):
             #         partyManagementFrame.playerRewards = None
 
             BotEventsManager().dispatch(BotEventsManager.MAP_DATA_LOADED)
+            return False    
+            
+    def isFight(self, entityId:int) -> bool:
+        if not self._entities:
             return False
+        return isinstance(self._entities[entityId], FightTeam)
 
+    def getFightId(self, entityId:int) -> int:
+        if isinstance(self._entities[entityId], FightTeam):
+            return self._entities[entityId].fight.fightId
+
+    def getFightLeaderId(self, entityId:int) -> int:
+        if isinstance(self._entities[entityId], FightTeam):
+            return self._entities[entityId].teamInfos.leaderId
+        
+    def getFightTeamType(self, entityId:int) -> int:
+        if isinstance(self._entities[entityId], FightTeam):
+            return self._entities[entityId].teamType

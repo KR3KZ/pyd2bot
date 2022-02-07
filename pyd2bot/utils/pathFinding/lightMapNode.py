@@ -1,5 +1,5 @@
 # noeud utilisé pour les parcours de zones (besoin:pas de création de chemin)
-from com.ankamagames.atouin.data.map.map import Map, CellData
+from com.ankamagames.atouin.data.map.map import Map, Cell
 from pyd2bot.gameData.world.mapZones import MapZones
 from pyd2bot.utils.pathFinding.pathFinder import PathNode
 DOUBLE_MAX = 1.7976931348623158E+308
@@ -75,14 +75,14 @@ class LightMapNode(PathNode):
         return middleCell
     
 
-    def getNearestMapChangeCell(self, cell:CellData, direction):
+    def getNearestMapChangeCell(self, cell:Cell, direction):
         """Get the nearest cell that will change the map for a certain direction
         """
         nearestCellId = -1
         shortestDistance = DOUBLE_MAX
         for zcell in self.currentZone.values(): 
             if zcell.allowsChangementMap() and self.isOutgoingPossibility(zcell.id, direction) and not self.isForbiddenPossibility(zcell.id): 
-                currentDistance = CellData.distanceBetween(zcell, cell)
+                currentDistance = Cell.distanceBetween(zcell, cell)
                 if currentDistance == 0: # petit raccourci
                     return zcell.id
                 if currentDistance < shortestDistance: 
