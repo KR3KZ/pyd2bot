@@ -47,7 +47,7 @@ class WorldPathFinder(metaclass=Singleton):
         
     def isInitialized(self) -> bool:
         return self.worldGraph != None
-        
+
     def findPath(self, destinationMapId:float, callback:FunctionType) -> None:
         if not self.isInitialized():
             callback(None)

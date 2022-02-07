@@ -1,5 +1,5 @@
 from typing import TYPE_CHECKING
-from com.ankamagames.atouin.atouinConstants import AtouinConstants
+from com.ankamagames.atouin.AtouinConstants import AtouinConstants
 from com.ankamagames.jerakine.data.BinaryStream import BinaryStream
 from com.ankamagames.jerakine.types.positions.MapPoint import Point
 if TYPE_CHECKING:
@@ -12,7 +12,8 @@ class Cell:
     def __init__(self, raw:BinaryStream, map:'Map', id:int):
         self.id = id
         self.map = map
-        self.x, self.y = self.getCoords(self.id)
+        p = self.getCoords(self.id)
+        self.x, self.y = p.x, p.y
         self.top_arrow = None
         self.bottom_arrow = None
         self.left_arrow = None
@@ -150,7 +151,7 @@ class Cell:
         return self.id == cell.id
     
     def __hash__(self) -> str:
-        return f"{self.map.id}-{self.id}"
+        return self.id
 
     def __str__(self) -> str:
         return "map : " + self.map.id + " CellId : " + self.id + " mov : " + self.mov + " los : " + self.los + " nonWalkableDuringFight : " + self.nonWalkableDuringFight + " nonWalkableDuringRp : " + self.nonWalkableDuringRP + " farmCell : " + self.farmCell + " havenbagCell: " + self.havenbagCell + " visbile : " + self.visible + " speed: " + self.speed + " moveZone: " + self.moveZone + " linkedZoneId: " + self.linkedZone

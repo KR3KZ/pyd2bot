@@ -20,6 +20,8 @@ class EntitiesManager(metaclass=Singleton):
       self._entities[entityID] = entity
 
    def getEntity(self, entityID:float) -> 'IEntity':
+      # logger.debug('getEntity ' + str(entityID))
+      # logger.debug(self._entities.keys())
       return self._entities.get(entityID)
 
    def getEntityID(self, entity:'IEntity') -> float:

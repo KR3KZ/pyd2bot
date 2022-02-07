@@ -15,9 +15,9 @@ class AreaItemCriterion(ItemCriterion, IDataCenter):
    @property
    def isRespected(self) -> bool:
       if self.operator.text  == ItemCriterionOperator.EQUAL or self.operator.text  == ItemCriterionOperator.DIFFERENT:
-         return super().isRespected()
+            return super().isRespected
       else:
-         return False
+            return False
    
    @property
    def text(self) -> str:

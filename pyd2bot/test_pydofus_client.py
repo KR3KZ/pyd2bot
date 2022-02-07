@@ -1,7 +1,6 @@
 from pathlib import Path
-from time import sleep
 import json
-from com.ankamagames.atouin.data.map.map import Map
+from com.ankamagames.atouin.managers.FrustumManager import FrustumManager
 from com.ankamagames.dofus import Constants
 import com.ankamagames.dofus.kernel.Kernel as krnl
 from com.ankamagames.dofus.logic.connection.actions.ServerSelectionAction import ServerSelectionAction
@@ -16,11 +15,11 @@ from com.ankamagames.dofus.types.entities.AnimatedCharacter import AnimatedChara
 from com.ankamagames.jerakine.data.I18nFileAccessor import I18nFileAccessor
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.resources.events.ResourceLoadedEvent import ResourceLoadedEvent
+from com.ankamagames.jerakine.types.enums.DirectionsEnum import DirectionsEnum
 from com.ankamagames.jerakine.types.positions.MapPoint import MapPoint
 from pyd2bot.events.BotEventsManager import BotEventsManager
 from com.ankamagames.atouin.utils.DataMapProvider import DataMapProvider
 logger = Logger(__name__)
-
 
 PORT = 5555
 AUTH_SERVER = "54.76.16.121"
@@ -31,7 +30,6 @@ CONN = {
     "host": AUTH_SERVER,
     "port": PORT,
 }
-
 
 class TestBot:
 
@@ -75,16 +73,7 @@ class TestBot:
 
     def onMapComplementaryDataLoaded(self, e:ResourceLoadedEvent):
         logger.info(f"Bot is currently in the map {PlayedCharacterManager().currentMap.mapId}")
-        # WorldPathFinder().findPath(190580737, self.onPathFound)
-        rpmf:RoleplayMovementFrame = krnl.Kernel().getWorker().getFrame(RoleplayMovementFrame)
-        
-        rpmf.askMoveTo(MapPoint.fromCellId(439))
-    
-    def onPathFound(self, path:list[Edge]):
-        logger.info("sheesh")
-        print("Path : ")
-        for edge in path:
-            print(f"{edge.src} -> {edge.dst}")
+        FrustumManager.changeMapToDirection(DirectionsEnum.DOWN)
 
 
 if __name__ == "__main__":

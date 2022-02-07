@@ -10,8 +10,8 @@ from com.ankamagames.dofus.kernel.net.ConnectionsHandler import ConnectionsHandl
 from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerManager
 from com.ankamagames.dofus.logic.game.common.managers.TimerManager import TimeManager
 import com.ankamagames.dofus.logic.game.roleplay.frames.RoleplayContextFrame as rcf
+from com.ankamagames.dofus.logic.game.roleplay.messages.CharacterMovementStoppedMessage import CharacterMovementStoppedMessage
 from com.ankamagames.dofus.logic.game.roleplay.messages.DelayedActionMessage import DelayedActionMessage
-from com.ankamagames.dofus.logic.game.roleplay.types.FightTeam import FightTeam
 from com.ankamagames.dofus.network.enums.MapObstacleStateEnum import MapObstacleStateEnum
 from com.ankamagames.dofus.network.messages.game.context.roleplay.MapComplementaryInformationsDataInHavenBagMessage import MapComplementaryInformationsDataInHavenBagMessage
 from com.ankamagames.dofus.network.messages.game.context.roleplay.MapComplementaryInformationsWithCoordsMessage import MapComplementaryInformationsWithCoordsMessage
@@ -34,6 +34,10 @@ from com.ankamagames.dofus.types.entities.AnimatedCharacter import AnimatedChara
 from com.ankamagames.jerakine.messages.Frame import Frame
 from com.ankamagames.jerakine.messages.Message import Message
 from pyd2bot.events.BotEventsManager import BotEventsManager
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.logic.game.roleplay.types.FightTeam import FightTeam
+
 
 
 class RoleplayEntitiesFrame(AbstractEntitiesFrame, Frame):
@@ -311,20 +315,24 @@ class RoleplayEntitiesFrame(AbstractEntitiesFrame, Frame):
 
             BotEventsManager().dispatch(BotEventsManager.MAP_DATA_LOADED)
             return False    
-            
+        
+        if isinstance(msg, CharacterMovementStoppedMessage):
+            # TODO: notify bot here that he stopped moving for some usecases
+            return True
+
     def isFight(self, entityId:int) -> bool:
         if not self._entities:
             return False
-        return isinstance(self._entities[entityId], FightTeam)
+        return isinstance(self._entities[entityId], 'FightTeam')
 
     def getFightId(self, entityId:int) -> int:
-        if isinstance(self._entities[entityId], FightTeam):
+        if isinstance(self._entities[entityId], 'FightTeam'):
             return self._entities[entityId].fight.fightId
 
     def getFightLeaderId(self, entityId:int) -> int:
-        if isinstance(self._entities[entityId], FightTeam):
+        if isinstance(self._entities[entityId], 'FightTeam'):
             return self._entities[entityId].teamInfos.leaderId
         
     def getFightTeamType(self, entityId:int) -> int:
-        if isinstance(self._entities[entityId], FightTeam):
+        if isinstance(self._entities[entityId], 'FightTeam'):
             return self._entities[entityId].teamType

@@ -1,5 +1,13 @@
                         
-class AllianceAvAItemCriterion(ItemCriterion implements IDataCenter):
+from com.ankamagames.dofus.datacenter.items.criterion.IItemCriterion import IItemCriterion
+from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterionOperator import ItemCriterionOperator
+from com.ankamagames.dofus.datacenter.world.SubArea import SubArea
+from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
+from com.ankamagames.dofus.network.enums.AggressableStatusEnum import AggressableStatusEnum
+from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
+
+
+class AllianceAvAItemCriterion(IItemCriterion, IDataCenter):
       
    
    def __init__(self, pCriterion:str):
@@ -10,7 +18,7 @@ class AllianceAvAItemCriterion(ItemCriterion implements IDataCenter):
       aggressable:int = 0
       subArea:SubArea = None
       currentPrism:PrismSubAreaWrapper = None
-      if _operator.text == ItemCriterionOperator.EQUAL:
+      if self._operator.text == ItemCriterionOperator.EQUAL:
          aggressable = PlayedCharacterManager().characteristics.alignmentInfos.aggressable
          if aggressable != AggressableStatusEnum.AvA_ENABLED_AGGRESSABLE and aggressable != AggressableStatusEnum.AvA_PREQUALIFIED_AGGRESSABLE:
             return False
@@ -26,7 +34,7 @@ class AllianceAvAItemCriterion(ItemCriterion implements IDataCenter):
    @property
    def text(self) -> str:
       readableCriterion:str = None
-      if _operator.text == ItemCriterionOperator.EQUAL:
+      if self._operator.text == ItemCriterionOperator.EQUAL:
          readableCriterion = I18n.getUiText("ui.criterion.allianceAvA")
       return readableCriterion
    

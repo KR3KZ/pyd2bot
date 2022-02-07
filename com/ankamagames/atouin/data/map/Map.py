@@ -1,23 +1,21 @@
+from com.ankamagames.atouin.AtouinConstants import AtouinConstants
+from com.ankamagames.atouin.data.map.MapZones import MapZones
 from com.ankamagames.atouin.data.map.fixture import Fixture
 from com.ankamagames.atouin.data.map.Cell import Cell
 from com.ankamagames.atouin.data.map.layer import Layer
 from com.ankamagames.jerakine.data.BinaryStream import BinaryStream
 from com.ankamagames.jerakine.logger.Logger import Logger
+from com.ankamagames.jerakine.types.enums.DirectionsEnum import DirectionsEnum
 logger = Logger(__name__)
 
     
 class Map:
-    CELLS_COUNT = 560
-    WIDTH = 14
-    HEIGHT = 20 # 40 pour l'ancienne version du pathfinder
-    RIGHT = 0
-    DOWN_RIGHT = 1
-    DOWN = 2
-    DOWN_LEFT = 3
-    LEFT = 4
-    UP_LEFT = 5
-    UP = 6
-    UP_RIGHT = 7
+    OUTCELLS = {
+        DirectionsEnum.LEFT: [i * AtouinConstants.MAP_WIDTH for i in range(2 * AtouinConstants.MAP_HEIGHT)],
+        DirectionsEnum.RIGHT: [(i + 1) * AtouinConstants.MAP_WIDTH - 1 for i in range(2 * AtouinConstants.MAP_HEIGHT)],
+        DirectionsEnum.UP: [i for i in range(AtouinConstants.MAP_WIDTH)],
+        DirectionsEnum.DOWN: [i + AtouinConstants.MAP_WIDTH * (2 * AtouinConstants.MAP_HEIGHT - 1) for i in range(AtouinConstants.MAP_WIDTH)],
+    }
  
     def __init__(self, raw:BinaryStream, id, version:int):
         self.id = id
@@ -31,6 +29,7 @@ class Map:
         self.isUsingNewMovementSystem = False
         self._parser = False
         self.fromRaw(raw)
+        self.zones = MapZones(self)
 
     def fromRaw(self, raw:BinaryStream):
         self.relativeId = raw.readUnsignedInt()
@@ -84,7 +83,7 @@ class Map:
         self.layersCount = raw.readByte()
         self.layers = [Layer(raw, self.version) for _ in range(self.layersCount)]
         
-        for cellid in range(self.CELLS_COUNT):
+        for cellid in range(AtouinConstants.MAP_CELLS_COUNT):
             cell = Cell(raw, self, cellid)
             self.cells[cellid] = cell
             
@@ -107,6 +106,100 @@ class Map:
         
         self._parser = True
 
+    def getOutgoingCells(self, direction:DirectionsEnum):
+        return set([i for i in self.OUTCELLS[direction] if self.cells[i].allowsMapChange()])
+    
+    def cellOutTowards(self, currCellId, direction:DirectionsEnum):
+        currZone = self.zones.getZone(currCellId)
+        condidateOutCells = self.getOutgoingCells(direction)
+        for cellid in condidateOutCells:
+            if self.zones.getZone(cellid) == currZone:
+                return cellid
+        return None
 
+    def getNeighbourCellFromDirection(cls, srcId:int, direction:DirectionsEnum) -> 'Cell':
+        if (srcId // AtouinConstants.MAP_WIDTH) % 2 == 0: 
+            offsetId = 0
+            
+        else:
+            offsetId = 1
 
+        if direction == DirectionsEnum.RIGHT:
+            destId = srcId + 1
+            if destId % AtouinConstants.MAP_WIDTH != 0:
+                return cls.cells[destId]
+            return None
+        
+        elif direction == DirectionsEnum.DOWN_RIGHT:
+            destId = srcId + AtouinConstants.MAP_WIDTH + offsetId
+            if destId < AtouinConstants.MAP_CELLS_COUNT and (srcId + 1) % (AtouinConstants.MAP_WIDTH * 2) != 0:
+                return cls.cells[destId]
+            return None
+            
+        elif direction == DirectionsEnum.DOWN :
+            destId = srcId + AtouinConstants.MAP_WIDTH * 2
+            if destId < AtouinConstants.MAP_CELLS_COUNT:
+                return cls.cells[destId]
+            return None
+        
+        elif direction == DirectionsEnum.DOWN_LEFT :
+            destId = srcId + AtouinConstants.MAP_WIDTH - 1 + offsetId
+            if destId < AtouinConstants.MAP_CELLS_COUNT and srcId % (AtouinConstants.MAP_WIDTH * 2) != 0:
+                return cls.cells[destId]
+            return None
+        
+        elif direction == DirectionsEnum.LEFT :
+            destId = srcId - 1
+            if srcId % AtouinConstants.MAP_WIDTH != 0:
+                return cls.cells[destId]
+            return None
+        
+        elif direction == DirectionsEnum.UP_LEFT :
+            destId = srcId - AtouinConstants.MAP_WIDTH - 1 + offsetId
+            if destId >= 0 and srcId % (AtouinConstants.MAP_WIDTH * 2) != 0:
+                return cls.cells[destId]
+            return None
+        
+        elif direction == DirectionsEnum.UP :
+            destId = srcId - AtouinConstants.MAP_WIDTH * 2
+            if destId >= 0:
+                return cls.cells[destId]
+            return None
+        
+        elif direction == DirectionsEnum.UP_RIGHT :
+            destId = srcId - AtouinConstants.MAP_WIDTH + offsetId
+            if destId > 0 and (srcId + 1) % (AtouinConstants.MAP_WIDTH * 2) != 0:
+                return cls.cells[destId]
+            return None
+        
+        raise Exception("Invalid direction.")
 
+    def getCellNeighbours(self, cellId:int) -> set['Cell']:
+        neighbours = set[Cell]()
+        for i in DirectionsEnum:
+            cell = self.getNeighbourCellFromDirection(cellId, i)
+            if cell:
+                neighbours.add(cell)
+        return neighbours
+
+    def getNeighborIdFromDirection(self, direction:DirectionsEnum) -> int:
+        if direction == DirectionsEnum.LEFT: 
+            return self.leftNeighbourId
+        elif direction == DirectionsEnum.RIGHT: 
+            return self.rightNeighbourId
+        elif direction == DirectionsEnum.UP:
+            return self.topNeighbourId
+        elif direction == DirectionsEnum.DOWN:
+            return self.bottomNeighbourId
+        else:
+            raise Exception("invalid direction")
+
+    def printGrid(self):
+        format_row = "{:>2}" * (Map.WIDTH + 2)
+        print(format_row.format(*["#"] * (Map.WIDTH + 2)))
+        for j in range(2 * Map.HEIGHT):
+            row = []
+            for i in range(Map.WIDTH):
+                row.append(" " if self.cells[i + j * Map.WIDTH].isAccessibleDuringRP() else "X")
+            print(format_row.format("#", *row, "#"))
+        print(format_row.format(*["#"] * (Map.WIDTH + 2)))

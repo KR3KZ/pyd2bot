@@ -4,7 +4,6 @@ from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManage
 from com.ankamagames.dofus.logic.connection.managers.AuthentificationManager import AuthentificationManager
 from com.ankamagames.dofus.logic.game.fight.managers.FightersStateManager import FightersStateManager
 import com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager as pc
-from com.ankamagames.dofus.modules.utils.pathFinding.world.WorldPathFinder import WorldPathFinder
 from com.ankamagames.dofus.network.Metadata import Metadata
 from com.ankamagames.dofus.types.entities.AnimatedCharacter import AnimatedCharacter
 from com.ankamagames.jerakine.network.messages.Worker import Worker
@@ -54,7 +53,7 @@ class Kernel(metaclass=Singleton):
             self._worker.process(msg)
 
    def addInitialFrames(self, firstLaunch:bool = False) -> None:
-      from com.ankamagames.dofus.logic.connection.frames.DisconnectionHandlerFrame import DisconnectionHandlerFrame
+      import com.ankamagames.dofus.logic.connection.frames.DisconnectionHandlerFrame as dhF
       from com.ankamagames.dofus.logic.connection.frames.AuthentificationFrame import AuthentificationFrame
       from com.ankamagames.dofus.logic.common.frames.CleanupCrewFrame import CleanupCrewFrame
       from com.ankamagames.dofus.logic.common.frames.QueueFrame import QueueFrame
@@ -63,7 +62,7 @@ class Kernel(metaclass=Singleton):
       self._worker.addFrame(QueueFrame())
       if not self._worker.contains(CleanupCrewFrame):
          self._worker.addFrame(CleanupCrewFrame())
-      self.getWorker().addFrame(DisconnectionHandlerFrame())
+      self.getWorker().addFrame(dhF.DisconnectionHandlerFrame())
       #Kernel().getWorker().addFrame(GameStartingFrame())
       # if not self._worker.contains(LatencyFrame):
       #    self._worker.addFrame(LatencyFrame())

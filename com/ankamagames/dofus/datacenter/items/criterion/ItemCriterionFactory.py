@@ -1,67 +1,6 @@
-from com.ankamagames.dofus.datacenter.items.criterion.AccountRightsItemCriterion import AccountRightsItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.AchievementAccountItemCriterion import AchievementAccountItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.AchievementItemCriterion import AchievementItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.AchievementObjectiveValidated import AchievementObjectiveValidated
-from com.ankamagames.dofus.datacenter.items.criterion.AchievementPointsItemCriterion import AchievementPointsItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.AlignmentItemCriterion import AlignmentItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.AlignmentLevelItemCriterion import AlignmentLevelItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.AllianceAvAItemCriterion import AllianceAvAItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.AllianceItemCriterion import AllianceItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.AllianceRightsItemCriterion import AllianceRightsItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.AreaItemCriterion import AreaItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.ArenaDuelRankCriterion import ArenaDuelRankCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.ArenaMaxDuelRankCriterion import ArenaMaxDuelRankCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.ArenaMaxSoloRankCriterion import ArenaMaxSoloRankCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.ArenaMaxTeamRankCriterion import ArenaMaxTeamRankCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.ArenaSoloRankCriterion import ArenaSoloRankCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.ArenaTeamRankCriterion import ArenaTeamRankCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.BonesItemCriterion import BonesItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.BonusSetItemCriterion import BonusSetItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.BreedItemCriterion import BreedItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.CommunityItemCriterion import CommunityItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.DayItemCriterion import DayItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.EmoteItemCriterion import EmoteItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.FriendlistItemCriterion import FriendlistItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.GiftItemCriterion import GiftItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.GuildItemCriterion import GuildItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.GuildLevelItemCriterion import GuildLevelItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.GuildRightsItemCriterion import GuildRightsItemCriterion
 from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterion import ItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.JobItemCriterion import JobItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.KamaItemCriterion import KamaItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.LevelItemCriterion import LevelItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.MapCharactersItemCriterion import MapCharactersItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.MapItemCriterion import MapItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.MariedItemCriterion import MariedItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.MonsterGroupChallengeCriterion import MonsterGroupChallengeCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.MonthItemCriterion import MonthItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.MountFamilyItemCriterion import MountFamilyItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.NameItemCriterion import NameItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.NewHavenbagItemCriterion import NewHavenbagItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.NumberOfItemMadeCriterion import floatOfItemMadeCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.NumberOfMountBirthedCriterion import floatOfMountBirthedCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.ObjectItemCriterion import ObjectItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.PVPRankItemCriterion import PVPRankItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.PremiumAccountItemCriterion import PremiumAccountItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.PrestigeLevelItemCriterion import PrestigeLevelItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.QuestItemCriterion import QuestItemCriterion
 from com.ankamagames.dofus.datacenter.items.criterion.QuestObjectiveItemCriterion import QuestObjectiveItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.RideItemCriterion import RideItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.RuneByBreakingItemCriterion import RuneByBreakingItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.ServerItemCriterion import ServerItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.ServerSeasonTemporisCriterion import ServerSeasonTemporisCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.ServerTypeItemCriterion import ServerTypeItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.SexItemCriterion import SexItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.SkillItemCriterion import SkillItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.SmileyPackItemCriterion import SmileyPackItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.SoulStoneItemCriterion import SoulStoneItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.SpecializationItemCriterion import SpecializationItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.SpellItemCriterion import SpellItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.StaticCriterionItemCriterion import StaticCriterionItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.SubareaItemCriterion import SubareaItemCriterion
 from com.ankamagames.dofus.datacenter.items.criterion.SubscribeItemCriterion import SubscribeItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.SubscriptionDurationItemCriterion import SubscriptionDurationItemCriterion
-from com.ankamagames.dofus.datacenter.items.criterion.WeightItemCriterion import WeightItemCriterion
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.dofus.datacenter.items.criterion.IItemCriterion import IItemCriterion
 from com.ankamagames.dofus.datacenter.items.criterion.UnusableItemCriterion import UnusableItemCriterion
@@ -70,7 +9,7 @@ logger = Logger(__name__)
 
 class ItemCriterionFactory:
    
-   def create(self, pServerCriterionForm:str) -> IItemCriterion:
+   def create(pServerCriterionForm:str) -> IItemCriterion:
       criterion = None
       s:str = pServerCriterionForm[0:2]
       
@@ -95,13 +34,16 @@ class ItemCriterionFactory:
       elif s == "Kd":
          criterion = ArenaDuelRankCriterion(pServerCriterionForm)
          
-      elif s == "KD": 
+      elif s == "KD":
+         from com.ankamagames.dofus.datacenter.items.criterion.ArenaMaxDuelRankCriterion import ArenaMaxDuelRankCriterion
          criterion = ArenaMaxDuelRankCriterion(pServerCriterionForm)
          
-      elif s == "Ks": 
+      elif s == "Ks":
+         from com.ankamagames.dofus.datacenter.items.criterion.ArenaSoloRankCriterion import ArenaSoloRankCriterion
          criterion = ArenaSoloRankCriterion(pServerCriterionForm)
          
-      elif s == "KS": 
+      elif s == "KS":
+         from com.ankamagames.dofus.datacenter.items.criterion.ArenaMaxSoloRankCriterion import ArenaMaxSoloRankCriterion
          criterion = ArenaMaxSoloRankCriterion(pServerCriterionForm)
          
       elif s == "Kt": 
@@ -147,6 +89,7 @@ class ItemCriterionFactory:
          criterion = AllianceAvAItemCriterion(pServerCriterionForm)
          
       elif s == "Pa": 
+         from com.ankamagames.dofus.datacenter.items.criterion.AlignmentLevelItemCriterion import AlignmentLevelItemCriterion
          criterion = AlignmentLevelItemCriterion(pServerCriterionForm)
          
       elif s == "PA": 
@@ -185,7 +128,8 @@ class ItemCriterionFactory:
       elif s == "PK": 
          criterion = KamaItemCriterion(pServerCriterionForm)
          
-      elif s == "PL": 
+      elif s == "PL":
+         from com.ankamagames.dofus.datacenter.items.criterion.LevelItemCriterion import LevelItemCriterion
          criterion = LevelItemCriterion(pServerCriterionForm)
          
       elif s == "Pl": 

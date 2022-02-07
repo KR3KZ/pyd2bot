@@ -91,7 +91,7 @@ class ServerSelectionFrame(Frame):
          if not serverHasBeenUpdated:
             self._serversList.append(ssumsg.server)
             self._serversList.sort(key=lambda x: x.date)
-         logger.info("Server " + ssumsg.server.id + " status changed to " + ssumsg.server.status + ".")
+         logger.info(f"Server {ssumsg.server.id} status changed to {ssumsg.server.status}.")
          self.broadcastServersListUpdate()
          return True
 

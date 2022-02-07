@@ -13,7 +13,6 @@ from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerMana
 from com.ankamagames.dofus.logic.game.approach.actions.CharacterSelectionAction import CharacterSelectionAction
 from com.ankamagames.dofus.logic.game.common.actions.chat.PopupWarningCloseRequestAction import PopupWarningCloseRequestAction
 from com.ankamagames.dofus.logic.game.common.frames.ContextChangeFrame import ContextChangeFrame
-from com.ankamagames.dofus.logic.game.common.frames.PlayedCharacterUpdatesFrame import PlayedCharacterUpdatesFrame
 from com.ankamagames.dofus.logic.game.common.frames.SynchronisationFrame import SynchronisationFrame
 from com.ankamagames.dofus.logic.game.common.frames.WorldFrame import WorldFrame
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
@@ -145,6 +144,7 @@ class GameServerApproachFrame(Frame):
          return True
 
       elif isinstance(msg, CharacterSelectedSuccessMessage):
+         import com.ankamagames.dofus.logic.game.common.frames.PlayedCharacterUpdatesFrame as pcuF
          cssmsg = msg
          self._loadingStart = time.perf_counter()
          if krnl.Kernel().getWorker().getFrame(ssfrm.ServerSelectionFrame):
@@ -153,7 +153,7 @@ class GameServerApproachFrame(Frame):
          DataStoreType.CHARACTER_ID = str(cssmsg.infos.id)
          krnl.Kernel().getWorker().addFrame(WorldFrame())
          krnl.Kernel().getWorker().addFrame(SynchronisationFrame())
-         krnl.Kernel().getWorker().addFrame(PlayedCharacterUpdatesFrame())
+         krnl.Kernel().getWorker().addFrame(pcuF.PlayedCharacterUpdatesFrame())
          # krnl.Kernel().getWorker().addFrame(SpellInventoryManagementFrame())
          # krnl.Kernel().getWorker().addFrame(InventoryManagementFrame())
          krnl.Kernel().getWorker().addFrame(ContextChangeFrame())

@@ -8,7 +8,13 @@ from com.ankamagames.jerakine.types.positions.PathElement import PathElement
 class MovementPath:
    
    MAX_PATH_LENGTH:int = 100
-   
+   HORIZONTAL_WALK_DURATION = 510
+   VERTICAL_WALK_DURATION = 425
+   DIAGONAL_WALK_DURATION = 480
+   HORIZONTAL_RUN_DURATION = 255
+   VERTICAL_RUN_DURATION = 150
+   DIAGONAL_RUN_DURATION = 170
+
    def __init__(self):
       super().__init__()
       self._oEnd = MapPoint()
@@ -89,9 +95,6 @@ class MovementPath:
                elem-=1
    
    def fill(self) -> None:
-      elem:int = 0
-      pFinal:PathElement = None
-      pe:PathElement = None
       if len(self._aPath) > 0:
          elem = 0
          pFinal = PathElement()
@@ -152,3 +155,25 @@ class MovementPath:
       clonePath.end = self._oEnd
       clonePath.path = self._aPath.copy()
       return clonePath
+
+   def getCrossingDuration(self, run:bool=True) -> int:
+      duration = 0
+      for i in range(1, len(self._aPath)):
+         incomingDirection = self._aPath[i - 1].orientation
+         if not run:
+            if incomingDirection % 2 == 0:
+                  if incomingDirection % 4 == 0:
+                     duration += self.HORIZONTAL_WALK_DURATION
+                  else:
+                     duration += self.VERTICAL_WALK_DURATION
+            else:
+                  duration += self.DIAGONAL_WALK_DURATION
+         else:
+            if incomingDirection % 2 == 0:
+                  if incomingDirection % 4 == 0:
+                     duration += self.HORIZONTAL_RUN_DURATION
+                  else:
+                     duration += self.VERTICAL_RUN_DURATION
+            else:
+               duration += self.DIAGONAL_RUN_DURATION
+      return min(duration / 1000, 5)

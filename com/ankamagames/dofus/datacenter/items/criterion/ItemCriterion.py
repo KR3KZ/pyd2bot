@@ -98,9 +98,9 @@ class ItemCriterion(IItemCriterion):
    def getInfos(self) -> None:
       operator:str = None
       for operator in ItemCriterionOperator.OPERATORS_LIST:
-         if self._serverCriterionForm.index(operator) == 2:
+         if self._serverCriterionForm.find(operator) == 2:
             self._operator = ItemCriterionOperator(operator)
-            self.self._criterionRef = self._serverCriterionForm.split(operator)[0]
+            self._criterionRef = self._serverCriterionForm.split(operator)[0]
             self._criterionValue = self._serverCriterionForm.split(operator)[1]
             self._criterionValueText = self._serverCriterionForm.split(operator)[1]
             

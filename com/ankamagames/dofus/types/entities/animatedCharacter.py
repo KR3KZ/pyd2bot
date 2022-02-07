@@ -16,7 +16,16 @@ class AnimatedCharacter(IEntity, IObstacle):
         self._stop = False
         self.speedAdjust:float = 0.0
         self.cantWalk8Directions:bool = False
+        super().__init__()
     
+    @property
+    def id(self) -> int:
+        return self._id
+    
+    @id.setter
+    def id(self, value:int):
+        self._id = value
+
     @property
     def position(self) -> MapPoint:
         return self._position

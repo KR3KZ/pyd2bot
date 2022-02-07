@@ -9,8 +9,8 @@ from wdom.server import start_server, start
 from wdom.themes import bootstrap3
 from wdom.themes.bootstrap3 import *
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from pyd2bot.network.message import Message
-from pyd2bot.network.sniffer import DofusSniffer
+from .network.message import Message
+from .network.sniffer import DofusSniffer
 logger = logging.getLogger("labot")
 
 

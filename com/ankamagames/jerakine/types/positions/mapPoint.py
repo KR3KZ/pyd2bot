@@ -93,6 +93,8 @@ class MapPoint:
 
     @cellID.setter
     def cellId(self, i:int):
+        if not type(i) == int:
+            raise TypeError("cellId must be an int")
         self._nCellId = i
         self.setFromCellId()
 

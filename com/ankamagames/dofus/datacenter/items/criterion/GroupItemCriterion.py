@@ -26,8 +26,8 @@ class GroupItemCriterion(IItemCriterion):
       self._cleanCriterionTextForm = str.replace(self._cleanCriterionTextForm, " ", "")
       delimitedlist:list[str] = StringUtils.getDelimitedText(self._cleanCriterionTextForm,"(",")",True)
       if len(delimitedlist) > 0 and delimitedlist[0] == self._cleanCriterionTextForm:
-         self._cleanCriterionTextForm = self._cleanCriterionTextForm.slice(1)
-         self._cleanCriterionTextForm = len(self._cleanCriterionTextForm.slice(0,self._cleanCriterionTextForm) - 1)
+         self._cleanCriterionTextForm = self._cleanCriterionTextForm[1:]
+         self._cleanCriterionTextForm = self._cleanCriterionTextForm[0:len(self._cleanCriterionTextForm) - 1]
       self.split()
       self.createNewGroups()
    
@@ -170,7 +170,7 @@ class GroupItemCriterion(IItemCriterion):
             else:
                self._criteria.append(criterion)
                index = searchingstr.index(criterion.basicText)
-               op = searchingstr.slice(index + len(criterion.basicText),index + 1 + len(criterion.basicText))
+               op = searchingstr[index + len(criterion.basicText):index + 1 + len(criterion.basicText)]
                if op:
                   self._operators.append(op)
                searchingstr = searchingstr[index + 1 + len(criterion.basicText):]
@@ -227,12 +227,12 @@ class GroupItemCriterion(IItemCriterion):
       if not pCriteria:
          return None
       pCriteria = str.replace(pCriteria, " ", "")
-      if pCriteria.slice(0,1) == "(":
+      if pCriteria[0:1] == "(":
          dl = StringUtils.getDelimitedText(pCriteria,"(",")",True)
          criterion = GroupItemCriterion(dl[0])
       else:
-         ANDindex = pCriteria.index("&")
-         ORindex = pCriteria.index("|")
+         ANDindex = pCriteria.find("&")
+         ORindex = pCriteria.find("|")
          from com.ankamagames.dofus.datacenter.items.criterion.ItemCriterionFactory import ItemCriterionFactory
          if ANDindex == -1 and ORindex == -1:
             criterion = ItemCriterionFactory.create(pCriteria)

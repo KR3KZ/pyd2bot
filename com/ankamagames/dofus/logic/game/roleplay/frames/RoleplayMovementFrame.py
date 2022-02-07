@@ -1,4 +1,6 @@
 
+from threading import Timer
+from time import sleep
 from time import perf_counter
 from com.ankamagames.atouin.messages.EntityMovementCompleteMessage import EntityMovementCompleteMessage
 from com.ankamagames.atouin.messages.EntityMovementStoppedMessage import EntityMovementStoppedMessage
@@ -12,8 +14,6 @@ from com.ankamagames.dofus.logic.game.roleplay.actions.PlayerFightRequestAction 
 # from com.ankamagames.dofus.logic.game.roleplay.frames.RoleplayEntitiesFrame import RoleplayEntitiesFrame
 from com.ankamagames.dofus.logic.game.roleplay.messages.CharacterMovementStoppedMessage import CharacterMovementStoppedMessage
 from com.ankamagames.dofus.network.enums.PlayerLifeStatusEnum import PlayerLifeStatusEnum
-from com.ankamagames.dofus.network.messages.game.context.GameCautiousMapMovementMessage import GameCautiousMapMovementMessage
-from com.ankamagames.dofus.network.messages.game.context.GameCautiousMapMovementRequestMessage import GameCautiousMapMovementRequestMessage
 from com.ankamagames.dofus.network.messages.game.context.GameMapMovementCancelMessage import GameMapMovementCancelMessage
 from com.ankamagames.dofus.network.messages.game.context.GameMapMovementConfirmMessage import GameMapMovementConfirmMessage
 from com.ankamagames.dofus.network.messages.game.context.GameMapMovementMessage import GameMapMovementMessage
@@ -124,22 +124,28 @@ class RoleplayMovementFrame(Frame):
 
       if isinstance(msg, GameMapMovementMessage):
          gmmmsg = msg
+         movedEntity = DofusEntities.getEntity(gmmmsg.actorId)
+         clientkeyMoves = MapMovementAdapter.getClientMovement(gmmmsg.keyMovements)
+         movedEntity.position.cellId = clientkeyMoves.end.cellID
          if gmmmsg.actorId != PlayedCharacterManager().id:
-            self.applyGameMapMovement(gmmmsg.actorId, MapMovementAdapter.getClientMovement(gmmmsg.keyMovements), msg)
+            self.applyGameMapMovement(gmmmsg.actorId, clientkeyMoves, msg)
          else:
-            self._lastPlayerValidatedPosition = MapMovementAdapter.getClientMovement(gmmmsg.keyMovements).end
+            logger.info("Player is moving :)")
+            self._lastPlayerValidatedPosition = clientkeyMoves.end
             if self._lastMoveEndCellId != self._lastPlayerValidatedPosition.cellId:
                playerEntity:AnimatedCharacter = DofusEntities.getEntity(PlayedCharacterManager().id)
-               requestedPath = Pathfinding.findPath(DataMapProvider(),playerEntity.position, self._lastPlayerValidatedPosition, not playerEntity.cantWalk8Directions,True)
+               requestedPath = Pathfinding.findPath(DataMapProvider(), playerEntity.position, self._lastPlayerValidatedPosition, not playerEntity.cantWalk8Directions, True)
                self.applyGameMapMovement(gmmmsg.actorId, requestedPath, msg)
          return True
 
       if isinstance(msg, EntityMovementCompleteMessage):
          emcmsg = msg
+         logger.debug("EntityMovementCompleteMessage received for entinty " + str(emcmsg.entity.id))
          if emcmsg.entity.id == PlayedCharacterManager().id:
             gmmcmsg = GameMapMovementConfirmMessage()
             ConnectionsHandler.getConnection().send(gmmcmsg)
             if self._wantToChangeMap >= 0 and emcmsg.entity.position.cellId == self._destinationPoint:
+               logger.debug("Player arrived at destination point and he wanted to change map")
                self.askMapChange()
                self._isRequestingMovement = False
             if self._followingIe:
@@ -261,6 +267,7 @@ class RoleplayMovementFrame(Frame):
       self._nextMovementBehavior = pValue
    
    def askMoveTo(self, cell:MapPoint) -> bool:
+      logger.debug(f"Asking to move to cell {cell}")
       if not self._canMove or PlayedCharacterManager().state == PlayerLifeStatusEnum.STATUS_TOMBSTONE:
          return False
       if self._isRequestingMovement:
@@ -279,7 +286,6 @@ class RoleplayMovementFrame(Frame):
          playerEntity.stop()
          self._followingMove = cell
          return False
-      playerEntity.visibleAura = False
       movePath = Pathfinding.findPath(DataMapProvider(), playerEntity.position, cell)
       self.sendPath(movePath)
       return True
@@ -302,19 +308,20 @@ class RoleplayMovementFrame(Frame):
       gmmrmsg.init(keymoves, PlayedCharacterManager().currentMap.mapId)
       ConnectionsHandler.getConnection().send(gmmrmsg)
       self.applyGameMapMovement(PlayedCharacterManager().id, originalPath, forceWalk)
-      self._nextMovementBehavior = 0
       self._latestMovementRequest = perf_counter()
    
    def applyGameMapMovement(self, actorId:float, movement:MovementPath, forceWalking:bool = False) -> None:
       movedEntity:IEntity = DofusEntities.getEntity(actorId)
-      if not movedEntity:
+      if movedEntity is None:
          logger.warn("The entity " + actorId + " moved before it was added to the scene. Aborting movement.")
          return
       self._lastMoveEndCellId = movement.end.cellId
-      # rpEntitiesFrame:RoleplayEntitiesFrame = Kernel().getWorker().getFrame(RoleplayEntitiesFrame)
-      # del rpEntitiesFrame.lastStaticAnimations[actorId]
-      
+      pathDuration = movement.getCrossingDuration()
+      logger.debug(f"Sending EntityMovementCompleteMessage with entityId {movedEntity.id} to the worker after {pathDuration} seconds.")
+      Timer(pathDuration, lambda: Kernel().getWorker().processImmediately(EntityMovementCompleteMessage(movedEntity))).start()
+
    def askMapChange(self) -> None:
+      logger.debug("Asking for a map change to map " + str(self._wantToChangeMap))
       cmmsg:ChangeMapMessage = ChangeMapMessage()
       cmmsg.init(self._wantToChangeMap, self._changeMapByAutoTrip)
       ConnectionsHandler.getConnection().send(cmmsg)

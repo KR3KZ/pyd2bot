@@ -37,3 +37,11 @@ class StringUtils:
       if pIncludeDelimiter:
          r = [pFirstDelimiter + _ + pSecondDelimiter for _ in r]
       return r
+   
+   def getAllIndexOf(pc:str, pText:str) -> list[int]:
+      return [i for i, c in enumerate(pText) if c == pc]
+   
+
+if __name__ == "__main__":
+   r = StringUtils.getAllIndexOf("k", "dsqkdjklsjkhalidskdjkj")
+   print(r)

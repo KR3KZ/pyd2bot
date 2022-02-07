@@ -9,22 +9,16 @@ class SuperArea(IDataCenter):
       
    MODULE:str = "SuperAreas"
    
-   _allSuperAreas:list
-      
+   _allSuperAreas = list()
    
-   id:int
-   
-   nameId:int
-   
-   worldmapId:int
-   
-   hasWorldMap:bool
-   
-   _name:str
-   
-   _worldmap:WorldMap
    
    def __init__(self):
+      self._worldmap = None
+      self._name = None
+      self.worldmapId:int = None
+      self.nameId:int = None
+      self.id:int = None
+
       super().__init__()
    
    @staticmethod

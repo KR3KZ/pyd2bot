@@ -5,9 +5,9 @@ from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
 
 class WorldGraph:
        
-   _vertices:dict
+   _vertices:dict[int, Vertex]
    
-   _edges:dict
+   _edges:dict[float, Edge]
    
    _outgoingEdges:dict
    

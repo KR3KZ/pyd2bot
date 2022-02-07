@@ -30,3 +30,6 @@ class Edge:
    def addTransition(self, dir:int, type:int, skill:int, criterion:str, transitionMapId:float, cell:int, id:int) -> None:
       self.transitions.append(Transition(type, dir, skill, criterion, transitionMapId, cell, id))
    
+   def __str__(self):
+      return "Edge(src={}, dst={}, transitions={})".format(self.src, self.dst, self.transitions)
+   

@@ -41,7 +41,6 @@ class MapDisplayManager(metaclass=Singleton):
 
    @mapInstanceId.setter
    def mapInstanceId(self, mapId:float) -> None:
-      logger.debug(f"mapInstanceId {mapId}")
       self._mapInstanceId = mapId
 
    def reset(self) -> None:
@@ -59,7 +58,7 @@ class MapDisplayManager(metaclass=Singleton):
       self._nMapLoadStart = perf_counter()
       map = self._loader.load(mapId)
       self._nMapLoadEnd = perf_counter()
-      logger.debug("Map loaded in " + str(self._nMapLoadEnd - self._nMapLoadStart) + " seconds")
+      # logger.debug("Map loaded in " + str(self._nMapLoadEnd - self._nMapLoadStart) + " seconds")
       dmpm.DataMapProvider().resetUpdatedCell()
       dmpm.DataMapProvider().resetSpecialEffects()
       self.currentDataMap = map

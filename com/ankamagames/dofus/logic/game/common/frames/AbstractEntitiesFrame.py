@@ -120,7 +120,7 @@ class AbstractEntitiesFrame(Frame):
             entity = DofusEntities.getEntity(actorId)
             if entity != None and isinstance(entity, AnimatedCharacter):
                 entity
-            --self._entitiesTotal
+            self._entitiesTotal -= 1
         del self._entities[actorId]
         StatsManager().deleteStats(actorId)
 
@@ -133,7 +133,7 @@ class AbstractEntitiesFrame(Frame):
             characterEntity = AnimatedCharacter(infos.contextualId)
             if isinstance(infos, GameFightMonsterInformations):
                 characterEntity.speedAdjust = Monster.getMonsterById(GameFightMonsterInformations(infos).creatureGenericId).speedAdjust
-            EntitiesManager().addAnimatedEntity(infos.contextualId, characterEntity)
+            EntitiesManager().addAnimatedEntity(int(infos.contextualId), characterEntity)
         if isinstance(infos, GameRolePlayHumanoidInformations):
             humanoid = infos
             if infos.contextualId == PlayedCharacterManager().id:

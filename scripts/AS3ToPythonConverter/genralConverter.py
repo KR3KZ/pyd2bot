@@ -108,6 +108,10 @@ patterns = {
     r"\.shift\(\)": ".pop(0)",
     r"msg as (\w+)": r"msg",
 
+    # extras only for items criterion
+    "_operator": "self._operator",
+    "_criterionValue": "self._criterionValue",
+
 }
 SWITCH_CASE_PATTERN = r"\s*(switch\(.*\)\s*\n?\{\s*(?:.|\n)+break;\s*\n\s*(?:default:)?(?:[^}]|\n)*\})"
 CASE_PATTERN1 = "(?P<spaces>\s*)case (?P<testvar>\S+) is (?P<testvalue>\S+):"
@@ -268,54 +272,36 @@ def postSwitchCaseProcess(code):
     codeLines = code.split("\n")
     testvar  = None
     res = []
-    inCaseBlock = False
     blockIndent = None
     for line in codeLines:
-        if inCaseBlock:
-            print("in case block")
-        else:
-            print("not case block")
-        if "case" in line:
-            matched = False
-            inCaseBlock = True
-            m = re.match('(\s*)case\s+(\S+)\s+is\s+(.*)\s*\:\s*\n?', line)
-            if m:
-                blockIndent = m.group(1)[3:]
-                line = f"{blockIndent}if isinstance({m.group(2)}, {m.group(3)}):\n"
-                matched = True
-                res.append(line)
-                continue
-            m = re.match("(\s*)case\s+(\S+)\s*:\s*\n?", line, flags=re.M)
-            if m:
-                blockIndent = m.group(1)[3:]
-                line = f"{blockIndent}if {testvar}  == {m.group(2)}:\n"
-                matched = True
-                res.append(line)
-                continue
-            if not matched:
-                raise Exception(f"unable to match line: {line}")
-            
-        if "switch(" in line:
-            m = re.match(r"\s*switch\((?P<testvar>\S+)\)", line)
-            if m:
-                testvar = m.group("testvar")
-                continue
-            else:
-                raise Exception(f"unable to match line: {line}")
 
+        m = re.match('(\s*)case\s+(\S+)\s+is\s+(.*)\s*\:\s*\n?', line)
+        if m:
+            blockIndent = m.group(1)[3:]
+            line = f"{blockIndent}if isinstance({m.group(2)}, {m.group(3)}):"
+            res.append(line)
+            continue
+
+        m = re.match("(\s*)case\s+(\S+)\s*:\s*\n?", line, flags=re.M)
+        if m:
+            blockIndent = m.group(1)[3:]
+            line = f"{blockIndent}if {testvar}  == {m.group(2)}:"
+            res.append(line)
+            continue
+
+        m = re.match(r"\s*switch\((?P<testvar>\S+)\)", line)
+        if m:
+            testvar = m.group("testvar")
+            continue
+        
+        m = re.match(r"\s*default\s*:\s*\n?", line)
+        if m:
+            line = f"{blockIndent}else:"
+            res.append(line)
+            continue
         if "break" in line:
             continue
 
-        # if inCaseBlock:
-        #     xlineIndent = getLineIndent(line)
-        #     print(xlineIndent, len(blockIndent))
-        #     if "default" in line:
-        #         line = f"{blockIndent}else:\n"
-        #         inCaseBlock = False
-        #         continue
-        #     line = ' ' * (xlineIndent - 3) + line[xlineIndent:]
-        #     res.append(line)
-        #     continue
         res.append(line)
     return "\n".join(res)
 
@@ -338,5 +324,5 @@ def parseFile(file_p, out_p):
 ROOTDIR = pathlib.Path(os.path.dirname(__file__))
 # parseFolderFiles("AS3ToPythonConverter/scripts", "AS3ToPythonConverter/connectionType")
 t = perf_counter()
-parseFile(ROOTDIR / "target.as", ROOTDIR / "IInteractive.py")
+parseFile(ROOTDIR / "target.as", ROOTDIR / "QuestObjectiveItemCriterion.py")
 print("parsing took:", perf_counter() - t)

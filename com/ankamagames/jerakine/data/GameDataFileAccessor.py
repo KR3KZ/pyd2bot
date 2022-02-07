@@ -19,10 +19,17 @@ class GameDataFileAccessor(metaclass=Singleton):
         moduleName:str = nativeFile.name.split(".d2o")[0]
         self._modules[moduleName] = ModuleReader(nativeFile.open('rb'))
 
+    def initFromModuleName(self, moduleName:str) -> None:
+        if moduleName not in self._modules:
+            modle_file_path = Constants.DOFUS_COMMON_DIR / f"{moduleName}.d2o"
+            self.init(modle_file_path)
+
     def initFromBinaryStream(self, modulename:str, moduleBinaries:BinaryStream):
         self._modules[modulename] = ModuleReader(moduleBinaries)
 
     def getDataProcessor(self, moduleName:str) -> 'GameDataProcess':
+        if moduleName not in self._modules:
+            self.initFromModuleName(moduleName)
         return self._modules[moduleName]._gameDataProcessor
     
     def getClassDefinition(self, moduleName:str, classId:int) -> 'GameDataClassDefinition':
@@ -30,8 +37,7 @@ class GameDataFileAccessor(metaclass=Singleton):
     
     def getCount(self, moduleName:str) -> int:
         if moduleName not in self._modules:
-            modle_file_path = Constants.DOFUS_COMMON_DIR / f"{moduleName}.d2o"
-            self.init(modle_file_path)
+            self.initFromModuleName(moduleName)
         return self._modules[moduleName]._counter
     
     def getObject(self, moduleName:str, objectId) -> Any:

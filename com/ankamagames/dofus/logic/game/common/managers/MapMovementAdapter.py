@@ -27,7 +27,7 @@ class MapMovementAdapter:
       if cls.DEBUG_ADAPTER:
          movStr = ""
          for movCell in movement:
-            movStr += (movCell & 4095) + " > "
+            movStr += str(movCell & 4095) + " > "
          logger.debug("Sending path : " + movStr)
       return movement
    
@@ -53,8 +53,8 @@ class MapMovementAdapter:
          moveCount += 1
       mp.fill()
       if cls.DEBUG_ADAPTER:
-         movStr = "Start : " + mp.start.cellId + " | "
+         movStr = f"Start : {mp.start.cellId} | "
          for movElement in mp.path:
-            movStr += movElement.step.cellId + " > "
-         logger.debug("Received path : " + movStr + " | End : " + mp.end.cellId)
+            movStr += str(movElement.step.cellId) + " > "
+         logger.debug(f"Received path : {movStr} | End : {mp.end.cellId}")
       return mp

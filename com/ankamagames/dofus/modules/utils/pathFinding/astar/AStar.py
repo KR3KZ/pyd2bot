@@ -15,7 +15,7 @@ logger = Logger(__name__)
 
 
 class AStar:
-   
+   DEBUG = True
    dest:MapPosition = None
    
    closedDic = dict()
@@ -46,6 +46,8 @@ class AStar:
    
    @classmethod
    def search(cls, worldGraph:WorldGraph, src:Vertex, dst:Vertex, callback:FunctionType) -> None:
+      if cls.DEBUG:
+         logger.debug(f"Searching path from {src} to {dst} ...")
       if cls.callback != None:
          raise Exception("Pathfinding already in progress")
       if src == dst:
@@ -74,17 +76,9 @@ class AStar:
    
    @classmethod
    def compute(cls, e:Event=None) -> None:
-      current:Node = None
-      edges:list[Edge] = None
-      oldLength:int = 0
-      cost:int = 0
-      edge:Edge = None
-      existing:Node = None
-      map:MapPosition = None
-      manhattanDistance:int = 0
-      node:Node = None
-      start:int = perf_counter()
-      while len(cls.openList) > 0:
+      if cls.DEBUG:
+         logger.debug(f"Iteration {cls.iterations}")
+      while cls.openList:
          if cls.iterations > cls.MAX_ITERATION:
             cls.callbackWithResult(None)
             logger.error("Too many iterations, aborting A*")
@@ -126,7 +120,7 @@ class AStar:
       valid:bool = False
       for transition in edge.transitions:
          if len(transition.criterion) != 0:
-            if transition.criterion.find("&") == -1 and transition.criterion.find("|") == -1 and criterionWhiteList.find(transition.criterion.substr(0,2)) != -1:
+            if "&" not in transition.criterion and "|" not in transition.criterion and transition.criterion[0:2] not in criterionWhiteList:
                return False
             criterion = GroupItemCriterion(transition.criterion)
             return criterion.isRespected
@@ -141,9 +135,7 @@ class AStar:
       toSubareaId:int = MapPosition.getMapPositionById(toMapId).subAreaId
       if fromSubareaId == toSubareaId:
          return True
-      if cls._forbiddenSubareaIds.find(toSubareaId) != -1:
-         return False
-      return True
+      return toSubareaId not in cls._forbiddenSubareaIds
    
    @classmethod   
    def callbackWithResult(cls, result:list[Edge]) -> None:

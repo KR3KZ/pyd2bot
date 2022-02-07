@@ -1,22 +1,17 @@
 from datetime import datetime
 from logging import Logger
-from socket import MSG_BCAST
 from time import perf_counter
-from jinja2 import pass_context, pass_eval_context
 from com.ankamagames.dofus.datacenter.world.SubArea import SubArea
 from com.ankamagames.dofus.internalDatacenter.stats.entityStats import EntityStats
 from com.ankamagames.dofus.kernel.Kernel import Kernel
-from com.ankamagames.dofus.kernel.net.ConnectionsHandler import ConnectionsHandler
 from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerManager
 from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManager
-from com.ankamagames.dofus.logic.game.common.managers.EntitiesManager import EntitiesManager
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
 from com.ankamagames.dofus.logic.game.common.managers.TimerManager import TimeManager
 from com.ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEntities
 from com.ankamagames.dofus.logic.game.fight.managers.CurrentPlayedFighterManager import CurrentPlayedFighterManager
-from com.ankamagames.dofus.logic.game.roleplay.frames.RoleplayContextFrame import RoleplayContextFrame
+import com.ankamagames.dofus.logic.game.roleplay.frames.RoleplayContextFrame as rplCF
 from com.ankamagames.dofus.logic.game.roleplay.frames.RoleplayEntitiesFrame import RoleplayEntitiesFrame
-from com.ankamagames.dofus.network.enums.AggressableStatusEnum import AggressableStatusEnum
 from com.ankamagames.dofus.network.enums.CompassTypeEnum import CompassTypeEnum
 from com.ankamagames.dofus.network.enums.PlayerLifeStatusEnum import PlayerLifeStatusEnum
 from com.ankamagames.dofus.network.enums.ProtocolConstantsEnum import ProtocolConstantsEnum
@@ -37,12 +32,10 @@ from com.ankamagames.dofus.network.messages.game.character.stats.CharacterExperi
 from com.ankamagames.dofus.network.messages.game.character.stats.CharacterLevelUpInformationMessage import CharacterLevelUpInformationMessage
 from com.ankamagames.dofus.network.messages.game.character.stats.CharacterLevelUpMessage import CharacterLevelUpMessage
 from com.ankamagames.dofus.network.messages.game.character.stats.CharacterStatsListMessage import CharacterStatsListMessage
-from com.ankamagames.dofus.network.messages.game.character.stats.ResetCharacterStatsRequestMessage import ResetCharacterStatsRequestMessage
 from com.ankamagames.dofus.network.messages.game.context.GameMapSpeedMovementMessage import GameMapSpeedMovementMessage
 from com.ankamagames.dofus.network.messages.game.context.roleplay.MapComplementaryInformationsDataMessage import MapComplementaryInformationsDataMessage
 from com.ankamagames.dofus.network.messages.game.context.roleplay.death.GameRolePlayGameOverMessage import GameRolePlayGameOverMessage
 from com.ankamagames.dofus.network.messages.game.context.roleplay.death.GameRolePlayPlayerLifeStatusMessage import GameRolePlayPlayerLifeStatusMessage
-from com.ankamagames.dofus.network.messages.game.context.roleplay.stats.StatsUpgradeRequestMessage import StatsUpgradeRequestMessage
 from com.ankamagames.dofus.network.messages.game.context.roleplay.stats.StatsUpgradeResultMessage import StatsUpgradeResultMessage
 from com.ankamagames.dofus.network.messages.game.initialization.CharacterCapabilitiesMessage import CharacterCapabilitiesMessage
 from com.ankamagames.dofus.network.messages.game.initialization.ServerExperienceModificatorMessage import ServerExperienceModificatorMessage
@@ -52,25 +45,13 @@ from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeMon
 from com.ankamagames.dofus.network.messages.game.inventory.items.SetUpdateMessage import SetUpdateMessage
 from com.ankamagames.dofus.network.messages.game.startup.StartupActionAddMessage import StartupActionAddMessage
 from com.ankamagames.dofus.network.messages.game.startup.StartupActionFinishedMessage import StartupActionFinishedMessage
-from com.ankamagames.dofus.network.messages.game.startup.StartupActionsAllAttributionMessage import StartupActionsAllAttributionMessage
 from com.ankamagames.dofus.network.messages.game.startup.StartupActionsListMessage import StartupActionsListMessage
-from com.ankamagames.dofus.network.messages.game.startup.StartupActionsObjetAttributionMessage import StartupActionsObjetAttributionMessage
 from com.ankamagames.dofus.network.types.game.character.characteristic.CharacterCharacteristicsInformations import CharacterCharacteristicsInformations
-from com.ankamagames.dofus.network.types.game.context.roleplay.GameRolePlayActorInformations import GameRolePlayActorInformations
-from com.ankamagames.dofus.network.types.game.context.roleplay.GameRolePlayCharacterInformations import GameRolePlayCharacterInformations
-from com.ankamagames.dofus.network.types.game.context.roleplay.GameRolePlayHumanoidInformations import GameRolePlayHumanoidInformations
-from com.ankamagames.dofus.network.types.game.context.roleplay.HumanOption import HumanOption
 from com.ankamagames.dofus.network.types.game.context.roleplay.HumanOptionAlliance import HumanOptionAlliance
 from com.ankamagames.dofus.network.types.game.context.roleplay.HumanOptionOrnament import HumanOptionOrnament
-from com.ankamagames.dofus.network.types.game.data.items.ForgettableSpellItem import ForgettableSpellItem
-from com.ankamagames.dofus.network.types.game.data.items.ObjectItemInformationWithQuantity import ObjectItemInformationWithQuantity
-from com.ankamagames.dofus.network.types.game.startup.StartupActionAddObject import StartupActionAddObject
 from com.ankamagames.jerakine.data.I18n import I18n
-from com.ankamagames.jerakine.managers.storeDataManager import StoreDataManager
 from com.ankamagames.jerakine.messages.Frame import Frame
 from com.ankamagames.jerakine.messages.Message import Message
-from com.ankamagames.jerakine.types.DataStoreType import DataStoreType
-from com.ankamagames.jerakine.types.enums.DataStoreEnum import DataStoreEnum
 from com.ankamagames.jerakine.types.enums.Priority import Priority
 from damageCalculation.tools import StatIds
 logger = Logger(__name__)
@@ -98,8 +79,8 @@ class PlayedCharacterUpdatesFrame(Frame):
       return Priority.HIGH
 
    @property
-   def roleplayContextFrame(self) -> RoleplayContextFrame:
-      return Kernel().getWorker().getFrame(RoleplayContextFrame)
+   def roleplayContextFrame(self) -> rplCF.RoleplayContextFrame:
+      return Kernel().getWorker().getFrame(rplCF.RoleplayContextFrame)
 
    @property
    def kamasLimit(self) -> float:

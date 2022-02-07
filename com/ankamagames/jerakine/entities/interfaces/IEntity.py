@@ -1,8 +1,7 @@
-from abc import ABC
 from com.ankamagames.jerakine.types.positions.MapPoint import MapPoint
 
 
-class IEntity(ABC):
+class IEntity:
 
     @property
     def id(self) -> int:

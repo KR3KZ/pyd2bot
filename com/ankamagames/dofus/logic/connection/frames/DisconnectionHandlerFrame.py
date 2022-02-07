@@ -6,7 +6,6 @@ from com.ankamagames.dofus import Constants
 import com.ankamagames.dofus.kernel.Kernel as krnl
 import com.ankamagames.dofus.kernel.net.ConnectionsHandler as connh
 from com.ankamagames.dofus.kernel.net.DisconnectionReasonEnum import DisconnectionReasonEnum
-from com.ankamagames.dofus.logic.connection.managers.AuthentificationManager import AuthentificationManager
 from com.ankamagames.jerakine.benchmark.BenchmarkTimer import BenchmarkTimer
 from com.ankamagames.jerakine.managers.storeDataManager import StoreDataManager
 from com.ankamagames.jerakine.messages.Frame import Frame
@@ -16,7 +15,7 @@ from com.ankamagames.jerakine.network.ServerConnectionClosedMessage import Serve
 from com.ankamagames.jerakine.network.messages.ExpectedSocketClosureMessage import ExpectedSocketClosureMessage
 from com.ankamagames.jerakine.network.messages.UnexpectedSocketClosureMessage import UnexpectedSocketClosureMessage
 from com.ankamagames.jerakine.types.enums.Priority import Priority
-from com.ankamagames.dofus.logic.game.approach.frames.GameServerApproachFrame import GameServerApproachFrame
+import com.ankamagames.dofus.logic.game.approach.frames.GameServerApproachFrame as gsaF
 logger = Logger(__name__)
 
 class DisconnectionHandlerFrame(Frame):
@@ -58,7 +57,7 @@ class DisconnectionHandlerFrame(Frame):
             
          if sccmsg.closedConnection == connh.ConnectionsHandler.getConnection().getSubConnection(sccmsg):
             logger.debug("The connection was closed. Checking reasons.")
-            GameServerApproachFrame.authenticationTicketAccepted = False
+            gsaF.GameServerApproachFrame.authenticationTicketAccepted = False
             if connh.ConnectionsHandler.hasReceivedMsg:
                if not connh.ConnectionsHandler.hasReceivedNetworkMsg and self._numberOfAttemptsAlreadyDone < self.CONNECTION_ATTEMPTS_NUMBER:
                   self._numberOfAttemptsAlreadyDone+=1
@@ -87,14 +86,14 @@ class DisconnectionHandlerFrame(Frame):
    
       elif isinstance(msg, WrongSocketClosureReasonMessage):
          wscrmsg = msg 
-         GameServerApproachFrame.authenticationTicketAccepted = False
+         gsaF.GameServerApproachFrame.authenticationTicketAccepted = False
          logger.error("Expecting socket closure for reason " + wscrmsg.expectedReason + ", got reason " + wscrmsg.gotReason + "! Reseting.")
          krnl.Kernel().reset([UnexpectedSocketClosureMessage()])
          return True
 
       elif isinstance(msg, UnexpectedSocketClosureMessage):
          logger.debug("go hook UnexpectedSocketClosure")
-         GameServerApproachFrame.authenticationTicketAccepted = False
+         gsaF.GameServerApproachFrame.authenticationTicketAccepted = False
          return True
   
    def pulled(self) -> bool:

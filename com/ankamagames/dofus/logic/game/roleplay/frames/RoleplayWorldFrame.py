@@ -1,30 +1,24 @@
-from com.ankamagames.atouin.AtouinConstants import AtouinConstants
-from com.ankamagames.atouin.managers.FrustumManager import FrustumManager
 from com.ankamagames.atouin.managers.MapDisplayManager import MapDisplayManager
 from com.ankamagames.atouin.messages.AdjacentMapClickMessage import AdjacentMapClickMessage
 from com.ankamagames.atouin.messages.CellClickMessage import CellClickMessage
 from com.ankamagames.atouin.utils.DataMapProvider import DataMapProvider
-from com.ankamagames.dofus.datacenter.world.SubArea import SubArea
 from com.ankamagames.dofus.kernel.Kernel import Kernel
 from com.ankamagames.dofus.kernel.net.ConnectionsHandler import ConnectionsHandler
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
 from com.ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEntities
-from com.ankamagames.dofus.logic.game.roleplay.frames.RoleplayContextFrame import RoleplayContextFrame
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+   from com.ankamagames.dofus.logic.game.roleplay.frames.RoleplayContextFrame import RoleplayContextFrame
 from com.ankamagames.dofus.logic.game.roleplay.frames.RoleplayEntitiesFrame import RoleplayEntitiesFrame
 from com.ankamagames.dofus.logic.game.roleplay.frames.RoleplayMovementFrame import RoleplayMovementFrame
-from com.ankamagames.dofus.network.enums.PlayerLifeStatusEnum import PlayerLifeStatusEnum
 from com.ankamagames.dofus.network.messages.game.context.fight.GameFightJoinRequestMessage import GameFightJoinRequestMessage
 from com.ankamagames.dofus.network.messages.game.context.roleplay.MapComplementaryInformationsDataMessage import MapComplementaryInformationsDataMessage
 from com.ankamagames.dofus.network.messages.game.context.roleplay.MapFightStartPositionsUpdateMessage import MapFightStartPositionsUpdateMessage
-from com.ankamagames.dofus.network.messages.game.context.roleplay.houses.HouseKickIndoorMerchantRequestMessage import HouseKickIndoorMerchantRequestMessage
-from com.ankamagames.dofus.network.messages.game.context.roleplay.party.PartyInvitationRequestMessage import PartyInvitationRequestMessage
 from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeOnHumanVendorRequestMessage import ExchangeOnHumanVendorRequestMessage
-from com.ankamagames.dofus.network.types.common.PlayerSearchCharacterNameInformation import PlayerSearchCharacterNameInformation
 from com.ankamagames.dofus.network.types.game.context.fight.FightStartingPositions import FightStartingPositions
 from com.ankamagames.dofus.network.types.game.context.roleplay.GameRolePlayActorInformations import GameRolePlayActorInformations
 from com.ankamagames.dofus.network.types.game.context.roleplay.GameRolePlayGroupMonsterInformations import GameRolePlayGroupMonsterInformations
 from com.ankamagames.dofus.types.entities.AnimatedCharacter import AnimatedCharacter
-from com.ankamagames.jerakine.data.I18n import I18n
 from com.ankamagames.jerakine.entities.messages.EntityClickMessage import EntityClickMessage
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.messages.Frame import Frame
@@ -78,12 +72,13 @@ class RoleplayWorldFrame(Frame):
       return Priority.NORMAL
    
    @property
-   def roleplayContextFrame(self) -> RoleplayContextFrame:
-      return Kernel.getWorker().getFrame(RoleplayContextFrame)
+   def roleplayContextFrame(self) -> 'RoleplayContextFrame':
+      from com.ankamagames.dofus.logic.game.roleplay.frames.RoleplayContextFrame import RoleplayContextFrame
+      return Kernel().getWorker().getFrame(RoleplayContextFrame)
    
    @property
    def roleplayMovementFrame(self) -> RoleplayMovementFrame:
-      return Kernel.getWorker().getFrame(RoleplayMovementFrame)
+      return Kernel().getWorker().getFrame(RoleplayMovementFrame)
    
    def pushed(self) -> bool:
       self._allowOnlyCharacterInteraction = False
@@ -157,69 +152,69 @@ class RoleplayWorldFrame(Frame):
             self.roleplayMovementFrame.askMoveTo(entityc.position)
          return True
 
-      if isinstance(msg, InteractiveElementActivationMessage):
-         sendInteractiveUseRequest = True
-         ieamsg = msg
-         interactiveFrame = Kernel.getWorker().getFrame(RoleplayInteractivesFrame)
-         if not (interactiveFrame and interactiveFrame.usingInteractive):
-            playerEntity = DofusEntities.getEntity(PlayedCharacterManager().id)
-            if not playerEntity:
-               return True
-            forbiddenCellsIds = list()
-            cells = MapDisplayManager().dataMap.cells
-            dmp = DataMapProvider()
-            for i in range(8):
-               mp = ieamsg.position.getNearestCellInDirection(i)
-               if mp:
-                  cellData = cells[mp.cellId]
-                  forbidden = not cellData.mov or cellData.farmCell
-               if not forbidden:
-                  numWalkableCells = 8
-                  for j in range(8):
-                     mp2 = mp.getNearestCellInDirection(j)
-                     if mp2 and (not dmp.pointMov(mp2.x,mp2.y,True,mp.cellId) or not dmp.pointMov(mp2.x - 1,mp2.y,True,mp.cellId) and not dmp.pointMov(mp2.x,mp2.y - 1,True,mp.cellId)):
-                        numWalkableCells-=1
-                  if not numWalkableCells:
-                     forbidden = True
-               if forbidden:
-                  if not forbiddenCellsIds:
-                     forbiddenCellsIds = []
-                  forbiddenCellsIds.append(mp.cellId)
-            ieCellData = cells[ieamsg.position.cellId]
-            skills = ieamsg.interactiveElement.enabledSkills
-            minimalRange = 63
-            for skillForRange in skills:
-               skillData = Skill.getSkillById(skillForRange.skillId)
-               if skillData:
-                  if not skillData.useRangeInClient:
-                     minimalRange = 1
-                  elif skillData.range < minimalRange:
-                     minimalRange = skillData.range
-            distanceElementToPlayer = ieamsg.position.distanceToCell(playerEntity.position)
-            if distanceElementToPlayer <= minimalRange and (not ieCellData.mov or ieCellData.farmCell):
-               nearestCell = MapPoint.fromCellId(playerEntity.position.cellId)
-            else:
-               nearestCell = ieamsg.position.getNearestFreeCellInDirection(ieamsg.position.advancedOrientationTo(playerEntity.position),DataMapProvider(),True,True,False,forbiddenCellsIds)
-               if minimalRange > 1:
-                  for iRange in range(1, minimalRange):
-                     forbiddenCellsIds.append(nearestCell.cellId)
-                     nearestCell = nearestCell.getNearestFreeCellInDirection(nearestCell.advancedOrientationTo(playerEntity.position,False),DataMapProvider(),True,True,False,forbiddenCellsIds)
-                     if not nearestCell or nearestCell.cellId == playerEntity.position.cellId:
-                        iRange += 1
-            if len(skills) == 1 and SkillManager().isDoorCursorSkill(skills[0].skillId):
-               nearestCell.cellId = ieamsg.position.cellId
-               sendInteractiveUseRequest = False
-            if not nearestCell or forbiddenCellsIds.find(nearestCell.cellId) != -1:
-               nearestCell = ieamsg.position
-            if sendInteractiveUseRequest:
-               {
-                  "ie":ieamsg.interactiveElement,
-                  "skillInstanceId":ieamsg.skillInstanceId,
-                  "additionalParam":ieamsg.additionalParam
-               }
-            self.roleplayMovementFrame.resetNextMoveMapChange()
-            self.roleplayMovementFrame.askMoveTo(nearestCell)
-         return True
+      # if isinstance(msg, InteractiveElementActivationMessage):
+      #    sendInteractiveUseRequest = True
+      #    ieamsg = msg
+      #    interactiveFrame = Kernel.getWorker().getFrame(RoleplayInteractivesFrame)
+      #    if not (interactiveFrame and interactiveFrame.usingInteractive):
+      #       playerEntity = DofusEntities.getEntity(PlayedCharacterManager().id)
+      #       if not playerEntity:
+      #          return True
+      #       forbiddenCellsIds = list()
+      #       cells = MapDisplayManager().dataMap.cells
+      #       dmp = DataMapProvider()
+      #       for i in range(8):
+      #          mp = ieamsg.position.getNearestCellInDirection(i)
+      #          if mp:
+      #             cellData = cells[mp.cellId]
+      #             forbidden = not cellData.mov or cellData.farmCell
+      #          if not forbidden:
+      #             numWalkableCells = 8
+      #             for j in range(8):
+      #                mp2 = mp.getNearestCellInDirection(j)
+      #                if mp2 and (not dmp.pointMov(mp2.x,mp2.y,True,mp.cellId) or not dmp.pointMov(mp2.x - 1,mp2.y,True,mp.cellId) and not dmp.pointMov(mp2.x,mp2.y - 1,True,mp.cellId)):
+      #                   numWalkableCells-=1
+      #             if not numWalkableCells:
+      #                forbidden = True
+      #          if forbidden:
+      #             if not forbiddenCellsIds:
+      #                forbiddenCellsIds = []
+      #             forbiddenCellsIds.append(mp.cellId)
+      #       ieCellData = cells[ieamsg.position.cellId]
+      #       skills = ieamsg.interactiveElement.enabledSkills
+      #       minimalRange = 63
+      #       for skillForRange in skills:
+      #          skillData = Skill.getSkillById(skillForRange.skillId)
+      #          if skillData:
+      #             if not skillData.useRangeInClient:
+      #                minimalRange = 1
+      #             elif skillData.range < minimalRange:
+      #                minimalRange = skillData.range
+      #       distanceElementToPlayer = ieamsg.position.distanceToCell(playerEntity.position)
+      #       if distanceElementToPlayer <= minimalRange and (not ieCellData.mov or ieCellData.farmCell):
+      #          nearestCell = MapPoint.fromCellId(playerEntity.position.cellId)
+      #       else:
+      #          nearestCell = ieamsg.position.getNearestFreeCellInDirection(ieamsg.position.advancedOrientationTo(playerEntity.position),DataMapProvider(),True,True,False,forbiddenCellsIds)
+      #          if minimalRange > 1:
+      #             for iRange in range(1, minimalRange):
+      #                forbiddenCellsIds.append(nearestCell.cellId)
+      #                nearestCell = nearestCell.getNearestFreeCellInDirection(nearestCell.advancedOrientationTo(playerEntity.position,False),DataMapProvider(),True,True,False,forbiddenCellsIds)
+      #                if not nearestCell or nearestCell.cellId == playerEntity.position.cellId:
+      #                   iRange += 1
+      #       if len(skills) == 1 and SkillManager().isDoorCursorSkill(skills[0].skillId):
+      #          nearestCell.cellId = ieamsg.position.cellId
+      #          sendInteractiveUseRequest = False
+      #       if not nearestCell or forbiddenCellsIds.find(nearestCell.cellId) != -1:
+      #          nearestCell = ieamsg.position
+      #       if sendInteractiveUseRequest:
+      #          {
+      #             "ie":ieamsg.interactiveElement,
+      #             "skillInstanceId":ieamsg.skillInstanceId,
+      #             "additionalParam":ieamsg.additionalParam
+      #          }
+      #       self.roleplayMovementFrame.resetNextMoveMapChange()
+      #       self.roleplayMovementFrame.askMoveTo(nearestCell)
+      #    return True
 
       return False
 
