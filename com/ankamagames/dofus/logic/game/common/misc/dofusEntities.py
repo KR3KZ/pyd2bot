@@ -1,4 +1,4 @@
-from com.ankamagames.dofus.logic.game.common.managers.EntitiesManager import EntitiesManager
+from com.ankamagames.atouin.managers.EntitiesManager import EntitiesManager
 from com.ankamagames.dofus.logic.game.misc.IEntityLocalizer import IEntityLocalizer
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.entities.interfaces.IEntity import IEntity

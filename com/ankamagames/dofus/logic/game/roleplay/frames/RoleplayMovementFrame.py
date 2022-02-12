@@ -137,7 +137,7 @@ class RoleplayMovementFrame(Frame):
             self._isRequestingMovement = False
             pathDuration = max(1, clientMovePath.getCrossingDuration())
             logger.debug("Sending Entity movement complete in %s seconds", pathDuration)
-            Timer(pathDuration, lambda: Kernel().getWorker().processImmediately(EntityMovementCompleteMessage(movedEntity))).start()
+            Timer(1.5 * pathDuration, lambda: Kernel().getWorker().processImmediately(EntityMovementCompleteMessage(movedEntity))).start()
          return True
 
       if isinstance(msg, EntityMovementCompleteMessage):

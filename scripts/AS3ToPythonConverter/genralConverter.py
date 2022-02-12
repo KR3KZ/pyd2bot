@@ -111,6 +111,10 @@ patterns = {
     # extras only for items criterion
     "_operator": "self._operator",
     "_criterionValue": "self._criterionValue",
+    "else$$": r"else:",
+    # " as [A-Z]+\S+": "",
+    # "(\S+) is ([A-Z]+\S+)": r"isinstance(\1, \2)",
+    # "(\S+) ? (\S+) : (^[:\s]+)": r"\2 if \1 else \3",
 
 }
 SWITCH_CASE_PATTERN = r"\s*(switch\(.*\)\s*\n?\{\s*(?:.|\n)+break;\s*\n\s*(?:default:)?(?:[^}]|\n)*\})"
@@ -324,5 +328,5 @@ def parseFile(file_p, out_p):
 ROOTDIR = pathlib.Path(os.path.dirname(__file__))
 # parseFolderFiles("AS3ToPythonConverter/scripts", "AS3ToPythonConverter/connectionType")
 t = perf_counter()
-parseFile(ROOTDIR / "target.as", ROOTDIR / "QuestObjectiveItemCriterion.py")
+parseFile(ROOTDIR / "target.as", ROOTDIR / "TeamEnum.py")
 print("parsing took:", perf_counter() - t)

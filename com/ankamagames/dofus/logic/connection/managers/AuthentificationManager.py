@@ -78,11 +78,11 @@ class AuthentificationManager(metaclass=Singleton):
             'useLoginToken': False,
             'version': {
                 '__type__': 'Version',
-                'build': BuildInfos.VERSION.build,
+                'build': 15,
                 'buildType': 0,
-                'code': BuildInfos.VERSION.code,
-                'major': BuildInfos.VERSION.major,
-                'minor': BuildInfos.VERSION.minor
+                'code': 5,
+                'major': 2,
+                'minor': 62
             }
         })
         return imsg

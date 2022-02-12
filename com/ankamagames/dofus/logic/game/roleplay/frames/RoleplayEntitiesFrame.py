@@ -340,7 +340,6 @@ class RoleplayEntitiesFrame(AbstractEntitiesFrame, Frame):
         if isinstance(self._entities[entityId], 'FightTeam'):
             return self._entities[entityId].teamType
         
-        
     def addFight(self, infos:FightCommonInformations): 
         teamEntity:IEntity = None
         fightTeam:'FightTeam' = None
