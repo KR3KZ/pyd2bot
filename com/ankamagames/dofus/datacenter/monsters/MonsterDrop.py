@@ -1,5 +1,3 @@
-
-
 from com.ankamagames.dofus.datacenter.items.criterion import GroupItemCriterion
 from com.ankamagames.dofus.datacenter.items.criterion.MonsterGroupChallengeCriterion import MonsterGroupChallengeCriterion
 from typing import TYPE_CHECKING
@@ -11,7 +9,7 @@ from com.ankamagames.dofus.datacenter.monsters.Monster import Monster
 
 class MonsterDrop:
       
-   
+
    dropId:int
    
    monsterId:int

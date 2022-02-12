@@ -1,7 +1,8 @@
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.atouin.AtouinConstants import AtouinConstants
-from com.ankamagames.atouin.data.map.Cell import Cell
-from com.ankamagames.atouin.data.map.map import Map
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.atouin.data.map.Cell import Cell
 import com.ankamagames.atouin.managers.MapDisplayManager as mdmm
 from com.ankamagames.dofus.logic.game.common.managers.EntitiesManager import EntitiesManager
 from com.ankamagames.jerakine.interfaces.IObstacle import IObstacle
@@ -50,14 +51,15 @@ class DataMapProvider(IDataMapProvider, metaclass=Singleton):
         return mdmm.MapDisplayManager().currentDataMap.cells[cellId].havenbagCell
     
     def isChangeZone(self, cell1:int, cell2:int) -> bool:
-        cellData1:Cell = mdmm.MapDisplayManager().currentDataMap.cells[cell1]
-        cellData2:Cell = mdmm.MapDisplayManager().currentDataMap.cells[cell2]
+        cellData1:'Cell' = mdmm.MapDisplayManager().currentDataMap.cells[cell1]
+        cellData2:'Cell' = mdmm.MapDisplayManager().currentDataMap.cells[cell2]
         dif:int = abs(abs(cellData1.floor) - abs(cellData2.floor))
         return cellData1.moveZone != cellData2.moveZone and dif == 0
     
-    def pointMov(self, x:int, y:int, bAllowTroughEntity:bool = True, previousCellId:int = -1, endCellId:int = -1, aNoneObstacles:bool = True) -> bool:
+    def pointMov(self, x:int, y:int, bAllowTroughEntity:bool = True, previousCellId:int = -1, endCellId:int = -1, aNoneObstacles:bool = True, dataMap=None) -> bool:
         if MapPoint.isInMap(x,y):
-            dataMap:Map = mdmm.MapDisplayManager().currentDataMap
+            if not dataMap:
+                dataMap = mdmm.MapDisplayManager().currentDataMap
             useNewSystem = dataMap.isUsingNewMovementSystem
             cellId = MapTools.getCellIdByCoord(x,y)
             cellData = dataMap.cells[cellId]
@@ -84,12 +86,12 @@ class DataMapProvider(IDataMapProvider, metaclass=Singleton):
     
     def pointCanStop(self, x:int, y:int, bAllowTroughEntity:bool = True) -> bool:
         cellId:int = MapTools.getCellIdByCoord(x,y)
-        cellData:Cell = mdmm.MapDisplayManager().currentDataMap.cells[cellId]
+        cellData:'Cell' = mdmm.MapDisplayManager().currentDataMap.cells[cellId]
         return self.pointMov(x, y, bAllowTroughEntity) and (self.isInFight or not cellData.nonWalkableDuringRP)
     
     def fillEntityOnCelllist(self, v:list[bool], allowThroughEntity:bool) -> list[bool]:
-        for e in EntitiesManager().entities:
-            if isinstance(e, self._playerobject) and (not allowThroughEntity or not e.allowMovementThrough) and e.position is not None:
+        for e in EntitiesManager().entities.values():
+            if isinstance(e, self._playerobject) and (not allowThroughEntity or not e.canWalkThrough) and e.position is not None:
                 v[e.position.cellId] = True
         return v
     
@@ -103,7 +105,7 @@ class DataMapProvider(IDataMapProvider, metaclass=Singleton):
             else:
                 weight += 11 + abs(speed)
             entity = EntitiesManager().getEntityOnCell(cellId, self._playerobject)
-            if entity and not getattr(entity, "allowMovementThrough"):
+            if entity:
                 weight = 20
             else:
                 if EntitiesManager().getEntityOnCell(cellId, self._playerobject) is not None:

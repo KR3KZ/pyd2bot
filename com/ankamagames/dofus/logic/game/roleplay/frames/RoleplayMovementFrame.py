@@ -1,4 +1,5 @@
 
+from shutil import move
 from threading import Timer
 from time import sleep
 from time import perf_counter
@@ -99,11 +100,13 @@ class RoleplayMovementFrame(Frame):
       self._followingMove = None
       self._isRequestingMovement = False
       self._latestMovementRequest = 0
+      self._lastMoveEndCellId = None   
       return True
    
    def process(self, msg:Message) -> bool:
 
       if isinstance(msg, GameMapNoMovementMessage):
+         logger.debug("Map change impossible")
          self._isRequestingMovement = False
          if self._followingIe:
             self.activateSkill(self._followingIe.skillInstanceId, self._followingIe.ie, self._followingIe.additionalParam)
@@ -125,22 +128,20 @@ class RoleplayMovementFrame(Frame):
       if isinstance(msg, GameMapMovementMessage):
          gmmmsg = msg
          movedEntity = DofusEntities.getEntity(gmmmsg.actorId)
-         clientkeyMoves = MapMovementAdapter.getClientMovement(gmmmsg.keyMovements)
-         movedEntity.position.cellId = clientkeyMoves.end.cellID
+         clientMovePath = MapMovementAdapter.getClientMovement(gmmmsg.keyMovements)
+         if movedEntity:
+            movedEntity.position.cellId = clientMovePath.end.cellId
          if gmmmsg.actorId != PlayedCharacterManager().id:
-            self.applyGameMapMovement(gmmmsg.actorId, clientkeyMoves, msg)
+            self.applyGameMapMovement(gmmmsg.actorId, clientMovePath, msg)
          else:
-            logger.info("Player is moving :)")
-            self._lastPlayerValidatedPosition = clientkeyMoves.end
-            if self._lastMoveEndCellId != self._lastPlayerValidatedPosition.cellId:
-               playerEntity:AnimatedCharacter = DofusEntities.getEntity(PlayedCharacterManager().id)
-               requestedPath = Pathfinding.findPath(DataMapProvider(), playerEntity.position, self._lastPlayerValidatedPosition, not playerEntity.cantWalk8Directions, True)
-               self.applyGameMapMovement(gmmmsg.actorId, requestedPath, msg)
+            self._isRequestingMovement = False
+            pathDuration = max(1, clientMovePath.getCrossingDuration())
+            logger.debug("Sending Entity movement complete in %s seconds", pathDuration)
+            Timer(pathDuration, lambda: Kernel().getWorker().processImmediately(EntityMovementCompleteMessage(movedEntity))).start()
          return True
 
       if isinstance(msg, EntityMovementCompleteMessage):
          emcmsg = msg
-         logger.debug("EntityMovementCompleteMessage received for entinty " + str(emcmsg.entity.id))
          if emcmsg.entity.id == PlayedCharacterManager().id:
             gmmcmsg = GameMapMovementConfirmMessage()
             ConnectionsHandler.getConnection().send(gmmcmsg)
@@ -269,11 +270,14 @@ class RoleplayMovementFrame(Frame):
    def askMoveTo(self, cell:MapPoint) -> bool:
       logger.debug(f"Asking to move to cell {cell}")
       if not self._canMove or PlayedCharacterManager().state == PlayerLifeStatusEnum.STATUS_TOMBSTONE:
+         logger.debug("Can't move or dead, aborting")
          return False
       if self._isRequestingMovement:
+         logger.debug("Already requesting movement, aborting")
          return False
       now:int = perf_counter()
       if self._latestMovementRequest + self.CONSECUTIVE_MOVEMENT_DELAY > now:
+         logger.debug("Too soon to request movement, aborting")
          return False
       self._isRequestingMovement = True
       playerEntity:AnimatedCharacter = DofusEntities.getEntity(PlayedCharacterManager().id)
@@ -285,12 +289,16 @@ class RoleplayMovementFrame(Frame):
       if playerEntity.isMoving:
          playerEntity.stop()
          self._followingMove = cell
+         logger.debug("Player is already moving, waiting for him to stop")
          return False
       movePath = Pathfinding.findPath(DataMapProvider(), playerEntity.position, cell)
+      pathDuration = movePath.getCrossingDuration()
+      # logger.info('Path estimated duration is : ' + str(pathDuration))
       self.sendPath(movePath)
       return True
    
    def sendPath(self, path:MovementPath) -> None:
+      logger.info(f"Sending path {path}")
       originalPath:MovementPath = path.clone()
       if path.start.cellId == path.end.cellId:
          logger.warn(f"Discarding a movement path that begins and ends on the same cell ({path.start.cellId}).")
@@ -307,26 +315,23 @@ class RoleplayMovementFrame(Frame):
       keymoves = MapMovementAdapter.getServerMovement(path)
       gmmrmsg.init(keymoves, PlayedCharacterManager().currentMap.mapId)
       ConnectionsHandler.getConnection().send(gmmrmsg)
-      self.applyGameMapMovement(PlayedCharacterManager().id, originalPath, forceWalk)
+      logger.info(f"Sending a movement request to the server. Path length: {len(keymoves)}")
       self._latestMovementRequest = perf_counter()
    
    def applyGameMapMovement(self, actorId:float, movement:MovementPath, forceWalking:bool = False) -> None:
       movedEntity:IEntity = DofusEntities.getEntity(actorId)
       if movedEntity is None:
-         logger.warn("The entity " + actorId + " moved before it was added to the scene. Aborting movement.")
+         logger.warn(f"The entity {actorId} moved before it was added to the scene. Aborting movement.")
          return
       self._lastMoveEndCellId = movement.end.cellId
-      pathDuration = movement.getCrossingDuration()
-      logger.debug(f"Sending EntityMovementCompleteMessage with entityId {movedEntity.id} to the worker after {pathDuration} seconds.")
-      Timer(pathDuration, lambda: Kernel().getWorker().processImmediately(EntityMovementCompleteMessage(movedEntity))).start()
+      if movedEntity.id == PlayedCharacterManager().id:
+         self._isRequestingMovement = False      
 
    def askMapChange(self) -> None:
       logger.debug("Asking for a map change to map " + str(self._wantToChangeMap))
       cmmsg:ChangeMapMessage = ChangeMapMessage()
       cmmsg.init(self._wantToChangeMap, self._changeMapByAutoTrip)
       ConnectionsHandler.getConnection().send(cmmsg)
-      self._wantToChangeMap = -1
-      self._changeMapByAutoTrip = False
    
    def activateSkill(self, skillInstanceId:int, ie:InteractiveElement, additionalParam:int) -> None:
       iurmsg:InteractiveUseRequestMessage = None

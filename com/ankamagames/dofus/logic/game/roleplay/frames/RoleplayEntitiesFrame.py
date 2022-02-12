@@ -1,3 +1,4 @@
+import random
 from timeit import Timer
 from com.ankamagames.atouin.managers.MapDisplayManager import MapDisplayManager
 from com.ankamagames.atouin.messages.MapLoadedMessage import MapLoadedMessage
@@ -12,11 +13,14 @@ from com.ankamagames.dofus.logic.game.common.managers.TimerManager import TimeMa
 import com.ankamagames.dofus.logic.game.roleplay.frames.RoleplayContextFrame as rcf
 from com.ankamagames.dofus.logic.game.roleplay.messages.CharacterMovementStoppedMessage import CharacterMovementStoppedMessage
 from com.ankamagames.dofus.logic.game.roleplay.messages.DelayedActionMessage import DelayedActionMessage
+from com.ankamagames.dofus.logic.game.roleplay.types.Fight import Fight
 from com.ankamagames.dofus.network.enums.MapObstacleStateEnum import MapObstacleStateEnum
 from com.ankamagames.dofus.network.messages.game.context.roleplay.MapComplementaryInformationsDataInHavenBagMessage import MapComplementaryInformationsDataInHavenBagMessage
 from com.ankamagames.dofus.network.messages.game.context.roleplay.MapComplementaryInformationsWithCoordsMessage import MapComplementaryInformationsWithCoordsMessage
 from com.ankamagames.dofus.network.messages.game.context.roleplay.anomaly.MapComplementaryInformationsAnomalyMessage import MapComplementaryInformationsAnomalyMessage
 from com.ankamagames.dofus.network.messages.game.interactive.InteractiveUsedMessage import InteractiveUsedMessage
+from com.ankamagames.dofus.network.types.game.context.fight.FightCommonInformations import FightCommonInformations
+from com.ankamagames.dofus.network.types.game.context.fight.FightTeamInformations import FightTeamInformations
 from com.ankamagames.dofus.network.types.game.context.roleplay.GameRolePlayCharacterInformations import GameRolePlayCharacterInformations
 from com.ankamagames.dofus.network.types.game.context.roleplay.GameRolePlayGroupMonsterInformations import GameRolePlayGroupMonsterInformations
 from com.ankamagames.dofus.logic.game.common.frames.AbstractEntitiesFrame import AbstractEntitiesFrame
@@ -31,12 +35,11 @@ from com.ankamagames.dofus.network.types.game.context.roleplay.HumanOptionObject
 from com.ankamagames.dofus.network.types.game.context.roleplay.HumanOptionSkillUse import HumanOptionSkillUse
 from com.ankamagames.dofus.network.types.game.interactive.InteractiveElement import InteractiveElement
 from com.ankamagames.dofus.types.entities.AnimatedCharacter import AnimatedCharacter
+from com.ankamagames.jerakine.entities.interfaces.IEntity import IEntity
 from com.ankamagames.jerakine.messages.Frame import Frame
 from com.ankamagames.jerakine.messages.Message import Message
 from pyd2bot.events.BotEventsManager import BotEventsManager
-from typing import TYPE_CHECKING
-if TYPE_CHECKING:
-    from com.ankamagames.dofus.logic.game.roleplay.types.FightTeam import FightTeam
+from com.ankamagames.dofus.logic.game.roleplay.types.FightTeam import FightTeam
 
 
 
@@ -129,7 +132,7 @@ class RoleplayEntitiesFrame(AbstractEntitiesFrame, Frame):
                 mirmsg.init(mapId_=MapDisplayManager().currentMapPoint.mapId)
                 ConnectionsHandler.getConnection().send(mirmsg, connexion)
                 self._waitForMap = False
-            return False
+            return True
         
         if isinstance(msg, MapComplementaryInformationsDataMessage):
             mcidmsg = msg
@@ -336,3 +339,19 @@ class RoleplayEntitiesFrame(AbstractEntitiesFrame, Frame):
     def getFightTeamType(self, entityId:int) -> int:
         if isinstance(self._entities[entityId], 'FightTeam'):
             return self._entities[entityId].teamType
+        
+        
+    def addFight(self, infos:FightCommonInformations): 
+        teamEntity:IEntity = None
+        fightTeam:'FightTeam' = None
+        if self._fights.get(infos.fightId):
+            return
+        teams = list['FightTeam']()
+        fight:Fight = Fight(infos.fightId,teams);
+        teamCounter:int = 0
+        for team in infos.fightTeams:
+            fightTeam = FightTeam(fight, team.teamTypeId, teamEntity, team, infos.fightTeamsOptions[team.teamId])
+            self.registerActorWithId(fightTeam, teamEntity.id)
+            teams.push(fightTeam)
+            teamCounter += 1
+        self._fights[infos.fightId] = fight

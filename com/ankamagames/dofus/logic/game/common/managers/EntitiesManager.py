@@ -54,7 +54,7 @@ class EntitiesManager(metaclass=Singleton):
          ts.visible = visible
 
    @property
-   def entities(self) -> list:
+   def entities(self) -> dict[int, 'IEntity']:
       return self._entities
 
    def entitiesScheduledForDestruction(self) -> list:

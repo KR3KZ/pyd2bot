@@ -30,7 +30,7 @@ logger = Logger(__name__)
 
 class ServerConnection(IServerConnection):
 
-   DEBUG_VERBOSE:bool = False
+   DEBUG_VERBOSE:bool = True
 
    LOG_ENCODED_CLIENT_MESSAGES:bool = False
 

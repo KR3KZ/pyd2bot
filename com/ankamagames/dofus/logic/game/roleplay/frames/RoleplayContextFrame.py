@@ -70,11 +70,10 @@ class RoleplayContextFrame(Frame):
                 wp = WorldPointWrapper(mcmsg.mapId, True, PlayedCharacterManager().currentMap.outdoorX, PlayedCharacterManager().currentMap.outdoorY)
             else:
                 wp = WorldPointWrapper(int(mcmsg.mapId))
-
             if PlayedCharacterManager().currentMap:
                 self._previousMapId = PlayedCharacterManager().currentMap.mapId
-
             PlayedCharacterManager().currentMap = wp
+            self._roleplayEntitiesFrame._waitForMap = True
             MapDisplayManager().loadMap(int(mcmsg.mapId))
             return True
 
@@ -85,7 +84,7 @@ class RoleplayContextFrame(Frame):
                 Kernel().getWorker().addFrame(self._movementFrame)
             if not Kernel().getWorker().contains(rplWF.RoleplayWorldFrame):
                 Kernel().getWorker().addFrame(self._worldFrame)
-            return True
+            return False
 
         elif isinstance(msg, GameContextDestroyMessage):
             Kernel().getWorker().removeFrame(self)

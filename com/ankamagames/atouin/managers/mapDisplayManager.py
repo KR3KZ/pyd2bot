@@ -4,7 +4,6 @@ from com.ankamagames.jerakine.logger.Logger import Logger
 from time import perf_counter
 import com.ankamagames.atouin.utils.DataMapProvider as dmpm
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
-from com.ankamagames.jerakine.resources.loaders.MapLoader import MapLoader
 from com.ankamagames.jerakine.types.positions.worldPoint import WorldPoint
 logger = Logger(__name__)
 
@@ -19,6 +18,7 @@ class MapDisplayManager(metaclass=Singleton):
    _nMapLoadEnd:int
 
    def __init__(self) -> None:
+      from com.ankamagames.jerakine.resources.loaders.MapLoader import MapLoader
       self._loader = MapLoader()
       self._currentMap = None
       self.currentDataMap = None
@@ -58,7 +58,7 @@ class MapDisplayManager(metaclass=Singleton):
       self._nMapLoadStart = perf_counter()
       map = self._loader.load(mapId)
       self._nMapLoadEnd = perf_counter()
-      # logger.debug("Map loaded in " + str(self._nMapLoadEnd - self._nMapLoadStart) + " seconds")
+      logger.debug("Map loaded in " + str(self._nMapLoadEnd - self._nMapLoadStart) + " seconds")
       dmpm.DataMapProvider().resetUpdatedCell()
       dmpm.DataMapProvider().resetSpecialEffects()
       self.currentDataMap = map

@@ -1,6 +1,8 @@
 from logging import Logger
 import random
 from typing import TYPE_CHECKING
+from com.ankamagames.atouin.utils.DataMapProvider import DataMapProvider
+from com.ankamagames.jerakine.types.positions.MapPoint import MapPoint
 if TYPE_CHECKING:
     from com.ankamagames.atouin.data.map.Cell import Cell
     from com.ankamagames.atouin.data.map.map import Map
@@ -37,7 +39,7 @@ class Zone(dict[int, 'Cell']):
 
 class MapZones(list[Zone]):
     
-    def __init__(self, map:'Map'):
+    def __init__(self, dataMap:'Map'):
         super().__init__()
         seen = set['Cell']()
         def conxComponent(cellId) -> dict[int, 'Cell']:
@@ -46,12 +48,15 @@ class MapZones(list[Zone]):
             while nodes:
                 cell = nodes.pop()
                 seen.add(cell)
-                nodes |= map.getCellNeighbours(cell.id) - seen
+                nodes |= dataMap.getCellNeighbours(cell.id) - seen
                 ret[cell.id] = cell
             return ret
-        for cell in map.cells.values():
+        for cell in dataMap.cells.values():
             if cell not in seen:
-                self.append(Zone(map, conxComponent(cell)))
+                if cell.isAccessibleDuringRP():
+                    self.append(Zone(dataMap, conxComponent(cell)))
+                else:
+                    seen.add(cell)
     
     def inSameZone(self, cellId1:int, cellId2:int) -> bool: 
         return self.getZone(cellId1) == self.getZone(cellId2)		

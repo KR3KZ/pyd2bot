@@ -1,5 +1,6 @@
 from pathlib import Path
 import json
+import random
 from com.ankamagames.atouin.managers.FrustumManager import FrustumManager
 from com.ankamagames.dofus import Constants
 import com.ankamagames.dofus.kernel.Kernel as krnl
@@ -73,8 +74,8 @@ class TestBot:
 
     def onMapComplementaryDataLoaded(self, e:ResourceLoadedEvent):
         logger.info(f"Bot is currently in the map {PlayedCharacterManager().currentMap.mapId}")
-        FrustumManager.changeMapToDirection(DirectionsEnum.DOWN)
-
+        FrustumManager.randomMapChange()
+        
 
 if __name__ == "__main__":
     bot = TestBot()

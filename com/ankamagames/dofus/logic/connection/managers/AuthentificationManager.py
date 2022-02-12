@@ -1,5 +1,6 @@
 from argparse import ArgumentError
 import os
+from com.ankamagames.dofus.BuildInfos import BuildInfos
 from com.ankamagames.dofus.network.messages.connection.IdentificationMessage import IdentificationMessage
 from com.ankamagames.dofus.network.types.version.Version import Version
 from com.ankamagames.jerakine.logger.Logger import Logger
@@ -65,16 +66,6 @@ class AuthentificationManager(metaclass=Singleton):
         self._password = password
 
     def getIdentificationMessage(self) -> IdentificationMessage:
-
-
-        version = Version()
-        version.init(
-            build_=11,
-            buildType_=0,
-            code_=5,
-            major_=2,
-            minor_=62
-        )
         imsg = NetworkMessage.from_json({
             '__type__': 'IdentificationMessage',
             'autoconnect': False,
@@ -87,11 +78,11 @@ class AuthentificationManager(metaclass=Singleton):
             'useLoginToken': False,
             'version': {
                 '__type__': 'Version',
-                'build': 13,
+                'build': BuildInfos.VERSION.build,
                 'buildType': 0,
-                'code': 5,
-                'major': 2,
-                'minor': 62
+                'code': BuildInfos.VERSION.code,
+                'major': BuildInfos.VERSION.major,
+                'minor': BuildInfos.VERSION.minor
             }
         })
         return imsg

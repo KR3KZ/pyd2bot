@@ -1,6 +1,8 @@
 
 import math
 
+from com.ankamagames.jerakine.types.enums.DirectionsEnum import DirectionsEnum
+
 
 class Point:
     def __init__(self, x=None, y=None):    
@@ -61,6 +63,7 @@ class MapPoint:
         mp = cls()
         mp._nX = x
         mp._nY = y
+        mp.setFromCoords()
         return mp
 
     @staticmethod
@@ -88,10 +91,10 @@ class MapPoint:
             i2-=1
     
     @property
-    def cellID(self) -> int:
+    def cellId(self) -> int:
         return self._nCellId
 
-    @cellID.setter
+    @cellId.setter
     def cellId(self, i:int):
         if not type(i) == int:
             raise TypeError("cellId must be an int")
@@ -125,36 +128,36 @@ class MapPoint:
     def distanceToCell(self, mp:'MapPoint'):
         return abs(self.y - mp.y) + abs(self.y - mp.y)
     
-    def orientationTo(self, mp:'MapPoint'):
+    def orientationTo(self, mp:'MapPoint') -> DirectionsEnum:
         if self._nX == mp._nX and self._nY == mp._nY:
-            return 1
+            return DirectionsEnum.DOWN_RIGHT
         p = Point()
         p.x = 1 if mp._nX > self._nX else (-1 if mp._nX < self._nX else 0)
         p.y = 1 if mp._nY > self._nY else (-1 if mp._nY < self._nY else 0)
-        nb = 0
+        nb = DirectionsEnum.RIGHT
         if p.x == self.VECTOR_RIGHT.x and p.y == self.VECTOR_RIGHT.y:
-            nb = self.RIGHT
+            nb = DirectionsEnum.RIGHT
             
         elif p.x == self.VECTOR_DOWN_RIGHT.x and p.y == self.VECTOR_DOWN_RIGHT.y:
-            nb = self.DOWN_RIGHT
+            nb = DirectionsEnum.DOWN_RIGHT
             
         elif p.x == self.VECTOR_DOWN.x and p.y == self.VECTOR_DOWN.y:
-            nb = self.DOWN
+            nb = DirectionsEnum.DOWN
             
         elif p.x == self.VECTOR_DOWN_LEFT.x and p.y == self.VECTOR_DOWN_LEFT.y:
-            nb = self.DOWN_LEFT
+            nb = DirectionsEnum.DOWN_LEFT
             
         elif p.x == self.VECTOR_LEFT.x and p.y == self.VECTOR_LEFT.y:
-            nb = self.LEFT
+            nb = DirectionsEnum.LEFT
             
         elif p.x == self.VECTOR_UP_LEFT.x and p.y == self.VECTOR_UP_LEFT.y:
-            nb = self.UP_LEFT
+            nb = DirectionsEnum.UP_LEFT
             
         elif p.x == self.VECTOR_UP.x and p.y == self.VECTOR_UP.y:
-            nb = self.UP
+            nb = DirectionsEnum.UP
             
         elif p.x == self.VECTOR_UP_RIGHT.x and p.y == self.VECTOR_UP_RIGHT.y:
-            nb = self.UP_RIGHT
+            nb = DirectionsEnum.UP_RIGHT
         return nb
         
     def advancedOrientationTo(self, mp:'MapPoint', b:bool) -> int:
@@ -182,7 +185,7 @@ class MapPoint:
         return self._nCellId == mp._nCellId 
 
     def __str__(self): 
-        return f"MapPoint(x: {self.x}, y: {self.y}, id: {self.cellID})"
+        return f"MapPoint(x: {self.x}, y: {self.y}, id: {self.cellId})"
 
     def __hash__(self) -> int:
         return self._nCellId

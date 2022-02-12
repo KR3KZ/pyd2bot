@@ -7,6 +7,7 @@ from com.ankamagames.dofus.logic.connection.managers.AuthentificationManager imp
 from com.ankamagames.dofus.logic.common.managers.InterClientManager import InterClientManager
 from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerManager
 from com.ankamagames.dofus.logic.connection.frames.DisconnectionHandlerFrame import DisconnectionHandlerFrame
+from com.ankamagames.dofus.network.enums.IdentificationFailureReasonsEnum import IdentificationFailureReasonEnum
 from com.ankamagames.dofus.network.messages.connection.HelloConnectMessage import HelloConnectMessage
 from com.ankamagames.dofus.network.messages.connection.IdentificationAccountForceMessage import IdentificationAccountForceMessage
 from com.ankamagames.dofus.network.messages.connection.IdentificationFailedMessage import IdentificationFailedMessage
@@ -34,7 +35,7 @@ class AuthentificationFrame(Frame):
    
    _connexionHosts:list = []
          
-   _dispatchModuleHook:bool
+   _dispatchModuleHook:bool = False
    
    _connexionSequence:list
    
@@ -116,6 +117,7 @@ class AuthentificationFrame(Frame):
             return True
 
          elif isinstance(msg, IdentificationFailedMessage):
+            logger.info("Identification failed for reason " + IdentificationFailureReasonEnum(msg.reason).name)
             PlayerManager().destroy()
             connh.ConnectionsHandler.closeConnection()
             if not self._dispatchModuleHook:

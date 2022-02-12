@@ -17,3 +17,7 @@ class DirectionsEnum(Enum):
    UP:int = 6
    
    UP_RIGHT:int = 7
+
+   @classmethod
+   def getMapChangeDirections(cls):
+      return [cls.RIGHT, cls.DOWN, cls.LEFT, cls.UP]

@@ -1,11 +1,9 @@
 from time import sleep
-from com.ankamagames.atouin.utils.DataMapProvider import DataMapProvider
 from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManager
 from com.ankamagames.dofus.logic.connection.managers.AuthentificationManager import AuthentificationManager
 from com.ankamagames.dofus.logic.game.fight.managers.FightersStateManager import FightersStateManager
 import com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager as pc
 from com.ankamagames.dofus.network.Metadata import Metadata
-from com.ankamagames.dofus.types.entities.AnimatedCharacter import AnimatedCharacter
 from com.ankamagames.jerakine.network.messages.Worker import Worker
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 from com.ankamagames.jerakine.utils.displays.FrameIdManager import FrameIdManager
@@ -31,10 +29,6 @@ class Kernel(metaclass=Singleton):
       self._worker.clear()
       self.addInitialFrames(True)
       logger.info(f"Using protocole #{Metadata.PROTOCOL_BUILD}, built on {Metadata.PROTOCOL_DATE}")
-
-   def postInit(self) -> None:
-      DataMapProvider.init(AnimatedCharacter)
-      WorldPathFinder.init()
 
    def reset(self, messagesToDispatchAfter:list = None, autoRetry:bool = False, reloadData:bool = False) -> None:
       import com.ankamagames.dofus.logic.game.fight.managers.CurrentPlayedFighterManager as cpfm

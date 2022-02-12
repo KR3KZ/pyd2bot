@@ -33,9 +33,6 @@ class MapMovementAdapter:
    
    @classmethod
    def getClientMovement(cls, path:list[int]) -> MovementPath:
-      previousElement:PathElement = None
-      movStr = None
-      movElement:PathElement = None
       mp:MovementPath = MovementPath()
       moveCount:int = 0
       for movement in path:
@@ -48,6 +45,7 @@ class MapMovementAdapter:
             previousElement.orientation = previousElement.step.orientationTo(pe.step)
          if moveCount == len(path) - 1:
             mp.end = destination
+            break
          mp.addPoint(pe)
          previousElement = pe
          moveCount += 1

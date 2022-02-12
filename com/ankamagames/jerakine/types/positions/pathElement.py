@@ -5,13 +5,16 @@ from com.ankamagames.jerakine.types.positions.MapPoint import MapPoint
 
 class PathElement:
 
-    def __init__(self, mp:MapPoint=None, orientation:int=None): 
+    def __init__(self, mp:MapPoint=None, orientation:int=0): 
         if mp is None:
             self.step = MapPoint()
         else:
             self.step = mp
         self._nOrientation = orientation
-        self.cellId = self.step.cellID
+    
+    @property
+    def cellId(self):
+        return self.step.cellId
     
     @property
     def orientation(self) -> int:

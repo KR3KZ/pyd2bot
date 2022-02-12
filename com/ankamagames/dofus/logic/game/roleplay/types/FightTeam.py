@@ -1,5 +1,7 @@
 from com.ankamagames.dofus.kernel.Kernel import Kernel
-from com.ankamagames.dofus.logic.game.roleplay.types.Fight import Fight
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+   from com.ankamagames.dofus.logic.game.roleplay.types.Fight import Fight
 from com.ankamagames.dofus.network.enums.FightOptionsEnum import FightOptionsEnum
 from com.ankamagames.dofus.network.types.game.context.GameContextActorInformations import GameContextActorInformations
 from com.ankamagames.dofus.network.types.game.context.fight.FightOptionsInformations import FightOptionsInformations
@@ -15,7 +17,7 @@ class FightTeam(GameContextActorInformations):
    logger = Logger(__name__)
    
    
-   fight:Fight
+   fight:'Fight'
    
    teamType:int
    
@@ -25,7 +27,7 @@ class FightTeam(GameContextActorInformations):
    
    teamOptions:list
    
-   def __init__(self, fight:Fight, teamType:int, teamEntity:IEntity, teamInfos:FightTeamInformations, teamOptions:FightOptionsInformations):
+   def __init__(self, fight:'Fight', teamType:int, teamEntity:IEntity, teamInfos:FightTeamInformations, teamOptions:FightOptionsInformations):
       super().__init__()
       self.fight = fight
       self.teamType = teamType
