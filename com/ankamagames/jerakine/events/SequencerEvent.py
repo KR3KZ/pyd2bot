@@ -6,9 +6,9 @@ from com.ankamagames.jerakine.sequencer.ISequencer import ISequencer
 
 
 class SequencerEvent(Event):
-   
+       
    SEQUENCE_END:str = "onSequenceEnd"
-   
+
    SEQUENCE_STEP_START:str = "SEQUENCE_STEP_START"
    
    SEQUENCE_STEP_FINISH:str = "SEQUENCE_STEP_FINISH"

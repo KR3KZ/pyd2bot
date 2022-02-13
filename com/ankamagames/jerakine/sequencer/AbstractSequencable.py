@@ -77,7 +77,7 @@ class AbstractSequencable(IPausableSequencable):
    
    def executeCallbacks(self) -> None:
       listener:ISequencableListener = None
-      FightProfiler().stop()
+      # FightProfiler().stop()
       if self._timeOut:
          self._timeOut.cancel()
          self._timeOut = None

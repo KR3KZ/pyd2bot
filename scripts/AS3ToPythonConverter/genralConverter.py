@@ -120,7 +120,7 @@ patterns = {
 SWITCH_CASE_PATTERN = r"\s*(switch\(.*\)\s*\n?\{\s*(?:.|\n)+break;\s*\n\s*(?:default:)?(?:[^}]|\n)*\})"
 CASE_PATTERN1 = "(?P<spaces>\s*)case (?P<testvar>\S+) is (?P<testvalue>\S+):"
 CASE_PATTERN2 = "(?P<spaces>\s*)case (?P<testvalue>\S+):"
-
+INDENT_SIZE = 4
 
 def processCaseBlock(block, case_pattern, testvar=None):
     blockLines = block.split("\n")
@@ -149,12 +149,12 @@ def processCaseBlock(block, case_pattern, testvar=None):
                 if firstCase:
                     resLines.append(tab_size + f"{op} isinstance({m.group('testvar')}, {m.group('testvalue')}):")
                 else:
-                    resLines.append(tab_size[3:] + f"{op} isinstance({m.group('testvar')}, {m.group('testvalue')}):")
+                    resLines.append(tab_size[INDENT_SIZE:] + f"{op} isinstance({m.group('testvar')}, {m.group('testvalue')}):")
             elif case_pattern == CASE_PATTERN2:
                 if firstCase:
                     resLines.append(tab_size + f"{op} {testvar} == {m.group('testvalue')}:")
                 else:
-                    resLines.append(tab_size[3:] + f"{op} {testvar} == {m.group('testvalue')}:")
+                    resLines.append(tab_size[INDENT_SIZE:] + f"{op} {testvar} == {m.group('testvalue')}:")
             continue
         if "break;" in line:
             continue
@@ -214,7 +214,7 @@ def deleteFirstTwoSpaces(code):
     r = []
     for line in lines:
         if line.startswith("  "):
-            line = line[3:]
+            line = line[INDENT_SIZE:]
         r.append(line)
     return "\n".join(r)
 
@@ -243,7 +243,7 @@ def handleIndent(code):
                 inClass = True
         else:
             spaceCount = sum(1 for _ in itertools.takewhile(str.isspace, line))
-            line = (spaceCount // indentSize) * 3 * ' ' + line[spaceCount:]
+            line = (spaceCount // indentSize) * INDENT_SIZE * ' ' + line[spaceCount:]
         r.append(line)
     return "\n".join(r)
 
@@ -281,14 +281,14 @@ def postSwitchCaseProcess(code):
 
         m = re.match('(\s*)case\s+(\S+)\s+is\s+(.*)\s*\:\s*\n?', line)
         if m:
-            blockIndent = m.group(1)[3:]
+            blockIndent = m.group(1)[INDENT_SIZE:]
             line = f"{blockIndent}if isinstance({m.group(2)}, {m.group(3)}):"
             res.append(line)
             continue
 
         m = re.match("(\s*)case\s+(\S+)\s*:\s*\n?", line, flags=re.M)
         if m:
-            blockIndent = m.group(1)[3:]
+            blockIndent = m.group(1)[INDENT_SIZE:]
             line = f"{blockIndent}if {testvar}  == {m.group(2)}:"
             res.append(line)
             continue
@@ -328,5 +328,5 @@ def parseFile(file_p, out_p):
 ROOTDIR = pathlib.Path(os.path.dirname(__file__))
 # parseFolderFiles("AS3ToPythonConverter/scripts", "AS3ToPythonConverter/connectionType")
 t = perf_counter()
-parseFile(ROOTDIR / "target.as", ROOTDIR / "AbstractSequencable.py")
+parseFile(ROOTDIR / "target.as", ROOTDIR / "FightSequenceFrame.py")
 print("parsing took:", perf_counter() - t)

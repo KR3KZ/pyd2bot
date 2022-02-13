@@ -8,7 +8,7 @@ from com.ankamagames.jerakine.sequencer.ISequencable import ISequencable
 from com.ankamagames.jerakine.sequencer.ISequencer import ISequencer
 from com.ankamagames.jerakine.sequencer.ISubSequenceSequencable import ISubSequenceSequencable
 from com.ankamagames.jerakine.utils.display.EnterFrameDispatcher import EnterFrameDispatcher
-from scripts.AS3ToPythonConverter.AbstractSequencable import AbstractSequencable
+from com.ankamagames.jerakine.sequencer.AbstractSequencable import AbstractSequencable
 logger = Logger(__name__)
 
 
@@ -134,7 +134,7 @@ class SerialSequencer(EventDispatcher, ISequencer):
       self._currentStep = self._aStep.pop(0)
       if not self._currentStep:
          return
-      FightProfiler().start()
+      # FightProfiler().start()
       self._currentStep.addListener(self)
       try:
          if isinstance(self._currentStep, ISubSequenceSequencable):
