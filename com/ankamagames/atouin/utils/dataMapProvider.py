@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from com.ankamagames.atouin.data.map.Cell import Cell
 import com.ankamagames.atouin.managers.MapDisplayManager as mdmm
-from com.ankamagames.dofus.logic.game.common.managers.EntitiesManager import EntitiesManager
+from com.ankamagames.atouin.managers.EntitiesManager import EntitiesManager
 from com.ankamagames.jerakine.interfaces.IObstacle import IObstacle
 from com.ankamagames.jerakine.map.IDataMapProvider import IDataMapProvider
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton

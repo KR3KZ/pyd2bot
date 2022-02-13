@@ -33,8 +33,8 @@ patterns = {
     "^(.*){(.*)\n?": "",
     "^(.*)}(.*)\n?": "",
     ":\*": "",
-    "null": "None",
-    "Number": "float",
+    " = null": " = None",
+    "\:Number": ":float",
     "([\s|[|<])String([\s|]|>])": r"\1str\2",
     "void": "None",
     "Array": "list",
@@ -328,5 +328,5 @@ def parseFile(file_p, out_p):
 ROOTDIR = pathlib.Path(os.path.dirname(__file__))
 # parseFolderFiles("AS3ToPythonConverter/scripts", "AS3ToPythonConverter/connectionType")
 t = perf_counter()
-parseFile(ROOTDIR / "target.as", ROOTDIR / "TeamEnum.py")
+parseFile(ROOTDIR / "target.as", ROOTDIR / "BasicBuff.py")
 print("parsing took:", perf_counter() - t)

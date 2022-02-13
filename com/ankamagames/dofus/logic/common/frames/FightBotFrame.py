@@ -191,17 +191,17 @@ class FightBotFrame(Frame, metaclass=Singleton):
          return
       mapPos:MapPosition = self._mapPos[int(random.random() * len(self._mapPos))]
       aqcmsg:AdminQuietCommandMessage = AdminQuietCommandMessage()
-      aqcmsg.initAdminQuietCommandMessage("moveto " + mapPos.id)
+      aqcmsg.init("moveto " + mapPos.id)
       ConnectionsHandler.getConnection().send(aqcmsg)
-      self._actionTimer.reset()
+      self._actionTimer.cancel()
       self._actionTimer.start()
    
    def fakeActivity(self) -> None:
       if not self._enabled:
          return
-      setTimeout(self.fakeActivity,1000 * 60 * 5)
+      setTimeout(self.fakeActivity, 60 * 5)
       bpmgs:BasicPingMessage = BasicPingMessage()
-      bpmgs.initBasicPingMessage(False)
+      bpmgs.init(False)
       ConnectionsHandler.getConnection().send(bpmgs, ConnectionType.TO_ALL_SERVERS)
    
    def randomWalk(self) -> None:
@@ -231,7 +231,7 @@ class FightBotFrame(Frame, metaclass=Singleton):
          self.nextTurnAction()
          return
       ccmsg:CellClickMessage = CellClickMessage()
-      ccmsg.cell = MapPoint.fromCellId(reachableCells.reachableCells[math.floor(len(reachableCells.reachableCells) * Math.random())])
+      ccmsg.cell = MapPoint.fromCellId(reachableCells.reachableCells[math.floor(len(reachableCells.reachableCells) * random.random())])
       ccmsg.cellId = ccmsg.cell.cellId
       ccmsg.id = MapDisplayManager().currentMapPoint.mapId
       Kernel.getWorker().process(ccmsg)
@@ -239,17 +239,13 @@ class FightBotFrame(Frame, metaclass=Singleton):
    def randomOver(self, *foo) -> None:
       e:IEntity = None
       entity:IInteractive = None
-      ui:UiRootContainer = None
-      emomsg2:EntityMouseOutMessage = None
-      elem:GraphicContainer = None
-      momsg2:MouseOutMessage = None
       if self._wait:
          return
       avaibleEntities:list = []
       for e in EntitiesManager().entities:
          if isinstance(e, IInteractive):
             avaibleEntities.append(e)
-      entity = avaibleEntities[math.floor(len(avaibleEntities) * Math.random())]
+      entity = avaibleEntities[math.floor(len(avaibleEntities) * random.random())]
       if not entity:
          return
       if self._lastEntityOver:
@@ -284,10 +280,10 @@ class FightBotFrame(Frame, metaclass=Singleton):
       else:
          avaibleCells = []
          for entity in FightEntitiesFrame.getCurrentInstance().entities:
-            if entity.contextualId < 0 and entity is GameFightMonsterInformations:
-               monster = entity as GameFightMonsterInformations
+            if entity.contextualId < 0 and isinstance(entity, GameFightMonsterInformations):
+               monster = entity
                if monster.spawnInfo.alive:
                   avaibleCells.append(entity.disposition.cellId)
-         cellId = avaibleCells[math.floor(len(avaibleCells) * Math.random())]
-      gafcrmsg.initGameActionFightCastRequestMessage(spellId,cellId)
+         cellId = avaibleCells[math.floor(len(avaibleCells) * random.random())]
+      gafcrmsg.init(spellId, cellId)
       ConnectionsHandler.getConnection().send(gafcrmsg)
