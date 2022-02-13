@@ -13,6 +13,7 @@ from com.ankamagames.dofus.kernel.net.ConnectionsHandler import ConnectionsHandl
 from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerManager
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
 from com.ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEntities
+from com.ankamagames.dofus.logic.game.fight.frames.FightBattleFrame import FightBattleFrame
 from com.ankamagames.dofus.logic.game.fight.frames.FightEntitiesFrame import FightEntitiesFrame
 from com.ankamagames.dofus.logic.game.fight.frames.FightPreparationFrame import FightPreparationFrame
 from com.ankamagames.dofus.logic.game.fight.managers.CurrentPlayedFighterManager import CurrentPlayedFighterManager
@@ -411,7 +412,6 @@ class FightContextFrame(Frame):
          self._entitiesFrame.removeSwords()
          CurrentPlayedFighterManager().getSpellCastManager().resetInitialCooldown()
          Kernel().getWorker().addFrame(self._battleFrame)
-         
          if PlayerManager().kisServerPort > 0:
             if ExternalNotificationManager().canAddExternalNotification(ExternalNotificationTypeEnum.KOLO_START):
                pass
@@ -421,59 +421,6 @@ class FightContextFrame(Frame):
          
       if isinstance(msg, GameContextDestroyMessage):
          Kernel().getWorker().removeFrame(self)
-         return True
-         
-      if isinstance(msg, CellOverMessage):
-         conmsg = msg
-         fscf = Kernel().getWorker().getFrame(FightSpellCastFrame)
-         if entity is AnimatedCharacter and not entity:
-            if not (fscf != None and fscf.isTeleportationPreviewEntity(entity.id)):
-               cellEntity = entity
-         currentCell = conmsg.cellId
-         if cellEntity:
-            self.overEntity(cellEntity.id)
-         mcm = MarkedCellsManager()
-         portalOnThisCell = mcm.getMarkAtCellId(conmsg.cellId,GameActionMarkTypeEnum.PORTAL)
-         if portalOnThisCell:
-            for mi in mcm.getMarks(portalOnThisCell.markType,portalOnThisCell.teamId,False):
-               glyph = mcm.getGlyph(mi.markId)
-               if glyph and glyph.lbl_number:
-                  glyph.lbl_number.visible = True
-            if portalOnThisCell.active and mcm.getActivePortalsCount(portalOnThisCell.teamId) >= 2:
-               mpWithPortals = mcm.getMarksMapPoint(GameActionMarkTypeEnum.PORTAL,portalOnThisCell.teamId)
-               links = LinkedCellsManager().getLinks(MapPoint.fromCellId(conmsg.cellId),mpWithPortals)
-               if links:
-                  LinkedCellsManager().drawPortalLinks(links)
-         return True
-         
-      if isinstance(msg, CellOutMessage):
-         coutMsg = msg
-         for entity2 in EntitiesManager().getEntitiesOnCell(coutMsg.cellId):
-            if isinstance(entity2, AnimatedCharacter):
-               cellEntity2 = entity2 
-         currentCell = -1
-         if cellEntity2:
-            self.outEntity(cellEntity2.id)
-         mcmOut = MarkedCellsManager()
-         portalOnThisCellOut = mcmOut.getMarkAtCellId(coutMsg.cellId,GameActionMarkTypeEnum.PORTAL)
-         if portalOnThisCellOut:
-            for miOut in mcmOut.getMarks(portalOnThisCellOut.markType,portalOnThisCellOut.teamId,False):
-               glyphOut = mcmOut.getGlyph(miOut.markId)
-               if glyphOut and glyphOut.lbl_number:
-                  glyphOut.lbl_number.visible = False
-         LinkedCellsManager().clearLinks()
-         return True
-         
-      if isinstance(msg, EntityMouseOverMessage):
-         emovmsg = msg
-         currentCell = emovmsg.entity.position.cellId
-         self.overEntity(emovmsg.entity.id)
-         return True
-         
-      if isinstance(msg, EntityMouseOutMessage):
-         emomsg = msg
-         currentCell = -1
-         self.outEntity(emomsg.entity.id)
          return True
          
       if isinstance(msg, GameFightLeaveMessage):

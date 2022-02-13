@@ -1,38 +1,28 @@
 from typing import Any
-from com.ankama.dofus.enums.ActionIds import ActionIds
 from com.ankamagames.dofus.datacenter.effects.EffectInstance import EffectInstance
 from com.ankamagames.dofus.datacenter.effects.instances.EffectInstanceDice import EffectInstanceDice
 from com.ankamagames.dofus.datacenter.effects.instances.EffectInstanceInteger import EffectInstanceInteger
 from com.ankamagames.dofus.datacenter.spells.SpellLevel import SpellLevel
+from com.ankamagames.dofus.enums.ActionIds import ActionIds
 from com.ankamagames.dofus.kernel.Kernel import Kernel
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
-from com.ankamagames.dofus.logic.game.fight.frames.FightBattleFrame import FightBattleFrame
 from com.ankamagames.dofus.logic.game.fight.frames.FightEntitiesFrame import FightEntitiesFrame
 from com.ankamagames.dofus.logic.game.fight.types.CastingSpell import CastingSpell
 from com.ankamagames.dofus.misc.utils.GameDebugManager import GameDebugManager
 from com.ankamagames.dofus.network.enums.FightDispellableEnum import FightDispellableEnum
 from com.ankamagames.dofus.network.types.game.actions.fight.AbstractFightDispellableEffect import AbstractFightDispellableEffect
 from com.ankamagames.dofus.network.types.game.context.fight.GameFightFighterInformations import GameFightFighterInformations
-from com.ankamagames.jerakine.logger.Log import Log
 from com.ankamagames.jerakine.logger.Logger import Logger
-from flash.utils.getQualifiedClassName import getQualifiedClassName
+logger = Logger(__name__)
 
 class BasicBuff:
-   
-   logger = Logger(__name__)
-   
    
    _effect:EffectInstance
    
    _disabled:bool = False
    
    _removed:bool = False
-   
-   _rawParam1
-   
-   _rawParam2
-   
-   _rawParam3
+
    
    uid:int
    
@@ -76,22 +66,22 @@ class BasicBuff:
       self.dispelable = effect.dispelable
       self.source = castingSpell.casterId
       self.dataUid = effect.effectId
-      fightBattleFrame:FightBattleFrame = Kernel.getWorker().getFrame(FightBattleFrame)
+      fightBattleFrame:FightBattleFrame = Kernel().getWorker().getFrame(FightBattleFrame)
       currentPlayerId:float = fightBattleFrame.currentPlayerId
       isPlayerId = currentPlayerId is not 0
       fighterInfo:GameFightFighterInformations = None
       if isPlayerId:
-         entitiesFrame = Kernel.getWorker().getFrame(FightEntitiesFrame)
+         entitiesFrame = Kernel().getWorker().getFrame(FightEntitiesFrame)
          if entitiesFrame is not None:
             fighterInfo = entitiesFrame.getEntityInfos(currentPlayerId)
-      if Kernel.beingInReconection or not isPlayerId or fighterInfo is not None and not fighterInfo.spawnInfo.alive:
+      if Kernel().beingInReconection or not isPlayerId or fighterInfo is not None and not fighterInfo.spawnInfo.alive:
          self.aliveSource = self.source
       else:
          self.aliveSource = currentPlayerId
       self.parentBoostUid = self.parentBoostUid
-      self.initParam(param1,param2,param3)
+      self.initParam(param1 ,param2, param3)
       if GameDebugManager().buffsDebugActivated:
-         logger.debug("[BUFFS DEBUG] Buff " + self.id + " cr�� ! Params " + param1 + ", " + param2 + ", " + param3 + ", aliveSource " + self.aliveSource + "     \'" + self._effect.description + "\'")
+         logger.debug(f"[BUFFS DEBUG] Buff {self.id} créé ! Params {param1}, {param2}, {param3}, aliveSource {self.aliveSource} '{self._effect.description}'")
    
    @property
    def effect(self) -> EffectInstance:
@@ -145,16 +135,9 @@ class BasicBuff:
    
    @property
    def unusableNextTurn(self) -> bool:
-      currentPlayerId:float = None
-      playerId:float = None
-      playerPos:int = 0
-      currentPos:int = 0
-      casterPos:int = 0
-      i:int = 0
-      fighter:float = None
       if self.duration > 1 or self.duration < 0:
          return False
-      frame:FightBattleFrame = Kernel.getWorker().getFrame(FightBattleFrame)
+      frame:FightBattleFrame = Kernel().getWorker().getFrame(FightBattleFrame)
       if frame:
          currentPlayerId = frame.currentPlayerId
          playerId = PlayedCharacterManager().id
@@ -244,22 +227,22 @@ class BasicBuff:
       if targetBuffId == self.id:
          return True
       if self.dispelable  == FightDispellableEnum.DISPELLABLE:
-            return True
+         return True
       if self.dispelable  == FightDispellableEnum.DISPELLABLE_BY_STRONG_DISPEL:
-            return forceUndispellable
+         return forceUndispellable
       if self.dispelable  == FightDispellableEnum.DISPELLABLE_BY_DEATH:
-            return dying or forceUndispellable
+         return dying or forceUndispellable
       if self.dispelable  == FightDispellableEnum.REALLY_NOT_DISPELLABLE:
-            return targetBuffId == self.id
+         return targetBuffId == self.id
       else:
-            return False
+         return False
    
    def dispellableByDeath(self) -> bool:
       return self.dispelable == FightDispellableEnum.DISPELLABLE_BY_DEATH or self.dispelable == FightDispellableEnum.DISPELLABLE
    
    def onDisabled(self) -> None:
       if GameDebugManager().buffsDebugActivated:
-         logger.debug("[BUFFS DEBUG] Buff " + self.uid + " desactiv�")
+         logger.debug("[BUFFS DEBUG] Buff {self.uid} desactiv�")
       self._disabled = True
    
    @property
@@ -269,23 +252,23 @@ class BasicBuff:
    def onReenable(self) -> None:
       if not self._removed:
          if GameDebugManager().buffsDebugActivated:
-            logger.debug("[BUFFS DEBUG] Buff " + self.uid + " r�activ�")
+            logger.debug("[BUFFS DEBUG] Buff {self.uid} r�activ�")
          self._disabled = False
    
    def onRemoved(self) -> None:
       if GameDebugManager().buffsDebugActivated:
-         logger.debug("[BUFFS DEBUG] Buff " + self.uid + " retir�")
+         logger.debug("[BUFFS DEBUG] Buff {self.uid} retir�")
       self._removed = True
       if not self._disabled:
          self.onDisabled()
    
    def onApplied(self) -> None:
       if GameDebugManager().buffsDebugActivated:
-         logger.debug("[BUFFS DEBUG] Buff " + self.uid + " appliqu�")
+         logger.debug("[BUFFS DEBUG] Buff {self.uid} appliqu�")
       self._disabled = False
       self._removed = False
    
-   def equals(self, other:BasicBuff, ignoreSpell:bool = False) -> bool:
+   def equals(self, other:'BasicBuff', ignoreSpell:bool = False) -> bool:
       sb1:StateBuff = None
       sb2:StateBuff = None
       if self.targetId != other.targetId or self.aliveSource != other.aliveSource or self.effect.effectId != other.actionId or self.duration != other.duration or self.effect.hasOwnProperty("delay") and other.effect.hasOwnProperty("delay") and self.effect.delay != other.effect.delay or self.castingSpell.spellRank and other.castingSpell.spellRank and not ignoreSpell and self.castingSpell.spellRank.id != other.castingSpell.spellRank.id or not ignoreSpell and self.castingSpell.spell.id != other.castingSpell.spell.id or getQualifiedClassName(self) != getQualifiedClassName(other) or self.source != other.source or self.trigger and (self.effect.triggers.find("|") == -1 or self.dataUid != other.dataUid):
@@ -310,7 +293,7 @@ class BasicBuff:
                   return False
       return True
    
-   def add(self, buff:BasicBuff) -> None:
+   def add(self, buff:'BasicBuff') -> None:
       if not self.stack:
          self.stack = list[BasicBuff]()
          self.stack.append(self.clone(self.id))
@@ -333,37 +316,32 @@ class BasicBuff:
                            ActionIds.ACTION_BOOST_SPELL_CAST_INTVL_SET, 
                            ActionIds.ACTION_DEBOOST_SPELL_RANGE_MAX, 
                            ActionIds.ACTION_DEBOOST_SPELL_RANGE_MIN]:
-            additionDetails += "\rparam2 : " + self.param2 + " � " + (self.param2 + buff.param2)
-            additionDetails += "\rparam3 : " + self.param3 + " � " + (self.param3 + buff.param3)
+            additionDetails += f"\rparam2 : {self.param2}  & {(self.param2 + buff.param2)}"
+            additionDetails += f"\rparam3 : {self.param3}  & {(self.param3 + buff.param3)}"
             self.param1 = buff.param1
             self.param2 += buff.param2
             self.param3 += buff.param3
       if self.actionId  == ActionIds.ACTION_CHARACTER_PUNISHMENT:
-         additionDetails += "\rparam1 : " + self.param1 + " � " + (self.param1 + buff.param2)
+         additionDetails += f"\rparam1 : {self.param1}  &  {(self.param1 + buff.param2)}"
          self.param1 += buff.param2
          
       if self.actionId  in [ActionIds.ACTION_FIGHT_SET_STATE, ActionIds.ACTION_FIGHT_UNSET_STATE, ActionIds.ACTION_FIGHT_DISABLE_STATE]:
          if isinstance(self, StateBuff) and isinstance(buff, StateBuff):
-            additionDetails += "\rdelta : " + self.delta + " � " + str(self.delta + buff)
+            additionDetails += f"\rdelta : {self.delta} à {self.delta + buff}"
             self.delta += buff.delta
             
       else:
-            additionDetails += "\rparam1 : " + self.param1 + " � " + (self.param1 + buff.param1)
-            additionDetails += "\rparam2 : " + self.param2 + " � " + (self.param2 + buff.param2)
-            additionDetails += "\rparam3 : " + self.param3 + " � " + (self.param3 + buff.param3)
-            self.param1 += buff.param1
-            self.param2 += buff.param2
-            self.param3 += buff.param3
+         additionDetails += f"\rparam1 : {self.param1} à {self.param1 + buff.param1}"
+         additionDetails += f"\rparam2 : {self.param2} à {self.param2 + buff.param2}"
+         additionDetails += f"\rparam3 : {self.param3} à {self.param3 + buff.param3}"
+         self.param1 += buff.param1
+         self.param2 += buff.param2
+         self.param3 += buff.param3
       if GameDebugManager().buffsDebugActivated:
-         logger.debug("[BUFFS DEBUG] Buff " + self.uid + " : ajout du buff " + buff.uid + " " + additionDetails)
+         logger.debug("[BUFFS DEBUG] Buff {self.uid} : ajout du buff {buff.uid} {additionDetails}")
       self.refreshDescription()
    
    def updateParam(self, value1:int = 0, value2:int = 0, value3:int = 0, buffId:int = -1) -> None:
-      stackBuff:BasicBuff = None
-      i:int = 0
-      p1:int = 0
-      p2:int = 0
-      p3:int = 0
       if buffId == -1:
          p1 = value1
          p2 = value2
@@ -393,35 +371,31 @@ class BasicBuff:
                p2 += stackBuff.param2
                p3 += stackBuff.param3
          else:
-            i = 0
-            while True: 
-               j = self.stack.hasnext(j,i)
-               p1 += stackBuff.param1
-               p2 += stackBuff.param2
-               p3 += stackBuff.param3)
-               stackBuff = nextvalue(i, j)
+            for stackBuff in self.stack:
                if stackBuff.id != buffId:
                   continue
-               if stackBuff.actionId  in [ActionIds.ACTION_CHARACTER_PUNISHMENT, ActionIds.ACTION_FIGHT_SET_STATE, 
+               if stackBuff.actionId in [ActionIds.ACTION_CHARACTER_PUNISHMENT, ActionIds.ACTION_FIGHT_SET_STATE, 
                                           ActionIds.ACTION_FIGHT_UNSET_STATE, ActionIds.ACTION_FIGHT_DISABLE_STATE]:
                   break
                else:
                   stackBuff.param1 = value1
                   stackBuff.param2 = value2
                   stackBuff.param3 = value3
+               p1 += stackBuff.param1
+               p2 += stackBuff.param2
+               p3 += stackBuff.param3
       else:
          p1 = value1
          p2 = value2
          p3 = value3
       if self.actionId  == ActionIds.ACTION_CHARACTER_PUNISHMENT:
          self.param1 = p2
-      if self.actionId  == ActionIds.ACTION_FIGHT_SET_STATE:
-      if self.actionId  == ActionIds.ACTION_FIGHT_UNSET_STATE:
-      if self.actionId  == ActionIds.ACTION_FIGHT_DISABLE_STATE:
+      if self.actionId  in [ActionIds.ACTION_FIGHT_SET_STATE, ActionIds.ACTION_FIGHT_UNSET_STATE, ActionIds.ACTION_FIGHT_DISABLE_STATE]:
+         pass
       else:
-            self.param1 = p1
-            self.param2 = p2
-            self.param3 = p3
+         self.param1 = p1
+         self.param2 = p2
+         self.param3 = p3
       if GameDebugManager().buffsDebugActivated:
          logger.debug("[BUFFS DEBUG] Buff " + self.id + " rafraichissement des params " + self.param1 + ", " + self.param2 + ", " + self.param3)
       self.refreshDescription()
@@ -433,7 +407,7 @@ class BasicBuff:
       oldDuration:int = 0
       if GameDebugManager().buffsDebugActivated:
          if dispellEffect:
-            logger.debug("[BUFFS DEBUG] Buff " + self.id + " dur�e modifi�e de " + delta + " (desenvoutement de l\'effet)")
+            logger.debug(f"[BUFFS DEBUG] Buff {self.id} durée modifiée de {delta} (desenvoutement de l\'effet)")
       if not dispellEffect or self.canBeDispell():
          if self.duration >= 63 or self.duration == -1000:
             return False
@@ -442,13 +416,13 @@ class BasicBuff:
             self.duration += delta
             self.effect.duration += delta
             if GameDebugManager().buffsDebugActivated:
-               logger.debug("[BUFFS DEBUG] Buff " + self.id + " dur�e modifi�e de " + oldDuration + " � " + self.duration)
+               logger.debug(f"[BUFFS DEBUG] Buff {self.id} durée modifiée de {oldDuration} à {self.duration}")
             return True
          if self.duration > 0:
             self.duration = 0
             self.effect.duration = 0
             if GameDebugManager().buffsDebugActivated:
-               logger.debug("[BUFFS DEBUG] Buff " + self.id + " dur�e modifi�e de " + oldDuration + " � " + self.duration)
+               logger.debug(f"[BUFFS DEBUG] Buff {self.id} durée modifiée de {oldDuration} à {self.duration}")
             return True
          return False
       return False
@@ -457,7 +431,7 @@ class BasicBuff:
    def active(self) -> bool:
       return self.duration != 0
    
-   def clone(self, id:int = 0) -> BasicBuff:
+   def clone(self, id:int = 0) -> 'BasicBuff':
       bb:BasicBuff = BasicBuff()
       bb.id = self.uid
       bb.uid = self.uid
@@ -475,4 +449,4 @@ class BasicBuff:
       return bb
    
    def __str__(self) -> str:
-      return "[BasicBuff id=" + self.id + ", uid=" + self.uid + ", targetId=" + self.targetId + ", sourceId=" + self.source + ", duration=" + self.duration + ", len(stack)=" + (!not self.stack ? len(self.stack) : "0") + "]"
+      return f"[BasicBuff id={self.id}, uid={self.uid}, targetId={self.targetId}, sourceId={self.source}, duration={self.duration}, len(stack)={(len(self.stack) if self.stack else 0)}]"

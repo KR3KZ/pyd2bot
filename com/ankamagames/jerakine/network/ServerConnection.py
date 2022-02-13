@@ -15,7 +15,7 @@ from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
 from com.ankamagames.jerakine.network.ILagometer import ILagometer
 from com.ankamagames.jerakine.network.IServerConnection import IServerConnection
 from com.ankamagames.jerakine.network.RawDataParser import RawDataParser
-from com.ankamagames.jerakine.events.BasicEvent import BasicEvent
+from com.ankamagames.jerakine.events.SocketEvent import SocketEvent
 from com.ankamagames.jerakine.events.IOErrorEvent import IOErrorEvent
 from com.ankamagames.jerakine.events.SecurityErrorEvent import SecurityErrorEvent
 from com.ankamagames.jerakine.network.UnpackMode import UnpackMode
@@ -248,15 +248,15 @@ class ServerConnection(IServerConnection):
 
    def addListeners(self) -> None:
       self._socket.addEventListener(ProgressEvent.SOCKET_DATA, self.onSocketData, 0)
-      self._socket.addEventListener(BasicEvent.CONNECT, self.onConnect, 0)
-      self._socket.addEventListener(BasicEvent.CLOSE, self.onClose, float("inf"))
+      self._socket.addEventListener(SocketEvent.CONNECT, self.onConnect, 0)
+      self._socket.addEventListener(SocketEvent.CLOSE, self.onClose, float("inf"))
       self._socket.addEventListener(IOErrorEvent.IO_ERROR, self.onSocketError, 0)
       EnterFrameDispatcher().addEventListener(self.onEnterFrame, EnterFrameConst.SERVER_CONNECTION)
 
    def removeListeners(self) -> None:
       self._socket.removeEventListener(ProgressEvent.SOCKET_DATA, self.onSocketData)
-      self._socket.removeEventListener(BasicEvent.CONNECT, self.onConnect)
-      self._socket.removeEventListener(BasicEvent.CLOSE, self.onClose)
+      self._socket.removeEventListener(SocketEvent.CONNECT, self.onConnect)
+      self._socket.removeEventListener(SocketEvent.CLOSE, self.onClose)
       self._socket.removeEventListener(IOErrorEvent.IO_ERROR, self.onSocketError)
       EnterFrameDispatcher().removeEventListener(self.onEnterFrame)
 
@@ -291,7 +291,7 @@ class ServerConnection(IServerConnection):
       if self._willClose:
          if len(self._asyncTrees) == 0:
             self._willClose = False
-            self.dispatchEvent(BasicEvent.CLOSE)
+            self.dispatchEvent(SocketEvent.CLOSE)
          return True
       return False
 

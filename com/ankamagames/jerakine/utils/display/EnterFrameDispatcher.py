@@ -1,8 +1,8 @@
 from com.ankamagames.jerakine.logger.Logger import Logger
 from time import perf_counter
 from types import FunctionType
-from com.ankamagames.jerakine.network.messages import Worker
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
+from com.ankamagames.jerakine.network.messages.Worker import Worker
 logger = Logger(__name__)
 
 class EnterFrameDispatcher(metaclass=Singleton):

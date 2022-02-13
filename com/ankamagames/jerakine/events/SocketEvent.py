@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class BasicEvent(Enum):
+class SocketEvent(Enum):
     
     CONNECT = "connect"
     CLOSE = "close"

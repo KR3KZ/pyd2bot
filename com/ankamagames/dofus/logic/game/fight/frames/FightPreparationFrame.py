@@ -226,8 +226,6 @@ class FightPreparationFrame(Frame):
          ecmsg = msg
          clickedEntity = ecmsg.entity
          if clickedEntity:
-            fighter = Object()
-            fighter.name = self._fightContextFrame.getFighterName(clickedEntity.id)
             entitiesFrame = Kernel.getWorker().getFrame(FightEntitiesFrame)
             fighterInfos = entitiesFrame.getEntityInfos(clickedEntity.id)
             playerInfos = entitiesFrame.getEntityInfos(PlayedCharacterManager().id)

@@ -6,7 +6,7 @@ from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
 from com.ankamagames.jerakine.messages.Message import Message
 from com.ankamagames.jerakine.messages.MessageHandler import MessageHandler
 from com.ankamagames.jerakine.network.NetworkSentEvent import NetworkSentEvent
-from com.ankamagames.jerakine.events.BasicEvent import BasicEvent
+from com.ankamagames.jerakine.events.SocketEvent import SocketEvent
 from com.ankamagames.jerakine.events.IOErrorEvent import IOErrorEvent
 from com.ankamagames.jerakine.events.SecurityErrorEvent import SecurityErrorEvent
 from com.ankamagames.jerakine.network.IMessagerouter import IMessageRouter
@@ -65,8 +65,8 @@ class MultiConnection(EventDispatcher):
       self._connectionCount += 1
       logger.warn("Adding connection " + str(id))
       conn.handler = MessageWatcher(self.proccessMsg, conn.handler, conn)
-      conn.add_listener(BasicEvent.CONNECT, self.onSubConnectionEvent)
-      conn.add_listener(BasicEvent.CLOSE, self.onSubConnectionEvent)
+      conn.add_listener(SocketEvent.CONNECT, self.onSubConnectionEvent)
+      conn.add_listener(SocketEvent.CLOSE, self.onSubConnectionEvent)
       conn.add_listener(IOErrorEvent.IO_ERROR, self.onSubConnectionEvent)
       conn.add_listener(SecurityErrorEvent.SECURITY_ERROR, self.onSubConnectionEvent)
       if conn.connected:
@@ -81,8 +81,8 @@ class MultiConnection(EventDispatcher):
          conn = idOrConnection
       if not conn:
          return False
-      conn.remove_listener(BasicEvent.CONNECT, self.onSubConnectionEvent)
-      conn.remove_listener(BasicEvent.CLOSE, self.onSubConnectionEvent)
+      conn.remove_listener(SocketEvent.CONNECT, self.onSubConnectionEvent)
+      conn.remove_listener(SocketEvent.CLOSE, self.onSubConnectionEvent)
       conn.remove_listener(IOErrorEvent.IO_ERROR, self.onSubConnectionEvent)
       conn.remove_listener(SecurityErrorEvent.SECURITY_ERROR, self.onSubConnectionEvent)
       self._connectionCount -= 1
@@ -174,9 +174,9 @@ class MultiConnection(EventDispatcher):
       self._connectionByMsg[msg] = conn
 
    def onSubConnectionEvent(self, e:Event) -> None:
-      if e.name == BasicEvent.CONNECT:
+      if e.name == SocketEvent.CONNECT:
          self._connectionConnectedCount+=1
-      elif e.name == BasicEvent.CLOSE:
+      elif e.name == SocketEvent.CLOSE:
          self._connectionConnectedCount-=1
       self._connectionByEvent[e] = e.dispatcher
       if self.has_listeners(e.name):

@@ -1,7 +1,7 @@
 import socket
 import threading
 from whistle import EventDispatcher
-from com.ankamagames.jerakine.events.BasicEvent import BasicEvent
+from com.ankamagames.jerakine.events.SocketEvent import SocketEvent
 from com.ankamagames.jerakine.events.ProgressEvent import ProgressEvent
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
@@ -38,13 +38,13 @@ class Socket(threading.Thread):
         self._sock.connect((host, port))
         self.connected = True
         self.start()
-        self.dispatcher.dispatch(BasicEvent.CONNECT)
+        self.dispatcher.dispatch(SocketEvent.CONNECT)
  
     def close(self):
         self._kill.set()
         self._sock.close()
         self.connected = False
-        self.dispatcher.dispatch(BasicEvent.CLOSE)
+        self.dispatcher.dispatch(SocketEvent.CLOSE)
 
     def addEventListener(self, event, listener, priority=0):
         self.dispatcher.add_listener(event, listener, priority)

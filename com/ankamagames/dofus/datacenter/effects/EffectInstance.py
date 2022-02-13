@@ -6,6 +6,8 @@ from com.ankamagames.dofus.datacenter.jobs.Job import Job
 from com.ankamagames.dofus.datacenter.monsters.Monster import Monster
 from com.ankamagames.dofus.datacenter.monsters.MonsterRace import MonsterRace
 from com.ankamagames.dofus.datacenter.monsters.MonsterSuperRace import MonsterSuperRace
+from com.ankamagames.dofus.datacenter.spells.Spell import Spell
+from com.ankamagames.dofus.datacenter.spells.SpellLevel import SpellLevel
 from com.ankamagames.jerakine.data.I18n import I18n
 from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
 from com.ankamagames.jerakine.logger.Logger import Logger
@@ -21,15 +23,12 @@ class EffectInstance(IDataCenter):
    
    IS_NOT_DISPELLABLE:int = 3
    
-   logger = Logger(__name__)
-   
    UNDEFINED_CATEGORY:int = -2
    
    UNDEFINED_SHOW:int = -1
    
    UNDEFINED_DESCRIPTION:str = "None"
       
-   
    effectUid:int
    
    baseEffectId:int
