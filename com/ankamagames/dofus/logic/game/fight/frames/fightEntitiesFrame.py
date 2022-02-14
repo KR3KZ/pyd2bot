@@ -56,16 +56,18 @@ from com.ankamagames.jerakine.messages.Message import Message
 from com.ankamagames.jerakine.types.positions.MapPoint import MapPoint
 from damageCalculation.tools.StatIds import StatIds
 logger = Logger(__name__)
+
+
 class FightEntitiesFrame(AbstractEntitiesFrame, Frame):
-   
+
    TEAM_CIRCLE_COLOR_1:int = 255
-   
+
    TEAM_CIRCLE_COLOR_2:int = 16711680
-   
+
    _ie:dict
-   
+
    _tempFighterList:list
-   
+
    _illusionEntities:dict
    
    _entitiesNumber:dict

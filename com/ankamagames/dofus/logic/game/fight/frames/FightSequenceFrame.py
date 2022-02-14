@@ -6,6 +6,7 @@ from com.ankamagames.dofus.datacenter.effects.instances.EffectInstanceDice impor
 from com.ankamagames.dofus.datacenter.monsters.Monster import Monster
 from com.ankamagames.dofus.datacenter.spells.Spell import Spell
 from com.ankamagames.dofus.datacenter.spells.SpellLevel import SpellLevel
+from com.ankamagames.dofus.enums.ActionIds import ActionIds
 from com.ankamagames.dofus.kernel.Kernel import Kernel
 from com.ankamagames.dofus.logic.game.common.managers.MapMovementAdapter import MapMovementAdapter
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
@@ -18,6 +19,8 @@ from com.ankamagames.dofus.logic.game.fight.managers.CurrentPlayedFighterManager
 from com.ankamagames.dofus.logic.game.fight.miscs.TackleUtil import TackleUtil
 from com.ankamagames.dofus.logic.game.fight.types.BasicBuff import BasicBuff
 from com.ankamagames.dofus.logic.game.fight.types.CastingSpell import CastingSpell
+from com.ankamagames.dofus.misc.utils.GameDebugManager import GameDebugManager
+from com.ankamagames.dofus.network.enums.FightSpellCastCriticalEnum import FightSpellCastCriticalEnum
 from com.ankamagames.dofus.network.messages.game.actions.AbstractGameActionMessage import AbstractGameActionMessage
 from com.ankamagames.dofus.network.messages.game.actions.fight.GameActionFightActivateGlyphTrapMessage import GameActionFightActivateGlyphTrapMessage
 from com.ankamagames.dofus.network.messages.game.actions.fight.GameActionFightCarryCharacterMessage import GameActionFightCarryCharacterMessage
@@ -134,15 +137,15 @@ class FightSequenceFrame(Frame, ISpellCastProvider):
     _instanceId:int
     
     _teleportThroughPortal:bool
-    
+
     _updateMovementAreaAtSequenceEnd:bool
-    
+
     _playSpellScriptStep:FightPlaySpellScriptStep
-    
+
     _spellScriptTemporaryBuffer:SpellScriptBuffer
-    
+
     _permanentTooltipsCallback:Callback
-    
+   
     def __init__(self, pFightBattleFrame:FightBattleFrame, parent:FightSequenceFrame = None):
         super().__init__()
         self._instanceId = self._currentInstanceId
@@ -160,7 +163,7 @@ class FightSequenceFrame(Frame, ISpellCastProvider):
         return self._currentInstanceId
     
     def deleteTooltip(self, fighterId:float) -> None:
-        fightContextFrame:FightContextFrame = Kernel.getWorker().getFrame(FightContextFrame)
+        fightContextFrame:FightContextFrame = Kernel().getWorker().getFrame(FightContextFrame)
         if FightContextFrame.fighterEntityTooltipId == fighterId and FightContextFrame.fighterEntityTooltipId != fightContextFrame.timelineOverEntityId:
             if fightContextFrame:
                 fightContextFrame.outEntity(fighterId)
@@ -180,7 +183,7 @@ class FightSequenceFrame(Frame, ISpellCastProvider):
         return self._stepsBuffer
     
     @property
-    def parent(self) -> FightSequenceFrame:
+    def parent(self) -> 'FightSequenceFrame':
         return self._parent
     
     @property
@@ -210,7 +213,7 @@ class FightSequenceFrame(Frame, ISpellCastProvider):
     @property
     def fightEntitiesFrame(self) -> FightEntitiesFrame:
         if not self._fightEntitiesFrame:
-            self._fightEntitiesFrame = Kernel.getWorker().getFrame(FightEntitiesFrame)
+            self._fightEntitiesFrame = Kernel().getWorker().getFrame(FightEntitiesFrame)
         return self._fightEntitiesFrame
     
     def addSubSequence(self, sequence:ISequencer) -> None:
@@ -218,505 +221,469 @@ class FightSequenceFrame(Frame, ISpellCastProvider):
         self._stepsBuffer.append(ParallelStartSequenceStep([sequence],False))
     
     def process(self, msg:Message) -> bool:
-        fightEntitiesFrame:FightEntitiesFrame = None
-        gfrfmsg:GameFightRefreshFighterMessage = None
-        gafscmsg:GameActionFightSpellCastMessage = None
         forceDetailedLogs:bool = False
         closeCombatWeaponId:int = 0
         fxScriptId:int = 0
         sourceCellId:int = 0
-        tempCastingSpell:CastingSpell = None
         critical = False
-        entities:dict = None
-        fighter:GameFightFighterInformations = None
-        playerManager:PlayedCharacterManager = None
         isAlly:bool = False
-        playerId:float = None
-        sourceInfos:GameFightFighterInformations = None
-        playerInfos:GameFightFighterInformations = None
-        target:GameFightFighterInformations = None
-        gmmmsg:GameMapMovementMessage = None
-        fslmsg:FighterStatsListMessage = None
-        gafpvmsg:GameActionFightPointsVariationMessage = None
-        gaflasplmsg:GameActionFightLifeAndShieldPointsLostMessage = None
-        gaflpgmsg:GameActionFightLifePointsGainMessage = None
-        gaflplmsg:GameActionFightLifePointsLostMessage = None
-        gaftosmmsg:GameActionFightTeleportOnSameMapMessage = None
-        gafepmsg:GameActionFightExchangePositionsMessage = None
-        gafsmsg:GameActionFightSlideMessage = None
-        fightContextFrame_gafsmsg:FightContextFrame = None
-        slideTargetInfos:GameContextActorInformations = None
-        gafsnmsg:GameActionFightSummonMessage = None
-        gafmsmsg:GameActionFightMultipleSummonMessage = None
-        gffinfos:GameFightFighterInformations = None
-        rcmsg:RefreshCharacterStatsMessage = None
-        gafmcmsg:GameActionFightMarkCellsMessage = None
-        gafucmsg:GameActionFightUnmarkCellsMessage = None
-        gafclmsg:GameActionFightChangeLookMessage = None
-        gafimsg:GameActionFightInvisibilityMessage = None
-        inviInfo:GameContextActorInformations = None
-        gaflmsg:GameActionFightLeaveMessage = None
-        gafdmsg:GameActionFightDeathMessage = None
-        gafvmsg:GameActionFightVanishMessage = None
-        entityInfosv:GameContextActorInformations = None
-        fightContextFrame_gafvmsg:FightContextFrame = None
-        gafdiemsg:GameActionFightDispellEffectMessage = None
-        gafdsmsg:GameActionFightDispellSpellMessage = None
-        gafdimsg:GameActionFightDispellMessage = None
-        gafdplmsg:GameActionFightDodgePointLossMessage = None
-        gafscvmsg:GameActionFightSpellCooldownVariationMessage = None
-        gafsimsg:GameActionFightSpellImmunityMessage = None
-        gafkmsg:GameActionFightKillMessage = None
-        gafredmsg:GameActionFightReduceDamagesMessage = None
-        gafrfdmsg:GameActionFightReflectDamagesMessage = None
-        gafrsmsg:GameActionFightReflectSpellMessage = None
-        gafskmsg:GameActionFightStealKamaMessage = None
-        gaftmsg:GameActionFightTackledMessage = None
-        gaftgtmsg:GameActionFightTriggerGlyphTrapMessage = None
-        gafagtmsg:GameActionFightActivateGlyphTrapMessage = None
-        gaftbmsg:GameActionFightDispellableEffectMessage = None
-        gafmedmsg:GameActionFightModifyEffectsDurationMessage = None
-        gafcchmsg:GameActionFightCarryCharacterMessage = None
-        gaftcmsg:GameActionFightThrowCharacterMessage = None
         throwCellId:int = 0
-        fightContextFrame_gaftcmsg:FightContextFrame = None
-        gafdcmsg:GameActionFightDropCharacterMessage = None
         dropCellId:int = 0
-        gafidMsg:GameActionFightInvisibleDetectedMessage = None
-        gftmsg:GameFightTurnListMessage = None
-        gafccmsg:GameActionFightCloseCombatMessage = None
-        fighterInfo:GameContextActorInformations = None
-        cssb:SpellScriptBuffer = None
         startIndex:int = 0
         stepsChanged:bool = False
         playSpellScriptStepPosition:int = 0
-        lookWithMount:TiphonEntityLook = None
-        sliced:list[ISequencable] = None
         stepIndex:int = 0
         stepSubIndex:int = 0
-        spellTargetEntities:list = None
-        isSpellKnown:bool = False
-        playerSpellLevel:SpellLevel = None
-        spellKnown:SpellWrapper = None
-        spell:Spell = None
-        castSpellLevel:SpellLevel = None
-        fighterInfos:GameFightFighterInformations = None
-        simf:SpellInventoryManagementFrame = None
         gcdValue:int = 0
-        spellCastManager:SpellCastInFightManager = None
-        spellManager:SpellManager = None
-        gfsc:GameFightSpellCooldown = None
         shape:int = 0
-        ei:EffectInstance = None
-        ts:TiphonSprite = None
-        targetedCell:GraphicCell = None
-        cellPos:Point = None
-        infos:GameFightFighterInformations = None
-        fightContextFrame_gafcchmsg:FightContextFrame = None
-        carried:TiphonSprite = None
-        carriedByCarried:AnimatedCharacter = None
-        fightEntitiesFrame = None
+        
         if isinstance(msg, GameFightRefreshFighterMessage):
-                gfrfmsg = msg
-                self.keepInMindToUpdateMovementArea()
-                self._stepsBuffer.append(FightRefreshFighterStep(gfrfmsg.informations))
+            gfrfmsg = msg
+            self.keepInMindToUpdateMovementArea()
+            self._stepsBuffer.append(FightRefreshFighterStep(gfrfmsg.informations))
+            return True
+            
+        if isinstance(msg, (GameActionFightCloseCombatMessage, GameActionFightSpellCastMessage)):
+            forceDetailedLogs = GameDebugManager().detailedFightLog_showEverything
+            if not self._castingSpells:
+                self._castingSpells = list[CastingSpell]()
+            if isinstance(msg, GameActionFightSpellCastMessage):
+                gafscmsg = msg
+                if forceDetailedLogs:
+                    gafscmsg.verboseCast = True
+            else:
+                gafccmsg = msg
+                closeCombatWeaponId = gafccmsg.weaponGenericId
+                gafscmsg = GameActionFightSpellCastMessage()
+                gafscmsg.init(
+                    gafccmsg.targetId,
+                    gafccmsg.destinationCellId,
+                    gafccmsg.critical,
+                    gafccmsg.silentCast,
+                    gafccmsg.verboseCast,
+                    gafccmsg.actionId,
+                    gafccmsg.sourceId,
+                )
+                if forceDetailedLogs:
+                    gafscmsg.verboseCast = True
+            fightEntitiesFrame = FightEntitiesFrame.getCurrentInstance()
+            sourceCellId = -1
+            if fightEntitiesFrame and fightEntitiesFrame.hasEntity(gafscmsg.sourceId):
+                fighterInfo = fightEntitiesFrame.getEntityInfos(gafscmsg.sourceId)
+                if fighterInfo:
+                    sourceCellId = fighterInfo.disposition.cellId
+            tempCastingSpell = CastingSpell()
+            tempCastingSpell.casterId = gafscmsg.sourceId
+            tempCastingSpell.spell = Spell.getSpellById(gafscmsg.spellId)
+            tempCastingSpell.spellRank = tempCastingSpell.spell.getSpellLevel(gafscmsg.spellLevel)
+            tempCastingSpell.isCriticalFail = gafscmsg.critical == FightSpellCastCriticalEnum.CRITICAL_FAIL
+            tempCastingSpell.isCriticalHit = gafscmsg.critical == FightSpellCastCriticalEnum.CRITICAL_HIT
+            tempCastingSpell.silentCast = gafscmsg.silentCast
+            tempCastingSpell.portalIds = gafscmsg.portalsIds
+            tempCastingSpell.portalMapPoints = MarkedCellsManager().getMapPointsFromMarkIds(gafscmsg.portalsIds)
+            if GameDebugManager().buffsDebugActivated:
+                logger.debug("\r[BUFFS DEBUG] Sort " + tempCastingSpell.spell.name + " (" + gafscmsg.spellId + ") lanc� par " + gafscmsg.sourceId + " sur " + gafscmsg.targetId + " (cellule " + gafscmsg.destinationCellId + ")")
+            if not self._fightBattleFrame.currentPlayerId:
+                BuffManager().spellBuffsToIgnore.append(tempCastingSpell)
+            if gafscmsg.destinationCellId != -1:
+                tempCastingSpell.targetedCell = MapPoint.fromCellId(gafscmsg.destinationCellId)
+            if gafscmsg and gafscmsg.actionId == ActionIds.ACTION_FINISH_MOVE:
+                cssb = SpellScriptBuffer(tempCastingSpell)
+                fxScriptId = tempCastingSpell.spell.getScriptId(tempCastingSpell.isCriticalHit)
+                self.appendPlaySpellScriptStep(fxScriptId,gafscmsg.sourceId,gafscmsg.destinationCellId,gafscmsg.spellId,gafscmsg.spellLevel,cssb)
+                startIndex = 0
+                stepsChanged = True
+                playSpellScriptStepPosition = 0
+                while stepsChanged:
+                    stepsChanged = False
+                    for stepIndex in range(len(self._stepsBuffer)):
+                        if self._stepsBuffer[stepIndex] == self._playSpellScriptStep:
+                            playSpellScriptStepPosition = stepIndex
+                        if self._spellScriptTemporaryBuffer:
+                            for stepSubIndex in range(startIndex, len(self._spellScriptTemporaryBuffer.stepsBuffer)):
+                                if self._stepsBuffer[stepIndex] == self._spellScriptTemporaryBuffer.stepsBuffer[stepSubIndex]:
+                                    stepsChanged = True
+                                    startIndex = stepSubIndex
+                                    self._stepsBuffer = self._stepsBuffer.slice(0,stepIndex).extend(self._stepsBuffer.slice(stepIndex + 1))
+                        if stepsChanged:
+                            pass
+                sliced = self._stepsBuffer[playSpellScriptStepPosition + 1:]
+                self._stepsBuffer = self._stepsBuffer[:playSpellScriptStepPosition + 1]
+                self._stepsBuffer.extend(cssb.stepsBuffer)
+                self._stepsBuffer.extend(sliced)
+                self._fightBattleFrame.isFightAboutToEnd = True
                 return True
-        if isinstance(msg, GameActionFightCloseCombatMessage) or isinstance(msg, GameActionFightSpellCastMessage):
-                forceDetailedLogs = GameDebugManager().detailedFightLog_showEverything
-                if not self._castingSpells:
-                    self._castingSpells = list[CastingSpell]()
-                if isinstance(msg, GameActionFightSpellCastMessage):
-                    gafscmsg = msg
-                    if forceDetailedLogs:
-                        gafscmsg.verboseCast = True
-                else:
-                    gafccmsg = msg
-                    closeCombatWeaponId = gafccmsg.weaponGenericId
-                    gafscmsg = GameActionFightSpellCastMessage()
-                    gafscmsg.init(gafccmsg.actionId,gafccmsg.sourceId,gafccmsg.targetId,gafccmsg.destinationCellId,gafccmsg.critical,gafccmsg.silentCast,gafccmsg.verboseCast)
-                    if forceDetailedLogs:
-                        gafscmsg.verboseCast = True
-                    if gafccmsg.sourceId == PlayedCharacterManager().id:
-                        SpeakingItemManager().triggerEvent(SpeakingItemManager.SPEAK_TRIGGER_PLAYER_CLOSE_COMBAT)
-                fightEntitiesFrame = FightEntitiesFrame.getCurrentInstance()
-                sourceCellId = -1
-                if fightEntitiesFrame and fightEntitiesFrame.hasEntity(gafscmsg.sourceId):
-                    fighterInfo = fightEntitiesFrame.getEntityInfos(gafscmsg.sourceId)
-                    if fighterInfo:
-                        sourceCellId = fighterInfo.disposition.cellId
-                tempCastingSpell = CastingSpell()
-                tempCastingSpell.casterId = gafscmsg.sourceId
-                tempCastingSpell.spell = Spell.getSpellById(gafscmsg.spellId)
-                tempCastingSpell.spellRank = tempCastingSpell.spell.getSpellLevel(gafscmsg.spellLevel)
-                tempCastingSpell.isCriticalFail = gafscmsg.critical == FightSpellCastCriticalEnum.CRITICAL_FAIL
-                tempCastingSpell.isCriticalHit = gafscmsg.critical == FightSpellCastCriticalEnum.CRITICAL_HIT
-                tempCastingSpell.silentCast = gafscmsg.silentCast
-                tempCastingSpell.portalIds = gafscmsg.portalsIds
-                tempCastingSpell.portalMapPoints = MarkedCellsManager().getMapPointsFromMarkIds(gafscmsg.portalsIds)
-                if GameDebugManager().buffsDebugActivated:
-                    logger.debug("\r[BUFFS DEBUG] Sort " + tempCastingSpell.spell.name + " (" + gafscmsg.spellId + ") lanc� par " + gafscmsg.sourceId + " sur " + gafscmsg.targetId + " (cellule " + gafscmsg.destinationCellId + ")")
-                if not self._fightBattleFrame.currentPlayerId:
-                    BuffManager().spellBuffsToIgnore.append(tempCastingSpell)
-                if gafscmsg.destinationCellId != -1:
-                    tempCastingSpell.targetedCell = MapPoint.fromCellId(gafscmsg.destinationCellId)
-                if gafscmsg and gafscmsg.actionId == ActionIds.ACTION_FINISH_MOVE:
-                    if not OptionManager.getOptionManager("dofus").getOption("showFinishMoves"):
-                        return True
-                    cssb = SpellScriptBuffer(tempCastingSpell)
-                    fxScriptId = tempCastingSpell.spell.getScriptId(tempCastingSpell.isCriticalHit)
-                    self.appendPlaySpellScriptStep(fxScriptId,gafscmsg.sourceId,gafscmsg.destinationCellId,gafscmsg.spellId,gafscmsg.spellLevel,cssb)
-                    startIndex = 0
-                    stepsChanged = True
-                    playSpellScriptStepPosition = 0
-                    while stepsChanged:
-                        stepsChanged = False
-                        for stepIndex in range(len(self._stepsBuffer)):
-                            if self._stepsBuffer[stepIndex] == self._playSpellScriptStep:
-                                playSpellScriptStepPosition = stepIndex
-                            if self._spellScriptTemporaryBuffer:
-                                for stepSubIndex in range(startIndex, len(self._spellScriptTemporaryBuffer.stepsBuffer)):
-                                    if self._stepsBuffer[stepIndex] == self._spellScriptTemporaryBuffer.stepsBuffer[stepSubIndex]:
-                                        stepsChanged = True
-                                        startIndex = stepSubIndex
-                                        self._stepsBuffer = self._stepsBuffer.slice(0,stepIndex).extend(self._stepsBuffer.slice(stepIndex + 1))
-                            if stepsChanged:
-                    lookWithMount = EntitiesLooksManager().getRealTiphonEntityLook(gafscmsg.sourceId)
-                    sliced = self._stepsBuffer.slice(playSpellScriptStepPosition + 1)
-                    self._stepsBuffer = self._stepsBuffer.slice(0,playSpellScriptStepPosition + 1)
-                    self.appendStep(FightChangeLookStep(gafscmsg.sourceId,EntityLookAdapter.fromNetwork(EntityLookAdapter.toNetwork(TiphonUtility.getLookWithoutMount(lookWithMount)))))
-                    self._stepsBuffer = self._stepsBuffer.extend(cssb.stepsBuffer).extend(sliced)
-                    self._fightBattleFrame.isFightAboutToEnd = True
-                    return True
-                if self._castingSpell:
-                    if closeCombatWeaponId != 0:
-                        self.appendStep(FightCloseCombatStep(gafscmsg.sourceId,closeCombatWeaponId,gafscmsg.critical,gafscmsg.verboseCast))
-                    elif sourceCellId >= 0:
-                        self.appendStep(FightSpellCastStep(gafscmsg.sourceId,gafscmsg.destinationCellId,sourceCellId,gafscmsg.spellId,gafscmsg.spellLevel,gafscmsg.critical,gafscmsg.verboseCast))
-                    self._castingSpells.append(tempCastingSpell)
-                    if isinstance(msg, GameActionFightCloseCombatMessage):
-                        self._castingSpell.weaponId = GameActionFightCloseCombatMessage(msg).weaponGenericId
-                        self.appendPlaySpellScriptStep(7,gafscmsg.sourceId,gafscmsg.destinationCellId,gafscmsg.spellId,gafscmsg.spellLevel)
-                    elif not tempCastingSpell.isCriticalFail:
-                        fxScriptId = tempCastingSpell.spell.getScriptId(tempCastingSpell.isCriticalHit)
-                        self.appendPlaySpellScriptStep(fxScriptId,gafscmsg.sourceId,gafscmsg.destinationCellId,gafscmsg.spellId,gafscmsg.spellLevel)
-                    return True
-                self._castingSpell = tempCastingSpell
-                self._spellScriptTemporaryBuffer = SpellScriptBuffer(self._castingSpell)
-                if isinstance(msg, GameActionFightCloseCombatMessage):
-                    self._castingSpell.weaponId = GameActionFightCloseCombatMessage(msg).weaponGenericId
-                    self._playSpellScriptStep = self.appendPlaySpellScriptStep(7,gafscmsg.sourceId,gafscmsg.destinationCellId,gafscmsg.spellId,gafscmsg.spellLevel,self._spellScriptTemporaryBuffer)
-                elif not self._castingSpell.isCriticalFail:
-                    fxScriptId = self._castingSpell.spell.getScriptId(self._castingSpell.isCriticalHit)
-                    self._playSpellScriptStep = self.appendPlaySpellScriptStep(fxScriptId,gafscmsg.sourceId,gafscmsg.destinationCellId,gafscmsg.spellId,gafscmsg.spellLevel,self._spellScriptTemporaryBuffer)
-                self._stepsBuffer = self._stepsBuffer.extend(self._spellScriptTemporaryBuffer.stepsBuffer)
-                if gafscmsg.critical != FightSpellCastCriticalEnum.CRITICAL_FAIL:
-                    spellTargetEntities = []
-                    spellTargetEntities.append(gafscmsg.targetId)
-                    CurrentPlayedFighterManager().getSpellCastManagerById(gafscmsg.sourceId).castSpell(gafscmsg.spellId,gafscmsg.spellLevel,spellTargetEntities)
-                critical = gafscmsg.critical == FightSpellCastCriticalEnum.CRITICAL_HIT
-                entities = FightEntitiesFrame.getCurrentInstance().entities
-                fighter = entities[gafscmsg.sourceId]
+            if self._castingSpell:
                 if closeCombatWeaponId != 0:
                     self.appendStep(FightCloseCombatStep(gafscmsg.sourceId,closeCombatWeaponId,gafscmsg.critical,gafscmsg.verboseCast))
-                else:
+                elif sourceCellId >= 0:
                     self.appendStep(FightSpellCastStep(gafscmsg.sourceId,gafscmsg.destinationCellId,sourceCellId,gafscmsg.spellId,gafscmsg.spellLevel,gafscmsg.critical,gafscmsg.verboseCast))
-                if gafscmsg.sourceId == CurrentPlayedFighterManager().currentFighterId:
-                    KernelEventsManager().processCallback(TriggerHookList.FightSpellCast)
-                playerManager = PlayedCharacterManager()
-                isAlly = False
-                if entities and entities[playerManager.id] and fighter and entities[playerManager.id].spawnInfo.teamId == fighter.spawnInfo.teamId:
-                    isAlly = True
-                if isAlly and not self._castingSpell.isCriticalFail:
-                    isSpellKnown = False
-                    for spellKnown in playerManager.spellsInventory:
-                        if spellKnown.id == gafscmsg.spellId:
-                            isSpellKnown = True
-                            playerSpellLevel = spellKnown.spellLevelInfos
-                    spell = Spell.getSpellById(gafscmsg.spellId)
-                    castSpellLevel = spell.getSpellLevel(gafscmsg.spellLevel)
-                    if castSpellLevel.globalCooldown:
-                        if isSpellKnown and gafscmsg.sourceId != playerManager.id:
-                            if castSpellLevel.globalCooldown == -1:
-                                gcdValue = playerSpellLevel.minCastInterval
-                            else:
-                                gcdValue = castSpellLevel.globalCooldown
-                            spellCastManager = CurrentPlayedFighterManager().getSpellCastManagerById(playerManager.id)
-                            if spellCastManager:
-                                spellManager = spellCastManager.getSpellManagerBySpellId(gafscmsg.spellId,True,castSpellLevel.id)
-                                if spellCastManager.currentTurn > 1:
-                                    if spellManager and spellManager.cooldown <= gcdValue:
-                                        self.appendStep(FightSpellCooldownVariationStep(playerManager.id,0,gafscmsg.spellId,gcdValue,True))
-                                else:
+                self._castingSpells.append(tempCastingSpell)
+                if isinstance(msg, GameActionFightCloseCombatMessage):
+                    self._castingSpell.weaponId = GameActionFightCloseCombatMessage(msg).weaponGenericId
+                    self.appendPlaySpellScriptStep(7,gafscmsg.sourceId,gafscmsg.destinationCellId,gafscmsg.spellId,gafscmsg.spellLevel)
+                elif not tempCastingSpell.isCriticalFail:
+                    fxScriptId = tempCastingSpell.spell.getScriptId(tempCastingSpell.isCriticalHit)
+                    self.appendPlaySpellScriptStep(fxScriptId,gafscmsg.sourceId,gafscmsg.destinationCellId,gafscmsg.spellId,gafscmsg.spellLevel)
+                return True
+            self._castingSpell = tempCastingSpell
+            self._spellScriptTemporaryBuffer = SpellScriptBuffer(self._castingSpell)
+            if isinstance(msg, GameActionFightCloseCombatMessage):
+                self._castingSpell.weaponId = GameActionFightCloseCombatMessage(msg).weaponGenericId
+                self._playSpellScriptStep = self.appendPlaySpellScriptStep(7,gafscmsg.sourceId,gafscmsg.destinationCellId,gafscmsg.spellId,gafscmsg.spellLevel,self._spellScriptTemporaryBuffer)
+            elif not self._castingSpell.isCriticalFail:
+                fxScriptId = self._castingSpell.spell.getScriptId(self._castingSpell.isCriticalHit)
+                self._playSpellScriptStep = self.appendPlaySpellScriptStep(fxScriptId,gafscmsg.sourceId,gafscmsg.destinationCellId,gafscmsg.spellId,gafscmsg.spellLevel,self._spellScriptTemporaryBuffer)
+            self._stepsBuffer = self._stepsBuffer.extend(self._spellScriptTemporaryBuffer.stepsBuffer)
+            if gafscmsg.critical != FightSpellCastCriticalEnum.CRITICAL_FAIL:
+                spellTargetEntities = []
+                spellTargetEntities.append(gafscmsg.targetId)
+                CurrentPlayedFighterManager().getSpellCastManagerById(gafscmsg.sourceId).castSpell(gafscmsg.spellId,gafscmsg.spellLevel,spellTargetEntities)
+            critical = gafscmsg.critical == FightSpellCastCriticalEnum.CRITICAL_HIT
+            entities = FightEntitiesFrame.getCurrentInstance().entities
+            fighter = entities[gafscmsg.sourceId]
+            if closeCombatWeaponId != 0:
+                self.appendStep(FightCloseCombatStep(gafscmsg.sourceId,closeCombatWeaponId,gafscmsg.critical,gafscmsg.verboseCast))
+            else:
+                self.appendStep(FightSpellCastStep(gafscmsg.sourceId,gafscmsg.destinationCellId,sourceCellId,gafscmsg.spellId,gafscmsg.spellLevel,gafscmsg.critical,gafscmsg.verboseCast))
+            if gafscmsg.sourceId == CurrentPlayedFighterManager().currentFighterId:
+                KernelEventsManager().processCallback(TriggerHookList.FightSpellCast)
+            playerManager = PlayedCharacterManager()
+            isAlly = False
+            if entities and entities[playerManager.id] and fighter and entities[playerManager.id].spawnInfo.teamId == fighter.spawnInfo.teamId:
+                isAlly = True
+            if isAlly and not self._castingSpell.isCriticalFail:
+                isSpellKnown = False
+                for spellKnown in playerManager.spellsInventory:
+                    if spellKnown.id == gafscmsg.spellId:
+                        isSpellKnown = True
+                        playerSpellLevel = spellKnown.spellLevelInfos
+                spell = Spell.getSpellById(gafscmsg.spellId)
+                castSpellLevel = spell.getSpellLevel(gafscmsg.spellLevel)
+                if castSpellLevel.globalCooldown:
+                    if isSpellKnown and gafscmsg.sourceId != playerManager.id:
+                        if castSpellLevel.globalCooldown == -1:
+                            gcdValue = playerSpellLevel.minCastInterval
+                        else:
+                            gcdValue = castSpellLevel.globalCooldown
+                        spellCastManager = CurrentPlayedFighterManager().getSpellCastManagerById(playerManager.id)
+                        if spellCastManager:
+                            spellManager = spellCastManager.getSpellManagerBySpellId(gafscmsg.spellId,True,castSpellLevel.id)
+                            if spellCastManager.currentTurn > 1:
+                                if spellManager and spellManager.cooldown <= gcdValue:
                                     self.appendStep(FightSpellCooldownVariationStep(playerManager.id,0,gafscmsg.spellId,gcdValue,True))
-                        simf = Kernel.getWorker().getFrame(SpellInventoryManagementFrame)
-                        for fighterInfos in entities:
-                            gfsc = GameFightSpellCooldown()
-                            if fighterInfos is GameFightEntityInformation and gafscmsg.sourceId != fighterInfos.contextualId:
-                                gfsc.initGameFightSpellCooldown(gafscmsg.spellId,castSpellLevel.globalCooldown)
-                                simf.addSpellGlobalCoolDownInfo(fighterInfos.contextualId,gfsc)
-                            elif fighterInfos is GameFightCharacterInformations and gafscmsg.sourceId != fighterInfos.contextualId and fighterInfos.contextualId == playerManager.id:
-                                gfsc.initGameFightSpellCooldown(gafscmsg.spellId,castSpellLevel.globalCooldown)
-                                simf.addSpellGlobalCoolDownInfo(fighterInfos.contextualId,gfsc)
-                if not fightEntitiesFrame:
-                    return True
-                playerId = PlayedCharacterManager().id
-                sourceInfos = fightEntitiesFrame.getEntityInfos(gafscmsg.sourceId)
-                playerInfos = fightEntitiesFrame.getEntityInfos(playerId)
-                if critical:
-                    if gafscmsg.sourceId == playerId:
-                        SpeakingItemManager().triggerEvent(SpeakingItemManager.SPEAK_TRIGGER_CC_OWNER)
-                    elif playerInfos and sourceInfos.spawnInfo.teamId == playerInfos.spawnInfo.teamId:
-                        SpeakingItemManager().triggerEvent(SpeakingItemManager.SPEAK_TRIGGER_CC_ALLIED)
-                    else:
-                        SpeakingItemManager().triggerEvent(SpeakingItemManager.SPEAK_TRIGGER_CC_ENEMY)
-                elif gafscmsg.critical == FightSpellCastCriticalEnum.CRITICAL_FAIL:
-                    if gafscmsg.sourceId == playerId:
-                        SpeakingItemManager().triggerEvent(SpeakingItemManager.SPEAK_TRIGGER_EC_OWNER)
-                    elif playerInfos and sourceInfos.spawnInfo.teamId == playerInfos.spawnInfo.teamId:
-                        SpeakingItemManager().triggerEvent(SpeakingItemManager.SPEAK_TRIGGER_EC_ALLIED)
-                    else:
-                        SpeakingItemManager().triggerEvent(SpeakingItemManager.SPEAK_TRIGGER_EC_ENEMY)
-                target = fightEntitiesFrame.getEntityInfos(gafscmsg.targetId)
-                if target and target.disposition.cellId == -1:
-                    for ei in self._castingSpell.spellRank.effects:
-                        if ei.hasOwnProperty("zoneShape"):
-                            shape = ei.zoneShape
-                    if shape == SpellShapeEnum.P:
-                        ts = DofusEntities.getEntity(gafscmsg.targetId)
-                        if ts and self._castingSpell and self._castingSpell.targetedCell:
-                            targetedCell = InteractiveCellManager().getCell(self._castingSpell.targetedCell.cellId)
-                            cellPos = targetedCell.parent.localToGlobal(Point(targetedCell.x + targetedCell.width / 2,targetedCell.y + targetedCell.height / 2))
-                            ts.x = cellPos.x
-                            ts.y = cellPos.y
-                self._castingSpells.append(self._castingSpell)
+                            else:
+                                self.appendStep(FightSpellCooldownVariationStep(playerManager.id,0,gafscmsg.spellId,gcdValue,True))
+                    simf = Kernel().getWorker().getFrame(SpellInventoryManagementFrame)
+                    for fighterInfos in entities:
+                        gfsc = GameFightSpellCooldown()
+                        if fighterInfos is GameFightEntityInformation and gafscmsg.sourceId != fighterInfos.contextualId:
+                            gfsc.initGameFightSpellCooldown(gafscmsg.spellId,castSpellLevel.globalCooldown)
+                            simf.addSpellGlobalCoolDownInfo(fighterInfos.contextualId,gfsc)
+                        elif fighterInfos is GameFightCharacterInformations and gafscmsg.sourceId != fighterInfos.contextualId and fighterInfos.contextualId == playerManager.id:
+                            gfsc.initGameFightSpellCooldown(gafscmsg.spellId,castSpellLevel.globalCooldown)
+                            simf.addSpellGlobalCoolDownInfo(fighterInfos.contextualId,gfsc)
+            if not fightEntitiesFrame:
                 return True
+            playerId = PlayedCharacterManager().id
+            sourceInfos = fightEntitiesFrame.getEntityInfos(gafscmsg.sourceId)
+            playerInfos = fightEntitiesFrame.getEntityInfos(playerId)
+            if critical:
+                if gafscmsg.sourceId == playerId:
+                    SpeakingItemManager().triggerEvent(SpeakingItemManager.SPEAK_TRIGGER_CC_OWNER)
+                elif playerInfos and sourceInfos.spawnInfo.teamId == playerInfos.spawnInfo.teamId:
+                    SpeakingItemManager().triggerEvent(SpeakingItemManager.SPEAK_TRIGGER_CC_ALLIED)
+                else:
+                    SpeakingItemManager().triggerEvent(SpeakingItemManager.SPEAK_TRIGGER_CC_ENEMY)
+            elif gafscmsg.critical == FightSpellCastCriticalEnum.CRITICAL_FAIL:
+                if gafscmsg.sourceId == playerId:
+                    SpeakingItemManager().triggerEvent(SpeakingItemManager.SPEAK_TRIGGER_EC_OWNER)
+                elif playerInfos and sourceInfos.spawnInfo.teamId == playerInfos.spawnInfo.teamId:
+                    SpeakingItemManager().triggerEvent(SpeakingItemManager.SPEAK_TRIGGER_EC_ALLIED)
+                else:
+                    SpeakingItemManager().triggerEvent(SpeakingItemManager.SPEAK_TRIGGER_EC_ENEMY)
+            target = fightEntitiesFrame.getEntityInfos(gafscmsg.targetId)
+            if target and target.disposition.cellId == -1:
+                for ei in self._castingSpell.spellRank.effects:
+                    if ei.hasOwnProperty("zoneShape"):
+                        shape = ei.zoneShape
+                if shape == SpellShapeEnum.P:
+                    ts = DofusEntities.getEntity(gafscmsg.targetId)
+                    if ts and self._castingSpell and self._castingSpell.targetedCell:
+                        targetedCell = InteractiveCellManager().getCell(self._castingSpell.targetedCell.cellId)
+                        cellPos = targetedCell.parent.localToGlobal(Point(targetedCell.x + targetedCell.width / 2,targetedCell.y + targetedCell.height / 2))
+                        ts.x = cellPos.x
+                        ts.y = cellPos.y
+            self._castingSpells.append(self._castingSpell)
+            return True
+            
         if isinstance(msg, GameMapMovementMessage):
-                gmmmsg = msg
-                self.keepInMindToUpdateMovementArea()
-                self.fighterHasMoved(gmmmsg)
-                return True
+            gmmmsg = msg
+            self.keepInMindToUpdateMovementArea()
+            self.fighterHasMoved(gmmmsg)
+            return True
+        
         if isinstance(msg, FighterStatsListMessage):
-                fslmsg = msg
-                self.appendStep(FightFighterStatsListStep(fslmsg.stats))
-                return True
+            fslmsg = msg
+            self.appendStep(FightFighterStatsListStep(fslmsg.stats))
+            return True
+        
         if isinstance(msg, GameActionFightPointsVariationMessage):
-                gafpvmsg = msg
-                self.appendPointsVariationStep(gafpvmsg.targetId,gafpvmsg.actionId,gafpvmsg.delta)
-                return True
+            gafpvmsg = msg
+            self.appendPointsVariationStep(gafpvmsg.targetId,gafpvmsg.actionId,gafpvmsg.delta)
+            return True
+            
         if isinstance(msg, GameActionFightLifeAndShieldPointsLostMessage):
-                gaflasplmsg = msg
-                self.appendStep(FightShieldPointsVariationStep(gaflasplmsg.targetId,-gaflasplmsg.shieldLoss,gaflasplmsg.elementId))
-                self.appendStep(FightLifeVariationStep(gaflasplmsg.targetId,-gaflasplmsg.loss,-gaflasplmsg.permanentDamages,gaflasplmsg.elementId))
-                return True
+            gaflasplmsg = msg
+            self.appendStep(FightShieldPointsVariationStep(gaflasplmsg.targetId,-gaflasplmsg.shieldLoss,gaflasplmsg.elementId))
+            self.appendStep(FightLifeVariationStep(gaflasplmsg.targetId,-gaflasplmsg.loss,-gaflasplmsg.permanentDamages,gaflasplmsg.elementId))
+            return True
+        
         if isinstance(msg, GameActionFightLifePointsGainMessage):
-                gaflpgmsg = msg
-                self.appendStep(FightLifeVariationStep(gaflpgmsg.targetId,gaflpgmsg.delta,0,ElementEnum.ELEMENT_NONE))
-                return True
+            gaflpgmsg = msg
+            self.appendStep(FightLifeVariationStep(gaflpgmsg.targetId,gaflpgmsg.delta,0,ElementEnum.ELEMENT_NONE))
+            return True
+            
         if isinstance(msg, GameActionFightLifePointsLostMessage):
-                gaflplmsg = msg
-                self.appendStep(FightLifeVariationStep(gaflplmsg.targetId,-gaflplmsg.loss,-gaflplmsg.permanentDamages,gaflplmsg.elementId))
-                return True
+            gaflplmsg = msg
+            self.appendStep(FightLifeVariationStep(gaflplmsg.targetId,-gaflplmsg.loss,-gaflplmsg.permanentDamages,gaflplmsg.elementId))
+            return True
+        
         if isinstance(msg, GameActionFightTeleportOnSameMapMessage):
-                gaftosmmsg = msg
-                self.keepInMindToUpdateMovementArea()
-                self.fighterHasBeenTeleported(gaftosmmsg)
-                return True
+            gaftosmmsg = msg
+            self.keepInMindToUpdateMovementArea()
+            self.fighterHasBeenTeleported(gaftosmmsg)
+            return True
+        
         if isinstance(msg, GameActionFightExchangePositionsMessage):
-                gafepmsg = msg
-                self.keepInMindToUpdateMovementArea()
-                self.fightersExchangedPositions(gafepmsg)
-                return True
+            gafepmsg = msg
+            self.keepInMindToUpdateMovementArea()
+            self.fightersExchangedPositions(gafepmsg)
+            return True
+        
         if isinstance(msg, GameActionFightSlideMessage):
-                gafsmsg = msg
-                self.keepInMindToUpdateMovementArea()
-                fightContextFrame_gafsmsg = Kernel.getWorker().getFrame(FightContextFrame)
-                slideTargetInfos = fightContextFrame_gafsmsg.entitiesFrame.getEntityInfos(gafsmsg.targetId)
-                if slideTargetInfos:
-                    fightContextFrame_gafsmsg.saveFighterPosition(gafsmsg.targetId,gafsmsg.endCellId)
-                    self.appendSlideStep(gafsmsg.targetId,gafsmsg.startCellId,gafsmsg.endCellId)
-                return True
+            gafsmsg = msg
+            self.keepInMindToUpdateMovementArea()
+            fightContextFrame_gafsmsg = Kernel().getWorker().getFrame(FightContextFrame)
+            slideTargetInfos = fightContextFrame_gafsmsg.entitiesFrame.getEntityInfos(gafsmsg.targetId)
+            if slideTargetInfos:
+                fightContextFrame_gafsmsg.saveFighterPosition(gafsmsg.targetId,gafsmsg.endCellId)
+                self.appendSlideStep(gafsmsg.targetId,gafsmsg.startCellId,gafsmsg.endCellId)
+            return True
+        
         if isinstance(msg, GameActionFightSummonMessage):
-                gafsnmsg = msg
-                self.keepInMindToUpdateMovementArea()
-                self.fighterSummonEntity(gafsnmsg)
-                return True
+            gafsnmsg = msg
+            self.keepInMindToUpdateMovementArea()
+            self.fighterSummonEntity(gafsnmsg)
+            return True
+        
         if isinstance(msg, GameActionFightMultipleSummonMessage):
-                gafmsmsg = msg
-                self.keepInMindToUpdateMovementArea()
-                gffinfos = GameFightFighterInformations()
-                self.appendStep(FightUpdateStatStep(gffinfos.contextualId,gffinfos.stats.characteristics.characteristics))
-                gffinfos = self.fighterSummonMultipleEntities(gafmsmsg,gffinfos)
-                return True
+            gafmsmsg = msg
+            self.keepInMindToUpdateMovementArea()
+            gffinfos = GameFightFighterInformations()
+            self.appendStep(FightUpdateStatStep(gffinfos.contextualId,gffinfos.stats.characteristics.characteristics))
+            gffinfos = self.fighterSummonMultipleEntities(gafmsmsg,gffinfos)
+            return True
+        
         if isinstance(msg, RefreshCharacterStatsMessage):
-                rcmsg = msg
-                fightEntitiesFrame = FightEntitiesFrame.getCurrentInstance()
-                if fightEntitiesFrame:
-                    infos = fightEntitiesFrame.getEntityInfos(rcmsg.fighterId)
-                    if infos:
-                        infos.stats = rcmsg.stats
-                self.appendStep(FightUpdateStatStep(rcmsg.fighterId,rcmsg.stats.characteristics.characteristics))
-                return True
+            rcmsg = msg
+            fightEntitiesFrame = FightEntitiesFrame.getCurrentInstance()
+            if fightEntitiesFrame:
+                infos = fightEntitiesFrame.getEntityInfos(rcmsg.fighterId)
+                if infos:
+                    infos.stats = rcmsg.stats
+            self.appendStep(FightUpdateStatStep(rcmsg.fighterId,rcmsg.stats.characteristics.characteristics))
+            return True
+        
         if isinstance(msg, GameActionFightMarkCellsMessage):
-                gafmcmsg = msg
-                self.cellsHasBeenMarked(gafmcmsg)
-                return True
+            gafmcmsg = msg
+            self.cellsHasBeenMarked(gafmcmsg)
+            return True
+        
         if isinstance(msg, GameActionFightUnmarkCellsMessage):
-                gafucmsg = msg
-                self.appendStep(FightUnmarkCellsStep(gafucmsg.markId))
-                return True
+            gafucmsg = msg
+            self.appendStep(FightUnmarkCellsStep(gafucmsg.markId))
+            return True
+        
         if isinstance(msg, GameActionFightChangeLookMessage):
-                gafclmsg = msg
-                self.appendStep(FightChangeLookStep(gafclmsg.targetId,EntityLookAdapter.fromNetwork(gafclmsg.entityLook)))
-                return True
+            gafclmsg = msg
+            self.appendStep(FightChangeLookStep(gafclmsg.targetId,EntityLookAdapter.fromNetwork(gafclmsg.entityLook)))
+            return True
+        
         if isinstance(msg, GameActionFightInvisibilityMessage):
-                gafimsg = msg
-                self.keepInMindToUpdateMovementArea()
-                fightEntitiesFrame = FightEntitiesFrame.getCurrentInstance()
-                inviInfo = fightEntitiesFrame.getEntityInfos(gafimsg.targetId)
-                if GameDebugManager().buffsDebugActivated:
-                    logger.debug("[BUFFS DEBUG] Changement de l\'invisibilit� de " + gafimsg.targetId + " (cellule " + inviInfo.disposition.cellId + ")" + " nouvel �tat " + gafimsg.state)
-                fightEntitiesFrame.setLastKnownEntityPosition(gafimsg.targetId,inviInfo.disposition.cellId)
-                fightEntitiesFrame.setLastKnownEntityMovementPoint(gafimsg.targetId,0,True)
-                self.appendStep(FightChangeVisibilityStep(gafimsg.targetId,gafimsg.state))
-                return True
+            gafimsg = msg
+            self.keepInMindToUpdateMovementArea()
+            fightEntitiesFrame = FightEntitiesFrame.getCurrentInstance()
+            inviInfo = fightEntitiesFrame.getEntityInfos(gafimsg.targetId)
+            if GameDebugManager().buffsDebugActivated:
+                logger.debug("[BUFFS DEBUG] Changement de l\'invisibilit� de " + gafimsg.targetId + " (cellule " + inviInfo.disposition.cellId + ")" + " nouvel �tat " + gafimsg.state)
+            fightEntitiesFrame.setLastKnownEntityPosition(gafimsg.targetId,inviInfo.disposition.cellId)
+            fightEntitiesFrame.setLastKnownEntityMovementPoint(gafimsg.targetId,0,True)
+            self.appendStep(FightChangeVisibilityStep(gafimsg.targetId,gafimsg.state))
+            return True
+        
         if isinstance(msg, GameActionFightLeaveMessage):
-                gaflmsg = msg
-                self.keepInMindToUpdateMovementArea()
-                self.fighterHasLeftBattle(gaflmsg)
-                return True
+            gaflmsg = msg
+            self.keepInMindToUpdateMovementArea()
+            self.fighterHasLeftBattle(gaflmsg)
+            return True
+        
         if isinstance(msg, GameActionFightDeathMessage):
-                gafdmsg = msg
-                self.keepInMindToUpdateMovementArea()
-                self.fighterHasBeenKilled(gafdmsg)
-                return True
+            gafdmsg = msg
+            self.keepInMindToUpdateMovementArea()
+            self.fighterHasBeenKilled(gafdmsg)
+            return True
+        
         if isinstance(msg, GameActionFightVanishMessage):
-                gafvmsg = msg
-                self.keepInMindToUpdateMovementArea()
-                self.appendStep(FightVanishStep(gafvmsg.targetId,gafvmsg.sourceId))
-                entityInfosv = FightEntitiesFrame.getCurrentInstance().getEntityInfos(gafvmsg.targetId)
-                if isinstance(entityInfosv, GameFightFighterInformations):
-                    entityInfosv.spawnInfo.alive = False
-                fightContextFrame_gafvmsg = Kernel.getWorker().getFrame(FightContextFrame)
-                if fightContextFrame_gafvmsg:
-                    fightContextFrame_gafvmsg.outEntity(gafvmsg.targetId)
-                FightEntitiesFrame.getCurrentInstance().updateRemovedEntity(gafvmsg.targetId)
-                return True
+            gafvmsg = msg
+            self.keepInMindToUpdateMovementArea()
+            self.appendStep(FightVanishStep(gafvmsg.targetId,gafvmsg.sourceId))
+            entityInfosv = FightEntitiesFrame.getCurrentInstance().getEntityInfos(gafvmsg.targetId)
+            if isinstance(entityInfosv, GameFightFighterInformations):
+                entityInfosv.spawnInfo.alive = False
+            fightContextFrame_gafvmsg = Kernel().getWorker().getFrame(FightContextFrame)
+            if fightContextFrame_gafvmsg:
+                fightContextFrame_gafvmsg.outEntity(gafvmsg.targetId)
+            FightEntitiesFrame.getCurrentInstance().updateRemovedEntity(gafvmsg.targetId)
+            return True
+        
         if isinstance(msg, GameActionFightTriggerEffectMessage):
-                return True
+            return True
+        
         if isinstance(msg, GameActionFightDispellEffectMessage):
-                gafdiemsg = msg
-                if GameDebugManager().buffsDebugActivated:
-                    logger.debug("[BUFFS DEBUG] Message de retrait du buff " + gafdiemsg.boostUID + " de " + gafdiemsg.targetId)
-                self.appendStep(FightDispellEffectStep(gafdiemsg.targetId,gafdiemsg.boostUID))
-                return True
+            gafdiemsg = msg
+            if GameDebugManager().buffsDebugActivated:
+                logger.debug("[BUFFS DEBUG] Message de retrait du buff " + gafdiemsg.boostUID + " de " + gafdiemsg.targetId)
+            self.appendStep(FightDispellEffectStep(gafdiemsg.targetId,gafdiemsg.boostUID))
+            return True
+        
         if isinstance(msg, GameActionFightDispellSpellMessage):
-                gafdsmsg = msg
-                if GameDebugManager().buffsDebugActivated:
-                    logger.debug("[BUFFS DEBUG] Message de retrait des buffs du sort " + gafdsmsg.spellId + " de " + gafdsmsg.targetId)
-                self.appendStep(FightDispellSpellStep(gafdsmsg.targetId,gafdsmsg.spellId,gafdsmsg.verboseCast))
-                return True
+            gafdsmsg = msg
+            if GameDebugManager().buffsDebugActivated:
+                logger.debug("[BUFFS DEBUG] Message de retrait des buffs du sort " + gafdsmsg.spellId + " de " + gafdsmsg.targetId)
+            self.appendStep(FightDispellSpellStep(gafdsmsg.targetId,gafdsmsg.spellId,gafdsmsg.verboseCast))
+            return True
+        
         if isinstance(msg, GameActionFightDispellMessage):
-                gafdimsg = msg
-                if GameDebugManager().buffsDebugActivated:
-                    logger.debug("[BUFFS DEBUG] Message de retrait de tous les buffs de " + gafdimsg.targetId)
-                self.appendStep(FightDispellStep(gafdimsg.targetId))
-                return True
+            gafdimsg = msg
+            if GameDebugManager().buffsDebugActivated:
+                logger.debug("[BUFFS DEBUG] Message de retrait de tous les buffs de " + gafdimsg.targetId)
+            self.appendStep(FightDispellStep(gafdimsg.targetId))
+            return True
+        
         if isinstance(msg, GameActionFightDodgePointLossMessage):
-                gafdplmsg = msg
-                self.appendPointsLossDodgeStep(gafdplmsg.targetId,gafdplmsg.actionId,gafdplmsg.amount)
-                return True
+            gafdplmsg = msg
+            self.appendPointsLossDodgeStep(gafdplmsg.targetId,gafdplmsg.actionId,gafdplmsg.amount)
+            return True
+        
         if isinstance(msg, GameActionFightSpellCooldownVariationMessage):
-                gafscvmsg = msg
-                self.appendStep(FightSpellCooldownVariationStep(gafscvmsg.targetId,gafscvmsg.actionId,gafscvmsg.spellId,gafscvmsg.value))
-                return True
+            gafscvmsg = msg
+            self.appendStep(FightSpellCooldownVariationStep(gafscvmsg.targetId,gafscvmsg.actionId,gafscvmsg.spellId,gafscvmsg.value))
+            return True
+            
         if isinstance(msg, GameActionFightSpellImmunityMessage):
-                gafsimsg = msg
-                self.appendStep(FightSpellImmunityStep(gafsimsg.targetId))
-                return True
+            gafsimsg = msg
+            self.appendStep(FightSpellImmunityStep(gafsimsg.targetId))
+            return True
+            
         if isinstance(msg, GameActionFightKillMessage):
-                gafkmsg = msg
-                self.appendStep(FightKillStep(gafkmsg.targetId,gafkmsg.sourceId))
-                return True
+            gafkmsg = msg
+            self.appendStep(FightKillStep(gafkmsg.targetId,gafkmsg.sourceId))
+            return True
+            
         if isinstance(msg, GameActionFightReduceDamagesMessage):
-                gafredmsg = msg
-                self.appendStep(FightReducedDamagesStep(gafredmsg.targetId,gafredmsg.amount))
-                return True
+            gafredmsg = msg
+            self.appendStep(FightReducedDamagesStep(gafredmsg.targetId,gafredmsg.amount))
+            return True
+            
         if isinstance(msg, GameActionFightReflectDamagesMessage):
-                gafrfdmsg = msg
-                self.appendStep(FightReflectedDamagesStep(gafrfdmsg.sourceId))
-                return True
+            gafrfdmsg = msg
+            self.appendStep(FightReflectedDamagesStep(gafrfdmsg.sourceId))
+            return True
+            
         if isinstance(msg, GameActionFightReflectSpellMessage):
-                gafrsmsg = msg
-                self.appendStep(FightReflectedSpellStep(gafrsmsg.targetId))
-                return True
+            gafrsmsg = msg
+            self.appendStep(FightReflectedSpellStep(gafrsmsg.targetId))
+            return True
+        
         if isinstance(msg, GameActionFightStealKamaMessage):
-                gafskmsg = msg
-                self.appendStep(FightStealingKamasStep(gafskmsg.sourceId,gafskmsg.targetId,gafskmsg.amount))
-                return True
+            gafskmsg = msg
+            self.appendStep(FightStealingKamasStep(gafskmsg.sourceId,gafskmsg.targetId,gafskmsg.amount))
+            return True
+            
         if isinstance(msg, GameActionFightTackledMessage):
-                gaftmsg = msg
-                if gaftmsg.sourceId == PlayedCharacterManager().id:
-                    SpeakingItemManager().triggerEvent(SpeakingItemManager.SPEAK_TRIGGER_PLAYER_TACKLED)
-                self.appendStep(FightTackledStep(gaftmsg.sourceId))
-                return True
+            gaftmsg = msg
+            if gaftmsg.sourceId == PlayedCharacterManager().id:
+                SpeakingItemManager().triggerEvent(SpeakingItemManager.SPEAK_TRIGGER_PLAYER_TACKLED)
+            self.appendStep(FightTackledStep(gaftmsg.sourceId))
+            return True
+            
         if isinstance(msg, GameActionFightTriggerGlyphTrapMessage):
-                if self._castingSpell:
-                    self._fightBattleFrame.process(SequenceEndMessage())
-                    self._fightBattleFrame.process(SequenceStartMessage())
-                    self._fightBattleFrame.currentSequenceFrame.process(msg)
-                    return True
-                gaftgtmsg = msg
-                self.fighterHasTriggeredGlyphOrTrap(gaftgtmsg)
+            if self._castingSpell:
+                self._fightBattleFrame.process(SequenceEndMessage())
+                self._fightBattleFrame.process(SequenceStartMessage())
+                self._fightBattleFrame.currentSequenceFrame.process(msg)
                 return True
+            gaftgtmsg = msg
+            self.fighterHasTriggeredGlyphOrTrap(gaftgtmsg)
+            return True
+            
         if isinstance(msg, GameActionFightActivateGlyphTrapMessage):
-                gafagtmsg = msg
-                self.appendStep(FightMarkActivateStep(gafagtmsg.markId,gafagtmsg.active))
-                return True
+            gafagtmsg = msg
+            self.appendStep(FightMarkActivateStep(gafagtmsg.markId,gafagtmsg.active))
+            return True
+            
         if isinstance(msg, GameActionFightDispellableEffectMessage):
-                gaftbmsg = msg
-                self.keepInMindToUpdateMovementArea()
-                self.fighterHasBeenBuffed(gaftbmsg)
-                return True
+            gaftbmsg = msg
+            self.keepInMindToUpdateMovementArea()
+            self.fighterHasBeenBuffed(gaftbmsg)
+            return True
+            
         if isinstance(msg, GameActionFightModifyEffectsDurationMessage):
-                gafmedmsg = msg
-                self.appendStep(FightModifyEffectsDurationStep(gafmedmsg.sourceId,gafmedmsg.targetId,gafmedmsg.delta))
-                return False
+            gafmedmsg = msg
+            self.appendStep(FightModifyEffectsDurationStep(gafmedmsg.sourceId,gafmedmsg.targetId,gafmedmsg.delta))
+            return False
+            
         if isinstance(msg, GameActionFightCarryCharacterMessage):
-                gafcchmsg = msg
-                self.keepInMindToUpdateMovementArea()
-                if gafcchmsg.cellId != -1:
-                    fightContextFrame_gafcchmsg = Kernel.getWorker().getFrame(FightContextFrame)
-                    fightContextFrame_gafcchmsg.saveFighterPosition(gafcchmsg.targetId,gafcchmsg.cellId)
-                    carried = DofusEntities.getEntity(gafcchmsg.targetId)
-                    carriedByCarried = carried.carriedEntity
-                    while(carriedByCarried)
-                        fightContextFrame_gafcchmsg.saveFighterPosition(carriedByCarried.id,gafcchmsg.cellId)
-                        carriedByCarried = carriedByCarried.carriedEntity
-                    self.appendStep(FightCarryCharacterStep(gafcchmsg.sourceId,gafcchmsg.targetId,gafcchmsg.cellId))
-                    self._stepsBuffer.append(CallbackStep(Callback(deleteTooltip,gafcchmsg.targetId)))
-                return False
+            gafcchmsg = msg
+            self.keepInMindToUpdateMovementArea()
+            if gafcchmsg.cellId != -1:
+                fightContextFrame_gafcchmsg = Kernel().getWorker().getFrame(FightContextFrame)
+                fightContextFrame_gafcchmsg.saveFighterPosition(gafcchmsg.targetId,gafcchmsg.cellId)
+                carried = DofusEntities.getEntity(gafcchmsg.targetId)
+                carriedByCarried = carried.carriedEntity
+                while carriedByCarried:
+                    fightContextFrame_gafcchmsg.saveFighterPosition(carriedByCarried.id,gafcchmsg.cellId)
+                    carriedByCarried = carriedByCarried.carriedEntity
+                self.appendStep(FightCarryCharacterStep(gafcchmsg.sourceId,gafcchmsg.targetId,gafcchmsg.cellId))
+                self._stepsBuffer.append(CallbackStep(Callback(deleteTooltip,gafcchmsg.targetId)))
+            return False
+            
         if isinstance(msg, GameActionFightThrowCharacterMessage):
-                gaftcmsg = msg
-                self.keepInMindToUpdateMovementArea()
-                throwCellId = self._castingSpell and self._castingSpell.targetedCell ? int(self._castingSpell.targetedCell.cellId) : int(gaftcmsg.cellId)
-                fightContextFrame_gaftcmsg = Kernel.getWorker().getFrame(FightContextFrame)
-                fightContextFrame_gaftcmsg.saveFighterPosition(gaftcmsg.targetId,throwCellId)
-                self.appendThrowCharacterStep(gaftcmsg.sourceId,gaftcmsg.targetId,throwCellId)
-                return False
+            gaftcmsg = msg
+            self.keepInMindToUpdateMovementArea()
+            throwCellId = int(self._castingSpell.targetedCell.cellId) if self._castingSpell and self._castingSpell.targetedCell else int(gaftcmsg.cellId)
+            fightContextFrame_gaftcmsg = Kernel().getWorker().getFrame(FightContextFrame)
+            fightContextFrame_gaftcmsg.saveFighterPosition(gaftcmsg.targetId,throwCellId)
+            self.appendThrowCharacterStep(gaftcmsg.sourceId,gaftcmsg.targetId,throwCellId)
+            return False
+        
         if isinstance(msg, GameActionFightDropCharacterMessage):
-                gafdcmsg = msg
-                self.keepInMindToUpdateMovementArea()
-                dropCellId = gafdcmsg.cellId
-                if dropCellId == -1 and self._castingSpell:
-                    dropCellId = self._castingSpell.targetedCell.cellId
-                self.appendThrowCharacterStep(gafdcmsg.sourceId,gafdcmsg.targetId,dropCellId)
-                return False
+            gafdcmsg = msg
+            self.keepInMindToUpdateMovementArea()
+            dropCellId = gafdcmsg.cellId
+            if dropCellId == -1 and self._castingSpell:
+                dropCellId = self._castingSpell.targetedCell.cellId
+            self.appendThrowCharacterStep(gafdcmsg.sourceId,gafdcmsg.targetId,dropCellId)
+            return False
+            
         if isinstance(msg, GameActionFightInvisibleDetectedMessage):
-                gafidMsg = msg
-                self.appendStep(FightInvisibleTemporarilyDetectedStepDofusEntities.getEntity(gafidMsg.sourceId)
-                FightEntitiesFrame.getCurrentInstance().setLastKnownEntityPosition(gafidMsg.targetId,gafidMsg.cellId)
-                FightEntitiesFrame.getCurrentInstance().setLastKnownEntityMovementPoint(gafidMsg.targetId,0)
-                return True
+            gafidMsg = msg
+            self.appendStep(FightInvisibleTemporarilyDetectedStepDofusEntities.getEntity(gafidMsg.sourceId))
+            FightEntitiesFrame.getCurrentInstance().setLastKnownEntityPosition(gafidMsg.targetId, gafidMsg.cellId)
+            FightEntitiesFrame.getCurrentInstance().setLastKnownEntityMovementPoint(gafidMsg.targetId,0)
+            return True
+            
         if isinstance(msg, GameFightTurnListMessage):
                 gftmsg = msg
                 self.appendStep(FightTurnListStep(gftmsg.ids,gftmsg.deadsIds))
@@ -741,19 +708,8 @@ class FightSequenceFrame(Frame, ISpellCastProvider):
         self.executeBuffer(callback)
     
     def fighterHasBeenKilled(self, gafdmsg:GameActionFightDeathMessage) -> None:
-        actorInfo:GameFightFighterInformations = None
-        gcai:GameContextActorInformations = None
-        playerId:float = None
-        sourceInfos:GameFightFighterInformations = None
-        targetInfos:GameFightFighterInformations = None
-        playerInfos:GameFightFighterInformations = None
         summonDestroyedWithSummoner:bool = False
         summonerIsMe:bool = False
-        step:ISequencable = None
-        summonerInfos:GameFightFighterInformations = None
-        summonedEntityInfos:GameFightMonsterInformations = None
-        monster:Monster = None
-        fighterInfos:GameFightFighterInformations = None
         entitiesDictionnary:dict = FightEntitiesFrame.getCurrentInstance().entities
         for gcai in entitiesDictionnary:
             if isinstance(gcai, GameFightFighterInformations):
@@ -766,10 +722,10 @@ class FightSequenceFrame(Frame, ISpellCastProvider):
         playerInfos = self.fightEntitiesFrame.getEntityInfos(playerId)
         summonDestroyedWithSummoner = False
         summonerIsMe = True
-        if targetInfos.stats.summoned and !(targetInfos is GameFightFighterNamedInformations) and !(targetInfos is GameFightEntityInformation):
+        if targetInfos.stats.summoned and not (targetInfos is GameFightFighterNamedInformations) and not (targetInfos is GameFightEntityInformation):
             summonerInfos = self.fightEntitiesFrame.getEntityInfos(targetInfos.stats.summoner)
-            summonDestroyedWithSummoner = summonerInfos == null or not summonerInfos.spawnInfo.alive
-            summonerIsMe = summonerInfos != null and summonerInfos == playerInfos
+            summonDestroyedWithSummoner = summonerInfos == None or not summonerInfos.spawnInfo.alive
+            summonerIsMe = summonerInfos != None and summonerInfos == playerInfos
         if not summonDestroyedWithSummoner and summonerIsMe:
             self.fightEntitiesFrame.addLastKilledAlly(targetInfos)
         if gafdmsg.targetId != self._fightBattleFrame.currentPlayerId and (self._fightBattleFrame.slaveId == gafdmsg.targetId or self._fightBattleFrame.masterId == gafdmsg.targetId):
@@ -795,7 +751,7 @@ class FightSequenceFrame(Frame, ISpellCastProvider):
         if not entityDeathStepAlreadyInBuffer:
             self.appendStep(FightDeathStep(gafdmsg.targetId))
         entityInfos:GameContextActorInformations = FightEntitiesFrame.getCurrentInstance().getEntityInfos(gafdmsg.targetId)
-        ftf:FightTurnFrame = Kernel.getWorker().getFrame(FightTurnFrame)
+        ftf:FightTurnFrame = Kernel().getWorker().getFrame(FightTurnFrame)
         updatePath:bool = ftf and ftf.myTurn and gafdmsg.targetId != playerId and TackleUtil.isTackling(playerInfos,targetInfos,ftf.lastPath)
         currentPlayedFighterManager:CurrentPlayedFighterManager = CurrentPlayedFighterManager()
         if isinstance(entityInfos, GameFightMonsterInformations):
@@ -815,7 +771,7 @@ class FightSequenceFrame(Frame, ISpellCastProvider):
                 if currentPlayedFighterManager.checkPlayableEntity(fighterInfos.stats.summoner):
                     currentPlayedFighterManager.removeSummonedCreature(fighterInfos.stats.summoner)
                     SpellWrapper.refreshAllPlayerSpellHolder(fighterInfos.stats.summoner)
-        fightContextFrame:FightContextFrame = Kernel.getWorker().getFrame(FightContextFrame)
+        fightContextFrame:FightContextFrame = Kernel().getWorker().getFrame(FightContextFrame)
         if fightContextFrame:
             fightContextFrame.outEntity(gafdmsg.targetId)
         FightEntitiesFrame.getCurrentInstance().updateRemovedEntity(gafdmsg.targetId)
@@ -867,7 +823,7 @@ class FightSequenceFrame(Frame, ISpellCastProvider):
             for effect in spellLevel.effects:
                 if effect.effectId == ActionIds.ACTION_FIGHT_ADD_TRAP_CASTING_SPELL or effect.effectId == ActionIds.ACTION_FIGHT_ADD_GLYPH_CASTING_SPELL or effect.effectId == ActionIds.ACTION_FIGHT_ADD_GLYPH_CASTING_SPELL_ENDTURN:
                     spellId = effect.parameter0
-                    spellGrade = Spell.getSpellByIdspellId).getSpellLevel(effect.parameter1.grade
+                    spellGrade = Spell.getSpellById(spellId).getSpellLevel(effect.parameter1.grade)
         self.appendStep(FightMarkCellsStep(gafmcmsg.mark.markId,gafmcmsg.mark.markType,gafmcmsg.mark.cells,spellId,spellGrade,gafmcmsg.mark.markTeamId,gafmcmsg.mark.markimpactCell,gafmcmsg.sourceId))
     
     def fighterSummonMultipleEntities(self, gafmsmsg:GameActionFightMultipleSummonMessage, gffinfos:GameFightFighterInformations) -> GameFightFighterInformations:
@@ -880,24 +836,28 @@ class FightSequenceFrame(Frame, ISpellCastProvider):
         for summons in gafmsmsg.summons:
             for sum in summons.summons:
                 if isinstance(summons.spawnInformation, SpawnCharacterInformation):
-                        gffninfos = GameFightFighterNamedInformations()
-                        gffninfos.initGameFightFighterNamedInformationssum.informations.contextualId,sum.informations.disposition,summons.look,sum,summons.wave,summons.stats,null,(summons.spawnInformation
-                        gffinfos = gffninfos
+                    gffninfos = GameFightFighterNamedInformations()
+                    gffninfos.init(sum.informations.contextualId, sum.informations.disposition,summons.look, sum, summons.wave, summons.stats,None, summons.spawnInformation)
+                    gffinfos = gffninfos
+                    
                 if isinstance(summons.spawnInformation, SpawnCompanionInformation):
-                        gfeinfos = GameFightEntityInformation()
-                        gfeinfos.initGameFightEntityInformationsum.informations.contextualId,sum.informations.disposition,summons.look,sum,summons.wave,summons.stats,null,(summons.spawnInformation.modelId,summons.spawnInformation.level,summons.spawnInformation
-                        gffinfos = gfeinfos
+                    gfeinfos = GameFightEntityInformation()
+                    gfeinfos.init(sum.informations.contextualId,sum.informations.disposition,summons.look,sum,summons.wave,summons.stats,None,summons.spawnInformation.modelId,summons.spawnInformation.level,summons.spawnInformation)
+                    gffinfos = gfeinfos
+                    
                 if isinstance(summons.spawnInformation, SpawnMonsterInformation):
-                        gfminfos = GameFightMonsterInformations()
-                        gfminfos.initGameFightMonsterInformationssum.informations.contextualId,sum.informations.disposition,summons.look,sum,summons.wave,summons.stats,null,(summons.spawnInformation.creatureGenericId,summons.spawnInformation
-                        gffinfos = gfminfos
+                    gfminfos = GameFightMonsterInformations()
+                    gfminfos.init(sum.informations.contextualId,sum.informations.disposition,summons.look,sum,summons.wave,summons.stats,None,summons.spawnInformation.creatureGenericId,summons.spawnInformation)
+                    gffinfos = gfminfos
+                    
                 if isinstance(summons.spawnInformation, SpawnScaledMonsterInformation):
-                        gfsminfos = GameFightMonsterInformations()
-                        gfsminfos.initGameFightMonsterInformationssum.informations.contextualId,sum.informations.disposition,summons.look,sum,summons.wave,summons.stats,null,(summons.spawnInformation.creatureGenericId,0,summons.spawnInformation
-                        gffinfos = gfsminfos
+                    gfsminfos = GameFightMonsterInformations()
+                    gfsminfos.init(sum.informations.contextualId,sum.informations.disposition,summons.look,sum,summons.wave,summons.stats,None,summons.spawnInformation.creatureGenericId,0,summons.spawnInformation)
+                    gffinfos = gfsminfos
+                    
                 else:
-                        gffinfos = GameFightFighterInformations()
-                        gffinfos.initGameFightFighterInformations(sum.informations.contextualId,sum.informations.disposition,summons.look,sum,summons.wave,summons.stats)
+                    gffinfos = GameFightFighterInformations()
+                    gffinfos.initGameFightFighterInformations(sum.informations.contextualId,sum.informations.disposition,summons.look,sum,summons.wave,summons.stats)
                 self.summonEntity(gffinfos,gafmsmsg.sourceId,gafmsmsg.actionId)
         return gffinfos
     
@@ -911,13 +871,13 @@ class FightSequenceFrame(Frame, ISpellCastProvider):
         for summon in gafsnmsg.summons:
             if gafsnmsg.actionId == ActionIds.ACTION_CHARACTER_ADD_ILLUSION_RANDOM or gafsnmsg.actionId == ActionIds.ACTION_CHARACTER_ADD_ILLUSION_MIRROR:
                 fightEntities = self.fightEntitiesFrame.entities
-                for(fighterId in fightEntities)
+                for fighterId in fightEntities:
                     infos = self.fightEntitiesFrame.getEntityInfos(fighterId)
                     if not self.fightEntitiesFrame.entityIsIllusion(fighterId) and infos.hasOwnProperty("name") and summon.hasOwnProperty("name") and infos["name"] == summon["name"]:
                         summon.stats.summoner = infos.contextualId
                 gfsfrsmsg = GameFightShowFighterRandomStaticPoseMessage()
                 gfsfrsmsg.initGameFightShowFighterRandomStaticPoseMessage(summon)
-                Kernel.getWorker().getFrame(FightEntitiesFrame).process(gfsfrsmsg)
+                Kernel().getWorker().getFrame(FightEntitiesFrame).process(gfsfrsmsg)
                 illusionCreature = DofusEntities.getEntity(summon.contextualId)
                 if illusionCreature:
                     illusionCreature.visible = False
@@ -926,7 +886,7 @@ class FightSequenceFrame(Frame, ISpellCastProvider):
                 self.summonEntity(summon,gafsnmsg.sourceId,gafsnmsg.actionId)
     
     def fightersExchangedPositions(self, gafepmsg:GameActionFightExchangePositionsMessage) -> None:
-        fightContextFrame:FightContextFrame = Kernel.getWorker().getFrame(FightContextFrame)
+        fightContextFrame:FightContextFrame = Kernel().getWorker().getFrame(FightContextFrame)
         if not self.isSpellTeleportingToPreviousPosition():
             fightContextFrame.saveFighterPosition(gafepmsg.sourceId,gafepmsg.targetCellId)
         else:
@@ -937,7 +897,7 @@ class FightSequenceFrame(Frame, ISpellCastProvider):
         self.appendStep(FightExchangePositionsStep(gafepmsg.sourceId,gafepmsg.casterCellId,gafepmsg.targetId,gafepmsg.targetCellId))
     
     def fighterHasBeenTeleported(self, gaftosmmsg:GameActionFightTeleportOnSameMapMessage) -> None:
-        fightContextFrame:FightContextFrame = Kernel.getWorker().getFrame(FightContextFrame)
+        fightContextFrame:FightContextFrame = Kernel().getWorker().getFrame(FightContextFrame)
         if not self.isSpellTeleportingToPreviousPosition():
             if not self._teleportThroughPortal:
                 fightContextFrame.saveFighterPosition(gaftosmmsg.targetId,gaftosmmsg.cellId)
@@ -955,16 +915,16 @@ class FightSequenceFrame(Frame, ISpellCastProvider):
             KernelEventsManager().processCallback(TriggerHookList.PlayerFightMove)
         movementPath:MovementPath = MapMovementAdapter.getClientMovement(gmmmsg.keyMovements)
         movementPathCells:list[int] = movementPath.getCells()
-        fightContextFrame:FightContextFrame = Kernel.getWorker().getFrame(FightContextFrame)
+        fightContextFrame:FightContextFrame = Kernel().getWorker().getFrame(FightContextFrame)
         nbCells:int = len(movementPathCells)
         movingEntity:TiphonSprite = DofusEntities.getEntity(gmmmsg.actorId)
-        for(i = 1 i < nbCells i += 1)
+        for i in range(nbCells):
             fightContextFrame.saveFighterPosition(gmmmsg.actorId,movementPathCells[i])
             carriedEntity = movingEntity.carriedEntity
-            while(carriedEntity)
+            while carriedEntity:
                 fightContextFrame.saveFighterPosition(carriedEntity.id,movementPathCells[i])
                 carriedEntity = carriedEntity.carriedEntity
-        fscf:FightSpellCastFrame = Kernel.getWorker().getFrame(FightSpellCastFrame)
+        fscf:FightSpellCastFrame = Kernel().getWorker().getFrame(FightSpellCastFrame)
         if fscf:
             fscf.entityMovement(gmmmsg.actorId)
         self._stepsBuffer.append(CallbackStep(Callback(deleteTooltip,gmmmsg.actorId)))
@@ -977,7 +937,7 @@ class FightSequenceFrame(Frame, ISpellCastProvider):
         self._castingSpell = CastingSpell()
         self._castingSpell.casterId = gaftgtmsg.sourceId
         triggeringCharacterInfos:GameFightFighterInformations = FightEntitiesFrame.getCurrentInstance().getEntityInfos(gaftgtmsg.triggeringCharacterId)
-        triggeredCellId:int = !not triggeringCharacterInfos ? int(triggeringCharacterInfos.disposition.cellId) : -1
+        triggeredCellId = triggeringCharacterInfos.disposition.cellId if triggeringCharacterInfos else -1
         mark:MarkInstance = MarkedCellsManager().getMarkDatas(gaftgtmsg.markId)
         if triggeredCellId != -1:
             if mark:
@@ -996,53 +956,53 @@ class FightSequenceFrame(Frame, ISpellCastProvider):
         if mark and mark.markType == GameActionMarkTypeEnum.PORTAL:
             self._teleportThroughPortal = True
     
-   def fighterHasBeenBuffed(self, gaftbmsg:GameActionFightDispellableEffectMessage) -> None:
-      actionId:int = 0
-      if GameDebugManager().buffsDebugActivated:
-         e = Effect.getEffectById(gaftbmsg.actionId)
-         description = ""
-         if e != null:
-               description = e.description
-         logger.debug("\r[BUFFS DEBUG] Message de nouveau buff \'" + description + "\' (" + gaftbmsg.actionId + ") lanc� par " + gaftbmsg.sourceId + " sur " + gaftbmsg.effect.targetId + " (uid " + gaftbmsg.effect.uid + ", sort " + gaftbmsg.effect.spellId + ", dur�e " + gaftbmsg.effect.turnDuration + ", desenvoutable " + gaftbmsg.effect.dispelable + ", buff parent " + gaftbmsg.effect.parentBoostUid + ")")
-      for castedSpell in self._castingSpells:
-         if castedSpell.spell.id == gaftbmsg.effect.spellId and castedSpell.casterId == gaftbmsg.sourceId:
-               myCastingSpell = castedSpell
-      if not myCastingSpell:
-         if gaftbmsg.actionId == ActionIdProtocol.ACTION_CHARACTER_UPDATE_BOOST:
-               myCastingSpell = CastingSpell(False)
-         else:
-               myCastingSpell = CastingSpell(self._castingSpell == null)
-         if self._castingSpell:
-               myCastingSpell.castingSpellId = self._castingSpell.castingSpellId
-               if self._castingSpell.spell and self._castingSpell.spell.id == gaftbmsg.effect.spellId:
-                  myCastingSpell.spellRank = self._castingSpell.spellRank
-         myCastingSpell.spell = Spell.getSpellById(gaftbmsg.effect.spellId)
-         myCastingSpell.casterId = gaftbmsg.sourceId
-      buffEffect:AbstractFightDispellableEffect = gaftbmsg.effect
-      buff:BasicBuff = BuffManager.makeBuffFromEffect(buffEffect,myCastingSpell,gaftbmsg.actionId)
-      if isinstance(buff, StateBuff):
-         sb = buff
-         if sb.actionId == ActionIds.ACTION_FIGHT_DISABLE_STATE:
-               step = FightLeavingStateStep(sb.targetId,sb.stateId,buff)
-         else:
-               step = FightEnteringStateStep(sb.targetId,sb.stateId,sb.effect.durationString,buff)
-         if myCastingSpell != null:
-               step.castingSpellId = myCastingSpell.castingSpellId
-         self._stepsBuffer.append(step)
-        if isinstance(buff, StatBuff):
-            buff.isRecent = True
-        if isinstance(buffEffect, FightTemporaryBoostEffect):
-            actionId = gaftbmsg.actionId
-            if actionId != ActionIds.ACTION_CHARACTER_MAKE_INVISIBLE and actionId != ActionIdProtocol.ACTION_CHARACTER_UPDATE_BOOST and actionId != ActionIds.ACTION_CHARACTER_CHANGE_LOOK and actionId != ActionIds.ACTION_CHARACTER_CHANGE_COLOR and actionId != ActionIds.ACTION_CHARACTER_ADD_APPEARANCE and actionId != ActionIds.ACTION_FIGHT_SET_STATE:
-                if GameDebugManager().detailedFightLog_showEverything:
-                    buff.effect.visibleInFightLog = True
-                if GameDebugManager().detailedFightLog_showBuffsInUi:
-                    buff.effect.visibleInBuffUi = True
-                self.appendStep(FightTemporaryBoostStep(gaftbmsg.effect.targetId,buff.effect.description,buff.effect.duration,buff.effect.durationString,buff.effect.visibleInFightLog,buff))
-            if actionId == ActionIds.ACTION_CHARACTER_BOOST_SHIELD:
-                self.appendStep(FightShieldPointsVariationStepgaftbmsg.effect.targetId,(buff
-        self.appendStep(FightDisplayBuffStep(buff))
-    
+    def fighterHasBeenBuffed(self, gaftbmsg:GameActionFightDispellableEffectMessage) -> None:
+        actionId:int = 0
+        if GameDebugManager().buffsDebugActivated:
+            e = Effect.getEffectById(gaftbmsg.actionId)
+            description = ""
+            if e != None:
+                description = e.description
+            logger.debug("\r[BUFFS DEBUG] Message de nouveau buff \'" + description + "\' (" + gaftbmsg.actionId + ") lanc� par " + gaftbmsg.sourceId + " sur " + gaftbmsg.effect.targetId + " (uid " + gaftbmsg.effect.uid + ", sort " + gaftbmsg.effect.spellId + ", dur�e " + gaftbmsg.effect.turnDuration + ", desenvoutable " + gaftbmsg.effect.dispelable + ", buff parent " + gaftbmsg.effect.parentBoostUid + ")")
+        for castedSpell in self._castingSpells:
+            if castedSpell.spell.id == gaftbmsg.effect.spellId and castedSpell.casterId == gaftbmsg.sourceId:
+                myCastingSpell = castedSpell
+        if not myCastingSpell:
+            if gaftbmsg.actionId == ActionIdProtocol.ACTION_CHARACTER_UPDATE_BOOST:
+                myCastingSpell = CastingSpell(False)
+            else:
+                myCastingSpell = CastingSpell(self._castingSpell == None)
+            if self._castingSpell:
+                myCastingSpell.castingSpellId = self._castingSpell.castingSpellId
+                if self._castingSpell.spell and self._castingSpell.spell.id == gaftbmsg.effect.spellId:
+                    myCastingSpell.spellRank = self._castingSpell.spellRank
+            myCastingSpell.spell = Spell.getSpellById(gaftbmsg.effect.spellId)
+            myCastingSpell.casterId = gaftbmsg.sourceId
+        buffEffect:AbstractFightDispellableEffect = gaftbmsg.effect
+        buff:BasicBuff = BuffManager.makeBuffFromEffect(buffEffect,myCastingSpell,gaftbmsg.actionId)
+        if isinstance(buff, StateBuff):
+            sb = buff
+            if sb.actionId == ActionIds.ACTION_FIGHT_DISABLE_STATE:
+                step = FightLeavingStateStep(sb.targetId,sb.stateId,buff)
+            else:
+                step = FightEnteringStateStep(sb.targetId,sb.stateId,sb.effect.durationString,buff)
+            if myCastingSpell != None:
+                step.castingSpellId = myCastingSpell.castingSpellId
+            self._stepsBuffer.append(step)
+            if isinstance(buff, StatBuff):
+                buff.isRecent = True
+            if isinstance(buffEffect, FightTemporaryBoostEffect):
+                actionId = gaftbmsg.actionId
+                if actionId != ActionIds.ACTION_CHARACTER_MAKE_INVISIBLE and actionId != ActionIdProtocol.ACTION_CHARACTER_UPDATE_BOOST and actionId != ActionIds.ACTION_CHARACTER_CHANGE_LOOK and actionId != ActionIds.ACTION_CHARACTER_CHANGE_COLOR and actionId != ActionIds.ACTION_CHARACTER_ADD_APPEARANCE and actionId != ActionIds.ACTION_FIGHT_SET_STATE:
+                    if GameDebugManager().detailedFightLog_showEverything:
+                        buff.effect.visibleInFightLog = True
+                    if GameDebugManager().detailedFightLog_showBuffsInUi:
+                        buff.effect.visibleInBuffUi = True
+                    self.appendStep(FightTemporaryBoostStep(gaftbmsg.effect.targetId,buff.effect.description,buff.effect.duration,buff.effect.durationString,buff.effect.visibleInFightLog,buff))
+                if actionId == ActionIds.ACTION_CHARACTER_BOOST_SHIELD:
+                    self.appendStep(FightShieldPointsVariationStepgaftbmsg.effect.targetId,buff)
+            self.appendStep(FightDisplayBuffStep(buff))
+        
     def executeBuffer(self, callback:FunctionType) -> None:
         allowHitAnim:bool = False
         allowSpellEffects:bool = False
@@ -1061,96 +1021,93 @@ class FightSequenceFrame(Frame, ISpellCastProvider):
         for step in self._stepsBuffer:
             if isinstance(step, FightMarkTriggeredStep):
                 waitHitEnd = True
-        allowHitAnim = OptionManager.getOptionManager("dofus").getOption("allowHitAnim")
-        allowSpellEffects = OptionManager.getOptionManager("dofus").getOption("allowSpellEffects")
         startStep = []
         endStep = []
         entityAttaqueAnimWait = dict()
-        lifeLoseSum = dict(True)
-        lifeLoseLastStep = dict(True)
-        shieldLoseSum = dict(True)
-        shieldLoseLastStep = dict(True)
+        lifeLoseSum = dict()
+        lifeLoseLastStep = dict()
+        shieldLoseSum = dict()
+        shieldLoseLastStep = dict()
         deathNumber = 0
-        for(i = len(self._stepsBuffer) --i >= 0 )
+        for i in range(len(self._stepsBuffer), 0, -1):
             if removed and step:
                 step.clear()
             removed = True
             step = self._stepsBuffer[i]
             if isinstance(step, PlayAnimationStep):
-                    animStep = step
-                    if animStep.animation.find(AnimationEnum.ANIM_HIT) != -1:
-                        if not allowHitAnim:
-                            continue
-                        animStep.waitEvent = waitHitEnd
-                        if animStep.target == null or deathStepRef[EntitiesManager).getEntityID(animStep.target] or hitStep.find(animStep.target):
-                            continue
-                        if animStep.animation != AnimationEnum.ANIM_HIT and animStep.animation != AnimationEnum.ANIM_HIT_CARRYING and not animStep.target.hasAnimation(animStep.animation,1):
-                            animStep.animation = AnimationEnum.ANIM_HIT
-                        hitStep.append(animStep.target)
-                    if self._castingSpell and self._castingSpell.casterId < 0:
-                        if entityAttaqueAnimWait[animStep.target]:
-                            cleanedBuffer.unshift(entityAttaqueAnimWait[animStep.target])
-                            del entityAttaqueAnimWait[animStep.target]
-                        if animStep.animation.find(AnimationEnum.ANIM_ATTAQUE_BASE) != -1:
-                            entityAttaqueAnimWait[animStep.target] = WaitAnimationEventStep(animStep)
+                animStep = step
+                if animStep.animation.find(AnimationEnum.ANIM_HIT) != -1:
+                    if not allowHitAnim:
+                        continue
+                    animStep.waitEvent = waitHitEnd
+                    if animStep.target == None or deathStepRef[EntitiesManager().getEntityID(animStep.target)] or hitStep.find(animStep.target):
+                        continue
+                    if animStep.animation != AnimationEnum.ANIM_HIT and animStep.animation != AnimationEnum.ANIM_HIT_CARRYING and not animStep.target.hasAnimation(animStep.animation,1):
+                        animStep.animation = AnimationEnum.ANIM_HIT
+                    hitStep.append(animStep.target)
+                if self._castingSpell and self._castingSpell.casterId < 0:
+                    if entityAttaqueAnimWait[animStep.target]:
+                        cleanedBuffer.unshift(entityAttaqueAnimWait[animStep.target])
+                        del entityAttaqueAnimWait[animStep.target]
+                    if animStep.animation.find(AnimationEnum.ANIM_ATTAQUE_BASE) != -1:
+                        entityAttaqueAnimWait[animStep.target] = WaitAnimationEventStep(animStep)
+                            
             if isinstance(step, FightDeathStep):
-                    deathStep = step
-                    deathStepRef[deathStep.entityId] = True
-                    deadEntityIndex = self._fightBattleFrame.targetedEntities.find(deathStep.entityId)
-                    if deadEntityIndex != -1:
-                        self._fightBattleFrame.targetedEntities.splice(deadEntityIndex,1)
-                        TooltipManager.hide("tooltipOverEntity_" + deathStep.entityId)
-                    deathNumber += 1
+                deathStep = step
+                deathStepRef[deathStep.entityId] = True
+                deadEntityIndex = self._fightBattleFrame.targetedEntities.find(deathStep.entityId)
+                if deadEntityIndex != -1:
+                    self._fightBattleFrame.targetedEntities.splice(deadEntityIndex,1)
+                deathNumber += 1
+                    
             if isinstance(step, FightActionPointsVariationStep):
-               fapvs = step
-               if not fapvs.voluntarlyUsed:
-               startStep.append(fapvs)
-               removed = False
-               continue
+                fapvs = step
+                if not fapvs.voluntarlyUsed:
+                    startStep.append(fapvs)
+                removed = False
+                continue
                
             if isinstance(step, FightShieldPointsVariationStep):
-               fspvs = step
-               fspvsTarget = fspvs.target
-               if fspvsTarget == null:
-               if fspvs.value < 0:
-                  fspvs.virtual = True
-                  if shieldLoseSum[fspvsTarget] == null:
+                fspvs = step
+                fspvsTarget = fspvs.target
+                if fspvsTarget == None:
+                    break
+                if fspvs.value < 0:
+                    fspvs.virtual = True
+                    if shieldLoseSum[fspvsTarget] == None:
                         shieldLoseSum[fspvsTarget] = 0
-                  shieldLoseSum[fspvsTarget] += fspvs.value
-                  shieldLoseLastStep[fspvsTarget] = fspvs
-                  
+                    shieldLoseSum[fspvsTarget] += fspvs.value
+                    shieldLoseLastStep[fspvsTarget] = fspvs
+                                
             if isinstance(step, FightLifeVariationStep):
-               flvs = step
-               flvsTarget = flvs.target
-               if flvsTarget == null:
-               if flvs.delta < 0:
-                  loseLifeStep[flvsTarget] = flvs
-               if lifeLoseSum[flvsTarget] == null:
-                  lifeLoseSum[flvsTarget] = 0
-               lifeLoseSum[flvsTarget] += flvs.delta
-               lifeLoseLastStep[flvsTarget] = flvs
+                flvs = step
+                flvsTarget = flvs.target
+                if flvsTarget == None:
+                    break
+                if flvs.delta < 0:
+                    loseLifeStep[flvsTarget] = flvs
+                if lifeLoseSum[flvsTarget] == None:
+                    lifeLoseSum[flvsTarget] = 0
+                lifeLoseSum[flvsTarget] += flvs.delta
+                lifeLoseLastStep[flvsTarget] = flvs
                     
-            if isinstance(step, AddGfxEntityStep):
-            if isinstance(step, AddGfxInLineStep):
-            if isinstance(step, AddGlyphGfxStep):
-            if isinstance(step, ParableGfxMovementStep):
-            if isinstance(step, AddWorldEntityStep):
-                    if !(not allowSpellEffects and PlayedCharacterManager().isFighting):
+            if isinstance(step, (AddGfxEntityStep, AddGfxInLineStep, AddGlyphGfxStep, ParableGfxMovementStep, AddWorldEntityStep)):
+                if not (not allowSpellEffects and PlayedCharacterManager().isFighting):
                     continue
             removed = False
-            cleanedBuffer.unshift(step)
+            cleanedBuffer.insert(0, step)
         self._fightBattleFrame.deathPlayingNumber = deathNumber
         for b in cleanedBuffer:
-            if b is FightLifeVariationStep and lifeLoseSum[b.target] == 0 and shieldLoseSum[b.target] != null:
+            if b is FightLifeVariationStep and lifeLoseSum[b.target] == 0 and shieldLoseSum[b.target] != None:
                 b.skipTextEvent = True
-        for(index in lifeLoseSum)
-            if index != "null" and lifeLoseSum[index] != 0:
+        for index in lifeLoseSum:
+            if index != "None" and lifeLoseSum[index] != 0:
                 idx = cleanedBuffer.find(lifeLoseLastStep[index])
-                cleanedBuffer.splice(idx,0,FightLossAnimStep(index,lifeLoseSum[index],FightLifeVariationStep.COLOR))
+                cleanedBuffer.splice(idx,0,FightLossAnimStep(index, lifeLoseSum[index], FightLifeVariationStep.COLOR))
             lifeLoseLastStep[index] = -1
             lifeLoseSum[index] = 0
-        for(index in shieldLoseSum)
-            if index != "null" and shieldLoseSum[index] != 0:
+        for index in shieldLoseSum:
+            if index != "None" and shieldLoseSum[index] != 0:
                 idx2 = cleanedBuffer.find(shieldLoseLastStep[index])
                 cleanedBuffer.splice(idx2,0,FightLossAnimStep(index,shieldLoseSum[index],FightShieldPointsVariationStep.COLOR))
             shieldLoseLastStep[index] = -1
@@ -1158,16 +1115,16 @@ class FightSequenceFrame(Frame, ISpellCastProvider):
         for waitStep in entityAttaqueAnimWait:
             endStep.append(waitStep)
         if allowHitAnim:
-            for(loseLifeTarget in loseLifeStep)
+            for loseLifeTarget in loseLifeStep:
                 if hitStep.find(loseLifeTarget) == -1:
-                    for(j = 0 j < len(cleanedBuffer) j += 1)
+                    for j in range(len(cleanedBuffer)):
                         if cleanedBuffer[j] == loseLifeStep[loseLifeTarget]:
-                            cleanedBuffer.splice(j,0,PlayAnimationSteploseLifeTarget
+                            cleanedBuffer[j] = PlayAnimationSteploseLifeTarget
         cleanedBuffer = startStep.extend(cleanedBuffer).extend(endStep)
         for step in cleanedBuffer:
             self._sequencer.addStep(step)
         self.clearBuffer()
-        if callback != null and not self._parent:
+        if callback != None and not self._parent:
             self._sequenceEndCallback = callback
             self._permanentTooltipsCallback = Callback(self.showPermanentTooltips,cleanedBuffer)
             self._sequencer.addEventListener(SequencerEvent.SEQUENCE_END,self.onSequenceEnd)
@@ -1179,7 +1136,7 @@ class FightSequenceFrame(Frame, ISpellCastProvider):
             else:
                 logger.warn("Waiting sub sequence init end (" + self._subSequenceWaitingCount + " seq)")
         else:
-            if callback != null:
+            if callback != None:
                 callback()
             self._parent.subSequenceInitDone()
     
@@ -1204,7 +1161,7 @@ class FightSequenceFrame(Frame, ISpellCastProvider):
         self._stepsBuffer.append(CallbackStep(Callback(deleteTooltip,fighterId)))
         if destinationCell != -1:
             step = FightTeleportStep(fighterId,MapPoint.fromCellId(destinationCell))
-            if self.castingSpell != null:
+            if self.castingSpell != None:
                 step.castingSpellId = self.castingSpell.castingSpellId
             self._stepsBuffer.append(step)
     
@@ -1213,31 +1170,29 @@ class FightSequenceFrame(Frame, ISpellCastProvider):
             return
         self._stepsBuffer.append(CallbackStep(Callback(deleteTooltip,fighterId)))
         step:FightEntitySlideStep = FightEntitySlideStep(fighterId,MapPoint.fromCellId(startCell),MapPoint.fromCellId(endCell))
-        if self.castingSpell != null:
+        if self.castingSpell != None:
             step.castingSpellId = self.castingSpell.castingSpellId
         self._stepsBuffer.append(step)
     
     def pushPointsVariationStep(self, fighterId:float, actionId:int, delta:int) -> None:
         step:IFightStep = None
         if actionId  == ActionIdProtocol.ACTION_CHARACTER_ACTION_POINTS_USE:
-                step = FightActionPointsVariationStep(fighterId,delta,True)
-        if actionId  == ActionIds.ACTION_CHARACTER_ACTION_POINTS_LOST:
-        if actionId  == ActionIds.ACTION_CHARACTER_ACTION_POINTS_WIN:
-                step = FightActionPointsVariationStep(fighterId,delta,False)
+            step = FightActionPointsVariationStep(fighterId,delta,True)
+        if actionId  == ActionIds.ACTION_CHARACTER_ACTION_POINTS_LOST or actionId  == ActionIds.ACTION_CHARACTER_ACTION_POINTS_WIN:
+            step = FightActionPointsVariationStep(fighterId,delta,False)
         if actionId  == ActionIdProtocol.ACTION_CHARACTER_MOVEMENT_POINTS_USE:
-                step = FightMovementPointsVariationStep(fighterId,delta,True)
-        if actionId  == ActionIds.ACTION_CHARACTER_MOVEMENT_POINTS_LOST:
-        if actionId  == ActionIds.ACTION_CHARACTER_MOVEMENT_POINTS_WIN:
-                step = FightMovementPointsVariationStep(fighterId,delta,False)
+            step = FightMovementPointsVariationStep(fighterId,delta,True)
+        if actionId  == ActionIds.ACTION_CHARACTER_MOVEMENT_POINTS_LOST or actionId  == ActionIds.ACTION_CHARACTER_MOVEMENT_POINTS_WIN:
+            step = FightMovementPointsVariationStep(fighterId,delta,False)
         else:
-                logger.warn("Points variation with unsupported action (" + actionId + "), skipping.")
-                return
-        if self.castingSpell != null:
+            logger.warn("Points variation with unsupported action (" + actionId + "), skipping.")
+            return
+        if self.castingSpell != None:
             step.castingSpellId = self.castingSpell.castingSpellId
         self._stepsBuffer.append(step)
     
     def pushStep(self, step:AbstractSequencable) -> None:
-        if self.castingSpell != null:
+        if self.castingSpell != None:
             step.castingSpellId = self.castingSpell.castingSpellId
         self._stepsBuffer.append(step)
     
@@ -1250,20 +1205,20 @@ class FightSequenceFrame(Frame, ISpellCastProvider):
         else:
                 logger.warn("Points dodge with unsupported action (" + actionId + "), skipping.")
                 return
-        if self.castingSpell != null:
+        if self.castingSpell != None:
             step.castingSpellId = self.castingSpell.castingSpellId
         self._stepsBuffer.append(step)
     
     def pushPlaySpellScriptStep(self, fxScriptId:int, fighterId:float, cellId:int, spellId:int, spellRank:int, stepBuff:SpellScriptBuffer = None) -> FightPlaySpellScriptStep:
-        step:FightPlaySpellScriptStep = FightPlaySpellScriptStep(fxScriptId,fighterId,cellId,spellId,spellRank,!not stepBuff ? stepBuff : self)
-        if self.castingSpell != null:
+        step:FightPlaySpellScriptStep = FightPlaySpellScriptStep(fxScriptId,fighterId,cellId,spellId,spellRank, stepBuff if stepBuff else self)
+        if self.castingSpell != None:
             step.castingSpellId = self.castingSpell.castingSpellId
         self._stepsBuffer.append(step)
         return step
     
     def pushThrowCharacterStep(self, fighterId:float, carriedId:float, cellId:int) -> None:
         step:FightThrowCharacterStep = FightThrowCharacterStep(fighterId,carriedId,cellId)
-        if self.castingSpell != null:
+        if self.castingSpell != None:
             step.castingSpellId = self.castingSpell.castingSpellId
             step.portals = self.castingSpell.portalMapPoints
             step.portalIds = self.castingSpell.portalIds
@@ -1275,25 +1230,16 @@ class FightSequenceFrame(Frame, ISpellCastProvider):
     def keepInMindToUpdateMovementArea(self) -> None:
         if self._updateMovementAreaAtSequenceEnd:
             return
-        fightTurnFrame:FightTurnFrame = Kernel.getWorker().getFrame(FightTurnFrame)
+        fightTurnFrame:FightTurnFrame = Kernel().getWorker().getFrame(FightTurnFrame)
         if fightTurnFrame and fightTurnFrame.myTurn:
             self._updateMovementAreaAtSequenceEnd = True
     
     def updateMovementArea(self) -> None:
         if not self._updateMovementAreaAtSequenceEnd:
             return
-        fightTurnFrame:FightTurnFrame = Kernel.getWorker().getFrame(FightTurnFrame)
+        fightTurnFrame:FightTurnFrame = Kernel().getWorker().getFrame(FightTurnFrame)
         if fightTurnFrame and fightTurnFrame.myTurn:
-            fightTurnFrame.drawMovementArea()
             self._updateMovementAreaAtSequenceEnd = False
-    
-    def showTargetTooltip(self, pEntityId:float) -> None:
-        fcf:FightContextFrame = Kernel.getWorker().getFrame(FightContextFrame)
-        entityInfos:GameFightFighterInformations = self.fightEntitiesFrame.getEntityInfos(pEntityId)
-        if entityInfos.spawnInfo.alive and self._castingSpell and (self._castingSpell.casterId == PlayedCharacterManager().id or fcf.battleFrame.playingSlaveEntity) and pEntityId != self.castingSpell.casterId and self._fightBattleFrame.targetedEntities.find(pEntityId) == -1 and fcf.hiddenEntites.find(pEntityId) == -1:
-            self._fightBattleFrame.targetedEntities.append(pEntityId)
-            if OptionManager.getOptionManager("dofus").getOption("showPermanentTargetsTooltips") == True:
-                fcf.displayEntityTooltip(pEntityId)
     
     def isSpellTeleportingToPreviousPosition(self) -> bool:
         spellEffect:EffectInstanceDice = None
@@ -1303,27 +1249,13 @@ class FightSequenceFrame(Frame, ISpellCastProvider):
                     return True
         return False
     
-    def showPermanentTooltips(self, pSteps:list) -> None:
-        step:AbstractSequencable = None
-        targetId:float = None
-        if not self.fightEntitiesFrame:
-            return
-        targetInfo:GameContextActorInformations = None
-        for step in pSteps:
-            if step is IFightStep and !(step is FightTurnListStep):
-                for targetId in step.targets:
-                    if self.fightEntitiesFrame.hasEntity(targetId):
-                        targetInfo = self.fightEntitiesFrame.getEntityInfos(targetId)
-                        if targetInfo and targetInfo.disposition.cellId != -1:
-                            self.showTargetTooltip(targetId)
-    
     def summonEntity(self, entity:GameFightFighterInformations, sourceId:float, actionId:int) -> None:
         entityInfosS:GameContextActorInformations = None
         summonedEntityInfosS:GameFightMonsterInformations = None
         monsterS:Monster = None
         gfsgmsg:GameFightShowFighterMessage = GameFightShowFighterMessage()
         gfsgmsg.initGameFightShowFighterMessage(entity)
-        Kernel.getWorker().getFrame(FightEntitiesFrame).process(gfsgmsg)
+        Kernel().getWorker().getFrame(FightEntitiesFrame).process(gfsgmsg)
         if ActionIdHelper.isRevive(actionId):
             self.fightEntitiesFrame.removeLastKilledAlly(entity.spawnInfo.teamId)
         summonedCreature:Sprite = DofusEntities.getEntity(entity.contextualId)
