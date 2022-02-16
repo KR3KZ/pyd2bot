@@ -102,7 +102,6 @@ class Monster:
    
    _undiatricalName:str
    
-
    
    @property
    def type(self) -> 'MonsterRace':

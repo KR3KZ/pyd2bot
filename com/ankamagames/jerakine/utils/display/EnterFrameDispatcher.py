@@ -1,6 +1,7 @@
-from com.ankamagames.jerakine.logger.Logger import Logger
-from time import perf_counter
+
 from types import FunctionType
+from time import perf_counter
+from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 from com.ankamagames.jerakine.network.messages.Worker import Worker
 logger = Logger(__name__)

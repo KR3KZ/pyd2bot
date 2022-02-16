@@ -120,7 +120,7 @@ patterns = {
 SWITCH_CASE_PATTERN = r"\s*(switch\(.*\)\s*\n?\{\s*(?:.|\n)+break;\s*\n\s*(?:default:)?(?:[^}]|\n)*\})"
 CASE_PATTERN1 = "(?P<spaces>\s*)case (?P<testvar>\S+) is (?P<testvalue>\S+):"
 CASE_PATTERN2 = "(?P<spaces>\s*)case (?P<testvalue>\S+):"
-INDENT_SIZE = 4
+INDENT_SIZE = 3
 
 def processCaseBlock(block, case_pattern, testvar=None):
     blockLines = block.split("\n")
@@ -328,5 +328,5 @@ def parseFile(file_p, out_p):
 ROOTDIR = pathlib.Path(os.path.dirname(__file__))
 # parseFolderFiles("AS3ToPythonConverter/scripts", "AS3ToPythonConverter/connectionType")
 t = perf_counter()
-parseFile(ROOTDIR / "target.as", ROOTDIR / "FightSpellCastCriticalEnum.py")
+parseFile(ROOTDIR / "target.as", ROOTDIR / "EffectZone.py")
 print("parsing took:", perf_counter() - t)

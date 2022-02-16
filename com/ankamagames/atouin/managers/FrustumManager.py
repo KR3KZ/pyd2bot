@@ -1,7 +1,7 @@
 import random
 from com.ankamagames.atouin.AtouinConstants import AtouinConstants
 from com.ankamagames.atouin.data.map.Cell import Cell
-from com.ankamagames.atouin.data.map.map import Map
+from com.ankamagames.atouin.data.map.Map import Map
 from com.ankamagames.atouin.managers.MapDisplayManager import MapDisplayManager
 from com.ankamagames.atouin.messages.AdjacentMapClickMessage import AdjacentMapClickMessage
 from com.ankamagames.atouin.messages.CellClickMessage import CellClickMessage

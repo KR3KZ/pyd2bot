@@ -13,6 +13,8 @@ from com.ankamagames.dofus.kernel.net.ConnectionsHandler import ConnectionsHandl
 from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerManager
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
 from com.ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEntities
+from com.ankamagames.dofus.logic.game.fight.fightEvents.FightEventsHelper import FightEventsHelper
+from com.ankamagames.dofus.logic.game.fight.frames import FightSequenceFrame
 from com.ankamagames.dofus.logic.game.fight.frames.FightBattleFrame import FightBattleFrame
 from com.ankamagames.dofus.logic.game.fight.frames.FightEntitiesFrame import FightEntitiesFrame
 from com.ankamagames.dofus.logic.game.fight.frames.FightPreparationFrame import FightPreparationFrame
@@ -70,6 +72,7 @@ from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.messages.Frame import Frame
 from com.ankamagames.jerakine.messages.Message import Message
 from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
+from com.ankamagames.jerakine.sequencer.SerialSequencer import SerialSequencer
 from com.ankamagames.jerakine.types.enums.Priority import Priority
 from com.ankamagames.jerakine.types.positions.MapPoint import MapPoint
 from com.ankamagames.jerakine.utils.memory.WeakReference import WeakReference
@@ -149,7 +152,7 @@ class FightContextFrame(Frame):
       self._fightersPositionsHistory = dict()
       self._fightersRoundStartPosition = dict()
       super().__init__()
-      DamagePreview.init()
+      # DamagePreview.init()
    
    def saveResults(self, resultsDescr:object) -> str:
       key:str = self.FIGHT_RESULT_KEY_PREFIX + str(self.fightResultId)
@@ -219,7 +222,7 @@ class FightContextFrame(Frame):
       return self._fightersPositionsHistory
    
    def pushed(self) -> bool:
-      currentCell = -1
+      self.currentCell = -1
       self._entitiesFrame = FightEntitiesFrame()
       self._preparationFrame = FightPreparationFrame(self)
       self._battleFrame = FightBattleFrame()
@@ -233,7 +236,7 @@ class FightContextFrame(Frame):
       if isinstance(fighterInfos, GameFightFighterNamedInformations):
          return fighterInfos.name
       if isinstance(fighterInfos, GameFightMonsterInformations):
-         return Monster.getMonsterById(fighterInfos.name)
+         return Monster.getMonsterById(fighterInfos.creatureGenericId)
       if isinstance(fighterInfos, GameFightEntityInformation):
          return "Companion"
       if isinstance(fighterInfos, GameFightTaxCollectorInformations):
@@ -242,7 +245,7 @@ class FightContextFrame(Frame):
          return "Unknown Fighter Type"
    
    def getFighterLevel(self, fighterId:float) -> int:
-      fighterInfos:GameFightFighterInformations = self.getFighterInfos(fighterId)
+      fighterInfos = self.getFighterInfos(fighterId)
       if not fighterInfos:
          return 0
       if isinstance(fighterInfos, GameFightMutantInformations):
@@ -272,20 +275,10 @@ class FightContextFrame(Frame):
             return 0
       
    def process(self, msg:Message) -> bool:
-      i:int = 0
-      num:int = 0
-      numEffects:int = 0
-      timeBeforeStart2:int = 0
-      timeBeforeStart:int = 0
-      resultIndex:int = 0
-      isSpectator:bool = False
-      currentWinner:int = 0
-      numIdols:int = 0
-      j:int = 0
-      
+          
+          
       if isinstance(msg, GameFightStartingMessage):
          gfsmsg = msg
-         MapDisplayManager().activeIdentifiedElements(False)
          FightEventsHelper.reset()
          self.fightType = gfsmsg.fightType
          self._fightAttackerId = gfsmsg.attackerId
@@ -460,8 +453,8 @@ class FightContextFrame(Frame):
          FightEventsHelper.sendAllFightEvent(True)
          PlayedCharacterManager().isFighting = False
          PlayedCharacterManager().fightId = -1
-         SpellWrapper.removeAllSpellWrapperBut(PlayedCharacterManager().id,SecureCenter.ACCESS_KEY)
-         SpellWrapper.resetAllCoolDown(PlayedCharacterManager().id,SecureCenter.ACCESS_KEY)
+         SpellWrapper.removeAllSpellWrapperBut(PlayedCharacterManager().id, SecureCenter.ACCESS_KEY)
+         SpellWrapper.resetAllCoolDown(PlayedCharacterManager().id, SecureCenter.ACCESS_KEY)
          SpellModifiersManager().destroy()
          if gfemsg.results == None:
             pass
@@ -480,7 +473,7 @@ class FightContextFrame(Frame):
                resultEntry = temp[i]
             if isinstance(resultEntry, FightResultPlayerListEntry):
                   id = resultEntry.id
-                  frew = FightResultEntry,self._entitiesFrame.getEntityInfos(id)
+                  frew = FightResultEntry, self._entitiesFrame.getEntityInfos(id)
                   frew.alive = FightResultPlayerListEntry(resultEntry).alive
             if isinstance(resultEntry, FightResultTaxCollectorListEntry):
                   id = resultEntry.id

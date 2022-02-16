@@ -1,16 +1,15 @@
 
    
 from com.ankamagames.jerakine.logger.Logger import Logger
-from com.ankamagames.atouin.data.map.map import Map
+from com.ankamagames.atouin.data.map.Map import Map
 from com.ankamagames.dofus.internalDatacenter.stats.stat import Stat
 from com.ankamagames.dofus.kernel.Kernel import Kernel
 from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManager
 from com.ankamagames.atouin.managers.EntitiesManager import EntitiesManager
-from com.ankamagames.dofus.logic.game.fight.frames.fightEntitiesFrame import FightEntitiesFrame
+from com.ankamagames.dofus.logic.game.fight.frames.FightEntitiesFrame import FightEntitiesFrame
 from com.ankamagames.dofus.network.messages.game.context.EntityDispositionInformations import EntityDispositionInformations
 from com.ankamagames.dofus.network.types.game.context.fight.GameFightFighterInformations import GameFightFighterInformations
 from com.ankamagames.dofus.network.types.game.context.fight.GameFightMonsterInformations import GameFightMonsterInformations
-from pyd2bot.bot import IBot
 from damageCalculation.tools.StatIds import StatIds
 from com.ankamagames.atouin.data.map.Cell import Cell
 from com.ankamagames.jerakine.types.positions.MapPoint import MapPoint

@@ -5,7 +5,7 @@ from com.ankamagames.atouin.utils.DataMapProvider import DataMapProvider
 from com.ankamagames.jerakine.types.positions.MapPoint import MapPoint
 if TYPE_CHECKING:
     from com.ankamagames.atouin.data.map.Cell import Cell
-    from com.ankamagames.atouin.data.map.map import Map
+    from com.ankamagames.atouin.data.map.Map import Map
 logger = Logger(__name__)
 
 

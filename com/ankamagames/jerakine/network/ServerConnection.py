@@ -28,6 +28,7 @@ from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 logger = Logger(__name__)
 
 
+
 class ServerConnection(IServerConnection):
 
    DEBUG_VERBOSE:bool = True

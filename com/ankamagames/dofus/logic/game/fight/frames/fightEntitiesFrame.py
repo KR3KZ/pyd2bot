@@ -1,5 +1,4 @@
 from com.ankamagames.dofus.datacenter.world.SubArea import SubArea
-from com.ankamagames.dofus.internalDatacenter.dataEnum import DataEnum
 from com.ankamagames.dofus.internalDatacenter.world.WorldPointWrapper import WorldPointWrapper
 from com.ankamagames.dofus.kernel.Kernel import Kernel
 from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerManager
@@ -7,6 +6,8 @@ from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManage
 from com.ankamagames.dofus.logic.game.common.frames.AbstractEntitiesFrame import AbstractEntitiesFrame
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
 from com.ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEntities
+from com.ankamagames.dofus.logic.game.fight.frames.FightContextFrame import FightContextFrame
+from com.ankamagames.dofus.logic.game.fight.frames.FightPreparationFrame import FightPreparationFrame
 from com.ankamagames.dofus.logic.game.fight.managers.CurrentPlayedFighterManager import CurrentPlayedFighterManager
 from com.ankamagames.dofus.network.enums.GameActionFightInvisibilityStateEnum import GameActionFightInvisibilityStateEnum
 from com.ankamagames.dofus.network.enums.MapObstacleStateEnum import MapObstacleStateEnum
@@ -271,25 +272,25 @@ class FightEntitiesFrame(AbstractEntitiesFrame, Frame):
                      "room":b.room,
                      "bosses":b.bosses
                   }
-         else:
-            self._worldPoint = WorldPointWrapper(mcidmsg.mapId)
-            if PlayedCharacterManager().isInHouse:
-               pass
-            PlayedCharacterManager().isInHouse = False
-            PlayedCharacterManager().isInHisHouse = False
-         self._currentSubAreaId = mcidmsg.subAreaId
-         PlayedCharacterManager().currentMap = self._worldPoint
-         PlayedCharacterManager().currentSubArea = SubArea.getSubAreaById(self._currentSubAreaId)
-         for mo in mcidmsg.obstacles:
-            InteractiveCellManager().updateCell(mo.obstacleCellId,mo.state == MapObstacleStateEnum.OBSTACLE_OPENED)
-         for ie in mcidmsg.interactiveElements:
-            if len(ie.enabledSkills):
-               self.registerInteractive(ie,ie.enabledSkills[0].skillId)
-            elif len(ie.disabledSkills):
-               self.registerInteractive(ie,ie.disabledSkills[0].skillId)
-         for se in mcidmsg.statedElements:
-            self.updateStatedElement(se)
-         return True
+            else:
+               self._worldPoint = WorldPointWrapper(mcidmsg.mapId)
+               if PlayedCharacterManager().isInHouse:
+                  pass
+               PlayedCharacterManager().isInHouse = False
+               PlayedCharacterManager().isInHisHouse = False
+            self._currentSubAreaId = mcidmsg.subAreaId
+            PlayedCharacterManager().currentMap = self._worldPoint
+            PlayedCharacterManager().currentSubArea = SubArea.getSubAreaById(self._currentSubAreaId)
+            for mo in mcidmsg.obstacles:
+               InteractiveCellManager().updateCell(mo.obstacleCellId,mo.state == MapObstacleStateEnum.OBSTACLE_OPENED)
+            for ie in mcidmsg.interactiveElements:
+               if len(ie.enabledSkills):
+                  self.registerInteractive(ie,ie.enabledSkills[0].skillId)
+               elif len(ie.disabledSkills):
+                  self.registerInteractive(ie,ie.disabledSkills[0].skillId)
+            for se in mcidmsg.statedElements:
+               self.updateStatedElement(se)
+            return True
 
       if isinstance(msg, AnomalyStateMessage):
          taimsg = msg

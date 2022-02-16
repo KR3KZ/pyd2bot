@@ -16,8 +16,8 @@ from com.ankamagames.jerakine.messages.QueueableMessage import QueueableMessage
 from com.ankamagames.jerakine.messages.events.FramePushedEvent import FramePushedEvent
 from com.ankamagames.jerakine.pools.GenericPool import GenericPool
 from com.ankamagames.jerakine.pools.Poolable import Poolable
-import com.ankamagames.jerakine.utils.displays.EnterFrameDispatcher as efd
-from com.ankamagames.jerakine.utils.displays.FrameIdManager import FrameIdManager
+import com.ankamagames.jerakine.utils.display.EnterFrameDispatcher as efd
+from com.ankamagames.jerakine.utils.display.FrameIdManager import FrameIdManager
 logger = Logger(__name__)
 
 

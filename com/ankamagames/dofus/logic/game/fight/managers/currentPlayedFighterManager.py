@@ -1,4 +1,7 @@
+from com.ankamagames.dofus.datacenter.spells.Spell import Spell
+from com.ankamagames.dofus.datacenter.spells.SpellLevel import SpellLevel
 import com.ankamagames.dofus.kernel.Kernel as knl
+from com.ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEntities
 from com.ankamagames.dofus.network.types.game.character.characteristic.CharacterCharacteristicsInformations import CharacterCharacteristicsInformations
 from com.ankamagames.dofus.network.types.game.data.items.Item import Item
 from com.ankamagames.jerakine.logger.Logger import Logger
@@ -7,7 +10,6 @@ from com.ankamagames.dofus.datacenter.spells.SpellState import SpellState
 from com.ankamagames.dofus.internalDatacenter.dataEnum import DataEnum
 from com.ankamagames.dofus.internalDatacenter.stats.entityStats import EntityStats
 from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManager
-from com.ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEntities
 from com.ankamagames.dofus.logic.game.fight.managers.FightersStateManager import FightersStateManager
 import com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager as pc
 from com.ankamagames.dofus.types.entities.AnimatedCharacter import AnimatedCharacter
@@ -79,9 +81,7 @@ class CurrentPlayedFighterManager(metaclass=Singleton):
          playerManager.spellsInventory = playerManager.playerSpellList
          # if knl.Kernel.getWorker().contains(FightSpellCastFrame):
          #    knl.Kernel.getWorker().removeFrame(knl.Kernel.getWorker().getFrame(FightSpellCastFrame))
-      # if inventoryManager.shortcutBarSpells != playerManager.playerShortcutList:
-      #    inventoryManager.shortcutBarSpells = playerManager.playerShortcutList
-      #    KernelEventsManager().processCallback(InventoryHookList.ShortcutBarViewContent,ShortcutBarEnum.SPELL_SHORTCUT_BAR)
+
 
    def setCharacteristicsInformations(self, id:float, characteristics:CharacterCharacteristicsInformations) -> None:
       self._characteristicsInformationsList[id] = characteristics
@@ -120,109 +120,109 @@ class CurrentPlayedFighterManager(metaclass=Singleton):
          totalTurnDurationInSeconds += apBase + apAdditional + apBonus + mpBase + mpAdditional + mpBonus
       return totalTurnDurationInSeconds
 
-   # def getSpellById(self, spellId:int) -> SpellWrapper:
-   #    spellKnown:SpellWrapper = None
-   #    player = pc.PlayedCharacterManager()
-   #    for spellKnown in player.spellsInventory:
-   #       if spellKnown.id == spellId:
-   #          return spellKnown
-   #    return None
+   def getSpellById(self, spellId:int) -> SpellWrapper:
+      spellKnown:SpellWrapper = None
+      player = pc.PlayedCharacterManager()
+      for spellKnown in player.spellsInventory:
+         if spellKnown.id == spellId:
+            return spellKnown
+      return None
 
-   # def getSpellCastManager(self) -> SpellCastInFightManager:
-   #    scm:SpellCastInFightManager = self._spellCastInFightManagerList[self._currentFighterId]
-   #    if not scm:
-   #       scm = SpellCastInFightManager(self._currentFighterId)
-   #       self._spellCastInFightManagerList[self._currentFighterId] = scm
-   #    return scm
+   def getSpellCastManager(self) -> SpellCastInFightManager:
+      scm:SpellCastInFightManager = self._spellCastInFightManagerList[self._currentFighterId]
+      if not scm:
+         scm = SpellCastInFightManager(self._currentFighterId)
+         self._spellCastInFightManagerList[self._currentFighterId] = scm
+      return scm
 
-   # def getSpellCastManagerById(self, id:float) -> SpellCastInFightManager:
-   #    scm:SpellCastInFightManager = self._spellCastInFightManagerList[id]
-   #    if not scm:
-   #       scm = SpellCastInFightManager(id)
-   #       self._spellCastInFightManagerList[id] = scm
-   #    return scm
+   def getSpellCastManagerById(self, id:float) -> SpellCastInFightManager:
+      scm:SpellCastInFightManager = self._spellCastInFightManagerList[id]
+      if not scm:
+         scm = SpellCastInFightManager(id)
+         self._spellCastInFightManagerList[id] = scm
+      return scm
 
-   # def canCastThisSpell(self, spellId:int, lvl:int, pTargetId:float = 0, result:list = None) -> bool:
-   #    spell:Spell = Spell.getSpellById(spellId)
-   #    spellLevel:SpellLevel = spell.getSpellLevel(lvl)
-   #    if spellLevel == None:
-   #       return False
-   #    player = pc.PlayedCharacterManager()
-   #    if self._currentFighterIsRealPlayer:
-   #       if spellId == 0:
-   #          if player.currentWeapon:
-   #             spellName = player.currentWeapon.name
-   #          else:
-   #             spellName = spell.name
-   #       else:
-   #          if spellLevel.minPlayerLevel > player.infos.level:
-   #             return False
-   #       characteristics = self.getCharacteristicsInformations()
-   #       if not characteristics:
-   #          return False
-   #    for spellKnown in player.spellsInventory:
-   #       if spellKnown and spellKnown.id == spellId:
-   #          selfSpell = spellKnown
-   #          break
-   #    if not selfSpell:
-   #       return False
-   #    entityStats:EntityStats = StatsManager().getStats(self.currentFighterId)
-   #    currentPA:int = int(entityStats.getStatTotalValue(StatIds.ACTION_POINTS)) if entityStats is not None else 0
-   #    if spellId == 0 and player.currentWeapon != None:
-   #       weapon = Item.getItemById(player.currentWeapon.objectGID)
-   #       if not weapon:
-   #          return False
-   #       apCost = weapon.apCost
-   #       maxCastPerTurn = weapon.maxCastPerTurn
-   #    else:
-   #       apCost = selfSpell.apCost
-   #       maxCastPerTurn = selfSpell.maxCastPerTurn
-   #    if apCost > currentPA:
-   #       return False
-   #    states:list = FightersStateManager().getStates(self._currentFighterId)
-   #    if not states:
-   #       states = list()
-   #    for state in states:
-   #       currentState = SpellState.getSpellStateById(state)
-   #       if currentState.preventsFight and spellId == 0:
-   #          return False
-   #       if currentState.id == DataEnum.SPELL_STATE_ARCHER and spellId == 0:
-   #          weapon2 = Item.getItemById(player.currentWeapon.objectGID)
-   #          if weapon2.typeId != DataEnum.ITEM_TYPE_BOW:
-   #             return False
-   #       if spellLevel.statesForbidden and state not in spellLevel.statesForbidden:
-   #          return False
-   #       if currentState.preventsSpellCast:
-   #          if not (spellLevel.statesRequired or spellLevel.statesAuthorized):
-   #             return False
-   #          if (not spellLevel.statesRequired or len(spellLevel.statesRequired) == 0 or state not in spellLevel.statesRequired) and (not spellLevel.statesAuthorized or len(spellLevel.statesAuthorized) == 0 or state not in spellLevel.statesAuthorized):
-   #             return False
-   #    for stateRequired in spellLevel.statesRequired:
-   #       if stateRequired not in states:
-   #          stateReq = SpellState.getSpellStateById(stateRequired)
-   #          return False
-   #    if not spell.bypassSummoningLimit and spellLevel.canSummon and not self.canSummon():
-   #       return False
-   #    if spellLevel.canBomb and not self.canBomb():
-   #       return False
-   #    if not player.isFighting:
-   #       return True
-   #    spellCastManager:SpellCastInFightManager = self.getSpellCastManager()
-   #    spellManager:SpellManager = spellCastManager.getSpellManagerBySpellId(spellId)
-   #    if spellManager == None:
-   #       return True
-   #    if maxCastPerTurn <= spellManager.numberCastThisTurn and maxCastPerTurn > 0:
-   #       return False
-   #    if spellManager.cooldown > 0 or selfSpell.actualCooldown > 0:
-   #       cooldown = max(spellManager.cooldown,selfSpell.actualCooldown)
-   #       return False
-   #    if pTargetId != 0:
-   #       numberCastOnTarget = spellManager.getCastOnEntity(pTargetId)
-   #       spellModifiers = SpellModifiersManager().getSpellModifiers(self.currentFighterId,spellId)
-   #       bonus = float(spellModifiers.getModifierValue(CharacterSpellModificationTypeEnum.MAX_CAST_PER_TARGET)) if not not spellModifiers else float(0)
-   #       if spellLevel.maxCastPerTarget + bonus <= numberCastOnTarget and spellLevel.maxCastPerTarget > 0:
-   #          return False
-   #    return True
+   def canCastThisSpell(self, spellId:int, lvl:int, pTargetId:float = 0, result:list = None) -> bool:
+      spell:Spell = Spell.getSpellById(spellId)
+      spellLevel:SpellLevel = spell.getSpellLevel(lvl)
+      if spellLevel == None:
+         return False
+      player = pc.PlayedCharacterManager()
+      if self._currentFighterIsRealPlayer:
+         if spellId == 0:
+            if player.currentWeapon:
+               spellName = player.currentWeapon.name
+            else:
+               spellName = spell.name
+         else:
+            if spellLevel.minPlayerLevel > player.infos.level:
+               return False
+         characteristics = self.getCharacteristicsInformations()
+         if not characteristics:
+            return False
+      for spellKnown in player.spellsInventory:
+         if spellKnown and spellKnown.id == spellId:
+            selfSpell = spellKnown
+            break
+      if not selfSpell:
+         return False
+      entityStats:EntityStats = StatsManager().getStats(self.currentFighterId)
+      currentPA:int = int(entityStats.getStatTotalValue(StatIds.ACTION_POINTS)) if entityStats is not None else 0
+      if spellId == 0 and player.currentWeapon != None:
+         weapon = Item.getItemById(player.currentWeapon.objectGID)
+         if not weapon:
+            return False
+         apCost = weapon.apCost
+         maxCastPerTurn = weapon.maxCastPerTurn
+      else:
+         apCost = selfSpell.apCost
+         maxCastPerTurn = selfSpell.maxCastPerTurn
+      if apCost > currentPA:
+         return False
+      states:list = FightersStateManager().getStates(self._currentFighterId)
+      if not states:
+         states = list()
+      for state in states:
+         currentState = SpellState.getSpellStateById(state)
+         if currentState.preventsFight and spellId == 0:
+            return False
+         if currentState.id == DataEnum.SPELL_STATE_ARCHER and spellId == 0:
+            weapon2 = Item.getItemById(player.currentWeapon.objectGID)
+            if weapon2.typeId != DataEnum.ITEM_TYPE_BOW:
+               return False
+         if spellLevel.statesForbidden and state not in spellLevel.statesForbidden:
+            return False
+         if currentState.preventsSpellCast:
+            if not (spellLevel.statesRequired or spellLevel.statesAuthorized):
+               return False
+            if (not spellLevel.statesRequired or len(spellLevel.statesRequired) == 0 or state not in spellLevel.statesRequired) and (not spellLevel.statesAuthorized or len(spellLevel.statesAuthorized) == 0 or state not in spellLevel.statesAuthorized):
+               return False
+      for stateRequired in spellLevel.statesRequired:
+         if stateRequired not in states:
+            stateReq = SpellState.getSpellStateById(stateRequired)
+            return False
+      if not spell.bypassSummoningLimit and spellLevel.canSummon and not self.canSummon():
+         return False
+      if spellLevel.canBomb and not self.canBomb():
+         return False
+      if not player.isFighting:
+         return True
+      spellCastManager:SpellCastInFightManager = self.getSpellCastManager()
+      spellManager:SpellManager = spellCastManager.getSpellManagerBySpellId(spellId)
+      if spellManager == None:
+         return True
+      if maxCastPerTurn <= spellManager.numberCastThisTurn and maxCastPerTurn > 0:
+         return False
+      if spellManager.cooldown > 0 or selfSpell.actualCooldown > 0:
+         cooldown = max(spellManager.cooldown,selfSpell.actualCooldown)
+         return False
+      if pTargetId != 0:
+         numberCastOnTarget = spellManager.getCastOnEntity(pTargetId)
+         spellModifiers = SpellModifiersManager().getSpellModifiers(self.currentFighterId,spellId)
+         bonus = float(spellModifiers.getModifierValue(CharacterSpellModificationTypeEnum.MAX_CAST_PER_TARGET)) if not not spellModifiers else float(0)
+         if spellLevel.maxCastPerTarget + bonus <= numberCastOnTarget and spellLevel.maxCastPerTarget > 0:
+            return False
+      return True
 
    def endFight(self) -> None:
       if pc.PlayedCharacterManager().id != self._currentFighterId:

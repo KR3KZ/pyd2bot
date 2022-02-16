@@ -1,1 +1,1 @@
-from .fightEntitiesFrame import FightEntitiesFrame
+from .FightEntitiesFrame import FightEntitiesFrame

@@ -1,7 +1,7 @@
 {
     "python.analysis.extraPaths": [
     ],
-    "python.linting.enabled": true,
+    "python.linting.enabled": false,
     "python.testing.pytestArgs": [
         "."
     ],
