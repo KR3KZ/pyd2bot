@@ -6,6 +6,8 @@ from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManage
 from com.ankamagames.dofus.logic.game.common.frames.AbstractEntitiesFrame import AbstractEntitiesFrame
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
 from com.ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEntities
+from com.ankamagames.dofus.logic.game.fight.actions.RemoveEntityAction import RemoveEntityAction
+from com.ankamagames.dofus.logic.game.fight.frames.FightBattleFrame import FightBattleFrame
 from com.ankamagames.dofus.logic.game.fight.frames.FightContextFrame import FightContextFrame
 from com.ankamagames.dofus.logic.game.fight.frames.FightPreparationFrame import FightPreparationFrame
 from com.ankamagames.dofus.logic.game.fight.managers.CurrentPlayedFighterManager import CurrentPlayedFighterManager
@@ -109,7 +111,7 @@ class FightEntitiesFrame(AbstractEntitiesFrame, Frame):
       self._lastKnownMovementPoint = dict()
       self._lastKnownPlayerStatus = dict()
       self._realFightersLooks = dict()
-      return super().appended()
+      return super().pushed()
    
    def addLastKilledAlly(self, entity:GameFightFighterInformations) -> None:
       listKilled:list[GameFightFighterInformations] = self.lastKilledChallengers if entity.spawnInfo.teamId == TeamEnum.TEAM_CHALLENGER else self.lastKilledDefenders
@@ -259,37 +261,6 @@ class FightEntitiesFrame(AbstractEntitiesFrame, Frame):
             self._worldPoint = WorldPointWrapper(mcidihmsg.mapId,True,mcidihmsg.currentHouse.worldX,mcidihmsg.currentHouse.worldY)
             
          elif isinstance(msg, MapComplementaryInformationsBreachMessage):
-            self._worldPoint = WorldPointWrapper(mcidmsg.mapId)
-            breachFrame = Kernel().getWorker().getFrame(BreachFrame)
-            if breachFrame:
-               mcibm = msg
-               breachFrame.floor = mcibm.floor
-               breachFrame.room = mcibm.room
-               breachFrame.infinityLevel = mcibm.infinityMode
-               breachFrame.branches = dict()
-               for b in mcibm.branches:
-                  breachFrame.branches[b.element] = {
-                     "room":b.room,
-                     "bosses":b.bosses
-                  }
-            else:
-               self._worldPoint = WorldPointWrapper(mcidmsg.mapId)
-               if PlayedCharacterManager().isInHouse:
-                  pass
-               PlayedCharacterManager().isInHouse = False
-               PlayedCharacterManager().isInHisHouse = False
-            self._currentSubAreaId = mcidmsg.subAreaId
-            PlayedCharacterManager().currentMap = self._worldPoint
-            PlayedCharacterManager().currentSubArea = SubArea.getSubAreaById(self._currentSubAreaId)
-            for mo in mcidmsg.obstacles:
-               InteractiveCellManager().updateCell(mo.obstacleCellId,mo.state == MapObstacleStateEnum.OBSTACLE_OPENED)
-            for ie in mcidmsg.interactiveElements:
-               if len(ie.enabledSkills):
-                  self.registerInteractive(ie,ie.enabledSkills[0].skillId)
-               elif len(ie.disabledSkills):
-                  self.registerInteractive(ie,ie.disabledSkills[0].skillId)
-            for se in mcidmsg.statedElements:
-               self.updateStatedElement(se)
             return True
 
       if isinstance(msg, AnomalyStateMessage):

@@ -3,9 +3,13 @@ from com.ankamagames.dofus.datacenter.effects.instances.EffectInstanceDice impor
 from com.ankamagames.dofus.datacenter.spells.Spell import Spell
 from com.ankamagames.dofus.datacenter.spells.SpellLevel import SpellLevel
 from com.ankamagames.dofus.kernel.Kernel import Kernel
+from com.ankamagames.dofus.logic.game.fight.fightEvents.FightEventsHelper import FightEventsHelper
+from com.ankamagames.dofus.logic.game.fight.frames.FightBattleFrame import FightBattleFrame
 from com.ankamagames.dofus.logic.game.fight.frames.FightEntitiesFrame import FightEntitiesFrame
 from com.ankamagames.dofus.logic.game.fight.managers.CurrentPlayedFighterManager import CurrentPlayedFighterManager
+from com.ankamagames.dofus.logic.game.fight.types.BasicBuff import BasicBuff
 from com.ankamagames.dofus.logic.game.fight.types.CastingSpell import CastingSpell
+from com.ankamagames.dofus.misc.utils.GameDebugManager import GameDebugManager
 from com.ankamagames.dofus.network.types.game.actions.fight.AbstractFightDispellableEffect import AbstractFightDispellableEffect
 from com.ankamagames.dofus.network.types.game.actions.fight.FightTemporaryBoostEffect import FightTemporaryBoostEffect
 from com.ankamagames.dofus.network.types.game.actions.fight.FightTemporaryBoostStateEffect import FightTemporaryBoostStateEffect
@@ -36,43 +40,42 @@ class BuffManager(metaclass=Singleton):
 
    
    def makeBuffFromEffect(self, effect:AbstractFightDispellableEffect, castingSpell:CastingSpell, actionId:int) -> BasicBuff:
-      buff:BasicBuff = None
-      effectInstanceDice:EffectInstanceDice = None
       criticalEffect:bool = False
-      level:SpellLevel = None
-      ftbwde:FightTemporaryBoostWeaponDamagesEffect = None
-      ftsie:FightTemporarySpellImmunityEffect = None
-      spellLevel:SpellLevel = None
-      effects:list[EffectInstanceDice] = None
-      effid:EffectInstanceDice = None
       if GameDebugManager().buffsDebugActivated:
          logger.debug("[BUFFS DEBUG] Creation du buff " + effect.uid)
+         
       if isinstance(effect, FightTemporarySpellBoostEffect):
             buff = SpellBuffeffect
             if GameDebugManager().buffsDebugActivated:
                logger.debug("[BUFFS DEBUG]      Buff " + effect.uid + " : type SpellBuff")
+               
       if isinstance(effect, FightTriggeredEffect):
             buff = TriggeredBuffeffect
             if GameDebugManager().buffsDebugActivated:
                logger.debug("[BUFFS DEBUG]      Buff " + effect.uid + " : type TriggeredBuff")
+               
       if isinstance(effect, FightTemporaryBoostWeaponDamagesEffect):
             ftbwde = effect 
             buff = BasicBuff(effect,castingSpell,actionId,ftbwde.weaponTypeId,ftbwde.delta,ftbwde.weaponTypeId)
             if GameDebugManager().buffsDebugActivated:
                logger.debug("[BUFFS DEBUG]      Buff " + effect.uid + " : type BasicBuff avec FightTemporaryBoostWeaponDamagesEffect")
+               
       if isinstance(effect, FightTemporaryBoostStateEffect):
             buff = StateBuffeffect
             if GameDebugManager().buffsDebugActivated:
                logger.debug("[BUFFS DEBUG]      Buff " + effect.uid + " : type StateBuff")
+               
       if isinstance(effect, FightTemporarySpellImmunityEffect):
             ftsie = effect 
             buff = BasicBuff(effect,castingSpell,actionId,ftsie.immuneSpellId,None,None)
             if GameDebugManager().buffsDebugActivated:
                logger.debug("[BUFFS DEBUG]      Buff " + effect.uid + " : type BasicBuff avec FightTemporarySpellImmunityEffect")
+               
       if isinstance(effect, FightTemporaryBoostEffect):
             buff = StatBuffFactory.createStatBuffeffect
             if GameDebugManager().buffsDebugActivated:
                logger.debug("[BUFFS DEBUG]      Buff " + effect.uid + " : type StatBuff")
+               
       buff.id = effect.uid
       spellLevelsId:int = -1
       spell:Spell = Spell.getSpellById(effect.spellId)
@@ -99,7 +102,7 @@ class BuffManager(metaclass=Singleton):
       return buff
    
    def decrementDuration(self, targetId:float) -> None:
-      self.incrementDuration(targetId,-1)
+      self.incrementDuration(targetId, -1)
    
    def synchronize(self) -> None:
       entityId = None
@@ -112,16 +115,12 @@ class BuffManager(metaclass=Singleton):
                buffItem.onReenable()
    
    def incrementDuration(self, targetId:float, delta:int, dispellEffect:bool = False, incrementMode:int = 1) -> None:
-      targetBuffs:list = None
-      buffItem:BasicBuff = None
       modified:bool = False
       skipBuffUpdate:bool = False
-      spell:CastingSpell = None
-      currentFighterId:float = None
       newBuffs:dict = dict()
       for targetBuffs in self._buffs:
          for buffItem in targetBuffs:
-            if dispellEffect and buffItem is TriggeredBuff and TriggeredBuff(buffItem).delay > 0:
+            if dispellEffect and isinstance(buffItem, TriggeredBuff) and buffItem.delay > 0:
                if newBuffs[buffItem.targetId] == None:
                   newBuffs[buffItem.targetId] = []
                newBuffs[buffItem.targetId].append(buffItem)
@@ -166,7 +165,7 @@ class BuffManager(metaclass=Singleton):
       i:int = 0
       fightersCount:int = 0
       fighterId:float = None
-      fightBattleFrame:FightBattleFrame = Kernel.getWorker().getFrame(FightBattleFrame) 
+      fightBattleFrame:FightBattleFrame = Kernel().getWorker().getFrame(FightBattleFrame) 
       if fightBattleFrame == None:
          return
       currentFighterId:float = fightBattleFrame.currentPlayerId

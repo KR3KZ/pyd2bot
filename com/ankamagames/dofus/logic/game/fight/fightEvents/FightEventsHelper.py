@@ -45,7 +45,7 @@ class FightEventsHelper:
    def sendFightEvent(self, name:str, params:list, fighterId:float, pCastingSpellId:int, sendNow:bool = False, checkParams:int = 0, pFirstParamToCheck:int = 1, buff:BasicBuff = None) -> None:
       fightEvent:FightEvent = FightEvent(name, params, fighterId, checkParams, pCastingSpellId, len(self._fightEvents), pFirstParamToCheck, buff)
       if sendNow:
-         self.sendFightLogToChat(fightEvent)
+         pass
       else:
          if name:
             self._fightEvents[0] = fightEvent
@@ -335,34 +335,6 @@ class FightEventsHelper:
    def clearData(self) -> None:
       self._fightEvents = list[FightEvent]()
       FightEvent.reset()
-   
-   def sendFightLogToChat(self, pFightEvent:FightEvent, pTargetsTeam:str = "", pTargetsList:list[float] = None, pActiveColoration:bool = True, pAddDeathInTheSameMsg:bool = False) -> None:
-      name:str = pFightEvent.name == FightEventEnum.FIGHTER_LIFE_LOSS and pAddDeathInTheSameMsg ? FightEventEnum.FIGHTER_LIFE_LOSS_AND_DEATH : pFightEvent.name
-      params:list = pFightEvent.params.extend()
-      if pActiveColoration:
-         if pFightEvent.name == FightEventEnum.FIGHTER_LIFE_LOSS or pFightEvent.name == FightEventEnum.FIGHTER_SHIELD_LOSS:
-            params[1] = formateColorsForFightDamages("-" + params[1],params[2])
-      KernelEventsManager().processCallback(HookList.FightText,name,params,pTargetsList,pTargetsTeam,GameDebugManager().detailedFightLog_showIds)
-   
-   def formateColorsForFightDamages(self, inText:str, elementId:int) -> str:
-      color:str = None
-      if elementId  == ElementEnum.ELEMENT_MULTI:
-            color = XmlConfig().getEntry:("colors.fight.text.multi")
-      if elementId  == ElementEnum.ELEMENT_NEUTRAL:
-            color = XmlConfig().getEntry:("colors.fight.text.neutral")
-      if elementId  == ElementEnum.ELEMENT_EARTH:
-            color = XmlConfig().getEntry:("colors.fight.text.earth")
-      if elementId  == ElementEnum.ELEMENT_FIRE:
-            color = XmlConfig().getEntry:("colors.fight.text.fire")
-      if elementId  == ElementEnum.ELEMENT_WATER:
-            color = XmlConfig().getEntry:("colors.fight.text.water")
-      if elementId  == ElementEnum.ELEMENT_AIR:
-            color = XmlConfig().getEntry:("colors.fight.text.air")
-      if elementId  == ElementEnum.ELEMENT_NONE:
-      else:
-            color = ""
-      if color != "":
-      return inText
    
    @property
    def fightEvents(self) -> list[FightEvent]:

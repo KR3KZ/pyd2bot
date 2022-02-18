@@ -328,5 +328,5 @@ def parseFile(file_p, out_p):
 ROOTDIR = pathlib.Path(os.path.dirname(__file__))
 # parseFolderFiles("AS3ToPythonConverter/scripts", "AS3ToPythonConverter/connectionType")
 t = perf_counter()
-parseFile(ROOTDIR / "target.as", ROOTDIR / "EffectZone.py")
+parseFile(ROOTDIR / "target.as", ROOTDIR / "UpdateSpellModifierAction.py")
 print("parsing took:", perf_counter() - t)

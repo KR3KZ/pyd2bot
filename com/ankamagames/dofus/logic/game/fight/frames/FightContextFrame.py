@@ -152,7 +152,7 @@ class FightContextFrame(Frame):
       self._fightersPositionsHistory = dict()
       self._fightersRoundStartPosition = dict()
       super().__init__()
-      # DamagePreview.init()
+      # TODO: don't forget to init the damage preview later DamagePreview.init()
    
    def saveResults(self, resultsDescr:object) -> str:
       key:str = self.FIGHT_RESULT_KEY_PREFIX + str(self.fightResultId)
@@ -197,8 +197,8 @@ class FightContextFrame(Frame):
    @fightType.setter
    def fightType(self, t:int) -> None:
       self._fightType = t
-      partyFrame:PartyManagementFrame = Kernel().getWorker().getFrame(PartyManagementFrame)
-      partyFrame.lastFightType = t
+      # TODO: uncomment when party manager is done : partyFrame:PartyManagementFrame = Kernel().getWorker().getFrame(PartyManagementFrame)
+      # partyFrame.lastFightType = t
    
    @property
    def isKolossium(self) -> bool:
@@ -275,7 +275,6 @@ class FightContextFrame(Frame):
             return 0
       
    def process(self, msg:Message) -> bool:
-          
           
       if isinstance(msg, GameFightStartingMessage):
          gfsmsg = msg

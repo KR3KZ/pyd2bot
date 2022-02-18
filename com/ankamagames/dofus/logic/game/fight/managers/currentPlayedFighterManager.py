@@ -1,7 +1,10 @@
 from com.ankamagames.dofus.datacenter.spells.Spell import Spell
 from com.ankamagames.dofus.datacenter.spells.SpellLevel import SpellLevel
+from com.ankamagames.dofus.internalDatacenter.spells.SpellWrapper import SpellWrapper
 import com.ankamagames.dofus.kernel.Kernel as knl
 from com.ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEntities
+from com.ankamagames.dofus.logic.game.fight.managers.SpellCastInFightManager import SpellCastInFightManager
+from com.ankamagames.dofus.logic.game.fight.managers.SpellManager import SpellManager
 from com.ankamagames.dofus.network.types.game.character.characteristic.CharacterCharacteristicsInformations import CharacterCharacteristicsInformations
 from com.ankamagames.dofus.network.types.game.data.items.Item import Item
 from com.ankamagames.jerakine.logger.Logger import Logger
@@ -79,6 +82,7 @@ class CurrentPlayedFighterManager(metaclass=Singleton):
       if playerManager.spellsInventory != playerManager.playerSpellList:
          logger.info("Remise à jour de la liste des sorts du joueur")
          playerManager.spellsInventory = playerManager.playerSpellList
+         # FIXME: Uncomment this when spell cast frame is implemented
          # if knl.Kernel.getWorker().contains(FightSpellCastFrame):
          #    knl.Kernel.getWorker().removeFrame(knl.Kernel.getWorker().getFrame(FightSpellCastFrame))
 
@@ -121,7 +125,6 @@ class CurrentPlayedFighterManager(metaclass=Singleton):
       return totalTurnDurationInSeconds
 
    def getSpellById(self, spellId:int) -> SpellWrapper:
-      spellKnown:SpellWrapper = None
       player = pc.PlayedCharacterManager()
       for spellKnown in player.spellsInventory:
          if spellKnown.id == spellId:

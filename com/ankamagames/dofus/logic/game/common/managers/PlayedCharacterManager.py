@@ -1,4 +1,5 @@
 from typing import TYPE_CHECKING
+from com.ankamagames.dofus.logic.game.fight.frames.FightContextFrame import FightContextFrame
 if TYPE_CHECKING:
    from com.ankamagames.dofus.internalDatacenter.items.ItemWrapper import ItemWrapper
    from com.ankamagames.dofus.internalDatacenter.items.WeaponWrapper import WeaponWrapper
