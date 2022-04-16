@@ -1,4 +1,4 @@
-from com.ankamagames.atouin.managers.MapDisplayManager import MapDisplayManager
+import com.ankamagames.atouin.managers.MapDisplayManager as mdm
 from com.ankamagames.dofus.datacenter.world.MapPosition import MapPosition
 from com.ankamagames.dofus.datacenter.world.MapScrollAction import MapScrollAction
 from com.ankamagames.jerakine.logger.Logger import Logger
@@ -38,7 +38,7 @@ class WorldPointWrapper(WorldPoint):
             else:
                self._outdoorX = self.x
                self._outdoorY = self.y
-         dmc = MapDisplayManager()
+         dmc = mdm.MapDisplayManager()
          if dmc and dmc.dataMap and dmc.dataMap.id == mapid:
             self._topNeighbourId = dmc.dataMap.topNeighbourId
             self._bottomNeighbourId = dmc.dataMap.bottomNeighbourId

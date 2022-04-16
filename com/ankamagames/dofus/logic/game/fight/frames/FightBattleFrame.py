@@ -3,8 +3,8 @@ from time import perf_counter
 from types import FunctionType
 from com.ankamagames.atouin.managers.EntitiesManager import EntitiesManager
 from com.ankamagames.atouin.utils.DataMapProvider import DataMapProvider
-from com.ankamagames.dofus.internalDatacenter.stats.entityStats import EntityStats
-from com.ankamagames.dofus.kernel.Kernel import Kernel
+from com.ankamagames.dofus.internalDatacenter.stats.EntityStats import EntityStats
+import com.ankamagames.dofus.kernel.Kernel as krnl
 from com.ankamagames.dofus.kernel.net.ConnectionsHandler import ConnectionsHandler
 from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerManager
 from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManager
@@ -209,7 +209,7 @@ class FightBattleFrame(Frame):
       self._playingSlaveEntity = False
       self._sequenceFrames = []
       DataMapProvider().isInFight = True
-      Kernel().getWorker().addFrame(self._turnFrame)
+      krnl.Kernel().getWorker().addFrame(self._turnFrame)
       self._destroyed = False
       self._autoEndTurnTimer = Timer(0.06, self.sendAutoEndTurn)
       self._neverSynchronizedBefore = True
@@ -317,17 +317,17 @@ class FightBattleFrame(Frame):
             self._skipTurnTimer = None
          if gftsmsg.id == playerId or self._playingSlaveEntity:
             if AFKFightManager().isAfk:
-               fightContextFrame = Kernel().getWorker().getFrame(FightContextFrame)
+               fightContextFrame = krnl.Kernel().getWorker().getFrame(FightContextFrame)
                if fightContextFrame and not fightContextFrame.isKolossium:
                   time = perf_counter()
                   if AFKFightManager().lastTurnSkip + 5 * 1000 < time:
                      action = GameFightTurnFinishAction()
-                     Kernel().getWorker().process(action)
+                     krnl.Kernel().getWorker().process(action)
                   else:
                      self._skipTurnTimer = Timer(5 - (time - AFKFightManager().lastTurnSkip), self.onSkipTurnTimeOut)
                      self._skipTurnTimer.start()
             else:
-               fightEntitesFrame = Kernel().getWorker().getFrame(FightEntitiesFrame)
+               fightEntitesFrame = krnl.Kernel().getWorker().getFrame(FightEntitiesFrame)
                alivePlayers = 0
                for en in fightEntitesFrame.entities:
                   if en is GameFightCharacterInformations and GameFightCharacterInformations(en).spawnInfo.alive and en.contextualId > 0:
@@ -335,14 +335,14 @@ class FightBattleFrame(Frame):
                if alivePlayers > 0:
                   AFKFightManager().initialize()
          self.removeSavedPosition(gftsmsg.id)
-         entitiesFrame = Kernel().getWorker().getFrame(FightEntitiesFrame)
+         entitiesFrame = krnl.Kernel().getWorker().getFrame(FightEntitiesFrame)
          entitiesIds = entitiesFrame.getEntitiesIdsList()
          numEntities = len(entitiesIds)
          for i in range(numEntities):
             fighterInfos = entitiesFrame.getEntityInfos(entitiesIds[i])
             if fighterInfos and fighterInfos.stats.summoner == gftsmsg.id:
                self.removeSavedPosition(entitiesIds[i])
-         Kernel().getWorker().getFrame(FightContextFrame)
+         krnl.Kernel().getWorker().getFrame(FightContextFrame)
          return True
             
       if isinstance(msg, GameFightTurnStartPlayingMessage):
@@ -373,7 +373,7 @@ class FightBattleFrame(Frame):
          self._autoEndTurn = False
          if not self._sequenceFrameSwitcher:
             self._sequenceFrameSwitcher = FightSequenceSwitcherFrame()
-            Kernel().getWorker().addFrame(self._sequenceFrameSwitcher)
+            krnl.Kernel().getWorker().addFrame(self._sequenceFrameSwitcher)
          self._currentSequenceFrame = FightSequenceFrame(self,self._currentSequenceFrame)
          self._sequenceFrameSwitcher.currentFrame = self._currentSequenceFrame
          return True
@@ -387,7 +387,7 @@ class FightBattleFrame(Frame):
          self._currentSequenceFrame.ackIdent = semsg.actionId
          self._sequenceFrameSwitcher.currentFrame = None
          if not self._currentSequenceFrame.parent:
-            Kernel().getWorker().removeFrame(self._sequenceFrameSwitcher)
+            krnl.Kernel().getWorker().removeFrame(self._sequenceFrameSwitcher)
             self._sequenceFrameSwitcher = None
             self._sequenceFrames.append(self._currentSequenceFrame)
             self._currentSequenceFrame = None
@@ -494,15 +494,15 @@ class FightBattleFrame(Frame):
       self.applyDelayedStats()
       DataMapProvider().isInFight = False
       TweenMax.killAll(False)
-      if Kernel().getWorker().contains(FightTurnFrame):
-         Kernel().getWorker().removeFrame(self._turnFrame)
+      if krnl.Kernel().getWorker().contains(FightTurnFrame):
+         krnl.Kernel().getWorker().removeFrame(self._turnFrame)
       BuffManager().destroy()
       MarkedCellsManager().destroy()
       LinkedCellsManager().destroy()
-      if self._executingSequence or Kernel().getWorker().contains(FightSequenceFrame):
+      if self._executingSequence or krnl.Kernel().getWorker().contains(FightSequenceFrame):
          logger.warn("Wow, wait. We\'re pulling FightBattle but there\'s still sequences inside the worker !!")
-         fsf = Kernel().getWorker().getFrame(FightSequenceFrame)
-         Kernel().getWorker().removeFrame(fsf)
+         fsf = krnl.Kernel().getWorker().getFrame(FightSequenceFrame)
+         krnl.Kernel().getWorker().removeFrame(fsf)
       SerialSequencer.clearByType(FIGHT_SEQUENCER_NAME)
       SerialSequencer.clearByType(FightSequenceFrame.FIGHT_SEQUENCERS_CATEGORY)
       AFKFightManager().enabled = False
@@ -596,7 +596,7 @@ class FightBattleFrame(Frame):
    def applyDelayedStats(self) -> None:
       if not self._delayCslmsg:
          return
-      characterFrame:PlayedCharacterUpdatesFrame = Kernel().getWorker().getFrame(PlayedCharacterUpdatesFrame)
+      characterFrame:PlayedCharacterUpdatesFrame = krnl.Kernel().getWorker().getFrame(PlayedCharacterUpdatesFrame)
       if characterFrame:
          characterFrame.updateCharacterStatsList(self._delayCslmsg.stats)
       self._delayCslmsg = None
@@ -605,7 +605,7 @@ class FightBattleFrame(Frame):
       entityId:float = None
       tiphonSprite:TiphonSprite = None
       key = None
-      entitiesFrame:FightEntitiesFrame = Kernel().getWorker().getFrame(FightEntitiesFrame)
+      entitiesFrame:FightEntitiesFrame = krnl.Kernel().getWorker().getFrame(FightEntitiesFrame)
       entityIdList:list[float] = None
       if entitiesFrame is not None:
          entityIdList = entitiesFrame.getEntitiesIdsList()
@@ -703,7 +703,7 @@ class FightBattleFrame(Frame):
       action:Action = None
       if self._autoEndTurn:
          action = GameFightTurnFinishAction()
-         Kernel().getWorker().process(action)
+         krnl.Kernel().getWorker().process(action)
          self._autoEndTurn = False
       self._autoEndTurnTimer.stop()
    
@@ -711,8 +711,8 @@ class FightBattleFrame(Frame):
       self._turnsList = turnsList
       self._deadTurnsList = deadTurnsList
       pass
-      if Dofus().options.getOption("orderFighters") and Kernel().getWorker().getFrame(FightEntitiesFrame):
-         Kernel().getWorker().getFrame(FightEntitiesFrame)
+      if Dofus().options.getOption("orderFighters") and krnl.Kernel().getWorker().getFrame(FightEntitiesFrame):
+         krnl.Kernel().getWorker().getFrame(FightEntitiesFrame)
    
    def confirmTurnEnd(self) -> None:
       entityId:float = None
@@ -742,23 +742,23 @@ class FightBattleFrame(Frame):
          coward
       _holder.reset()
       self._synchroniseFighters = None
-      Kernel().getWorker().removeFrame(self)
-      fightContextFrame = Kernel().getWorker().getFrame(FightContextFrame)
+      krnl.Kernel().getWorker().removeFrame(self)
+      fightContextFrame = krnl.Kernel().getWorker().getFrame(FightContextFrame)
       fightContextFrame.process(fightEnd)
    
    def onSkipTurnTimeOut(self, event:TimerEvent) -> None:
       action:Action = None
       self._skipTurnTimer.removeEventListener(TimerEvent.TIMER,self.onSkipTurnTimeOut)
       self._skipTurnTimer = None
-      fightContextFrame:FightContextFrame = Kernel().getWorker().getFrame(FightContextFrame)
+      fightContextFrame:FightContextFrame = krnl.Kernel().getWorker().getFrame(FightContextFrame)
       if AFKFightManager().isAfk and (fightContextFrame and not fightContextFrame.isKolossium):
          action = GameFightTurnFinishAction()
-         Kernel().getWorker().process(action)
+         krnl.Kernel().getWorker().process(action)
    
    def gameFightSynchronize(self, fighters:list[GameFightFighterInformations]) -> None:
       newWaveAppeared:bool = False
       newWaveMonster:bool = False
-      entitiesFrame:FightEntitiesFrame = Kernel().getWorker().getFrame(FightEntitiesFrame)
+      entitiesFrame:FightEntitiesFrame = krnl.Kernel().getWorker().getFrame(FightEntitiesFrame)
       newWaveMonsterIndex:int = 0
       BuffManager().synchronize()
       for fighterInfos in fighters:
@@ -787,7 +787,7 @@ class FightBattleFrame(Frame):
          self._neverSynchronizedBefore = False
    
    def removeSavedPosition(self, pEntityId:float) -> None:
-      fightContextFrame:FightContextFrame = Kernel().getWorker().getFrame(FightContextFrame)
+      fightContextFrame:FightContextFrame = krnl.Kernel().getWorker().getFrame(FightContextFrame)
       savedPositions:list = fightContextFrame.fightersPositionsHistory[pEntityId]
       if savedPositions:
          nbPos = len(savedPositions)

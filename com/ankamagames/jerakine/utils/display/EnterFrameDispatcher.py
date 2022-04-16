@@ -1,26 +1,27 @@
-
 from types import FunctionType
 from time import perf_counter
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
-from com.ankamagames.jerakine.network.messages.Worker import Worker
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from com.ankamagames.jerakine.network.messages.Worker import Worker
 logger = Logger(__name__)
 
+
 class EnterFrameDispatcher(metaclass=Singleton):
-
     def __init__(self):
-        self._maxAllowedTime:int = 20
-        self._listenerUp:bool = False
-        self._workerListenerUp:bool = False
-        self._currentTime:int = perf_counter()
-        self._postWorkerTime:int = 0
-        self._diff:int = 0
-        self._noWorkerFrameCount:int = 0
+        self._maxAllowedTime: int = 20
+        self._listenerUp: bool = False
+        self._workerListenerUp: bool = False
+        self._currentTime: int = perf_counter()
+        self._postWorkerTime: int = 0
+        self._diff: int = 0
+        self._noWorkerFrameCount: int = 0
         self._controledListeners = dict[FunctionType, ControledEnterFrameListener]()
-        self._worker:Worker = None
+        self._worker: "Worker" = None
 
-
-    def addWorker(self, w:Worker) -> None:
+    def addWorker(self, w: "Worker") -> None:
         self._worker = w
         self.handleEnterFrameEvents()
         self.handleWorkers()
@@ -38,17 +39,24 @@ class EnterFrameDispatcher(metaclass=Singleton):
         return self._controledListeners
 
     @property
-    def worker(self) -> Worker:
+    def worker(self) -> "Worker":
         return self._worker
 
-    def addEventListener(self, listener:FunctionType, name:str, frameRate:int = 0.004294967295E9) -> None:
+    def addEventListener(
+        self, listener: FunctionType, name: str, frameRate: int = 0.004294967295e9
+    ) -> None:
         if not self._controledListeners.get(listener):
             exp1 = 0 if frameRate == float("inf") else int(1 / frameRate)
-            self._controledListeners[listener] = ControledEnterFrameListener(name, listener, frameRate <= 0 or exp1, int(self._currentTime) if not self._listenerUp else int(perf_counter()))
+            self._controledListeners[listener] = ControledEnterFrameListener(
+                name,
+                listener,
+                frameRate <= 0 or exp1,
+                int(self._currentTime) if not self._listenerUp else int(perf_counter()),
+            )
             if not self._listenerUp:
                 self._listenerUp = True
 
-    def hasEventListener(self, listener:FunctionType) -> bool:
+    def hasEventListener(self, listener: FunctionType) -> bool:
         return self._controledListeners.get(listener) != None
 
     @property
@@ -56,10 +64,10 @@ class EnterFrameDispatcher(metaclass=Singleton):
         return self._maxAllowedTime
 
     @maxAllowedTime.setter
-    def maxAllowedTime(self, time:int) -> None:
+    def maxAllowedTime(self, time: int) -> None:
         self._maxAllowedTime = time
 
-    def removeEventListener(self, listener:FunctionType) -> None:
+    def removeEventListener(self, listener: FunctionType) -> None:
         if self._controledListeners.get(listener):
             del self._controledListeners[listener]
             if len(self._controledListeners) == 0 and not self._workerListenerUp:
@@ -93,13 +101,15 @@ class EnterFrameDispatcher(metaclass=Singleton):
 
 
 class ControledEnterFrameListener:
-    name:str
-    listener:FunctionType
-    wantedGap:int
-    overhead:int
-    latestChange:int
+    name: str
+    listener: FunctionType
+    wantedGap: int
+    overhead: int
+    latestChange: int
 
-    def __init__(self, name:str, listener:FunctionType, wantedGap:int, latestChange:int):
+    def __init__(
+        self, name: str, listener: FunctionType, wantedGap: int, latestChange: int
+    ):
         self.name = name
         self.listener = listener
         self.wantedGap = wantedGap

@@ -2,7 +2,7 @@
    
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.atouin.data.map.Map import Map
-from com.ankamagames.dofus.internalDatacenter.stats.stat import Stat
+from com.ankamagames.dofus.internalDatacenter.stats.Stat import Stat
 from com.ankamagames.dofus.kernel.Kernel import Kernel
 from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManager
 from com.ankamagames.atouin.managers.EntitiesManager import EntitiesManager

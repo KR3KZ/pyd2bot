@@ -21,8 +21,8 @@ from com.ankamagames.jerakine.events.SecurityErrorEvent import SecurityErrorEven
 from com.ankamagames.jerakine.network.UnpackMode import UnpackMode
 from com.ankamagames.jerakine.network.messages.ServerConnectionFailedMessage import ServerConnectionFailedMessage
 from com.ankamagames.jerakine.network.utils.FuncTree import FuncTree
-from com.ankamagames.jerakine.utils.displays.EnterFrameConst import EnterFrameConst
-from com.ankamagames.jerakine.utils.displays.EnterFrameDispatcher import EnterFrameDispatcher
+from com.ankamagames.jerakine.utils.display.EnterFrameConst import EnterFrameConst
+from com.ankamagames.jerakine.utils.display.EnterFrameDispatcher import EnterFrameDispatcher
 from mx.CustomSocket.Socket import Socket
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 logger = Logger(__name__)

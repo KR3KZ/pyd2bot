@@ -6,8 +6,8 @@ from com.ankamagames.dofus.datacenter.jobs.Job import Job
 from com.ankamagames.dofus.datacenter.monsters.Monster import Monster
 from com.ankamagames.dofus.datacenter.monsters.MonsterRace import MonsterRace
 from com.ankamagames.dofus.datacenter.monsters.MonsterSuperRace import MonsterSuperRace
-from com.ankamagames.dofus.datacenter.spells.Spell import Spell
-from com.ankamagames.dofus.datacenter.spells.SpellLevel import SpellLevel
+import com.ankamagames.dofus.datacenter.spells.Spell as spellmod
+import com.ankamagames.dofus.datacenter.spells.SpellLevel as spellLevelmod
 from com.ankamagames.jerakine.data.I18n import I18n
 from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
 from com.ankamagames.jerakine.logger.Logger import Logger
@@ -215,12 +215,12 @@ class EffectInstance(IDataCenter):
     
    @staticmethod  
    def getSpellName(id:int) -> str:
-      o:Spell = Spell.getSpellById(id)
+      o:spellmod.Spell = spellmod.Spell.getSpellById(id)
       return o.name if not o else EffectInstance.UNKNOWN_NAME
    
    @staticmethod   
    def getSpellLevelName(id:int) -> str:
-      o:SpellLevel = SpellLevel.getLevelById(id)
+      o:spellLevelmod.SpellLevel = spellLevelmod.SpellLevel.getLevelById(id)
       name:str = EffectInstance.getSpellName(o.spellId) if not o else EffectInstance.UNKNOWN_NAME
       return EffectInstance.getSpellName(o.spellId) if not o else EffectInstance.UNKNOWN_NAME
    

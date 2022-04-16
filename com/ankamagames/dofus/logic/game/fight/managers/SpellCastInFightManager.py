@@ -2,7 +2,7 @@ from com.ankamagames.dofus.datacenter.spells.SpellLevel import SpellLevel
 from com.ankamagames.dofus.internalDatacenter.spells.SpellWrapper import SpellWrapper
 from com.ankamagames.dofus.kernel.Kernel import Kernel
 from com.ankamagames.dofus.logic.game.fight.managers.CurrentPlayedFighterManager import CurrentPlayedFighterManager
-from com.ankamagames.dofus.logic.game.fight.managers.SpellManager import SpellManager
+from com.ankamagames.dofus.logic.game.fight.types.castSpellManager.SpellManager import SpellManager
 from com.ankamagames.dofus.network.enums.CharacterSpellModificationTypeEnum import CharacterSpellModificationTypeEnum
 from com.ankamagames.dofus.network.types.game.context.fight.GameFightSpellCooldown import GameFightSpellCooldown
 from com.ankamagames.jerakine.logger.Logger import Logger

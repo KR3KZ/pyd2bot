@@ -1,10 +1,10 @@
 from com.ankamagames.dofus.datacenter.world.SubArea import SubArea
 from com.ankamagames.dofus.internalDatacenter.world.WorldPointWrapper import WorldPointWrapper
-from com.ankamagames.dofus.kernel.Kernel import Kernel
+import com.ankamagames.dofus.kernel.Kernel as krnl
 from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerManager
 from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManager
 from com.ankamagames.dofus.logic.game.common.frames.AbstractEntitiesFrame import AbstractEntitiesFrame
-from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
+import com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager as pcm
 from com.ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEntities
 from com.ankamagames.dofus.logic.game.fight.actions.RemoveEntityAction import RemoveEntityAction
 from com.ankamagames.dofus.logic.game.fight.frames.FightBattleFrame import FightBattleFrame
@@ -102,7 +102,7 @@ class FightEntitiesFrame(AbstractEntitiesFrame, Frame):
       super().__init__()
    
    def getCurrentInstance(self) -> 'FightEntitiesFrame':
-      return Kernel().getWorker().getFrame(FightEntitiesFrame)
+      return krnl.Kernel().getWorker().getFrame(FightEntitiesFrame)
       
    def pushed(self) -> bool:
       self._entitiesNumber = dict()
@@ -161,11 +161,11 @@ class FightEntitiesFrame(AbstractEntitiesFrame, Frame):
             fullInfos.disposition = gfrfmsg.informations.disposition
             fullInfos.look = gfrfmsg.informations.look
             self._realFightersLooks[gfrfmsg.informations.contextualId] = gfrfmsg.informations.look
-            if Kernel().getWorker().contains(FightPreparationFrame) and gfrfmsg.informations.disposition.cellId == -1:
+            if krnl.Kernel().getWorker().contains(FightPreparationFrame) and gfrfmsg.informations.disposition.cellId == -1:
                self.registerActor(gfrfmsg.informations)
             else:
                self.updateActor(fullInfos,True)
-         if Kernel().getWorker().getFrame(FightPreparationFrame):
+         if krnl.Kernel().getWorker().getFrame(FightPreparationFrame):
             pass
          return True
 
@@ -176,12 +176,12 @@ class FightEntitiesFrame(AbstractEntitiesFrame, Frame):
             self.updateFighter(gfsfmsg.informations)
             self._illusionEntities[gfsfmsg.informations.contextualId] = True
          else:
-            if Kernel().getWorker().contains(FightPreparationFrame) and gfsfmsg.informations.disposition.cellId == -1:
+            if krnl.Kernel().getWorker().contains(FightPreparationFrame) and gfsfmsg.informations.disposition.cellId == -1:
                self.registerActor(gfsfmsg.informations)
             else:
                self.updateFighter(gfsfmsg.informations)
             self._illusionEntities[gfsfmsg.informations.contextualId] = False
-         fightContextFrame = Kernel().getWorker().getFrame(FightContextFrame)
+         fightContextFrame = krnl.Kernel().getWorker().getFrame(FightContextFrame)
          if fightContextFrame.fightersPositionsHistory[gfsfmsg.informations.contextualId]:
             pass
          return True
@@ -195,9 +195,9 @@ class FightEntitiesFrame(AbstractEntitiesFrame, Frame):
          if gfhrsmsg.isReady:
             pass
          else:
-            if gfhrsmsg.characterId == PlayedCharacterManager().id:
+            if gfhrsmsg.characterId == pcm.PlayedCharacterManager().id:
                pass
-         fightPreparationFrame = Kernel().getWorker().getFrame(FightPreparationFrame)
+         fightPreparationFrame = krnl.Kernel().getWorker().getFrame(FightPreparationFrame)
          if fightPreparationFrame:
             pass
          return True
@@ -244,20 +244,20 @@ class FightEntitiesFrame(AbstractEntitiesFrame, Frame):
          self._interactiveElements = mcidmsg.interactiveElements
          if isinstance(msg, MapComplementaryInformationsWithCoordsMessage):
             mciwcmsg = msg
-            if PlayedCharacterManager().isInHouse:
+            if pcm.PlayedCharacterManager().isInHouse:
                pass
-            PlayedCharacterManager().isInHouse = False
-            PlayedCharacterManager().isInHisHouse = False
-            PlayedCharacterManager().currentMap.setOutdoorCoords(mciwcmsg.worldX,mciwcmsg.worldY)
+            pcm.PlayedCharacterManager().isInHouse = False
+            pcm.PlayedCharacterManager().isInHisHouse = False
+            pcm.PlayedCharacterManager().currentMap.setOutdoorCoords(mciwcmsg.worldX,mciwcmsg.worldY)
             self._worldPoint = WorldPointWrapper(mciwcmsg.mapId,True,mciwcmsg.worldX,mciwcmsg.worldY)
             
          elif isinstance(msg, MapComplementaryInformationsDataInHouseMessage):
             mcidihmsg = msg
             isPlayerHouse = PlayerManager().nickname == mcidihmsg.currentHouse.houseInfos.ownerTag.nickname
-            PlayedCharacterManager().isInHouse = True
+            pcm.PlayedCharacterManager().isInHouse = True
             if isPlayerHouse:
-               PlayedCharacterManager().isInHisHouse = True
-            PlayedCharacterManager().currentMap.setOutdoorCoords(mcidihmsg.currentHouse.worldX,mcidihmsg.currentHouse.worldY)
+               pcm.PlayedCharacterManager().isInHisHouse = True
+            pcm.PlayedCharacterManager().currentMap.setOutdoorCoords(mcidihmsg.currentHouse.worldX,mcidihmsg.currentHouse.worldY)
             self._worldPoint = WorldPointWrapper(mcidihmsg.mapId,True,mcidihmsg.currentHouse.worldX,mcidihmsg.currentHouse.worldY)
             
          elif isinstance(msg, MapComplementaryInformationsBreachMessage):
@@ -390,7 +390,7 @@ class FightEntitiesFrame(AbstractEntitiesFrame, Frame):
          pEvent.currentTarget.removeEventListener(TiphonEvent.RENDER_SUCCEED,self.onCreatureSwitchEnd)
          --self._numCreatureSwitchingEntities
       if self._numCreatureSwitchingEntities == 0:
-         fightPreparationFrame = Kernel().getWorker().getFrame(FightPreparationFrame)
+         fightPreparationFrame = krnl.Kernel().getWorker().getFrame(FightPreparationFrame)
          if fightPreparationFrame:
             fightPreparationFrame.updateSwapPositionRequestsIcons()
    
@@ -496,7 +496,7 @@ class FightEntitiesFrame(AbstractEntitiesFrame, Frame):
    
    def updateActorLook(self, actorId:float, newLook:EntityLook, smoke:bool = False) -> AnimatedCharacter:
       ac:AnimatedCharacter = super().updateActorLook(actorId,newLook,smoke)
-      if ac and actorId != PlayedCharacterManager().id:
+      if ac and actorId != pcm.PlayedCharacterManager().id:
          pass
       return ac
    
@@ -549,7 +549,7 @@ class FightEntitiesFrame(AbstractEntitiesFrame, Frame):
       self._entitiesNumber[idEntity] = None
       if Dofus().options.getOption("orderFighters"):
          num = 1
-         fightBFrame = Kernel().getWorker().getFrame(FightBattleFrame)
+         fightBFrame = krnl.Kernel().getWorker().getFrame(FightBattleFrame)
          for entId in fightBFrame.fightersList:
             if entId != idEntity and self.getEntityInfos(entId):
                self.updateEntityfloat(entId,num)
@@ -562,12 +562,12 @@ class FightEntitiesFrame(AbstractEntitiesFrame, Frame):
       fightBFrame:FightBattleFrame = None
       entId:float = None
       if not self._worldPoint:
-         self._worldPoint = PlayedCharacterManager().currentMap
+         self._worldPoint = pcm.PlayedCharacterManager().currentMap
       if not self._currentSubAreaId:
-         self._currentSubAreaId = PlayedCharacterManager().currentSubArea.id
+         self._currentSubAreaId = pcm.PlayedCharacterManager().currentSubArea.id
       super().onPropertyChanged(e)
       if e.propertyName == "cellSelectionOnly":
-         untargetableEntities = e.propertyValue or Kernel().getWorker().getFrame(FightPreparationFrame)
+         untargetableEntities = e.propertyValue or krnl.Kernel().getWorker().getFrame(FightPreparationFrame)
       elif e.propertyName == "orderFighters":
          if not e.propertyValue:
             for id in self._entitiesNumber:
@@ -575,7 +575,7 @@ class FightEntitiesFrame(AbstractEntitiesFrame, Frame):
                   self._entitiesNumber[float(id)] = None
          else:
             num = 1
-            fightBFrame = Kernel().getWorker().getFrame(FightBattleFrame)
+            fightBFrame = krnl.Kernel().getWorker().getFrame(FightBattleFrame)
             if fightBFrame:
                for entId in fightBFrame.fightersList:
                   if self.getEntityInfos(entId):

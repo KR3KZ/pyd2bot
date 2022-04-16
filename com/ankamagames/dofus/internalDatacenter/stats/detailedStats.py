@@ -1,6 +1,6 @@
 
 
-from com.ankamagames.dofus.internalDatacenter.stats.stat import Stat
+from com.ankamagames.dofus.internalDatacenter.stats.Stat import Stat
 
 
 class DetailedStat(Stat):

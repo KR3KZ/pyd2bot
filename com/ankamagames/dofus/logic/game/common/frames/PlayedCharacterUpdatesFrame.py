@@ -2,11 +2,11 @@ from datetime import datetime
 from logging import Logger
 from time import perf_counter
 from com.ankamagames.dofus.datacenter.world.SubArea import SubArea
-from com.ankamagames.dofus.internalDatacenter.stats.entityStats import EntityStats
-from com.ankamagames.dofus.kernel.Kernel import Kernel
+from com.ankamagames.dofus.internalDatacenter.stats.EntityStats import EntityStats
+import com.ankamagames.dofus.kernel.Kernel as krnl
 from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerManager
 from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManager
-from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
+import com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager as pcm
 from com.ankamagames.dofus.logic.game.common.managers.TimerManager import TimeManager
 from com.ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEntities
 from com.ankamagames.dofus.logic.game.fight.managers.CurrentPlayedFighterManager import CurrentPlayedFighterManager
@@ -80,7 +80,7 @@ class PlayedCharacterUpdatesFrame(Frame):
 
    @property
    def roleplayContextFrame(self) -> rplCF.RoleplayContextFrame:
-      return Kernel().getWorker().getFrame(rplCF.RoleplayContextFrame)
+      return krnl.Kernel().getWorker().getFrame(rplCF.RoleplayContextFrame)
 
    @property
    def kamasLimit(self) -> float:
@@ -95,9 +95,9 @@ class PlayedCharacterUpdatesFrame(Frame):
 
       if isinstance(msg, SetCharacterRestrictionsMessage):
          scrmsg = msg
-         if scrmsg.actorId == PlayedCharacterManager().id:
-            PlayedCharacterManager().restrictions = scrmsg.restrictions
-         rpEntitiesFrame = Kernel().getWorker().getFrame(RoleplayEntitiesFrame)
+         if scrmsg.actorId == pcm.PlayedCharacterManager().id:
+            pcm.PlayedCharacterManager().restrictions = scrmsg.restrictions
+         rpEntitiesFrame = krnl.Kernel().getWorker().getFrame(RoleplayEntitiesFrame)
          if rpEntitiesFrame:
             infos = rpEntitiesFrame.getEntityInfos(scrmsg.actorId)
             if infos and infos.humanoidInfo:
@@ -106,48 +106,48 @@ class PlayedCharacterUpdatesFrame(Frame):
 
       if isinstance(msg, ServerExperienceModificatorMessage):
          semsg = msg
-         PlayedCharacterManager().experiencePercent = semsg.experiencePercent - 100
+         pcm.PlayedCharacterManager().experiencePercent = semsg.experiencePercent - 100
          return True
 
       if isinstance(msg, CharacterStatsListMessage):
          # cslmsg = msg
-         # fightBattleFrame = Kernel().getWorker().getFrame(FightBattleFrame)
+         # fightBattleFrame = krnl.Kernel().getWorker().getFrame(FightBattleFrame)
          # if fightBattleFrame is not None and fightBattleFrame.executingSequence:
          #    fightBattleFrame.delayCharacterStatsList(cslmsg)
          # else:
          #    self.updateCharacterStatsList(cslmsg.stats)
          # if self.roleplayContextFrame and self.roleplayContextFrame.entitiesFrame:
-         #    playerInfos = self.roleplayContextFrame.entitiesFrame.getEntityInfos(PlayedCharacterManager().id)
+         #    playerInfos = self.roleplayContextFrame.entitiesFrame.getEntityInfos(pcm.PlayedCharacterManager().id)
          #    if playerInfos:
          #       playerInfos.alignmentInfos = cslmsg.stats.alignmentInfos
-         # if Kernel().getWorker().getFrame(QuestFrame).achievmentsListProcessed == False:
-         #    Kernel().getWorker().getFrame(QuestFrame)
+         # if krnl.Kernel().getWorker().getFrame(QuestFrame).achievmentsListProcessed == False:
+         #    krnl.Kernel().getWorker().getFrame(QuestFrame)
          return True
 
       if isinstance(msg, MapComplementaryInformationsDataMessage):
          mcidmsg = msg
          for grai in mcidmsg.actors:
             grpci = grai
-            if grpci and grpci.contextualId == PlayedCharacterManager().id:
-               PlayedCharacterManager().infos.entityLook = grpci.look
+            if grpci and grpci.contextualId == pcm.PlayedCharacterManager().id:
+               pcm.PlayedCharacterManager().infos.entityLook = grpci.look
                for opt in grpci.humanoidInfo.options:
                   if isinstance(opt, HumanOptionAlliance):
-                     PlayedCharacterManager().characteristics.alignmentInfos.aggressable = opt.aggressable
+                     pcm.PlayedCharacterManager().characteristics.alignmentInfos.aggressable = opt.aggressable
 
-         # if not (PlayedCharacterManager().characteristics.alignmentInfos.aggressable == AggressableStatusEnum.AvA_DISQUALIFIED or\
-         #     PlayedCharacterManager().characteristics.alignmentInfos.aggressable == AggressableStatusEnum.AvA_ENABLED_AGGRESSABLE or\
-         #         PlayedCharacterManager().characteristics.alignmentInfos.aggressable == AggressableStatusEnum.AvA_ENABLED_NON_AGGRESSABLE or\
-         #             PlayedCharacterManager().characteristics.alignmentInfos.aggressable == AggressableStatusEnum.AvA_PREQUALIFIED_AGGRESSABLE):
+         # if not (pcm.PlayedCharacterManager().characteristics.alignmentInfos.aggressable == AggressableStatusEnum.AvA_DISQUALIFIED or\
+         #     pcm.PlayedCharacterManager().characteristics.alignmentInfos.aggressable == AggressableStatusEnum.AvA_ENABLED_AGGRESSABLE or\
+         #         pcm.PlayedCharacterManager().characteristics.alignmentInfos.aggressable == AggressableStatusEnum.AvA_ENABLED_NON_AGGRESSABLE or\
+         #             pcm.PlayedCharacterManager().characteristics.alignmentInfos.aggressable == AggressableStatusEnum.AvA_PREQUALIFIED_AGGRESSABLE):
          #    return False
 
          newSubArea = SubArea.getSubAreaByMapId(mcidmsg.mapId)
 
-         # if PlayedCharacterManager().currentSubArea and newSubArea:
+         # if pcm.PlayedCharacterManager().currentSubArea and newSubArea:
          #    if PrismSubAreaWrapper.prismList[newSubArea.id]:
          #       prism = PrismSubAreaWrapper.prismList[newSubArea.id]
          #       if prism.state == PrismStateEnum.PRISM_STATE_VULNERABLE:
-         #          if Kernel().getWorker().contains(AllianceFrame):
-         #             allianceFrame = Kernel().getWorker().getFrame(AllianceFrame)
+         #          if krnl.Kernel().getWorker().contains(AllianceFrame):
+         #             allianceFrame = krnl.Kernel().getWorker().getFrame(AllianceFrame)
          
          return False
 
@@ -180,8 +180,8 @@ class PlayedCharacterUpdatesFrame(Frame):
          clumsg = msg
          messageId = clumsg.getMessageId()
          if messageId  == CharacterLevelUpMessage.protocolId:
-            previousLevel = PlayedCharacterManager().infos.level
-            PlayedCharacterManager().infos.level = clumsg.newLevel
+            previousLevel = pcm.PlayedCharacterManager().infos.level
+            pcm.PlayedCharacterManager().infos.level = clumsg.newLevel
             if clumsg.newLevel == 10 and PlayerManager().server.gameTypeId != GameServerTypeEnum.SERVER_TYPE_TEMPORIS:
                InventoryManagementFrame.displayNewsPopupClassic()
             caracPointEarned = 0
@@ -189,7 +189,7 @@ class PlayedCharacterUpdatesFrame(Frame):
             caracPointEarned = (clumsg.newLevel - previousLevel) * 5
             healPointEarned = (clumsg.newLevel - previousLevel) * 5
             newSpellWrappers = []
-            playerBreed = Breed.getBreedById(PlayedCharacterManager().infos.breed)
+            playerBreed = Breed.getBreedById(pcm.PlayedCharacterManager().infos.breed)
             for spellVariant in playerBreed.breedSpellVariants:
                for spellBreed in spellVariant.spells:
                   for spellLevelBreedId in spellBreed.spellLevels:
@@ -198,7 +198,7 @@ class PlayedCharacterUpdatesFrame(Frame):
                         obtentionLevel = spellLevelBreed.minPlayerLevel
                         if obtentionLevel <= clumsg.newLevel and obtentionLevel > previousLevel:
                            newSpellWrappers.append(SpellWrapper.create(spellBreed.id,spellLevelBreed.grade,False))
-            for spellWrapper in PlayedCharacterManager().spellsInventory:
+            for spellWrapper in pcm.PlayedCharacterManager().spellsInventory:
                spellWrapper.updateSpellLevelAndEffectsAccordingToPlayerLevel()
             if len(newSpellWrappers):
                # new level handle
@@ -208,7 +208,7 @@ class PlayedCharacterUpdatesFrame(Frame):
             except Exception as e:
                pass
             if self.roleplayContextFrame:
-               entityInfos = self.roleplayContextFrame.entitiesFrame.getEntityInfos(PlayedCharacterManager().id)
+               entityInfos = self.roleplayContextFrame.entitiesFrame.getEntityInfos(pcm.PlayedCharacterManager().id)
             if entityInfos:
                for option in entityInfos.humanoidInfo.options:
                   if isinstance(option, HumanOptionOrnament):
@@ -234,12 +234,12 @@ class PlayedCharacterUpdatesFrame(Frame):
 
       if isinstance(msg, GameRolePlayPlayerLifeStatusMessage):
          grplsmsg = msg
-         PlayedCharacterManager().state = grplsmsg.state
+         pcm.PlayedCharacterManager().state = grplsmsg.state
          return True
 
       if isinstance(msg, GameRolePlayGameOverMessage):
          grpgomsg = msg
-         PlayedCharacterManager().state = PlayerLifeStatusEnum.STATUS_TOMBSTONE
+         pcm.PlayedCharacterManager().state = PlayerLifeStatusEnum.STATUS_TOMBSTONE
          return True
 
       if isinstance(msg, AlmanachCalendarDateMessage):
@@ -257,11 +257,11 @@ class PlayedCharacterUpdatesFrame(Frame):
          # name = "flag_srv" + crmsg.type
 
          # if crmsg.type  == CompassTypeEnum.COMPASS_TYPE_SPOUSE:
-         #    socialFrame = Kernel().getWorker().getFrame(SocialFrame)
+         #    socialFrame = krnl.Kernel().getWorker().getFrame(SocialFrame)
          #    socialFrame.spouse.followSpouse = False
 
          # if crmsg.type  == CompassTypeEnum.COMPASS_TYPE_PARTY:
-         #    PlayedCharacterManager().followingPlayerIds = []
+         #    pcm.PlayedCharacterManager().followingPlayerIds = []
          #    return True
          return True
 
@@ -278,11 +278,11 @@ class PlayedCharacterUpdatesFrame(Frame):
             memberId = CompassUpdatePartyMemberMessage(msg).memberId
             active = CompassUpdatePartyMemberMessage(msg).active
             if memberId == 0 and not active:
-               for followingPlayerId in PlayedCharacterManager().followingPlayerIds:
+               for followingPlayerId in pcm.PlayedCharacterManager().followingPlayerIds:
                   pass
-               PlayedCharacterManager().followingPlayerIds = []
+               pcm.PlayedCharacterManager().followingPlayerIds = []
             else:
-               pmFrame = Kernel().getWorker().getFrame(PartyManagementFrame)
+               pmFrame = krnl.Kernel().getWorker().getFrame(PartyManagementFrame)
                if pmFrame:
                   memberInfo = pmFrame.getGroupMemberById(memberId)
                   if memberInfo:
@@ -303,7 +303,7 @@ class PlayedCharacterUpdatesFrame(Frame):
             legend = cumsg.coords.worldX + "," + cumsg.coords.worldY
 
          if cumsg.type  == CompassTypeEnum.COMPASS_TYPE_SPOUSE:
-            socialFrame2 = Kernel().getWorker().getFrame(SocialFrame)
+            socialFrame2 = krnl.Kernel().getWorker().getFrame(SocialFrame)
             socialFrame2.spouse.followSpouse = True
          return True
 
@@ -318,8 +318,8 @@ class PlayedCharacterUpdatesFrame(Frame):
          # salm = msg
          # giftList = []
          # initialGiftCount = 0
-         # if PlayedCharacterManager().waitingGifts and PlayedCharacterManager().len(waitingGifts) != 0:
-         #    initialGiftCount = PlayedCharacterManager().len(waitingGifts)
+         # if pcm.PlayedCharacterManager().waitingGifts and pcm.PlayedCharacterManager().len(waitingGifts) != 0:
+         #    initialGiftCount = pcm.PlayedCharacterManager().len(waitingGifts)
          # for gift in salm.actions:
          #        _items = []
          #    for item in gift.items:
@@ -332,7 +332,7 @@ class PlayedCharacterUpdatesFrame(Frame):
          #          "items":_items
          #       }
          #    giftList.append(obj)
-         # PlayedCharacterManager().waitingGifts = giftList
+         # pcm.PlayedCharacterManager().waitingGifts = giftList
          # if len(giftList) > 0:
          #    if self._giftListInitialized and len(giftList) != initialGiftCount and len(giftList) > initialGiftCount:
          #       pass
@@ -351,7 +351,7 @@ class PlayedCharacterUpdatesFrame(Frame):
          #    "text":saam.newAction.text,
          #    "items":items
          # }
-         # PlayedCharacterManager().waitingGifts.append(obj)
+         # pcm.PlayedCharacterManager().waitingGifts.append(obj)
          return True
 
       # if isinstance(msg, GiftAssignRequestAction):
@@ -371,12 +371,12 @@ class PlayedCharacterUpdatesFrame(Frame):
       if isinstance(msg, StartupActionFinishedMessage):
          # safm = msg
          # indexToDelete = -1
-         # for giftAction in PlayedCharacterManager().waitingGifts:
+         # for giftAction in pcm.PlayedCharacterManager().waitingGifts:
          #    if giftAction.uid == safm.actionId:
-         #       indexToDelete = PlayedCharacterManager().waitingGifts.find(giftAction)
+         #       indexToDelete = pcm.PlayedCharacterManager().waitingGifts.find(giftAction)
          # if indexToDelete > -1:
-         #    PlayedCharacterManager().waitingGifts.splice(indexToDelete,1)
-         #    if len(PlayedCharacterManager().waitingGifts) == 0:
+         #    pcm.PlayedCharacterManager().waitingGifts.splice(indexToDelete,1)
+         #    if len(pcm.PlayedCharacterManager().waitingGifts) == 0:
          #       pass
          return True
 
@@ -401,7 +401,7 @@ class PlayedCharacterUpdatesFrame(Frame):
          #    newSpellList = dict()
          #    for forgettableSpell in fslumsg.spells:
          #       newSpellList[forgettableSpell.spellId] = forgettableSpell
-         #    PlayedCharacterManager().playerForgettableSpelldict = newSpellList
+         #    pcm.PlayedCharacterManager().playerForgettableSpelldict = newSpellList
          # else:
          #    ds = DataStoreType("AccountModule_",True,DataStoreEnum.LOCATION_LOCAL,DataStoreEnum.BIND_ACCOUNT)
          #    if not StoreDataManager().getData(ds,FORGETTABLE_SPELL_FIRST_NOTIF_NAME):
@@ -409,7 +409,7 @@ class PlayedCharacterUpdatesFrame(Frame):
          #       nid = NotificationManager().prepareNotification(I18n.getUiText("ui.temporis.popupFirstSpellAddedTitle"),I18n.getUiText("ui.temporis.popupFirstSpellAddedContent"),NotificationTypeEnum.TUTORIAL,"FirstForgettableSpellNotif")
          #       NotificationManager().addButtonToNotification(nid,I18n.getUiText("ui.temporis.popupFirstSpellAddedButton"),"OpenForgettableSpellsUiAction")
          #       NotificationManager().sendNotification(nid)
-         #    playerForgettableSpellsDict = PlayedCharacterManager().playerForgettableSpelldict
+         #    playerForgettableSpellsDict = pcm.PlayedCharacterManager().playerForgettableSpelldict
          #    for forgettableSpell in fslumsg.spells:
          #       playerForgettableSpellsDict[forgettableSpell.spellId] = forgettableSpell
          # KernelEventsManager().processCallback(HookList.ForgettableSpellListUpdate)
@@ -419,7 +419,7 @@ class PlayedCharacterUpdatesFrame(Frame):
 
       if isinstance(msg, ForgettableSpellDeleteMessage):
          # fsdmsg = msg
-         # playerForgettableSpellsDict = PlayedCharacterManager().playerForgettableSpelldict
+         # playerForgettableSpellsDict = pcm.PlayedCharacterManager().playerForgettableSpelldict
          # for forgettableSpellId in fsdmsg.spells:
          #    del playerForgettableSpellsDict[forgettableSpellId]
          # StorageOptionManager().updateStorageView()
@@ -428,12 +428,12 @@ class PlayedCharacterUpdatesFrame(Frame):
 
       if isinstance(msg, ForgettableSpellEquipmentSlotsMessage):
          # fsesmsg = msg
-         # PlayedCharacterManager().playerMaxForgettableSpellsfloat = fsesmsg.quantity
+         # pcm.PlayedCharacterManager().playerMaxForgettableSpellsfloat = fsesmsg.quantity
          return True
 
       if isinstance(msg, KnownZaapListMessage):
          kzlmsg = msg
-         PlayedCharacterManager().updateKnownZaaps(kzlmsg.destinations)
+         pcm.PlayedCharacterManager().updateKnownZaaps(kzlmsg.destinations)
          return True
 
       # if isinstance(msg, UpdateSpellModifierAction):
@@ -444,15 +444,15 @@ class PlayedCharacterUpdatesFrame(Frame):
       if isinstance(msg, GameMapSpeedMovementMessage):
          gmsmm = msg
          newSpeedAjust = 10 * (gmsmm.speedMultiplier - 1)
-         PlayedCharacterManager().speedAjust = newSpeedAjust
-         if DofusEntities.getEntity(PlayedCharacterManager().id) is not None and self.roleplayContextFrame is not None:
-            DofusEntities.getEntity(PlayedCharacterManager().id).speedAdjust = newSpeedAjust
+         pcm.PlayedCharacterManager().speedAjust = newSpeedAjust
+         if DofusEntities.getEntity(pcm.PlayedCharacterManager().id) is not None and self.roleplayContextFrame is not None:
+            DofusEntities.getEntity(pcm.PlayedCharacterManager().id).speedAdjust = newSpeedAjust
          return True
 
       return False
 
    def updateCharacterStatsList(self, stats:CharacterCharacteristicsInformations) -> None:
-      playerId:float = PlayedCharacterManager().id
+      playerId:float = pcm.PlayedCharacterManager().id
       statsManager:StatsManager = StatsManager()
       playerStats:EntityStats = statsManager.getStats(playerId)
       oldEnergyPoints:float = 0
@@ -462,16 +462,16 @@ class PlayedCharacterUpdatesFrame(Frame):
       SpellModifiersManager().setRawSpellsModifiers(playerId,stats.spellModifications)
       if stats.kamas != InventoryManager().inventory.kamas:
          InventoryManager().inventory.kamas = stats.kamas
-      PlayedCharacterManager().characteristics = stats
-      if PlayedCharacterManager().isFighting:
+      pcm.PlayedCharacterManager().characteristics = stats
+      if pcm.PlayedCharacterManager().isFighting:
          if CurrentPlayedFighterManager().isRealPlayer():
             pass
-         SpellWrapper.refreshAllPlayerSpellHolder(PlayedCharacterManager().id)
+         SpellWrapper.refreshAllPlayerSpellHolder(pcm.PlayedCharacterManager().id)
       else:
          pass
 
    def updateSpellModifier(self, targetId:float, spellId:float, statId:float) -> None:
-      playerId:float = PlayedCharacterManager().id
+      playerId:float = pcm.PlayedCharacterManager().id
       if playerId is not targetId:
          return
       spell:SpellWrapper = SpellWrapper.getSpellWrapperById(spellId,playerId)

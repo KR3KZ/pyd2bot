@@ -1,68 +1,73 @@
 from com.ankamagames.atouin.messages.MapLoadedMessage import MapLoadedMessage
-import com.ankamagames.dofus.kernel.Kernel as krnl
 from com.ankamagames.jerakine.logger.Logger import Logger
 from time import perf_counter
 import com.ankamagames.atouin.utils.DataMapProvider as dmpm
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 from com.ankamagames.jerakine.types.positions.worldPoint import WorldPoint
+
 logger = Logger(__name__)
 
 
 class MapDisplayManager(metaclass=Singleton):
 
-   MEMORY_LOG:dict = dict()
-   _currentMap:WorldPoint
-   _mapInstanceId:float = 0
-   _lastMap:WorldPoint
-   _nMapLoadStart:int
-   _nMapLoadEnd:int
+    MEMORY_LOG: dict = dict()
+    _currentMap: WorldPoint
+    _mapInstanceId: float = 0
+    _lastMap: WorldPoint
+    _nMapLoadStart: int
+    _nMapLoadEnd: int
 
-   def __init__(self) -> None:
-      from com.ankamagames.jerakine.resources.loaders.MapLoader import MapLoader
-      self._loader = MapLoader()
-      self._currentMap = None
-      self.currentDataMap = None
-      self._lastMap = None
-      self._nMapLoadStart = 0
-      self._nMapLoadEnd = 0
-      self._forceReloadWithoutCache = False
+    def __init__(self) -> None:
+        from com.ankamagames.jerakine.resources.loaders.MapLoader import MapLoader
 
-   @property
-   def dataMap(self):
-      return self.currentDataMap
+        self._loader = MapLoader()
+        self._currentMap = None
+        self.currentDataMap = None
+        self._lastMap = None
+        self._nMapLoadStart = 0
+        self._nMapLoadEnd = 0
+        self._forceReloadWithoutCache = False
 
-   @property
-   def currentMapPoint(self) -> WorldPoint:
-      return self._currentMap
+    @property
+    def dataMap(self):
+        return self.currentDataMap
 
-   @property
-   def mapInstanceId(self) -> float:
-      return self._mapInstanceId
+    @property
+    def currentMapPoint(self) -> WorldPoint:
+        return self._currentMap
 
-   @mapInstanceId.setter
-   def mapInstanceId(self, mapId:float) -> None:
-      self._mapInstanceId = mapId
+    @property
+    def mapInstanceId(self) -> float:
+        return self._mapInstanceId
 
-   def reset(self) -> None:
-      self._currentMap = None
-      logger.debug("mapInstanceId reset 0")
-      self._mapInstanceId = 0
-      self._lastMap = None
+    @mapInstanceId.setter
+    def mapInstanceId(self, mapId: float) -> None:
+        self._mapInstanceId = mapId
 
-   def mapDisplayed(self) -> None:
-      InteractiveCellManager().updateInteractiveCell(self.currentDataMap)
+    def reset(self) -> None:
+        self._currentMap = None
+        logger.debug("mapInstanceId reset 0")
+        self._mapInstanceId = 0
+        self._lastMap = None
 
-   def loadMap(self, mapId:int, forceReloadWithoutCache:bool=False) -> None:
-      self.lastDataMap = self.currentDataMap
-      self._forceReloadWithoutCache = forceReloadWithoutCache
-      self._nMapLoadStart = perf_counter()
-      map = self._loader.load(mapId)
-      self._nMapLoadEnd = perf_counter()
-      logger.debug("Map loaded in " + str(self._nMapLoadEnd - self._nMapLoadStart) + " seconds")
-      dmpm.DataMapProvider().resetUpdatedCell()
-      dmpm.DataMapProvider().resetSpecialEffects()
-      self.currentDataMap = map
-      self._currentMap = WorldPoint.fromMapId(map.id)
-      msg = MapLoadedMessage()
-      msg.id = self._currentMap.mapId
-      krnl.Kernel().getWorker().process(msg)
+    def mapDisplayed(self) -> None:
+        InteractiveCellManager().updateInteractiveCell(self.currentDataMap)
+
+    def loadMap(self, mapId: int, forceReloadWithoutCache: bool = False) -> None:
+        from com.ankamagames.dofus.kernel.Kernel import Kernel
+
+        self.lastDataMap = self.currentDataMap
+        self._forceReloadWithoutCache = forceReloadWithoutCache
+        self._nMapLoadStart = perf_counter()
+        map = self._loader.load(mapId)
+        self._nMapLoadEnd = perf_counter()
+        logger.debug(
+            "Map loaded in " + str(self._nMapLoadEnd - self._nMapLoadStart) + " seconds"
+        )
+        dmpm.DataMapProvider().resetUpdatedCell()
+        dmpm.DataMapProvider().resetSpecialEffects()
+        self.currentDataMap = map
+        self._currentMap = WorldPoint.fromMapId(map.id)
+        msg = MapLoadedMessage()
+        msg.id = self._currentMap.mapId
+        Kernel().getWorker().process(msg)

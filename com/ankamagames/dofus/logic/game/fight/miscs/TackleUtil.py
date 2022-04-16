@@ -1,8 +1,8 @@
                                                                   
 from com.ankamagames.dofus.datacenter.monsters.Monster import Monster
-from com.ankamagames.dofus.internalDatacenter.dataEnum import DataEnum
-from com.ankamagames.dofus.internalDatacenter.stats.entityStats import EntityStats
-from com.ankamagames.dofus.internalDatacenter.stats.stat import Stat
+from com.ankamagames.dofus.internalDatacenter.DataEnum import DataEnum
+from com.ankamagames.dofus.internalDatacenter.stats.EntityStats import EntityStats
+from com.ankamagames.dofus.internalDatacenter.stats.Stat import Stat
 from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManager
 from com.ankamagames.atouin.managers.EntitiesManager import EntitiesManager
 from com.ankamagames.dofus.logic.game.fight.frames import FightEntitiesFrame

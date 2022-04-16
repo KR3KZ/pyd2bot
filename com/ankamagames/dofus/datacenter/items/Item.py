@@ -6,7 +6,7 @@ if TYPE_CHECKING:
 from com.ankamagames.dofus.datacenter.items.criterion.GroupItemCriterion import GroupItemCriterion
 from com.ankamagames.dofus.datacenter.items.ItemSet import ItemSet
 from com.ankamagames.dofus.datacenter.items.ItemType import ItemType
-from com.ankamagames.dofus.internalDatacenter.dataEnum import DataEnum
+from com.ankamagames.dofus.internalDatacenter.DataEnum import DataEnum
 from com.ankamagames.dofus.types.IdAccessors import IdAccessors
 from com.ankamagames.dofus.types.enums.ItemCategoryEnum import ItemCategoryEnum
 from com.ankamagames.jerakine.data.IposInit import IPostInit

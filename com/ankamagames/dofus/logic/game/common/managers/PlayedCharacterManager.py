@@ -1,11 +1,10 @@
 from typing import TYPE_CHECKING
-from com.ankamagames.dofus.logic.game.fight.frames.FightContextFrame import FightContextFrame
 if TYPE_CHECKING:
    from com.ankamagames.dofus.internalDatacenter.items.ItemWrapper import ItemWrapper
    from com.ankamagames.dofus.internalDatacenter.items.WeaponWrapper import WeaponWrapper
    from com.ankamagames.dofus.internalDatacenter.mount.MountData import MountData
    from com.ankamagames.dofus.network.types.game.character.choice.CharacterBaseInformations import CharacterBaseInformations
-   from com.ankamagames.dofus.internalDatacenter.stats.entityStats import EntityStats
+   from com.ankamagames.dofus.internalDatacenter.stats.EntityStats import EntityStats
    from com.ankamagames.dofus.datacenter.world.SubArea import SubArea
    from com.ankamagames.dofus.datacenter.world.WorldMap import WorldMap
    from com.ankamagames.dofus.internalDatacenter.jobs.KnownJobWrapper import KnownJobWrapper
@@ -17,7 +16,7 @@ from com.ankamagames.dofus.network.enums.CharacterInventoryPositionEnum import C
 from com.ankamagames.dofus.network.enums.PlayerLifeStatusEnum import PlayerLifeStatusEnum
 from com.ankamagames.dofus.network.types.game.havenbag.HavenBagRoomPreviewInformation import HavenBagRoomPreviewInformation
 from com.ankamagames.jerakine.logger.Logger import Logger
-from com.ankamagames.dofus.internalDatacenter.dataEnum import DataEnum
+from com.ankamagames.dofus.internalDatacenter.DataEnum import DataEnum
 from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManager
 from com.ankamagames.dofus.network.protocolConstantsEnum import ProtocolConstantsEnum
 from com.ankamagames.jerakine.interfaces.IDestroyable import IDestroyable
@@ -190,7 +189,8 @@ class PlayedCharacterManager(IDestroyable, metaclass=Singleton):
       return self.restrictions.cantAttackMonster
 
    @property
-   def isInKoli(self) -> bool:
+   def isInKoli(self) -> bool:    
+      from com.ankamagames.dofus.logic.game.fight.frames.FightContextFrame import FightContextFrame
       from com.ankamagames.dofus.kernel.Kernel import Kernel
       fightContextFrame:FightContextFrame = Kernel().getWorker().getFrame(FightContextFrame)
       return fightContextFrame and fightContextFrame.isKolossium

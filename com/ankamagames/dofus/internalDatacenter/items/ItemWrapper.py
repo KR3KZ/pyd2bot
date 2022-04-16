@@ -8,7 +8,7 @@ from com.ankamagames.dofus.datacenter.items.LegendaryPowerCategory import Legend
 from com.ankamagames.dofus.datacenter.monsters.Monster import Monster
 from com.ankamagames.dofus.datacenter.monsters.MonsterGrade import MonsterGrade
 from com.ankamagames.dofus.enums.ActionIds import ActionIds
-from com.ankamagames.dofus.internalDatacenter.dataEnum import DataEnum
+from com.ankamagames.dofus.internalDatacenter.DataEnum import DataEnum
 from com.ankamagames.dofus.internalDatacenter.items.WeaponWrapper import WeaponWrapper
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
 from com.ankamagames.dofus.network.types.game.data.items.Item import Item

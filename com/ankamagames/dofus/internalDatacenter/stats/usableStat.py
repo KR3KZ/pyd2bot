@@ -1,4 +1,4 @@
-from .detailedStats import DetailedStat
+from .DetailedStats import DetailedStat
 
 
 class UsableStat(DetailedStat):

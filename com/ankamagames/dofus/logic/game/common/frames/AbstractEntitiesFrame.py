@@ -3,7 +3,7 @@ from com.ankamagames.dofus.datacenter.monsters.Monster import Monster
 from com.ankamagames.dofus.internalDatacenter.world.WorldPointWrapper import WorldPointWrapper
 from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManager
 from com.ankamagames.atouin.managers.EntitiesManager import EntitiesManager
-from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
+import com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager as pcm
 from com.ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEntities
 from com.ankamagames.dofus.network.messages.game.context.EntityDispositionInformations import EntityDispositionInformations
 from com.ankamagames.dofus.network.types.game.context.GameContextActorInformations import GameContextActorInformations
@@ -136,8 +136,8 @@ class AbstractEntitiesFrame(Frame):
             EntitiesManager().addAnimatedEntity(int(infos.contextualId), characterEntity)
         if isinstance(infos, GameRolePlayHumanoidInformations):
             humanoid = infos
-            if infos.contextualId == PlayedCharacterManager().id:
-                PlayedCharacterManager().restrictions = humanoid.humanoidInfo.restrictions
+            if infos.contextualId == pcm.PlayedCharacterManager().id:
+                pcm.PlayedCharacterManager().restrictions = humanoid.humanoidInfo.restrictions
         if infos.disposition.cellId != -1:
             characterEntity.position = MapPoint.fromCellId(infos.disposition.cellId)
         return characterEntity

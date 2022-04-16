@@ -2,9 +2,9 @@
 
    
 from com.ankamagames.jerakine.logger.Logger import Logger
-from com.ankamagames.dofus.internalDatacenter.stats.detailedStats import DetailedStat
-from com.ankamagames.dofus.internalDatacenter.stats.stat import Stat
-from com.ankamagames.dofus.internalDatacenter.stats.usableStat import UsableStat
+from com.ankamagames.dofus.internalDatacenter.stats.DetailedStats import DetailedStat
+from com.ankamagames.dofus.internalDatacenter.stats.Stat import Stat
+from com.ankamagames.dofus.internalDatacenter.stats.UsableStat import UsableStat
 from damageCalculation.tools import StatIds
 logger = Logger(__name__)
 

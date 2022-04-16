@@ -1,20 +1,21 @@
-from com.ankamagames.dofus.datacenter.spells.Spell import Spell
-from com.ankamagames.dofus.datacenter.spells.SpellLevel import SpellLevel
-from com.ankamagames.dofus.internalDatacenter.spells.SpellWrapper import SpellWrapper
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+   from com.ankamagames.dofus.datacenter.spells.SpellLevel import SpellLevel
+   from com.ankamagames.dofus.internalDatacenter.spells.SpellWrapper import SpellWrapper
 import com.ankamagames.dofus.kernel.Kernel as knl
 from com.ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEntities
 from com.ankamagames.dofus.logic.game.fight.managers.SpellCastInFightManager import SpellCastInFightManager
-from com.ankamagames.dofus.logic.game.fight.managers.SpellManager import SpellManager
+from com.ankamagames.dofus.logic.game.fight.types.castSpellManager.SpellManager import SpellManager
 from com.ankamagames.dofus.network.types.game.character.characteristic.CharacterCharacteristicsInformations import CharacterCharacteristicsInformations
 from com.ankamagames.dofus.network.types.game.data.items.Item import Item
 from com.ankamagames.jerakine.logger.Logger import Logger
 # from com.ankamagames.dofus.datacenter.items.criterion.Item import Item
 from com.ankamagames.dofus.datacenter.spells.SpellState import SpellState
-from com.ankamagames.dofus.internalDatacenter.dataEnum import DataEnum
-from com.ankamagames.dofus.internalDatacenter.stats.entityStats import EntityStats
+from com.ankamagames.dofus.internalDatacenter.DataEnum import DataEnum
+from com.ankamagames.dofus.internalDatacenter.stats.EntityStats import EntityStats
 from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManager
 from com.ankamagames.dofus.logic.game.fight.managers.FightersStateManager import FightersStateManager
-import com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager as pc
+import com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager as pcm
 from com.ankamagames.dofus.types.entities.AnimatedCharacter import AnimatedCharacter
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 from damageCalculation.tools import StatIds
@@ -52,7 +53,7 @@ class CurrentPlayedFighterManager(metaclass=Singleton):
          return
       lastFighterId:float = self._currentFighterId
       self._currentFighterId = id
-      playerManager = pc.PlayedCharacterManager()
+      playerManager = pcm.PlayedCharacterManager()
       self._currentFighterIsRealPlayer = self._currentFighterId == playerManager.id
       lastFighterEntity:AnimatedCharacter = DofusEntities.getEntity(lastFighterId)
       if lastFighterEntity:
@@ -69,7 +70,7 @@ class CurrentPlayedFighterManager(metaclass=Singleton):
             pass
 
    def checkPlayableEntity(self, id:float) -> bool:
-      if id == pc.PlayedCharacterManager().id:
+      if id == pcm.PlayedCharacterManager().id:
          return True
       return self._characteristicsInformationsList.get(id) != None
 
@@ -77,7 +78,7 @@ class CurrentPlayedFighterManager(metaclass=Singleton):
       return self._currentFighterIsRealPlayer
 
    def resetPlayerSpellList(self) -> None:
-      playerManager = pc.PlayedCharacterManager()
+      playerManager = pcm.PlayedCharacterManager()
       # inventoryManager:InventoryManager = InventoryManager()
       if playerManager.spellsInventory != playerManager.playerSpellList:
          logger.info("Remise à jour de la liste des sorts du joueur")
@@ -91,7 +92,7 @@ class CurrentPlayedFighterManager(metaclass=Singleton):
       self._characteristicsInformationsList[id] = characteristics
 
    def getCharacteristicsInformations(self, id:float = 0) -> CharacterCharacteristicsInformations:
-      player = pc.PlayedCharacterManager()
+      player = pcm.PlayedCharacterManager()
       if id:
          if id == player.id:
             return player.characteristics
@@ -124,8 +125,8 @@ class CurrentPlayedFighterManager(metaclass=Singleton):
          totalTurnDurationInSeconds += apBase + apAdditional + apBonus + mpBase + mpAdditional + mpBonus
       return totalTurnDurationInSeconds
 
-   def getSpellById(self, spellId:int) -> SpellWrapper:
-      player = pc.PlayedCharacterManager()
+   def getSpellById(self, spellId:int) -> 'SpellWrapper':
+      player = pcm.PlayedCharacterManager()
       for spellKnown in player.spellsInventory:
          if spellKnown.id == spellId:
             return spellKnown
@@ -146,11 +147,12 @@ class CurrentPlayedFighterManager(metaclass=Singleton):
       return scm
 
    def canCastThisSpell(self, spellId:int, lvl:int, pTargetId:float = 0, result:list = None) -> bool:
+      from com.ankamagames.dofus.datacenter.spells.Spell import Spell
       spell:Spell = Spell.getSpellById(spellId)
       spellLevel:SpellLevel = spell.getSpellLevel(lvl)
       if spellLevel == None:
          return False
-      player = pc.PlayedCharacterManager()
+      player = pcm.PlayedCharacterManager()
       if self._currentFighterIsRealPlayer:
          if spellId == 0:
             if player.currentWeapon:
@@ -228,8 +230,8 @@ class CurrentPlayedFighterManager(metaclass=Singleton):
       return True
 
    def endFight(self) -> None:
-      if pc.PlayedCharacterManager().id != self._currentFighterId:
-         self.currentFighterId = pc.PlayedCharacterManager().id
+      if pcm.PlayedCharacterManager().id != self._currentFighterId:
+         self.currentFighterId = pcm.PlayedCharacterManager().id
          self.resetPlayerSpellList()
          # self.updatePortrait(DofusEntities.getEntity(self._currentFighterId))
       self._currentFighterId = 0
