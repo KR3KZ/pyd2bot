@@ -18,12 +18,14 @@ class IdentificationSuccessMessage(NetworkMessage):
     hasRights:bool
     hasConsoleRight:bool
     wasAlreadyConnected:bool
+    isAccountForced:bool
     hasRights:bool
     hasConsoleRight:bool
     wasAlreadyConnected:bool
+    isAccountForced:bool
     
 
-    def init(self, login_:str, accountTag_:'AccountTagInformation', accountId_:int, communityId_:int, secretQuestion_:str, accountCreation_:int, subscriptionElapsedDuration_:int, subscriptionEndDate_:int, havenbagAvailableRoom_:int, hasRights_:bool, hasConsoleRight_:bool, wasAlreadyConnected_:bool):
+    def init(self, login_:str, accountTag_:'AccountTagInformation', accountId_:int, communityId_:int, secretQuestion_:str, accountCreation_:int, subscriptionElapsedDuration_:int, subscriptionEndDate_:int, havenbagAvailableRoom_:int, hasRights_:bool, hasConsoleRight_:bool, wasAlreadyConnected_:bool, isAccountForced_:bool):
         self.login = login_
         self.accountTag = accountTag_
         self.accountId = accountId_
@@ -36,6 +38,7 @@ class IdentificationSuccessMessage(NetworkMessage):
         self.hasRights = hasRights_
         self.hasConsoleRight = hasConsoleRight_
         self.wasAlreadyConnected = wasAlreadyConnected_
+        self.isAccountForced = isAccountForced_
         
         super().__init__()
     

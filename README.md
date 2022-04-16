@@ -1,29 +1,13 @@
 # pyd2bot
 
-## Intro
-Ce projet a pour objectif de developper un bot fullsocket pour dofus 2 100% en python.
+## Add the project sources to the python site-packages
 
-## Setup des sources dans site-packages de python
-Vous devez executer le script shell setup.sh affin que le chemin des sources soit connu par votre python
 `./setup.py`
 
-# Dependences 
-## dependences
-Commencer d'abord par installer les dependeces python avec `pip install -r requirements.txt".
-## decodeur flash
-Après, il faudra télécharger et installer le decodeur flash ffdec de l'url, qui va permettre de decompiler une partie des sources de dofus [JPEXS
-FFDec](https://github.com/jindrapetrik/jpexs-decompiler).
-# Build 
-Après installation des dépendences il faudra suivre les étapes suivantes pour pouvoir lancer une instance le bot correctement et s'amuser avec :).
-## Build du protocol 
-Commencer par modifier le fichier qui se situe au path "protocol_builder/config.json", vous devez y renseigner deux choses:
-- "dofusInvoker_path" (chemin vers le fichier dofusInvoker): example "C:\\Users\\<ton_user_name>\\AppData\\Local\\Ankama\\Dofus\\DofusInvoker.swf",
-- "ffdec_path" (chemin vers l'executable du decodeur flash): example "C:\\Program Files (x86)\\FFDec\\ffdec.bat"
+## Instll dependencies
 
-Lancer Après la commande `python -m protocol_builder`.
-## Extraction des données de jeux (les maps, la pub_key du client ...)
-Section pas encore rédigée
-# Lancement d'une instance de bot
-Rendez-vous dans le dossier tests pour trouver des examples de lancement de bots.
+make deps
 
-# Lancement de la webui du sniffer sur le port 8888: `python -m sniffer_webui`
+## Build or update the protocol
+
+make updateProtocol

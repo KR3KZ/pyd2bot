@@ -9,14 +9,11 @@ from tqdm import tqdm
 patterns = {
     "^\n?(\s*)public static function get(\S+)ById\(id:(?:uint|int|double)\)\s*:\s*(\S+)\n?\s*{\n?\s*return\s*GameData\.getObject\(\s*MODULE\s*,\s*id\s*\)\s*as\s*(\S+);\n?\s*}\n?$$": r"\n\1@classmethod\1def get\2ById(cls, id:int) -> '\3':\1\treturn GameData.getObject(cls.MODULE, id)\n",
     "^\n?(\s*)public static function get(\S+)s\(\)\s*:\s*Array\n?\s*{\n?\s*return\s*GameData\.getObjects\(\s*MODULE\s*\)\s*;\n?\s*}\n?$$": r"\n\1@classmethod\1def get\2s(cls) -> list['\2']:\1\treturn GameData.getObjects(cls.MODULE)\n",
-    
     "for each\((\S+) in (.*)\)": r"for \1 in \2:",
     "\((\S+) as (\S+)\)": r"\1",
-    
     "^\s*from com.ankamagames.jerakine.logger.Log import Log": "",
     "^\s*import com.ankamagames.jerakine.logger.Logger;": "from com.ankamagames.jerakine.logger.Logger import Logger",
     "package \S+\n?": "",
-    
     "String\((.*?)\)": r"str(\1)",
     "^\s*import (\S+(?:\.\S+)*)\.(\S+);": r"from \1.\2 import \2",
     "getQualifiedobjectName\((\S+)\)": r"\1.__class__.__name__",
@@ -51,19 +48,17 @@ patterns = {
     "undefined": "None",
     "\.push": ".append",
     " implements ": " ",
-    " extends ": " ",    
-
-    
+    " extends ": " ",
     "Vector\.<(\S+)>": r"list[\1]",
     "function (\S+)\((.*)\) : (\S+)": r"def \1(self, \2) -> \3:",
     "function (\S+)\((.*)\) :": r"def \1(self, \2):",
     # "if !(.*)": r"if not \1",
     "([_a-zA-Z][_a-zA-Z0-9.]{0,30})\.length": r"len(\1)",
     "throw Error(.*)": r"raise Exception\1",
-    r'^(.*)function get (\S+)\((.*)\) : (\S+)$': r"\1@property\n\1def \2(self, \3) -> \4:",
-    r'^(.*)function set (\S+)\((.*)\) : (\S+)$': r"\1@\2.setter\n\1def \2(self, \3) -> \4:",
+    r"^(.*)function get (\S+)\((.*)\) : (\S+)$": r"\1@property\n\1def \2(self, \3) -> \4:",
+    r"^(.*)function set (\S+)\((.*)\) : (\S+)$": r"\1@\2.setter\n\1def \2(self, \3) -> \4:",
     "function [A-Z]+(\S+)\((.*)\)": r"def __init__(self, \2):",
-    "_log:Logger = Log\.getLogger\((.*)\)": r'logger = Logger(__name__)',
+    "_log:Logger = Log\.getLogger\((.*)\)": r"logger = Logger(__name__)",
     ", \)": r")",
     "!==": r"is not",
     "!(\w+)": r"not \1",
@@ -83,12 +78,11 @@ patterns = {
     "Math.min": "min",
     r"(if|else\sif|else)\s*\((.*)\)\s*\n": r"\1 \2:\n",
     r"(elif|if) (\S+) is ([A-Z]+\S+)\:": r"\1 isinstance(\2, \3):",
-
     r"super\((.*)\)": r"super().__init__(\1)",
     r"super\.": r"super().",
     r"(\S+).__str__\(\)": r"str(\1)",
     r"for (\S+):(\S+)\s*=\s*(\S+)\s+(\S+)\s+(.*)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\:": r"for \1 in range(\3, \6, \9):",
-    r"Function" : "FunctionType",
+    r"Function": "FunctionType",
     r"StringUtils\.replace\((.*),(.*),(.*)\)": r"str.replace(\1, \2, \3)",
     r"\.indexOf": ".find",
     r"\.substring\((.*?),(.*?)\)": r"[\1:\2]",
@@ -107,7 +101,6 @@ patterns = {
     r"getTimer\(\)": "perf_counter()",
     r"\.shift\(\)": ".pop(0)",
     r"msg as (\w+)": r"msg",
-
     # extras only for items criterion
     "_operator": "self._operator",
     "_criterionValue": "self._criterionValue",
@@ -115,12 +108,14 @@ patterns = {
     # " as [A-Z]+\S+": "",
     # "(\S+) is ([A-Z]+\S+)": r"isinstance(\1, \2)",
     # "(\S+) ? (\S+) : (^[:\s]+)": r"\2 if \1 else \3",
-
 }
-SWITCH_CASE_PATTERN = r"\s*(switch\(.*\)\s*\n?\{\s*(?:.|\n)+break;\s*\n\s*(?:default:)?(?:[^}]|\n)*\})"
+SWITCH_CASE_PATTERN = (
+    r"\s*(switch\(.*\)\s*\n?\{\s*(?:.|\n)+break;\s*\n\s*(?:default:)?(?:[^}]|\n)*\})"
+)
 CASE_PATTERN1 = "(?P<spaces>\s*)case (?P<testvar>\S+) is (?P<testvalue>\S+):"
 CASE_PATTERN2 = "(?P<spaces>\s*)case (?P<testvalue>\S+):"
 INDENT_SIZE = 3
+
 
 def processCaseBlock(block, case_pattern, testvar=None):
     blockLines = block.split("\n")
@@ -147,14 +142,25 @@ def processCaseBlock(block, case_pattern, testvar=None):
                 firstCase = False
             if case_pattern == CASE_PATTERN1:
                 if firstCase:
-                    resLines.append(tab_size + f"{op} isinstance({m.group('testvar')}, {m.group('testvalue')}):")
+                    resLines.append(
+                        tab_size
+                        + f"{op} isinstance({m.group('testvar')}, {m.group('testvalue')}):"
+                    )
                 else:
-                    resLines.append(tab_size[INDENT_SIZE:] + f"{op} isinstance({m.group('testvar')}, {m.group('testvalue')}):")
+                    resLines.append(
+                        tab_size[INDENT_SIZE:]
+                        + f"{op} isinstance({m.group('testvar')}, {m.group('testvalue')}):"
+                    )
             elif case_pattern == CASE_PATTERN2:
                 if firstCase:
-                    resLines.append(tab_size + f"{op} {testvar} == {m.group('testvalue')}:")
+                    resLines.append(
+                        tab_size + f"{op} {testvar} == {m.group('testvalue')}:"
+                    )
                 else:
-                    resLines.append(tab_size[INDENT_SIZE:] + f"{op} {testvar} == {m.group('testvalue')}:")
+                    resLines.append(
+                        tab_size[INDENT_SIZE:]
+                        + f"{op} {testvar} == {m.group('testvalue')}:"
+                    )
             continue
         if "break;" in line:
             continue
@@ -174,7 +180,9 @@ def processSwitchCases(code):
             if testvar == "true":
                 processedSwitchCase = processCaseBlock(switch_case, CASE_PATTERN1)
             else:
-                processedSwitchCase = processCaseBlock(switch_case, CASE_PATTERN2, testvar)
+                processedSwitchCase = processCaseBlock(
+                    switch_case, CASE_PATTERN2, testvar
+                )
             code = code.replace(switch_case, processedSwitchCase)
         switch_cases = re.findall(SWITCH_CASE_PATTERN, code, flags=re.M)
     return code
@@ -193,7 +201,14 @@ def processCompressedIfELse(line):
         return line
     else:
         j = content.rfind(":")
-        return leftSide + processCompressedIfELse(content[i+1:j]) + "if " + content[:i] + "else" + content[j+1:]
+        return (
+            leftSide
+            + processCompressedIfELse(content[i + 1 : j])
+            + "if "
+            + content[:i]
+            + "else"
+            + content[j + 1 :]
+        )
 
 
 def processCompressedIfELseInAllCode(code):
@@ -243,7 +258,7 @@ def handleIndent(code):
                 inClass = True
         else:
             spaceCount = sum(1 for _ in itertools.takewhile(str.isspace, line))
-            line = (spaceCount // indentSize) * INDENT_SIZE * ' ' + line[spaceCount:]
+            line = (spaceCount // indentSize) * INDENT_SIZE * " " + line[spaceCount:]
         r.append(line)
     return "\n".join(r)
 
@@ -256,7 +271,9 @@ def handleClassHeader(code):
         m = re.match(reg, line)
         if m:
             parents = m.group("parents").split(" ")
-            parents = [p for p in parents if p != "" and p not in ["extends", "implements"]]
+            parents = [
+                p for p in parents if p != "" and p not in ["extends", "implements"]
+            ]
             parents = f"({', '.join(parents)})" if len(parents) > 0 else ""
             line = f"{m.group('left')}class {m.group('name')}{parents}:"
         r.append(line)
@@ -265,7 +282,9 @@ def handleClassHeader(code):
 
 def parseFolderFiles(in_dir, out_dir):
     for f in tqdm(pathlib.Path(in_dir).glob("**/*.as")):
-        parseFile(f, pathlib.Path(out_dir) / f.relative_to(in_dir).name.replace(".as", ".py"))
+        parseFile(
+            f, pathlib.Path(out_dir) / f.relative_to(in_dir).name.replace(".as", ".py")
+        )
 
 
 def getLineIndent(line):
@@ -274,12 +293,12 @@ def getLineIndent(line):
 
 def postSwitchCaseProcess(code):
     codeLines = code.split("\n")
-    testvar  = None
+    testvar = None
     res = []
     blockIndent = None
     for line in codeLines:
 
-        m = re.match('(\s*)case\s+(\S+)\s+is\s+(.*)\s*\:\s*\n?', line)
+        m = re.match("(\s*)case\s+(\S+)\s+is\s+(.*)\s*\:\s*\n?", line)
         if m:
             blockIndent = m.group(1)[INDENT_SIZE:]
             line = f"{blockIndent}if isinstance({m.group(2)}, {m.group(3)}):"
@@ -297,7 +316,7 @@ def postSwitchCaseProcess(code):
         if m:
             testvar = m.group("testvar")
             continue
-        
+
         m = re.match(r"\s*default\s*:\s*\n?", line)
         if m:
             line = f"{blockIndent}else:"
@@ -328,5 +347,5 @@ def parseFile(file_p, out_p):
 ROOTDIR = pathlib.Path(os.path.dirname(__file__))
 # parseFolderFiles("AS3ToPythonConverter/scripts", "AS3ToPythonConverter/connectionType")
 t = perf_counter()
-parseFile(ROOTDIR / "target.as", ROOTDIR / "InventoryManager.py")
+parseFile(ROOTDIR / "target.as", ROOTDIR / "MessageReceiverEW.py")
 print("parsing took:", perf_counter() - t)

@@ -7,12 +7,12 @@ if TYPE_CHECKING:
 
 class GuildJoinedMessage(NetworkMessage):
     guildInfo:'GuildInformations'
-    memberRights:int
+    rankId:int
     
 
-    def init(self, guildInfo_:'GuildInformations', memberRights_:int):
+    def init(self, guildInfo_:'GuildInformations', rankId_:int):
         self.guildInfo = guildInfo_
-        self.memberRights = memberRights_
+        self.rankId = rankId_
         
         super().__init__()
     

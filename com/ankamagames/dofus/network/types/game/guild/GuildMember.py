@@ -2,15 +2,15 @@ from com.ankamagames.dofus.network.types.game.character.CharacterMinimalInformat
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from com.ankamagames.dofus.network.types.game.character.status.PlayerStatus import PlayerStatus
+    from com.ankamagames.dofus.network.types.game.character.guild.note.PlayerNote import PlayerNote
     
 
 
 class GuildMember(CharacterMinimalInformations):
     breed:int
-    rank:int
+    rankId:int
     givenExperience:int
     experienceGivenPercent:int
-    rights:int
     connected:int
     alignmentSide:int
     hoursSinceLastConnection:int
@@ -18,18 +18,18 @@ class GuildMember(CharacterMinimalInformations):
     accountId:int
     achievementPoints:int
     status:'PlayerStatus'
+    note:'PlayerNote'
     sex:bool
     havenBagShared:bool
     sex:bool
     havenBagShared:bool
     
 
-    def init(self, breed_:int, rank_:int, givenExperience_:int, experienceGivenPercent_:int, rights_:int, connected_:int, alignmentSide_:int, hoursSinceLastConnection_:int, moodSmileyId_:int, accountId_:int, achievementPoints_:int, status_:'PlayerStatus', sex_:bool, havenBagShared_:bool, level_:int, name_:str, id_:int):
+    def init(self, breed_:int, rankId_:int, givenExperience_:int, experienceGivenPercent_:int, connected_:int, alignmentSide_:int, hoursSinceLastConnection_:int, moodSmileyId_:int, accountId_:int, achievementPoints_:int, status_:'PlayerStatus', note_:'PlayerNote', sex_:bool, havenBagShared_:bool, level_:int, name_:str, id_:int):
         self.breed = breed_
-        self.rank = rank_
+        self.rankId = rankId_
         self.givenExperience = givenExperience_
         self.experienceGivenPercent = experienceGivenPercent_
-        self.rights = rights_
         self.connected = connected_
         self.alignmentSide = alignmentSide_
         self.hoursSinceLastConnection = hoursSinceLastConnection_
@@ -37,6 +37,7 @@ class GuildMember(CharacterMinimalInformations):
         self.accountId = accountId_
         self.achievementPoints = achievementPoints_
         self.status = status_
+        self.note = note_
         self.sex = sex_
         self.havenBagShared = havenBagShared_
         

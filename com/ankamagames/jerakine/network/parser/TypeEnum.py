@@ -2,7 +2,6 @@ from enum import Enum
 
 
 class TypeEnum(Enum):
-    
     VARLONG = 13
     UTF = 2
     VARSHORT = 14
@@ -23,7 +22,7 @@ class TypeEnum(Enum):
     OBJECT = -1
 
     @staticmethod
-    def getPrimitiveName(type:'TypeEnum'):
+    def getPrimitiveName(type: "TypeEnum"):
         matcher = {
             TypeEnum.INT: "Int",
             TypeEnum.UNSIGNEDINT: "UnsignedInt",
@@ -43,3 +42,10 @@ class TypeEnum(Enum):
             TypeEnum.VARUHLONG: "VarUhLong",
         }
         return matcher.get(type)
+
+    @classmethod
+    def fromString(cls, string):
+        try:
+            return getattr(cls, string.upper())
+        except:
+            return cls.OBJECT

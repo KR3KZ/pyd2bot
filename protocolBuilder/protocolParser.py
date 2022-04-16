@@ -1,10 +1,12 @@
-from functools import partial
 import re
 from pathlib import Path
+import sys
 from tqdm import tqdm
-
-from com.ankamagames.jerakine.enum.GameDataTypeEnum import GameDataTypeEnum
 from com.ankamagames.jerakine.network.parser.TypeEnum import TypeEnum
+from pathlib import Path
+import json
+import os
+import com.ankamagames.dofus.Constants as Constants
 
 TO_PTYPE = {
     "Array": "list",
@@ -16,10 +18,13 @@ TO_PTYPE = {
     "ByteArray": "bytearray",
 }
 
+
 class ProtocolParser:
     CLASS_PATTERN = r"\s*public class (?P<name>\w+) (?:extends (?P<parent>\w+) )?implements (?P<interface>\w+)\n"
     ID_PATTERN = r"\s*public static const protocolId:uint = (?P<id>\d+);\n"
-    PUBLIC_VAR_PATTERN = r"\s*public var (?P<name>\w+):(?P<type>\S*)( = (?P<init>.*))?;\n"
+    PUBLIC_VAR_PATTERN = (
+        r"\s*public var (?P<name>\w+):(?P<type>\S*)( = (?P<init>.*))?;\n"
+    )
     VECTOR_TYPE_PATTERN = r"Vector\.<(?P<type>\w+)>"
 
     ATTR_ASSIGN_PATTERN_OF_NAME = r"\s*this\.%s = (?:\w*)\.read(?P<type>\w*)\(\);\n"
@@ -37,26 +42,26 @@ class ProtocolParser:
     )
     OPTIONAL_VAR_PATTERN_OF_NAME = r"\s*if\(this\.%s == null\)\n"
     HASH_FUNCTION_PATTERN = r"\s*HASH_FUNCTION\(data\);\n"
-    WRAPPED_BOOLEAN_PATTERN = r"\s*this.(?P<name>\w+) = BooleanByteWrapper\.getFlag\(.*;\n"
-    
-    json = {
-        "type": {},
-        "msg_by_id": {},
-        "type_by_id": {}
-    }
-    
+    WRAPPED_BOOLEAN_PATTERN = (
+        r"\s*this.(?P<name>\w+) = BooleanByteWrapper\.getFlag\(.*;\n"
+    )
+
+    json = {"type": {}, "msg_by_id": {}, "type_by_id": {}}
+
     def run(self, src_paths):
         self.getMsgTypesFromSrcs(src_paths)
         for msg_type in tqdm(self.json["type"].values()):
             self.parseMsgType(msg_type)
-        self.json["primitives"] = list({
-            v["type"]
-            for t in self.json["type"].values()
-            for v in t["fields"]
-            if v["type"] and not v["type"] in self.json["type"]
-        })
+        self.json["primitives"] = list(
+            {
+                v["type"]
+                for t in self.json["type"].values()
+                for v in t["fields"]
+                if v["type"] and not v["type"] in self.json["type"]
+            }
+        )
         return self.json
-        
+
     def getMsgTypesFromSrcs(self, src_paths):
         for path in src_paths:
             msg_type = {}
@@ -65,10 +70,13 @@ class ProtocolParser:
                 msg_type[name] = {
                     "name": name,
                     "path": as_file_path,
-                    "package": ".".join(as_file_path.parts[as_file_path.parts.index("com"):-1]+(name,)),
+                    "package": ".".join(
+                        as_file_path.parts[as_file_path.parts.index("com") : -1]
+                        + (name,)
+                    ),
                 }
             self.json["type"].update(msg_type)
-    
+
     def parseVar(self, name, typename, lines):
         var_type = None
         dynamicType = False
@@ -113,8 +121,10 @@ class ProtocolParser:
                 optional = True
 
         if var_type is None and not dynamicType:
-            raise Exception(f"Unable to parse 'var_type' of attrib {name} from class_type {typename}")
-            
+            raise Exception(
+                f"Unable to parse 'var_type' of attrib {name} from class_type {typename}"
+            )
+
         return {
             "name": name,
             "length": None,
@@ -123,7 +133,7 @@ class ProtocolParser:
             "typeId": TypeEnum.fromString(var_type).value,
             "lengthTypeId": None,
             "typename": TO_PTYPE.get(typename, typename),
-            "optional": optional
+            "optional": optional,
         }
 
     def parseVectorVar(self, name, typename, lines):
@@ -160,23 +170,25 @@ class ProtocolParser:
             if m:
                 length = int(m.group("size"))
 
-        return dict({
-            "name": name,
-            "length": length,
-            "dynamicType": dynamicType,
-            "lengthTypeId": TypeEnum.fromString(lengthType).value,
-            "type": var_type,
-            "typeId": TypeEnum.fromString(var_type).value,
-            "typename": TO_PTYPE[typename] if typename in TO_PTYPE else typename,
-            "optional":False
-        })
+        return dict(
+            {
+                "name": name,
+                "length": length,
+                "dynamicType": dynamicType,
+                "lengthTypeId": TypeEnum.fromString(lengthType).value,
+                "type": var_type,
+                "typeId": TypeEnum.fromString(var_type).value,
+                "typename": TO_PTYPE[typename] if typename in TO_PTYPE else typename,
+                "optional": False,
+            }
+        )
 
     def parseMsgType(self, msg_type):
         fields = []
         hash_function = False
         wrapped_booleans = set()
 
-        with open(msg_type["path"], 'r') as fp:
+        with open(msg_type["path"], "r") as fp:
             lines = list(fp.readlines())
             msg_type["parent"] = None
 
@@ -211,7 +223,7 @@ class ProtocolParser:
         if "messages" in str(msg_type["path"]):
             assert protocolId not in self.json["msg_by_id"]
             self.json["msg_by_id"][protocolId] = msg_type
-            
+
         elif "types" in str(msg_type["path"]):
             assert protocolId not in self.json["type_by_id"]
             self.json["type_by_id"][protocolId] = msg_type
@@ -219,7 +231,7 @@ class ProtocolParser:
         if sum(field["type"] == "Boolean" for field in fields) > 1:
             boolfields = [var for var in fields if var["name"] in wrapped_booleans]
             fields = [var for var in fields if var["name"] not in wrapped_booleans]
-            
+
         else:
             boolfields = []
 
@@ -227,4 +239,43 @@ class ProtocolParser:
         msg_type["boolfields"] = list(boolfields)
         msg_type["hash_function"] = hash_function
         del msg_type["path"]
-    
+
+
+def parseVersion(metaDataAs):
+    PROTOCOL_BUILD_REGX = (
+        '^\s*public static const PROTOCOL_BUILD:String = "(?P<protocol_build>.*)";'
+    )
+    PROTOCOL_DATE_REGX = (
+        '^\s*public static const PROTOCOL_DATE:String = "(?P<protocol_date>.*)";'
+    )
+    with open(metaDataAs, "r") as fp:
+        lines = list(fp.readlines())
+        for line in lines:
+            m = re.match(PROTOCOL_BUILD_REGX, line)
+            if m:
+                build = m.group("protocol_build")
+            else:
+                m = re.match(PROTOCOL_DATE_REGX, line)
+                if m:
+                    date = m.group("protocol_date")
+    return build, date
+
+
+if __name__ == "__main__":
+    src_dir = Path(sys.argv[1])
+
+    src_paths = [
+        src_dir / "scripts/com/ankamagames/dofus/network/types",
+        src_dir / "scripts/com/ankamagames/dofus/network/messages",
+    ]
+    protocol_json = {}
+    version, date = parseVersion(
+        src_dir / "scripts/com/ankamagames/dofus/network/Metadata.as"
+    )
+    protocol_json["version"] = version
+    protocol_json["date"] = date
+
+    protocol_json.update(ProtocolParser().run(src_paths))
+
+    with open(Constants.PROTOCOL_SPEC_PATH, "w") as fp:
+        json.dump(protocol_json, fp, indent=4, separators=(", ", ": "), sort_keys=True)

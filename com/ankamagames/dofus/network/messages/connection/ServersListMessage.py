@@ -7,13 +7,11 @@ if TYPE_CHECKING:
 
 class ServersListMessage(NetworkMessage):
     servers:list['GameServerInformations']
-    alreadyConnectedToServerId:int
     canCreateNewCharacter:bool
     
 
-    def init(self, servers_:list['GameServerInformations'], alreadyConnectedToServerId_:int, canCreateNewCharacter_:bool):
+    def init(self, servers_:list['GameServerInformations'], canCreateNewCharacter_:bool):
         self.servers = servers_
-        self.alreadyConnectedToServerId = alreadyConnectedToServerId_
         self.canCreateNewCharacter = canCreateNewCharacter_
         
         super().__init__()
