@@ -66,3 +66,5 @@ LANG_FILE_PATH = DOFUS_DATA_DIR / "i18n" / "i18n_fr.d2i"
 PROTOCOL_MSG_SHUFFLE_PATH = ROOTDIR / "network" / "msgShuffle.json"
 
 GAME_VERSION_PATH = DOFUS_ROOTDIR / "VERSION"
+
+BINARY_DATA_DIR = ROOTDIR / "../../../binaryData"

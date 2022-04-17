@@ -1,6 +1,9 @@
 from argparse import ArgumentError
 import os
 from com.ankamagames.dofus.BuildInfos import BuildInfos
+from com.ankamagames.dofus.logic.connection.managers.AuthentificationManager__verifyKey import (
+    AuthentificationManager__verifyKey,
+)
 from com.ankamagames.dofus.network.messages.connection.IdentificationMessage import (
     IdentificationMessage,
 )
@@ -21,18 +24,8 @@ logger = Logger(__name__)
 ROOTDIR = os.path.dirname(__file__)
 
 
-class ClientPubKeyNotFoundError(Exception):
-    pass
-
-
-CLIENT_PUBLIC_KEY_P = os.path.join(ROOTDIR, "public_key.pk")
-if not os.path.exists(CLIENT_PUBLIC_KEY_P):
-    raise ClientPubKeyNotFoundError(f"{CLIENT_PUBLIC_KEY_P} file not found")
-
-
 class AuthentificationManager(metaclass=Singleton):
-    with open(CLIENT_PUBLIC_KEY_P, "r") as fp:
-        CLIENT_PUB_KEY = RSA.import_key(fp.read())
+    _verifyKey = AuthentificationManager__verifyKey.create()
     AES_KEY_LENGTH = 32
     _publicKey: str = None
     _salt: str = None
@@ -55,7 +48,7 @@ class AuthentificationManager(metaclass=Singleton):
 
     def setPublicKey(self, enc_publicKey: list[int]):
         baSignedKey = ByteArray.from_int8Arr(enc_publicKey)
-        rsacipher = RSACipher(self.CLIENT_PUB_KEY, PKCS1())
+        rsacipher = RSACipher(self._verifyKey, PKCS1())
         ba_pubKey = ByteArray()
         if not rsacipher.verify(baSignedKey, ba_pubKey):
             raise Exception("Pubkey Sign validation failed!")

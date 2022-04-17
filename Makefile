@@ -2,12 +2,16 @@ DOFUSINVOKER = C:\\Users\\majdoub\\AppData\\Local\\Ankama\\Dofus\\DofusInvoker.s
 FFDEC = $(CURDIR)/FFDec/ffdec.bat
 DOFUS_SRC = $(CURDIR)/protocolBuilder/sources
 SELECTCLASS = com.ankamagames.dofus.BuildInfos,com.ankamagames.dofus.network.++,com.ankamagames.jerakine.network.++
+KEYS_DIR = $(CURDIR)/binaryData
 
-updateProtocol: decompile gen-protocol gen-msgClasses gen-msgSuffle
+update: decompile gen-protocol gen-msgClasses gen-msgSuffle extract-keys
 
 decompile:
-	@$(FFDEC) -config parallelSpeedUp=0 -selectclass $(SELECTCLASS) -export script $(DOFUS_SRC) $(DOFUSINVOKER)
+	@$(FFDEC) -config parallelSpeedUp=true -selectclass $(SELECTCLASS) -export script $(DOFUS_SRC) $(DOFUSINVOKER)
 
+extract-keys:
+	@$(FFDEC) -config parallelSpeedUp=true -export binaryData $(KEYS_DIR) $(DOFUSINVOKER)
+	
 gen-protocol:
 	@python protocolBuilder/protocolParser.py $(DOFUS_SRC)
 

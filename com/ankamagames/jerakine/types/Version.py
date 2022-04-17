@@ -23,9 +23,7 @@ class Version(IExternalizable, IDataCenter):
         else:
             if not (len(args) == 2 and isinstance(args[0], str)):
                 raise Exception("invalid parameters, " + str(args))
-            print(args)
             split = args[0].split(".")
-            print(split)
             self._major = int(split[0])
             self._minor = int(split[1])
             self._code = int(split[2])
@@ -76,8 +74,10 @@ class Version(IExternalizable, IDataCenter):
             return f"{self._major}.{self._minor}.{self._code}"
         if self._buildType == 0:
             return f"{self._major}.{self._minor}.{self._code}.{self._build}"
-        return  f"{self._major}.{self._minor}.{self._code}.{self._build}-{self._buildType}" 
-        
+        return (
+            f"{self._major}.{self._minor}.{self._code}.{self._build}-{self._buildType}"
+        )
+
     def toStringForAppName(self) -> str:
         version = self._major + "." + self._minor + "." + self._code + "." + self._build
         if self._buildType == 1:
