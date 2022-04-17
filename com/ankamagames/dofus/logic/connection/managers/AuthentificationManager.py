@@ -87,7 +87,7 @@ class AuthentificationManager(metaclass=Singleton):
                 "version": {
                     "__type__": "Version",
                     "build": BuildInfos.VERSION.build,
-                    "buildType": BuildInfos.BUILD_TYPE,
+                    "buildType": BuildInfos.VERSION.buildType,
                     "code": BuildInfos.VERSION.code,
                     "major": BuildInfos.VERSION.major,
                     "minor": BuildInfos.VERSION.minor,

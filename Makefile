@@ -25,3 +25,6 @@ startSniffer:
 
 venvActivate:
 	@$(CURDIR)/.venv/Scripts/activate.ps1
+
+test:
+	@python $(CURDIR)/pyd2bot/test_pydofus_client.py  

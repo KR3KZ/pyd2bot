@@ -11,20 +11,19 @@ from wdom.themes.bootstrap3 import *
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from .network.message import Message
 from .network.sniffer import DofusSniffer
+
 logger = logging.getLogger("labot")
 
 
 class SnifferUI(Div):
     def __init__(self, capture_file=None, *args, **kwargs):
-        logger.debug(
-            f"Initializing sniffer UI with capture file {capture_file}"
-        )
-        
+        logger.debug(f"Initializing sniffer UI with capture file {capture_file}")
+
         self.capture_file = capture_file
         self.stopfun = None
         super().__init__(*args, **kwargs)
 
-        self.append(H1("LaBot sniffer", style="text-align: center;"))
+        self.append(H1("Dofus Sniffer", style="text-align: center;"))
 
         self.button_wrapper = Div(parent=self)
 
@@ -86,7 +85,6 @@ class MsgTable(Table):
 
 
 class MsgView(Tr):
-    
     def __init__(self, msg: Message, *args, **kwargs):
         if msg.from_client:
             super().__init__(class_="success", *args, **kwargs)

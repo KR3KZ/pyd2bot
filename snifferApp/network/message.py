@@ -1,13 +1,15 @@
+from com.ankamagames.dofus.network.MessageReceiver import MessageReceiver
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.network.CustomDataWrapper import Buffer, ByteArray
-from com.ankamagames.jerakine.network.parser.NetworkMessageClassDefinition import NetworkMessageClassDefinition
+from com.ankamagames.jerakine.network.parser.NetworkMessageClassDefinition import (
+    NetworkMessageClassDefinition,
+)
 from com.ankamagames.jerakine.network.parser.ProtocolSpec import ProtocolSpec
-from . import msgReceiver
+
 logger = Logger(__name__)
 
 
 class Message:
-    
     def __init__(self, m_id, data, count=None, from_client=None, src=None, dst=None):
         self.id = m_id
         self.raw = data
@@ -40,7 +42,7 @@ class Message:
     def fromRaw(buf: Buffer, from_client, src=None, dst=None):
         """Read a message from the buffer and
         empty the beginning of the buffer.
-        msg fields spec: 
+        msg fields spec:
             id     |   len    |   data
            2 bits  |  2 bits  |  len bits
         """
@@ -66,16 +68,11 @@ class Message:
             if not msg or newbuffer.remaining():
                 raise Exception("Unable to parse Message")
             return msg
-        
+
         buf.end()
 
         return Message(
-            m_id=id, 
-            data=data, 
-            count=count, 
-            from_client=from_client,
-            src=src,
-            dst=dst
+            m_id=id, data=data, count=count, from_client=from_client, src=src, dst=dst
         )
 
     def lenlenData(self):
@@ -100,7 +97,7 @@ class Message:
     @property
     def name(self):
         if not self.from_client:
-            return msgReceiver._messagesTypes[self.id]
+            return MessageReceiver._messagesTypes[self.id].__name__
         else:
             return ProtocolSpec.getClassSpecById(self.id)["name"]
 
