@@ -4,3 +4,4 @@ tqdm
 pycryptodomex
 whistle
 Py3AMF
+thrift

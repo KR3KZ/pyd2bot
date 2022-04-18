@@ -9,6 +9,13 @@ class ByteArray(bytearray):
         super().__init__(*args, **kwrgs)
         self.position = 0
 
+    @classmethod
+    def from_bytes(cls, b:bytes):
+        r = cls()
+        r.writeByteArray(b)
+        r.position = 0
+        return r
+    
     def __add__(self, b) -> 'ByteArray':
         return ByteArray(super().__add__(b))
 
@@ -98,7 +105,7 @@ class ByteArray(bytearray):
         lon = self.readUnsignedShort()
         return self.read(lon).decode()
 
-    def writeUTF(self, ch):
+    def writeUTF(self, ch:str):
         dat = ch.encode()
         self.writeUnsignedShort(len(dat))
         self += dat

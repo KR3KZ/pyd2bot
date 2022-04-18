@@ -1,26 +1,25 @@
-
 import hashlib
 import traceback
 from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
-from com.hurlan.crypto.signatureKey import SignatureKey
+from com.hurlan.crypto.SignatureKey import SignatureKey
 from Cryptodome.PublicKey import RSA
-from com.hurlan.crypto.symmetric.pKCS1 import PKCS1
-from com.hurlan.crypto.symmetric.rSAKey import RSACipher
+from com.hurlan.crypto.symmetric.PKCS1 import PKCS1
+from com.hurlan.crypto.symmetric.PSAKey import RSACipher
 
 
 class SignatureError(Exception):
     pass
 
-        
-class Signature:
-    ANKAMA_SIGNED_FILE_HEADER:str = "AKSF"
-    SIGNATURE_HEADER:str = "AKSD"
-    
-    def __init__(self, key1:SignatureKey, key2:RSA.RsaKey):
-        self.key1 = key1
-        self.key2= key2
 
-    def verify(self, input:ByteArray) -> ByteArray:
+class Signature:
+    ANKAMA_SIGNED_FILE_HEADER: str = "AKSF"
+    SIGNATURE_HEADER: str = "AKSD"
+
+    def __init__(self, key1: SignatureKey, key2: RSA.RsaKey):
+        self.key1 = key1
+        self.key2 = key2
+
+    def verify(self, input: ByteArray) -> ByteArray:
         headerSize = input.readUnsignedShort()
         if headerSize != len(self.ANKAMA_SIGNED_FILE_HEADER):
             input.position = 0
@@ -35,7 +34,7 @@ class Signature:
                 return self.verifyV1Signature(input)
         raise SignatureError("Invalid header")
 
-    def verifyV2Signature(self, input:ByteArray, headerPosition:int) -> bool:
+    def verifyV2Signature(self, input: ByteArray, headerPosition: int) -> bool:
         if not self.key2:
             raise SignatureError("No key for self signature version (2)")
         try:
@@ -74,33 +73,34 @@ class Signature:
             return None
         return output
 
-    def verifyV1Signature(self, input:ByteArray) -> bytearray:
-        len:int = 0
+    def verifyV1Signature(self, input: ByteArray) -> bytearray:
+        len: int = 0
         try:
             len = input.readInt()
             sigData = input.readBytes(0, len)
         except Exception as e:
             raise SignatureError("Invalid signature format, not enough data.")
-        
+
         try:
             decryptedHash = ByteArray()
             rsacipher = RSACipher(self.key1, PKCS1())
             rsacipher.verify(sigData, decryptedHash)
         except Exception as e:
             return None
-        
+
         decryptedHash.position = 0
         ramdomPart = decryptedHash.readByte()
         for i in range(len(decryptedHash)):
             decryptedHash[i] ^= ramdomPart
-        
-        contentLen:int = decryptedHash.readUnsignedInt()
-        testedContentLen:int = input.remaining()
-        signHash:str = decryptedHash.readUTFBytes(decryptedHash.remaining())[1:]
+
+        contentLen: int = decryptedHash.readUnsignedInt()
+        testedContentLen: int = input.remaining()
+        signHash: str = decryptedHash.readUTFBytes(decryptedHash.remaining())[1:]
         output = ByteArray(input.readBytes())
-        contentHash:str = hashlib.md5(output.readUTFBytes(output.remaining())).hexdigest()[1:]
+        contentHash: str = hashlib.md5(
+            output.readUTFBytes(output.remaining())
+        ).hexdigest()[1:]
         if signHash and signHash == contentHash and contentLen == testedContentLen:
             return output
         else:
             return None
-      

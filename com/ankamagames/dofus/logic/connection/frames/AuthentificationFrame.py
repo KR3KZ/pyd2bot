@@ -131,7 +131,7 @@ class AuthentificationFrame(Frame):
                     IdentificationSuccessWithLoginTokenMessage(ismsg).loginToken
                 )
             if ismsg.login:
-                AuthentificationManager()._username = ismsg.login
+                AuthentificationManager().username = ismsg.login
             PlayerManager().accountId = ismsg.accountId
             PlayerManager().communityId = ismsg.communityId
             PlayerManager().hasRights = ismsg.hasRights

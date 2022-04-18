@@ -1,10 +1,21 @@
 from time import perf_counter
 from types import FunctionType
-from com.ankamagames.dofus.modules.utils.pathFinding.world.WorldPathFinder import WorldPathFinder
+from com.ankamagames.dofus.modules.utils.pathFinding.world.WorldPathFinder import (
+    WorldPathFinder,
+)
 from com.ankamagames.jerakine.resources.loaders.MapLoader import MapLoader
-from com.ankamagames.jerakine.utils.displays.EnterFrameDispatcher import EnterFrameDispatcher
+from com.ankamagames.jerakine.utils.display.EnterFrameDispatcher import (
+    EnterFrameDispatcher,
+)
 
-def findPath(wpf: WorldPathFinder, currCellId, currMap, destinationMapId: float, callback: FunctionType) -> None:
+
+def findPath(
+    wpf: WorldPathFinder,
+    currCellId,
+    currMap,
+    destinationMapId: float,
+    callback: FunctionType,
+) -> None:
     if not wpf.isInitialized():
         print("not initiéalized")
         callback(None)
@@ -19,6 +30,7 @@ def findPath(wpf: WorldPathFinder, currCellId, currMap, destinationMapId: float,
     wpf.dst = destinationMapId
     wpf.next()
 
+
 def onPathFound(a, path) -> None:
     if path is None:
         print("path is None")
@@ -27,7 +39,8 @@ def onPathFound(a, path) -> None:
         for e in path:
             print(e)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     currMapID = 155975689
     dstMapID = 193331717
     playedEntityCellId = 36

@@ -1,7 +1,4 @@
-
-
-
-from com.hurlan.crypto.symmetric.iCipher import ICipher
+from com.hurlan.crypto.symmetric.ICipher import ICipher
 
 
 class IMode(ICipher):

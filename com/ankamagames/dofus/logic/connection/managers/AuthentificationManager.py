@@ -12,12 +12,12 @@ from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.metaclasses.singleton import Singleton
 from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
-from com.hurlan.crypto.symmetric.aESKey import AESKey
-from com.hurlan.crypto.symmetric.cBCMode import CBCMode
-from com.hurlan.crypto.symmetric.nullPAd import NullPad
-from com.hurlan.crypto.symmetric.pKCS1 import PKCS1
-from com.hurlan.crypto.symmetric.rSAKey import RSACipher
-from com.hurlan.crypto.symmetric.simpleIVMode import SimpleIVMode
+from com.hurlan.crypto.symmetric.AESKey import AESKey
+from com.hurlan.crypto.symmetric.CBCMode import CBCMode
+from com.hurlan.crypto.symmetric.NullPAd import NullPad
+from com.hurlan.crypto.symmetric.PKCS1 import PKCS1
+from com.hurlan.crypto.symmetric.PSAKey import RSACipher
+from com.hurlan.crypto.symmetric.SimpleIVMode import SimpleIVMode
 from Cryptodome.PublicKey import RSA
 
 logger = Logger(__name__)
@@ -33,8 +33,9 @@ class AuthentificationManager(metaclass=Singleton):
     _AESKey: ByteArray = None
     nextToken: str = None
     tokenMode: bool = None
-    _username = None
+    username: str = None
     _password = None
+    _certificate = None
 
     def initAESKey(self):
         self._AESKey = AESKey.generateRandomAESKey(self.AES_KEY_LENGTH)
@@ -62,7 +63,7 @@ class AuthentificationManager(metaclass=Singleton):
         return self.nextToken != None
 
     def setCredentials(self, username, password):
-        self._username = username
+        self.username = username
         self._password = password
 
     def getIdentificationMessage(self) -> IdentificationMessage:
@@ -93,8 +94,8 @@ class AuthentificationManager(metaclass=Singleton):
         baIn = bytearray()
         baIn += bytes(self._salt, "utf")
         baIn += self._AESKey
-        baIn += len(self._username).to_bytes(1, "big")
-        baIn += bytes(self._username, "utf")
+        baIn += len(self.username).to_bytes(1, "big")
+        baIn += bytes(self.username, "utf")
         baIn += bytes(self._password, "utf")
         rsa_key = RSA.importKey(bytes(self._publicKey, "utf"))
         rsacipher = RSACipher(rsa_key, PKCS1())
