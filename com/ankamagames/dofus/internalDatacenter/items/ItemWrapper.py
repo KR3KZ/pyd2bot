@@ -7,6 +7,7 @@ from com.ankamagames.dofus.datacenter.effects.instances.EffectInstanceDice impor
 from com.ankamagames.dofus.datacenter.effects.instances.EffectInstanceInteger import (
     EffectInstanceInteger,
 )
+from com.ankamagames.dofus.datacenter.items.Item import Item
 from com.ankamagames.dofus.datacenter.items.ItemType import ItemType
 from com.ankamagames.dofus.datacenter.items.LegendaryPowerCategory import (
     LegendaryPowerCategory,
@@ -15,11 +16,9 @@ from com.ankamagames.dofus.datacenter.monsters.Monster import Monster
 from com.ankamagames.dofus.datacenter.monsters.MonsterGrade import MonsterGrade
 from com.ankamagames.dofus.enums.ActionIds import ActionIds
 from com.ankamagames.dofus.internalDatacenter.DataEnum import DataEnum
-from com.ankamagames.dofus.internalDatacenter.items.WeaponWrapper import WeaponWrapper
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import (
     PlayedCharacterManager,
 )
-from com.ankamagames.dofus.network.types.game.data.items.Item import Item
 from com.ankamagames.dofus.network.types.game.data.items.ObjectItem import ObjectItem
 from com.ankamagames.dofus.network.types.game.data.items.effects.ObjectEffect import (
     ObjectEffect,
@@ -28,9 +27,12 @@ from com.ankamagames.dofus.types.enums.ItemCategoryEnum import ItemCategoryEnum
 from com.ankamagames.jerakine.data.I18n import I18n
 from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
 from com.ankamagames.jerakine.interfaces.ISlotData import ISlotData
+from com.ankamagames.jerakine.interfaces.ISlotDataHolder import ISlotDataHolder
 from com.ankamagames.jerakine.utils.display.spellZone.ICellZoneProvider import (
     ICellZoneProvider,
 )
+from com.ankamagames.jerakine.utils.display.spellZone.IZoneShape import IZoneShape
+from com.ankamagames.jerakine.utils.display.spellZone.ZoneEffect import ZoneEffect
 from com.ankamagames.jerakine.utils.misc.StringUtils import StringUtils
 
 logger = Logger(__name__)
@@ -69,7 +71,7 @@ class ItemWrapper(Item, ISlotData, ICellZoneProvider, IDataCenter):
 
     _active: bool = True
 
-    _uri: Uri
+    _uri: str
 
     _shortName: str
 
@@ -150,6 +152,10 @@ class ItemWrapper(Item, ISlotData, ICellZoneProvider, IDataCenter):
         )
         if not cachedItem or not useCache:
             if refItem.isWeapon:
+                from com.ankamagames.dofus.internalDatacenter.items.WeaponWrapper import (
+                    WeaponWrapper,
+                )
+
                 item = WeaponWrapper()
             else:
                 item = ItemWrapper()
@@ -196,6 +202,10 @@ class ItemWrapper(Item, ISlotData, ICellZoneProvider, IDataCenter):
         )
         if not cachedItem or not useCache:
             if refItem.isWeapon:
+                from com.ankamagames.dofus.internalDatacenter.items.WeaponWrapper import (
+                    WeaponWrapper,
+                )
+
                 item = WeaponWrapper()
             else:
                 item = ItemWrapper()
@@ -385,11 +395,11 @@ class ItemWrapper(Item, ISlotData, ICellZoneProvider, IDataCenter):
 
     @property
     def isEquipment(self) -> bool:
-        return category == ItemCategoryEnum.EQUIPMENT_CATEGORY
+        return self.category == ItemCategoryEnum.EQUIPMENT_CATEGORY
 
     @property
     def isCosmetic(self) -> bool:
-        return category == ItemCategoryEnum.COSMETICS_CATEGORY
+        return self.category == ItemCategoryEnum.COSMETICS_CATEGORY
 
     @property
     def isUsable(self) -> bool:

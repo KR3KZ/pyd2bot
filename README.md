@@ -4,10 +4,10 @@
 
 `./setup.py`
 
-## Instll dependencies
+## Install dependencies
 
 make deps
 
-## Build or update the protocol
+## Fetch data from Dofus Invoker(protocol, keys, version, msgClasses)
 
-make updateProtocol
+make update

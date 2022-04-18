@@ -1,4 +1,4 @@
-DOFUSINVOKER = C:\\Users\\majdoub\\AppData\\Local\\Ankama\\Dofus\\DofusInvoker.swf
+DOFUSINVOKER = $(LOCALAPPDATA)/Ankama/Dofus/DofusInvoker.swf
 FFDEC = $(CURDIR)/FFDec/ffdec.bat
 DOFUS_SRC = $(CURDIR)/protocolBuilder/sources
 SELECTCLASS = com.ankamagames.dofus.BuildInfos,com.ankamagames.dofus.network.++,com.ankamagames.jerakine.network.++
@@ -31,4 +31,4 @@ venvActivate:
 	@$(CURDIR)/.venv/Scripts/activate.ps1
 
 test:
-	@python $(CURDIR)/pyd2bot/test_pydofus_client.py  
+	@python $(CURDIR)/pyd2bot/test_pydofus_client.py
