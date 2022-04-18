@@ -6,39 +6,39 @@ from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
 
 
 class Mount(IDataCenter):
-      
-      MODULE:str = "Mounts"
-       
-      
-      id:int
-      
-      familyId:int
-      
-      nameId:int
-      
-      look:str
-      
-      certificateId:int
-      
-      effects:list[EffectInstance]
-      
-      _name:str
-      
-      def __init__(self):
-         super().__init__()
-      
-      @classmethod
-      def getMountById(cls, id:int) -> 'Mount':
-         return GameData.getObject(cls.MODULE,id)
-      
-      classmethod
-      def getMounts(cls) -> list:
-         return GameData.getobjects(cls.MODULE)
-      
-      idAccessors:IdAccessors = IdAccessors(getMountById,getMounts)
 
-      @property
-      def name(self) -> str:
-         if not self._name:
+    MODULE: str = "Mounts"
+
+    id: int
+
+    familyId: int
+
+    nameId: int
+
+    look: str
+
+    certificateId: int
+
+    effects: list[EffectInstance]
+
+    _name: str
+
+    def __init__(self):
+        super().__init__()
+
+    @classmethod
+    def getMountById(cls, id: int) -> "Mount":
+        return GameData.getObject(cls.MODULE, id)
+
+    classmethod
+
+    def getMounts(cls) -> list:
+        return GameData.getobjects(cls.MODULE)
+
+    idAccessors: IdAccessors = IdAccessors(getMountById, getMounts)
+
+    @property
+    def name(self) -> str:
+        if not self._name:
             self._name = I18n.getText(self.nameId)
-         return self._name
+        return self._name

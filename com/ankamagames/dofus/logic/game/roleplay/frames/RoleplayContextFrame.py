@@ -1,23 +1,36 @@
 from com.ankamagames.atouin.managers.MapDisplayManager import MapDisplayManager
 from com.ankamagames.atouin.messages.MapLoadedMessage import MapLoadedMessage
 from com.ankamagames.dofus.datacenter.world.SubArea import SubArea
-from com.ankamagames.dofus.internalDatacenter.world.WorldPointWrapper import WorldPointWrapper
+from com.ankamagames.dofus.internalDatacenter.world.WorldPointWrapper import (
+    WorldPointWrapper,
+)
 from com.ankamagames.dofus.kernel.Kernel import Kernel
-from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import PlayedCharacterManager
+from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import (
+    PlayedCharacterManager,
+)
 import com.ankamagames.dofus.logic.game.roleplay.frames.RoleplayEntitiesFrame as rplEF
-from com.ankamagames.dofus.logic.game.roleplay.frames.RoleplayMovementFrame import RoleplayMovementFrame
+from com.ankamagames.dofus.logic.game.roleplay.frames.RoleplayMovementFrame import (
+    RoleplayMovementFrame,
+)
 import com.ankamagames.dofus.logic.game.roleplay.frames.RoleplayWorldFrame as rplWF
-from com.ankamagames.dofus.network.messages.game.context.GameContextDestroyMessage import GameContextDestroyMessage
-from com.ankamagames.dofus.network.messages.game.context.roleplay.CurrentMapInstanceMessage import CurrentMapInstanceMessage
-from com.ankamagames.dofus.network.messages.game.context.roleplay.CurrentMapMessage import CurrentMapMessage
+from com.ankamagames.dofus.network.messages.game.context.GameContextDestroyMessage import (
+    GameContextDestroyMessage,
+)
+from com.ankamagames.dofus.network.messages.game.context.roleplay.CurrentMapInstanceMessage import (
+    CurrentMapInstanceMessage,
+)
+from com.ankamagames.dofus.network.messages.game.context.roleplay.CurrentMapMessage import (
+    CurrentMapMessage,
+)
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.messages.Frame import Frame
 from com.ankamagames.jerakine.messages.Message import Message
 from com.ankamagames.jerakine.types.enums.Priority import Priority
+
 logger = Logger(__name__)
 
-class RoleplayContextFrame(Frame):
 
+class RoleplayContextFrame(Frame):
     def __init__(self):
         self._newCurrentMapIsReceived = False
         self._previousMapId = None
@@ -67,7 +80,12 @@ class RoleplayContextFrame(Frame):
                 MapDisplayManager().mapInstanceId = 0
             wp = None
             if PlayedCharacterManager().isInHouse:
-                wp = WorldPointWrapper(mcmsg.mapId, True, PlayedCharacterManager().currentMap.outdoorX, PlayedCharacterManager().currentMap.outdoorY)
+                wp = WorldPointWrapper(
+                    mcmsg.mapId,
+                    True,
+                    PlayedCharacterManager().currentMap.outdoorX,
+                    PlayedCharacterManager().currentMap.outdoorY,
+                )
             else:
                 wp = WorldPointWrapper(int(mcmsg.mapId))
             if PlayedCharacterManager().currentMap:
@@ -94,4 +112,3 @@ class RoleplayContextFrame(Frame):
 
     def pulled(self) -> bool:
         return True
-

@@ -25,46 +25,45 @@
 # from com.ankamagames.dofus.datacenter.world.MapPosition import MapPosition
 # from com.ankamagames.dofus.datacenter.world.MapScrollAction import MapScrollAction
 from com.ankamagames.dofus.datacenter.world.SubArea import SubArea
+
 # from com.ankamagames.dofus.datacenter.world.SuperArea import SuperArea
 # from com.ankamagames.dofus.datacenter.world.WorldMap import WorldMap
 
 
-
 class GameDataList:
-   
-   CLASSES:list[object] = [
-      # Server,
-      # ServerCommunity,
-      # ServerGameType,
-      # ServerPopulation,
-      # Monster,
-      # MonsterGrade,
-      # MonsterRace,
-      # MonsterSuperRace,
-      # MonsterDrop,
-      # Effect,
-      # EffectInstance,
-      # SpellState,
-      # SuperArea,
-      # Area,
-      # WorldMap,
-      SubArea,
-      # MapPosition,
-      # MapScrollAction,
-      #Item,
-      # Weapon,
-      # Job,
-      # ItemSet,
-      # AlignmentGift,
-      # AlignmentOrder,
-      # AlignmentRank,
-      # AlignmentRankJntGift,
-      # AlignmentSide,
-      # AlignmentTitle,
-      # ItemType,
-      # EvolutiveItemType
-   ]
-      
-   
-   def __init__(self):
-      super().__init__()
+
+    CLASSES: list[object] = [
+        # Server,
+        # ServerCommunity,
+        # ServerGameType,
+        # ServerPopulation,
+        # Monster,
+        # MonsterGrade,
+        # MonsterRace,
+        # MonsterSuperRace,
+        # MonsterDrop,
+        # Effect,
+        # EffectInstance,
+        # SpellState,
+        # SuperArea,
+        # Area,
+        # WorldMap,
+        SubArea,
+        # MapPosition,
+        # MapScrollAction,
+        # Item,
+        # Weapon,
+        # Job,
+        # ItemSet,
+        # AlignmentGift,
+        # AlignmentOrder,
+        # AlignmentRank,
+        # AlignmentRankJntGift,
+        # AlignmentSide,
+        # AlignmentTitle,
+        # ItemType,
+        # EvolutiveItemType
+    ]
+
+    def __init__(self):
+        super().__init__()

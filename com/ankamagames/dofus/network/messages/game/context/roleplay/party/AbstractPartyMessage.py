@@ -2,12 +2,9 @@ from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
 class AbstractPartyMessage(NetworkMessage):
-    partyId:int
-    
+    partyId: int
 
-    def init(self, partyId_:int):
+    def init(self, partyId_: int):
         self.partyId = partyId_
-        
+
         super().__init__()
-    
-    

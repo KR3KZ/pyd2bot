@@ -2,11 +2,10 @@ from com.ankamagames.jerakine.data.BinaryStream import BinaryStream
 
 
 class Fixture:
-    
     def __init__(self, raw):
         self.read(raw)
 
-    def read(self, raw:BinaryStream):
+    def read(self, raw: BinaryStream):
         self.fixtureId = raw.readInt()
         self.offsetX = raw.readShort()
         self.offsetY = raw.readShort()

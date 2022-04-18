@@ -1,5 +1,3 @@
-
-class IPostInit():
-    
+class IPostInit:
     def postInit(self) -> None:
-        pass 
+        pass

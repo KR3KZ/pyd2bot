@@ -5,18 +5,18 @@ import com.ankamagames.dofus.Constants as Constants
 
 
 class BuildInfos:
-   with open(Constants.GAME_VERSION_PATH, "r") as fp:
-      VERSION: Version = Version(fp.read().strip(), BuildTypeEnum.RELEASE.value)
+    with open(Constants.GAME_VERSION_PATH, "r") as fp:
+        VERSION: Version = Version(fp.read().strip(), BuildTypeEnum.RELEASE.value)
 
-   BUILD_DATE: str = "01/Jan/1970"
+    BUILD_DATE: str = "01/Jan/1970"
 
-   def __init__(self):
-      super().__init__()
+    def __init__(self):
+        super().__init__()
 
-   @property
-   def buildTypeName(self) -> str:
-      return BuildTypeParser.getTypeName(self.VERSION.buildType)
+    @property
+    def buildTypeName(self) -> str:
+        return BuildTypeParser.getTypeName(self.VERSION.buildType)
 
-   @property
-   def BUILD_TYPE(self) -> int:
-      return self.VERSION.buildType
+    @property
+    def BUILD_TYPE(self) -> int:
+        return self.VERSION.buildType

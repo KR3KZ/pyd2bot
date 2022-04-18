@@ -1,16 +1,13 @@
-
-
 from com.ankamagames.jerakine.data.BinaryStream import BinaryStream
 
 
 class GraphicalElement:
-    
-    def __init__(self, raw:BinaryStream, mapVersion):
+    def __init__(self, raw: BinaryStream, mapVersion):
         self.mapVersion = mapVersion
         self.elementName = "Graphical"
         self.read(raw)
-    
-    def read(self, raw:BinaryStream):
+
+    def read(self, raw: BinaryStream):
         self.elementId = raw.readUnsignedInt()
 
         # hue
@@ -26,7 +23,7 @@ class GraphicalElement:
         if self.mapVersion <= 4:
             self.offsetX = raw.readByte()
             self.offsetY = raw.readByte()
-            
+
         else:
             self.offsetX = raw.readShort()
             self.offsetY = raw.readShort()

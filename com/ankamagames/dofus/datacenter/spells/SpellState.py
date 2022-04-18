@@ -1,57 +1,55 @@
-
-
 from com.ankamagames.jerakine.data import GameData
 from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
 from com.ankamagames.dofus.types.IdAccessors import IdAccessors
 
 
 class SpellState(IDataCenter):
-   MODULE:str = "SpellStates"
+    MODULE: str = "SpellStates"
 
-   id:int
+    id: int
 
-   nameId:int
+    nameId: int
 
-   preventsSpellCast:bool
+    preventsSpellCast: bool
 
-   preventsFight:bool
+    preventsFight: bool
 
-   isSilent:bool
+    isSilent: bool
 
-   cantDealDamage:bool
+    cantDealDamage: bool
 
-   invulnerable:bool
+    invulnerable: bool
 
-   incurable:bool
+    incurable: bool
 
-   cantBeMoved:bool
+    cantBeMoved: bool
 
-   cantBePushed:bool
+    cantBePushed: bool
 
-   cantSwitchPosition:bool
+    cantSwitchPosition: bool
 
-   effectsIds:list[int]
+    effectsIds: list[int]
 
-   icon:str = ""
+    icon: str = ""
 
-   iconVisibilityMask:int
+    iconVisibilityMask: int
 
-   invulnerableMelee:bool
+    invulnerableMelee: bool
 
-   invulnerableRange:bool
+    invulnerableRange: bool
 
-   cantTackle:bool
+    cantTackle: bool
 
-   cantBeTackled:bool
+    cantBeTackled: bool
 
-   displayTurnRemaining:bool
+    displayTurnRemaining: bool
 
-   @staticmethod
-   def getSpellStateById(id:int):
-      return GameData.getObject(SpellState.MODULE, id)
+    @staticmethod
+    def getSpellStateById(id: int):
+        return GameData.getObject(SpellState.MODULE, id)
 
-   @staticmethod
-   def getSpellStates() -> list:
-      return GameData.getObjects(SpellState.MODULE)
+    @staticmethod
+    def getSpellStates() -> list:
+        return GameData.getObjects(SpellState.MODULE)
 
-   idAccessors:IdAccessors = IdAccessors(getSpellStateById, getSpellStates)
+    idAccessors: IdAccessors = IdAccessors(getSpellStateById, getSpellStates)

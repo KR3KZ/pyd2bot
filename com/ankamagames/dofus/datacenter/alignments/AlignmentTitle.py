@@ -4,22 +4,19 @@ from com.ankamagames.dofus.types.IdAccessors import IdAccessors
 
 class AlignmentTitle:
     MODULE = "AlignmentTitles"
-    
-    sideId:int
-    
-    namesId:list[int]
-    
-    shortsId:list[int]
-    
-    
+
+    sideId: int
+
+    namesId: list[int]
+
+    shortsId: list[int]
+
     @classmethod
-    def getAlignmentTitles(cls) -> list['AlignmentTitle']:
+    def getAlignmentTitles(cls) -> list["AlignmentTitle"]:
         return GameData.getObjects(cls.MODULE)
-    
-    
+
     @classmethod
-    def getAlignmentTitleById(cls, id) -> 'AlignmentTitle':
+    def getAlignmentTitleById(cls, id) -> "AlignmentTitle":
         return GameData.getObject(cls.MODULE, id)
-    
+
     idAccessors = IdAccessors(getAlignmentTitleById, getAlignmentTitles)
-    

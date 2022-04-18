@@ -8,12 +8,12 @@ from com.ankamagames.jerakine.data.BinaryStream import BinaryStream
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.types.enums.DirectionsEnum import DirectionsEnum
 from com.ankamagames.jerakine.types.positions.MapPoint import MapPoint
+
 logger = Logger(__name__)
 
-    
+
 class Map:
- 
-    def __init__(self, raw:BinaryStream, id, version:int):
+    def __init__(self, raw: BinaryStream, id, version: int):
         self.id = id
         self.version = version
         self.topArrowCell = set[int]()
@@ -27,7 +27,7 @@ class Map:
         self.fromRaw(raw)
         self.zones = MapZones(self)
 
-    def fromRaw(self, raw:BinaryStream):
+    def fromRaw(self, raw: BinaryStream):
         self.relativeId = raw.readUnsignedInt()
         self.mapType = raw.readByte()
         self.subareaId = raw.readInt()
@@ -48,14 +48,24 @@ class Map:
             grid_red = (read_color & 16711680) >> 16
             grid_green = (read_color & 65280) >> 8
             grid_blue = read_color & 255
-            self.gridColor = (grid_alpha & 255) << 32 | (grid_red & 255) << 16 | (grid_green & 255) << 8 | grid_blue & 255
-            
+            self.gridColor = (
+                (grid_alpha & 255) << 32
+                | (grid_red & 255) << 16
+                | (grid_green & 255) << 8
+                | grid_blue & 255
+            )
+
         elif self.version >= 3:
             self.backgroundRed = raw.readByte()
             self.backgroundGreen = raw.readByte()
             self.backgroundBlue = raw.readByte()
-            
-        self.backgroundColor = (self.backgroundAlpha & 255) << 32 | (self.backgroundRed & 255) << 16 | (self.backgroundGreen & 255) << 8 | self.backgroundBlue & 255
+
+        self.backgroundColor = (
+            (self.backgroundAlpha & 255) << 32
+            | (self.backgroundRed & 255) << 16
+            | (self.backgroundGreen & 255) << 8
+            | self.backgroundBlue & 255
+        )
 
         if self.version >= 4:
             self.zoomScale = raw.readUnsignedShort() // 100
@@ -64,7 +74,7 @@ class Map:
             if self.zoomScale < 1:
                 self.zoomScale = 1
                 self.zoomOffsetX = self.zoomOffsetY = 0
-                
+
         if self.version > 10:
             self.tacticalModeTemplateId = raw.readInt()
 
@@ -72,22 +82,22 @@ class Map:
         self.backgroundFixtures = [Fixture(raw) for _ in range(self.backgroundsCount)]
 
         self.foregroundsCount = raw.readByte()
-        self.foregroundsFixtures = [Fixture(raw) for _  in range(self.foregroundsCount)]
+        self.foregroundsFixtures = [Fixture(raw) for _ in range(self.foregroundsCount)]
 
         raw.readInt()
         self.groundCRC = raw.readInt()
         self.layersCount = raw.readByte()
         self.layers = [Layer(raw, self.version) for _ in range(self.layersCount)]
-        
+
         for cellid in range(AtouinConstants.MAP_CELLS_COUNT):
             cell = Cell(raw, self, cellid)
             self.cells[cellid] = cell
-            
+
             if not self.oldMvtSystem:
                 self.oldMvtSystem = cell.moveZone
             if cell.moveZone != self.oldMvtSystem:
                 self.isUsingNewMovementSystem = True
-                
+
             if cell.top_arrow:
                 self.topArrowCell.add(cellid)
 
@@ -96,19 +106,21 @@ class Map:
 
             elif cell.left_arrow:
                 self.leftArrowCell.add(cellid)
-                
+
             elif cell.right_arrow:
                 self.rightArrowCell.add(cellid)
-        
+
         self._parser = True
 
-    def getOutgoingCells(self, direction:DirectionsEnum):
-        return set([i for i in self.OUTCELLS[direction] if self.cells[i].allowsMapChange()])
-    
-    def cellOutTowards(self, currCellId, direction:DirectionsEnum):
+    def getOutgoingCells(self, direction: DirectionsEnum):
+        return set(
+            [i for i in self.OUTCELLS[direction] if self.cells[i].allowsMapChange()]
+        )
+
+    def cellOutTowards(self, currCellId, direction: DirectionsEnum):
         currZone = self.zones.getZone(currCellId)
         condidateOutCells = self.getBorderCells(direction)
-        mindDist = float('inf')
+        mindDist = float("inf")
         outCellId = None
         for cellid in condidateOutCells:
             if self.zones.getZone(cellid) == currZone:
@@ -120,10 +132,12 @@ class Map:
                     outCellId = cellid
         return outCellId
 
-    def getNeighbourCellFromDirection(cls, srcId:int, direction:DirectionsEnum) -> 'Cell':
-        if (srcId // AtouinConstants.MAP_WIDTH) % 2 == 0: 
+    def getNeighbourCellFromDirection(
+        cls, srcId: int, direction: DirectionsEnum
+    ) -> "Cell":
+        if (srcId // AtouinConstants.MAP_WIDTH) % 2 == 0:
             offsetId = 0
-            
+
         else:
             offsetId = 1
 
@@ -132,52 +146,58 @@ class Map:
             if destId % AtouinConstants.MAP_WIDTH != 0:
                 return cls.cells[destId]
             return None
-        
+
         elif direction == DirectionsEnum.DOWN_RIGHT:
             destId = srcId + AtouinConstants.MAP_WIDTH + offsetId
-            if destId < AtouinConstants.MAP_CELLS_COUNT and (srcId + 1) % (AtouinConstants.MAP_WIDTH * 2) != 0:
+            if (
+                destId < AtouinConstants.MAP_CELLS_COUNT
+                and (srcId + 1) % (AtouinConstants.MAP_WIDTH * 2) != 0
+            ):
                 return cls.cells[destId]
             return None
-            
-        elif direction == DirectionsEnum.DOWN :
+
+        elif direction == DirectionsEnum.DOWN:
             destId = srcId + AtouinConstants.MAP_WIDTH * 2
             if destId < AtouinConstants.MAP_CELLS_COUNT:
                 return cls.cells[destId]
             return None
-        
-        elif direction == DirectionsEnum.DOWN_LEFT :
+
+        elif direction == DirectionsEnum.DOWN_LEFT:
             destId = srcId + AtouinConstants.MAP_WIDTH - 1 + offsetId
-            if destId < AtouinConstants.MAP_CELLS_COUNT and srcId % (AtouinConstants.MAP_WIDTH * 2) != 0:
+            if (
+                destId < AtouinConstants.MAP_CELLS_COUNT
+                and srcId % (AtouinConstants.MAP_WIDTH * 2) != 0
+            ):
                 return cls.cells[destId]
             return None
-        
-        elif direction == DirectionsEnum.LEFT :
+
+        elif direction == DirectionsEnum.LEFT:
             destId = srcId - 1
             if srcId % AtouinConstants.MAP_WIDTH != 0:
                 return cls.cells[destId]
             return None
-        
-        elif direction == DirectionsEnum.UP_LEFT :
+
+        elif direction == DirectionsEnum.UP_LEFT:
             destId = srcId - AtouinConstants.MAP_WIDTH - 1 + offsetId
             if destId >= 0 and srcId % (AtouinConstants.MAP_WIDTH * 2) != 0:
                 return cls.cells[destId]
             return None
-        
-        elif direction == DirectionsEnum.UP :
+
+        elif direction == DirectionsEnum.UP:
             destId = srcId - AtouinConstants.MAP_WIDTH * 2
             if destId >= 0:
                 return cls.cells[destId]
             return None
-        
-        elif direction == DirectionsEnum.UP_RIGHT :
+
+        elif direction == DirectionsEnum.UP_RIGHT:
             destId = srcId - AtouinConstants.MAP_WIDTH + offsetId
             if destId > 0 and (srcId + 1) % (AtouinConstants.MAP_WIDTH * 2) != 0:
                 return cls.cells[destId]
             return None
-        
+
         raise Exception("Invalid direction.")
 
-    def getCellNeighbours(self, cellId:int) -> set['Cell']:
+    def getCellNeighbours(self, cellId: int) -> set["Cell"]:
         neighbours = set[Cell]()
         for i in DirectionsEnum:
             cell = self.getNeighbourCellFromDirection(cellId, i)
@@ -185,10 +205,10 @@ class Map:
                 neighbours.add(cell)
         return neighbours
 
-    def getNeighborIdFromDirection(self, direction:DirectionsEnum) -> int:
-        if direction == DirectionsEnum.LEFT: 
+    def getNeighborIdFromDirection(self, direction: DirectionsEnum) -> int:
+        if direction == DirectionsEnum.LEFT:
             return self.leftNeighbourId
-        elif direction == DirectionsEnum.RIGHT: 
+        elif direction == DirectionsEnum.RIGHT:
             return self.rightNeighbourId
         elif direction == DirectionsEnum.UP:
             return self.topNeighbourId
@@ -203,55 +223,101 @@ class Map:
         for j in range(2 * AtouinConstants.MAP_HEIGHT):
             row = []
             for i in range(AtouinConstants.MAP_WIDTH):
-                row.append(" " if self.cells[i + j * AtouinConstants.MAP_WIDTH].isAccessibleDuringRP() else "X")
+                row.append(
+                    " "
+                    if self.cells[
+                        i + j * AtouinConstants.MAP_WIDTH
+                    ].isAccessibleDuringRP()
+                    else "X"
+                )
             print(format_row.format(" ", *row, " "))
         print(format_row.format(*[" "] * (AtouinConstants.MAP_WIDTH + 2)))
-        
-    def getBorderCells(self, direction:DirectionsEnum):
+
+    def getBorderCells(self, direction: DirectionsEnum):
         currentlyCheckedCellX = None
         currentlyCheckedCellY = None
-        
+
         if direction == DirectionsEnum.RIGHT:
             currentlyCheckedCellX = AtouinConstants.MAP_WIDTH - 1
             currentlyCheckedCellY = AtouinConstants.MAP_WIDTH - 1
-            
+
         elif direction == DirectionsEnum.LEFT:
             currentlyCheckedCellX = 0
             currentlyCheckedCellY = 0
-            
+
         elif direction == DirectionsEnum.DOWN:
             currentlyCheckedCellX = AtouinConstants.MAP_HEIGHT - 1
             currentlyCheckedCellY = -(AtouinConstants.MAP_HEIGHT - 1)
-        
+
         elif direction == DirectionsEnum.UP:
             currentlyCheckedCellX = 0
             currentlyCheckedCellY = 0
-        
+
         res = []
-        
+
         if direction == DirectionsEnum.RIGHT or direction == DirectionsEnum.LEFT:
             maxI = AtouinConstants.MAP_HEIGHT * 2
             for i in range(maxI):
-                currentCellId = MapPoint.fromCoords(currentlyCheckedCellX, currentlyCheckedCellY).cellId
+                currentCellId = MapPoint.fromCoords(
+                    currentlyCheckedCellX, currentlyCheckedCellY
+                ).cellId
                 cellData = self.cells[currentCellId]
                 mapChangeData = cellData.mapChangeData
-                if mapChangeData and (direction == DirectionsEnum.RIGHT and (mapChangeData & 1 or (currentCellId + 1) % (AtouinConstants.MAP_WIDTH * 2) == 0 and mapChangeData & 2 or (currentCellId + 1) % (AtouinConstants.MAP_WIDTH * 2) == 0 and mapChangeData & 128) or direction == DirectionsEnum.LEFT and (currentlyCheckedCellX == -currentlyCheckedCellY and mapChangeData & 8 or mapChangeData & 16 or currentlyCheckedCellX == -currentlyCheckedCellY and mapChangeData & 32)):
+                if mapChangeData and (
+                    direction == DirectionsEnum.RIGHT
+                    and (
+                        mapChangeData & 1
+                        or (currentCellId + 1) % (AtouinConstants.MAP_WIDTH * 2) == 0
+                        and mapChangeData & 2
+                        or (currentCellId + 1) % (AtouinConstants.MAP_WIDTH * 2) == 0
+                        and mapChangeData & 128
+                    )
+                    or direction == DirectionsEnum.LEFT
+                    and (
+                        currentlyCheckedCellX == -currentlyCheckedCellY
+                        and mapChangeData & 8
+                        or mapChangeData & 16
+                        or currentlyCheckedCellX == -currentlyCheckedCellY
+                        and mapChangeData & 32
+                    )
+                ):
                     res.append(currentCellId)
                 if not (i % 2):
-                    currentlyCheckedCellX+=1
+                    currentlyCheckedCellX += 1
                 else:
-                    currentlyCheckedCellY-=1
-                    
+                    currentlyCheckedCellY -= 1
+
         elif direction == DirectionsEnum.DOWN or direction == DirectionsEnum.UP:
             for i in range(AtouinConstants.MAP_WIDTH * 2):
-                currentCellId = MapPoint.fromCoords(currentlyCheckedCellX, currentlyCheckedCellY).cellId
+                currentCellId = MapPoint.fromCoords(
+                    currentlyCheckedCellX, currentlyCheckedCellY
+                ).cellId
                 cellData = self.cells[currentCellId]
                 mapChangeData = cellData.mapChangeData
-                if mapChangeData and (direction == DirectionsEnum.UP and (currentCellId < AtouinConstants.MAP_WIDTH and mapChangeData & 32 or mapChangeData & 64 or currentCellId < AtouinConstants.MAP_WIDTH and mapChangeData & 128) or direction == DirectionsEnum.DOWN and (currentCellId >= AtouinConstants.MAP_CELLS_COUNT - AtouinConstants.MAP_WIDTH and mapChangeData & 2 or mapChangeData & 4 or currentCellId >= AtouinConstants.MAP_CELLS_COUNT - AtouinConstants.MAP_WIDTH and mapChangeData & 8)):
+                if mapChangeData and (
+                    direction == DirectionsEnum.UP
+                    and (
+                        currentCellId < AtouinConstants.MAP_WIDTH
+                        and mapChangeData & 32
+                        or mapChangeData & 64
+                        or currentCellId < AtouinConstants.MAP_WIDTH
+                        and mapChangeData & 128
+                    )
+                    or direction == DirectionsEnum.DOWN
+                    and (
+                        currentCellId
+                        >= AtouinConstants.MAP_CELLS_COUNT - AtouinConstants.MAP_WIDTH
+                        and mapChangeData & 2
+                        or mapChangeData & 4
+                        or currentCellId
+                        >= AtouinConstants.MAP_CELLS_COUNT - AtouinConstants.MAP_WIDTH
+                        and mapChangeData & 8
+                    )
+                ):
                     res.append(currentCellId)
                 if not (i % 2):
-                    currentlyCheckedCellX+=1
+                    currentlyCheckedCellX += 1
                 else:
-                    currentlyCheckedCellY+=1
-                
+                    currentlyCheckedCellY += 1
+
         return res

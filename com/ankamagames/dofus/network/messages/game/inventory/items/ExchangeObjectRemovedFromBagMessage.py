@@ -1,13 +1,12 @@
-from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeObjectMessage import ExchangeObjectMessage
+from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeObjectMessage import (
+    ExchangeObjectMessage,
+)
 
 
 class ExchangeObjectRemovedFromBagMessage(ExchangeObjectMessage):
-    objectUID:int
-    
+    objectUID: int
 
-    def init(self, objectUID_:int, remote_:bool):
+    def init(self, objectUID_: int, remote_: bool):
         self.objectUID = objectUID_
-        
+
         super().__init__(remote_)
-    
-    

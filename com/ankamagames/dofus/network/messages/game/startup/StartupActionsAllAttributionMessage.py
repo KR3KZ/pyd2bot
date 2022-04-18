@@ -2,12 +2,9 @@ from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
 class StartupActionsAllAttributionMessage(NetworkMessage):
-    characterId:int
-    
+    characterId: int
 
-    def init(self, characterId_:int):
+    def init(self, characterId_: int):
         self.characterId = characterId_
-        
+
         super().__init__()
-    
-    

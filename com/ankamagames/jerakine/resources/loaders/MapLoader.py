@@ -7,12 +7,11 @@ from dataAdapter.dlm import DLM
 
 class MapLoader(metaclass=Singleton):
     DLM_KEY = "649ae451ca33ec53bbcbcc33becf15f4"
-    
-    
+
     def __init__(self) -> None:
         self._reader = DLM(self.DLM_KEY)
 
-    @lru_cache(maxsize = 256)
+    @lru_cache(maxsize=256)
     def load(self, mapId, key=None):
         if key is not None:
             self._reader.setKey(key)
@@ -25,5 +24,3 @@ class MapLoader(metaclass=Singleton):
 
     def getMapURI(mapId):
         return f"{int(mapId) % 10}/{int(mapId)}.dlm"
-    
-    

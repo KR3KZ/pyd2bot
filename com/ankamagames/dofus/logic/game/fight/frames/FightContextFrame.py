@@ -485,7 +485,9 @@ class FightContextFrame(Frame):
                 if not castingSpell:
                     castingSpell = CastingSpell()
                     castingSpell.casterId = buff.sourceId
-                    castingSpell.spell = spellmod.Spell.getSpellById(buff.effect.spellId)
+                    castingSpell.spell = spellmod.Spell.getSpellById(
+                        buff.effect.spellId
+                    )
                     durationPool[buff.effect.spellId] = castingSpell
                 buffTmp = BuffManager.makeBuffFromEffect(
                     buff.effect, castingSpell, buff.actionId

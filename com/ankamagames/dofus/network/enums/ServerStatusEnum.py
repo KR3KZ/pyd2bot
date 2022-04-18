@@ -10,7 +10,7 @@ class ServerStatusEnum(Enum):
     SAVING = 5
     STOPING = 6
     FULL = 7
-    
+
     def __str__(self):
         matched = {
             0: "STATUS_UNKNOWN",
@@ -20,6 +20,6 @@ class ServerStatusEnum(Enum):
             4: "NOJOIN",
             5: "SAVING",
             6: "STOPING",
-            7: "FULL"
+            7: "FULL",
         }
         return matched[self.value]

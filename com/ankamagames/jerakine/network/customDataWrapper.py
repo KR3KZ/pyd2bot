@@ -4,19 +4,26 @@ import struct
 
 
 class ByteArray(bytearray):
-
     def __init__(self, *args, **kwrgs):
         super().__init__(*args, **kwrgs)
         self.position = 0
 
     @classmethod
-    def from_bytes(cls, b:bytes):
+    def from_bytes(cls, b: bytes) -> "ByteArray":
         r = cls()
         r.writeByteArray(b)
         r.position = 0
         return r
-    
-    def __add__(self, b) -> 'ByteArray':
+
+    @classmethod
+    def from_int8Array(cls, arr: list[int]):
+        r = cls()
+        for i in arr:
+            r.writeByte(i, signed=True)
+        r.position = 0
+        return r
+
+    def __add__(self, b) -> "ByteArray":
         return ByteArray(super().__add__(b))
 
     @property
@@ -58,7 +65,7 @@ class ByteArray(bytearray):
 
     def readBoolean(self) -> bool:
         ans = self.read(1)
-        r = struct.unpack('?',ans)[0]
+        r = struct.unpack("?", ans)[0]
         return r
 
     def writeBoolean(self, b):
@@ -105,7 +112,7 @@ class ByteArray(bytearray):
         lon = self.readUnsignedShort()
         return self.read(lon).decode()
 
-    def writeUTF(self, ch:str):
+    def writeUTF(self, ch: str):
         dat = ch.encode()
         self.writeUnsignedShort(len(dat))
         self += dat
@@ -202,14 +209,14 @@ class ByteArray(bytearray):
     def writeVarUhShort(self, i):
         self.writeVarShort(i)
 
-    def to_int8Arr(ba:bytearray) -> list[int]:
+    def to_int8Arr(ba: bytearray) -> list[int]:
         ret = []
         for i in range(len(ba)):
-            ret.append(int.from_bytes(ba[i:i+1], "big", signed=True))
+            ret.append(int.from_bytes(ba[i : i + 1], "big", signed=True))
         return ret
 
     @staticmethod
-    def from_int8Arr(int_arr:list[int]) -> bytearray:
+    def from_int8Arr(int_arr: list[int]) -> bytearray:
         res = ByteArray()
         for nbr in int_arr:
             res += nbr.to_bytes(1, "big", signed=True)
@@ -226,9 +233,10 @@ class ByteArray(bytearray):
             self += ba[offset + chunck_size : offset + size]
         self.position += size
 
+
 class Buffer(ByteArray):
     def end(self):
-        del self[:self.position]
+        del self[: self.position]
         self.position = 0
 
     def reset(self):

@@ -4,9 +4,11 @@
 import io
 from struct import *
 
+
 class BinaryStream:
     """Allow some binary operations on a stream opened in binary mode"""
-    def __init__(self, base_stream:io.BytesIO=None, big_endian=False):
+
+    def __init__(self, base_stream: io.BytesIO = None, big_endian=False):
         if not base_stream:
             self._stream = io.BytesIO()
         self._stream = base_stream
@@ -20,7 +22,7 @@ class BinaryStream:
     def position(self, value):
         self._stream.seek(value)
 
-    def seek(self, value:int):
+    def seek(self, value: int):
         self._stream.seek(value)
 
     def close(self):
@@ -44,47 +46,47 @@ class BinaryStream:
         return bytes
 
     def readByte(self):
-        return self._unpack('b')
+        return self._unpack("b")
 
     def readUnsignedByte(self) -> int:
         return int.from_bytes(self.readBytes(1), "big")
 
     def readUchar(self):
-        return self._unpack('B')
+        return self._unpack("B")
 
     def readbool(self) -> bool:
-        return self._unpack('?')
+        return self._unpack("?")
 
     def readShort(self):
-        return self._unpack('h', 2)
+        return self._unpack("h", 2)
 
     def readUnsignedShort(self):
-        return self._unpack('H', 2)
+        return self._unpack("H", 2)
 
     def readInt(self) -> int:
-        return self._unpack('i', 4)
+        return self._unpack("i", 4)
 
     def readUnsignedInt(self) -> int:
-        return self._unpack('I', 4)
+        return self._unpack("I", 4)
 
     def readInt64(self) -> int:
-        return self._unpack('q', 8)
+        return self._unpack("q", 8)
 
     def readUint64(self) -> int:
-        return self._unpack('Q', 8)
+        return self._unpack("Q", 8)
 
     def readFloat(self) -> float:
-        return self._unpack('f', 4)
+        return self._unpack("f", 4)
 
     def readDouble(self) -> float:
-        return self._unpack('d', 8)
+        return self._unpack("d", 8)
 
     def readUTF(self) -> str:
         length = self.readUnsignedShort()
-        return self._unpack(str(length) + 's', length).decode("utf-8")
+        return self._unpack(str(length) + "s", length).decode("utf-8")
 
     def readUTFBytes(self, length) -> str:
-        return self._unpack(str(length) + 's', length)
+        return self._unpack(str(length) + "s", length)
 
     def _unpack(self, fmt, length=1):
         bytes = self.readBytes(length)

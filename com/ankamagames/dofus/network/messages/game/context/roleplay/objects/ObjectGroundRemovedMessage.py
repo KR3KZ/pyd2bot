@@ -2,12 +2,9 @@ from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
 class ObjectGroundRemovedMessage(NetworkMessage):
-    cell:int
-    
+    cell: int
 
-    def init(self, cell_:int):
+    def init(self, cell_: int):
         self.cell = cell_
-        
+
         super().__init__()
-    
-    

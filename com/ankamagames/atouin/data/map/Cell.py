@@ -2,14 +2,14 @@ from typing import TYPE_CHECKING
 from com.ankamagames.atouin.AtouinConstants import AtouinConstants
 from com.ankamagames.jerakine.data.BinaryStream import BinaryStream
 from com.ankamagames.jerakine.types.positions.MapPoint import Point
+
 if TYPE_CHECKING:
     from .map import Map
-import math 
+import math
 
 
 class Cell:
-    
-    def __init__(self, raw:BinaryStream, map:'Map', id:int):
+    def __init__(self, raw: BinaryStream, map: "Map", id: int):
         self.id = id
         self.map = map
         p = self.getCoords(self.id)
@@ -21,7 +21,7 @@ class Cell:
         self.read(raw)
 
     @staticmethod
-    def getId(x:int, y:int) -> int:
+    def getId(x: int, y: int) -> int:
         return x + y * 14
 
     @staticmethod
@@ -30,7 +30,7 @@ class Cell:
         y = cell_id // 14
         return Point(x, y)
 
-    def read(self, raw:BinaryStream):
+    def read(self, raw: BinaryStream):
         self.floor = raw.readByte() * 10
         if self.floor == -1280:
             return
@@ -51,14 +51,14 @@ class Cell:
                 self.bottom_arrow = (tmp_bytes & 512) != 0
                 self.right_arrow = (tmp_bytes & 1024) != 0
                 self.left_arrow = (tmp_bytes & 2048) != 0
-                
+
             else:
                 self.havenbagCell = (tmp_bytes & 256) != 0
                 self.top_arrow = (tmp_bytes & 512) != 0
                 self.bottom_arrow = (tmp_bytes & 1024) != 0
                 self.right_arrow = (tmp_bytes & 2048) != 0
                 self.left_arrow = (tmp_bytes & 4096) != 0
-                
+
         else:
             self.losmov = raw.readUnsignedByte()
             self.los = (self.losmov & 2) >> 1 == 1
@@ -69,14 +69,16 @@ class Cell:
             self.red = (self.losmov & 8) >> 3 == 1
             self.nonWalkableDuringRP = (self.losmov & 128) >> 7 == 1
             self.nonWalkableDuringFight = (self.losmov & 4) >> 2 == 1
-            
+
         self.speed = raw.readByte()
         self.mapChangeData = raw.readByte()
 
         if self.map.version > 5:
             self.moveZone = raw.readUnsignedByte()
 
-        if self.map.version > 10 and (self.hasLinkedZoneRP() or self.hasLinkedZoneFight()):
+        if self.map.version > 10 and (
+            self.hasLinkedZoneRP() or self.hasLinkedZoneFight()
+        ):
             self.linkedZone = raw.readUnsignedByte()
 
         if 7 < self.map.version < 9:
@@ -115,43 +117,72 @@ class Cell:
         return self.mov and not self.farmCell
 
     def hasLinkedZoneFight(self) -> bool:
-        return self.mov \
-               and not self.nonWalkableDuringFight\
-               and not self.farmCell\
-               and not self.havenbagCell
-    
+        return (
+            self.mov
+            and not self.nonWalkableDuringFight
+            and not self.farmCell
+            and not self.havenbagCell
+        )
+
     def linkedZoneFight(self) -> int:
         return self.linkedZone & 15
-     
+
     def isAccessibleDuringRP(self):
         return self.mov and not self.nonWalkableDuringRP
-    
+
     def isAccessibleDuringFight(self):
         return self.mov and not self.nonWalkableDuringFight
 
     def allowsMapChange(self) -> bool:
         return self.mapChangeData != 0
-    
+
     @property
     def linkedZoneRP(self):
         return (self.linkedZone & 240) >> 4
 
     @staticmethod
-    def distanceBetween(cell1:'Cell', cell2:'Cell') -> float:
-        return math.sqrt((cell1.x - cell2.x)**2 + (cell1.y - cell2.y)**2)
+    def distanceBetween(cell1: "Cell", cell2: "Cell") -> float:
+        return math.sqrt((cell1.x - cell2.x) ** 2 + (cell1.y - cell2.y) ** 2)
 
     @classmethod
-    def cellPixelCoords(cls, cellId:int) -> Point:
-        p:Point = cls.getCoords(cellId);
-        p.x = p.x * AtouinConstants.CELL_WIDTH + (AtouinConstants.CELL_HALF_WIDTH if p.y % 2 == 1 else 0)
+    def cellPixelCoords(cls, cellId: int) -> Point:
+        p: Point = cls.getCoords(cellId)
+        p.x = p.x * AtouinConstants.CELL_WIDTH + (
+            AtouinConstants.CELL_HALF_WIDTH if p.y % 2 == 1 else 0
+        )
         p.y *= AtouinConstants.CELL_HALF_HEIGHT
         return p
-      
-    def __eq__(self, cell:'Cell'):
+
+    def __eq__(self, cell: "Cell"):
         return self.id == cell.id
-    
+
     def __hash__(self) -> str:
         return self.id
 
     def __str__(self) -> str:
-        return "map : " + self.map.id + " CellId : " + self.id + " mov : " + self.mov + " los : " + self.los + " nonWalkableDuringFight : " + self.nonWalkableDuringFight + " nonWalkableDuringRp : " + self.nonWalkableDuringRP + " farmCell : " + self.farmCell + " havenbagCell: " + self.havenbagCell + " visbile : " + self.visible + " speed: " + self.speed + " moveZone: " + self.moveZone + " linkedZoneId: " + self.linkedZone
+        return (
+            "map : "
+            + self.map.id
+            + " CellId : "
+            + self.id
+            + " mov : "
+            + self.mov
+            + " los : "
+            + self.los
+            + " nonWalkableDuringFight : "
+            + self.nonWalkableDuringFight
+            + " nonWalkableDuringRp : "
+            + self.nonWalkableDuringRP
+            + " farmCell : "
+            + self.farmCell
+            + " havenbagCell: "
+            + self.havenbagCell
+            + " visbile : "
+            + self.visible
+            + " speed: "
+            + self.speed
+            + " moveZone: "
+            + self.moveZone
+            + " linkedZoneId: "
+            + self.linkedZone
+        )

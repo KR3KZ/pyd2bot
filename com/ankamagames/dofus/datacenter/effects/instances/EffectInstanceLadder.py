@@ -1,17 +1,19 @@
 from com.ankamagames.dofus.datacenter.effects.EffectInstance import EffectInstance
-from com.ankamagames.dofus.datacenter.effects.instances.EffectInstanceCreature import EffectInstanceCreature
+from com.ankamagames.dofus.datacenter.effects.instances.EffectInstanceCreature import (
+    EffectInstanceCreature,
+)
 from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
 
+
 class EffectInstanceLadder(EffectInstanceCreature, IDataCenter):
-    
-    
-    monsterCount:int
-    
+
+    monsterCount: int
+
     def __init__(self):
         super().__init__()
-    
+
     def clone(self) -> EffectInstance:
-        o:EffectInstanceLadder = EffectInstanceLadder()
+        o: EffectInstanceLadder = EffectInstanceLadder()
         o.rawZone = self.rawZone
         o.effectId = self.effectId
         o.duration = self.duration
@@ -23,17 +25,17 @@ class EffectInstanceLadder(EffectInstanceCreature, IDataCenter):
         o.targetId = self.targetId
         o.targetMask = self.targetMask
         return o
-    
+
     @property
     def parameter0(self) -> object:
         return self.monsterFamilyId
-    
+
     @property
     def parameter2(self) -> object:
         return self.monsterCount
-    
-    def setParameter(self, paramIndex:int, value) -> None:
+
+    def setParameter(self, paramIndex: int, value) -> None:
         if paramIndex == 0:
-                monsterFamilyId = int(value)
+            monsterFamilyId = int(value)
         elif paramIndex == 2:
-                self.monsterCount = int(value)
+            self.monsterCount = int(value)

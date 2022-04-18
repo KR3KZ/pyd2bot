@@ -11,14 +11,18 @@ class Logger(logging.Logger):
         super().__init__("logger")
         self._prefix = log_prefix
         self.setLevel(logging.DEBUG)
-        formatter = logging.Formatter('%(asctime)s [%(levelname)s | %(filename)s:%(lineno)s] > %(message)s')
+        formatter = logging.Formatter(
+            "%(asctime)s [%(levelname)s | %(filename)s:%(lineno)s] > %(message)s"
+        )
 
         now = datetime.datetime.now()
         dirname = "./log"
 
         if not os.path.isdir(dirname):
             os.mkdir(dirname)
-        fileHandler = logging.FileHandler(dirname + f"/log_{self._prefix}" + now.strftime("%Y-%m-%d")+".log")
+        fileHandler = logging.FileHandler(
+            dirname + f"/log_{self._prefix}" + now.strftime("%Y-%m-%d") + ".log"
+        )
 
         streamHandler = logging.StreamHandler()
 

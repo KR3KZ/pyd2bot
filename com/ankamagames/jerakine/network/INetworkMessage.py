@@ -5,14 +5,13 @@ from com.ankamagames.jerakine.network.utils.FuncTree import FuncTree
 
 
 class INetworkMessage(IdentifiedMessage, QueueableMessage):
-     
-    def pack(self, param1:ByteArray) -> None:
+    def pack(self, param1: ByteArray) -> None:
         pass
 
-    def unpack(self, param1:ByteArray, param2:int) -> None:
+    def unpack(self, param1: ByteArray, param2: int) -> None:
         pass
 
-    def unpackAsync(self, param1:ByteArray, param2:int) -> FuncTree:
+    def unpackAsync(self, param1: ByteArray, param2: int) -> FuncTree:
         pass
 
     @property
@@ -24,5 +23,5 @@ class INetworkMessage(IdentifiedMessage, QueueableMessage):
         pass
 
     @unpacked.setter
-    def unpacked(self, param1:bool) -> None:
+    def unpacked(self, param1: bool) -> None:
         pass

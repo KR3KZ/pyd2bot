@@ -5,35 +5,35 @@ from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
 
 class MapScrollAction(IDataCenter):
 
-      MODULE:str = "MapScrollActions"
+    MODULE: str = "MapScrollActions"
 
-      id:float
+    id: float
 
-      rightExists:bool
+    rightExists: bool
 
-      bottomExists:bool
+    bottomExists: bool
 
-      leftExists:bool
+    leftExists: bool
 
-      topExists:bool
+    topExists: bool
 
-      rightMapId:float
+    rightMapId: float
 
-      bottomMapId:float
+    bottomMapId: float
 
-      leftMapId:float
+    leftMapId: float
 
-      topMapId:float
+    topMapId: float
 
-      def __init__(self):
-         super().__init__()
+    def __init__(self):
+        super().__init__()
 
-      @staticmethod
-      def getMapScrollActionById(id:float) -> 'MapScrollAction':
-         return GameData.getObject(MapScrollAction.MODULE, id)
+    @staticmethod
+    def getMapScrollActionById(id: float) -> "MapScrollAction":
+        return GameData.getObject(MapScrollAction.MODULE, id)
 
-      @staticmethod
-      def getMapScrollActions() -> list:
-         return GameData.getobjects(MapScrollAction.MODULE)
+    @staticmethod
+    def getMapScrollActions() -> list:
+        return GameData.getobjects(MapScrollAction.MODULE)
 
-      idAccessors:IdAccessors = IdAccessors(getMapScrollActionById,getMapScrollActions)
+    idAccessors: IdAccessors = IdAccessors(getMapScrollActionById, getMapScrollActions)

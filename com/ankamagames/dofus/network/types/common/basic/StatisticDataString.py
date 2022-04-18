@@ -2,12 +2,9 @@ from com.ankamagames.dofus.network.types.common.basic.StatisticData import Stati
 
 
 class StatisticDataString(StatisticData):
-    value:str
-    
+    value: str
 
-    def init(self, value_:str):
+    def init(self, value_: str):
         self.value = value_
-        
+
         super().__init__()
-    
-    

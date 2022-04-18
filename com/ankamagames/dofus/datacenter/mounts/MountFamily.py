@@ -5,34 +5,32 @@ from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
 
 
 class MountFamily(IDataCenter):
-      
-      MODULE:str = "MountFamily"
 
-      id:int
-      
-      nameId:int
-      
-      headUri:str
-      
-      _name:str
-      
-      def __init__(self):
-         super().__init__()
+    MODULE: str = "MountFamily"
 
-      
-      @classmethod      
-      def getMountFamilyById(cls, id:int) -> 'MountFamily':      
-         return GameData.getObject(cls.MODULE, id)
+    id: int
 
-      
-      @classmethod      
-      def getMountFamilies(cls) -> list['MountFamily']:      
-         return GameData.getobjects(cls.MODULE)
+    nameId: int
 
-      idAccessors:IdAccessors = IdAccessors(getMountFamilyById,getMountFamilies)
-      
-      @property
-      def name(self) -> str:
-         if not self._name:
+    headUri: str
+
+    _name: str
+
+    def __init__(self):
+        super().__init__()
+
+    @classmethod
+    def getMountFamilyById(cls, id: int) -> "MountFamily":
+        return GameData.getObject(cls.MODULE, id)
+
+    @classmethod
+    def getMountFamilies(cls) -> list["MountFamily"]:
+        return GameData.getobjects(cls.MODULE)
+
+    idAccessors: IdAccessors = IdAccessors(getMountFamilyById, getMountFamilies)
+
+    @property
+    def name(self) -> str:
+        if not self._name:
             self._name = I18n.getText(self.nameId)
-         return self._name
+        return self._name
