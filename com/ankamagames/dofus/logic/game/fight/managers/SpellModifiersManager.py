@@ -4,8 +4,8 @@ from com.ankamagames.dofus.network.types.game.character.characteristic.Character
     CharacterSpellModification,
 )
 from com.ankamagames.jerakine.logger.Logger import Logger
-from com.ankamagames.jerakine.managers.storeDataManager import StoreDataManager
-from com.ankamagames.jerakine.metaclasses.singleton import Singleton
+from com.ankamagames.jerakine.managers.StoreDataManager import StoreDataManager
+from com.ankamagames.jerakine.metaclasses.Singleton import Singleton
 from com.ankamagames.jerakine.types.DataStoreType import DataStoreType
 from com.ankamagames.jerakine.types.enums.DataStoreEnum import DataStoreEnum
 

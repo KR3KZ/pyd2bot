@@ -1,11 +1,11 @@
 from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
-    from com.ankamagames.jerakine.newCache.iCacheGarbageCollector import (
+    from com.ankamagames.jerakine.newCache.ICacheGarbageCollector import (
         ICacheGarbageCollector,
     )
-from com.ankamagames.jerakine.newCache.iCache import ICache
-from com.ankamagames.jerakine.newCache.impl.infiniteCache import InfiniteCache
+from com.ankamagames.jerakine.newCache.ICache import ICache
+from com.ankamagames.jerakine.newCache.impl.InfiniteCache import InfiniteCache
 
 
 class Cache(InfiniteCache, ICache):

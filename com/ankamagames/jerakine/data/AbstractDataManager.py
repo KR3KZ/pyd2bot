@@ -2,10 +2,10 @@ from com.ankamagames.jerakine.logger.Logger import Logger
 import math
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine import JerakineConstants
-from com.ankamagames.jerakine.managers.storeDataManager import StoreDataManager
-from com.ankamagames.jerakine.newCache.iCache import ICache
-from com.ankamagames.jerakine.newCache.impl.cache import Cache
-from com.ankamagames.jerakine.newCache.impl.infiniteCache import InfiniteCache
+from com.ankamagames.jerakine.managers.StoreDataManager import StoreDataManager
+from com.ankamagames.jerakine.newCache.ICache import ICache
+from com.ankamagames.jerakine.newCache.impl.Cache import Cache
+from com.ankamagames.jerakine.newCache.impl.InfiniteCache import InfiniteCache
 from com.ankamagames.jerakine.types.CustomSharedObject import CustomSharedObject
 
 logger = Logger(__name__)

@@ -1,6 +1,6 @@
 from com.ankamagames.jerakine import JerakineConstants
 from com.ankamagames.jerakine.logger.Logger import Logger
-from com.ankamagames.jerakine.metaclasses.singleton import Singleton
+from com.ankamagames.jerakine.metaclasses.Singleton import Singleton
 import com.ankamagames.jerakine.pools.Pool as pool
 
 

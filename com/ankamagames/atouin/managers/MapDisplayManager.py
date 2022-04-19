@@ -2,8 +2,8 @@ from com.ankamagames.atouin.messages.MapLoadedMessage import MapLoadedMessage
 from com.ankamagames.jerakine.logger.Logger import Logger
 from time import perf_counter
 import com.ankamagames.atouin.utils.DataMapProvider as dmpm
-from com.ankamagames.jerakine.metaclasses.singleton import Singleton
-from com.ankamagames.jerakine.types.positions.worldPoint import WorldPoint
+from com.ankamagames.jerakine.metaclasses.Singleton import Singleton
+from com.ankamagames.jerakine.types.positions.WorldPoint import WorldPoint
 
 logger = Logger(__name__)
 

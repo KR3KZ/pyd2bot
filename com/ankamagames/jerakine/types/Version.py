@@ -1,5 +1,5 @@
 from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
-from com.ankamagames.jerakine.managers.storeDataManager import IExternalizable
+from com.ankamagames.jerakine.managers.StoreDataManager import IExternalizable
 from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
 
 

@@ -9,7 +9,7 @@ from com.ankamagames.dofus.logic.game.fight.managers.FightersStateManager import
 import com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager as pcm
 from com.ankamagames.dofus.network.Metadata import Metadata
 from com.ankamagames.jerakine.network.messages.Worker import Worker
-from com.ankamagames.jerakine.metaclasses.singleton import Singleton
+from com.ankamagames.jerakine.metaclasses.Singleton import Singleton
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.utils.display.FrameIdManager import FrameIdManager
 

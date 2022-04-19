@@ -8,7 +8,7 @@ import com.ankamagames.atouin.managers.MapDisplayManager as mdmm
 from com.ankamagames.atouin.managers.EntitiesManager import EntitiesManager
 from com.ankamagames.jerakine.interfaces.IObstacle import IObstacle
 from com.ankamagames.jerakine.map.IDataMapProvider import IDataMapProvider
-from com.ankamagames.jerakine.metaclasses.singleton import Singleton
+from com.ankamagames.jerakine.metaclasses.Singleton import Singleton
 from com.ankamagames.jerakine.types.positions.MapPoint import MapPoint
 from mapTools import MapTools
 

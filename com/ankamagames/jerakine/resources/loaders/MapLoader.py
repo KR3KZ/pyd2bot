@@ -1,7 +1,7 @@
 from functools import lru_cache
 from pathlib import Path
 from com.ankamagames.dofus import Constants
-from com.ankamagames.jerakine.metaclasses.singleton import Singleton
+from com.ankamagames.jerakine.metaclasses.Singleton import Singleton
 from dataAdapter.dlm import DLM
 
 

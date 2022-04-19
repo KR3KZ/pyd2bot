@@ -37,9 +37,9 @@ from com.ankamagames.dofus.network.types.game.havenbag.HavenBagRoomPreviewInform
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.dofus.internalDatacenter.DataEnum import DataEnum
 from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManager
-from com.ankamagames.dofus.network.protocolConstantsEnum import ProtocolConstantsEnum
+from com.ankamagames.dofus.network.ProtocolConstantsEnum import ProtocolConstantsEnum
 from com.ankamagames.jerakine.interfaces.IDestroyable import IDestroyable
-from com.ankamagames.jerakine.metaclasses.singleton import Singleton
+from com.ankamagames.jerakine.metaclasses.Singleton import Singleton
 from com.ankamagames.jerakine.types.Callback import Callback
 from com.ankamagames.jerakine.types.positions.MapPoint import Point
 from damageCalculation.tools import StatIds

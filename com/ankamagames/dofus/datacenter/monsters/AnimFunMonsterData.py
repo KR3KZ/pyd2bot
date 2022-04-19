@@ -1,4 +1,4 @@
-from com.ankamagames.dofus.types.data.animFunData import AnimFunData
+from com.ankamagames.dofus.types.data.AnimFunData import AnimFunData
 
 
 class AnimFunMonsterData(AnimFunData):

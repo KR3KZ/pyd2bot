@@ -35,7 +35,7 @@ from com.ankamagames.jerakine.entities.interfaces.IEntity import IEntity
 from com.ankamagames.jerakine.entities.interfaces.IInteractive import IInteractive
 from com.ankamagames.jerakine.messages.Frame import Frame
 from com.ankamagames.jerakine.messages.Message import Message
-from com.ankamagames.jerakine.metaclasses.singleton import Singleton
+from com.ankamagames.jerakine.metaclasses.Singleton import Singleton
 from com.ankamagames.jerakine.pools.GenericPool import GenericPool
 from com.ankamagames.jerakine.types.enums.Priority import Priority
 from com.ankamagames.jerakine.types.positions.MapPoint import MapPoint

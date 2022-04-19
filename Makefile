@@ -4,6 +4,9 @@ DOFUS_SRC = $(CURDIR)/protocolBuilder/sources
 SELECTCLASS = com.ankamagames.dofus.BuildInfos,com.ankamagames.dofus.network.++,com.ankamagames.jerakine.network.++
 KEYS_DIR = $(CURDIR)/binaryData
 
+setup:
+	@python ./setup.py
+
 update: decompile gen-protocol gen-msgClasses gen-msgShuffle extract-keys
 
 decompile:
@@ -25,7 +28,7 @@ deps:
 	@pip install -r requirements.txt
 
 startSniffer:
-	@python -m snifferApp 
+	@python3 -m snifferApp 
 
 venvActivate:
 	@$(CURDIR)/.venv/Scripts/activate.ps1

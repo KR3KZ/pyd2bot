@@ -1,7 +1,7 @@
 import pathlib
 from com.ankamagames.jerakine import JerakineConstants
 from com.ankamagames.jerakine.data.I18nFileAccessor import I18nFileAccessor
-from com.ankamagames.jerakine.managers.storeDataManager import StoreDataManager
+from com.ankamagames.jerakine.managers.StoreDataManager import StoreDataManager
 
 
 class I18nUpdater(DataUpdateManager):

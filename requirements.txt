@@ -5,4 +5,5 @@ pycryptodomex
 whistle
 Py3AMF
 thrift
-requests
+httpx
+black

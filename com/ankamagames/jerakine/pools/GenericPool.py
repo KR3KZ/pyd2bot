@@ -1,5 +1,5 @@
 from typing import Any
-from com.ankamagames.jerakine.metaclasses.singleton import Singleton
+from com.ankamagames.jerakine.metaclasses.Singleton import Singleton
 from com.ankamagames.jerakine.pools.Poolable import Poolable
 
 

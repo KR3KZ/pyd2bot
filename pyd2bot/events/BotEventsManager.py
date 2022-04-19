@@ -1,5 +1,5 @@
 from whistle import EventDispatcher
-from com.ankamagames.jerakine.metaclasses.singleton import Singleton
+from com.ankamagames.jerakine.metaclasses.Singleton import Singleton
 
 
 

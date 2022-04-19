@@ -2,10 +2,10 @@ import math
 import time
 from typing import TYPE_CHECKING
 from com.ankamagames.dofus.datacenter.servers.Server import Server
-from com.ankamagames.jerakine.metaclasses.singleton import Singleton
+from com.ankamagames.jerakine.metaclasses.Singleton import Singleton
 
 if TYPE_CHECKING:
-    from com.ankamagames.dofus.internalDatacenter.connection.basicCharacterWrapper import (
+    from com.ankamagames.dofus.internalDatacenter.connection.BasicCharacterWrapper import (
         BasicCharacterWrapper,
     )
 from com.ankamagames.dofus.network.types.game.havenbag.HavenBagRoomPreviewInformation import (

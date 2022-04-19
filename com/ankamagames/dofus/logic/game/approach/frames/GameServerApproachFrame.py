@@ -1,7 +1,7 @@
 from datetime import datetime
 from threading import Timer
 import time
-from com.ankamagames.dofus.internalDatacenter.connection.basicCharacterWrapper import (
+from com.ankamagames.dofus.internalDatacenter.connection.BasicCharacterWrapper import (
     BasicCharacterWrapper,
 )
 from com.ankamagames.dofus.internalDatacenter.items.ItemWrapper import ItemWrapper

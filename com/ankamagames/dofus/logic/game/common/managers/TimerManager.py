@@ -1,5 +1,5 @@
 from datetime import datetime, timezone
-from com.ankamagames.jerakine.metaclasses.singleton import Singleton
+from com.ankamagames.jerakine.metaclasses.Singleton import Singleton
 
 
 class TimeManager(metaclass=Singleton):

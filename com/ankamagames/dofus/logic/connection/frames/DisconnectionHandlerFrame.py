@@ -7,7 +7,7 @@ from com.ankamagames.dofus.kernel.net.DisconnectionReasonEnum import (
     DisconnectionReasonEnum,
 )
 from com.ankamagames.jerakine.benchmark.BenchmarkTimer import BenchmarkTimer
-from com.ankamagames.jerakine.managers.storeDataManager import StoreDataManager
+from com.ankamagames.jerakine.managers.StoreDataManager import StoreDataManager
 from com.ankamagames.jerakine.messages.Frame import Frame
 from com.ankamagames.jerakine.messages.Message import Message
 from com.ankamagames.jerakine.messages.WrongSocketClosureReasonMessage import (

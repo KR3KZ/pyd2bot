@@ -1,4 +1,4 @@
-from com.ankamagames.jerakine.metaclasses.singleton import Singleton
+from com.ankamagames.jerakine.metaclasses.Singleton import Singleton
 from Cryptodome.PublicKey import RSA
 import com.ankamagames.dofus.Constants as Constants
 

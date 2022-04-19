@@ -1,7 +1,7 @@
 from com.ankamagames.jerakine.logger.Logger import Logger
 import math
 from com.ankamagames.jerakine import JerakineConstants
-from com.ankamagames.jerakine.managers.storeDataManager import StoreDataManager
+from com.ankamagames.jerakine.managers.StoreDataManager import StoreDataManager
 from com.ankamagames.jerakine.newCache.LruGarbageCollector import LruGarbageCollector
 from com.ankamagames.jerakine.newCache.iCache import ICache
 from com.ankamagames.jerakine.newCache.impl.cache import Cache

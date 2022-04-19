@@ -56,14 +56,14 @@ DOFUS_LOCAL_DATA_STORE = Path(os.getenv("APPDATA")) / "Dofus"
 DOFUS_CONTENT_DIR = DOFUS_ROOTDIR / "content"
 
 PROTOCOL_SPEC_PATH = (
-    ROOTDIR / ".." / "jerakine" / "network" / "parser" / "d2protocol.json"
+    ROOTDIR / ".." / "jerakine" / "network" / "parser" / "D2protocol.json"
 )
 
 WORLDGRAPH_PATH = DOFUS_CONTENT_DIR / "maps" / "world-graph.binary"
 
 LANG_FILE_PATH = DOFUS_DATA_DIR / "i18n" / "i18n_fr.d2i"
 
-PROTOCOL_MSG_SHUFFLE_PATH = ROOTDIR / "network" / "msgShuffle.json"
+PROTOCOL_MSG_SHUFFLE_PATH = ROOTDIR / "network" / "MsgShuffle.json"
 
 GAME_VERSION_PATH = DOFUS_ROOTDIR / "VERSION"
 

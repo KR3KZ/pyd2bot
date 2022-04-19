@@ -1,6 +1,6 @@
 from abc import ABC
 from typing import Any
-from com.ankamagames.jerakine.newCache.impl.cache import Cache
+from com.ankamagames.jerakine.newCache.impl.Cache import Cache
 
 
 class ICacheGarbageCollector(ABC):

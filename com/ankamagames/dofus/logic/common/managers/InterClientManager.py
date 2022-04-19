@@ -1,4 +1,4 @@
-from com.ankamagames.jerakine.metaclasses.singleton import Singleton
+from com.ankamagames.jerakine.metaclasses.Singleton import Singleton
 
 
 class InterClientManager(metaclass=Singleton):

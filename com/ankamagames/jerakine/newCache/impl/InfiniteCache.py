@@ -1,5 +1,5 @@
 from typing import Any
-from com.ankamagames.jerakine.newCache.iCache import ICache
+from com.ankamagames.jerakine.newCache.ICache import ICache
 
 
 class InfiniteCache(ICache):

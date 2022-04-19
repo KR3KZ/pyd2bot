@@ -3,7 +3,7 @@ import json
 import sys
 from types import FunctionType
 from com.ankamagames.jerakine.logger.Logger import Logger
-from com.ankamagames.jerakine.managers.storeDataManager import StoreDataManager
+from com.ankamagames.jerakine.managers.StoreDataManager import StoreDataManager
 from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
 from com.ankamagames.jerakine.network.INetworkMessage import INetworkMessage
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage

@@ -9,7 +9,7 @@ from com.ankamagames.dofus.network.messages.connection.IdentificationMessage imp
 )
 from com.ankamagames.dofus.network.types.version.Version import Version
 from com.ankamagames.jerakine.logger.Logger import Logger
-from com.ankamagames.jerakine.metaclasses.singleton import Singleton
+from com.ankamagames.jerakine.metaclasses.Singleton import Singleton
 from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
 from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 from com.hurlan.crypto.symmetric.AESKey import AESKey

@@ -22,7 +22,7 @@ class CredsManager:
     @staticmethod
     def addEntry(name, username, password):
         password = CredsManager.encryptPasssword(password)
-        CredsManager._creds.update({name: {"username": username, "password": password}})
+        CredsManager._creds.update({name: {"login": username, "password": password}})
         with open(CREDS_DB, "w") as fp:
             json.dump(CredsManager._creds, fp, indent=4)
 
@@ -49,7 +49,4 @@ class CredsManager:
 
 
 if __name__ == "__main__":
-    with open("pyd2bot/creds.json", "r") as fp:
-        creds = json.load(fp)
-        print(creds)
-    print(CredsManager.decryptPasssword(creds["grinderSama"]["password"]))
+    CredsManager.addEntry("149512160", "kmajdoub", "3f4gV!79b5UwWe3")

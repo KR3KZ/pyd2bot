@@ -11,8 +11,8 @@ from com.ankamagames.dofus.logic.shield.ShieldCertifcate import ShieldCertifcate
 from com.ankamagames.dofus.logic.shield.ShieldSecureLevel import ShieldSecureLevel
 from com.ankamagames.dofus.network.types.secure.TrustCertificate import TrustCertificate
 from com.ankamagames.jerakine.logger.Logger import Logger
-from com.ankamagames.jerakine.managers.storeDataManager import StoreDataManager
-from com.ankamagames.jerakine.metaclasses.singleton import Singleton
+from com.ankamagames.jerakine.managers.StoreDataManager import StoreDataManager
+from com.ankamagames.jerakine.metaclasses.Singleton import Singleton
 from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
 from com.ankamagames.jerakine.types.CustomSharedObject import CustomSharedObject
 from flash.Capabilities import Capabilities

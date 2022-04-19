@@ -35,7 +35,7 @@ from com.ankamagames.dofus.network.messages.security.ClientKeyMessage import (
     ClientKeyMessage,
 )
 from com.ankamagames.jerakine.logger.Logger import Logger
-from com.ankamagames.jerakine.managers.storeDataManager import StoreDataManager
+from com.ankamagames.jerakine.managers.StoreDataManager import StoreDataManager
 from com.ankamagames.jerakine.messages.Frame import Frame
 from com.ankamagames.jerakine.messages.Message import Message
 from com.ankamagames.jerakine.network.messages.ServerConnectionFailedMessage import (
