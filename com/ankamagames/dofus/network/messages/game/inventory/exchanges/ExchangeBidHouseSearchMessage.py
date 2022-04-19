@@ -2,11 +2,12 @@ from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
 class ExchangeBidHouseSearchMessage(NetworkMessage):
-    genId: int
-    follow: bool
+    objectGID:int
+    
 
-    def init(self, genId_: int, follow_: bool):
-        self.genId = genId_
-        self.follow = follow_
-
+    def init(self, objectGID_:int):
+        self.objectGID = objectGID_
+        
         super().__init__()
+    
+    

@@ -4,10 +4,10 @@ DOFUS_SRC = $(CURDIR)/protocolBuilder/sources
 SELECTCLASS = com.ankamagames.dofus.BuildInfos,com.ankamagames.dofus.network.++,com.ankamagames.jerakine.network.++
 KEYS_DIR = $(CURDIR)/binaryData
 
-update: decompile gen-protocol gen-msgClasses gen-msgSuffle extract-keys
+update: decompile gen-protocol gen-msgClasses gen-msgShuffle extract-keys
 
 decompile:
-	@$(FFDEC) -config parallelSpeedUp=true -selectclass $(SELECTCLASS) -export script $(DOFUS_SRC) $(DOFUSINVOKER)
+	@$(FFDEC) -config parallelSpeedUp=false -selectclass $(SELECTCLASS) -export script $(DOFUS_SRC) $(DOFUSINVOKER)
 
 extract-keys:
 	@$(FFDEC) -config parallelSpeedUp=true -export binaryData $(KEYS_DIR) $(DOFUSINVOKER)

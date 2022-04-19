@@ -2,9 +2,12 @@ from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
 class GuildApplicationListenMessage(NetworkMessage):
-    listen: bool
+    listen:bool
+    
 
-    def init(self, listen_: bool):
+    def init(self, listen_:bool):
         self.listen = listen_
-
+        
         super().__init__()
+    
+    

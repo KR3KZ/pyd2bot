@@ -2,9 +2,12 @@ from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
 class ExchangeBidHousePriceMessage(NetworkMessage):
-    genId: int
+    objectGID:int
+    
 
-    def init(self, genId_: int):
-        self.genId = genId_
-
+    def init(self, objectGID_:int):
+        self.objectGID = objectGID_
+        
         super().__init__()
+    
+    

@@ -2,9 +2,12 @@ from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
 class GameMapSpeedMovementMessage(NetworkMessage):
-    speedMultiplier: int
+    speedMultiplier:int
+    
 
-    def init(self, speedMultiplier_: int):
+    def init(self, speedMultiplier_:int):
         self.speedMultiplier = speedMultiplier_
-
+        
         super().__init__()
+    
+    

@@ -2,6 +2,10 @@ from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
 class PrismSettingsErrorMessage(NetworkMessage):
-    def init(self):
+    
 
+    def init(self):
+        
         super().__init__()
+    
+    

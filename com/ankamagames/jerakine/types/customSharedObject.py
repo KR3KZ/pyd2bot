@@ -21,6 +21,7 @@ class CustomSharedObject:
     clearedCacheAndRebooting = False
     throwException = True
     _cache = dict[str, "CustomSharedObject"]()
+    data = None
 
     def __init__(self):
         self.data = None

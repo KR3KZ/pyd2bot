@@ -1,12 +1,13 @@
-from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeObjectMessage import (
-    ExchangeObjectMessage,
-)
+from com.ankamagames.dofus.network.messages.game.inventory.exchanges.ExchangeObjectMessage import ExchangeObjectMessage
 
 
 class ExchangeKamaModifiedMessage(ExchangeObjectMessage):
-    quantity: int
+    quantity:int
+    
 
-    def init(self, quantity_: int, remote_: bool):
+    def init(self, quantity_:int, remote_:bool):
         self.quantity = quantity_
-
+        
         super().__init__(remote_)
+    
+    

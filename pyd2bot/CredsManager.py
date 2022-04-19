@@ -52,4 +52,5 @@ class CredsManager:
 if __name__ == "__main__":
     with open("pyd2bot/creds.json", "r") as fp:
         creds = json.load(fp)
-    print(CredsManager.decryptPasssword(creds["password"]))
+        print(creds)
+    print(CredsManager.decryptPasssword(creds["grinderSama"]["password"]))

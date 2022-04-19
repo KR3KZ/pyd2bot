@@ -2,9 +2,12 @@ from com.ankamagames.jerakine.network.NetworkMessage import NetworkMessage
 
 
 class BreachTeleportResponseMessage(NetworkMessage):
-    teleported: bool
+    teleported:bool
+    
 
-    def init(self, teleported_: bool):
+    def init(self, teleported_:bool):
         self.teleported = teleported_
-
+        
         super().__init__()
+    
+    

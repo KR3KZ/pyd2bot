@@ -34,4 +34,4 @@ if __name__ == "__main__":
     msgReceiverAs = sys.argv[1]
     msgShuffle = main(msgReceiverAs)
     with open(Constants.PROTOCOL_MSG_SHUFFLE_PATH, "w") as fp:
-        json.dump(msgShuffle, fp)
+        json.dump(msgShuffle, fp, indent=4, separators=(", ", ": "), sort_keys=True)
