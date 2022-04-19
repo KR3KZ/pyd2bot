@@ -30,9 +30,9 @@ make update
 
 ### Create rsa keys to encrypt your account credentials
 
-Crate a folder outside the repository for example c:/my_passEnc_keys
-then add that folder to your environment variables under a vraiable named 'PASS_ENC_KEYS'. Don't make an error in the var name.
+Crate a folder outside the repository for example `C:/my_passEnc_keys`. Don't make an error in the var name.
 Then run :
+
 `make genRsaKeyPair dst-dir=$PASS_ENC_KEYS`
 
 > :warning: You may have to restart your terminal for the new variable to be added to env.
@@ -40,6 +40,7 @@ Then run :
 ### Create an entry for your bot credentials
 
 Example:
+
 `make createAccount entryName=grinder login="myAccountAwsomeLogin" password='keepThisOneSafe'`
 
 > :warning: Make sure to put the password inside single quotes to avoid having problems with special chars.
@@ -47,6 +48,7 @@ Example:
 ### Create an entry for the bot charachter infos
 
 Example:
+
 `make createBot botName='myBotName' account='grinder' charachterId=290210840786 serverId=210`
 
 Here 'account' arg should correspond to the entryName you chose for your account creds.
