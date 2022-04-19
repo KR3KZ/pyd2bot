@@ -2,12 +2,11 @@ import json
 from pathlib import Path
 from Cryptodome.PublicKey import RSA
 from Cryptodome.Cipher import PKCS1_OAEP
-import base64
-
 from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
 
+CURRDIR = Path(__file__).parent
 KEYS_DIR = Path("D:\RSA-KEYS\password-crypting")
-CREDS_DB = Path("pyd2bot\creds.json")
+CREDS_DB = CURRDIR / "creds.json"
 pubkey_p = KEYS_DIR / "id_rsa.pub"
 privatekey_p = KEYS_DIR / "id_rsa"
 
@@ -29,7 +28,7 @@ class CredsManager:
 
     @staticmethod
     def getEntry(name):
-        result = CredsManager._creds.get(name)
+        result = CredsManager._creds.get(name).copy()
         result["password"] = CredsManager.decryptPasssword(result["password"])
         return result
 

@@ -66,6 +66,10 @@ class AuthentificationManager(metaclass=Singleton):
         self.username = username
         self._password = password
 
+    def setToken(self, token: str):
+        self._token = token
+        self.username = "   "
+
     def getIdentificationMessage(self) -> IdentificationMessage:
         imsg = NetworkMessage.from_json(
             {
@@ -76,7 +80,7 @@ class AuthentificationManager(metaclass=Singleton):
                 "lang": "fr",
                 "serverId": 0,
                 "sessionOptionalSalt": 0,
-                "useCertificate": True,
+                "useCertificate": False,
                 "useLoginToken": True,
                 "version": {
                     "__type__": "Version",
@@ -91,20 +95,12 @@ class AuthentificationManager(metaclass=Singleton):
         return imsg
 
     def getAuthCredentials(self) -> list[int]:
-        certificate_id = 125849908
-        certificate_hash = (
-            "ae50b79eeab014bcb078040aa662165ec480ccd56bdb4326806c5d6c8272a64d"
-        )
         baIn = ByteArray()
         baIn += bytes(self._salt, "utf")
         baIn += self._AESKey
-        baIn += certificate_id.to_bytes(4, "big")
-        baIn += bytes(certificate_hash, "utf")
-        self.username = "   "
-        self._password = "21ea43ae3c13e24c10ca6d6801e12612"
         baIn += len(self.username).to_bytes(1, "big")
         baIn += bytes(self.username, "utf")
-        baIn += bytes(self._password, "utf")
+        baIn += bytes(self._token, "utf")
         rsa_key = RSA.importKey(bytes(self._publicKey, "utf"))
         rsacipher = RSACipher(rsa_key, PKCS1())
         baOut = rsacipher.encrypt(baIn)

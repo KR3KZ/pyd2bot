@@ -60,11 +60,10 @@ class CustomSharedObject:
     def clearCache(cls, name: str) -> None:
         del cls._cache[name]
 
-    @classmethod
-    def flush(cls) -> None:
-        if cls.clearedCacheAndRebooting:
+    def flush(self) -> None:
+        if self.clearedCacheAndRebooting:
             return
-        cls.writeData(cls.data)
+        self.writeData(self.data)
 
     def clear(self) -> None:
         self.data = object()

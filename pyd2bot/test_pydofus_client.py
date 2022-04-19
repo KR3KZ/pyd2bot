@@ -29,7 +29,8 @@ from com.ankamagames.jerakine.resources.events.ResourceLoadedEvent import (
     ResourceLoadedEvent,
 )
 
-from pyd2bot.CredsManager import CredsManager
+from hackedLauncher.CredsManager import CredsManager
+from hackedLauncher.Launcher import Haapi
 from pyd2bot.events.BotEventsManager import BotEventsManager
 from com.ankamagames.atouin.utils.DataMapProvider import DataMapProvider
 
@@ -39,11 +40,13 @@ PORT = 5555
 AUTH_SERVER = "54.76.16.121"
 SERVER_ID = 210
 CHARACTER_ID = 290210840786
-CREDS = CredsManager.getEntry("grinderSama")
+ACCOUNT_ID = "149512160"
+haapi = Haapi()
 CONN = {
     "host": AUTH_SERVER,
     "port": PORT,
 }
+TOKEN = haapi.getLoginToken(ACCOUNT_ID)
 
 
 class TestBot:
@@ -55,7 +58,7 @@ class TestBot:
 
     def main(self):
         krnl.Kernel().init()
-        auth.AuthentificationManager().setCredentials(**CREDS)
+        auth.AuthentificationManager().setToken(TOKEN)
         connh.ConnectionsHandler.connectToLoginServer(**CONN)
         BotEventsManager().add_listener(
             BotEventsManager.SERVER_SELECTION, self.onServerSelection

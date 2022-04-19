@@ -94,7 +94,6 @@ class ServerSelectionFrame(Frame):
             PlayerManager().server = None
             self._serversList = slmsg.servers
             self._serversList.sort(key=lambda x: x.date)
-            self._alreadyConnectedToServerId = slmsg.alreadyConnectedToServerId
             self.broadcastServersListUpdate()
             BotEventsManager().dispatch(BotEventsManager.SERVER_SELECTION)
             return True
