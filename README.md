@@ -30,7 +30,7 @@ make update
 
 ### Create rsa keys to encrypt your account credentials
 
-Crate a folder outside the repository for example `C:/my_passEnc_keys`. Don't make an error in the var name.
+Crate a folder outside the repository for example `C:/my_passEnc_keys`. Add new env variable to your env pointing to this folder you created, name this variable `PASS_ENC_KEYS`. Don't make an error in the var name.
 Then run :
 
 `make genRsaKeyPair dst-dir=$PASS_ENC_KEYS`
