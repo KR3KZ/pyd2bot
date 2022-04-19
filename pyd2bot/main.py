@@ -1,6 +1,7 @@
 from pathlib import Path
 import json
 import random
+import sys
 from com.ankamagames.atouin.managers.FrustumManager import FrustumManager
 from com.ankamagames.dofus import Constants
 import com.ankamagames.dofus.kernel.Kernel as krnl
@@ -31,16 +32,19 @@ from com.ankamagames.jerakine.resources.events.ResourceLoadedEvent import (
 
 from hackedLauncher.CredsManager import CredsManager
 from hackedLauncher.Launcher import Haapi
+from pyd2bot.BotsDataManager import BotsDataManager
 from pyd2bot.events.BotEventsManager import BotEventsManager
 from com.ankamagames.atouin.utils.DataMapProvider import DataMapProvider
 
 logger = Logger(__name__)
-
-PORT = 5555
 AUTH_SERVER = "54.76.16.121"
-SERVER_ID = 210
-CHARACTER_ID = 290210840786
-ACCOUNT_ID = "149512160"
+PORT = 5555
+
+botName = sys.argv[1]
+botInfos = BotsDataManager.getEntry(botName)
+SERVER_ID = botInfos["serverId"]
+CHARACTER_ID = botInfos["charachterId"]
+ACCOUNT_ID = botInfos["account"]
 haapi = Haapi()
 CONN = {
     "host": AUTH_SERVER,

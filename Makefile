@@ -33,5 +33,14 @@ startSniffer:
 venvActivate:
 	@$(CURDIR)/.venv/Scripts/activate.ps1
 
+createAccount:
+	@python3 $(CURDIR)/hackedLauncher/CredsManager.py $(entryName) $(login) $(password)
+
+createBot:
+	@python3 $(CURDIR)/pyd2bot/BotsDataManager.py $(botName) $(account) $(serverId) $(charachterId)
+
+genRsaKeyPair:
+	@ssh-keygen -t rsa -b 2056 -m PEM -f $(dst-dir)/id_rsa
+
 test:
-	@python $(CURDIR)/pyd2bot/test_pydofus_client.py
+	@python $(CURDIR)/pyd2bot/main.py $(botName)

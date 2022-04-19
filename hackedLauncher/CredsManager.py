@@ -1,11 +1,12 @@
 import json
+import os
 from pathlib import Path
 from Cryptodome.PublicKey import RSA
 from Cryptodome.Cipher import PKCS1_OAEP
 from com.ankamagames.jerakine.network.CustomDataWrapper import ByteArray
 
 CURRDIR = Path(__file__).parent
-KEYS_DIR = Path("D:\RSA-KEYS\password-crypting")
+KEYS_DIR = Path(os.environ["PASS_ENC_KEYS"])
 CREDS_DB = CURRDIR / "creds.json"
 pubkey_p = KEYS_DIR / "id_rsa.pub"
 privatekey_p = KEYS_DIR / "id_rsa"
@@ -16,6 +17,9 @@ class CredsManager:
         _pubkey = RSA.import_key(fp.read())
     with open(privatekey_p, "rb") as fp:
         _privatekey = RSA.import_key(fp.read())
+    if not os.path.exists(CREDS_DB):
+        with open(CREDS_DB, "w") as fp:
+            json.dump({}, fp)
     with open(CREDS_DB, "r") as fp:
         _creds = json.load(fp)
 
@@ -49,4 +53,10 @@ class CredsManager:
 
 
 if __name__ == "__main__":
-    CredsManager.addEntry("149512160", "kmajdoub", "3f4gV!79b5UwWe3")
+    import sys
+
+    print(sys.argv)
+    entryName = sys.argv[1]
+    entryLogin = sys.argv[2]
+    entryPassword = sys.argv[3]
+    CredsManager.addEntry(entryName, entryLogin, entryPassword)
