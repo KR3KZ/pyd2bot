@@ -2,7 +2,9 @@ import os
 from subprocess import Popen, PIPE
 import json
 import httpx
+from com.ankamagames.jerakine.logger.Logger import Logger
 
+logger = Logger(__name__)
 from hackedLauncher.CredsManager import CredsManager
 
 
@@ -21,6 +23,7 @@ class Haapi:
         )
 
     def createAPIKEY(self, accountId, game_id=102) -> str:
+        logger.debug("Calling HAAPI to Create APIKEY")
         creds = CredsManager.getEntry(accountId)
         cert = self.getCert(creds["login"])
         data = {
@@ -42,21 +45,27 @@ class Haapi:
             },
         )
         self.APIKEY = response.json()["key"]
+        logger.debug("APIKEY created")
         return self.APIKEY
 
     def getCert(self, login):
         CURRDIR = os.path.dirname(__file__)
         p = Popen(
-            ["cd", CURRDIR, "&&", "node", "getCertificate.js", login], stderr=PIPE, stdout=PIPE, shell=True
+            ["cd", CURRDIR, "&&", "node", "getCertificate.js", login],
+            stderr=PIPE,
+            stdout=PIPE,
+            shell=True,
         )
         stdout, stderr = p.communicate()
         if stderr:
             raise Exception(stderr.decode("utf-8"))
         ret_json = stdout.decode("utf-8")
         cert = json.loads(ret_json)
+        logger.debug("Certificate loaded")
         return cert
 
     def getLoginToken(self, accountId, game_id=1):
+        logger.debug("Calling HAAPI to get Login Token")
         if not self.APIKEY:
             self.createAPIKEY(accountId)
         creds = CredsManager.getEntry(accountId)
@@ -75,6 +84,7 @@ class Haapi:
             },
         )
         token = response.json()["token"]
+        logger.debug("Login Token created")
         return token
 
 
