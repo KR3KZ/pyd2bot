@@ -14,5 +14,5 @@ unpacked_raw_msg
 /.venv/
 /.vscode/
 creds.json
-botCharacter.json
+botCharachtersDB.json
 content\maps
