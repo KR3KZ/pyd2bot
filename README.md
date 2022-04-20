@@ -1,4 +1,5 @@
 # pyd2bot
+Un bot dofus 2 en full socket entièrement en python.
 
 ## Setup DEV Env
 
