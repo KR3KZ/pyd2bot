@@ -41,6 +41,6 @@ if __name__ == "__main__":
 
     botName = sys.argv[1]
     account = sys.argv[2]
-    charachterId = int(sys.argv[3])
-    serverId = int(sys.argv[4])
+    serverId = int(sys.argv[3])
+    charachterId = int(sys.argv[4])
     BotsDataManager.addEntry(botName, account, charachterId, serverId)

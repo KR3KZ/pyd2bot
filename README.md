@@ -5,16 +5,16 @@
 ### Install node js
 
 Install node js. It's needed to run the simulated launcher.
+Install make if you are under Windows. In windows i reccommend using git bash.
 
-### Make fresh new venv
+### Make a fresh new venv in the project folder
 
 `python3 -m venv .venv`
 
 ### Add the project sources to the python site-packages
 
 `make setup`
-
-> :warning: If make is not recognised as a command, look how to install make for windows if you are under windows like me.)
+> :warning: If this doesn't work. Add the path to the project in your `PYTHONPATH` env variable.
 
 ### Install dependencies
 
@@ -30,10 +30,10 @@ make update
 
 ### Create rsa keys to encrypt your account credentials
 
-Crate a folder outside the repository for example `C:/my_passEnc_keys`. Add new env variable to your env pointing to this folder you created, name this variable `PASS_ENC_KEYS`. Don't make an error in the var name.
+Crate a folder outside the repository for example `C:/my_passEnc_keys`. Add a new env variable to your env pointing to this folder you just created. Name this variable `PASS_ENC_KEYS`. Don't make an error in the variable name because the launcher searches for it in the env to find the key used to encrypt your passwords before saving them.
 Then run :
 
-`make genRsaKeyPair dst-dir=$PASS_ENC_KEYS`
+`make genKeys`
 
 > :warning: You may have to restart your terminal for the new variable to be added to env.
 

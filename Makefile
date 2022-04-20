@@ -7,10 +7,10 @@ KEYS_DIR = $(CURDIR)/binaryData
 setup:
 	@python ./setup.py
 
-update: decompile gen-protocol gen-msgClasses gen-msgShuffle extract-keys
+update: decompile gen-protocol gen-msgClasses gen-msgShuffle extract-keys unpack-maps
 
 decompile:
-	@$(FFDEC) -config parallelSpeedUp=false -selectclass $(SELECTCLASS) -export script $(DOFUS_SRC) $(DOFUSINVOKER)
+	@$(FFDEC) -config parallelSpeedUp=true -selectclass $(SELECTCLASS) -export script $(DOFUS_SRC) $(DOFUSINVOKER)
 
 extract-keys:
 	@$(FFDEC) -config parallelSpeedUp=true -export binaryData $(KEYS_DIR) $(DOFUSINVOKER)
@@ -24,23 +24,27 @@ gen-msgClasses:
 gen-msgShuffle:
 	@python protocolBuilder/extractMsgShuffle.py $(DOFUS_SRC)/scripts/com/ankamagames/dofus/network/MessageReceiver.as
 
+unpack-maps:
+	@python scripts/unpack_maps.py $(DOFUS_SRC)
+
 deps:
 	@pip install -r requirements.txt
 
 startSniffer:
-	@python3 -m snifferApp 
+	@python -m snifferApp 
 
 venvActivate:
-	@$(CURDIR)/.venv/Scripts/activate.ps1
+	shell source $(CURDIR)/.venv/Scripts/activate
 
 createAccount:
-	@python3 $(CURDIR)/hackedLauncher/CredsManager.py $(entryName) $(login) $(password)
+	@python $(CURDIR)/hackedLauncher/CredsManager.py $(entryName) $(login) $(password)
 
 createBot:
-	@python3 $(CURDIR)/pyd2bot/BotsDataManager.py $(botName) $(account) $(serverId) $(charachterId)
+	@python $(CURDIR)/pyd2bot/BotsDataManager.py $(botName) $(account) $(serverId) $(charachterId)
 
-genRsaKeyPair:
-	@ssh-keygen -t rsa -b 2056 -m PEM -f $(dst-dir)/id_rsa
+genKeys:
+	@ssh-keygen -t rsa -b 2056 -m PEM -f $(PASS_ENC_KEYS)/id_rsa
 
 test:
 	@python $(CURDIR)/pyd2bot/main.py $(botName)
+

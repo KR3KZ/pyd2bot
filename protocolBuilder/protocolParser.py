@@ -187,7 +187,9 @@ class ProtocolParser:
         fields = []
         hash_function = False
         wrapped_booleans = set()
-
+        protocolId = None
+        if not os.path.exists(msg_type["path"]):
+            raise Exception(f"{msg_type['path']} does not exist")
         with open(msg_type["path"], "r") as fp:
             lines = list(fp.readlines())
             msg_type["parent"] = None
@@ -217,7 +219,8 @@ class ProtocolParser:
                 m = re.fullmatch(self.WRAPPED_BOOLEAN_PATTERN, line)
                 if m:
                     wrapped_booleans.add(m.group("name"))
-
+        if protocolId is None:
+            raise Exception(f"{msg_type['path']} does not have protocolId")
         msg_type["protocolId"] = protocolId
 
         if "messages" in str(msg_type["path"]):

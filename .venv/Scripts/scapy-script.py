@@ -1,4 +1,4 @@
-#!C:\Users\majdoub\OneDrive\Documents\pyd2bot\.venv\Scripts\python.exe
+#!C:\Users\majdoub\pyd2bot\.venv\Scripts\python.exe
 # EASY-INSTALL-ENTRY-SCRIPT: 'scapy==2.4.5','console_scripts','scapy'
 import re
 import sys

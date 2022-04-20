@@ -11,6 +11,8 @@ sources
 *.d2p
 unpacked_raw_msg
 *.as
-.venv
-.vscode
+/.venv/
+/.vscode/
 creds.json
+botCharacter.json
+content\maps

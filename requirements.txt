@@ -4,6 +4,6 @@ tqdm
 pycryptodomex
 whistle
 Py3AMF
-thrift
 httpx
 black
+jinja2
