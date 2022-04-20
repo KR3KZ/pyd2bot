@@ -1,9 +1,12 @@
 from com.ankamagames.dofus.datacenter.spells.Spell import Spell
 from com.ankamagames.dofus.datacenter.spells.SpellLevel import SpellLevel
-from com.ankamagames.dofus.internalDatacenter.spells.SpellWrapper import SpellWrapper
-from com.ankamagames.dofus.logic.game.fight.managers.SpellCastInFightManager import (
-    SpellCastInFightManager,
-)
+import com.ankamagames.dofus.internalDatacenter.spells.SpellWrapper as spellw
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.logic.game.fight.managers.SpellCastInFightManager import (
+        SpellCastInFightManager,
+    )
 from com.ankamagames.dofus.network.enums.CharacterSpellModificationTypeEnum import (
     CharacterSpellModificationTypeEnum,
 )
@@ -30,14 +33,17 @@ class SpellManager:
 
     _targetsThisTurn: dict
 
-    _spellCastManager: SpellCastInFightManager
+    _spellCastManager: "SpellCastInFightManager"
 
     _castIntervalModificator: int
 
     _castIntervalSetModificator: int
 
     def __init__(
-        self, spellCastManager: SpellCastInFightManager, pSpellId: int, pSpellLevel: int
+        self,
+        spellCastManager: "SpellCastInFightManager",
+        pSpellId: int,
+        pSpellLevel: int,
     ):
         super().__init__()
         self._spellCastManager = spellCastManager
@@ -154,7 +160,7 @@ class SpellManager:
             cooldown + self._spellCastManager.currentTurn - spellL.minCastInterval
         )
         self._forcedCooldown = True
-        spellW: SpellWrapper = SpellWrapper.getSpellWrapperById(
+        spellW: spellw.SpellWrapper = spellw.SpellWrapper.getSpellWrapperById(
             self._spellId, self._spellCastManager.entityId
         )
         if isBonusRefresh:
@@ -167,11 +173,11 @@ class SpellManager:
         self.updateSpellWrapper()
 
     def updateSpellWrapper(self) -> None:
-        spellW: SpellWrapper = SpellWrapper.getSpellWrapperById(
+        spellW: spellw.SpellWrapper = spellw.SpellWrapper.getSpellWrapperById(
             self._spellId, self._spellCastManager.entityId
         )
         if spellW == None:
-            spellW = SpellWrapper.create(
+            spellW = spellw.SpellWrapper.create(
                 self._spellId, self._spellLevel, True, self._spellCastManager.entityId
             )
         if spellW and spellW.actualCooldown != 63:

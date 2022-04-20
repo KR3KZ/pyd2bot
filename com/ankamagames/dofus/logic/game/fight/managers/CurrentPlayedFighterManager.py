@@ -7,9 +7,7 @@ if TYPE_CHECKING:
     )
 import com.ankamagames.dofus.kernel.Kernel as knl
 from com.ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEntities
-from com.ankamagames.dofus.logic.game.fight.managers.SpellCastInFightManager import (
-    SpellCastInFightManager,
-)
+import com.ankamagames.dofus.logic.game.fight.managers.SpellCastInFightManager as scifm
 from com.ankamagames.dofus.logic.game.fight.types.castSpellManager.SpellManager import (
     SpellManager,
 )
@@ -152,19 +150,19 @@ class CurrentPlayedFighterManager(metaclass=Singleton):
                 return spellKnown
         return None
 
-    def getSpellCastManager(self) -> SpellCastInFightManager:
-        scm: SpellCastInFightManager = self._spellCastInFightManagerList[
+    def getSpellCastManager(self) -> scifm.SpellCastInFightManager:
+        scm: scifm.SpellCastInFightManager = self._spellCastInFightManagerList[
             self._currentFighterId
         ]
         if not scm:
-            scm = SpellCastInFightManager(self._currentFighterId)
+            scm = scifm.SpellCastInFightManager(self._currentFighterId)
             self._spellCastInFightManagerList[self._currentFighterId] = scm
         return scm
 
-    def getSpellCastManagerById(self, id: float) -> SpellCastInFightManager:
-        scm: SpellCastInFightManager = self._spellCastInFightManagerList[id]
+    def getSpellCastManagerById(self, id: float) -> scifm.SpellCastInFightManager:
+        scm: scifm.SpellCastInFightManager = self._spellCastInFightManagerList[id]
         if not scm:
-            scm = SpellCastInFightManager(id)
+            scm = scifm.SpellCastInFightManager(id)
             self._spellCastInFightManagerList[id] = scm
         return scm
 
@@ -253,7 +251,7 @@ class CurrentPlayedFighterManager(metaclass=Singleton):
             return False
         if not player.isFighting:
             return True
-        spellCastManager: SpellCastInFightManager = self.getSpellCastManager()
+        spellCastManager: scifm.SpellCastInFightManager = self.getSpellCastManager()
         spellManager: SpellManager = spellCastManager.getSpellManagerBySpellId(spellId)
         if spellManager == None:
             return True

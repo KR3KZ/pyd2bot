@@ -3,9 +3,7 @@ from com.ankamagames.dofus.internalDatacenter.items.ItemWrapper import ItemWrapp
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import (
     PlayedCharacterManager,
 )
-from com.ankamagames.dofus.logic.game.common.managers.StorageOptionManager import (
-    StorageOptionManager,
-)
+import com.ankamagames.dofus.logic.game.common.managers.StorageOptionManager as storageoptmgr
 from com.ankamagames.dofus.logic.game.common.misc.IInventoryView import IInventoryView
 from com.ankamagames.dofus.network.enums.CharacterInventoryPositionEnum import (
     CharacterInventoryPositionEnum,
@@ -43,7 +41,7 @@ class Inventory:
     @kamas.setter
     def kamas(self, value: float) -> None:
         self._kamas = value
-        StorageOptionManager().updateStorageView()
+        storageoptmgr.StorageOptionManager().updateStorageView()
 
     def addView(self, view: IInventoryView) -> None:
         self._views[view.name] = view

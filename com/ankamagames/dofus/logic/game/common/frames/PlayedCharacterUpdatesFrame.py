@@ -2,15 +2,22 @@ from datetime import datetime
 from logging import Logger
 from time import perf_counter
 from com.ankamagames.dofus.datacenter.world.SubArea import SubArea
+from com.ankamagames.dofus.internalDatacenter.spells.SpellWrapper import SpellWrapper
 from com.ankamagames.dofus.internalDatacenter.stats.EntityStats import EntityStats
 import com.ankamagames.dofus.kernel.Kernel as krnl
 from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerManager
 from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManager
+from com.ankamagames.dofus.logic.game.common.managers.InventoryManager import (
+    InventoryManager,
+)
 import com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager as pcm
 from com.ankamagames.dofus.logic.game.common.managers.TimerManager import TimeManager
 from com.ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEntities
 from com.ankamagames.dofus.logic.game.fight.managers.CurrentPlayedFighterManager import (
     CurrentPlayedFighterManager,
+)
+from com.ankamagames.dofus.logic.game.fight.managers.SpellModifiersManager import (
+    SpellModifiersManager,
 )
 import com.ankamagames.dofus.logic.game.roleplay.frames.RoleplayContextFrame as rplCF
 from com.ankamagames.dofus.logic.game.roleplay.frames.RoleplayEntitiesFrame import (
@@ -582,7 +589,6 @@ class PlayedCharacterUpdatesFrame(Frame):
         playerId: float = pcm.PlayedCharacterManager().id
         statsManager: StatsManager = StatsManager()
         playerStats: EntityStats = statsManager.getStats(playerId)
-        oldEnergyPoints: float = 0
         if playerStats is not None:
             oldEnergyPoints = playerStats.getStatTotalValue(StatIds.ENERGY_POINTS)
         statsManager.addRawStats(playerId, stats.characteristics)

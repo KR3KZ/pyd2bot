@@ -1,3 +1,6 @@
+from com.ankamagames.dofus.datacenter.breeds.BreedRoleByBreed import BreedRoleByBreed
+from com.ankamagames.dofus.datacenter.spells.Spell import Spell
+from com.ankamagames.dofus.datacenter.spells.SpellVariant import SpellVariant
 from com.ankamagames.jerakine.logger.Logger import Logger
 from re import S
 from com.ankamagames.dofus.types.IdAccessors import IdAccessors

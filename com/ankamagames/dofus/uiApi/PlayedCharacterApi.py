@@ -1,11 +1,13 @@
-from click import pass_context
 from com.ankamagames.berilia.interfaces.IApi import IApi
 from com.ankamagames.dofus.datacenter.breeds.Breed import Breed
+from com.ankamagames.dofus.datacenter.optionalFeatures.ForgettableSpell import (
+    ForgettableSpell,
+)
 from com.ankamagames.dofus.datacenter.world.SubArea import SubArea
 from com.ankamagames.dofus.internalDatacenter.DataEnum import DataEnum
 from com.ankamagames.dofus.internalDatacenter.items.ItemWrapper import ItemWrapper
 from com.ankamagames.dofus.internalDatacenter.items.WeaponWrapper import WeaponWrapper
-from com.ankamagames.dofus.internalDatacenter.items.idolsPresetWrapper import (
+from com.ankamagames.dofus.internalDatacenter.items.IdolsPresetWrapper import (
     IdolsPresetWrapper,
 )
 from com.ankamagames.dofus.internalDatacenter.mount.MountData import MountData
@@ -22,10 +24,12 @@ from com.ankamagames.dofus.logic.game.common.frames.AbstractEntitiesFrame import
 from com.ankamagames.dofus.logic.game.common.frames.PlayedCharacterUpdatesFrame import (
     PlayedCharacterUpdatesFrame,
 )
+from com.ankamagames.dofus.logic.game.common.managers.InventoryManager import (
+    InventoryManager,
+)
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import (
     PlayedCharacterManager,
 )
-from com.ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEntities
 from com.ankamagames.dofus.logic.game.fight.frames.FightContextFrame import (
     FightContextFrame,
 )
@@ -83,7 +87,6 @@ from com.ankamagames.dofus.network.types.game.data.items.ForgettableSpellItem im
 from com.ankamagames.dofus.network.types.game.guild.application.GuildApplicationInformation import (
     GuildApplicationInformation,
 )
-from com.ankamagames.dofus.types.entities.AnimatedCharacter import AnimatedCharacter
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.metaclasses.Singleton import Singleton
 
