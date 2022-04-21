@@ -33,7 +33,6 @@ from com.ankamagames.dofus.logic.game.common.managers.InventoryManager import (
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import (
     PlayedCharacterManager,
 )
-import com.ankamagames.dofus.logic.game.fight.frames.FightEntitiesFrame as feF
 from com.ankamagames.dofus.logic.game.fight.frames.FightPreparationFrame import (
     FightPreparationFrame,
 )
@@ -243,19 +242,20 @@ class PlayedCharacterApi(IApi, metaclass=Singleton):
         return Kernel().getWorker().getFrame(TinselFrame).titlesOrnamentsAskedBefore
 
     def getEntityInfos(self) -> GameRolePlayCharacterInformations:
+        import com.ankamagames.dofus.logic.game.fight.frames.FightEntitiesFrame as fightEntitiesFrame
         entitiesFrame: AbstractEntitiesFrame = None
         if self.isInFight():
-            entitiesFrame = Kernel().getFrame(feF.FightEntitiesFrame)
+            entitiesFrame = Kernel().getFrame(fightEntitiesFrame.FightEntitiesFrame)
             entitiesFrame = Kernel().getFrame(RoleplayEntitiesFrame)
         if not entitiesFrame:
             return None
         return entitiesFrame.getEntityInfos(PlayedCharacterManager().id)
 
-    def getEntityTooltipInfos(self) -> CharacterTooltipInformation:
-        playerInfo: GameRolePlayCharacterInformations = self.getEntityInfos()
-        if not playerInfo:
-            return None
-        return CharacterTooltipInformation(playerInfo, 0)
+    # def getEntityTooltipInfos(self) -> CharacterTooltipInformation:
+    #     playerInfo: GameRolePlayCharacterInformations = self.getEntityInfos()
+    #     if not playerInfo:
+    #         return None
+    #     return CharacterTooltipInformation(playerInfo, 0)
 
     def getKamasMaxLimit(self) -> float:
         playedCharacterFrame: pcuF.PlayedCharacterUpdatesFrame = (

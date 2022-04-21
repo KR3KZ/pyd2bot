@@ -2,7 +2,7 @@ from com.ankamagames.dofus.datacenter.effects.Effect import Effect
 from com.ankamagames.dofus.datacenter.effects.instances.EffectInstanceDice import (
     EffectInstanceDice,
 )
-from com.ankamagames.dofus.logic.game.fight.types.BasicBuff import BasicBuff
+import com.ankamagames.dofus.logic.game.fight.types.BasicBuff as basicBuff
 from com.ankamagames.dofus.logic.game.fight.types.CastingSpell import CastingSpell
 from com.ankamagames.dofus.network.types.game.actions.fight.FightTemporaryBoostEffect import (
     FightTemporaryBoostEffect,
@@ -12,7 +12,7 @@ from com.ankamagames.jerakine.logger.Logger import Logger
 logger = Logger(__name__)
 
 
-class StatBuff(BasicBuff):
+class StatBuff(basicBuff.BasicBuff):
 
     _statName: str
 
@@ -53,7 +53,7 @@ class StatBuff(BasicBuff):
         if effect is not None and effect.active:
             self.onApplied()
 
-    def clone(self, id: int = 0) -> BasicBuff:
+    def clone(self, id: int = 0) -> basicBuff.BasicBuff:
         sb: StatBuff = StatBuff()
         sb._statName = self._statName
         sb._isABoost = self._isABoost

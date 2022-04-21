@@ -1682,7 +1682,7 @@ class FightSequenceFrame(Frame, ISpellCastProvider):
             myCastingSpell.spell = Spell.getSpellById(gaftbmsg.effect.spellId)
             myCastingSpell.casterId = gaftbmsg.sourceId
         buffEffect: AbstractFightDispellableEffect = gaftbmsg.effect
-        buff: BasicBuff = BuffManager.makeBuffFromEffect(
+        buff: BasicBuff = BuffManager().makeBuffFromEffect(
             buffEffect, myCastingSpell, gaftbmsg.actionId
         )
         if isinstance(buff, StateBuff):

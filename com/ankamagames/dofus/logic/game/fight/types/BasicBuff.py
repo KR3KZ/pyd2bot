@@ -12,7 +12,8 @@ from com.ankamagames.dofus.kernel.Kernel import Kernel
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import (
     PlayedCharacterManager,
 )
-import com.ankamagames.dofus.logic.game.fight.frames.FightEntitiesFrame as feF
+import com.ankamagames.dofus.logic.game.fight.frames.FightBattleFrame as fightBattleFrame
+import com.ankamagames.dofus.logic.game.fight.frames.FightEntitiesFrame as fightBattleFrame
 from com.ankamagames.dofus.logic.game.fight.types.CastingSpell import CastingSpell
 from com.ankamagames.dofus.misc.utils.GameDebugManager import GameDebugManager
 from com.ankamagames.dofus.network.enums.FightDispellableEnum import (
@@ -86,14 +87,14 @@ class BasicBuff:
         self.dispelable = effect.dispelable
         self.source = castingSpell.casterId
         self.dataUid = effect.effectId
-        fightBattleFrame: FightBattleFrame = (
-            Kernel().getWorker().getFrame(FightBattleFrame)
+        fightBattleFrame = (
+            Kernel().getWorker().getFrame(fightBattleFrame.FightBattleFrame)
         )
         currentPlayerId: float = fightBattleFrame.currentPlayerId
         isPlayerId = currentPlayerId is not 0
         fighterInfo: GameFightFighterInformations = None
         if isPlayerId:
-            entitiesFrame = Kernel().getWorker().getFrame(feF.FightEntitiesFrame)
+            entitiesFrame = Kernel().getWorker().getFrame(fightBattleFrame.FightEntitiesFrame)
             if entitiesFrame is not None:
                 fighterInfo = entitiesFrame.getEntityInfos(currentPlayerId)
         if (
@@ -166,7 +167,7 @@ class BasicBuff:
     def unusableNextTurn(self) -> bool:
         if self.duration > 1 or self.duration < 0:
             return False
-        frame: FightBattleFrame = Kernel().getWorker().getFrame(FightBattleFrame)
+        frame = Kernel().getWorker().getFrame(fightBattleFrame.FightBattleFrame)
         if frame:
             currentPlayerId = frame.currentPlayerId
             playerId = PlayedCharacterManager().id

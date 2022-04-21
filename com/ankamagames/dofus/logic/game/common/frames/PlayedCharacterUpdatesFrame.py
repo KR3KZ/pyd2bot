@@ -2,7 +2,7 @@ from datetime import datetime
 from logging import Logger
 from time import perf_counter
 from com.ankamagames.dofus.datacenter.world.SubArea import SubArea
-from com.ankamagames.dofus.internalDatacenter.spells.SpellWrapper import SpellWrapper
+import com.ankamagames.dofus.internalDatacenter.spells.SpellWrapper as spellWrapper
 from com.ankamagames.dofus.internalDatacenter.stats.EntityStats import EntityStats
 import com.ankamagames.dofus.kernel.Kernel as krnl
 from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerManager
@@ -293,7 +293,7 @@ class PlayedCharacterUpdatesFrame(Frame):
                                     and obtentionLevel > previousLevel
                                 ):
                                     newSpellWrappers.append(
-                                        SpellWrapper.create(
+                                        spellWrapper.SpellWrapper.create(
                                             spellBreed.id, spellLevelBreed.grade, False
                                         )
                                     )
@@ -601,7 +601,7 @@ class PlayedCharacterUpdatesFrame(Frame):
         if pcm.PlayedCharacterManager().isFighting:
             if CurrentPlayedFighterManager().isRealPlayer():
                 pass
-            SpellWrapper.refreshAllPlayerSpellHolder(pcm.PlayedCharacterManager().id)
+            spellWrapper.SpellWrapper.refreshAllPlayerSpellHolder(pcm.PlayedCharacterManager().id)
         else:
             pass
 
@@ -611,7 +611,7 @@ class PlayedCharacterUpdatesFrame(Frame):
         playerId: float = pcm.PlayedCharacterManager().id
         if playerId is not targetId:
             return
-        spell: SpellWrapper = SpellWrapper.getSpellWrapperById(spellId, playerId)
+        spell = spellWrapper.SpellWrapper.getSpellWrapperById(spellId, playerId)
         if spell is not None:
             spell = spell.clone()
             ++spell.versionNum

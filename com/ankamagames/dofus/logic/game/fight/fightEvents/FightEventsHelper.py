@@ -8,7 +8,7 @@ from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager imp
     PlayedCharacterManager,
 )
 from com.ankamagames.dofus.logic.game.fight.fightEvents.FightEvent import FightEvent
-import com.ankamagames.dofus.logic.game.fight.frames.FightEntitiesFrame as feF
+import com.ankamagames.dofus.logic.game.fight.frames.FightEntitiesFrame as fightEntitiesFrame
 from com.ankamagames.dofus.logic.game.fight.types.BasicBuff import BasicBuff
 from com.ankamagames.dofus.logic.game.fight.types.StatBuff import StatBuff
 from com.ankamagames.dofus.misc.utils.GameDebugManager import GameDebugManager
@@ -161,8 +161,8 @@ class FightEventsHelper:
         EnterFrameDispatcher().removeEventListener(self.sendEvents)
         self.sendFightEvent(None, None, 0, -1)
         self.sendAllFightEvents()
-        entitiesFrame: feF.FightEntitiesFrame = (
-            Kernel().getWorker().getFrame(feF.FightEntitiesFrame)
+        entitiesFrame: fightEntitiesFrame.FightEntitiesFrame = (
+            Kernel().getWorker().getFrame(fightEntitiesFrame.FightEntitiesFrame)
         )
         entitiesList: dict = entitiesFrame.entities if entitiesFrame else dict()
         self.groupAllEventsForDisplay(entitiesList)

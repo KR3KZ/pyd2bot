@@ -13,15 +13,9 @@ from com.ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEnti
 from com.ankamagames.dofus.logic.game.fight.actions.RemoveEntityAction import (
     RemoveEntityAction,
 )
-from com.ankamagames.dofus.logic.game.fight.frames.FightBattleFrame import (
-    FightBattleFrame,
-)
-from com.ankamagames.dofus.logic.game.fight.frames.FightContextFrame import (
-    FightContextFrame,
-)
-from com.ankamagames.dofus.logic.game.fight.frames.FightPreparationFrame import (
-    FightPreparationFrame,
-)
+import com.ankamagames.dofus.logic.game.fight.fightEvents.FightEventsHelper as fightEventsHelper
+import com.ankamagames.dofus.logic.game.fight.frames.FightBattleFrame as fightBattleFrame
+import com.ankamagames.dofus.logic.game.fight.frames.FightPreparationFrame as fightPreparationFrame
 from com.ankamagames.dofus.logic.game.fight.managers.CurrentPlayedFighterManager import (
     CurrentPlayedFighterManager,
 )
@@ -140,6 +134,7 @@ from com.ankamagames.jerakine.entities.interfaces.IEntity import IEntity
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.messages.Frame import Frame
 from com.ankamagames.jerakine.messages.Message import Message
+from com.ankamagames.jerakine.types.events.PropertyChangeEvent import PropertyChangeEvent
 from com.ankamagames.jerakine.types.positions.MapPoint import MapPoint
 from damageCalculation.tools.StatIds import StatIds
 
@@ -267,13 +262,13 @@ class FightEntitiesFrame(AbstractEntitiesFrame, Frame):
                     gfrfmsg.informations.contextualId
                 ] = gfrfmsg.informations.look
                 if (
-                    krnl.Kernel().getWorker().contains(FightPreparationFrame)
+                    krnl.Kernel().getWorker().contains(fightPreparationFrame.FightPreparationFrame)
                     and gfrfmsg.informations.disposition.cellId == -1
                 ):
                     self.registerActor(gfrfmsg.informations)
                 else:
                     self.updateActor(fullInfos, True)
-            if krnl.Kernel().getWorker().getFrame(FightPreparationFrame):
+            if krnl.Kernel().getWorker().getFrame(fightPreparationFrame.FightPreparationFrame):
                 pass
             return True
 
@@ -287,14 +282,16 @@ class FightEntitiesFrame(AbstractEntitiesFrame, Frame):
                 self._illusionEntities[gfsfmsg.informations.contextualId] = True
             else:
                 if (
-                    krnl.Kernel().getWorker().contains(FightPreparationFrame)
+                    krnl.Kernel().getWorker().contains(fightPreparationFrame.FightPreparationFrame)
                     and gfsfmsg.informations.disposition.cellId == -1
                 ):
                     self.registerActor(gfsfmsg.informations)
                 else:
                     self.updateFighter(gfsfmsg.informations)
                 self._illusionEntities[gfsfmsg.informations.contextualId] = False
-            fightContextFrame = krnl.Kernel().getWorker().getFrame(FightContextFrame)
+            fightContextFrame = (
+                krnl.Kernel().getWorker().getFrame(fightContextFrame.FightContextFrame)
+            )
             if fightContextFrame.fightersPositionsHistory[
                 gfsfmsg.informations.contextualId
             ]:
@@ -316,7 +313,7 @@ class FightEntitiesFrame(AbstractEntitiesFrame, Frame):
                 if gfhrsmsg.characterId == pcm.PlayedCharacterManager().id:
                     pass
             fightPreparationFrame = (
-                krnl.Kernel().getWorker().getFrame(FightPreparationFrame)
+                krnl.Kernel().getWorker().getFrame(fightPreparationFrame.FightPreparationFrame)
             )
             if fightPreparationFrame:
                 pass
@@ -560,19 +557,18 @@ class FightEntitiesFrame(AbstractEntitiesFrame, Frame):
         )
         del self._ie[interactiveElement]
 
-    def onCreatureSwitchEnd(self, pEvent: TiphonEvent) -> None:
-        fightPreparationFrame: FightPreparationFrame = None
-        if pEvent:
-            pEvent.currentTarget.removeEventListener(
-                TiphonEvent.RENDER_SUCCEED, self.onCreatureSwitchEnd
-            )
-            --self._numCreatureSwitchingEntities
-        if self._numCreatureSwitchingEntities == 0:
-            fightPreparationFrame = (
-                krnl.Kernel().getWorker().getFrame(FightPreparationFrame)
-            )
-            if fightPreparationFrame:
-                fightPreparationFrame.updateSwapPositionRequestsIcons()
+    # def onCreatureSwitchEnd(self, pEvent: TiphonEvent) -> None:
+    #     if pEvent:
+    #         pEvent.currentTarget.removeEventListener(
+    #             TiphonEvent.RENDER_SUCCEED, self.onCreatureSwitchEnd
+    #         )
+    #         --self._numCreatureSwitchingEntities
+    #     if self._numCreatureSwitchingEntities == 0:
+    #         fightPreparationFrame = (
+    #             krnl.Kernel().getWorker().getFrame(fightPreparationFrame.FightPreparationFrame)
+    #         )
+    #         if fightPreparationFrame:
+    #             fightPreparationFrame.updateSwapPositionRequestsIcons()
 
     def getOrdonnedPreFighters(self) -> list[float]:
         entitiesIds: list[float] = self.getEntitiesIdsList()
@@ -770,13 +766,15 @@ class FightEntitiesFrame(AbstractEntitiesFrame, Frame):
             fighterId, carriedId, -1, True
         )
         step.start()
-        FightEventsHelper.sendAllFightEvent()
+        fightEventsHelper.FightEventsHelper.sendAllFightEvent()
 
     def updateRemovedEntity(self, idEntity: float) -> None:
         self._entitiesNumber[idEntity] = None
         if Dofus().options.getOption("orderFighters"):
             num = 1
-            fightBFrame = krnl.Kernel().getWorker().getFrame(FightBattleFrame)
+            fightBFrame = (
+                krnl.Kernel().getWorker().getFrame(fightBattleFrame.FightBattleFrame)
+            )
             for entId in fightBFrame.fightersList:
                 if entId != idEntity and self.getEntityInfos(entId):
                     self.updateEntityfloat(entId, num)
@@ -791,7 +789,7 @@ class FightEntitiesFrame(AbstractEntitiesFrame, Frame):
         if e.propertyName == "cellSelectionOnly":
             untargetableEntities = (
                 e.propertyValue
-                or krnl.Kernel().getWorker().getFrame(FightPreparationFrame)
+                or krnl.Kernel().getWorker().getFrame(fightPreparationFrame.FightPreparationFrame)
             )
         elif e.propertyName == "orderFighters":
             if not e.propertyValue:
@@ -800,7 +798,11 @@ class FightEntitiesFrame(AbstractEntitiesFrame, Frame):
                         self._entitiesNumber[float(id)] = None
             else:
                 num = 1
-                fightBFrame = krnl.Kernel().getWorker().getFrame(FightBattleFrame)
+                fightBFrame = (
+                    krnl.Kernel()
+                    .getWorker()
+                    .getFrame(fightBattleFrame.FightBattleFrame)
+                )
                 if fightBFrame:
                     for entId in fightBFrame.fightersList:
                         if self.getEntityInfos(entId):

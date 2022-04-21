@@ -1,4 +1,7 @@
-from com.ankamagames.dofus.logic.game.fight.types.BasicBuff import BasicBuff
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.logic.game.fight.types.BasicBuff import BasicBuff
 
 
 class FightEvent:
@@ -19,7 +22,7 @@ class FightEvent:
 
     order: int
 
-    buff: BasicBuff
+    buff: "BasicBuff"
 
     id: int
 
@@ -32,7 +35,7 @@ class FightEvent:
         pCastingSpellId: int,
         pOrder: int = -1,
         pFirstParamToCheck: int = 1,
-        pBuff: BasicBuff = None,
+        pBuff: "BasicBuff" = None,
     ):
         super().__init__()
         self.name = pName

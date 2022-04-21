@@ -16,9 +16,7 @@ from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager imp
     PlayedCharacterManager,
 )
 from com.ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEntities
-from com.ankamagames.dofus.logic.game.fight.fightEvents.FightEventsHelper import (
-    FightEventsHelper,
-)
+import com.ankamagames.dofus.logic.game.fight.fightEvents.FightEventsHelper as fightEventsHelper
 from com.ankamagames.dofus.logic.game.fight.frames import FightSequenceFrame
 from com.ankamagames.dofus.logic.game.fight.frames.FightBattleFrame import (
     FightBattleFrame,
@@ -379,7 +377,7 @@ class FightContextFrame(Frame):
 
         if isinstance(msg, GameFightStartingMessage):
             gfsmsg = msg
-            FightEventsHelper.reset()
+            fightEventsHelper.FightEventsHelper.reset()
             self.fightType = gfsmsg.fightType
             self._fightAttackerId = gfsmsg.attackerId
             PlayedCharacterManager().fightId = gfsmsg.fightId
@@ -597,7 +595,7 @@ class FightContextFrame(Frame):
             self.hideMovementRange()
             CurrentPlayedFighterManager().resetPlayerSpellList()
             mdm.MapDisplayManager().activeIdentifiedElements(True)
-            FightEventsHelper.sendAllFightEvent(True)
+            fightEventsHelper.FightEventsHelper.sendAllFightEvent(True)
             PlayedCharacterManager().isFighting = False
             PlayedCharacterManager().fightId = -1
             SpellWrapper.removeAllSpellWrapperBut(
@@ -711,7 +709,7 @@ class FightContextFrame(Frame):
                     resultsRecap["idols"] = idols
                     resultsKey = self.saveResults(resultsRecap)
                     if not PlayedCharacterManager().isSpectator:
-                        FightEventsHelper.sendFightEvent(
+                        fightEventsHelper.FightEventsHelper.sendFightEvent(
                             FightEventEnum.FIGHT_END, [resultsKey], 0, -1, True
                         )
 
@@ -877,4 +875,4 @@ class FightContextFrame(Frame):
         Kernel().beingInReconection = False
 
     def sendFightEvents(self) -> None:
-        FightEventsHelper.sendAllFightEvent()
+        fightEventsHelper.FightEventsHelper.sendAllFightEvent()

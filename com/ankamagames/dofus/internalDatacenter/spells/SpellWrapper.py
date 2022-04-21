@@ -28,7 +28,6 @@ import com.ankamagames.dofus.logic.game.fight.managers.SpellModifiersManager as 
 from com.ankamagames.dofus.network.enums.CharacterSpellModificationTypeEnum import (
     CharacterSpellModificationTypeEnum,
 )
-from com.ankamagames.dofus.uiApi.PlayedCharacterApi import PlayedCharacterApi
 from com.ankamagames.jerakine.data.XmlConfig import XmlConfig
 from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
 from com.ankamagames.jerakine.interfaces.ISlotData import ISlotData
@@ -74,7 +73,7 @@ class SpellWrapper(ISlotData, ICellZoneProvider, IDataCenter):
         1016,
     ]
 
-    _uri: Uri
+    _uri: str
 
     _slotDataHolderManager: SlotDataHolderManager
 
@@ -109,6 +108,8 @@ class SpellWrapper(ISlotData, ICellZoneProvider, IDataCenter):
 
     @staticmethod
     def getEntityId() -> float:
+        from com.ankamagames.dofus.uiApi.PlayedCharacterApi import PlayedCharacterApi
+
         if PlayedCharacterApi().isInFight():
             return cpfm.CurrentPlayedFighterManager().currentFighterId
         return PlayedCharacterManager().id

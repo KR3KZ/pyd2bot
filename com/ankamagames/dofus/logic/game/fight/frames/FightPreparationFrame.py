@@ -27,9 +27,7 @@ from com.ankamagames.dofus.logic.game.fight.actions.GameFightReadyAction import 
 from com.ankamagames.dofus.logic.game.fight.actions.RemoveEntityAction import (
     RemoveEntityAction,
 )
-from com.ankamagames.dofus.logic.game.fight.frames.FightContextFrame import (
-    FightContextFrame,
-)
+import com.ankamagames.dofus.logic.game.fight.frames.FightContextFrame as fightContextFrame
 from com.ankamagames.dofus.logic.game.fight.frames.FightEntitiesFrame import (
     FightEntitiesFrame,
 )
@@ -117,7 +115,7 @@ class FightPreparationFrame(Frame):
 
     SELECTION_DEFENDER: str = "FightPlacementDefenderTeam"
 
-    _fightContextFrame: FightContextFrame
+    _fightContextFrame: fightContextFrame.FightContextFrame
 
     _playerTeam: int
 
@@ -129,7 +127,7 @@ class FightPreparationFrame(Frame):
 
     _fightersId: list[float]
 
-    def __init__(self, fightContextFrame: FightContextFrame):
+    def __init__(self, fightContextFrame: fightContextFrame.FightContextFrame):
         super().__init__()
         self._fightContextFrame = fightContextFrame
 
@@ -184,7 +182,7 @@ class FightPreparationFrame(Frame):
                 Kernel().getWorker().removeFrame(self)
                 gfemsg = GameFightEndMessage()
                 gfemsg.init()
-                fightContextFrame2 = Kernel().getWorker().getFrame(FightContextFrame)
+                fightContextFrame2 = Kernel().getWorker().getFrame(fightContextFrame.FightContextFrame)
                 if fightContextFrame2:
                     fightContextFrame2.process(gfemsg)
                 else:
@@ -362,7 +360,7 @@ class FightPreparationFrame(Frame):
         if isinstance(msg, GameContextDestroyMessage):
             gfemsg2 = GameFightEndMessage()
             gfemsg2.initGameFightEndMessage()
-            fightContextFrame = Kernel().getWorker().getFrame(FightContextFrame)
+            fightContextFrame = Kernel().getWorker().getFrame(fightContextFrame.FightContextFrame)
             if fightContextFrame:
                 fightContextFrame.process(gfemsg2)
             else:

@@ -352,5 +352,5 @@ ROOTDIR = pathlib.Path(os.path.dirname(__file__))
 #     ROOTDIR / "inventoryView",
 # )
 t = perf_counter()
-parseFile(ROOTDIR / "target.as", ROOTDIR / "ListView.py")
+parseFile(ROOTDIR / "target.as", ROOTDIR / "PropertyChangeEvent.py")
 print("parsing took:", perf_counter() - t)
