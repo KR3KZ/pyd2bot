@@ -1,4 +1,3 @@
-from asyncio.log import logger
 from time import perf_counter
 from com.ankamagames.dofus import Constants
 from com.ankamagames.dofus.datacenter.jobs.Recipe import Recipe
