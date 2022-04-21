@@ -89,6 +89,10 @@ class AbstractEntitiesFrame(Frame):
         self._entitiesTotal = 0
         return True
 
+    @property
+    def interactiveElements(self) -> list[InteractiveElement]:
+        return self._interactiveElements
+
     @abstractmethod
     def process(msg: Message) -> bool:
         pass

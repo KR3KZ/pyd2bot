@@ -1,6 +1,4 @@
-from shutil import move
 from threading import Timer
-from time import sleep
 from time import perf_counter
 from com.ankamagames.atouin.messages.EntityMovementCompleteMessage import (
     EntityMovementCompleteMessage,
@@ -20,6 +18,9 @@ from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager imp
 from com.ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEntities
 from com.ankamagames.dofus.logic.game.roleplay.actions.PlayerFightRequestAction import (
     PlayerFightRequestAction,
+)
+from com.ankamagames.dofus.logic.game.roleplay.frames.RoleplayInteractivesFrame import (
+    RoleplayInteractivesFrame,
 )
 
 # from com.ankamagames.dofus.logic.game.roleplay.frames.RoleplayEntitiesFrame import RoleplayEntitiesFrame

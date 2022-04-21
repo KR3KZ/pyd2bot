@@ -1,3 +1,6 @@
+from com.ankamagames.atouin.managers.InteractiveCellManager import (
+    InteractiveCellManager,
+)
 from com.ankamagames.atouin.messages.MapLoadedMessage import MapLoadedMessage
 from com.ankamagames.jerakine.logger.Logger import Logger
 from time import perf_counter
