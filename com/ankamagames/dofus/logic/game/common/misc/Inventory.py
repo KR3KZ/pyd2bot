@@ -20,19 +20,12 @@ class Inventory:
 
     _views: dict
 
-    _hookLock: HookLock
-
     _kamas: float = 0
 
     def __init__(self):
         self._itemsDict = dict()
-        self._hookLock = HookLock()
         super().__init__()
         self._views = dict()
-
-    @property
-    def hookLock(self) -> HookLock:
-        return self._hookLock
 
     @property
     def kamas(self) -> float:

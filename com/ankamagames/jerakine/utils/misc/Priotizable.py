@@ -1,7 +1,4 @@
-from abc import ABC
-
-
-class Prioritizable(ABC):
+class Prioritizable:
     @property
     def priority() -> int:
         pass
