@@ -1,6 +1,3 @@
-from com.ankamagames.dofus.logic.game.common.managers.InventoryManager import (
-    InventoryManager,
-)
 from com.ankamagames.dofus.logic.game.common.managers.StorageOptionManager import (
     StorageOptionManager,
 )

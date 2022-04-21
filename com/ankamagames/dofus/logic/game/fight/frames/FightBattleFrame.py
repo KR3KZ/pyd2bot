@@ -8,9 +8,7 @@ import com.ankamagames.dofus.kernel.Kernel as krnl
 from com.ankamagames.dofus.kernel.net.ConnectionsHandler import ConnectionsHandler
 from com.ankamagames.dofus.logic.common.managers.PlayerManager import PlayerManager
 from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManager
-from com.ankamagames.dofus.logic.game.common.frames.PlayedCharacterUpdatesFrame import (
-    PlayedCharacterUpdatesFrame,
-)
+import com.ankamagames.dofus.logic.game.common.frames.PlayedCharacterUpdatesFrame as pcuF
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import (
     PlayedCharacterManager,
 )
@@ -756,16 +754,14 @@ class FightBattleFrame(Frame):
     def applyDelayedStats(self) -> None:
         if not self._delayCslmsg:
             return
-        characterFrame: PlayedCharacterUpdatesFrame = (
-            krnl.Kernel().getWorker().getFrame(PlayedCharacterUpdatesFrame)
+        characterFrame: pcuF.PlayedCharacterUpdatesFrame = (
+            krnl.Kernel().getWorker().getFrame(pcuF.PlayedCharacterUpdatesFrame)
         )
         if characterFrame:
             characterFrame.updateCharacterStatsList(self._delayCslmsg.stats)
         self._delayCslmsg = None
 
     def waitAnimations(self) -> None:
-        entityId: float = None
-        tiphonSprite: TiphonSprite = None
         key = None
         entitiesFrame: FightEntitiesFrame = (
             krnl.Kernel().getWorker().getFrame(FightEntitiesFrame)
@@ -776,7 +772,6 @@ class FightBattleFrame(Frame):
         if entityIdList == None:
             self.sendAcknowledgement()
             return
-        tiphonSpriteToListen: TiphonSprite = None
         maxFramesLeft: float = -1
         for index in range(len(entityIdList)):
             entityId = entityIdList[index]
@@ -800,10 +795,6 @@ class FightBattleFrame(Frame):
                     if tiphonSprite.framesLeft > maxFramesLeft:
                         maxFramesLeft = tiphonSprite.framesLeft
                         tiphonSpriteToListen = tiphonSprite
-        if tiphonSpriteToListen is not None:
-            tiphonSpriteToListen.addEventListener(
-                TiphonEvent.ANIMATION_END, self.onLastAnimationFinished
-            )
         else:
             self.sendAcknowledgement()
 

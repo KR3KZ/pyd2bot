@@ -23,7 +23,6 @@ from com.ankamagames.dofus.logic.game.common.misc.inventoryView.StorageCraftFilt
 from com.ankamagames.dofus.logic.game.common.misc.inventoryView.StorageSmithMagicFilterView import (
     StorageSmithMagicFilterView,
 )
-from com.ankamagames.dofus.misc.lists.InventoryHookList import InventoryHookList
 from com.ankamagames.dofus.types.enums.ItemCategoryEnum import ItemCategoryEnum
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.metaclasses.Singleton import Singleton
@@ -100,6 +99,10 @@ class StorageOptionManager(metaclass=Singleton):
         self._bankCategoryFilter = cat
         self.updateBankStorageView()
 
+    @property
+    def filter(self) -> int:
+        return self._filterType
+
     @filter.setter
     def filter(self, filterType: int) -> None:
         self._filterType = filterType
@@ -113,10 +116,6 @@ class StorageOptionManager(metaclass=Singleton):
                     "storage", "storageFiltered"
                 )
         self.updateStorageView()
-
-    @property
-    def filter(self) -> int:
-        return self._filterType
 
     def hasFilter(self) -> bool:
         return self._filterType != -1
@@ -150,6 +149,10 @@ class StorageOptionManager(metaclass=Singleton):
     def sortFields(self) -> list:
         return self._sortFields
 
+    @property
+    def sortField(self):
+        raise RuntimeError("This property has no getter!")
+
     @sortField.setter
     def sortField(self, fieldName: int) -> None:
         if fieldName not in self._sortFields:
@@ -178,6 +181,10 @@ class StorageOptionManager(metaclass=Singleton):
     def resetSort(self) -> None:
         self._newSort = True
         self._sortFields = list()
+
+    @property
+    def sortBankField(self):
+        raise RuntimeError("This property has no getter!")
 
     @sortBankField.setter
     def sortBankField(self, fieldName: int) -> None:
@@ -215,13 +222,14 @@ class StorageOptionManager(metaclass=Singleton):
         self._newSort = True
         self._sortBankFields = list()
 
+    @property
+    def sortBankRevert(self) -> bool:
+
+        return self._sortBankRevert
+
     @sortBankRevert.setter
     def sortBankRevert(self, revert: bool) -> None:
         self._sortBankRevert = revert
-
-    @property
-    def sortBankRevert(self) -> bool:
-        return self._sortBankRevert
 
     @property
     def currentStorageView(self) -> IStorageView:

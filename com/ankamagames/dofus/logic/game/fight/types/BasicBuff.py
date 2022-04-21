@@ -12,9 +12,7 @@ from com.ankamagames.dofus.kernel.Kernel import Kernel
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import (
     PlayedCharacterManager,
 )
-from com.ankamagames.dofus.logic.game.fight.frames.FightEntitiesFrame import (
-    FightEntitiesFrame,
-)
+import com.ankamagames.dofus.logic.game.fight.frames.FightEntitiesFrame as feF
 from com.ankamagames.dofus.logic.game.fight.types.CastingSpell import CastingSpell
 from com.ankamagames.dofus.misc.utils.GameDebugManager import GameDebugManager
 from com.ankamagames.dofus.network.enums.FightDispellableEnum import (
@@ -76,7 +74,6 @@ class BasicBuff:
         param2=None,
         param3=None,
     ):
-        entitiesFrame: FightEntitiesFrame = None
         super().__init__()
         if not effect:
             return
@@ -96,7 +93,7 @@ class BasicBuff:
         isPlayerId = currentPlayerId is not 0
         fighterInfo: GameFightFighterInformations = None
         if isPlayerId:
-            entitiesFrame = Kernel().getWorker().getFrame(FightEntitiesFrame)
+            entitiesFrame = Kernel().getWorker().getFrame(feF.FightEntitiesFrame)
             if entitiesFrame is not None:
                 fighterInfo = entitiesFrame.getEntityInfos(currentPlayerId)
         if (

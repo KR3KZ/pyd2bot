@@ -773,9 +773,6 @@ class FightEntitiesFrame(AbstractEntitiesFrame, Frame):
         FightEventsHelper.sendAllFightEvent()
 
     def updateRemovedEntity(self, idEntity: float) -> None:
-        num: int = 0
-        fightBFrame: FightBattleFrame = None
-        entId: float = None
         self._entitiesNumber[idEntity] = None
         if Dofus().options.getOption("orderFighters"):
             num = 1
@@ -786,11 +783,6 @@ class FightEntitiesFrame(AbstractEntitiesFrame, Frame):
                     num += 1
 
     def onPropertyChanged(self, e: PropertyChangeEvent) -> None:
-        id = None
-        ac: AnimatedCharacter = None
-        num: int = 0
-        fightBFrame: FightBattleFrame = None
-        entId: float = None
         if not self._worldPoint:
             self._worldPoint = pcm.PlayedCharacterManager().currentMap
         if not self._currentSubAreaId:
