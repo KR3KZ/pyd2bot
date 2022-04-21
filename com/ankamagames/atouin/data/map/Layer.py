@@ -1,5 +1,5 @@
 from com.ankamagames.atouin.data.map.elements.GraphicalElement import GraphicalElement
-from com.ankamagames.atouin.data.map.elements.soundElement import SoundElement
+from com.ankamagames.atouin.data.map.elements.SoundElement import SoundElement
 from com.ankamagames.jerakine.data.BinaryStream import BinaryStream
 
 

@@ -56,7 +56,7 @@ class Item(IPostInit, IDataCenter):
 
     level: int
 
-    realWeight: int
+    realWeight: int = None
 
     cursed: bool
 
@@ -140,7 +140,7 @@ class Item(IPostInit, IDataCenter):
 
     tooltipExpirationDate: float = None
 
-    _name: str
+    _name: str = None
 
     _undiatricalName: str
 
@@ -148,7 +148,7 @@ class Item(IPostInit, IDataCenter):
 
     _type: ItemType
 
-    _weight: int
+    _weight: int = None
 
     _itemSet: ItemSet
 
@@ -183,7 +183,7 @@ class Item(IPostInit, IDataCenter):
         if item or not returnDefaultItemIfNull:
             return item
         logger.error(
-            "Impossible de trouver l'objet " + id + ", remplacement par l'objet 666"
+            f"Impossible de trouver l'objet {id}, remplacement par l'objet 666"
         )
         return GameData.getObject(cls.MODULE, 666)
 
@@ -202,6 +202,14 @@ class Item(IPostInit, IDataCenter):
             if item:
                 items.append(item)
         return items
+
+    @property
+    def weight(self) -> int:
+        return self._weight
+
+    @weight.setter
+    def weight(self, value: int) -> None:
+        self._weight = value
 
     @property
     def name(self) -> str:
@@ -242,14 +250,6 @@ class Item(IPostInit, IDataCenter):
             self.importantNotice
         )
         return self._processedImportantNotice
-
-    @property
-    def weight(self) -> int:
-        return self._weight
-
-    @weight.setter
-    def weight(self, n: int) -> None:
-        self._weight = n
 
     @property
     def type(self) -> object:
@@ -364,7 +364,7 @@ class Item(IPostInit, IDataCenter):
             experienceInt = math.floor(self._basicExperienceAsFood * 100000)
             self._basicExperienceAsFood = experienceInt / 100000
         return self._basicExperienceAsFood
-
+    
     def copy(self, src: "Item", to: "Item") -> None:
         to.id = src.id
         to.nameId = src.nameId
@@ -373,6 +373,7 @@ class Item(IPostInit, IDataCenter):
         to.iconId = src.iconId
         to.level = src.level
         to.realWeight = src.realWeight
+
         to.weight = src.weight
         to.cursed = src.cursed
         to.useAnimationId = src.useAnimationId

@@ -1,9 +1,4 @@
-from com.ankamagames.dofus.datacenter.spells.SpellLevel import SpellLevel
-from com.ankamagames.dofus.internalDatacenter.spells.SpellWrapper import SpellWrapper
 from com.ankamagames.dofus.kernel.Kernel import Kernel
-from com.ankamagames.dofus.logic.game.fight.managers.CurrentPlayedFighterManager import (
-    CurrentPlayedFighterManager,
-)
 from com.ankamagames.dofus.logic.game.fight.types.castSpellManager.SpellManager import (
     SpellManager,
 )
@@ -42,14 +37,12 @@ class SpellCastInFightManager:
             spell.newTurn()
 
     def resetInitialCooldown(self, hasBeenSummoned: bool = False) -> None:
-        spellWrapper: SpellWrapper = None
-        spellManager: SpellManager = None
         spim: SpellInventoryManagementFrame = Kernel.getWorker().getFrame(
             SpellInventoryManagementFrame
         )
         spellList: list = spim.getFullSpellListByOwnerId(self.entityId)
         for spellWrapper in spellList:
-            if spellWrapper.spellLevelInfos.initialCooldown is not 0:
+            if spellWrapper.spellLevelInfos.initialCooldown != 0:
                 if (
                     hasBeenSummoned
                     and spellWrapper.actualCooldown
@@ -66,14 +59,16 @@ class SpellCastInFightManager:
     def updateCooldowns(
         self, spellCooldowns: list[GameFightSpellCooldown] = None
     ) -> None:
-        spellCooldown: GameFightSpellCooldown = None
-        spellW: SpellWrapper = None
-        spellLevel: SpellLevel = None
-        spellCastManager: SpellCastInFightManager = None
-        interval: int = 0
-        castInterval: float = None
-        castIntervalSet: float = None
-        spellModifiers: SpellModifiers = None
+        from com.ankamagames.dofus.internalDatacenter.spells.SpellWrapper import (
+            SpellWrapper,
+        )
+        from com.ankamagames.dofus.logic.game.fight.managers.CurrentPlayedFighterManager import (
+            CurrentPlayedFighterManager,
+        )
+        from com.ankamagames.dofus.logic.game.fight.managers.SpellModifiersManager import (
+            SpellModifiersManager,
+        )
+
         if self.needCooldownUpdate and not spellCooldowns:
             spellCooldowns = self._storedSpellCooldowns
         playedFighterManager: CurrentPlayedFighterManager = (
@@ -133,7 +128,7 @@ class SpellCastInFightManager:
         self, pSpellId: int, isForceNewInstance: bool = False, pSpellLevelId: int = -1
     ) -> SpellManager:
         spellManager: SpellManager = self._spells[pSpellId]
-        if spellManager == None and isForceNewInstance and pSpellLevelId is not -1:
+        if spellManager == None and isForceNewInstance and pSpellLevelId != -1:
             spellManager = self._spells[pSpellId] = SpellManager(
                 self, pSpellId, pSpellLevelId
             )

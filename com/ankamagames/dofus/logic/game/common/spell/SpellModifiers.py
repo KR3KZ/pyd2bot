@@ -3,9 +3,7 @@ from com.ankamagames.dofus.logic.game.common.spell.SpellModifier import SpellMod
 from com.ankamagames.dofus.logic.game.fight.actions.UpdateSpellModifierAction import (
     UpdateSpellModifierAction,
 )
-from com.ankamagames.dofus.logic.game.fight.managers.SpellModifiersManager import (
-    SpellModifiersManager,
-)
+import com.ankamagames.dofus.logic.game.fight.managers.SpellModifiersManager as spellmm
 from com.ankamagames.jerakine.logger.Logger import Logger
 
 logger = Logger(__name__)
@@ -32,7 +30,7 @@ class SpellModifiers:
 
     @property
     def isVerbose(self) -> bool:
-        return SpellModifiersManager().isVerbose
+        return spellmm.SpellModifiersManager().isVerbose
 
     def getFormattedMessage(self, message: str) -> str:
         return (

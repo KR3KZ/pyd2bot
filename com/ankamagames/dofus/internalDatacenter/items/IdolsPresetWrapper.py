@@ -1,3 +1,6 @@
+from com.ankamagames.dofus.internalDatacenter.items.PresetWrapper import PresetWrapper
+
+
 class IdolsPresetWrapper(PresetWrapper):
 
     idolsIds: list[int]

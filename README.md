@@ -8,22 +8,13 @@ Un bot dofus 2 en full socket entièrement en python.
 Install node js. It's needed to run the simulated launcher.
 Install make if you are under Windows. In windows i reccommend using git bash.
 
-### Make a fresh new venv in the project folder
-
-`python3 -m venv .venv`
-
-### Add the project sources to the python site-packages
+### Setup dev env
 
 `make setup`
-> :warning: If this doesn't work. Add the path to the project in your `PYTHONPATH` env variable.
-
-### Install dependencies
-
-`make deps`
 
 ### Fetch data from Dofus Invoker(protocol, keys, version, msgClasses)
 
-make update
+`make update`
 
 > :warning: This process takes quite some time.
 
@@ -58,4 +49,4 @@ Here 'account' arg should correspond to the entryName you chose for your account
 
 ### Launch the bot
 
-`make test botName='myBotName'`
+`make test bot='myBotName'`

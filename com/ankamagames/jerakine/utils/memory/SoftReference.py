@@ -3,10 +3,10 @@ from typing import Any
 
 
 class SoftReference:
-    def __init__(self, obj, keptTime: int = 10000):
-        super().__init__()
+    def __init__(self, obj, keptTime: int = 10):
         self.value = obj
         self.keptTime = keptTime
+        self.timeout = None
         self.resetTimeout()
 
     @property
@@ -15,10 +15,12 @@ class SoftReference:
         return self.value
 
     def resetTimeout(self) -> None:
-        self.timeout.cancel()
+        if self.timeout:
+            self.timeout.cancel()
         if self.value:
             self.timeout = Timer(self.keptTime, self.clearReference)
             self.timeout.start()
 
     def clearReference(self) -> None:
+        del self.value
         self.value = None

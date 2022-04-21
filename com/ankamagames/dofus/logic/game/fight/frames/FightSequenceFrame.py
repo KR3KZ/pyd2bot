@@ -1,4 +1,9 @@
 from types import FunctionType
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.logic.game.fight.frames.FightBattleFrame import (
+        FightBattleFrame,
+    )
 from com.ankamagames.atouin.managers.EntitiesManager import EntitiesManager
 from com.ankamagames.dofus.datacenter.effects.Effect import Effect
 from com.ankamagames.dofus.datacenter.effects.EffectInstance import EffectInstance
@@ -18,12 +23,7 @@ from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager imp
 )
 from com.ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEntities
 from com.ankamagames.dofus.logic.game.fight.frames import FightContextFrame
-from com.ankamagames.dofus.logic.game.fight.frames.FightEntitiesFrame import (
-    FightEntitiesFrame,
-)
-from com.ankamagames.dofus.logic.game.fight.frames.FightBattleFrame import (
-    FightBattleFrame,
-)
+
 from com.ankamagames.dofus.logic.game.fight.managers.BuffManager import BuffManager
 from com.ankamagames.dofus.logic.game.fight.managers.CurrentPlayedFighterManager import (
     CurrentPlayedFighterManager,
@@ -272,7 +272,7 @@ class FightSequenceFrame(Frame, ISpellCastProvider):
 
     _parent: "FightSequenceFrame"
 
-    _fightBattleFrame: FightBattleFrame
+    _fightBattleFrame: 'FightBattleFrame'
 
     _fightEntitiesFrame: FightEntitiesFrame
 
@@ -289,7 +289,7 @@ class FightSequenceFrame(Frame, ISpellCastProvider):
     _permanentTooltipsCallback: Callback
 
     def __init__(
-        self, pFightBattleFrame: FightBattleFrame, parent: FightSequenceFrame = None
+        self, pFightBattleFrame: 'FightBattleFrame', parent: FightSequenceFrame = None
     ):
         super().__init__()
         self._instanceId = self._currentInstanceId
@@ -1682,7 +1682,7 @@ class FightSequenceFrame(Frame, ISpellCastProvider):
             myCastingSpell.spell = Spell.getSpellById(gaftbmsg.effect.spellId)
             myCastingSpell.casterId = gaftbmsg.sourceId
         buffEffect: AbstractFightDispellableEffect = gaftbmsg.effect
-        buff: BasicBuff = BuffManager.makeBuffFromEffect(
+        buff: BasicBuff = BuffManager().makeBuffFromEffect(
             buffEffect, myCastingSpell, gaftbmsg.actionId
         )
         if isinstance(buff, StateBuff):

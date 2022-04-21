@@ -1,4 +1,3 @@
-from logging import Logger
 import math
 from com.ankamagames.dofus.datacenter.effects.EffectInstance import EffectInstance
 from com.ankamagames.dofus.datacenter.effects.instances.EffectInstanceDice import (
@@ -28,6 +27,7 @@ from com.ankamagames.jerakine.data.I18n import I18n
 from com.ankamagames.jerakine.interfaces.IDataCenter import IDataCenter
 from com.ankamagames.jerakine.interfaces.ISlotData import ISlotData
 from com.ankamagames.jerakine.interfaces.ISlotDataHolder import ISlotDataHolder
+from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.utils.display.spellZone.ICellZoneProvider import (
     ICellZoneProvider,
 )
@@ -67,13 +67,13 @@ class ItemWrapper(Item, ISlotData, ICellZoneProvider, IDataCenter):
 
     _cacheGId: dict = dict()
 
-    _uniqueIndex: int
+    _uniqueIndex: int = 0
 
     _active: bool = True
 
     _uri: str
 
-    _shortName: str
+    _shortName: str = None
 
     _nameWithoutAccent: str
 
@@ -131,12 +131,15 @@ class ItemWrapper(Item, ISlotData, ICellZoneProvider, IDataCenter):
 
     evolutiveLevel: int = 0
 
+    MEMORY_LOG = dict()
+
     def __init__(self):
         self.effects = list[EffectInstance]()
         super().__init__()
 
+    @classmethod
     def create(
-        self,
+        cls,
         position: int,
         objectUID: int,
         objectGID: int,
@@ -148,7 +151,7 @@ class ItemWrapper(Item, ISlotData, ICellZoneProvider, IDataCenter):
         effect: EffectInstance = None
         refItem: Item = Item.getItemById(objectGID)
         cachedItem: ItemWrapper = (
-            self._cache[objectUID] if objectUID > 0 else self._cacheGId[objectGID]
+            cls._cache.get(objectUID) if objectUID > 0 else cls._cacheGId.get(objectGID)
         )
         if not cachedItem or not useCache:
             if refItem.isWeapon:
@@ -162,24 +165,25 @@ class ItemWrapper(Item, ISlotData, ICellZoneProvider, IDataCenter):
             item.objectUID = objectUID
             if useCache:
                 if objectUID > 0:
-                    self._cache[objectUID] = item
+                    cls._cache[objectUID] = item
                 else:
-                    self._cacheGId[objectGID] = item
+                    cls._cacheGId[objectGID] = item
         else:
             item = cachedItem
-        self.MEMORY_LOG[item] = 1
+        cls.MEMORY_LOG[item] = 1
         item._nameWithoutAccent = StringUtils.noAccent(refItem.name)
         item.effectsList = newEffects
         item.isPresetobject = objectGID == DataEnum.ITEM_GID_PRESET_SHORTCUT
         if item.objectGID != objectGID:
             item._uri = None
             item._uriPngMode = None
+
         refItem.copy(refItem, item)
         item.position = position
         item.objectGID = objectGID
         item.quantity = quantity
-        self._uniqueIndex += 1
-        item.sortOrder = self._uniqueIndex
+        cls._uniqueIndex += 1
+        item.sortOrder = cls._uniqueIndex
         item.livingobjectCategory = 0
         item.wrapperobjectCategory = 0
         item.effects = list[EffectInstance]()
@@ -245,11 +249,14 @@ class ItemWrapper(Item, ISlotData, ICellZoneProvider, IDataCenter):
 
     @property
     def weight(self) -> int:
-        i: EffectInstance = None
         for i in self.effects:
             if i.effectId == ActionIds.ACTION_ITEM_EXTRA_PODS:
                 return self.realWeight + i.parameter0
         return self.realWeight
+
+    @weight.setter
+    def weight(self, value: int) -> None:
+        self.realWeight = value
 
     @property
     def isSpeakingobject(self) -> bool:

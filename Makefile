@@ -4,8 +4,13 @@ DOFUS_SRC = $(CURDIR)/protocolBuilder/sources
 SELECTCLASS = com.ankamagames.dofus.BuildInfos,com.ankamagames.dofus.network.++,com.ankamagames.jerakine.network.++
 KEYS_DIR = $(CURDIR)/binaryData
 
+
 setup:
-	@python ./setup.py
+	\python -m venv .venv; \
+	source .venv/Scripts/activate; \
+	echo "$(CURDIR)" >> .venv/pyd2bot.pth; \
+	pip install -r requirements.txt;\
+	
 
 update: decompile gen-protocol gen-msgClasses gen-msgShuffle extract-keys unpack-maps
 
@@ -33,8 +38,8 @@ deps:
 startSniffer:
 	@python -m snifferApp 
 
-venvActivate:
-	shell source $(CURDIR)/.venv/Scripts/activate
+activate:
+	\. $(CURDIR)/.venv/Scripts/activate\
 
 createAccount:
 	@python $(CURDIR)/hackedLauncher/CredsManager.py $(entryName) $(login) $(password)
@@ -46,5 +51,5 @@ genKeys:
 	@ssh-keygen -t rsa -b 2056 -m PEM -f $(PASS_ENC_KEYS)/id_rsa
 
 test:
-	@python $(CURDIR)/pyd2bot/main.py $(botName)
+	@python $(CURDIR)/pyd2bot/main.py $(bot)
 

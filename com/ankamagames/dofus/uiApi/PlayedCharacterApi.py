@@ -1,15 +1,22 @@
-from click import pass_context
 from com.ankamagames.berilia.interfaces.IApi import IApi
 from com.ankamagames.dofus.datacenter.breeds.Breed import Breed
+from com.ankamagames.dofus.datacenter.optionalFeatures.ForgettableSpell import (
+    ForgettableSpell,
+)
 from com.ankamagames.dofus.datacenter.world.SubArea import SubArea
 from com.ankamagames.dofus.internalDatacenter.DataEnum import DataEnum
 from com.ankamagames.dofus.internalDatacenter.items.ItemWrapper import ItemWrapper
 from com.ankamagames.dofus.internalDatacenter.items.WeaponWrapper import WeaponWrapper
-from com.ankamagames.dofus.internalDatacenter.items.idolsPresetWrapper import (
-    IdolsPresetWrapper,
-)
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from com.ankamagames.dofus.internalDatacenter.items.IdolsPresetWrapper import (
+        IdolsPresetWrapper,
+    )
+    from com.ankamagames.dofus.internalDatacenter.spells.SpellWrapper import (
+        SpellWrapper,
+    )
 from com.ankamagames.dofus.internalDatacenter.mount.MountData import MountData
-from com.ankamagames.dofus.internalDatacenter.spells.SpellWrapper import SpellWrapper
 from com.ankamagames.dofus.internalDatacenter.stats.EntityStats import EntityStats
 from com.ankamagames.dofus.internalDatacenter.world.WorldPointWrapper import (
     WorldPointWrapper,
@@ -19,18 +26,12 @@ from com.ankamagames.dofus.logic.common.managers.StatsManager import StatsManage
 from com.ankamagames.dofus.logic.game.common.frames.AbstractEntitiesFrame import (
     AbstractEntitiesFrame,
 )
-from com.ankamagames.dofus.logic.game.common.frames.PlayedCharacterUpdatesFrame import (
-    PlayedCharacterUpdatesFrame,
+import com.ankamagames.dofus.logic.game.common.frames.PlayedCharacterUpdatesFrame as pcuF
+from com.ankamagames.dofus.logic.game.common.managers.InventoryManager import (
+    InventoryManager,
 )
 from com.ankamagames.dofus.logic.game.common.managers.PlayedCharacterManager import (
     PlayedCharacterManager,
-)
-from com.ankamagames.dofus.logic.game.common.misc.DofusEntities import DofusEntities
-from com.ankamagames.dofus.logic.game.fight.frames.FightContextFrame import (
-    FightContextFrame,
-)
-from com.ankamagames.dofus.logic.game.fight.frames.FightEntitiesFrame import (
-    FightEntitiesFrame,
 )
 from com.ankamagames.dofus.logic.game.fight.frames.FightPreparationFrame import (
     FightPreparationFrame,
@@ -83,7 +84,6 @@ from com.ankamagames.dofus.network.types.game.data.items.ForgettableSpellItem im
 from com.ankamagames.dofus.network.types.game.guild.application.GuildApplicationInformation import (
     GuildApplicationInformation,
 )
-from com.ankamagames.dofus.types.entities.AnimatedCharacter import AnimatedCharacter
 from com.ankamagames.jerakine.logger.Logger import Logger
 from com.ankamagames.jerakine.metaclasses.Singleton import Singleton
 
@@ -189,7 +189,6 @@ class PlayedCharacterApi(IApi, metaclass=Singleton):
         return CustomModeBreedSpell.getCustomModeBreedSpellList(breedId)
 
     def getBreedSpellActivatedIds(self) -> list:
-        spellWrapper: SpellWrapper = None
         spellsInventory: list = PlayedCharacterManager().spellsInventory
         activatedSpellIds: list = list()
         playerBreedId: int = PlayedCharacterManager().infos.breed
@@ -243,23 +242,24 @@ class PlayedCharacterApi(IApi, metaclass=Singleton):
         return Kernel().getWorker().getFrame(TinselFrame).titlesOrnamentsAskedBefore
 
     def getEntityInfos(self) -> GameRolePlayCharacterInformations:
+        import com.ankamagames.dofus.logic.game.fight.frames.FightEntitiesFrame as fightEntitiesFrame
         entitiesFrame: AbstractEntitiesFrame = None
         if self.isInFight():
-            entitiesFrame = Kernel().getFrame(FightEntitiesFrame)
+            entitiesFrame = Kernel().getFrame(fightEntitiesFrame.FightEntitiesFrame)
             entitiesFrame = Kernel().getFrame(RoleplayEntitiesFrame)
         if not entitiesFrame:
             return None
         return entitiesFrame.getEntityInfos(PlayedCharacterManager().id)
 
-    def getEntityTooltipInfos(self) -> CharacterTooltipInformation:
-        playerInfo: GameRolePlayCharacterInformations = self.getEntityInfos()
-        if not playerInfo:
-            return None
-        return CharacterTooltipInformation(playerInfo, 0)
+    # def getEntityTooltipInfos(self) -> CharacterTooltipInformation:
+    #     playerInfo: GameRolePlayCharacterInformations = self.getEntityInfos()
+    #     if not playerInfo:
+    #         return None
+    #     return CharacterTooltipInformation(playerInfo, 0)
 
     def getKamasMaxLimit(self) -> float:
-        playedCharacterFrame: PlayedCharacterUpdatesFrame = (
-            Kernel().getWorker().getFrame(PlayedCharacterUpdatesFrame)
+        playedCharacterFrame: pcuF.PlayedCharacterUpdatesFrame = (
+            Kernel().getWorker().getFrame(pcuF.PlayedCharacterUpdatesFrame)
         )
         if playedCharacterFrame:
             return playedCharacterFrame.kamasLimit
@@ -290,6 +290,10 @@ class PlayedCharacterApi(IApi, metaclass=Singleton):
         return PlayedCharacterManager().isInExchange
 
     def isInFight(self) -> bool:
+        from com.ankamagames.dofus.logic.game.fight.frames.FightContextFrame import (
+            FightContextFrame,
+        )
+
         return Kernel().getWorker().getFrame(FightContextFrame) != None
 
     def isInPreFight(self) -> bool:
@@ -385,7 +389,7 @@ class PlayedCharacterApi(IApi, metaclass=Singleton):
     def canSummon(self) -> bool:
         return CurrentPlayedFighterManager().canSummon()
 
-    def getSpell(self, spellId: int) -> SpellWrapper:
+    def getSpell(self, spellId: int) -> "SpellWrapper":
         return CurrentPlayedFighterManager().getSpellById(spellId)
 
     def canCastThisSpell(self, spellId: int, lvl: int) -> bool:
@@ -441,8 +445,8 @@ class PlayedCharacterApi(IApi, metaclass=Singleton):
         return PlayedCharacterManager().followingPlayerIds
 
     def getPlayerSet(self, objectGID: int) -> PlayerSetInfo:
-        return PlayedCharacterUpdatesFrame(
-            Kernel().getWorker().getFrame(PlayedCharacterUpdatesFrame)
+        return pcuF.PlayedCharacterUpdatesFrame(
+            Kernel().getWorker().getFrame(pcuF.PlayedCharacterUpdatesFrame)
         ).getPlayerSet(objectGID)
 
     def getWeapon(self) -> WeaponWrapper:
@@ -478,7 +482,7 @@ class PlayedCharacterApi(IApi, metaclass=Singleton):
     def setPartyIdols(self, pIdols: list[int]) -> None:
         PlayedCharacterManager().partyIdols = pIdols
 
-    def getIdolsPresets(self) -> list[IdolsPresetWrapper]:
+    def getIdolsPresets(self) -> list["IdolsPresetWrapper"]:
         return PlayedCharacterManager().idolsPresets
 
     def isInHisHavenbag(self) -> bool:

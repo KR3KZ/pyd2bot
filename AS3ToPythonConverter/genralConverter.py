@@ -281,6 +281,8 @@ def handleClassHeader(code):
 
 
 def parseFolderFiles(in_dir, out_dir):
+    if not os.path.exists(out_dir):
+        os.makedirs(out_dir)
     for f in tqdm(pathlib.Path(in_dir).glob("**/*.as")):
         parseFile(
             f, pathlib.Path(out_dir) / f.relative_to(in_dir).name.replace(".as", ".py")
@@ -345,7 +347,10 @@ def parseFile(file_p, out_p):
 
 
 ROOTDIR = pathlib.Path(os.path.dirname(__file__))
-# parseFolderFiles("AS3ToPythonConverter/scripts", "AS3ToPythonConverter/connectionType")
+# parseFolderFiles(
+#     r"C:\Users\majdoub\OneDrive\Documents\scripts\com\ankamagames\dofus\logic\game\common\misc\inventoryView",
+#     ROOTDIR / "inventoryView",
+# )
 t = perf_counter()
-parseFile(ROOTDIR / "target.as", ROOTDIR / "StorageOptionManager.py")
+parseFile(ROOTDIR / "target.as", ROOTDIR / "PropertyChangeEvent.py")
 print("parsing took:", perf_counter() - t)
